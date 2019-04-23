@@ -1,0 +1,355 @@
+package client
+
+import (
+)
+
+// ActionMonitoredEventIndex is a type for action Monitored_event#Index
+type ActionMonitoredEventIndex struct {
+	// Pointer to client
+	Client *Client
+}
+
+func NewActionMonitoredEventIndex(client *Client) *ActionMonitoredEventIndex {
+	return &ActionMonitoredEventIndex{
+		Client: client,
+	}
+}
+
+// ActionMonitoredEventIndexMetaGlobalInput is a type for action global meta input parameters
+type ActionMonitoredEventIndexMetaGlobalInput struct {
+	No bool `json:"no"`
+	Count bool `json:"count"`
+	Includes string `json:"includes"`
+	// Only selected parameters are sent to the API. Ignored if empty.
+	_selectedParameters map[string]interface{}
+}
+
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMonitoredEventIndexMetaGlobalInput) SetNo(value bool) *ActionMonitoredEventIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
+	return in
+}
+// SetCount sets parameter Count to value and selects it for sending
+func (in *ActionMonitoredEventIndexMetaGlobalInput) SetCount(value bool) *ActionMonitoredEventIndexMetaGlobalInput {
+	in.Count = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Count"] = nil
+	return in
+}
+// SetIncludes sets parameter Includes to value and selects it for sending
+func (in *ActionMonitoredEventIndexMetaGlobalInput) SetIncludes(value string) *ActionMonitoredEventIndexMetaGlobalInput {
+	in.Includes = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Includes"] = nil
+	return in
+}
+
+// SelectParameters sets parameters from ActionMonitoredEventIndexMetaGlobalInput
+// that will be sent to the API.
+// SelectParameters can be called multiple times.
+func (in *ActionMonitoredEventIndexMetaGlobalInput) SelectParameters(params ...string) *ActionMonitoredEventIndexMetaGlobalInput {
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	for _, param := range params {
+		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+func (in *ActionMonitoredEventIndexMetaGlobalInput) AnySelected() bool {
+	if in._selectedParameters == nil {
+		return false
+	}
+
+	return len(in._selectedParameters) > 0
+}
+
+// ActionMonitoredEventIndexInput is a type for action input parameters
+type ActionMonitoredEventIndexInput struct {
+	Offset int64 `json:"offset"`
+	Limit int64 `json:"limit"`
+	Monitor string `json:"monitor"`
+	ObjectName string `json:"object_name"`
+	ObjectId int64 `json:"object_id"`
+	State string `json:"state"`
+	User int64 `json:"user"`
+	Order string `json:"order"`
+	// Only selected parameters are sent to the API. Ignored if empty.
+	_selectedParameters map[string]interface{}
+}
+
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionMonitoredEventIndexInput) SetOffset(value int64) *ActionMonitoredEventIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
+	return in
+}
+// SetLimit sets parameter Limit to value and selects it for sending
+func (in *ActionMonitoredEventIndexInput) SetLimit(value int64) *ActionMonitoredEventIndexInput {
+	in.Limit = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetMonitor sets parameter Monitor to value and selects it for sending
+func (in *ActionMonitoredEventIndexInput) SetMonitor(value string) *ActionMonitoredEventIndexInput {
+	in.Monitor = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Monitor"] = nil
+	return in
+}
+// SetObjectName sets parameter ObjectName to value and selects it for sending
+func (in *ActionMonitoredEventIndexInput) SetObjectName(value string) *ActionMonitoredEventIndexInput {
+	in.ObjectName = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ObjectName"] = nil
+	return in
+}
+// SetObjectId sets parameter ObjectId to value and selects it for sending
+func (in *ActionMonitoredEventIndexInput) SetObjectId(value int64) *ActionMonitoredEventIndexInput {
+	in.ObjectId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ObjectId"] = nil
+	return in
+}
+// SetState sets parameter State to value and selects it for sending
+func (in *ActionMonitoredEventIndexInput) SetState(value string) *ActionMonitoredEventIndexInput {
+	in.State = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["State"] = nil
+	return in
+}
+// SetUser sets parameter User to value and selects it for sending
+func (in *ActionMonitoredEventIndexInput) SetUser(value int64) *ActionMonitoredEventIndexInput {
+	in.User = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["User"] = nil
+	return in
+}
+// SetOrder sets parameter Order to value and selects it for sending
+func (in *ActionMonitoredEventIndexInput) SetOrder(value string) *ActionMonitoredEventIndexInput {
+	in.Order = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Order"] = nil
+	return in
+}
+
+// SelectParameters sets parameters from ActionMonitoredEventIndexInput
+// that will be sent to the API.
+// SelectParameters can be called multiple times.
+func (in *ActionMonitoredEventIndexInput) SelectParameters(params ...string) *ActionMonitoredEventIndexInput {
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	for _, param := range params {
+		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+func (in *ActionMonitoredEventIndexInput) AnySelected() bool {
+	if in._selectedParameters == nil {
+		return false
+	}
+
+	return len(in._selectedParameters) > 0
+}
+
+
+// ActionMonitoredEventIndexOutput is a type for action output parameters
+type ActionMonitoredEventIndexOutput struct {
+	Id int64 `json:"id"`
+	Monitor string `json:"monitor"`
+	Label string `json:"label"`
+	Issue string `json:"issue"`
+	ObjectName string `json:"object_name"`
+	ObjectId int64 `json:"object_id"`
+	State string `json:"state"`
+	User *ActionUserShowOutput `json:"user"`
+	CreatedAt string `json:"created_at"`
+	UpdatedAt string `json:"updated_at"`
+	SavedUntil string `json:"saved_until"`
+}
+
+
+// Type for action response, including envelope
+type ActionMonitoredEventIndexResponse struct {
+	Action *ActionMonitoredEventIndex `json:"-"`
+	*Envelope
+	// Action output encapsulated within a namespace
+	Response *struct {
+		MonitoredEvents []*ActionMonitoredEventIndexOutput `json:"monitored_events"`
+	}
+
+	// Action output without the namespace
+	Output []*ActionMonitoredEventIndexOutput
+}
+
+
+// Prepare the action for invocation
+func (action *ActionMonitoredEventIndex) Prepare() *ActionMonitoredEventIndexInvocation {
+	return &ActionMonitoredEventIndexInvocation{
+		Action: action,
+		Path: "/v5.0/monitored_events",
+	}
+}
+
+// ActionMonitoredEventIndexInvocation is used to configure action for invocation
+type ActionMonitoredEventIndexInvocation struct {
+	// Pointer to the action
+	Action *ActionMonitoredEventIndex
+
+	// Path which may contain parameters that need to be set
+	Path string
+	// Input parameters
+	Input *ActionMonitoredEventIndexInput
+	// Global meta input parameters
+	MetaInput *ActionMonitoredEventIndexMetaGlobalInput
+}
+
+
+// SetInput provides input parameters to send to the API
+func (inv *ActionMonitoredEventIndexInvocation) SetInput(input *ActionMonitoredEventIndexInput) *ActionMonitoredEventIndexInvocation {
+	inv.Input = input
+	return inv
+}
+
+// IsParameterSelected returns true if param is to be sent to the API
+func (inv *ActionMonitoredEventIndexInvocation) IsParameterSelected(param string) bool {
+	if inv.Input._selectedParameters == nil {
+		return true
+	}
+
+	_, exists := inv.Input._selectedParameters[param]
+	return exists
+}
+// SetMetaInput provides global meta input parameters to send to the API
+func (inv *ActionMonitoredEventIndexInvocation) SetMetaInput(input *ActionMonitoredEventIndexMetaGlobalInput) *ActionMonitoredEventIndexInvocation {
+	inv.MetaInput = input
+	return inv
+}
+
+// IsMetaParameterSelected returns true if global meta param is to be sent to the API
+func (inv *ActionMonitoredEventIndexInvocation) IsMetaParameterSelected(param string) bool {
+	if inv.MetaInput._selectedParameters == nil {
+		return true
+	}
+
+	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// Call() invokes the action and returns a response from the API server
+func (inv *ActionMonitoredEventIndexInvocation) Call() (*ActionMonitoredEventIndexResponse, error) {
+	return inv.callAsQuery()
+}
+
+func (inv *ActionMonitoredEventIndexInvocation) callAsQuery() (*ActionMonitoredEventIndexResponse, error) {
+	queryParams := make(map[string]string)
+	inv.convertInputToQueryParams(queryParams)
+	inv.convertMetaInputToQueryParams(queryParams)
+	resp := &ActionMonitoredEventIndexResponse{Action: inv.Action}
+	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
+	if err == nil && resp.Status {
+		resp.Output = resp.Response.MonitoredEvents
+	}
+	return resp, err
+}
+
+
+
+func (inv *ActionMonitoredEventIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Offset") {
+			ret["monitored_event[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
+		if inv.IsParameterSelected("Limit") {
+			ret["monitored_event[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Monitor") {
+			ret["monitored_event[monitor]"] = inv.Input.Monitor
+		}
+		if inv.IsParameterSelected("ObjectName") {
+			ret["monitored_event[object_name]"] = inv.Input.ObjectName
+		}
+		if inv.IsParameterSelected("ObjectId") {
+			ret["monitored_event[object_id]"] = convertInt64ToString(inv.Input.ObjectId)
+		}
+		if inv.IsParameterSelected("State") {
+			ret["monitored_event[state]"] = inv.Input.State
+		}
+		if inv.IsParameterSelected("User") {
+			ret["monitored_event[user]"] = convertInt64ToString(inv.Input.User)
+		}
+		if inv.IsParameterSelected("Order") {
+			ret["monitored_event[order]"] = inv.Input.Order
+		}
+	}
+}
+
+func (inv *ActionMonitoredEventIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+	if inv.MetaInput != nil {
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
+		}
+		if inv.IsMetaParameterSelected("Count") {
+			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
+		}
+		if inv.IsMetaParameterSelected("Includes") {
+			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+	}
+}
+

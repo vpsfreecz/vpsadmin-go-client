@@ -1,0 +1,292 @@
+package client
+
+import (
+	"strings"
+)
+
+// ActionUserPublicKeyCreate is a type for action User.Public_key#Create
+type ActionUserPublicKeyCreate struct {
+	// Pointer to client
+	Client *Client
+}
+
+func NewActionUserPublicKeyCreate(client *Client) *ActionUserPublicKeyCreate {
+	return &ActionUserPublicKeyCreate{
+		Client: client,
+	}
+}
+
+// ActionUserPublicKeyCreateMetaGlobalInput is a type for action global meta input parameters
+type ActionUserPublicKeyCreateMetaGlobalInput struct {
+	No bool `json:"no"`
+	Includes string `json:"includes"`
+	// Only selected parameters are sent to the API. Ignored if empty.
+	_selectedParameters map[string]interface{}
+}
+
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserPublicKeyCreateMetaGlobalInput) SetNo(value bool) *ActionUserPublicKeyCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
+	return in
+}
+// SetIncludes sets parameter Includes to value and selects it for sending
+func (in *ActionUserPublicKeyCreateMetaGlobalInput) SetIncludes(value string) *ActionUserPublicKeyCreateMetaGlobalInput {
+	in.Includes = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Includes"] = nil
+	return in
+}
+
+// SelectParameters sets parameters from ActionUserPublicKeyCreateMetaGlobalInput
+// that will be sent to the API.
+// SelectParameters can be called multiple times.
+func (in *ActionUserPublicKeyCreateMetaGlobalInput) SelectParameters(params ...string) *ActionUserPublicKeyCreateMetaGlobalInput {
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	for _, param := range params {
+		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+func (in *ActionUserPublicKeyCreateMetaGlobalInput) AnySelected() bool {
+	if in._selectedParameters == nil {
+		return false
+	}
+
+	return len(in._selectedParameters) > 0
+}
+
+// ActionUserPublicKeyCreateInput is a type for action input parameters
+type ActionUserPublicKeyCreateInput struct {
+	Label string `json:"label"`
+	Key string `json:"key"`
+	AutoAdd bool `json:"auto_add"`
+	// Only selected parameters are sent to the API. Ignored if empty.
+	_selectedParameters map[string]interface{}
+}
+
+// SetLabel sets parameter Label to value and selects it for sending
+func (in *ActionUserPublicKeyCreateInput) SetLabel(value string) *ActionUserPublicKeyCreateInput {
+	in.Label = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Label"] = nil
+	return in
+}
+// SetKey sets parameter Key to value and selects it for sending
+func (in *ActionUserPublicKeyCreateInput) SetKey(value string) *ActionUserPublicKeyCreateInput {
+	in.Key = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Key"] = nil
+	return in
+}
+// SetAutoAdd sets parameter AutoAdd to value and selects it for sending
+func (in *ActionUserPublicKeyCreateInput) SetAutoAdd(value bool) *ActionUserPublicKeyCreateInput {
+	in.AutoAdd = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AutoAdd"] = nil
+	return in
+}
+
+// SelectParameters sets parameters from ActionUserPublicKeyCreateInput
+// that will be sent to the API.
+// SelectParameters can be called multiple times.
+func (in *ActionUserPublicKeyCreateInput) SelectParameters(params ...string) *ActionUserPublicKeyCreateInput {
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	for _, param := range params {
+		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+func (in *ActionUserPublicKeyCreateInput) AnySelected() bool {
+	if in._selectedParameters == nil {
+		return false
+	}
+
+	return len(in._selectedParameters) > 0
+}
+
+// ActionUserPublicKeyCreateRequest is a type for the entire action request
+type ActionUserPublicKeyCreateRequest struct {
+	PublicKey map[string]interface{} `json:"public_key"`
+	Meta map[string]interface{} `json:"_meta"`
+}
+
+// ActionUserPublicKeyCreateOutput is a type for action output parameters
+type ActionUserPublicKeyCreateOutput struct {
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	Key string `json:"key"`
+	AutoAdd bool `json:"auto_add"`
+	Fingerprint string `json:"fingerprint"`
+	Comment string `json:"comment"`
+	CreatedAt string `json:"created_at"`
+	UpdatedAt string `json:"updated_at"`
+}
+
+
+// Type for action response, including envelope
+type ActionUserPublicKeyCreateResponse struct {
+	Action *ActionUserPublicKeyCreate `json:"-"`
+	*Envelope
+	// Action output encapsulated within a namespace
+	Response *struct {
+		PublicKey *ActionUserPublicKeyCreateOutput `json:"public_key"`
+	}
+
+	// Action output without the namespace
+	Output *ActionUserPublicKeyCreateOutput
+}
+
+
+// Prepare the action for invocation
+func (action *ActionUserPublicKeyCreate) Prepare() *ActionUserPublicKeyCreateInvocation {
+	return &ActionUserPublicKeyCreateInvocation{
+		Action: action,
+		Path: "/v5.0/users/:user_id/public_keys",
+	}
+}
+
+// ActionUserPublicKeyCreateInvocation is used to configure action for invocation
+type ActionUserPublicKeyCreateInvocation struct {
+	// Pointer to the action
+	Action *ActionUserPublicKeyCreate
+
+	// Path which may contain parameters that need to be set
+	Path string
+	// Input parameters
+	Input *ActionUserPublicKeyCreateInput
+	// Global meta input parameters
+	MetaInput *ActionUserPublicKeyCreateMetaGlobalInput
+}
+
+// SetPathParamInt sets integer path parameter
+func (inv *ActionUserPublicKeyCreateInvocation) SetPathParamInt(param string, value int64) *ActionUserPublicKeyCreateInvocation {
+	return inv.SetPathParamString(param, convertInt64ToString(value))
+}
+
+// SetPathParamString sets string path parameter
+func (inv *ActionUserPublicKeyCreateInvocation) SetPathParamString(param string, value string) *ActionUserPublicKeyCreateInvocation {
+	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	return inv
+}
+
+// SetInput provides input parameters to send to the API
+func (inv *ActionUserPublicKeyCreateInvocation) SetInput(input *ActionUserPublicKeyCreateInput) *ActionUserPublicKeyCreateInvocation {
+	inv.Input = input
+	return inv
+}
+
+// IsParameterSelected returns true if param is to be sent to the API
+func (inv *ActionUserPublicKeyCreateInvocation) IsParameterSelected(param string) bool {
+	if inv.Input._selectedParameters == nil {
+		return true
+	}
+
+	_, exists := inv.Input._selectedParameters[param]
+	return exists
+}
+// SetMetaInput provides global meta input parameters to send to the API
+func (inv *ActionUserPublicKeyCreateInvocation) SetMetaInput(input *ActionUserPublicKeyCreateMetaGlobalInput) *ActionUserPublicKeyCreateInvocation {
+	inv.MetaInput = input
+	return inv
+}
+
+// IsMetaParameterSelected returns true if global meta param is to be sent to the API
+func (inv *ActionUserPublicKeyCreateInvocation) IsMetaParameterSelected(param string) bool {
+	if inv.MetaInput._selectedParameters == nil {
+		return true
+	}
+
+	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// Call() invokes the action and returns a response from the API server
+func (inv *ActionUserPublicKeyCreateInvocation) Call() (*ActionUserPublicKeyCreateResponse, error) {
+	return inv.callAsBody()
+}
+
+
+func (inv *ActionUserPublicKeyCreateInvocation) callAsBody() (*ActionUserPublicKeyCreateResponse, error) {
+	input := inv.makeAllInputParams()
+	resp := &ActionUserPublicKeyCreateResponse{Action: inv.Action}
+	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
+	if err == nil && resp.Status {
+		resp.Output = resp.Response.PublicKey
+	}
+	return resp, err
+}
+
+
+
+
+func (inv *ActionUserPublicKeyCreateInvocation) makeAllInputParams() *ActionUserPublicKeyCreateRequest {
+	return &ActionUserPublicKeyCreateRequest{
+		PublicKey: inv.makeInputParams(),
+		Meta: inv.makeMetaInputParams(),
+	}
+}
+
+func (inv *ActionUserPublicKeyCreateInvocation) makeInputParams() map[string]interface{} {
+	ret := make(map[string]interface{})
+
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Label") {
+			ret["label"] = inv.Input.Label
+		}
+		if inv.IsParameterSelected("Key") {
+			ret["key"] = inv.Input.Key
+		}
+		if inv.IsParameterSelected("AutoAdd") {
+			ret["auto_add"] = inv.Input.AutoAdd
+		}
+	}
+
+	return ret
+}
+
+func (inv *ActionUserPublicKeyCreateInvocation) makeMetaInputParams() map[string]interface{} {
+	ret := make(map[string]interface{})
+
+	if inv.MetaInput != nil {
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
+		}
+		if inv.IsMetaParameterSelected("Includes") {
+			ret["includes"] = inv.MetaInput.Includes
+		}
+	}
+
+	return ret
+}
