@@ -197,6 +197,12 @@ func (inv *ActionVpsOutageWindowUpdateAllInvocation) SetPathParamString(param st
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionVpsOutageWindowUpdateAllInvocation) NewInput() *ActionVpsOutageWindowUpdateAllInput {
+	inv.Input = &ActionVpsOutageWindowUpdateAllInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionVpsOutageWindowUpdateAllInvocation) SetInput(input *ActionVpsOutageWindowUpdateAllInput) *ActionVpsOutageWindowUpdateAllInvocation {
 	inv.Input = input
@@ -212,6 +218,13 @@ func (inv *ActionVpsOutageWindowUpdateAllInvocation) IsParameterSelected(param s
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionVpsOutageWindowUpdateAllInvocation) NewMetaInput() *ActionVpsOutageWindowUpdateAllMetaGlobalInput {
+	inv.MetaInput = &ActionVpsOutageWindowUpdateAllMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionVpsOutageWindowUpdateAllInvocation) SetMetaInput(input *ActionVpsOutageWindowUpdateAllMetaGlobalInput) *ActionVpsOutageWindowUpdateAllInvocation {
 	inv.MetaInput = input

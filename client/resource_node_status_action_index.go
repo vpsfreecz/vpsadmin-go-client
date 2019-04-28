@@ -236,6 +236,12 @@ func (inv *ActionNodeStatusIndexInvocation) SetPathParamString(param string, val
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionNodeStatusIndexInvocation) NewInput() *ActionNodeStatusIndexInput {
+	inv.Input = &ActionNodeStatusIndexInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionNodeStatusIndexInvocation) SetInput(input *ActionNodeStatusIndexInput) *ActionNodeStatusIndexInvocation {
 	inv.Input = input
@@ -251,6 +257,13 @@ func (inv *ActionNodeStatusIndexInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionNodeStatusIndexInvocation) NewMetaInput() *ActionNodeStatusIndexMetaGlobalInput {
+	inv.MetaInput = &ActionNodeStatusIndexMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionNodeStatusIndexInvocation) SetMetaInput(input *ActionNodeStatusIndexMetaGlobalInput) *ActionNodeStatusIndexInvocation {
 	inv.MetaInput = input

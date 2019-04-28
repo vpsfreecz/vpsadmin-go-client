@@ -159,6 +159,12 @@ func (inv *ActionAuthTokenUpdateInvocation) SetPathParamString(param string, val
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionAuthTokenUpdateInvocation) NewInput() *ActionAuthTokenUpdateInput {
+	inv.Input = &ActionAuthTokenUpdateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionAuthTokenUpdateInvocation) SetInput(input *ActionAuthTokenUpdateInput) *ActionAuthTokenUpdateInvocation {
 	inv.Input = input
@@ -174,6 +180,13 @@ func (inv *ActionAuthTokenUpdateInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionAuthTokenUpdateInvocation) NewMetaInput() *ActionAuthTokenUpdateMetaGlobalInput {
+	inv.MetaInput = &ActionAuthTokenUpdateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionAuthTokenUpdateInvocation) SetMetaInput(input *ActionAuthTokenUpdateMetaGlobalInput) *ActionAuthTokenUpdateInvocation {
 	inv.MetaInput = input

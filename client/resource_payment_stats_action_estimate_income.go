@@ -179,6 +179,12 @@ type ActionPaymentStatsEstimateIncomeInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionPaymentStatsEstimateIncomeInvocation) NewInput() *ActionPaymentStatsEstimateIncomeInput {
+	inv.Input = &ActionPaymentStatsEstimateIncomeInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionPaymentStatsEstimateIncomeInvocation) SetInput(input *ActionPaymentStatsEstimateIncomeInput) *ActionPaymentStatsEstimateIncomeInvocation {
 	inv.Input = input
@@ -194,6 +200,13 @@ func (inv *ActionPaymentStatsEstimateIncomeInvocation) IsParameterSelected(param
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionPaymentStatsEstimateIncomeInvocation) NewMetaInput() *ActionPaymentStatsEstimateIncomeMetaGlobalInput {
+	inv.MetaInput = &ActionPaymentStatsEstimateIncomeMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionPaymentStatsEstimateIncomeInvocation) SetMetaInput(input *ActionPaymentStatsEstimateIncomeMetaGlobalInput) *ActionPaymentStatsEstimateIncomeInvocation {
 	inv.MetaInput = input

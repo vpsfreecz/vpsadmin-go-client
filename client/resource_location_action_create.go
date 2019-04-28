@@ -225,6 +225,12 @@ type ActionLocationCreateInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionLocationCreateInvocation) NewInput() *ActionLocationCreateInput {
+	inv.Input = &ActionLocationCreateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionLocationCreateInvocation) SetInput(input *ActionLocationCreateInput) *ActionLocationCreateInvocation {
 	inv.Input = input
@@ -240,6 +246,13 @@ func (inv *ActionLocationCreateInvocation) IsParameterSelected(param string) boo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionLocationCreateInvocation) NewMetaInput() *ActionLocationCreateMetaGlobalInput {
+	inv.MetaInput = &ActionLocationCreateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionLocationCreateInvocation) SetMetaInput(input *ActionLocationCreateMetaGlobalInput) *ActionLocationCreateInvocation {
 	inv.MetaInput = input

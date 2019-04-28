@@ -207,6 +207,12 @@ func (inv *ActionUserEnvironmentConfigIndexInvocation) SetPathParamString(param 
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionUserEnvironmentConfigIndexInvocation) NewInput() *ActionUserEnvironmentConfigIndexInput {
+	inv.Input = &ActionUserEnvironmentConfigIndexInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionUserEnvironmentConfigIndexInvocation) SetInput(input *ActionUserEnvironmentConfigIndexInput) *ActionUserEnvironmentConfigIndexInvocation {
 	inv.Input = input
@@ -222,6 +228,13 @@ func (inv *ActionUserEnvironmentConfigIndexInvocation) IsParameterSelected(param
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionUserEnvironmentConfigIndexInvocation) NewMetaInput() *ActionUserEnvironmentConfigIndexMetaGlobalInput {
+	inv.MetaInput = &ActionUserEnvironmentConfigIndexMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionUserEnvironmentConfigIndexInvocation) SetMetaInput(input *ActionUserEnvironmentConfigIndexMetaGlobalInput) *ActionUserEnvironmentConfigIndexInvocation {
 	inv.MetaInput = input

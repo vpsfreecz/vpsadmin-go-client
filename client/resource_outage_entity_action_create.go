@@ -185,6 +185,12 @@ func (inv *ActionOutageEntityCreateInvocation) SetPathParamString(param string, 
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionOutageEntityCreateInvocation) NewInput() *ActionOutageEntityCreateInput {
+	inv.Input = &ActionOutageEntityCreateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionOutageEntityCreateInvocation) SetInput(input *ActionOutageEntityCreateInput) *ActionOutageEntityCreateInvocation {
 	inv.Input = input
@@ -200,6 +206,13 @@ func (inv *ActionOutageEntityCreateInvocation) IsParameterSelected(param string)
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionOutageEntityCreateInvocation) NewMetaInput() *ActionOutageEntityCreateMetaGlobalInput {
+	inv.MetaInput = &ActionOutageEntityCreateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionOutageEntityCreateInvocation) SetMetaInput(input *ActionOutageEntityCreateMetaGlobalInput) *ActionOutageEntityCreateInvocation {
 	inv.MetaInput = input

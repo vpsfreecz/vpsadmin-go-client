@@ -199,6 +199,12 @@ type ActionDnsResolverCreateInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionDnsResolverCreateInvocation) NewInput() *ActionDnsResolverCreateInput {
+	inv.Input = &ActionDnsResolverCreateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionDnsResolverCreateInvocation) SetInput(input *ActionDnsResolverCreateInput) *ActionDnsResolverCreateInvocation {
 	inv.Input = input
@@ -214,6 +220,13 @@ func (inv *ActionDnsResolverCreateInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionDnsResolverCreateInvocation) NewMetaInput() *ActionDnsResolverCreateMetaGlobalInput {
+	inv.MetaInput = &ActionDnsResolverCreateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionDnsResolverCreateInvocation) SetMetaInput(input *ActionDnsResolverCreateMetaGlobalInput) *ActionDnsResolverCreateInvocation {
 	inv.MetaInput = input

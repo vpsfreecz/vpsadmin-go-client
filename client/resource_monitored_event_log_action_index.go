@@ -215,6 +215,12 @@ func (inv *ActionMonitoredEventLogIndexInvocation) SetPathParamString(param stri
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionMonitoredEventLogIndexInvocation) NewInput() *ActionMonitoredEventLogIndexInput {
+	inv.Input = &ActionMonitoredEventLogIndexInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionMonitoredEventLogIndexInvocation) SetInput(input *ActionMonitoredEventLogIndexInput) *ActionMonitoredEventLogIndexInvocation {
 	inv.Input = input
@@ -230,6 +236,13 @@ func (inv *ActionMonitoredEventLogIndexInvocation) IsParameterSelected(param str
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionMonitoredEventLogIndexInvocation) NewMetaInput() *ActionMonitoredEventLogIndexMetaGlobalInput {
+	inv.MetaInput = &ActionMonitoredEventLogIndexMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionMonitoredEventLogIndexInvocation) SetMetaInput(input *ActionMonitoredEventLogIndexMetaGlobalInput) *ActionMonitoredEventLogIndexInvocation {
 	inv.MetaInput = input

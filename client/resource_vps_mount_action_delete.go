@@ -124,6 +124,13 @@ func (inv *ActionVpsMountDeleteInvocation) SetPathParamString(param string, valu
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionVpsMountDeleteInvocation) NewMetaInput() *ActionVpsMountDeleteMetaGlobalInput {
+	inv.MetaInput = &ActionVpsMountDeleteMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionVpsMountDeleteInvocation) SetMetaInput(input *ActionVpsMountDeleteMetaGlobalInput) *ActionVpsMountDeleteInvocation {
 	inv.MetaInput = input
@@ -169,10 +176,10 @@ func (resp *ActionVpsMountDeleteResponse) OperationStatus() (*ActionActionStateS
 func (resp *ActionVpsMountDeleteResponse) WaitForOperation(timeout float64) (*ActionActionStatePollResponse, error) {
 	req := resp.Action.Client.ActionState.Poll.Prepare()
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-	req.SetInput(&ActionActionStatePollInput{
-		Timeout: timeout,
-	})
-	req.Input.SelectParameters("Timeout")
+
+	input := req.NewInput()
+	input.SetTimeout(timeout)
+
 	return req.Call()
 }
 
@@ -181,11 +188,11 @@ func (resp *ActionVpsMountDeleteResponse) WaitForOperation(timeout float64) (*Ac
 func (resp *ActionVpsMountDeleteResponse) WatchOperation(timeout float64, updateIn float64, callback OperationProgressCallback) (*ActionActionStatePollResponse, error) {
 	req := resp.Action.Client.ActionState.Poll.Prepare()
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-	req.SetInput(&ActionActionStatePollInput{
-		Timeout: timeout,
-		UpdateIn: updateIn,
-	})
-	req.Input.SelectParameters("Timeout", "UpdateIn")
+
+	input := req.NewInput()
+	input.SetTimeout(timeout)
+	input.SetUpdateIn(updateIn)
+
 	pollResp, err := req.Call()
 
 	if err != nil {

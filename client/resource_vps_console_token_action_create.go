@@ -127,6 +127,13 @@ func (inv *ActionVpsConsoleTokenCreateInvocation) SetPathParamString(param strin
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionVpsConsoleTokenCreateInvocation) NewMetaInput() *ActionVpsConsoleTokenCreateMetaGlobalInput {
+	inv.MetaInput = &ActionVpsConsoleTokenCreateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionVpsConsoleTokenCreateInvocation) SetMetaInput(input *ActionVpsConsoleTokenCreateMetaGlobalInput) *ActionVpsConsoleTokenCreateInvocation {
 	inv.MetaInput = input

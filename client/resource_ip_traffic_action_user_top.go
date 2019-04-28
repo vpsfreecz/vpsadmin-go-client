@@ -327,6 +327,12 @@ type ActionIpTrafficUserTopInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionIpTrafficUserTopInvocation) NewInput() *ActionIpTrafficUserTopInput {
+	inv.Input = &ActionIpTrafficUserTopInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionIpTrafficUserTopInvocation) SetInput(input *ActionIpTrafficUserTopInput) *ActionIpTrafficUserTopInvocation {
 	inv.Input = input
@@ -342,6 +348,13 @@ func (inv *ActionIpTrafficUserTopInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionIpTrafficUserTopInvocation) NewMetaInput() *ActionIpTrafficUserTopMetaGlobalInput {
+	inv.MetaInput = &ActionIpTrafficUserTopMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionIpTrafficUserTopInvocation) SetMetaInput(input *ActionIpTrafficUserTopMetaGlobalInput) *ActionIpTrafficUserTopInvocation {
 	inv.MetaInput = input

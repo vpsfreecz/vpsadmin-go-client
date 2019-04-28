@@ -212,6 +212,12 @@ type ActionSnapshotDownloadIndexInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionSnapshotDownloadIndexInvocation) NewInput() *ActionSnapshotDownloadIndexInput {
+	inv.Input = &ActionSnapshotDownloadIndexInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionSnapshotDownloadIndexInvocation) SetInput(input *ActionSnapshotDownloadIndexInput) *ActionSnapshotDownloadIndexInvocation {
 	inv.Input = input
@@ -227,6 +233,13 @@ func (inv *ActionSnapshotDownloadIndexInvocation) IsParameterSelected(param stri
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionSnapshotDownloadIndexInvocation) NewMetaInput() *ActionSnapshotDownloadIndexMetaGlobalInput {
+	inv.MetaInput = &ActionSnapshotDownloadIndexMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionSnapshotDownloadIndexInvocation) SetMetaInput(input *ActionSnapshotDownloadIndexMetaGlobalInput) *ActionSnapshotDownloadIndexInvocation {
 	inv.MetaInput = input

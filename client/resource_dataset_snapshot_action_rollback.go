@@ -124,6 +124,13 @@ func (inv *ActionDatasetSnapshotRollbackInvocation) SetPathParamString(param str
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionDatasetSnapshotRollbackInvocation) NewMetaInput() *ActionDatasetSnapshotRollbackMetaGlobalInput {
+	inv.MetaInput = &ActionDatasetSnapshotRollbackMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionDatasetSnapshotRollbackInvocation) SetMetaInput(input *ActionDatasetSnapshotRollbackMetaGlobalInput) *ActionDatasetSnapshotRollbackInvocation {
 	inv.MetaInput = input
@@ -169,10 +176,10 @@ func (resp *ActionDatasetSnapshotRollbackResponse) OperationStatus() (*ActionAct
 func (resp *ActionDatasetSnapshotRollbackResponse) WaitForOperation(timeout float64) (*ActionActionStatePollResponse, error) {
 	req := resp.Action.Client.ActionState.Poll.Prepare()
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-	req.SetInput(&ActionActionStatePollInput{
-		Timeout: timeout,
-	})
-	req.Input.SelectParameters("Timeout")
+
+	input := req.NewInput()
+	input.SetTimeout(timeout)
+
 	return req.Call()
 }
 
@@ -181,11 +188,11 @@ func (resp *ActionDatasetSnapshotRollbackResponse) WaitForOperation(timeout floa
 func (resp *ActionDatasetSnapshotRollbackResponse) WatchOperation(timeout float64, updateIn float64, callback OperationProgressCallback) (*ActionActionStatePollResponse, error) {
 	req := resp.Action.Client.ActionState.Poll.Prepare()
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-	req.SetInput(&ActionActionStatePollInput{
-		Timeout: timeout,
-		UpdateIn: updateIn,
-	})
-	req.Input.SelectParameters("Timeout", "UpdateIn")
+
+	input := req.NewInput()
+	input.SetTimeout(timeout)
+	input.SetUpdateIn(updateIn)
+
 	pollResp, err := req.Call()
 
 	if err != nil {

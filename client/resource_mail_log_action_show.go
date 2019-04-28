@@ -137,6 +137,13 @@ func (inv *ActionMailLogShowInvocation) SetPathParamString(param string, value s
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionMailLogShowInvocation) NewMetaInput() *ActionMailLogShowMetaGlobalInput {
+	inv.MetaInput = &ActionMailLogShowMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionMailLogShowInvocation) SetMetaInput(input *ActionMailLogShowMetaGlobalInput) *ActionMailLogShowInvocation {
 	inv.MetaInput = input

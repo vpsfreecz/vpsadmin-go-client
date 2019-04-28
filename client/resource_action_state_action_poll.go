@@ -210,6 +210,12 @@ func (inv *ActionActionStatePollInvocation) SetPathParamString(param string, val
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionActionStatePollInvocation) NewInput() *ActionActionStatePollInput {
+	inv.Input = &ActionActionStatePollInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionActionStatePollInvocation) SetInput(input *ActionActionStatePollInput) *ActionActionStatePollInvocation {
 	inv.Input = input
@@ -225,6 +231,13 @@ func (inv *ActionActionStatePollInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionActionStatePollInvocation) NewMetaInput() *ActionActionStatePollMetaGlobalInput {
+	inv.MetaInput = &ActionActionStatePollMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionActionStatePollInvocation) SetMetaInput(input *ActionActionStatePollMetaGlobalInput) *ActionActionStatePollInvocation {
 	inv.MetaInput = input

@@ -249,6 +249,12 @@ func (inv *ActionEnvironmentUpdateInvocation) SetPathParamString(param string, v
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionEnvironmentUpdateInvocation) NewInput() *ActionEnvironmentUpdateInput {
+	inv.Input = &ActionEnvironmentUpdateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionEnvironmentUpdateInvocation) SetInput(input *ActionEnvironmentUpdateInput) *ActionEnvironmentUpdateInvocation {
 	inv.Input = input
@@ -264,6 +270,13 @@ func (inv *ActionEnvironmentUpdateInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionEnvironmentUpdateInvocation) NewMetaInput() *ActionEnvironmentUpdateMetaGlobalInput {
+	inv.MetaInput = &ActionEnvironmentUpdateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionEnvironmentUpdateInvocation) SetMetaInput(input *ActionEnvironmentUpdateMetaGlobalInput) *ActionEnvironmentUpdateInvocation {
 	inv.MetaInput = input

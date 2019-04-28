@@ -115,6 +115,13 @@ type ActionClusterFullStatsInvocation struct {
 }
 
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionClusterFullStatsInvocation) NewMetaInput() *ActionClusterFullStatsMetaGlobalInput {
+	inv.MetaInput = &ActionClusterFullStatsMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionClusterFullStatsInvocation) SetMetaInput(input *ActionClusterFullStatsMetaGlobalInput) *ActionClusterFullStatsInvocation {
 	inv.MetaInput = input

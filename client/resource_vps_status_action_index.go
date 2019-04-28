@@ -255,6 +255,12 @@ func (inv *ActionVpsStatusIndexInvocation) SetPathParamString(param string, valu
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionVpsStatusIndexInvocation) NewInput() *ActionVpsStatusIndexInput {
+	inv.Input = &ActionVpsStatusIndexInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionVpsStatusIndexInvocation) SetInput(input *ActionVpsStatusIndexInput) *ActionVpsStatusIndexInvocation {
 	inv.Input = input
@@ -270,6 +276,13 @@ func (inv *ActionVpsStatusIndexInvocation) IsParameterSelected(param string) boo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionVpsStatusIndexInvocation) NewMetaInput() *ActionVpsStatusIndexMetaGlobalInput {
+	inv.MetaInput = &ActionVpsStatusIndexMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionVpsStatusIndexInvocation) SetMetaInput(input *ActionVpsStatusIndexMetaGlobalInput) *ActionVpsStatusIndexInvocation {
 	inv.MetaInput = input

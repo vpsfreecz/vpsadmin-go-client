@@ -136,6 +136,13 @@ func (inv *ActionOutageShowInvocation) SetPathParamString(param string, value st
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionOutageShowInvocation) NewMetaInput() *ActionOutageShowMetaGlobalInput {
+	inv.MetaInput = &ActionOutageShowMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionOutageShowInvocation) SetMetaInput(input *ActionOutageShowMetaGlobalInput) *ActionOutageShowInvocation {
 	inv.MetaInput = input

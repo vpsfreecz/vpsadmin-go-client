@@ -115,6 +115,13 @@ func (inv *ActionAuthTokenDeleteInvocation) SetPathParamString(param string, val
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionAuthTokenDeleteInvocation) NewMetaInput() *ActionAuthTokenDeleteMetaGlobalInput {
+	inv.MetaInput = &ActionAuthTokenDeleteMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionAuthTokenDeleteInvocation) SetMetaInput(input *ActionAuthTokenDeleteMetaGlobalInput) *ActionAuthTokenDeleteInvocation {
 	inv.MetaInput = input

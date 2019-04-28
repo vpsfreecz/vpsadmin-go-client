@@ -129,6 +129,13 @@ func (inv *ActionTransactionChainShowInvocation) SetPathParamString(param string
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionTransactionChainShowInvocation) NewMetaInput() *ActionTransactionChainShowMetaGlobalInput {
+	inv.MetaInput = &ActionTransactionChainShowMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionTransactionChainShowInvocation) SetMetaInput(input *ActionTransactionChainShowMetaGlobalInput) *ActionTransactionChainShowInvocation {
 	inv.MetaInput = input

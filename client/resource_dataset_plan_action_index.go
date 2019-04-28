@@ -180,6 +180,12 @@ type ActionDatasetPlanIndexInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionDatasetPlanIndexInvocation) NewInput() *ActionDatasetPlanIndexInput {
+	inv.Input = &ActionDatasetPlanIndexInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionDatasetPlanIndexInvocation) SetInput(input *ActionDatasetPlanIndexInput) *ActionDatasetPlanIndexInvocation {
 	inv.Input = input
@@ -195,6 +201,13 @@ func (inv *ActionDatasetPlanIndexInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionDatasetPlanIndexInvocation) NewMetaInput() *ActionDatasetPlanIndexMetaGlobalInput {
+	inv.MetaInput = &ActionDatasetPlanIndexMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionDatasetPlanIndexInvocation) SetMetaInput(input *ActionDatasetPlanIndexMetaGlobalInput) *ActionDatasetPlanIndexInvocation {
 	inv.MetaInput = input

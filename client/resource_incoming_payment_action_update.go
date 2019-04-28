@@ -186,6 +186,12 @@ func (inv *ActionIncomingPaymentUpdateInvocation) SetPathParamString(param strin
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionIncomingPaymentUpdateInvocation) NewInput() *ActionIncomingPaymentUpdateInput {
+	inv.Input = &ActionIncomingPaymentUpdateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionIncomingPaymentUpdateInvocation) SetInput(input *ActionIncomingPaymentUpdateInput) *ActionIncomingPaymentUpdateInvocation {
 	inv.Input = input
@@ -201,6 +207,13 @@ func (inv *ActionIncomingPaymentUpdateInvocation) IsParameterSelected(param stri
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionIncomingPaymentUpdateInvocation) NewMetaInput() *ActionIncomingPaymentUpdateMetaGlobalInput {
+	inv.MetaInput = &ActionIncomingPaymentUpdateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionIncomingPaymentUpdateInvocation) SetMetaInput(input *ActionIncomingPaymentUpdateMetaGlobalInput) *ActionIncomingPaymentUpdateInvocation {
 	inv.MetaInput = input

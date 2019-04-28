@@ -327,6 +327,12 @@ func (inv *ActionUserRequestRegistrationUpdateInvocation) SetPathParamString(par
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionUserRequestRegistrationUpdateInvocation) NewInput() *ActionUserRequestRegistrationUpdateInput {
+	inv.Input = &ActionUserRequestRegistrationUpdateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionUserRequestRegistrationUpdateInvocation) SetInput(input *ActionUserRequestRegistrationUpdateInput) *ActionUserRequestRegistrationUpdateInvocation {
 	inv.Input = input
@@ -342,6 +348,13 @@ func (inv *ActionUserRequestRegistrationUpdateInvocation) IsParameterSelected(pa
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionUserRequestRegistrationUpdateInvocation) NewMetaInput() *ActionUserRequestRegistrationUpdateMetaGlobalInput {
+	inv.MetaInput = &ActionUserRequestRegistrationUpdateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionUserRequestRegistrationUpdateInvocation) SetMetaInput(input *ActionUserRequestRegistrationUpdateMetaGlobalInput) *ActionUserRequestRegistrationUpdateInvocation {
 	inv.MetaInput = input

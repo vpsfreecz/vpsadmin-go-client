@@ -124,6 +124,13 @@ func (inv *ActionSnapshotDownloadDeleteInvocation) SetPathParamString(param stri
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionSnapshotDownloadDeleteInvocation) NewMetaInput() *ActionSnapshotDownloadDeleteMetaGlobalInput {
+	inv.MetaInput = &ActionSnapshotDownloadDeleteMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionSnapshotDownloadDeleteInvocation) SetMetaInput(input *ActionSnapshotDownloadDeleteMetaGlobalInput) *ActionSnapshotDownloadDeleteInvocation {
 	inv.MetaInput = input
@@ -169,10 +176,10 @@ func (resp *ActionSnapshotDownloadDeleteResponse) OperationStatus() (*ActionActi
 func (resp *ActionSnapshotDownloadDeleteResponse) WaitForOperation(timeout float64) (*ActionActionStatePollResponse, error) {
 	req := resp.Action.Client.ActionState.Poll.Prepare()
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-	req.SetInput(&ActionActionStatePollInput{
-		Timeout: timeout,
-	})
-	req.Input.SelectParameters("Timeout")
+
+	input := req.NewInput()
+	input.SetTimeout(timeout)
+
 	return req.Call()
 }
 
@@ -181,11 +188,11 @@ func (resp *ActionSnapshotDownloadDeleteResponse) WaitForOperation(timeout float
 func (resp *ActionSnapshotDownloadDeleteResponse) WatchOperation(timeout float64, updateIn float64, callback OperationProgressCallback) (*ActionActionStatePollResponse, error) {
 	req := resp.Action.Client.ActionState.Poll.Prepare()
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-	req.SetInput(&ActionActionStatePollInput{
-		Timeout: timeout,
-		UpdateIn: updateIn,
-	})
-	req.Input.SelectParameters("Timeout", "UpdateIn")
+
+	input := req.NewInput()
+	input.SetTimeout(timeout)
+	input.SetUpdateIn(updateIn)
+
 	pollResp, err := req.Call()
 
 	if err != nil {

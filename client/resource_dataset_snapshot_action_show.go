@@ -128,6 +128,13 @@ func (inv *ActionDatasetSnapshotShowInvocation) SetPathParamString(param string,
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionDatasetSnapshotShowInvocation) NewMetaInput() *ActionDatasetSnapshotShowMetaGlobalInput {
+	inv.MetaInput = &ActionDatasetSnapshotShowMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionDatasetSnapshotShowInvocation) SetMetaInput(input *ActionDatasetSnapshotShowMetaGlobalInput) *ActionDatasetSnapshotShowInvocation {
 	inv.MetaInput = input

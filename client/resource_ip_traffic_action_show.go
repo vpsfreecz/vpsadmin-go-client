@@ -131,6 +131,13 @@ func (inv *ActionIpTrafficShowInvocation) SetPathParamString(param string, value
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionIpTrafficShowInvocation) NewMetaInput() *ActionIpTrafficShowMetaGlobalInput {
+	inv.MetaInput = &ActionIpTrafficShowMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionIpTrafficShowInvocation) SetMetaInput(input *ActionIpTrafficShowMetaGlobalInput) *ActionIpTrafficShowInvocation {
 	inv.MetaInput = input

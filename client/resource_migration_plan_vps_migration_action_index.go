@@ -235,6 +235,12 @@ func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) SetPathParamString(pa
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) NewInput() *ActionMigrationPlanVpsMigrationIndexInput {
+	inv.Input = &ActionMigrationPlanVpsMigrationIndexInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) SetInput(input *ActionMigrationPlanVpsMigrationIndexInput) *ActionMigrationPlanVpsMigrationIndexInvocation {
 	inv.Input = input
@@ -250,6 +256,13 @@ func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) IsParameterSelected(p
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) NewMetaInput() *ActionMigrationPlanVpsMigrationIndexMetaGlobalInput {
+	inv.MetaInput = &ActionMigrationPlanVpsMigrationIndexMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) SetMetaInput(input *ActionMigrationPlanVpsMigrationIndexMetaGlobalInput) *ActionMigrationPlanVpsMigrationIndexInvocation {
 	inv.MetaInput = input

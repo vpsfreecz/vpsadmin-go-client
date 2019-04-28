@@ -129,6 +129,13 @@ type ActionUserCurrentInvocation struct {
 }
 
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionUserCurrentInvocation) NewMetaInput() *ActionUserCurrentMetaGlobalInput {
+	inv.MetaInput = &ActionUserCurrentMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionUserCurrentInvocation) SetMetaInput(input *ActionUserCurrentMetaGlobalInput) *ActionUserCurrentInvocation {
 	inv.MetaInput = input

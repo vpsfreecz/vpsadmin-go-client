@@ -192,6 +192,12 @@ func (inv *ActionVpsConfigUpdateInvocation) SetPathParamString(param string, val
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionVpsConfigUpdateInvocation) NewInput() *ActionVpsConfigUpdateInput {
+	inv.Input = &ActionVpsConfigUpdateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionVpsConfigUpdateInvocation) SetInput(input *ActionVpsConfigUpdateInput) *ActionVpsConfigUpdateInvocation {
 	inv.Input = input
@@ -207,6 +213,13 @@ func (inv *ActionVpsConfigUpdateInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionVpsConfigUpdateInvocation) NewMetaInput() *ActionVpsConfigUpdateMetaGlobalInput {
+	inv.MetaInput = &ActionVpsConfigUpdateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionVpsConfigUpdateInvocation) SetMetaInput(input *ActionVpsConfigUpdateMetaGlobalInput) *ActionVpsConfigUpdateInvocation {
 	inv.MetaInput = input
@@ -252,10 +265,10 @@ func (resp *ActionVpsConfigUpdateResponse) OperationStatus() (*ActionActionState
 func (resp *ActionVpsConfigUpdateResponse) WaitForOperation(timeout float64) (*ActionActionStatePollResponse, error) {
 	req := resp.Action.Client.ActionState.Poll.Prepare()
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-	req.SetInput(&ActionActionStatePollInput{
-		Timeout: timeout,
-	})
-	req.Input.SelectParameters("Timeout")
+
+	input := req.NewInput()
+	input.SetTimeout(timeout)
+
 	return req.Call()
 }
 
@@ -264,11 +277,11 @@ func (resp *ActionVpsConfigUpdateResponse) WaitForOperation(timeout float64) (*A
 func (resp *ActionVpsConfigUpdateResponse) WatchOperation(timeout float64, updateIn float64, callback OperationProgressCallback) (*ActionActionStatePollResponse, error) {
 	req := resp.Action.Client.ActionState.Poll.Prepare()
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-	req.SetInput(&ActionActionStatePollInput{
-		Timeout: timeout,
-		UpdateIn: updateIn,
-	})
-	req.Input.SelectParameters("Timeout", "UpdateIn")
+
+	input := req.NewInput()
+	input.SetTimeout(timeout)
+	input.SetUpdateIn(updateIn)
+
 	pollResp, err := req.Call()
 
 	if err != nil {

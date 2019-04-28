@@ -124,6 +124,13 @@ func (inv *ActionVpsStartInvocation) SetPathParamString(param string, value stri
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionVpsStartInvocation) NewMetaInput() *ActionVpsStartMetaGlobalInput {
+	inv.MetaInput = &ActionVpsStartMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionVpsStartInvocation) SetMetaInput(input *ActionVpsStartMetaGlobalInput) *ActionVpsStartInvocation {
 	inv.MetaInput = input
@@ -169,10 +176,10 @@ func (resp *ActionVpsStartResponse) OperationStatus() (*ActionActionStateShowRes
 func (resp *ActionVpsStartResponse) WaitForOperation(timeout float64) (*ActionActionStatePollResponse, error) {
 	req := resp.Action.Client.ActionState.Poll.Prepare()
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-	req.SetInput(&ActionActionStatePollInput{
-		Timeout: timeout,
-	})
-	req.Input.SelectParameters("Timeout")
+
+	input := req.NewInput()
+	input.SetTimeout(timeout)
+
 	return req.Call()
 }
 
@@ -181,11 +188,11 @@ func (resp *ActionVpsStartResponse) WaitForOperation(timeout float64) (*ActionAc
 func (resp *ActionVpsStartResponse) WatchOperation(timeout float64, updateIn float64, callback OperationProgressCallback) (*ActionActionStatePollResponse, error) {
 	req := resp.Action.Client.ActionState.Poll.Prepare()
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-	req.SetInput(&ActionActionStatePollInput{
-		Timeout: timeout,
-		UpdateIn: updateIn,
-	})
-	req.Input.SelectParameters("Timeout", "UpdateIn")
+
+	input := req.NewInput()
+	input.SetTimeout(timeout)
+	input.SetUpdateIn(updateIn)
+
 	pollResp, err := req.Call()
 
 	if err != nil {

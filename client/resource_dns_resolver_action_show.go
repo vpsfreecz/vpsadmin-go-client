@@ -126,6 +126,13 @@ func (inv *ActionDnsResolverShowInvocation) SetPathParamString(param string, val
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionDnsResolverShowInvocation) NewMetaInput() *ActionDnsResolverShowMetaGlobalInput {
+	inv.MetaInput = &ActionDnsResolverShowMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionDnsResolverShowInvocation) SetMetaInput(input *ActionDnsResolverShowMetaGlobalInput) *ActionDnsResolverShowInvocation {
 	inv.MetaInput = input

@@ -210,6 +210,12 @@ type ActionUserRequestChangeCreateInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionUserRequestChangeCreateInvocation) NewInput() *ActionUserRequestChangeCreateInput {
+	inv.Input = &ActionUserRequestChangeCreateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionUserRequestChangeCreateInvocation) SetInput(input *ActionUserRequestChangeCreateInput) *ActionUserRequestChangeCreateInvocation {
 	inv.Input = input
@@ -225,6 +231,13 @@ func (inv *ActionUserRequestChangeCreateInvocation) IsParameterSelected(param st
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionUserRequestChangeCreateInvocation) NewMetaInput() *ActionUserRequestChangeCreateMetaGlobalInput {
+	inv.MetaInput = &ActionUserRequestChangeCreateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionUserRequestChangeCreateInvocation) SetMetaInput(input *ActionUserRequestChangeCreateMetaGlobalInput) *ActionUserRequestChangeCreateInvocation {
 	inv.MetaInput = input

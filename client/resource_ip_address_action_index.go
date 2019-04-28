@@ -332,6 +332,12 @@ type ActionIpAddressIndexInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionIpAddressIndexInvocation) NewInput() *ActionIpAddressIndexInput {
+	inv.Input = &ActionIpAddressIndexInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionIpAddressIndexInvocation) SetInput(input *ActionIpAddressIndexInput) *ActionIpAddressIndexInvocation {
 	inv.Input = input
@@ -347,6 +353,13 @@ func (inv *ActionIpAddressIndexInvocation) IsParameterSelected(param string) boo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionIpAddressIndexInvocation) NewMetaInput() *ActionIpAddressIndexMetaGlobalInput {
+	inv.MetaInput = &ActionIpAddressIndexMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionIpAddressIndexInvocation) SetMetaInput(input *ActionIpAddressIndexMetaGlobalInput) *ActionIpAddressIndexInvocation {
 	inv.MetaInput = input

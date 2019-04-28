@@ -228,6 +228,12 @@ func (inv *ActionDatasetPropertyHistoryIndexInvocation) SetPathParamString(param
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionDatasetPropertyHistoryIndexInvocation) NewInput() *ActionDatasetPropertyHistoryIndexInput {
+	inv.Input = &ActionDatasetPropertyHistoryIndexInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionDatasetPropertyHistoryIndexInvocation) SetInput(input *ActionDatasetPropertyHistoryIndexInput) *ActionDatasetPropertyHistoryIndexInvocation {
 	inv.Input = input
@@ -243,6 +249,13 @@ func (inv *ActionDatasetPropertyHistoryIndexInvocation) IsParameterSelected(para
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionDatasetPropertyHistoryIndexInvocation) NewMetaInput() *ActionDatasetPropertyHistoryIndexMetaGlobalInput {
+	inv.MetaInput = &ActionDatasetPropertyHistoryIndexMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionDatasetPropertyHistoryIndexInvocation) SetMetaInput(input *ActionDatasetPropertyHistoryIndexMetaGlobalInput) *ActionDatasetPropertyHistoryIndexInvocation {
 	inv.MetaInput = input

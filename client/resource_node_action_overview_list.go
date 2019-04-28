@@ -158,6 +158,13 @@ type ActionNodeOverviewListInvocation struct {
 }
 
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionNodeOverviewListInvocation) NewMetaInput() *ActionNodeOverviewListMetaGlobalInput {
+	inv.MetaInput = &ActionNodeOverviewListMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionNodeOverviewListInvocation) SetMetaInput(input *ActionNodeOverviewListMetaGlobalInput) *ActionNodeOverviewListInvocation {
 	inv.MetaInput = input

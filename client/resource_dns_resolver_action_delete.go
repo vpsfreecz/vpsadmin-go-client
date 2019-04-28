@@ -159,6 +159,12 @@ func (inv *ActionDnsResolverDeleteInvocation) SetPathParamString(param string, v
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionDnsResolverDeleteInvocation) NewInput() *ActionDnsResolverDeleteInput {
+	inv.Input = &ActionDnsResolverDeleteInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionDnsResolverDeleteInvocation) SetInput(input *ActionDnsResolverDeleteInput) *ActionDnsResolverDeleteInvocation {
 	inv.Input = input
@@ -174,6 +180,13 @@ func (inv *ActionDnsResolverDeleteInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionDnsResolverDeleteInvocation) NewMetaInput() *ActionDnsResolverDeleteMetaGlobalInput {
+	inv.MetaInput = &ActionDnsResolverDeleteMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionDnsResolverDeleteInvocation) SetMetaInput(input *ActionDnsResolverDeleteMetaGlobalInput) *ActionDnsResolverDeleteInvocation {
 	inv.MetaInput = input

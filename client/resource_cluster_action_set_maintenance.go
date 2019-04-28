@@ -148,6 +148,12 @@ type ActionClusterSetMaintenanceInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionClusterSetMaintenanceInvocation) NewInput() *ActionClusterSetMaintenanceInput {
+	inv.Input = &ActionClusterSetMaintenanceInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionClusterSetMaintenanceInvocation) SetInput(input *ActionClusterSetMaintenanceInput) *ActionClusterSetMaintenanceInvocation {
 	inv.Input = input
@@ -163,6 +169,13 @@ func (inv *ActionClusterSetMaintenanceInvocation) IsParameterSelected(param stri
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionClusterSetMaintenanceInvocation) NewMetaInput() *ActionClusterSetMaintenanceMetaGlobalInput {
+	inv.MetaInput = &ActionClusterSetMaintenanceMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionClusterSetMaintenanceInvocation) SetMetaInput(input *ActionClusterSetMaintenanceMetaGlobalInput) *ActionClusterSetMaintenanceInvocation {
 	inv.MetaInput = input

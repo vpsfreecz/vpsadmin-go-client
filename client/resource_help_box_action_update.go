@@ -223,6 +223,12 @@ func (inv *ActionHelpBoxUpdateInvocation) SetPathParamString(param string, value
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionHelpBoxUpdateInvocation) NewInput() *ActionHelpBoxUpdateInput {
+	inv.Input = &ActionHelpBoxUpdateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionHelpBoxUpdateInvocation) SetInput(input *ActionHelpBoxUpdateInput) *ActionHelpBoxUpdateInvocation {
 	inv.Input = input
@@ -238,6 +244,13 @@ func (inv *ActionHelpBoxUpdateInvocation) IsParameterSelected(param string) bool
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionHelpBoxUpdateInvocation) NewMetaInput() *ActionHelpBoxUpdateMetaGlobalInput {
+	inv.MetaInput = &ActionHelpBoxUpdateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionHelpBoxUpdateInvocation) SetMetaInput(input *ActionHelpBoxUpdateMetaGlobalInput) *ActionHelpBoxUpdateInvocation {
 	inv.MetaInput = input

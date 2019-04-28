@@ -199,6 +199,12 @@ type ActionMailRecipientCreateInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionMailRecipientCreateInvocation) NewInput() *ActionMailRecipientCreateInput {
+	inv.Input = &ActionMailRecipientCreateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionMailRecipientCreateInvocation) SetInput(input *ActionMailRecipientCreateInput) *ActionMailRecipientCreateInvocation {
 	inv.Input = input
@@ -214,6 +220,13 @@ func (inv *ActionMailRecipientCreateInvocation) IsParameterSelected(param string
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionMailRecipientCreateInvocation) NewMetaInput() *ActionMailRecipientCreateMetaGlobalInput {
+	inv.MetaInput = &ActionMailRecipientCreateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionMailRecipientCreateInvocation) SetMetaInput(input *ActionMailRecipientCreateMetaGlobalInput) *ActionMailRecipientCreateInvocation {
 	inv.MetaInput = input

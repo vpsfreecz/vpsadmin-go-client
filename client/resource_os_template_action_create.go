@@ -238,6 +238,12 @@ type ActionOsTemplateCreateInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionOsTemplateCreateInvocation) NewInput() *ActionOsTemplateCreateInput {
+	inv.Input = &ActionOsTemplateCreateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionOsTemplateCreateInvocation) SetInput(input *ActionOsTemplateCreateInput) *ActionOsTemplateCreateInvocation {
 	inv.Input = input
@@ -253,6 +259,13 @@ func (inv *ActionOsTemplateCreateInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionOsTemplateCreateInvocation) NewMetaInput() *ActionOsTemplateCreateMetaGlobalInput {
+	inv.MetaInput = &ActionOsTemplateCreateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionOsTemplateCreateInvocation) SetMetaInput(input *ActionOsTemplateCreateMetaGlobalInput) *ActionOsTemplateCreateInvocation {
 	inv.MetaInput = input

@@ -96,6 +96,13 @@ type AuthTokenActionTokenRevokeInvocation struct {
 }
 
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *AuthTokenActionTokenRevokeInvocation) NewMetaInput() *AuthTokenActionTokenRevokeMetaGlobalInput {
+	inv.MetaInput = &AuthTokenActionTokenRevokeMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *AuthTokenActionTokenRevokeInvocation) SetMetaInput(input *AuthTokenActionTokenRevokeMetaGlobalInput) *AuthTokenActionTokenRevokeInvocation {
 	inv.MetaInput = input

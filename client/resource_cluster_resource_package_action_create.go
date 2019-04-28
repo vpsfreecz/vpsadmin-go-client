@@ -164,6 +164,12 @@ type ActionClusterResourcePackageCreateInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionClusterResourcePackageCreateInvocation) NewInput() *ActionClusterResourcePackageCreateInput {
+	inv.Input = &ActionClusterResourcePackageCreateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionClusterResourcePackageCreateInvocation) SetInput(input *ActionClusterResourcePackageCreateInput) *ActionClusterResourcePackageCreateInvocation {
 	inv.Input = input
@@ -179,6 +185,13 @@ func (inv *ActionClusterResourcePackageCreateInvocation) IsParameterSelected(par
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionClusterResourcePackageCreateInvocation) NewMetaInput() *ActionClusterResourcePackageCreateMetaGlobalInput {
+	inv.MetaInput = &ActionClusterResourcePackageCreateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionClusterResourcePackageCreateInvocation) SetMetaInput(input *ActionClusterResourcePackageCreateMetaGlobalInput) *ActionClusterResourcePackageCreateInvocation {
 	inv.MetaInput = input

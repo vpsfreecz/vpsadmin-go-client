@@ -64,22 +64,25 @@ response, err := action.Call()
 ```
 
 ### Input parameters
-The client can be configured either to send all available input parameters, or
-just a selected list of parameters.
+The client can be configured either to send just the configured parameters,
+or to send all parameters, even unset ones.
 
 ```go
 action := api.Vps.Update.Prepare()
 action.SetPathParamInt("vps_id", 123)
-action.SetInput(&client.ActionVpsUpdateInput{
-	Hostname: "new-hostname",
-})
 
-// If action.Input.SelectParameters() wasn't called, all input parameters for
-// Vps.Update would be sent
-action.Input.SelectParameters("Hostname")
+input := action.NewInput()
+input.SetHostname("new-hostname")
 
+// Although Vps.Update has many more input parameters, only Hostname was set
+// and so no other parameter will be sent. This is what we want in order to
+// change just the hostname.
 response, err := action.Call()
 ```
+
+To send all input parameters, do not use the setter functions, but access
+the input struct's fields directly. Or create the struct manually
+(e.g. `ActionVpsUpdateInput{}`) and then use `action.SetInput()`.
 
 ## Updating the client
 ```

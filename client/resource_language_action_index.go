@@ -180,6 +180,12 @@ type ActionLanguageIndexInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionLanguageIndexInvocation) NewInput() *ActionLanguageIndexInput {
+	inv.Input = &ActionLanguageIndexInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionLanguageIndexInvocation) SetInput(input *ActionLanguageIndexInput) *ActionLanguageIndexInvocation {
 	inv.Input = input
@@ -195,6 +201,13 @@ func (inv *ActionLanguageIndexInvocation) IsParameterSelected(param string) bool
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionLanguageIndexInvocation) NewMetaInput() *ActionLanguageIndexMetaGlobalInput {
+	inv.MetaInput = &ActionLanguageIndexMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionLanguageIndexInvocation) SetMetaInput(input *ActionLanguageIndexMetaGlobalInput) *ActionLanguageIndexInvocation {
 	inv.MetaInput = input

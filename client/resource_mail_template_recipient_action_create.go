@@ -171,6 +171,12 @@ func (inv *ActionMailTemplateRecipientCreateInvocation) SetPathParamString(param
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionMailTemplateRecipientCreateInvocation) NewInput() *ActionMailTemplateRecipientCreateInput {
+	inv.Input = &ActionMailTemplateRecipientCreateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionMailTemplateRecipientCreateInvocation) SetInput(input *ActionMailTemplateRecipientCreateInput) *ActionMailTemplateRecipientCreateInvocation {
 	inv.Input = input
@@ -186,6 +192,13 @@ func (inv *ActionMailTemplateRecipientCreateInvocation) IsParameterSelected(para
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionMailTemplateRecipientCreateInvocation) NewMetaInput() *ActionMailTemplateRecipientCreateMetaGlobalInput {
+	inv.MetaInput = &ActionMailTemplateRecipientCreateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionMailTemplateRecipientCreateInvocation) SetMetaInput(input *ActionMailTemplateRecipientCreateMetaGlobalInput) *ActionMailTemplateRecipientCreateInvocation {
 	inv.MetaInput = input

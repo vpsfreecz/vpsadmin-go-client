@@ -206,6 +206,12 @@ type ActionIntegrityCheckCreateInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionIntegrityCheckCreateInvocation) NewInput() *ActionIntegrityCheckCreateInput {
+	inv.Input = &ActionIntegrityCheckCreateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionIntegrityCheckCreateInvocation) SetInput(input *ActionIntegrityCheckCreateInput) *ActionIntegrityCheckCreateInvocation {
 	inv.Input = input
@@ -221,6 +227,13 @@ func (inv *ActionIntegrityCheckCreateInvocation) IsParameterSelected(param strin
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionIntegrityCheckCreateInvocation) NewMetaInput() *ActionIntegrityCheckCreateMetaGlobalInput {
+	inv.MetaInput = &ActionIntegrityCheckCreateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionIntegrityCheckCreateInvocation) SetMetaInput(input *ActionIntegrityCheckCreateMetaGlobalInput) *ActionIntegrityCheckCreateInvocation {
 	inv.MetaInput = input

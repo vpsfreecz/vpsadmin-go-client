@@ -230,6 +230,12 @@ func (inv *ActionNodeEvacuateInvocation) SetPathParamString(param string, value 
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionNodeEvacuateInvocation) NewInput() *ActionNodeEvacuateInput {
+	inv.Input = &ActionNodeEvacuateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionNodeEvacuateInvocation) SetInput(input *ActionNodeEvacuateInput) *ActionNodeEvacuateInvocation {
 	inv.Input = input
@@ -245,6 +251,13 @@ func (inv *ActionNodeEvacuateInvocation) IsParameterSelected(param string) bool 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionNodeEvacuateInvocation) NewMetaInput() *ActionNodeEvacuateMetaGlobalInput {
+	inv.MetaInput = &ActionNodeEvacuateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionNodeEvacuateInvocation) SetMetaInput(input *ActionNodeEvacuateMetaGlobalInput) *ActionNodeEvacuateInvocation {
 	inv.MetaInput = input

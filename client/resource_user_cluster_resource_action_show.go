@@ -127,6 +127,13 @@ func (inv *ActionUserClusterResourceShowInvocation) SetPathParamString(param str
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionUserClusterResourceShowInvocation) NewMetaInput() *ActionUserClusterResourceShowMetaGlobalInput {
+	inv.MetaInput = &ActionUserClusterResourceShowMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionUserClusterResourceShowInvocation) SetMetaInput(input *ActionUserClusterResourceShowMetaGlobalInput) *ActionUserClusterResourceShowInvocation {
 	inv.MetaInput = input

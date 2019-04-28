@@ -186,6 +186,12 @@ func (inv *ActionNewsLogUpdateInvocation) SetPathParamString(param string, value
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionNewsLogUpdateInvocation) NewInput() *ActionNewsLogUpdateInput {
+	inv.Input = &ActionNewsLogUpdateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionNewsLogUpdateInvocation) SetInput(input *ActionNewsLogUpdateInput) *ActionNewsLogUpdateInvocation {
 	inv.Input = input
@@ -201,6 +207,13 @@ func (inv *ActionNewsLogUpdateInvocation) IsParameterSelected(param string) bool
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionNewsLogUpdateInvocation) NewMetaInput() *ActionNewsLogUpdateMetaGlobalInput {
+	inv.MetaInput = &ActionNewsLogUpdateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionNewsLogUpdateInvocation) SetMetaInput(input *ActionNewsLogUpdateMetaGlobalInput) *ActionNewsLogUpdateInvocation {
 	inv.MetaInput = input

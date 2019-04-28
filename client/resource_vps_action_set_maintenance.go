@@ -159,6 +159,12 @@ func (inv *ActionVpsSetMaintenanceInvocation) SetPathParamString(param string, v
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionVpsSetMaintenanceInvocation) NewInput() *ActionVpsSetMaintenanceInput {
+	inv.Input = &ActionVpsSetMaintenanceInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionVpsSetMaintenanceInvocation) SetInput(input *ActionVpsSetMaintenanceInput) *ActionVpsSetMaintenanceInvocation {
 	inv.Input = input
@@ -174,6 +180,13 @@ func (inv *ActionVpsSetMaintenanceInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionVpsSetMaintenanceInvocation) NewMetaInput() *ActionVpsSetMaintenanceMetaGlobalInput {
+	inv.MetaInput = &ActionVpsSetMaintenanceMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionVpsSetMaintenanceInvocation) SetMetaInput(input *ActionVpsSetMaintenanceMetaGlobalInput) *ActionVpsSetMaintenanceInvocation {
 	inv.MetaInput = input

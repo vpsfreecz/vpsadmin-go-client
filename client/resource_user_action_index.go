@@ -312,6 +312,12 @@ type ActionUserIndexInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionUserIndexInvocation) NewInput() *ActionUserIndexInput {
+	inv.Input = &ActionUserIndexInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionUserIndexInvocation) SetInput(input *ActionUserIndexInput) *ActionUserIndexInvocation {
 	inv.Input = input
@@ -327,6 +333,13 @@ func (inv *ActionUserIndexInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionUserIndexInvocation) NewMetaInput() *ActionUserIndexMetaGlobalInput {
+	inv.MetaInput = &ActionUserIndexMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionUserIndexInvocation) SetMetaInput(input *ActionUserIndexMetaGlobalInput) *ActionUserIndexInvocation {
 	inv.MetaInput = input

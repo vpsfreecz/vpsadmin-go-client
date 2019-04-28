@@ -194,6 +194,12 @@ type ActionNewsLogIndexInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionNewsLogIndexInvocation) NewInput() *ActionNewsLogIndexInput {
+	inv.Input = &ActionNewsLogIndexInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionNewsLogIndexInvocation) SetInput(input *ActionNewsLogIndexInput) *ActionNewsLogIndexInvocation {
 	inv.Input = input
@@ -209,6 +215,13 @@ func (inv *ActionNewsLogIndexInvocation) IsParameterSelected(param string) bool 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionNewsLogIndexInvocation) NewMetaInput() *ActionNewsLogIndexMetaGlobalInput {
+	inv.MetaInput = &ActionNewsLogIndexMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionNewsLogIndexInvocation) SetMetaInput(input *ActionNewsLogIndexMetaGlobalInput) *ActionNewsLogIndexInvocation {
 	inv.MetaInput = input

@@ -115,6 +115,13 @@ func (inv *ActionMigrationPlanDeleteInvocation) SetPathParamString(param string,
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionMigrationPlanDeleteInvocation) NewMetaInput() *ActionMigrationPlanDeleteMetaGlobalInput {
+	inv.MetaInput = &ActionMigrationPlanDeleteMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionMigrationPlanDeleteInvocation) SetMetaInput(input *ActionMigrationPlanDeleteMetaGlobalInput) *ActionMigrationPlanDeleteInvocation {
 	inv.MetaInput = input

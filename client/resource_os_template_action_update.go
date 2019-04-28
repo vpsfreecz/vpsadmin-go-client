@@ -237,6 +237,12 @@ func (inv *ActionOsTemplateUpdateInvocation) SetPathParamString(param string, va
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionOsTemplateUpdateInvocation) NewInput() *ActionOsTemplateUpdateInput {
+	inv.Input = &ActionOsTemplateUpdateInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionOsTemplateUpdateInvocation) SetInput(input *ActionOsTemplateUpdateInput) *ActionOsTemplateUpdateInvocation {
 	inv.Input = input
@@ -252,6 +258,13 @@ func (inv *ActionOsTemplateUpdateInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionOsTemplateUpdateInvocation) NewMetaInput() *ActionOsTemplateUpdateMetaGlobalInput {
+	inv.MetaInput = &ActionOsTemplateUpdateMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionOsTemplateUpdateInvocation) SetMetaInput(input *ActionOsTemplateUpdateMetaGlobalInput) *ActionOsTemplateUpdateInvocation {
 	inv.MetaInput = input

@@ -145,6 +145,13 @@ func (inv *ActionNodeStatusShowInvocation) SetPathParamString(param string, valu
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionNodeStatusShowInvocation) NewMetaInput() *ActionNodeStatusShowMetaGlobalInput {
+	inv.MetaInput = &ActionNodeStatusShowMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionNodeStatusShowInvocation) SetMetaInput(input *ActionNodeStatusShowMetaGlobalInput) *ActionNodeStatusShowInvocation {
 	inv.MetaInput = input

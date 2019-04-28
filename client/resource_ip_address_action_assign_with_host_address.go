@@ -198,6 +198,12 @@ func (inv *ActionIpAddressAssignWithHostAddressInvocation) SetPathParamString(pa
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionIpAddressAssignWithHostAddressInvocation) NewInput() *ActionIpAddressAssignWithHostAddressInput {
+	inv.Input = &ActionIpAddressAssignWithHostAddressInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionIpAddressAssignWithHostAddressInvocation) SetInput(input *ActionIpAddressAssignWithHostAddressInput) *ActionIpAddressAssignWithHostAddressInvocation {
 	inv.Input = input
@@ -213,6 +219,13 @@ func (inv *ActionIpAddressAssignWithHostAddressInvocation) IsParameterSelected(p
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionIpAddressAssignWithHostAddressInvocation) NewMetaInput() *ActionIpAddressAssignWithHostAddressMetaGlobalInput {
+	inv.MetaInput = &ActionIpAddressAssignWithHostAddressMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionIpAddressAssignWithHostAddressInvocation) SetMetaInput(input *ActionIpAddressAssignWithHostAddressMetaGlobalInput) *ActionIpAddressAssignWithHostAddressInvocation {
 	inv.MetaInput = input
@@ -261,10 +274,10 @@ func (resp *ActionIpAddressAssignWithHostAddressResponse) OperationStatus() (*Ac
 func (resp *ActionIpAddressAssignWithHostAddressResponse) WaitForOperation(timeout float64) (*ActionActionStatePollResponse, error) {
 	req := resp.Action.Client.ActionState.Poll.Prepare()
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-	req.SetInput(&ActionActionStatePollInput{
-		Timeout: timeout,
-	})
-	req.Input.SelectParameters("Timeout")
+
+	input := req.NewInput()
+	input.SetTimeout(timeout)
+
 	return req.Call()
 }
 
@@ -273,11 +286,11 @@ func (resp *ActionIpAddressAssignWithHostAddressResponse) WaitForOperation(timeo
 func (resp *ActionIpAddressAssignWithHostAddressResponse) WatchOperation(timeout float64, updateIn float64, callback OperationProgressCallback) (*ActionActionStatePollResponse, error) {
 	req := resp.Action.Client.ActionState.Poll.Prepare()
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-	req.SetInput(&ActionActionStatePollInput{
-		Timeout: timeout,
-		UpdateIn: updateIn,
-	})
-	req.Input.SelectParameters("Timeout", "UpdateIn")
+
+	input := req.NewInput()
+	input.SetTimeout(timeout)
+	input.SetUpdateIn(updateIn)
+
 	pollResp, err := req.Call()
 
 	if err != nil {

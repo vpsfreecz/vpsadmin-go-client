@@ -191,6 +191,12 @@ func (inv *ActionUserClusterResourcePackageItemIndexInvocation) SetPathParamStri
 	return inv
 }
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionUserClusterResourcePackageItemIndexInvocation) NewInput() *ActionUserClusterResourcePackageItemIndexInput {
+	inv.Input = &ActionUserClusterResourcePackageItemIndexInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionUserClusterResourcePackageItemIndexInvocation) SetInput(input *ActionUserClusterResourcePackageItemIndexInput) *ActionUserClusterResourcePackageItemIndexInvocation {
 	inv.Input = input
@@ -206,6 +212,13 @@ func (inv *ActionUserClusterResourcePackageItemIndexInvocation) IsParameterSelec
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionUserClusterResourcePackageItemIndexInvocation) NewMetaInput() *ActionUserClusterResourcePackageItemIndexMetaGlobalInput {
+	inv.MetaInput = &ActionUserClusterResourcePackageItemIndexMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionUserClusterResourcePackageItemIndexInvocation) SetMetaInput(input *ActionUserClusterResourcePackageItemIndexMetaGlobalInput) *ActionUserClusterResourcePackageItemIndexInvocation {
 	inv.MetaInput = input

@@ -115,6 +115,13 @@ func (inv *ActionOutageRebuildAffectedVpsInvocation) SetPathParamString(param st
 	return inv
 }
 
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionOutageRebuildAffectedVpsInvocation) NewMetaInput() *ActionOutageRebuildAffectedVpsMetaGlobalInput {
+	inv.MetaInput = &ActionOutageRebuildAffectedVpsMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionOutageRebuildAffectedVpsInvocation) SetMetaInput(input *ActionOutageRebuildAffectedVpsMetaGlobalInput) *ActionOutageRebuildAffectedVpsInvocation {
 	inv.MetaInput = input

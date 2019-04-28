@@ -261,6 +261,12 @@ type ActionIntegrityObjectIndexInvocation struct {
 }
 
 
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionIntegrityObjectIndexInvocation) NewInput() *ActionIntegrityObjectIndexInput {
+	inv.Input = &ActionIntegrityObjectIndexInput{}
+	return inv.Input
+}
+
 // SetInput provides input parameters to send to the API
 func (inv *ActionIntegrityObjectIndexInvocation) SetInput(input *ActionIntegrityObjectIndexInput) *ActionIntegrityObjectIndexInvocation {
 	inv.Input = input
@@ -276,6 +282,13 @@ func (inv *ActionIntegrityObjectIndexInvocation) IsParameterSelected(param strin
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+// NewMetaInput returns a new struct for global meta input parameters and sets
+// it as with SetMetaInput
+func (inv *ActionIntegrityObjectIndexInvocation) NewMetaInput() *ActionIntegrityObjectIndexMetaGlobalInput {
+	inv.MetaInput = &ActionIntegrityObjectIndexMetaGlobalInput{}
+	return inv.MetaInput
+}
+
 // SetMetaInput provides global meta input parameters to send to the API
 func (inv *ActionIntegrityObjectIndexInvocation) SetMetaInput(input *ActionIntegrityObjectIndexMetaGlobalInput) *ActionIntegrityObjectIndexInvocation {
 	inv.MetaInput = input
