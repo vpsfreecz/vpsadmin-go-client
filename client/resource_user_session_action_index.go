@@ -91,7 +91,6 @@ type ActionUserSessionIndexInput struct {
 	ClientIpAddr string `json:"client_ip_addr"`
 	UserAgent string `json:"user_agent"`
 	ClientVersion string `json:"client_version"`
-	AuthTokenStr string `json:"auth_token_str"`
 	Admin int64 `json:"admin"`
 	IpAddr string `json:"ip_addr"`
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -186,17 +185,6 @@ func (in *ActionUserSessionIndexInput) SetClientVersion(value string) *ActionUse
 	in._selectedParameters["ClientVersion"] = nil
 	return in
 }
-// SetAuthTokenStr sets parameter AuthTokenStr to value and selects it for sending
-func (in *ActionUserSessionIndexInput) SetAuthTokenStr(value string) *ActionUserSessionIndexInput {
-	in.AuthTokenStr = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["AuthTokenStr"] = nil
-	return in
-}
 // SetAdmin sets parameter Admin to value and selects it for sending
 func (in *ActionUserSessionIndexInput) SetAdmin(value int64) *ActionUserSessionIndexInput {
 	in.Admin = value
@@ -255,8 +243,8 @@ type ActionUserSessionIndexOutput struct {
 	ClientIpPtr string `json:"client_ip_ptr"`
 	UserAgent string `json:"user_agent"`
 	ClientVersion string `json:"client_version"`
-	AuthToken *ActionAuthTokenShowOutput `json:"auth_token"`
-	AuthTokenStr string `json:"auth_token_str"`
+	SessionToken *ActionSessionTokenShowOutput `json:"session_token"`
+	SessionTokenStr string `json:"session_token_str"`
 	CreatedAt string `json:"created_at"`
 	LastRequestAt string `json:"last_request_at"`
 	ClosedAt string `json:"closed_at"`
@@ -388,9 +376,6 @@ func (inv *ActionUserSessionIndexInvocation) convertInputToQueryParams(ret map[s
 		}
 		if inv.IsParameterSelected("ClientVersion") {
 			ret["user_session[client_version]"] = inv.Input.ClientVersion
-		}
-		if inv.IsParameterSelected("AuthTokenStr") {
-			ret["user_session[auth_token_str]"] = inv.Input.AuthTokenStr
 		}
 		if inv.IsParameterSelected("Admin") {
 			ret["user_session[admin]"] = convertInt64ToString(inv.Input.Admin)

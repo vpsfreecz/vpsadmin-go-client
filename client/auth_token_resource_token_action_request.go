@@ -59,7 +59,7 @@ func (in *AuthTokenActionTokenRequestMetaGlobalInput) AnySelected() bool {
 
 // AuthTokenActionTokenRequestInput is a type for action input parameters
 type AuthTokenActionTokenRequestInput struct {
-	Login string `json:"login"`
+	User string `json:"user"`
 	Password string `json:"password"`
 	Lifetime string `json:"lifetime"`
 	Interval int64 `json:"interval"`
@@ -67,15 +67,15 @@ type AuthTokenActionTokenRequestInput struct {
 	_selectedParameters map[string]interface{}
 }
 
-// SetLogin sets parameter Login to value and selects it for sending
-func (in *AuthTokenActionTokenRequestInput) SetLogin(value string) *AuthTokenActionTokenRequestInput {
-	in.Login = value
+// SetUser sets parameter User to value and selects it for sending
+func (in *AuthTokenActionTokenRequestInput) SetUser(value string) *AuthTokenActionTokenRequestInput {
+	in.User = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Login"] = nil
+	in._selectedParameters["User"] = nil
 	return in
 }
 // SetPassword sets parameter Password to value and selects it for sending
@@ -145,6 +145,8 @@ type AuthTokenActionTokenRequestRequest struct {
 type AuthTokenActionTokenRequestOutput struct {
 	Token string `json:"token"`
 	ValidTo string `json:"valid_to"`
+	Complete bool `json:"complete"`
+	NextAction string `json:"next_action"`
 }
 
 
@@ -258,8 +260,8 @@ func (inv *AuthTokenActionTokenRequestInvocation) makeInputParams() map[string]i
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Login") {
-			ret["login"] = inv.Input.Login
+		if inv.IsParameterSelected("User") {
+			ret["user"] = inv.Input.User
 		}
 		if inv.IsParameterSelected("Password") {
 			ret["password"] = inv.Input.Password

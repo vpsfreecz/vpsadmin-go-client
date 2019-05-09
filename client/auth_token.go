@@ -1,7 +1,7 @@
 package client
 
 import (
-	"errors"
+	"fmt"
 	"net/http"
 )
 
@@ -38,19 +38,26 @@ func (auth *TokenAuth) Authenticate(request *http.Request) {
 	}
 }
 
-// SetNewTokenAuth obtains a new authentication token with username and password
-//
-// lifetime can be one of: fixed, renewable_auto, renewable_manual or permanent
-// interval determines how many seconds will the token be valid
-func (client *Client) SetNewTokenAuth(username string, password string, lifetime string, interval int) error {
+type TokenAuthOptions struct {
+	User string
+	Password string
+	Lifetime string
+	Interval int64
+	TotpCallback func(input *AuthTokenActionTokenTotpInput) error
+}
+
+// SetNewTokenAuth obtains a new authentication token with login credentials
+func (client *Client) SetNewTokenAuth(options *TokenAuthOptions) error {
 	resource := NewAuthTokenResourceToken(client)
+	auth := &TokenAuth{Resource: resource, Mode: HttpHeader}
+	auth.setDefaultOptions(options)
 
 	request := resource.Request.Prepare()
 	request.SetInput(&AuthTokenActionTokenRequestInput{
-		Login: username,
-		Password: password,
-		Lifetime: lifetime,
-		Interval: int64(interval),
+		User: options.User,
+		Password: options.Password,
+		Lifetime: options.Lifetime,
+		Interval: options.Interval,
 	})
 
 	resp, err := request.Call()
@@ -58,16 +65,70 @@ func (client *Client) SetNewTokenAuth(username string, password string, lifetime
 	if err != nil {
 		return err
 	} else if !resp.Status {
-		return errors.New("Unable to request token: " + resp.Message)
+		return fmt.Errorf("Unable to request token: %v", resp.Message)
 	}
 
-	client.Authentication = &TokenAuth{
-		Resource: resource,
-		Token: resp.Output.Token,
-		Mode: HttpHeader,
+	if resp.Output.Complete {
+		auth.Token = resp.Output.Token
+		client.Authentication = auth
+		return nil
 	}
 
-	return nil
+	return auth.nextAuthenticationStep(
+		options,
+		resp.Output.NextAction,
+		resp.Output.Token,
+	);
+}
+
+func (auth *TokenAuth) setDefaultOptions(options *TokenAuthOptions) {
+	if options.Lifetime == "" {
+		options.Lifetime = "renewable_auto"
+	}
+
+	if options.Interval == 0 {
+		options.Interval = 300
+	}
+}
+
+// nextAuthenticationStep performs authentication steps recursively, until
+// the authentication is completed
+func (auth *TokenAuth) nextAuthenticationStep(options *TokenAuthOptions, action string, token string) error {
+	if action == "totp" {
+		action := auth.Resource.Totp.Prepare()
+		input := action.NewInput()
+		input.SetToken(token)
+
+		if options.TotpCallback == nil {
+			return fmt.Errorf("Implement callback TotpCallback")
+		}
+
+		if err := options.TotpCallback(input); err != nil {
+			return fmt.Errorf("TotpCallback failed: %v", err)
+		}
+
+		resp, err := action.Call()
+
+		if err != nil {
+			return err
+		} else if !resp.Status {
+			return fmt.Errorf("Failed at authentication step '%s': %v", action, resp.Message)
+		}
+
+		if resp.Output.Complete {
+			auth.Token = resp.Output.Token
+			auth.Resource.Client.Authentication = auth
+			return nil
+		}
+
+		return auth.nextAuthenticationStep(
+			options,
+			resp.Output.NextAction,
+			resp.Output.Token,
+		);
+	}
+
+	return fmt.Errorf("Unsupported authentication action '%s'", action)
 }
 
 // SetExistingTokenAuth will use a previously acquired token
@@ -93,7 +154,7 @@ func (client *Client) RevokeAuthToken() error {
 	if err != nil {
 		return err
 	} else if !resp.Status {
-		return errors.New("Unable to revoke token: " + resp.Message)
+		return fmt.Errorf("Unable to revoke token: %v", resp.Message)
 	}
 
 	client.Authentication = nil

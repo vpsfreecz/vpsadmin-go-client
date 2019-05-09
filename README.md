@@ -44,7 +44,10 @@ Both HTTP basic and token authentication is supported.
 api.SetBasicAuthentication("user", "password")
 
 // New token
-err := api.SetNewTokenAuth("user", "password")
+err := api.SetNewTokenAuth(&client.TokenAuthOptions{
+	User: "user",
+	Password: "secret",
+})
 
 if err != nil {
 	fmt.Printf("Token is: %s\n", api.Authentication.(client.TokenAuth).Token)
@@ -52,6 +55,25 @@ if err != nil {
 
 // Existing token
 api.SetExistingTokenAuth("mytoken")
+```
+
+### Two-factor authentication
+Two-factor authentication is supported only by token authentication. The API
+server decides when the two-factor authentication is required, so the client
+has to implement appropriate callbacks.
+
+```go
+err := api.SetNewTokenAuth(&client.TokenAuthOptions{
+	User: "user",
+	Password: "secret",
+	TotpCallback: func (input *client.AuthTokenActionTokenTotpInput) error {
+		reader := bufio.NewReader(os.Stdin)
+		fmt.Print("TOTP code: ")
+		code, _ := reader.ReadString('\n')
+		input.SetCode(strings.TrimSpace(code))
+		return nil
+	},
+})
 ```
 
 ### Path parameters

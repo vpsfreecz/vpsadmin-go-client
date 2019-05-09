@@ -8,8 +8,6 @@ type Client struct {
 	// Options for authentication method
 	Authentication Authenticator
 
-	// Resource Auth_token
-	AuthToken *ResourceAuthToken
 	// Resource Cluster
 	Cluster *ResourceCluster
 	// Resource Cluster_resource
@@ -62,6 +60,8 @@ type Client struct {
 	OsTemplate *ResourceOsTemplate
 	// Resource Pool
 	Pool *ResourcePool
+	// Resource Session_token
+	SessionToken *ResourceSessionToken
 	// Resource Snapshot_download
 	SnapshotDownload *ResourceSnapshotDownload
 	// Resource System_config
@@ -118,7 +118,6 @@ type Client struct {
 func New(url string) *Client {
 	c := &Client{Url: url}
 
-	c.AuthToken = NewResourceAuthToken(c)
 	c.Cluster = NewResourceCluster(c)
 	c.ClusterResource = NewResourceClusterResource(c)
 	c.ClusterResourcePackage = NewResourceClusterResourcePackage(c)
@@ -145,6 +144,7 @@ func New(url string) *Client {
 	c.ObjectHistory = NewResourceObjectHistory(c)
 	c.OsTemplate = NewResourceOsTemplate(c)
 	c.Pool = NewResourcePool(c)
+	c.SessionToken = NewResourceSessionToken(c)
 	c.SnapshotDownload = NewResourceSnapshotDownload(c)
 	c.SystemConfig = NewResourceSystemConfig(c)
 	c.Transaction = NewResourceTransaction(c)

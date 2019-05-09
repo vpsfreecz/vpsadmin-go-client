@@ -83,8 +83,8 @@ type ActionUserSessionShowOutput struct {
 	ClientIpPtr string `json:"client_ip_ptr"`
 	UserAgent string `json:"user_agent"`
 	ClientVersion string `json:"client_version"`
-	AuthToken *ActionAuthTokenShowOutput `json:"auth_token"`
-	AuthTokenStr string `json:"auth_token_str"`
+	SessionToken *ActionSessionTokenShowOutput `json:"session_token"`
+	SessionTokenStr string `json:"session_token_str"`
 	CreatedAt string `json:"created_at"`
 	LastRequestAt string `json:"last_request_at"`
 	ClosedAt string `json:"closed_at"`

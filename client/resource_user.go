@@ -35,6 +35,12 @@ type ResourceUser struct {
 	Find *ActionUserShow
 	// Action User#Update
 	Update *ActionUserUpdate
+	// Action User#Totp_enable
+	TotpEnable *ActionUserTotpEnable
+	// Action User#Totp_confirm
+	TotpConfirm *ActionUserTotpConfirm
+	// Action User#Totp_disable
+	TotpDisable *ActionUserTotpDisable
 	// Action User#Delete
 	Delete *ActionUserDelete
 	// Action User#Delete
@@ -48,6 +54,9 @@ func NewResourceUser(client *Client) *ResourceUser {
 	actionTouch := NewActionUserTouch(client)
 	actionShow := NewActionUserShow(client)
 	actionUpdate := NewActionUserUpdate(client)
+	actionTotpEnable := NewActionUserTotpEnable(client)
+	actionTotpConfirm := NewActionUserTotpConfirm(client)
+	actionTotpDisable := NewActionUserTotpDisable(client)
 	actionDelete := NewActionUserDelete(client)
 
 	return &ResourceUser{
@@ -67,6 +76,9 @@ func NewResourceUser(client *Client) *ResourceUser {
 		Show: actionShow,
 		Find: actionShow,
 		Update: actionUpdate,
+		TotpEnable: actionTotpEnable,
+		TotpConfirm: actionTotpConfirm,
+		TotpDisable: actionTotpDisable,
 		Delete: actionDelete,
 		Destroy: actionDelete,
 	}

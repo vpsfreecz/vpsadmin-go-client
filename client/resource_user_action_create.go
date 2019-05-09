@@ -78,6 +78,8 @@ type ActionUserCreateInput struct {
 	Level int64 `json:"level"`
 	Info string `json:"info"`
 	MailerEnabled bool `json:"mailer_enabled"`
+	PasswordReset bool `json:"password_reset"`
+	Lockout bool `json:"lockout"`
 	Language int64 `json:"language"`
 	Password string `json:"password"`
 	Vps bool `json:"vps"`
@@ -164,6 +166,28 @@ func (in *ActionUserCreateInput) SetMailerEnabled(value bool) *ActionUserCreateI
 	}
 
 	in._selectedParameters["MailerEnabled"] = nil
+	return in
+}
+// SetPasswordReset sets parameter PasswordReset to value and selects it for sending
+func (in *ActionUserCreateInput) SetPasswordReset(value bool) *ActionUserCreateInput {
+	in.PasswordReset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PasswordReset"] = nil
+	return in
+}
+// SetLockout sets parameter Lockout to value and selects it for sending
+func (in *ActionUserCreateInput) SetLockout(value bool) *ActionUserCreateInput {
+	in.Lockout = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Lockout"] = nil
 	return in
 }
 // SetLanguage sets parameter Language to value and selects it for sending
@@ -283,7 +307,10 @@ type ActionUserCreateOutput struct {
 	Level int64 `json:"level"`
 	Info string `json:"info"`
 	MailerEnabled bool `json:"mailer_enabled"`
+	PasswordReset bool `json:"password_reset"`
+	Lockout bool `json:"lockout"`
 	Language *ActionLanguageShowOutput `json:"language"`
+	TotpEnabled bool `json:"totp_enabled"`
 	LastActivityAt string `json:"last_activity_at"`
 	CreatedAt string `json:"created_at"`
 	ObjectState string `json:"object_state"`
@@ -502,6 +529,12 @@ func (inv *ActionUserCreateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("MailerEnabled") {
 			ret["mailer_enabled"] = inv.Input.MailerEnabled
+		}
+		if inv.IsParameterSelected("PasswordReset") {
+			ret["password_reset"] = inv.Input.PasswordReset
+		}
+		if inv.IsParameterSelected("Lockout") {
+			ret["lockout"] = inv.Input.Lockout
 		}
 		if inv.IsParameterSelected("Language") {
 			ret["language"] = inv.Input.Language

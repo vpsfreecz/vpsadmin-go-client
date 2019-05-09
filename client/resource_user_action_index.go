@@ -92,6 +92,8 @@ type ActionUserIndexInput struct {
 	Level int64 `json:"level"`
 	Info string `json:"info"`
 	MailerEnabled bool `json:"mailer_enabled"`
+	PasswordReset bool `json:"password_reset"`
+	Lockout bool `json:"lockout"`
 	Language int64 `json:"language"`
 	Admin bool `json:"admin"`
 	ObjectState string `json:"object_state"`
@@ -198,6 +200,28 @@ func (in *ActionUserIndexInput) SetMailerEnabled(value bool) *ActionUserIndexInp
 	in._selectedParameters["MailerEnabled"] = nil
 	return in
 }
+// SetPasswordReset sets parameter PasswordReset to value and selects it for sending
+func (in *ActionUserIndexInput) SetPasswordReset(value bool) *ActionUserIndexInput {
+	in.PasswordReset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PasswordReset"] = nil
+	return in
+}
+// SetLockout sets parameter Lockout to value and selects it for sending
+func (in *ActionUserIndexInput) SetLockout(value bool) *ActionUserIndexInput {
+	in.Lockout = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Lockout"] = nil
+	return in
+}
 // SetLanguage sets parameter Language to value and selects it for sending
 func (in *ActionUserIndexInput) SetLanguage(value int64) *ActionUserIndexInput {
 	in.Language = value
@@ -266,7 +290,10 @@ type ActionUserIndexOutput struct {
 	Level int64 `json:"level"`
 	Info string `json:"info"`
 	MailerEnabled bool `json:"mailer_enabled"`
+	PasswordReset bool `json:"password_reset"`
+	Lockout bool `json:"lockout"`
 	Language *ActionLanguageShowOutput `json:"language"`
+	TotpEnabled bool `json:"totp_enabled"`
 	LastActivityAt string `json:"last_activity_at"`
 	CreatedAt string `json:"created_at"`
 	ObjectState string `json:"object_state"`
@@ -403,6 +430,12 @@ func (inv *ActionUserIndexInvocation) convertInputToQueryParams(ret map[string]s
 		}
 		if inv.IsParameterSelected("MailerEnabled") {
 			ret["user[mailer_enabled]"] = convertBoolToString(inv.Input.MailerEnabled)
+		}
+		if inv.IsParameterSelected("PasswordReset") {
+			ret["user[password_reset]"] = convertBoolToString(inv.Input.PasswordReset)
+		}
+		if inv.IsParameterSelected("Lockout") {
+			ret["user[lockout]"] = convertBoolToString(inv.Input.Lockout)
 		}
 		if inv.IsParameterSelected("Language") {
 			ret["user[language]"] = convertInt64ToString(inv.Input.Language)
