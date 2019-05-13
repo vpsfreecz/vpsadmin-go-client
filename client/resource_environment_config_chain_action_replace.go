@@ -131,7 +131,7 @@ type ActionEnvironmentConfigChainReplaceResponse struct {
 func (action *ActionEnvironmentConfigChainReplace) Prepare() *ActionEnvironmentConfigChainReplaceInvocation {
 	return &ActionEnvironmentConfigChainReplaceInvocation{
 		Action: action,
-		Path: "/v5.0/environments/:environment_id/config_chains/replace",
+		Path: "/v5.0/environments/{environment_id}/config_chains/replace",
 	}
 }
 
@@ -155,7 +155,7 @@ func (inv *ActionEnvironmentConfigChainReplaceInvocation) SetPathParamInt(param 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionEnvironmentConfigChainReplaceInvocation) SetPathParamString(param string, value string) *ActionEnvironmentConfigChainReplaceInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

@@ -310,7 +310,7 @@ type ActionVpsCloneResponse struct {
 func (action *ActionVpsClone) Prepare() *ActionVpsCloneInvocation {
 	return &ActionVpsCloneInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/:vps_id/clone",
+		Path: "/v5.0/vpses/{vps_id}/clone",
 	}
 }
 
@@ -334,7 +334,7 @@ func (inv *ActionVpsCloneInvocation) SetPathParamInt(param string, value int64) 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsCloneInvocation) SetPathParamString(param string, value string) *ActionVpsCloneInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

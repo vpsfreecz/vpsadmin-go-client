@@ -86,7 +86,7 @@ type ActionActionStateCancelResponse struct {
 func (action *ActionActionStateCancel) Prepare() *ActionActionStateCancelInvocation {
 	return &ActionActionStateCancelInvocation{
 		Action: action,
-		Path: "/v5.0/action_states/:action_state_id/cancel",
+		Path: "/v5.0/action_states/{action_state_id}/cancel",
 	}
 }
 
@@ -108,7 +108,7 @@ func (inv *ActionActionStateCancelInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionActionStateCancelInvocation) SetPathParamString(param string, value string) *ActionActionStateCancelInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

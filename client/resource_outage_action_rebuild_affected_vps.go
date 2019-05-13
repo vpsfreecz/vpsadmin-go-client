@@ -89,7 +89,7 @@ type ActionOutageRebuildAffectedVpsResponse struct {
 func (action *ActionOutageRebuildAffectedVps) Prepare() *ActionOutageRebuildAffectedVpsInvocation {
 	return &ActionOutageRebuildAffectedVpsInvocation{
 		Action: action,
-		Path: "/v5.0/outages/:outage_id/rebuild_affected_vps",
+		Path: "/v5.0/outages/{outage_id}/rebuild_affected_vps",
 	}
 }
 
@@ -111,7 +111,7 @@ func (inv *ActionOutageRebuildAffectedVpsInvocation) SetPathParamInt(param strin
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOutageRebuildAffectedVpsInvocation) SetPathParamString(param string, value string) *ActionOutageRebuildAffectedVpsInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

@@ -182,7 +182,7 @@ type ActionActionStatePollResponse struct {
 func (action *ActionActionStatePoll) Prepare() *ActionActionStatePollInvocation {
 	return &ActionActionStatePollInvocation{
 		Action: action,
-		Path: "/v5.0/action_states/:action_state_id/poll",
+		Path: "/v5.0/action_states/{action_state_id}/poll",
 	}
 }
 
@@ -206,7 +206,7 @@ func (inv *ActionActionStatePollInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionActionStatePollInvocation) SetPathParamString(param string, value string) *ActionActionStatePollInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

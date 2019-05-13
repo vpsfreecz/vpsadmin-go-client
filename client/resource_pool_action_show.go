@@ -114,7 +114,7 @@ type ActionPoolShowResponse struct {
 func (action *ActionPoolShow) Prepare() *ActionPoolShowInvocation {
 	return &ActionPoolShowInvocation{
 		Action: action,
-		Path: "/v5.0/pools/:pool_id",
+		Path: "/v5.0/pools/{pool_id}",
 	}
 }
 
@@ -136,7 +136,7 @@ func (inv *ActionPoolShowInvocation) SetPathParamInt(param string, value int64) 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionPoolShowInvocation) SetPathParamString(param string, value string) *ActionPoolShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

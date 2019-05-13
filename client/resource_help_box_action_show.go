@@ -101,7 +101,7 @@ type ActionHelpBoxShowResponse struct {
 func (action *ActionHelpBoxShow) Prepare() *ActionHelpBoxShowInvocation {
 	return &ActionHelpBoxShowInvocation{
 		Action: action,
-		Path: "/v5.0/help_boxes/:help_box_id",
+		Path: "/v5.0/help_boxes/{help_box_id}",
 	}
 }
 
@@ -123,7 +123,7 @@ func (inv *ActionHelpBoxShowInvocation) SetPathParamInt(param string, value int6
 
 // SetPathParamString sets string path parameter
 func (inv *ActionHelpBoxShowInvocation) SetPathParamString(param string, value string) *ActionHelpBoxShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

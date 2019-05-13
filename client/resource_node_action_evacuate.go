@@ -202,7 +202,7 @@ type ActionNodeEvacuateResponse struct {
 func (action *ActionNodeEvacuate) Prepare() *ActionNodeEvacuateInvocation {
 	return &ActionNodeEvacuateInvocation{
 		Action: action,
-		Path: "/v5.0/nodes/:node_id/evacuate",
+		Path: "/v5.0/nodes/{node_id}/evacuate",
 	}
 }
 
@@ -226,7 +226,7 @@ func (inv *ActionNodeEvacuateInvocation) SetPathParamInt(param string, value int
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNodeEvacuateInvocation) SetPathParamString(param string, value string) *ActionNodeEvacuateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

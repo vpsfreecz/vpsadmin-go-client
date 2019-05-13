@@ -110,7 +110,7 @@ type ActionUserRequestRegistrationPreviewResponse struct {
 func (action *ActionUserRequestRegistrationPreview) Prepare() *ActionUserRequestRegistrationPreviewInvocation {
 	return &ActionUserRequestRegistrationPreviewInvocation{
 		Action: action,
-		Path: "/v5.0/user_request/registrations/:registration_id/:token",
+		Path: "/v5.0/user_request/registrations/{registration_id}/{token}",
 	}
 }
 
@@ -132,7 +132,7 @@ func (inv *ActionUserRequestRegistrationPreviewInvocation) SetPathParamInt(param
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserRequestRegistrationPreviewInvocation) SetPathParamString(param string, value string) *ActionUserRequestRegistrationPreviewInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

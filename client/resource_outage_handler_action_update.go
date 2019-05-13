@@ -145,7 +145,7 @@ type ActionOutageHandlerUpdateResponse struct {
 func (action *ActionOutageHandlerUpdate) Prepare() *ActionOutageHandlerUpdateInvocation {
 	return &ActionOutageHandlerUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/outages/:outage_id/handlers/:handler_id",
+		Path: "/v5.0/outages/{outage_id}/handlers/{handler_id}",
 	}
 }
 
@@ -169,7 +169,7 @@ func (inv *ActionOutageHandlerUpdateInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOutageHandlerUpdateInvocation) SetPathParamString(param string, value string) *ActionOutageHandlerUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

@@ -101,7 +101,7 @@ type ActionVpsStateLogShowResponse struct {
 func (action *ActionVpsStateLogShow) Prepare() *ActionVpsStateLogShowInvocation {
 	return &ActionVpsStateLogShowInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/:vps_id/state_logs/:state_log_id",
+		Path: "/v5.0/vpses/{vps_id}/state_logs/{state_log_id}",
 	}
 }
 
@@ -123,7 +123,7 @@ func (inv *ActionVpsStateLogShowInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsStateLogShowInvocation) SetPathParamString(param string, value string) *ActionVpsStateLogShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

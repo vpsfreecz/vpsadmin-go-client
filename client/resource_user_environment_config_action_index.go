@@ -179,7 +179,7 @@ type ActionUserEnvironmentConfigIndexResponse struct {
 func (action *ActionUserEnvironmentConfigIndex) Prepare() *ActionUserEnvironmentConfigIndexInvocation {
 	return &ActionUserEnvironmentConfigIndexInvocation{
 		Action: action,
-		Path: "/v5.0/users/:user_id/environment_configs",
+		Path: "/v5.0/users/{user_id}/environment_configs",
 	}
 }
 
@@ -203,7 +203,7 @@ func (inv *ActionUserEnvironmentConfigIndexInvocation) SetPathParamInt(param str
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserEnvironmentConfigIndexInvocation) SetPathParamString(param string, value string) *ActionUserEnvironmentConfigIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

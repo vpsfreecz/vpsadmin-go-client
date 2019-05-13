@@ -101,7 +101,7 @@ type ActionUserStateLogShowResponse struct {
 func (action *ActionUserStateLogShow) Prepare() *ActionUserStateLogShowInvocation {
 	return &ActionUserStateLogShowInvocation{
 		Action: action,
-		Path: "/v5.0/users/:user_id/state_logs/:state_log_id",
+		Path: "/v5.0/users/{user_id}/state_logs/{state_log_id}",
 	}
 }
 
@@ -123,7 +123,7 @@ func (inv *ActionUserStateLogShowInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserStateLogShowInvocation) SetPathParamString(param string, value string) *ActionUserStateLogShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

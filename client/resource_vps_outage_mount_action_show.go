@@ -98,7 +98,7 @@ type ActionVpsOutageMountShowResponse struct {
 func (action *ActionVpsOutageMountShow) Prepare() *ActionVpsOutageMountShowInvocation {
 	return &ActionVpsOutageMountShowInvocation{
 		Action: action,
-		Path: "/v5.0/vps_outage_mounts/:vps_outage_mount_id",
+		Path: "/v5.0/vps_outage_mounts/{vps_outage_mount_id}",
 	}
 }
 
@@ -120,7 +120,7 @@ func (inv *ActionVpsOutageMountShowInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsOutageMountShowInvocation) SetPathParamString(param string, value string) *ActionVpsOutageMountShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

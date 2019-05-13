@@ -103,7 +103,7 @@ type ActionTransactionChainShowResponse struct {
 func (action *ActionTransactionChainShow) Prepare() *ActionTransactionChainShowInvocation {
 	return &ActionTransactionChainShowInvocation{
 		Action: action,
-		Path: "/v5.0/transaction_chains/:transaction_chain_id",
+		Path: "/v5.0/transaction_chains/{transaction_chain_id}",
 	}
 }
 
@@ -125,7 +125,7 @@ func (inv *ActionTransactionChainShowInvocation) SetPathParamInt(param string, v
 
 // SetPathParamString sets string path parameter
 func (inv *ActionTransactionChainShowInvocation) SetPathParamString(param string, value string) *ActionTransactionChainShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

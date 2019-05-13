@@ -112,7 +112,7 @@ type ActionIncomingPaymentShowResponse struct {
 func (action *ActionIncomingPaymentShow) Prepare() *ActionIncomingPaymentShowInvocation {
 	return &ActionIncomingPaymentShowInvocation{
 		Action: action,
-		Path: "/v5.0/incoming_payments/:incoming_payment_id",
+		Path: "/v5.0/incoming_payments/{incoming_payment_id}",
 	}
 }
 
@@ -134,7 +134,7 @@ func (inv *ActionIncomingPaymentShowInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionIncomingPaymentShowInvocation) SetPathParamString(param string, value string) *ActionIncomingPaymentShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

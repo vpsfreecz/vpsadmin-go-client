@@ -264,7 +264,7 @@ type ActionNetworkUpdateResponse struct {
 func (action *ActionNetworkUpdate) Prepare() *ActionNetworkUpdateInvocation {
 	return &ActionNetworkUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/networks/:network_id",
+		Path: "/v5.0/networks/{network_id}",
 	}
 }
 
@@ -288,7 +288,7 @@ func (inv *ActionNetworkUpdateInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNetworkUpdateInvocation) SetPathParamString(param string, value string) *ActionNetworkUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

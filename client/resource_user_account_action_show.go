@@ -98,7 +98,7 @@ type ActionUserAccountShowResponse struct {
 func (action *ActionUserAccountShow) Prepare() *ActionUserAccountShowInvocation {
 	return &ActionUserAccountShowInvocation{
 		Action: action,
-		Path: "/v5.0/user_accounts/:user_account_id",
+		Path: "/v5.0/user_accounts/{user_account_id}",
 	}
 }
 
@@ -120,7 +120,7 @@ func (inv *ActionUserAccountShowInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserAccountShowInvocation) SetPathParamString(param string, value string) *ActionUserAccountShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

@@ -130,7 +130,7 @@ type ActionUserTotpConfirmResponse struct {
 func (action *ActionUserTotpConfirm) Prepare() *ActionUserTotpConfirmInvocation {
 	return &ActionUserTotpConfirmInvocation{
 		Action: action,
-		Path: "/v5.0/users/totp_confirm/:user_id",
+		Path: "/v5.0/users/totp_confirm/{user_id}",
 	}
 }
 
@@ -154,7 +154,7 @@ func (inv *ActionUserTotpConfirmInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserTotpConfirmInvocation) SetPathParamString(param string, value string) *ActionUserTotpConfirmInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

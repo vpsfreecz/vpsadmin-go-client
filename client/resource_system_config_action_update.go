@@ -105,7 +105,7 @@ type ActionSystemConfigUpdateResponse struct {
 func (action *ActionSystemConfigUpdate) Prepare() *ActionSystemConfigUpdateInvocation {
 	return &ActionSystemConfigUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/system_configs/:category/:name",
+		Path: "/v5.0/system_configs/{category}/{name}",
 	}
 }
 
@@ -127,7 +127,7 @@ func (inv *ActionSystemConfigUpdateInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionSystemConfigUpdateInvocation) SetPathParamString(param string, value string) *ActionSystemConfigUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

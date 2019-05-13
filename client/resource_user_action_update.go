@@ -329,7 +329,7 @@ type ActionUserUpdateResponse struct {
 func (action *ActionUserUpdate) Prepare() *ActionUserUpdateInvocation {
 	return &ActionUserUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/users/:user_id",
+		Path: "/v5.0/users/{user_id}",
 	}
 }
 
@@ -353,7 +353,7 @@ func (inv *ActionUserUpdateInvocation) SetPathParamInt(param string, value int64
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserUpdateInvocation) SetPathParamString(param string, value string) *ActionUserUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

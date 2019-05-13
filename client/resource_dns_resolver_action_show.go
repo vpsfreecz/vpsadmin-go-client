@@ -100,7 +100,7 @@ type ActionDnsResolverShowResponse struct {
 func (action *ActionDnsResolverShow) Prepare() *ActionDnsResolverShowInvocation {
 	return &ActionDnsResolverShowInvocation{
 		Action: action,
-		Path: "/v5.0/dns_resolvers/:dns_resolver_id",
+		Path: "/v5.0/dns_resolvers/{dns_resolver_id}",
 	}
 }
 
@@ -122,7 +122,7 @@ func (inv *ActionDnsResolverShowInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsResolverShowInvocation) SetPathParamString(param string, value string) *ActionDnsResolverShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

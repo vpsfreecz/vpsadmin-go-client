@@ -89,7 +89,7 @@ type ActionUserTotpEnableResponse struct {
 func (action *ActionUserTotpEnable) Prepare() *ActionUserTotpEnableInvocation {
 	return &ActionUserTotpEnableInvocation{
 		Action: action,
-		Path: "/v5.0/users/totp_enable/:user_id",
+		Path: "/v5.0/users/totp_enable/{user_id}",
 	}
 }
 
@@ -111,7 +111,7 @@ func (inv *ActionUserTotpEnableInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserTotpEnableInvocation) SetPathParamString(param string, value string) *ActionUserTotpEnableInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

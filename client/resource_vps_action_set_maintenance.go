@@ -131,7 +131,7 @@ type ActionVpsSetMaintenanceResponse struct {
 func (action *ActionVpsSetMaintenance) Prepare() *ActionVpsSetMaintenanceInvocation {
 	return &ActionVpsSetMaintenanceInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/:vps_id/set_maintenance",
+		Path: "/v5.0/vpses/{vps_id}/set_maintenance",
 	}
 }
 
@@ -155,7 +155,7 @@ func (inv *ActionVpsSetMaintenanceInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsSetMaintenanceInvocation) SetPathParamString(param string, value string) *ActionVpsSetMaintenanceInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

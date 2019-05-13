@@ -89,7 +89,7 @@ type ActionOutageHandlerDeleteResponse struct {
 func (action *ActionOutageHandlerDelete) Prepare() *ActionOutageHandlerDeleteInvocation {
 	return &ActionOutageHandlerDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/outages/:outage_id/handlers/:handler_id",
+		Path: "/v5.0/outages/{outage_id}/handlers/{handler_id}",
 	}
 }
 
@@ -111,7 +111,7 @@ func (inv *ActionOutageHandlerDeleteInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOutageHandlerDeleteInvocation) SetPathParamString(param string, value string) *ActionOutageHandlerDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

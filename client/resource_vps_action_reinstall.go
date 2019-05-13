@@ -140,7 +140,7 @@ type ActionVpsReinstallResponse struct {
 func (action *ActionVpsReinstall) Prepare() *ActionVpsReinstallInvocation {
 	return &ActionVpsReinstallInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/:vps_id/reinstall",
+		Path: "/v5.0/vpses/{vps_id}/reinstall",
 	}
 }
 
@@ -164,7 +164,7 @@ func (inv *ActionVpsReinstallInvocation) SetPathParamInt(param string, value int
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsReinstallInvocation) SetPathParamString(param string, value string) *ActionVpsReinstallInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

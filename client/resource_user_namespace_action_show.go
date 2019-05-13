@@ -100,7 +100,7 @@ type ActionUserNamespaceShowResponse struct {
 func (action *ActionUserNamespaceShow) Prepare() *ActionUserNamespaceShowInvocation {
 	return &ActionUserNamespaceShowInvocation{
 		Action: action,
-		Path: "/v5.0/user_namespaces/:user_namespace_id",
+		Path: "/v5.0/user_namespaces/{user_namespace_id}",
 	}
 }
 
@@ -122,7 +122,7 @@ func (inv *ActionUserNamespaceShowInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserNamespaceShowInvocation) SetPathParamString(param string, value string) *ActionUserNamespaceShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

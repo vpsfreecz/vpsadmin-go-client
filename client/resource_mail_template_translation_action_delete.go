@@ -89,7 +89,7 @@ type ActionMailTemplateTranslationDeleteResponse struct {
 func (action *ActionMailTemplateTranslationDelete) Prepare() *ActionMailTemplateTranslationDeleteInvocation {
 	return &ActionMailTemplateTranslationDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/mail_templates/:mail_template_id/translations/:translation_id",
+		Path: "/v5.0/mail_templates/{mail_template_id}/translations/{translation_id}",
 	}
 }
 
@@ -111,7 +111,7 @@ func (inv *ActionMailTemplateTranslationDeleteInvocation) SetPathParamInt(param 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMailTemplateTranslationDeleteInvocation) SetPathParamString(param string, value string) *ActionMailTemplateTranslationDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

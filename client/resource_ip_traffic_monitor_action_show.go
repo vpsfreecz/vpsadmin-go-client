@@ -154,7 +154,7 @@ type ActionIpTrafficMonitorShowResponse struct {
 func (action *ActionIpTrafficMonitorShow) Prepare() *ActionIpTrafficMonitorShowInvocation {
 	return &ActionIpTrafficMonitorShowInvocation{
 		Action: action,
-		Path: "/v5.0/ip_traffic_monitors/:ip_traffic_monitor_id",
+		Path: "/v5.0/ip_traffic_monitors/{ip_traffic_monitor_id}",
 	}
 }
 
@@ -176,7 +176,7 @@ func (inv *ActionIpTrafficMonitorShowInvocation) SetPathParamInt(param string, v
 
 // SetPathParamString sets string path parameter
 func (inv *ActionIpTrafficMonitorShowInvocation) SetPathParamString(param string, value string) *ActionIpTrafficMonitorShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

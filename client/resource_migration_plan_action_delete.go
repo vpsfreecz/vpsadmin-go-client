@@ -89,7 +89,7 @@ type ActionMigrationPlanDeleteResponse struct {
 func (action *ActionMigrationPlanDelete) Prepare() *ActionMigrationPlanDeleteInvocation {
 	return &ActionMigrationPlanDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/migration_plans/:migration_plan_id",
+		Path: "/v5.0/migration_plans/{migration_plan_id}",
 	}
 }
 
@@ -111,7 +111,7 @@ func (inv *ActionMigrationPlanDeleteInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMigrationPlanDeleteInvocation) SetPathParamString(param string, value string) *ActionMigrationPlanDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

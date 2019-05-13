@@ -140,7 +140,7 @@ type ActionVpsConfigReplaceResponse struct {
 func (action *ActionVpsConfigReplace) Prepare() *ActionVpsConfigReplaceInvocation {
 	return &ActionVpsConfigReplaceInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/:vps_id/configs/replace",
+		Path: "/v5.0/vpses/{vps_id}/configs/replace",
 	}
 }
 
@@ -164,7 +164,7 @@ func (inv *ActionVpsConfigReplaceInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsConfigReplaceInvocation) SetPathParamString(param string, value string) *ActionVpsConfigReplaceInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

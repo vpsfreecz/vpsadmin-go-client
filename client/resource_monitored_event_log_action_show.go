@@ -98,7 +98,7 @@ type ActionMonitoredEventLogShowResponse struct {
 func (action *ActionMonitoredEventLogShow) Prepare() *ActionMonitoredEventLogShowInvocation {
 	return &ActionMonitoredEventLogShowInvocation{
 		Action: action,
-		Path: "/v5.0/monitored_events/:monitored_event_id/logs/:log_id",
+		Path: "/v5.0/monitored_events/{monitored_event_id}/logs/{log_id}",
 	}
 }
 
@@ -120,7 +120,7 @@ func (inv *ActionMonitoredEventLogShowInvocation) SetPathParamInt(param string, 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMonitoredEventLogShowInvocation) SetPathParamString(param string, value string) *ActionMonitoredEventLogShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

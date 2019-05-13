@@ -131,7 +131,7 @@ type ActionEnvironmentSetMaintenanceResponse struct {
 func (action *ActionEnvironmentSetMaintenance) Prepare() *ActionEnvironmentSetMaintenanceInvocation {
 	return &ActionEnvironmentSetMaintenanceInvocation{
 		Action: action,
-		Path: "/v5.0/environments/:environment_id/set_maintenance",
+		Path: "/v5.0/environments/{environment_id}/set_maintenance",
 	}
 }
 
@@ -155,7 +155,7 @@ func (inv *ActionEnvironmentSetMaintenanceInvocation) SetPathParamInt(param stri
 
 // SetPathParamString sets string path parameter
 func (inv *ActionEnvironmentSetMaintenanceInvocation) SetPathParamString(param string, value string) *ActionEnvironmentSetMaintenanceInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

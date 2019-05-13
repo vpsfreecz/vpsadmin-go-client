@@ -102,7 +102,7 @@ type ActionMailTemplateShowResponse struct {
 func (action *ActionMailTemplateShow) Prepare() *ActionMailTemplateShowInvocation {
 	return &ActionMailTemplateShowInvocation{
 		Action: action,
-		Path: "/v5.0/mail_templates/:mail_template_id",
+		Path: "/v5.0/mail_templates/{mail_template_id}",
 	}
 }
 
@@ -124,7 +124,7 @@ func (inv *ActionMailTemplateShowInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMailTemplateShowInvocation) SetPathParamString(param string, value string) *ActionMailTemplateShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

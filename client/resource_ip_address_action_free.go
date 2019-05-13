@@ -116,7 +116,7 @@ type ActionIpAddressFreeResponse struct {
 func (action *ActionIpAddressFree) Prepare() *ActionIpAddressFreeInvocation {
 	return &ActionIpAddressFreeInvocation{
 		Action: action,
-		Path: "/v5.0/ip_addresses/:ip_address_id/free",
+		Path: "/v5.0/ip_addresses/{ip_address_id}/free",
 	}
 }
 
@@ -138,7 +138,7 @@ func (inv *ActionIpAddressFreeInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionIpAddressFreeInvocation) SetPathParamString(param string, value string) *ActionIpAddressFreeInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

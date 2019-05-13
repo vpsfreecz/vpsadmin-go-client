@@ -169,7 +169,7 @@ type ActionVpsOutageWindowUpdateResponse struct {
 func (action *ActionVpsOutageWindowUpdate) Prepare() *ActionVpsOutageWindowUpdateInvocation {
 	return &ActionVpsOutageWindowUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/:vps_id/outage_windows/:outage_window_id",
+		Path: "/v5.0/vpses/{vps_id}/outage_windows/{outage_window_id}",
 	}
 }
 
@@ -193,7 +193,7 @@ func (inv *ActionVpsOutageWindowUpdateInvocation) SetPathParamInt(param string, 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsOutageWindowUpdateInvocation) SetPathParamString(param string, value string) *ActionVpsOutageWindowUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

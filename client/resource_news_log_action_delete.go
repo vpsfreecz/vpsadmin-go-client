@@ -89,7 +89,7 @@ type ActionNewsLogDeleteResponse struct {
 func (action *ActionNewsLogDelete) Prepare() *ActionNewsLogDeleteInvocation {
 	return &ActionNewsLogDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/news_logs/:news_log_id",
+		Path: "/v5.0/news_logs/{news_log_id}",
 	}
 }
 
@@ -111,7 +111,7 @@ func (inv *ActionNewsLogDeleteInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNewsLogDeleteInvocation) SetPathParamString(param string, value string) *ActionNewsLogDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

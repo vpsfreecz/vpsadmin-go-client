@@ -140,7 +140,7 @@ type ActionDatasetInheritResponse struct {
 func (action *ActionDatasetInherit) Prepare() *ActionDatasetInheritInvocation {
 	return &ActionDatasetInheritInvocation{
 		Action: action,
-		Path: "/v5.0/datasets/:dataset_id/inherit",
+		Path: "/v5.0/datasets/{dataset_id}/inherit",
 	}
 }
 
@@ -164,7 +164,7 @@ func (inv *ActionDatasetInheritInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetInheritInvocation) SetPathParamString(param string, value string) *ActionDatasetInheritInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

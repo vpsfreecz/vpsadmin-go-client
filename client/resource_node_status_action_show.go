@@ -119,7 +119,7 @@ type ActionNodeStatusShowResponse struct {
 func (action *ActionNodeStatusShow) Prepare() *ActionNodeStatusShowInvocation {
 	return &ActionNodeStatusShowInvocation{
 		Action: action,
-		Path: "/v5.0/nodes/:node_id/statuses/:status_id",
+		Path: "/v5.0/nodes/{node_id}/statuses/{status_id}",
 	}
 }
 
@@ -141,7 +141,7 @@ func (inv *ActionNodeStatusShowInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNodeStatusShowInvocation) SetPathParamString(param string, value string) *ActionNodeStatusShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

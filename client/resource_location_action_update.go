@@ -191,7 +191,7 @@ type ActionLocationUpdateResponse struct {
 func (action *ActionLocationUpdate) Prepare() *ActionLocationUpdateInvocation {
 	return &ActionLocationUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/locations/:location_id",
+		Path: "/v5.0/locations/{location_id}",
 	}
 }
 
@@ -215,7 +215,7 @@ func (inv *ActionLocationUpdateInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionLocationUpdateInvocation) SetPathParamString(param string, value string) *ActionLocationUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

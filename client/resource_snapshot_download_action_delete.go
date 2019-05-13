@@ -98,7 +98,7 @@ type ActionSnapshotDownloadDeleteResponse struct {
 func (action *ActionSnapshotDownloadDelete) Prepare() *ActionSnapshotDownloadDeleteInvocation {
 	return &ActionSnapshotDownloadDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/snapshot_downloads/:snapshot_download_id",
+		Path: "/v5.0/snapshot_downloads/{snapshot_download_id}",
 	}
 }
 
@@ -120,7 +120,7 @@ func (inv *ActionSnapshotDownloadDeleteInvocation) SetPathParamInt(param string,
 
 // SetPathParamString sets string path parameter
 func (inv *ActionSnapshotDownloadDeleteInvocation) SetPathParamString(param string, value string) *ActionSnapshotDownloadDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

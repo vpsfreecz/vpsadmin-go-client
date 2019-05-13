@@ -100,7 +100,7 @@ type ActionEnvironmentDatasetPlanShowResponse struct {
 func (action *ActionEnvironmentDatasetPlanShow) Prepare() *ActionEnvironmentDatasetPlanShowInvocation {
 	return &ActionEnvironmentDatasetPlanShowInvocation{
 		Action: action,
-		Path: "/v5.0/environments/:environment_id/dataset_plans/:dataset_plan_id",
+		Path: "/v5.0/environments/{environment_id}/dataset_plans/{dataset_plan_id}",
 	}
 }
 
@@ -122,7 +122,7 @@ func (inv *ActionEnvironmentDatasetPlanShowInvocation) SetPathParamInt(param str
 
 // SetPathParamString sets string path parameter
 func (inv *ActionEnvironmentDatasetPlanShowInvocation) SetPathParamString(param string, value string) *ActionEnvironmentDatasetPlanShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

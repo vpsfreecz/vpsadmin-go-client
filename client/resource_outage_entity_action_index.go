@@ -164,7 +164,7 @@ type ActionOutageEntityIndexResponse struct {
 func (action *ActionOutageEntityIndex) Prepare() *ActionOutageEntityIndexInvocation {
 	return &ActionOutageEntityIndexInvocation{
 		Action: action,
-		Path: "/v5.0/outages/:outage_id/entities",
+		Path: "/v5.0/outages/{outage_id}/entities",
 	}
 }
 
@@ -188,7 +188,7 @@ func (inv *ActionOutageEntityIndexInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOutageEntityIndexInvocation) SetPathParamString(param string, value string) *ActionOutageEntityIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

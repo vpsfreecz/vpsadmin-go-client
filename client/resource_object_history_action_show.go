@@ -102,7 +102,7 @@ type ActionObjectHistoryShowResponse struct {
 func (action *ActionObjectHistoryShow) Prepare() *ActionObjectHistoryShowInvocation {
 	return &ActionObjectHistoryShowInvocation{
 		Action: action,
-		Path: "/v5.0/object_histories/:object_history_id",
+		Path: "/v5.0/object_histories/{object_history_id}",
 	}
 }
 
@@ -124,7 +124,7 @@ func (inv *ActionObjectHistoryShowInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionObjectHistoryShowInvocation) SetPathParamString(param string, value string) *ActionObjectHistoryShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

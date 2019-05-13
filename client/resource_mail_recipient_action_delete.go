@@ -89,7 +89,7 @@ type ActionMailRecipientDeleteResponse struct {
 func (action *ActionMailRecipientDelete) Prepare() *ActionMailRecipientDeleteInvocation {
 	return &ActionMailRecipientDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/mail_recipients/:mail_recipient_id",
+		Path: "/v5.0/mail_recipients/{mail_recipient_id}",
 	}
 }
 
@@ -111,7 +111,7 @@ func (inv *ActionMailRecipientDeleteInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMailRecipientDeleteInvocation) SetPathParamString(param string, value string) *ActionMailRecipientDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

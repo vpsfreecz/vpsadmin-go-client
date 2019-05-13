@@ -163,7 +163,7 @@ type ActionUserClusterResourcePackageItemIndexResponse struct {
 func (action *ActionUserClusterResourcePackageItemIndex) Prepare() *ActionUserClusterResourcePackageItemIndexInvocation {
 	return &ActionUserClusterResourcePackageItemIndexInvocation{
 		Action: action,
-		Path: "/v5.0/user_cluster_resource_packages/:user_cluster_resource_package_id/items",
+		Path: "/v5.0/user_cluster_resource_packages/{user_cluster_resource_package_id}/items",
 	}
 }
 
@@ -187,7 +187,7 @@ func (inv *ActionUserClusterResourcePackageItemIndexInvocation) SetPathParamInt(
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserClusterResourcePackageItemIndexInvocation) SetPathParamString(param string, value string) *ActionUserClusterResourcePackageItemIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

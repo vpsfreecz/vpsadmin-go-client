@@ -200,7 +200,7 @@ type ActionDatasetPropertyHistoryIndexResponse struct {
 func (action *ActionDatasetPropertyHistoryIndex) Prepare() *ActionDatasetPropertyHistoryIndexInvocation {
 	return &ActionDatasetPropertyHistoryIndexInvocation{
 		Action: action,
-		Path: "/v5.0/datasets/:dataset_id/property_history",
+		Path: "/v5.0/datasets/{dataset_id}/property_history",
 	}
 }
 
@@ -224,7 +224,7 @@ func (inv *ActionDatasetPropertyHistoryIndexInvocation) SetPathParamInt(param st
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetPropertyHistoryIndexInvocation) SetPathParamString(param string, value string) *ActionDatasetPropertyHistoryIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

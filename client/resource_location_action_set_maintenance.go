@@ -131,7 +131,7 @@ type ActionLocationSetMaintenanceResponse struct {
 func (action *ActionLocationSetMaintenance) Prepare() *ActionLocationSetMaintenanceInvocation {
 	return &ActionLocationSetMaintenanceInvocation{
 		Action: action,
-		Path: "/v5.0/locations/:location_id/set_maintenance",
+		Path: "/v5.0/locations/{location_id}/set_maintenance",
 	}
 }
 
@@ -155,7 +155,7 @@ func (inv *ActionLocationSetMaintenanceInvocation) SetPathParamInt(param string,
 
 // SetPathParamString sets string path parameter
 func (inv *ActionLocationSetMaintenanceInvocation) SetPathParamString(param string, value string) *ActionLocationSetMaintenanceInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

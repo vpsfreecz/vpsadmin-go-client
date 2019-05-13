@@ -165,7 +165,7 @@ type ActionEnvironmentDatasetPlanIndexResponse struct {
 func (action *ActionEnvironmentDatasetPlanIndex) Prepare() *ActionEnvironmentDatasetPlanIndexInvocation {
 	return &ActionEnvironmentDatasetPlanIndexInvocation{
 		Action: action,
-		Path: "/v5.0/environments/:environment_id/dataset_plans",
+		Path: "/v5.0/environments/{environment_id}/dataset_plans",
 	}
 }
 
@@ -189,7 +189,7 @@ func (inv *ActionEnvironmentDatasetPlanIndexInvocation) SetPathParamInt(param st
 
 // SetPathParamString sets string path parameter
 func (inv *ActionEnvironmentDatasetPlanIndexInvocation) SetPathParamString(param string, value string) *ActionEnvironmentDatasetPlanIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

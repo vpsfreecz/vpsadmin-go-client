@@ -89,7 +89,7 @@ type ActionUserPublicKeyDeleteResponse struct {
 func (action *ActionUserPublicKeyDelete) Prepare() *ActionUserPublicKeyDeleteInvocation {
 	return &ActionUserPublicKeyDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/users/:user_id/public_keys/:public_key_id",
+		Path: "/v5.0/users/{user_id}/public_keys/{public_key_id}",
 	}
 }
 
@@ -111,7 +111,7 @@ func (inv *ActionUserPublicKeyDeleteInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserPublicKeyDeleteInvocation) SetPathParamString(param string, value string) *ActionUserPublicKeyDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

@@ -89,7 +89,7 @@ type ActionOsTemplateDeleteResponse struct {
 func (action *ActionOsTemplateDelete) Prepare() *ActionOsTemplateDeleteInvocation {
 	return &ActionOsTemplateDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/os_templates/:os_template_id",
+		Path: "/v5.0/os_templates/{os_template_id}",
 	}
 }
 
@@ -111,7 +111,7 @@ func (inv *ActionOsTemplateDeleteInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOsTemplateDeleteInvocation) SetPathParamString(param string, value string) *ActionOsTemplateDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

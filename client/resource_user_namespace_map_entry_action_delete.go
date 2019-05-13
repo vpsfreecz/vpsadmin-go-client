@@ -89,7 +89,7 @@ type ActionUserNamespaceMapEntryDeleteResponse struct {
 func (action *ActionUserNamespaceMapEntryDelete) Prepare() *ActionUserNamespaceMapEntryDeleteInvocation {
 	return &ActionUserNamespaceMapEntryDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/user_namespace_maps/:user_namespace_map_id/entries/:entry_id",
+		Path: "/v5.0/user_namespace_maps/{user_namespace_map_id}/entries/{entry_id}",
 	}
 }
 
@@ -111,7 +111,7 @@ func (inv *ActionUserNamespaceMapEntryDeleteInvocation) SetPathParamInt(param st
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserNamespaceMapEntryDeleteInvocation) SetPathParamString(param string, value string) *ActionUserNamespaceMapEntryDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

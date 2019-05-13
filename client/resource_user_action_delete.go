@@ -164,7 +164,7 @@ type ActionUserDeleteResponse struct {
 func (action *ActionUserDelete) Prepare() *ActionUserDeleteInvocation {
 	return &ActionUserDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/users/:user_id",
+		Path: "/v5.0/users/{user_id}",
 	}
 }
 
@@ -188,7 +188,7 @@ func (inv *ActionUserDeleteInvocation) SetPathParamInt(param string, value int64
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserDeleteInvocation) SetPathParamString(param string, value string) *ActionUserDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

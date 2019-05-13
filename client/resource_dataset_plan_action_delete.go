@@ -89,7 +89,7 @@ type ActionDatasetPlanDeleteResponse struct {
 func (action *ActionDatasetPlanDelete) Prepare() *ActionDatasetPlanDeleteInvocation {
 	return &ActionDatasetPlanDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/datasets/:dataset_id/plans/:plan_id",
+		Path: "/v5.0/datasets/{dataset_id}/plans/{plan_id}",
 	}
 }
 
@@ -111,7 +111,7 @@ func (inv *ActionDatasetPlanDeleteInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetPlanDeleteInvocation) SetPathParamString(param string, value string) *ActionDatasetPlanDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

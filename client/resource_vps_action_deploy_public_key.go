@@ -140,7 +140,7 @@ type ActionVpsDeployPublicKeyResponse struct {
 func (action *ActionVpsDeployPublicKey) Prepare() *ActionVpsDeployPublicKeyInvocation {
 	return &ActionVpsDeployPublicKeyInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/:vps_id/deploy_public_key",
+		Path: "/v5.0/vpses/{vps_id}/deploy_public_key",
 	}
 }
 
@@ -164,7 +164,7 @@ func (inv *ActionVpsDeployPublicKeyInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsDeployPublicKeyInvocation) SetPathParamString(param string, value string) *ActionVpsDeployPublicKeyInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

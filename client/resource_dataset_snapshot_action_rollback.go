@@ -98,7 +98,7 @@ type ActionDatasetSnapshotRollbackResponse struct {
 func (action *ActionDatasetSnapshotRollback) Prepare() *ActionDatasetSnapshotRollbackInvocation {
 	return &ActionDatasetSnapshotRollbackInvocation{
 		Action: action,
-		Path: "/v5.0/datasets/:dataset_id/snapshots/:snapshot_id/rollback",
+		Path: "/v5.0/datasets/{dataset_id}/snapshots/{snapshot_id}/rollback",
 	}
 }
 
@@ -120,7 +120,7 @@ func (inv *ActionDatasetSnapshotRollbackInvocation) SetPathParamInt(param string
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetSnapshotRollbackInvocation) SetPathParamString(param string, value string) *ActionDatasetSnapshotRollbackInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

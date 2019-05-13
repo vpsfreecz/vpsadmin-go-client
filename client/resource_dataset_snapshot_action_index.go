@@ -167,7 +167,7 @@ type ActionDatasetSnapshotIndexResponse struct {
 func (action *ActionDatasetSnapshotIndex) Prepare() *ActionDatasetSnapshotIndexInvocation {
 	return &ActionDatasetSnapshotIndexInvocation{
 		Action: action,
-		Path: "/v5.0/datasets/:dataset_id/snapshots",
+		Path: "/v5.0/datasets/{dataset_id}/snapshots",
 	}
 }
 
@@ -191,7 +191,7 @@ func (inv *ActionDatasetSnapshotIndexInvocation) SetPathParamInt(param string, v
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetSnapshotIndexInvocation) SetPathParamString(param string, value string) *ActionDatasetSnapshotIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

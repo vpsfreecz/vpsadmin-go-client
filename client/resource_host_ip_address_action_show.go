@@ -99,7 +99,7 @@ type ActionHostIpAddressShowResponse struct {
 func (action *ActionHostIpAddressShow) Prepare() *ActionHostIpAddressShowInvocation {
 	return &ActionHostIpAddressShowInvocation{
 		Action: action,
-		Path: "/v5.0/host_ip_addresses/:host_ip_address_id",
+		Path: "/v5.0/host_ip_addresses/{host_ip_address_id}",
 	}
 }
 
@@ -121,7 +121,7 @@ func (inv *ActionHostIpAddressShowInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionHostIpAddressShowInvocation) SetPathParamString(param string, value string) *ActionHostIpAddressShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

@@ -131,7 +131,7 @@ type ActionMonitoredEventIgnoreResponse struct {
 func (action *ActionMonitoredEventIgnore) Prepare() *ActionMonitoredEventIgnoreInvocation {
 	return &ActionMonitoredEventIgnoreInvocation{
 		Action: action,
-		Path: "/v5.0/monitored_events/:monitored_event_id/ignore",
+		Path: "/v5.0/monitored_events/{monitored_event_id}/ignore",
 	}
 }
 
@@ -155,7 +155,7 @@ func (inv *ActionMonitoredEventIgnoreInvocation) SetPathParamInt(param string, v
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMonitoredEventIgnoreInvocation) SetPathParamString(param string, value string) *ActionMonitoredEventIgnoreInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

@@ -107,7 +107,7 @@ type ActionIntegrityObjectShowResponse struct {
 func (action *ActionIntegrityObjectShow) Prepare() *ActionIntegrityObjectShowInvocation {
 	return &ActionIntegrityObjectShowInvocation{
 		Action: action,
-		Path: "/v5.0/integrity_objects/:integrity_object_id",
+		Path: "/v5.0/integrity_objects/{integrity_object_id}",
 	}
 }
 
@@ -129,7 +129,7 @@ func (inv *ActionIntegrityObjectShowInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionIntegrityObjectShowInvocation) SetPathParamString(param string, value string) *ActionIntegrityObjectShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

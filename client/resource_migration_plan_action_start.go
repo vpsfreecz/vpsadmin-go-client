@@ -108,7 +108,7 @@ type ActionMigrationPlanStartResponse struct {
 func (action *ActionMigrationPlanStart) Prepare() *ActionMigrationPlanStartInvocation {
 	return &ActionMigrationPlanStartInvocation{
 		Action: action,
-		Path: "/v5.0/migration_plans/:migration_plan_id/start",
+		Path: "/v5.0/migration_plans/{migration_plan_id}/start",
 	}
 }
 
@@ -130,7 +130,7 @@ func (inv *ActionMigrationPlanStartInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMigrationPlanStartInvocation) SetPathParamString(param string, value string) *ActionMigrationPlanStartInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

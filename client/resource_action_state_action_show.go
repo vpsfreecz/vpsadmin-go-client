@@ -93,7 +93,7 @@ type ActionActionStateShowResponse struct {
 func (action *ActionActionStateShow) Prepare() *ActionActionStateShowInvocation {
 	return &ActionActionStateShowInvocation{
 		Action: action,
-		Path: "/v5.0/action_states/:action_state_id",
+		Path: "/v5.0/action_states/{action_state_id}",
 	}
 }
 
@@ -115,7 +115,7 @@ func (inv *ActionActionStateShowInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionActionStateShowInvocation) SetPathParamString(param string, value string) *ActionActionStateShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

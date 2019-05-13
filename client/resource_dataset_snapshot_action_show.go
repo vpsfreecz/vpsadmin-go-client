@@ -102,7 +102,7 @@ type ActionDatasetSnapshotShowResponse struct {
 func (action *ActionDatasetSnapshotShow) Prepare() *ActionDatasetSnapshotShowInvocation {
 	return &ActionDatasetSnapshotShowInvocation{
 		Action: action,
-		Path: "/v5.0/datasets/:dataset_id/snapshots/:snapshot_id",
+		Path: "/v5.0/datasets/{dataset_id}/snapshots/{snapshot_id}",
 	}
 }
 
@@ -124,7 +124,7 @@ func (inv *ActionDatasetSnapshotShowInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetSnapshotShowInvocation) SetPathParamString(param string, value string) *ActionDatasetSnapshotShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

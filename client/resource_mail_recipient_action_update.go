@@ -182,7 +182,7 @@ type ActionMailRecipientUpdateResponse struct {
 func (action *ActionMailRecipientUpdate) Prepare() *ActionMailRecipientUpdateInvocation {
 	return &ActionMailRecipientUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/mail_recipients/:mail_recipient_id",
+		Path: "/v5.0/mail_recipients/{mail_recipient_id}",
 	}
 }
 
@@ -206,7 +206,7 @@ func (inv *ActionMailRecipientUpdateInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMailRecipientUpdateInvocation) SetPathParamString(param string, value string) *ActionMailRecipientUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

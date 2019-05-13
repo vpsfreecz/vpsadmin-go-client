@@ -188,7 +188,7 @@ type ActionVpsSwapWithResponse struct {
 func (action *ActionVpsSwapWith) Prepare() *ActionVpsSwapWithInvocation {
 	return &ActionVpsSwapWithInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/:vps_id/swap_with",
+		Path: "/v5.0/vpses/{vps_id}/swap_with",
 	}
 }
 
@@ -212,7 +212,7 @@ func (inv *ActionVpsSwapWithInvocation) SetPathParamInt(param string, value int6
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsSwapWithInvocation) SetPathParamString(param string, value string) *ActionVpsSwapWithInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

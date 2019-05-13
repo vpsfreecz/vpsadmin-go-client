@@ -176,7 +176,7 @@ type ActionVpsDeleteResponse struct {
 func (action *ActionVpsDelete) Prepare() *ActionVpsDeleteInvocation {
 	return &ActionVpsDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/:vps_id",
+		Path: "/v5.0/vpses/{vps_id}",
 	}
 }
 
@@ -200,7 +200,7 @@ func (inv *ActionVpsDeleteInvocation) SetPathParamInt(param string, value int64)
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsDeleteInvocation) SetPathParamString(param string, value string) *ActionVpsDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

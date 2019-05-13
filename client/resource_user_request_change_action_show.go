@@ -111,7 +111,7 @@ type ActionUserRequestChangeShowResponse struct {
 func (action *ActionUserRequestChangeShow) Prepare() *ActionUserRequestChangeShowInvocation {
 	return &ActionUserRequestChangeShowInvocation{
 		Action: action,
-		Path: "/v5.0/user_request/changes/:change_id",
+		Path: "/v5.0/user_request/changes/{change_id}",
 	}
 }
 
@@ -133,7 +133,7 @@ func (inv *ActionUserRequestChangeShowInvocation) SetPathParamInt(param string, 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserRequestChangeShowInvocation) SetPathParamString(param string, value string) *ActionUserRequestChangeShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

@@ -156,7 +156,7 @@ type ActionClusterResourcePackageItemCreateResponse struct {
 func (action *ActionClusterResourcePackageItemCreate) Prepare() *ActionClusterResourcePackageItemCreateInvocation {
 	return &ActionClusterResourcePackageItemCreateInvocation{
 		Action: action,
-		Path: "/v5.0/cluster_resource_packages/:cluster_resource_package_id/items",
+		Path: "/v5.0/cluster_resource_packages/{cluster_resource_package_id}/items",
 	}
 }
 
@@ -180,7 +180,7 @@ func (inv *ActionClusterResourcePackageItemCreateInvocation) SetPathParamInt(par
 
 // SetPathParamString sets string path parameter
 func (inv *ActionClusterResourcePackageItemCreateInvocation) SetPathParamString(param string, value string) *ActionClusterResourcePackageItemCreateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

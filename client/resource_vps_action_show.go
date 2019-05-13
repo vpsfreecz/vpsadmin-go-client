@@ -130,7 +130,7 @@ type ActionVpsShowResponse struct {
 func (action *ActionVpsShow) Prepare() *ActionVpsShowInvocation {
 	return &ActionVpsShowInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/:vps_id",
+		Path: "/v5.0/vpses/{vps_id}",
 	}
 }
 
@@ -152,7 +152,7 @@ func (inv *ActionVpsShowInvocation) SetPathParamInt(param string, value int64) *
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsShowInvocation) SetPathParamString(param string, value string) *ActionVpsShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

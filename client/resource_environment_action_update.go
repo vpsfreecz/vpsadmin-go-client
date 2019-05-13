@@ -221,7 +221,7 @@ type ActionEnvironmentUpdateResponse struct {
 func (action *ActionEnvironmentUpdate) Prepare() *ActionEnvironmentUpdateInvocation {
 	return &ActionEnvironmentUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/environments/:environment_id",
+		Path: "/v5.0/environments/{environment_id}",
 	}
 }
 
@@ -245,7 +245,7 @@ func (inv *ActionEnvironmentUpdateInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionEnvironmentUpdateInvocation) SetPathParamString(param string, value string) *ActionEnvironmentUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

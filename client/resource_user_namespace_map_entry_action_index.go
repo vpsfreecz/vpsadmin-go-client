@@ -165,7 +165,7 @@ type ActionUserNamespaceMapEntryIndexResponse struct {
 func (action *ActionUserNamespaceMapEntryIndex) Prepare() *ActionUserNamespaceMapEntryIndexInvocation {
 	return &ActionUserNamespaceMapEntryIndexInvocation{
 		Action: action,
-		Path: "/v5.0/user_namespace_maps/:user_namespace_map_id/entries",
+		Path: "/v5.0/user_namespace_maps/{user_namespace_map_id}/entries",
 	}
 }
 
@@ -189,7 +189,7 @@ func (inv *ActionUserNamespaceMapEntryIndexInvocation) SetPathParamInt(param str
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserNamespaceMapEntryIndexInvocation) SetPathParamString(param string, value string) *ActionUserNamespaceMapEntryIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

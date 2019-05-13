@@ -131,7 +131,7 @@ type ActionSessionTokenUpdateResponse struct {
 func (action *ActionSessionTokenUpdate) Prepare() *ActionSessionTokenUpdateInvocation {
 	return &ActionSessionTokenUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/session_tokens/:session_token_id",
+		Path: "/v5.0/session_tokens/{session_token_id}",
 	}
 }
 
@@ -155,7 +155,7 @@ func (inv *ActionSessionTokenUpdateInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionSessionTokenUpdateInvocation) SetPathParamString(param string, value string) *ActionSessionTokenUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

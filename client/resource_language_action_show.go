@@ -98,7 +98,7 @@ type ActionLanguageShowResponse struct {
 func (action *ActionLanguageShow) Prepare() *ActionLanguageShowInvocation {
 	return &ActionLanguageShowInvocation{
 		Action: action,
-		Path: "/v5.0/languages/:language_id",
+		Path: "/v5.0/languages/{language_id}",
 	}
 }
 
@@ -120,7 +120,7 @@ func (inv *ActionLanguageShowInvocation) SetPathParamInt(param string, value int
 
 // SetPathParamString sets string path parameter
 func (inv *ActionLanguageShowInvocation) SetPathParamString(param string, value string) *ActionLanguageShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

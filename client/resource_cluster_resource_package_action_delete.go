@@ -89,7 +89,7 @@ type ActionClusterResourcePackageDeleteResponse struct {
 func (action *ActionClusterResourcePackageDelete) Prepare() *ActionClusterResourcePackageDeleteInvocation {
 	return &ActionClusterResourcePackageDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/cluster_resource_packages/:cluster_resource_package_id",
+		Path: "/v5.0/cluster_resource_packages/{cluster_resource_package_id}",
 	}
 }
 
@@ -111,7 +111,7 @@ func (inv *ActionClusterResourcePackageDeleteInvocation) SetPathParamInt(param s
 
 // SetPathParamString sets string path parameter
 func (inv *ActionClusterResourcePackageDeleteInvocation) SetPathParamString(param string, value string) *ActionClusterResourcePackageDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

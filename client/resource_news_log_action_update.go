@@ -158,7 +158,7 @@ type ActionNewsLogUpdateResponse struct {
 func (action *ActionNewsLogUpdate) Prepare() *ActionNewsLogUpdateInvocation {
 	return &ActionNewsLogUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/news_logs/:news_log_id",
+		Path: "/v5.0/news_logs/{news_log_id}",
 	}
 }
 
@@ -182,7 +182,7 @@ func (inv *ActionNewsLogUpdateInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNewsLogUpdateInvocation) SetPathParamString(param string, value string) *ActionNewsLogUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

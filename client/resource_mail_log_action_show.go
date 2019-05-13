@@ -111,7 +111,7 @@ type ActionMailLogShowResponse struct {
 func (action *ActionMailLogShow) Prepare() *ActionMailLogShowInvocation {
 	return &ActionMailLogShowInvocation{
 		Action: action,
-		Path: "/v5.0/mail_logs/:mail_log_id",
+		Path: "/v5.0/mail_logs/{mail_log_id}",
 	}
 }
 
@@ -133,7 +133,7 @@ func (inv *ActionMailLogShowInvocation) SetPathParamInt(param string, value int6
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMailLogShowInvocation) SetPathParamString(param string, value string) *ActionMailLogShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

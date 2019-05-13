@@ -131,7 +131,7 @@ type ActionDnsResolverDeleteResponse struct {
 func (action *ActionDnsResolverDelete) Prepare() *ActionDnsResolverDeleteInvocation {
 	return &ActionDnsResolverDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/dns_resolvers/:dns_resolver_id",
+		Path: "/v5.0/dns_resolvers/{dns_resolver_id}",
 	}
 }
 
@@ -155,7 +155,7 @@ func (inv *ActionDnsResolverDeleteInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsResolverDeleteInvocation) SetPathParamString(param string, value string) *ActionDnsResolverDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

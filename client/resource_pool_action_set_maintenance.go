@@ -131,7 +131,7 @@ type ActionPoolSetMaintenanceResponse struct {
 func (action *ActionPoolSetMaintenance) Prepare() *ActionPoolSetMaintenanceInvocation {
 	return &ActionPoolSetMaintenanceInvocation{
 		Action: action,
-		Path: "/v5.0/pools/:pool_id/set_maintenance",
+		Path: "/v5.0/pools/{pool_id}/set_maintenance",
 	}
 }
 
@@ -155,7 +155,7 @@ func (inv *ActionPoolSetMaintenanceInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionPoolSetMaintenanceInvocation) SetPathParamString(param string, value string) *ActionPoolSetMaintenanceInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

@@ -97,7 +97,7 @@ type ActionVpsConsoleTokenShowResponse struct {
 func (action *ActionVpsConsoleTokenShow) Prepare() *ActionVpsConsoleTokenShowInvocation {
 	return &ActionVpsConsoleTokenShowInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/:vps_id/console_token",
+		Path: "/v5.0/vpses/{vps_id}/console_token",
 	}
 }
 
@@ -119,7 +119,7 @@ func (inv *ActionVpsConsoleTokenShowInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsConsoleTokenShowInvocation) SetPathParamString(param string, value string) *ActionVpsConsoleTokenShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

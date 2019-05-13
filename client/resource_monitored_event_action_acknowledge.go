@@ -131,7 +131,7 @@ type ActionMonitoredEventAcknowledgeResponse struct {
 func (action *ActionMonitoredEventAcknowledge) Prepare() *ActionMonitoredEventAcknowledgeInvocation {
 	return &ActionMonitoredEventAcknowledgeInvocation{
 		Action: action,
-		Path: "/v5.0/monitored_events/:monitored_event_id/acknowledge",
+		Path: "/v5.0/monitored_events/{monitored_event_id}/acknowledge",
 	}
 }
 
@@ -155,7 +155,7 @@ func (inv *ActionMonitoredEventAcknowledgeInvocation) SetPathParamInt(param stri
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMonitoredEventAcknowledgeInvocation) SetPathParamString(param string, value string) *ActionMonitoredEventAcknowledgeInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

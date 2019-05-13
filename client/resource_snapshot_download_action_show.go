@@ -106,7 +106,7 @@ type ActionSnapshotDownloadShowResponse struct {
 func (action *ActionSnapshotDownloadShow) Prepare() *ActionSnapshotDownloadShowInvocation {
 	return &ActionSnapshotDownloadShowInvocation{
 		Action: action,
-		Path: "/v5.0/snapshot_downloads/:snapshot_download_id",
+		Path: "/v5.0/snapshot_downloads/{snapshot_download_id}",
 	}
 }
 
@@ -128,7 +128,7 @@ func (inv *ActionSnapshotDownloadShowInvocation) SetPathParamInt(param string, v
 
 // SetPathParamString sets string path parameter
 func (inv *ActionSnapshotDownloadShowInvocation) SetPathParamString(param string, value string) *ActionSnapshotDownloadShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

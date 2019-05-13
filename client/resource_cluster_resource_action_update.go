@@ -195,7 +195,7 @@ type ActionClusterResourceUpdateResponse struct {
 func (action *ActionClusterResourceUpdate) Prepare() *ActionClusterResourceUpdateInvocation {
 	return &ActionClusterResourceUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/cluster_resources/:cluster_resource_id",
+		Path: "/v5.0/cluster_resources/{cluster_resource_id}",
 	}
 }
 
@@ -219,7 +219,7 @@ func (inv *ActionClusterResourceUpdateInvocation) SetPathParamInt(param string, 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionClusterResourceUpdateInvocation) SetPathParamString(param string, value string) *ActionClusterResourceUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

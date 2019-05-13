@@ -182,7 +182,7 @@ type ActionIpAddressUpdateResponse struct {
 func (action *ActionIpAddressUpdate) Prepare() *ActionIpAddressUpdateInvocation {
 	return &ActionIpAddressUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/ip_addresses/:ip_address_id",
+		Path: "/v5.0/ip_addresses/{ip_address_id}",
 	}
 }
 
@@ -206,7 +206,7 @@ func (inv *ActionIpAddressUpdateInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionIpAddressUpdateInvocation) SetPathParamString(param string, value string) *ActionIpAddressUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

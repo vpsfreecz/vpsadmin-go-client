@@ -275,7 +275,7 @@ type ActionNodeUpdateResponse struct {
 func (action *ActionNodeUpdate) Prepare() *ActionNodeUpdateInvocation {
 	return &ActionNodeUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/nodes/:node_id",
+		Path: "/v5.0/nodes/{node_id}",
 	}
 }
 
@@ -299,7 +299,7 @@ func (inv *ActionNodeUpdateInvocation) SetPathParamInt(param string, value int64
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNodeUpdateInvocation) SetPathParamString(param string, value string) *ActionNodeUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

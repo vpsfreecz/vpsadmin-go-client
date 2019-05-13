@@ -152,7 +152,7 @@ type ActionNetworkInterfaceUpdateResponse struct {
 func (action *ActionNetworkInterfaceUpdate) Prepare() *ActionNetworkInterfaceUpdateInvocation {
 	return &ActionNetworkInterfaceUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/network_interfaces/:network_interface_id",
+		Path: "/v5.0/network_interfaces/{network_interface_id}",
 	}
 }
 
@@ -176,7 +176,7 @@ func (inv *ActionNetworkInterfaceUpdateInvocation) SetPathParamInt(param string,
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNetworkInterfaceUpdateInvocation) SetPathParamString(param string, value string) *ActionNetworkInterfaceUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

@@ -89,7 +89,7 @@ type ActionVpsConsoleTokenDeleteResponse struct {
 func (action *ActionVpsConsoleTokenDelete) Prepare() *ActionVpsConsoleTokenDeleteInvocation {
 	return &ActionVpsConsoleTokenDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/:vps_id/console_token",
+		Path: "/v5.0/vpses/{vps_id}/console_token",
 	}
 }
 
@@ -111,7 +111,7 @@ func (inv *ActionVpsConsoleTokenDeleteInvocation) SetPathParamInt(param string, 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsConsoleTokenDeleteInvocation) SetPathParamString(param string, value string) *ActionVpsConsoleTokenDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

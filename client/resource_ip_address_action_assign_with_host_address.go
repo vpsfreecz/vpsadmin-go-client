@@ -170,7 +170,7 @@ type ActionIpAddressAssignWithHostAddressResponse struct {
 func (action *ActionIpAddressAssignWithHostAddress) Prepare() *ActionIpAddressAssignWithHostAddressInvocation {
 	return &ActionIpAddressAssignWithHostAddressInvocation{
 		Action: action,
-		Path: "/v5.0/ip_addresses/:ip_address_id/assign_with_host_address",
+		Path: "/v5.0/ip_addresses/{ip_address_id}/assign_with_host_address",
 	}
 }
 
@@ -194,7 +194,7 @@ func (inv *ActionIpAddressAssignWithHostAddressInvocation) SetPathParamInt(param
 
 // SetPathParamString sets string path parameter
 func (inv *ActionIpAddressAssignWithHostAddressInvocation) SetPathParamString(param string, value string) *ActionIpAddressAssignWithHostAddressInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

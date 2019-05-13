@@ -85,7 +85,7 @@ type ActionUserTouchResponse struct {
 func (action *ActionUserTouch) Prepare() *ActionUserTouchInvocation {
 	return &ActionUserTouchInvocation{
 		Action: action,
-		Path: "/v5.0/users/:user_id/touch",
+		Path: "/v5.0/users/{user_id}/touch",
 	}
 }
 
@@ -107,7 +107,7 @@ func (inv *ActionUserTouchInvocation) SetPathParamInt(param string, value int64)
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserTouchInvocation) SetPathParamString(param string, value string) *ActionUserTouchInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

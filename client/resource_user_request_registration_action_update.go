@@ -299,7 +299,7 @@ type ActionUserRequestRegistrationUpdateResponse struct {
 func (action *ActionUserRequestRegistrationUpdate) Prepare() *ActionUserRequestRegistrationUpdateInvocation {
 	return &ActionUserRequestRegistrationUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/user_request/registrations/:registration_id/:token",
+		Path: "/v5.0/user_request/registrations/{registration_id}/{token}",
 	}
 }
 
@@ -323,7 +323,7 @@ func (inv *ActionUserRequestRegistrationUpdateInvocation) SetPathParamInt(param 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserRequestRegistrationUpdateInvocation) SetPathParamString(param string, value string) *ActionUserRequestRegistrationUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

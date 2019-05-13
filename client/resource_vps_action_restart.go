@@ -98,7 +98,7 @@ type ActionVpsRestartResponse struct {
 func (action *ActionVpsRestart) Prepare() *ActionVpsRestartInvocation {
 	return &ActionVpsRestartInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/:vps_id/restart",
+		Path: "/v5.0/vpses/{vps_id}/restart",
 	}
 }
 
@@ -120,7 +120,7 @@ func (inv *ActionVpsRestartInvocation) SetPathParamInt(param string, value int64
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsRestartInvocation) SetPathParamString(param string, value string) *ActionVpsRestartInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

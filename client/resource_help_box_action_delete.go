@@ -89,7 +89,7 @@ type ActionHelpBoxDeleteResponse struct {
 func (action *ActionHelpBoxDelete) Prepare() *ActionHelpBoxDeleteInvocation {
 	return &ActionHelpBoxDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/help_boxes/:help_box_id",
+		Path: "/v5.0/help_boxes/{help_box_id}",
 	}
 }
 
@@ -111,7 +111,7 @@ func (inv *ActionHelpBoxDeleteInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionHelpBoxDeleteInvocation) SetPathParamString(param string, value string) *ActionHelpBoxDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

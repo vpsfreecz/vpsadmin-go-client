@@ -209,7 +209,7 @@ type ActionOsTemplateUpdateResponse struct {
 func (action *ActionOsTemplateUpdate) Prepare() *ActionOsTemplateUpdateInvocation {
 	return &ActionOsTemplateUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/os_templates/:os_template_id",
+		Path: "/v5.0/os_templates/{os_template_id}",
 	}
 }
 
@@ -233,7 +233,7 @@ func (inv *ActionOsTemplateUpdateInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOsTemplateUpdateInvocation) SetPathParamString(param string, value string) *ActionOsTemplateUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 

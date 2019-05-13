@@ -103,7 +103,7 @@ type ActionUserPublicKeyShowResponse struct {
 func (action *ActionUserPublicKeyShow) Prepare() *ActionUserPublicKeyShowInvocation {
 	return &ActionUserPublicKeyShowInvocation{
 		Action: action,
-		Path: "/v5.0/users/:user_id/public_keys/:public_key_id",
+		Path: "/v5.0/users/{user_id}/public_keys/{public_key_id}",
 	}
 }
 
@@ -125,7 +125,7 @@ func (inv *ActionUserPublicKeyShowInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserPublicKeyShowInvocation) SetPathParamString(param string, value string) *ActionUserPublicKeyShowInvocation {
-	inv.Path = strings.Replace(inv.Path, ":"+param, value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
 	return inv
 }
 
