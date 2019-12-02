@@ -216,6 +216,7 @@ type ActionDatasetIndexOutput struct {
 	Used int64 `json:"used"`
 	Referenced int64 `json:"referenced"`
 	Avail int64 `json:"avail"`
+	Export *ActionExportShowOutput `json:"export"`
 }
 
 

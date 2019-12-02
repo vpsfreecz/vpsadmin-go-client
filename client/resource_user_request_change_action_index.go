@@ -89,6 +89,7 @@ type ActionUserRequestChangeIndexInput struct {
 	State string `json:"state"`
 	ApiIpAddr string `json:"api_ip_addr"`
 	ClientIpAddr string `json:"client_ip_addr"`
+	ClientIpPtr string `json:"client_ip_ptr"`
 	Admin int64 `json:"admin"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -158,6 +159,17 @@ func (in *ActionUserRequestChangeIndexInput) SetClientIpAddr(value string) *Acti
 	}
 
 	in._selectedParameters["ClientIpAddr"] = nil
+	return in
+}
+// SetClientIpPtr sets parameter ClientIpPtr to value and selects it for sending
+func (in *ActionUserRequestChangeIndexInput) SetClientIpPtr(value string) *ActionUserRequestChangeIndexInput {
+	in.ClientIpPtr = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ClientIpPtr"] = nil
 	return in
 }
 // SetAdmin sets parameter Admin to value and selects it for sending
@@ -335,6 +347,9 @@ func (inv *ActionUserRequestChangeIndexInvocation) convertInputToQueryParams(ret
 		}
 		if inv.IsParameterSelected("ClientIpAddr") {
 			ret["change[client_ip_addr]"] = inv.Input.ClientIpAddr
+		}
+		if inv.IsParameterSelected("ClientIpPtr") {
+			ret["change[client_ip_ptr]"] = inv.Input.ClientIpPtr
 		}
 		if inv.IsParameterSelected("Admin") {
 			ret["change[admin]"] = convertInt64ToString(inv.Input.Admin)

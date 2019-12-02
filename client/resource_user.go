@@ -9,6 +9,8 @@ type ResourceUser struct {
 	EnvironmentConfig *ResourceUserEnvironmentConfig
 	// Resource User.Cluster_resource
 	ClusterResource *ResourceUserClusterResource
+	// Resource User.Totp_device
+	TotpDevice *ResourceUserTotpDevice
 	// Resource User.Public_key
 	PublicKey *ResourceUserPublicKey
 	// Resource User.Mail_role_recipient
@@ -35,12 +37,6 @@ type ResourceUser struct {
 	Find *ActionUserShow
 	// Action User#Update
 	Update *ActionUserUpdate
-	// Action User#Totp_enable
-	TotpEnable *ActionUserTotpEnable
-	// Action User#Totp_confirm
-	TotpConfirm *ActionUserTotpConfirm
-	// Action User#Totp_disable
-	TotpDisable *ActionUserTotpDisable
 	// Action User#Delete
 	Delete *ActionUserDelete
 	// Action User#Delete
@@ -54,15 +50,13 @@ func NewResourceUser(client *Client) *ResourceUser {
 	actionTouch := NewActionUserTouch(client)
 	actionShow := NewActionUserShow(client)
 	actionUpdate := NewActionUserUpdate(client)
-	actionTotpEnable := NewActionUserTotpEnable(client)
-	actionTotpConfirm := NewActionUserTotpConfirm(client)
-	actionTotpDisable := NewActionUserTotpDisable(client)
 	actionDelete := NewActionUserDelete(client)
 
 	return &ResourceUser{
 		Client: client,
 		EnvironmentConfig: NewResourceUserEnvironmentConfig(client),
 		ClusterResource: NewResourceUserClusterResource(client),
+		TotpDevice: NewResourceUserTotpDevice(client),
 		PublicKey: NewResourceUserPublicKey(client),
 		MailRoleRecipient: NewResourceUserMailRoleRecipient(client),
 		MailTemplateRecipient: NewResourceUserMailTemplateRecipient(client),
@@ -76,9 +70,6 @@ func NewResourceUser(client *Client) *ResourceUser {
 		Show: actionShow,
 		Find: actionShow,
 		Update: actionUpdate,
-		TotpEnable: actionTotpEnable,
-		TotpConfirm: actionTotpConfirm,
-		TotpDisable: actionTotpDisable,
 		Delete: actionDelete,
 		Destroy: actionDelete,
 	}

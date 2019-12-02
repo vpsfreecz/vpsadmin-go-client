@@ -281,6 +281,7 @@ type ActionDatasetCreateOutput struct {
 	Used int64 `json:"used"`
 	Referenced int64 `json:"referenced"`
 	Avail int64 `json:"avail"`
+	Export *ActionExportShowOutput `json:"export"`
 }
 
 // ActionDatasetCreateMetaGlobalOutput is a type for global output metadata parameters

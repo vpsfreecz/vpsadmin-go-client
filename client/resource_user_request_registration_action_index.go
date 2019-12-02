@@ -89,6 +89,7 @@ type ActionUserRequestRegistrationIndexInput struct {
 	State string `json:"state"`
 	ApiIpAddr string `json:"api_ip_addr"`
 	ClientIpAddr string `json:"client_ip_addr"`
+	ClientIpPtr string `json:"client_ip_ptr"`
 	Admin int64 `json:"admin"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -158,6 +159,17 @@ func (in *ActionUserRequestRegistrationIndexInput) SetClientIpAddr(value string)
 	}
 
 	in._selectedParameters["ClientIpAddr"] = nil
+	return in
+}
+// SetClientIpPtr sets parameter ClientIpPtr to value and selects it for sending
+func (in *ActionUserRequestRegistrationIndexInput) SetClientIpPtr(value string) *ActionUserRequestRegistrationIndexInput {
+	in.ClientIpPtr = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ClientIpPtr"] = nil
 	return in
 }
 // SetAdmin sets parameter Admin to value and selects it for sending
@@ -344,6 +356,9 @@ func (inv *ActionUserRequestRegistrationIndexInvocation) convertInputToQueryPara
 		}
 		if inv.IsParameterSelected("ClientIpAddr") {
 			ret["registration[client_ip_addr]"] = inv.Input.ClientIpAddr
+		}
+		if inv.IsParameterSelected("ClientIpPtr") {
+			ret["registration[client_ip_ptr]"] = inv.Input.ClientIpPtr
 		}
 		if inv.IsParameterSelected("Admin") {
 			ret["registration[admin]"] = convertInt64ToString(inv.Input.Admin)

@@ -92,6 +92,7 @@ type ActionIpAddressIndexInput struct {
 	Location int64 `json:"location"`
 	User int64 `json:"user"`
 	Role string `json:"role"`
+	Purpose string `json:"purpose"`
 	Addr string `json:"addr"`
 	Prefix int64 `json:"prefix"`
 	Size int64 `json:"size"`
@@ -198,6 +199,17 @@ func (in *ActionIpAddressIndexInput) SetRole(value string) *ActionIpAddressIndex
 	}
 
 	in._selectedParameters["Role"] = nil
+	return in
+}
+// SetPurpose sets parameter Purpose to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetPurpose(value string) *ActionIpAddressIndexInput {
+	in.Purpose = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Purpose"] = nil
 	return in
 }
 // SetAddr sets parameter Addr to value and selects it for sending
@@ -423,6 +435,9 @@ func (inv *ActionIpAddressIndexInvocation) convertInputToQueryParams(ret map[str
 		}
 		if inv.IsParameterSelected("Role") {
 			ret["ip_address[role]"] = inv.Input.Role
+		}
+		if inv.IsParameterSelected("Purpose") {
+			ret["ip_address[purpose]"] = inv.Input.Purpose
 		}
 		if inv.IsParameterSelected("Addr") {
 			ret["ip_address[addr]"] = inv.Input.Addr

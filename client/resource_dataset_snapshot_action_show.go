@@ -81,6 +81,7 @@ type ActionDatasetSnapshotShowOutput struct {
 	CreatedAt string `json:"created_at"`
 	HistoryId int64 `json:"history_id"`
 	Mount *ActionVpsMountShowOutput `json:"mount"`
+	Export *ActionExportShowOutput `json:"export"`
 }
 
 

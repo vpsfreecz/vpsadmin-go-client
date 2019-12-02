@@ -22,6 +22,8 @@ type Client struct {
 	DnsResolver *ResourceDnsResolver
 	// Resource Environment
 	Environment *ResourceEnvironment
+	// Resource Export
+	Export *ResourceExport
 	// Resource Host_ip_address
 	HostIpAddress *ResourceHostIpAddress
 	// Resource Integrity_check
@@ -86,6 +88,18 @@ type Client struct {
 	VpsConfig *ResourceVpsConfig
 	// Resource Monitored_event
 	MonitoredEvent *ResourceMonitoredEvent
+	// Resource User_request
+	UserRequest *ResourceUserRequest
+	// Resource Incoming_payment
+	IncomingPayment *ResourceIncomingPayment
+	// Resource Payment_stats
+	PaymentStats *ResourcePaymentStats
+	// Resource User_account
+	UserAccount *ResourceUserAccount
+	// Resource User_payment
+	UserPayment *ResourceUserPayment
+	// Resource Help_box
+	HelpBox *ResourceHelpBox
 	// Resource Outage
 	Outage *ResourceOutage
 	// Resource Outage_update
@@ -96,20 +110,8 @@ type Client struct {
 	VpsOutage *ResourceVpsOutage
 	// Resource Vps_outage_mount
 	VpsOutageMount *ResourceVpsOutageMount
-	// Resource Help_box
-	HelpBox *ResourceHelpBox
 	// Resource News_log
 	NewsLog *ResourceNewsLog
-	// Resource Incoming_payment
-	IncomingPayment *ResourceIncomingPayment
-	// Resource Payment_stats
-	PaymentStats *ResourcePaymentStats
-	// Resource User_account
-	UserAccount *ResourceUserAccount
-	// Resource User_payment
-	UserPayment *ResourceUserPayment
-	// Resource User_request
-	UserRequest *ResourceUserRequest
 	// Resource Action_state
 	ActionState *ResourceActionState
 }
@@ -125,6 +127,7 @@ func New(url string) *Client {
 	c.DatasetPlan = NewResourceDatasetPlan(c)
 	c.DnsResolver = NewResourceDnsResolver(c)
 	c.Environment = NewResourceEnvironment(c)
+	c.Export = NewResourceExport(c)
 	c.HostIpAddress = NewResourceHostIpAddress(c)
 	c.IntegrityCheck = NewResourceIntegrityCheck(c)
 	c.IntegrityFact = NewResourceIntegrityFact(c)
@@ -157,18 +160,18 @@ func New(url string) *Client {
 	c.Vps = NewResourceVps(c)
 	c.VpsConfig = NewResourceVpsConfig(c)
 	c.MonitoredEvent = NewResourceMonitoredEvent(c)
+	c.UserRequest = NewResourceUserRequest(c)
+	c.IncomingPayment = NewResourceIncomingPayment(c)
+	c.PaymentStats = NewResourcePaymentStats(c)
+	c.UserAccount = NewResourceUserAccount(c)
+	c.UserPayment = NewResourceUserPayment(c)
+	c.HelpBox = NewResourceHelpBox(c)
 	c.Outage = NewResourceOutage(c)
 	c.OutageUpdate = NewResourceOutageUpdate(c)
 	c.UserOutage = NewResourceUserOutage(c)
 	c.VpsOutage = NewResourceVpsOutage(c)
 	c.VpsOutageMount = NewResourceVpsOutageMount(c)
-	c.HelpBox = NewResourceHelpBox(c)
 	c.NewsLog = NewResourceNewsLog(c)
-	c.IncomingPayment = NewResourceIncomingPayment(c)
-	c.PaymentStats = NewResourcePaymentStats(c)
-	c.UserAccount = NewResourceUserAccount(c)
-	c.UserPayment = NewResourceUserPayment(c)
-	c.UserRequest = NewResourceUserRequest(c)
 	c.ActionState = NewResourceActionState(c)
 
 	return c

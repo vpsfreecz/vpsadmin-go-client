@@ -86,6 +86,7 @@ type ActionNetworkIndexInput struct {
 	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
 	Location int64 `json:"location"`
+	Purpose string `json:"purpose"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -121,6 +122,17 @@ func (in *ActionNetworkIndexInput) SetLocation(value int64) *ActionNetworkIndexI
 	}
 
 	in._selectedParameters["Location"] = nil
+	return in
+}
+// SetPurpose sets parameter Purpose to value and selects it for sending
+func (in *ActionNetworkIndexInput) SetPurpose(value string) *ActionNetworkIndexInput {
+	in.Purpose = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Purpose"] = nil
 	return in
 }
 
@@ -161,6 +173,7 @@ type ActionNetworkIndexOutput struct {
 	SplitAccess string `json:"split_access"`
 	SplitPrefix int64 `json:"split_prefix"`
 	Autopick bool `json:"autopick"`
+	Purpose string `json:"purpose"`
 	Size int64 `json:"size"`
 	Used int64 `json:"used"`
 	Assigned int64 `json:"assigned"`
@@ -277,6 +290,9 @@ func (inv *ActionNetworkIndexInvocation) convertInputToQueryParams(ret map[strin
 		}
 		if inv.IsParameterSelected("Location") {
 			ret["network[location]"] = convertInt64ToString(inv.Input.Location)
+		}
+		if inv.IsParameterSelected("Purpose") {
+			ret["network[purpose]"] = inv.Input.Purpose
 		}
 	}
 }

@@ -310,7 +310,6 @@ type ActionUserCreateOutput struct {
 	PasswordReset bool `json:"password_reset"`
 	Lockout bool `json:"lockout"`
 	Language *ActionLanguageShowOutput `json:"language"`
-	TotpEnabled bool `json:"totp_enabled"`
 	LastActivityAt string `json:"last_activity_at"`
 	CreatedAt string `json:"created_at"`
 	ObjectState string `json:"object_state"`

@@ -82,6 +82,7 @@ type ActionNetworkUpdateInput struct {
 	SplitAccess string `json:"split_access"`
 	SplitPrefix int64 `json:"split_prefix"`
 	Autopick bool `json:"autopick"`
+	Purpose string `json:"purpose"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -196,6 +197,17 @@ func (in *ActionNetworkUpdateInput) SetAutopick(value bool) *ActionNetworkUpdate
 	in._selectedParameters["Autopick"] = nil
 	return in
 }
+// SetPurpose sets parameter Purpose to value and selects it for sending
+func (in *ActionNetworkUpdateInput) SetPurpose(value string) *ActionNetworkUpdateInput {
+	in.Purpose = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Purpose"] = nil
+	return in
+}
 
 // SelectParameters sets parameters from ActionNetworkUpdateInput
 // that will be sent to the API.
@@ -239,6 +251,7 @@ type ActionNetworkUpdateOutput struct {
 	SplitAccess string `json:"split_access"`
 	SplitPrefix int64 `json:"split_prefix"`
 	Autopick bool `json:"autopick"`
+	Purpose string `json:"purpose"`
 	Size int64 `json:"size"`
 	Used int64 `json:"used"`
 	Assigned int64 `json:"assigned"`
@@ -395,6 +408,9 @@ func (inv *ActionNetworkUpdateInvocation) makeInputParams() map[string]interface
 		}
 		if inv.IsParameterSelected("Autopick") {
 			ret["autopick"] = inv.Input.Autopick
+		}
+		if inv.IsParameterSelected("Purpose") {
+			ret["purpose"] = inv.Input.Purpose
 		}
 	}
 

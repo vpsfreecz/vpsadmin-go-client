@@ -81,6 +81,7 @@ type ActionNetworkCreateInput struct {
 	SplitAccess string `json:"split_access"`
 	SplitPrefix int64 `json:"split_prefix"`
 	Autopick bool `json:"autopick"`
+	Purpose string `json:"purpose"`
 	AddIpAddresses bool `json:"add_ip_addresses"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -196,6 +197,17 @@ func (in *ActionNetworkCreateInput) SetAutopick(value bool) *ActionNetworkCreate
 	in._selectedParameters["Autopick"] = nil
 	return in
 }
+// SetPurpose sets parameter Purpose to value and selects it for sending
+func (in *ActionNetworkCreateInput) SetPurpose(value string) *ActionNetworkCreateInput {
+	in.Purpose = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Purpose"] = nil
+	return in
+}
 // SetAddIpAddresses sets parameter AddIpAddresses to value and selects it for sending
 func (in *ActionNetworkCreateInput) SetAddIpAddresses(value bool) *ActionNetworkCreateInput {
 	in.AddIpAddresses = value
@@ -250,6 +262,7 @@ type ActionNetworkCreateOutput struct {
 	SplitAccess string `json:"split_access"`
 	SplitPrefix int64 `json:"split_prefix"`
 	Autopick bool `json:"autopick"`
+	Purpose string `json:"purpose"`
 	Size int64 `json:"size"`
 	Used int64 `json:"used"`
 	Assigned int64 `json:"assigned"`
@@ -477,6 +490,9 @@ func (inv *ActionNetworkCreateInvocation) makeInputParams() map[string]interface
 		}
 		if inv.IsParameterSelected("Autopick") {
 			ret["autopick"] = inv.Input.Autopick
+		}
+		if inv.IsParameterSelected("Purpose") {
+			ret["purpose"] = inv.Input.Purpose
 		}
 		if inv.IsParameterSelected("AddIpAddresses") {
 			ret["add_ip_addresses"] = inv.Input.AddIpAddresses

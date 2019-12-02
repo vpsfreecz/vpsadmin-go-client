@@ -85,6 +85,7 @@ type ActionNetworkShowOutput struct {
 	SplitAccess string `json:"split_access"`
 	SplitPrefix int64 `json:"split_prefix"`
 	Autopick bool `json:"autopick"`
+	Purpose string `json:"purpose"`
 	Size int64 `json:"size"`
 	Used int64 `json:"used"`
 	Assigned int64 `json:"assigned"`
