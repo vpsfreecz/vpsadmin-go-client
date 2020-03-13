@@ -109,7 +109,7 @@ type ActionHostIpAddressAssignResponse struct {
 func (action *ActionHostIpAddressAssign) Prepare() *ActionHostIpAddressAssignInvocation {
 	return &ActionHostIpAddressAssignInvocation{
 		Action: action,
-		Path: "/v5.0/host_ip_addresses/{host_ip_address_id}/assign",
+		Path: "/v6.0/host_ip_addresses/{host_ip_address_id}/assign",
 	}
 }
 

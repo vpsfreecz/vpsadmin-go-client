@@ -140,7 +140,7 @@ type ActionVpsConfigReplaceResponse struct {
 func (action *ActionVpsConfigReplace) Prepare() *ActionVpsConfigReplaceInvocation {
 	return &ActionVpsConfigReplaceInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/configs/replace",
+		Path: "/v6.0/vpses/{vps_id}/configs/replace",
 	}
 }
 

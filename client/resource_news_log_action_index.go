@@ -176,7 +176,7 @@ type ActionNewsLogIndexResponse struct {
 func (action *ActionNewsLogIndex) Prepare() *ActionNewsLogIndexInvocation {
 	return &ActionNewsLogIndexInvocation{
 		Action: action,
-		Path: "/v5.0/news_logs",
+		Path: "/v6.0/news_logs",
 	}
 }
 

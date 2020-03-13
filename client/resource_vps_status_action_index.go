@@ -227,7 +227,7 @@ type ActionVpsStatusIndexResponse struct {
 func (action *ActionVpsStatusIndex) Prepare() *ActionVpsStatusIndexInvocation {
 	return &ActionVpsStatusIndexInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/statuses",
+		Path: "/v6.0/vpses/{vps_id}/statuses",
 	}
 }
 

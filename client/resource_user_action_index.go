@@ -320,7 +320,7 @@ type ActionUserIndexResponse struct {
 func (action *ActionUserIndex) Prepare() *ActionUserIndexInvocation {
 	return &ActionUserIndexInvocation{
 		Action: action,
-		Path: "/v5.0/users",
+		Path: "/v6.0/users",
 	}
 }
 

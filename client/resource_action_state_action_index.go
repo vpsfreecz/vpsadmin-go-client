@@ -169,7 +169,7 @@ type ActionActionStateIndexResponse struct {
 func (action *ActionActionStateIndex) Prepare() *ActionActionStateIndexInvocation {
 	return &ActionActionStateIndexInvocation{
 		Action: action,
-		Path: "/v5.0/action_states",
+		Path: "/v6.0/action_states",
 	}
 }
 

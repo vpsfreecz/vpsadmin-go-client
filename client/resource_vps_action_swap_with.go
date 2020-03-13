@@ -188,7 +188,7 @@ type ActionVpsSwapWithResponse struct {
 func (action *ActionVpsSwapWith) Prepare() *ActionVpsSwapWithInvocation {
 	return &ActionVpsSwapWithInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/swap_with",
+		Path: "/v6.0/vpses/{vps_id}/swap_with",
 	}
 }
 

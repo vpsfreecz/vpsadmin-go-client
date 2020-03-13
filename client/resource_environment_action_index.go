@@ -164,6 +164,7 @@ func (in *ActionEnvironmentIndexInput) AnySelected() bool {
 type ActionEnvironmentIndexOutput struct {
 	Id int64 `json:"id"`
 	Label string `json:"label"`
+	Description string `json:"description"`
 	Domain string `json:"domain"`
 	CanCreateVps bool `json:"can_create_vps"`
 	CanDestroyVps bool `json:"can_destroy_vps"`
@@ -193,7 +194,7 @@ type ActionEnvironmentIndexResponse struct {
 func (action *ActionEnvironmentIndex) Prepare() *ActionEnvironmentIndexInvocation {
 	return &ActionEnvironmentIndexInvocation{
 		Action: action,
-		Path: "/v5.0/environments",
+		Path: "/v6.0/environments",
 	}
 }
 

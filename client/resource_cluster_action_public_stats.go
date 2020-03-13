@@ -89,7 +89,7 @@ func (action *ActionClusterPublicStats) Call() (*ActionClusterPublicStatsRespons
 func (action *ActionClusterPublicStats) Prepare() *ActionClusterPublicStatsInvocation {
 	return &ActionClusterPublicStatsInvocation{
 		Action: action,
-		Path: "/v5.0/cluster/public_stats",
+		Path: "/v6.0/cluster/public_stats",
 	}
 }
 

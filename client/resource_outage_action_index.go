@@ -342,7 +342,7 @@ type ActionOutageIndexResponse struct {
 func (action *ActionOutageIndex) Prepare() *ActionOutageIndexInvocation {
 	return &ActionOutageIndexInvocation{
 		Action: action,
-		Path: "/v5.0/outages",
+		Path: "/v6.0/outages",
 	}
 }
 

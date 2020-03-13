@@ -76,6 +76,7 @@ func (in *ActionEnvironmentShowMetaGlobalInput) AnySelected() bool {
 type ActionEnvironmentShowOutput struct {
 	Id int64 `json:"id"`
 	Label string `json:"label"`
+	Description string `json:"description"`
 	Domain string `json:"domain"`
 	CanCreateVps bool `json:"can_create_vps"`
 	CanDestroyVps bool `json:"can_destroy_vps"`
@@ -105,7 +106,7 @@ type ActionEnvironmentShowResponse struct {
 func (action *ActionEnvironmentShow) Prepare() *ActionEnvironmentShowInvocation {
 	return &ActionEnvironmentShowInvocation{
 		Action: action,
-		Path: "/v5.0/environments/{environment_id}",
+		Path: "/v6.0/environments/{environment_id}",
 	}
 }
 

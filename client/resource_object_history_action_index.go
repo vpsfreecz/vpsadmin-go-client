@@ -226,7 +226,7 @@ type ActionObjectHistoryIndexResponse struct {
 func (action *ActionObjectHistoryIndex) Prepare() *ActionObjectHistoryIndexInvocation {
 	return &ActionObjectHistoryIndexInvocation{
 		Action: action,
-		Path: "/v5.0/object_histories",
+		Path: "/v6.0/object_histories",
 	}
 }
 

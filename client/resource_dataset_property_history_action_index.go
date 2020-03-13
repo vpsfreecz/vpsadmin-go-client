@@ -200,7 +200,7 @@ type ActionDatasetPropertyHistoryIndexResponse struct {
 func (action *ActionDatasetPropertyHistoryIndex) Prepare() *ActionDatasetPropertyHistoryIndexInvocation {
 	return &ActionDatasetPropertyHistoryIndexInvocation{
 		Action: action,
-		Path: "/v5.0/datasets/{dataset_id}/property_history",
+		Path: "/v6.0/datasets/{dataset_id}/property_history",
 	}
 }
 

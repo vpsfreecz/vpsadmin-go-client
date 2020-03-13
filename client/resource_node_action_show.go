@@ -132,7 +132,7 @@ type ActionNodeShowResponse struct {
 func (action *ActionNodeShow) Prepare() *ActionNodeShowInvocation {
 	return &ActionNodeShowInvocation{
 		Action: action,
-		Path: "/v5.0/nodes/{node_id}",
+		Path: "/v6.0/nodes/{node_id}",
 	}
 }
 

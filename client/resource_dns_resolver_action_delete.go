@@ -131,7 +131,7 @@ type ActionDnsResolverDeleteResponse struct {
 func (action *ActionDnsResolverDelete) Prepare() *ActionDnsResolverDeleteInvocation {
 	return &ActionDnsResolverDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/dns_resolvers/{dns_resolver_id}",
+		Path: "/v6.0/dns_resolvers/{dns_resolver_id}",
 	}
 }
 

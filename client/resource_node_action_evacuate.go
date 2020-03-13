@@ -62,7 +62,7 @@ func (in *ActionNodeEvacuateMetaGlobalInput) AnySelected() bool {
 type ActionNodeEvacuateInput struct {
 	DstNode int64 `json:"dst_node"`
 	StopOnError bool `json:"stop_on_error"`
-	OutageWindow bool `json:"outage_window"`
+	MaintenanceWindow bool `json:"maintenance_window"`
 	Concurrency int64 `json:"concurrency"`
 	CleanupData bool `json:"cleanup_data"`
 	SendMail bool `json:"send_mail"`
@@ -93,15 +93,15 @@ func (in *ActionNodeEvacuateInput) SetStopOnError(value bool) *ActionNodeEvacuat
 	in._selectedParameters["StopOnError"] = nil
 	return in
 }
-// SetOutageWindow sets parameter OutageWindow to value and selects it for sending
-func (in *ActionNodeEvacuateInput) SetOutageWindow(value bool) *ActionNodeEvacuateInput {
-	in.OutageWindow = value
+// SetMaintenanceWindow sets parameter MaintenanceWindow to value and selects it for sending
+func (in *ActionNodeEvacuateInput) SetMaintenanceWindow(value bool) *ActionNodeEvacuateInput {
+	in.MaintenanceWindow = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["OutageWindow"] = nil
+	in._selectedParameters["MaintenanceWindow"] = nil
 	return in
 }
 // SetConcurrency sets parameter Concurrency to value and selects it for sending
@@ -202,7 +202,7 @@ type ActionNodeEvacuateResponse struct {
 func (action *ActionNodeEvacuate) Prepare() *ActionNodeEvacuateInvocation {
 	return &ActionNodeEvacuateInvocation{
 		Action: action,
-		Path: "/v5.0/nodes/{node_id}/evacuate",
+		Path: "/v6.0/nodes/{node_id}/evacuate",
 	}
 }
 
@@ -310,8 +310,8 @@ func (inv *ActionNodeEvacuateInvocation) makeInputParams() map[string]interface{
 		if inv.IsParameterSelected("StopOnError") {
 			ret["stop_on_error"] = inv.Input.StopOnError
 		}
-		if inv.IsParameterSelected("OutageWindow") {
-			ret["outage_window"] = inv.Input.OutageWindow
+		if inv.IsParameterSelected("MaintenanceWindow") {
+			ret["maintenance_window"] = inv.Input.MaintenanceWindow
 		}
 		if inv.IsParameterSelected("Concurrency") {
 			ret["concurrency"] = inv.Input.Concurrency

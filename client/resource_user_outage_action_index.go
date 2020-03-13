@@ -187,7 +187,7 @@ type ActionUserOutageIndexResponse struct {
 func (action *ActionUserOutageIndex) Prepare() *ActionUserOutageIndexInvocation {
 	return &ActionUserOutageIndexInvocation{
 		Action: action,
-		Path: "/v5.0/user_outages",
+		Path: "/v6.0/user_outages",
 	}
 }
 

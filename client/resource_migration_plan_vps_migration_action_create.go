@@ -74,7 +74,7 @@ func (in *ActionMigrationPlanVpsMigrationCreateMetaGlobalInput) AnySelected() bo
 type ActionMigrationPlanVpsMigrationCreateInput struct {
 	Vps int64 `json:"vps"`
 	DstNode int64 `json:"dst_node"`
-	OutageWindow bool `json:"outage_window"`
+	MaintenanceWindow bool `json:"maintenance_window"`
 	CleanupData bool `json:"cleanup_data"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -102,15 +102,15 @@ func (in *ActionMigrationPlanVpsMigrationCreateInput) SetDstNode(value int64) *A
 	in._selectedParameters["DstNode"] = nil
 	return in
 }
-// SetOutageWindow sets parameter OutageWindow to value and selects it for sending
-func (in *ActionMigrationPlanVpsMigrationCreateInput) SetOutageWindow(value bool) *ActionMigrationPlanVpsMigrationCreateInput {
-	in.OutageWindow = value
+// SetMaintenanceWindow sets parameter MaintenanceWindow to value and selects it for sending
+func (in *ActionMigrationPlanVpsMigrationCreateInput) SetMaintenanceWindow(value bool) *ActionMigrationPlanVpsMigrationCreateInput {
+	in.MaintenanceWindow = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["OutageWindow"] = nil
+	in._selectedParameters["MaintenanceWindow"] = nil
 	return in
 }
 // SetCleanupData sets parameter CleanupData to value and selects it for sending
@@ -162,7 +162,7 @@ type ActionMigrationPlanVpsMigrationCreateOutput struct {
 	SrcNode *ActionNodeShowOutput `json:"src_node"`
 	Vps *ActionVpsShowOutput `json:"vps"`
 	DstNode *ActionNodeShowOutput `json:"dst_node"`
-	OutageWindow bool `json:"outage_window"`
+	MaintenanceWindow bool `json:"maintenance_window"`
 	CleanupData bool `json:"cleanup_data"`
 	CreatedAt string `json:"created_at"`
 	StartedAt string `json:"started_at"`
@@ -188,7 +188,7 @@ type ActionMigrationPlanVpsMigrationCreateResponse struct {
 func (action *ActionMigrationPlanVpsMigrationCreate) Prepare() *ActionMigrationPlanVpsMigrationCreateInvocation {
 	return &ActionMigrationPlanVpsMigrationCreateInvocation{
 		Action: action,
-		Path: "/v5.0/migration_plans/{migration_plan_id}/vps_migrations",
+		Path: "/v6.0/migration_plans/{migration_plan_id}/vps_migrations",
 	}
 }
 
@@ -296,8 +296,8 @@ func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) makeInputParams() ma
 		if inv.IsParameterSelected("DstNode") {
 			ret["dst_node"] = inv.Input.DstNode
 		}
-		if inv.IsParameterSelected("OutageWindow") {
-			ret["outage_window"] = inv.Input.OutageWindow
+		if inv.IsParameterSelected("MaintenanceWindow") {
+			ret["maintenance_window"] = inv.Input.MaintenanceWindow
 		}
 		if inv.IsParameterSelected("CleanupData") {
 			ret["cleanup_data"] = inv.Input.CleanupData

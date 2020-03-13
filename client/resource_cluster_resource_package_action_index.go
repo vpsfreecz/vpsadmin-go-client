@@ -189,7 +189,7 @@ type ActionClusterResourcePackageIndexResponse struct {
 func (action *ActionClusterResourcePackageIndex) Prepare() *ActionClusterResourcePackageIndexInvocation {
 	return &ActionClusterResourcePackageIndexInvocation{
 		Action: action,
-		Path: "/v5.0/cluster_resource_packages",
+		Path: "/v6.0/cluster_resource_packages",
 	}
 }
 

@@ -270,7 +270,7 @@ type ActionUserSessionIndexResponse struct {
 func (action *ActionUserSessionIndex) Prepare() *ActionUserSessionIndexInvocation {
 	return &ActionUserSessionIndexInvocation{
 		Action: action,
-		Path: "/v5.0/user_sessions",
+		Path: "/v6.0/user_sessions",
 	}
 }
 

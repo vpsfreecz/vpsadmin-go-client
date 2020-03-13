@@ -89,7 +89,7 @@ type ActionUserClusterResourcePackageDeleteResponse struct {
 func (action *ActionUserClusterResourcePackageDelete) Prepare() *ActionUserClusterResourcePackageDeleteInvocation {
 	return &ActionUserClusterResourcePackageDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/user_cluster_resource_packages/{user_cluster_resource_package_id}",
+		Path: "/v6.0/user_cluster_resource_packages/{user_cluster_resource_package_id}",
 	}
 }
 

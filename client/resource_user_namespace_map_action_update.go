@@ -156,7 +156,7 @@ type ActionUserNamespaceMapUpdateResponse struct {
 func (action *ActionUserNamespaceMapUpdate) Prepare() *ActionUserNamespaceMapUpdateInvocation {
 	return &ActionUserNamespaceMapUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/user_namespace_maps/{user_namespace_map_id}",
+		Path: "/v6.0/user_namespace_maps/{user_namespace_map_id}",
 	}
 }
 

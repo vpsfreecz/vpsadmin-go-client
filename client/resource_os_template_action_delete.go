@@ -89,7 +89,7 @@ type ActionOsTemplateDeleteResponse struct {
 func (action *ActionOsTemplateDelete) Prepare() *ActionOsTemplateDeleteInvocation {
 	return &ActionOsTemplateDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/os_templates/{os_template_id}",
+		Path: "/v6.0/os_templates/{os_template_id}",
 	}
 }
 

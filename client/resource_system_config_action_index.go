@@ -177,7 +177,7 @@ type ActionSystemConfigIndexResponse struct {
 func (action *ActionSystemConfigIndex) Prepare() *ActionSystemConfigIndexInvocation {
 	return &ActionSystemConfigIndexInvocation{
 		Action: action,
-		Path: "/v5.0/system_configs",
+		Path: "/v6.0/system_configs",
 	}
 }
 

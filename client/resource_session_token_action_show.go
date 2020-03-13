@@ -104,7 +104,7 @@ type ActionSessionTokenShowResponse struct {
 func (action *ActionSessionTokenShow) Prepare() *ActionSessionTokenShowInvocation {
 	return &ActionSessionTokenShowInvocation{
 		Action: action,
-		Path: "/v5.0/session_tokens/{session_token_id}",
+		Path: "/v6.0/session_tokens/{session_token_id}",
 	}
 }
 

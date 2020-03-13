@@ -172,7 +172,7 @@ type ActionVpsMountIndexResponse struct {
 func (action *ActionVpsMountIndex) Prepare() *ActionVpsMountIndexInvocation {
 	return &ActionVpsMountIndexInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/mounts",
+		Path: "/v6.0/vpses/{vps_id}/mounts",
 	}
 }
 

@@ -107,7 +107,7 @@ type ActionIntegrityCheckShowResponse struct {
 func (action *ActionIntegrityCheckShow) Prepare() *ActionIntegrityCheckShowInvocation {
 	return &ActionIntegrityCheckShowInvocation{
 		Action: action,
-		Path: "/v5.0/integrity_checks/{integrity_check_id}",
+		Path: "/v6.0/integrity_checks/{integrity_check_id}",
 	}
 }
 

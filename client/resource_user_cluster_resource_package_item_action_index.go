@@ -163,7 +163,7 @@ type ActionUserClusterResourcePackageItemIndexResponse struct {
 func (action *ActionUserClusterResourcePackageItemIndex) Prepare() *ActionUserClusterResourcePackageItemIndexInvocation {
 	return &ActionUserClusterResourcePackageItemIndexInvocation{
 		Action: action,
-		Path: "/v5.0/user_cluster_resource_packages/{user_cluster_resource_package_id}/items",
+		Path: "/v6.0/user_cluster_resource_packages/{user_cluster_resource_package_id}/items",
 	}
 }
 

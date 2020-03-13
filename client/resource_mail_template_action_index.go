@@ -166,7 +166,7 @@ type ActionMailTemplateIndexResponse struct {
 func (action *ActionMailTemplateIndex) Prepare() *ActionMailTemplateIndexInvocation {
 	return &ActionMailTemplateIndexInvocation{
 		Action: action,
-		Path: "/v5.0/mail_templates",
+		Path: "/v6.0/mail_templates",
 	}
 }
 

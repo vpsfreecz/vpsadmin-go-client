@@ -42,6 +42,8 @@ type Client struct {
 	Language *ResourceLanguage
 	// Resource Location
 	Location *ResourceLocation
+	// Resource Location_network
+	LocationNetwork *ResourceLocationNetwork
 	// Resource Mail_log
 	MailLog *ResourceMailLog
 	// Resource Mail_recipient
@@ -137,6 +139,7 @@ func New(url string) *Client {
 	c.IpTrafficMonitor = NewResourceIpTrafficMonitor(c)
 	c.Language = NewResourceLanguage(c)
 	c.Location = NewResourceLocation(c)
+	c.LocationNetwork = NewResourceLocationNetwork(c)
 	c.MailLog = NewResourceMailLog(c)
 	c.MailRecipient = NewResourceMailRecipient(c)
 	c.MailTemplate = NewResourceMailTemplate(c)

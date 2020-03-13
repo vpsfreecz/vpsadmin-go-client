@@ -158,7 +158,7 @@ type ActionNewsLogUpdateResponse struct {
 func (action *ActionNewsLogUpdate) Prepare() *ActionNewsLogUpdateInvocation {
 	return &ActionNewsLogUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/news_logs/{news_log_id}",
+		Path: "/v6.0/news_logs/{news_log_id}",
 	}
 }
 

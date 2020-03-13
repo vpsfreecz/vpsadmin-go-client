@@ -164,7 +164,7 @@ type ActionVpsFeatureIndexResponse struct {
 func (action *ActionVpsFeatureIndex) Prepare() *ActionVpsFeatureIndexInvocation {
 	return &ActionVpsFeatureIndexInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/features",
+		Path: "/v6.0/vpses/{vps_id}/features",
 	}
 }
 

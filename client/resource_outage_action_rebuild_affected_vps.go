@@ -89,7 +89,7 @@ type ActionOutageRebuildAffectedVpsResponse struct {
 func (action *ActionOutageRebuildAffectedVps) Prepare() *ActionOutageRebuildAffectedVpsInvocation {
 	return &ActionOutageRebuildAffectedVpsInvocation{
 		Action: action,
-		Path: "/v5.0/outages/{outage_id}/rebuild_affected_vps",
+		Path: "/v6.0/outages/{outage_id}/rebuild_affected_vps",
 	}
 }
 

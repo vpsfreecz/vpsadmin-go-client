@@ -162,7 +162,7 @@ type ActionLanguageIndexResponse struct {
 func (action *ActionLanguageIndex) Prepare() *ActionLanguageIndexInvocation {
 	return &ActionLanguageIndexInvocation{
 		Action: action,
-		Path: "/v5.0/languages",
+		Path: "/v6.0/languages",
 	}
 }
 

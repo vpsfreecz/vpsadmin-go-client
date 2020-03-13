@@ -200,7 +200,7 @@ type ActionUserNamespaceIndexResponse struct {
 func (action *ActionUserNamespaceIndex) Prepare() *ActionUserNamespaceIndexInvocation {
 	return &ActionUserNamespaceIndexInvocation{
 		Action: action,
-		Path: "/v5.0/user_namespaces",
+		Path: "/v6.0/user_namespaces",
 	}
 }
 

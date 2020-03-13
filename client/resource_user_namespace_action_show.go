@@ -100,7 +100,7 @@ type ActionUserNamespaceShowResponse struct {
 func (action *ActionUserNamespaceShow) Prepare() *ActionUserNamespaceShowInvocation {
 	return &ActionUserNamespaceShowInvocation{
 		Action: action,
-		Path: "/v5.0/user_namespaces/{user_namespace_id}",
+		Path: "/v6.0/user_namespaces/{user_namespace_id}",
 	}
 }
 

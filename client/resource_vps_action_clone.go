@@ -76,6 +76,7 @@ type ActionVpsCloneInput struct {
 	Location int64 `json:"location"`
 	Node int64 `json:"node"`
 	User int64 `json:"user"`
+	KeepPlatform bool `json:"keep_platform"`
 	Subdatasets bool `json:"subdatasets"`
 	DatasetPlans bool `json:"dataset_plans"`
 	Configs bool `json:"configs"`
@@ -130,6 +131,17 @@ func (in *ActionVpsCloneInput) SetUser(value int64) *ActionVpsCloneInput {
 	}
 
 	in._selectedParameters["User"] = nil
+	return in
+}
+// SetKeepPlatform sets parameter KeepPlatform to value and selects it for sending
+func (in *ActionVpsCloneInput) SetKeepPlatform(value bool) *ActionVpsCloneInput {
+	in.KeepPlatform = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["KeepPlatform"] = nil
 	return in
 }
 // SetSubdatasets sets parameter Subdatasets to value and selects it for sending
@@ -310,7 +322,7 @@ type ActionVpsCloneResponse struct {
 func (action *ActionVpsClone) Prepare() *ActionVpsCloneInvocation {
 	return &ActionVpsCloneInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/clone",
+		Path: "/v6.0/vpses/{vps_id}/clone",
 	}
 }
 
@@ -498,6 +510,9 @@ func (inv *ActionVpsCloneInvocation) makeInputParams() map[string]interface{} {
 		}
 		if inv.IsParameterSelected("User") {
 			ret["user"] = inv.Input.User
+		}
+		if inv.IsParameterSelected("KeepPlatform") {
+			ret["keep_platform"] = inv.Input.KeepPlatform
 		}
 		if inv.IsParameterSelected("Subdatasets") {
 			ret["subdatasets"] = inv.Input.Subdatasets

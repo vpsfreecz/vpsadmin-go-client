@@ -130,7 +130,7 @@ type ActionVpsShowResponse struct {
 func (action *ActionVpsShow) Prepare() *ActionVpsShowInvocation {
 	return &ActionVpsShowInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}",
+		Path: "/v6.0/vpses/{vps_id}",
 	}
 }
 

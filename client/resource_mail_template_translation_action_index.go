@@ -170,7 +170,7 @@ type ActionMailTemplateTranslationIndexResponse struct {
 func (action *ActionMailTemplateTranslationIndex) Prepare() *ActionMailTemplateTranslationIndexInvocation {
 	return &ActionMailTemplateTranslationIndexInvocation{
 		Action: action,
-		Path: "/v5.0/mail_templates/{mail_template_id}/translations",
+		Path: "/v6.0/mail_templates/{mail_template_id}/translations",
 	}
 }
 

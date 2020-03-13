@@ -98,7 +98,7 @@ type ActionUserAccountShowResponse struct {
 func (action *ActionUserAccountShow) Prepare() *ActionUserAccountShowInvocation {
 	return &ActionUserAccountShowInvocation{
 		Action: action,
-		Path: "/v5.0/user_accounts/{user_account_id}",
+		Path: "/v6.0/user_accounts/{user_account_id}",
 	}
 }
 

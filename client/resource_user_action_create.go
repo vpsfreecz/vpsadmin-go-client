@@ -341,7 +341,7 @@ type ActionUserCreateResponse struct {
 func (action *ActionUserCreate) Prepare() *ActionUserCreateInvocation {
 	return &ActionUserCreateInvocation{
 		Action: action,
-		Path: "/v5.0/users",
+		Path: "/v6.0/users",
 	}
 }
 

@@ -328,7 +328,7 @@ type ActionUserUpdateResponse struct {
 func (action *ActionUserUpdate) Prepare() *ActionUserUpdateInvocation {
 	return &ActionUserUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/users/{user_id}",
+		Path: "/v6.0/users/{user_id}",
 	}
 }
 

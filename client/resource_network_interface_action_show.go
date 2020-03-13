@@ -100,7 +100,7 @@ type ActionNetworkInterfaceShowResponse struct {
 func (action *ActionNetworkInterfaceShow) Prepare() *ActionNetworkInterfaceShowInvocation {
 	return &ActionNetworkInterfaceShowInvocation{
 		Action: action,
-		Path: "/v5.0/network_interfaces/{network_interface_id}",
+		Path: "/v6.0/network_interfaces/{network_interface_id}",
 	}
 }
 

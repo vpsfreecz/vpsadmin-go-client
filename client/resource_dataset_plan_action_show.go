@@ -98,7 +98,7 @@ type ActionDatasetPlanShowResponse struct {
 func (action *ActionDatasetPlanShow) Prepare() *ActionDatasetPlanShowInvocation {
 	return &ActionDatasetPlanShowInvocation{
 		Action: action,
-		Path: "/v5.0/dataset_plans/{dataset_plan_id}",
+		Path: "/v6.0/dataset_plans/{dataset_plan_id}",
 	}
 }
 

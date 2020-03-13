@@ -101,7 +101,7 @@ type ActionExportHostShowResponse struct {
 func (action *ActionExportHostShow) Prepare() *ActionExportHostShowInvocation {
 	return &ActionExportHostShowInvocation{
 		Action: action,
-		Path: "/v5.0/exports/{export_id}/hosts/{host_id}",
+		Path: "/v6.0/exports/{export_id}/hosts/{host_id}",
 	}
 }
 

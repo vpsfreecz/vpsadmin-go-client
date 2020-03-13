@@ -85,7 +85,7 @@ type ActionUserTouchResponse struct {
 func (action *ActionUserTouch) Prepare() *ActionUserTouchInvocation {
 	return &ActionUserTouchInvocation{
 		Action: action,
-		Path: "/v5.0/users/{user_id}/touch",
+		Path: "/v6.0/users/{user_id}/touch",
 	}
 }
 

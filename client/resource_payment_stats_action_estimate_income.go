@@ -161,7 +161,7 @@ type ActionPaymentStatsEstimateIncomeResponse struct {
 func (action *ActionPaymentStatsEstimateIncome) Prepare() *ActionPaymentStatsEstimateIncomeInvocation {
 	return &ActionPaymentStatsEstimateIncomeInvocation{
 		Action: action,
-		Path: "/v5.0/payment_stat/estimate_income",
+		Path: "/v6.0/payment_stat/estimate_income",
 	}
 }
 

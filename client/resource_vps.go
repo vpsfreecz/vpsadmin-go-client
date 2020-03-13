@@ -13,8 +13,8 @@ type ResourceVps struct {
 	Feature *ResourceVpsFeature
 	// Resource Vps.Mount
 	Mount *ResourceVpsMount
-	// Resource Vps.Outage_window
-	OutageWindow *ResourceVpsOutageWindow
+	// Resource Vps.Maintenance_window
+	MaintenanceWindow *ResourceVpsMaintenanceWindow
 	// Resource Vps.Console_token
 	ConsoleToken *ResourceVpsConsoleToken
 	// Resource Vps.Status
@@ -82,7 +82,7 @@ func NewResourceVps(client *Client) *ResourceVps {
 		Config: NewResourceVpsConfig(client),
 		Feature: NewResourceVpsFeature(client),
 		Mount: NewResourceVpsMount(client),
-		OutageWindow: NewResourceVpsOutageWindow(client),
+		MaintenanceWindow: NewResourceVpsMaintenanceWindow(client),
 		ConsoleToken: NewResourceVpsConsoleToken(client),
 		Status: NewResourceVpsStatus(client),
 		Index: actionIndex,

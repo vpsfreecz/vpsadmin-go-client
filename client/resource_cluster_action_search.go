@@ -132,7 +132,7 @@ type ActionClusterSearchResponse struct {
 func (action *ActionClusterSearch) Prepare() *ActionClusterSearchInvocation {
 	return &ActionClusterSearchInvocation{
 		Action: action,
-		Path: "/v5.0/cluster/search",
+		Path: "/v6.0/cluster/search",
 	}
 }
 

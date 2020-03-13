@@ -163,7 +163,7 @@ type ActionVpsConfigIndexResponse struct {
 func (action *ActionVpsConfigIndex) Prepare() *ActionVpsConfigIndexInvocation {
 	return &ActionVpsConfigIndexInvocation{
 		Action: action,
-		Path: "/v5.0/vps_configs",
+		Path: "/v6.0/vps_configs",
 	}
 }
 

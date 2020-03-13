@@ -239,7 +239,7 @@ type ActionTransactionChainIndexResponse struct {
 func (action *ActionTransactionChainIndex) Prepare() *ActionTransactionChainIndexInvocation {
 	return &ActionTransactionChainIndexInvocation{
 		Action: action,
-		Path: "/v5.0/transaction_chains",
+		Path: "/v6.0/transaction_chains",
 	}
 }
 

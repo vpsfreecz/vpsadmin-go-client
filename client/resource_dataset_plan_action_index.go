@@ -162,7 +162,7 @@ type ActionDatasetPlanIndexResponse struct {
 func (action *ActionDatasetPlanIndex) Prepare() *ActionDatasetPlanIndexInvocation {
 	return &ActionDatasetPlanIndexInvocation{
 		Action: action,
-		Path: "/v5.0/dataset_plans",
+		Path: "/v6.0/dataset_plans",
 	}
 }
 

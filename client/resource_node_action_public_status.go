@@ -108,7 +108,7 @@ func (action *ActionNodePublicStatus) Call() (*ActionNodePublicStatusResponse, e
 func (action *ActionNodePublicStatus) Prepare() *ActionNodePublicStatusInvocation {
 	return &ActionNodePublicStatusInvocation{
 		Action: action,
-		Path: "/v5.0/nodes/public_status",
+		Path: "/v6.0/nodes/public_status",
 	}
 }
 

@@ -105,7 +105,7 @@ type ActionIpTrafficShowResponse struct {
 func (action *ActionIpTrafficShow) Prepare() *ActionIpTrafficShowInvocation {
 	return &ActionIpTrafficShowInvocation{
 		Action: action,
-		Path: "/v5.0/ip_traffics/{ip_traffic_id}",
+		Path: "/v6.0/ip_traffics/{ip_traffic_id}",
 	}
 }
 

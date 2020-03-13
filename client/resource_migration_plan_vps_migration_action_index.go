@@ -181,7 +181,7 @@ type ActionMigrationPlanVpsMigrationIndexOutput struct {
 	SrcNode *ActionNodeShowOutput `json:"src_node"`
 	Vps *ActionVpsShowOutput `json:"vps"`
 	DstNode *ActionNodeShowOutput `json:"dst_node"`
-	OutageWindow bool `json:"outage_window"`
+	MaintenanceWindow bool `json:"maintenance_window"`
 	CleanupData bool `json:"cleanup_data"`
 	CreatedAt string `json:"created_at"`
 	StartedAt string `json:"started_at"`
@@ -207,7 +207,7 @@ type ActionMigrationPlanVpsMigrationIndexResponse struct {
 func (action *ActionMigrationPlanVpsMigrationIndex) Prepare() *ActionMigrationPlanVpsMigrationIndexInvocation {
 	return &ActionMigrationPlanVpsMigrationIndexInvocation{
 		Action: action,
-		Path: "/v5.0/migration_plans/{migration_plan_id}/vps_migrations",
+		Path: "/v6.0/migration_plans/{migration_plan_id}/vps_migrations",
 	}
 }
 

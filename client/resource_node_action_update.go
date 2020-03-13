@@ -275,7 +275,7 @@ type ActionNodeUpdateResponse struct {
 func (action *ActionNodeUpdate) Prepare() *ActionNodeUpdateInvocation {
 	return &ActionNodeUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/nodes/{node_id}",
+		Path: "/v6.0/nodes/{node_id}",
 	}
 }
 

@@ -278,7 +278,7 @@ type ActionVpsIndexResponse struct {
 func (action *ActionVpsIndex) Prepare() *ActionVpsIndexInvocation {
 	return &ActionVpsIndexInvocation{
 		Action: action,
-		Path: "/v5.0/vpses",
+		Path: "/v6.0/vpses",
 	}
 }
 

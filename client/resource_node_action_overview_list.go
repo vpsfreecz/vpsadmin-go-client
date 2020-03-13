@@ -142,7 +142,7 @@ func (action *ActionNodeOverviewList) Call() (*ActionNodeOverviewListResponse, e
 func (action *ActionNodeOverviewList) Prepare() *ActionNodeOverviewListInvocation {
 	return &ActionNodeOverviewListInvocation{
 		Action: action,
-		Path: "/v5.0/nodes/overview_list",
+		Path: "/v6.0/nodes/overview_list",
 	}
 }
 

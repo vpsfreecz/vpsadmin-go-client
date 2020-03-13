@@ -102,7 +102,7 @@ type ActionIntegrityFactShowResponse struct {
 func (action *ActionIntegrityFactShow) Prepare() *ActionIntegrityFactShowInvocation {
 	return &ActionIntegrityFactShowInvocation{
 		Action: action,
-		Path: "/v5.0/integrity_facts/{integrity_fact_id}",
+		Path: "/v6.0/integrity_facts/{integrity_fact_id}",
 	}
 }
 

@@ -131,7 +131,7 @@ type ActionVpsSetMaintenanceResponse struct {
 func (action *ActionVpsSetMaintenance) Prepare() *ActionVpsSetMaintenanceInvocation {
 	return &ActionVpsSetMaintenanceInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/set_maintenance",
+		Path: "/v6.0/vpses/{vps_id}/set_maintenance",
 	}
 }
 

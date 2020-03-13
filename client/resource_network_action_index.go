@@ -164,7 +164,6 @@ func (in *ActionNetworkIndexInput) AnySelected() bool {
 type ActionNetworkIndexOutput struct {
 	Id int64 `json:"id"`
 	Label string `json:"label"`
-	Location *ActionLocationShowOutput `json:"location"`
 	IpVersion int64 `json:"ip_version"`
 	Address string `json:"address"`
 	Prefix int64 `json:"prefix"`
@@ -199,7 +198,7 @@ type ActionNetworkIndexResponse struct {
 func (action *ActionNetworkIndex) Prepare() *ActionNetworkIndexInvocation {
 	return &ActionNetworkIndexInvocation{
 		Action: action,
-		Path: "/v5.0/networks",
+		Path: "/v6.0/networks",
 	}
 }
 

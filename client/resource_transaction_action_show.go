@@ -112,7 +112,7 @@ type ActionTransactionShowResponse struct {
 func (action *ActionTransactionShow) Prepare() *ActionTransactionShowInvocation {
 	return &ActionTransactionShowInvocation{
 		Action: action,
-		Path: "/v5.0/transactions/{transaction_id}",
+		Path: "/v6.0/transactions/{transaction_id}",
 	}
 }
 

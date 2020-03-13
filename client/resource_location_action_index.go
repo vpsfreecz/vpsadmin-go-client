@@ -88,6 +88,7 @@ type ActionLocationIndexInput struct {
 	Environment int64 `json:"environment"`
 	HasHypervisor bool `json:"has_hypervisor"`
 	HasStorage bool `json:"has_storage"`
+	HypervisorType string `json:"hypervisor_type"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -147,6 +148,17 @@ func (in *ActionLocationIndexInput) SetHasStorage(value bool) *ActionLocationInd
 	in._selectedParameters["HasStorage"] = nil
 	return in
 }
+// SetHypervisorType sets parameter HypervisorType to value and selects it for sending
+func (in *ActionLocationIndexInput) SetHypervisorType(value string) *ActionLocationIndexInput {
+	in.HypervisorType = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["HypervisorType"] = nil
+	return in
+}
 
 // SelectParameters sets parameters from ActionLocationIndexInput
 // that will be sent to the API.
@@ -176,6 +188,7 @@ func (in *ActionLocationIndexInput) AnySelected() bool {
 type ActionLocationIndexOutput struct {
 	Id int64 `json:"id"`
 	Label string `json:"label"`
+	Description string `json:"description"`
 	HasIpv6 bool `json:"has_ipv6"`
 	VpsOnboot bool `json:"vps_onboot"`
 	RemoteConsoleServer string `json:"remote_console_server"`
@@ -204,7 +217,7 @@ type ActionLocationIndexResponse struct {
 func (action *ActionLocationIndex) Prepare() *ActionLocationIndexInvocation {
 	return &ActionLocationIndexInvocation{
 		Action: action,
-		Path: "/v5.0/locations",
+		Path: "/v6.0/locations",
 	}
 }
 
@@ -301,6 +314,9 @@ func (inv *ActionLocationIndexInvocation) convertInputToQueryParams(ret map[stri
 		}
 		if inv.IsParameterSelected("HasStorage") {
 			ret["location[has_storage]"] = convertBoolToString(inv.Input.HasStorage)
+		}
+		if inv.IsParameterSelected("HypervisorType") {
+			ret["location[hypervisor_type]"] = inv.Input.HypervisorType
 		}
 	}
 }

@@ -106,7 +106,7 @@ type ActionMonitoredEventShowResponse struct {
 func (action *ActionMonitoredEventShow) Prepare() *ActionMonitoredEventShowInvocation {
 	return &ActionMonitoredEventShowInvocation{
 		Action: action,
-		Path: "/v5.0/monitored_events/{monitored_event_id}",
+		Path: "/v6.0/monitored_events/{monitored_event_id}",
 	}
 }
 

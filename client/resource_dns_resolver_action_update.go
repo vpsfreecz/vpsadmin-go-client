@@ -182,7 +182,7 @@ type ActionDnsResolverUpdateResponse struct {
 func (action *ActionDnsResolverUpdate) Prepare() *ActionDnsResolverUpdateInvocation {
 	return &ActionDnsResolverUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/dns_resolvers/{dns_resolver_id}",
+		Path: "/v6.0/dns_resolvers/{dns_resolver_id}",
 	}
 }
 

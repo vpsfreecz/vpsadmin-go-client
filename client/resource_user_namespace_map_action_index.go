@@ -186,7 +186,7 @@ type ActionUserNamespaceMapIndexResponse struct {
 func (action *ActionUserNamespaceMapIndex) Prepare() *ActionUserNamespaceMapIndexInvocation {
 	return &ActionUserNamespaceMapIndexInvocation{
 		Action: action,
-		Path: "/v5.0/user_namespace_maps",
+		Path: "/v6.0/user_namespace_maps",
 	}
 }
 

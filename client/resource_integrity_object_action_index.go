@@ -243,7 +243,7 @@ type ActionIntegrityObjectIndexResponse struct {
 func (action *ActionIntegrityObjectIndex) Prepare() *ActionIntegrityObjectIndexInvocation {
 	return &ActionIntegrityObjectIndexInvocation{
 		Action: action,
-		Path: "/v5.0/integrity_objects",
+		Path: "/v6.0/integrity_objects",
 	}
 }
 

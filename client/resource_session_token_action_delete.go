@@ -89,7 +89,7 @@ type ActionSessionTokenDeleteResponse struct {
 func (action *ActionSessionTokenDelete) Prepare() *ActionSessionTokenDeleteInvocation {
 	return &ActionSessionTokenDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/session_tokens/{session_token_id}",
+		Path: "/v6.0/session_tokens/{session_token_id}",
 	}
 }
 

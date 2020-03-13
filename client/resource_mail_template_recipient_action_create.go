@@ -143,7 +143,7 @@ type ActionMailTemplateRecipientCreateResponse struct {
 func (action *ActionMailTemplateRecipientCreate) Prepare() *ActionMailTemplateRecipientCreateInvocation {
 	return &ActionMailTemplateRecipientCreateInvocation{
 		Action: action,
-		Path: "/v5.0/mail_templates/{mail_template_id}/recipients",
+		Path: "/v6.0/mail_templates/{mail_template_id}/recipients",
 	}
 }
 

@@ -98,7 +98,7 @@ type ActionVpsRestartResponse struct {
 func (action *ActionVpsRestart) Prepare() *ActionVpsRestartInvocation {
 	return &ActionVpsRestartInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/restart",
+		Path: "/v6.0/vpses/{vps_id}/restart",
 	}
 }
 

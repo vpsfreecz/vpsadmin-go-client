@@ -115,7 +115,7 @@ func (action *ActionUserCurrent) Call() (*ActionUserCurrentResponse, error) {
 func (action *ActionUserCurrent) Prepare() *ActionUserCurrentInvocation {
 	return &ActionUserCurrentInvocation{
 		Action: action,
-		Path: "/v5.0/users/current",
+		Path: "/v6.0/users/current",
 	}
 }
 

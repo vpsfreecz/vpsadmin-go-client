@@ -100,7 +100,7 @@ type ActionDnsResolverShowResponse struct {
 func (action *ActionDnsResolverShow) Prepare() *ActionDnsResolverShowInvocation {
 	return &ActionDnsResolverShowInvocation{
 		Action: action,
-		Path: "/v5.0/dns_resolvers/{dns_resolver_id}",
+		Path: "/v6.0/dns_resolvers/{dns_resolver_id}",
 	}
 }
 

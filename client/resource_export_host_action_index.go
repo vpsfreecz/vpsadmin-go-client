@@ -166,7 +166,7 @@ type ActionExportHostIndexResponse struct {
 func (action *ActionExportHostIndex) Prepare() *ActionExportHostIndexInvocation {
 	return &ActionExportHostIndexInvocation{
 		Action: action,
-		Path: "/v5.0/exports/{export_id}/hosts",
+		Path: "/v6.0/exports/{export_id}/hosts",
 	}
 }
 

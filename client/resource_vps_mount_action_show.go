@@ -107,7 +107,7 @@ type ActionVpsMountShowResponse struct {
 func (action *ActionVpsMountShow) Prepare() *ActionVpsMountShowInvocation {
 	return &ActionVpsMountShowInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/mounts/{mount_id}",
+		Path: "/v6.0/vpses/{vps_id}/mounts/{mount_id}",
 	}
 }
 

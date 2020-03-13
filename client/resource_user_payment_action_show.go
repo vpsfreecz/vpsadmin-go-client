@@ -103,7 +103,7 @@ type ActionUserPaymentShowResponse struct {
 func (action *ActionUserPaymentShow) Prepare() *ActionUserPaymentShowInvocation {
 	return &ActionUserPaymentShowInvocation{
 		Action: action,
-		Path: "/v5.0/user_payments/{user_payment_id}",
+		Path: "/v6.0/user_payments/{user_payment_id}",
 	}
 }
 

@@ -175,7 +175,7 @@ type ActionMailLogIndexResponse struct {
 func (action *ActionMailLogIndex) Prepare() *ActionMailLogIndexInvocation {
 	return &ActionMailLogIndexInvocation{
 		Action: action,
-		Path: "/v5.0/mail_logs",
+		Path: "/v6.0/mail_logs",
 	}
 }
 

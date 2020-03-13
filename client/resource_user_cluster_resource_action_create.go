@@ -171,7 +171,7 @@ type ActionUserClusterResourceCreateResponse struct {
 func (action *ActionUserClusterResourceCreate) Prepare() *ActionUserClusterResourceCreateInvocation {
 	return &ActionUserClusterResourceCreateInvocation{
 		Action: action,
-		Path: "/v5.0/users/{user_id}/cluster_resources",
+		Path: "/v6.0/users/{user_id}/cluster_resources",
 	}
 }
 

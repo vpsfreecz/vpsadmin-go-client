@@ -131,7 +131,7 @@ type ActionLocationSetMaintenanceResponse struct {
 func (action *ActionLocationSetMaintenance) Prepare() *ActionLocationSetMaintenanceInvocation {
 	return &ActionLocationSetMaintenanceInvocation{
 		Action: action,
-		Path: "/v5.0/locations/{location_id}/set_maintenance",
+		Path: "/v6.0/locations/{location_id}/set_maintenance",
 	}
 }
 

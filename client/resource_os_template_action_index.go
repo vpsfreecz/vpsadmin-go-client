@@ -86,6 +86,7 @@ type ActionOsTemplateIndexInput struct {
 	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
 	Location int64 `json:"location"`
+	HypervisorType string `json:"hypervisor_type"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -121,6 +122,17 @@ func (in *ActionOsTemplateIndexInput) SetLocation(value int64) *ActionOsTemplate
 	}
 
 	in._selectedParameters["Location"] = nil
+	return in
+}
+// SetHypervisorType sets parameter HypervisorType to value and selects it for sending
+func (in *ActionOsTemplateIndexInput) SetHypervisorType(value string) *ActionOsTemplateIndexInput {
+	in.HypervisorType = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["HypervisorType"] = nil
 	return in
 }
 
@@ -179,7 +191,7 @@ type ActionOsTemplateIndexResponse struct {
 func (action *ActionOsTemplateIndex) Prepare() *ActionOsTemplateIndexInvocation {
 	return &ActionOsTemplateIndexInvocation{
 		Action: action,
-		Path: "/v5.0/os_templates",
+		Path: "/v6.0/os_templates",
 	}
 }
 
@@ -270,6 +282,9 @@ func (inv *ActionOsTemplateIndexInvocation) convertInputToQueryParams(ret map[st
 		}
 		if inv.IsParameterSelected("Location") {
 			ret["os_template[location]"] = convertInt64ToString(inv.Input.Location)
+		}
+		if inv.IsParameterSelected("HypervisorType") {
+			ret["os_template[hypervisor_type]"] = inv.Input.HypervisorType
 		}
 	}
 }

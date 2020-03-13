@@ -162,7 +162,7 @@ type ActionMailTemplateRecipientIndexResponse struct {
 func (action *ActionMailTemplateRecipientIndex) Prepare() *ActionMailTemplateRecipientIndexInvocation {
 	return &ActionMailTemplateRecipientIndexInvocation{
 		Action: action,
-		Path: "/v5.0/mail_templates/{mail_template_id}/recipients",
+		Path: "/v6.0/mail_templates/{mail_template_id}/recipients",
 	}
 }
 

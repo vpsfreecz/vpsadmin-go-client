@@ -198,7 +198,7 @@ type ActionVpsOutageMountIndexResponse struct {
 func (action *ActionVpsOutageMountIndex) Prepare() *ActionVpsOutageMountIndexInvocation {
 	return &ActionVpsOutageMountIndexInvocation{
 		Action: action,
-		Path: "/v5.0/vps_outage_mounts",
+		Path: "/v6.0/vps_outage_mounts",
 	}
 }
 

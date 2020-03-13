@@ -88,7 +88,7 @@ func (action *ActionClusterShow) Call() (*ActionClusterShowResponse, error) {
 func (action *ActionClusterShow) Prepare() *ActionClusterShowInvocation {
 	return &ActionClusterShowInvocation{
 		Action: action,
-		Path: "/v5.0/cluster",
+		Path: "/v6.0/cluster",
 	}
 }
 

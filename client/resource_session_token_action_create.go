@@ -185,7 +185,7 @@ type ActionSessionTokenCreateResponse struct {
 func (action *ActionSessionTokenCreate) Prepare() *ActionSessionTokenCreateInvocation {
 	return &ActionSessionTokenCreateInvocation{
 		Action: action,
-		Path: "/v5.0/session_tokens",
+		Path: "/v6.0/session_tokens",
 	}
 }
 

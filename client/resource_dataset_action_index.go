@@ -238,7 +238,7 @@ type ActionDatasetIndexResponse struct {
 func (action *ActionDatasetIndex) Prepare() *ActionDatasetIndexInvocation {
 	return &ActionDatasetIndexInvocation{
 		Action: action,
-		Path: "/v5.0/datasets",
+		Path: "/v6.0/datasets",
 	}
 }
 

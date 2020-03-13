@@ -166,7 +166,7 @@ type ActionVpsStateLogIndexResponse struct {
 func (action *ActionVpsStateLogIndex) Prepare() *ActionVpsStateLogIndexInvocation {
 	return &ActionVpsStateLogIndexInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/state_logs",
+		Path: "/v6.0/vpses/{vps_id}/state_logs",
 	}
 }
 

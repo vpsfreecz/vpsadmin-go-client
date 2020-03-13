@@ -182,7 +182,7 @@ type ActionUserNamespaceMapEntryCreateResponse struct {
 func (action *ActionUserNamespaceMapEntryCreate) Prepare() *ActionUserNamespaceMapEntryCreateInvocation {
 	return &ActionUserNamespaceMapEntryCreateInvocation{
 		Action: action,
-		Path: "/v5.0/user_namespace_maps/{user_namespace_map_id}/entries",
+		Path: "/v6.0/user_namespace_maps/{user_namespace_map_id}/entries",
 	}
 }
 

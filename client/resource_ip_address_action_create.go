@@ -226,6 +226,7 @@ type ActionIpAddressCreateOutput struct {
 	MaxTx int64 `json:"max_tx"`
 	MaxRx int64 `json:"max_rx"`
 	ClassId int64 `json:"class_id"`
+	ChargedEnvironment *ActionEnvironmentShowOutput `json:"charged_environment"`
 }
 
 
@@ -247,7 +248,7 @@ type ActionIpAddressCreateResponse struct {
 func (action *ActionIpAddressCreate) Prepare() *ActionIpAddressCreateInvocation {
 	return &ActionIpAddressCreateInvocation{
 		Action: action,
-		Path: "/v5.0/ip_addresses",
+		Path: "/v6.0/ip_addresses",
 	}
 }
 

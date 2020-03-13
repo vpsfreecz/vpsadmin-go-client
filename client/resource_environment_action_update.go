@@ -73,6 +73,7 @@ func (in *ActionEnvironmentUpdateMetaGlobalInput) AnySelected() bool {
 // ActionEnvironmentUpdateInput is a type for action input parameters
 type ActionEnvironmentUpdateInput struct {
 	Label string `json:"label"`
+	Description string `json:"description"`
 	Domain string `json:"domain"`
 	CanCreateVps bool `json:"can_create_vps"`
 	CanDestroyVps bool `json:"can_destroy_vps"`
@@ -92,6 +93,17 @@ func (in *ActionEnvironmentUpdateInput) SetLabel(value string) *ActionEnvironmen
 	}
 
 	in._selectedParameters["Label"] = nil
+	return in
+}
+// SetDescription sets parameter Description to value and selects it for sending
+func (in *ActionEnvironmentUpdateInput) SetDescription(value string) *ActionEnvironmentUpdateInput {
+	in.Description = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Description"] = nil
 	return in
 }
 // SetDomain sets parameter Domain to value and selects it for sending
@@ -194,6 +206,7 @@ type ActionEnvironmentUpdateRequest struct {
 type ActionEnvironmentUpdateOutput struct {
 	Id int64 `json:"id"`
 	Label string `json:"label"`
+	Description string `json:"description"`
 	Domain string `json:"domain"`
 	CanCreateVps bool `json:"can_create_vps"`
 	CanDestroyVps bool `json:"can_destroy_vps"`
@@ -221,7 +234,7 @@ type ActionEnvironmentUpdateResponse struct {
 func (action *ActionEnvironmentUpdate) Prepare() *ActionEnvironmentUpdateInvocation {
 	return &ActionEnvironmentUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/environments/{environment_id}",
+		Path: "/v6.0/environments/{environment_id}",
 	}
 }
 
@@ -325,6 +338,9 @@ func (inv *ActionEnvironmentUpdateInvocation) makeInputParams() map[string]inter
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
+		}
+		if inv.IsParameterSelected("Description") {
+			ret["description"] = inv.Input.Description
 		}
 		if inv.IsParameterSelected("Domain") {
 			ret["domain"] = inv.Input.Domain

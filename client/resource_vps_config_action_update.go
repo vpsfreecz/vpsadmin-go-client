@@ -164,7 +164,7 @@ type ActionVpsConfigUpdateResponse struct {
 func (action *ActionVpsConfigUpdate) Prepare() *ActionVpsConfigUpdateInvocation {
 	return &ActionVpsConfigUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/vps_configs/{vps_config_id}",
+		Path: "/v6.0/vps_configs/{vps_config_id}",
 	}
 }
 

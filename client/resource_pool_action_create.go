@@ -307,7 +307,7 @@ type ActionPoolCreateResponse struct {
 func (action *ActionPoolCreate) Prepare() *ActionPoolCreateInvocation {
 	return &ActionPoolCreateInvocation{
 		Action: action,
-		Path: "/v5.0/pools",
+		Path: "/v6.0/pools",
 	}
 }
 

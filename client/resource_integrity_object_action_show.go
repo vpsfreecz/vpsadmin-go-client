@@ -107,7 +107,7 @@ type ActionIntegrityObjectShowResponse struct {
 func (action *ActionIntegrityObjectShow) Prepare() *ActionIntegrityObjectShowInvocation {
 	return &ActionIntegrityObjectShowInvocation{
 		Action: action,
-		Path: "/v5.0/integrity_objects/{integrity_object_id}",
+		Path: "/v6.0/integrity_objects/{integrity_object_id}",
 	}
 }
 

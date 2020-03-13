@@ -145,7 +145,7 @@ type ActionOutageHandlerUpdateResponse struct {
 func (action *ActionOutageHandlerUpdate) Prepare() *ActionOutageHandlerUpdateInvocation {
 	return &ActionOutageHandlerUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/outages/{outage_id}/handlers/{handler_id}",
+		Path: "/v6.0/outages/{outage_id}/handlers/{handler_id}",
 	}
 }
 

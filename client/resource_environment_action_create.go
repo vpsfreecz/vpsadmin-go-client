@@ -72,6 +72,7 @@ func (in *ActionEnvironmentCreateMetaGlobalInput) AnySelected() bool {
 // ActionEnvironmentCreateInput is a type for action input parameters
 type ActionEnvironmentCreateInput struct {
 	Label string `json:"label"`
+	Description string `json:"description"`
 	Domain string `json:"domain"`
 	CanCreateVps bool `json:"can_create_vps"`
 	CanDestroyVps bool `json:"can_destroy_vps"`
@@ -91,6 +92,17 @@ func (in *ActionEnvironmentCreateInput) SetLabel(value string) *ActionEnvironmen
 	}
 
 	in._selectedParameters["Label"] = nil
+	return in
+}
+// SetDescription sets parameter Description to value and selects it for sending
+func (in *ActionEnvironmentCreateInput) SetDescription(value string) *ActionEnvironmentCreateInput {
+	in.Description = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Description"] = nil
 	return in
 }
 // SetDomain sets parameter Domain to value and selects it for sending
@@ -193,6 +205,7 @@ type ActionEnvironmentCreateRequest struct {
 type ActionEnvironmentCreateOutput struct {
 	Id int64 `json:"id"`
 	Label string `json:"label"`
+	Description string `json:"description"`
 	Domain string `json:"domain"`
 	CanCreateVps bool `json:"can_create_vps"`
 	CanDestroyVps bool `json:"can_destroy_vps"`
@@ -220,7 +233,7 @@ type ActionEnvironmentCreateResponse struct {
 func (action *ActionEnvironmentCreate) Prepare() *ActionEnvironmentCreateInvocation {
 	return &ActionEnvironmentCreateInvocation{
 		Action: action,
-		Path: "/v5.0/environments",
+		Path: "/v6.0/environments",
 	}
 }
 
@@ -314,6 +327,9 @@ func (inv *ActionEnvironmentCreateInvocation) makeInputParams() map[string]inter
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
+		}
+		if inv.IsParameterSelected("Description") {
+			ret["description"] = inv.Input.Description
 		}
 		if inv.IsParameterSelected("Domain") {
 			ret["domain"] = inv.Input.Domain

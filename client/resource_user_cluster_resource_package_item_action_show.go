@@ -98,7 +98,7 @@ type ActionUserClusterResourcePackageItemShowResponse struct {
 func (action *ActionUserClusterResourcePackageItemShow) Prepare() *ActionUserClusterResourcePackageItemShowInvocation {
 	return &ActionUserClusterResourcePackageItemShowInvocation{
 		Action: action,
-		Path: "/v5.0/user_cluster_resource_packages/{user_cluster_resource_package_id}/items/{item_id}",
+		Path: "/v6.0/user_cluster_resource_packages/{user_cluster_resource_package_id}/items/{item_id}",
 	}
 }
 

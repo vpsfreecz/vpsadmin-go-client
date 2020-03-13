@@ -168,7 +168,7 @@ type ActionUserPublicKeyIndexResponse struct {
 func (action *ActionUserPublicKeyIndex) Prepare() *ActionUserPublicKeyIndexInvocation {
 	return &ActionUserPublicKeyIndexInvocation{
 		Action: action,
-		Path: "/v5.0/users/{user_id}/public_keys",
+		Path: "/v6.0/users/{user_id}/public_keys",
 	}
 }
 

@@ -220,7 +220,7 @@ type ActionOsTemplateCreateResponse struct {
 func (action *ActionOsTemplateCreate) Prepare() *ActionOsTemplateCreateInvocation {
 	return &ActionOsTemplateCreateInvocation{
 		Action: action,
-		Path: "/v5.0/os_templates",
+		Path: "/v6.0/os_templates",
 	}
 }
 

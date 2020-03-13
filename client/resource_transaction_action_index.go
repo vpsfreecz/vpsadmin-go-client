@@ -236,7 +236,7 @@ type ActionTransactionIndexResponse struct {
 func (action *ActionTransactionIndex) Prepare() *ActionTransactionIndexInvocation {
 	return &ActionTransactionIndexInvocation{
 		Action: action,
-		Path: "/v5.0/transactions",
+		Path: "/v6.0/transactions",
 	}
 }
 

@@ -130,7 +130,7 @@ type ActionUserTotpDeviceConfirmResponse struct {
 func (action *ActionUserTotpDeviceConfirm) Prepare() *ActionUserTotpDeviceConfirmInvocation {
 	return &ActionUserTotpDeviceConfirmInvocation{
 		Action: action,
-		Path: "/v5.0/users/{user_id}/totp_devices/{totp_device_id}/confirm",
+		Path: "/v6.0/users/{user_id}/totp_devices/{totp_device_id}/confirm",
 	}
 }
 

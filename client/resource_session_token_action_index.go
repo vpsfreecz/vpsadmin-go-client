@@ -180,7 +180,7 @@ type ActionSessionTokenIndexResponse struct {
 func (action *ActionSessionTokenIndex) Prepare() *ActionSessionTokenIndexInvocation {
 	return &ActionSessionTokenIndexInvocation{
 		Action: action,
-		Path: "/v5.0/session_tokens",
+		Path: "/v6.0/session_tokens",
 	}
 }
 

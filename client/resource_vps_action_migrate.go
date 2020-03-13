@@ -74,7 +74,8 @@ func (in *ActionVpsMigrateMetaGlobalInput) AnySelected() bool {
 type ActionVpsMigrateInput struct {
 	Node int64 `json:"node"`
 	ReplaceIpAddresses bool `json:"replace_ip_addresses"`
-	OutageWindow bool `json:"outage_window"`
+	TransferIpAddresses bool `json:"transfer_ip_addresses"`
+	MaintenanceWindow bool `json:"maintenance_window"`
 	CleanupData bool `json:"cleanup_data"`
 	SendMail bool `json:"send_mail"`
 	Reason string `json:"reason"`
@@ -104,15 +105,26 @@ func (in *ActionVpsMigrateInput) SetReplaceIpAddresses(value bool) *ActionVpsMig
 	in._selectedParameters["ReplaceIpAddresses"] = nil
 	return in
 }
-// SetOutageWindow sets parameter OutageWindow to value and selects it for sending
-func (in *ActionVpsMigrateInput) SetOutageWindow(value bool) *ActionVpsMigrateInput {
-	in.OutageWindow = value
+// SetTransferIpAddresses sets parameter TransferIpAddresses to value and selects it for sending
+func (in *ActionVpsMigrateInput) SetTransferIpAddresses(value bool) *ActionVpsMigrateInput {
+	in.TransferIpAddresses = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["OutageWindow"] = nil
+	in._selectedParameters["TransferIpAddresses"] = nil
+	return in
+}
+// SetMaintenanceWindow sets parameter MaintenanceWindow to value and selects it for sending
+func (in *ActionVpsMigrateInput) SetMaintenanceWindow(value bool) *ActionVpsMigrateInput {
+	in.MaintenanceWindow = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["MaintenanceWindow"] = nil
 	return in
 }
 // SetCleanupData sets parameter CleanupData to value and selects it for sending
@@ -200,7 +212,7 @@ type ActionVpsMigrateResponse struct {
 func (action *ActionVpsMigrate) Prepare() *ActionVpsMigrateInvocation {
 	return &ActionVpsMigrateInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/migrate",
+		Path: "/v6.0/vpses/{vps_id}/migrate",
 	}
 }
 
@@ -380,8 +392,11 @@ func (inv *ActionVpsMigrateInvocation) makeInputParams() map[string]interface{} 
 		if inv.IsParameterSelected("ReplaceIpAddresses") {
 			ret["replace_ip_addresses"] = inv.Input.ReplaceIpAddresses
 		}
-		if inv.IsParameterSelected("OutageWindow") {
-			ret["outage_window"] = inv.Input.OutageWindow
+		if inv.IsParameterSelected("TransferIpAddresses") {
+			ret["transfer_ip_addresses"] = inv.Input.TransferIpAddresses
+		}
+		if inv.IsParameterSelected("MaintenanceWindow") {
+			ret["maintenance_window"] = inv.Input.MaintenanceWindow
 		}
 		if inv.IsParameterSelected("CleanupData") {
 			ret["cleanup_data"] = inv.Input.CleanupData

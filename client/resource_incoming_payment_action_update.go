@@ -158,7 +158,7 @@ type ActionIncomingPaymentUpdateResponse struct {
 func (action *ActionIncomingPaymentUpdate) Prepare() *ActionIncomingPaymentUpdateInvocation {
 	return &ActionIncomingPaymentUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/incoming_payments/{incoming_payment_id}",
+		Path: "/v6.0/incoming_payments/{incoming_payment_id}",
 	}
 }
 

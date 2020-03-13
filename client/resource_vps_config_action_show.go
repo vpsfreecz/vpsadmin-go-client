@@ -99,7 +99,7 @@ type ActionVpsConfigShowResponse struct {
 func (action *ActionVpsConfigShow) Prepare() *ActionVpsConfigShowInvocation {
 	return &ActionVpsConfigShowInvocation{
 		Action: action,
-		Path: "/v5.0/vps_configs/{vps_config_id}",
+		Path: "/v6.0/vps_configs/{vps_config_id}",
 	}
 }
 

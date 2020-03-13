@@ -73,6 +73,7 @@ func (in *ActionLocationUpdateMetaGlobalInput) AnySelected() bool {
 // ActionLocationUpdateInput is a type for action input parameters
 type ActionLocationUpdateInput struct {
 	Label string `json:"label"`
+	Description string `json:"description"`
 	HasIpv6 bool `json:"has_ipv6"`
 	VpsOnboot bool `json:"vps_onboot"`
 	RemoteConsoleServer string `json:"remote_console_server"`
@@ -91,6 +92,17 @@ func (in *ActionLocationUpdateInput) SetLabel(value string) *ActionLocationUpdat
 	}
 
 	in._selectedParameters["Label"] = nil
+	return in
+}
+// SetDescription sets parameter Description to value and selects it for sending
+func (in *ActionLocationUpdateInput) SetDescription(value string) *ActionLocationUpdateInput {
+	in.Description = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Description"] = nil
 	return in
 }
 // SetHasIpv6 sets parameter HasIpv6 to value and selects it for sending
@@ -191,7 +203,7 @@ type ActionLocationUpdateResponse struct {
 func (action *ActionLocationUpdate) Prepare() *ActionLocationUpdateInvocation {
 	return &ActionLocationUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/locations/{location_id}",
+		Path: "/v6.0/locations/{location_id}",
 	}
 }
 
@@ -292,6 +304,9 @@ func (inv *ActionLocationUpdateInvocation) makeInputParams() map[string]interfac
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
+		}
+		if inv.IsParameterSelected("Description") {
+			ret["description"] = inv.Input.Description
 		}
 		if inv.IsParameterSelected("HasIpv6") {
 			ret["has_ipv6"] = inv.Input.HasIpv6

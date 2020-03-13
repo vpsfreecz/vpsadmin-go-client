@@ -309,7 +309,7 @@ type ActionUserRequestRegistrationCreateResponse struct {
 func (action *ActionUserRequestRegistrationCreate) Prepare() *ActionUserRequestRegistrationCreateInvocation {
 	return &ActionUserRequestRegistrationCreateInvocation{
 		Action: action,
-		Path: "/v5.0/user_request/registrations",
+		Path: "/v6.0/user_request/registrations",
 	}
 }
 

@@ -201,7 +201,7 @@ type ActionHelpBoxIndexResponse struct {
 func (action *ActionHelpBoxIndex) Prepare() *ActionHelpBoxIndexInvocation {
 	return &ActionHelpBoxIndexInvocation{
 		Action: action,
-		Path: "/v5.0/help_boxes",
+		Path: "/v6.0/help_boxes",
 	}
 }
 

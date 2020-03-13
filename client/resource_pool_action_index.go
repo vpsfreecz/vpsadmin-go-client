@@ -334,7 +334,7 @@ type ActionPoolIndexResponse struct {
 func (action *ActionPoolIndex) Prepare() *ActionPoolIndexInvocation {
 	return &ActionPoolIndexInvocation{
 		Action: action,
-		Path: "/v5.0/pools",
+		Path: "/v6.0/pools",
 	}
 }
 

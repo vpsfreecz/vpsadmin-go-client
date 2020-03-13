@@ -309,7 +309,7 @@ type ActionDatasetCreateResponse struct {
 func (action *ActionDatasetCreate) Prepare() *ActionDatasetCreateInvocation {
 	return &ActionDatasetCreateInvocation{
 		Action: action,
-		Path: "/v5.0/datasets",
+		Path: "/v6.0/datasets",
 	}
 }
 

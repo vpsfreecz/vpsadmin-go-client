@@ -98,7 +98,7 @@ type ActionDatasetSnapshotRollbackResponse struct {
 func (action *ActionDatasetSnapshotRollback) Prepare() *ActionDatasetSnapshotRollbackInvocation {
 	return &ActionDatasetSnapshotRollbackInvocation{
 		Action: action,
-		Path: "/v5.0/datasets/{dataset_id}/snapshots/{snapshot_id}/rollback",
+		Path: "/v6.0/datasets/{dataset_id}/snapshots/{snapshot_id}/rollback",
 	}
 }
 

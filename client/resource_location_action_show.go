@@ -76,6 +76,7 @@ func (in *ActionLocationShowMetaGlobalInput) AnySelected() bool {
 type ActionLocationShowOutput struct {
 	Id int64 `json:"id"`
 	Label string `json:"label"`
+	Description string `json:"description"`
 	HasIpv6 bool `json:"has_ipv6"`
 	VpsOnboot bool `json:"vps_onboot"`
 	RemoteConsoleServer string `json:"remote_console_server"`
@@ -104,7 +105,7 @@ type ActionLocationShowResponse struct {
 func (action *ActionLocationShow) Prepare() *ActionLocationShowInvocation {
 	return &ActionLocationShowInvocation{
 		Action: action,
-		Path: "/v5.0/locations/{location_id}",
+		Path: "/v6.0/locations/{location_id}",
 	}
 }
 

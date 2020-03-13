@@ -236,7 +236,7 @@ type ActionVpsFeatureUpdateAllResponse struct {
 func (action *ActionVpsFeatureUpdateAll) Prepare() *ActionVpsFeatureUpdateAllInvocation {
 	return &ActionVpsFeatureUpdateAllInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/features/update_all",
+		Path: "/v6.0/vpses/{vps_id}/features/update_all",
 	}
 }
 

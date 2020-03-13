@@ -85,6 +85,7 @@ type ActionIpAddressShowOutput struct {
 	MaxTx int64 `json:"max_tx"`
 	MaxRx int64 `json:"max_rx"`
 	ClassId int64 `json:"class_id"`
+	ChargedEnvironment *ActionEnvironmentShowOutput `json:"charged_environment"`
 }
 
 
@@ -106,7 +107,7 @@ type ActionIpAddressShowResponse struct {
 func (action *ActionIpAddressShow) Prepare() *ActionIpAddressShowInvocation {
 	return &ActionIpAddressShowInvocation{
 		Action: action,
-		Path: "/v5.0/ip_addresses/{ip_address_id}",
+		Path: "/v6.0/ip_addresses/{ip_address_id}",
 	}
 }
 

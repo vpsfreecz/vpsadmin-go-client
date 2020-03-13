@@ -183,7 +183,7 @@ type ActionMailTemplateCreateResponse struct {
 func (action *ActionMailTemplateCreate) Prepare() *ActionMailTemplateCreateInvocation {
 	return &ActionMailTemplateCreateInvocation{
 		Action: action,
-		Path: "/v5.0/mail_templates",
+		Path: "/v6.0/mail_templates",
 	}
 }
 

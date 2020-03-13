@@ -174,7 +174,7 @@ type ActionVpsConfigCreateResponse struct {
 func (action *ActionVpsConfigCreate) Prepare() *ActionVpsConfigCreateInvocation {
 	return &ActionVpsConfigCreateInvocation{
 		Action: action,
-		Path: "/v5.0/vps_configs",
+		Path: "/v6.0/vps_configs",
 	}
 }
 

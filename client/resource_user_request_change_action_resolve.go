@@ -191,7 +191,7 @@ type ActionUserRequestChangeResolveResponse struct {
 func (action *ActionUserRequestChangeResolve) Prepare() *ActionUserRequestChangeResolveInvocation {
 	return &ActionUserRequestChangeResolveInvocation{
 		Action: action,
-		Path: "/v5.0/user_request/changes/{change_id}/resolve",
+		Path: "/v6.0/user_request/changes/{change_id}/resolve",
 	}
 }
 

@@ -331,7 +331,7 @@ type ActionHostIpAddressIndexResponse struct {
 func (action *ActionHostIpAddressIndex) Prepare() *ActionHostIpAddressIndexInvocation {
 	return &ActionHostIpAddressIndexInvocation{
 		Action: action,
-		Path: "/v5.0/host_ip_addresses",
+		Path: "/v6.0/host_ip_addresses",
 	}
 }
 

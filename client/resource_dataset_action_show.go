@@ -114,7 +114,7 @@ type ActionDatasetShowResponse struct {
 func (action *ActionDatasetShow) Prepare() *ActionDatasetShowInvocation {
 	return &ActionDatasetShowInvocation{
 		Action: action,
-		Path: "/v5.0/datasets/{dataset_id}",
+		Path: "/v6.0/datasets/{dataset_id}",
 	}
 }
 

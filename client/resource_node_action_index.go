@@ -88,6 +88,7 @@ type ActionNodeIndexInput struct {
 	Location int64 `json:"location"`
 	Environment int64 `json:"environment"`
 	Type string `json:"type"`
+	HypervisorType string `json:"hypervisor_type"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -145,6 +146,17 @@ func (in *ActionNodeIndexInput) SetType(value string) *ActionNodeIndexInput {
 	}
 
 	in._selectedParameters["Type"] = nil
+	return in
+}
+// SetHypervisorType sets parameter HypervisorType to value and selects it for sending
+func (in *ActionNodeIndexInput) SetHypervisorType(value string) *ActionNodeIndexInput {
+	in.HypervisorType = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["HypervisorType"] = nil
 	return in
 }
 
@@ -232,7 +244,7 @@ type ActionNodeIndexResponse struct {
 func (action *ActionNodeIndex) Prepare() *ActionNodeIndexInvocation {
 	return &ActionNodeIndexInvocation{
 		Action: action,
-		Path: "/v5.0/nodes",
+		Path: "/v6.0/nodes",
 	}
 }
 
@@ -329,6 +341,9 @@ func (inv *ActionNodeIndexInvocation) convertInputToQueryParams(ret map[string]s
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["node[type]"] = inv.Input.Type
+		}
+		if inv.IsParameterSelected("HypervisorType") {
+			ret["node[hypervisor_type]"] = inv.Input.HypervisorType
 		}
 	}
 }

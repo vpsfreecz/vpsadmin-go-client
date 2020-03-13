@@ -192,7 +192,7 @@ type ActionUserTotpDeviceIndexResponse struct {
 func (action *ActionUserTotpDeviceIndex) Prepare() *ActionUserTotpDeviceIndexInvocation {
 	return &ActionUserTotpDeviceIndexInvocation{
 		Action: action,
-		Path: "/v5.0/users/{user_id}/totp_devices",
+		Path: "/v6.0/users/{user_id}/totp_devices",
 	}
 }
 

@@ -164,7 +164,7 @@ type ActionOutageEntityIndexResponse struct {
 func (action *ActionOutageEntityIndex) Prepare() *ActionOutageEntityIndexInvocation {
 	return &ActionOutageEntityIndexInvocation{
 		Action: action,
-		Path: "/v5.0/outages/{outage_id}/entities",
+		Path: "/v6.0/outages/{outage_id}/entities",
 	}
 }
 

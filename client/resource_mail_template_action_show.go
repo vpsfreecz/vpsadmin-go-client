@@ -102,7 +102,7 @@ type ActionMailTemplateShowResponse struct {
 func (action *ActionMailTemplateShow) Prepare() *ActionMailTemplateShowInvocation {
 	return &ActionMailTemplateShowInvocation{
 		Action: action,
-		Path: "/v5.0/mail_templates/{mail_template_id}",
+		Path: "/v6.0/mail_templates/{mail_template_id}",
 	}
 }
 

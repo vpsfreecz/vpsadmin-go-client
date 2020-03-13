@@ -109,7 +109,7 @@ type ActionHostIpAddressFreeResponse struct {
 func (action *ActionHostIpAddressFree) Prepare() *ActionHostIpAddressFreeInvocation {
 	return &ActionHostIpAddressFreeInvocation{
 		Action: action,
-		Path: "/v5.0/host_ip_addresses/{host_ip_address_id}/free",
+		Path: "/v6.0/host_ip_addresses/{host_ip_address_id}/free",
 	}
 }
 

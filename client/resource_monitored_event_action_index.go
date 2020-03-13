@@ -242,7 +242,7 @@ type ActionMonitoredEventIndexResponse struct {
 func (action *ActionMonitoredEventIndex) Prepare() *ActionMonitoredEventIndexInvocation {
 	return &ActionMonitoredEventIndexInvocation{
 		Action: action,
-		Path: "/v5.0/monitored_events",
+		Path: "/v6.0/monitored_events",
 	}
 }
 

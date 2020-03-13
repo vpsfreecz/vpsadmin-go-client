@@ -114,7 +114,7 @@ type ActionPoolShowResponse struct {
 func (action *ActionPoolShow) Prepare() *ActionPoolShowInvocation {
 	return &ActionPoolShowInvocation{
 		Action: action,
-		Path: "/v5.0/pools/{pool_id}",
+		Path: "/v6.0/pools/{pool_id}",
 	}
 }
 

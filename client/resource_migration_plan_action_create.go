@@ -185,7 +185,7 @@ type ActionMigrationPlanCreateResponse struct {
 func (action *ActionMigrationPlanCreate) Prepare() *ActionMigrationPlanCreateInvocation {
 	return &ActionMigrationPlanCreateInvocation{
 		Action: action,
-		Path: "/v5.0/migration_plans",
+		Path: "/v6.0/migration_plans",
 	}
 }
 

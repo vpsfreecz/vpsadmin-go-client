@@ -100,7 +100,7 @@ type ActionMailRecipientShowResponse struct {
 func (action *ActionMailRecipientShow) Prepare() *ActionMailRecipientShowInvocation {
 	return &ActionMailRecipientShowInvocation{
 		Action: action,
-		Path: "/v5.0/mail_recipients/{mail_recipient_id}",
+		Path: "/v6.0/mail_recipients/{mail_recipient_id}",
 	}
 }
 

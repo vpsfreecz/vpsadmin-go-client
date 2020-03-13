@@ -114,7 +114,7 @@ type ActionVpsStatusShowResponse struct {
 func (action *ActionVpsStatusShow) Prepare() *ActionVpsStatusShowInvocation {
 	return &ActionVpsStatusShowInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/statuses/{status_id}",
+		Path: "/v6.0/vpses/{vps_id}/statuses/{status_id}",
 	}
 }
 

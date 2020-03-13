@@ -250,7 +250,7 @@ type ActionIntegrityFactIndexResponse struct {
 func (action *ActionIntegrityFactIndex) Prepare() *ActionIntegrityFactIndexInvocation {
 	return &ActionIntegrityFactIndexInvocation{
 		Action: action,
-		Path: "/v5.0/integrity_facts",
+		Path: "/v6.0/integrity_facts",
 	}
 }
 

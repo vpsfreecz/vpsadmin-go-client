@@ -192,7 +192,7 @@ type ActionMigrationPlanIndexResponse struct {
 func (action *ActionMigrationPlanIndex) Prepare() *ActionMigrationPlanIndexInvocation {
 	return &ActionMigrationPlanIndexInvocation{
 		Action: action,
-		Path: "/v5.0/migration_plans",
+		Path: "/v6.0/migration_plans",
 	}
 }
 

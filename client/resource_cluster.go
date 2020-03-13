@@ -15,6 +15,8 @@ type ResourceCluster struct {
 	FullStats *ActionClusterFullStats
 	// Action Cluster#Search
 	Search *ActionClusterSearch
+	// Action Cluster#Authorize_migration_keys
+	AuthorizeMigrationKeys *ActionClusterAuthorizeMigrationKeys
 	// Action Cluster#Set_maintenance
 	SetMaintenance *ActionClusterSetMaintenance
 }
@@ -24,6 +26,7 @@ func NewResourceCluster(client *Client) *ResourceCluster {
 	actionPublicStats := NewActionClusterPublicStats(client)
 	actionFullStats := NewActionClusterFullStats(client)
 	actionSearch := NewActionClusterSearch(client)
+	actionAuthorizeMigrationKeys := NewActionClusterAuthorizeMigrationKeys(client)
 	actionSetMaintenance := NewActionClusterSetMaintenance(client)
 
 	return &ResourceCluster{
@@ -33,6 +36,7 @@ func NewResourceCluster(client *Client) *ResourceCluster {
 		PublicStats: actionPublicStats,
 		FullStats: actionFullStats,
 		Search: actionSearch,
+		AuthorizeMigrationKeys: actionAuthorizeMigrationKeys,
 		SetMaintenance: actionSetMaintenance,
 	}
 }

@@ -91,6 +91,7 @@ type ActionIpAddressIndexInput struct {
 	Network int64 `json:"network"`
 	Location int64 `json:"location"`
 	User int64 `json:"user"`
+	AssignedToInterface bool `json:"assigned_to_interface"`
 	Role string `json:"role"`
 	Purpose string `json:"purpose"`
 	Addr string `json:"addr"`
@@ -188,6 +189,17 @@ func (in *ActionIpAddressIndexInput) SetUser(value int64) *ActionIpAddressIndexI
 	}
 
 	in._selectedParameters["User"] = nil
+	return in
+}
+// SetAssignedToInterface sets parameter AssignedToInterface to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetAssignedToInterface(value bool) *ActionIpAddressIndexInput {
+	in.AssignedToInterface = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AssignedToInterface"] = nil
 	return in
 }
 // SetRole sets parameter Role to value and selects it for sending
@@ -305,6 +317,7 @@ type ActionIpAddressIndexOutput struct {
 	MaxTx int64 `json:"max_tx"`
 	MaxRx int64 `json:"max_rx"`
 	ClassId int64 `json:"class_id"`
+	ChargedEnvironment *ActionEnvironmentShowOutput `json:"charged_environment"`
 }
 
 
@@ -326,7 +339,7 @@ type ActionIpAddressIndexResponse struct {
 func (action *ActionIpAddressIndex) Prepare() *ActionIpAddressIndexInvocation {
 	return &ActionIpAddressIndexInvocation{
 		Action: action,
-		Path: "/v5.0/ip_addresses",
+		Path: "/v6.0/ip_addresses",
 	}
 }
 
@@ -432,6 +445,9 @@ func (inv *ActionIpAddressIndexInvocation) convertInputToQueryParams(ret map[str
 		}
 		if inv.IsParameterSelected("User") {
 			ret["ip_address[user]"] = convertInt64ToString(inv.Input.User)
+		}
+		if inv.IsParameterSelected("AssignedToInterface") {
+			ret["ip_address[assigned_to_interface]"] = convertBoolToString(inv.Input.AssignedToInterface)
 		}
 		if inv.IsParameterSelected("Role") {
 			ret["ip_address[role]"] = inv.Input.Role

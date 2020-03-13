@@ -140,7 +140,7 @@ type ActionVpsDeployPublicKeyResponse struct {
 func (action *ActionVpsDeployPublicKey) Prepare() *ActionVpsDeployPublicKeyInvocation {
 	return &ActionVpsDeployPublicKeyInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/deploy_public_key",
+		Path: "/v6.0/vpses/{vps_id}/deploy_public_key",
 	}
 }
 

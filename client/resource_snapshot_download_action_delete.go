@@ -98,7 +98,7 @@ type ActionSnapshotDownloadDeleteResponse struct {
 func (action *ActionSnapshotDownloadDelete) Prepare() *ActionSnapshotDownloadDeleteInvocation {
 	return &ActionSnapshotDownloadDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/snapshot_downloads/{snapshot_download_id}",
+		Path: "/v6.0/snapshot_downloads/{snapshot_download_id}",
 	}
 }
 

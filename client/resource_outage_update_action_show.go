@@ -109,7 +109,7 @@ type ActionOutageUpdateShowResponse struct {
 func (action *ActionOutageUpdateShow) Prepare() *ActionOutageUpdateShowInvocation {
 	return &ActionOutageUpdateShowInvocation{
 		Action: action,
-		Path: "/v5.0/outage_updates/{outage_update_id}",
+		Path: "/v6.0/outage_updates/{outage_update_id}",
 	}
 }
 

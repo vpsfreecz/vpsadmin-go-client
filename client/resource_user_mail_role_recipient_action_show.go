@@ -99,7 +99,7 @@ type ActionUserMailRoleRecipientShowResponse struct {
 func (action *ActionUserMailRoleRecipientShow) Prepare() *ActionUserMailRoleRecipientShowInvocation {
 	return &ActionUserMailRoleRecipientShowInvocation{
 		Action: action,
-		Path: "/v5.0/users/{user_id}/mail_role_recipients/{mail_role_recipient_id}",
+		Path: "/v6.0/users/{user_id}/mail_role_recipients/{mail_role_recipient_id}",
 	}
 }
 

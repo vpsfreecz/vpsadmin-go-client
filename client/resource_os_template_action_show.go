@@ -103,7 +103,7 @@ type ActionOsTemplateShowResponse struct {
 func (action *ActionOsTemplateShow) Prepare() *ActionOsTemplateShowInvocation {
 	return &ActionOsTemplateShowInvocation{
 		Action: action,
-		Path: "/v5.0/os_templates/{os_template_id}",
+		Path: "/v6.0/os_templates/{os_template_id}",
 	}
 }
 

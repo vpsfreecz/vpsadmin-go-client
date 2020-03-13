@@ -99,7 +99,7 @@ type ActionDatasetPropertyHistoryShowResponse struct {
 func (action *ActionDatasetPropertyHistoryShow) Prepare() *ActionDatasetPropertyHistoryShowInvocation {
 	return &ActionDatasetPropertyHistoryShowInvocation{
 		Action: action,
-		Path: "/v5.0/datasets/{dataset_id}/property_history/{property_history_id}",
+		Path: "/v6.0/datasets/{dataset_id}/property_history/{property_history_id}",
 	}
 }
 

@@ -98,7 +98,7 @@ type ActionVpsStopResponse struct {
 func (action *ActionVpsStop) Prepare() *ActionVpsStopInvocation {
 	return &ActionVpsStopInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/stop",
+		Path: "/v6.0/vpses/{vps_id}/stop",
 	}
 }
 

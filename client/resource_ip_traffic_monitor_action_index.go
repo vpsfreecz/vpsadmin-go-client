@@ -326,7 +326,7 @@ type ActionIpTrafficMonitorIndexResponse struct {
 func (action *ActionIpTrafficMonitorIndex) Prepare() *ActionIpTrafficMonitorIndexInvocation {
 	return &ActionIpTrafficMonitorIndexInvocation{
 		Action: action,
-		Path: "/v5.0/ip_traffic_monitors",
+		Path: "/v6.0/ip_traffic_monitors",
 	}
 }
 

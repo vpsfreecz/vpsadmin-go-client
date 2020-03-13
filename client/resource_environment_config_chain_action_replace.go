@@ -131,7 +131,7 @@ type ActionEnvironmentConfigChainReplaceResponse struct {
 func (action *ActionEnvironmentConfigChainReplace) Prepare() *ActionEnvironmentConfigChainReplaceInvocation {
 	return &ActionEnvironmentConfigChainReplaceInvocation{
 		Action: action,
-		Path: "/v5.0/environments/{environment_id}/config_chains/replace",
+		Path: "/v6.0/environments/{environment_id}/config_chains/replace",
 	}
 }
 

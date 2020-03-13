@@ -188,7 +188,7 @@ type ActionExportIndexResponse struct {
 func (action *ActionExportIndex) Prepare() *ActionExportIndexInvocation {
 	return &ActionExportIndexInvocation{
 		Action: action,
-		Path: "/v5.0/exports",
+		Path: "/v6.0/exports",
 	}
 }
 

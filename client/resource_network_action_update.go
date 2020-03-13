@@ -73,7 +73,6 @@ func (in *ActionNetworkUpdateMetaGlobalInput) AnySelected() bool {
 // ActionNetworkUpdateInput is a type for action input parameters
 type ActionNetworkUpdateInput struct {
 	Label string `json:"label"`
-	Location int64 `json:"location"`
 	IpVersion int64 `json:"ip_version"`
 	Address string `json:"address"`
 	Prefix int64 `json:"prefix"`
@@ -96,17 +95,6 @@ func (in *ActionNetworkUpdateInput) SetLabel(value string) *ActionNetworkUpdateI
 	}
 
 	in._selectedParameters["Label"] = nil
-	return in
-}
-// SetLocation sets parameter Location to value and selects it for sending
-func (in *ActionNetworkUpdateInput) SetLocation(value int64) *ActionNetworkUpdateInput {
-	in.Location = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Location"] = nil
 	return in
 }
 // SetIpVersion sets parameter IpVersion to value and selects it for sending
@@ -242,7 +230,6 @@ type ActionNetworkUpdateRequest struct {
 type ActionNetworkUpdateOutput struct {
 	Id int64 `json:"id"`
 	Label string `json:"label"`
-	Location *ActionLocationShowOutput `json:"location"`
 	IpVersion int64 `json:"ip_version"`
 	Address string `json:"address"`
 	Prefix int64 `json:"prefix"`
@@ -277,7 +264,7 @@ type ActionNetworkUpdateResponse struct {
 func (action *ActionNetworkUpdate) Prepare() *ActionNetworkUpdateInvocation {
 	return &ActionNetworkUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/networks/{network_id}",
+		Path: "/v6.0/networks/{network_id}",
 	}
 }
 
@@ -381,9 +368,6 @@ func (inv *ActionNetworkUpdateInvocation) makeInputParams() map[string]interface
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
-		}
-		if inv.IsParameterSelected("Location") {
-			ret["location"] = inv.Input.Location
 		}
 		if inv.IsParameterSelected("IpVersion") {
 			ret["ip_version"] = inv.Input.IpVersion

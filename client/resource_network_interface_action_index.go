@@ -200,7 +200,7 @@ type ActionNetworkInterfaceIndexResponse struct {
 func (action *ActionNetworkInterfaceIndex) Prepare() *ActionNetworkInterfaceIndexInvocation {
 	return &ActionNetworkInterfaceIndexInvocation{
 		Action: action,
-		Path: "/v5.0/network_interfaces",
+		Path: "/v6.0/network_interfaces",
 	}
 }
 

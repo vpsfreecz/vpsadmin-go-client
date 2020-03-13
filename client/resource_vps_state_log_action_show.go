@@ -101,7 +101,7 @@ type ActionVpsStateLogShowResponse struct {
 func (action *ActionVpsStateLogShow) Prepare() *ActionVpsStateLogShowInvocation {
 	return &ActionVpsStateLogShowInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/state_logs/{state_log_id}",
+		Path: "/v6.0/vpses/{vps_id}/state_logs/{state_log_id}",
 	}
 }
 

@@ -89,7 +89,7 @@ type ActionUserTotpDeviceDeleteResponse struct {
 func (action *ActionUserTotpDeviceDelete) Prepare() *ActionUserTotpDeviceDeleteInvocation {
 	return &ActionUserTotpDeviceDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/users/{user_id}/totp_devices/{totp_device_id}",
+		Path: "/v6.0/users/{user_id}/totp_devices/{totp_device_id}",
 	}
 }
 

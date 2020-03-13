@@ -103,7 +103,7 @@ type ActionUserPublicKeyShowResponse struct {
 func (action *ActionUserPublicKeyShow) Prepare() *ActionUserPublicKeyShowInvocation {
 	return &ActionUserPublicKeyShowInvocation{
 		Action: action,
-		Path: "/v5.0/users/{user_id}/public_keys/{public_key_id}",
+		Path: "/v6.0/users/{user_id}/public_keys/{public_key_id}",
 	}
 }
 

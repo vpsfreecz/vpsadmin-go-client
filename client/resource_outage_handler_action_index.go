@@ -164,7 +164,7 @@ type ActionOutageHandlerIndexResponse struct {
 func (action *ActionOutageHandlerIndex) Prepare() *ActionOutageHandlerIndexInvocation {
 	return &ActionOutageHandlerIndexInvocation{
 		Action: action,
-		Path: "/v5.0/outages/{outage_id}/handlers",
+		Path: "/v6.0/outages/{outage_id}/handlers",
 	}
 }
 

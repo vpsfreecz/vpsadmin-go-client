@@ -72,7 +72,6 @@ func (in *ActionNetworkCreateMetaGlobalInput) AnySelected() bool {
 // ActionNetworkCreateInput is a type for action input parameters
 type ActionNetworkCreateInput struct {
 	Label string `json:"label"`
-	Location int64 `json:"location"`
 	IpVersion int64 `json:"ip_version"`
 	Address string `json:"address"`
 	Prefix int64 `json:"prefix"`
@@ -96,17 +95,6 @@ func (in *ActionNetworkCreateInput) SetLabel(value string) *ActionNetworkCreateI
 	}
 
 	in._selectedParameters["Label"] = nil
-	return in
-}
-// SetLocation sets parameter Location to value and selects it for sending
-func (in *ActionNetworkCreateInput) SetLocation(value int64) *ActionNetworkCreateInput {
-	in.Location = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Location"] = nil
 	return in
 }
 // SetIpVersion sets parameter IpVersion to value and selects it for sending
@@ -253,7 +241,6 @@ type ActionNetworkCreateRequest struct {
 type ActionNetworkCreateOutput struct {
 	Id int64 `json:"id"`
 	Label string `json:"label"`
-	Location *ActionLocationShowOutput `json:"location"`
 	IpVersion int64 `json:"ip_version"`
 	Address string `json:"address"`
 	Prefix int64 `json:"prefix"`
@@ -294,7 +281,7 @@ type ActionNetworkCreateResponse struct {
 func (action *ActionNetworkCreate) Prepare() *ActionNetworkCreateInvocation {
 	return &ActionNetworkCreateInvocation{
 		Action: action,
-		Path: "/v5.0/networks",
+		Path: "/v6.0/networks",
 	}
 }
 
@@ -463,9 +450,6 @@ func (inv *ActionNetworkCreateInvocation) makeInputParams() map[string]interface
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
-		}
-		if inv.IsParameterSelected("Location") {
-			ret["location"] = inv.Input.Location
 		}
 		if inv.IsParameterSelected("IpVersion") {
 			ret["ip_version"] = inv.Input.IpVersion

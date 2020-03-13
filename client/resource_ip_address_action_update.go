@@ -75,6 +75,7 @@ type ActionIpAddressUpdateInput struct {
 	MaxTx int64 `json:"max_tx"`
 	MaxRx int64 `json:"max_rx"`
 	User int64 `json:"user"`
+	Environment int64 `json:"environment"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -110,6 +111,17 @@ func (in *ActionIpAddressUpdateInput) SetUser(value int64) *ActionIpAddressUpdat
 	}
 
 	in._selectedParameters["User"] = nil
+	return in
+}
+// SetEnvironment sets parameter Environment to value and selects it for sending
+func (in *ActionIpAddressUpdateInput) SetEnvironment(value int64) *ActionIpAddressUpdateInput {
+	in.Environment = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Environment"] = nil
 	return in
 }
 
@@ -155,6 +167,7 @@ type ActionIpAddressUpdateOutput struct {
 	MaxTx int64 `json:"max_tx"`
 	MaxRx int64 `json:"max_rx"`
 	ClassId int64 `json:"class_id"`
+	ChargedEnvironment *ActionEnvironmentShowOutput `json:"charged_environment"`
 }
 
 // ActionIpAddressUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -182,7 +195,7 @@ type ActionIpAddressUpdateResponse struct {
 func (action *ActionIpAddressUpdate) Prepare() *ActionIpAddressUpdateInvocation {
 	return &ActionIpAddressUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/ip_addresses/{ip_address_id}",
+		Path: "/v6.0/ip_addresses/{ip_address_id}",
 	}
 }
 
@@ -367,6 +380,9 @@ func (inv *ActionIpAddressUpdateInvocation) makeInputParams() map[string]interfa
 		}
 		if inv.IsParameterSelected("User") {
 			ret["user"] = inv.Input.User
+		}
+		if inv.IsParameterSelected("Environment") {
+			ret["environment"] = inv.Input.Environment
 		}
 	}
 

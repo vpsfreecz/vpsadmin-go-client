@@ -89,7 +89,7 @@ type ActionOutageEntityDeleteResponse struct {
 func (action *ActionOutageEntityDelete) Prepare() *ActionOutageEntityDeleteInvocation {
 	return &ActionOutageEntityDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/outages/{outage_id}/entities/{entity_id}",
+		Path: "/v6.0/outages/{outage_id}/entities/{entity_id}",
 	}
 }
 

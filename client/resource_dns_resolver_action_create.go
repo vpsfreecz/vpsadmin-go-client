@@ -181,7 +181,7 @@ type ActionDnsResolverCreateResponse struct {
 func (action *ActionDnsResolverCreate) Prepare() *ActionDnsResolverCreateInvocation {
 	return &ActionDnsResolverCreateInvocation{
 		Action: action,
-		Path: "/v5.0/dns_resolvers",
+		Path: "/v6.0/dns_resolvers",
 	}
 }
 

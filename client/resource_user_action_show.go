@@ -112,7 +112,7 @@ type ActionUserShowResponse struct {
 func (action *ActionUserShow) Prepare() *ActionUserShowInvocation {
 	return &ActionUserShowInvocation{
 		Action: action,
-		Path: "/v5.0/users/{user_id}",
+		Path: "/v6.0/users/{user_id}",
 	}
 }
 

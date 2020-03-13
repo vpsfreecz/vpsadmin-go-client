@@ -349,7 +349,7 @@ type ActionNodeCreateResponse struct {
 func (action *ActionNodeCreate) Prepare() *ActionNodeCreateInvocation {
 	return &ActionNodeCreateInvocation{
 		Action: action,
-		Path: "/v5.0/nodes",
+		Path: "/v6.0/nodes",
 	}
 }
 

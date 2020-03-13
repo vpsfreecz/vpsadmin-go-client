@@ -89,6 +89,7 @@ type ActionIpAddressFreeOutput struct {
 	MaxTx int64 `json:"max_tx"`
 	MaxRx int64 `json:"max_rx"`
 	ClassId int64 `json:"class_id"`
+	ChargedEnvironment *ActionEnvironmentShowOutput `json:"charged_environment"`
 }
 
 // ActionIpAddressFreeMetaGlobalOutput is a type for global output metadata parameters
@@ -116,7 +117,7 @@ type ActionIpAddressFreeResponse struct {
 func (action *ActionIpAddressFree) Prepare() *ActionIpAddressFreeInvocation {
 	return &ActionIpAddressFreeInvocation{
 		Action: action,
-		Path: "/v5.0/ip_addresses/{ip_address_id}/free",
+		Path: "/v6.0/ip_addresses/{ip_address_id}/free",
 	}
 }
 

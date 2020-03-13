@@ -165,7 +165,7 @@ type ActionClusterResourceIndexResponse struct {
 func (action *ActionClusterResourceIndex) Prepare() *ActionClusterResourceIndexInvocation {
 	return &ActionClusterResourceIndexInvocation{
 		Action: action,
-		Path: "/v5.0/cluster_resources",
+		Path: "/v6.0/cluster_resources",
 	}
 }
 

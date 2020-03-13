@@ -100,7 +100,7 @@ type ActionUserNamespaceMapEntryShowResponse struct {
 func (action *ActionUserNamespaceMapEntryShow) Prepare() *ActionUserNamespaceMapEntryShowInvocation {
 	return &ActionUserNamespaceMapEntryShowInvocation{
 		Action: action,
-		Path: "/v5.0/user_namespace_maps/{user_namespace_map_id}/entries/{entry_id}",
+		Path: "/v6.0/user_namespace_maps/{user_namespace_map_id}/entries/{entry_id}",
 	}
 }
 

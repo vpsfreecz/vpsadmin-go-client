@@ -119,7 +119,7 @@ type ActionNodeStatusShowResponse struct {
 func (action *ActionNodeStatusShow) Prepare() *ActionNodeStatusShowInvocation {
 	return &ActionNodeStatusShowInvocation{
 		Action: action,
-		Path: "/v5.0/nodes/{node_id}/statuses/{status_id}",
+		Path: "/v6.0/nodes/{node_id}/statuses/{status_id}",
 	}
 }
 

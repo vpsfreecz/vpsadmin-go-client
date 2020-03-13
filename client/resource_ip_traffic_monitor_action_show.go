@@ -154,7 +154,7 @@ type ActionIpTrafficMonitorShowResponse struct {
 func (action *ActionIpTrafficMonitorShow) Prepare() *ActionIpTrafficMonitorShowInvocation {
 	return &ActionIpTrafficMonitorShowInvocation{
 		Action: action,
-		Path: "/v5.0/ip_traffic_monitors/{ip_traffic_monitor_id}",
+		Path: "/v6.0/ip_traffic_monitors/{ip_traffic_monitor_id}",
 	}
 }
 

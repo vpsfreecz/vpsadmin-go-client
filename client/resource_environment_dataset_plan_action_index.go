@@ -165,7 +165,7 @@ type ActionEnvironmentDatasetPlanIndexResponse struct {
 func (action *ActionEnvironmentDatasetPlanIndex) Prepare() *ActionEnvironmentDatasetPlanIndexInvocation {
 	return &ActionEnvironmentDatasetPlanIndexInvocation{
 		Action: action,
-		Path: "/v5.0/environments/{environment_id}/dataset_plans",
+		Path: "/v6.0/environments/{environment_id}/dataset_plans",
 	}
 }
 

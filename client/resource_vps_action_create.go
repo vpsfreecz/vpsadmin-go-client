@@ -407,7 +407,7 @@ type ActionVpsCreateResponse struct {
 func (action *ActionVpsCreate) Prepare() *ActionVpsCreateInvocation {
 	return &ActionVpsCreateInvocation{
 		Action: action,
-		Path: "/v5.0/vpses",
+		Path: "/v6.0/vpses",
 	}
 }
 

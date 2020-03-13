@@ -99,7 +99,7 @@ type ActionOutageEntityShowResponse struct {
 func (action *ActionOutageEntityShow) Prepare() *ActionOutageEntityShowInvocation {
 	return &ActionOutageEntityShowInvocation{
 		Action: action,
-		Path: "/v5.0/outages/{outage_id}/entities/{entity_id}",
+		Path: "/v6.0/outages/{outage_id}/entities/{entity_id}",
 	}
 }
 

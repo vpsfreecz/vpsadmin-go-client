@@ -80,7 +80,7 @@ type ActionMigrationPlanVpsMigrationShowOutput struct {
 	SrcNode *ActionNodeShowOutput `json:"src_node"`
 	Vps *ActionVpsShowOutput `json:"vps"`
 	DstNode *ActionNodeShowOutput `json:"dst_node"`
-	OutageWindow bool `json:"outage_window"`
+	MaintenanceWindow bool `json:"maintenance_window"`
 	CleanupData bool `json:"cleanup_data"`
 	CreatedAt string `json:"created_at"`
 	StartedAt string `json:"started_at"`
@@ -106,7 +106,7 @@ type ActionMigrationPlanVpsMigrationShowResponse struct {
 func (action *ActionMigrationPlanVpsMigrationShow) Prepare() *ActionMigrationPlanVpsMigrationShowInvocation {
 	return &ActionMigrationPlanVpsMigrationShowInvocation{
 		Action: action,
-		Path: "/v5.0/migration_plans/{migration_plan_id}/vps_migrations/{vps_migration_id}",
+		Path: "/v6.0/migration_plans/{migration_plan_id}/vps_migrations/{vps_migration_id}",
 	}
 }
 

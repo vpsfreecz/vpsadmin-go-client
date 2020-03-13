@@ -62,6 +62,7 @@ func (in *ActionNetworkAddAddressesMetaGlobalInput) AnySelected() bool {
 type ActionNetworkAddAddressesInput struct {
 	Count int64 `json:"count"`
 	User int64 `json:"user"`
+	Environment int64 `json:"environment"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -86,6 +87,17 @@ func (in *ActionNetworkAddAddressesInput) SetUser(value int64) *ActionNetworkAdd
 	}
 
 	in._selectedParameters["User"] = nil
+	return in
+}
+// SetEnvironment sets parameter Environment to value and selects it for sending
+func (in *ActionNetworkAddAddressesInput) SetEnvironment(value int64) *ActionNetworkAddAddressesInput {
+	in.Environment = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Environment"] = nil
 	return in
 }
 
@@ -142,7 +154,7 @@ type ActionNetworkAddAddressesResponse struct {
 func (action *ActionNetworkAddAddresses) Prepare() *ActionNetworkAddAddressesInvocation {
 	return &ActionNetworkAddAddressesInvocation{
 		Action: action,
-		Path: "/v5.0/networks/{network_id}/add_addresses",
+		Path: "/v6.0/networks/{network_id}/add_addresses",
 	}
 }
 
@@ -249,6 +261,9 @@ func (inv *ActionNetworkAddAddressesInvocation) makeInputParams() map[string]int
 		}
 		if inv.IsParameterSelected("User") {
 			ret["user"] = inv.Input.User
+		}
+		if inv.IsParameterSelected("Environment") {
+			ret["environment"] = inv.Input.Environment
 		}
 	}
 

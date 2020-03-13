@@ -162,7 +162,7 @@ type ActionUserAccountIndexResponse struct {
 func (action *ActionUserAccountIndex) Prepare() *ActionUserAccountIndexInvocation {
 	return &ActionUserAccountIndexInvocation{
 		Action: action,
-		Path: "/v5.0/user_accounts",
+		Path: "/v6.0/user_accounts",
 	}
 }
 

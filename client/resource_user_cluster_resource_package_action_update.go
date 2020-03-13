@@ -151,7 +151,7 @@ type ActionUserClusterResourcePackageUpdateResponse struct {
 func (action *ActionUserClusterResourcePackageUpdate) Prepare() *ActionUserClusterResourcePackageUpdateInvocation {
 	return &ActionUserClusterResourcePackageUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/user_cluster_resource_packages/{user_cluster_resource_package_id}",
+		Path: "/v6.0/user_cluster_resource_packages/{user_cluster_resource_package_id}",
 	}
 }
 

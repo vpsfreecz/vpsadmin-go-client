@@ -188,7 +188,7 @@ type ActionIntegrityCheckCreateResponse struct {
 func (action *ActionIntegrityCheckCreate) Prepare() *ActionIntegrityCheckCreateInvocation {
 	return &ActionIntegrityCheckCreateInvocation{
 		Action: action,
-		Path: "/v5.0/integrity_checks",
+		Path: "/v6.0/integrity_checks",
 	}
 }
 

@@ -120,7 +120,7 @@ type ActionUserRequestRegistrationShowResponse struct {
 func (action *ActionUserRequestRegistrationShow) Prepare() *ActionUserRequestRegistrationShowInvocation {
 	return &ActionUserRequestRegistrationShowInvocation{
 		Action: action,
-		Path: "/v5.0/user_request/registrations/{registration_id}",
+		Path: "/v6.0/user_request/registrations/{registration_id}",
 	}
 }
 

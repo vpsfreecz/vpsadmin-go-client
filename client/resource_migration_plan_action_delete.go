@@ -89,7 +89,7 @@ type ActionMigrationPlanDeleteResponse struct {
 func (action *ActionMigrationPlanDelete) Prepare() *ActionMigrationPlanDeleteInvocation {
 	return &ActionMigrationPlanDeleteInvocation{
 		Action: action,
-		Path: "/v5.0/migration_plans/{migration_plan_id}",
+		Path: "/v6.0/migration_plans/{migration_plan_id}",
 	}
 }
 

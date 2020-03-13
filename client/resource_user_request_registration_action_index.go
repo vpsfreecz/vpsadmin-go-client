@@ -256,7 +256,7 @@ type ActionUserRequestRegistrationIndexResponse struct {
 func (action *ActionUserRequestRegistrationIndex) Prepare() *ActionUserRequestRegistrationIndexInvocation {
 	return &ActionUserRequestRegistrationIndexInvocation{
 		Action: action,
-		Path: "/v5.0/user_request/registrations",
+		Path: "/v6.0/user_request/registrations",
 	}
 }
 

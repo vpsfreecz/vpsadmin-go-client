@@ -157,7 +157,7 @@ type ActionOutageEntityCreateResponse struct {
 func (action *ActionOutageEntityCreate) Prepare() *ActionOutageEntityCreateInvocation {
 	return &ActionOutageEntityCreateInvocation{
 		Action: action,
-		Path: "/v5.0/outages/{outage_id}/entities",
+		Path: "/v6.0/outages/{outage_id}/entities",
 	}
 }
 

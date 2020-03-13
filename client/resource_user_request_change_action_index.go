@@ -247,7 +247,7 @@ type ActionUserRequestChangeIndexResponse struct {
 func (action *ActionUserRequestChangeIndex) Prepare() *ActionUserRequestChangeIndexInvocation {
 	return &ActionUserRequestChangeIndexInvocation{
 		Action: action,
-		Path: "/v5.0/user_request/changes",
+		Path: "/v6.0/user_request/changes",
 	}
 }
 

@@ -161,7 +161,7 @@ type ActionEnvironmentConfigChainIndexResponse struct {
 func (action *ActionEnvironmentConfigChainIndex) Prepare() *ActionEnvironmentConfigChainIndexInvocation {
 	return &ActionEnvironmentConfigChainIndexInvocation{
 		Action: action,
-		Path: "/v5.0/environments/{environment_id}/config_chains",
+		Path: "/v6.0/environments/{environment_id}/config_chains",
 	}
 }
 

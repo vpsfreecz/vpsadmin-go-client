@@ -191,7 +191,7 @@ type ActionUserPaymentIndexResponse struct {
 func (action *ActionUserPaymentIndex) Prepare() *ActionUserPaymentIndexInvocation {
 	return &ActionUserPaymentIndexInvocation{
 		Action: action,
-		Path: "/v5.0/user_payments",
+		Path: "/v6.0/user_payments",
 	}
 }
 

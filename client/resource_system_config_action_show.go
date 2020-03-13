@@ -101,7 +101,7 @@ type ActionSystemConfigShowResponse struct {
 func (action *ActionSystemConfigShow) Prepare() *ActionSystemConfigShowInvocation {
 	return &ActionSystemConfigShowInvocation{
 		Action: action,
-		Path: "/v5.0/system_configs/{category}/{name}",
+		Path: "/v6.0/system_configs/{category}/{name}",
 	}
 }
 

@@ -309,7 +309,7 @@ type ActionIpTrafficUserTopResponse struct {
 func (action *ActionIpTrafficUserTop) Prepare() *ActionIpTrafficUserTopInvocation {
 	return &ActionIpTrafficUserTopInvocation{
 		Action: action,
-		Path: "/v5.0/ip_traffics/user_top",
+		Path: "/v6.0/ip_traffics/user_top",
 	}
 }
 

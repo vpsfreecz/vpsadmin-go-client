@@ -143,6 +143,7 @@ type ActionIpAddressAssignOutput struct {
 	MaxTx int64 `json:"max_tx"`
 	MaxRx int64 `json:"max_rx"`
 	ClassId int64 `json:"class_id"`
+	ChargedEnvironment *ActionEnvironmentShowOutput `json:"charged_environment"`
 }
 
 // ActionIpAddressAssignMetaGlobalOutput is a type for global output metadata parameters
@@ -170,7 +171,7 @@ type ActionIpAddressAssignResponse struct {
 func (action *ActionIpAddressAssign) Prepare() *ActionIpAddressAssignInvocation {
 	return &ActionIpAddressAssignInvocation{
 		Action: action,
-		Path: "/v5.0/ip_addresses/{ip_address_id}/assign",
+		Path: "/v6.0/ip_addresses/{ip_address_id}/assign",
 	}
 }
 

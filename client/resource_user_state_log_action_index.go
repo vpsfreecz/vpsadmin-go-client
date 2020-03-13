@@ -166,7 +166,7 @@ type ActionUserStateLogIndexResponse struct {
 func (action *ActionUserStateLogIndex) Prepare() *ActionUserStateLogIndexInvocation {
 	return &ActionUserStateLogIndexInvocation{
 		Action: action,
-		Path: "/v5.0/users/{user_id}/state_logs",
+		Path: "/v6.0/users/{user_id}/state_logs",
 	}
 }
 

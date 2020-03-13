@@ -111,7 +111,7 @@ type ActionMailLogShowResponse struct {
 func (action *ActionMailLogShow) Prepare() *ActionMailLogShowInvocation {
 	return &ActionMailLogShowInvocation{
 		Action: action,
-		Path: "/v5.0/mail_logs/{mail_log_id}",
+		Path: "/v6.0/mail_logs/{mail_log_id}",
 	}
 }
 

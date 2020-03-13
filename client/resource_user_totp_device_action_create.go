@@ -151,7 +151,7 @@ type ActionUserTotpDeviceCreateResponse struct {
 func (action *ActionUserTotpDeviceCreate) Prepare() *ActionUserTotpDeviceCreateInvocation {
 	return &ActionUserTotpDeviceCreateInvocation{
 		Action: action,
-		Path: "/v5.0/users/{user_id}/totp_devices",
+		Path: "/v6.0/users/{user_id}/totp_devices",
 	}
 }
 
