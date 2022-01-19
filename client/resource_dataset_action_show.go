@@ -19,7 +19,7 @@ func NewActionDatasetShow(client *Client) *ActionDatasetShow {
 // ActionDatasetShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionDatasetShowMetaGlobalInput) SetIncludes(value string) *ActionDat
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDatasetShowMetaGlobalInput) SetNo(value bool) *ActionDatasetShowMetaGlobalInput {
 	in.No = value
@@ -70,31 +71,28 @@ func (in *ActionDatasetShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionDatasetShowOutput is a type for action output parameters
 type ActionDatasetShowOutput struct {
-	Atime bool `json:"atime"`
-	Avail int64 `json:"avail"`
-	Compression bool `json:"compression"`
-	CurrentHistoryId int64 `json:"current_history_id"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	Export *ActionExportShowOutput `json:"export"`
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	Parent *ActionDatasetShowOutput `json:"parent"`
-	Quota int64 `json:"quota"`
-	Recordsize int64 `json:"recordsize"`
-	Referenced int64 `json:"referenced"`
-	Refquota int64 `json:"refquota"`
-	Relatime bool `json:"relatime"`
-	Sharenfs string `json:"sharenfs"`
-	Sync string `json:"sync"`
-	Used int64 `json:"used"`
-	User *ActionUserShowOutput `json:"user"`
+	Atime            bool                              `json:"atime"`
+	Avail            int64                             `json:"avail"`
+	Compression      bool                              `json:"compression"`
+	CurrentHistoryId int64                             `json:"current_history_id"`
+	Environment      *ActionEnvironmentShowOutput      `json:"environment"`
+	Export           *ActionExportShowOutput           `json:"export"`
+	Id               int64                             `json:"id"`
+	Name             string                            `json:"name"`
+	Parent           *ActionDatasetShowOutput          `json:"parent"`
+	Quota            int64                             `json:"quota"`
+	Recordsize       int64                             `json:"recordsize"`
+	Referenced       int64                             `json:"referenced"`
+	Refquota         int64                             `json:"refquota"`
+	Relatime         bool                              `json:"relatime"`
+	Sharenfs         string                            `json:"sharenfs"`
+	Sync             string                            `json:"sync"`
+	Used             int64                             `json:"used"`
+	User             *ActionUserShowOutput             `json:"user"`
 	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
 }
-
 
 // Type for action response, including envelope
 type ActionDatasetShowResponse struct {
@@ -109,12 +107,11 @@ type ActionDatasetShowResponse struct {
 	Output *ActionDatasetShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDatasetShow) Prepare() *ActionDatasetShowInvocation {
 	return &ActionDatasetShowInvocation{
 		Action: action,
-		Path: "/v6.0/datasets/{dataset_id}",
+		Path:   "/v6.0/datasets/{dataset_id}",
 	}
 }
 
@@ -179,9 +176,6 @@ func (inv *ActionDatasetShowInvocation) callAsQuery() (*ActionDatasetShowRespons
 	return resp, err
 }
 
-
-
-
 func (inv *ActionDatasetShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -192,4 +186,3 @@ func (inv *ActionDatasetShowInvocation) convertMetaInputToQueryParams(ret map[st
 		}
 	}
 }
-

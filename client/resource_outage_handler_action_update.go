@@ -19,7 +19,7 @@ func NewActionOutageHandlerUpdate(client *Client) *ActionOutageHandlerUpdate {
 // ActionOutageHandlerUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageHandlerUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOutageHandlerUpdateMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOutageHandlerUpdateMetaGlobalInput) SetNo(value bool) *ActionOutageHandlerUpdateMetaGlobalInput {
 	in.No = value
@@ -115,17 +116,16 @@ func (in *ActionOutageHandlerUpdateInput) AnySelected() bool {
 // ActionOutageHandlerUpdateRequest is a type for the entire action request
 type ActionOutageHandlerUpdateRequest struct {
 	Handler map[string]interface{} `json:"handler"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta    map[string]interface{} `json:"_meta"`
 }
 
 // ActionOutageHandlerUpdateOutput is a type for action output parameters
 type ActionOutageHandlerUpdateOutput struct {
-	FullName string `json:"full_name"`
-	Id int64 `json:"id"`
-	Note string `json:"note"`
-	User *ActionUserShowOutput `json:"user"`
+	FullName string                `json:"full_name"`
+	Id       int64                 `json:"id"`
+	Note     string                `json:"note"`
+	User     *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionOutageHandlerUpdateResponse struct {
@@ -140,12 +140,11 @@ type ActionOutageHandlerUpdateResponse struct {
 	Output *ActionOutageHandlerUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOutageHandlerUpdate) Prepare() *ActionOutageHandlerUpdateInvocation {
 	return &ActionOutageHandlerUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/outages/{outage_id}/handlers/{handler_id}",
+		Path:   "/v6.0/outages/{outage_id}/handlers/{handler_id}",
 	}
 }
 
@@ -194,6 +193,7 @@ func (inv *ActionOutageHandlerUpdateInvocation) IsParameterSelected(param string
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOutageHandlerUpdateInvocation) NewMetaInput() *ActionOutageHandlerUpdateMetaGlobalInput {
@@ -222,7 +222,6 @@ func (inv *ActionOutageHandlerUpdateInvocation) Call() (*ActionOutageHandlerUpda
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionOutageHandlerUpdateInvocation) callAsBody() (*ActionOutageHandlerUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionOutageHandlerUpdateResponse{Action: inv.Action}
@@ -233,13 +232,10 @@ func (inv *ActionOutageHandlerUpdateInvocation) callAsBody() (*ActionOutageHandl
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOutageHandlerUpdateInvocation) makeAllInputParams() *ActionOutageHandlerUpdateRequest {
 	return &ActionOutageHandlerUpdateRequest{
 		Handler: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:    inv.makeMetaInputParams(),
 	}
 }
 

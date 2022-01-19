@@ -19,7 +19,7 @@ func NewActionIncomingPaymentShow(client *Client) *ActionIncomingPaymentShow {
 // ActionIncomingPaymentShowMetaGlobalInput is a type for action global meta input parameters
 type ActionIncomingPaymentShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionIncomingPaymentShowMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionIncomingPaymentShowMetaGlobalInput) SetNo(value bool) *ActionIncomingPaymentShowMetaGlobalInput {
 	in.No = value
@@ -70,29 +71,26 @@ func (in *ActionIncomingPaymentShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionIncomingPaymentShowOutput is a type for action output parameters
 type ActionIncomingPaymentShowOutput struct {
-	AccountName string `json:"account_name"`
-	Amount int64 `json:"amount"`
-	Comment string `json:"comment"`
-	CreatedAt string `json:"created_at"`
-	Currency string `json:"currency"`
-	Date string `json:"date"`
-	Id int64 `json:"id"`
-	Ks string `json:"ks"`
-	SrcAmount int64 `json:"src_amount"`
-	SrcCurrency string `json:"src_currency"`
-	Ss string `json:"ss"`
-	State string `json:"state"`
-	TransactionId string `json:"transaction_id"`
+	AccountName     string `json:"account_name"`
+	Amount          int64  `json:"amount"`
+	Comment         string `json:"comment"`
+	CreatedAt       string `json:"created_at"`
+	Currency        string `json:"currency"`
+	Date            string `json:"date"`
+	Id              int64  `json:"id"`
+	Ks              string `json:"ks"`
+	SrcAmount       int64  `json:"src_amount"`
+	SrcCurrency     string `json:"src_currency"`
+	Ss              string `json:"ss"`
+	State           string `json:"state"`
+	TransactionId   string `json:"transaction_id"`
 	TransactionType string `json:"transaction_type"`
-	UserIdent string `json:"user_ident"`
-	UserMessage string `json:"user_message"`
-	Vs string `json:"vs"`
+	UserIdent       string `json:"user_ident"`
+	UserMessage     string `json:"user_message"`
+	Vs              string `json:"vs"`
 }
-
 
 // Type for action response, including envelope
 type ActionIncomingPaymentShowResponse struct {
@@ -107,12 +105,11 @@ type ActionIncomingPaymentShowResponse struct {
 	Output *ActionIncomingPaymentShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionIncomingPaymentShow) Prepare() *ActionIncomingPaymentShowInvocation {
 	return &ActionIncomingPaymentShowInvocation{
 		Action: action,
-		Path: "/v6.0/incoming_payments/{incoming_payment_id}",
+		Path:   "/v6.0/incoming_payments/{incoming_payment_id}",
 	}
 }
 
@@ -177,9 +174,6 @@ func (inv *ActionIncomingPaymentShowInvocation) callAsQuery() (*ActionIncomingPa
 	return resp, err
 }
 
-
-
-
 func (inv *ActionIncomingPaymentShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -190,4 +184,3 @@ func (inv *ActionIncomingPaymentShowInvocation) convertMetaInputToQueryParams(re
 		}
 	}
 }
-

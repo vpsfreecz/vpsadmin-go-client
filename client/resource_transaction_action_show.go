@@ -19,7 +19,7 @@ func NewActionTransactionShow(client *Client) *ActionTransactionShow {
 // ActionTransactionShowMetaGlobalInput is a type for action global meta input parameters
 type ActionTransactionShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionTransactionShowMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionTransactionShowMetaGlobalInput) SetNo(value bool) *ActionTransactionShowMetaGlobalInput {
 	in.No = value
@@ -70,29 +71,26 @@ func (in *ActionTransactionShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionTransactionShowOutput is a type for action output parameters
 type ActionTransactionShowOutput struct {
-	CreatedAt string `json:"created_at"`
-	DependsOn *ActionTransactionShowOutput `json:"depends_on"`
-	Done string `json:"done"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	Input string `json:"input"`
-	Name string `json:"name"`
-	Node *ActionNodeShowOutput `json:"node"`
-	Output string `json:"output"`
-	Priority int64 `json:"priority"`
-	StartedAt string `json:"started_at"`
-	Success int64 `json:"success"`
+	CreatedAt        string                            `json:"created_at"`
+	DependsOn        *ActionTransactionShowOutput      `json:"depends_on"`
+	Done             string                            `json:"done"`
+	FinishedAt       string                            `json:"finished_at"`
+	Id               int64                             `json:"id"`
+	Input            string                            `json:"input"`
+	Name             string                            `json:"name"`
+	Node             *ActionNodeShowOutput             `json:"node"`
+	Output           string                            `json:"output"`
+	Priority         int64                             `json:"priority"`
+	StartedAt        string                            `json:"started_at"`
+	Success          int64                             `json:"success"`
 	TransactionChain *ActionTransactionChainShowOutput `json:"transaction_chain"`
-	Type int64 `json:"type"`
-	Urgent bool `json:"urgent"`
-	User *ActionUserShowOutput `json:"user"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	Type             int64                             `json:"type"`
+	Urgent           bool                              `json:"urgent"`
+	User             *ActionUserShowOutput             `json:"user"`
+	Vps              *ActionVpsShowOutput              `json:"vps"`
 }
-
 
 // Type for action response, including envelope
 type ActionTransactionShowResponse struct {
@@ -107,12 +105,11 @@ type ActionTransactionShowResponse struct {
 	Output *ActionTransactionShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionTransactionShow) Prepare() *ActionTransactionShowInvocation {
 	return &ActionTransactionShowInvocation{
 		Action: action,
-		Path: "/v6.0/transactions/{transaction_id}",
+		Path:   "/v6.0/transactions/{transaction_id}",
 	}
 }
 
@@ -177,9 +174,6 @@ func (inv *ActionTransactionShowInvocation) callAsQuery() (*ActionTransactionSho
 	return resp, err
 }
 
-
-
-
 func (inv *ActionTransactionShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -190,4 +184,3 @@ func (inv *ActionTransactionShowInvocation) convertMetaInputToQueryParams(ret ma
 		}
 	}
 }
-

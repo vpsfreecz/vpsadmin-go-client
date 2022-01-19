@@ -33,15 +33,15 @@ func NewResourceDatasetSnapshot(client *Client) *ResourceDatasetSnapshot {
 	actionShow := NewActionDatasetSnapshotShow(client)
 
 	return &ResourceDatasetSnapshot{
-		Client: client,
-		Create: actionCreate,
-		New: actionCreate,
-		Delete: actionDelete,
-		Destroy: actionDelete,
-		Index: actionIndex,
-		List: actionIndex,
+		Client:   client,
+		Create:   actionCreate,
+		New:      actionCreate,
+		Delete:   actionDelete,
+		Destroy:  actionDelete,
+		Index:    actionIndex,
+		List:     actionIndex,
 		Rollback: actionRollback,
-		Show: actionShow,
-		Find: actionShow,
+		Show:     actionShow,
+		Find:     actionShow,
 	}
 }

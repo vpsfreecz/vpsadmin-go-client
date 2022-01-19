@@ -19,7 +19,7 @@ func NewActionEnvironmentDatasetPlanShow(client *Client) *ActionEnvironmentDatas
 // ActionEnvironmentDatasetPlanShowMetaGlobalInput is a type for action global meta input parameters
 type ActionEnvironmentDatasetPlanShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionEnvironmentDatasetPlanShowMetaGlobalInput) SetIncludes(value str
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionEnvironmentDatasetPlanShowMetaGlobalInput) SetNo(value bool) *ActionEnvironmentDatasetPlanShowMetaGlobalInput {
 	in.No = value
@@ -70,17 +71,14 @@ func (in *ActionEnvironmentDatasetPlanShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionEnvironmentDatasetPlanShowOutput is a type for action output parameters
 type ActionEnvironmentDatasetPlanShowOutput struct {
 	DatasetPlan *ActionDatasetPlanShowOutput `json:"dataset_plan"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	UserAdd bool `json:"user_add"`
-	UserRemove bool `json:"user_remove"`
+	Id          int64                        `json:"id"`
+	Label       string                       `json:"label"`
+	UserAdd     bool                         `json:"user_add"`
+	UserRemove  bool                         `json:"user_remove"`
 }
-
 
 // Type for action response, including envelope
 type ActionEnvironmentDatasetPlanShowResponse struct {
@@ -95,12 +93,11 @@ type ActionEnvironmentDatasetPlanShowResponse struct {
 	Output *ActionEnvironmentDatasetPlanShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionEnvironmentDatasetPlanShow) Prepare() *ActionEnvironmentDatasetPlanShowInvocation {
 	return &ActionEnvironmentDatasetPlanShowInvocation{
 		Action: action,
-		Path: "/v6.0/environments/{environment_id}/dataset_plans/{dataset_plan_id}",
+		Path:   "/v6.0/environments/{environment_id}/dataset_plans/{dataset_plan_id}",
 	}
 }
 
@@ -165,9 +162,6 @@ func (inv *ActionEnvironmentDatasetPlanShowInvocation) callAsQuery() (*ActionEnv
 	return resp, err
 }
 
-
-
-
 func (inv *ActionEnvironmentDatasetPlanShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -178,4 +172,3 @@ func (inv *ActionEnvironmentDatasetPlanShowInvocation) convertMetaInputToQueryPa
 		}
 	}
 }
-

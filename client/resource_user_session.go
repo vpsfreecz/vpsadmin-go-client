@@ -21,9 +21,9 @@ func NewResourceUserSession(client *Client) *ResourceUserSession {
 
 	return &ResourceUserSession{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

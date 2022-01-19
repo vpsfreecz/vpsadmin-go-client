@@ -26,12 +26,12 @@ func NewResourceVpsMaintenanceWindow(client *Client) *ResourceVpsMaintenanceWind
 	actionUpdateAll := NewActionVpsMaintenanceWindowUpdateAll(client)
 
 	return &ResourceVpsMaintenanceWindow{
-		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Client:    client,
+		Index:     actionIndex,
+		List:      actionIndex,
+		Show:      actionShow,
+		Find:      actionShow,
+		Update:    actionUpdate,
 		UpdateAll: actionUpdateAll,
 	}
 }

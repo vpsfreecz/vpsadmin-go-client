@@ -18,9 +18,9 @@ func NewActionUserMailRoleRecipientIndex(client *Client) *ActionUserMailRoleReci
 
 // ActionUserMailRoleRecipientIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserMailRoleRecipientIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionUserMailRoleRecipientIndexMetaGlobalInput) SetCount(value bool) 
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserMailRoleRecipientIndexMetaGlobalInput) SetIncludes(value string) *ActionUserMailRoleRecipientIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionUserMailRoleRecipientIndexMetaGlobalInput) SetIncludes(value str
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserMailRoleRecipientIndexMetaGlobalInput) SetNo(value bool) *ActionUserMailRoleRecipientIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionUserMailRoleRecipientIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserMailRoleRecipientIndexInput is a type for action input parameters
 type ActionUserMailRoleRecipientIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionUserMailRoleRecipientIndexInput) SetLimit(value int64) *ActionUs
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionUserMailRoleRecipientIndexInput) SetOffset(value int64) *ActionUserMailRoleRecipientIndexInput {
 	in.Offset = value
@@ -136,15 +139,13 @@ func (in *ActionUserMailRoleRecipientIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserMailRoleRecipientIndexOutput is a type for action output parameters
 type ActionUserMailRoleRecipientIndexOutput struct {
 	Description string `json:"description"`
-	Id string `json:"id"`
-	Label string `json:"label"`
-	To string `json:"to"`
+	Id          string `json:"id"`
+	Label       string `json:"label"`
+	To          string `json:"to"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserMailRoleRecipientIndexResponse struct {
@@ -159,12 +160,11 @@ type ActionUserMailRoleRecipientIndexResponse struct {
 	Output []*ActionUserMailRoleRecipientIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserMailRoleRecipientIndex) Prepare() *ActionUserMailRoleRecipientIndexInvocation {
 	return &ActionUserMailRoleRecipientIndexInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/mail_role_recipients",
+		Path:   "/v6.0/users/{user_id}/mail_role_recipients",
 	}
 }
 
@@ -213,6 +213,7 @@ func (inv *ActionUserMailRoleRecipientIndexInvocation) IsParameterSelected(param
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserMailRoleRecipientIndexInvocation) NewMetaInput() *ActionUserMailRoleRecipientIndexMetaGlobalInput {
@@ -253,8 +254,6 @@ func (inv *ActionUserMailRoleRecipientIndexInvocation) callAsQuery() (*ActionUse
 	return resp, err
 }
 
-
-
 func (inv *ActionUserMailRoleRecipientIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -279,4 +278,3 @@ func (inv *ActionUserMailRoleRecipientIndexInvocation) convertMetaInputToQueryPa
 		}
 	}
 }
-

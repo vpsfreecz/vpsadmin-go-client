@@ -30,14 +30,14 @@ func NewResourceOutageEntity(client *Client) *ResourceOutageEntity {
 	actionShow := NewActionOutageEntityShow(client)
 
 	return &ResourceOutageEntity{
-		Client: client,
-		Create: actionCreate,
-		New: actionCreate,
-		Delete: actionDelete,
+		Client:  client,
+		Create:  actionCreate,
+		New:     actionCreate,
+		Delete:  actionDelete,
 		Destroy: actionDelete,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:   actionIndex,
+		List:    actionIndex,
+		Show:    actionShow,
+		Find:    actionShow,
 	}
 }

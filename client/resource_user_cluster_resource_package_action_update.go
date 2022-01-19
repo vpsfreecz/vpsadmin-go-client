@@ -19,7 +19,7 @@ func NewActionUserClusterResourcePackageUpdate(client *Client) *ActionUserCluste
 // ActionUserClusterResourcePackageUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserClusterResourcePackageUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserClusterResourcePackageUpdateMetaGlobalInput) SetIncludes(val
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserClusterResourcePackageUpdateMetaGlobalInput) SetNo(value bool) *ActionUserClusterResourcePackageUpdateMetaGlobalInput {
 	in.No = value
@@ -115,23 +116,22 @@ func (in *ActionUserClusterResourcePackageUpdateInput) AnySelected() bool {
 // ActionUserClusterResourcePackageUpdateRequest is a type for the entire action request
 type ActionUserClusterResourcePackageUpdateRequest struct {
 	UserClusterResourcePackage map[string]interface{} `json:"user_cluster_resource_package"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta                       map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserClusterResourcePackageUpdateOutput is a type for action output parameters
 type ActionUserClusterResourcePackageUpdateOutput struct {
-	AddedBy *ActionUserShowOutput `json:"added_by"`
+	AddedBy                *ActionUserShowOutput                   `json:"added_by"`
 	ClusterResourcePackage *ActionClusterResourcePackageShowOutput `json:"cluster_resource_package"`
-	Comment string `json:"comment"`
-	CreatedAt string `json:"created_at"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	Id int64 `json:"id"`
-	IsPersonal bool `json:"is_personal"`
-	Label string `json:"label"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
+	Comment                string                                  `json:"comment"`
+	CreatedAt              string                                  `json:"created_at"`
+	Environment            *ActionEnvironmentShowOutput            `json:"environment"`
+	Id                     int64                                   `json:"id"`
+	IsPersonal             bool                                    `json:"is_personal"`
+	Label                  string                                  `json:"label"`
+	UpdatedAt              string                                  `json:"updated_at"`
+	User                   *ActionUserShowOutput                   `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserClusterResourcePackageUpdateResponse struct {
@@ -146,12 +146,11 @@ type ActionUserClusterResourcePackageUpdateResponse struct {
 	Output *ActionUserClusterResourcePackageUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserClusterResourcePackageUpdate) Prepare() *ActionUserClusterResourcePackageUpdateInvocation {
 	return &ActionUserClusterResourcePackageUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/user_cluster_resource_packages/{user_cluster_resource_package_id}",
+		Path:   "/v6.0/user_cluster_resource_packages/{user_cluster_resource_package_id}",
 	}
 }
 
@@ -200,6 +199,7 @@ func (inv *ActionUserClusterResourcePackageUpdateInvocation) IsParameterSelected
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserClusterResourcePackageUpdateInvocation) NewMetaInput() *ActionUserClusterResourcePackageUpdateMetaGlobalInput {
@@ -228,7 +228,6 @@ func (inv *ActionUserClusterResourcePackageUpdateInvocation) Call() (*ActionUser
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserClusterResourcePackageUpdateInvocation) callAsBody() (*ActionUserClusterResourcePackageUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserClusterResourcePackageUpdateResponse{Action: inv.Action}
@@ -239,13 +238,10 @@ func (inv *ActionUserClusterResourcePackageUpdateInvocation) callAsBody() (*Acti
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserClusterResourcePackageUpdateInvocation) makeAllInputParams() *ActionUserClusterResourcePackageUpdateRequest {
 	return &ActionUserClusterResourcePackageUpdateRequest{
 		UserClusterResourcePackage: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:                       inv.makeMetaInputParams(),
 	}
 }
 

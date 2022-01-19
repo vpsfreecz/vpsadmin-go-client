@@ -18,8 +18,8 @@ func NewActionVpsOutageWindowIndex(client *Client) *ActionVpsOutageWindowIndex {
 
 // ActionVpsOutageWindowIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsOutageWindowIndexMetaGlobalInput struct {
-	No bool `json:"no"`
-	Count bool `json:"count"`
+	No       bool   `json:"no"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -36,6 +36,7 @@ func (in *ActionVpsOutageWindowIndexMetaGlobalInput) SetNo(value bool) *ActionVp
 	in._selectedParameters["No"] = nil
 	return in
 }
+
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionVpsOutageWindowIndexMetaGlobalInput) SetCount(value bool) *ActionVpsOutageWindowIndexMetaGlobalInput {
 	in.Count = value
@@ -47,6 +48,7 @@ func (in *ActionVpsOutageWindowIndexMetaGlobalInput) SetCount(value bool) *Actio
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsOutageWindowIndexMetaGlobalInput) SetIncludes(value string) *ActionVpsOutageWindowIndexMetaGlobalInput {
 	in.Includes = value
@@ -85,7 +87,7 @@ func (in *ActionVpsOutageWindowIndexMetaGlobalInput) AnySelected() bool {
 // ActionVpsOutageWindowIndexInput is a type for action input parameters
 type ActionVpsOutageWindowIndexInput struct {
 	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -101,6 +103,7 @@ func (in *ActionVpsOutageWindowIndexInput) SetOffset(value int64) *ActionVpsOuta
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionVpsOutageWindowIndexInput) SetLimit(value int64) *ActionVpsOutageWindowIndexInput {
 	in.Limit = value
@@ -136,15 +139,13 @@ func (in *ActionVpsOutageWindowIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionVpsOutageWindowIndexOutput is a type for action output parameters
 type ActionVpsOutageWindowIndexOutput struct {
-	Weekday int64 `json:"weekday"`
-	IsOpen bool `json:"is_open"`
-	OpensAt int64 `json:"opens_at"`
+	Weekday  int64 `json:"weekday"`
+	IsOpen   bool  `json:"is_open"`
+	OpensAt  int64 `json:"opens_at"`
 	ClosesAt int64 `json:"closes_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsOutageWindowIndexResponse struct {
@@ -159,12 +160,11 @@ type ActionVpsOutageWindowIndexResponse struct {
 	Output []*ActionVpsOutageWindowIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsOutageWindowIndex) Prepare() *ActionVpsOutageWindowIndexInvocation {
 	return &ActionVpsOutageWindowIndexInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/outage_windows",
+		Path:   "/v5.0/vpses/{vps_id}/outage_windows",
 	}
 }
 
@@ -213,6 +213,7 @@ func (inv *ActionVpsOutageWindowIndexInvocation) IsParameterSelected(param strin
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsOutageWindowIndexInvocation) NewMetaInput() *ActionVpsOutageWindowIndexMetaGlobalInput {
@@ -253,8 +254,6 @@ func (inv *ActionVpsOutageWindowIndexInvocation) callAsQuery() (*ActionVpsOutage
 	return resp, err
 }
 
-
-
 func (inv *ActionVpsOutageWindowIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Offset") {
@@ -279,4 +278,3 @@ func (inv *ActionVpsOutageWindowIndexInvocation) convertMetaInputToQueryParams(r
 		}
 	}
 }
-

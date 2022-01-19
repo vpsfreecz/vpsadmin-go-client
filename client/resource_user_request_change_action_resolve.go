@@ -19,7 +19,7 @@ func NewActionUserRequestChangeResolve(client *Client) *ActionUserRequestChangeR
 // ActionUserRequestChangeResolveMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestChangeResolveMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserRequestChangeResolveMetaGlobalInput) SetIncludes(value strin
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserRequestChangeResolveMetaGlobalInput) SetNo(value bool) *ActionUserRequestChangeResolveMetaGlobalInput {
 	in.No = value
@@ -72,12 +73,12 @@ func (in *ActionUserRequestChangeResolveMetaGlobalInput) AnySelected() bool {
 
 // ActionUserRequestChangeResolveInput is a type for action input parameters
 type ActionUserRequestChangeResolveInput struct {
-	Action string `json:"action"`
-	Address string `json:"address"`
+	Action       string `json:"action"`
+	Address      string `json:"address"`
 	ChangeReason string `json:"change_reason"`
-	Email string `json:"email"`
-	FullName string `json:"full_name"`
-	Reason string `json:"reason"`
+	Email        string `json:"email"`
+	FullName     string `json:"full_name"`
+	Reason       string `json:"reason"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -93,6 +94,7 @@ func (in *ActionUserRequestChangeResolveInput) SetAction(value string) *ActionUs
 	in._selectedParameters["Action"] = nil
 	return in
 }
+
 // SetAddress sets parameter Address to value and selects it for sending
 func (in *ActionUserRequestChangeResolveInput) SetAddress(value string) *ActionUserRequestChangeResolveInput {
 	in.Address = value
@@ -104,6 +106,7 @@ func (in *ActionUserRequestChangeResolveInput) SetAddress(value string) *ActionU
 	in._selectedParameters["Address"] = nil
 	return in
 }
+
 // SetChangeReason sets parameter ChangeReason to value and selects it for sending
 func (in *ActionUserRequestChangeResolveInput) SetChangeReason(value string) *ActionUserRequestChangeResolveInput {
 	in.ChangeReason = value
@@ -115,6 +118,7 @@ func (in *ActionUserRequestChangeResolveInput) SetChangeReason(value string) *Ac
 	in._selectedParameters["ChangeReason"] = nil
 	return in
 }
+
 // SetEmail sets parameter Email to value and selects it for sending
 func (in *ActionUserRequestChangeResolveInput) SetEmail(value string) *ActionUserRequestChangeResolveInput {
 	in.Email = value
@@ -126,6 +130,7 @@ func (in *ActionUserRequestChangeResolveInput) SetEmail(value string) *ActionUse
 	in._selectedParameters["Email"] = nil
 	return in
 }
+
 // SetFullName sets parameter FullName to value and selects it for sending
 func (in *ActionUserRequestChangeResolveInput) SetFullName(value string) *ActionUserRequestChangeResolveInput {
 	in.FullName = value
@@ -137,6 +142,7 @@ func (in *ActionUserRequestChangeResolveInput) SetFullName(value string) *Action
 	in._selectedParameters["FullName"] = nil
 	return in
 }
+
 // SetReason sets parameter Reason to value and selects it for sending
 func (in *ActionUserRequestChangeResolveInput) SetReason(value string) *ActionUserRequestChangeResolveInput {
 	in.Reason = value
@@ -175,10 +181,8 @@ func (in *ActionUserRequestChangeResolveInput) AnySelected() bool {
 // ActionUserRequestChangeResolveRequest is a type for the entire action request
 type ActionUserRequestChangeResolveRequest struct {
 	Change map[string]interface{} `json:"change"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta   map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionUserRequestChangeResolveResponse struct {
@@ -186,12 +190,11 @@ type ActionUserRequestChangeResolveResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserRequestChangeResolve) Prepare() *ActionUserRequestChangeResolveInvocation {
 	return &ActionUserRequestChangeResolveInvocation{
 		Action: action,
-		Path: "/v6.0/user_request/changes/{change_id}/resolve",
+		Path:   "/v6.0/user_request/changes/{change_id}/resolve",
 	}
 }
 
@@ -240,6 +243,7 @@ func (inv *ActionUserRequestChangeResolveInvocation) IsParameterSelected(param s
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserRequestChangeResolveInvocation) NewMetaInput() *ActionUserRequestChangeResolveMetaGlobalInput {
@@ -268,7 +272,6 @@ func (inv *ActionUserRequestChangeResolveInvocation) Call() (*ActionUserRequestC
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserRequestChangeResolveInvocation) callAsBody() (*ActionUserRequestChangeResolveResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserRequestChangeResolveResponse{Action: inv.Action}
@@ -276,13 +279,10 @@ func (inv *ActionUserRequestChangeResolveInvocation) callAsBody() (*ActionUserRe
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserRequestChangeResolveInvocation) makeAllInputParams() *ActionUserRequestChangeResolveRequest {
 	return &ActionUserRequestChangeResolveRequest{
 		Change: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:   inv.makeMetaInputParams(),
 	}
 }
 

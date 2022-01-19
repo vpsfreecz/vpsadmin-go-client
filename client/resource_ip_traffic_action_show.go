@@ -19,7 +19,7 @@ func NewActionIpTrafficShow(client *Client) *ActionIpTrafficShow {
 // ActionIpTrafficShowMetaGlobalInput is a type for action global meta input parameters
 type ActionIpTrafficShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionIpTrafficShowMetaGlobalInput) SetIncludes(value string) *ActionI
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionIpTrafficShowMetaGlobalInput) SetNo(value bool) *ActionIpTrafficShowMetaGlobalInput {
 	in.No = value
@@ -70,22 +71,19 @@ func (in *ActionIpTrafficShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionIpTrafficShowOutput is a type for action output parameters
 type ActionIpTrafficShowOutput struct {
-	BytesIn int64 `json:"bytes_in"`
-	BytesOut int64 `json:"bytes_out"`
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	PacketsIn int64 `json:"packets_in"`
-	PacketsOut int64 `json:"packets_out"`
-	Protocol string `json:"protocol"`
-	Role string `json:"role"`
-	User *ActionUserShowOutput `json:"user"`
+	BytesIn    int64                      `json:"bytes_in"`
+	BytesOut   int64                      `json:"bytes_out"`
+	CreatedAt  string                     `json:"created_at"`
+	Id         int64                      `json:"id"`
+	IpAddress  *ActionIpAddressShowOutput `json:"ip_address"`
+	PacketsIn  int64                      `json:"packets_in"`
+	PacketsOut int64                      `json:"packets_out"`
+	Protocol   string                     `json:"protocol"`
+	Role       string                     `json:"role"`
+	User       *ActionUserShowOutput      `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionIpTrafficShowResponse struct {
@@ -100,12 +98,11 @@ type ActionIpTrafficShowResponse struct {
 	Output *ActionIpTrafficShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionIpTrafficShow) Prepare() *ActionIpTrafficShowInvocation {
 	return &ActionIpTrafficShowInvocation{
 		Action: action,
-		Path: "/v6.0/ip_traffics/{ip_traffic_id}",
+		Path:   "/v6.0/ip_traffics/{ip_traffic_id}",
 	}
 }
 
@@ -170,9 +167,6 @@ func (inv *ActionIpTrafficShowInvocation) callAsQuery() (*ActionIpTrafficShowRes
 	return resp, err
 }
 
-
-
-
 func (inv *ActionIpTrafficShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -183,4 +177,3 @@ func (inv *ActionIpTrafficShowInvocation) convertMetaInputToQueryParams(ret map[
 		}
 	}
 }
-

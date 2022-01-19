@@ -30,14 +30,14 @@ func NewResourceMonitoredEvent(client *Client) *ResourceMonitoredEvent {
 	actionShow := NewActionMonitoredEventShow(client)
 
 	return &ResourceMonitoredEvent{
-		Client: client,
-		Log: NewResourceMonitoredEventLog(client),
+		Client:      client,
+		Log:         NewResourceMonitoredEventLog(client),
 		Acknowledge: actionAcknowledge,
-		Ack: actionAcknowledge,
-		Ignore: actionIgnore,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Ack:         actionAcknowledge,
+		Ignore:      actionIgnore,
+		Index:       actionIndex,
+		List:        actionIndex,
+		Show:        actionShow,
+		Find:        actionShow,
 	}
 }

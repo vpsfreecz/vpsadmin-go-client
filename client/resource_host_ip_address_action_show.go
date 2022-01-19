@@ -19,7 +19,7 @@ func NewActionHostIpAddressShow(client *Client) *ActionHostIpAddressShow {
 // ActionHostIpAddressShowMetaGlobalInput is a type for action global meta input parameters
 type ActionHostIpAddressShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionHostIpAddressShowMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionHostIpAddressShowMetaGlobalInput) SetNo(value bool) *ActionHostIpAddressShowMetaGlobalInput {
 	in.No = value
@@ -70,16 +71,13 @@ func (in *ActionHostIpAddressShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionHostIpAddressShowOutput is a type for action output parameters
 type ActionHostIpAddressShowOutput struct {
-	Addr string `json:"addr"`
-	Assigned bool `json:"assigned"`
-	Id int64 `json:"id"`
+	Addr      string                     `json:"addr"`
+	Assigned  bool                       `json:"assigned"`
+	Id        int64                      `json:"id"`
 	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
 }
-
 
 // Type for action response, including envelope
 type ActionHostIpAddressShowResponse struct {
@@ -94,12 +92,11 @@ type ActionHostIpAddressShowResponse struct {
 	Output *ActionHostIpAddressShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionHostIpAddressShow) Prepare() *ActionHostIpAddressShowInvocation {
 	return &ActionHostIpAddressShowInvocation{
 		Action: action,
-		Path: "/v6.0/host_ip_addresses/{host_ip_address_id}",
+		Path:   "/v6.0/host_ip_addresses/{host_ip_address_id}",
 	}
 }
 
@@ -164,9 +161,6 @@ func (inv *ActionHostIpAddressShowInvocation) callAsQuery() (*ActionHostIpAddres
 	return resp, err
 }
 
-
-
-
 func (inv *ActionHostIpAddressShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -177,4 +171,3 @@ func (inv *ActionHostIpAddressShowInvocation) convertMetaInputToQueryParams(ret 
 		}
 	}
 }
-

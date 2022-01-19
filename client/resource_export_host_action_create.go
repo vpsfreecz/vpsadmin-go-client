@@ -19,7 +19,7 @@ func NewActionExportHostCreate(client *Client) *ActionExportHostCreate {
 // ActionExportHostCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionExportHostCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionExportHostCreateMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionExportHostCreateMetaGlobalInput) SetNo(value bool) *ActionExportHostCreateMetaGlobalInput {
 	in.No = value
@@ -72,11 +73,11 @@ func (in *ActionExportHostCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionExportHostCreateInput is a type for action input parameters
 type ActionExportHostCreateInput struct {
-	IpAddress int64 `json:"ip_address"`
-	RootSquash bool `json:"root_squash"`
-	Rw bool `json:"rw"`
-	SubtreeCheck bool `json:"subtree_check"`
-	Sync bool `json:"sync"`
+	IpAddress    int64 `json:"ip_address"`
+	RootSquash   bool  `json:"root_squash"`
+	Rw           bool  `json:"rw"`
+	SubtreeCheck bool  `json:"subtree_check"`
+	Sync         bool  `json:"sync"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -92,6 +93,7 @@ func (in *ActionExportHostCreateInput) SetIpAddress(value int64) *ActionExportHo
 	in._selectedParameters["IpAddress"] = nil
 	return in
 }
+
 // SetRootSquash sets parameter RootSquash to value and selects it for sending
 func (in *ActionExportHostCreateInput) SetRootSquash(value bool) *ActionExportHostCreateInput {
 	in.RootSquash = value
@@ -103,6 +105,7 @@ func (in *ActionExportHostCreateInput) SetRootSquash(value bool) *ActionExportHo
 	in._selectedParameters["RootSquash"] = nil
 	return in
 }
+
 // SetRw sets parameter Rw to value and selects it for sending
 func (in *ActionExportHostCreateInput) SetRw(value bool) *ActionExportHostCreateInput {
 	in.Rw = value
@@ -114,6 +117,7 @@ func (in *ActionExportHostCreateInput) SetRw(value bool) *ActionExportHostCreate
 	in._selectedParameters["Rw"] = nil
 	return in
 }
+
 // SetSubtreeCheck sets parameter SubtreeCheck to value and selects it for sending
 func (in *ActionExportHostCreateInput) SetSubtreeCheck(value bool) *ActionExportHostCreateInput {
 	in.SubtreeCheck = value
@@ -125,6 +129,7 @@ func (in *ActionExportHostCreateInput) SetSubtreeCheck(value bool) *ActionExport
 	in._selectedParameters["SubtreeCheck"] = nil
 	return in
 }
+
 // SetSync sets parameter Sync to value and selects it for sending
 func (in *ActionExportHostCreateInput) SetSync(value bool) *ActionExportHostCreateInput {
 	in.Sync = value
@@ -168,12 +173,12 @@ type ActionExportHostCreateRequest struct {
 
 // ActionExportHostCreateOutput is a type for action output parameters
 type ActionExportHostCreateOutput struct {
-	Id int64 `json:"id"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	RootSquash bool `json:"root_squash"`
-	Rw bool `json:"rw"`
-	SubtreeCheck bool `json:"subtree_check"`
-	Sync bool `json:"sync"`
+	Id           int64                      `json:"id"`
+	IpAddress    *ActionIpAddressShowOutput `json:"ip_address"`
+	RootSquash   bool                       `json:"root_squash"`
+	Rw           bool                       `json:"rw"`
+	SubtreeCheck bool                       `json:"subtree_check"`
+	Sync         bool                       `json:"sync"`
 }
 
 // ActionExportHostCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -196,12 +201,11 @@ type ActionExportHostCreateResponse struct {
 	Output *ActionExportHostCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionExportHostCreate) Prepare() *ActionExportHostCreateInvocation {
 	return &ActionExportHostCreateInvocation{
 		Action: action,
-		Path: "/v6.0/exports/{export_id}/hosts",
+		Path:   "/v6.0/exports/{export_id}/hosts",
 	}
 }
 
@@ -250,6 +254,7 @@ func (inv *ActionExportHostCreateInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionExportHostCreateInvocation) NewMetaInput() *ActionExportHostCreateMetaGlobalInput {
@@ -277,7 +282,6 @@ func (inv *ActionExportHostCreateInvocation) IsMetaParameterSelected(param strin
 func (inv *ActionExportHostCreateInvocation) Call() (*ActionExportHostCreateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionExportHostCreateInvocation) callAsBody() (*ActionExportHostCreateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -338,11 +342,11 @@ func (resp *ActionExportHostCreateResponse) WatchOperation(timeout float64, upda
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -364,8 +368,6 @@ func (resp *ActionExportHostCreateResponse) CancelOperation() (*ActionActionStat
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 	return req.Call()
 }
-
-
 
 func (inv *ActionExportHostCreateInvocation) makeAllInputParams() *ActionExportHostCreateRequest {
 	return &ActionExportHostCreateRequest{

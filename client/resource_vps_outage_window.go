@@ -26,12 +26,12 @@ func NewResourceVpsOutageWindow(client *Client) *ResourceVpsOutageWindow {
 	actionUpdateAll := NewActionVpsOutageWindowUpdateAll(client)
 
 	return &ResourceVpsOutageWindow{
-		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Client:    client,
+		Index:     actionIndex,
+		List:      actionIndex,
+		Show:      actionShow,
+		Find:      actionShow,
+		Update:    actionUpdate,
 		UpdateAll: actionUpdateAll,
 	}
 }

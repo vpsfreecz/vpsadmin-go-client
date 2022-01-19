@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionSystemConfigIndex is a type for action System_config#Index
 type ActionSystemConfigIndex struct {
@@ -17,9 +16,9 @@ func NewActionSystemConfigIndex(client *Client) *ActionSystemConfigIndex {
 
 // ActionSystemConfigIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionSystemConfigIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionSystemConfigIndexMetaGlobalInput) SetCount(value bool) *ActionSy
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionSystemConfigIndexMetaGlobalInput) SetIncludes(value string) *ActionSystemConfigIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionSystemConfigIndexMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionSystemConfigIndexMetaGlobalInput) SetNo(value bool) *ActionSystemConfigIndexMetaGlobalInput {
 	in.No = value
@@ -84,8 +85,8 @@ func (in *ActionSystemConfigIndexMetaGlobalInput) AnySelected() bool {
 // ActionSystemConfigIndexInput is a type for action input parameters
 type ActionSystemConfigIndexInput struct {
 	Category string `json:"category"`
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
+	Limit    int64  `json:"limit"`
+	Offset   int64  `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -101,6 +102,7 @@ func (in *ActionSystemConfigIndexInput) SetCategory(value string) *ActionSystemC
 	in._selectedParameters["Category"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionSystemConfigIndexInput) SetLimit(value int64) *ActionSystemConfigIndexInput {
 	in.Limit = value
@@ -112,6 +114,7 @@ func (in *ActionSystemConfigIndexInput) SetLimit(value int64) *ActionSystemConfi
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionSystemConfigIndexInput) SetOffset(value int64) *ActionSystemConfigIndexInput {
 	in.Offset = value
@@ -147,17 +150,15 @@ func (in *ActionSystemConfigIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionSystemConfigIndexOutput is a type for action output parameters
 type ActionSystemConfigIndexOutput struct {
-	Category string `json:"category"`
-	Description string `json:"description"`
-	Label string `json:"label"`
-	MinUserLevel int64 `json:"min_user_level"`
-	Name string `json:"name"`
-	Type string `json:"type"`
+	Category     string `json:"category"`
+	Description  string `json:"description"`
+	Label        string `json:"label"`
+	MinUserLevel int64  `json:"min_user_level"`
+	Name         string `json:"name"`
+	Type         string `json:"type"`
 }
-
 
 // Type for action response, including envelope
 type ActionSystemConfigIndexResponse struct {
@@ -172,12 +173,11 @@ type ActionSystemConfigIndexResponse struct {
 	Output []*ActionSystemConfigIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionSystemConfigIndex) Prepare() *ActionSystemConfigIndexInvocation {
 	return &ActionSystemConfigIndexInvocation{
 		Action: action,
-		Path: "/v6.0/system_configs",
+		Path:   "/v6.0/system_configs",
 	}
 }
 
@@ -193,7 +193,6 @@ type ActionSystemConfigIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionSystemConfigIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionSystemConfigIndexInvocation) NewInput() *ActionSystemConfigIndexInput {
@@ -216,6 +215,7 @@ func (inv *ActionSystemConfigIndexInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionSystemConfigIndexInvocation) NewMetaInput() *ActionSystemConfigIndexMetaGlobalInput {
@@ -256,8 +256,6 @@ func (inv *ActionSystemConfigIndexInvocation) callAsQuery() (*ActionSystemConfig
 	return resp, err
 }
 
-
-
 func (inv *ActionSystemConfigIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Category") {
@@ -285,4 +283,3 @@ func (inv *ActionSystemConfigIndexInvocation) convertMetaInputToQueryParams(ret 
 		}
 	}
 }
-

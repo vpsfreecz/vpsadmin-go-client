@@ -19,7 +19,7 @@ func NewActionVpsShow(client *Client) *ActionVpsShow {
 // ActionVpsShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsShowMetaGlobalInput) SetIncludes(value string) *ActionVpsShow
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsShowMetaGlobalInput) SetNo(value bool) *ActionVpsShowMetaGlobalInput {
 	in.No = value
@@ -70,49 +71,46 @@ func (in *ActionVpsShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionVpsShowOutput is a type for action output parameters
 type ActionVpsShowOutput struct {
-	Config string `json:"config"`
-	Cpu int64 `json:"cpu"`
-	CpuIdle float64 `json:"cpu_idle"`
-	CpuIowait float64 `json:"cpu_iowait"`
-	CpuIrq float64 `json:"cpu_irq"`
-	CpuLimit int64 `json:"cpu_limit"`
-	CpuNice float64 `json:"cpu_nice"`
-	CpuSoftirq float64 `json:"cpu_softirq"`
-	CpuSystem float64 `json:"cpu_system"`
-	CpuUser float64 `json:"cpu_user"`
-	CreatedAt string `json:"created_at"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Diskspace int64 `json:"diskspace"`
-	DnsResolver *ActionDnsResolverShowOutput `json:"dns_resolver"`
-	ExpirationDate string `json:"expiration_date"`
-	Hostname string `json:"hostname"`
-	Id int64 `json:"id"`
-	InRescueMode bool `json:"in_rescue_mode"`
-	Info string `json:"info"`
-	IsRunning bool `json:"is_running"`
-	Loadavg float64 `json:"loadavg"`
-	MaintenanceLock string `json:"maintenance_lock"`
-	MaintenanceLockReason string `json:"maintenance_lock_reason"`
-	ManageHostname bool `json:"manage_hostname"`
-	Memory int64 `json:"memory"`
-	Node *ActionNodeShowOutput `json:"node"`
-	ObjectState string `json:"object_state"`
-	Onboot bool `json:"onboot"`
-	Onstartall bool `json:"onstartall"`
-	OsTemplate *ActionOsTemplateShowOutput `json:"os_template"`
-	ProcessCount int64 `json:"process_count"`
-	Swap int64 `json:"swap"`
-	Uptime int64 `json:"uptime"`
-	UsedDiskspace int64 `json:"used_diskspace"`
-	UsedMemory int64 `json:"used_memory"`
-	UsedSwap int64 `json:"used_swap"`
-	User *ActionUserShowOutput `json:"user"`
+	Config                string                       `json:"config"`
+	Cpu                   int64                        `json:"cpu"`
+	CpuIdle               float64                      `json:"cpu_idle"`
+	CpuIowait             float64                      `json:"cpu_iowait"`
+	CpuIrq                float64                      `json:"cpu_irq"`
+	CpuLimit              int64                        `json:"cpu_limit"`
+	CpuNice               float64                      `json:"cpu_nice"`
+	CpuSoftirq            float64                      `json:"cpu_softirq"`
+	CpuSystem             float64                      `json:"cpu_system"`
+	CpuUser               float64                      `json:"cpu_user"`
+	CreatedAt             string                       `json:"created_at"`
+	Dataset               *ActionDatasetShowOutput     `json:"dataset"`
+	Diskspace             int64                        `json:"diskspace"`
+	DnsResolver           *ActionDnsResolverShowOutput `json:"dns_resolver"`
+	ExpirationDate        string                       `json:"expiration_date"`
+	Hostname              string                       `json:"hostname"`
+	Id                    int64                        `json:"id"`
+	InRescueMode          bool                         `json:"in_rescue_mode"`
+	Info                  string                       `json:"info"`
+	IsRunning             bool                         `json:"is_running"`
+	Loadavg               float64                      `json:"loadavg"`
+	MaintenanceLock       string                       `json:"maintenance_lock"`
+	MaintenanceLockReason string                       `json:"maintenance_lock_reason"`
+	ManageHostname        bool                         `json:"manage_hostname"`
+	Memory                int64                        `json:"memory"`
+	Node                  *ActionNodeShowOutput        `json:"node"`
+	ObjectState           string                       `json:"object_state"`
+	Onboot                bool                         `json:"onboot"`
+	Onstartall            bool                         `json:"onstartall"`
+	OsTemplate            *ActionOsTemplateShowOutput  `json:"os_template"`
+	ProcessCount          int64                        `json:"process_count"`
+	Swap                  int64                        `json:"swap"`
+	Uptime                int64                        `json:"uptime"`
+	UsedDiskspace         int64                        `json:"used_diskspace"`
+	UsedMemory            int64                        `json:"used_memory"`
+	UsedSwap              int64                        `json:"used_swap"`
+	User                  *ActionUserShowOutput        `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsShowResponse struct {
@@ -127,12 +125,11 @@ type ActionVpsShowResponse struct {
 	Output *ActionVpsShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsShow) Prepare() *ActionVpsShowInvocation {
 	return &ActionVpsShowInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}",
+		Path:   "/v6.0/vpses/{vps_id}",
 	}
 }
 
@@ -197,9 +194,6 @@ func (inv *ActionVpsShowInvocation) callAsQuery() (*ActionVpsShowResponse, error
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -210,4 +204,3 @@ func (inv *ActionVpsShowInvocation) convertMetaInputToQueryParams(ret map[string
 		}
 	}
 }
-

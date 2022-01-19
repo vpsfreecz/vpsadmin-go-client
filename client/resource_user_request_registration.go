@@ -34,15 +34,15 @@ func NewResourceUserRequestRegistration(client *Client) *ResourceUserRequestRegi
 	actionUpdate := NewActionUserRequestRegistrationUpdate(client)
 
 	return &ResourceUserRequestRegistration{
-		Client: client,
-		Create: actionCreate,
-		New: actionCreate,
-		Index: actionIndex,
-		List: actionIndex,
+		Client:  client,
+		Create:  actionCreate,
+		New:     actionCreate,
+		Index:   actionIndex,
+		List:    actionIndex,
 		Preview: actionPreview,
 		Resolve: actionResolve,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Show:    actionShow,
+		Find:    actionShow,
+		Update:  actionUpdate,
 	}
 }

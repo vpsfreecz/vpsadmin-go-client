@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionDnsResolverCreate is a type for action Dns_resolver#Create
 type ActionDnsResolverCreate struct {
@@ -18,7 +17,7 @@ func NewActionDnsResolverCreate(client *Client) *ActionDnsResolverCreate {
 // ActionDnsResolverCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsResolverCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionDnsResolverCreateMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDnsResolverCreateMetaGlobalInput) SetNo(value bool) *ActionDnsResolverCreateMetaGlobalInput {
 	in.No = value
@@ -71,10 +71,10 @@ func (in *ActionDnsResolverCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsResolverCreateInput is a type for action input parameters
 type ActionDnsResolverCreateInput struct {
-	IpAddr string `json:"ip_addr"`
-	IsUniversal bool `json:"is_universal"`
-	Label string `json:"label"`
-	Location int64 `json:"location"`
+	IpAddr      string `json:"ip_addr"`
+	IsUniversal bool   `json:"is_universal"`
+	Label       string `json:"label"`
+	Location    int64  `json:"location"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -90,6 +90,7 @@ func (in *ActionDnsResolverCreateInput) SetIpAddr(value string) *ActionDnsResolv
 	in._selectedParameters["IpAddr"] = nil
 	return in
 }
+
 // SetIsUniversal sets parameter IsUniversal to value and selects it for sending
 func (in *ActionDnsResolverCreateInput) SetIsUniversal(value bool) *ActionDnsResolverCreateInput {
 	in.IsUniversal = value
@@ -101,6 +102,7 @@ func (in *ActionDnsResolverCreateInput) SetIsUniversal(value bool) *ActionDnsRes
 	in._selectedParameters["IsUniversal"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionDnsResolverCreateInput) SetLabel(value string) *ActionDnsResolverCreateInput {
 	in.Label = value
@@ -112,6 +114,7 @@ func (in *ActionDnsResolverCreateInput) SetLabel(value string) *ActionDnsResolve
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionDnsResolverCreateInput) SetLocation(value int64) *ActionDnsResolverCreateInput {
 	in.Location = value
@@ -150,18 +153,17 @@ func (in *ActionDnsResolverCreateInput) AnySelected() bool {
 // ActionDnsResolverCreateRequest is a type for the entire action request
 type ActionDnsResolverCreateRequest struct {
 	DnsResolver map[string]interface{} `json:"dns_resolver"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta        map[string]interface{} `json:"_meta"`
 }
 
 // ActionDnsResolverCreateOutput is a type for action output parameters
 type ActionDnsResolverCreateOutput struct {
-	Id int64 `json:"id"`
-	IpAddr string `json:"ip_addr"`
-	IsUniversal bool `json:"is_universal"`
-	Label string `json:"label"`
-	Location *ActionLocationShowOutput `json:"location"`
+	Id          int64                     `json:"id"`
+	IpAddr      string                    `json:"ip_addr"`
+	IsUniversal bool                      `json:"is_universal"`
+	Label       string                    `json:"label"`
+	Location    *ActionLocationShowOutput `json:"location"`
 }
-
 
 // Type for action response, including envelope
 type ActionDnsResolverCreateResponse struct {
@@ -176,12 +178,11 @@ type ActionDnsResolverCreateResponse struct {
 	Output *ActionDnsResolverCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDnsResolverCreate) Prepare() *ActionDnsResolverCreateInvocation {
 	return &ActionDnsResolverCreateInvocation{
 		Action: action,
-		Path: "/v6.0/dns_resolvers",
+		Path:   "/v6.0/dns_resolvers",
 	}
 }
 
@@ -197,7 +198,6 @@ type ActionDnsResolverCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionDnsResolverCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionDnsResolverCreateInvocation) NewInput() *ActionDnsResolverCreateInput {
@@ -220,6 +220,7 @@ func (inv *ActionDnsResolverCreateInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionDnsResolverCreateInvocation) NewMetaInput() *ActionDnsResolverCreateMetaGlobalInput {
@@ -248,7 +249,6 @@ func (inv *ActionDnsResolverCreateInvocation) Call() (*ActionDnsResolverCreateRe
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionDnsResolverCreateInvocation) callAsBody() (*ActionDnsResolverCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionDnsResolverCreateResponse{Action: inv.Action}
@@ -259,13 +259,10 @@ func (inv *ActionDnsResolverCreateInvocation) callAsBody() (*ActionDnsResolverCr
 	return resp, err
 }
 
-
-
-
 func (inv *ActionDnsResolverCreateInvocation) makeAllInputParams() *ActionDnsResolverCreateRequest {
 	return &ActionDnsResolverCreateRequest{
 		DnsResolver: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:        inv.makeMetaInputParams(),
 	}
 }
 

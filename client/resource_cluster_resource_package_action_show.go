@@ -19,7 +19,7 @@ func NewActionClusterResourcePackageShow(client *Client) *ActionClusterResourceP
 // ActionClusterResourcePackageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourcePackageShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionClusterResourcePackageShowMetaGlobalInput) SetIncludes(value str
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionClusterResourcePackageShowMetaGlobalInput) SetNo(value bool) *ActionClusterResourcePackageShowMetaGlobalInput {
 	in.No = value
@@ -70,18 +71,15 @@ func (in *ActionClusterResourcePackageShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionClusterResourcePackageShowOutput is a type for action output parameters
 type ActionClusterResourcePackageShowOutput struct {
-	CreatedAt string `json:"created_at"`
+	CreatedAt   string                       `json:"created_at"`
 	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
+	Id          int64                        `json:"id"`
+	Label       string                       `json:"label"`
+	UpdatedAt   string                       `json:"updated_at"`
+	User        *ActionUserShowOutput        `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionClusterResourcePackageShowResponse struct {
@@ -96,12 +94,11 @@ type ActionClusterResourcePackageShowResponse struct {
 	Output *ActionClusterResourcePackageShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionClusterResourcePackageShow) Prepare() *ActionClusterResourcePackageShowInvocation {
 	return &ActionClusterResourcePackageShowInvocation{
 		Action: action,
-		Path: "/v6.0/cluster_resource_packages/{cluster_resource_package_id}",
+		Path:   "/v6.0/cluster_resource_packages/{cluster_resource_package_id}",
 	}
 }
 
@@ -166,9 +163,6 @@ func (inv *ActionClusterResourcePackageShowInvocation) callAsQuery() (*ActionClu
 	return resp, err
 }
 
-
-
-
 func (inv *ActionClusterResourcePackageShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -179,4 +173,3 @@ func (inv *ActionClusterResourcePackageShowInvocation) convertMetaInputToQueryPa
 		}
 	}
 }
-

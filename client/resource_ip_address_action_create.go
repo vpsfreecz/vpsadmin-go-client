@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionIpAddressCreate is a type for action Ip_address#Create
 type ActionIpAddressCreate struct {
@@ -18,7 +17,7 @@ func NewActionIpAddressCreate(client *Client) *ActionIpAddressCreate {
 // ActionIpAddressCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionIpAddressCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionIpAddressCreateMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionIpAddressCreateMetaGlobalInput) SetNo(value bool) *ActionIpAddressCreateMetaGlobalInput {
 	in.No = value
@@ -71,15 +71,15 @@ func (in *ActionIpAddressCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionIpAddressCreateInput is a type for action input parameters
 type ActionIpAddressCreateInput struct {
-	Addr string `json:"addr"`
-	MaxRx int64 `json:"max_rx"`
-	MaxTx int64 `json:"max_tx"`
-	Network int64 `json:"network"`
-	NetworkInterface int64 `json:"network_interface"`
-	Prefix int64 `json:"prefix"`
-	RouteVia int64 `json:"route_via"`
-	Size int64 `json:"size"`
-	User int64 `json:"user"`
+	Addr             string `json:"addr"`
+	MaxRx            int64  `json:"max_rx"`
+	MaxTx            int64  `json:"max_tx"`
+	Network          int64  `json:"network"`
+	NetworkInterface int64  `json:"network_interface"`
+	Prefix           int64  `json:"prefix"`
+	RouteVia         int64  `json:"route_via"`
+	Size             int64  `json:"size"`
+	User             int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -95,6 +95,7 @@ func (in *ActionIpAddressCreateInput) SetAddr(value string) *ActionIpAddressCrea
 	in._selectedParameters["Addr"] = nil
 	return in
 }
+
 // SetMaxRx sets parameter MaxRx to value and selects it for sending
 func (in *ActionIpAddressCreateInput) SetMaxRx(value int64) *ActionIpAddressCreateInput {
 	in.MaxRx = value
@@ -106,6 +107,7 @@ func (in *ActionIpAddressCreateInput) SetMaxRx(value int64) *ActionIpAddressCrea
 	in._selectedParameters["MaxRx"] = nil
 	return in
 }
+
 // SetMaxTx sets parameter MaxTx to value and selects it for sending
 func (in *ActionIpAddressCreateInput) SetMaxTx(value int64) *ActionIpAddressCreateInput {
 	in.MaxTx = value
@@ -117,6 +119,7 @@ func (in *ActionIpAddressCreateInput) SetMaxTx(value int64) *ActionIpAddressCrea
 	in._selectedParameters["MaxTx"] = nil
 	return in
 }
+
 // SetNetwork sets parameter Network to value and selects it for sending
 func (in *ActionIpAddressCreateInput) SetNetwork(value int64) *ActionIpAddressCreateInput {
 	in.Network = value
@@ -128,6 +131,7 @@ func (in *ActionIpAddressCreateInput) SetNetwork(value int64) *ActionIpAddressCr
 	in._selectedParameters["Network"] = nil
 	return in
 }
+
 // SetNetworkInterface sets parameter NetworkInterface to value and selects it for sending
 func (in *ActionIpAddressCreateInput) SetNetworkInterface(value int64) *ActionIpAddressCreateInput {
 	in.NetworkInterface = value
@@ -139,6 +143,7 @@ func (in *ActionIpAddressCreateInput) SetNetworkInterface(value int64) *ActionIp
 	in._selectedParameters["NetworkInterface"] = nil
 	return in
 }
+
 // SetPrefix sets parameter Prefix to value and selects it for sending
 func (in *ActionIpAddressCreateInput) SetPrefix(value int64) *ActionIpAddressCreateInput {
 	in.Prefix = value
@@ -150,6 +155,7 @@ func (in *ActionIpAddressCreateInput) SetPrefix(value int64) *ActionIpAddressCre
 	in._selectedParameters["Prefix"] = nil
 	return in
 }
+
 // SetRouteVia sets parameter RouteVia to value and selects it for sending
 func (in *ActionIpAddressCreateInput) SetRouteVia(value int64) *ActionIpAddressCreateInput {
 	in.RouteVia = value
@@ -161,6 +167,7 @@ func (in *ActionIpAddressCreateInput) SetRouteVia(value int64) *ActionIpAddressC
 	in._selectedParameters["RouteVia"] = nil
 	return in
 }
+
 // SetSize sets parameter Size to value and selects it for sending
 func (in *ActionIpAddressCreateInput) SetSize(value int64) *ActionIpAddressCreateInput {
 	in.Size = value
@@ -172,6 +179,7 @@ func (in *ActionIpAddressCreateInput) SetSize(value int64) *ActionIpAddressCreat
 	in._selectedParameters["Size"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionIpAddressCreateInput) SetUser(value int64) *ActionIpAddressCreateInput {
 	in.User = value
@@ -210,25 +218,24 @@ func (in *ActionIpAddressCreateInput) AnySelected() bool {
 // ActionIpAddressCreateRequest is a type for the entire action request
 type ActionIpAddressCreateRequest struct {
 	IpAddress map[string]interface{} `json:"ip_address"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta      map[string]interface{} `json:"_meta"`
 }
 
 // ActionIpAddressCreateOutput is a type for action output parameters
 type ActionIpAddressCreateOutput struct {
-	Addr string `json:"addr"`
-	ChargedEnvironment *ActionEnvironmentShowOutput `json:"charged_environment"`
-	ClassId int64 `json:"class_id"`
-	Id int64 `json:"id"`
-	MaxRx int64 `json:"max_rx"`
-	MaxTx int64 `json:"max_tx"`
-	Network *ActionNetworkShowOutput `json:"network"`
-	NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Prefix int64 `json:"prefix"`
-	RouteVia *ActionHostIpAddressShowOutput `json:"route_via"`
-	Size int64 `json:"size"`
-	User *ActionUserShowOutput `json:"user"`
+	Addr               string                            `json:"addr"`
+	ChargedEnvironment *ActionEnvironmentShowOutput      `json:"charged_environment"`
+	ClassId            int64                             `json:"class_id"`
+	Id                 int64                             `json:"id"`
+	MaxRx              int64                             `json:"max_rx"`
+	MaxTx              int64                             `json:"max_tx"`
+	Network            *ActionNetworkShowOutput          `json:"network"`
+	NetworkInterface   *ActionNetworkInterfaceShowOutput `json:"network_interface"`
+	Prefix             int64                             `json:"prefix"`
+	RouteVia           *ActionHostIpAddressShowOutput    `json:"route_via"`
+	Size               int64                             `json:"size"`
+	User               *ActionUserShowOutput             `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionIpAddressCreateResponse struct {
@@ -243,12 +250,11 @@ type ActionIpAddressCreateResponse struct {
 	Output *ActionIpAddressCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionIpAddressCreate) Prepare() *ActionIpAddressCreateInvocation {
 	return &ActionIpAddressCreateInvocation{
 		Action: action,
-		Path: "/v6.0/ip_addresses",
+		Path:   "/v6.0/ip_addresses",
 	}
 }
 
@@ -264,7 +270,6 @@ type ActionIpAddressCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionIpAddressCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionIpAddressCreateInvocation) NewInput() *ActionIpAddressCreateInput {
@@ -287,6 +292,7 @@ func (inv *ActionIpAddressCreateInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionIpAddressCreateInvocation) NewMetaInput() *ActionIpAddressCreateMetaGlobalInput {
@@ -315,7 +321,6 @@ func (inv *ActionIpAddressCreateInvocation) Call() (*ActionIpAddressCreateRespon
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionIpAddressCreateInvocation) callAsBody() (*ActionIpAddressCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionIpAddressCreateResponse{Action: inv.Action}
@@ -326,13 +331,10 @@ func (inv *ActionIpAddressCreateInvocation) callAsBody() (*ActionIpAddressCreate
 	return resp, err
 }
 
-
-
-
 func (inv *ActionIpAddressCreateInvocation) makeAllInputParams() *ActionIpAddressCreateRequest {
 	return &ActionIpAddressCreateRequest{
 		IpAddress: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:      inv.makeMetaInputParams(),
 	}
 }
 

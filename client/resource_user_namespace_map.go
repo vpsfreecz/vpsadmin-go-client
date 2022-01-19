@@ -35,16 +35,16 @@ func NewResourceUserNamespaceMap(client *Client) *ResourceUserNamespaceMap {
 	actionUpdate := NewActionUserNamespaceMapUpdate(client)
 
 	return &ResourceUserNamespaceMap{
-		Client: client,
-		Entry: NewResourceUserNamespaceMapEntry(client),
-		Create: actionCreate,
-		New: actionCreate,
-		Delete: actionDelete,
+		Client:  client,
+		Entry:   NewResourceUserNamespaceMapEntry(client),
+		Create:  actionCreate,
+		New:     actionCreate,
+		Delete:  actionDelete,
 		Destroy: actionDelete,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Index:   actionIndex,
+		List:    actionIndex,
+		Show:    actionShow,
+		Find:    actionShow,
+		Update:  actionUpdate,
 	}
 }

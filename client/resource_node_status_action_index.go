@@ -18,9 +18,9 @@ func NewActionNodeStatusIndex(client *Client) *ActionNodeStatusIndex {
 
 // ActionNodeStatusIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeStatusIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionNodeStatusIndexMetaGlobalInput) SetCount(value bool) *ActionNode
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionNodeStatusIndexMetaGlobalInput) SetIncludes(value string) *ActionNodeStatusIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionNodeStatusIndexMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNodeStatusIndexMetaGlobalInput) SetNo(value bool) *ActionNodeStatusIndexMetaGlobalInput {
 	in.No = value
@@ -84,10 +86,10 @@ func (in *ActionNodeStatusIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeStatusIndexInput is a type for action input parameters
 type ActionNodeStatusIndexInput struct {
-	From string `json:"from"`
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
-	To string `json:"to"`
+	From   string `json:"from"`
+	Limit  int64  `json:"limit"`
+	Offset int64  `json:"offset"`
+	To     string `json:"to"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -103,6 +105,7 @@ func (in *ActionNodeStatusIndexInput) SetFrom(value string) *ActionNodeStatusInd
 	in._selectedParameters["From"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionNodeStatusIndexInput) SetLimit(value int64) *ActionNodeStatusIndexInput {
 	in.Limit = value
@@ -114,6 +117,7 @@ func (in *ActionNodeStatusIndexInput) SetLimit(value int64) *ActionNodeStatusInd
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionNodeStatusIndexInput) SetOffset(value int64) *ActionNodeStatusIndexInput {
 	in.Offset = value
@@ -125,6 +129,7 @@ func (in *ActionNodeStatusIndexInput) SetOffset(value int64) *ActionNodeStatusIn
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetTo sets parameter To to value and selects it for sending
 func (in *ActionNodeStatusIndexInput) SetTo(value string) *ActionNodeStatusIndexInput {
 	in.To = value
@@ -160,35 +165,33 @@ func (in *ActionNodeStatusIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionNodeStatusIndexOutput is a type for action output parameters
 type ActionNodeStatusIndexOutput struct {
-	ArcC int64 `json:"arc_c"`
-	ArcCMax int64 `json:"arc_c_max"`
+	ArcC          int64   `json:"arc_c"`
+	ArcCMax       int64   `json:"arc_c_max"`
 	ArcHitpercent float64 `json:"arc_hitpercent"`
-	ArcSize int64 `json:"arc_size"`
-	CpuGuest float64 `json:"cpu_guest"`
-	CpuIdle float64 `json:"cpu_idle"`
-	CpuIowait float64 `json:"cpu_iowait"`
-	CpuIrq float64 `json:"cpu_irq"`
-	CpuNice float64 `json:"cpu_nice"`
-	CpuSoftirq float64 `json:"cpu_softirq"`
-	CpuSystem float64 `json:"cpu_system"`
-	CpuUser float64 `json:"cpu_user"`
-	Cpus int64 `json:"cpus"`
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	Kernel string `json:"kernel"`
-	Loadavg float64 `json:"loadavg"`
-	ProcessCount int64 `json:"process_count"`
-	TotalMemory int64 `json:"total_memory"`
-	TotalSwap int64 `json:"total_swap"`
-	Uptime int64 `json:"uptime"`
-	UsedMemory int64 `json:"used_memory"`
-	UsedSwap int64 `json:"used_swap"`
-	Version string `json:"version"`
+	ArcSize       int64   `json:"arc_size"`
+	CpuGuest      float64 `json:"cpu_guest"`
+	CpuIdle       float64 `json:"cpu_idle"`
+	CpuIowait     float64 `json:"cpu_iowait"`
+	CpuIrq        float64 `json:"cpu_irq"`
+	CpuNice       float64 `json:"cpu_nice"`
+	CpuSoftirq    float64 `json:"cpu_softirq"`
+	CpuSystem     float64 `json:"cpu_system"`
+	CpuUser       float64 `json:"cpu_user"`
+	Cpus          int64   `json:"cpus"`
+	CreatedAt     string  `json:"created_at"`
+	Id            int64   `json:"id"`
+	Kernel        string  `json:"kernel"`
+	Loadavg       float64 `json:"loadavg"`
+	ProcessCount  int64   `json:"process_count"`
+	TotalMemory   int64   `json:"total_memory"`
+	TotalSwap     int64   `json:"total_swap"`
+	Uptime        int64   `json:"uptime"`
+	UsedMemory    int64   `json:"used_memory"`
+	UsedSwap      int64   `json:"used_swap"`
+	Version       string  `json:"version"`
 }
-
 
 // Type for action response, including envelope
 type ActionNodeStatusIndexResponse struct {
@@ -203,12 +206,11 @@ type ActionNodeStatusIndexResponse struct {
 	Output []*ActionNodeStatusIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNodeStatusIndex) Prepare() *ActionNodeStatusIndexInvocation {
 	return &ActionNodeStatusIndexInvocation{
 		Action: action,
-		Path: "/v6.0/nodes/{node_id}/statuses",
+		Path:   "/v6.0/nodes/{node_id}/statuses",
 	}
 }
 
@@ -257,6 +259,7 @@ func (inv *ActionNodeStatusIndexInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionNodeStatusIndexInvocation) NewMetaInput() *ActionNodeStatusIndexMetaGlobalInput {
@@ -297,8 +300,6 @@ func (inv *ActionNodeStatusIndexInvocation) callAsQuery() (*ActionNodeStatusInde
 	return resp, err
 }
 
-
-
 func (inv *ActionNodeStatusIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("From") {
@@ -329,4 +330,3 @@ func (inv *ActionNodeStatusIndexInvocation) convertMetaInputToQueryParams(ret ma
 		}
 	}
 }
-

@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionDnsResolverIndex is a type for action Dns_resolver#Index
 type ActionDnsResolverIndex struct {
@@ -17,9 +16,9 @@ func NewActionDnsResolverIndex(client *Client) *ActionDnsResolverIndex {
 
 // ActionDnsResolverIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsResolverIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionDnsResolverIndexMetaGlobalInput) SetCount(value bool) *ActionDns
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionDnsResolverIndexMetaGlobalInput) SetIncludes(value string) *ActionDnsResolverIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionDnsResolverIndexMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDnsResolverIndexMetaGlobalInput) SetNo(value bool) *ActionDnsResolverIndexMetaGlobalInput {
 	in.No = value
@@ -83,9 +84,9 @@ func (in *ActionDnsResolverIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsResolverIndexInput is a type for action input parameters
 type ActionDnsResolverIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
-	Vps int64 `json:"vps"`
+	Vps    int64 `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -101,6 +102,7 @@ func (in *ActionDnsResolverIndexInput) SetLimit(value int64) *ActionDnsResolverI
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionDnsResolverIndexInput) SetOffset(value int64) *ActionDnsResolverIndexInput {
 	in.Offset = value
@@ -112,6 +114,7 @@ func (in *ActionDnsResolverIndexInput) SetOffset(value int64) *ActionDnsResolver
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetVps sets parameter Vps to value and selects it for sending
 func (in *ActionDnsResolverIndexInput) SetVps(value int64) *ActionDnsResolverIndexInput {
 	in.Vps = value
@@ -147,16 +150,14 @@ func (in *ActionDnsResolverIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionDnsResolverIndexOutput is a type for action output parameters
 type ActionDnsResolverIndexOutput struct {
-	Id int64 `json:"id"`
-	IpAddr string `json:"ip_addr"`
-	IsUniversal bool `json:"is_universal"`
-	Label string `json:"label"`
-	Location *ActionLocationShowOutput `json:"location"`
+	Id          int64                     `json:"id"`
+	IpAddr      string                    `json:"ip_addr"`
+	IsUniversal bool                      `json:"is_universal"`
+	Label       string                    `json:"label"`
+	Location    *ActionLocationShowOutput `json:"location"`
 }
-
 
 // Type for action response, including envelope
 type ActionDnsResolverIndexResponse struct {
@@ -171,12 +172,11 @@ type ActionDnsResolverIndexResponse struct {
 	Output []*ActionDnsResolverIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDnsResolverIndex) Prepare() *ActionDnsResolverIndexInvocation {
 	return &ActionDnsResolverIndexInvocation{
 		Action: action,
-		Path: "/v6.0/dns_resolvers",
+		Path:   "/v6.0/dns_resolvers",
 	}
 }
 
@@ -192,7 +192,6 @@ type ActionDnsResolverIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionDnsResolverIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionDnsResolverIndexInvocation) NewInput() *ActionDnsResolverIndexInput {
@@ -215,6 +214,7 @@ func (inv *ActionDnsResolverIndexInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionDnsResolverIndexInvocation) NewMetaInput() *ActionDnsResolverIndexMetaGlobalInput {
@@ -255,8 +255,6 @@ func (inv *ActionDnsResolverIndexInvocation) callAsQuery() (*ActionDnsResolverIn
 	return resp, err
 }
 
-
-
 func (inv *ActionDnsResolverIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -284,4 +282,3 @@ func (inv *ActionDnsResolverIndexInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

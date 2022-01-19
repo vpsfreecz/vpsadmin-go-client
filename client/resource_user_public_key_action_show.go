@@ -19,7 +19,7 @@ func NewActionUserPublicKeyShow(client *Client) *ActionUserPublicKeyShow {
 // ActionUserPublicKeyShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPublicKeyShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserPublicKeyShowMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserPublicKeyShowMetaGlobalInput) SetNo(value bool) *ActionUserPublicKeyShowMetaGlobalInput {
 	in.No = value
@@ -70,20 +71,17 @@ func (in *ActionUserPublicKeyShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserPublicKeyShowOutput is a type for action output parameters
 type ActionUserPublicKeyShowOutput struct {
-	AutoAdd bool `json:"auto_add"`
-	Comment string `json:"comment"`
-	CreatedAt string `json:"created_at"`
+	AutoAdd     bool   `json:"auto_add"`
+	Comment     string `json:"comment"`
+	CreatedAt   string `json:"created_at"`
 	Fingerprint string `json:"fingerprint"`
-	Id int64 `json:"id"`
-	Key string `json:"key"`
-	Label string `json:"label"`
-	UpdatedAt string `json:"updated_at"`
+	Id          int64  `json:"id"`
+	Key         string `json:"key"`
+	Label       string `json:"label"`
+	UpdatedAt   string `json:"updated_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserPublicKeyShowResponse struct {
@@ -98,12 +96,11 @@ type ActionUserPublicKeyShowResponse struct {
 	Output *ActionUserPublicKeyShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserPublicKeyShow) Prepare() *ActionUserPublicKeyShowInvocation {
 	return &ActionUserPublicKeyShowInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/public_keys/{public_key_id}",
+		Path:   "/v6.0/users/{user_id}/public_keys/{public_key_id}",
 	}
 }
 
@@ -168,9 +165,6 @@ func (inv *ActionUserPublicKeyShowInvocation) callAsQuery() (*ActionUserPublicKe
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserPublicKeyShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -181,4 +175,3 @@ func (inv *ActionUserPublicKeyShowInvocation) convertMetaInputToQueryParams(ret 
 		}
 	}
 }
-

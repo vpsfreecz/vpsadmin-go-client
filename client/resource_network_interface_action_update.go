@@ -19,7 +19,7 @@ func NewActionNetworkInterfaceUpdate(client *Client) *ActionNetworkInterfaceUpda
 // ActionNetworkInterfaceUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkInterfaceUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionNetworkInterfaceUpdateMetaGlobalInput) SetIncludes(value string)
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNetworkInterfaceUpdateMetaGlobalInput) SetNo(value bool) *ActionNetworkInterfaceUpdateMetaGlobalInput {
 	in.No = value
@@ -115,16 +116,16 @@ func (in *ActionNetworkInterfaceUpdateInput) AnySelected() bool {
 // ActionNetworkInterfaceUpdateRequest is a type for the entire action request
 type ActionNetworkInterfaceUpdateRequest struct {
 	NetworkInterface map[string]interface{} `json:"network_interface"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta             map[string]interface{} `json:"_meta"`
 }
 
 // ActionNetworkInterfaceUpdateOutput is a type for action output parameters
 type ActionNetworkInterfaceUpdateOutput struct {
-	Id int64 `json:"id"`
-	Mac string `json:"mac"`
-	Name string `json:"name"`
-	Type string `json:"type"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	Id   int64                `json:"id"`
+	Mac  string               `json:"mac"`
+	Name string               `json:"name"`
+	Type string               `json:"type"`
+	Vps  *ActionVpsShowOutput `json:"vps"`
 }
 
 // ActionNetworkInterfaceUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -147,12 +148,11 @@ type ActionNetworkInterfaceUpdateResponse struct {
 	Output *ActionNetworkInterfaceUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNetworkInterfaceUpdate) Prepare() *ActionNetworkInterfaceUpdateInvocation {
 	return &ActionNetworkInterfaceUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/network_interfaces/{network_interface_id}",
+		Path:   "/v6.0/network_interfaces/{network_interface_id}",
 	}
 }
 
@@ -201,6 +201,7 @@ func (inv *ActionNetworkInterfaceUpdateInvocation) IsParameterSelected(param str
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionNetworkInterfaceUpdateInvocation) NewMetaInput() *ActionNetworkInterfaceUpdateMetaGlobalInput {
@@ -228,7 +229,6 @@ func (inv *ActionNetworkInterfaceUpdateInvocation) IsMetaParameterSelected(param
 func (inv *ActionNetworkInterfaceUpdateInvocation) Call() (*ActionNetworkInterfaceUpdateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionNetworkInterfaceUpdateInvocation) callAsBody() (*ActionNetworkInterfaceUpdateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -289,11 +289,11 @@ func (resp *ActionNetworkInterfaceUpdateResponse) WatchOperation(timeout float64
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -316,12 +316,10 @@ func (resp *ActionNetworkInterfaceUpdateResponse) CancelOperation() (*ActionActi
 	return req.Call()
 }
 
-
-
 func (inv *ActionNetworkInterfaceUpdateInvocation) makeAllInputParams() *ActionNetworkInterfaceUpdateRequest {
 	return &ActionNetworkInterfaceUpdateRequest{
 		NetworkInterface: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:             inv.makeMetaInputParams(),
 	}
 }
 

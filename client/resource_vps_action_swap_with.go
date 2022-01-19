@@ -19,7 +19,7 @@ func NewActionVpsSwapWith(client *Client) *ActionVpsSwapWith {
 // ActionVpsSwapWithMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsSwapWithMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsSwapWithMetaGlobalInput) SetIncludes(value string) *ActionVps
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsSwapWithMetaGlobalInput) SetNo(value bool) *ActionVpsSwapWithMetaGlobalInput {
 	in.No = value
@@ -72,11 +73,11 @@ func (in *ActionVpsSwapWithMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsSwapWithInput is a type for action input parameters
 type ActionVpsSwapWithInput struct {
-	Configs bool `json:"configs"`
-	Expirations bool `json:"expirations"`
-	Hostname bool `json:"hostname"`
-	Resources bool `json:"resources"`
-	Vps int64 `json:"vps"`
+	Configs     bool  `json:"configs"`
+	Expirations bool  `json:"expirations"`
+	Hostname    bool  `json:"hostname"`
+	Resources   bool  `json:"resources"`
+	Vps         int64 `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -92,6 +93,7 @@ func (in *ActionVpsSwapWithInput) SetConfigs(value bool) *ActionVpsSwapWithInput
 	in._selectedParameters["Configs"] = nil
 	return in
 }
+
 // SetExpirations sets parameter Expirations to value and selects it for sending
 func (in *ActionVpsSwapWithInput) SetExpirations(value bool) *ActionVpsSwapWithInput {
 	in.Expirations = value
@@ -103,6 +105,7 @@ func (in *ActionVpsSwapWithInput) SetExpirations(value bool) *ActionVpsSwapWithI
 	in._selectedParameters["Expirations"] = nil
 	return in
 }
+
 // SetHostname sets parameter Hostname to value and selects it for sending
 func (in *ActionVpsSwapWithInput) SetHostname(value bool) *ActionVpsSwapWithInput {
 	in.Hostname = value
@@ -114,6 +117,7 @@ func (in *ActionVpsSwapWithInput) SetHostname(value bool) *ActionVpsSwapWithInpu
 	in._selectedParameters["Hostname"] = nil
 	return in
 }
+
 // SetResources sets parameter Resources to value and selects it for sending
 func (in *ActionVpsSwapWithInput) SetResources(value bool) *ActionVpsSwapWithInput {
 	in.Resources = value
@@ -125,6 +129,7 @@ func (in *ActionVpsSwapWithInput) SetResources(value bool) *ActionVpsSwapWithInp
 	in._selectedParameters["Resources"] = nil
 	return in
 }
+
 // SetVps sets parameter Vps to value and selects it for sending
 func (in *ActionVpsSwapWithInput) SetVps(value int64) *ActionVpsSwapWithInput {
 	in.Vps = value
@@ -162,10 +167,9 @@ func (in *ActionVpsSwapWithInput) AnySelected() bool {
 
 // ActionVpsSwapWithRequest is a type for the entire action request
 type ActionVpsSwapWithRequest struct {
-	Vps map[string]interface{} `json:"vps"`
+	Vps  map[string]interface{} `json:"vps"`
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionVpsSwapWithMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsSwapWithMetaGlobalOutput struct {
@@ -183,12 +187,11 @@ type ActionVpsSwapWithResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsSwapWith) Prepare() *ActionVpsSwapWithInvocation {
 	return &ActionVpsSwapWithInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/swap_with",
+		Path:   "/v6.0/vpses/{vps_id}/swap_with",
 	}
 }
 
@@ -237,6 +240,7 @@ func (inv *ActionVpsSwapWithInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsSwapWithInvocation) NewMetaInput() *ActionVpsSwapWithMetaGlobalInput {
@@ -264,7 +268,6 @@ func (inv *ActionVpsSwapWithInvocation) IsMetaParameterSelected(param string) bo
 func (inv *ActionVpsSwapWithInvocation) Call() (*ActionVpsSwapWithResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsSwapWithInvocation) callAsBody() (*ActionVpsSwapWithResponse, error) {
 	input := inv.makeAllInputParams()
@@ -322,11 +325,11 @@ func (resp *ActionVpsSwapWithResponse) WatchOperation(timeout float64, updateIn 
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -349,11 +352,9 @@ func (resp *ActionVpsSwapWithResponse) CancelOperation() (*ActionActionStateCanc
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsSwapWithInvocation) makeAllInputParams() *ActionVpsSwapWithRequest {
 	return &ActionVpsSwapWithRequest{
-		Vps: inv.makeInputParams(),
+		Vps:  inv.makeInputParams(),
 		Meta: inv.makeMetaInputParams(),
 	}
 }

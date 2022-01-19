@@ -19,7 +19,7 @@ func NewActionDatasetDelete(client *Client) *ActionDatasetDelete {
 // ActionDatasetDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionDatasetDeleteMetaGlobalInput) SetIncludes(value string) *ActionD
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDatasetDeleteMetaGlobalInput) SetNo(value bool) *ActionDatasetDeleteMetaGlobalInput {
 	in.No = value
@@ -70,12 +71,10 @@ func (in *ActionDatasetDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionDatasetDeleteRequest is a type for the entire action request
 type ActionDatasetDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionDatasetDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionDatasetDeleteMetaGlobalOutput struct {
@@ -93,12 +92,11 @@ type ActionDatasetDeleteResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDatasetDelete) Prepare() *ActionDatasetDeleteInvocation {
 	return &ActionDatasetDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/datasets/{dataset_id}",
+		Path:   "/v6.0/datasets/{dataset_id}",
 	}
 }
 
@@ -151,7 +149,6 @@ func (inv *ActionDatasetDeleteInvocation) IsMetaParameterSelected(param string) 
 func (inv *ActionDatasetDeleteInvocation) Call() (*ActionDatasetDeleteResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionDatasetDeleteInvocation) callAsBody() (*ActionDatasetDeleteResponse, error) {
 	input := inv.makeAllInputParams()
@@ -209,11 +206,11 @@ func (resp *ActionDatasetDeleteResponse) WatchOperation(timeout float64, updateI
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -236,14 +233,11 @@ func (resp *ActionDatasetDeleteResponse) CancelOperation() (*ActionActionStateCa
 	return req.Call()
 }
 
-
-
 func (inv *ActionDatasetDeleteInvocation) makeAllInputParams() *ActionDatasetDeleteRequest {
 	return &ActionDatasetDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionDatasetDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

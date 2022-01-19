@@ -21,9 +21,9 @@ func NewResourceIntegrityObject(client *Client) *ResourceIntegrityObject {
 
 	return &ResourceIntegrityObject{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

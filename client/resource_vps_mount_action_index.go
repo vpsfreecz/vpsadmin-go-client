@@ -18,9 +18,9 @@ func NewActionVpsMountIndex(client *Client) *ActionVpsMountIndex {
 
 // ActionVpsMountIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMountIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionVpsMountIndexMetaGlobalInput) SetCount(value bool) *ActionVpsMou
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsMountIndexMetaGlobalInput) SetIncludes(value string) *ActionVpsMountIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionVpsMountIndexMetaGlobalInput) SetIncludes(value string) *ActionV
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsMountIndexMetaGlobalInput) SetNo(value bool) *ActionVpsMountIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionVpsMountIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMountIndexInput is a type for action input parameters
 type ActionVpsMountIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionVpsMountIndexInput) SetLimit(value int64) *ActionVpsMountIndexIn
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionVpsMountIndexInput) SetOffset(value int64) *ActionVpsMountIndexInput {
 	in.Offset = value
@@ -136,23 +139,21 @@ func (in *ActionVpsMountIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionVpsMountIndexOutput is a type for action output parameters
 type ActionVpsMountIndexOutput struct {
-	CurrentState string `json:"current_state"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Enabled bool `json:"enabled"`
-	ExpirationDate string `json:"expiration_date"`
-	Id int64 `json:"id"`
-	MasterEnabled bool `json:"master_enabled"`
-	Mode string `json:"mode"`
-	Mountpoint string `json:"mountpoint"`
-	OnStartFail string `json:"on_start_fail"`
-	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
+	CurrentState     string                            `json:"current_state"`
+	Dataset          *ActionDatasetShowOutput          `json:"dataset"`
+	Enabled          bool                              `json:"enabled"`
+	ExpirationDate   string                            `json:"expiration_date"`
+	Id               int64                             `json:"id"`
+	MasterEnabled    bool                              `json:"master_enabled"`
+	Mode             string                            `json:"mode"`
+	Mountpoint       string                            `json:"mountpoint"`
+	OnStartFail      string                            `json:"on_start_fail"`
+	Snapshot         *ActionDatasetSnapshotShowOutput  `json:"snapshot"`
 	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	Vps              *ActionVpsShowOutput              `json:"vps"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsMountIndexResponse struct {
@@ -167,12 +168,11 @@ type ActionVpsMountIndexResponse struct {
 	Output []*ActionVpsMountIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsMountIndex) Prepare() *ActionVpsMountIndexInvocation {
 	return &ActionVpsMountIndexInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/mounts",
+		Path:   "/v6.0/vpses/{vps_id}/mounts",
 	}
 }
 
@@ -221,6 +221,7 @@ func (inv *ActionVpsMountIndexInvocation) IsParameterSelected(param string) bool
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsMountIndexInvocation) NewMetaInput() *ActionVpsMountIndexMetaGlobalInput {
@@ -261,8 +262,6 @@ func (inv *ActionVpsMountIndexInvocation) callAsQuery() (*ActionVpsMountIndexRes
 	return resp, err
 }
 
-
-
 func (inv *ActionVpsMountIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -287,4 +286,3 @@ func (inv *ActionVpsMountIndexInvocation) convertMetaInputToQueryParams(ret map[
 		}
 	}
 }
-

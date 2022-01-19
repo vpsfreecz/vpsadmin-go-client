@@ -19,7 +19,7 @@ func NewActionVpsConsoleTokenCreate(client *Client) *ActionVpsConsoleTokenCreate
 // ActionVpsConsoleTokenCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsConsoleTokenCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsConsoleTokenCreateMetaGlobalInput) SetIncludes(value string) 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsConsoleTokenCreateMetaGlobalInput) SetNo(value bool) *ActionVpsConsoleTokenCreateMetaGlobalInput {
 	in.No = value
@@ -70,7 +71,6 @@ func (in *ActionVpsConsoleTokenCreateMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionVpsConsoleTokenCreateRequest is a type for the entire action request
 type ActionVpsConsoleTokenCreateRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
@@ -79,9 +79,8 @@ type ActionVpsConsoleTokenCreateRequest struct {
 // ActionVpsConsoleTokenCreateOutput is a type for action output parameters
 type ActionVpsConsoleTokenCreateOutput struct {
 	Expiration string `json:"expiration"`
-	Token string `json:"token"`
+	Token      string `json:"token"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsConsoleTokenCreateResponse struct {
@@ -96,12 +95,11 @@ type ActionVpsConsoleTokenCreateResponse struct {
 	Output *ActionVpsConsoleTokenCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsConsoleTokenCreate) Prepare() *ActionVpsConsoleTokenCreateInvocation {
 	return &ActionVpsConsoleTokenCreateInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/console_token",
+		Path:   "/v6.0/vpses/{vps_id}/console_token",
 	}
 }
 
@@ -155,7 +153,6 @@ func (inv *ActionVpsConsoleTokenCreateInvocation) Call() (*ActionVpsConsoleToken
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionVpsConsoleTokenCreateInvocation) callAsBody() (*ActionVpsConsoleTokenCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionVpsConsoleTokenCreateResponse{Action: inv.Action}
@@ -166,15 +163,11 @@ func (inv *ActionVpsConsoleTokenCreateInvocation) callAsBody() (*ActionVpsConsol
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsConsoleTokenCreateInvocation) makeAllInputParams() *ActionVpsConsoleTokenCreateRequest {
 	return &ActionVpsConsoleTokenCreateRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionVpsConsoleTokenCreateInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

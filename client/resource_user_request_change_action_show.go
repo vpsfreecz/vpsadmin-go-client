@@ -19,7 +19,7 @@ func NewActionUserRequestChangeShow(client *Client) *ActionUserRequestChangeShow
 // ActionUserRequestChangeShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestChangeShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserRequestChangeShowMetaGlobalInput) SetIncludes(value string) 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserRequestChangeShowMetaGlobalInput) SetNo(value bool) *ActionUserRequestChangeShowMetaGlobalInput {
 	in.No = value
@@ -70,28 +71,25 @@ func (in *ActionUserRequestChangeShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserRequestChangeShowOutput is a type for action output parameters
 type ActionUserRequestChangeShowOutput struct {
-	Address string `json:"address"`
-	Admin *ActionUserShowOutput `json:"admin"`
-	AdminResponse string `json:"admin_response"`
-	ApiIpAddr string `json:"api_ip_addr"`
-	ApiIpPtr string `json:"api_ip_ptr"`
-	ChangeReason string `json:"change_reason"`
-	ClientIpAddr string `json:"client_ip_addr"`
-	ClientIpPtr string `json:"client_ip_ptr"`
-	CreatedAt string `json:"created_at"`
-	Email string `json:"email"`
-	FullName string `json:"full_name"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	State string `json:"state"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
+	Address       string                `json:"address"`
+	Admin         *ActionUserShowOutput `json:"admin"`
+	AdminResponse string                `json:"admin_response"`
+	ApiIpAddr     string                `json:"api_ip_addr"`
+	ApiIpPtr      string                `json:"api_ip_ptr"`
+	ChangeReason  string                `json:"change_reason"`
+	ClientIpAddr  string                `json:"client_ip_addr"`
+	ClientIpPtr   string                `json:"client_ip_ptr"`
+	CreatedAt     string                `json:"created_at"`
+	Email         string                `json:"email"`
+	FullName      string                `json:"full_name"`
+	Id            int64                 `json:"id"`
+	Label         string                `json:"label"`
+	State         string                `json:"state"`
+	UpdatedAt     string                `json:"updated_at"`
+	User          *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserRequestChangeShowResponse struct {
@@ -106,12 +104,11 @@ type ActionUserRequestChangeShowResponse struct {
 	Output *ActionUserRequestChangeShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserRequestChangeShow) Prepare() *ActionUserRequestChangeShowInvocation {
 	return &ActionUserRequestChangeShowInvocation{
 		Action: action,
-		Path: "/v6.0/user_request/changes/{change_id}",
+		Path:   "/v6.0/user_request/changes/{change_id}",
 	}
 }
 
@@ -176,9 +173,6 @@ func (inv *ActionUserRequestChangeShowInvocation) callAsQuery() (*ActionUserRequ
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserRequestChangeShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -189,4 +183,3 @@ func (inv *ActionUserRequestChangeShowInvocation) convertMetaInputToQueryParams(
 		}
 	}
 }
-

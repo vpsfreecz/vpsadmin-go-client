@@ -19,7 +19,7 @@ func NewActionUserTotpDeviceUpdate(client *Client) *ActionUserTotpDeviceUpdate {
 // ActionUserTotpDeviceUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserTotpDeviceUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserTotpDeviceUpdateMetaGlobalInput) SetIncludes(value string) *
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserTotpDeviceUpdateMetaGlobalInput) SetNo(value bool) *ActionUserTotpDeviceUpdateMetaGlobalInput {
 	in.No = value
@@ -72,8 +73,8 @@ func (in *ActionUserTotpDeviceUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserTotpDeviceUpdateInput is a type for action input parameters
 type ActionUserTotpDeviceUpdateInput struct {
-	Enabled bool `json:"enabled"`
-	Label string `json:"label"`
+	Enabled bool   `json:"enabled"`
+	Label   string `json:"label"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -89,6 +90,7 @@ func (in *ActionUserTotpDeviceUpdateInput) SetEnabled(value bool) *ActionUserTot
 	in._selectedParameters["Enabled"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionUserTotpDeviceUpdateInput) SetLabel(value string) *ActionUserTotpDeviceUpdateInput {
 	in.Label = value
@@ -127,21 +129,20 @@ func (in *ActionUserTotpDeviceUpdateInput) AnySelected() bool {
 // ActionUserTotpDeviceUpdateRequest is a type for the entire action request
 type ActionUserTotpDeviceUpdateRequest struct {
 	TotpDevice map[string]interface{} `json:"totp_device"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta       map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserTotpDeviceUpdateOutput is a type for action output parameters
 type ActionUserTotpDeviceUpdateOutput struct {
-	Confirmed bool `json:"confirmed"`
+	Confirmed bool   `json:"confirmed"`
 	CreatedAt string `json:"created_at"`
-	Enabled bool `json:"enabled"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
+	Enabled   bool   `json:"enabled"`
+	Id        int64  `json:"id"`
+	Label     string `json:"label"`
 	LastUseAt string `json:"last_use_at"`
 	UpdatedAt string `json:"updated_at"`
-	UseCount int64 `json:"use_count"`
+	UseCount  int64  `json:"use_count"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserTotpDeviceUpdateResponse struct {
@@ -156,12 +157,11 @@ type ActionUserTotpDeviceUpdateResponse struct {
 	Output *ActionUserTotpDeviceUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserTotpDeviceUpdate) Prepare() *ActionUserTotpDeviceUpdateInvocation {
 	return &ActionUserTotpDeviceUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/totp_devices/{totp_device_id}",
+		Path:   "/v6.0/users/{user_id}/totp_devices/{totp_device_id}",
 	}
 }
 
@@ -210,6 +210,7 @@ func (inv *ActionUserTotpDeviceUpdateInvocation) IsParameterSelected(param strin
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserTotpDeviceUpdateInvocation) NewMetaInput() *ActionUserTotpDeviceUpdateMetaGlobalInput {
@@ -238,7 +239,6 @@ func (inv *ActionUserTotpDeviceUpdateInvocation) Call() (*ActionUserTotpDeviceUp
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserTotpDeviceUpdateInvocation) callAsBody() (*ActionUserTotpDeviceUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserTotpDeviceUpdateResponse{Action: inv.Action}
@@ -249,13 +249,10 @@ func (inv *ActionUserTotpDeviceUpdateInvocation) callAsBody() (*ActionUserTotpDe
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserTotpDeviceUpdateInvocation) makeAllInputParams() *ActionUserTotpDeviceUpdateRequest {
 	return &ActionUserTotpDeviceUpdateRequest{
 		TotpDevice: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:       inv.makeMetaInputParams(),
 	}
 }
 

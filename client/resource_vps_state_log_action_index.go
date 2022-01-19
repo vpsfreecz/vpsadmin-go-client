@@ -18,9 +18,9 @@ func NewActionVpsStateLogIndex(client *Client) *ActionVpsStateLogIndex {
 
 // ActionVpsStateLogIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsStateLogIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionVpsStateLogIndexMetaGlobalInput) SetCount(value bool) *ActionVps
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsStateLogIndexMetaGlobalInput) SetIncludes(value string) *ActionVpsStateLogIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionVpsStateLogIndexMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsStateLogIndexMetaGlobalInput) SetNo(value bool) *ActionVpsStateLogIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionVpsStateLogIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsStateLogIndexInput is a type for action input parameters
 type ActionVpsStateLogIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionVpsStateLogIndexInput) SetLimit(value int64) *ActionVpsStateLogI
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionVpsStateLogIndexInput) SetOffset(value int64) *ActionVpsStateLogIndexInput {
 	in.Offset = value
@@ -136,17 +139,15 @@ func (in *ActionVpsStateLogIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionVpsStateLogIndexOutput is a type for action output parameters
 type ActionVpsStateLogIndexOutput struct {
-	ChangedAt string `json:"changed_at"`
-	Expiration string `json:"expiration"`
-	Id int64 `json:"id"`
-	Reason string `json:"reason"`
-	State string `json:"state"`
-	User *ActionUserShowOutput `json:"user"`
+	ChangedAt  string                `json:"changed_at"`
+	Expiration string                `json:"expiration"`
+	Id         int64                 `json:"id"`
+	Reason     string                `json:"reason"`
+	State      string                `json:"state"`
+	User       *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsStateLogIndexResponse struct {
@@ -161,12 +162,11 @@ type ActionVpsStateLogIndexResponse struct {
 	Output []*ActionVpsStateLogIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsStateLogIndex) Prepare() *ActionVpsStateLogIndexInvocation {
 	return &ActionVpsStateLogIndexInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/state_logs",
+		Path:   "/v6.0/vpses/{vps_id}/state_logs",
 	}
 }
 
@@ -215,6 +215,7 @@ func (inv *ActionVpsStateLogIndexInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsStateLogIndexInvocation) NewMetaInput() *ActionVpsStateLogIndexMetaGlobalInput {
@@ -255,8 +256,6 @@ func (inv *ActionVpsStateLogIndexInvocation) callAsQuery() (*ActionVpsStateLogIn
 	return resp, err
 }
 
-
-
 func (inv *ActionVpsStateLogIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -281,4 +280,3 @@ func (inv *ActionVpsStateLogIndexInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

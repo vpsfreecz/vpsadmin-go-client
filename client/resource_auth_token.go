@@ -33,15 +33,15 @@ func NewResourceAuthToken(client *Client) *ResourceAuthToken {
 	actionDelete := NewActionAuthTokenDelete(client)
 
 	return &ResourceAuthToken{
-		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Create: actionCreate,
-		New: actionCreate,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
-		Delete: actionDelete,
+		Client:  client,
+		Index:   actionIndex,
+		List:    actionIndex,
+		Create:  actionCreate,
+		New:     actionCreate,
+		Show:    actionShow,
+		Find:    actionShow,
+		Update:  actionUpdate,
+		Delete:  actionDelete,
 		Destroy: actionDelete,
 	}
 }

@@ -19,7 +19,7 @@ func NewActionDatasetPlanDelete(client *Client) *ActionDatasetPlanDelete {
 // ActionDatasetPlanDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetPlanDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionDatasetPlanDeleteMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDatasetPlanDeleteMetaGlobalInput) SetNo(value bool) *ActionDatasetPlanDeleteMetaGlobalInput {
 	in.No = value
@@ -70,13 +71,10 @@ func (in *ActionDatasetPlanDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionDatasetPlanDeleteRequest is a type for the entire action request
 type ActionDatasetPlanDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionDatasetPlanDeleteResponse struct {
@@ -84,12 +82,11 @@ type ActionDatasetPlanDeleteResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDatasetPlanDelete) Prepare() *ActionDatasetPlanDeleteInvocation {
 	return &ActionDatasetPlanDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/datasets/{dataset_id}/plans/{plan_id}",
+		Path:   "/v6.0/datasets/{dataset_id}/plans/{plan_id}",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionDatasetPlanDeleteInvocation) Call() (*ActionDatasetPlanDeleteRe
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionDatasetPlanDeleteInvocation) callAsBody() (*ActionDatasetPlanDeleteResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionDatasetPlanDeleteResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionDatasetPlanDeleteInvocation) callAsBody() (*ActionDatasetPlanDe
 	return resp, err
 }
 
-
-
-
 func (inv *ActionDatasetPlanDeleteInvocation) makeAllInputParams() *ActionDatasetPlanDeleteRequest {
 	return &ActionDatasetPlanDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionDatasetPlanDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

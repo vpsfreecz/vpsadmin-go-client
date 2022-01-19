@@ -19,7 +19,7 @@ func NewActionExportHostShow(client *Client) *ActionExportHostShow {
 // ActionExportHostShowMetaGlobalInput is a type for action global meta input parameters
 type ActionExportHostShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionExportHostShowMetaGlobalInput) SetIncludes(value string) *Action
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionExportHostShowMetaGlobalInput) SetNo(value bool) *ActionExportHostShowMetaGlobalInput {
 	in.No = value
@@ -70,18 +71,15 @@ func (in *ActionExportHostShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionExportHostShowOutput is a type for action output parameters
 type ActionExportHostShowOutput struct {
-	Id int64 `json:"id"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	RootSquash bool `json:"root_squash"`
-	Rw bool `json:"rw"`
-	SubtreeCheck bool `json:"subtree_check"`
-	Sync bool `json:"sync"`
+	Id           int64                      `json:"id"`
+	IpAddress    *ActionIpAddressShowOutput `json:"ip_address"`
+	RootSquash   bool                       `json:"root_squash"`
+	Rw           bool                       `json:"rw"`
+	SubtreeCheck bool                       `json:"subtree_check"`
+	Sync         bool                       `json:"sync"`
 }
-
 
 // Type for action response, including envelope
 type ActionExportHostShowResponse struct {
@@ -96,12 +94,11 @@ type ActionExportHostShowResponse struct {
 	Output *ActionExportHostShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionExportHostShow) Prepare() *ActionExportHostShowInvocation {
 	return &ActionExportHostShowInvocation{
 		Action: action,
-		Path: "/v6.0/exports/{export_id}/hosts/{host_id}",
+		Path:   "/v6.0/exports/{export_id}/hosts/{host_id}",
 	}
 }
 
@@ -166,9 +163,6 @@ func (inv *ActionExportHostShowInvocation) callAsQuery() (*ActionExportHostShowR
 	return resp, err
 }
 
-
-
-
 func (inv *ActionExportHostShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -179,4 +173,3 @@ func (inv *ActionExportHostShowInvocation) convertMetaInputToQueryParams(ret map
 		}
 	}
 }
-

@@ -19,7 +19,7 @@ func NewActionVpsStatusShow(client *Client) *ActionVpsStatusShow {
 // ActionVpsStatusShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsStatusShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsStatusShowMetaGlobalInput) SetIncludes(value string) *ActionV
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsStatusShowMetaGlobalInput) SetNo(value bool) *ActionVpsStatusShowMetaGlobalInput {
 	in.No = value
@@ -70,32 +71,29 @@ func (in *ActionVpsStatusShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionVpsStatusShowOutput is a type for action output parameters
 type ActionVpsStatusShowOutput struct {
-	CpuIdle float64 `json:"cpu_idle"`
-	CpuIowait float64 `json:"cpu_iowait"`
-	CpuIrq float64 `json:"cpu_irq"`
-	CpuNice float64 `json:"cpu_nice"`
-	CpuSoftirq float64 `json:"cpu_softirq"`
-	CpuSystem float64 `json:"cpu_system"`
-	CpuUser float64 `json:"cpu_user"`
-	Cpus int64 `json:"cpus"`
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	InRescueMode bool `json:"in_rescue_mode"`
-	IsRunning bool `json:"is_running"`
-	Loadavg float64 `json:"loadavg"`
-	ProcessCount int64 `json:"process_count"`
-	Status bool `json:"status"`
-	TotalMemory int64 `json:"total_memory"`
-	TotalSwap int64 `json:"total_swap"`
-	Uptime int64 `json:"uptime"`
-	UsedMemory int64 `json:"used_memory"`
-	UsedSwap int64 `json:"used_swap"`
+	CpuIdle      float64 `json:"cpu_idle"`
+	CpuIowait    float64 `json:"cpu_iowait"`
+	CpuIrq       float64 `json:"cpu_irq"`
+	CpuNice      float64 `json:"cpu_nice"`
+	CpuSoftirq   float64 `json:"cpu_softirq"`
+	CpuSystem    float64 `json:"cpu_system"`
+	CpuUser      float64 `json:"cpu_user"`
+	Cpus         int64   `json:"cpus"`
+	CreatedAt    string  `json:"created_at"`
+	Id           int64   `json:"id"`
+	InRescueMode bool    `json:"in_rescue_mode"`
+	IsRunning    bool    `json:"is_running"`
+	Loadavg      float64 `json:"loadavg"`
+	ProcessCount int64   `json:"process_count"`
+	Status       bool    `json:"status"`
+	TotalMemory  int64   `json:"total_memory"`
+	TotalSwap    int64   `json:"total_swap"`
+	Uptime       int64   `json:"uptime"`
+	UsedMemory   int64   `json:"used_memory"`
+	UsedSwap     int64   `json:"used_swap"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsStatusShowResponse struct {
@@ -110,12 +108,11 @@ type ActionVpsStatusShowResponse struct {
 	Output *ActionVpsStatusShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsStatusShow) Prepare() *ActionVpsStatusShowInvocation {
 	return &ActionVpsStatusShowInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/statuses/{status_id}",
+		Path:   "/v6.0/vpses/{vps_id}/statuses/{status_id}",
 	}
 }
 
@@ -180,9 +177,6 @@ func (inv *ActionVpsStatusShowInvocation) callAsQuery() (*ActionVpsStatusShowRes
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsStatusShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -193,4 +187,3 @@ func (inv *ActionVpsStatusShowInvocation) convertMetaInputToQueryParams(ret map[
 		}
 	}
 }
-

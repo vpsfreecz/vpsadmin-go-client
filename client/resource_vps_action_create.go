@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionVpsCreate is a type for action Vps#Create
 type ActionVpsCreate struct {
@@ -18,7 +17,7 @@ func NewActionVpsCreate(client *Client) *ActionVpsCreate {
 // ActionVpsCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionVpsCreateMetaGlobalInput) SetIncludes(value string) *ActionVpsCr
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsCreateMetaGlobalInput) SetNo(value bool) *ActionVpsCreateMetaGlobalInput {
 	in.No = value
@@ -71,27 +71,27 @@ func (in *ActionVpsCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsCreateInput is a type for action input parameters
 type ActionVpsCreateInput struct {
-	AddressLocation int64 `json:"address_location"`
-	Config string `json:"config"`
-	Cpu int64 `json:"cpu"`
-	CpuLimit int64 `json:"cpu_limit"`
-	Diskspace int64 `json:"diskspace"`
-	DnsResolver int64 `json:"dns_resolver"`
-	Environment int64 `json:"environment"`
-	Hostname string `json:"hostname"`
-	Info string `json:"info"`
-	Ipv4 int64 `json:"ipv4"`
-	Ipv4Private int64 `json:"ipv4_private"`
-	Ipv6 int64 `json:"ipv6"`
-	Location int64 `json:"location"`
-	Memory int64 `json:"memory"`
-	Node int64 `json:"node"`
-	Onboot bool `json:"onboot"`
-	Onstartall bool `json:"onstartall"`
-	OsTemplate int64 `json:"os_template"`
-	Swap int64 `json:"swap"`
-	User int64 `json:"user"`
-	UserNamespaceMap int64 `json:"user_namespace_map"`
+	AddressLocation  int64  `json:"address_location"`
+	Config           string `json:"config"`
+	Cpu              int64  `json:"cpu"`
+	CpuLimit         int64  `json:"cpu_limit"`
+	Diskspace        int64  `json:"diskspace"`
+	DnsResolver      int64  `json:"dns_resolver"`
+	Environment      int64  `json:"environment"`
+	Hostname         string `json:"hostname"`
+	Info             string `json:"info"`
+	Ipv4             int64  `json:"ipv4"`
+	Ipv4Private      int64  `json:"ipv4_private"`
+	Ipv6             int64  `json:"ipv6"`
+	Location         int64  `json:"location"`
+	Memory           int64  `json:"memory"`
+	Node             int64  `json:"node"`
+	Onboot           bool   `json:"onboot"`
+	Onstartall       bool   `json:"onstartall"`
+	OsTemplate       int64  `json:"os_template"`
+	Swap             int64  `json:"swap"`
+	User             int64  `json:"user"`
+	UserNamespaceMap int64  `json:"user_namespace_map"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -107,6 +107,7 @@ func (in *ActionVpsCreateInput) SetAddressLocation(value int64) *ActionVpsCreate
 	in._selectedParameters["AddressLocation"] = nil
 	return in
 }
+
 // SetConfig sets parameter Config to value and selects it for sending
 func (in *ActionVpsCreateInput) SetConfig(value string) *ActionVpsCreateInput {
 	in.Config = value
@@ -118,6 +119,7 @@ func (in *ActionVpsCreateInput) SetConfig(value string) *ActionVpsCreateInput {
 	in._selectedParameters["Config"] = nil
 	return in
 }
+
 // SetCpu sets parameter Cpu to value and selects it for sending
 func (in *ActionVpsCreateInput) SetCpu(value int64) *ActionVpsCreateInput {
 	in.Cpu = value
@@ -129,6 +131,7 @@ func (in *ActionVpsCreateInput) SetCpu(value int64) *ActionVpsCreateInput {
 	in._selectedParameters["Cpu"] = nil
 	return in
 }
+
 // SetCpuLimit sets parameter CpuLimit to value and selects it for sending
 func (in *ActionVpsCreateInput) SetCpuLimit(value int64) *ActionVpsCreateInput {
 	in.CpuLimit = value
@@ -140,6 +143,7 @@ func (in *ActionVpsCreateInput) SetCpuLimit(value int64) *ActionVpsCreateInput {
 	in._selectedParameters["CpuLimit"] = nil
 	return in
 }
+
 // SetDiskspace sets parameter Diskspace to value and selects it for sending
 func (in *ActionVpsCreateInput) SetDiskspace(value int64) *ActionVpsCreateInput {
 	in.Diskspace = value
@@ -151,6 +155,7 @@ func (in *ActionVpsCreateInput) SetDiskspace(value int64) *ActionVpsCreateInput 
 	in._selectedParameters["Diskspace"] = nil
 	return in
 }
+
 // SetDnsResolver sets parameter DnsResolver to value and selects it for sending
 func (in *ActionVpsCreateInput) SetDnsResolver(value int64) *ActionVpsCreateInput {
 	in.DnsResolver = value
@@ -162,6 +167,7 @@ func (in *ActionVpsCreateInput) SetDnsResolver(value int64) *ActionVpsCreateInpu
 	in._selectedParameters["DnsResolver"] = nil
 	return in
 }
+
 // SetEnvironment sets parameter Environment to value and selects it for sending
 func (in *ActionVpsCreateInput) SetEnvironment(value int64) *ActionVpsCreateInput {
 	in.Environment = value
@@ -173,6 +179,7 @@ func (in *ActionVpsCreateInput) SetEnvironment(value int64) *ActionVpsCreateInpu
 	in._selectedParameters["Environment"] = nil
 	return in
 }
+
 // SetHostname sets parameter Hostname to value and selects it for sending
 func (in *ActionVpsCreateInput) SetHostname(value string) *ActionVpsCreateInput {
 	in.Hostname = value
@@ -184,6 +191,7 @@ func (in *ActionVpsCreateInput) SetHostname(value string) *ActionVpsCreateInput 
 	in._selectedParameters["Hostname"] = nil
 	return in
 }
+
 // SetInfo sets parameter Info to value and selects it for sending
 func (in *ActionVpsCreateInput) SetInfo(value string) *ActionVpsCreateInput {
 	in.Info = value
@@ -195,6 +203,7 @@ func (in *ActionVpsCreateInput) SetInfo(value string) *ActionVpsCreateInput {
 	in._selectedParameters["Info"] = nil
 	return in
 }
+
 // SetIpv4 sets parameter Ipv4 to value and selects it for sending
 func (in *ActionVpsCreateInput) SetIpv4(value int64) *ActionVpsCreateInput {
 	in.Ipv4 = value
@@ -206,6 +215,7 @@ func (in *ActionVpsCreateInput) SetIpv4(value int64) *ActionVpsCreateInput {
 	in._selectedParameters["Ipv4"] = nil
 	return in
 }
+
 // SetIpv4Private sets parameter Ipv4Private to value and selects it for sending
 func (in *ActionVpsCreateInput) SetIpv4Private(value int64) *ActionVpsCreateInput {
 	in.Ipv4Private = value
@@ -217,6 +227,7 @@ func (in *ActionVpsCreateInput) SetIpv4Private(value int64) *ActionVpsCreateInpu
 	in._selectedParameters["Ipv4Private"] = nil
 	return in
 }
+
 // SetIpv6 sets parameter Ipv6 to value and selects it for sending
 func (in *ActionVpsCreateInput) SetIpv6(value int64) *ActionVpsCreateInput {
 	in.Ipv6 = value
@@ -228,6 +239,7 @@ func (in *ActionVpsCreateInput) SetIpv6(value int64) *ActionVpsCreateInput {
 	in._selectedParameters["Ipv6"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionVpsCreateInput) SetLocation(value int64) *ActionVpsCreateInput {
 	in.Location = value
@@ -239,6 +251,7 @@ func (in *ActionVpsCreateInput) SetLocation(value int64) *ActionVpsCreateInput {
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetMemory sets parameter Memory to value and selects it for sending
 func (in *ActionVpsCreateInput) SetMemory(value int64) *ActionVpsCreateInput {
 	in.Memory = value
@@ -250,6 +263,7 @@ func (in *ActionVpsCreateInput) SetMemory(value int64) *ActionVpsCreateInput {
 	in._selectedParameters["Memory"] = nil
 	return in
 }
+
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionVpsCreateInput) SetNode(value int64) *ActionVpsCreateInput {
 	in.Node = value
@@ -261,6 +275,7 @@ func (in *ActionVpsCreateInput) SetNode(value int64) *ActionVpsCreateInput {
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetOnboot sets parameter Onboot to value and selects it for sending
 func (in *ActionVpsCreateInput) SetOnboot(value bool) *ActionVpsCreateInput {
 	in.Onboot = value
@@ -272,6 +287,7 @@ func (in *ActionVpsCreateInput) SetOnboot(value bool) *ActionVpsCreateInput {
 	in._selectedParameters["Onboot"] = nil
 	return in
 }
+
 // SetOnstartall sets parameter Onstartall to value and selects it for sending
 func (in *ActionVpsCreateInput) SetOnstartall(value bool) *ActionVpsCreateInput {
 	in.Onstartall = value
@@ -283,6 +299,7 @@ func (in *ActionVpsCreateInput) SetOnstartall(value bool) *ActionVpsCreateInput 
 	in._selectedParameters["Onstartall"] = nil
 	return in
 }
+
 // SetOsTemplate sets parameter OsTemplate to value and selects it for sending
 func (in *ActionVpsCreateInput) SetOsTemplate(value int64) *ActionVpsCreateInput {
 	in.OsTemplate = value
@@ -294,6 +311,7 @@ func (in *ActionVpsCreateInput) SetOsTemplate(value int64) *ActionVpsCreateInput
 	in._selectedParameters["OsTemplate"] = nil
 	return in
 }
+
 // SetSwap sets parameter Swap to value and selects it for sending
 func (in *ActionVpsCreateInput) SetSwap(value int64) *ActionVpsCreateInput {
 	in.Swap = value
@@ -305,6 +323,7 @@ func (in *ActionVpsCreateInput) SetSwap(value int64) *ActionVpsCreateInput {
 	in._selectedParameters["Swap"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionVpsCreateInput) SetUser(value int64) *ActionVpsCreateInput {
 	in.User = value
@@ -316,6 +335,7 @@ func (in *ActionVpsCreateInput) SetUser(value int64) *ActionVpsCreateInput {
 	in._selectedParameters["User"] = nil
 	return in
 }
+
 // SetUserNamespaceMap sets parameter UserNamespaceMap to value and selects it for sending
 func (in *ActionVpsCreateInput) SetUserNamespaceMap(value int64) *ActionVpsCreateInput {
 	in.UserNamespaceMap = value
@@ -353,47 +373,47 @@ func (in *ActionVpsCreateInput) AnySelected() bool {
 
 // ActionVpsCreateRequest is a type for the entire action request
 type ActionVpsCreateRequest struct {
-	Vps map[string]interface{} `json:"vps"`
+	Vps  map[string]interface{} `json:"vps"`
 	Meta map[string]interface{} `json:"_meta"`
 }
 
 // ActionVpsCreateOutput is a type for action output parameters
 type ActionVpsCreateOutput struct {
-	Config string `json:"config"`
-	Cpu int64 `json:"cpu"`
-	CpuIdle float64 `json:"cpu_idle"`
-	CpuIowait float64 `json:"cpu_iowait"`
-	CpuIrq float64 `json:"cpu_irq"`
-	CpuLimit int64 `json:"cpu_limit"`
-	CpuNice float64 `json:"cpu_nice"`
-	CpuSoftirq float64 `json:"cpu_softirq"`
-	CpuSystem float64 `json:"cpu_system"`
-	CpuUser float64 `json:"cpu_user"`
-	CreatedAt string `json:"created_at"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Diskspace int64 `json:"diskspace"`
-	DnsResolver *ActionDnsResolverShowOutput `json:"dns_resolver"`
-	ExpirationDate string `json:"expiration_date"`
-	Hostname string `json:"hostname"`
-	Id int64 `json:"id"`
-	InRescueMode bool `json:"in_rescue_mode"`
-	Info string `json:"info"`
-	IsRunning bool `json:"is_running"`
-	Loadavg float64 `json:"loadavg"`
-	ManageHostname bool `json:"manage_hostname"`
-	Memory int64 `json:"memory"`
-	Node *ActionNodeShowOutput `json:"node"`
-	ObjectState string `json:"object_state"`
-	Onboot bool `json:"onboot"`
-	Onstartall bool `json:"onstartall"`
-	OsTemplate *ActionOsTemplateShowOutput `json:"os_template"`
-	ProcessCount int64 `json:"process_count"`
-	Swap int64 `json:"swap"`
-	Uptime int64 `json:"uptime"`
-	UsedDiskspace int64 `json:"used_diskspace"`
-	UsedMemory int64 `json:"used_memory"`
-	UsedSwap int64 `json:"used_swap"`
-	User *ActionUserShowOutput `json:"user"`
+	Config         string                       `json:"config"`
+	Cpu            int64                        `json:"cpu"`
+	CpuIdle        float64                      `json:"cpu_idle"`
+	CpuIowait      float64                      `json:"cpu_iowait"`
+	CpuIrq         float64                      `json:"cpu_irq"`
+	CpuLimit       int64                        `json:"cpu_limit"`
+	CpuNice        float64                      `json:"cpu_nice"`
+	CpuSoftirq     float64                      `json:"cpu_softirq"`
+	CpuSystem      float64                      `json:"cpu_system"`
+	CpuUser        float64                      `json:"cpu_user"`
+	CreatedAt      string                       `json:"created_at"`
+	Dataset        *ActionDatasetShowOutput     `json:"dataset"`
+	Diskspace      int64                        `json:"diskspace"`
+	DnsResolver    *ActionDnsResolverShowOutput `json:"dns_resolver"`
+	ExpirationDate string                       `json:"expiration_date"`
+	Hostname       string                       `json:"hostname"`
+	Id             int64                        `json:"id"`
+	InRescueMode   bool                         `json:"in_rescue_mode"`
+	Info           string                       `json:"info"`
+	IsRunning      bool                         `json:"is_running"`
+	Loadavg        float64                      `json:"loadavg"`
+	ManageHostname bool                         `json:"manage_hostname"`
+	Memory         int64                        `json:"memory"`
+	Node           *ActionNodeShowOutput        `json:"node"`
+	ObjectState    string                       `json:"object_state"`
+	Onboot         bool                         `json:"onboot"`
+	Onstartall     bool                         `json:"onstartall"`
+	OsTemplate     *ActionOsTemplateShowOutput  `json:"os_template"`
+	ProcessCount   int64                        `json:"process_count"`
+	Swap           int64                        `json:"swap"`
+	Uptime         int64                        `json:"uptime"`
+	UsedDiskspace  int64                        `json:"used_diskspace"`
+	UsedMemory     int64                        `json:"used_memory"`
+	UsedSwap       int64                        `json:"used_swap"`
+	User           *ActionUserShowOutput        `json:"user"`
 }
 
 // ActionVpsCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -416,12 +436,11 @@ type ActionVpsCreateResponse struct {
 	Output *ActionVpsCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsCreate) Prepare() *ActionVpsCreateInvocation {
 	return &ActionVpsCreateInvocation{
 		Action: action,
-		Path: "/v6.0/vpses",
+		Path:   "/v6.0/vpses",
 	}
 }
 
@@ -437,7 +456,6 @@ type ActionVpsCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionVpsCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionVpsCreateInvocation) NewInput() *ActionVpsCreateInput {
@@ -460,6 +478,7 @@ func (inv *ActionVpsCreateInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsCreateInvocation) NewMetaInput() *ActionVpsCreateMetaGlobalInput {
@@ -487,7 +506,6 @@ func (inv *ActionVpsCreateInvocation) IsMetaParameterSelected(param string) bool
 func (inv *ActionVpsCreateInvocation) Call() (*ActionVpsCreateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsCreateInvocation) callAsBody() (*ActionVpsCreateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -548,11 +566,11 @@ func (resp *ActionVpsCreateResponse) WatchOperation(timeout float64, updateIn fl
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -575,11 +593,9 @@ func (resp *ActionVpsCreateResponse) CancelOperation() (*ActionActionStateCancel
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsCreateInvocation) makeAllInputParams() *ActionVpsCreateRequest {
 	return &ActionVpsCreateRequest{
-		Vps: inv.makeInputParams(),
+		Vps:  inv.makeInputParams(),
 		Meta: inv.makeMetaInputParams(),
 	}
 }

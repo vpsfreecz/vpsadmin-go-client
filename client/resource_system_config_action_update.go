@@ -19,7 +19,7 @@ func NewActionSystemConfigUpdate(client *Client) *ActionSystemConfigUpdate {
 // ActionSystemConfigUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionSystemConfigUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionSystemConfigUpdateMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionSystemConfigUpdateMetaGlobalInput) SetNo(value bool) *ActionSystemConfigUpdateMetaGlobalInput {
 	in.No = value
@@ -70,7 +71,6 @@ func (in *ActionSystemConfigUpdateMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionSystemConfigUpdateRequest is a type for the entire action request
 type ActionSystemConfigUpdateRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
@@ -78,14 +78,13 @@ type ActionSystemConfigUpdateRequest struct {
 
 // ActionSystemConfigUpdateOutput is a type for action output parameters
 type ActionSystemConfigUpdateOutput struct {
-	Category string `json:"category"`
-	Description string `json:"description"`
-	Label string `json:"label"`
-	MinUserLevel int64 `json:"min_user_level"`
-	Name string `json:"name"`
-	Type string `json:"type"`
+	Category     string `json:"category"`
+	Description  string `json:"description"`
+	Label        string `json:"label"`
+	MinUserLevel int64  `json:"min_user_level"`
+	Name         string `json:"name"`
+	Type         string `json:"type"`
 }
-
 
 // Type for action response, including envelope
 type ActionSystemConfigUpdateResponse struct {
@@ -100,12 +99,11 @@ type ActionSystemConfigUpdateResponse struct {
 	Output *ActionSystemConfigUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionSystemConfigUpdate) Prepare() *ActionSystemConfigUpdateInvocation {
 	return &ActionSystemConfigUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/system_configs/{category}/{name}",
+		Path:   "/v6.0/system_configs/{category}/{name}",
 	}
 }
 
@@ -159,7 +157,6 @@ func (inv *ActionSystemConfigUpdateInvocation) Call() (*ActionSystemConfigUpdate
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionSystemConfigUpdateInvocation) callAsBody() (*ActionSystemConfigUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionSystemConfigUpdateResponse{Action: inv.Action}
@@ -170,15 +167,11 @@ func (inv *ActionSystemConfigUpdateInvocation) callAsBody() (*ActionSystemConfig
 	return resp, err
 }
 
-
-
-
 func (inv *ActionSystemConfigUpdateInvocation) makeAllInputParams() *ActionSystemConfigUpdateRequest {
 	return &ActionSystemConfigUpdateRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionSystemConfigUpdateInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

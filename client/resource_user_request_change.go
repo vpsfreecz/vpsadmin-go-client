@@ -28,13 +28,13 @@ func NewResourceUserRequestChange(client *Client) *ResourceUserRequestChange {
 	actionShow := NewActionUserRequestChangeShow(client)
 
 	return &ResourceUserRequestChange{
-		Client: client,
-		Create: actionCreate,
-		New: actionCreate,
-		Index: actionIndex,
-		List: actionIndex,
+		Client:  client,
+		Create:  actionCreate,
+		New:     actionCreate,
+		Index:   actionIndex,
+		List:    actionIndex,
 		Resolve: actionResolve,
-		Show: actionShow,
-		Find: actionShow,
+		Show:    actionShow,
+		Find:    actionShow,
 	}
 }

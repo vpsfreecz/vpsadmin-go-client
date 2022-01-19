@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionPoolCreate is a type for action Pool#Create
 type ActionPoolCreate struct {
@@ -18,7 +17,7 @@ func NewActionPoolCreate(client *Client) *ActionPoolCreate {
 // ActionPoolCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionPoolCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionPoolCreateMetaGlobalInput) SetIncludes(value string) *ActionPool
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionPoolCreateMetaGlobalInput) SetNo(value bool) *ActionPoolCreateMetaGlobalInput {
 	in.No = value
@@ -71,19 +71,19 @@ func (in *ActionPoolCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionPoolCreateInput is a type for action input parameters
 type ActionPoolCreateInput struct {
-	Atime bool `json:"atime"`
-	Compression bool `json:"compression"`
-	Filesystem string `json:"filesystem"`
-	Label string `json:"label"`
-	Node int64 `json:"node"`
-	Quota int64 `json:"quota"`
-	Recordsize int64 `json:"recordsize"`
-	Refquota int64 `json:"refquota"`
-	RefquotaCheck bool `json:"refquota_check"`
-	Relatime bool `json:"relatime"`
-	Role string `json:"role"`
-	Sharenfs string `json:"sharenfs"`
-	Sync string `json:"sync"`
+	Atime         bool   `json:"atime"`
+	Compression   bool   `json:"compression"`
+	Filesystem    string `json:"filesystem"`
+	Label         string `json:"label"`
+	Node          int64  `json:"node"`
+	Quota         int64  `json:"quota"`
+	Recordsize    int64  `json:"recordsize"`
+	Refquota      int64  `json:"refquota"`
+	RefquotaCheck bool   `json:"refquota_check"`
+	Relatime      bool   `json:"relatime"`
+	Role          string `json:"role"`
+	Sharenfs      string `json:"sharenfs"`
+	Sync          string `json:"sync"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -99,6 +99,7 @@ func (in *ActionPoolCreateInput) SetAtime(value bool) *ActionPoolCreateInput {
 	in._selectedParameters["Atime"] = nil
 	return in
 }
+
 // SetCompression sets parameter Compression to value and selects it for sending
 func (in *ActionPoolCreateInput) SetCompression(value bool) *ActionPoolCreateInput {
 	in.Compression = value
@@ -110,6 +111,7 @@ func (in *ActionPoolCreateInput) SetCompression(value bool) *ActionPoolCreateInp
 	in._selectedParameters["Compression"] = nil
 	return in
 }
+
 // SetFilesystem sets parameter Filesystem to value and selects it for sending
 func (in *ActionPoolCreateInput) SetFilesystem(value string) *ActionPoolCreateInput {
 	in.Filesystem = value
@@ -121,6 +123,7 @@ func (in *ActionPoolCreateInput) SetFilesystem(value string) *ActionPoolCreateIn
 	in._selectedParameters["Filesystem"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionPoolCreateInput) SetLabel(value string) *ActionPoolCreateInput {
 	in.Label = value
@@ -132,6 +135,7 @@ func (in *ActionPoolCreateInput) SetLabel(value string) *ActionPoolCreateInput {
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionPoolCreateInput) SetNode(value int64) *ActionPoolCreateInput {
 	in.Node = value
@@ -143,6 +147,7 @@ func (in *ActionPoolCreateInput) SetNode(value int64) *ActionPoolCreateInput {
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetQuota sets parameter Quota to value and selects it for sending
 func (in *ActionPoolCreateInput) SetQuota(value int64) *ActionPoolCreateInput {
 	in.Quota = value
@@ -154,6 +159,7 @@ func (in *ActionPoolCreateInput) SetQuota(value int64) *ActionPoolCreateInput {
 	in._selectedParameters["Quota"] = nil
 	return in
 }
+
 // SetRecordsize sets parameter Recordsize to value and selects it for sending
 func (in *ActionPoolCreateInput) SetRecordsize(value int64) *ActionPoolCreateInput {
 	in.Recordsize = value
@@ -165,6 +171,7 @@ func (in *ActionPoolCreateInput) SetRecordsize(value int64) *ActionPoolCreateInp
 	in._selectedParameters["Recordsize"] = nil
 	return in
 }
+
 // SetRefquota sets parameter Refquota to value and selects it for sending
 func (in *ActionPoolCreateInput) SetRefquota(value int64) *ActionPoolCreateInput {
 	in.Refquota = value
@@ -176,6 +183,7 @@ func (in *ActionPoolCreateInput) SetRefquota(value int64) *ActionPoolCreateInput
 	in._selectedParameters["Refquota"] = nil
 	return in
 }
+
 // SetRefquotaCheck sets parameter RefquotaCheck to value and selects it for sending
 func (in *ActionPoolCreateInput) SetRefquotaCheck(value bool) *ActionPoolCreateInput {
 	in.RefquotaCheck = value
@@ -187,6 +195,7 @@ func (in *ActionPoolCreateInput) SetRefquotaCheck(value bool) *ActionPoolCreateI
 	in._selectedParameters["RefquotaCheck"] = nil
 	return in
 }
+
 // SetRelatime sets parameter Relatime to value and selects it for sending
 func (in *ActionPoolCreateInput) SetRelatime(value bool) *ActionPoolCreateInput {
 	in.Relatime = value
@@ -198,6 +207,7 @@ func (in *ActionPoolCreateInput) SetRelatime(value bool) *ActionPoolCreateInput 
 	in._selectedParameters["Relatime"] = nil
 	return in
 }
+
 // SetRole sets parameter Role to value and selects it for sending
 func (in *ActionPoolCreateInput) SetRole(value string) *ActionPoolCreateInput {
 	in.Role = value
@@ -209,6 +219,7 @@ func (in *ActionPoolCreateInput) SetRole(value string) *ActionPoolCreateInput {
 	in._selectedParameters["Role"] = nil
 	return in
 }
+
 // SetSharenfs sets parameter Sharenfs to value and selects it for sending
 func (in *ActionPoolCreateInput) SetSharenfs(value string) *ActionPoolCreateInput {
 	in.Sharenfs = value
@@ -220,6 +231,7 @@ func (in *ActionPoolCreateInput) SetSharenfs(value string) *ActionPoolCreateInpu
 	in._selectedParameters["Sharenfs"] = nil
 	return in
 }
+
 // SetSync sets parameter Sync to value and selects it for sending
 func (in *ActionPoolCreateInput) SetSync(value string) *ActionPoolCreateInput {
 	in.Sync = value
@@ -263,23 +275,23 @@ type ActionPoolCreateRequest struct {
 
 // ActionPoolCreateOutput is a type for action output parameters
 type ActionPoolCreateOutput struct {
-	Atime bool `json:"atime"`
-	Avail int64 `json:"avail"`
-	Compression bool `json:"compression"`
-	Filesystem string `json:"filesystem"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Node *ActionNodeShowOutput `json:"node"`
-	Quota int64 `json:"quota"`
-	Recordsize int64 `json:"recordsize"`
-	Referenced int64 `json:"referenced"`
-	Refquota int64 `json:"refquota"`
-	RefquotaCheck bool `json:"refquota_check"`
-	Relatime bool `json:"relatime"`
-	Role string `json:"role"`
-	Sharenfs string `json:"sharenfs"`
-	Sync string `json:"sync"`
-	Used int64 `json:"used"`
+	Atime         bool                  `json:"atime"`
+	Avail         int64                 `json:"avail"`
+	Compression   bool                  `json:"compression"`
+	Filesystem    string                `json:"filesystem"`
+	Id            int64                 `json:"id"`
+	Label         string                `json:"label"`
+	Node          *ActionNodeShowOutput `json:"node"`
+	Quota         int64                 `json:"quota"`
+	Recordsize    int64                 `json:"recordsize"`
+	Referenced    int64                 `json:"referenced"`
+	Refquota      int64                 `json:"refquota"`
+	RefquotaCheck bool                  `json:"refquota_check"`
+	Relatime      bool                  `json:"relatime"`
+	Role          string                `json:"role"`
+	Sharenfs      string                `json:"sharenfs"`
+	Sync          string                `json:"sync"`
+	Used          int64                 `json:"used"`
 }
 
 // ActionPoolCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -302,12 +314,11 @@ type ActionPoolCreateResponse struct {
 	Output *ActionPoolCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionPoolCreate) Prepare() *ActionPoolCreateInvocation {
 	return &ActionPoolCreateInvocation{
 		Action: action,
-		Path: "/v6.0/pools",
+		Path:   "/v6.0/pools",
 	}
 }
 
@@ -323,7 +334,6 @@ type ActionPoolCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionPoolCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionPoolCreateInvocation) NewInput() *ActionPoolCreateInput {
@@ -346,6 +356,7 @@ func (inv *ActionPoolCreateInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionPoolCreateInvocation) NewMetaInput() *ActionPoolCreateMetaGlobalInput {
@@ -373,7 +384,6 @@ func (inv *ActionPoolCreateInvocation) IsMetaParameterSelected(param string) boo
 func (inv *ActionPoolCreateInvocation) Call() (*ActionPoolCreateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionPoolCreateInvocation) callAsBody() (*ActionPoolCreateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -434,11 +444,11 @@ func (resp *ActionPoolCreateResponse) WatchOperation(timeout float64, updateIn f
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -460,8 +470,6 @@ func (resp *ActionPoolCreateResponse) CancelOperation() (*ActionActionStateCance
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 	return req.Call()
 }
-
-
 
 func (inv *ActionPoolCreateInvocation) makeAllInputParams() *ActionPoolCreateRequest {
 	return &ActionPoolCreateRequest{

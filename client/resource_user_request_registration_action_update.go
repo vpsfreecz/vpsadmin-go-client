@@ -19,7 +19,7 @@ func NewActionUserRequestRegistrationUpdate(client *Client) *ActionUserRequestRe
 // ActionUserRequestRegistrationUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestRegistrationUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserRequestRegistrationUpdateMetaGlobalInput) SetIncludes(value 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateMetaGlobalInput) SetNo(value bool) *ActionUserRequestRegistrationUpdateMetaGlobalInput {
 	in.No = value
@@ -72,19 +73,19 @@ func (in *ActionUserRequestRegistrationUpdateMetaGlobalInput) AnySelected() bool
 
 // ActionUserRequestRegistrationUpdateInput is a type for action input parameters
 type ActionUserRequestRegistrationUpdateInput struct {
-	Address string `json:"address"`
-	Currency string `json:"currency"`
-	Email string `json:"email"`
-	FullName string `json:"full_name"`
-	How string `json:"how"`
-	Language int64 `json:"language"`
-	Location int64 `json:"location"`
-	Login string `json:"login"`
-	Note string `json:"note"`
-	OrgId string `json:"org_id"`
-	OrgName string `json:"org_name"`
-	OsTemplate int64 `json:"os_template"`
-	YearOfBirth int64 `json:"year_of_birth"`
+	Address     string `json:"address"`
+	Currency    string `json:"currency"`
+	Email       string `json:"email"`
+	FullName    string `json:"full_name"`
+	How         string `json:"how"`
+	Language    int64  `json:"language"`
+	Location    int64  `json:"location"`
+	Login       string `json:"login"`
+	Note        string `json:"note"`
+	OrgId       string `json:"org_id"`
+	OrgName     string `json:"org_name"`
+	OsTemplate  int64  `json:"os_template"`
+	YearOfBirth int64  `json:"year_of_birth"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -100,6 +101,7 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetAddress(value string) *Ac
 	in._selectedParameters["Address"] = nil
 	return in
 }
+
 // SetCurrency sets parameter Currency to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetCurrency(value string) *ActionUserRequestRegistrationUpdateInput {
 	in.Currency = value
@@ -111,6 +113,7 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetCurrency(value string) *A
 	in._selectedParameters["Currency"] = nil
 	return in
 }
+
 // SetEmail sets parameter Email to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetEmail(value string) *ActionUserRequestRegistrationUpdateInput {
 	in.Email = value
@@ -122,6 +125,7 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetEmail(value string) *Acti
 	in._selectedParameters["Email"] = nil
 	return in
 }
+
 // SetFullName sets parameter FullName to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetFullName(value string) *ActionUserRequestRegistrationUpdateInput {
 	in.FullName = value
@@ -133,6 +137,7 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetFullName(value string) *A
 	in._selectedParameters["FullName"] = nil
 	return in
 }
+
 // SetHow sets parameter How to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetHow(value string) *ActionUserRequestRegistrationUpdateInput {
 	in.How = value
@@ -144,6 +149,7 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetHow(value string) *Action
 	in._selectedParameters["How"] = nil
 	return in
 }
+
 // SetLanguage sets parameter Language to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetLanguage(value int64) *ActionUserRequestRegistrationUpdateInput {
 	in.Language = value
@@ -155,6 +161,7 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetLanguage(value int64) *Ac
 	in._selectedParameters["Language"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetLocation(value int64) *ActionUserRequestRegistrationUpdateInput {
 	in.Location = value
@@ -166,6 +173,7 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetLocation(value int64) *Ac
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetLogin sets parameter Login to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetLogin(value string) *ActionUserRequestRegistrationUpdateInput {
 	in.Login = value
@@ -177,6 +185,7 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetLogin(value string) *Acti
 	in._selectedParameters["Login"] = nil
 	return in
 }
+
 // SetNote sets parameter Note to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetNote(value string) *ActionUserRequestRegistrationUpdateInput {
 	in.Note = value
@@ -188,6 +197,7 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetNote(value string) *Actio
 	in._selectedParameters["Note"] = nil
 	return in
 }
+
 // SetOrgId sets parameter OrgId to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetOrgId(value string) *ActionUserRequestRegistrationUpdateInput {
 	in.OrgId = value
@@ -199,6 +209,7 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetOrgId(value string) *Acti
 	in._selectedParameters["OrgId"] = nil
 	return in
 }
+
 // SetOrgName sets parameter OrgName to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetOrgName(value string) *ActionUserRequestRegistrationUpdateInput {
 	in.OrgName = value
@@ -210,6 +221,7 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetOrgName(value string) *Ac
 	in._selectedParameters["OrgName"] = nil
 	return in
 }
+
 // SetOsTemplate sets parameter OsTemplate to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetOsTemplate(value int64) *ActionUserRequestRegistrationUpdateInput {
 	in.OsTemplate = value
@@ -221,6 +233,7 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetOsTemplate(value int64) *
 	in._selectedParameters["OsTemplate"] = nil
 	return in
 }
+
 // SetYearOfBirth sets parameter YearOfBirth to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetYearOfBirth(value int64) *ActionUserRequestRegistrationUpdateInput {
 	in.YearOfBirth = value
@@ -259,27 +272,26 @@ func (in *ActionUserRequestRegistrationUpdateInput) AnySelected() bool {
 // ActionUserRequestRegistrationUpdateRequest is a type for the entire action request
 type ActionUserRequestRegistrationUpdateRequest struct {
 	Registration map[string]interface{} `json:"registration"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta         map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserRequestRegistrationUpdateOutput is a type for action output parameters
 type ActionUserRequestRegistrationUpdateOutput struct {
-	Address string `json:"address"`
-	Currency string `json:"currency"`
-	Email string `json:"email"`
-	FullName string `json:"full_name"`
-	How string `json:"how"`
-	Id int64 `json:"id"`
-	Language *ActionLanguageShowOutput `json:"language"`
-	Location *ActionLocationShowOutput `json:"location"`
-	Login string `json:"login"`
-	Note string `json:"note"`
-	OrgId string `json:"org_id"`
-	OrgName string `json:"org_name"`
-	OsTemplate *ActionOsTemplateShowOutput `json:"os_template"`
-	YearOfBirth int64 `json:"year_of_birth"`
+	Address     string                      `json:"address"`
+	Currency    string                      `json:"currency"`
+	Email       string                      `json:"email"`
+	FullName    string                      `json:"full_name"`
+	How         string                      `json:"how"`
+	Id          int64                       `json:"id"`
+	Language    *ActionLanguageShowOutput   `json:"language"`
+	Location    *ActionLocationShowOutput   `json:"location"`
+	Login       string                      `json:"login"`
+	Note        string                      `json:"note"`
+	OrgId       string                      `json:"org_id"`
+	OrgName     string                      `json:"org_name"`
+	OsTemplate  *ActionOsTemplateShowOutput `json:"os_template"`
+	YearOfBirth int64                       `json:"year_of_birth"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserRequestRegistrationUpdateResponse struct {
@@ -294,12 +306,11 @@ type ActionUserRequestRegistrationUpdateResponse struct {
 	Output *ActionUserRequestRegistrationUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserRequestRegistrationUpdate) Prepare() *ActionUserRequestRegistrationUpdateInvocation {
 	return &ActionUserRequestRegistrationUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/user_request/registrations/{registration_id}/{token}",
+		Path:   "/v6.0/user_request/registrations/{registration_id}/{token}",
 	}
 }
 
@@ -348,6 +359,7 @@ func (inv *ActionUserRequestRegistrationUpdateInvocation) IsParameterSelected(pa
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserRequestRegistrationUpdateInvocation) NewMetaInput() *ActionUserRequestRegistrationUpdateMetaGlobalInput {
@@ -376,7 +388,6 @@ func (inv *ActionUserRequestRegistrationUpdateInvocation) Call() (*ActionUserReq
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserRequestRegistrationUpdateInvocation) callAsBody() (*ActionUserRequestRegistrationUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserRequestRegistrationUpdateResponse{Action: inv.Action}
@@ -387,13 +398,10 @@ func (inv *ActionUserRequestRegistrationUpdateInvocation) callAsBody() (*ActionU
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserRequestRegistrationUpdateInvocation) makeAllInputParams() *ActionUserRequestRegistrationUpdateRequest {
 	return &ActionUserRequestRegistrationUpdateRequest{
 		Registration: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:         inv.makeMetaInputParams(),
 	}
 }
 

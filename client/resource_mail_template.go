@@ -37,17 +37,17 @@ func NewResourceMailTemplate(client *Client) *ResourceMailTemplate {
 	actionUpdate := NewActionMailTemplateUpdate(client)
 
 	return &ResourceMailTemplate{
-		Client: client,
-		Recipient: NewResourceMailTemplateRecipient(client),
+		Client:      client,
+		Recipient:   NewResourceMailTemplateRecipient(client),
 		Translation: NewResourceMailTemplateTranslation(client),
-		Create: actionCreate,
-		New: actionCreate,
-		Delete: actionDelete,
-		Destroy: actionDelete,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Create:      actionCreate,
+		New:         actionCreate,
+		Delete:      actionDelete,
+		Destroy:     actionDelete,
+		Index:       actionIndex,
+		List:        actionIndex,
+		Show:        actionShow,
+		Find:        actionShow,
+		Update:      actionUpdate,
 	}
 }

@@ -42,19 +42,19 @@ func NewResourceDataset(client *Client) *ResourceDataset {
 	actionUpdate := NewActionDatasetUpdate(client)
 
 	return &ResourceDataset{
-		Client: client,
-		Plan: NewResourceDatasetPlan(client),
+		Client:          client,
+		Plan:            NewResourceDatasetPlan(client),
 		PropertyHistory: NewResourceDatasetPropertyHistory(client),
-		Snapshot: NewResourceDatasetSnapshot(client),
-		Create: actionCreate,
-		New: actionCreate,
-		Delete: actionDelete,
-		Destroy: actionDelete,
-		Index: actionIndex,
-		List: actionIndex,
-		Inherit: actionInherit,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Snapshot:        NewResourceDatasetSnapshot(client),
+		Create:          actionCreate,
+		New:             actionCreate,
+		Delete:          actionDelete,
+		Destroy:         actionDelete,
+		Index:           actionIndex,
+		List:            actionIndex,
+		Inherit:         actionInherit,
+		Show:            actionShow,
+		Find:            actionShow,
+		Update:          actionUpdate,
 	}
 }

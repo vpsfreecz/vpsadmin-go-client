@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionLocationCreate is a type for action Location#Create
 type ActionLocationCreate struct {
@@ -18,7 +17,7 @@ func NewActionLocationCreate(client *Client) *ActionLocationCreate {
 // ActionLocationCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionLocationCreateMetaGlobalInput) SetIncludes(value string) *Action
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionLocationCreateMetaGlobalInput) SetNo(value bool) *ActionLocationCreateMetaGlobalInput {
 	in.No = value
@@ -71,13 +71,13 @@ func (in *ActionLocationCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationCreateInput is a type for action input parameters
 type ActionLocationCreateInput struct {
-	Description string `json:"description"`
-	Domain string `json:"domain"`
-	Environment int64 `json:"environment"`
-	HasIpv6 bool `json:"has_ipv6"`
-	Label string `json:"label"`
+	Description         string `json:"description"`
+	Domain              string `json:"domain"`
+	Environment         int64  `json:"environment"`
+	HasIpv6             bool   `json:"has_ipv6"`
+	Label               string `json:"label"`
 	RemoteConsoleServer string `json:"remote_console_server"`
-	VpsOnboot bool `json:"vps_onboot"`
+	VpsOnboot           bool   `json:"vps_onboot"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -93,6 +93,7 @@ func (in *ActionLocationCreateInput) SetDescription(value string) *ActionLocatio
 	in._selectedParameters["Description"] = nil
 	return in
 }
+
 // SetDomain sets parameter Domain to value and selects it for sending
 func (in *ActionLocationCreateInput) SetDomain(value string) *ActionLocationCreateInput {
 	in.Domain = value
@@ -104,6 +105,7 @@ func (in *ActionLocationCreateInput) SetDomain(value string) *ActionLocationCrea
 	in._selectedParameters["Domain"] = nil
 	return in
 }
+
 // SetEnvironment sets parameter Environment to value and selects it for sending
 func (in *ActionLocationCreateInput) SetEnvironment(value int64) *ActionLocationCreateInput {
 	in.Environment = value
@@ -115,6 +117,7 @@ func (in *ActionLocationCreateInput) SetEnvironment(value int64) *ActionLocation
 	in._selectedParameters["Environment"] = nil
 	return in
 }
+
 // SetHasIpv6 sets parameter HasIpv6 to value and selects it for sending
 func (in *ActionLocationCreateInput) SetHasIpv6(value bool) *ActionLocationCreateInput {
 	in.HasIpv6 = value
@@ -126,6 +129,7 @@ func (in *ActionLocationCreateInput) SetHasIpv6(value bool) *ActionLocationCreat
 	in._selectedParameters["HasIpv6"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionLocationCreateInput) SetLabel(value string) *ActionLocationCreateInput {
 	in.Label = value
@@ -137,6 +141,7 @@ func (in *ActionLocationCreateInput) SetLabel(value string) *ActionLocationCreat
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetRemoteConsoleServer sets parameter RemoteConsoleServer to value and selects it for sending
 func (in *ActionLocationCreateInput) SetRemoteConsoleServer(value string) *ActionLocationCreateInput {
 	in.RemoteConsoleServer = value
@@ -148,6 +153,7 @@ func (in *ActionLocationCreateInput) SetRemoteConsoleServer(value string) *Actio
 	in._selectedParameters["RemoteConsoleServer"] = nil
 	return in
 }
+
 // SetVpsOnboot sets parameter VpsOnboot to value and selects it for sending
 func (in *ActionLocationCreateInput) SetVpsOnboot(value bool) *ActionLocationCreateInput {
 	in.VpsOnboot = value
@@ -186,21 +192,20 @@ func (in *ActionLocationCreateInput) AnySelected() bool {
 // ActionLocationCreateRequest is a type for the entire action request
 type ActionLocationCreateRequest struct {
 	Location map[string]interface{} `json:"location"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta     map[string]interface{} `json:"_meta"`
 }
 
 // ActionLocationCreateOutput is a type for action output parameters
 type ActionLocationCreateOutput struct {
-	Description string `json:"description"`
-	Domain string `json:"domain"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	HasIpv6 bool `json:"has_ipv6"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	RemoteConsoleServer string `json:"remote_console_server"`
-	VpsOnboot bool `json:"vps_onboot"`
+	Description         string                       `json:"description"`
+	Domain              string                       `json:"domain"`
+	Environment         *ActionEnvironmentShowOutput `json:"environment"`
+	HasIpv6             bool                         `json:"has_ipv6"`
+	Id                  int64                        `json:"id"`
+	Label               string                       `json:"label"`
+	RemoteConsoleServer string                       `json:"remote_console_server"`
+	VpsOnboot           bool                         `json:"vps_onboot"`
 }
-
 
 // Type for action response, including envelope
 type ActionLocationCreateResponse struct {
@@ -215,12 +220,11 @@ type ActionLocationCreateResponse struct {
 	Output *ActionLocationCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionLocationCreate) Prepare() *ActionLocationCreateInvocation {
 	return &ActionLocationCreateInvocation{
 		Action: action,
-		Path: "/v6.0/locations",
+		Path:   "/v6.0/locations",
 	}
 }
 
@@ -236,7 +240,6 @@ type ActionLocationCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionLocationCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionLocationCreateInvocation) NewInput() *ActionLocationCreateInput {
@@ -259,6 +262,7 @@ func (inv *ActionLocationCreateInvocation) IsParameterSelected(param string) boo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionLocationCreateInvocation) NewMetaInput() *ActionLocationCreateMetaGlobalInput {
@@ -287,7 +291,6 @@ func (inv *ActionLocationCreateInvocation) Call() (*ActionLocationCreateResponse
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionLocationCreateInvocation) callAsBody() (*ActionLocationCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionLocationCreateResponse{Action: inv.Action}
@@ -298,13 +301,10 @@ func (inv *ActionLocationCreateInvocation) callAsBody() (*ActionLocationCreateRe
 	return resp, err
 }
 
-
-
-
 func (inv *ActionLocationCreateInvocation) makeAllInputParams() *ActionLocationCreateRequest {
 	return &ActionLocationCreateRequest{
 		Location: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:     inv.makeMetaInputParams(),
 	}
 }
 

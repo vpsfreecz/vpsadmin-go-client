@@ -18,7 +18,7 @@ func NewActionVpsOutageWindowUpdate(client *Client) *ActionVpsOutageWindowUpdate
 
 // ActionVpsOutageWindowUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsOutageWindowUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	Includes string `json:"includes"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -35,6 +35,7 @@ func (in *ActionVpsOutageWindowUpdateMetaGlobalInput) SetNo(value bool) *ActionV
 	in._selectedParameters["No"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsOutageWindowUpdateMetaGlobalInput) SetIncludes(value string) *ActionVpsOutageWindowUpdateMetaGlobalInput {
 	in.Includes = value
@@ -72,8 +73,8 @@ func (in *ActionVpsOutageWindowUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsOutageWindowUpdateInput is a type for action input parameters
 type ActionVpsOutageWindowUpdateInput struct {
-	IsOpen bool `json:"is_open"`
-	OpensAt int64 `json:"opens_at"`
+	IsOpen   bool  `json:"is_open"`
+	OpensAt  int64 `json:"opens_at"`
 	ClosesAt int64 `json:"closes_at"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -90,6 +91,7 @@ func (in *ActionVpsOutageWindowUpdateInput) SetIsOpen(value bool) *ActionVpsOuta
 	in._selectedParameters["IsOpen"] = nil
 	return in
 }
+
 // SetOpensAt sets parameter OpensAt to value and selects it for sending
 func (in *ActionVpsOutageWindowUpdateInput) SetOpensAt(value int64) *ActionVpsOutageWindowUpdateInput {
 	in.OpensAt = value
@@ -101,6 +103,7 @@ func (in *ActionVpsOutageWindowUpdateInput) SetOpensAt(value int64) *ActionVpsOu
 	in._selectedParameters["OpensAt"] = nil
 	return in
 }
+
 // SetClosesAt sets parameter ClosesAt to value and selects it for sending
 func (in *ActionVpsOutageWindowUpdateInput) SetClosesAt(value int64) *ActionVpsOutageWindowUpdateInput {
 	in.ClosesAt = value
@@ -139,17 +142,16 @@ func (in *ActionVpsOutageWindowUpdateInput) AnySelected() bool {
 // ActionVpsOutageWindowUpdateRequest is a type for the entire action request
 type ActionVpsOutageWindowUpdateRequest struct {
 	OutageWindow map[string]interface{} `json:"outage_window"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta         map[string]interface{} `json:"_meta"`
 }
 
 // ActionVpsOutageWindowUpdateOutput is a type for action output parameters
 type ActionVpsOutageWindowUpdateOutput struct {
-	Weekday int64 `json:"weekday"`
-	IsOpen bool `json:"is_open"`
-	OpensAt int64 `json:"opens_at"`
+	Weekday  int64 `json:"weekday"`
+	IsOpen   bool  `json:"is_open"`
+	OpensAt  int64 `json:"opens_at"`
 	ClosesAt int64 `json:"closes_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsOutageWindowUpdateResponse struct {
@@ -164,12 +166,11 @@ type ActionVpsOutageWindowUpdateResponse struct {
 	Output *ActionVpsOutageWindowUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsOutageWindowUpdate) Prepare() *ActionVpsOutageWindowUpdateInvocation {
 	return &ActionVpsOutageWindowUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/outage_windows/{outage_window_id}",
+		Path:   "/v5.0/vpses/{vps_id}/outage_windows/{outage_window_id}",
 	}
 }
 
@@ -218,6 +219,7 @@ func (inv *ActionVpsOutageWindowUpdateInvocation) IsParameterSelected(param stri
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsOutageWindowUpdateInvocation) NewMetaInput() *ActionVpsOutageWindowUpdateMetaGlobalInput {
@@ -246,7 +248,6 @@ func (inv *ActionVpsOutageWindowUpdateInvocation) Call() (*ActionVpsOutageWindow
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionVpsOutageWindowUpdateInvocation) callAsBody() (*ActionVpsOutageWindowUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionVpsOutageWindowUpdateResponse{Action: inv.Action}
@@ -257,13 +258,10 @@ func (inv *ActionVpsOutageWindowUpdateInvocation) callAsBody() (*ActionVpsOutage
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsOutageWindowUpdateInvocation) makeAllInputParams() *ActionVpsOutageWindowUpdateRequest {
 	return &ActionVpsOutageWindowUpdateRequest{
 		OutageWindow: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:         inv.makeMetaInputParams(),
 	}
 }
 

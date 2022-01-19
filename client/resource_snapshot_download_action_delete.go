@@ -19,7 +19,7 @@ func NewActionSnapshotDownloadDelete(client *Client) *ActionSnapshotDownloadDele
 // ActionSnapshotDownloadDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionSnapshotDownloadDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionSnapshotDownloadDeleteMetaGlobalInput) SetIncludes(value string)
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionSnapshotDownloadDeleteMetaGlobalInput) SetNo(value bool) *ActionSnapshotDownloadDeleteMetaGlobalInput {
 	in.No = value
@@ -70,12 +71,10 @@ func (in *ActionSnapshotDownloadDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionSnapshotDownloadDeleteRequest is a type for the entire action request
 type ActionSnapshotDownloadDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionSnapshotDownloadDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionSnapshotDownloadDeleteMetaGlobalOutput struct {
@@ -93,12 +92,11 @@ type ActionSnapshotDownloadDeleteResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionSnapshotDownloadDelete) Prepare() *ActionSnapshotDownloadDeleteInvocation {
 	return &ActionSnapshotDownloadDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/snapshot_downloads/{snapshot_download_id}",
+		Path:   "/v6.0/snapshot_downloads/{snapshot_download_id}",
 	}
 }
 
@@ -151,7 +149,6 @@ func (inv *ActionSnapshotDownloadDeleteInvocation) IsMetaParameterSelected(param
 func (inv *ActionSnapshotDownloadDeleteInvocation) Call() (*ActionSnapshotDownloadDeleteResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionSnapshotDownloadDeleteInvocation) callAsBody() (*ActionSnapshotDownloadDeleteResponse, error) {
 	input := inv.makeAllInputParams()
@@ -209,11 +206,11 @@ func (resp *ActionSnapshotDownloadDeleteResponse) WatchOperation(timeout float64
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -236,14 +233,11 @@ func (resp *ActionSnapshotDownloadDeleteResponse) CancelOperation() (*ActionActi
 	return req.Call()
 }
 
-
-
 func (inv *ActionSnapshotDownloadDeleteInvocation) makeAllInputParams() *ActionSnapshotDownloadDeleteRequest {
 	return &ActionSnapshotDownloadDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionSnapshotDownloadDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

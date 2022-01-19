@@ -19,7 +19,7 @@ func NewActionMonitoredEventLogShow(client *Client) *ActionMonitoredEventLogShow
 // ActionMonitoredEventLogShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMonitoredEventLogShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMonitoredEventLogShowMetaGlobalInput) SetIncludes(value string) 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMonitoredEventLogShowMetaGlobalInput) SetNo(value bool) *ActionMonitoredEventLogShowMetaGlobalInput {
 	in.No = value
@@ -70,15 +71,12 @@ func (in *ActionMonitoredEventLogShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionMonitoredEventLogShowOutput is a type for action output parameters
 type ActionMonitoredEventLogShowOutput struct {
 	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	Passed bool `json:"passed"`
+	Id        int64  `json:"id"`
+	Passed    bool   `json:"passed"`
 }
-
 
 // Type for action response, including envelope
 type ActionMonitoredEventLogShowResponse struct {
@@ -93,12 +91,11 @@ type ActionMonitoredEventLogShowResponse struct {
 	Output *ActionMonitoredEventLogShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMonitoredEventLogShow) Prepare() *ActionMonitoredEventLogShowInvocation {
 	return &ActionMonitoredEventLogShowInvocation{
 		Action: action,
-		Path: "/v6.0/monitored_events/{monitored_event_id}/logs/{log_id}",
+		Path:   "/v6.0/monitored_events/{monitored_event_id}/logs/{log_id}",
 	}
 }
 
@@ -163,9 +160,6 @@ func (inv *ActionMonitoredEventLogShowInvocation) callAsQuery() (*ActionMonitore
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMonitoredEventLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -176,4 +170,3 @@ func (inv *ActionMonitoredEventLogShowInvocation) convertMetaInputToQueryParams(
 		}
 	}
 }
-

@@ -19,7 +19,7 @@ func NewActionClusterResourceUpdate(client *Client) *ActionClusterResourceUpdate
 // ActionClusterResourceUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourceUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionClusterResourceUpdateMetaGlobalInput) SetIncludes(value string) 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionClusterResourceUpdateMetaGlobalInput) SetNo(value bool) *ActionClusterResourceUpdateMetaGlobalInput {
 	in.No = value
@@ -72,11 +73,11 @@ func (in *ActionClusterResourceUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterResourceUpdateInput is a type for action input parameters
 type ActionClusterResourceUpdateInput struct {
-	Label string `json:"label"`
-	Max int64 `json:"max"`
-	Min int64 `json:"min"`
-	Name string `json:"name"`
-	Stepsize int64 `json:"stepsize"`
+	Label    string `json:"label"`
+	Max      int64  `json:"max"`
+	Min      int64  `json:"min"`
+	Name     string `json:"name"`
+	Stepsize int64  `json:"stepsize"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -92,6 +93,7 @@ func (in *ActionClusterResourceUpdateInput) SetLabel(value string) *ActionCluste
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetMax sets parameter Max to value and selects it for sending
 func (in *ActionClusterResourceUpdateInput) SetMax(value int64) *ActionClusterResourceUpdateInput {
 	in.Max = value
@@ -103,6 +105,7 @@ func (in *ActionClusterResourceUpdateInput) SetMax(value int64) *ActionClusterRe
 	in._selectedParameters["Max"] = nil
 	return in
 }
+
 // SetMin sets parameter Min to value and selects it for sending
 func (in *ActionClusterResourceUpdateInput) SetMin(value int64) *ActionClusterResourceUpdateInput {
 	in.Min = value
@@ -114,6 +117,7 @@ func (in *ActionClusterResourceUpdateInput) SetMin(value int64) *ActionClusterRe
 	in._selectedParameters["Min"] = nil
 	return in
 }
+
 // SetName sets parameter Name to value and selects it for sending
 func (in *ActionClusterResourceUpdateInput) SetName(value string) *ActionClusterResourceUpdateInput {
 	in.Name = value
@@ -125,6 +129,7 @@ func (in *ActionClusterResourceUpdateInput) SetName(value string) *ActionCluster
 	in._selectedParameters["Name"] = nil
 	return in
 }
+
 // SetStepsize sets parameter Stepsize to value and selects it for sending
 func (in *ActionClusterResourceUpdateInput) SetStepsize(value int64) *ActionClusterResourceUpdateInput {
 	in.Stepsize = value
@@ -163,19 +168,18 @@ func (in *ActionClusterResourceUpdateInput) AnySelected() bool {
 // ActionClusterResourceUpdateRequest is a type for the entire action request
 type ActionClusterResourceUpdateRequest struct {
 	ClusterResource map[string]interface{} `json:"cluster_resource"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta            map[string]interface{} `json:"_meta"`
 }
 
 // ActionClusterResourceUpdateOutput is a type for action output parameters
 type ActionClusterResourceUpdateOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Max int64 `json:"max"`
-	Min int64 `json:"min"`
-	Name string `json:"name"`
-	Stepsize int64 `json:"stepsize"`
+	Id       int64  `json:"id"`
+	Label    string `json:"label"`
+	Max      int64  `json:"max"`
+	Min      int64  `json:"min"`
+	Name     string `json:"name"`
+	Stepsize int64  `json:"stepsize"`
 }
-
 
 // Type for action response, including envelope
 type ActionClusterResourceUpdateResponse struct {
@@ -190,12 +194,11 @@ type ActionClusterResourceUpdateResponse struct {
 	Output *ActionClusterResourceUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionClusterResourceUpdate) Prepare() *ActionClusterResourceUpdateInvocation {
 	return &ActionClusterResourceUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/cluster_resources/{cluster_resource_id}",
+		Path:   "/v6.0/cluster_resources/{cluster_resource_id}",
 	}
 }
 
@@ -244,6 +247,7 @@ func (inv *ActionClusterResourceUpdateInvocation) IsParameterSelected(param stri
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionClusterResourceUpdateInvocation) NewMetaInput() *ActionClusterResourceUpdateMetaGlobalInput {
@@ -272,7 +276,6 @@ func (inv *ActionClusterResourceUpdateInvocation) Call() (*ActionClusterResource
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionClusterResourceUpdateInvocation) callAsBody() (*ActionClusterResourceUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionClusterResourceUpdateResponse{Action: inv.Action}
@@ -283,13 +286,10 @@ func (inv *ActionClusterResourceUpdateInvocation) callAsBody() (*ActionClusterRe
 	return resp, err
 }
 
-
-
-
 func (inv *ActionClusterResourceUpdateInvocation) makeAllInputParams() *ActionClusterResourceUpdateRequest {
 	return &ActionClusterResourceUpdateRequest{
 		ClusterResource: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:            inv.makeMetaInputParams(),
 	}
 }
 

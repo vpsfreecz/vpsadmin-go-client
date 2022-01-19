@@ -19,7 +19,7 @@ func NewActionIntegrityCheckShow(client *Client) *ActionIntegrityCheckShow {
 // ActionIntegrityCheckShowMetaGlobalInput is a type for action global meta input parameters
 type ActionIntegrityCheckShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionIntegrityCheckShowMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionIntegrityCheckShowMetaGlobalInput) SetNo(value bool) *ActionIntegrityCheckShowMetaGlobalInput {
 	in.No = value
@@ -70,24 +71,21 @@ func (in *ActionIntegrityCheckShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionIntegrityCheckShowOutput is a type for action output parameters
 type ActionIntegrityCheckShowOutput struct {
-	BrokenObjects int64 `json:"broken_objects"`
-	CheckedFacts int64 `json:"checked_facts"`
-	CheckedObjects int64 `json:"checked_objects"`
-	CreatedAt string `json:"created_at"`
-	FalseFacts int64 `json:"false_facts"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	IntegralObjects int64 `json:"integral_objects"`
-	Status string `json:"status"`
-	TrueFacts int64 `json:"true_facts"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
+	BrokenObjects   int64                 `json:"broken_objects"`
+	CheckedFacts    int64                 `json:"checked_facts"`
+	CheckedObjects  int64                 `json:"checked_objects"`
+	CreatedAt       string                `json:"created_at"`
+	FalseFacts      int64                 `json:"false_facts"`
+	FinishedAt      string                `json:"finished_at"`
+	Id              int64                 `json:"id"`
+	IntegralObjects int64                 `json:"integral_objects"`
+	Status          string                `json:"status"`
+	TrueFacts       int64                 `json:"true_facts"`
+	UpdatedAt       string                `json:"updated_at"`
+	User            *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionIntegrityCheckShowResponse struct {
@@ -102,12 +100,11 @@ type ActionIntegrityCheckShowResponse struct {
 	Output *ActionIntegrityCheckShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionIntegrityCheckShow) Prepare() *ActionIntegrityCheckShowInvocation {
 	return &ActionIntegrityCheckShowInvocation{
 		Action: action,
-		Path: "/v6.0/integrity_checks/{integrity_check_id}",
+		Path:   "/v6.0/integrity_checks/{integrity_check_id}",
 	}
 }
 
@@ -172,9 +169,6 @@ func (inv *ActionIntegrityCheckShowInvocation) callAsQuery() (*ActionIntegrityCh
 	return resp, err
 }
 
-
-
-
 func (inv *ActionIntegrityCheckShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -185,4 +179,3 @@ func (inv *ActionIntegrityCheckShowInvocation) convertMetaInputToQueryParams(ret
 		}
 	}
 }
-

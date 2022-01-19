@@ -28,10 +28,10 @@ func NewResourceActionState(client *Client) *ResourceActionState {
 	return &ResourceActionState{
 		Client: client,
 		Cancel: actionCancel,
-		Index: actionIndex,
-		List: actionIndex,
-		Poll: actionPoll,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Poll:   actionPoll,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

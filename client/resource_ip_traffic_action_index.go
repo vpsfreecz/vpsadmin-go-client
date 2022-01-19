@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionIpTrafficIndex is a type for action Ip_traffic#Index
 type ActionIpTrafficIndex struct {
@@ -17,9 +16,9 @@ func NewActionIpTrafficIndex(client *Client) *ActionIpTrafficIndex {
 
 // ActionIpTrafficIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionIpTrafficIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionIpTrafficIndexMetaGlobalInput) SetCount(value bool) *ActionIpTra
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionIpTrafficIndexMetaGlobalInput) SetIncludes(value string) *ActionIpTrafficIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionIpTrafficIndexMetaGlobalInput) SetIncludes(value string) *Action
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionIpTrafficIndexMetaGlobalInput) SetNo(value bool) *ActionIpTrafficIndexMetaGlobalInput {
 	in.No = value
@@ -83,24 +84,24 @@ func (in *ActionIpTrafficIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionIpTrafficIndexInput is a type for action input parameters
 type ActionIpTrafficIndexInput struct {
-	Accumulate string `json:"accumulate"`
-	Environment int64 `json:"environment"`
-	From string `json:"from"`
-	IpAddress int64 `json:"ip_address"`
-	IpVersion int64 `json:"ip_version"`
-	Limit int64 `json:"limit"`
-	Location int64 `json:"location"`
-	Month int64 `json:"month"`
-	Network int64 `json:"network"`
-	Node int64 `json:"node"`
-	Offset int64 `json:"offset"`
-	Order string `json:"order"`
-	Protocol string `json:"protocol"`
-	Role string `json:"role"`
-	To string `json:"to"`
-	User int64 `json:"user"`
-	Vps int64 `json:"vps"`
-	Year int64 `json:"year"`
+	Accumulate  string `json:"accumulate"`
+	Environment int64  `json:"environment"`
+	From        string `json:"from"`
+	IpAddress   int64  `json:"ip_address"`
+	IpVersion   int64  `json:"ip_version"`
+	Limit       int64  `json:"limit"`
+	Location    int64  `json:"location"`
+	Month       int64  `json:"month"`
+	Network     int64  `json:"network"`
+	Node        int64  `json:"node"`
+	Offset      int64  `json:"offset"`
+	Order       string `json:"order"`
+	Protocol    string `json:"protocol"`
+	Role        string `json:"role"`
+	To          string `json:"to"`
+	User        int64  `json:"user"`
+	Vps         int64  `json:"vps"`
+	Year        int64  `json:"year"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -116,6 +117,7 @@ func (in *ActionIpTrafficIndexInput) SetAccumulate(value string) *ActionIpTraffi
 	in._selectedParameters["Accumulate"] = nil
 	return in
 }
+
 // SetEnvironment sets parameter Environment to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetEnvironment(value int64) *ActionIpTrafficIndexInput {
 	in.Environment = value
@@ -127,6 +129,7 @@ func (in *ActionIpTrafficIndexInput) SetEnvironment(value int64) *ActionIpTraffi
 	in._selectedParameters["Environment"] = nil
 	return in
 }
+
 // SetFrom sets parameter From to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetFrom(value string) *ActionIpTrafficIndexInput {
 	in.From = value
@@ -138,6 +141,7 @@ func (in *ActionIpTrafficIndexInput) SetFrom(value string) *ActionIpTrafficIndex
 	in._selectedParameters["From"] = nil
 	return in
 }
+
 // SetIpAddress sets parameter IpAddress to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetIpAddress(value int64) *ActionIpTrafficIndexInput {
 	in.IpAddress = value
@@ -149,6 +153,7 @@ func (in *ActionIpTrafficIndexInput) SetIpAddress(value int64) *ActionIpTrafficI
 	in._selectedParameters["IpAddress"] = nil
 	return in
 }
+
 // SetIpVersion sets parameter IpVersion to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetIpVersion(value int64) *ActionIpTrafficIndexInput {
 	in.IpVersion = value
@@ -160,6 +165,7 @@ func (in *ActionIpTrafficIndexInput) SetIpVersion(value int64) *ActionIpTrafficI
 	in._selectedParameters["IpVersion"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetLimit(value int64) *ActionIpTrafficIndexInput {
 	in.Limit = value
@@ -171,6 +177,7 @@ func (in *ActionIpTrafficIndexInput) SetLimit(value int64) *ActionIpTrafficIndex
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetLocation(value int64) *ActionIpTrafficIndexInput {
 	in.Location = value
@@ -182,6 +189,7 @@ func (in *ActionIpTrafficIndexInput) SetLocation(value int64) *ActionIpTrafficIn
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetMonth sets parameter Month to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetMonth(value int64) *ActionIpTrafficIndexInput {
 	in.Month = value
@@ -193,6 +201,7 @@ func (in *ActionIpTrafficIndexInput) SetMonth(value int64) *ActionIpTrafficIndex
 	in._selectedParameters["Month"] = nil
 	return in
 }
+
 // SetNetwork sets parameter Network to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetNetwork(value int64) *ActionIpTrafficIndexInput {
 	in.Network = value
@@ -204,6 +213,7 @@ func (in *ActionIpTrafficIndexInput) SetNetwork(value int64) *ActionIpTrafficInd
 	in._selectedParameters["Network"] = nil
 	return in
 }
+
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetNode(value int64) *ActionIpTrafficIndexInput {
 	in.Node = value
@@ -215,6 +225,7 @@ func (in *ActionIpTrafficIndexInput) SetNode(value int64) *ActionIpTrafficIndexI
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetOffset(value int64) *ActionIpTrafficIndexInput {
 	in.Offset = value
@@ -226,6 +237,7 @@ func (in *ActionIpTrafficIndexInput) SetOffset(value int64) *ActionIpTrafficInde
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetOrder sets parameter Order to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetOrder(value string) *ActionIpTrafficIndexInput {
 	in.Order = value
@@ -237,6 +249,7 @@ func (in *ActionIpTrafficIndexInput) SetOrder(value string) *ActionIpTrafficInde
 	in._selectedParameters["Order"] = nil
 	return in
 }
+
 // SetProtocol sets parameter Protocol to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetProtocol(value string) *ActionIpTrafficIndexInput {
 	in.Protocol = value
@@ -248,6 +261,7 @@ func (in *ActionIpTrafficIndexInput) SetProtocol(value string) *ActionIpTrafficI
 	in._selectedParameters["Protocol"] = nil
 	return in
 }
+
 // SetRole sets parameter Role to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetRole(value string) *ActionIpTrafficIndexInput {
 	in.Role = value
@@ -259,6 +273,7 @@ func (in *ActionIpTrafficIndexInput) SetRole(value string) *ActionIpTrafficIndex
 	in._selectedParameters["Role"] = nil
 	return in
 }
+
 // SetTo sets parameter To to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetTo(value string) *ActionIpTrafficIndexInput {
 	in.To = value
@@ -270,6 +285,7 @@ func (in *ActionIpTrafficIndexInput) SetTo(value string) *ActionIpTrafficIndexIn
 	in._selectedParameters["To"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetUser(value int64) *ActionIpTrafficIndexInput {
 	in.User = value
@@ -281,6 +297,7 @@ func (in *ActionIpTrafficIndexInput) SetUser(value int64) *ActionIpTrafficIndexI
 	in._selectedParameters["User"] = nil
 	return in
 }
+
 // SetVps sets parameter Vps to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetVps(value int64) *ActionIpTrafficIndexInput {
 	in.Vps = value
@@ -292,6 +309,7 @@ func (in *ActionIpTrafficIndexInput) SetVps(value int64) *ActionIpTrafficIndexIn
 	in._selectedParameters["Vps"] = nil
 	return in
 }
+
 // SetYear sets parameter Year to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetYear(value int64) *ActionIpTrafficIndexInput {
 	in.Year = value
@@ -327,21 +345,19 @@ func (in *ActionIpTrafficIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionIpTrafficIndexOutput is a type for action output parameters
 type ActionIpTrafficIndexOutput struct {
-	BytesIn int64 `json:"bytes_in"`
-	BytesOut int64 `json:"bytes_out"`
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	PacketsIn int64 `json:"packets_in"`
-	PacketsOut int64 `json:"packets_out"`
-	Protocol string `json:"protocol"`
-	Role string `json:"role"`
-	User *ActionUserShowOutput `json:"user"`
+	BytesIn    int64                      `json:"bytes_in"`
+	BytesOut   int64                      `json:"bytes_out"`
+	CreatedAt  string                     `json:"created_at"`
+	Id         int64                      `json:"id"`
+	IpAddress  *ActionIpAddressShowOutput `json:"ip_address"`
+	PacketsIn  int64                      `json:"packets_in"`
+	PacketsOut int64                      `json:"packets_out"`
+	Protocol   string                     `json:"protocol"`
+	Role       string                     `json:"role"`
+	User       *ActionUserShowOutput      `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionIpTrafficIndexResponse struct {
@@ -356,12 +372,11 @@ type ActionIpTrafficIndexResponse struct {
 	Output []*ActionIpTrafficIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionIpTrafficIndex) Prepare() *ActionIpTrafficIndexInvocation {
 	return &ActionIpTrafficIndexInvocation{
 		Action: action,
-		Path: "/v6.0/ip_traffics",
+		Path:   "/v6.0/ip_traffics",
 	}
 }
 
@@ -377,7 +392,6 @@ type ActionIpTrafficIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionIpTrafficIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionIpTrafficIndexInvocation) NewInput() *ActionIpTrafficIndexInput {
@@ -400,6 +414,7 @@ func (inv *ActionIpTrafficIndexInvocation) IsParameterSelected(param string) boo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionIpTrafficIndexInvocation) NewMetaInput() *ActionIpTrafficIndexMetaGlobalInput {
@@ -439,8 +454,6 @@ func (inv *ActionIpTrafficIndexInvocation) callAsQuery() (*ActionIpTrafficIndexR
 	}
 	return resp, err
 }
-
-
 
 func (inv *ActionIpTrafficIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
@@ -514,4 +527,3 @@ func (inv *ActionIpTrafficIndexInvocation) convertMetaInputToQueryParams(ret map
 		}
 	}
 }
-

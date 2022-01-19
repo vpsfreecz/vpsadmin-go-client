@@ -19,7 +19,7 @@ func NewActionPoolShow(client *Client) *ActionPoolShow {
 // ActionPoolShowMetaGlobalInput is a type for action global meta input parameters
 type ActionPoolShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionPoolShowMetaGlobalInput) SetIncludes(value string) *ActionPoolSh
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionPoolShowMetaGlobalInput) SetNo(value bool) *ActionPoolShowMetaGlobalInput {
 	in.No = value
@@ -70,31 +71,28 @@ func (in *ActionPoolShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionPoolShowOutput is a type for action output parameters
 type ActionPoolShowOutput struct {
-	Atime bool `json:"atime"`
-	Avail int64 `json:"avail"`
-	Compression bool `json:"compression"`
-	Filesystem string `json:"filesystem"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	MaintenanceLock string `json:"maintenance_lock"`
-	MaintenanceLockReason string `json:"maintenance_lock_reason"`
-	Node *ActionNodeShowOutput `json:"node"`
-	Quota int64 `json:"quota"`
-	Recordsize int64 `json:"recordsize"`
-	Referenced int64 `json:"referenced"`
-	Refquota int64 `json:"refquota"`
-	RefquotaCheck bool `json:"refquota_check"`
-	Relatime bool `json:"relatime"`
-	Role string `json:"role"`
-	Sharenfs string `json:"sharenfs"`
-	Sync string `json:"sync"`
-	Used int64 `json:"used"`
+	Atime                 bool                  `json:"atime"`
+	Avail                 int64                 `json:"avail"`
+	Compression           bool                  `json:"compression"`
+	Filesystem            string                `json:"filesystem"`
+	Id                    int64                 `json:"id"`
+	Label                 string                `json:"label"`
+	MaintenanceLock       string                `json:"maintenance_lock"`
+	MaintenanceLockReason string                `json:"maintenance_lock_reason"`
+	Node                  *ActionNodeShowOutput `json:"node"`
+	Quota                 int64                 `json:"quota"`
+	Recordsize            int64                 `json:"recordsize"`
+	Referenced            int64                 `json:"referenced"`
+	Refquota              int64                 `json:"refquota"`
+	RefquotaCheck         bool                  `json:"refquota_check"`
+	Relatime              bool                  `json:"relatime"`
+	Role                  string                `json:"role"`
+	Sharenfs              string                `json:"sharenfs"`
+	Sync                  string                `json:"sync"`
+	Used                  int64                 `json:"used"`
 }
-
 
 // Type for action response, including envelope
 type ActionPoolShowResponse struct {
@@ -109,12 +107,11 @@ type ActionPoolShowResponse struct {
 	Output *ActionPoolShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionPoolShow) Prepare() *ActionPoolShowInvocation {
 	return &ActionPoolShowInvocation{
 		Action: action,
-		Path: "/v6.0/pools/{pool_id}",
+		Path:   "/v6.0/pools/{pool_id}",
 	}
 }
 
@@ -179,9 +176,6 @@ func (inv *ActionPoolShowInvocation) callAsQuery() (*ActionPoolShowResponse, err
 	return resp, err
 }
 
-
-
-
 func (inv *ActionPoolShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -192,4 +186,3 @@ func (inv *ActionPoolShowInvocation) convertMetaInputToQueryParams(ret map[strin
 		}
 	}
 }
-

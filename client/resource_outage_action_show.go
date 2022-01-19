@@ -19,7 +19,7 @@ func NewActionOutageShow(client *Client) *ActionOutageShow {
 // ActionOutageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOutageShowMetaGlobalInput) SetIncludes(value string) *ActionOuta
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOutageShowMetaGlobalInput) SetNo(value bool) *ActionOutageShowMetaGlobalInput {
 	in.No = value
@@ -70,28 +71,25 @@ func (in *ActionOutageShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionOutageShowOutput is a type for action output parameters
 type ActionOutageShowOutput struct {
-	Affected bool `json:"affected"`
-	AffectedDirectVpsCount int64 `json:"affected_direct_vps_count"`
-	AffectedExportCount int64 `json:"affected_export_count"`
-	AffectedIndirectVpsCount int64 `json:"affected_indirect_vps_count"`
-	AffectedUserCount int64 `json:"affected_user_count"`
-	BeginsAt string `json:"begins_at"`
-	CsDescription string `json:"cs_description"`
-	CsSummary string `json:"cs_summary"`
-	Duration int64 `json:"duration"`
-	EnDescription string `json:"en_description"`
-	EnSummary string `json:"en_summary"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	Planned bool `json:"planned"`
-	State string `json:"state"`
-	Type string `json:"type"`
+	Affected                 bool   `json:"affected"`
+	AffectedDirectVpsCount   int64  `json:"affected_direct_vps_count"`
+	AffectedExportCount      int64  `json:"affected_export_count"`
+	AffectedIndirectVpsCount int64  `json:"affected_indirect_vps_count"`
+	AffectedUserCount        int64  `json:"affected_user_count"`
+	BeginsAt                 string `json:"begins_at"`
+	CsDescription            string `json:"cs_description"`
+	CsSummary                string `json:"cs_summary"`
+	Duration                 int64  `json:"duration"`
+	EnDescription            string `json:"en_description"`
+	EnSummary                string `json:"en_summary"`
+	FinishedAt               string `json:"finished_at"`
+	Id                       int64  `json:"id"`
+	Planned                  bool   `json:"planned"`
+	State                    string `json:"state"`
+	Type                     string `json:"type"`
 }
-
 
 // Type for action response, including envelope
 type ActionOutageShowResponse struct {
@@ -106,12 +104,11 @@ type ActionOutageShowResponse struct {
 	Output *ActionOutageShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOutageShow) Prepare() *ActionOutageShowInvocation {
 	return &ActionOutageShowInvocation{
 		Action: action,
-		Path: "/v6.0/outages/{outage_id}",
+		Path:   "/v6.0/outages/{outage_id}",
 	}
 }
 
@@ -176,9 +173,6 @@ func (inv *ActionOutageShowInvocation) callAsQuery() (*ActionOutageShowResponse,
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOutageShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -189,4 +183,3 @@ func (inv *ActionOutageShowInvocation) convertMetaInputToQueryParams(ret map[str
 		}
 	}
 }
-

@@ -60,7 +60,7 @@ func (in *ActionVpsSetMaintenanceMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsSetMaintenanceInput is a type for action input parameters
 type ActionVpsSetMaintenanceInput struct {
-	Lock bool `json:"lock"`
+	Lock   bool   `json:"lock"`
 	Reason string `json:"reason"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -77,6 +77,7 @@ func (in *ActionVpsSetMaintenanceInput) SetLock(value bool) *ActionVpsSetMainten
 	in._selectedParameters["Lock"] = nil
 	return in
 }
+
 // SetReason sets parameter Reason to value and selects it for sending
 func (in *ActionVpsSetMaintenanceInput) SetReason(value string) *ActionVpsSetMaintenanceInput {
 	in.Reason = value
@@ -114,11 +115,9 @@ func (in *ActionVpsSetMaintenanceInput) AnySelected() bool {
 
 // ActionVpsSetMaintenanceRequest is a type for the entire action request
 type ActionVpsSetMaintenanceRequest struct {
-	Vps map[string]interface{} `json:"vps"`
+	Vps  map[string]interface{} `json:"vps"`
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionVpsSetMaintenanceResponse struct {
@@ -126,12 +125,11 @@ type ActionVpsSetMaintenanceResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsSetMaintenance) Prepare() *ActionVpsSetMaintenanceInvocation {
 	return &ActionVpsSetMaintenanceInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/set_maintenance",
+		Path:   "/v6.0/vpses/{vps_id}/set_maintenance",
 	}
 }
 
@@ -180,6 +178,7 @@ func (inv *ActionVpsSetMaintenanceInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsSetMaintenanceInvocation) NewMetaInput() *ActionVpsSetMaintenanceMetaGlobalInput {
@@ -208,7 +207,6 @@ func (inv *ActionVpsSetMaintenanceInvocation) Call() (*ActionVpsSetMaintenanceRe
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionVpsSetMaintenanceInvocation) callAsBody() (*ActionVpsSetMaintenanceResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionVpsSetMaintenanceResponse{Action: inv.Action}
@@ -216,12 +214,9 @@ func (inv *ActionVpsSetMaintenanceInvocation) callAsBody() (*ActionVpsSetMainten
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsSetMaintenanceInvocation) makeAllInputParams() *ActionVpsSetMaintenanceRequest {
 	return &ActionVpsSetMaintenanceRequest{
-		Vps: inv.makeInputParams(),
+		Vps:  inv.makeInputParams(),
 		Meta: inv.makeMetaInputParams(),
 	}
 }

@@ -19,7 +19,7 @@ func NewActionUserAccountUpdate(client *Client) *ActionUserAccountUpdate {
 // ActionUserAccountUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserAccountUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserAccountUpdateMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserAccountUpdateMetaGlobalInput) SetNo(value bool) *ActionUserAccountUpdateMetaGlobalInput {
 	in.No = value
@@ -72,8 +73,8 @@ func (in *ActionUserAccountUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserAccountUpdateInput is a type for action input parameters
 type ActionUserAccountUpdateInput struct {
-	MonthlyPayment int64 `json:"monthly_payment"`
-	PaidUntil string `json:"paid_until"`
+	MonthlyPayment int64  `json:"monthly_payment"`
+	PaidUntil      string `json:"paid_until"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -89,6 +90,7 @@ func (in *ActionUserAccountUpdateInput) SetMonthlyPayment(value int64) *ActionUs
 	in._selectedParameters["MonthlyPayment"] = nil
 	return in
 }
+
 // SetPaidUntil sets parameter PaidUntil to value and selects it for sending
 func (in *ActionUserAccountUpdateInput) SetPaidUntil(value string) *ActionUserAccountUpdateInput {
 	in.PaidUntil = value
@@ -127,16 +129,15 @@ func (in *ActionUserAccountUpdateInput) AnySelected() bool {
 // ActionUserAccountUpdateRequest is a type for the entire action request
 type ActionUserAccountUpdateRequest struct {
 	UserAccount map[string]interface{} `json:"user_account"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta        map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserAccountUpdateOutput is a type for action output parameters
 type ActionUserAccountUpdateOutput struct {
-	Id int64 `json:"id"`
-	MonthlyPayment int64 `json:"monthly_payment"`
-	PaidUntil string `json:"paid_until"`
+	Id             int64  `json:"id"`
+	MonthlyPayment int64  `json:"monthly_payment"`
+	PaidUntil      string `json:"paid_until"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserAccountUpdateResponse struct {
@@ -151,12 +152,11 @@ type ActionUserAccountUpdateResponse struct {
 	Output *ActionUserAccountUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserAccountUpdate) Prepare() *ActionUserAccountUpdateInvocation {
 	return &ActionUserAccountUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/user_accounts/{user_account_id}",
+		Path:   "/v6.0/user_accounts/{user_account_id}",
 	}
 }
 
@@ -205,6 +205,7 @@ func (inv *ActionUserAccountUpdateInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserAccountUpdateInvocation) NewMetaInput() *ActionUserAccountUpdateMetaGlobalInput {
@@ -233,7 +234,6 @@ func (inv *ActionUserAccountUpdateInvocation) Call() (*ActionUserAccountUpdateRe
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserAccountUpdateInvocation) callAsBody() (*ActionUserAccountUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserAccountUpdateResponse{Action: inv.Action}
@@ -244,13 +244,10 @@ func (inv *ActionUserAccountUpdateInvocation) callAsBody() (*ActionUserAccountUp
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserAccountUpdateInvocation) makeAllInputParams() *ActionUserAccountUpdateRequest {
 	return &ActionUserAccountUpdateRequest{
 		UserAccount: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:        inv.makeMetaInputParams(),
 	}
 }
 

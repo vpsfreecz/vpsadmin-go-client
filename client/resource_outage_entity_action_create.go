@@ -19,7 +19,7 @@ func NewActionOutageEntityCreate(client *Client) *ActionOutageEntityCreate {
 // ActionOutageEntityCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageEntityCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOutageEntityCreateMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOutageEntityCreateMetaGlobalInput) SetNo(value bool) *ActionOutageEntityCreateMetaGlobalInput {
 	in.No = value
@@ -72,8 +73,8 @@ func (in *ActionOutageEntityCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageEntityCreateInput is a type for action input parameters
 type ActionOutageEntityCreateInput struct {
-	EntityId int64 `json:"entity_id"`
-	Name string `json:"name"`
+	EntityId int64  `json:"entity_id"`
+	Name     string `json:"name"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -89,6 +90,7 @@ func (in *ActionOutageEntityCreateInput) SetEntityId(value int64) *ActionOutageE
 	in._selectedParameters["EntityId"] = nil
 	return in
 }
+
 // SetName sets parameter Name to value and selects it for sending
 func (in *ActionOutageEntityCreateInput) SetName(value string) *ActionOutageEntityCreateInput {
 	in.Name = value
@@ -127,17 +129,16 @@ func (in *ActionOutageEntityCreateInput) AnySelected() bool {
 // ActionOutageEntityCreateRequest is a type for the entire action request
 type ActionOutageEntityCreateRequest struct {
 	Entity map[string]interface{} `json:"entity"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta   map[string]interface{} `json:"_meta"`
 }
 
 // ActionOutageEntityCreateOutput is a type for action output parameters
 type ActionOutageEntityCreateOutput struct {
-	EntityId int64 `json:"entity_id"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Name string `json:"name"`
+	EntityId int64  `json:"entity_id"`
+	Id       int64  `json:"id"`
+	Label    string `json:"label"`
+	Name     string `json:"name"`
 }
-
 
 // Type for action response, including envelope
 type ActionOutageEntityCreateResponse struct {
@@ -152,12 +153,11 @@ type ActionOutageEntityCreateResponse struct {
 	Output *ActionOutageEntityCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOutageEntityCreate) Prepare() *ActionOutageEntityCreateInvocation {
 	return &ActionOutageEntityCreateInvocation{
 		Action: action,
-		Path: "/v6.0/outages/{outage_id}/entities",
+		Path:   "/v6.0/outages/{outage_id}/entities",
 	}
 }
 
@@ -206,6 +206,7 @@ func (inv *ActionOutageEntityCreateInvocation) IsParameterSelected(param string)
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOutageEntityCreateInvocation) NewMetaInput() *ActionOutageEntityCreateMetaGlobalInput {
@@ -234,7 +235,6 @@ func (inv *ActionOutageEntityCreateInvocation) Call() (*ActionOutageEntityCreate
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionOutageEntityCreateInvocation) callAsBody() (*ActionOutageEntityCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionOutageEntityCreateResponse{Action: inv.Action}
@@ -245,13 +245,10 @@ func (inv *ActionOutageEntityCreateInvocation) callAsBody() (*ActionOutageEntity
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOutageEntityCreateInvocation) makeAllInputParams() *ActionOutageEntityCreateRequest {
 	return &ActionOutageEntityCreateRequest{
 		Entity: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:   inv.makeMetaInputParams(),
 	}
 }
 

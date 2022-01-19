@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionNetworkIndex is a type for action Network#Index
 type ActionNetworkIndex struct {
@@ -17,9 +16,9 @@ func NewActionNetworkIndex(client *Client) *ActionNetworkIndex {
 
 // ActionNetworkIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionNetworkIndexMetaGlobalInput) SetCount(value bool) *ActionNetwork
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionNetworkIndexMetaGlobalInput) SetIncludes(value string) *ActionNetworkIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionNetworkIndexMetaGlobalInput) SetIncludes(value string) *ActionNe
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNetworkIndexMetaGlobalInput) SetNo(value bool) *ActionNetworkIndexMetaGlobalInput {
 	in.No = value
@@ -83,10 +84,10 @@ func (in *ActionNetworkIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkIndexInput is a type for action input parameters
 type ActionNetworkIndexInput struct {
-	Limit int64 `json:"limit"`
-	Location int64 `json:"location"`
-	Offset int64 `json:"offset"`
-	Purpose string `json:"purpose"`
+	Limit    int64  `json:"limit"`
+	Location int64  `json:"location"`
+	Offset   int64  `json:"offset"`
+	Purpose  string `json:"purpose"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -102,6 +103,7 @@ func (in *ActionNetworkIndexInput) SetLimit(value int64) *ActionNetworkIndexInpu
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionNetworkIndexInput) SetLocation(value int64) *ActionNetworkIndexInput {
 	in.Location = value
@@ -113,6 +115,7 @@ func (in *ActionNetworkIndexInput) SetLocation(value int64) *ActionNetworkIndexI
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionNetworkIndexInput) SetOffset(value int64) *ActionNetworkIndexInput {
 	in.Offset = value
@@ -124,6 +127,7 @@ func (in *ActionNetworkIndexInput) SetOffset(value int64) *ActionNetworkIndexInp
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetPurpose sets parameter Purpose to value and selects it for sending
 func (in *ActionNetworkIndexInput) SetPurpose(value string) *ActionNetworkIndexInput {
 	in.Purpose = value
@@ -159,27 +163,25 @@ func (in *ActionNetworkIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionNetworkIndexOutput is a type for action output parameters
 type ActionNetworkIndexOutput struct {
-	Address string `json:"address"`
-	Assigned int64 `json:"assigned"`
-	Id int64 `json:"id"`
-	IpVersion int64 `json:"ip_version"`
-	Label string `json:"label"`
-	Managed bool `json:"managed"`
-	Owned int64 `json:"owned"`
-	Prefix int64 `json:"prefix"`
+	Address         string                    `json:"address"`
+	Assigned        int64                     `json:"assigned"`
+	Id              int64                     `json:"id"`
+	IpVersion       int64                     `json:"ip_version"`
+	Label           string                    `json:"label"`
+	Managed         bool                      `json:"managed"`
+	Owned           int64                     `json:"owned"`
+	Prefix          int64                     `json:"prefix"`
 	PrimaryLocation *ActionLocationShowOutput `json:"primary_location"`
-	Purpose string `json:"purpose"`
-	Role string `json:"role"`
-	Size int64 `json:"size"`
-	SplitAccess string `json:"split_access"`
-	SplitPrefix int64 `json:"split_prefix"`
-	Taken int64 `json:"taken"`
-	Used int64 `json:"used"`
+	Purpose         string                    `json:"purpose"`
+	Role            string                    `json:"role"`
+	Size            int64                     `json:"size"`
+	SplitAccess     string                    `json:"split_access"`
+	SplitPrefix     int64                     `json:"split_prefix"`
+	Taken           int64                     `json:"taken"`
+	Used            int64                     `json:"used"`
 }
-
 
 // Type for action response, including envelope
 type ActionNetworkIndexResponse struct {
@@ -194,12 +196,11 @@ type ActionNetworkIndexResponse struct {
 	Output []*ActionNetworkIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNetworkIndex) Prepare() *ActionNetworkIndexInvocation {
 	return &ActionNetworkIndexInvocation{
 		Action: action,
-		Path: "/v6.0/networks",
+		Path:   "/v6.0/networks",
 	}
 }
 
@@ -215,7 +216,6 @@ type ActionNetworkIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionNetworkIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionNetworkIndexInvocation) NewInput() *ActionNetworkIndexInput {
@@ -238,6 +238,7 @@ func (inv *ActionNetworkIndexInvocation) IsParameterSelected(param string) bool 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionNetworkIndexInvocation) NewMetaInput() *ActionNetworkIndexMetaGlobalInput {
@@ -278,8 +279,6 @@ func (inv *ActionNetworkIndexInvocation) callAsQuery() (*ActionNetworkIndexRespo
 	return resp, err
 }
 
-
-
 func (inv *ActionNetworkIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -310,4 +309,3 @@ func (inv *ActionNetworkIndexInvocation) convertMetaInputToQueryParams(ret map[s
 		}
 	}
 }
-

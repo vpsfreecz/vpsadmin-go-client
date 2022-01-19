@@ -19,7 +19,7 @@ func NewActionVpsMaintenanceWindowUpdateAll(client *Client) *ActionVpsMaintenanc
 // ActionVpsMaintenanceWindowUpdateAllMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMaintenanceWindowUpdateAllMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsMaintenanceWindowUpdateAllMetaGlobalInput) SetIncludes(value 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsMaintenanceWindowUpdateAllMetaGlobalInput) SetNo(value bool) *ActionVpsMaintenanceWindowUpdateAllMetaGlobalInput {
 	in.No = value
@@ -73,8 +74,8 @@ func (in *ActionVpsMaintenanceWindowUpdateAllMetaGlobalInput) AnySelected() bool
 // ActionVpsMaintenanceWindowUpdateAllInput is a type for action input parameters
 type ActionVpsMaintenanceWindowUpdateAllInput struct {
 	ClosesAt int64 `json:"closes_at"`
-	IsOpen bool `json:"is_open"`
-	OpensAt int64 `json:"opens_at"`
+	IsOpen   bool  `json:"is_open"`
+	OpensAt  int64 `json:"opens_at"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -90,6 +91,7 @@ func (in *ActionVpsMaintenanceWindowUpdateAllInput) SetClosesAt(value int64) *Ac
 	in._selectedParameters["ClosesAt"] = nil
 	return in
 }
+
 // SetIsOpen sets parameter IsOpen to value and selects it for sending
 func (in *ActionVpsMaintenanceWindowUpdateAllInput) SetIsOpen(value bool) *ActionVpsMaintenanceWindowUpdateAllInput {
 	in.IsOpen = value
@@ -101,6 +103,7 @@ func (in *ActionVpsMaintenanceWindowUpdateAllInput) SetIsOpen(value bool) *Actio
 	in._selectedParameters["IsOpen"] = nil
 	return in
 }
+
 // SetOpensAt sets parameter OpensAt to value and selects it for sending
 func (in *ActionVpsMaintenanceWindowUpdateAllInput) SetOpensAt(value int64) *ActionVpsMaintenanceWindowUpdateAllInput {
 	in.OpensAt = value
@@ -139,17 +142,16 @@ func (in *ActionVpsMaintenanceWindowUpdateAllInput) AnySelected() bool {
 // ActionVpsMaintenanceWindowUpdateAllRequest is a type for the entire action request
 type ActionVpsMaintenanceWindowUpdateAllRequest struct {
 	MaintenanceWindow map[string]interface{} `json:"maintenance_window"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta              map[string]interface{} `json:"_meta"`
 }
 
 // ActionVpsMaintenanceWindowUpdateAllOutput is a type for action output parameters
 type ActionVpsMaintenanceWindowUpdateAllOutput struct {
 	ClosesAt int64 `json:"closes_at"`
-	IsOpen bool `json:"is_open"`
-	OpensAt int64 `json:"opens_at"`
-	Weekday int64 `json:"weekday"`
+	IsOpen   bool  `json:"is_open"`
+	OpensAt  int64 `json:"opens_at"`
+	Weekday  int64 `json:"weekday"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsMaintenanceWindowUpdateAllResponse struct {
@@ -164,12 +166,11 @@ type ActionVpsMaintenanceWindowUpdateAllResponse struct {
 	Output []*ActionVpsMaintenanceWindowUpdateAllOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsMaintenanceWindowUpdateAll) Prepare() *ActionVpsMaintenanceWindowUpdateAllInvocation {
 	return &ActionVpsMaintenanceWindowUpdateAllInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/maintenance_windows",
+		Path:   "/v6.0/vpses/{vps_id}/maintenance_windows",
 	}
 }
 
@@ -218,6 +219,7 @@ func (inv *ActionVpsMaintenanceWindowUpdateAllInvocation) IsParameterSelected(pa
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsMaintenanceWindowUpdateAllInvocation) NewMetaInput() *ActionVpsMaintenanceWindowUpdateAllMetaGlobalInput {
@@ -246,7 +248,6 @@ func (inv *ActionVpsMaintenanceWindowUpdateAllInvocation) Call() (*ActionVpsMain
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionVpsMaintenanceWindowUpdateAllInvocation) callAsBody() (*ActionVpsMaintenanceWindowUpdateAllResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionVpsMaintenanceWindowUpdateAllResponse{Action: inv.Action}
@@ -257,13 +258,10 @@ func (inv *ActionVpsMaintenanceWindowUpdateAllInvocation) callAsBody() (*ActionV
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsMaintenanceWindowUpdateAllInvocation) makeAllInputParams() *ActionVpsMaintenanceWindowUpdateAllRequest {
 	return &ActionVpsMaintenanceWindowUpdateAllRequest{
 		MaintenanceWindow: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:              inv.makeMetaInputParams(),
 	}
 }
 

@@ -28,13 +28,13 @@ func NewResourcePool(client *Client) *ResourcePool {
 	actionShow := NewActionPoolShow(client)
 
 	return &ResourcePool{
-		Client: client,
-		Create: actionCreate,
-		New: actionCreate,
-		Index: actionIndex,
-		List: actionIndex,
+		Client:         client,
+		Create:         actionCreate,
+		New:            actionCreate,
+		Index:          actionIndex,
+		List:           actionIndex,
 		SetMaintenance: actionSetMaintenance,
-		Show: actionShow,
-		Find: actionShow,
+		Show:           actionShow,
+		Find:           actionShow,
 	}
 }

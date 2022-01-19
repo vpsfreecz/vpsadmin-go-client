@@ -19,7 +19,7 @@ func NewActionIpAddressUpdate(client *Client) *ActionIpAddressUpdate {
 // ActionIpAddressUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionIpAddressUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionIpAddressUpdateMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionIpAddressUpdateMetaGlobalInput) SetNo(value bool) *ActionIpAddressUpdateMetaGlobalInput {
 	in.No = value
@@ -73,9 +74,9 @@ func (in *ActionIpAddressUpdateMetaGlobalInput) AnySelected() bool {
 // ActionIpAddressUpdateInput is a type for action input parameters
 type ActionIpAddressUpdateInput struct {
 	Environment int64 `json:"environment"`
-	MaxRx int64 `json:"max_rx"`
-	MaxTx int64 `json:"max_tx"`
-	User int64 `json:"user"`
+	MaxRx       int64 `json:"max_rx"`
+	MaxTx       int64 `json:"max_tx"`
+	User        int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -91,6 +92,7 @@ func (in *ActionIpAddressUpdateInput) SetEnvironment(value int64) *ActionIpAddre
 	in._selectedParameters["Environment"] = nil
 	return in
 }
+
 // SetMaxRx sets parameter MaxRx to value and selects it for sending
 func (in *ActionIpAddressUpdateInput) SetMaxRx(value int64) *ActionIpAddressUpdateInput {
 	in.MaxRx = value
@@ -102,6 +104,7 @@ func (in *ActionIpAddressUpdateInput) SetMaxRx(value int64) *ActionIpAddressUpda
 	in._selectedParameters["MaxRx"] = nil
 	return in
 }
+
 // SetMaxTx sets parameter MaxTx to value and selects it for sending
 func (in *ActionIpAddressUpdateInput) SetMaxTx(value int64) *ActionIpAddressUpdateInput {
 	in.MaxTx = value
@@ -113,6 +116,7 @@ func (in *ActionIpAddressUpdateInput) SetMaxTx(value int64) *ActionIpAddressUpda
 	in._selectedParameters["MaxTx"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionIpAddressUpdateInput) SetUser(value int64) *ActionIpAddressUpdateInput {
 	in.User = value
@@ -151,23 +155,23 @@ func (in *ActionIpAddressUpdateInput) AnySelected() bool {
 // ActionIpAddressUpdateRequest is a type for the entire action request
 type ActionIpAddressUpdateRequest struct {
 	IpAddress map[string]interface{} `json:"ip_address"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta      map[string]interface{} `json:"_meta"`
 }
 
 // ActionIpAddressUpdateOutput is a type for action output parameters
 type ActionIpAddressUpdateOutput struct {
-	Addr string `json:"addr"`
-	ChargedEnvironment *ActionEnvironmentShowOutput `json:"charged_environment"`
-	ClassId int64 `json:"class_id"`
-	Id int64 `json:"id"`
-	MaxRx int64 `json:"max_rx"`
-	MaxTx int64 `json:"max_tx"`
-	Network *ActionNetworkShowOutput `json:"network"`
-	NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Prefix int64 `json:"prefix"`
-	RouteVia *ActionHostIpAddressShowOutput `json:"route_via"`
-	Size int64 `json:"size"`
-	User *ActionUserShowOutput `json:"user"`
+	Addr               string                            `json:"addr"`
+	ChargedEnvironment *ActionEnvironmentShowOutput      `json:"charged_environment"`
+	ClassId            int64                             `json:"class_id"`
+	Id                 int64                             `json:"id"`
+	MaxRx              int64                             `json:"max_rx"`
+	MaxTx              int64                             `json:"max_tx"`
+	Network            *ActionNetworkShowOutput          `json:"network"`
+	NetworkInterface   *ActionNetworkInterfaceShowOutput `json:"network_interface"`
+	Prefix             int64                             `json:"prefix"`
+	RouteVia           *ActionHostIpAddressShowOutput    `json:"route_via"`
+	Size               int64                             `json:"size"`
+	User               *ActionUserShowOutput             `json:"user"`
 }
 
 // ActionIpAddressUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -190,12 +194,11 @@ type ActionIpAddressUpdateResponse struct {
 	Output *ActionIpAddressUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionIpAddressUpdate) Prepare() *ActionIpAddressUpdateInvocation {
 	return &ActionIpAddressUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/ip_addresses/{ip_address_id}",
+		Path:   "/v6.0/ip_addresses/{ip_address_id}",
 	}
 }
 
@@ -244,6 +247,7 @@ func (inv *ActionIpAddressUpdateInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionIpAddressUpdateInvocation) NewMetaInput() *ActionIpAddressUpdateMetaGlobalInput {
@@ -271,7 +275,6 @@ func (inv *ActionIpAddressUpdateInvocation) IsMetaParameterSelected(param string
 func (inv *ActionIpAddressUpdateInvocation) Call() (*ActionIpAddressUpdateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionIpAddressUpdateInvocation) callAsBody() (*ActionIpAddressUpdateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -332,11 +335,11 @@ func (resp *ActionIpAddressUpdateResponse) WatchOperation(timeout float64, updat
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -359,12 +362,10 @@ func (resp *ActionIpAddressUpdateResponse) CancelOperation() (*ActionActionState
 	return req.Call()
 }
 
-
-
 func (inv *ActionIpAddressUpdateInvocation) makeAllInputParams() *ActionIpAddressUpdateRequest {
 	return &ActionIpAddressUpdateRequest{
 		IpAddress: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:      inv.makeMetaInputParams(),
 	}
 }
 

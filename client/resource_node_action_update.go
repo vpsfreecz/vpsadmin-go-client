@@ -19,7 +19,7 @@ func NewActionNodeUpdate(client *Client) *ActionNodeUpdate {
 // ActionNodeUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionNodeUpdateMetaGlobalInput) SetIncludes(value string) *ActionNode
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNodeUpdateMetaGlobalInput) SetNo(value bool) *ActionNodeUpdateMetaGlobalInput {
 	in.No = value
@@ -72,20 +73,20 @@ func (in *ActionNodeUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeUpdateInput is a type for action input parameters
 type ActionNodeUpdateInput struct {
-	Active bool `json:"active"`
-	Cpus int64 `json:"cpus"`
+	Active         bool   `json:"active"`
+	Cpus           int64  `json:"cpus"`
 	HypervisorType string `json:"hypervisor_type"`
-	IpAddr string `json:"ip_addr"`
-	Location int64 `json:"location"`
-	MaxRx int64 `json:"max_rx"`
-	MaxTx int64 `json:"max_tx"`
-	MaxVps int64 `json:"max_vps"`
-	Name string `json:"name"`
-	NetInterface string `json:"net_interface"`
-	TotalMemory int64 `json:"total_memory"`
-	TotalSwap int64 `json:"total_swap"`
-	Type string `json:"type"`
-	VePrivate string `json:"ve_private"`
+	IpAddr         string `json:"ip_addr"`
+	Location       int64  `json:"location"`
+	MaxRx          int64  `json:"max_rx"`
+	MaxTx          int64  `json:"max_tx"`
+	MaxVps         int64  `json:"max_vps"`
+	Name           string `json:"name"`
+	NetInterface   string `json:"net_interface"`
+	TotalMemory    int64  `json:"total_memory"`
+	TotalSwap      int64  `json:"total_swap"`
+	Type           string `json:"type"`
+	VePrivate      string `json:"ve_private"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -101,6 +102,7 @@ func (in *ActionNodeUpdateInput) SetActive(value bool) *ActionNodeUpdateInput {
 	in._selectedParameters["Active"] = nil
 	return in
 }
+
 // SetCpus sets parameter Cpus to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetCpus(value int64) *ActionNodeUpdateInput {
 	in.Cpus = value
@@ -112,6 +114,7 @@ func (in *ActionNodeUpdateInput) SetCpus(value int64) *ActionNodeUpdateInput {
 	in._selectedParameters["Cpus"] = nil
 	return in
 }
+
 // SetHypervisorType sets parameter HypervisorType to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetHypervisorType(value string) *ActionNodeUpdateInput {
 	in.HypervisorType = value
@@ -123,6 +126,7 @@ func (in *ActionNodeUpdateInput) SetHypervisorType(value string) *ActionNodeUpda
 	in._selectedParameters["HypervisorType"] = nil
 	return in
 }
+
 // SetIpAddr sets parameter IpAddr to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetIpAddr(value string) *ActionNodeUpdateInput {
 	in.IpAddr = value
@@ -134,6 +138,7 @@ func (in *ActionNodeUpdateInput) SetIpAddr(value string) *ActionNodeUpdateInput 
 	in._selectedParameters["IpAddr"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetLocation(value int64) *ActionNodeUpdateInput {
 	in.Location = value
@@ -145,6 +150,7 @@ func (in *ActionNodeUpdateInput) SetLocation(value int64) *ActionNodeUpdateInput
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetMaxRx sets parameter MaxRx to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetMaxRx(value int64) *ActionNodeUpdateInput {
 	in.MaxRx = value
@@ -156,6 +162,7 @@ func (in *ActionNodeUpdateInput) SetMaxRx(value int64) *ActionNodeUpdateInput {
 	in._selectedParameters["MaxRx"] = nil
 	return in
 }
+
 // SetMaxTx sets parameter MaxTx to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetMaxTx(value int64) *ActionNodeUpdateInput {
 	in.MaxTx = value
@@ -167,6 +174,7 @@ func (in *ActionNodeUpdateInput) SetMaxTx(value int64) *ActionNodeUpdateInput {
 	in._selectedParameters["MaxTx"] = nil
 	return in
 }
+
 // SetMaxVps sets parameter MaxVps to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetMaxVps(value int64) *ActionNodeUpdateInput {
 	in.MaxVps = value
@@ -178,6 +186,7 @@ func (in *ActionNodeUpdateInput) SetMaxVps(value int64) *ActionNodeUpdateInput {
 	in._selectedParameters["MaxVps"] = nil
 	return in
 }
+
 // SetName sets parameter Name to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetName(value string) *ActionNodeUpdateInput {
 	in.Name = value
@@ -189,6 +198,7 @@ func (in *ActionNodeUpdateInput) SetName(value string) *ActionNodeUpdateInput {
 	in._selectedParameters["Name"] = nil
 	return in
 }
+
 // SetNetInterface sets parameter NetInterface to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetNetInterface(value string) *ActionNodeUpdateInput {
 	in.NetInterface = value
@@ -200,6 +210,7 @@ func (in *ActionNodeUpdateInput) SetNetInterface(value string) *ActionNodeUpdate
 	in._selectedParameters["NetInterface"] = nil
 	return in
 }
+
 // SetTotalMemory sets parameter TotalMemory to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetTotalMemory(value int64) *ActionNodeUpdateInput {
 	in.TotalMemory = value
@@ -211,6 +222,7 @@ func (in *ActionNodeUpdateInput) SetTotalMemory(value int64) *ActionNodeUpdateIn
 	in._selectedParameters["TotalMemory"] = nil
 	return in
 }
+
 // SetTotalSwap sets parameter TotalSwap to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetTotalSwap(value int64) *ActionNodeUpdateInput {
 	in.TotalSwap = value
@@ -222,6 +234,7 @@ func (in *ActionNodeUpdateInput) SetTotalSwap(value int64) *ActionNodeUpdateInpu
 	in._selectedParameters["TotalSwap"] = nil
 	return in
 }
+
 // SetType sets parameter Type to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetType(value string) *ActionNodeUpdateInput {
 	in.Type = value
@@ -233,6 +246,7 @@ func (in *ActionNodeUpdateInput) SetType(value string) *ActionNodeUpdateInput {
 	in._selectedParameters["Type"] = nil
 	return in
 }
+
 // SetVePrivate sets parameter VePrivate to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetVePrivate(value string) *ActionNodeUpdateInput {
 	in.VePrivate = value
@@ -274,20 +288,17 @@ type ActionNodeUpdateRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
 
-
-
 // Type for action response, including envelope
 type ActionNodeUpdateResponse struct {
 	Action *ActionNodeUpdate `json:"-"`
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNodeUpdate) Prepare() *ActionNodeUpdateInvocation {
 	return &ActionNodeUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/nodes/{node_id}",
+		Path:   "/v6.0/nodes/{node_id}",
 	}
 }
 
@@ -336,6 +347,7 @@ func (inv *ActionNodeUpdateInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionNodeUpdateInvocation) NewMetaInput() *ActionNodeUpdateMetaGlobalInput {
@@ -364,16 +376,12 @@ func (inv *ActionNodeUpdateInvocation) Call() (*ActionNodeUpdateResponse, error)
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionNodeUpdateInvocation) callAsBody() (*ActionNodeUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionNodeUpdateResponse{Action: inv.Action}
 	err := inv.Action.Client.DoBodyRequest("PUT", inv.Path, input, resp)
 	return resp, err
 }
-
-
-
 
 func (inv *ActionNodeUpdateInvocation) makeAllInputParams() *ActionNodeUpdateRequest {
 	return &ActionNodeUpdateRequest{

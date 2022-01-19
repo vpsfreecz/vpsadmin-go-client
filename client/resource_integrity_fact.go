@@ -21,9 +21,9 @@ func NewResourceIntegrityFact(client *Client) *ResourceIntegrityFact {
 
 	return &ResourceIntegrityFact{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

@@ -19,7 +19,7 @@ func NewActionSessionTokenDelete(client *Client) *ActionSessionTokenDelete {
 // ActionSessionTokenDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionSessionTokenDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionSessionTokenDeleteMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionSessionTokenDeleteMetaGlobalInput) SetNo(value bool) *ActionSessionTokenDeleteMetaGlobalInput {
 	in.No = value
@@ -70,13 +71,10 @@ func (in *ActionSessionTokenDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionSessionTokenDeleteRequest is a type for the entire action request
 type ActionSessionTokenDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionSessionTokenDeleteResponse struct {
@@ -84,12 +82,11 @@ type ActionSessionTokenDeleteResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionSessionTokenDelete) Prepare() *ActionSessionTokenDeleteInvocation {
 	return &ActionSessionTokenDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/session_tokens/{session_token_id}",
+		Path:   "/v6.0/session_tokens/{session_token_id}",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionSessionTokenDeleteInvocation) Call() (*ActionSessionTokenDelete
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionSessionTokenDeleteInvocation) callAsBody() (*ActionSessionTokenDeleteResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionSessionTokenDeleteResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionSessionTokenDeleteInvocation) callAsBody() (*ActionSessionToken
 	return resp, err
 }
 
-
-
-
 func (inv *ActionSessionTokenDeleteInvocation) makeAllInputParams() *ActionSessionTokenDeleteRequest {
 	return &ActionSessionTokenDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionSessionTokenDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

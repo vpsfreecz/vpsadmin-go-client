@@ -35,16 +35,16 @@ func NewResourceOutage(client *Client) *ResourceOutage {
 	actionUpdate := NewActionOutageUpdate(client)
 
 	return &ResourceOutage{
-		Client: client,
-		Entity: NewResourceOutageEntity(client),
-		Handler: NewResourceOutageHandler(client),
-		Create: actionCreate,
-		New: actionCreate,
-		Index: actionIndex,
-		List: actionIndex,
+		Client:             client,
+		Entity:             NewResourceOutageEntity(client),
+		Handler:            NewResourceOutageHandler(client),
+		Create:             actionCreate,
+		New:                actionCreate,
+		Index:              actionIndex,
+		List:               actionIndex,
 		RebuildAffectedVps: actionRebuildAffectedVps,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Show:               actionShow,
+		Find:               actionShow,
+		Update:             actionUpdate,
 	}
 }

@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionClusterSetMaintenance is a type for action Cluster#Set_maintenance
 type ActionClusterSetMaintenance struct {
@@ -59,7 +58,7 @@ func (in *ActionClusterSetMaintenanceMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterSetMaintenanceInput is a type for action input parameters
 type ActionClusterSetMaintenanceInput struct {
-	Lock bool `json:"lock"`
+	Lock   bool   `json:"lock"`
 	Reason string `json:"reason"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -76,6 +75,7 @@ func (in *ActionClusterSetMaintenanceInput) SetLock(value bool) *ActionClusterSe
 	in._selectedParameters["Lock"] = nil
 	return in
 }
+
 // SetReason sets parameter Reason to value and selects it for sending
 func (in *ActionClusterSetMaintenanceInput) SetReason(value string) *ActionClusterSetMaintenanceInput {
 	in.Reason = value
@@ -114,10 +114,8 @@ func (in *ActionClusterSetMaintenanceInput) AnySelected() bool {
 // ActionClusterSetMaintenanceRequest is a type for the entire action request
 type ActionClusterSetMaintenanceRequest struct {
 	Cluster map[string]interface{} `json:"cluster"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta    map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionClusterSetMaintenanceResponse struct {
@@ -125,12 +123,11 @@ type ActionClusterSetMaintenanceResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionClusterSetMaintenance) Prepare() *ActionClusterSetMaintenanceInvocation {
 	return &ActionClusterSetMaintenanceInvocation{
 		Action: action,
-		Path: "/v6.0/cluster/set_maintenance",
+		Path:   "/v6.0/cluster/set_maintenance",
 	}
 }
 
@@ -146,7 +143,6 @@ type ActionClusterSetMaintenanceInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionClusterSetMaintenanceMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionClusterSetMaintenanceInvocation) NewInput() *ActionClusterSetMaintenanceInput {
@@ -169,6 +165,7 @@ func (inv *ActionClusterSetMaintenanceInvocation) IsParameterSelected(param stri
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionClusterSetMaintenanceInvocation) NewMetaInput() *ActionClusterSetMaintenanceMetaGlobalInput {
@@ -197,7 +194,6 @@ func (inv *ActionClusterSetMaintenanceInvocation) Call() (*ActionClusterSetMaint
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionClusterSetMaintenanceInvocation) callAsBody() (*ActionClusterSetMaintenanceResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionClusterSetMaintenanceResponse{Action: inv.Action}
@@ -205,13 +201,10 @@ func (inv *ActionClusterSetMaintenanceInvocation) callAsBody() (*ActionClusterSe
 	return resp, err
 }
 
-
-
-
 func (inv *ActionClusterSetMaintenanceInvocation) makeAllInputParams() *ActionClusterSetMaintenanceRequest {
 	return &ActionClusterSetMaintenanceRequest{
 		Cluster: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:    inv.makeMetaInputParams(),
 	}
 }
 

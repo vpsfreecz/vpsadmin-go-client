@@ -19,7 +19,7 @@ func NewActionVpsConsoleTokenDelete(client *Client) *ActionVpsConsoleTokenDelete
 // ActionVpsConsoleTokenDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsConsoleTokenDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsConsoleTokenDeleteMetaGlobalInput) SetIncludes(value string) 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsConsoleTokenDeleteMetaGlobalInput) SetNo(value bool) *ActionVpsConsoleTokenDeleteMetaGlobalInput {
 	in.No = value
@@ -70,13 +71,10 @@ func (in *ActionVpsConsoleTokenDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionVpsConsoleTokenDeleteRequest is a type for the entire action request
 type ActionVpsConsoleTokenDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionVpsConsoleTokenDeleteResponse struct {
@@ -84,12 +82,11 @@ type ActionVpsConsoleTokenDeleteResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsConsoleTokenDelete) Prepare() *ActionVpsConsoleTokenDeleteInvocation {
 	return &ActionVpsConsoleTokenDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/console_token",
+		Path:   "/v6.0/vpses/{vps_id}/console_token",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionVpsConsoleTokenDeleteInvocation) Call() (*ActionVpsConsoleToken
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionVpsConsoleTokenDeleteInvocation) callAsBody() (*ActionVpsConsoleTokenDeleteResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionVpsConsoleTokenDeleteResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionVpsConsoleTokenDeleteInvocation) callAsBody() (*ActionVpsConsol
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsConsoleTokenDeleteInvocation) makeAllInputParams() *ActionVpsConsoleTokenDeleteRequest {
 	return &ActionVpsConsoleTokenDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionVpsConsoleTokenDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

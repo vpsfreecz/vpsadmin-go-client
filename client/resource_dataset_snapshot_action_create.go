@@ -19,7 +19,7 @@ func NewActionDatasetSnapshotCreate(client *Client) *ActionDatasetSnapshotCreate
 // ActionDatasetSnapshotCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetSnapshotCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionDatasetSnapshotCreateMetaGlobalInput) SetIncludes(value string) 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDatasetSnapshotCreateMetaGlobalInput) SetNo(value bool) *ActionDatasetSnapshotCreateMetaGlobalInput {
 	in.No = value
@@ -115,19 +116,19 @@ func (in *ActionDatasetSnapshotCreateInput) AnySelected() bool {
 // ActionDatasetSnapshotCreateRequest is a type for the entire action request
 type ActionDatasetSnapshotCreateRequest struct {
 	Snapshot map[string]interface{} `json:"snapshot"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta     map[string]interface{} `json:"_meta"`
 }
 
 // ActionDatasetSnapshotCreateOutput is a type for action output parameters
 type ActionDatasetSnapshotCreateOutput struct {
-	CreatedAt string `json:"created_at"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Export *ActionExportShowOutput `json:"export"`
-	HistoryId int64 `json:"history_id"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Mount *ActionVpsMountShowOutput `json:"mount"`
-	Name string `json:"name"`
+	CreatedAt string                    `json:"created_at"`
+	Dataset   *ActionDatasetShowOutput  `json:"dataset"`
+	Export    *ActionExportShowOutput   `json:"export"`
+	HistoryId int64                     `json:"history_id"`
+	Id        int64                     `json:"id"`
+	Label     string                    `json:"label"`
+	Mount     *ActionVpsMountShowOutput `json:"mount"`
+	Name      string                    `json:"name"`
 }
 
 // ActionDatasetSnapshotCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -150,12 +151,11 @@ type ActionDatasetSnapshotCreateResponse struct {
 	Output *ActionDatasetSnapshotCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDatasetSnapshotCreate) Prepare() *ActionDatasetSnapshotCreateInvocation {
 	return &ActionDatasetSnapshotCreateInvocation{
 		Action: action,
-		Path: "/v6.0/datasets/{dataset_id}/snapshots",
+		Path:   "/v6.0/datasets/{dataset_id}/snapshots",
 	}
 }
 
@@ -204,6 +204,7 @@ func (inv *ActionDatasetSnapshotCreateInvocation) IsParameterSelected(param stri
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionDatasetSnapshotCreateInvocation) NewMetaInput() *ActionDatasetSnapshotCreateMetaGlobalInput {
@@ -231,7 +232,6 @@ func (inv *ActionDatasetSnapshotCreateInvocation) IsMetaParameterSelected(param 
 func (inv *ActionDatasetSnapshotCreateInvocation) Call() (*ActionDatasetSnapshotCreateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionDatasetSnapshotCreateInvocation) callAsBody() (*ActionDatasetSnapshotCreateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -292,11 +292,11 @@ func (resp *ActionDatasetSnapshotCreateResponse) WatchOperation(timeout float64,
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -319,12 +319,10 @@ func (resp *ActionDatasetSnapshotCreateResponse) CancelOperation() (*ActionActio
 	return req.Call()
 }
 
-
-
 func (inv *ActionDatasetSnapshotCreateInvocation) makeAllInputParams() *ActionDatasetSnapshotCreateRequest {
 	return &ActionDatasetSnapshotCreateRequest{
 		Snapshot: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:     inv.makeMetaInputParams(),
 	}
 }
 

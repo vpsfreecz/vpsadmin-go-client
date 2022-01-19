@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionDatasetPlanIndex is a type for action Dataset_plan#Index
 type ActionDatasetPlanIndex struct {
@@ -17,9 +16,9 @@ func NewActionDatasetPlanIndex(client *Client) *ActionDatasetPlanIndex {
 
 // ActionDatasetPlanIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetPlanIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionDatasetPlanIndexMetaGlobalInput) SetCount(value bool) *ActionDat
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionDatasetPlanIndexMetaGlobalInput) SetIncludes(value string) *ActionDatasetPlanIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionDatasetPlanIndexMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDatasetPlanIndexMetaGlobalInput) SetNo(value bool) *ActionDatasetPlanIndexMetaGlobalInput {
 	in.No = value
@@ -83,7 +84,7 @@ func (in *ActionDatasetPlanIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetPlanIndexInput is a type for action input parameters
 type ActionDatasetPlanIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -100,6 +101,7 @@ func (in *ActionDatasetPlanIndexInput) SetLimit(value int64) *ActionDatasetPlanI
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionDatasetPlanIndexInput) SetOffset(value int64) *ActionDatasetPlanIndexInput {
 	in.Offset = value
@@ -135,14 +137,12 @@ func (in *ActionDatasetPlanIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionDatasetPlanIndexOutput is a type for action output parameters
 type ActionDatasetPlanIndexOutput struct {
 	Description string `json:"description"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
+	Id          int64  `json:"id"`
+	Label       string `json:"label"`
 }
-
 
 // Type for action response, including envelope
 type ActionDatasetPlanIndexResponse struct {
@@ -157,12 +157,11 @@ type ActionDatasetPlanIndexResponse struct {
 	Output []*ActionDatasetPlanIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDatasetPlanIndex) Prepare() *ActionDatasetPlanIndexInvocation {
 	return &ActionDatasetPlanIndexInvocation{
 		Action: action,
-		Path: "/v6.0/dataset_plans",
+		Path:   "/v6.0/dataset_plans",
 	}
 }
 
@@ -178,7 +177,6 @@ type ActionDatasetPlanIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionDatasetPlanIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionDatasetPlanIndexInvocation) NewInput() *ActionDatasetPlanIndexInput {
@@ -201,6 +199,7 @@ func (inv *ActionDatasetPlanIndexInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionDatasetPlanIndexInvocation) NewMetaInput() *ActionDatasetPlanIndexMetaGlobalInput {
@@ -241,8 +240,6 @@ func (inv *ActionDatasetPlanIndexInvocation) callAsQuery() (*ActionDatasetPlanIn
 	return resp, err
 }
 
-
-
 func (inv *ActionDatasetPlanIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -267,4 +264,3 @@ func (inv *ActionDatasetPlanIndexInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

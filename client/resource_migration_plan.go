@@ -38,17 +38,17 @@ func NewResourceMigrationPlan(client *Client) *ResourceMigrationPlan {
 	actionStart := NewActionMigrationPlanStart(client)
 
 	return &ResourceMigrationPlan{
-		Client: client,
+		Client:       client,
 		VpsMigration: NewResourceMigrationPlanVpsMigration(client),
-		Cancel: actionCancel,
-		Create: actionCreate,
-		New: actionCreate,
-		Delete: actionDelete,
-		Destroy: actionDelete,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
-		Start: actionStart,
+		Cancel:       actionCancel,
+		Create:       actionCreate,
+		New:          actionCreate,
+		Delete:       actionDelete,
+		Destroy:      actionDelete,
+		Index:        actionIndex,
+		List:         actionIndex,
+		Show:         actionShow,
+		Find:         actionShow,
+		Start:        actionStart,
 	}
 }

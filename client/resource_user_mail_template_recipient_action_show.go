@@ -19,7 +19,7 @@ func NewActionUserMailTemplateRecipientShow(client *Client) *ActionUserMailTempl
 // ActionUserMailTemplateRecipientShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserMailTemplateRecipientShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserMailTemplateRecipientShowMetaGlobalInput) SetIncludes(value 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserMailTemplateRecipientShowMetaGlobalInput) SetNo(value bool) *ActionUserMailTemplateRecipientShowMetaGlobalInput {
 	in.No = value
@@ -70,17 +71,14 @@ func (in *ActionUserMailTemplateRecipientShowMetaGlobalInput) AnySelected() bool
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserMailTemplateRecipientShowOutput is a type for action output parameters
 type ActionUserMailTemplateRecipientShowOutput struct {
 	Description string `json:"description"`
-	Enabled bool `json:"enabled"`
-	Id string `json:"id"`
-	Label string `json:"label"`
-	To string `json:"to"`
+	Enabled     bool   `json:"enabled"`
+	Id          string `json:"id"`
+	Label       string `json:"label"`
+	To          string `json:"to"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserMailTemplateRecipientShowResponse struct {
@@ -95,12 +93,11 @@ type ActionUserMailTemplateRecipientShowResponse struct {
 	Output *ActionUserMailTemplateRecipientShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserMailTemplateRecipientShow) Prepare() *ActionUserMailTemplateRecipientShowInvocation {
 	return &ActionUserMailTemplateRecipientShowInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/mail_template_recipients/{mail_template_recipient_id}",
+		Path:   "/v6.0/users/{user_id}/mail_template_recipients/{mail_template_recipient_id}",
 	}
 }
 
@@ -165,9 +162,6 @@ func (inv *ActionUserMailTemplateRecipientShowInvocation) callAsQuery() (*Action
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserMailTemplateRecipientShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -178,4 +172,3 @@ func (inv *ActionUserMailTemplateRecipientShowInvocation) convertMetaInputToQuer
 		}
 	}
 }
-

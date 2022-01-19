@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionUserPaymentCreate is a type for action User_payment#Create
 type ActionUserPaymentCreate struct {
@@ -18,7 +17,7 @@ func NewActionUserPaymentCreate(client *Client) *ActionUserPaymentCreate {
 // ActionUserPaymentCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPaymentCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionUserPaymentCreateMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserPaymentCreateMetaGlobalInput) SetNo(value bool) *ActionUserPaymentCreateMetaGlobalInput {
 	in.No = value
@@ -71,9 +71,9 @@ func (in *ActionUserPaymentCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserPaymentCreateInput is a type for action input parameters
 type ActionUserPaymentCreateInput struct {
-	Amount int64 `json:"amount"`
+	Amount          int64 `json:"amount"`
 	IncomingPayment int64 `json:"incoming_payment"`
-	User int64 `json:"user"`
+	User            int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -89,6 +89,7 @@ func (in *ActionUserPaymentCreateInput) SetAmount(value int64) *ActionUserPaymen
 	in._selectedParameters["Amount"] = nil
 	return in
 }
+
 // SetIncomingPayment sets parameter IncomingPayment to value and selects it for sending
 func (in *ActionUserPaymentCreateInput) SetIncomingPayment(value int64) *ActionUserPaymentCreateInput {
 	in.IncomingPayment = value
@@ -100,6 +101,7 @@ func (in *ActionUserPaymentCreateInput) SetIncomingPayment(value int64) *ActionU
 	in._selectedParameters["IncomingPayment"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionUserPaymentCreateInput) SetUser(value int64) *ActionUserPaymentCreateInput {
 	in.User = value
@@ -138,19 +140,19 @@ func (in *ActionUserPaymentCreateInput) AnySelected() bool {
 // ActionUserPaymentCreateRequest is a type for the entire action request
 type ActionUserPaymentCreateRequest struct {
 	UserPayment map[string]interface{} `json:"user_payment"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta        map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserPaymentCreateOutput is a type for action output parameters
 type ActionUserPaymentCreateOutput struct {
-	AccountedBy *ActionUserShowOutput `json:"accounted_by"`
-	Amount int64 `json:"amount"`
-	CreatedAt string `json:"created_at"`
-	FromDate string `json:"from_date"`
-	Id int64 `json:"id"`
+	AccountedBy     *ActionUserShowOutput            `json:"accounted_by"`
+	Amount          int64                            `json:"amount"`
+	CreatedAt       string                           `json:"created_at"`
+	FromDate        string                           `json:"from_date"`
+	Id              int64                            `json:"id"`
 	IncomingPayment *ActionIncomingPaymentShowOutput `json:"incoming_payment"`
-	ToDate string `json:"to_date"`
-	User *ActionUserShowOutput `json:"user"`
+	ToDate          string                           `json:"to_date"`
+	User            *ActionUserShowOutput            `json:"user"`
 }
 
 // ActionUserPaymentCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -173,12 +175,11 @@ type ActionUserPaymentCreateResponse struct {
 	Output *ActionUserPaymentCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserPaymentCreate) Prepare() *ActionUserPaymentCreateInvocation {
 	return &ActionUserPaymentCreateInvocation{
 		Action: action,
-		Path: "/v6.0/user_payments",
+		Path:   "/v6.0/user_payments",
 	}
 }
 
@@ -194,7 +195,6 @@ type ActionUserPaymentCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionUserPaymentCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionUserPaymentCreateInvocation) NewInput() *ActionUserPaymentCreateInput {
@@ -217,6 +217,7 @@ func (inv *ActionUserPaymentCreateInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserPaymentCreateInvocation) NewMetaInput() *ActionUserPaymentCreateMetaGlobalInput {
@@ -244,7 +245,6 @@ func (inv *ActionUserPaymentCreateInvocation) IsMetaParameterSelected(param stri
 func (inv *ActionUserPaymentCreateInvocation) Call() (*ActionUserPaymentCreateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionUserPaymentCreateInvocation) callAsBody() (*ActionUserPaymentCreateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -305,11 +305,11 @@ func (resp *ActionUserPaymentCreateResponse) WatchOperation(timeout float64, upd
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -332,12 +332,10 @@ func (resp *ActionUserPaymentCreateResponse) CancelOperation() (*ActionActionSta
 	return req.Call()
 }
 
-
-
 func (inv *ActionUserPaymentCreateInvocation) makeAllInputParams() *ActionUserPaymentCreateRequest {
 	return &ActionUserPaymentCreateRequest{
 		UserPayment: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:        inv.makeMetaInputParams(),
 	}
 }
 

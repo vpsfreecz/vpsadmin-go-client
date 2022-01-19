@@ -19,7 +19,7 @@ func NewActionVpsOutageMountShow(client *Client) *ActionVpsOutageMountShow {
 // ActionVpsOutageMountShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsOutageMountShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsOutageMountShowMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsOutageMountShowMetaGlobalInput) SetNo(value bool) *ActionVpsOutageMountShowMetaGlobalInput {
 	in.No = value
@@ -70,15 +71,12 @@ func (in *ActionVpsOutageMountShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionVpsOutageMountShowOutput is a type for action output parameters
 type ActionVpsOutageMountShowOutput struct {
-	Id int64 `json:"id"`
-	Mount *ActionVpsMountShowOutput `json:"mount"`
+	Id        int64                      `json:"id"`
+	Mount     *ActionVpsMountShowOutput  `json:"mount"`
 	VpsOutage *ActionVpsOutageShowOutput `json:"vps_outage"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsOutageMountShowResponse struct {
@@ -93,12 +91,11 @@ type ActionVpsOutageMountShowResponse struct {
 	Output *ActionVpsOutageMountShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsOutageMountShow) Prepare() *ActionVpsOutageMountShowInvocation {
 	return &ActionVpsOutageMountShowInvocation{
 		Action: action,
-		Path: "/v6.0/vps_outage_mounts/{vps_outage_mount_id}",
+		Path:   "/v6.0/vps_outage_mounts/{vps_outage_mount_id}",
 	}
 }
 
@@ -163,9 +160,6 @@ func (inv *ActionVpsOutageMountShowInvocation) callAsQuery() (*ActionVpsOutageMo
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsOutageMountShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -176,4 +170,3 @@ func (inv *ActionVpsOutageMountShowInvocation) convertMetaInputToQueryParams(ret
 		}
 	}
 }
-

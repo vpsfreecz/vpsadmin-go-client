@@ -19,7 +19,7 @@ func NewActionUserPublicKeyCreate(client *Client) *ActionUserPublicKeyCreate {
 // ActionUserPublicKeyCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPublicKeyCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserPublicKeyCreateMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserPublicKeyCreateMetaGlobalInput) SetNo(value bool) *ActionUserPublicKeyCreateMetaGlobalInput {
 	in.No = value
@@ -72,9 +73,9 @@ func (in *ActionUserPublicKeyCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserPublicKeyCreateInput is a type for action input parameters
 type ActionUserPublicKeyCreateInput struct {
-	AutoAdd bool `json:"auto_add"`
-	Key string `json:"key"`
-	Label string `json:"label"`
+	AutoAdd bool   `json:"auto_add"`
+	Key     string `json:"key"`
+	Label   string `json:"label"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -90,6 +91,7 @@ func (in *ActionUserPublicKeyCreateInput) SetAutoAdd(value bool) *ActionUserPubl
 	in._selectedParameters["AutoAdd"] = nil
 	return in
 }
+
 // SetKey sets parameter Key to value and selects it for sending
 func (in *ActionUserPublicKeyCreateInput) SetKey(value string) *ActionUserPublicKeyCreateInput {
 	in.Key = value
@@ -101,6 +103,7 @@ func (in *ActionUserPublicKeyCreateInput) SetKey(value string) *ActionUserPublic
 	in._selectedParameters["Key"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionUserPublicKeyCreateInput) SetLabel(value string) *ActionUserPublicKeyCreateInput {
 	in.Label = value
@@ -139,21 +142,20 @@ func (in *ActionUserPublicKeyCreateInput) AnySelected() bool {
 // ActionUserPublicKeyCreateRequest is a type for the entire action request
 type ActionUserPublicKeyCreateRequest struct {
 	PublicKey map[string]interface{} `json:"public_key"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta      map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserPublicKeyCreateOutput is a type for action output parameters
 type ActionUserPublicKeyCreateOutput struct {
-	AutoAdd bool `json:"auto_add"`
-	Comment string `json:"comment"`
-	CreatedAt string `json:"created_at"`
+	AutoAdd     bool   `json:"auto_add"`
+	Comment     string `json:"comment"`
+	CreatedAt   string `json:"created_at"`
 	Fingerprint string `json:"fingerprint"`
-	Id int64 `json:"id"`
-	Key string `json:"key"`
-	Label string `json:"label"`
-	UpdatedAt string `json:"updated_at"`
+	Id          int64  `json:"id"`
+	Key         string `json:"key"`
+	Label       string `json:"label"`
+	UpdatedAt   string `json:"updated_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserPublicKeyCreateResponse struct {
@@ -168,12 +170,11 @@ type ActionUserPublicKeyCreateResponse struct {
 	Output *ActionUserPublicKeyCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserPublicKeyCreate) Prepare() *ActionUserPublicKeyCreateInvocation {
 	return &ActionUserPublicKeyCreateInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/public_keys",
+		Path:   "/v6.0/users/{user_id}/public_keys",
 	}
 }
 
@@ -222,6 +223,7 @@ func (inv *ActionUserPublicKeyCreateInvocation) IsParameterSelected(param string
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserPublicKeyCreateInvocation) NewMetaInput() *ActionUserPublicKeyCreateMetaGlobalInput {
@@ -250,7 +252,6 @@ func (inv *ActionUserPublicKeyCreateInvocation) Call() (*ActionUserPublicKeyCrea
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserPublicKeyCreateInvocation) callAsBody() (*ActionUserPublicKeyCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserPublicKeyCreateResponse{Action: inv.Action}
@@ -261,13 +262,10 @@ func (inv *ActionUserPublicKeyCreateInvocation) callAsBody() (*ActionUserPublicK
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserPublicKeyCreateInvocation) makeAllInputParams() *ActionUserPublicKeyCreateRequest {
 	return &ActionUserPublicKeyCreateRequest{
 		PublicKey: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:      inv.makeMetaInputParams(),
 	}
 }
 

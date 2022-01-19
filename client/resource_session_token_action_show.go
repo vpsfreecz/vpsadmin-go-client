@@ -19,7 +19,7 @@ func NewActionSessionTokenShow(client *Client) *ActionSessionTokenShow {
 // ActionSessionTokenShowMetaGlobalInput is a type for action global meta input parameters
 type ActionSessionTokenShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionSessionTokenShowMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionSessionTokenShowMetaGlobalInput) SetNo(value bool) *ActionSessionTokenShowMetaGlobalInput {
 	in.No = value
@@ -70,21 +71,18 @@ func (in *ActionSessionTokenShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionSessionTokenShowOutput is a type for action output parameters
 type ActionSessionTokenShowOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	Interval int64 `json:"interval"`
-	Label string `json:"label"`
-	Lifetime string `json:"lifetime"`
-	Token string `json:"token"`
-	UseCount int64 `json:"use_count"`
-	User *ActionUserShowOutput `json:"user"`
-	ValidTo string `json:"valid_to"`
+	CreatedAt string                `json:"created_at"`
+	Id        int64                 `json:"id"`
+	Interval  int64                 `json:"interval"`
+	Label     string                `json:"label"`
+	Lifetime  string                `json:"lifetime"`
+	Token     string                `json:"token"`
+	UseCount  int64                 `json:"use_count"`
+	User      *ActionUserShowOutput `json:"user"`
+	ValidTo   string                `json:"valid_to"`
 }
-
 
 // Type for action response, including envelope
 type ActionSessionTokenShowResponse struct {
@@ -99,12 +97,11 @@ type ActionSessionTokenShowResponse struct {
 	Output *ActionSessionTokenShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionSessionTokenShow) Prepare() *ActionSessionTokenShowInvocation {
 	return &ActionSessionTokenShowInvocation{
 		Action: action,
-		Path: "/v6.0/session_tokens/{session_token_id}",
+		Path:   "/v6.0/session_tokens/{session_token_id}",
 	}
 }
 
@@ -169,9 +166,6 @@ func (inv *ActionSessionTokenShowInvocation) callAsQuery() (*ActionSessionTokenS
 	return resp, err
 }
 
-
-
-
 func (inv *ActionSessionTokenShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -182,4 +176,3 @@ func (inv *ActionSessionTokenShowInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // AuthTokenActionTokenRenew is a type for action Token#Renew
 type AuthTokenActionTokenRenew struct {
@@ -57,7 +56,6 @@ func (in *AuthTokenActionTokenRenewMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // AuthTokenActionTokenRenewRequest is a type for the entire action request
 type AuthTokenActionTokenRenewRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
@@ -67,7 +65,6 @@ type AuthTokenActionTokenRenewRequest struct {
 type AuthTokenActionTokenRenewOutput struct {
 	ValidTo string `json:"valid_to"`
 }
-
 
 // Type for action response, including envelope
 type AuthTokenActionTokenRenewResponse struct {
@@ -91,7 +88,7 @@ func (action *AuthTokenActionTokenRenew) Call() (*AuthTokenActionTokenRenewRespo
 func (action *AuthTokenActionTokenRenew) Prepare() *AuthTokenActionTokenRenewInvocation {
 	return &AuthTokenActionTokenRenewInvocation{
 		Action: action,
-		Path: "/_auth/token/tokens/renew",
+		Path:   "/_auth/token/tokens/renew",
 	}
 }
 
@@ -105,7 +102,6 @@ type AuthTokenActionTokenRenewInvocation struct {
 	// Global meta input parameters
 	MetaInput *AuthTokenActionTokenRenewMetaGlobalInput
 }
-
 
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
@@ -135,7 +131,6 @@ func (inv *AuthTokenActionTokenRenewInvocation) Call() (*AuthTokenActionTokenRen
 	return inv.callAsBody()
 }
 
-
 func (inv *AuthTokenActionTokenRenewInvocation) callAsBody() (*AuthTokenActionTokenRenewResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &AuthTokenActionTokenRenewResponse{Action: inv.Action}
@@ -146,15 +141,11 @@ func (inv *AuthTokenActionTokenRenewInvocation) callAsBody() (*AuthTokenActionTo
 	return resp, err
 }
 
-
-
-
 func (inv *AuthTokenActionTokenRenewInvocation) makeAllInputParams() *AuthTokenActionTokenRenewRequest {
 	return &AuthTokenActionTokenRenewRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *AuthTokenActionTokenRenewInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

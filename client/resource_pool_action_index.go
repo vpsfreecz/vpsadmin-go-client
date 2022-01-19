@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionPoolIndex is a type for action Pool#Index
 type ActionPoolIndex struct {
@@ -17,9 +16,9 @@ func NewActionPoolIndex(client *Client) *ActionPoolIndex {
 
 // ActionPoolIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionPoolIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionPoolIndexMetaGlobalInput) SetCount(value bool) *ActionPoolIndexM
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionPoolIndexMetaGlobalInput) SetIncludes(value string) *ActionPoolIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionPoolIndexMetaGlobalInput) SetIncludes(value string) *ActionPoolI
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionPoolIndexMetaGlobalInput) SetNo(value bool) *ActionPoolIndexMetaGlobalInput {
 	in.No = value
@@ -83,21 +84,21 @@ func (in *ActionPoolIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionPoolIndexInput is a type for action input parameters
 type ActionPoolIndexInput struct {
-	Atime bool `json:"atime"`
-	Compression bool `json:"compression"`
-	Filesystem string `json:"filesystem"`
-	Label string `json:"label"`
-	Limit int64 `json:"limit"`
-	Node int64 `json:"node"`
-	Offset int64 `json:"offset"`
-	Quota int64 `json:"quota"`
-	Recordsize int64 `json:"recordsize"`
-	Refquota int64 `json:"refquota"`
-	RefquotaCheck bool `json:"refquota_check"`
-	Relatime bool `json:"relatime"`
-	Role string `json:"role"`
-	Sharenfs string `json:"sharenfs"`
-	Sync string `json:"sync"`
+	Atime         bool   `json:"atime"`
+	Compression   bool   `json:"compression"`
+	Filesystem    string `json:"filesystem"`
+	Label         string `json:"label"`
+	Limit         int64  `json:"limit"`
+	Node          int64  `json:"node"`
+	Offset        int64  `json:"offset"`
+	Quota         int64  `json:"quota"`
+	Recordsize    int64  `json:"recordsize"`
+	Refquota      int64  `json:"refquota"`
+	RefquotaCheck bool   `json:"refquota_check"`
+	Relatime      bool   `json:"relatime"`
+	Role          string `json:"role"`
+	Sharenfs      string `json:"sharenfs"`
+	Sync          string `json:"sync"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -113,6 +114,7 @@ func (in *ActionPoolIndexInput) SetAtime(value bool) *ActionPoolIndexInput {
 	in._selectedParameters["Atime"] = nil
 	return in
 }
+
 // SetCompression sets parameter Compression to value and selects it for sending
 func (in *ActionPoolIndexInput) SetCompression(value bool) *ActionPoolIndexInput {
 	in.Compression = value
@@ -124,6 +126,7 @@ func (in *ActionPoolIndexInput) SetCompression(value bool) *ActionPoolIndexInput
 	in._selectedParameters["Compression"] = nil
 	return in
 }
+
 // SetFilesystem sets parameter Filesystem to value and selects it for sending
 func (in *ActionPoolIndexInput) SetFilesystem(value string) *ActionPoolIndexInput {
 	in.Filesystem = value
@@ -135,6 +138,7 @@ func (in *ActionPoolIndexInput) SetFilesystem(value string) *ActionPoolIndexInpu
 	in._selectedParameters["Filesystem"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionPoolIndexInput) SetLabel(value string) *ActionPoolIndexInput {
 	in.Label = value
@@ -146,6 +150,7 @@ func (in *ActionPoolIndexInput) SetLabel(value string) *ActionPoolIndexInput {
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionPoolIndexInput) SetLimit(value int64) *ActionPoolIndexInput {
 	in.Limit = value
@@ -157,6 +162,7 @@ func (in *ActionPoolIndexInput) SetLimit(value int64) *ActionPoolIndexInput {
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionPoolIndexInput) SetNode(value int64) *ActionPoolIndexInput {
 	in.Node = value
@@ -168,6 +174,7 @@ func (in *ActionPoolIndexInput) SetNode(value int64) *ActionPoolIndexInput {
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionPoolIndexInput) SetOffset(value int64) *ActionPoolIndexInput {
 	in.Offset = value
@@ -179,6 +186,7 @@ func (in *ActionPoolIndexInput) SetOffset(value int64) *ActionPoolIndexInput {
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetQuota sets parameter Quota to value and selects it for sending
 func (in *ActionPoolIndexInput) SetQuota(value int64) *ActionPoolIndexInput {
 	in.Quota = value
@@ -190,6 +198,7 @@ func (in *ActionPoolIndexInput) SetQuota(value int64) *ActionPoolIndexInput {
 	in._selectedParameters["Quota"] = nil
 	return in
 }
+
 // SetRecordsize sets parameter Recordsize to value and selects it for sending
 func (in *ActionPoolIndexInput) SetRecordsize(value int64) *ActionPoolIndexInput {
 	in.Recordsize = value
@@ -201,6 +210,7 @@ func (in *ActionPoolIndexInput) SetRecordsize(value int64) *ActionPoolIndexInput
 	in._selectedParameters["Recordsize"] = nil
 	return in
 }
+
 // SetRefquota sets parameter Refquota to value and selects it for sending
 func (in *ActionPoolIndexInput) SetRefquota(value int64) *ActionPoolIndexInput {
 	in.Refquota = value
@@ -212,6 +222,7 @@ func (in *ActionPoolIndexInput) SetRefquota(value int64) *ActionPoolIndexInput {
 	in._selectedParameters["Refquota"] = nil
 	return in
 }
+
 // SetRefquotaCheck sets parameter RefquotaCheck to value and selects it for sending
 func (in *ActionPoolIndexInput) SetRefquotaCheck(value bool) *ActionPoolIndexInput {
 	in.RefquotaCheck = value
@@ -223,6 +234,7 @@ func (in *ActionPoolIndexInput) SetRefquotaCheck(value bool) *ActionPoolIndexInp
 	in._selectedParameters["RefquotaCheck"] = nil
 	return in
 }
+
 // SetRelatime sets parameter Relatime to value and selects it for sending
 func (in *ActionPoolIndexInput) SetRelatime(value bool) *ActionPoolIndexInput {
 	in.Relatime = value
@@ -234,6 +246,7 @@ func (in *ActionPoolIndexInput) SetRelatime(value bool) *ActionPoolIndexInput {
 	in._selectedParameters["Relatime"] = nil
 	return in
 }
+
 // SetRole sets parameter Role to value and selects it for sending
 func (in *ActionPoolIndexInput) SetRole(value string) *ActionPoolIndexInput {
 	in.Role = value
@@ -245,6 +258,7 @@ func (in *ActionPoolIndexInput) SetRole(value string) *ActionPoolIndexInput {
 	in._selectedParameters["Role"] = nil
 	return in
 }
+
 // SetSharenfs sets parameter Sharenfs to value and selects it for sending
 func (in *ActionPoolIndexInput) SetSharenfs(value string) *ActionPoolIndexInput {
 	in.Sharenfs = value
@@ -256,6 +270,7 @@ func (in *ActionPoolIndexInput) SetSharenfs(value string) *ActionPoolIndexInput 
 	in._selectedParameters["Sharenfs"] = nil
 	return in
 }
+
 // SetSync sets parameter Sync to value and selects it for sending
 func (in *ActionPoolIndexInput) SetSync(value string) *ActionPoolIndexInput {
 	in.Sync = value
@@ -291,30 +306,28 @@ func (in *ActionPoolIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionPoolIndexOutput is a type for action output parameters
 type ActionPoolIndexOutput struct {
-	Atime bool `json:"atime"`
-	Avail int64 `json:"avail"`
-	Compression bool `json:"compression"`
-	Filesystem string `json:"filesystem"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	MaintenanceLock string `json:"maintenance_lock"`
-	MaintenanceLockReason string `json:"maintenance_lock_reason"`
-	Node *ActionNodeShowOutput `json:"node"`
-	Quota int64 `json:"quota"`
-	Recordsize int64 `json:"recordsize"`
-	Referenced int64 `json:"referenced"`
-	Refquota int64 `json:"refquota"`
-	RefquotaCheck bool `json:"refquota_check"`
-	Relatime bool `json:"relatime"`
-	Role string `json:"role"`
-	Sharenfs string `json:"sharenfs"`
-	Sync string `json:"sync"`
-	Used int64 `json:"used"`
+	Atime                 bool                  `json:"atime"`
+	Avail                 int64                 `json:"avail"`
+	Compression           bool                  `json:"compression"`
+	Filesystem            string                `json:"filesystem"`
+	Id                    int64                 `json:"id"`
+	Label                 string                `json:"label"`
+	MaintenanceLock       string                `json:"maintenance_lock"`
+	MaintenanceLockReason string                `json:"maintenance_lock_reason"`
+	Node                  *ActionNodeShowOutput `json:"node"`
+	Quota                 int64                 `json:"quota"`
+	Recordsize            int64                 `json:"recordsize"`
+	Referenced            int64                 `json:"referenced"`
+	Refquota              int64                 `json:"refquota"`
+	RefquotaCheck         bool                  `json:"refquota_check"`
+	Relatime              bool                  `json:"relatime"`
+	Role                  string                `json:"role"`
+	Sharenfs              string                `json:"sharenfs"`
+	Sync                  string                `json:"sync"`
+	Used                  int64                 `json:"used"`
 }
-
 
 // Type for action response, including envelope
 type ActionPoolIndexResponse struct {
@@ -329,12 +342,11 @@ type ActionPoolIndexResponse struct {
 	Output []*ActionPoolIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionPoolIndex) Prepare() *ActionPoolIndexInvocation {
 	return &ActionPoolIndexInvocation{
 		Action: action,
-		Path: "/v6.0/pools",
+		Path:   "/v6.0/pools",
 	}
 }
 
@@ -350,7 +362,6 @@ type ActionPoolIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionPoolIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionPoolIndexInvocation) NewInput() *ActionPoolIndexInput {
@@ -373,6 +384,7 @@ func (inv *ActionPoolIndexInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionPoolIndexInvocation) NewMetaInput() *ActionPoolIndexMetaGlobalInput {
@@ -412,8 +424,6 @@ func (inv *ActionPoolIndexInvocation) callAsQuery() (*ActionPoolIndexResponse, e
 	}
 	return resp, err
 }
-
-
 
 func (inv *ActionPoolIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
@@ -478,4 +488,3 @@ func (inv *ActionPoolIndexInvocation) convertMetaInputToQueryParams(ret map[stri
 		}
 	}
 }
-

@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionEnvironmentIndex is a type for action Environment#Index
 type ActionEnvironmentIndex struct {
@@ -17,9 +16,9 @@ func NewActionEnvironmentIndex(client *Client) *ActionEnvironmentIndex {
 
 // ActionEnvironmentIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionEnvironmentIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionEnvironmentIndexMetaGlobalInput) SetCount(value bool) *ActionEnv
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionEnvironmentIndexMetaGlobalInput) SetIncludes(value string) *ActionEnvironmentIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionEnvironmentIndexMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionEnvironmentIndexMetaGlobalInput) SetNo(value bool) *ActionEnvironmentIndexMetaGlobalInput {
 	in.No = value
@@ -83,10 +84,10 @@ func (in *ActionEnvironmentIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionEnvironmentIndexInput is a type for action input parameters
 type ActionEnvironmentIndexInput struct {
-	HasHypervisor bool `json:"has_hypervisor"`
-	HasStorage bool `json:"has_storage"`
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
+	HasHypervisor bool  `json:"has_hypervisor"`
+	HasStorage    bool  `json:"has_storage"`
+	Limit         int64 `json:"limit"`
+	Offset        int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -102,6 +103,7 @@ func (in *ActionEnvironmentIndexInput) SetHasHypervisor(value bool) *ActionEnvir
 	in._selectedParameters["HasHypervisor"] = nil
 	return in
 }
+
 // SetHasStorage sets parameter HasStorage to value and selects it for sending
 func (in *ActionEnvironmentIndexInput) SetHasStorage(value bool) *ActionEnvironmentIndexInput {
 	in.HasStorage = value
@@ -113,6 +115,7 @@ func (in *ActionEnvironmentIndexInput) SetHasStorage(value bool) *ActionEnvironm
 	in._selectedParameters["HasStorage"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionEnvironmentIndexInput) SetLimit(value int64) *ActionEnvironmentIndexInput {
 	in.Limit = value
@@ -124,6 +127,7 @@ func (in *ActionEnvironmentIndexInput) SetLimit(value int64) *ActionEnvironmentI
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionEnvironmentIndexInput) SetOffset(value int64) *ActionEnvironmentIndexInput {
 	in.Offset = value
@@ -159,22 +163,20 @@ func (in *ActionEnvironmentIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionEnvironmentIndexOutput is a type for action output parameters
 type ActionEnvironmentIndexOutput struct {
-	CanCreateVps bool `json:"can_create_vps"`
-	CanDestroyVps bool `json:"can_destroy_vps"`
-	Description string `json:"description"`
-	Domain string `json:"domain"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	MaintenanceLock string `json:"maintenance_lock"`
+	CanCreateVps          bool   `json:"can_create_vps"`
+	CanDestroyVps         bool   `json:"can_destroy_vps"`
+	Description           string `json:"description"`
+	Domain                string `json:"domain"`
+	Id                    int64  `json:"id"`
+	Label                 string `json:"label"`
+	MaintenanceLock       string `json:"maintenance_lock"`
 	MaintenanceLockReason string `json:"maintenance_lock_reason"`
-	MaxVpsCount int64 `json:"max_vps_count"`
-	UserIpOwnership bool `json:"user_ip_ownership"`
-	VpsLifetime int64 `json:"vps_lifetime"`
+	MaxVpsCount           int64  `json:"max_vps_count"`
+	UserIpOwnership       bool   `json:"user_ip_ownership"`
+	VpsLifetime           int64  `json:"vps_lifetime"`
 }
-
 
 // Type for action response, including envelope
 type ActionEnvironmentIndexResponse struct {
@@ -189,12 +191,11 @@ type ActionEnvironmentIndexResponse struct {
 	Output []*ActionEnvironmentIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionEnvironmentIndex) Prepare() *ActionEnvironmentIndexInvocation {
 	return &ActionEnvironmentIndexInvocation{
 		Action: action,
-		Path: "/v6.0/environments",
+		Path:   "/v6.0/environments",
 	}
 }
 
@@ -210,7 +211,6 @@ type ActionEnvironmentIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionEnvironmentIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionEnvironmentIndexInvocation) NewInput() *ActionEnvironmentIndexInput {
@@ -233,6 +233,7 @@ func (inv *ActionEnvironmentIndexInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionEnvironmentIndexInvocation) NewMetaInput() *ActionEnvironmentIndexMetaGlobalInput {
@@ -273,8 +274,6 @@ func (inv *ActionEnvironmentIndexInvocation) callAsQuery() (*ActionEnvironmentIn
 	return resp, err
 }
 
-
-
 func (inv *ActionEnvironmentIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("HasHypervisor") {
@@ -305,4 +304,3 @@ func (inv *ActionEnvironmentIndexInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

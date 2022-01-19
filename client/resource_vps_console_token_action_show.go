@@ -19,7 +19,7 @@ func NewActionVpsConsoleTokenShow(client *Client) *ActionVpsConsoleTokenShow {
 // ActionVpsConsoleTokenShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsConsoleTokenShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsConsoleTokenShowMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsConsoleTokenShowMetaGlobalInput) SetNo(value bool) *ActionVpsConsoleTokenShowMetaGlobalInput {
 	in.No = value
@@ -70,14 +71,11 @@ func (in *ActionVpsConsoleTokenShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionVpsConsoleTokenShowOutput is a type for action output parameters
 type ActionVpsConsoleTokenShowOutput struct {
 	Expiration string `json:"expiration"`
-	Token string `json:"token"`
+	Token      string `json:"token"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsConsoleTokenShowResponse struct {
@@ -92,12 +90,11 @@ type ActionVpsConsoleTokenShowResponse struct {
 	Output *ActionVpsConsoleTokenShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsConsoleTokenShow) Prepare() *ActionVpsConsoleTokenShowInvocation {
 	return &ActionVpsConsoleTokenShowInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/console_token",
+		Path:   "/v6.0/vpses/{vps_id}/console_token",
 	}
 }
 
@@ -162,9 +159,6 @@ func (inv *ActionVpsConsoleTokenShowInvocation) callAsQuery() (*ActionVpsConsole
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsConsoleTokenShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -175,4 +169,3 @@ func (inv *ActionVpsConsoleTokenShowInvocation) convertMetaInputToQueryParams(re
 		}
 	}
 }
-

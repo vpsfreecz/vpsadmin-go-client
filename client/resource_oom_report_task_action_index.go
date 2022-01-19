@@ -18,9 +18,9 @@ func NewActionOomReportTaskIndex(client *Client) *ActionOomReportTaskIndex {
 
 // ActionOomReportTaskIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportTaskIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionOomReportTaskIndexMetaGlobalInput) SetCount(value bool) *ActionO
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionOomReportTaskIndexMetaGlobalInput) SetIncludes(value string) *ActionOomReportTaskIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionOomReportTaskIndexMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOomReportTaskIndexMetaGlobalInput) SetNo(value bool) *ActionOomReportTaskIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionOomReportTaskIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportTaskIndexInput is a type for action input parameters
 type ActionOomReportTaskIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionOomReportTaskIndexInput) SetLimit(value int64) *ActionOomReportT
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionOomReportTaskIndexInput) SetOffset(value int64) *ActionOomReportTaskIndexInput {
 	in.Offset = value
@@ -136,22 +139,20 @@ func (in *ActionOomReportTaskIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionOomReportTaskIndexOutput is a type for action output parameters
 type ActionOomReportTaskIndexOutput struct {
-	HostPid int64 `json:"host_pid"`
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	OomScoreAdj int64 `json:"oom_score_adj"`
-	PgtablesBytes int64 `json:"pgtables_bytes"`
-	Rss int64 `json:"rss"`
-	Swapents int64 `json:"swapents"`
-	Tgid int64 `json:"tgid"`
-	TotalVm int64 `json:"total_vm"`
-	VpsPid int64 `json:"vps_pid"`
-	VpsUid int64 `json:"vps_uid"`
+	HostPid       int64  `json:"host_pid"`
+	Id            int64  `json:"id"`
+	Name          string `json:"name"`
+	OomScoreAdj   int64  `json:"oom_score_adj"`
+	PgtablesBytes int64  `json:"pgtables_bytes"`
+	Rss           int64  `json:"rss"`
+	Swapents      int64  `json:"swapents"`
+	Tgid          int64  `json:"tgid"`
+	TotalVm       int64  `json:"total_vm"`
+	VpsPid        int64  `json:"vps_pid"`
+	VpsUid        int64  `json:"vps_uid"`
 }
-
 
 // Type for action response, including envelope
 type ActionOomReportTaskIndexResponse struct {
@@ -166,12 +167,11 @@ type ActionOomReportTaskIndexResponse struct {
 	Output []*ActionOomReportTaskIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOomReportTaskIndex) Prepare() *ActionOomReportTaskIndexInvocation {
 	return &ActionOomReportTaskIndexInvocation{
 		Action: action,
-		Path: "/v6.0/oom_reports/{oom_report_id}/tasks",
+		Path:   "/v6.0/oom_reports/{oom_report_id}/tasks",
 	}
 }
 
@@ -220,6 +220,7 @@ func (inv *ActionOomReportTaskIndexInvocation) IsParameterSelected(param string)
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOomReportTaskIndexInvocation) NewMetaInput() *ActionOomReportTaskIndexMetaGlobalInput {
@@ -260,8 +261,6 @@ func (inv *ActionOomReportTaskIndexInvocation) callAsQuery() (*ActionOomReportTa
 	return resp, err
 }
 
-
-
 func (inv *ActionOomReportTaskIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -286,4 +285,3 @@ func (inv *ActionOomReportTaskIndexInvocation) convertMetaInputToQueryParams(ret
 		}
 	}
 }
-

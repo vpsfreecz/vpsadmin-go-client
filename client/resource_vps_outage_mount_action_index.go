@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionVpsOutageMountIndex is a type for action Vps_outage_mount#Index
 type ActionVpsOutageMountIndex struct {
@@ -17,9 +16,9 @@ func NewActionVpsOutageMountIndex(client *Client) *ActionVpsOutageMountIndex {
 
 // ActionVpsOutageMountIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsOutageMountIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionVpsOutageMountIndexMetaGlobalInput) SetCount(value bool) *Action
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsOutageMountIndexMetaGlobalInput) SetIncludes(value string) *ActionVpsOutageMountIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionVpsOutageMountIndexMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsOutageMountIndexMetaGlobalInput) SetNo(value bool) *ActionVpsOutageMountIndexMetaGlobalInput {
 	in.No = value
@@ -83,11 +84,11 @@ func (in *ActionVpsOutageMountIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsOutageMountIndexInput is a type for action input parameters
 type ActionVpsOutageMountIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	Outage int64 `json:"outage"`
-	User int64 `json:"user"`
-	Vps int64 `json:"vps"`
+	User   int64 `json:"user"`
+	Vps    int64 `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -103,6 +104,7 @@ func (in *ActionVpsOutageMountIndexInput) SetLimit(value int64) *ActionVpsOutage
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionVpsOutageMountIndexInput) SetOffset(value int64) *ActionVpsOutageMountIndexInput {
 	in.Offset = value
@@ -114,6 +116,7 @@ func (in *ActionVpsOutageMountIndexInput) SetOffset(value int64) *ActionVpsOutag
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetOutage sets parameter Outage to value and selects it for sending
 func (in *ActionVpsOutageMountIndexInput) SetOutage(value int64) *ActionVpsOutageMountIndexInput {
 	in.Outage = value
@@ -125,6 +128,7 @@ func (in *ActionVpsOutageMountIndexInput) SetOutage(value int64) *ActionVpsOutag
 	in._selectedParameters["Outage"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionVpsOutageMountIndexInput) SetUser(value int64) *ActionVpsOutageMountIndexInput {
 	in.User = value
@@ -136,6 +140,7 @@ func (in *ActionVpsOutageMountIndexInput) SetUser(value int64) *ActionVpsOutageM
 	in._selectedParameters["User"] = nil
 	return in
 }
+
 // SetVps sets parameter Vps to value and selects it for sending
 func (in *ActionVpsOutageMountIndexInput) SetVps(value int64) *ActionVpsOutageMountIndexInput {
 	in.Vps = value
@@ -171,14 +176,12 @@ func (in *ActionVpsOutageMountIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionVpsOutageMountIndexOutput is a type for action output parameters
 type ActionVpsOutageMountIndexOutput struct {
-	Id int64 `json:"id"`
-	Mount *ActionVpsMountShowOutput `json:"mount"`
+	Id        int64                      `json:"id"`
+	Mount     *ActionVpsMountShowOutput  `json:"mount"`
 	VpsOutage *ActionVpsOutageShowOutput `json:"vps_outage"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsOutageMountIndexResponse struct {
@@ -193,12 +196,11 @@ type ActionVpsOutageMountIndexResponse struct {
 	Output []*ActionVpsOutageMountIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsOutageMountIndex) Prepare() *ActionVpsOutageMountIndexInvocation {
 	return &ActionVpsOutageMountIndexInvocation{
 		Action: action,
-		Path: "/v6.0/vps_outage_mounts",
+		Path:   "/v6.0/vps_outage_mounts",
 	}
 }
 
@@ -214,7 +216,6 @@ type ActionVpsOutageMountIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionVpsOutageMountIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionVpsOutageMountIndexInvocation) NewInput() *ActionVpsOutageMountIndexInput {
@@ -237,6 +238,7 @@ func (inv *ActionVpsOutageMountIndexInvocation) IsParameterSelected(param string
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsOutageMountIndexInvocation) NewMetaInput() *ActionVpsOutageMountIndexMetaGlobalInput {
@@ -277,8 +279,6 @@ func (inv *ActionVpsOutageMountIndexInvocation) callAsQuery() (*ActionVpsOutageM
 	return resp, err
 }
 
-
-
 func (inv *ActionVpsOutageMountIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -312,4 +312,3 @@ func (inv *ActionVpsOutageMountIndexInvocation) convertMetaInputToQueryParams(re
 		}
 	}
 }
-

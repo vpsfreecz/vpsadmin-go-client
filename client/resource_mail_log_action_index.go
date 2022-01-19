@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionMailLogIndex is a type for action Mail_log#Index
 type ActionMailLogIndex struct {
@@ -17,9 +16,9 @@ func NewActionMailLogIndex(client *Client) *ActionMailLogIndex {
 
 // ActionMailLogIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMailLogIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionMailLogIndexMetaGlobalInput) SetCount(value bool) *ActionMailLog
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionMailLogIndexMetaGlobalInput) SetIncludes(value string) *ActionMailLogIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionMailLogIndexMetaGlobalInput) SetIncludes(value string) *ActionMa
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMailLogIndexMetaGlobalInput) SetNo(value bool) *ActionMailLogIndexMetaGlobalInput {
 	in.No = value
@@ -83,7 +84,7 @@ func (in *ActionMailLogIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMailLogIndexInput is a type for action input parameters
 type ActionMailLogIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -100,6 +101,7 @@ func (in *ActionMailLogIndexInput) SetLimit(value int64) *ActionMailLogIndexInpu
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionMailLogIndexInput) SetOffset(value int64) *ActionMailLogIndexInput {
 	in.Offset = value
@@ -135,27 +137,25 @@ func (in *ActionMailLogIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionMailLogIndexOutput is a type for action output parameters
 type ActionMailLogIndexOutput struct {
-	Bcc string `json:"bcc"`
-	Cc string `json:"cc"`
-	CreatedAt string `json:"created_at"`
-	From string `json:"from"`
-	Id int64 `json:"id"`
-	InReplyTo string `json:"in_reply_to"`
+	Bcc          string                        `json:"bcc"`
+	Cc           string                        `json:"cc"`
+	CreatedAt    string                        `json:"created_at"`
+	From         string                        `json:"from"`
+	Id           int64                         `json:"id"`
+	InReplyTo    string                        `json:"in_reply_to"`
 	MailTemplate *ActionMailTemplateShowOutput `json:"mail_template"`
-	MessageId string `json:"message_id"`
-	References string `json:"references"`
-	ReplyTo string `json:"reply_to"`
-	ReturnPath string `json:"return_path"`
-	Subject string `json:"subject"`
-	TextHtml string `json:"text_html"`
-	TextPlain string `json:"text_plain"`
-	To string `json:"to"`
-	User *ActionUserShowOutput `json:"user"`
+	MessageId    string                        `json:"message_id"`
+	References   string                        `json:"references"`
+	ReplyTo      string                        `json:"reply_to"`
+	ReturnPath   string                        `json:"return_path"`
+	Subject      string                        `json:"subject"`
+	TextHtml     string                        `json:"text_html"`
+	TextPlain    string                        `json:"text_plain"`
+	To           string                        `json:"to"`
+	User         *ActionUserShowOutput         `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionMailLogIndexResponse struct {
@@ -170,12 +170,11 @@ type ActionMailLogIndexResponse struct {
 	Output []*ActionMailLogIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMailLogIndex) Prepare() *ActionMailLogIndexInvocation {
 	return &ActionMailLogIndexInvocation{
 		Action: action,
-		Path: "/v6.0/mail_logs",
+		Path:   "/v6.0/mail_logs",
 	}
 }
 
@@ -191,7 +190,6 @@ type ActionMailLogIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionMailLogIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionMailLogIndexInvocation) NewInput() *ActionMailLogIndexInput {
@@ -214,6 +212,7 @@ func (inv *ActionMailLogIndexInvocation) IsParameterSelected(param string) bool 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionMailLogIndexInvocation) NewMetaInput() *ActionMailLogIndexMetaGlobalInput {
@@ -254,8 +253,6 @@ func (inv *ActionMailLogIndexInvocation) callAsQuery() (*ActionMailLogIndexRespo
 	return resp, err
 }
 
-
-
 func (inv *ActionMailLogIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -280,4 +277,3 @@ func (inv *ActionMailLogIndexInvocation) convertMetaInputToQueryParams(ret map[s
 		}
 	}
 }
-

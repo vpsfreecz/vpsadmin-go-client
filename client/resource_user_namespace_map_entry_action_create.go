@@ -19,7 +19,7 @@ func NewActionUserNamespaceMapEntryCreate(client *Client) *ActionUserNamespaceMa
 // ActionUserNamespaceMapEntryCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceMapEntryCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserNamespaceMapEntryCreateMetaGlobalInput) SetIncludes(value st
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserNamespaceMapEntryCreateMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceMapEntryCreateMetaGlobalInput {
 	in.No = value
@@ -72,10 +73,10 @@ func (in *ActionUserNamespaceMapEntryCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserNamespaceMapEntryCreateInput is a type for action input parameters
 type ActionUserNamespaceMapEntryCreateInput struct {
-	Count int64 `json:"count"`
-	Kind string `json:"kind"`
-	NsId int64 `json:"ns_id"`
-	VpsId int64 `json:"vps_id"`
+	Count int64  `json:"count"`
+	Kind  string `json:"kind"`
+	NsId  int64  `json:"ns_id"`
+	VpsId int64  `json:"vps_id"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -91,6 +92,7 @@ func (in *ActionUserNamespaceMapEntryCreateInput) SetCount(value int64) *ActionU
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetKind sets parameter Kind to value and selects it for sending
 func (in *ActionUserNamespaceMapEntryCreateInput) SetKind(value string) *ActionUserNamespaceMapEntryCreateInput {
 	in.Kind = value
@@ -102,6 +104,7 @@ func (in *ActionUserNamespaceMapEntryCreateInput) SetKind(value string) *ActionU
 	in._selectedParameters["Kind"] = nil
 	return in
 }
+
 // SetNsId sets parameter NsId to value and selects it for sending
 func (in *ActionUserNamespaceMapEntryCreateInput) SetNsId(value int64) *ActionUserNamespaceMapEntryCreateInput {
 	in.NsId = value
@@ -113,6 +116,7 @@ func (in *ActionUserNamespaceMapEntryCreateInput) SetNsId(value int64) *ActionUs
 	in._selectedParameters["NsId"] = nil
 	return in
 }
+
 // SetVpsId sets parameter VpsId to value and selects it for sending
 func (in *ActionUserNamespaceMapEntryCreateInput) SetVpsId(value int64) *ActionUserNamespaceMapEntryCreateInput {
 	in.VpsId = value
@@ -151,18 +155,17 @@ func (in *ActionUserNamespaceMapEntryCreateInput) AnySelected() bool {
 // ActionUserNamespaceMapEntryCreateRequest is a type for the entire action request
 type ActionUserNamespaceMapEntryCreateRequest struct {
 	Entry map[string]interface{} `json:"entry"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta  map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserNamespaceMapEntryCreateOutput is a type for action output parameters
 type ActionUserNamespaceMapEntryCreateOutput struct {
-	Count int64 `json:"count"`
-	Id int64 `json:"id"`
-	Kind string `json:"kind"`
-	NsId int64 `json:"ns_id"`
-	VpsId int64 `json:"vps_id"`
+	Count int64  `json:"count"`
+	Id    int64  `json:"id"`
+	Kind  string `json:"kind"`
+	NsId  int64  `json:"ns_id"`
+	VpsId int64  `json:"vps_id"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserNamespaceMapEntryCreateResponse struct {
@@ -177,12 +180,11 @@ type ActionUserNamespaceMapEntryCreateResponse struct {
 	Output *ActionUserNamespaceMapEntryCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserNamespaceMapEntryCreate) Prepare() *ActionUserNamespaceMapEntryCreateInvocation {
 	return &ActionUserNamespaceMapEntryCreateInvocation{
 		Action: action,
-		Path: "/v6.0/user_namespace_maps/{user_namespace_map_id}/entries",
+		Path:   "/v6.0/user_namespace_maps/{user_namespace_map_id}/entries",
 	}
 }
 
@@ -231,6 +233,7 @@ func (inv *ActionUserNamespaceMapEntryCreateInvocation) IsParameterSelected(para
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserNamespaceMapEntryCreateInvocation) NewMetaInput() *ActionUserNamespaceMapEntryCreateMetaGlobalInput {
@@ -259,7 +262,6 @@ func (inv *ActionUserNamespaceMapEntryCreateInvocation) Call() (*ActionUserNames
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserNamespaceMapEntryCreateInvocation) callAsBody() (*ActionUserNamespaceMapEntryCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserNamespaceMapEntryCreateResponse{Action: inv.Action}
@@ -270,13 +272,10 @@ func (inv *ActionUserNamespaceMapEntryCreateInvocation) callAsBody() (*ActionUse
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserNamespaceMapEntryCreateInvocation) makeAllInputParams() *ActionUserNamespaceMapEntryCreateRequest {
 	return &ActionUserNamespaceMapEntryCreateRequest{
 		Entry: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:  inv.makeMetaInputParams(),
 	}
 }
 

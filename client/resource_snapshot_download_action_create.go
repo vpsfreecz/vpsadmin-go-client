@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionSnapshotDownloadCreate is a type for action Snapshot_download#Create
 type ActionSnapshotDownloadCreate struct {
@@ -18,7 +17,7 @@ func NewActionSnapshotDownloadCreate(client *Client) *ActionSnapshotDownloadCrea
 // ActionSnapshotDownloadCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionSnapshotDownloadCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionSnapshotDownloadCreateMetaGlobalInput) SetIncludes(value string)
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionSnapshotDownloadCreateMetaGlobalInput) SetNo(value bool) *ActionSnapshotDownloadCreateMetaGlobalInput {
 	in.No = value
@@ -71,10 +71,10 @@ func (in *ActionSnapshotDownloadCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionSnapshotDownloadCreateInput is a type for action input parameters
 type ActionSnapshotDownloadCreateInput struct {
-	Format string `json:"format"`
-	FromSnapshot int64 `json:"from_snapshot"`
-	SendMail bool `json:"send_mail"`
-	Snapshot int64 `json:"snapshot"`
+	Format       string `json:"format"`
+	FromSnapshot int64  `json:"from_snapshot"`
+	SendMail     bool   `json:"send_mail"`
+	Snapshot     int64  `json:"snapshot"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -90,6 +90,7 @@ func (in *ActionSnapshotDownloadCreateInput) SetFormat(value string) *ActionSnap
 	in._selectedParameters["Format"] = nil
 	return in
 }
+
 // SetFromSnapshot sets parameter FromSnapshot to value and selects it for sending
 func (in *ActionSnapshotDownloadCreateInput) SetFromSnapshot(value int64) *ActionSnapshotDownloadCreateInput {
 	in.FromSnapshot = value
@@ -101,6 +102,7 @@ func (in *ActionSnapshotDownloadCreateInput) SetFromSnapshot(value int64) *Actio
 	in._selectedParameters["FromSnapshot"] = nil
 	return in
 }
+
 // SetSendMail sets parameter SendMail to value and selects it for sending
 func (in *ActionSnapshotDownloadCreateInput) SetSendMail(value bool) *ActionSnapshotDownloadCreateInput {
 	in.SendMail = value
@@ -112,6 +114,7 @@ func (in *ActionSnapshotDownloadCreateInput) SetSendMail(value bool) *ActionSnap
 	in._selectedParameters["SendMail"] = nil
 	return in
 }
+
 // SetSnapshot sets parameter Snapshot to value and selects it for sending
 func (in *ActionSnapshotDownloadCreateInput) SetSnapshot(value int64) *ActionSnapshotDownloadCreateInput {
 	in.Snapshot = value
@@ -150,22 +153,22 @@ func (in *ActionSnapshotDownloadCreateInput) AnySelected() bool {
 // ActionSnapshotDownloadCreateRequest is a type for the entire action request
 type ActionSnapshotDownloadCreateRequest struct {
 	SnapshotDownload map[string]interface{} `json:"snapshot_download"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta             map[string]interface{} `json:"_meta"`
 }
 
 // ActionSnapshotDownloadCreateOutput is a type for action output parameters
 type ActionSnapshotDownloadCreateOutput struct {
-	ExpirationDate string `json:"expiration_date"`
-	FileName string `json:"file_name"`
-	Format string `json:"format"`
-	FromSnapshot *ActionDatasetSnapshotShowOutput `json:"from_snapshot"`
-	Id int64 `json:"id"`
-	Ready bool `json:"ready"`
-	Sha256sum string `json:"sha256sum"`
-	Size int64 `json:"size"`
-	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	Url string `json:"url"`
-	User *ActionUserShowOutput `json:"user"`
+	ExpirationDate string                           `json:"expiration_date"`
+	FileName       string                           `json:"file_name"`
+	Format         string                           `json:"format"`
+	FromSnapshot   *ActionDatasetSnapshotShowOutput `json:"from_snapshot"`
+	Id             int64                            `json:"id"`
+	Ready          bool                             `json:"ready"`
+	Sha256sum      string                           `json:"sha256sum"`
+	Size           int64                            `json:"size"`
+	Snapshot       *ActionDatasetSnapshotShowOutput `json:"snapshot"`
+	Url            string                           `json:"url"`
+	User           *ActionUserShowOutput            `json:"user"`
 }
 
 // ActionSnapshotDownloadCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -188,12 +191,11 @@ type ActionSnapshotDownloadCreateResponse struct {
 	Output *ActionSnapshotDownloadCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionSnapshotDownloadCreate) Prepare() *ActionSnapshotDownloadCreateInvocation {
 	return &ActionSnapshotDownloadCreateInvocation{
 		Action: action,
-		Path: "/v6.0/snapshot_downloads",
+		Path:   "/v6.0/snapshot_downloads",
 	}
 }
 
@@ -209,7 +211,6 @@ type ActionSnapshotDownloadCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionSnapshotDownloadCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionSnapshotDownloadCreateInvocation) NewInput() *ActionSnapshotDownloadCreateInput {
@@ -232,6 +233,7 @@ func (inv *ActionSnapshotDownloadCreateInvocation) IsParameterSelected(param str
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionSnapshotDownloadCreateInvocation) NewMetaInput() *ActionSnapshotDownloadCreateMetaGlobalInput {
@@ -259,7 +261,6 @@ func (inv *ActionSnapshotDownloadCreateInvocation) IsMetaParameterSelected(param
 func (inv *ActionSnapshotDownloadCreateInvocation) Call() (*ActionSnapshotDownloadCreateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionSnapshotDownloadCreateInvocation) callAsBody() (*ActionSnapshotDownloadCreateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -320,11 +321,11 @@ func (resp *ActionSnapshotDownloadCreateResponse) WatchOperation(timeout float64
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -347,12 +348,10 @@ func (resp *ActionSnapshotDownloadCreateResponse) CancelOperation() (*ActionActi
 	return req.Call()
 }
 
-
-
 func (inv *ActionSnapshotDownloadCreateInvocation) makeAllInputParams() *ActionSnapshotDownloadCreateRequest {
 	return &ActionSnapshotDownloadCreateRequest{
 		SnapshotDownload: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:             inv.makeMetaInputParams(),
 	}
 }
 

@@ -19,7 +19,7 @@ func NewActionTransactionChainShow(client *Client) *ActionTransactionChainShow {
 // ActionTransactionChainShowMetaGlobalInput is a type for action global meta input parameters
 type ActionTransactionChainShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionTransactionChainShowMetaGlobalInput) SetIncludes(value string) *
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionTransactionChainShowMetaGlobalInput) SetNo(value bool) *ActionTransactionChainShowMetaGlobalInput {
 	in.No = value
@@ -70,20 +71,17 @@ func (in *ActionTransactionChainShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionTransactionChainShowOutput is a type for action output parameters
 type ActionTransactionChainShowOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Name string `json:"name"`
-	Progress int64 `json:"progress"`
-	Size int64 `json:"size"`
-	State string `json:"state"`
-	User *ActionUserShowOutput `json:"user"`
+	CreatedAt string                `json:"created_at"`
+	Id        int64                 `json:"id"`
+	Label     string                `json:"label"`
+	Name      string                `json:"name"`
+	Progress  int64                 `json:"progress"`
+	Size      int64                 `json:"size"`
+	State     string                `json:"state"`
+	User      *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionTransactionChainShowResponse struct {
@@ -98,12 +96,11 @@ type ActionTransactionChainShowResponse struct {
 	Output *ActionTransactionChainShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionTransactionChainShow) Prepare() *ActionTransactionChainShowInvocation {
 	return &ActionTransactionChainShowInvocation{
 		Action: action,
-		Path: "/v6.0/transaction_chains/{transaction_chain_id}",
+		Path:   "/v6.0/transaction_chains/{transaction_chain_id}",
 	}
 }
 
@@ -168,9 +165,6 @@ func (inv *ActionTransactionChainShowInvocation) callAsQuery() (*ActionTransacti
 	return resp, err
 }
 
-
-
-
 func (inv *ActionTransactionChainShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -181,4 +175,3 @@ func (inv *ActionTransactionChainShowInvocation) convertMetaInputToQueryParams(r
 		}
 	}
 }
-

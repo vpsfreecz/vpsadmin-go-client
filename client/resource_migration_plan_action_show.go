@@ -19,7 +19,7 @@ func NewActionMigrationPlanShow(client *Client) *ActionMigrationPlanShow {
 // ActionMigrationPlanShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMigrationPlanShowMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMigrationPlanShowMetaGlobalInput) SetNo(value bool) *ActionMigrationPlanShowMetaGlobalInput {
 	in.No = value
@@ -70,21 +71,18 @@ func (in *ActionMigrationPlanShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionMigrationPlanShowOutput is a type for action output parameters
 type ActionMigrationPlanShowOutput struct {
-	Concurrency int64 `json:"concurrency"`
-	CreatedAt string `json:"created_at"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	Reason string `json:"reason"`
-	SendMail bool `json:"send_mail"`
-	State string `json:"state"`
-	StopOnError bool `json:"stop_on_error"`
-	User *ActionUserShowOutput `json:"user"`
+	Concurrency int64                 `json:"concurrency"`
+	CreatedAt   string                `json:"created_at"`
+	FinishedAt  string                `json:"finished_at"`
+	Id          int64                 `json:"id"`
+	Reason      string                `json:"reason"`
+	SendMail    bool                  `json:"send_mail"`
+	State       string                `json:"state"`
+	StopOnError bool                  `json:"stop_on_error"`
+	User        *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionMigrationPlanShowResponse struct {
@@ -99,12 +97,11 @@ type ActionMigrationPlanShowResponse struct {
 	Output *ActionMigrationPlanShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMigrationPlanShow) Prepare() *ActionMigrationPlanShowInvocation {
 	return &ActionMigrationPlanShowInvocation{
 		Action: action,
-		Path: "/v6.0/migration_plans/{migration_plan_id}",
+		Path:   "/v6.0/migration_plans/{migration_plan_id}",
 	}
 }
 
@@ -169,9 +166,6 @@ func (inv *ActionMigrationPlanShowInvocation) callAsQuery() (*ActionMigrationPla
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMigrationPlanShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -182,4 +176,3 @@ func (inv *ActionMigrationPlanShowInvocation) convertMetaInputToQueryParams(ret 
 		}
 	}
 }
-

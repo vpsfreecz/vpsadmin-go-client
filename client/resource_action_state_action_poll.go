@@ -60,10 +60,10 @@ func (in *ActionActionStatePollMetaGlobalInput) AnySelected() bool {
 
 // ActionActionStatePollInput is a type for action input parameters
 type ActionActionStatePollInput struct {
-	Current int64 `json:"current"`
-	Status bool `json:"status"`
-	Timeout float64 `json:"timeout"`
-	Total int64 `json:"total"`
+	Current  int64   `json:"current"`
+	Status   bool    `json:"status"`
+	Timeout  float64 `json:"timeout"`
+	Total    int64   `json:"total"`
 	UpdateIn float64 `json:"update_in"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -80,6 +80,7 @@ func (in *ActionActionStatePollInput) SetCurrent(value int64) *ActionActionState
 	in._selectedParameters["Current"] = nil
 	return in
 }
+
 // SetStatus sets parameter Status to value and selects it for sending
 func (in *ActionActionStatePollInput) SetStatus(value bool) *ActionActionStatePollInput {
 	in.Status = value
@@ -91,6 +92,7 @@ func (in *ActionActionStatePollInput) SetStatus(value bool) *ActionActionStatePo
 	in._selectedParameters["Status"] = nil
 	return in
 }
+
 // SetTimeout sets parameter Timeout to value and selects it for sending
 func (in *ActionActionStatePollInput) SetTimeout(value float64) *ActionActionStatePollInput {
 	in.Timeout = value
@@ -102,6 +104,7 @@ func (in *ActionActionStatePollInput) SetTimeout(value float64) *ActionActionSta
 	in._selectedParameters["Timeout"] = nil
 	return in
 }
+
 // SetTotal sets parameter Total to value and selects it for sending
 func (in *ActionActionStatePollInput) SetTotal(value int64) *ActionActionStatePollInput {
 	in.Total = value
@@ -113,6 +116,7 @@ func (in *ActionActionStatePollInput) SetTotal(value int64) *ActionActionStatePo
 	in._selectedParameters["Total"] = nil
 	return in
 }
+
 // SetUpdateIn sets parameter UpdateIn to value and selects it for sending
 func (in *ActionActionStatePollInput) SetUpdateIn(value float64) *ActionActionStatePollInput {
 	in.UpdateIn = value
@@ -148,21 +152,19 @@ func (in *ActionActionStatePollInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionActionStatePollOutput is a type for action output parameters
 type ActionActionStatePollOutput struct {
-	CanCancel bool `json:"can_cancel"`
+	CanCancel bool   `json:"can_cancel"`
 	CreatedAt string `json:"created_at"`
-	Current int64 `json:"current"`
-	Finished bool `json:"finished"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Status bool `json:"status"`
-	Total int64 `json:"total"`
-	Unit string `json:"unit"`
+	Current   int64  `json:"current"`
+	Finished  bool   `json:"finished"`
+	Id        int64  `json:"id"`
+	Label     string `json:"label"`
+	Status    bool   `json:"status"`
+	Total     int64  `json:"total"`
+	Unit      string `json:"unit"`
 	UpdatedAt string `json:"updated_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionActionStatePollResponse struct {
@@ -177,12 +179,11 @@ type ActionActionStatePollResponse struct {
 	Output *ActionActionStatePollOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionActionStatePoll) Prepare() *ActionActionStatePollInvocation {
 	return &ActionActionStatePollInvocation{
 		Action: action,
-		Path: "/v6.0/action_states/{action_state_id}/poll",
+		Path:   "/v6.0/action_states/{action_state_id}/poll",
 	}
 }
 
@@ -231,6 +232,7 @@ func (inv *ActionActionStatePollInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionActionStatePollInvocation) NewMetaInput() *ActionActionStatePollMetaGlobalInput {
@@ -271,8 +273,6 @@ func (inv *ActionActionStatePollInvocation) callAsQuery() (*ActionActionStatePol
 	return resp, err
 }
 
-
-
 func (inv *ActionActionStatePollInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Current") {
@@ -300,4 +300,3 @@ func (inv *ActionActionStatePollInvocation) convertMetaInputToQueryParams(ret ma
 		}
 	}
 }
-

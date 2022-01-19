@@ -19,7 +19,7 @@ func NewActionVpsClone(client *Client) *ActionVpsClone {
 // ActionVpsCloneMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsCloneMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsCloneMetaGlobalInput) SetIncludes(value string) *ActionVpsClo
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsCloneMetaGlobalInput) SetNo(value bool) *ActionVpsCloneMetaGlobalInput {
 	in.No = value
@@ -72,20 +73,20 @@ func (in *ActionVpsCloneMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsCloneInput is a type for action input parameters
 type ActionVpsCloneInput struct {
-	AddressLocation int64 `json:"address_location"`
-	Configs bool `json:"configs"`
-	DatasetPlans bool `json:"dataset_plans"`
-	Environment int64 `json:"environment"`
-	Features bool `json:"features"`
-	Hostname string `json:"hostname"`
-	KeepSnapshots bool `json:"keep_snapshots"`
-	Location int64 `json:"location"`
-	Node int64 `json:"node"`
-	Platform string `json:"platform"`
-	Resources bool `json:"resources"`
-	Stop bool `json:"stop"`
-	Subdatasets bool `json:"subdatasets"`
-	User int64 `json:"user"`
+	AddressLocation int64  `json:"address_location"`
+	Configs         bool   `json:"configs"`
+	DatasetPlans    bool   `json:"dataset_plans"`
+	Environment     int64  `json:"environment"`
+	Features        bool   `json:"features"`
+	Hostname        string `json:"hostname"`
+	KeepSnapshots   bool   `json:"keep_snapshots"`
+	Location        int64  `json:"location"`
+	Node            int64  `json:"node"`
+	Platform        string `json:"platform"`
+	Resources       bool   `json:"resources"`
+	Stop            bool   `json:"stop"`
+	Subdatasets     bool   `json:"subdatasets"`
+	User            int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -101,6 +102,7 @@ func (in *ActionVpsCloneInput) SetAddressLocation(value int64) *ActionVpsCloneIn
 	in._selectedParameters["AddressLocation"] = nil
 	return in
 }
+
 // SetConfigs sets parameter Configs to value and selects it for sending
 func (in *ActionVpsCloneInput) SetConfigs(value bool) *ActionVpsCloneInput {
 	in.Configs = value
@@ -112,6 +114,7 @@ func (in *ActionVpsCloneInput) SetConfigs(value bool) *ActionVpsCloneInput {
 	in._selectedParameters["Configs"] = nil
 	return in
 }
+
 // SetDatasetPlans sets parameter DatasetPlans to value and selects it for sending
 func (in *ActionVpsCloneInput) SetDatasetPlans(value bool) *ActionVpsCloneInput {
 	in.DatasetPlans = value
@@ -123,6 +126,7 @@ func (in *ActionVpsCloneInput) SetDatasetPlans(value bool) *ActionVpsCloneInput 
 	in._selectedParameters["DatasetPlans"] = nil
 	return in
 }
+
 // SetEnvironment sets parameter Environment to value and selects it for sending
 func (in *ActionVpsCloneInput) SetEnvironment(value int64) *ActionVpsCloneInput {
 	in.Environment = value
@@ -134,6 +138,7 @@ func (in *ActionVpsCloneInput) SetEnvironment(value int64) *ActionVpsCloneInput 
 	in._selectedParameters["Environment"] = nil
 	return in
 }
+
 // SetFeatures sets parameter Features to value and selects it for sending
 func (in *ActionVpsCloneInput) SetFeatures(value bool) *ActionVpsCloneInput {
 	in.Features = value
@@ -145,6 +150,7 @@ func (in *ActionVpsCloneInput) SetFeatures(value bool) *ActionVpsCloneInput {
 	in._selectedParameters["Features"] = nil
 	return in
 }
+
 // SetHostname sets parameter Hostname to value and selects it for sending
 func (in *ActionVpsCloneInput) SetHostname(value string) *ActionVpsCloneInput {
 	in.Hostname = value
@@ -156,6 +162,7 @@ func (in *ActionVpsCloneInput) SetHostname(value string) *ActionVpsCloneInput {
 	in._selectedParameters["Hostname"] = nil
 	return in
 }
+
 // SetKeepSnapshots sets parameter KeepSnapshots to value and selects it for sending
 func (in *ActionVpsCloneInput) SetKeepSnapshots(value bool) *ActionVpsCloneInput {
 	in.KeepSnapshots = value
@@ -167,6 +174,7 @@ func (in *ActionVpsCloneInput) SetKeepSnapshots(value bool) *ActionVpsCloneInput
 	in._selectedParameters["KeepSnapshots"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionVpsCloneInput) SetLocation(value int64) *ActionVpsCloneInput {
 	in.Location = value
@@ -178,6 +186,7 @@ func (in *ActionVpsCloneInput) SetLocation(value int64) *ActionVpsCloneInput {
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionVpsCloneInput) SetNode(value int64) *ActionVpsCloneInput {
 	in.Node = value
@@ -189,6 +198,7 @@ func (in *ActionVpsCloneInput) SetNode(value int64) *ActionVpsCloneInput {
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetPlatform sets parameter Platform to value and selects it for sending
 func (in *ActionVpsCloneInput) SetPlatform(value string) *ActionVpsCloneInput {
 	in.Platform = value
@@ -200,6 +210,7 @@ func (in *ActionVpsCloneInput) SetPlatform(value string) *ActionVpsCloneInput {
 	in._selectedParameters["Platform"] = nil
 	return in
 }
+
 // SetResources sets parameter Resources to value and selects it for sending
 func (in *ActionVpsCloneInput) SetResources(value bool) *ActionVpsCloneInput {
 	in.Resources = value
@@ -211,6 +222,7 @@ func (in *ActionVpsCloneInput) SetResources(value bool) *ActionVpsCloneInput {
 	in._selectedParameters["Resources"] = nil
 	return in
 }
+
 // SetStop sets parameter Stop to value and selects it for sending
 func (in *ActionVpsCloneInput) SetStop(value bool) *ActionVpsCloneInput {
 	in.Stop = value
@@ -222,6 +234,7 @@ func (in *ActionVpsCloneInput) SetStop(value bool) *ActionVpsCloneInput {
 	in._selectedParameters["Stop"] = nil
 	return in
 }
+
 // SetSubdatasets sets parameter Subdatasets to value and selects it for sending
 func (in *ActionVpsCloneInput) SetSubdatasets(value bool) *ActionVpsCloneInput {
 	in.Subdatasets = value
@@ -233,6 +246,7 @@ func (in *ActionVpsCloneInput) SetSubdatasets(value bool) *ActionVpsCloneInput {
 	in._selectedParameters["Subdatasets"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionVpsCloneInput) SetUser(value int64) *ActionVpsCloneInput {
 	in.User = value
@@ -270,45 +284,45 @@ func (in *ActionVpsCloneInput) AnySelected() bool {
 
 // ActionVpsCloneRequest is a type for the entire action request
 type ActionVpsCloneRequest struct {
-	Vps map[string]interface{} `json:"vps"`
+	Vps  map[string]interface{} `json:"vps"`
 	Meta map[string]interface{} `json:"_meta"`
 }
 
 // ActionVpsCloneOutput is a type for action output parameters
 type ActionVpsCloneOutput struct {
-	Config string `json:"config"`
-	Cpu int64 `json:"cpu"`
-	CpuIdle float64 `json:"cpu_idle"`
-	CpuIowait float64 `json:"cpu_iowait"`
-	CpuIrq float64 `json:"cpu_irq"`
-	CpuLimit int64 `json:"cpu_limit"`
-	CpuNice float64 `json:"cpu_nice"`
-	CpuSoftirq float64 `json:"cpu_softirq"`
-	CpuSystem float64 `json:"cpu_system"`
-	CpuUser float64 `json:"cpu_user"`
-	CreatedAt string `json:"created_at"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Diskspace int64 `json:"diskspace"`
-	DnsResolver *ActionDnsResolverShowOutput `json:"dns_resolver"`
-	Hostname string `json:"hostname"`
-	Id int64 `json:"id"`
-	InRescueMode bool `json:"in_rescue_mode"`
-	Info string `json:"info"`
-	IsRunning bool `json:"is_running"`
-	Loadavg float64 `json:"loadavg"`
-	ManageHostname bool `json:"manage_hostname"`
-	Memory int64 `json:"memory"`
-	Node *ActionNodeShowOutput `json:"node"`
-	Onboot bool `json:"onboot"`
-	Onstartall bool `json:"onstartall"`
-	OsTemplate *ActionOsTemplateShowOutput `json:"os_template"`
-	ProcessCount int64 `json:"process_count"`
-	Swap int64 `json:"swap"`
-	Uptime int64 `json:"uptime"`
-	UsedDiskspace int64 `json:"used_diskspace"`
-	UsedMemory int64 `json:"used_memory"`
-	UsedSwap int64 `json:"used_swap"`
-	User *ActionUserShowOutput `json:"user"`
+	Config         string                       `json:"config"`
+	Cpu            int64                        `json:"cpu"`
+	CpuIdle        float64                      `json:"cpu_idle"`
+	CpuIowait      float64                      `json:"cpu_iowait"`
+	CpuIrq         float64                      `json:"cpu_irq"`
+	CpuLimit       int64                        `json:"cpu_limit"`
+	CpuNice        float64                      `json:"cpu_nice"`
+	CpuSoftirq     float64                      `json:"cpu_softirq"`
+	CpuSystem      float64                      `json:"cpu_system"`
+	CpuUser        float64                      `json:"cpu_user"`
+	CreatedAt      string                       `json:"created_at"`
+	Dataset        *ActionDatasetShowOutput     `json:"dataset"`
+	Diskspace      int64                        `json:"diskspace"`
+	DnsResolver    *ActionDnsResolverShowOutput `json:"dns_resolver"`
+	Hostname       string                       `json:"hostname"`
+	Id             int64                        `json:"id"`
+	InRescueMode   bool                         `json:"in_rescue_mode"`
+	Info           string                       `json:"info"`
+	IsRunning      bool                         `json:"is_running"`
+	Loadavg        float64                      `json:"loadavg"`
+	ManageHostname bool                         `json:"manage_hostname"`
+	Memory         int64                        `json:"memory"`
+	Node           *ActionNodeShowOutput        `json:"node"`
+	Onboot         bool                         `json:"onboot"`
+	Onstartall     bool                         `json:"onstartall"`
+	OsTemplate     *ActionOsTemplateShowOutput  `json:"os_template"`
+	ProcessCount   int64                        `json:"process_count"`
+	Swap           int64                        `json:"swap"`
+	Uptime         int64                        `json:"uptime"`
+	UsedDiskspace  int64                        `json:"used_diskspace"`
+	UsedMemory     int64                        `json:"used_memory"`
+	UsedSwap       int64                        `json:"used_swap"`
+	User           *ActionUserShowOutput        `json:"user"`
 }
 
 // ActionVpsCloneMetaGlobalOutput is a type for global output metadata parameters
@@ -331,12 +345,11 @@ type ActionVpsCloneResponse struct {
 	Output *ActionVpsCloneOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsClone) Prepare() *ActionVpsCloneInvocation {
 	return &ActionVpsCloneInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/clone",
+		Path:   "/v6.0/vpses/{vps_id}/clone",
 	}
 }
 
@@ -385,6 +398,7 @@ func (inv *ActionVpsCloneInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsCloneInvocation) NewMetaInput() *ActionVpsCloneMetaGlobalInput {
@@ -412,7 +426,6 @@ func (inv *ActionVpsCloneInvocation) IsMetaParameterSelected(param string) bool 
 func (inv *ActionVpsCloneInvocation) Call() (*ActionVpsCloneResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsCloneInvocation) callAsBody() (*ActionVpsCloneResponse, error) {
 	input := inv.makeAllInputParams()
@@ -473,11 +486,11 @@ func (resp *ActionVpsCloneResponse) WatchOperation(timeout float64, updateIn flo
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -500,11 +513,9 @@ func (resp *ActionVpsCloneResponse) CancelOperation() (*ActionActionStateCancelR
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsCloneInvocation) makeAllInputParams() *ActionVpsCloneRequest {
 	return &ActionVpsCloneRequest{
-		Vps: inv.makeInputParams(),
+		Vps:  inv.makeInputParams(),
 		Meta: inv.makeMetaInputParams(),
 	}
 }

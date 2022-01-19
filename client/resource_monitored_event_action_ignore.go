@@ -19,7 +19,7 @@ func NewActionMonitoredEventIgnore(client *Client) *ActionMonitoredEventIgnore {
 // ActionMonitoredEventIgnoreMetaGlobalInput is a type for action global meta input parameters
 type ActionMonitoredEventIgnoreMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMonitoredEventIgnoreMetaGlobalInput) SetIncludes(value string) *
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMonitoredEventIgnoreMetaGlobalInput) SetNo(value bool) *ActionMonitoredEventIgnoreMetaGlobalInput {
 	in.No = value
@@ -115,10 +116,8 @@ func (in *ActionMonitoredEventIgnoreInput) AnySelected() bool {
 // ActionMonitoredEventIgnoreRequest is a type for the entire action request
 type ActionMonitoredEventIgnoreRequest struct {
 	MonitoredEvent map[string]interface{} `json:"monitored_event"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta           map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionMonitoredEventIgnoreResponse struct {
@@ -126,12 +125,11 @@ type ActionMonitoredEventIgnoreResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMonitoredEventIgnore) Prepare() *ActionMonitoredEventIgnoreInvocation {
 	return &ActionMonitoredEventIgnoreInvocation{
 		Action: action,
-		Path: "/v6.0/monitored_events/{monitored_event_id}/ignore",
+		Path:   "/v6.0/monitored_events/{monitored_event_id}/ignore",
 	}
 }
 
@@ -180,6 +178,7 @@ func (inv *ActionMonitoredEventIgnoreInvocation) IsParameterSelected(param strin
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionMonitoredEventIgnoreInvocation) NewMetaInput() *ActionMonitoredEventIgnoreMetaGlobalInput {
@@ -208,7 +207,6 @@ func (inv *ActionMonitoredEventIgnoreInvocation) Call() (*ActionMonitoredEventIg
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionMonitoredEventIgnoreInvocation) callAsBody() (*ActionMonitoredEventIgnoreResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionMonitoredEventIgnoreResponse{Action: inv.Action}
@@ -216,13 +214,10 @@ func (inv *ActionMonitoredEventIgnoreInvocation) callAsBody() (*ActionMonitoredE
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMonitoredEventIgnoreInvocation) makeAllInputParams() *ActionMonitoredEventIgnoreRequest {
 	return &ActionMonitoredEventIgnoreRequest{
 		MonitoredEvent: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:           inv.makeMetaInputParams(),
 	}
 }
 

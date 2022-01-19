@@ -19,7 +19,7 @@ func NewActionVpsConfigUpdate(client *Client) *ActionVpsConfigUpdate {
 // ActionVpsConfigUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsConfigUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsConfigUpdateMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsConfigUpdateMetaGlobalInput) SetNo(value bool) *ActionVpsConfigUpdateMetaGlobalInput {
 	in.No = value
@@ -73,8 +74,8 @@ func (in *ActionVpsConfigUpdateMetaGlobalInput) AnySelected() bool {
 // ActionVpsConfigUpdateInput is a type for action input parameters
 type ActionVpsConfigUpdateInput struct {
 	Config string `json:"config"`
-	Label string `json:"label"`
-	Name string `json:"name"`
+	Label  string `json:"label"`
+	Name   string `json:"name"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -90,6 +91,7 @@ func (in *ActionVpsConfigUpdateInput) SetConfig(value string) *ActionVpsConfigUp
 	in._selectedParameters["Config"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionVpsConfigUpdateInput) SetLabel(value string) *ActionVpsConfigUpdateInput {
 	in.Label = value
@@ -101,6 +103,7 @@ func (in *ActionVpsConfigUpdateInput) SetLabel(value string) *ActionVpsConfigUpd
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetName sets parameter Name to value and selects it for sending
 func (in *ActionVpsConfigUpdateInput) SetName(value string) *ActionVpsConfigUpdateInput {
 	in.Name = value
@@ -139,9 +142,8 @@ func (in *ActionVpsConfigUpdateInput) AnySelected() bool {
 // ActionVpsConfigUpdateRequest is a type for the entire action request
 type ActionVpsConfigUpdateRequest struct {
 	VpsConfig map[string]interface{} `json:"vps_config"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta      map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionVpsConfigUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsConfigUpdateMetaGlobalOutput struct {
@@ -159,12 +161,11 @@ type ActionVpsConfigUpdateResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsConfigUpdate) Prepare() *ActionVpsConfigUpdateInvocation {
 	return &ActionVpsConfigUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/vps_configs/{vps_config_id}",
+		Path:   "/v6.0/vps_configs/{vps_config_id}",
 	}
 }
 
@@ -213,6 +214,7 @@ func (inv *ActionVpsConfigUpdateInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsConfigUpdateInvocation) NewMetaInput() *ActionVpsConfigUpdateMetaGlobalInput {
@@ -240,7 +242,6 @@ func (inv *ActionVpsConfigUpdateInvocation) IsMetaParameterSelected(param string
 func (inv *ActionVpsConfigUpdateInvocation) Call() (*ActionVpsConfigUpdateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsConfigUpdateInvocation) callAsBody() (*ActionVpsConfigUpdateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -298,11 +299,11 @@ func (resp *ActionVpsConfigUpdateResponse) WatchOperation(timeout float64, updat
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -325,12 +326,10 @@ func (resp *ActionVpsConfigUpdateResponse) CancelOperation() (*ActionActionState
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsConfigUpdateInvocation) makeAllInputParams() *ActionVpsConfigUpdateRequest {
 	return &ActionVpsConfigUpdateRequest{
 		VpsConfig: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:      inv.makeMetaInputParams(),
 	}
 }
 

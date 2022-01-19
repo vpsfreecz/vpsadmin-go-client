@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionOutageCreate is a type for action Outage#Create
 type ActionOutageCreate struct {
@@ -18,7 +17,7 @@ func NewActionOutageCreate(client *Client) *ActionOutageCreate {
 // ActionOutageCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionOutageCreateMetaGlobalInput) SetIncludes(value string) *ActionOu
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOutageCreateMetaGlobalInput) SetNo(value bool) *ActionOutageCreateMetaGlobalInput {
 	in.No = value
@@ -71,15 +71,15 @@ func (in *ActionOutageCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageCreateInput is a type for action input parameters
 type ActionOutageCreateInput struct {
-	BeginsAt string `json:"begins_at"`
+	BeginsAt      string `json:"begins_at"`
 	CsDescription string `json:"cs_description"`
-	CsSummary string `json:"cs_summary"`
-	Duration int64 `json:"duration"`
+	CsSummary     string `json:"cs_summary"`
+	Duration      int64  `json:"duration"`
 	EnDescription string `json:"en_description"`
-	EnSummary string `json:"en_summary"`
-	FinishedAt string `json:"finished_at"`
-	Planned bool `json:"planned"`
-	Type string `json:"type"`
+	EnSummary     string `json:"en_summary"`
+	FinishedAt    string `json:"finished_at"`
+	Planned       bool   `json:"planned"`
+	Type          string `json:"type"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -95,6 +95,7 @@ func (in *ActionOutageCreateInput) SetBeginsAt(value string) *ActionOutageCreate
 	in._selectedParameters["BeginsAt"] = nil
 	return in
 }
+
 // SetCsDescription sets parameter CsDescription to value and selects it for sending
 func (in *ActionOutageCreateInput) SetCsDescription(value string) *ActionOutageCreateInput {
 	in.CsDescription = value
@@ -106,6 +107,7 @@ func (in *ActionOutageCreateInput) SetCsDescription(value string) *ActionOutageC
 	in._selectedParameters["CsDescription"] = nil
 	return in
 }
+
 // SetCsSummary sets parameter CsSummary to value and selects it for sending
 func (in *ActionOutageCreateInput) SetCsSummary(value string) *ActionOutageCreateInput {
 	in.CsSummary = value
@@ -117,6 +119,7 @@ func (in *ActionOutageCreateInput) SetCsSummary(value string) *ActionOutageCreat
 	in._selectedParameters["CsSummary"] = nil
 	return in
 }
+
 // SetDuration sets parameter Duration to value and selects it for sending
 func (in *ActionOutageCreateInput) SetDuration(value int64) *ActionOutageCreateInput {
 	in.Duration = value
@@ -128,6 +131,7 @@ func (in *ActionOutageCreateInput) SetDuration(value int64) *ActionOutageCreateI
 	in._selectedParameters["Duration"] = nil
 	return in
 }
+
 // SetEnDescription sets parameter EnDescription to value and selects it for sending
 func (in *ActionOutageCreateInput) SetEnDescription(value string) *ActionOutageCreateInput {
 	in.EnDescription = value
@@ -139,6 +143,7 @@ func (in *ActionOutageCreateInput) SetEnDescription(value string) *ActionOutageC
 	in._selectedParameters["EnDescription"] = nil
 	return in
 }
+
 // SetEnSummary sets parameter EnSummary to value and selects it for sending
 func (in *ActionOutageCreateInput) SetEnSummary(value string) *ActionOutageCreateInput {
 	in.EnSummary = value
@@ -150,6 +155,7 @@ func (in *ActionOutageCreateInput) SetEnSummary(value string) *ActionOutageCreat
 	in._selectedParameters["EnSummary"] = nil
 	return in
 }
+
 // SetFinishedAt sets parameter FinishedAt to value and selects it for sending
 func (in *ActionOutageCreateInput) SetFinishedAt(value string) *ActionOutageCreateInput {
 	in.FinishedAt = value
@@ -161,6 +167,7 @@ func (in *ActionOutageCreateInput) SetFinishedAt(value string) *ActionOutageCrea
 	in._selectedParameters["FinishedAt"] = nil
 	return in
 }
+
 // SetPlanned sets parameter Planned to value and selects it for sending
 func (in *ActionOutageCreateInput) SetPlanned(value bool) *ActionOutageCreateInput {
 	in.Planned = value
@@ -172,6 +179,7 @@ func (in *ActionOutageCreateInput) SetPlanned(value bool) *ActionOutageCreateInp
 	in._selectedParameters["Planned"] = nil
 	return in
 }
+
 // SetType sets parameter Type to value and selects it for sending
 func (in *ActionOutageCreateInput) SetType(value string) *ActionOutageCreateInput {
 	in.Type = value
@@ -210,29 +218,28 @@ func (in *ActionOutageCreateInput) AnySelected() bool {
 // ActionOutageCreateRequest is a type for the entire action request
 type ActionOutageCreateRequest struct {
 	Outage map[string]interface{} `json:"outage"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta   map[string]interface{} `json:"_meta"`
 }
 
 // ActionOutageCreateOutput is a type for action output parameters
 type ActionOutageCreateOutput struct {
-	Affected bool `json:"affected"`
-	AffectedDirectVpsCount int64 `json:"affected_direct_vps_count"`
-	AffectedExportCount int64 `json:"affected_export_count"`
-	AffectedIndirectVpsCount int64 `json:"affected_indirect_vps_count"`
-	AffectedUserCount int64 `json:"affected_user_count"`
-	BeginsAt string `json:"begins_at"`
-	CsDescription string `json:"cs_description"`
-	CsSummary string `json:"cs_summary"`
-	Duration int64 `json:"duration"`
-	EnDescription string `json:"en_description"`
-	EnSummary string `json:"en_summary"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	Planned bool `json:"planned"`
-	State string `json:"state"`
-	Type string `json:"type"`
+	Affected                 bool   `json:"affected"`
+	AffectedDirectVpsCount   int64  `json:"affected_direct_vps_count"`
+	AffectedExportCount      int64  `json:"affected_export_count"`
+	AffectedIndirectVpsCount int64  `json:"affected_indirect_vps_count"`
+	AffectedUserCount        int64  `json:"affected_user_count"`
+	BeginsAt                 string `json:"begins_at"`
+	CsDescription            string `json:"cs_description"`
+	CsSummary                string `json:"cs_summary"`
+	Duration                 int64  `json:"duration"`
+	EnDescription            string `json:"en_description"`
+	EnSummary                string `json:"en_summary"`
+	FinishedAt               string `json:"finished_at"`
+	Id                       int64  `json:"id"`
+	Planned                  bool   `json:"planned"`
+	State                    string `json:"state"`
+	Type                     string `json:"type"`
 }
-
 
 // Type for action response, including envelope
 type ActionOutageCreateResponse struct {
@@ -247,12 +254,11 @@ type ActionOutageCreateResponse struct {
 	Output *ActionOutageCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOutageCreate) Prepare() *ActionOutageCreateInvocation {
 	return &ActionOutageCreateInvocation{
 		Action: action,
-		Path: "/v6.0/outages",
+		Path:   "/v6.0/outages",
 	}
 }
 
@@ -268,7 +274,6 @@ type ActionOutageCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionOutageCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionOutageCreateInvocation) NewInput() *ActionOutageCreateInput {
@@ -291,6 +296,7 @@ func (inv *ActionOutageCreateInvocation) IsParameterSelected(param string) bool 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOutageCreateInvocation) NewMetaInput() *ActionOutageCreateMetaGlobalInput {
@@ -319,7 +325,6 @@ func (inv *ActionOutageCreateInvocation) Call() (*ActionOutageCreateResponse, er
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionOutageCreateInvocation) callAsBody() (*ActionOutageCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionOutageCreateResponse{Action: inv.Action}
@@ -330,13 +335,10 @@ func (inv *ActionOutageCreateInvocation) callAsBody() (*ActionOutageCreateRespon
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOutageCreateInvocation) makeAllInputParams() *ActionOutageCreateRequest {
 	return &ActionOutageCreateRequest{
 		Outage: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:   inv.makeMetaInputParams(),
 	}
 }
 

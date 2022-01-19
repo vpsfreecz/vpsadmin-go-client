@@ -19,7 +19,7 @@ func NewActionMigrationPlanVpsMigrationCreate(client *Client) *ActionMigrationPl
 // ActionMigrationPlanVpsMigrationCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanVpsMigrationCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMigrationPlanVpsMigrationCreateMetaGlobalInput) SetIncludes(valu
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMigrationPlanVpsMigrationCreateMetaGlobalInput) SetNo(value bool) *ActionMigrationPlanVpsMigrationCreateMetaGlobalInput {
 	in.No = value
@@ -72,10 +73,10 @@ func (in *ActionMigrationPlanVpsMigrationCreateMetaGlobalInput) AnySelected() bo
 
 // ActionMigrationPlanVpsMigrationCreateInput is a type for action input parameters
 type ActionMigrationPlanVpsMigrationCreateInput struct {
-	CleanupData bool `json:"cleanup_data"`
-	DstNode int64 `json:"dst_node"`
-	MaintenanceWindow bool `json:"maintenance_window"`
-	Vps int64 `json:"vps"`
+	CleanupData       bool  `json:"cleanup_data"`
+	DstNode           int64 `json:"dst_node"`
+	MaintenanceWindow bool  `json:"maintenance_window"`
+	Vps               int64 `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -91,6 +92,7 @@ func (in *ActionMigrationPlanVpsMigrationCreateInput) SetCleanupData(value bool)
 	in._selectedParameters["CleanupData"] = nil
 	return in
 }
+
 // SetDstNode sets parameter DstNode to value and selects it for sending
 func (in *ActionMigrationPlanVpsMigrationCreateInput) SetDstNode(value int64) *ActionMigrationPlanVpsMigrationCreateInput {
 	in.DstNode = value
@@ -102,6 +104,7 @@ func (in *ActionMigrationPlanVpsMigrationCreateInput) SetDstNode(value int64) *A
 	in._selectedParameters["DstNode"] = nil
 	return in
 }
+
 // SetMaintenanceWindow sets parameter MaintenanceWindow to value and selects it for sending
 func (in *ActionMigrationPlanVpsMigrationCreateInput) SetMaintenanceWindow(value bool) *ActionMigrationPlanVpsMigrationCreateInput {
 	in.MaintenanceWindow = value
@@ -113,6 +116,7 @@ func (in *ActionMigrationPlanVpsMigrationCreateInput) SetMaintenanceWindow(value
 	in._selectedParameters["MaintenanceWindow"] = nil
 	return in
 }
+
 // SetVps sets parameter Vps to value and selects it for sending
 func (in *ActionMigrationPlanVpsMigrationCreateInput) SetVps(value int64) *ActionMigrationPlanVpsMigrationCreateInput {
 	in.Vps = value
@@ -151,24 +155,23 @@ func (in *ActionMigrationPlanVpsMigrationCreateInput) AnySelected() bool {
 // ActionMigrationPlanVpsMigrationCreateRequest is a type for the entire action request
 type ActionMigrationPlanVpsMigrationCreateRequest struct {
 	VpsMigration map[string]interface{} `json:"vps_migration"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta         map[string]interface{} `json:"_meta"`
 }
 
 // ActionMigrationPlanVpsMigrationCreateOutput is a type for action output parameters
 type ActionMigrationPlanVpsMigrationCreateOutput struct {
-	CleanupData bool `json:"cleanup_data"`
-	CreatedAt string `json:"created_at"`
-	DstNode *ActionNodeShowOutput `json:"dst_node"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	MaintenanceWindow bool `json:"maintenance_window"`
-	SrcNode *ActionNodeShowOutput `json:"src_node"`
-	StartedAt string `json:"started_at"`
-	State string `json:"state"`
-	TransactionChain *ActionTransactionChainShowOutput `json:"transaction_chain"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	CleanupData       bool                              `json:"cleanup_data"`
+	CreatedAt         string                            `json:"created_at"`
+	DstNode           *ActionNodeShowOutput             `json:"dst_node"`
+	FinishedAt        string                            `json:"finished_at"`
+	Id                int64                             `json:"id"`
+	MaintenanceWindow bool                              `json:"maintenance_window"`
+	SrcNode           *ActionNodeShowOutput             `json:"src_node"`
+	StartedAt         string                            `json:"started_at"`
+	State             string                            `json:"state"`
+	TransactionChain  *ActionTransactionChainShowOutput `json:"transaction_chain"`
+	Vps               *ActionVpsShowOutput              `json:"vps"`
 }
-
 
 // Type for action response, including envelope
 type ActionMigrationPlanVpsMigrationCreateResponse struct {
@@ -183,12 +186,11 @@ type ActionMigrationPlanVpsMigrationCreateResponse struct {
 	Output *ActionMigrationPlanVpsMigrationCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMigrationPlanVpsMigrationCreate) Prepare() *ActionMigrationPlanVpsMigrationCreateInvocation {
 	return &ActionMigrationPlanVpsMigrationCreateInvocation{
 		Action: action,
-		Path: "/v6.0/migration_plans/{migration_plan_id}/vps_migrations",
+		Path:   "/v6.0/migration_plans/{migration_plan_id}/vps_migrations",
 	}
 }
 
@@ -237,6 +239,7 @@ func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) IsParameterSelected(
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) NewMetaInput() *ActionMigrationPlanVpsMigrationCreateMetaGlobalInput {
@@ -265,7 +268,6 @@ func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) Call() (*ActionMigra
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) callAsBody() (*ActionMigrationPlanVpsMigrationCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionMigrationPlanVpsMigrationCreateResponse{Action: inv.Action}
@@ -276,13 +278,10 @@ func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) callAsBody() (*Actio
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) makeAllInputParams() *ActionMigrationPlanVpsMigrationCreateRequest {
 	return &ActionMigrationPlanVpsMigrationCreateRequest{
 		VpsMigration: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:         inv.makeMetaInputParams(),
 	}
 }
 

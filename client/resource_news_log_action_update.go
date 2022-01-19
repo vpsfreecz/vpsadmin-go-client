@@ -19,7 +19,7 @@ func NewActionNewsLogUpdate(client *Client) *ActionNewsLogUpdate {
 // ActionNewsLogUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionNewsLogUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionNewsLogUpdateMetaGlobalInput) SetIncludes(value string) *ActionN
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNewsLogUpdateMetaGlobalInput) SetNo(value bool) *ActionNewsLogUpdateMetaGlobalInput {
 	in.No = value
@@ -72,7 +73,7 @@ func (in *ActionNewsLogUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionNewsLogUpdateInput is a type for action input parameters
 type ActionNewsLogUpdateInput struct {
-	Message string `json:"message"`
+	Message     string `json:"message"`
 	PublishedAt string `json:"published_at"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -89,6 +90,7 @@ func (in *ActionNewsLogUpdateInput) SetMessage(value string) *ActionNewsLogUpdat
 	in._selectedParameters["Message"] = nil
 	return in
 }
+
 // SetPublishedAt sets parameter PublishedAt to value and selects it for sending
 func (in *ActionNewsLogUpdateInput) SetPublishedAt(value string) *ActionNewsLogUpdateInput {
 	in.PublishedAt = value
@@ -127,18 +129,17 @@ func (in *ActionNewsLogUpdateInput) AnySelected() bool {
 // ActionNewsLogUpdateRequest is a type for the entire action request
 type ActionNewsLogUpdateRequest struct {
 	NewsLog map[string]interface{} `json:"news_log"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta    map[string]interface{} `json:"_meta"`
 }
 
 // ActionNewsLogUpdateOutput is a type for action output parameters
 type ActionNewsLogUpdateOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	Message string `json:"message"`
+	CreatedAt   string `json:"created_at"`
+	Id          int64  `json:"id"`
+	Message     string `json:"message"`
 	PublishedAt string `json:"published_at"`
-	UpdatedAt string `json:"updated_at"`
+	UpdatedAt   string `json:"updated_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionNewsLogUpdateResponse struct {
@@ -153,12 +154,11 @@ type ActionNewsLogUpdateResponse struct {
 	Output *ActionNewsLogUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNewsLogUpdate) Prepare() *ActionNewsLogUpdateInvocation {
 	return &ActionNewsLogUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/news_logs/{news_log_id}",
+		Path:   "/v6.0/news_logs/{news_log_id}",
 	}
 }
 
@@ -207,6 +207,7 @@ func (inv *ActionNewsLogUpdateInvocation) IsParameterSelected(param string) bool
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionNewsLogUpdateInvocation) NewMetaInput() *ActionNewsLogUpdateMetaGlobalInput {
@@ -235,7 +236,6 @@ func (inv *ActionNewsLogUpdateInvocation) Call() (*ActionNewsLogUpdateResponse, 
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionNewsLogUpdateInvocation) callAsBody() (*ActionNewsLogUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionNewsLogUpdateResponse{Action: inv.Action}
@@ -246,13 +246,10 @@ func (inv *ActionNewsLogUpdateInvocation) callAsBody() (*ActionNewsLogUpdateResp
 	return resp, err
 }
 
-
-
-
 func (inv *ActionNewsLogUpdateInvocation) makeAllInputParams() *ActionNewsLogUpdateRequest {
 	return &ActionNewsLogUpdateRequest{
 		NewsLog: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:    inv.makeMetaInputParams(),
 	}
 }
 

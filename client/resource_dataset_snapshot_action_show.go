@@ -19,7 +19,7 @@ func NewActionDatasetSnapshotShow(client *Client) *ActionDatasetSnapshotShow {
 // ActionDatasetSnapshotShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetSnapshotShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionDatasetSnapshotShowMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDatasetSnapshotShowMetaGlobalInput) SetNo(value bool) *ActionDatasetSnapshotShowMetaGlobalInput {
 	in.No = value
@@ -70,20 +71,17 @@ func (in *ActionDatasetSnapshotShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionDatasetSnapshotShowOutput is a type for action output parameters
 type ActionDatasetSnapshotShowOutput struct {
-	CreatedAt string `json:"created_at"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Export *ActionExportShowOutput `json:"export"`
-	HistoryId int64 `json:"history_id"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Mount *ActionVpsMountShowOutput `json:"mount"`
-	Name string `json:"name"`
+	CreatedAt string                    `json:"created_at"`
+	Dataset   *ActionDatasetShowOutput  `json:"dataset"`
+	Export    *ActionExportShowOutput   `json:"export"`
+	HistoryId int64                     `json:"history_id"`
+	Id        int64                     `json:"id"`
+	Label     string                    `json:"label"`
+	Mount     *ActionVpsMountShowOutput `json:"mount"`
+	Name      string                    `json:"name"`
 }
-
 
 // Type for action response, including envelope
 type ActionDatasetSnapshotShowResponse struct {
@@ -98,12 +96,11 @@ type ActionDatasetSnapshotShowResponse struct {
 	Output *ActionDatasetSnapshotShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDatasetSnapshotShow) Prepare() *ActionDatasetSnapshotShowInvocation {
 	return &ActionDatasetSnapshotShowInvocation{
 		Action: action,
-		Path: "/v6.0/datasets/{dataset_id}/snapshots/{snapshot_id}",
+		Path:   "/v6.0/datasets/{dataset_id}/snapshots/{snapshot_id}",
 	}
 }
 
@@ -168,9 +165,6 @@ func (inv *ActionDatasetSnapshotShowInvocation) callAsQuery() (*ActionDatasetSna
 	return resp, err
 }
 
-
-
-
 func (inv *ActionDatasetSnapshotShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -181,4 +175,3 @@ func (inv *ActionDatasetSnapshotShowInvocation) convertMetaInputToQueryParams(re
 		}
 	}
 }
-

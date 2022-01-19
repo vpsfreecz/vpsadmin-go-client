@@ -19,7 +19,7 @@ func NewActionUserTotpDeviceCreate(client *Client) *ActionUserTotpDeviceCreate {
 // ActionUserTotpDeviceCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserTotpDeviceCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserTotpDeviceCreateMetaGlobalInput) SetIncludes(value string) *
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserTotpDeviceCreateMetaGlobalInput) SetNo(value bool) *ActionUserTotpDeviceCreateMetaGlobalInput {
 	in.No = value
@@ -115,23 +116,22 @@ func (in *ActionUserTotpDeviceCreateInput) AnySelected() bool {
 // ActionUserTotpDeviceCreateRequest is a type for the entire action request
 type ActionUserTotpDeviceCreateRequest struct {
 	TotpDevice map[string]interface{} `json:"totp_device"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta       map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserTotpDeviceCreateOutput is a type for action output parameters
 type ActionUserTotpDeviceCreateOutput struct {
-	Confirmed bool `json:"confirmed"`
-	CreatedAt string `json:"created_at"`
-	Enabled bool `json:"enabled"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	LastUseAt string `json:"last_use_at"`
+	Confirmed       bool   `json:"confirmed"`
+	CreatedAt       string `json:"created_at"`
+	Enabled         bool   `json:"enabled"`
+	Id              int64  `json:"id"`
+	Label           string `json:"label"`
+	LastUseAt       string `json:"last_use_at"`
 	ProvisioningUri string `json:"provisioning_uri"`
-	Secret string `json:"secret"`
-	UpdatedAt string `json:"updated_at"`
-	UseCount int64 `json:"use_count"`
+	Secret          string `json:"secret"`
+	UpdatedAt       string `json:"updated_at"`
+	UseCount        int64  `json:"use_count"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserTotpDeviceCreateResponse struct {
@@ -146,12 +146,11 @@ type ActionUserTotpDeviceCreateResponse struct {
 	Output *ActionUserTotpDeviceCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserTotpDeviceCreate) Prepare() *ActionUserTotpDeviceCreateInvocation {
 	return &ActionUserTotpDeviceCreateInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/totp_devices",
+		Path:   "/v6.0/users/{user_id}/totp_devices",
 	}
 }
 
@@ -200,6 +199,7 @@ func (inv *ActionUserTotpDeviceCreateInvocation) IsParameterSelected(param strin
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserTotpDeviceCreateInvocation) NewMetaInput() *ActionUserTotpDeviceCreateMetaGlobalInput {
@@ -228,7 +228,6 @@ func (inv *ActionUserTotpDeviceCreateInvocation) Call() (*ActionUserTotpDeviceCr
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserTotpDeviceCreateInvocation) callAsBody() (*ActionUserTotpDeviceCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserTotpDeviceCreateResponse{Action: inv.Action}
@@ -239,13 +238,10 @@ func (inv *ActionUserTotpDeviceCreateInvocation) callAsBody() (*ActionUserTotpDe
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserTotpDeviceCreateInvocation) makeAllInputParams() *ActionUserTotpDeviceCreateRequest {
 	return &ActionUserTotpDeviceCreateRequest{
 		TotpDevice: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:       inv.makeMetaInputParams(),
 	}
 }
 

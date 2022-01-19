@@ -19,7 +19,7 @@ func NewActionEnvironmentUpdate(client *Client) *ActionEnvironmentUpdate {
 // ActionEnvironmentUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionEnvironmentUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionEnvironmentUpdateMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionEnvironmentUpdateMetaGlobalInput) SetNo(value bool) *ActionEnvironmentUpdateMetaGlobalInput {
 	in.No = value
@@ -72,14 +73,14 @@ func (in *ActionEnvironmentUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionEnvironmentUpdateInput is a type for action input parameters
 type ActionEnvironmentUpdateInput struct {
-	CanCreateVps bool `json:"can_create_vps"`
-	CanDestroyVps bool `json:"can_destroy_vps"`
-	Description string `json:"description"`
-	Domain string `json:"domain"`
-	Label string `json:"label"`
-	MaxVpsCount int64 `json:"max_vps_count"`
-	UserIpOwnership bool `json:"user_ip_ownership"`
-	VpsLifetime int64 `json:"vps_lifetime"`
+	CanCreateVps    bool   `json:"can_create_vps"`
+	CanDestroyVps   bool   `json:"can_destroy_vps"`
+	Description     string `json:"description"`
+	Domain          string `json:"domain"`
+	Label           string `json:"label"`
+	MaxVpsCount     int64  `json:"max_vps_count"`
+	UserIpOwnership bool   `json:"user_ip_ownership"`
+	VpsLifetime     int64  `json:"vps_lifetime"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -95,6 +96,7 @@ func (in *ActionEnvironmentUpdateInput) SetCanCreateVps(value bool) *ActionEnvir
 	in._selectedParameters["CanCreateVps"] = nil
 	return in
 }
+
 // SetCanDestroyVps sets parameter CanDestroyVps to value and selects it for sending
 func (in *ActionEnvironmentUpdateInput) SetCanDestroyVps(value bool) *ActionEnvironmentUpdateInput {
 	in.CanDestroyVps = value
@@ -106,6 +108,7 @@ func (in *ActionEnvironmentUpdateInput) SetCanDestroyVps(value bool) *ActionEnvi
 	in._selectedParameters["CanDestroyVps"] = nil
 	return in
 }
+
 // SetDescription sets parameter Description to value and selects it for sending
 func (in *ActionEnvironmentUpdateInput) SetDescription(value string) *ActionEnvironmentUpdateInput {
 	in.Description = value
@@ -117,6 +120,7 @@ func (in *ActionEnvironmentUpdateInput) SetDescription(value string) *ActionEnvi
 	in._selectedParameters["Description"] = nil
 	return in
 }
+
 // SetDomain sets parameter Domain to value and selects it for sending
 func (in *ActionEnvironmentUpdateInput) SetDomain(value string) *ActionEnvironmentUpdateInput {
 	in.Domain = value
@@ -128,6 +132,7 @@ func (in *ActionEnvironmentUpdateInput) SetDomain(value string) *ActionEnvironme
 	in._selectedParameters["Domain"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionEnvironmentUpdateInput) SetLabel(value string) *ActionEnvironmentUpdateInput {
 	in.Label = value
@@ -139,6 +144,7 @@ func (in *ActionEnvironmentUpdateInput) SetLabel(value string) *ActionEnvironmen
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetMaxVpsCount sets parameter MaxVpsCount to value and selects it for sending
 func (in *ActionEnvironmentUpdateInput) SetMaxVpsCount(value int64) *ActionEnvironmentUpdateInput {
 	in.MaxVpsCount = value
@@ -150,6 +156,7 @@ func (in *ActionEnvironmentUpdateInput) SetMaxVpsCount(value int64) *ActionEnvir
 	in._selectedParameters["MaxVpsCount"] = nil
 	return in
 }
+
 // SetUserIpOwnership sets parameter UserIpOwnership to value and selects it for sending
 func (in *ActionEnvironmentUpdateInput) SetUserIpOwnership(value bool) *ActionEnvironmentUpdateInput {
 	in.UserIpOwnership = value
@@ -161,6 +168,7 @@ func (in *ActionEnvironmentUpdateInput) SetUserIpOwnership(value bool) *ActionEn
 	in._selectedParameters["UserIpOwnership"] = nil
 	return in
 }
+
 // SetVpsLifetime sets parameter VpsLifetime to value and selects it for sending
 func (in *ActionEnvironmentUpdateInput) SetVpsLifetime(value int64) *ActionEnvironmentUpdateInput {
 	in.VpsLifetime = value
@@ -199,22 +207,21 @@ func (in *ActionEnvironmentUpdateInput) AnySelected() bool {
 // ActionEnvironmentUpdateRequest is a type for the entire action request
 type ActionEnvironmentUpdateRequest struct {
 	Environment map[string]interface{} `json:"environment"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta        map[string]interface{} `json:"_meta"`
 }
 
 // ActionEnvironmentUpdateOutput is a type for action output parameters
 type ActionEnvironmentUpdateOutput struct {
-	CanCreateVps bool `json:"can_create_vps"`
-	CanDestroyVps bool `json:"can_destroy_vps"`
-	Description string `json:"description"`
-	Domain string `json:"domain"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	MaxVpsCount int64 `json:"max_vps_count"`
-	UserIpOwnership bool `json:"user_ip_ownership"`
-	VpsLifetime int64 `json:"vps_lifetime"`
+	CanCreateVps    bool   `json:"can_create_vps"`
+	CanDestroyVps   bool   `json:"can_destroy_vps"`
+	Description     string `json:"description"`
+	Domain          string `json:"domain"`
+	Id              int64  `json:"id"`
+	Label           string `json:"label"`
+	MaxVpsCount     int64  `json:"max_vps_count"`
+	UserIpOwnership bool   `json:"user_ip_ownership"`
+	VpsLifetime     int64  `json:"vps_lifetime"`
 }
-
 
 // Type for action response, including envelope
 type ActionEnvironmentUpdateResponse struct {
@@ -229,12 +236,11 @@ type ActionEnvironmentUpdateResponse struct {
 	Output *ActionEnvironmentUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionEnvironmentUpdate) Prepare() *ActionEnvironmentUpdateInvocation {
 	return &ActionEnvironmentUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/environments/{environment_id}",
+		Path:   "/v6.0/environments/{environment_id}",
 	}
 }
 
@@ -283,6 +289,7 @@ func (inv *ActionEnvironmentUpdateInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionEnvironmentUpdateInvocation) NewMetaInput() *ActionEnvironmentUpdateMetaGlobalInput {
@@ -311,7 +318,6 @@ func (inv *ActionEnvironmentUpdateInvocation) Call() (*ActionEnvironmentUpdateRe
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionEnvironmentUpdateInvocation) callAsBody() (*ActionEnvironmentUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionEnvironmentUpdateResponse{Action: inv.Action}
@@ -322,13 +328,10 @@ func (inv *ActionEnvironmentUpdateInvocation) callAsBody() (*ActionEnvironmentUp
 	return resp, err
 }
 
-
-
-
 func (inv *ActionEnvironmentUpdateInvocation) makeAllInputParams() *ActionEnvironmentUpdateRequest {
 	return &ActionEnvironmentUpdateRequest{
 		Environment: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:        inv.makeMetaInputParams(),
 	}
 }
 

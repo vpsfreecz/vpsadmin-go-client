@@ -18,9 +18,9 @@ func NewActionVpsStatusIndex(client *Client) *ActionVpsStatusIndex {
 
 // ActionVpsStatusIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsStatusIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionVpsStatusIndexMetaGlobalInput) SetCount(value bool) *ActionVpsSt
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsStatusIndexMetaGlobalInput) SetIncludes(value string) *ActionVpsStatusIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionVpsStatusIndexMetaGlobalInput) SetIncludes(value string) *Action
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsStatusIndexMetaGlobalInput) SetNo(value bool) *ActionVpsStatusIndexMetaGlobalInput {
 	in.No = value
@@ -84,12 +86,12 @@ func (in *ActionVpsStatusIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsStatusIndexInput is a type for action input parameters
 type ActionVpsStatusIndexInput struct {
-	From string `json:"from"`
-	IsRunning bool `json:"is_running"`
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
-	Status bool `json:"status"`
-	To string `json:"to"`
+	From      string `json:"from"`
+	IsRunning bool   `json:"is_running"`
+	Limit     int64  `json:"limit"`
+	Offset    int64  `json:"offset"`
+	Status    bool   `json:"status"`
+	To        string `json:"to"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -105,6 +107,7 @@ func (in *ActionVpsStatusIndexInput) SetFrom(value string) *ActionVpsStatusIndex
 	in._selectedParameters["From"] = nil
 	return in
 }
+
 // SetIsRunning sets parameter IsRunning to value and selects it for sending
 func (in *ActionVpsStatusIndexInput) SetIsRunning(value bool) *ActionVpsStatusIndexInput {
 	in.IsRunning = value
@@ -116,6 +119,7 @@ func (in *ActionVpsStatusIndexInput) SetIsRunning(value bool) *ActionVpsStatusIn
 	in._selectedParameters["IsRunning"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionVpsStatusIndexInput) SetLimit(value int64) *ActionVpsStatusIndexInput {
 	in.Limit = value
@@ -127,6 +131,7 @@ func (in *ActionVpsStatusIndexInput) SetLimit(value int64) *ActionVpsStatusIndex
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionVpsStatusIndexInput) SetOffset(value int64) *ActionVpsStatusIndexInput {
 	in.Offset = value
@@ -138,6 +143,7 @@ func (in *ActionVpsStatusIndexInput) SetOffset(value int64) *ActionVpsStatusInde
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetStatus sets parameter Status to value and selects it for sending
 func (in *ActionVpsStatusIndexInput) SetStatus(value bool) *ActionVpsStatusIndexInput {
 	in.Status = value
@@ -149,6 +155,7 @@ func (in *ActionVpsStatusIndexInput) SetStatus(value bool) *ActionVpsStatusIndex
 	in._selectedParameters["Status"] = nil
 	return in
 }
+
 // SetTo sets parameter To to value and selects it for sending
 func (in *ActionVpsStatusIndexInput) SetTo(value string) *ActionVpsStatusIndexInput {
 	in.To = value
@@ -184,31 +191,29 @@ func (in *ActionVpsStatusIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionVpsStatusIndexOutput is a type for action output parameters
 type ActionVpsStatusIndexOutput struct {
-	CpuIdle float64 `json:"cpu_idle"`
-	CpuIowait float64 `json:"cpu_iowait"`
-	CpuIrq float64 `json:"cpu_irq"`
-	CpuNice float64 `json:"cpu_nice"`
-	CpuSoftirq float64 `json:"cpu_softirq"`
-	CpuSystem float64 `json:"cpu_system"`
-	CpuUser float64 `json:"cpu_user"`
-	Cpus int64 `json:"cpus"`
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	InRescueMode bool `json:"in_rescue_mode"`
-	IsRunning bool `json:"is_running"`
-	Loadavg float64 `json:"loadavg"`
-	ProcessCount int64 `json:"process_count"`
-	Status bool `json:"status"`
-	TotalMemory int64 `json:"total_memory"`
-	TotalSwap int64 `json:"total_swap"`
-	Uptime int64 `json:"uptime"`
-	UsedMemory int64 `json:"used_memory"`
-	UsedSwap int64 `json:"used_swap"`
+	CpuIdle      float64 `json:"cpu_idle"`
+	CpuIowait    float64 `json:"cpu_iowait"`
+	CpuIrq       float64 `json:"cpu_irq"`
+	CpuNice      float64 `json:"cpu_nice"`
+	CpuSoftirq   float64 `json:"cpu_softirq"`
+	CpuSystem    float64 `json:"cpu_system"`
+	CpuUser      float64 `json:"cpu_user"`
+	Cpus         int64   `json:"cpus"`
+	CreatedAt    string  `json:"created_at"`
+	Id           int64   `json:"id"`
+	InRescueMode bool    `json:"in_rescue_mode"`
+	IsRunning    bool    `json:"is_running"`
+	Loadavg      float64 `json:"loadavg"`
+	ProcessCount int64   `json:"process_count"`
+	Status       bool    `json:"status"`
+	TotalMemory  int64   `json:"total_memory"`
+	TotalSwap    int64   `json:"total_swap"`
+	Uptime       int64   `json:"uptime"`
+	UsedMemory   int64   `json:"used_memory"`
+	UsedSwap     int64   `json:"used_swap"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsStatusIndexResponse struct {
@@ -223,12 +228,11 @@ type ActionVpsStatusIndexResponse struct {
 	Output []*ActionVpsStatusIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsStatusIndex) Prepare() *ActionVpsStatusIndexInvocation {
 	return &ActionVpsStatusIndexInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/statuses",
+		Path:   "/v6.0/vpses/{vps_id}/statuses",
 	}
 }
 
@@ -277,6 +281,7 @@ func (inv *ActionVpsStatusIndexInvocation) IsParameterSelected(param string) boo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsStatusIndexInvocation) NewMetaInput() *ActionVpsStatusIndexMetaGlobalInput {
@@ -317,8 +322,6 @@ func (inv *ActionVpsStatusIndexInvocation) callAsQuery() (*ActionVpsStatusIndexR
 	return resp, err
 }
 
-
-
 func (inv *ActionVpsStatusIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("From") {
@@ -355,4 +358,3 @@ func (inv *ActionVpsStatusIndexInvocation) convertMetaInputToQueryParams(ret map
 		}
 	}
 }
-

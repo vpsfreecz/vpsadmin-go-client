@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionHostIpAddressIndex is a type for action Host_ip_address#Index
 type ActionHostIpAddressIndex struct {
@@ -17,9 +16,9 @@ func NewActionHostIpAddressIndex(client *Client) *ActionHostIpAddressIndex {
 
 // ActionHostIpAddressIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionHostIpAddressIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionHostIpAddressIndexMetaGlobalInput) SetCount(value bool) *ActionH
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionHostIpAddressIndexMetaGlobalInput) SetIncludes(value string) *ActionHostIpAddressIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionHostIpAddressIndexMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionHostIpAddressIndexMetaGlobalInput) SetNo(value bool) *ActionHostIpAddressIndexMetaGlobalInput {
 	in.No = value
@@ -83,24 +84,24 @@ func (in *ActionHostIpAddressIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionHostIpAddressIndexInput is a type for action input parameters
 type ActionHostIpAddressIndexInput struct {
-	Addr string `json:"addr"`
-	Assigned bool `json:"assigned"`
-	IpAddress int64 `json:"ip_address"`
-	Limit int64 `json:"limit"`
-	Location int64 `json:"location"`
-	MaxRx int64 `json:"max_rx"`
-	MaxTx int64 `json:"max_tx"`
-	Network int64 `json:"network"`
-	NetworkInterface int64 `json:"network_interface"`
-	Offset int64 `json:"offset"`
-	Order string `json:"order"`
-	Prefix int64 `json:"prefix"`
-	Purpose string `json:"purpose"`
-	Role string `json:"role"`
-	Size int64 `json:"size"`
-	User int64 `json:"user"`
-	Version int64 `json:"version"`
-	Vps int64 `json:"vps"`
+	Addr             string `json:"addr"`
+	Assigned         bool   `json:"assigned"`
+	IpAddress        int64  `json:"ip_address"`
+	Limit            int64  `json:"limit"`
+	Location         int64  `json:"location"`
+	MaxRx            int64  `json:"max_rx"`
+	MaxTx            int64  `json:"max_tx"`
+	Network          int64  `json:"network"`
+	NetworkInterface int64  `json:"network_interface"`
+	Offset           int64  `json:"offset"`
+	Order            string `json:"order"`
+	Prefix           int64  `json:"prefix"`
+	Purpose          string `json:"purpose"`
+	Role             string `json:"role"`
+	Size             int64  `json:"size"`
+	User             int64  `json:"user"`
+	Version          int64  `json:"version"`
+	Vps              int64  `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -116,6 +117,7 @@ func (in *ActionHostIpAddressIndexInput) SetAddr(value string) *ActionHostIpAddr
 	in._selectedParameters["Addr"] = nil
 	return in
 }
+
 // SetAssigned sets parameter Assigned to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetAssigned(value bool) *ActionHostIpAddressIndexInput {
 	in.Assigned = value
@@ -127,6 +129,7 @@ func (in *ActionHostIpAddressIndexInput) SetAssigned(value bool) *ActionHostIpAd
 	in._selectedParameters["Assigned"] = nil
 	return in
 }
+
 // SetIpAddress sets parameter IpAddress to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetIpAddress(value int64) *ActionHostIpAddressIndexInput {
 	in.IpAddress = value
@@ -138,6 +141,7 @@ func (in *ActionHostIpAddressIndexInput) SetIpAddress(value int64) *ActionHostIp
 	in._selectedParameters["IpAddress"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetLimit(value int64) *ActionHostIpAddressIndexInput {
 	in.Limit = value
@@ -149,6 +153,7 @@ func (in *ActionHostIpAddressIndexInput) SetLimit(value int64) *ActionHostIpAddr
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetLocation(value int64) *ActionHostIpAddressIndexInput {
 	in.Location = value
@@ -160,6 +165,7 @@ func (in *ActionHostIpAddressIndexInput) SetLocation(value int64) *ActionHostIpA
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetMaxRx sets parameter MaxRx to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetMaxRx(value int64) *ActionHostIpAddressIndexInput {
 	in.MaxRx = value
@@ -171,6 +177,7 @@ func (in *ActionHostIpAddressIndexInput) SetMaxRx(value int64) *ActionHostIpAddr
 	in._selectedParameters["MaxRx"] = nil
 	return in
 }
+
 // SetMaxTx sets parameter MaxTx to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetMaxTx(value int64) *ActionHostIpAddressIndexInput {
 	in.MaxTx = value
@@ -182,6 +189,7 @@ func (in *ActionHostIpAddressIndexInput) SetMaxTx(value int64) *ActionHostIpAddr
 	in._selectedParameters["MaxTx"] = nil
 	return in
 }
+
 // SetNetwork sets parameter Network to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetNetwork(value int64) *ActionHostIpAddressIndexInput {
 	in.Network = value
@@ -193,6 +201,7 @@ func (in *ActionHostIpAddressIndexInput) SetNetwork(value int64) *ActionHostIpAd
 	in._selectedParameters["Network"] = nil
 	return in
 }
+
 // SetNetworkInterface sets parameter NetworkInterface to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetNetworkInterface(value int64) *ActionHostIpAddressIndexInput {
 	in.NetworkInterface = value
@@ -204,6 +213,7 @@ func (in *ActionHostIpAddressIndexInput) SetNetworkInterface(value int64) *Actio
 	in._selectedParameters["NetworkInterface"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetOffset(value int64) *ActionHostIpAddressIndexInput {
 	in.Offset = value
@@ -215,6 +225,7 @@ func (in *ActionHostIpAddressIndexInput) SetOffset(value int64) *ActionHostIpAdd
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetOrder sets parameter Order to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetOrder(value string) *ActionHostIpAddressIndexInput {
 	in.Order = value
@@ -226,6 +237,7 @@ func (in *ActionHostIpAddressIndexInput) SetOrder(value string) *ActionHostIpAdd
 	in._selectedParameters["Order"] = nil
 	return in
 }
+
 // SetPrefix sets parameter Prefix to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetPrefix(value int64) *ActionHostIpAddressIndexInput {
 	in.Prefix = value
@@ -237,6 +249,7 @@ func (in *ActionHostIpAddressIndexInput) SetPrefix(value int64) *ActionHostIpAdd
 	in._selectedParameters["Prefix"] = nil
 	return in
 }
+
 // SetPurpose sets parameter Purpose to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetPurpose(value string) *ActionHostIpAddressIndexInput {
 	in.Purpose = value
@@ -248,6 +261,7 @@ func (in *ActionHostIpAddressIndexInput) SetPurpose(value string) *ActionHostIpA
 	in._selectedParameters["Purpose"] = nil
 	return in
 }
+
 // SetRole sets parameter Role to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetRole(value string) *ActionHostIpAddressIndexInput {
 	in.Role = value
@@ -259,6 +273,7 @@ func (in *ActionHostIpAddressIndexInput) SetRole(value string) *ActionHostIpAddr
 	in._selectedParameters["Role"] = nil
 	return in
 }
+
 // SetSize sets parameter Size to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetSize(value int64) *ActionHostIpAddressIndexInput {
 	in.Size = value
@@ -270,6 +285,7 @@ func (in *ActionHostIpAddressIndexInput) SetSize(value int64) *ActionHostIpAddre
 	in._selectedParameters["Size"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetUser(value int64) *ActionHostIpAddressIndexInput {
 	in.User = value
@@ -281,6 +297,7 @@ func (in *ActionHostIpAddressIndexInput) SetUser(value int64) *ActionHostIpAddre
 	in._selectedParameters["User"] = nil
 	return in
 }
+
 // SetVersion sets parameter Version to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetVersion(value int64) *ActionHostIpAddressIndexInput {
 	in.Version = value
@@ -292,6 +309,7 @@ func (in *ActionHostIpAddressIndexInput) SetVersion(value int64) *ActionHostIpAd
 	in._selectedParameters["Version"] = nil
 	return in
 }
+
 // SetVps sets parameter Vps to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetVps(value int64) *ActionHostIpAddressIndexInput {
 	in.Vps = value
@@ -327,15 +345,13 @@ func (in *ActionHostIpAddressIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionHostIpAddressIndexOutput is a type for action output parameters
 type ActionHostIpAddressIndexOutput struct {
-	Addr string `json:"addr"`
-	Assigned bool `json:"assigned"`
-	Id int64 `json:"id"`
+	Addr      string                     `json:"addr"`
+	Assigned  bool                       `json:"assigned"`
+	Id        int64                      `json:"id"`
 	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
 }
-
 
 // Type for action response, including envelope
 type ActionHostIpAddressIndexResponse struct {
@@ -350,12 +366,11 @@ type ActionHostIpAddressIndexResponse struct {
 	Output []*ActionHostIpAddressIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionHostIpAddressIndex) Prepare() *ActionHostIpAddressIndexInvocation {
 	return &ActionHostIpAddressIndexInvocation{
 		Action: action,
-		Path: "/v6.0/host_ip_addresses",
+		Path:   "/v6.0/host_ip_addresses",
 	}
 }
 
@@ -371,7 +386,6 @@ type ActionHostIpAddressIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionHostIpAddressIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionHostIpAddressIndexInvocation) NewInput() *ActionHostIpAddressIndexInput {
@@ -394,6 +408,7 @@ func (inv *ActionHostIpAddressIndexInvocation) IsParameterSelected(param string)
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionHostIpAddressIndexInvocation) NewMetaInput() *ActionHostIpAddressIndexMetaGlobalInput {
@@ -433,8 +448,6 @@ func (inv *ActionHostIpAddressIndexInvocation) callAsQuery() (*ActionHostIpAddre
 	}
 	return resp, err
 }
-
-
 
 func (inv *ActionHostIpAddressIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
@@ -508,4 +521,3 @@ func (inv *ActionHostIpAddressIndexInvocation) convertMetaInputToQueryParams(ret
 		}
 	}
 }
-

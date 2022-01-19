@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // AuthTokenActionTokenRequest is a type for action Token#Request
 type AuthTokenActionTokenRequest struct {
@@ -59,10 +58,10 @@ func (in *AuthTokenActionTokenRequestMetaGlobalInput) AnySelected() bool {
 
 // AuthTokenActionTokenRequestInput is a type for action input parameters
 type AuthTokenActionTokenRequestInput struct {
-	Interval int64 `json:"interval"`
+	Interval int64  `json:"interval"`
 	Lifetime string `json:"lifetime"`
 	Password string `json:"password"`
-	User string `json:"user"`
+	User     string `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -78,6 +77,7 @@ func (in *AuthTokenActionTokenRequestInput) SetInterval(value int64) *AuthTokenA
 	in._selectedParameters["Interval"] = nil
 	return in
 }
+
 // SetLifetime sets parameter Lifetime to value and selects it for sending
 func (in *AuthTokenActionTokenRequestInput) SetLifetime(value string) *AuthTokenActionTokenRequestInput {
 	in.Lifetime = value
@@ -89,6 +89,7 @@ func (in *AuthTokenActionTokenRequestInput) SetLifetime(value string) *AuthToken
 	in._selectedParameters["Lifetime"] = nil
 	return in
 }
+
 // SetPassword sets parameter Password to value and selects it for sending
 func (in *AuthTokenActionTokenRequestInput) SetPassword(value string) *AuthTokenActionTokenRequestInput {
 	in.Password = value
@@ -100,6 +101,7 @@ func (in *AuthTokenActionTokenRequestInput) SetPassword(value string) *AuthToken
 	in._selectedParameters["Password"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *AuthTokenActionTokenRequestInput) SetUser(value string) *AuthTokenActionTokenRequestInput {
 	in.User = value
@@ -138,17 +140,16 @@ func (in *AuthTokenActionTokenRequestInput) AnySelected() bool {
 // AuthTokenActionTokenRequestRequest is a type for the entire action request
 type AuthTokenActionTokenRequestRequest struct {
 	Token map[string]interface{} `json:"token"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta  map[string]interface{} `json:"_meta"`
 }
 
 // AuthTokenActionTokenRequestOutput is a type for action output parameters
 type AuthTokenActionTokenRequestOutput struct {
-	Complete bool `json:"complete"`
+	Complete   bool   `json:"complete"`
 	NextAction string `json:"next_action"`
-	Token string `json:"token"`
-	ValidTo string `json:"valid_to"`
+	Token      string `json:"token"`
+	ValidTo    string `json:"valid_to"`
 }
-
 
 // Type for action response, including envelope
 type AuthTokenActionTokenRequestResponse struct {
@@ -163,12 +164,11 @@ type AuthTokenActionTokenRequestResponse struct {
 	Output *AuthTokenActionTokenRequestOutput
 }
 
-
 // Prepare the action for invocation
 func (action *AuthTokenActionTokenRequest) Prepare() *AuthTokenActionTokenRequestInvocation {
 	return &AuthTokenActionTokenRequestInvocation{
 		Action: action,
-		Path: "/_auth/token/tokens",
+		Path:   "/_auth/token/tokens",
 	}
 }
 
@@ -184,7 +184,6 @@ type AuthTokenActionTokenRequestInvocation struct {
 	// Global meta input parameters
 	MetaInput *AuthTokenActionTokenRequestMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *AuthTokenActionTokenRequestInvocation) NewInput() *AuthTokenActionTokenRequestInput {
@@ -207,6 +206,7 @@ func (inv *AuthTokenActionTokenRequestInvocation) IsParameterSelected(param stri
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *AuthTokenActionTokenRequestInvocation) NewMetaInput() *AuthTokenActionTokenRequestMetaGlobalInput {
@@ -235,7 +235,6 @@ func (inv *AuthTokenActionTokenRequestInvocation) Call() (*AuthTokenActionTokenR
 	return inv.callAsBody()
 }
 
-
 func (inv *AuthTokenActionTokenRequestInvocation) callAsBody() (*AuthTokenActionTokenRequestResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &AuthTokenActionTokenRequestResponse{Action: inv.Action}
@@ -246,13 +245,10 @@ func (inv *AuthTokenActionTokenRequestInvocation) callAsBody() (*AuthTokenAction
 	return resp, err
 }
 
-
-
-
 func (inv *AuthTokenActionTokenRequestInvocation) makeAllInputParams() *AuthTokenActionTokenRequestRequest {
 	return &AuthTokenActionTokenRequestRequest{
 		Token: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:  inv.makeMetaInputParams(),
 	}
 }
 

@@ -19,7 +19,7 @@ func NewActionVpsDeployPublicKey(client *Client) *ActionVpsDeployPublicKey {
 // ActionVpsDeployPublicKeyMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsDeployPublicKeyMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsDeployPublicKeyMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsDeployPublicKeyMetaGlobalInput) SetNo(value bool) *ActionVpsDeployPublicKeyMetaGlobalInput {
 	in.No = value
@@ -114,10 +115,9 @@ func (in *ActionVpsDeployPublicKeyInput) AnySelected() bool {
 
 // ActionVpsDeployPublicKeyRequest is a type for the entire action request
 type ActionVpsDeployPublicKeyRequest struct {
-	Vps map[string]interface{} `json:"vps"`
+	Vps  map[string]interface{} `json:"vps"`
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionVpsDeployPublicKeyMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsDeployPublicKeyMetaGlobalOutput struct {
@@ -135,12 +135,11 @@ type ActionVpsDeployPublicKeyResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsDeployPublicKey) Prepare() *ActionVpsDeployPublicKeyInvocation {
 	return &ActionVpsDeployPublicKeyInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/deploy_public_key",
+		Path:   "/v6.0/vpses/{vps_id}/deploy_public_key",
 	}
 }
 
@@ -189,6 +188,7 @@ func (inv *ActionVpsDeployPublicKeyInvocation) IsParameterSelected(param string)
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsDeployPublicKeyInvocation) NewMetaInput() *ActionVpsDeployPublicKeyMetaGlobalInput {
@@ -216,7 +216,6 @@ func (inv *ActionVpsDeployPublicKeyInvocation) IsMetaParameterSelected(param str
 func (inv *ActionVpsDeployPublicKeyInvocation) Call() (*ActionVpsDeployPublicKeyResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsDeployPublicKeyInvocation) callAsBody() (*ActionVpsDeployPublicKeyResponse, error) {
 	input := inv.makeAllInputParams()
@@ -274,11 +273,11 @@ func (resp *ActionVpsDeployPublicKeyResponse) WatchOperation(timeout float64, up
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -301,11 +300,9 @@ func (resp *ActionVpsDeployPublicKeyResponse) CancelOperation() (*ActionActionSt
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsDeployPublicKeyInvocation) makeAllInputParams() *ActionVpsDeployPublicKeyRequest {
 	return &ActionVpsDeployPublicKeyRequest{
-		Vps: inv.makeInputParams(),
+		Vps:  inv.makeInputParams(),
 		Meta: inv.makeMetaInputParams(),
 	}
 }

@@ -13,7 +13,7 @@ func NewResourcePaymentStats(client *Client) *ResourcePaymentStats {
 	actionEstimateIncome := NewActionPaymentStatsEstimateIncome(client)
 
 	return &ResourcePaymentStats{
-		Client: client,
+		Client:         client,
 		EstimateIncome: actionEstimateIncome,
 	}
 }

@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionUserAccountIndex is a type for action User_account#Index
 type ActionUserAccountIndex struct {
@@ -17,9 +16,9 @@ func NewActionUserAccountIndex(client *Client) *ActionUserAccountIndex {
 
 // ActionUserAccountIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserAccountIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionUserAccountIndexMetaGlobalInput) SetCount(value bool) *ActionUse
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserAccountIndexMetaGlobalInput) SetIncludes(value string) *ActionUserAccountIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionUserAccountIndexMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserAccountIndexMetaGlobalInput) SetNo(value bool) *ActionUserAccountIndexMetaGlobalInput {
 	in.No = value
@@ -83,7 +84,7 @@ func (in *ActionUserAccountIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserAccountIndexInput is a type for action input parameters
 type ActionUserAccountIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -100,6 +101,7 @@ func (in *ActionUserAccountIndexInput) SetLimit(value int64) *ActionUserAccountI
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionUserAccountIndexInput) SetOffset(value int64) *ActionUserAccountIndexInput {
 	in.Offset = value
@@ -135,14 +137,12 @@ func (in *ActionUserAccountIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserAccountIndexOutput is a type for action output parameters
 type ActionUserAccountIndexOutput struct {
-	Id int64 `json:"id"`
-	MonthlyPayment int64 `json:"monthly_payment"`
-	PaidUntil string `json:"paid_until"`
+	Id             int64  `json:"id"`
+	MonthlyPayment int64  `json:"monthly_payment"`
+	PaidUntil      string `json:"paid_until"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserAccountIndexResponse struct {
@@ -157,12 +157,11 @@ type ActionUserAccountIndexResponse struct {
 	Output []*ActionUserAccountIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserAccountIndex) Prepare() *ActionUserAccountIndexInvocation {
 	return &ActionUserAccountIndexInvocation{
 		Action: action,
-		Path: "/v6.0/user_accounts",
+		Path:   "/v6.0/user_accounts",
 	}
 }
 
@@ -178,7 +177,6 @@ type ActionUserAccountIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionUserAccountIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionUserAccountIndexInvocation) NewInput() *ActionUserAccountIndexInput {
@@ -201,6 +199,7 @@ func (inv *ActionUserAccountIndexInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserAccountIndexInvocation) NewMetaInput() *ActionUserAccountIndexMetaGlobalInput {
@@ -241,8 +240,6 @@ func (inv *ActionUserAccountIndexInvocation) callAsQuery() (*ActionUserAccountIn
 	return resp, err
 }
 
-
-
 func (inv *ActionUserAccountIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -267,4 +264,3 @@ func (inv *ActionUserAccountIndexInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

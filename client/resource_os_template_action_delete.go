@@ -19,7 +19,7 @@ func NewActionOsTemplateDelete(client *Client) *ActionOsTemplateDelete {
 // ActionOsTemplateDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionOsTemplateDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOsTemplateDeleteMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOsTemplateDeleteMetaGlobalInput) SetNo(value bool) *ActionOsTemplateDeleteMetaGlobalInput {
 	in.No = value
@@ -70,13 +71,10 @@ func (in *ActionOsTemplateDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionOsTemplateDeleteRequest is a type for the entire action request
 type ActionOsTemplateDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionOsTemplateDeleteResponse struct {
@@ -84,12 +82,11 @@ type ActionOsTemplateDeleteResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOsTemplateDelete) Prepare() *ActionOsTemplateDeleteInvocation {
 	return &ActionOsTemplateDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/os_templates/{os_template_id}",
+		Path:   "/v6.0/os_templates/{os_template_id}",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionOsTemplateDeleteInvocation) Call() (*ActionOsTemplateDeleteResp
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionOsTemplateDeleteInvocation) callAsBody() (*ActionOsTemplateDeleteResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionOsTemplateDeleteResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionOsTemplateDeleteInvocation) callAsBody() (*ActionOsTemplateDele
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOsTemplateDeleteInvocation) makeAllInputParams() *ActionOsTemplateDeleteRequest {
 	return &ActionOsTemplateDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionOsTemplateDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionNodeCreate is a type for action Node#Create
 type ActionNodeCreate struct {
@@ -18,7 +17,7 @@ func NewActionNodeCreate(client *Client) *ActionNodeCreate {
 // ActionNodeCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionNodeCreateMetaGlobalInput) SetIncludes(value string) *ActionNode
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNodeCreateMetaGlobalInput) SetNo(value bool) *ActionNodeCreateMetaGlobalInput {
 	in.No = value
@@ -71,21 +71,21 @@ func (in *ActionNodeCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeCreateInput is a type for action input parameters
 type ActionNodeCreateInput struct {
-	Cpus int64 `json:"cpus"`
+	Cpus           int64  `json:"cpus"`
 	HypervisorType string `json:"hypervisor_type"`
-	Id int64 `json:"id"`
-	IpAddr string `json:"ip_addr"`
-	Location int64 `json:"location"`
-	Maintenance bool `json:"maintenance"`
-	MaxRx int64 `json:"max_rx"`
-	MaxTx int64 `json:"max_tx"`
-	MaxVps int64 `json:"max_vps"`
-	Name string `json:"name"`
-	NetInterface string `json:"net_interface"`
-	TotalMemory int64 `json:"total_memory"`
-	TotalSwap int64 `json:"total_swap"`
-	Type string `json:"type"`
-	VePrivate string `json:"ve_private"`
+	Id             int64  `json:"id"`
+	IpAddr         string `json:"ip_addr"`
+	Location       int64  `json:"location"`
+	Maintenance    bool   `json:"maintenance"`
+	MaxRx          int64  `json:"max_rx"`
+	MaxTx          int64  `json:"max_tx"`
+	MaxVps         int64  `json:"max_vps"`
+	Name           string `json:"name"`
+	NetInterface   string `json:"net_interface"`
+	TotalMemory    int64  `json:"total_memory"`
+	TotalSwap      int64  `json:"total_swap"`
+	Type           string `json:"type"`
+	VePrivate      string `json:"ve_private"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -101,6 +101,7 @@ func (in *ActionNodeCreateInput) SetCpus(value int64) *ActionNodeCreateInput {
 	in._selectedParameters["Cpus"] = nil
 	return in
 }
+
 // SetHypervisorType sets parameter HypervisorType to value and selects it for sending
 func (in *ActionNodeCreateInput) SetHypervisorType(value string) *ActionNodeCreateInput {
 	in.HypervisorType = value
@@ -112,6 +113,7 @@ func (in *ActionNodeCreateInput) SetHypervisorType(value string) *ActionNodeCrea
 	in._selectedParameters["HypervisorType"] = nil
 	return in
 }
+
 // SetId sets parameter Id to value and selects it for sending
 func (in *ActionNodeCreateInput) SetId(value int64) *ActionNodeCreateInput {
 	in.Id = value
@@ -123,6 +125,7 @@ func (in *ActionNodeCreateInput) SetId(value int64) *ActionNodeCreateInput {
 	in._selectedParameters["Id"] = nil
 	return in
 }
+
 // SetIpAddr sets parameter IpAddr to value and selects it for sending
 func (in *ActionNodeCreateInput) SetIpAddr(value string) *ActionNodeCreateInput {
 	in.IpAddr = value
@@ -134,6 +137,7 @@ func (in *ActionNodeCreateInput) SetIpAddr(value string) *ActionNodeCreateInput 
 	in._selectedParameters["IpAddr"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionNodeCreateInput) SetLocation(value int64) *ActionNodeCreateInput {
 	in.Location = value
@@ -145,6 +149,7 @@ func (in *ActionNodeCreateInput) SetLocation(value int64) *ActionNodeCreateInput
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetMaintenance sets parameter Maintenance to value and selects it for sending
 func (in *ActionNodeCreateInput) SetMaintenance(value bool) *ActionNodeCreateInput {
 	in.Maintenance = value
@@ -156,6 +161,7 @@ func (in *ActionNodeCreateInput) SetMaintenance(value bool) *ActionNodeCreateInp
 	in._selectedParameters["Maintenance"] = nil
 	return in
 }
+
 // SetMaxRx sets parameter MaxRx to value and selects it for sending
 func (in *ActionNodeCreateInput) SetMaxRx(value int64) *ActionNodeCreateInput {
 	in.MaxRx = value
@@ -167,6 +173,7 @@ func (in *ActionNodeCreateInput) SetMaxRx(value int64) *ActionNodeCreateInput {
 	in._selectedParameters["MaxRx"] = nil
 	return in
 }
+
 // SetMaxTx sets parameter MaxTx to value and selects it for sending
 func (in *ActionNodeCreateInput) SetMaxTx(value int64) *ActionNodeCreateInput {
 	in.MaxTx = value
@@ -178,6 +185,7 @@ func (in *ActionNodeCreateInput) SetMaxTx(value int64) *ActionNodeCreateInput {
 	in._selectedParameters["MaxTx"] = nil
 	return in
 }
+
 // SetMaxVps sets parameter MaxVps to value and selects it for sending
 func (in *ActionNodeCreateInput) SetMaxVps(value int64) *ActionNodeCreateInput {
 	in.MaxVps = value
@@ -189,6 +197,7 @@ func (in *ActionNodeCreateInput) SetMaxVps(value int64) *ActionNodeCreateInput {
 	in._selectedParameters["MaxVps"] = nil
 	return in
 }
+
 // SetName sets parameter Name to value and selects it for sending
 func (in *ActionNodeCreateInput) SetName(value string) *ActionNodeCreateInput {
 	in.Name = value
@@ -200,6 +209,7 @@ func (in *ActionNodeCreateInput) SetName(value string) *ActionNodeCreateInput {
 	in._selectedParameters["Name"] = nil
 	return in
 }
+
 // SetNetInterface sets parameter NetInterface to value and selects it for sending
 func (in *ActionNodeCreateInput) SetNetInterface(value string) *ActionNodeCreateInput {
 	in.NetInterface = value
@@ -211,6 +221,7 @@ func (in *ActionNodeCreateInput) SetNetInterface(value string) *ActionNodeCreate
 	in._selectedParameters["NetInterface"] = nil
 	return in
 }
+
 // SetTotalMemory sets parameter TotalMemory to value and selects it for sending
 func (in *ActionNodeCreateInput) SetTotalMemory(value int64) *ActionNodeCreateInput {
 	in.TotalMemory = value
@@ -222,6 +233,7 @@ func (in *ActionNodeCreateInput) SetTotalMemory(value int64) *ActionNodeCreateIn
 	in._selectedParameters["TotalMemory"] = nil
 	return in
 }
+
 // SetTotalSwap sets parameter TotalSwap to value and selects it for sending
 func (in *ActionNodeCreateInput) SetTotalSwap(value int64) *ActionNodeCreateInput {
 	in.TotalSwap = value
@@ -233,6 +245,7 @@ func (in *ActionNodeCreateInput) SetTotalSwap(value int64) *ActionNodeCreateInpu
 	in._selectedParameters["TotalSwap"] = nil
 	return in
 }
+
 // SetType sets parameter Type to value and selects it for sending
 func (in *ActionNodeCreateInput) SetType(value string) *ActionNodeCreateInput {
 	in.Type = value
@@ -244,6 +257,7 @@ func (in *ActionNodeCreateInput) SetType(value string) *ActionNodeCreateInput {
 	in._selectedParameters["Type"] = nil
 	return in
 }
+
 // SetVePrivate sets parameter VePrivate to value and selects it for sending
 func (in *ActionNodeCreateInput) SetVePrivate(value string) *ActionNodeCreateInput {
 	in.VePrivate = value
@@ -287,42 +301,42 @@ type ActionNodeCreateRequest struct {
 
 // ActionNodeCreateOutput is a type for action output parameters
 type ActionNodeCreateOutput struct {
-	Active bool `json:"active"`
-	ArcC int64 `json:"arc_c"`
-	ArcCMax int64 `json:"arc_c_max"`
-	ArcHitpercent int64 `json:"arc_hitpercent"`
-	ArcSize int64 `json:"arc_size"`
-	CpuGuest float64 `json:"cpu_guest"`
-	CpuIdle float64 `json:"cpu_idle"`
-	CpuIowait float64 `json:"cpu_iowait"`
-	CpuIrq float64 `json:"cpu_irq"`
-	CpuNice float64 `json:"cpu_nice"`
-	CpuSoftirq float64 `json:"cpu_softirq"`
-	CpuSystem float64 `json:"cpu_system"`
-	CpuUser float64 `json:"cpu_user"`
-	Cpus int64 `json:"cpus"`
-	DomainName string `json:"domain_name"`
-	HypervisorType string `json:"hypervisor_type"`
-	Id int64 `json:"id"`
-	IpAddr string `json:"ip_addr"`
-	Kernel string `json:"kernel"`
-	Loadavg float64 `json:"loadavg"`
-	Location *ActionLocationShowOutput `json:"location"`
-	MaxRx int64 `json:"max_rx"`
-	MaxTx int64 `json:"max_tx"`
-	MaxVps int64 `json:"max_vps"`
-	Name string `json:"name"`
-	NetInterface string `json:"net_interface"`
-	ProcessCount int64 `json:"process_count"`
-	Status bool `json:"status"`
-	TotalMemory int64 `json:"total_memory"`
-	TotalSwap int64 `json:"total_swap"`
-	Type string `json:"type"`
-	Uptime int64 `json:"uptime"`
-	UsedMemory int64 `json:"used_memory"`
-	UsedSwap int64 `json:"used_swap"`
-	VePrivate string `json:"ve_private"`
-	Version string `json:"version"`
+	Active         bool                      `json:"active"`
+	ArcC           int64                     `json:"arc_c"`
+	ArcCMax        int64                     `json:"arc_c_max"`
+	ArcHitpercent  int64                     `json:"arc_hitpercent"`
+	ArcSize        int64                     `json:"arc_size"`
+	CpuGuest       float64                   `json:"cpu_guest"`
+	CpuIdle        float64                   `json:"cpu_idle"`
+	CpuIowait      float64                   `json:"cpu_iowait"`
+	CpuIrq         float64                   `json:"cpu_irq"`
+	CpuNice        float64                   `json:"cpu_nice"`
+	CpuSoftirq     float64                   `json:"cpu_softirq"`
+	CpuSystem      float64                   `json:"cpu_system"`
+	CpuUser        float64                   `json:"cpu_user"`
+	Cpus           int64                     `json:"cpus"`
+	DomainName     string                    `json:"domain_name"`
+	HypervisorType string                    `json:"hypervisor_type"`
+	Id             int64                     `json:"id"`
+	IpAddr         string                    `json:"ip_addr"`
+	Kernel         string                    `json:"kernel"`
+	Loadavg        float64                   `json:"loadavg"`
+	Location       *ActionLocationShowOutput `json:"location"`
+	MaxRx          int64                     `json:"max_rx"`
+	MaxTx          int64                     `json:"max_tx"`
+	MaxVps         int64                     `json:"max_vps"`
+	Name           string                    `json:"name"`
+	NetInterface   string                    `json:"net_interface"`
+	ProcessCount   int64                     `json:"process_count"`
+	Status         bool                      `json:"status"`
+	TotalMemory    int64                     `json:"total_memory"`
+	TotalSwap      int64                     `json:"total_swap"`
+	Type           string                    `json:"type"`
+	Uptime         int64                     `json:"uptime"`
+	UsedMemory     int64                     `json:"used_memory"`
+	UsedSwap       int64                     `json:"used_swap"`
+	VePrivate      string                    `json:"ve_private"`
+	Version        string                    `json:"version"`
 }
 
 // ActionNodeCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -345,12 +359,11 @@ type ActionNodeCreateResponse struct {
 	Output *ActionNodeCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNodeCreate) Prepare() *ActionNodeCreateInvocation {
 	return &ActionNodeCreateInvocation{
 		Action: action,
-		Path: "/v6.0/nodes",
+		Path:   "/v6.0/nodes",
 	}
 }
 
@@ -366,7 +379,6 @@ type ActionNodeCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionNodeCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionNodeCreateInvocation) NewInput() *ActionNodeCreateInput {
@@ -389,6 +401,7 @@ func (inv *ActionNodeCreateInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionNodeCreateInvocation) NewMetaInput() *ActionNodeCreateMetaGlobalInput {
@@ -416,7 +429,6 @@ func (inv *ActionNodeCreateInvocation) IsMetaParameterSelected(param string) boo
 func (inv *ActionNodeCreateInvocation) Call() (*ActionNodeCreateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionNodeCreateInvocation) callAsBody() (*ActionNodeCreateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -477,11 +489,11 @@ func (resp *ActionNodeCreateResponse) WatchOperation(timeout float64, updateIn f
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -503,8 +515,6 @@ func (resp *ActionNodeCreateResponse) CancelOperation() (*ActionActionStateCance
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 	return req.Call()
 }
-
-
 
 func (inv *ActionNodeCreateInvocation) makeAllInputParams() *ActionNodeCreateRequest {
 	return &ActionNodeCreateRequest{

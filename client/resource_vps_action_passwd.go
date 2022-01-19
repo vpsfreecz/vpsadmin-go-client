@@ -102,7 +102,7 @@ func (in *ActionVpsPasswdInput) AnySelected() bool {
 
 // ActionVpsPasswdRequest is a type for the entire action request
 type ActionVpsPasswdRequest struct {
-	Vps map[string]interface{} `json:"vps"`
+	Vps  map[string]interface{} `json:"vps"`
 	Meta map[string]interface{} `json:"_meta"`
 }
 
@@ -131,12 +131,11 @@ type ActionVpsPasswdResponse struct {
 	Output *ActionVpsPasswdOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsPasswd) Prepare() *ActionVpsPasswdInvocation {
 	return &ActionVpsPasswdInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/passwd",
+		Path:   "/v6.0/vpses/{vps_id}/passwd",
 	}
 }
 
@@ -185,6 +184,7 @@ func (inv *ActionVpsPasswdInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsPasswdInvocation) NewMetaInput() *ActionVpsPasswdMetaGlobalInput {
@@ -212,7 +212,6 @@ func (inv *ActionVpsPasswdInvocation) IsMetaParameterSelected(param string) bool
 func (inv *ActionVpsPasswdInvocation) Call() (*ActionVpsPasswdResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsPasswdInvocation) callAsBody() (*ActionVpsPasswdResponse, error) {
 	input := inv.makeAllInputParams()
@@ -273,11 +272,11 @@ func (resp *ActionVpsPasswdResponse) WatchOperation(timeout float64, updateIn fl
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -300,11 +299,9 @@ func (resp *ActionVpsPasswdResponse) CancelOperation() (*ActionActionStateCancel
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsPasswdInvocation) makeAllInputParams() *ActionVpsPasswdRequest {
 	return &ActionVpsPasswdRequest{
-		Vps: inv.makeInputParams(),
+		Vps:  inv.makeInputParams(),
 		Meta: inv.makeMetaInputParams(),
 	}
 }

@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionIntegrityFactIndex is a type for action Integrity_fact#Index
 type ActionIntegrityFactIndex struct {
@@ -17,9 +16,9 @@ func NewActionIntegrityFactIndex(client *Client) *ActionIntegrityFactIndex {
 
 // ActionIntegrityFactIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionIntegrityFactIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionIntegrityFactIndexMetaGlobalInput) SetCount(value bool) *ActionI
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionIntegrityFactIndexMetaGlobalInput) SetIncludes(value string) *ActionIntegrityFactIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionIntegrityFactIndexMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionIntegrityFactIndexMetaGlobalInput) SetNo(value bool) *ActionIntegrityFactIndexMetaGlobalInput {
 	in.No = value
@@ -83,15 +84,15 @@ func (in *ActionIntegrityFactIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionIntegrityFactIndexInput is a type for action input parameters
 type ActionIntegrityFactIndexInput struct {
-	ClassName string `json:"class_name"`
-	IntegrityCheck int64 `json:"integrity_check"`
-	IntegrityObject int64 `json:"integrity_object"`
-	Limit int64 `json:"limit"`
-	Name string `json:"name"`
-	Node int64 `json:"node"`
-	Offset int64 `json:"offset"`
-	Severity string `json:"severity"`
-	Status string `json:"status"`
+	ClassName       string `json:"class_name"`
+	IntegrityCheck  int64  `json:"integrity_check"`
+	IntegrityObject int64  `json:"integrity_object"`
+	Limit           int64  `json:"limit"`
+	Name            string `json:"name"`
+	Node            int64  `json:"node"`
+	Offset          int64  `json:"offset"`
+	Severity        string `json:"severity"`
+	Status          string `json:"status"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -107,6 +108,7 @@ func (in *ActionIntegrityFactIndexInput) SetClassName(value string) *ActionInteg
 	in._selectedParameters["ClassName"] = nil
 	return in
 }
+
 // SetIntegrityCheck sets parameter IntegrityCheck to value and selects it for sending
 func (in *ActionIntegrityFactIndexInput) SetIntegrityCheck(value int64) *ActionIntegrityFactIndexInput {
 	in.IntegrityCheck = value
@@ -118,6 +120,7 @@ func (in *ActionIntegrityFactIndexInput) SetIntegrityCheck(value int64) *ActionI
 	in._selectedParameters["IntegrityCheck"] = nil
 	return in
 }
+
 // SetIntegrityObject sets parameter IntegrityObject to value and selects it for sending
 func (in *ActionIntegrityFactIndexInput) SetIntegrityObject(value int64) *ActionIntegrityFactIndexInput {
 	in.IntegrityObject = value
@@ -129,6 +132,7 @@ func (in *ActionIntegrityFactIndexInput) SetIntegrityObject(value int64) *Action
 	in._selectedParameters["IntegrityObject"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionIntegrityFactIndexInput) SetLimit(value int64) *ActionIntegrityFactIndexInput {
 	in.Limit = value
@@ -140,6 +144,7 @@ func (in *ActionIntegrityFactIndexInput) SetLimit(value int64) *ActionIntegrityF
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetName sets parameter Name to value and selects it for sending
 func (in *ActionIntegrityFactIndexInput) SetName(value string) *ActionIntegrityFactIndexInput {
 	in.Name = value
@@ -151,6 +156,7 @@ func (in *ActionIntegrityFactIndexInput) SetName(value string) *ActionIntegrityF
 	in._selectedParameters["Name"] = nil
 	return in
 }
+
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionIntegrityFactIndexInput) SetNode(value int64) *ActionIntegrityFactIndexInput {
 	in.Node = value
@@ -162,6 +168,7 @@ func (in *ActionIntegrityFactIndexInput) SetNode(value int64) *ActionIntegrityFa
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionIntegrityFactIndexInput) SetOffset(value int64) *ActionIntegrityFactIndexInput {
 	in.Offset = value
@@ -173,6 +180,7 @@ func (in *ActionIntegrityFactIndexInput) SetOffset(value int64) *ActionIntegrity
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetSeverity sets parameter Severity to value and selects it for sending
 func (in *ActionIntegrityFactIndexInput) SetSeverity(value string) *ActionIntegrityFactIndexInput {
 	in.Severity = value
@@ -184,6 +192,7 @@ func (in *ActionIntegrityFactIndexInput) SetSeverity(value string) *ActionIntegr
 	in._selectedParameters["Severity"] = nil
 	return in
 }
+
 // SetStatus sets parameter Status to value and selects it for sending
 func (in *ActionIntegrityFactIndexInput) SetStatus(value string) *ActionIntegrityFactIndexInput {
 	in.Status = value
@@ -219,18 +228,16 @@ func (in *ActionIntegrityFactIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionIntegrityFactIndexOutput is a type for action output parameters
 type ActionIntegrityFactIndexOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
+	CreatedAt       string                           `json:"created_at"`
+	Id              int64                            `json:"id"`
 	IntegrityObject *ActionIntegrityObjectShowOutput `json:"integrity_object"`
-	Message string `json:"message"`
-	Name string `json:"name"`
-	Severity string `json:"severity"`
-	Status string `json:"status"`
+	Message         string                           `json:"message"`
+	Name            string                           `json:"name"`
+	Severity        string                           `json:"severity"`
+	Status          string                           `json:"status"`
 }
-
 
 // Type for action response, including envelope
 type ActionIntegrityFactIndexResponse struct {
@@ -245,12 +252,11 @@ type ActionIntegrityFactIndexResponse struct {
 	Output []*ActionIntegrityFactIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionIntegrityFactIndex) Prepare() *ActionIntegrityFactIndexInvocation {
 	return &ActionIntegrityFactIndexInvocation{
 		Action: action,
-		Path: "/v6.0/integrity_facts",
+		Path:   "/v6.0/integrity_facts",
 	}
 }
 
@@ -266,7 +272,6 @@ type ActionIntegrityFactIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionIntegrityFactIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionIntegrityFactIndexInvocation) NewInput() *ActionIntegrityFactIndexInput {
@@ -289,6 +294,7 @@ func (inv *ActionIntegrityFactIndexInvocation) IsParameterSelected(param string)
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionIntegrityFactIndexInvocation) NewMetaInput() *ActionIntegrityFactIndexMetaGlobalInput {
@@ -328,8 +334,6 @@ func (inv *ActionIntegrityFactIndexInvocation) callAsQuery() (*ActionIntegrityFa
 	}
 	return resp, err
 }
-
-
 
 func (inv *ActionIntegrityFactIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
@@ -376,4 +380,3 @@ func (inv *ActionIntegrityFactIndexInvocation) convertMetaInputToQueryParams(ret
 		}
 	}
 }
-

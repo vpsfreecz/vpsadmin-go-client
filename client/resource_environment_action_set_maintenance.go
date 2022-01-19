@@ -60,7 +60,7 @@ func (in *ActionEnvironmentSetMaintenanceMetaGlobalInput) AnySelected() bool {
 
 // ActionEnvironmentSetMaintenanceInput is a type for action input parameters
 type ActionEnvironmentSetMaintenanceInput struct {
-	Lock bool `json:"lock"`
+	Lock   bool   `json:"lock"`
 	Reason string `json:"reason"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -77,6 +77,7 @@ func (in *ActionEnvironmentSetMaintenanceInput) SetLock(value bool) *ActionEnvir
 	in._selectedParameters["Lock"] = nil
 	return in
 }
+
 // SetReason sets parameter Reason to value and selects it for sending
 func (in *ActionEnvironmentSetMaintenanceInput) SetReason(value string) *ActionEnvironmentSetMaintenanceInput {
 	in.Reason = value
@@ -115,10 +116,8 @@ func (in *ActionEnvironmentSetMaintenanceInput) AnySelected() bool {
 // ActionEnvironmentSetMaintenanceRequest is a type for the entire action request
 type ActionEnvironmentSetMaintenanceRequest struct {
 	Environment map[string]interface{} `json:"environment"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta        map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionEnvironmentSetMaintenanceResponse struct {
@@ -126,12 +125,11 @@ type ActionEnvironmentSetMaintenanceResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionEnvironmentSetMaintenance) Prepare() *ActionEnvironmentSetMaintenanceInvocation {
 	return &ActionEnvironmentSetMaintenanceInvocation{
 		Action: action,
-		Path: "/v6.0/environments/{environment_id}/set_maintenance",
+		Path:   "/v6.0/environments/{environment_id}/set_maintenance",
 	}
 }
 
@@ -180,6 +178,7 @@ func (inv *ActionEnvironmentSetMaintenanceInvocation) IsParameterSelected(param 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionEnvironmentSetMaintenanceInvocation) NewMetaInput() *ActionEnvironmentSetMaintenanceMetaGlobalInput {
@@ -208,7 +207,6 @@ func (inv *ActionEnvironmentSetMaintenanceInvocation) Call() (*ActionEnvironment
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionEnvironmentSetMaintenanceInvocation) callAsBody() (*ActionEnvironmentSetMaintenanceResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionEnvironmentSetMaintenanceResponse{Action: inv.Action}
@@ -216,13 +214,10 @@ func (inv *ActionEnvironmentSetMaintenanceInvocation) callAsBody() (*ActionEnvir
 	return resp, err
 }
 
-
-
-
 func (inv *ActionEnvironmentSetMaintenanceInvocation) makeAllInputParams() *ActionEnvironmentSetMaintenanceRequest {
 	return &ActionEnvironmentSetMaintenanceRequest{
 		Environment: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:        inv.makeMetaInputParams(),
 	}
 }
 

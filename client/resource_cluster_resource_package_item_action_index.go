@@ -18,9 +18,9 @@ func NewActionClusterResourcePackageItemIndex(client *Client) *ActionClusterReso
 
 // ActionClusterResourcePackageItemIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourcePackageItemIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionClusterResourcePackageItemIndexMetaGlobalInput) SetCount(value b
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionClusterResourcePackageItemIndexMetaGlobalInput) SetIncludes(value string) *ActionClusterResourcePackageItemIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionClusterResourcePackageItemIndexMetaGlobalInput) SetIncludes(valu
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionClusterResourcePackageItemIndexMetaGlobalInput) SetNo(value bool) *ActionClusterResourcePackageItemIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionClusterResourcePackageItemIndexMetaGlobalInput) AnySelected() bo
 
 // ActionClusterResourcePackageItemIndexInput is a type for action input parameters
 type ActionClusterResourcePackageItemIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionClusterResourcePackageItemIndexInput) SetLimit(value int64) *Act
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionClusterResourcePackageItemIndexInput) SetOffset(value int64) *ActionClusterResourcePackageItemIndexInput {
 	in.Offset = value
@@ -136,14 +139,12 @@ func (in *ActionClusterResourcePackageItemIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionClusterResourcePackageItemIndexOutput is a type for action output parameters
 type ActionClusterResourcePackageItemIndexOutput struct {
 	ClusterResource *ActionClusterResourceShowOutput `json:"cluster_resource"`
-	Id int64 `json:"id"`
-	Value int64 `json:"value"`
+	Id              int64                            `json:"id"`
+	Value           int64                            `json:"value"`
 }
-
 
 // Type for action response, including envelope
 type ActionClusterResourcePackageItemIndexResponse struct {
@@ -158,12 +159,11 @@ type ActionClusterResourcePackageItemIndexResponse struct {
 	Output []*ActionClusterResourcePackageItemIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionClusterResourcePackageItemIndex) Prepare() *ActionClusterResourcePackageItemIndexInvocation {
 	return &ActionClusterResourcePackageItemIndexInvocation{
 		Action: action,
-		Path: "/v6.0/cluster_resource_packages/{cluster_resource_package_id}/items",
+		Path:   "/v6.0/cluster_resource_packages/{cluster_resource_package_id}/items",
 	}
 }
 
@@ -212,6 +212,7 @@ func (inv *ActionClusterResourcePackageItemIndexInvocation) IsParameterSelected(
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionClusterResourcePackageItemIndexInvocation) NewMetaInput() *ActionClusterResourcePackageItemIndexMetaGlobalInput {
@@ -252,8 +253,6 @@ func (inv *ActionClusterResourcePackageItemIndexInvocation) callAsQuery() (*Acti
 	return resp, err
 }
 
-
-
 func (inv *ActionClusterResourcePackageItemIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -278,4 +277,3 @@ func (inv *ActionClusterResourcePackageItemIndexInvocation) convertMetaInputToQu
 		}
 	}
 }
-

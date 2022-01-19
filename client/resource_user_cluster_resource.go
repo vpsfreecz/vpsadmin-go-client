@@ -27,10 +27,10 @@ func NewResourceUserClusterResource(client *Client) *ResourceUserClusterResource
 	return &ResourceUserClusterResource{
 		Client: client,
 		Create: actionCreate,
-		New: actionCreate,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		New:    actionCreate,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

@@ -19,7 +19,7 @@ func NewActionMonitoredEventShow(client *Client) *ActionMonitoredEventShow {
 // ActionMonitoredEventShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMonitoredEventShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMonitoredEventShowMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMonitoredEventShowMetaGlobalInput) SetNo(value bool) *ActionMonitoredEventShowMetaGlobalInput {
 	in.No = value
@@ -70,23 +71,20 @@ func (in *ActionMonitoredEventShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionMonitoredEventShowOutput is a type for action output parameters
 type ActionMonitoredEventShowOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	Issue string `json:"issue"`
-	Label string `json:"label"`
-	Monitor string `json:"monitor"`
-	ObjectId int64 `json:"object_id"`
-	ObjectName string `json:"object_name"`
-	SavedUntil string `json:"saved_until"`
-	State string `json:"state"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
+	CreatedAt  string                `json:"created_at"`
+	Id         int64                 `json:"id"`
+	Issue      string                `json:"issue"`
+	Label      string                `json:"label"`
+	Monitor    string                `json:"monitor"`
+	ObjectId   int64                 `json:"object_id"`
+	ObjectName string                `json:"object_name"`
+	SavedUntil string                `json:"saved_until"`
+	State      string                `json:"state"`
+	UpdatedAt  string                `json:"updated_at"`
+	User       *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionMonitoredEventShowResponse struct {
@@ -101,12 +99,11 @@ type ActionMonitoredEventShowResponse struct {
 	Output *ActionMonitoredEventShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMonitoredEventShow) Prepare() *ActionMonitoredEventShowInvocation {
 	return &ActionMonitoredEventShowInvocation{
 		Action: action,
-		Path: "/v6.0/monitored_events/{monitored_event_id}",
+		Path:   "/v6.0/monitored_events/{monitored_event_id}",
 	}
 }
 
@@ -171,9 +168,6 @@ func (inv *ActionMonitoredEventShowInvocation) callAsQuery() (*ActionMonitoredEv
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMonitoredEventShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -184,4 +178,3 @@ func (inv *ActionMonitoredEventShowInvocation) convertMetaInputToQueryParams(ret
 		}
 	}
 }
-

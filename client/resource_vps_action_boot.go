@@ -19,7 +19,7 @@ func NewActionVpsBoot(client *Client) *ActionVpsBoot {
 // ActionVpsBootMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsBootMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsBootMetaGlobalInput) SetIncludes(value string) *ActionVpsBoot
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsBootMetaGlobalInput) SetNo(value bool) *ActionVpsBootMetaGlobalInput {
 	in.No = value
@@ -73,7 +74,7 @@ func (in *ActionVpsBootMetaGlobalInput) AnySelected() bool {
 // ActionVpsBootInput is a type for action input parameters
 type ActionVpsBootInput struct {
 	MountRootDataset string `json:"mount_root_dataset"`
-	OsTemplate int64 `json:"os_template"`
+	OsTemplate       int64  `json:"os_template"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -89,6 +90,7 @@ func (in *ActionVpsBootInput) SetMountRootDataset(value string) *ActionVpsBootIn
 	in._selectedParameters["MountRootDataset"] = nil
 	return in
 }
+
 // SetOsTemplate sets parameter OsTemplate to value and selects it for sending
 func (in *ActionVpsBootInput) SetOsTemplate(value int64) *ActionVpsBootInput {
 	in.OsTemplate = value
@@ -126,10 +128,9 @@ func (in *ActionVpsBootInput) AnySelected() bool {
 
 // ActionVpsBootRequest is a type for the entire action request
 type ActionVpsBootRequest struct {
-	Vps map[string]interface{} `json:"vps"`
+	Vps  map[string]interface{} `json:"vps"`
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionVpsBootMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsBootMetaGlobalOutput struct {
@@ -147,12 +148,11 @@ type ActionVpsBootResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsBoot) Prepare() *ActionVpsBootInvocation {
 	return &ActionVpsBootInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/boot",
+		Path:   "/v6.0/vpses/{vps_id}/boot",
 	}
 }
 
@@ -201,6 +201,7 @@ func (inv *ActionVpsBootInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsBootInvocation) NewMetaInput() *ActionVpsBootMetaGlobalInput {
@@ -228,7 +229,6 @@ func (inv *ActionVpsBootInvocation) IsMetaParameterSelected(param string) bool {
 func (inv *ActionVpsBootInvocation) Call() (*ActionVpsBootResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsBootInvocation) callAsBody() (*ActionVpsBootResponse, error) {
 	input := inv.makeAllInputParams()
@@ -286,11 +286,11 @@ func (resp *ActionVpsBootResponse) WatchOperation(timeout float64, updateIn floa
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -313,11 +313,9 @@ func (resp *ActionVpsBootResponse) CancelOperation() (*ActionActionStateCancelRe
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsBootInvocation) makeAllInputParams() *ActionVpsBootRequest {
 	return &ActionVpsBootRequest{
-		Vps: inv.makeInputParams(),
+		Vps:  inv.makeInputParams(),
 		Meta: inv.makeMetaInputParams(),
 	}
 }

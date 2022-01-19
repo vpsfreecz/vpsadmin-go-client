@@ -19,7 +19,7 @@ func NewActionMailRecipientShow(client *Client) *ActionMailRecipientShow {
 // ActionMailRecipientShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMailRecipientShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMailRecipientShowMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMailRecipientShowMetaGlobalInput) SetNo(value bool) *ActionMailRecipientShowMetaGlobalInput {
 	in.No = value
@@ -70,17 +71,14 @@ func (in *ActionMailRecipientShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionMailRecipientShowOutput is a type for action output parameters
 type ActionMailRecipientShowOutput struct {
-	Bcc string `json:"bcc"`
-	Cc string `json:"cc"`
-	Id int64 `json:"id"`
+	Bcc   string `json:"bcc"`
+	Cc    string `json:"cc"`
+	Id    int64  `json:"id"`
 	Label string `json:"label"`
-	To string `json:"to"`
+	To    string `json:"to"`
 }
-
 
 // Type for action response, including envelope
 type ActionMailRecipientShowResponse struct {
@@ -95,12 +93,11 @@ type ActionMailRecipientShowResponse struct {
 	Output *ActionMailRecipientShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMailRecipientShow) Prepare() *ActionMailRecipientShowInvocation {
 	return &ActionMailRecipientShowInvocation{
 		Action: action,
-		Path: "/v6.0/mail_recipients/{mail_recipient_id}",
+		Path:   "/v6.0/mail_recipients/{mail_recipient_id}",
 	}
 }
 
@@ -165,9 +162,6 @@ func (inv *ActionMailRecipientShowInvocation) callAsQuery() (*ActionMailRecipien
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMailRecipientShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -178,4 +172,3 @@ func (inv *ActionMailRecipientShowInvocation) convertMetaInputToQueryParams(ret 
 		}
 	}
 }
-

@@ -19,7 +19,7 @@ func NewActionVpsRestart(client *Client) *ActionVpsRestart {
 // ActionVpsRestartMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsRestartMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsRestartMetaGlobalInput) SetIncludes(value string) *ActionVpsR
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsRestartMetaGlobalInput) SetNo(value bool) *ActionVpsRestartMetaGlobalInput {
 	in.No = value
@@ -70,12 +71,10 @@ func (in *ActionVpsRestartMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionVpsRestartRequest is a type for the entire action request
 type ActionVpsRestartRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionVpsRestartMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsRestartMetaGlobalOutput struct {
@@ -93,12 +92,11 @@ type ActionVpsRestartResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsRestart) Prepare() *ActionVpsRestartInvocation {
 	return &ActionVpsRestartInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/restart",
+		Path:   "/v6.0/vpses/{vps_id}/restart",
 	}
 }
 
@@ -151,7 +149,6 @@ func (inv *ActionVpsRestartInvocation) IsMetaParameterSelected(param string) boo
 func (inv *ActionVpsRestartInvocation) Call() (*ActionVpsRestartResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsRestartInvocation) callAsBody() (*ActionVpsRestartResponse, error) {
 	input := inv.makeAllInputParams()
@@ -209,11 +206,11 @@ func (resp *ActionVpsRestartResponse) WatchOperation(timeout float64, updateIn f
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -236,14 +233,11 @@ func (resp *ActionVpsRestartResponse) CancelOperation() (*ActionActionStateCance
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsRestartInvocation) makeAllInputParams() *ActionVpsRestartRequest {
 	return &ActionVpsRestartRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionVpsRestartInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

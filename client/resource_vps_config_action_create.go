@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionVpsConfigCreate is a type for action Vps_config#Create
 type ActionVpsConfigCreate struct {
@@ -18,7 +17,7 @@ func NewActionVpsConfigCreate(client *Client) *ActionVpsConfigCreate {
 // ActionVpsConfigCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsConfigCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionVpsConfigCreateMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsConfigCreateMetaGlobalInput) SetNo(value bool) *ActionVpsConfigCreateMetaGlobalInput {
 	in.No = value
@@ -72,8 +72,8 @@ func (in *ActionVpsConfigCreateMetaGlobalInput) AnySelected() bool {
 // ActionVpsConfigCreateInput is a type for action input parameters
 type ActionVpsConfigCreateInput struct {
 	Config string `json:"config"`
-	Label string `json:"label"`
-	Name string `json:"name"`
+	Label  string `json:"label"`
+	Name   string `json:"name"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -89,6 +89,7 @@ func (in *ActionVpsConfigCreateInput) SetConfig(value string) *ActionVpsConfigCr
 	in._selectedParameters["Config"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionVpsConfigCreateInput) SetLabel(value string) *ActionVpsConfigCreateInput {
 	in.Label = value
@@ -100,6 +101,7 @@ func (in *ActionVpsConfigCreateInput) SetLabel(value string) *ActionVpsConfigCre
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetName sets parameter Name to value and selects it for sending
 func (in *ActionVpsConfigCreateInput) SetName(value string) *ActionVpsConfigCreateInput {
 	in.Name = value
@@ -138,15 +140,15 @@ func (in *ActionVpsConfigCreateInput) AnySelected() bool {
 // ActionVpsConfigCreateRequest is a type for the entire action request
 type ActionVpsConfigCreateRequest struct {
 	VpsConfig map[string]interface{} `json:"vps_config"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta      map[string]interface{} `json:"_meta"`
 }
 
 // ActionVpsConfigCreateOutput is a type for action output parameters
 type ActionVpsConfigCreateOutput struct {
 	Config string `json:"config"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Name string `json:"name"`
+	Id     int64  `json:"id"`
+	Label  string `json:"label"`
+	Name   string `json:"name"`
 }
 
 // ActionVpsConfigCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -169,12 +171,11 @@ type ActionVpsConfigCreateResponse struct {
 	Output *ActionVpsConfigCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsConfigCreate) Prepare() *ActionVpsConfigCreateInvocation {
 	return &ActionVpsConfigCreateInvocation{
 		Action: action,
-		Path: "/v6.0/vps_configs",
+		Path:   "/v6.0/vps_configs",
 	}
 }
 
@@ -190,7 +191,6 @@ type ActionVpsConfigCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionVpsConfigCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionVpsConfigCreateInvocation) NewInput() *ActionVpsConfigCreateInput {
@@ -213,6 +213,7 @@ func (inv *ActionVpsConfigCreateInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsConfigCreateInvocation) NewMetaInput() *ActionVpsConfigCreateMetaGlobalInput {
@@ -240,7 +241,6 @@ func (inv *ActionVpsConfigCreateInvocation) IsMetaParameterSelected(param string
 func (inv *ActionVpsConfigCreateInvocation) Call() (*ActionVpsConfigCreateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsConfigCreateInvocation) callAsBody() (*ActionVpsConfigCreateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -301,11 +301,11 @@ func (resp *ActionVpsConfigCreateResponse) WatchOperation(timeout float64, updat
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -328,12 +328,10 @@ func (resp *ActionVpsConfigCreateResponse) CancelOperation() (*ActionActionState
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsConfigCreateInvocation) makeAllInputParams() *ActionVpsConfigCreateRequest {
 	return &ActionVpsConfigCreateRequest{
 		VpsConfig: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:      inv.makeMetaInputParams(),
 	}
 }
 

@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionIntegrityCheckCreate is a type for action Integrity_check#Create
 type ActionIntegrityCheckCreate struct {
@@ -18,7 +17,7 @@ func NewActionIntegrityCheckCreate(client *Client) *ActionIntegrityCheckCreate {
 // ActionIntegrityCheckCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionIntegrityCheckCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionIntegrityCheckCreateMetaGlobalInput) SetIncludes(value string) *
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionIntegrityCheckCreateMetaGlobalInput) SetNo(value bool) *ActionIntegrityCheckCreateMetaGlobalInput {
 	in.No = value
@@ -71,10 +71,10 @@ func (in *ActionIntegrityCheckCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionIntegrityCheckCreateInput is a type for action input parameters
 type ActionIntegrityCheckCreateInput struct {
-	Node int64 `json:"node"`
-	SkipMaintenance bool `json:"skip_maintenance"`
-	Storage bool `json:"storage"`
-	Vps bool `json:"vps"`
+	Node            int64 `json:"node"`
+	SkipMaintenance bool  `json:"skip_maintenance"`
+	Storage         bool  `json:"storage"`
+	Vps             bool  `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -90,6 +90,7 @@ func (in *ActionIntegrityCheckCreateInput) SetNode(value int64) *ActionIntegrity
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetSkipMaintenance sets parameter SkipMaintenance to value and selects it for sending
 func (in *ActionIntegrityCheckCreateInput) SetSkipMaintenance(value bool) *ActionIntegrityCheckCreateInput {
 	in.SkipMaintenance = value
@@ -101,6 +102,7 @@ func (in *ActionIntegrityCheckCreateInput) SetSkipMaintenance(value bool) *Actio
 	in._selectedParameters["SkipMaintenance"] = nil
 	return in
 }
+
 // SetStorage sets parameter Storage to value and selects it for sending
 func (in *ActionIntegrityCheckCreateInput) SetStorage(value bool) *ActionIntegrityCheckCreateInput {
 	in.Storage = value
@@ -112,6 +114,7 @@ func (in *ActionIntegrityCheckCreateInput) SetStorage(value bool) *ActionIntegri
 	in._selectedParameters["Storage"] = nil
 	return in
 }
+
 // SetVps sets parameter Vps to value and selects it for sending
 func (in *ActionIntegrityCheckCreateInput) SetVps(value bool) *ActionIntegrityCheckCreateInput {
 	in.Vps = value
@@ -150,25 +153,24 @@ func (in *ActionIntegrityCheckCreateInput) AnySelected() bool {
 // ActionIntegrityCheckCreateRequest is a type for the entire action request
 type ActionIntegrityCheckCreateRequest struct {
 	IntegrityCheck map[string]interface{} `json:"integrity_check"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta           map[string]interface{} `json:"_meta"`
 }
 
 // ActionIntegrityCheckCreateOutput is a type for action output parameters
 type ActionIntegrityCheckCreateOutput struct {
-	BrokenObjects int64 `json:"broken_objects"`
-	CheckedFacts int64 `json:"checked_facts"`
-	CheckedObjects int64 `json:"checked_objects"`
-	CreatedAt string `json:"created_at"`
-	FalseFacts int64 `json:"false_facts"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	IntegralObjects int64 `json:"integral_objects"`
-	Status string `json:"status"`
-	TrueFacts int64 `json:"true_facts"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
+	BrokenObjects   int64                 `json:"broken_objects"`
+	CheckedFacts    int64                 `json:"checked_facts"`
+	CheckedObjects  int64                 `json:"checked_objects"`
+	CreatedAt       string                `json:"created_at"`
+	FalseFacts      int64                 `json:"false_facts"`
+	FinishedAt      string                `json:"finished_at"`
+	Id              int64                 `json:"id"`
+	IntegralObjects int64                 `json:"integral_objects"`
+	Status          string                `json:"status"`
+	TrueFacts       int64                 `json:"true_facts"`
+	UpdatedAt       string                `json:"updated_at"`
+	User            *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionIntegrityCheckCreateResponse struct {
@@ -183,12 +185,11 @@ type ActionIntegrityCheckCreateResponse struct {
 	Output *ActionIntegrityCheckCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionIntegrityCheckCreate) Prepare() *ActionIntegrityCheckCreateInvocation {
 	return &ActionIntegrityCheckCreateInvocation{
 		Action: action,
-		Path: "/v6.0/integrity_checks",
+		Path:   "/v6.0/integrity_checks",
 	}
 }
 
@@ -204,7 +205,6 @@ type ActionIntegrityCheckCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionIntegrityCheckCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionIntegrityCheckCreateInvocation) NewInput() *ActionIntegrityCheckCreateInput {
@@ -227,6 +227,7 @@ func (inv *ActionIntegrityCheckCreateInvocation) IsParameterSelected(param strin
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionIntegrityCheckCreateInvocation) NewMetaInput() *ActionIntegrityCheckCreateMetaGlobalInput {
@@ -255,7 +256,6 @@ func (inv *ActionIntegrityCheckCreateInvocation) Call() (*ActionIntegrityCheckCr
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionIntegrityCheckCreateInvocation) callAsBody() (*ActionIntegrityCheckCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionIntegrityCheckCreateResponse{Action: inv.Action}
@@ -266,13 +266,10 @@ func (inv *ActionIntegrityCheckCreateInvocation) callAsBody() (*ActionIntegrityC
 	return resp, err
 }
 
-
-
-
 func (inv *ActionIntegrityCheckCreateInvocation) makeAllInputParams() *ActionIntegrityCheckCreateRequest {
 	return &ActionIntegrityCheckCreateRequest{
 		IntegrityCheck: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:           inv.makeMetaInputParams(),
 	}
 }
 

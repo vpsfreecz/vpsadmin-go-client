@@ -30,14 +30,14 @@ func NewResourceMailTemplateRecipient(client *Client) *ResourceMailTemplateRecip
 	actionShow := NewActionMailTemplateRecipientShow(client)
 
 	return &ResourceMailTemplateRecipient{
-		Client: client,
-		Create: actionCreate,
-		New: actionCreate,
-		Delete: actionDelete,
+		Client:  client,
+		Create:  actionCreate,
+		New:     actionCreate,
+		Delete:  actionDelete,
 		Destroy: actionDelete,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:   actionIndex,
+		List:    actionIndex,
+		Show:    actionShow,
+		Find:    actionShow,
 	}
 }

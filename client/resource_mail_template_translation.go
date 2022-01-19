@@ -33,15 +33,15 @@ func NewResourceMailTemplateTranslation(client *Client) *ResourceMailTemplateTra
 	actionUpdate := NewActionMailTemplateTranslationUpdate(client)
 
 	return &ResourceMailTemplateTranslation{
-		Client: client,
-		Create: actionCreate,
-		New: actionCreate,
-		Delete: actionDelete,
+		Client:  client,
+		Create:  actionCreate,
+		New:     actionCreate,
+		Delete:  actionDelete,
 		Destroy: actionDelete,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Index:   actionIndex,
+		List:    actionIndex,
+		Show:    actionShow,
+		Find:    actionShow,
+		Update:  actionUpdate,
 	}
 }

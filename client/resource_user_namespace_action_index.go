@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionUserNamespaceIndex is a type for action User_namespace#Index
 type ActionUserNamespaceIndex struct {
@@ -17,9 +16,9 @@ func NewActionUserNamespaceIndex(client *Client) *ActionUserNamespaceIndex {
 
 // ActionUserNamespaceIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionUserNamespaceIndexMetaGlobalInput) SetCount(value bool) *ActionU
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserNamespaceIndexMetaGlobalInput) SetIncludes(value string) *ActionUserNamespaceIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionUserNamespaceIndexMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserNamespaceIndexMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceIndexMetaGlobalInput {
 	in.No = value
@@ -84,10 +85,10 @@ func (in *ActionUserNamespaceIndexMetaGlobalInput) AnySelected() bool {
 // ActionUserNamespaceIndexInput is a type for action input parameters
 type ActionUserNamespaceIndexInput struct {
 	BlockCount int64 `json:"block_count"`
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
-	Size int64 `json:"size"`
-	User int64 `json:"user"`
+	Limit      int64 `json:"limit"`
+	Offset     int64 `json:"offset"`
+	Size       int64 `json:"size"`
+	User       int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -103,6 +104,7 @@ func (in *ActionUserNamespaceIndexInput) SetBlockCount(value int64) *ActionUserN
 	in._selectedParameters["BlockCount"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserNamespaceIndexInput) SetLimit(value int64) *ActionUserNamespaceIndexInput {
 	in.Limit = value
@@ -114,6 +116,7 @@ func (in *ActionUserNamespaceIndexInput) SetLimit(value int64) *ActionUserNamesp
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionUserNamespaceIndexInput) SetOffset(value int64) *ActionUserNamespaceIndexInput {
 	in.Offset = value
@@ -125,6 +128,7 @@ func (in *ActionUserNamespaceIndexInput) SetOffset(value int64) *ActionUserNames
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetSize sets parameter Size to value and selects it for sending
 func (in *ActionUserNamespaceIndexInput) SetSize(value int64) *ActionUserNamespaceIndexInput {
 	in.Size = value
@@ -136,6 +140,7 @@ func (in *ActionUserNamespaceIndexInput) SetSize(value int64) *ActionUserNamespa
 	in._selectedParameters["Size"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionUserNamespaceIndexInput) SetUser(value int64) *ActionUserNamespaceIndexInput {
 	in.User = value
@@ -171,16 +176,14 @@ func (in *ActionUserNamespaceIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserNamespaceIndexOutput is a type for action output parameters
 type ActionUserNamespaceIndexOutput struct {
-	BlockCount int64 `json:"block_count"`
-	Id int64 `json:"id"`
-	Offset int64 `json:"offset"`
-	Size int64 `json:"size"`
-	User *ActionUserShowOutput `json:"user"`
+	BlockCount int64                 `json:"block_count"`
+	Id         int64                 `json:"id"`
+	Offset     int64                 `json:"offset"`
+	Size       int64                 `json:"size"`
+	User       *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserNamespaceIndexResponse struct {
@@ -195,12 +198,11 @@ type ActionUserNamespaceIndexResponse struct {
 	Output []*ActionUserNamespaceIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserNamespaceIndex) Prepare() *ActionUserNamespaceIndexInvocation {
 	return &ActionUserNamespaceIndexInvocation{
 		Action: action,
-		Path: "/v6.0/user_namespaces",
+		Path:   "/v6.0/user_namespaces",
 	}
 }
 
@@ -216,7 +218,6 @@ type ActionUserNamespaceIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionUserNamespaceIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionUserNamespaceIndexInvocation) NewInput() *ActionUserNamespaceIndexInput {
@@ -239,6 +240,7 @@ func (inv *ActionUserNamespaceIndexInvocation) IsParameterSelected(param string)
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserNamespaceIndexInvocation) NewMetaInput() *ActionUserNamespaceIndexMetaGlobalInput {
@@ -279,8 +281,6 @@ func (inv *ActionUserNamespaceIndexInvocation) callAsQuery() (*ActionUserNamespa
 	return resp, err
 }
 
-
-
 func (inv *ActionUserNamespaceIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("BlockCount") {
@@ -314,4 +314,3 @@ func (inv *ActionUserNamespaceIndexInvocation) convertMetaInputToQueryParams(ret
 		}
 	}
 }
-

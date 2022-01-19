@@ -36,16 +36,16 @@ func NewResourceUserTotpDevice(client *Client) *ResourceUserTotpDevice {
 	actionUpdate := NewActionUserTotpDeviceUpdate(client)
 
 	return &ResourceUserTotpDevice{
-		Client: client,
+		Client:  client,
 		Confirm: actionConfirm,
-		Create: actionCreate,
-		New: actionCreate,
-		Delete: actionDelete,
+		Create:  actionCreate,
+		New:     actionCreate,
+		Delete:  actionDelete,
 		Destroy: actionDelete,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Index:   actionIndex,
+		List:    actionIndex,
+		Show:    actionShow,
+		Find:    actionShow,
+		Update:  actionUpdate,
 	}
 }

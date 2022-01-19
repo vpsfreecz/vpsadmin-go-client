@@ -19,7 +19,7 @@ func NewActionVpsDelete(client *Client) *ActionVpsDelete {
 // ActionVpsDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsDeleteMetaGlobalInput) SetIncludes(value string) *ActionVpsDe
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsDeleteMetaGlobalInput) SetNo(value bool) *ActionVpsDeleteMetaGlobalInput {
 	in.No = value
@@ -72,10 +73,10 @@ func (in *ActionVpsDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsDeleteInput is a type for action input parameters
 type ActionVpsDeleteInput struct {
-	ChangeReason string `json:"change_reason"`
+	ChangeReason   string `json:"change_reason"`
 	ExpirationDate string `json:"expiration_date"`
-	Lazy bool `json:"lazy"`
-	ObjectState string `json:"object_state"`
+	Lazy           bool   `json:"lazy"`
+	ObjectState    string `json:"object_state"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -91,6 +92,7 @@ func (in *ActionVpsDeleteInput) SetChangeReason(value string) *ActionVpsDeleteIn
 	in._selectedParameters["ChangeReason"] = nil
 	return in
 }
+
 // SetExpirationDate sets parameter ExpirationDate to value and selects it for sending
 func (in *ActionVpsDeleteInput) SetExpirationDate(value string) *ActionVpsDeleteInput {
 	in.ExpirationDate = value
@@ -102,6 +104,7 @@ func (in *ActionVpsDeleteInput) SetExpirationDate(value string) *ActionVpsDelete
 	in._selectedParameters["ExpirationDate"] = nil
 	return in
 }
+
 // SetLazy sets parameter Lazy to value and selects it for sending
 func (in *ActionVpsDeleteInput) SetLazy(value bool) *ActionVpsDeleteInput {
 	in.Lazy = value
@@ -113,6 +116,7 @@ func (in *ActionVpsDeleteInput) SetLazy(value bool) *ActionVpsDeleteInput {
 	in._selectedParameters["Lazy"] = nil
 	return in
 }
+
 // SetObjectState sets parameter ObjectState to value and selects it for sending
 func (in *ActionVpsDeleteInput) SetObjectState(value string) *ActionVpsDeleteInput {
 	in.ObjectState = value
@@ -150,10 +154,9 @@ func (in *ActionVpsDeleteInput) AnySelected() bool {
 
 // ActionVpsDeleteRequest is a type for the entire action request
 type ActionVpsDeleteRequest struct {
-	Vps map[string]interface{} `json:"vps"`
+	Vps  map[string]interface{} `json:"vps"`
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionVpsDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsDeleteMetaGlobalOutput struct {
@@ -171,12 +174,11 @@ type ActionVpsDeleteResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsDelete) Prepare() *ActionVpsDeleteInvocation {
 	return &ActionVpsDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}",
+		Path:   "/v6.0/vpses/{vps_id}",
 	}
 }
 
@@ -225,6 +227,7 @@ func (inv *ActionVpsDeleteInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsDeleteInvocation) NewMetaInput() *ActionVpsDeleteMetaGlobalInput {
@@ -252,7 +255,6 @@ func (inv *ActionVpsDeleteInvocation) IsMetaParameterSelected(param string) bool
 func (inv *ActionVpsDeleteInvocation) Call() (*ActionVpsDeleteResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsDeleteInvocation) callAsBody() (*ActionVpsDeleteResponse, error) {
 	input := inv.makeAllInputParams()
@@ -310,11 +312,11 @@ func (resp *ActionVpsDeleteResponse) WatchOperation(timeout float64, updateIn fl
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -337,11 +339,9 @@ func (resp *ActionVpsDeleteResponse) CancelOperation() (*ActionActionStateCancel
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsDeleteInvocation) makeAllInputParams() *ActionVpsDeleteRequest {
 	return &ActionVpsDeleteRequest{
-		Vps: inv.makeInputParams(),
+		Vps:  inv.makeInputParams(),
 		Meta: inv.makeMetaInputParams(),
 	}
 }

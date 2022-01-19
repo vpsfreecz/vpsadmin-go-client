@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionNetworkCreate is a type for action Network#Create
 type ActionNetworkCreate struct {
@@ -18,7 +17,7 @@ func NewActionNetworkCreate(client *Client) *ActionNetworkCreate {
 // ActionNetworkCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionNetworkCreateMetaGlobalInput) SetIncludes(value string) *ActionN
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNetworkCreateMetaGlobalInput) SetNo(value bool) *ActionNetworkCreateMetaGlobalInput {
 	in.No = value
@@ -71,16 +71,16 @@ func (in *ActionNetworkCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkCreateInput is a type for action input parameters
 type ActionNetworkCreateInput struct {
-	AddIpAddresses bool `json:"add_ip_addresses"`
-	Address string `json:"address"`
-	IpVersion int64 `json:"ip_version"`
-	Label string `json:"label"`
-	Managed bool `json:"managed"`
-	Prefix int64 `json:"prefix"`
-	Purpose string `json:"purpose"`
-	Role string `json:"role"`
-	SplitAccess string `json:"split_access"`
-	SplitPrefix int64 `json:"split_prefix"`
+	AddIpAddresses bool   `json:"add_ip_addresses"`
+	Address        string `json:"address"`
+	IpVersion      int64  `json:"ip_version"`
+	Label          string `json:"label"`
+	Managed        bool   `json:"managed"`
+	Prefix         int64  `json:"prefix"`
+	Purpose        string `json:"purpose"`
+	Role           string `json:"role"`
+	SplitAccess    string `json:"split_access"`
+	SplitPrefix    int64  `json:"split_prefix"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -96,6 +96,7 @@ func (in *ActionNetworkCreateInput) SetAddIpAddresses(value bool) *ActionNetwork
 	in._selectedParameters["AddIpAddresses"] = nil
 	return in
 }
+
 // SetAddress sets parameter Address to value and selects it for sending
 func (in *ActionNetworkCreateInput) SetAddress(value string) *ActionNetworkCreateInput {
 	in.Address = value
@@ -107,6 +108,7 @@ func (in *ActionNetworkCreateInput) SetAddress(value string) *ActionNetworkCreat
 	in._selectedParameters["Address"] = nil
 	return in
 }
+
 // SetIpVersion sets parameter IpVersion to value and selects it for sending
 func (in *ActionNetworkCreateInput) SetIpVersion(value int64) *ActionNetworkCreateInput {
 	in.IpVersion = value
@@ -118,6 +120,7 @@ func (in *ActionNetworkCreateInput) SetIpVersion(value int64) *ActionNetworkCrea
 	in._selectedParameters["IpVersion"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionNetworkCreateInput) SetLabel(value string) *ActionNetworkCreateInput {
 	in.Label = value
@@ -129,6 +132,7 @@ func (in *ActionNetworkCreateInput) SetLabel(value string) *ActionNetworkCreateI
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetManaged sets parameter Managed to value and selects it for sending
 func (in *ActionNetworkCreateInput) SetManaged(value bool) *ActionNetworkCreateInput {
 	in.Managed = value
@@ -140,6 +144,7 @@ func (in *ActionNetworkCreateInput) SetManaged(value bool) *ActionNetworkCreateI
 	in._selectedParameters["Managed"] = nil
 	return in
 }
+
 // SetPrefix sets parameter Prefix to value and selects it for sending
 func (in *ActionNetworkCreateInput) SetPrefix(value int64) *ActionNetworkCreateInput {
 	in.Prefix = value
@@ -151,6 +156,7 @@ func (in *ActionNetworkCreateInput) SetPrefix(value int64) *ActionNetworkCreateI
 	in._selectedParameters["Prefix"] = nil
 	return in
 }
+
 // SetPurpose sets parameter Purpose to value and selects it for sending
 func (in *ActionNetworkCreateInput) SetPurpose(value string) *ActionNetworkCreateInput {
 	in.Purpose = value
@@ -162,6 +168,7 @@ func (in *ActionNetworkCreateInput) SetPurpose(value string) *ActionNetworkCreat
 	in._selectedParameters["Purpose"] = nil
 	return in
 }
+
 // SetRole sets parameter Role to value and selects it for sending
 func (in *ActionNetworkCreateInput) SetRole(value string) *ActionNetworkCreateInput {
 	in.Role = value
@@ -173,6 +180,7 @@ func (in *ActionNetworkCreateInput) SetRole(value string) *ActionNetworkCreateIn
 	in._selectedParameters["Role"] = nil
 	return in
 }
+
 // SetSplitAccess sets parameter SplitAccess to value and selects it for sending
 func (in *ActionNetworkCreateInput) SetSplitAccess(value string) *ActionNetworkCreateInput {
 	in.SplitAccess = value
@@ -184,6 +192,7 @@ func (in *ActionNetworkCreateInput) SetSplitAccess(value string) *ActionNetworkC
 	in._selectedParameters["SplitAccess"] = nil
 	return in
 }
+
 // SetSplitPrefix sets parameter SplitPrefix to value and selects it for sending
 func (in *ActionNetworkCreateInput) SetSplitPrefix(value int64) *ActionNetworkCreateInput {
 	in.SplitPrefix = value
@@ -222,27 +231,27 @@ func (in *ActionNetworkCreateInput) AnySelected() bool {
 // ActionNetworkCreateRequest is a type for the entire action request
 type ActionNetworkCreateRequest struct {
 	Network map[string]interface{} `json:"network"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta    map[string]interface{} `json:"_meta"`
 }
 
 // ActionNetworkCreateOutput is a type for action output parameters
 type ActionNetworkCreateOutput struct {
-	Address string `json:"address"`
-	Assigned int64 `json:"assigned"`
-	Id int64 `json:"id"`
-	IpVersion int64 `json:"ip_version"`
-	Label string `json:"label"`
-	Managed bool `json:"managed"`
-	Owned int64 `json:"owned"`
-	Prefix int64 `json:"prefix"`
+	Address         string                    `json:"address"`
+	Assigned        int64                     `json:"assigned"`
+	Id              int64                     `json:"id"`
+	IpVersion       int64                     `json:"ip_version"`
+	Label           string                    `json:"label"`
+	Managed         bool                      `json:"managed"`
+	Owned           int64                     `json:"owned"`
+	Prefix          int64                     `json:"prefix"`
 	PrimaryLocation *ActionLocationShowOutput `json:"primary_location"`
-	Purpose string `json:"purpose"`
-	Role string `json:"role"`
-	Size int64 `json:"size"`
-	SplitAccess string `json:"split_access"`
-	SplitPrefix int64 `json:"split_prefix"`
-	Taken int64 `json:"taken"`
-	Used int64 `json:"used"`
+	Purpose         string                    `json:"purpose"`
+	Role            string                    `json:"role"`
+	Size            int64                     `json:"size"`
+	SplitAccess     string                    `json:"split_access"`
+	SplitPrefix     int64                     `json:"split_prefix"`
+	Taken           int64                     `json:"taken"`
+	Used            int64                     `json:"used"`
 }
 
 // ActionNetworkCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -265,12 +274,11 @@ type ActionNetworkCreateResponse struct {
 	Output *ActionNetworkCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNetworkCreate) Prepare() *ActionNetworkCreateInvocation {
 	return &ActionNetworkCreateInvocation{
 		Action: action,
-		Path: "/v6.0/networks",
+		Path:   "/v6.0/networks",
 	}
 }
 
@@ -286,7 +294,6 @@ type ActionNetworkCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionNetworkCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionNetworkCreateInvocation) NewInput() *ActionNetworkCreateInput {
@@ -309,6 +316,7 @@ func (inv *ActionNetworkCreateInvocation) IsParameterSelected(param string) bool
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionNetworkCreateInvocation) NewMetaInput() *ActionNetworkCreateMetaGlobalInput {
@@ -336,7 +344,6 @@ func (inv *ActionNetworkCreateInvocation) IsMetaParameterSelected(param string) 
 func (inv *ActionNetworkCreateInvocation) Call() (*ActionNetworkCreateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionNetworkCreateInvocation) callAsBody() (*ActionNetworkCreateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -397,11 +404,11 @@ func (resp *ActionNetworkCreateResponse) WatchOperation(timeout float64, updateI
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -424,12 +431,10 @@ func (resp *ActionNetworkCreateResponse) CancelOperation() (*ActionActionStateCa
 	return req.Call()
 }
 
-
-
 func (inv *ActionNetworkCreateInvocation) makeAllInputParams() *ActionNetworkCreateRequest {
 	return &ActionNetworkCreateRequest{
 		Network: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:    inv.makeMetaInputParams(),
 	}
 }
 

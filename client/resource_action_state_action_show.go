@@ -58,22 +58,19 @@ func (in *ActionActionStateShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionActionStateShowOutput is a type for action output parameters
 type ActionActionStateShowOutput struct {
-	CanCancel bool `json:"can_cancel"`
+	CanCancel bool   `json:"can_cancel"`
 	CreatedAt string `json:"created_at"`
-	Current int64 `json:"current"`
-	Finished bool `json:"finished"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Status bool `json:"status"`
-	Total int64 `json:"total"`
-	Unit string `json:"unit"`
+	Current   int64  `json:"current"`
+	Finished  bool   `json:"finished"`
+	Id        int64  `json:"id"`
+	Label     string `json:"label"`
+	Status    bool   `json:"status"`
+	Total     int64  `json:"total"`
+	Unit      string `json:"unit"`
 	UpdatedAt string `json:"updated_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionActionStateShowResponse struct {
@@ -88,12 +85,11 @@ type ActionActionStateShowResponse struct {
 	Output *ActionActionStateShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionActionStateShow) Prepare() *ActionActionStateShowInvocation {
 	return &ActionActionStateShowInvocation{
 		Action: action,
-		Path: "/v6.0/action_states/{action_state_id}",
+		Path:   "/v6.0/action_states/{action_state_id}",
 	}
 }
 
@@ -158,9 +154,6 @@ func (inv *ActionActionStateShowInvocation) callAsQuery() (*ActionActionStateSho
 	return resp, err
 }
 
-
-
-
 func (inv *ActionActionStateShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("No") {
@@ -168,4 +161,3 @@ func (inv *ActionActionStateShowInvocation) convertMetaInputToQueryParams(ret ma
 		}
 	}
 }
-

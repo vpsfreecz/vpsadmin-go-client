@@ -19,7 +19,7 @@ func NewActionIncomingPaymentUpdate(client *Client) *ActionIncomingPaymentUpdate
 // ActionIncomingPaymentUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionIncomingPaymentUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionIncomingPaymentUpdateMetaGlobalInput) SetIncludes(value string) 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionIncomingPaymentUpdateMetaGlobalInput) SetNo(value bool) *ActionIncomingPaymentUpdateMetaGlobalInput {
 	in.No = value
@@ -115,30 +116,29 @@ func (in *ActionIncomingPaymentUpdateInput) AnySelected() bool {
 // ActionIncomingPaymentUpdateRequest is a type for the entire action request
 type ActionIncomingPaymentUpdateRequest struct {
 	IncomingPayment map[string]interface{} `json:"incoming_payment"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta            map[string]interface{} `json:"_meta"`
 }
 
 // ActionIncomingPaymentUpdateOutput is a type for action output parameters
 type ActionIncomingPaymentUpdateOutput struct {
-	AccountName string `json:"account_name"`
-	Amount int64 `json:"amount"`
-	Comment string `json:"comment"`
-	CreatedAt string `json:"created_at"`
-	Currency string `json:"currency"`
-	Date string `json:"date"`
-	Id int64 `json:"id"`
-	Ks string `json:"ks"`
-	SrcAmount int64 `json:"src_amount"`
-	SrcCurrency string `json:"src_currency"`
-	Ss string `json:"ss"`
-	State string `json:"state"`
-	TransactionId string `json:"transaction_id"`
+	AccountName     string `json:"account_name"`
+	Amount          int64  `json:"amount"`
+	Comment         string `json:"comment"`
+	CreatedAt       string `json:"created_at"`
+	Currency        string `json:"currency"`
+	Date            string `json:"date"`
+	Id              int64  `json:"id"`
+	Ks              string `json:"ks"`
+	SrcAmount       int64  `json:"src_amount"`
+	SrcCurrency     string `json:"src_currency"`
+	Ss              string `json:"ss"`
+	State           string `json:"state"`
+	TransactionId   string `json:"transaction_id"`
 	TransactionType string `json:"transaction_type"`
-	UserIdent string `json:"user_ident"`
-	UserMessage string `json:"user_message"`
-	Vs string `json:"vs"`
+	UserIdent       string `json:"user_ident"`
+	UserMessage     string `json:"user_message"`
+	Vs              string `json:"vs"`
 }
-
 
 // Type for action response, including envelope
 type ActionIncomingPaymentUpdateResponse struct {
@@ -153,12 +153,11 @@ type ActionIncomingPaymentUpdateResponse struct {
 	Output *ActionIncomingPaymentUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionIncomingPaymentUpdate) Prepare() *ActionIncomingPaymentUpdateInvocation {
 	return &ActionIncomingPaymentUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/incoming_payments/{incoming_payment_id}",
+		Path:   "/v6.0/incoming_payments/{incoming_payment_id}",
 	}
 }
 
@@ -207,6 +206,7 @@ func (inv *ActionIncomingPaymentUpdateInvocation) IsParameterSelected(param stri
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionIncomingPaymentUpdateInvocation) NewMetaInput() *ActionIncomingPaymentUpdateMetaGlobalInput {
@@ -235,7 +235,6 @@ func (inv *ActionIncomingPaymentUpdateInvocation) Call() (*ActionIncomingPayment
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionIncomingPaymentUpdateInvocation) callAsBody() (*ActionIncomingPaymentUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionIncomingPaymentUpdateResponse{Action: inv.Action}
@@ -246,13 +245,10 @@ func (inv *ActionIncomingPaymentUpdateInvocation) callAsBody() (*ActionIncomingP
 	return resp, err
 }
 
-
-
-
 func (inv *ActionIncomingPaymentUpdateInvocation) makeAllInputParams() *ActionIncomingPaymentUpdateRequest {
 	return &ActionIncomingPaymentUpdateRequest{
 		IncomingPayment: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:            inv.makeMetaInputParams(),
 	}
 }
 

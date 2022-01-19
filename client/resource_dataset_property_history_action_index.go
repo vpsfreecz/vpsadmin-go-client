@@ -18,9 +18,9 @@ func NewActionDatasetPropertyHistoryIndex(client *Client) *ActionDatasetProperty
 
 // ActionDatasetPropertyHistoryIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetPropertyHistoryIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionDatasetPropertyHistoryIndexMetaGlobalInput) SetCount(value bool)
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionDatasetPropertyHistoryIndexMetaGlobalInput) SetIncludes(value string) *ActionDatasetPropertyHistoryIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionDatasetPropertyHistoryIndexMetaGlobalInput) SetIncludes(value st
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDatasetPropertyHistoryIndexMetaGlobalInput) SetNo(value bool) *ActionDatasetPropertyHistoryIndexMetaGlobalInput {
 	in.No = value
@@ -84,11 +86,11 @@ func (in *ActionDatasetPropertyHistoryIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetPropertyHistoryIndexInput is a type for action input parameters
 type ActionDatasetPropertyHistoryIndexInput struct {
-	From string `json:"from"`
-	Limit int64 `json:"limit"`
-	Name string `json:"name"`
-	Offset int64 `json:"offset"`
-	To string `json:"to"`
+	From   string `json:"from"`
+	Limit  int64  `json:"limit"`
+	Name   string `json:"name"`
+	Offset int64  `json:"offset"`
+	To     string `json:"to"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -104,6 +106,7 @@ func (in *ActionDatasetPropertyHistoryIndexInput) SetFrom(value string) *ActionD
 	in._selectedParameters["From"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionDatasetPropertyHistoryIndexInput) SetLimit(value int64) *ActionDatasetPropertyHistoryIndexInput {
 	in.Limit = value
@@ -115,6 +118,7 @@ func (in *ActionDatasetPropertyHistoryIndexInput) SetLimit(value int64) *ActionD
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetName sets parameter Name to value and selects it for sending
 func (in *ActionDatasetPropertyHistoryIndexInput) SetName(value string) *ActionDatasetPropertyHistoryIndexInput {
 	in.Name = value
@@ -126,6 +130,7 @@ func (in *ActionDatasetPropertyHistoryIndexInput) SetName(value string) *ActionD
 	in._selectedParameters["Name"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionDatasetPropertyHistoryIndexInput) SetOffset(value int64) *ActionDatasetPropertyHistoryIndexInput {
 	in.Offset = value
@@ -137,6 +142,7 @@ func (in *ActionDatasetPropertyHistoryIndexInput) SetOffset(value int64) *Action
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetTo sets parameter To to value and selects it for sending
 func (in *ActionDatasetPropertyHistoryIndexInput) SetTo(value string) *ActionDatasetPropertyHistoryIndexInput {
 	in.To = value
@@ -172,15 +178,13 @@ func (in *ActionDatasetPropertyHistoryIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionDatasetPropertyHistoryIndexOutput is a type for action output parameters
 type ActionDatasetPropertyHistoryIndexOutput struct {
 	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	Value int64 `json:"value"`
+	Id        int64  `json:"id"`
+	Name      string `json:"name"`
+	Value     int64  `json:"value"`
 }
-
 
 // Type for action response, including envelope
 type ActionDatasetPropertyHistoryIndexResponse struct {
@@ -195,12 +199,11 @@ type ActionDatasetPropertyHistoryIndexResponse struct {
 	Output []*ActionDatasetPropertyHistoryIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDatasetPropertyHistoryIndex) Prepare() *ActionDatasetPropertyHistoryIndexInvocation {
 	return &ActionDatasetPropertyHistoryIndexInvocation{
 		Action: action,
-		Path: "/v6.0/datasets/{dataset_id}/property_history",
+		Path:   "/v6.0/datasets/{dataset_id}/property_history",
 	}
 }
 
@@ -249,6 +252,7 @@ func (inv *ActionDatasetPropertyHistoryIndexInvocation) IsParameterSelected(para
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionDatasetPropertyHistoryIndexInvocation) NewMetaInput() *ActionDatasetPropertyHistoryIndexMetaGlobalInput {
@@ -289,8 +293,6 @@ func (inv *ActionDatasetPropertyHistoryIndexInvocation) callAsQuery() (*ActionDa
 	return resp, err
 }
 
-
-
 func (inv *ActionDatasetPropertyHistoryIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("From") {
@@ -324,4 +326,3 @@ func (inv *ActionDatasetPropertyHistoryIndexInvocation) convertMetaInputToQueryP
 		}
 	}
 }
-

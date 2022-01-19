@@ -19,7 +19,7 @@ func NewActionVpsReplace(client *Client) *ActionVpsReplace {
 // ActionVpsReplaceMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsReplaceMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsReplaceMetaGlobalInput) SetIncludes(value string) *ActionVpsR
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsReplaceMetaGlobalInput) SetNo(value bool) *ActionVpsReplaceMetaGlobalInput {
 	in.No = value
@@ -73,8 +74,8 @@ func (in *ActionVpsReplaceMetaGlobalInput) AnySelected() bool {
 // ActionVpsReplaceInput is a type for action input parameters
 type ActionVpsReplaceInput struct {
 	ExpirationDate string `json:"expiration_date"`
-	Node int64 `json:"node"`
-	Start bool `json:"start"`
+	Node           int64  `json:"node"`
+	Start          bool   `json:"start"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -90,6 +91,7 @@ func (in *ActionVpsReplaceInput) SetExpirationDate(value string) *ActionVpsRepla
 	in._selectedParameters["ExpirationDate"] = nil
 	return in
 }
+
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionVpsReplaceInput) SetNode(value int64) *ActionVpsReplaceInput {
 	in.Node = value
@@ -101,6 +103,7 @@ func (in *ActionVpsReplaceInput) SetNode(value int64) *ActionVpsReplaceInput {
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetStart sets parameter Start to value and selects it for sending
 func (in *ActionVpsReplaceInput) SetStart(value bool) *ActionVpsReplaceInput {
 	in.Start = value
@@ -138,45 +141,45 @@ func (in *ActionVpsReplaceInput) AnySelected() bool {
 
 // ActionVpsReplaceRequest is a type for the entire action request
 type ActionVpsReplaceRequest struct {
-	Vps map[string]interface{} `json:"vps"`
+	Vps  map[string]interface{} `json:"vps"`
 	Meta map[string]interface{} `json:"_meta"`
 }
 
 // ActionVpsReplaceOutput is a type for action output parameters
 type ActionVpsReplaceOutput struct {
-	Config string `json:"config"`
-	Cpu int64 `json:"cpu"`
-	CpuIdle float64 `json:"cpu_idle"`
-	CpuIowait float64 `json:"cpu_iowait"`
-	CpuIrq float64 `json:"cpu_irq"`
-	CpuLimit int64 `json:"cpu_limit"`
-	CpuNice float64 `json:"cpu_nice"`
-	CpuSoftirq float64 `json:"cpu_softirq"`
-	CpuSystem float64 `json:"cpu_system"`
-	CpuUser float64 `json:"cpu_user"`
-	CreatedAt string `json:"created_at"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Diskspace int64 `json:"diskspace"`
-	DnsResolver *ActionDnsResolverShowOutput `json:"dns_resolver"`
-	Hostname string `json:"hostname"`
-	Id int64 `json:"id"`
-	InRescueMode bool `json:"in_rescue_mode"`
-	Info string `json:"info"`
-	IsRunning bool `json:"is_running"`
-	Loadavg float64 `json:"loadavg"`
-	ManageHostname bool `json:"manage_hostname"`
-	Memory int64 `json:"memory"`
-	Node *ActionNodeShowOutput `json:"node"`
-	Onboot bool `json:"onboot"`
-	Onstartall bool `json:"onstartall"`
-	OsTemplate *ActionOsTemplateShowOutput `json:"os_template"`
-	ProcessCount int64 `json:"process_count"`
-	Swap int64 `json:"swap"`
-	Uptime int64 `json:"uptime"`
-	UsedDiskspace int64 `json:"used_diskspace"`
-	UsedMemory int64 `json:"used_memory"`
-	UsedSwap int64 `json:"used_swap"`
-	User *ActionUserShowOutput `json:"user"`
+	Config         string                       `json:"config"`
+	Cpu            int64                        `json:"cpu"`
+	CpuIdle        float64                      `json:"cpu_idle"`
+	CpuIowait      float64                      `json:"cpu_iowait"`
+	CpuIrq         float64                      `json:"cpu_irq"`
+	CpuLimit       int64                        `json:"cpu_limit"`
+	CpuNice        float64                      `json:"cpu_nice"`
+	CpuSoftirq     float64                      `json:"cpu_softirq"`
+	CpuSystem      float64                      `json:"cpu_system"`
+	CpuUser        float64                      `json:"cpu_user"`
+	CreatedAt      string                       `json:"created_at"`
+	Dataset        *ActionDatasetShowOutput     `json:"dataset"`
+	Diskspace      int64                        `json:"diskspace"`
+	DnsResolver    *ActionDnsResolverShowOutput `json:"dns_resolver"`
+	Hostname       string                       `json:"hostname"`
+	Id             int64                        `json:"id"`
+	InRescueMode   bool                         `json:"in_rescue_mode"`
+	Info           string                       `json:"info"`
+	IsRunning      bool                         `json:"is_running"`
+	Loadavg        float64                      `json:"loadavg"`
+	ManageHostname bool                         `json:"manage_hostname"`
+	Memory         int64                        `json:"memory"`
+	Node           *ActionNodeShowOutput        `json:"node"`
+	Onboot         bool                         `json:"onboot"`
+	Onstartall     bool                         `json:"onstartall"`
+	OsTemplate     *ActionOsTemplateShowOutput  `json:"os_template"`
+	ProcessCount   int64                        `json:"process_count"`
+	Swap           int64                        `json:"swap"`
+	Uptime         int64                        `json:"uptime"`
+	UsedDiskspace  int64                        `json:"used_diskspace"`
+	UsedMemory     int64                        `json:"used_memory"`
+	UsedSwap       int64                        `json:"used_swap"`
+	User           *ActionUserShowOutput        `json:"user"`
 }
 
 // ActionVpsReplaceMetaGlobalOutput is a type for global output metadata parameters
@@ -199,12 +202,11 @@ type ActionVpsReplaceResponse struct {
 	Output *ActionVpsReplaceOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsReplace) Prepare() *ActionVpsReplaceInvocation {
 	return &ActionVpsReplaceInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/replace",
+		Path:   "/v6.0/vpses/{vps_id}/replace",
 	}
 }
 
@@ -253,6 +255,7 @@ func (inv *ActionVpsReplaceInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsReplaceInvocation) NewMetaInput() *ActionVpsReplaceMetaGlobalInput {
@@ -280,7 +283,6 @@ func (inv *ActionVpsReplaceInvocation) IsMetaParameterSelected(param string) boo
 func (inv *ActionVpsReplaceInvocation) Call() (*ActionVpsReplaceResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsReplaceInvocation) callAsBody() (*ActionVpsReplaceResponse, error) {
 	input := inv.makeAllInputParams()
@@ -341,11 +343,11 @@ func (resp *ActionVpsReplaceResponse) WatchOperation(timeout float64, updateIn f
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -368,11 +370,9 @@ func (resp *ActionVpsReplaceResponse) CancelOperation() (*ActionActionStateCance
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsReplaceInvocation) makeAllInputParams() *ActionVpsReplaceRequest {
 	return &ActionVpsReplaceRequest{
-		Vps: inv.makeInputParams(),
+		Vps:  inv.makeInputParams(),
 		Meta: inv.makeMetaInputParams(),
 	}
 }

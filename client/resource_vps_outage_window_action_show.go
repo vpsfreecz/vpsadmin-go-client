@@ -18,7 +18,7 @@ func NewActionVpsOutageWindowShow(client *Client) *ActionVpsOutageWindowShow {
 
 // ActionVpsOutageWindowShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsOutageWindowShowMetaGlobalInput struct {
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	Includes string `json:"includes"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -35,6 +35,7 @@ func (in *ActionVpsOutageWindowShowMetaGlobalInput) SetNo(value bool) *ActionVps
 	in._selectedParameters["No"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsOutageWindowShowMetaGlobalInput) SetIncludes(value string) *ActionVpsOutageWindowShowMetaGlobalInput {
 	in.Includes = value
@@ -70,16 +71,13 @@ func (in *ActionVpsOutageWindowShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionVpsOutageWindowShowOutput is a type for action output parameters
 type ActionVpsOutageWindowShowOutput struct {
-	Weekday int64 `json:"weekday"`
-	IsOpen bool `json:"is_open"`
-	OpensAt int64 `json:"opens_at"`
+	Weekday  int64 `json:"weekday"`
+	IsOpen   bool  `json:"is_open"`
+	OpensAt  int64 `json:"opens_at"`
 	ClosesAt int64 `json:"closes_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsOutageWindowShowResponse struct {
@@ -94,12 +92,11 @@ type ActionVpsOutageWindowShowResponse struct {
 	Output *ActionVpsOutageWindowShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsOutageWindowShow) Prepare() *ActionVpsOutageWindowShowInvocation {
 	return &ActionVpsOutageWindowShowInvocation{
 		Action: action,
-		Path: "/v5.0/vpses/{vps_id}/outage_windows/{outage_window_id}",
+		Path:   "/v5.0/vpses/{vps_id}/outage_windows/{outage_window_id}",
 	}
 }
 
@@ -164,9 +161,6 @@ func (inv *ActionVpsOutageWindowShowInvocation) callAsQuery() (*ActionVpsOutageW
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsOutageWindowShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("No") {
@@ -177,4 +171,3 @@ func (inv *ActionVpsOutageWindowShowInvocation) convertMetaInputToQueryParams(re
 		}
 	}
 }
-

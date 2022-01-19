@@ -19,7 +19,7 @@ func NewActionMailRecipientUpdate(client *Client) *ActionMailRecipientUpdate {
 // ActionMailRecipientUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionMailRecipientUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMailRecipientUpdateMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMailRecipientUpdateMetaGlobalInput) SetNo(value bool) *ActionMailRecipientUpdateMetaGlobalInput {
 	in.No = value
@@ -72,10 +73,10 @@ func (in *ActionMailRecipientUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionMailRecipientUpdateInput is a type for action input parameters
 type ActionMailRecipientUpdateInput struct {
-	Bcc string `json:"bcc"`
-	Cc string `json:"cc"`
+	Bcc   string `json:"bcc"`
+	Cc    string `json:"cc"`
 	Label string `json:"label"`
-	To string `json:"to"`
+	To    string `json:"to"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -91,6 +92,7 @@ func (in *ActionMailRecipientUpdateInput) SetBcc(value string) *ActionMailRecipi
 	in._selectedParameters["Bcc"] = nil
 	return in
 }
+
 // SetCc sets parameter Cc to value and selects it for sending
 func (in *ActionMailRecipientUpdateInput) SetCc(value string) *ActionMailRecipientUpdateInput {
 	in.Cc = value
@@ -102,6 +104,7 @@ func (in *ActionMailRecipientUpdateInput) SetCc(value string) *ActionMailRecipie
 	in._selectedParameters["Cc"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionMailRecipientUpdateInput) SetLabel(value string) *ActionMailRecipientUpdateInput {
 	in.Label = value
@@ -113,6 +116,7 @@ func (in *ActionMailRecipientUpdateInput) SetLabel(value string) *ActionMailReci
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetTo sets parameter To to value and selects it for sending
 func (in *ActionMailRecipientUpdateInput) SetTo(value string) *ActionMailRecipientUpdateInput {
 	in.To = value
@@ -151,18 +155,17 @@ func (in *ActionMailRecipientUpdateInput) AnySelected() bool {
 // ActionMailRecipientUpdateRequest is a type for the entire action request
 type ActionMailRecipientUpdateRequest struct {
 	MailRecipient map[string]interface{} `json:"mail_recipient"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta          map[string]interface{} `json:"_meta"`
 }
 
 // ActionMailRecipientUpdateOutput is a type for action output parameters
 type ActionMailRecipientUpdateOutput struct {
-	Bcc string `json:"bcc"`
-	Cc string `json:"cc"`
-	Id int64 `json:"id"`
+	Bcc   string `json:"bcc"`
+	Cc    string `json:"cc"`
+	Id    int64  `json:"id"`
 	Label string `json:"label"`
-	To string `json:"to"`
+	To    string `json:"to"`
 }
-
 
 // Type for action response, including envelope
 type ActionMailRecipientUpdateResponse struct {
@@ -177,12 +180,11 @@ type ActionMailRecipientUpdateResponse struct {
 	Output *ActionMailRecipientUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMailRecipientUpdate) Prepare() *ActionMailRecipientUpdateInvocation {
 	return &ActionMailRecipientUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/mail_recipients/{mail_recipient_id}",
+		Path:   "/v6.0/mail_recipients/{mail_recipient_id}",
 	}
 }
 
@@ -231,6 +233,7 @@ func (inv *ActionMailRecipientUpdateInvocation) IsParameterSelected(param string
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionMailRecipientUpdateInvocation) NewMetaInput() *ActionMailRecipientUpdateMetaGlobalInput {
@@ -259,7 +262,6 @@ func (inv *ActionMailRecipientUpdateInvocation) Call() (*ActionMailRecipientUpda
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionMailRecipientUpdateInvocation) callAsBody() (*ActionMailRecipientUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionMailRecipientUpdateResponse{Action: inv.Action}
@@ -270,13 +272,10 @@ func (inv *ActionMailRecipientUpdateInvocation) callAsBody() (*ActionMailRecipie
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMailRecipientUpdateInvocation) makeAllInputParams() *ActionMailRecipientUpdateRequest {
 	return &ActionMailRecipientUpdateRequest{
 		MailRecipient: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:          inv.makeMetaInputParams(),
 	}
 }
 

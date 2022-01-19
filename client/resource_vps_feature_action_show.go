@@ -19,7 +19,7 @@ func NewActionVpsFeatureShow(client *Client) *ActionVpsFeatureShow {
 // ActionVpsFeatureShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsFeatureShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsFeatureShowMetaGlobalInput) SetIncludes(value string) *Action
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsFeatureShowMetaGlobalInput) SetNo(value bool) *ActionVpsFeatureShowMetaGlobalInput {
 	in.No = value
@@ -70,16 +71,13 @@ func (in *ActionVpsFeatureShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionVpsFeatureShowOutput is a type for action output parameters
 type ActionVpsFeatureShowOutput struct {
-	Enabled bool `json:"enabled"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Name string `json:"name"`
+	Enabled bool   `json:"enabled"`
+	Id      int64  `json:"id"`
+	Label   string `json:"label"`
+	Name    string `json:"name"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsFeatureShowResponse struct {
@@ -94,12 +92,11 @@ type ActionVpsFeatureShowResponse struct {
 	Output *ActionVpsFeatureShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsFeatureShow) Prepare() *ActionVpsFeatureShowInvocation {
 	return &ActionVpsFeatureShowInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/features/{feature_id}",
+		Path:   "/v6.0/vpses/{vps_id}/features/{feature_id}",
 	}
 }
 
@@ -164,9 +161,6 @@ func (inv *ActionVpsFeatureShowInvocation) callAsQuery() (*ActionVpsFeatureShowR
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsFeatureShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -177,4 +171,3 @@ func (inv *ActionVpsFeatureShowInvocation) convertMetaInputToQueryParams(ret map
 		}
 	}
 }
-

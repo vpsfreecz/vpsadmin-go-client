@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionMigrationPlanCreate is a type for action Migration_plan#Create
 type ActionMigrationPlanCreate struct {
@@ -18,7 +17,7 @@ func NewActionMigrationPlanCreate(client *Client) *ActionMigrationPlanCreate {
 // ActionMigrationPlanCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionMigrationPlanCreateMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMigrationPlanCreateMetaGlobalInput) SetNo(value bool) *ActionMigrationPlanCreateMetaGlobalInput {
 	in.No = value
@@ -71,10 +71,10 @@ func (in *ActionMigrationPlanCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionMigrationPlanCreateInput is a type for action input parameters
 type ActionMigrationPlanCreateInput struct {
-	Concurrency int64 `json:"concurrency"`
-	Reason string `json:"reason"`
-	SendMail bool `json:"send_mail"`
-	StopOnError bool `json:"stop_on_error"`
+	Concurrency int64  `json:"concurrency"`
+	Reason      string `json:"reason"`
+	SendMail    bool   `json:"send_mail"`
+	StopOnError bool   `json:"stop_on_error"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -90,6 +90,7 @@ func (in *ActionMigrationPlanCreateInput) SetConcurrency(value int64) *ActionMig
 	in._selectedParameters["Concurrency"] = nil
 	return in
 }
+
 // SetReason sets parameter Reason to value and selects it for sending
 func (in *ActionMigrationPlanCreateInput) SetReason(value string) *ActionMigrationPlanCreateInput {
 	in.Reason = value
@@ -101,6 +102,7 @@ func (in *ActionMigrationPlanCreateInput) SetReason(value string) *ActionMigrati
 	in._selectedParameters["Reason"] = nil
 	return in
 }
+
 // SetSendMail sets parameter SendMail to value and selects it for sending
 func (in *ActionMigrationPlanCreateInput) SetSendMail(value bool) *ActionMigrationPlanCreateInput {
 	in.SendMail = value
@@ -112,6 +114,7 @@ func (in *ActionMigrationPlanCreateInput) SetSendMail(value bool) *ActionMigrati
 	in._selectedParameters["SendMail"] = nil
 	return in
 }
+
 // SetStopOnError sets parameter StopOnError to value and selects it for sending
 func (in *ActionMigrationPlanCreateInput) SetStopOnError(value bool) *ActionMigrationPlanCreateInput {
 	in.StopOnError = value
@@ -150,22 +153,21 @@ func (in *ActionMigrationPlanCreateInput) AnySelected() bool {
 // ActionMigrationPlanCreateRequest is a type for the entire action request
 type ActionMigrationPlanCreateRequest struct {
 	MigrationPlan map[string]interface{} `json:"migration_plan"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta          map[string]interface{} `json:"_meta"`
 }
 
 // ActionMigrationPlanCreateOutput is a type for action output parameters
 type ActionMigrationPlanCreateOutput struct {
-	Concurrency int64 `json:"concurrency"`
-	CreatedAt string `json:"created_at"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	Reason string `json:"reason"`
-	SendMail bool `json:"send_mail"`
-	State string `json:"state"`
-	StopOnError bool `json:"stop_on_error"`
-	User *ActionUserShowOutput `json:"user"`
+	Concurrency int64                 `json:"concurrency"`
+	CreatedAt   string                `json:"created_at"`
+	FinishedAt  string                `json:"finished_at"`
+	Id          int64                 `json:"id"`
+	Reason      string                `json:"reason"`
+	SendMail    bool                  `json:"send_mail"`
+	State       string                `json:"state"`
+	StopOnError bool                  `json:"stop_on_error"`
+	User        *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionMigrationPlanCreateResponse struct {
@@ -180,12 +182,11 @@ type ActionMigrationPlanCreateResponse struct {
 	Output *ActionMigrationPlanCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMigrationPlanCreate) Prepare() *ActionMigrationPlanCreateInvocation {
 	return &ActionMigrationPlanCreateInvocation{
 		Action: action,
-		Path: "/v6.0/migration_plans",
+		Path:   "/v6.0/migration_plans",
 	}
 }
 
@@ -201,7 +202,6 @@ type ActionMigrationPlanCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionMigrationPlanCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionMigrationPlanCreateInvocation) NewInput() *ActionMigrationPlanCreateInput {
@@ -224,6 +224,7 @@ func (inv *ActionMigrationPlanCreateInvocation) IsParameterSelected(param string
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionMigrationPlanCreateInvocation) NewMetaInput() *ActionMigrationPlanCreateMetaGlobalInput {
@@ -252,7 +253,6 @@ func (inv *ActionMigrationPlanCreateInvocation) Call() (*ActionMigrationPlanCrea
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionMigrationPlanCreateInvocation) callAsBody() (*ActionMigrationPlanCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionMigrationPlanCreateResponse{Action: inv.Action}
@@ -263,13 +263,10 @@ func (inv *ActionMigrationPlanCreateInvocation) callAsBody() (*ActionMigrationPl
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMigrationPlanCreateInvocation) makeAllInputParams() *ActionMigrationPlanCreateRequest {
 	return &ActionMigrationPlanCreateRequest{
 		MigrationPlan: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:          inv.makeMetaInputParams(),
 	}
 }
 

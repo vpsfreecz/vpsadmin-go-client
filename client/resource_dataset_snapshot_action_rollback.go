@@ -19,7 +19,7 @@ func NewActionDatasetSnapshotRollback(client *Client) *ActionDatasetSnapshotRoll
 // ActionDatasetSnapshotRollbackMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetSnapshotRollbackMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionDatasetSnapshotRollbackMetaGlobalInput) SetIncludes(value string
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDatasetSnapshotRollbackMetaGlobalInput) SetNo(value bool) *ActionDatasetSnapshotRollbackMetaGlobalInput {
 	in.No = value
@@ -70,12 +71,10 @@ func (in *ActionDatasetSnapshotRollbackMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionDatasetSnapshotRollbackRequest is a type for the entire action request
 type ActionDatasetSnapshotRollbackRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionDatasetSnapshotRollbackMetaGlobalOutput is a type for global output metadata parameters
 type ActionDatasetSnapshotRollbackMetaGlobalOutput struct {
@@ -93,12 +92,11 @@ type ActionDatasetSnapshotRollbackResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDatasetSnapshotRollback) Prepare() *ActionDatasetSnapshotRollbackInvocation {
 	return &ActionDatasetSnapshotRollbackInvocation{
 		Action: action,
-		Path: "/v6.0/datasets/{dataset_id}/snapshots/{snapshot_id}/rollback",
+		Path:   "/v6.0/datasets/{dataset_id}/snapshots/{snapshot_id}/rollback",
 	}
 }
 
@@ -151,7 +149,6 @@ func (inv *ActionDatasetSnapshotRollbackInvocation) IsMetaParameterSelected(para
 func (inv *ActionDatasetSnapshotRollbackInvocation) Call() (*ActionDatasetSnapshotRollbackResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionDatasetSnapshotRollbackInvocation) callAsBody() (*ActionDatasetSnapshotRollbackResponse, error) {
 	input := inv.makeAllInputParams()
@@ -209,11 +206,11 @@ func (resp *ActionDatasetSnapshotRollbackResponse) WatchOperation(timeout float6
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -236,14 +233,11 @@ func (resp *ActionDatasetSnapshotRollbackResponse) CancelOperation() (*ActionAct
 	return req.Call()
 }
 
-
-
 func (inv *ActionDatasetSnapshotRollbackInvocation) makeAllInputParams() *ActionDatasetSnapshotRollbackRequest {
 	return &ActionDatasetSnapshotRollbackRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionDatasetSnapshotRollbackInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

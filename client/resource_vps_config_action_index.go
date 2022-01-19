@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionVpsConfigIndex is a type for action Vps_config#Index
 type ActionVpsConfigIndex struct {
@@ -17,9 +16,9 @@ func NewActionVpsConfigIndex(client *Client) *ActionVpsConfigIndex {
 
 // ActionVpsConfigIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsConfigIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionVpsConfigIndexMetaGlobalInput) SetCount(value bool) *ActionVpsCo
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsConfigIndexMetaGlobalInput) SetIncludes(value string) *ActionVpsConfigIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionVpsConfigIndexMetaGlobalInput) SetIncludes(value string) *Action
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsConfigIndexMetaGlobalInput) SetNo(value bool) *ActionVpsConfigIndexMetaGlobalInput {
 	in.No = value
@@ -83,7 +84,7 @@ func (in *ActionVpsConfigIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsConfigIndexInput is a type for action input parameters
 type ActionVpsConfigIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -100,6 +101,7 @@ func (in *ActionVpsConfigIndexInput) SetLimit(value int64) *ActionVpsConfigIndex
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionVpsConfigIndexInput) SetOffset(value int64) *ActionVpsConfigIndexInput {
 	in.Offset = value
@@ -135,15 +137,13 @@ func (in *ActionVpsConfigIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionVpsConfigIndexOutput is a type for action output parameters
 type ActionVpsConfigIndexOutput struct {
 	Config string `json:"config"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Name string `json:"name"`
+	Id     int64  `json:"id"`
+	Label  string `json:"label"`
+	Name   string `json:"name"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsConfigIndexResponse struct {
@@ -158,12 +158,11 @@ type ActionVpsConfigIndexResponse struct {
 	Output []*ActionVpsConfigIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsConfigIndex) Prepare() *ActionVpsConfigIndexInvocation {
 	return &ActionVpsConfigIndexInvocation{
 		Action: action,
-		Path: "/v6.0/vps_configs",
+		Path:   "/v6.0/vps_configs",
 	}
 }
 
@@ -179,7 +178,6 @@ type ActionVpsConfigIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionVpsConfigIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionVpsConfigIndexInvocation) NewInput() *ActionVpsConfigIndexInput {
@@ -202,6 +200,7 @@ func (inv *ActionVpsConfigIndexInvocation) IsParameterSelected(param string) boo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsConfigIndexInvocation) NewMetaInput() *ActionVpsConfigIndexMetaGlobalInput {
@@ -242,8 +241,6 @@ func (inv *ActionVpsConfigIndexInvocation) callAsQuery() (*ActionVpsConfigIndexR
 	return resp, err
 }
 
-
-
 func (inv *ActionVpsConfigIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -268,4 +265,3 @@ func (inv *ActionVpsConfigIndexInvocation) convertMetaInputToQueryParams(ret map
 		}
 	}
 }
-

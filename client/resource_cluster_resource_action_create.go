@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionClusterResourceCreate is a type for action Cluster_resource#Create
 type ActionClusterResourceCreate struct {
@@ -18,7 +17,7 @@ func NewActionClusterResourceCreate(client *Client) *ActionClusterResourceCreate
 // ActionClusterResourceCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourceCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionClusterResourceCreateMetaGlobalInput) SetIncludes(value string) 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionClusterResourceCreateMetaGlobalInput) SetNo(value bool) *ActionClusterResourceCreateMetaGlobalInput {
 	in.No = value
@@ -71,11 +71,11 @@ func (in *ActionClusterResourceCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterResourceCreateInput is a type for action input parameters
 type ActionClusterResourceCreateInput struct {
-	Label string `json:"label"`
-	Max int64 `json:"max"`
-	Min int64 `json:"min"`
-	Name string `json:"name"`
-	Stepsize int64 `json:"stepsize"`
+	Label    string `json:"label"`
+	Max      int64  `json:"max"`
+	Min      int64  `json:"min"`
+	Name     string `json:"name"`
+	Stepsize int64  `json:"stepsize"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -91,6 +91,7 @@ func (in *ActionClusterResourceCreateInput) SetLabel(value string) *ActionCluste
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetMax sets parameter Max to value and selects it for sending
 func (in *ActionClusterResourceCreateInput) SetMax(value int64) *ActionClusterResourceCreateInput {
 	in.Max = value
@@ -102,6 +103,7 @@ func (in *ActionClusterResourceCreateInput) SetMax(value int64) *ActionClusterRe
 	in._selectedParameters["Max"] = nil
 	return in
 }
+
 // SetMin sets parameter Min to value and selects it for sending
 func (in *ActionClusterResourceCreateInput) SetMin(value int64) *ActionClusterResourceCreateInput {
 	in.Min = value
@@ -113,6 +115,7 @@ func (in *ActionClusterResourceCreateInput) SetMin(value int64) *ActionClusterRe
 	in._selectedParameters["Min"] = nil
 	return in
 }
+
 // SetName sets parameter Name to value and selects it for sending
 func (in *ActionClusterResourceCreateInput) SetName(value string) *ActionClusterResourceCreateInput {
 	in.Name = value
@@ -124,6 +127,7 @@ func (in *ActionClusterResourceCreateInput) SetName(value string) *ActionCluster
 	in._selectedParameters["Name"] = nil
 	return in
 }
+
 // SetStepsize sets parameter Stepsize to value and selects it for sending
 func (in *ActionClusterResourceCreateInput) SetStepsize(value int64) *ActionClusterResourceCreateInput {
 	in.Stepsize = value
@@ -162,10 +166,8 @@ func (in *ActionClusterResourceCreateInput) AnySelected() bool {
 // ActionClusterResourceCreateRequest is a type for the entire action request
 type ActionClusterResourceCreateRequest struct {
 	ClusterResource map[string]interface{} `json:"cluster_resource"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta            map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionClusterResourceCreateResponse struct {
@@ -173,12 +175,11 @@ type ActionClusterResourceCreateResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionClusterResourceCreate) Prepare() *ActionClusterResourceCreateInvocation {
 	return &ActionClusterResourceCreateInvocation{
 		Action: action,
-		Path: "/v6.0/cluster_resources",
+		Path:   "/v6.0/cluster_resources",
 	}
 }
 
@@ -194,7 +195,6 @@ type ActionClusterResourceCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionClusterResourceCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionClusterResourceCreateInvocation) NewInput() *ActionClusterResourceCreateInput {
@@ -217,6 +217,7 @@ func (inv *ActionClusterResourceCreateInvocation) IsParameterSelected(param stri
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionClusterResourceCreateInvocation) NewMetaInput() *ActionClusterResourceCreateMetaGlobalInput {
@@ -245,7 +246,6 @@ func (inv *ActionClusterResourceCreateInvocation) Call() (*ActionClusterResource
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionClusterResourceCreateInvocation) callAsBody() (*ActionClusterResourceCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionClusterResourceCreateResponse{Action: inv.Action}
@@ -253,13 +253,10 @@ func (inv *ActionClusterResourceCreateInvocation) callAsBody() (*ActionClusterRe
 	return resp, err
 }
 
-
-
-
 func (inv *ActionClusterResourceCreateInvocation) makeAllInputParams() *ActionClusterResourceCreateRequest {
 	return &ActionClusterResourceCreateRequest{
 		ClusterResource: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:            inv.makeMetaInputParams(),
 	}
 }
 

@@ -19,7 +19,7 @@ func NewActionVpsStateLogShow(client *Client) *ActionVpsStateLogShow {
 // ActionVpsStateLogShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsStateLogShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsStateLogShowMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsStateLogShowMetaGlobalInput) SetNo(value bool) *ActionVpsStateLogShowMetaGlobalInput {
 	in.No = value
@@ -70,18 +71,15 @@ func (in *ActionVpsStateLogShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionVpsStateLogShowOutput is a type for action output parameters
 type ActionVpsStateLogShowOutput struct {
-	ChangedAt string `json:"changed_at"`
-	Expiration string `json:"expiration"`
-	Id int64 `json:"id"`
-	Reason string `json:"reason"`
-	State string `json:"state"`
-	User *ActionUserShowOutput `json:"user"`
+	ChangedAt  string                `json:"changed_at"`
+	Expiration string                `json:"expiration"`
+	Id         int64                 `json:"id"`
+	Reason     string                `json:"reason"`
+	State      string                `json:"state"`
+	User       *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsStateLogShowResponse struct {
@@ -96,12 +94,11 @@ type ActionVpsStateLogShowResponse struct {
 	Output *ActionVpsStateLogShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsStateLogShow) Prepare() *ActionVpsStateLogShowInvocation {
 	return &ActionVpsStateLogShowInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/state_logs/{state_log_id}",
+		Path:   "/v6.0/vpses/{vps_id}/state_logs/{state_log_id}",
 	}
 }
 
@@ -166,9 +163,6 @@ func (inv *ActionVpsStateLogShowInvocation) callAsQuery() (*ActionVpsStateLogSho
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsStateLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -179,4 +173,3 @@ func (inv *ActionVpsStateLogShowInvocation) convertMetaInputToQueryParams(ret ma
 		}
 	}
 }
-

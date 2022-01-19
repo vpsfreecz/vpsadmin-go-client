@@ -19,7 +19,7 @@ func NewActionVpsOutageShow(client *Client) *ActionVpsOutageShow {
 // ActionVpsOutageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsOutageShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsOutageShowMetaGlobalInput) SetIncludes(value string) *ActionV
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsOutageShowMetaGlobalInput) SetNo(value bool) *ActionVpsOutageShowMetaGlobalInput {
 	in.No = value
@@ -70,20 +71,17 @@ func (in *ActionVpsOutageShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionVpsOutageShowOutput is a type for action output parameters
 type ActionVpsOutageShowOutput struct {
-	Direct bool `json:"direct"`
+	Direct      bool                         `json:"direct"`
 	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	Id int64 `json:"id"`
-	Location *ActionLocationShowOutput `json:"location"`
-	Node *ActionNodeShowOutput `json:"node"`
-	Outage *ActionOutageShowOutput `json:"outage"`
-	User *ActionUserShowOutput `json:"user"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	Id          int64                        `json:"id"`
+	Location    *ActionLocationShowOutput    `json:"location"`
+	Node        *ActionNodeShowOutput        `json:"node"`
+	Outage      *ActionOutageShowOutput      `json:"outage"`
+	User        *ActionUserShowOutput        `json:"user"`
+	Vps         *ActionVpsShowOutput         `json:"vps"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsOutageShowResponse struct {
@@ -98,12 +96,11 @@ type ActionVpsOutageShowResponse struct {
 	Output *ActionVpsOutageShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsOutageShow) Prepare() *ActionVpsOutageShowInvocation {
 	return &ActionVpsOutageShowInvocation{
 		Action: action,
-		Path: "/v6.0/vps_outages/{vps_outage_id}",
+		Path:   "/v6.0/vps_outages/{vps_outage_id}",
 	}
 }
 
@@ -168,9 +165,6 @@ func (inv *ActionVpsOutageShowInvocation) callAsQuery() (*ActionVpsOutageShowRes
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsOutageShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -181,4 +175,3 @@ func (inv *ActionVpsOutageShowInvocation) convertMetaInputToQueryParams(ret map[
 		}
 	}
 }
-

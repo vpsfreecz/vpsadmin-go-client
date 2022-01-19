@@ -21,9 +21,9 @@ func NewResourceNodeStatus(client *Client) *ResourceNodeStatus {
 
 	return &ResourceNodeStatus{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

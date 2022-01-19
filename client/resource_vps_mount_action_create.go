@@ -19,7 +19,7 @@ func NewActionVpsMountCreate(client *Client) *ActionVpsMountCreate {
 // ActionVpsMountCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMountCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsMountCreateMetaGlobalInput) SetIncludes(value string) *Action
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsMountCreateMetaGlobalInput) SetNo(value bool) *ActionVpsMountCreateMetaGlobalInput {
 	in.No = value
@@ -72,12 +73,12 @@ func (in *ActionVpsMountCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMountCreateInput is a type for action input parameters
 type ActionVpsMountCreateInput struct {
-	Dataset int64 `json:"dataset"`
-	Mode string `json:"mode"`
-	Mountpoint string `json:"mountpoint"`
-	OnStartFail string `json:"on_start_fail"`
-	Snapshot int64 `json:"snapshot"`
-	UserNamespaceMap int64 `json:"user_namespace_map"`
+	Dataset          int64  `json:"dataset"`
+	Mode             string `json:"mode"`
+	Mountpoint       string `json:"mountpoint"`
+	OnStartFail      string `json:"on_start_fail"`
+	Snapshot         int64  `json:"snapshot"`
+	UserNamespaceMap int64  `json:"user_namespace_map"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -93,6 +94,7 @@ func (in *ActionVpsMountCreateInput) SetDataset(value int64) *ActionVpsMountCrea
 	in._selectedParameters["Dataset"] = nil
 	return in
 }
+
 // SetMode sets parameter Mode to value and selects it for sending
 func (in *ActionVpsMountCreateInput) SetMode(value string) *ActionVpsMountCreateInput {
 	in.Mode = value
@@ -104,6 +106,7 @@ func (in *ActionVpsMountCreateInput) SetMode(value string) *ActionVpsMountCreate
 	in._selectedParameters["Mode"] = nil
 	return in
 }
+
 // SetMountpoint sets parameter Mountpoint to value and selects it for sending
 func (in *ActionVpsMountCreateInput) SetMountpoint(value string) *ActionVpsMountCreateInput {
 	in.Mountpoint = value
@@ -115,6 +118,7 @@ func (in *ActionVpsMountCreateInput) SetMountpoint(value string) *ActionVpsMount
 	in._selectedParameters["Mountpoint"] = nil
 	return in
 }
+
 // SetOnStartFail sets parameter OnStartFail to value and selects it for sending
 func (in *ActionVpsMountCreateInput) SetOnStartFail(value string) *ActionVpsMountCreateInput {
 	in.OnStartFail = value
@@ -126,6 +130,7 @@ func (in *ActionVpsMountCreateInput) SetOnStartFail(value string) *ActionVpsMoun
 	in._selectedParameters["OnStartFail"] = nil
 	return in
 }
+
 // SetSnapshot sets parameter Snapshot to value and selects it for sending
 func (in *ActionVpsMountCreateInput) SetSnapshot(value int64) *ActionVpsMountCreateInput {
 	in.Snapshot = value
@@ -137,6 +142,7 @@ func (in *ActionVpsMountCreateInput) SetSnapshot(value int64) *ActionVpsMountCre
 	in._selectedParameters["Snapshot"] = nil
 	return in
 }
+
 // SetUserNamespaceMap sets parameter UserNamespaceMap to value and selects it for sending
 func (in *ActionVpsMountCreateInput) SetUserNamespaceMap(value int64) *ActionVpsMountCreateInput {
 	in.UserNamespaceMap = value
@@ -175,23 +181,23 @@ func (in *ActionVpsMountCreateInput) AnySelected() bool {
 // ActionVpsMountCreateRequest is a type for the entire action request
 type ActionVpsMountCreateRequest struct {
 	Mount map[string]interface{} `json:"mount"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta  map[string]interface{} `json:"_meta"`
 }
 
 // ActionVpsMountCreateOutput is a type for action output parameters
 type ActionVpsMountCreateOutput struct {
-	CurrentState string `json:"current_state"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Enabled bool `json:"enabled"`
-	ExpirationDate string `json:"expiration_date"`
-	Id int64 `json:"id"`
-	MasterEnabled bool `json:"master_enabled"`
-	Mode string `json:"mode"`
-	Mountpoint string `json:"mountpoint"`
-	OnStartFail string `json:"on_start_fail"`
-	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
+	CurrentState     string                            `json:"current_state"`
+	Dataset          *ActionDatasetShowOutput          `json:"dataset"`
+	Enabled          bool                              `json:"enabled"`
+	ExpirationDate   string                            `json:"expiration_date"`
+	Id               int64                             `json:"id"`
+	MasterEnabled    bool                              `json:"master_enabled"`
+	Mode             string                            `json:"mode"`
+	Mountpoint       string                            `json:"mountpoint"`
+	OnStartFail      string                            `json:"on_start_fail"`
+	Snapshot         *ActionDatasetSnapshotShowOutput  `json:"snapshot"`
 	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	Vps              *ActionVpsShowOutput              `json:"vps"`
 }
 
 // ActionVpsMountCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -214,12 +220,11 @@ type ActionVpsMountCreateResponse struct {
 	Output *ActionVpsMountCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsMountCreate) Prepare() *ActionVpsMountCreateInvocation {
 	return &ActionVpsMountCreateInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/mounts",
+		Path:   "/v6.0/vpses/{vps_id}/mounts",
 	}
 }
 
@@ -268,6 +273,7 @@ func (inv *ActionVpsMountCreateInvocation) IsParameterSelected(param string) boo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsMountCreateInvocation) NewMetaInput() *ActionVpsMountCreateMetaGlobalInput {
@@ -295,7 +301,6 @@ func (inv *ActionVpsMountCreateInvocation) IsMetaParameterSelected(param string)
 func (inv *ActionVpsMountCreateInvocation) Call() (*ActionVpsMountCreateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsMountCreateInvocation) callAsBody() (*ActionVpsMountCreateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -356,11 +361,11 @@ func (resp *ActionVpsMountCreateResponse) WatchOperation(timeout float64, update
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -383,12 +388,10 @@ func (resp *ActionVpsMountCreateResponse) CancelOperation() (*ActionActionStateC
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsMountCreateInvocation) makeAllInputParams() *ActionVpsMountCreateRequest {
 	return &ActionVpsMountCreateRequest{
 		Mount: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:  inv.makeMetaInputParams(),
 	}
 }
 

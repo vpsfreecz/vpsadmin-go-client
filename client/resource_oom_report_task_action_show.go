@@ -19,7 +19,7 @@ func NewActionOomReportTaskShow(client *Client) *ActionOomReportTaskShow {
 // ActionOomReportTaskShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportTaskShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOomReportTaskShowMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOomReportTaskShowMetaGlobalInput) SetNo(value bool) *ActionOomReportTaskShowMetaGlobalInput {
 	in.No = value
@@ -70,23 +71,20 @@ func (in *ActionOomReportTaskShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionOomReportTaskShowOutput is a type for action output parameters
 type ActionOomReportTaskShowOutput struct {
-	HostPid int64 `json:"host_pid"`
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	OomScoreAdj int64 `json:"oom_score_adj"`
-	PgtablesBytes int64 `json:"pgtables_bytes"`
-	Rss int64 `json:"rss"`
-	Swapents int64 `json:"swapents"`
-	Tgid int64 `json:"tgid"`
-	TotalVm int64 `json:"total_vm"`
-	VpsPid int64 `json:"vps_pid"`
-	VpsUid int64 `json:"vps_uid"`
+	HostPid       int64  `json:"host_pid"`
+	Id            int64  `json:"id"`
+	Name          string `json:"name"`
+	OomScoreAdj   int64  `json:"oom_score_adj"`
+	PgtablesBytes int64  `json:"pgtables_bytes"`
+	Rss           int64  `json:"rss"`
+	Swapents      int64  `json:"swapents"`
+	Tgid          int64  `json:"tgid"`
+	TotalVm       int64  `json:"total_vm"`
+	VpsPid        int64  `json:"vps_pid"`
+	VpsUid        int64  `json:"vps_uid"`
 }
-
 
 // Type for action response, including envelope
 type ActionOomReportTaskShowResponse struct {
@@ -101,12 +99,11 @@ type ActionOomReportTaskShowResponse struct {
 	Output []*ActionOomReportTaskShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOomReportTaskShow) Prepare() *ActionOomReportTaskShowInvocation {
 	return &ActionOomReportTaskShowInvocation{
 		Action: action,
-		Path: "/v6.0/oom_reports/{oom_report_id}/tasks/{task_id}",
+		Path:   "/v6.0/oom_reports/{oom_report_id}/tasks/{task_id}",
 	}
 }
 
@@ -171,9 +168,6 @@ func (inv *ActionOomReportTaskShowInvocation) callAsQuery() (*ActionOomReportTas
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOomReportTaskShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -184,4 +178,3 @@ func (inv *ActionOomReportTaskShowInvocation) convertMetaInputToQueryParams(ret 
 		}
 	}
 }
-

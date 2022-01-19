@@ -19,7 +19,7 @@ func NewActionMailTemplateTranslationCreate(client *Client) *ActionMailTemplateT
 // ActionMailTemplateTranslationCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateTranslationCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMailTemplateTranslationCreateMetaGlobalInput) SetIncludes(value 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMailTemplateTranslationCreateMetaGlobalInput) SetNo(value bool) *ActionMailTemplateTranslationCreateMetaGlobalInput {
 	in.No = value
@@ -72,13 +73,13 @@ func (in *ActionMailTemplateTranslationCreateMetaGlobalInput) AnySelected() bool
 
 // ActionMailTemplateTranslationCreateInput is a type for action input parameters
 type ActionMailTemplateTranslationCreateInput struct {
-	From string `json:"from"`
-	Language int64 `json:"language"`
-	ReplyTo string `json:"reply_to"`
+	From       string `json:"from"`
+	Language   int64  `json:"language"`
+	ReplyTo    string `json:"reply_to"`
 	ReturnPath string `json:"return_path"`
-	Subject string `json:"subject"`
-	TextHtml string `json:"text_html"`
-	TextPlain string `json:"text_plain"`
+	Subject    string `json:"subject"`
+	TextHtml   string `json:"text_html"`
+	TextPlain  string `json:"text_plain"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -94,6 +95,7 @@ func (in *ActionMailTemplateTranslationCreateInput) SetFrom(value string) *Actio
 	in._selectedParameters["From"] = nil
 	return in
 }
+
 // SetLanguage sets parameter Language to value and selects it for sending
 func (in *ActionMailTemplateTranslationCreateInput) SetLanguage(value int64) *ActionMailTemplateTranslationCreateInput {
 	in.Language = value
@@ -105,6 +107,7 @@ func (in *ActionMailTemplateTranslationCreateInput) SetLanguage(value int64) *Ac
 	in._selectedParameters["Language"] = nil
 	return in
 }
+
 // SetReplyTo sets parameter ReplyTo to value and selects it for sending
 func (in *ActionMailTemplateTranslationCreateInput) SetReplyTo(value string) *ActionMailTemplateTranslationCreateInput {
 	in.ReplyTo = value
@@ -116,6 +119,7 @@ func (in *ActionMailTemplateTranslationCreateInput) SetReplyTo(value string) *Ac
 	in._selectedParameters["ReplyTo"] = nil
 	return in
 }
+
 // SetReturnPath sets parameter ReturnPath to value and selects it for sending
 func (in *ActionMailTemplateTranslationCreateInput) SetReturnPath(value string) *ActionMailTemplateTranslationCreateInput {
 	in.ReturnPath = value
@@ -127,6 +131,7 @@ func (in *ActionMailTemplateTranslationCreateInput) SetReturnPath(value string) 
 	in._selectedParameters["ReturnPath"] = nil
 	return in
 }
+
 // SetSubject sets parameter Subject to value and selects it for sending
 func (in *ActionMailTemplateTranslationCreateInput) SetSubject(value string) *ActionMailTemplateTranslationCreateInput {
 	in.Subject = value
@@ -138,6 +143,7 @@ func (in *ActionMailTemplateTranslationCreateInput) SetSubject(value string) *Ac
 	in._selectedParameters["Subject"] = nil
 	return in
 }
+
 // SetTextHtml sets parameter TextHtml to value and selects it for sending
 func (in *ActionMailTemplateTranslationCreateInput) SetTextHtml(value string) *ActionMailTemplateTranslationCreateInput {
 	in.TextHtml = value
@@ -149,6 +155,7 @@ func (in *ActionMailTemplateTranslationCreateInput) SetTextHtml(value string) *A
 	in._selectedParameters["TextHtml"] = nil
 	return in
 }
+
 // SetTextPlain sets parameter TextPlain to value and selects it for sending
 func (in *ActionMailTemplateTranslationCreateInput) SetTextPlain(value string) *ActionMailTemplateTranslationCreateInput {
 	in.TextPlain = value
@@ -187,23 +194,22 @@ func (in *ActionMailTemplateTranslationCreateInput) AnySelected() bool {
 // ActionMailTemplateTranslationCreateRequest is a type for the entire action request
 type ActionMailTemplateTranslationCreateRequest struct {
 	Translation map[string]interface{} `json:"translation"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta        map[string]interface{} `json:"_meta"`
 }
 
 // ActionMailTemplateTranslationCreateOutput is a type for action output parameters
 type ActionMailTemplateTranslationCreateOutput struct {
-	CreatedAt string `json:"created_at"`
-	From string `json:"from"`
-	Id int64 `json:"id"`
-	Language *ActionLanguageShowOutput `json:"language"`
-	ReplyTo string `json:"reply_to"`
-	ReturnPath string `json:"return_path"`
-	Subject string `json:"subject"`
-	TextHtml string `json:"text_html"`
-	TextPlain string `json:"text_plain"`
-	UpdatedAt string `json:"updated_at"`
+	CreatedAt  string                    `json:"created_at"`
+	From       string                    `json:"from"`
+	Id         int64                     `json:"id"`
+	Language   *ActionLanguageShowOutput `json:"language"`
+	ReplyTo    string                    `json:"reply_to"`
+	ReturnPath string                    `json:"return_path"`
+	Subject    string                    `json:"subject"`
+	TextHtml   string                    `json:"text_html"`
+	TextPlain  string                    `json:"text_plain"`
+	UpdatedAt  string                    `json:"updated_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionMailTemplateTranslationCreateResponse struct {
@@ -218,12 +224,11 @@ type ActionMailTemplateTranslationCreateResponse struct {
 	Output *ActionMailTemplateTranslationCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMailTemplateTranslationCreate) Prepare() *ActionMailTemplateTranslationCreateInvocation {
 	return &ActionMailTemplateTranslationCreateInvocation{
 		Action: action,
-		Path: "/v6.0/mail_templates/{mail_template_id}/translations",
+		Path:   "/v6.0/mail_templates/{mail_template_id}/translations",
 	}
 }
 
@@ -272,6 +277,7 @@ func (inv *ActionMailTemplateTranslationCreateInvocation) IsParameterSelected(pa
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionMailTemplateTranslationCreateInvocation) NewMetaInput() *ActionMailTemplateTranslationCreateMetaGlobalInput {
@@ -300,7 +306,6 @@ func (inv *ActionMailTemplateTranslationCreateInvocation) Call() (*ActionMailTem
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionMailTemplateTranslationCreateInvocation) callAsBody() (*ActionMailTemplateTranslationCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionMailTemplateTranslationCreateResponse{Action: inv.Action}
@@ -311,13 +316,10 @@ func (inv *ActionMailTemplateTranslationCreateInvocation) callAsBody() (*ActionM
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMailTemplateTranslationCreateInvocation) makeAllInputParams() *ActionMailTemplateTranslationCreateRequest {
 	return &ActionMailTemplateTranslationCreateRequest{
 		Translation: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:        inv.makeMetaInputParams(),
 	}
 }
 

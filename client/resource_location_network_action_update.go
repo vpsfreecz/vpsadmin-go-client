@@ -19,7 +19,7 @@ func NewActionLocationNetworkUpdate(client *Client) *ActionLocationNetworkUpdate
 // ActionLocationNetworkUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationNetworkUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionLocationNetworkUpdateMetaGlobalInput) SetIncludes(value string) 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionLocationNetworkUpdateMetaGlobalInput) SetNo(value bool) *ActionLocationNetworkUpdateMetaGlobalInput {
 	in.No = value
@@ -72,10 +73,10 @@ func (in *ActionLocationNetworkUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationNetworkUpdateInput is a type for action input parameters
 type ActionLocationNetworkUpdateInput struct {
-	Autopick bool `json:"autopick"`
-	Primary bool `json:"primary"`
+	Autopick bool  `json:"autopick"`
+	Primary  bool  `json:"primary"`
 	Priority int64 `json:"priority"`
-	Userpick bool `json:"userpick"`
+	Userpick bool  `json:"userpick"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -91,6 +92,7 @@ func (in *ActionLocationNetworkUpdateInput) SetAutopick(value bool) *ActionLocat
 	in._selectedParameters["Autopick"] = nil
 	return in
 }
+
 // SetPrimary sets parameter Primary to value and selects it for sending
 func (in *ActionLocationNetworkUpdateInput) SetPrimary(value bool) *ActionLocationNetworkUpdateInput {
 	in.Primary = value
@@ -102,6 +104,7 @@ func (in *ActionLocationNetworkUpdateInput) SetPrimary(value bool) *ActionLocati
 	in._selectedParameters["Primary"] = nil
 	return in
 }
+
 // SetPriority sets parameter Priority to value and selects it for sending
 func (in *ActionLocationNetworkUpdateInput) SetPriority(value int64) *ActionLocationNetworkUpdateInput {
 	in.Priority = value
@@ -113,6 +116,7 @@ func (in *ActionLocationNetworkUpdateInput) SetPriority(value int64) *ActionLoca
 	in._selectedParameters["Priority"] = nil
 	return in
 }
+
 // SetUserpick sets parameter Userpick to value and selects it for sending
 func (in *ActionLocationNetworkUpdateInput) SetUserpick(value bool) *ActionLocationNetworkUpdateInput {
 	in.Userpick = value
@@ -151,20 +155,19 @@ func (in *ActionLocationNetworkUpdateInput) AnySelected() bool {
 // ActionLocationNetworkUpdateRequest is a type for the entire action request
 type ActionLocationNetworkUpdateRequest struct {
 	LocationNetwork map[string]interface{} `json:"location_network"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta            map[string]interface{} `json:"_meta"`
 }
 
 // ActionLocationNetworkUpdateOutput is a type for action output parameters
 type ActionLocationNetworkUpdateOutput struct {
-	Autopick bool `json:"autopick"`
-	Id int64 `json:"id"`
+	Autopick bool                      `json:"autopick"`
+	Id       int64                     `json:"id"`
 	Location *ActionLocationShowOutput `json:"location"`
-	Network *ActionNetworkShowOutput `json:"network"`
-	Primary bool `json:"primary"`
-	Priority int64 `json:"priority"`
-	Userpick bool `json:"userpick"`
+	Network  *ActionNetworkShowOutput  `json:"network"`
+	Primary  bool                      `json:"primary"`
+	Priority int64                     `json:"priority"`
+	Userpick bool                      `json:"userpick"`
 }
-
 
 // Type for action response, including envelope
 type ActionLocationNetworkUpdateResponse struct {
@@ -179,12 +182,11 @@ type ActionLocationNetworkUpdateResponse struct {
 	Output *ActionLocationNetworkUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionLocationNetworkUpdate) Prepare() *ActionLocationNetworkUpdateInvocation {
 	return &ActionLocationNetworkUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/location_networks/{location_network_id}",
+		Path:   "/v6.0/location_networks/{location_network_id}",
 	}
 }
 
@@ -233,6 +235,7 @@ func (inv *ActionLocationNetworkUpdateInvocation) IsParameterSelected(param stri
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionLocationNetworkUpdateInvocation) NewMetaInput() *ActionLocationNetworkUpdateMetaGlobalInput {
@@ -261,7 +264,6 @@ func (inv *ActionLocationNetworkUpdateInvocation) Call() (*ActionLocationNetwork
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionLocationNetworkUpdateInvocation) callAsBody() (*ActionLocationNetworkUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionLocationNetworkUpdateResponse{Action: inv.Action}
@@ -272,13 +274,10 @@ func (inv *ActionLocationNetworkUpdateInvocation) callAsBody() (*ActionLocationN
 	return resp, err
 }
 
-
-
-
 func (inv *ActionLocationNetworkUpdateInvocation) makeAllInputParams() *ActionLocationNetworkUpdateRequest {
 	return &ActionLocationNetworkUpdateRequest{
 		LocationNetwork: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:            inv.makeMetaInputParams(),
 	}
 }
 

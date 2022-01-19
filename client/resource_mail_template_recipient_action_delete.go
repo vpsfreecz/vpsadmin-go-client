@@ -19,7 +19,7 @@ func NewActionMailTemplateRecipientDelete(client *Client) *ActionMailTemplateRec
 // ActionMailTemplateRecipientDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateRecipientDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMailTemplateRecipientDeleteMetaGlobalInput) SetIncludes(value st
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMailTemplateRecipientDeleteMetaGlobalInput) SetNo(value bool) *ActionMailTemplateRecipientDeleteMetaGlobalInput {
 	in.No = value
@@ -70,13 +71,10 @@ func (in *ActionMailTemplateRecipientDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionMailTemplateRecipientDeleteRequest is a type for the entire action request
 type ActionMailTemplateRecipientDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionMailTemplateRecipientDeleteResponse struct {
@@ -84,12 +82,11 @@ type ActionMailTemplateRecipientDeleteResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMailTemplateRecipientDelete) Prepare() *ActionMailTemplateRecipientDeleteInvocation {
 	return &ActionMailTemplateRecipientDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/mail_templates/{mail_template_id}/recipients/{recipient_id}",
+		Path:   "/v6.0/mail_templates/{mail_template_id}/recipients/{recipient_id}",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionMailTemplateRecipientDeleteInvocation) Call() (*ActionMailTempl
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionMailTemplateRecipientDeleteInvocation) callAsBody() (*ActionMailTemplateRecipientDeleteResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionMailTemplateRecipientDeleteResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionMailTemplateRecipientDeleteInvocation) callAsBody() (*ActionMai
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMailTemplateRecipientDeleteInvocation) makeAllInputParams() *ActionMailTemplateRecipientDeleteRequest {
 	return &ActionMailTemplateRecipientDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionMailTemplateRecipientDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

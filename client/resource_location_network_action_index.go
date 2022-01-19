@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionLocationNetworkIndex is a type for action Location_network#Index
 type ActionLocationNetworkIndex struct {
@@ -17,9 +16,9 @@ func NewActionLocationNetworkIndex(client *Client) *ActionLocationNetworkIndex {
 
 // ActionLocationNetworkIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationNetworkIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionLocationNetworkIndexMetaGlobalInput) SetCount(value bool) *Actio
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionLocationNetworkIndexMetaGlobalInput) SetIncludes(value string) *ActionLocationNetworkIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionLocationNetworkIndexMetaGlobalInput) SetIncludes(value string) *
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionLocationNetworkIndexMetaGlobalInput) SetNo(value bool) *ActionLocationNetworkIndexMetaGlobalInput {
 	in.No = value
@@ -83,10 +84,10 @@ func (in *ActionLocationNetworkIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationNetworkIndexInput is a type for action input parameters
 type ActionLocationNetworkIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit    int64 `json:"limit"`
 	Location int64 `json:"location"`
-	Network int64 `json:"network"`
-	Offset int64 `json:"offset"`
+	Network  int64 `json:"network"`
+	Offset   int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -102,6 +103,7 @@ func (in *ActionLocationNetworkIndexInput) SetLimit(value int64) *ActionLocation
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionLocationNetworkIndexInput) SetLocation(value int64) *ActionLocationNetworkIndexInput {
 	in.Location = value
@@ -113,6 +115,7 @@ func (in *ActionLocationNetworkIndexInput) SetLocation(value int64) *ActionLocat
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetNetwork sets parameter Network to value and selects it for sending
 func (in *ActionLocationNetworkIndexInput) SetNetwork(value int64) *ActionLocationNetworkIndexInput {
 	in.Network = value
@@ -124,6 +127,7 @@ func (in *ActionLocationNetworkIndexInput) SetNetwork(value int64) *ActionLocati
 	in._selectedParameters["Network"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionLocationNetworkIndexInput) SetOffset(value int64) *ActionLocationNetworkIndexInput {
 	in.Offset = value
@@ -159,18 +163,16 @@ func (in *ActionLocationNetworkIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionLocationNetworkIndexOutput is a type for action output parameters
 type ActionLocationNetworkIndexOutput struct {
-	Autopick bool `json:"autopick"`
-	Id int64 `json:"id"`
+	Autopick bool                      `json:"autopick"`
+	Id       int64                     `json:"id"`
 	Location *ActionLocationShowOutput `json:"location"`
-	Network *ActionNetworkShowOutput `json:"network"`
-	Primary bool `json:"primary"`
-	Priority int64 `json:"priority"`
-	Userpick bool `json:"userpick"`
+	Network  *ActionNetworkShowOutput  `json:"network"`
+	Primary  bool                      `json:"primary"`
+	Priority int64                     `json:"priority"`
+	Userpick bool                      `json:"userpick"`
 }
-
 
 // Type for action response, including envelope
 type ActionLocationNetworkIndexResponse struct {
@@ -185,12 +187,11 @@ type ActionLocationNetworkIndexResponse struct {
 	Output []*ActionLocationNetworkIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionLocationNetworkIndex) Prepare() *ActionLocationNetworkIndexInvocation {
 	return &ActionLocationNetworkIndexInvocation{
 		Action: action,
-		Path: "/v6.0/location_networks",
+		Path:   "/v6.0/location_networks",
 	}
 }
 
@@ -206,7 +207,6 @@ type ActionLocationNetworkIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionLocationNetworkIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionLocationNetworkIndexInvocation) NewInput() *ActionLocationNetworkIndexInput {
@@ -229,6 +229,7 @@ func (inv *ActionLocationNetworkIndexInvocation) IsParameterSelected(param strin
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionLocationNetworkIndexInvocation) NewMetaInput() *ActionLocationNetworkIndexMetaGlobalInput {
@@ -269,8 +270,6 @@ func (inv *ActionLocationNetworkIndexInvocation) callAsQuery() (*ActionLocationN
 	return resp, err
 }
 
-
-
 func (inv *ActionLocationNetworkIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -301,4 +300,3 @@ func (inv *ActionLocationNetworkIndexInvocation) convertMetaInputToQueryParams(r
 		}
 	}
 }
-

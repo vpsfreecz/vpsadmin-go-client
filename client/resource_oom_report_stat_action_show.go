@@ -19,7 +19,7 @@ func NewActionOomReportStatShow(client *Client) *ActionOomReportStatShow {
 // ActionOomReportStatShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportStatShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOomReportStatShowMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOomReportStatShowMetaGlobalInput) SetNo(value bool) *ActionOomReportStatShowMetaGlobalInput {
 	in.No = value
@@ -70,15 +71,12 @@ func (in *ActionOomReportStatShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionOomReportStatShowOutput is a type for action output parameters
 type ActionOomReportStatShowOutput struct {
-	Id int64 `json:"id"`
+	Id        int64  `json:"id"`
 	Parameter string `json:"parameter"`
-	Value int64 `json:"value"`
+	Value     int64  `json:"value"`
 }
-
 
 // Type for action response, including envelope
 type ActionOomReportStatShowResponse struct {
@@ -93,12 +91,11 @@ type ActionOomReportStatShowResponse struct {
 	Output []*ActionOomReportStatShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOomReportStatShow) Prepare() *ActionOomReportStatShowInvocation {
 	return &ActionOomReportStatShowInvocation{
 		Action: action,
-		Path: "/v6.0/oom_reports/{oom_report_id}/stats/{stat_id}",
+		Path:   "/v6.0/oom_reports/{oom_report_id}/stats/{stat_id}",
 	}
 }
 
@@ -163,9 +160,6 @@ func (inv *ActionOomReportStatShowInvocation) callAsQuery() (*ActionOomReportSta
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOomReportStatShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -176,4 +170,3 @@ func (inv *ActionOomReportStatShowInvocation) convertMetaInputToQueryParams(ret 
 		}
 	}
 }
-

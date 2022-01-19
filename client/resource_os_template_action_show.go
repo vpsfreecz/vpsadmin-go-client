@@ -19,7 +19,7 @@ func NewActionOsTemplateShow(client *Client) *ActionOsTemplateShow {
 // ActionOsTemplateShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOsTemplateShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOsTemplateShowMetaGlobalInput) SetIncludes(value string) *Action
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOsTemplateShowMetaGlobalInput) SetNo(value bool) *ActionOsTemplateShowMetaGlobalInput {
 	in.No = value
@@ -70,20 +71,17 @@ func (in *ActionOsTemplateShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionOsTemplateShowOutput is a type for action output parameters
 type ActionOsTemplateShowOutput struct {
-	Enabled bool `json:"enabled"`
+	Enabled        bool   `json:"enabled"`
 	HypervisorType string `json:"hypervisor_type"`
-	Id int64 `json:"id"`
-	Info string `json:"info"`
-	Label string `json:"label"`
-	Name string `json:"name"`
-	Order int64 `json:"order"`
-	Supported bool `json:"supported"`
+	Id             int64  `json:"id"`
+	Info           string `json:"info"`
+	Label          string `json:"label"`
+	Name           string `json:"name"`
+	Order          int64  `json:"order"`
+	Supported      bool   `json:"supported"`
 }
-
 
 // Type for action response, including envelope
 type ActionOsTemplateShowResponse struct {
@@ -98,12 +96,11 @@ type ActionOsTemplateShowResponse struct {
 	Output *ActionOsTemplateShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOsTemplateShow) Prepare() *ActionOsTemplateShowInvocation {
 	return &ActionOsTemplateShowInvocation{
 		Action: action,
-		Path: "/v6.0/os_templates/{os_template_id}",
+		Path:   "/v6.0/os_templates/{os_template_id}",
 	}
 }
 
@@ -168,9 +165,6 @@ func (inv *ActionOsTemplateShowInvocation) callAsQuery() (*ActionOsTemplateShowR
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOsTemplateShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -181,4 +175,3 @@ func (inv *ActionOsTemplateShowInvocation) convertMetaInputToQueryParams(ret map
 		}
 	}
 }
-

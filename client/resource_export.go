@@ -35,16 +35,16 @@ func NewResourceExport(client *Client) *ResourceExport {
 	actionUpdate := NewActionExportUpdate(client)
 
 	return &ResourceExport{
-		Client: client,
-		Host: NewResourceExportHost(client),
-		Create: actionCreate,
-		New: actionCreate,
-		Delete: actionDelete,
+		Client:  client,
+		Host:    NewResourceExportHost(client),
+		Create:  actionCreate,
+		New:     actionCreate,
+		Delete:  actionDelete,
 		Destroy: actionDelete,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Index:   actionIndex,
+		List:    actionIndex,
+		Show:    actionShow,
+		Find:    actionShow,
+		Update:  actionUpdate,
 	}
 }

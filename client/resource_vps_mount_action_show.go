@@ -19,7 +19,7 @@ func NewActionVpsMountShow(client *Client) *ActionVpsMountShow {
 // ActionVpsMountShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMountShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsMountShowMetaGlobalInput) SetIncludes(value string) *ActionVp
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsMountShowMetaGlobalInput) SetNo(value bool) *ActionVpsMountShowMetaGlobalInput {
 	in.No = value
@@ -70,24 +71,21 @@ func (in *ActionVpsMountShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionVpsMountShowOutput is a type for action output parameters
 type ActionVpsMountShowOutput struct {
-	CurrentState string `json:"current_state"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Enabled bool `json:"enabled"`
-	ExpirationDate string `json:"expiration_date"`
-	Id int64 `json:"id"`
-	MasterEnabled bool `json:"master_enabled"`
-	Mode string `json:"mode"`
-	Mountpoint string `json:"mountpoint"`
-	OnStartFail string `json:"on_start_fail"`
-	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
+	CurrentState     string                            `json:"current_state"`
+	Dataset          *ActionDatasetShowOutput          `json:"dataset"`
+	Enabled          bool                              `json:"enabled"`
+	ExpirationDate   string                            `json:"expiration_date"`
+	Id               int64                             `json:"id"`
+	MasterEnabled    bool                              `json:"master_enabled"`
+	Mode             string                            `json:"mode"`
+	Mountpoint       string                            `json:"mountpoint"`
+	OnStartFail      string                            `json:"on_start_fail"`
+	Snapshot         *ActionDatasetSnapshotShowOutput  `json:"snapshot"`
 	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	Vps              *ActionVpsShowOutput              `json:"vps"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsMountShowResponse struct {
@@ -102,12 +100,11 @@ type ActionVpsMountShowResponse struct {
 	Output *ActionVpsMountShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsMountShow) Prepare() *ActionVpsMountShowInvocation {
 	return &ActionVpsMountShowInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/mounts/{mount_id}",
+		Path:   "/v6.0/vpses/{vps_id}/mounts/{mount_id}",
 	}
 }
 
@@ -172,9 +169,6 @@ func (inv *ActionVpsMountShowInvocation) callAsQuery() (*ActionVpsMountShowRespo
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsMountShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -185,4 +179,3 @@ func (inv *ActionVpsMountShowInvocation) convertMetaInputToQueryParams(ret map[s
 		}
 	}
 }
-

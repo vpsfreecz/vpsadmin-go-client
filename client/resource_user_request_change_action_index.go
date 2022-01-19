@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionUserRequestChangeIndex is a type for action User_request.Change#Index
 type ActionUserRequestChangeIndex struct {
@@ -17,9 +16,9 @@ func NewActionUserRequestChangeIndex(client *Client) *ActionUserRequestChangeInd
 
 // ActionUserRequestChangeIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestChangeIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionUserRequestChangeIndexMetaGlobalInput) SetCount(value bool) *Act
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserRequestChangeIndexMetaGlobalInput) SetIncludes(value string) *ActionUserRequestChangeIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionUserRequestChangeIndexMetaGlobalInput) SetIncludes(value string)
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserRequestChangeIndexMetaGlobalInput) SetNo(value bool) *ActionUserRequestChangeIndexMetaGlobalInput {
 	in.No = value
@@ -83,14 +84,14 @@ func (in *ActionUserRequestChangeIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserRequestChangeIndexInput is a type for action input parameters
 type ActionUserRequestChangeIndexInput struct {
-	Admin int64 `json:"admin"`
-	ApiIpAddr string `json:"api_ip_addr"`
+	Admin        int64  `json:"admin"`
+	ApiIpAddr    string `json:"api_ip_addr"`
 	ClientIpAddr string `json:"client_ip_addr"`
-	ClientIpPtr string `json:"client_ip_ptr"`
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
-	State string `json:"state"`
-	User int64 `json:"user"`
+	ClientIpPtr  string `json:"client_ip_ptr"`
+	Limit        int64  `json:"limit"`
+	Offset       int64  `json:"offset"`
+	State        string `json:"state"`
+	User         int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -106,6 +107,7 @@ func (in *ActionUserRequestChangeIndexInput) SetAdmin(value int64) *ActionUserRe
 	in._selectedParameters["Admin"] = nil
 	return in
 }
+
 // SetApiIpAddr sets parameter ApiIpAddr to value and selects it for sending
 func (in *ActionUserRequestChangeIndexInput) SetApiIpAddr(value string) *ActionUserRequestChangeIndexInput {
 	in.ApiIpAddr = value
@@ -117,6 +119,7 @@ func (in *ActionUserRequestChangeIndexInput) SetApiIpAddr(value string) *ActionU
 	in._selectedParameters["ApiIpAddr"] = nil
 	return in
 }
+
 // SetClientIpAddr sets parameter ClientIpAddr to value and selects it for sending
 func (in *ActionUserRequestChangeIndexInput) SetClientIpAddr(value string) *ActionUserRequestChangeIndexInput {
 	in.ClientIpAddr = value
@@ -128,6 +131,7 @@ func (in *ActionUserRequestChangeIndexInput) SetClientIpAddr(value string) *Acti
 	in._selectedParameters["ClientIpAddr"] = nil
 	return in
 }
+
 // SetClientIpPtr sets parameter ClientIpPtr to value and selects it for sending
 func (in *ActionUserRequestChangeIndexInput) SetClientIpPtr(value string) *ActionUserRequestChangeIndexInput {
 	in.ClientIpPtr = value
@@ -139,6 +143,7 @@ func (in *ActionUserRequestChangeIndexInput) SetClientIpPtr(value string) *Actio
 	in._selectedParameters["ClientIpPtr"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserRequestChangeIndexInput) SetLimit(value int64) *ActionUserRequestChangeIndexInput {
 	in.Limit = value
@@ -150,6 +155,7 @@ func (in *ActionUserRequestChangeIndexInput) SetLimit(value int64) *ActionUserRe
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionUserRequestChangeIndexInput) SetOffset(value int64) *ActionUserRequestChangeIndexInput {
 	in.Offset = value
@@ -161,6 +167,7 @@ func (in *ActionUserRequestChangeIndexInput) SetOffset(value int64) *ActionUserR
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetState sets parameter State to value and selects it for sending
 func (in *ActionUserRequestChangeIndexInput) SetState(value string) *ActionUserRequestChangeIndexInput {
 	in.State = value
@@ -172,6 +179,7 @@ func (in *ActionUserRequestChangeIndexInput) SetState(value string) *ActionUserR
 	in._selectedParameters["State"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionUserRequestChangeIndexInput) SetUser(value int64) *ActionUserRequestChangeIndexInput {
 	in.User = value
@@ -207,27 +215,25 @@ func (in *ActionUserRequestChangeIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserRequestChangeIndexOutput is a type for action output parameters
 type ActionUserRequestChangeIndexOutput struct {
-	Address string `json:"address"`
-	Admin *ActionUserShowOutput `json:"admin"`
-	AdminResponse string `json:"admin_response"`
-	ApiIpAddr string `json:"api_ip_addr"`
-	ApiIpPtr string `json:"api_ip_ptr"`
-	ChangeReason string `json:"change_reason"`
-	ClientIpAddr string `json:"client_ip_addr"`
-	ClientIpPtr string `json:"client_ip_ptr"`
-	CreatedAt string `json:"created_at"`
-	Email string `json:"email"`
-	FullName string `json:"full_name"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	State string `json:"state"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
+	Address       string                `json:"address"`
+	Admin         *ActionUserShowOutput `json:"admin"`
+	AdminResponse string                `json:"admin_response"`
+	ApiIpAddr     string                `json:"api_ip_addr"`
+	ApiIpPtr      string                `json:"api_ip_ptr"`
+	ChangeReason  string                `json:"change_reason"`
+	ClientIpAddr  string                `json:"client_ip_addr"`
+	ClientIpPtr   string                `json:"client_ip_ptr"`
+	CreatedAt     string                `json:"created_at"`
+	Email         string                `json:"email"`
+	FullName      string                `json:"full_name"`
+	Id            int64                 `json:"id"`
+	Label         string                `json:"label"`
+	State         string                `json:"state"`
+	UpdatedAt     string                `json:"updated_at"`
+	User          *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserRequestChangeIndexResponse struct {
@@ -242,12 +248,11 @@ type ActionUserRequestChangeIndexResponse struct {
 	Output []*ActionUserRequestChangeIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserRequestChangeIndex) Prepare() *ActionUserRequestChangeIndexInvocation {
 	return &ActionUserRequestChangeIndexInvocation{
 		Action: action,
-		Path: "/v6.0/user_request/changes",
+		Path:   "/v6.0/user_request/changes",
 	}
 }
 
@@ -263,7 +268,6 @@ type ActionUserRequestChangeIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionUserRequestChangeIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionUserRequestChangeIndexInvocation) NewInput() *ActionUserRequestChangeIndexInput {
@@ -286,6 +290,7 @@ func (inv *ActionUserRequestChangeIndexInvocation) IsParameterSelected(param str
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserRequestChangeIndexInvocation) NewMetaInput() *ActionUserRequestChangeIndexMetaGlobalInput {
@@ -325,8 +330,6 @@ func (inv *ActionUserRequestChangeIndexInvocation) callAsQuery() (*ActionUserReq
 	}
 	return resp, err
 }
-
-
 
 func (inv *ActionUserRequestChangeIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
@@ -370,4 +373,3 @@ func (inv *ActionUserRequestChangeIndexInvocation) convertMetaInputToQueryParams
 		}
 	}
 }
-

@@ -18,7 +18,7 @@ func NewActionAuthTokenUpdate(client *Client) *ActionAuthTokenUpdate {
 
 // ActionAuthTokenUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionAuthTokenUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	Includes string `json:"includes"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -35,6 +35,7 @@ func (in *ActionAuthTokenUpdateMetaGlobalInput) SetNo(value bool) *ActionAuthTok
 	in._selectedParameters["No"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionAuthTokenUpdateMetaGlobalInput) SetIncludes(value string) *ActionAuthTokenUpdateMetaGlobalInput {
 	in.Includes = value
@@ -115,10 +116,8 @@ func (in *ActionAuthTokenUpdateInput) AnySelected() bool {
 // ActionAuthTokenUpdateRequest is a type for the entire action request
 type ActionAuthTokenUpdateRequest struct {
 	AuthToken map[string]interface{} `json:"auth_token"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta      map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionAuthTokenUpdateResponse struct {
@@ -126,12 +125,11 @@ type ActionAuthTokenUpdateResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionAuthTokenUpdate) Prepare() *ActionAuthTokenUpdateInvocation {
 	return &ActionAuthTokenUpdateInvocation{
 		Action: action,
-		Path: "/v5.0/auth_tokens/:auth_token_id",
+		Path:   "/v5.0/auth_tokens/:auth_token_id",
 	}
 }
 
@@ -180,6 +178,7 @@ func (inv *ActionAuthTokenUpdateInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionAuthTokenUpdateInvocation) NewMetaInput() *ActionAuthTokenUpdateMetaGlobalInput {
@@ -208,7 +207,6 @@ func (inv *ActionAuthTokenUpdateInvocation) Call() (*ActionAuthTokenUpdateRespon
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionAuthTokenUpdateInvocation) callAsBody() (*ActionAuthTokenUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionAuthTokenUpdateResponse{Action: inv.Action}
@@ -216,13 +214,10 @@ func (inv *ActionAuthTokenUpdateInvocation) callAsBody() (*ActionAuthTokenUpdate
 	return resp, err
 }
 
-
-
-
 func (inv *ActionAuthTokenUpdateInvocation) makeAllInputParams() *ActionAuthTokenUpdateRequest {
 	return &ActionAuthTokenUpdateRequest{
 		AuthToken: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:      inv.makeMetaInputParams(),
 	}
 }
 

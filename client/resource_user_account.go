@@ -24,10 +24,10 @@ func NewResourceUserAccount(client *Client) *ResourceUserAccount {
 
 	return &ResourceUserAccount{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 		Update: actionUpdate,
 	}
 }

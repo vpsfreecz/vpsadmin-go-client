@@ -18,9 +18,9 @@ func NewActionVpsFeatureIndex(client *Client) *ActionVpsFeatureIndex {
 
 // ActionVpsFeatureIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsFeatureIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionVpsFeatureIndexMetaGlobalInput) SetCount(value bool) *ActionVpsF
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsFeatureIndexMetaGlobalInput) SetIncludes(value string) *ActionVpsFeatureIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionVpsFeatureIndexMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsFeatureIndexMetaGlobalInput) SetNo(value bool) *ActionVpsFeatureIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionVpsFeatureIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsFeatureIndexInput is a type for action input parameters
 type ActionVpsFeatureIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionVpsFeatureIndexInput) SetLimit(value int64) *ActionVpsFeatureInd
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionVpsFeatureIndexInput) SetOffset(value int64) *ActionVpsFeatureIndexInput {
 	in.Offset = value
@@ -136,15 +139,13 @@ func (in *ActionVpsFeatureIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionVpsFeatureIndexOutput is a type for action output parameters
 type ActionVpsFeatureIndexOutput struct {
-	Enabled bool `json:"enabled"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Name string `json:"name"`
+	Enabled bool   `json:"enabled"`
+	Id      int64  `json:"id"`
+	Label   string `json:"label"`
+	Name    string `json:"name"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsFeatureIndexResponse struct {
@@ -159,12 +160,11 @@ type ActionVpsFeatureIndexResponse struct {
 	Output []*ActionVpsFeatureIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsFeatureIndex) Prepare() *ActionVpsFeatureIndexInvocation {
 	return &ActionVpsFeatureIndexInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/features",
+		Path:   "/v6.0/vpses/{vps_id}/features",
 	}
 }
 
@@ -213,6 +213,7 @@ func (inv *ActionVpsFeatureIndexInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsFeatureIndexInvocation) NewMetaInput() *ActionVpsFeatureIndexMetaGlobalInput {
@@ -253,8 +254,6 @@ func (inv *ActionVpsFeatureIndexInvocation) callAsQuery() (*ActionVpsFeatureInde
 	return resp, err
 }
 
-
-
 func (inv *ActionVpsFeatureIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -279,4 +278,3 @@ func (inv *ActionVpsFeatureIndexInvocation) convertMetaInputToQueryParams(ret ma
 		}
 	}
 }
-

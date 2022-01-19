@@ -18,7 +18,7 @@ func NewActionUserTotpDisable(client *Client) *ActionUserTotpDisable {
 
 // ActionUserTotpDisableMetaGlobalInput is a type for action global meta input parameters
 type ActionUserTotpDisableMetaGlobalInput struct {
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	Includes string `json:"includes"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -35,6 +35,7 @@ func (in *ActionUserTotpDisableMetaGlobalInput) SetNo(value bool) *ActionUserTot
 	in._selectedParameters["No"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserTotpDisableMetaGlobalInput) SetIncludes(value string) *ActionUserTotpDisableMetaGlobalInput {
 	in.Includes = value
@@ -70,13 +71,10 @@ func (in *ActionUserTotpDisableMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserTotpDisableRequest is a type for the entire action request
 type ActionUserTotpDisableRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionUserTotpDisableResponse struct {
@@ -84,12 +82,11 @@ type ActionUserTotpDisableResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserTotpDisable) Prepare() *ActionUserTotpDisableInvocation {
 	return &ActionUserTotpDisableInvocation{
 		Action: action,
-		Path: "/v5.0/users/totp_disable/{user_id}",
+		Path:   "/v5.0/users/totp_disable/{user_id}",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionUserTotpDisableInvocation) Call() (*ActionUserTotpDisableRespon
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserTotpDisableInvocation) callAsBody() (*ActionUserTotpDisableResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserTotpDisableResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionUserTotpDisableInvocation) callAsBody() (*ActionUserTotpDisable
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserTotpDisableInvocation) makeAllInputParams() *ActionUserTotpDisableRequest {
 	return &ActionUserTotpDisableRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionUserTotpDisableInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

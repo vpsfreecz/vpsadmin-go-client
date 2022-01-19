@@ -60,7 +60,7 @@ func (in *ActionPoolSetMaintenanceMetaGlobalInput) AnySelected() bool {
 
 // ActionPoolSetMaintenanceInput is a type for action input parameters
 type ActionPoolSetMaintenanceInput struct {
-	Lock bool `json:"lock"`
+	Lock   bool   `json:"lock"`
 	Reason string `json:"reason"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -77,6 +77,7 @@ func (in *ActionPoolSetMaintenanceInput) SetLock(value bool) *ActionPoolSetMaint
 	in._selectedParameters["Lock"] = nil
 	return in
 }
+
 // SetReason sets parameter Reason to value and selects it for sending
 func (in *ActionPoolSetMaintenanceInput) SetReason(value string) *ActionPoolSetMaintenanceInput {
 	in.Reason = value
@@ -118,20 +119,17 @@ type ActionPoolSetMaintenanceRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
 
-
-
 // Type for action response, including envelope
 type ActionPoolSetMaintenanceResponse struct {
 	Action *ActionPoolSetMaintenance `json:"-"`
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionPoolSetMaintenance) Prepare() *ActionPoolSetMaintenanceInvocation {
 	return &ActionPoolSetMaintenanceInvocation{
 		Action: action,
-		Path: "/v6.0/pools/{pool_id}/set_maintenance",
+		Path:   "/v6.0/pools/{pool_id}/set_maintenance",
 	}
 }
 
@@ -180,6 +178,7 @@ func (inv *ActionPoolSetMaintenanceInvocation) IsParameterSelected(param string)
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionPoolSetMaintenanceInvocation) NewMetaInput() *ActionPoolSetMaintenanceMetaGlobalInput {
@@ -208,16 +207,12 @@ func (inv *ActionPoolSetMaintenanceInvocation) Call() (*ActionPoolSetMaintenance
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionPoolSetMaintenanceInvocation) callAsBody() (*ActionPoolSetMaintenanceResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionPoolSetMaintenanceResponse{Action: inv.Action}
 	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
 	return resp, err
 }
-
-
-
 
 func (inv *ActionPoolSetMaintenanceInvocation) makeAllInputParams() *ActionPoolSetMaintenanceRequest {
 	return &ActionPoolSetMaintenanceRequest{

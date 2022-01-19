@@ -19,7 +19,7 @@ func NewActionOutageRebuildAffectedVps(client *Client) *ActionOutageRebuildAffec
 // ActionOutageRebuildAffectedVpsMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageRebuildAffectedVpsMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOutageRebuildAffectedVpsMetaGlobalInput) SetIncludes(value strin
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOutageRebuildAffectedVpsMetaGlobalInput) SetNo(value bool) *ActionOutageRebuildAffectedVpsMetaGlobalInput {
 	in.No = value
@@ -70,13 +71,10 @@ func (in *ActionOutageRebuildAffectedVpsMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionOutageRebuildAffectedVpsRequest is a type for the entire action request
 type ActionOutageRebuildAffectedVpsRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionOutageRebuildAffectedVpsResponse struct {
@@ -84,12 +82,11 @@ type ActionOutageRebuildAffectedVpsResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOutageRebuildAffectedVps) Prepare() *ActionOutageRebuildAffectedVpsInvocation {
 	return &ActionOutageRebuildAffectedVpsInvocation{
 		Action: action,
-		Path: "/v6.0/outages/{outage_id}/rebuild_affected_vps",
+		Path:   "/v6.0/outages/{outage_id}/rebuild_affected_vps",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionOutageRebuildAffectedVpsInvocation) Call() (*ActionOutageRebuil
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionOutageRebuildAffectedVpsInvocation) callAsBody() (*ActionOutageRebuildAffectedVpsResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionOutageRebuildAffectedVpsResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionOutageRebuildAffectedVpsInvocation) callAsBody() (*ActionOutage
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOutageRebuildAffectedVpsInvocation) makeAllInputParams() *ActionOutageRebuildAffectedVpsRequest {
 	return &ActionOutageRebuildAffectedVpsRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionOutageRebuildAffectedVpsInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

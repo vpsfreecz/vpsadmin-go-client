@@ -28,10 +28,10 @@ func NewResourceHostIpAddress(client *Client) *ResourceHostIpAddress {
 	return &ResourceHostIpAddress{
 		Client: client,
 		Assign: actionAssign,
-		Free: actionFree,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Free:   actionFree,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

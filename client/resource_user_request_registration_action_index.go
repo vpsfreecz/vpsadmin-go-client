@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionUserRequestRegistrationIndex is a type for action User_request.Registration#Index
 type ActionUserRequestRegistrationIndex struct {
@@ -17,9 +16,9 @@ func NewActionUserRequestRegistrationIndex(client *Client) *ActionUserRequestReg
 
 // ActionUserRequestRegistrationIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestRegistrationIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionUserRequestRegistrationIndexMetaGlobalInput) SetCount(value bool
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserRequestRegistrationIndexMetaGlobalInput) SetIncludes(value string) *ActionUserRequestRegistrationIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionUserRequestRegistrationIndexMetaGlobalInput) SetIncludes(value s
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserRequestRegistrationIndexMetaGlobalInput) SetNo(value bool) *ActionUserRequestRegistrationIndexMetaGlobalInput {
 	in.No = value
@@ -83,14 +84,14 @@ func (in *ActionUserRequestRegistrationIndexMetaGlobalInput) AnySelected() bool 
 
 // ActionUserRequestRegistrationIndexInput is a type for action input parameters
 type ActionUserRequestRegistrationIndexInput struct {
-	Admin int64 `json:"admin"`
-	ApiIpAddr string `json:"api_ip_addr"`
+	Admin        int64  `json:"admin"`
+	ApiIpAddr    string `json:"api_ip_addr"`
 	ClientIpAddr string `json:"client_ip_addr"`
-	ClientIpPtr string `json:"client_ip_ptr"`
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
-	State string `json:"state"`
-	User int64 `json:"user"`
+	ClientIpPtr  string `json:"client_ip_ptr"`
+	Limit        int64  `json:"limit"`
+	Offset       int64  `json:"offset"`
+	State        string `json:"state"`
+	User         int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -106,6 +107,7 @@ func (in *ActionUserRequestRegistrationIndexInput) SetAdmin(value int64) *Action
 	in._selectedParameters["Admin"] = nil
 	return in
 }
+
 // SetApiIpAddr sets parameter ApiIpAddr to value and selects it for sending
 func (in *ActionUserRequestRegistrationIndexInput) SetApiIpAddr(value string) *ActionUserRequestRegistrationIndexInput {
 	in.ApiIpAddr = value
@@ -117,6 +119,7 @@ func (in *ActionUserRequestRegistrationIndexInput) SetApiIpAddr(value string) *A
 	in._selectedParameters["ApiIpAddr"] = nil
 	return in
 }
+
 // SetClientIpAddr sets parameter ClientIpAddr to value and selects it for sending
 func (in *ActionUserRequestRegistrationIndexInput) SetClientIpAddr(value string) *ActionUserRequestRegistrationIndexInput {
 	in.ClientIpAddr = value
@@ -128,6 +131,7 @@ func (in *ActionUserRequestRegistrationIndexInput) SetClientIpAddr(value string)
 	in._selectedParameters["ClientIpAddr"] = nil
 	return in
 }
+
 // SetClientIpPtr sets parameter ClientIpPtr to value and selects it for sending
 func (in *ActionUserRequestRegistrationIndexInput) SetClientIpPtr(value string) *ActionUserRequestRegistrationIndexInput {
 	in.ClientIpPtr = value
@@ -139,6 +143,7 @@ func (in *ActionUserRequestRegistrationIndexInput) SetClientIpPtr(value string) 
 	in._selectedParameters["ClientIpPtr"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserRequestRegistrationIndexInput) SetLimit(value int64) *ActionUserRequestRegistrationIndexInput {
 	in.Limit = value
@@ -150,6 +155,7 @@ func (in *ActionUserRequestRegistrationIndexInput) SetLimit(value int64) *Action
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionUserRequestRegistrationIndexInput) SetOffset(value int64) *ActionUserRequestRegistrationIndexInput {
 	in.Offset = value
@@ -161,6 +167,7 @@ func (in *ActionUserRequestRegistrationIndexInput) SetOffset(value int64) *Actio
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetState sets parameter State to value and selects it for sending
 func (in *ActionUserRequestRegistrationIndexInput) SetState(value string) *ActionUserRequestRegistrationIndexInput {
 	in.State = value
@@ -172,6 +179,7 @@ func (in *ActionUserRequestRegistrationIndexInput) SetState(value string) *Actio
 	in._selectedParameters["State"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionUserRequestRegistrationIndexInput) SetUser(value int64) *ActionUserRequestRegistrationIndexInput {
 	in.User = value
@@ -207,67 +215,65 @@ func (in *ActionUserRequestRegistrationIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserRequestRegistrationIndexOutput is a type for action output parameters
 type ActionUserRequestRegistrationIndexOutput struct {
-	Address string `json:"address"`
-	Admin *ActionUserShowOutput `json:"admin"`
-	AdminResponse string `json:"admin_response"`
-	ApiIpAddr string `json:"api_ip_addr"`
-	ApiIpPtr string `json:"api_ip_ptr"`
-	ClientIpAddr string `json:"client_ip_addr"`
-	ClientIpPtr string `json:"client_ip_ptr"`
-	CreatedAt string `json:"created_at"`
-	Currency string `json:"currency"`
-	Email string `json:"email"`
-	FullName string `json:"full_name"`
-	How string `json:"how"`
-	Id int64 `json:"id"`
-	IpChecked bool `json:"ip_checked"`
-	IpCrawler bool `json:"ip_crawler"`
-	IpErrors string `json:"ip_errors"`
-	IpFraudScore int64 `json:"ip_fraud_score"`
-	IpMessage string `json:"ip_message"`
-	IpProxy bool `json:"ip_proxy"`
-	IpRecentAbuse bool `json:"ip_recent_abuse"`
-	IpRequestId string `json:"ip_request_id"`
-	IpSuccess bool `json:"ip_success"`
-	IpTor bool `json:"ip_tor"`
-	IpVpn bool `json:"ip_vpn"`
-	Label string `json:"label"`
-	Language *ActionLanguageShowOutput `json:"language"`
-	Location *ActionLocationShowOutput `json:"location"`
-	Login string `json:"login"`
-	MailCatchAll bool `json:"mail_catch_all"`
-	MailChecked bool `json:"mail_checked"`
-	MailDeliverability string `json:"mail_deliverability"`
-	MailDisposable bool `json:"mail_disposable"`
-	MailDnsValid bool `json:"mail_dns_valid"`
-	MailErrors string `json:"mail_errors"`
-	MailFraudScore int64 `json:"mail_fraud_score"`
-	MailFrequentComplainer bool `json:"mail_frequent_complainer"`
-	MailHoneypot bool `json:"mail_honeypot"`
-	MailLeaked bool `json:"mail_leaked"`
-	MailMessage string `json:"mail_message"`
-	MailOverallScore int64 `json:"mail_overall_score"`
-	MailRecentAbuse bool `json:"mail_recent_abuse"`
-	MailRequestId string `json:"mail_request_id"`
-	MailSmtpScore int64 `json:"mail_smtp_score"`
-	MailSpamTrapScore string `json:"mail_spam_trap_score"`
-	MailSuccess bool `json:"mail_success"`
-	MailSuspect bool `json:"mail_suspect"`
-	MailTimedOut bool `json:"mail_timed_out"`
-	MailValid bool `json:"mail_valid"`
-	Note string `json:"note"`
-	OrgId string `json:"org_id"`
-	OrgName string `json:"org_name"`
-	OsTemplate *ActionOsTemplateShowOutput `json:"os_template"`
-	State string `json:"state"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
-	YearOfBirth int64 `json:"year_of_birth"`
+	Address                string                      `json:"address"`
+	Admin                  *ActionUserShowOutput       `json:"admin"`
+	AdminResponse          string                      `json:"admin_response"`
+	ApiIpAddr              string                      `json:"api_ip_addr"`
+	ApiIpPtr               string                      `json:"api_ip_ptr"`
+	ClientIpAddr           string                      `json:"client_ip_addr"`
+	ClientIpPtr            string                      `json:"client_ip_ptr"`
+	CreatedAt              string                      `json:"created_at"`
+	Currency               string                      `json:"currency"`
+	Email                  string                      `json:"email"`
+	FullName               string                      `json:"full_name"`
+	How                    string                      `json:"how"`
+	Id                     int64                       `json:"id"`
+	IpChecked              bool                        `json:"ip_checked"`
+	IpCrawler              bool                        `json:"ip_crawler"`
+	IpErrors               string                      `json:"ip_errors"`
+	IpFraudScore           int64                       `json:"ip_fraud_score"`
+	IpMessage              string                      `json:"ip_message"`
+	IpProxy                bool                        `json:"ip_proxy"`
+	IpRecentAbuse          bool                        `json:"ip_recent_abuse"`
+	IpRequestId            string                      `json:"ip_request_id"`
+	IpSuccess              bool                        `json:"ip_success"`
+	IpTor                  bool                        `json:"ip_tor"`
+	IpVpn                  bool                        `json:"ip_vpn"`
+	Label                  string                      `json:"label"`
+	Language               *ActionLanguageShowOutput   `json:"language"`
+	Location               *ActionLocationShowOutput   `json:"location"`
+	Login                  string                      `json:"login"`
+	MailCatchAll           bool                        `json:"mail_catch_all"`
+	MailChecked            bool                        `json:"mail_checked"`
+	MailDeliverability     string                      `json:"mail_deliverability"`
+	MailDisposable         bool                        `json:"mail_disposable"`
+	MailDnsValid           bool                        `json:"mail_dns_valid"`
+	MailErrors             string                      `json:"mail_errors"`
+	MailFraudScore         int64                       `json:"mail_fraud_score"`
+	MailFrequentComplainer bool                        `json:"mail_frequent_complainer"`
+	MailHoneypot           bool                        `json:"mail_honeypot"`
+	MailLeaked             bool                        `json:"mail_leaked"`
+	MailMessage            string                      `json:"mail_message"`
+	MailOverallScore       int64                       `json:"mail_overall_score"`
+	MailRecentAbuse        bool                        `json:"mail_recent_abuse"`
+	MailRequestId          string                      `json:"mail_request_id"`
+	MailSmtpScore          int64                       `json:"mail_smtp_score"`
+	MailSpamTrapScore      string                      `json:"mail_spam_trap_score"`
+	MailSuccess            bool                        `json:"mail_success"`
+	MailSuspect            bool                        `json:"mail_suspect"`
+	MailTimedOut           bool                        `json:"mail_timed_out"`
+	MailValid              bool                        `json:"mail_valid"`
+	Note                   string                      `json:"note"`
+	OrgId                  string                      `json:"org_id"`
+	OrgName                string                      `json:"org_name"`
+	OsTemplate             *ActionOsTemplateShowOutput `json:"os_template"`
+	State                  string                      `json:"state"`
+	UpdatedAt              string                      `json:"updated_at"`
+	User                   *ActionUserShowOutput       `json:"user"`
+	YearOfBirth            int64                       `json:"year_of_birth"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserRequestRegistrationIndexResponse struct {
@@ -282,12 +288,11 @@ type ActionUserRequestRegistrationIndexResponse struct {
 	Output []*ActionUserRequestRegistrationIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserRequestRegistrationIndex) Prepare() *ActionUserRequestRegistrationIndexInvocation {
 	return &ActionUserRequestRegistrationIndexInvocation{
 		Action: action,
-		Path: "/v6.0/user_request/registrations",
+		Path:   "/v6.0/user_request/registrations",
 	}
 }
 
@@ -303,7 +308,6 @@ type ActionUserRequestRegistrationIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionUserRequestRegistrationIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionUserRequestRegistrationIndexInvocation) NewInput() *ActionUserRequestRegistrationIndexInput {
@@ -326,6 +330,7 @@ func (inv *ActionUserRequestRegistrationIndexInvocation) IsParameterSelected(par
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserRequestRegistrationIndexInvocation) NewMetaInput() *ActionUserRequestRegistrationIndexMetaGlobalInput {
@@ -365,8 +370,6 @@ func (inv *ActionUserRequestRegistrationIndexInvocation) callAsQuery() (*ActionU
 	}
 	return resp, err
 }
-
-
 
 func (inv *ActionUserRequestRegistrationIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
@@ -410,4 +413,3 @@ func (inv *ActionUserRequestRegistrationIndexInvocation) convertMetaInputToQuery
 		}
 	}
 }
-

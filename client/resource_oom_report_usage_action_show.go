@@ -19,7 +19,7 @@ func NewActionOomReportUsageShow(client *Client) *ActionOomReportUsageShow {
 // ActionOomReportUsageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportUsageShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOomReportUsageShowMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOomReportUsageShowMetaGlobalInput) SetNo(value bool) *ActionOomReportUsageShowMetaGlobalInput {
 	in.No = value
@@ -70,17 +71,14 @@ func (in *ActionOomReportUsageShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionOomReportUsageShowOutput is a type for action output parameters
 type ActionOomReportUsageShowOutput struct {
-	Failcnt int64 `json:"failcnt"`
-	Id int64 `json:"id"`
-	Limit int64 `json:"limit"`
+	Failcnt int64  `json:"failcnt"`
+	Id      int64  `json:"id"`
+	Limit   int64  `json:"limit"`
 	Memtype string `json:"memtype"`
-	Usage int64 `json:"usage"`
+	Usage   int64  `json:"usage"`
 }
-
 
 // Type for action response, including envelope
 type ActionOomReportUsageShowResponse struct {
@@ -95,12 +93,11 @@ type ActionOomReportUsageShowResponse struct {
 	Output []*ActionOomReportUsageShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOomReportUsageShow) Prepare() *ActionOomReportUsageShowInvocation {
 	return &ActionOomReportUsageShowInvocation{
 		Action: action,
-		Path: "/v6.0/oom_reports/{oom_report_id}/usages/{usage_id}",
+		Path:   "/v6.0/oom_reports/{oom_report_id}/usages/{usage_id}",
 	}
 }
 
@@ -165,9 +162,6 @@ func (inv *ActionOomReportUsageShowInvocation) callAsQuery() (*ActionOomReportUs
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOomReportUsageShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -178,4 +172,3 @@ func (inv *ActionOomReportUsageShowInvocation) convertMetaInputToQueryParams(ret
 		}
 	}
 }
-

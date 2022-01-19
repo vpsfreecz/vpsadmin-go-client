@@ -19,7 +19,7 @@ func NewActionIpAddressShow(client *Client) *ActionIpAddressShow {
 // ActionIpAddressShowMetaGlobalInput is a type for action global meta input parameters
 type ActionIpAddressShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionIpAddressShowMetaGlobalInput) SetIncludes(value string) *ActionI
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionIpAddressShowMetaGlobalInput) SetNo(value bool) *ActionIpAddressShowMetaGlobalInput {
 	in.No = value
@@ -70,24 +71,21 @@ func (in *ActionIpAddressShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionIpAddressShowOutput is a type for action output parameters
 type ActionIpAddressShowOutput struct {
-	Addr string `json:"addr"`
-	ChargedEnvironment *ActionEnvironmentShowOutput `json:"charged_environment"`
-	ClassId int64 `json:"class_id"`
-	Id int64 `json:"id"`
-	MaxRx int64 `json:"max_rx"`
-	MaxTx int64 `json:"max_tx"`
-	Network *ActionNetworkShowOutput `json:"network"`
-	NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Prefix int64 `json:"prefix"`
-	RouteVia *ActionHostIpAddressShowOutput `json:"route_via"`
-	Size int64 `json:"size"`
-	User *ActionUserShowOutput `json:"user"`
+	Addr               string                            `json:"addr"`
+	ChargedEnvironment *ActionEnvironmentShowOutput      `json:"charged_environment"`
+	ClassId            int64                             `json:"class_id"`
+	Id                 int64                             `json:"id"`
+	MaxRx              int64                             `json:"max_rx"`
+	MaxTx              int64                             `json:"max_tx"`
+	Network            *ActionNetworkShowOutput          `json:"network"`
+	NetworkInterface   *ActionNetworkInterfaceShowOutput `json:"network_interface"`
+	Prefix             int64                             `json:"prefix"`
+	RouteVia           *ActionHostIpAddressShowOutput    `json:"route_via"`
+	Size               int64                             `json:"size"`
+	User               *ActionUserShowOutput             `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionIpAddressShowResponse struct {
@@ -102,12 +100,11 @@ type ActionIpAddressShowResponse struct {
 	Output *ActionIpAddressShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionIpAddressShow) Prepare() *ActionIpAddressShowInvocation {
 	return &ActionIpAddressShowInvocation{
 		Action: action,
-		Path: "/v6.0/ip_addresses/{ip_address_id}",
+		Path:   "/v6.0/ip_addresses/{ip_address_id}",
 	}
 }
 
@@ -172,9 +169,6 @@ func (inv *ActionIpAddressShowInvocation) callAsQuery() (*ActionIpAddressShowRes
 	return resp, err
 }
 
-
-
-
 func (inv *ActionIpAddressShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -185,4 +179,3 @@ func (inv *ActionIpAddressShowInvocation) convertMetaInputToQueryParams(ret map[
 		}
 	}
 }
-

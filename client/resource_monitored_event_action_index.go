@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionMonitoredEventIndex is a type for action Monitored_event#Index
 type ActionMonitoredEventIndex struct {
@@ -17,9 +16,9 @@ func NewActionMonitoredEventIndex(client *Client) *ActionMonitoredEventIndex {
 
 // ActionMonitoredEventIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMonitoredEventIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionMonitoredEventIndexMetaGlobalInput) SetCount(value bool) *Action
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionMonitoredEventIndexMetaGlobalInput) SetIncludes(value string) *ActionMonitoredEventIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionMonitoredEventIndexMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMonitoredEventIndexMetaGlobalInput) SetNo(value bool) *ActionMonitoredEventIndexMetaGlobalInput {
 	in.No = value
@@ -83,14 +84,14 @@ func (in *ActionMonitoredEventIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMonitoredEventIndexInput is a type for action input parameters
 type ActionMonitoredEventIndexInput struct {
-	Limit int64 `json:"limit"`
-	Monitor string `json:"monitor"`
-	ObjectId int64 `json:"object_id"`
+	Limit      int64  `json:"limit"`
+	Monitor    string `json:"monitor"`
+	ObjectId   int64  `json:"object_id"`
 	ObjectName string `json:"object_name"`
-	Offset int64 `json:"offset"`
-	Order string `json:"order"`
-	State string `json:"state"`
-	User int64 `json:"user"`
+	Offset     int64  `json:"offset"`
+	Order      string `json:"order"`
+	State      string `json:"state"`
+	User       int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -106,6 +107,7 @@ func (in *ActionMonitoredEventIndexInput) SetLimit(value int64) *ActionMonitored
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetMonitor sets parameter Monitor to value and selects it for sending
 func (in *ActionMonitoredEventIndexInput) SetMonitor(value string) *ActionMonitoredEventIndexInput {
 	in.Monitor = value
@@ -117,6 +119,7 @@ func (in *ActionMonitoredEventIndexInput) SetMonitor(value string) *ActionMonito
 	in._selectedParameters["Monitor"] = nil
 	return in
 }
+
 // SetObjectId sets parameter ObjectId to value and selects it for sending
 func (in *ActionMonitoredEventIndexInput) SetObjectId(value int64) *ActionMonitoredEventIndexInput {
 	in.ObjectId = value
@@ -128,6 +131,7 @@ func (in *ActionMonitoredEventIndexInput) SetObjectId(value int64) *ActionMonito
 	in._selectedParameters["ObjectId"] = nil
 	return in
 }
+
 // SetObjectName sets parameter ObjectName to value and selects it for sending
 func (in *ActionMonitoredEventIndexInput) SetObjectName(value string) *ActionMonitoredEventIndexInput {
 	in.ObjectName = value
@@ -139,6 +143,7 @@ func (in *ActionMonitoredEventIndexInput) SetObjectName(value string) *ActionMon
 	in._selectedParameters["ObjectName"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionMonitoredEventIndexInput) SetOffset(value int64) *ActionMonitoredEventIndexInput {
 	in.Offset = value
@@ -150,6 +155,7 @@ func (in *ActionMonitoredEventIndexInput) SetOffset(value int64) *ActionMonitore
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetOrder sets parameter Order to value and selects it for sending
 func (in *ActionMonitoredEventIndexInput) SetOrder(value string) *ActionMonitoredEventIndexInput {
 	in.Order = value
@@ -161,6 +167,7 @@ func (in *ActionMonitoredEventIndexInput) SetOrder(value string) *ActionMonitore
 	in._selectedParameters["Order"] = nil
 	return in
 }
+
 // SetState sets parameter State to value and selects it for sending
 func (in *ActionMonitoredEventIndexInput) SetState(value string) *ActionMonitoredEventIndexInput {
 	in.State = value
@@ -172,6 +179,7 @@ func (in *ActionMonitoredEventIndexInput) SetState(value string) *ActionMonitore
 	in._selectedParameters["State"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionMonitoredEventIndexInput) SetUser(value int64) *ActionMonitoredEventIndexInput {
 	in.User = value
@@ -207,22 +215,20 @@ func (in *ActionMonitoredEventIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionMonitoredEventIndexOutput is a type for action output parameters
 type ActionMonitoredEventIndexOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	Issue string `json:"issue"`
-	Label string `json:"label"`
-	Monitor string `json:"monitor"`
-	ObjectId int64 `json:"object_id"`
-	ObjectName string `json:"object_name"`
-	SavedUntil string `json:"saved_until"`
-	State string `json:"state"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
+	CreatedAt  string                `json:"created_at"`
+	Id         int64                 `json:"id"`
+	Issue      string                `json:"issue"`
+	Label      string                `json:"label"`
+	Monitor    string                `json:"monitor"`
+	ObjectId   int64                 `json:"object_id"`
+	ObjectName string                `json:"object_name"`
+	SavedUntil string                `json:"saved_until"`
+	State      string                `json:"state"`
+	UpdatedAt  string                `json:"updated_at"`
+	User       *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionMonitoredEventIndexResponse struct {
@@ -237,12 +243,11 @@ type ActionMonitoredEventIndexResponse struct {
 	Output []*ActionMonitoredEventIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMonitoredEventIndex) Prepare() *ActionMonitoredEventIndexInvocation {
 	return &ActionMonitoredEventIndexInvocation{
 		Action: action,
-		Path: "/v6.0/monitored_events",
+		Path:   "/v6.0/monitored_events",
 	}
 }
 
@@ -258,7 +263,6 @@ type ActionMonitoredEventIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionMonitoredEventIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionMonitoredEventIndexInvocation) NewInput() *ActionMonitoredEventIndexInput {
@@ -281,6 +285,7 @@ func (inv *ActionMonitoredEventIndexInvocation) IsParameterSelected(param string
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionMonitoredEventIndexInvocation) NewMetaInput() *ActionMonitoredEventIndexMetaGlobalInput {
@@ -320,8 +325,6 @@ func (inv *ActionMonitoredEventIndexInvocation) callAsQuery() (*ActionMonitoredE
 	}
 	return resp, err
 }
-
-
 
 func (inv *ActionMonitoredEventIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
@@ -365,4 +368,3 @@ func (inv *ActionMonitoredEventIndexInvocation) convertMetaInputToQueryParams(re
 		}
 	}
 }
-

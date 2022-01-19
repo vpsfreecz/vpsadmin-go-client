@@ -19,7 +19,7 @@ func NewActionHelpBoxDelete(client *Client) *ActionHelpBoxDelete {
 // ActionHelpBoxDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionHelpBoxDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionHelpBoxDeleteMetaGlobalInput) SetIncludes(value string) *ActionH
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionHelpBoxDeleteMetaGlobalInput) SetNo(value bool) *ActionHelpBoxDeleteMetaGlobalInput {
 	in.No = value
@@ -70,13 +71,10 @@ func (in *ActionHelpBoxDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionHelpBoxDeleteRequest is a type for the entire action request
 type ActionHelpBoxDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionHelpBoxDeleteResponse struct {
@@ -84,12 +82,11 @@ type ActionHelpBoxDeleteResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionHelpBoxDelete) Prepare() *ActionHelpBoxDeleteInvocation {
 	return &ActionHelpBoxDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/help_boxes/{help_box_id}",
+		Path:   "/v6.0/help_boxes/{help_box_id}",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionHelpBoxDeleteInvocation) Call() (*ActionHelpBoxDeleteResponse, 
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionHelpBoxDeleteInvocation) callAsBody() (*ActionHelpBoxDeleteResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionHelpBoxDeleteResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionHelpBoxDeleteInvocation) callAsBody() (*ActionHelpBoxDeleteResp
 	return resp, err
 }
 
-
-
-
 func (inv *ActionHelpBoxDeleteInvocation) makeAllInputParams() *ActionHelpBoxDeleteRequest {
 	return &ActionHelpBoxDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionHelpBoxDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

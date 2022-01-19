@@ -31,14 +31,14 @@ func NewResourceNetwork(client *Client) *ResourceNetwork {
 	actionUpdate := NewActionNetworkUpdate(client)
 
 	return &ResourceNetwork{
-		Client: client,
+		Client:       client,
 		AddAddresses: actionAddAddresses,
-		Create: actionCreate,
-		New: actionCreate,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Create:       actionCreate,
+		New:          actionCreate,
+		Index:        actionIndex,
+		List:         actionIndex,
+		Show:         actionShow,
+		Find:         actionShow,
+		Update:       actionUpdate,
 	}
 }

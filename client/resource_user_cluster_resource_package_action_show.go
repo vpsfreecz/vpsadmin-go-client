@@ -19,7 +19,7 @@ func NewActionUserClusterResourcePackageShow(client *Client) *ActionUserClusterR
 // ActionUserClusterResourcePackageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserClusterResourcePackageShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserClusterResourcePackageShowMetaGlobalInput) SetIncludes(value
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserClusterResourcePackageShowMetaGlobalInput) SetNo(value bool) *ActionUserClusterResourcePackageShowMetaGlobalInput {
 	in.No = value
@@ -70,22 +71,19 @@ func (in *ActionUserClusterResourcePackageShowMetaGlobalInput) AnySelected() boo
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserClusterResourcePackageShowOutput is a type for action output parameters
 type ActionUserClusterResourcePackageShowOutput struct {
-	AddedBy *ActionUserShowOutput `json:"added_by"`
+	AddedBy                *ActionUserShowOutput                   `json:"added_by"`
 	ClusterResourcePackage *ActionClusterResourcePackageShowOutput `json:"cluster_resource_package"`
-	Comment string `json:"comment"`
-	CreatedAt string `json:"created_at"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	Id int64 `json:"id"`
-	IsPersonal bool `json:"is_personal"`
-	Label string `json:"label"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
+	Comment                string                                  `json:"comment"`
+	CreatedAt              string                                  `json:"created_at"`
+	Environment            *ActionEnvironmentShowOutput            `json:"environment"`
+	Id                     int64                                   `json:"id"`
+	IsPersonal             bool                                    `json:"is_personal"`
+	Label                  string                                  `json:"label"`
+	UpdatedAt              string                                  `json:"updated_at"`
+	User                   *ActionUserShowOutput                   `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserClusterResourcePackageShowResponse struct {
@@ -100,12 +98,11 @@ type ActionUserClusterResourcePackageShowResponse struct {
 	Output *ActionUserClusterResourcePackageShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserClusterResourcePackageShow) Prepare() *ActionUserClusterResourcePackageShowInvocation {
 	return &ActionUserClusterResourcePackageShowInvocation{
 		Action: action,
-		Path: "/v6.0/user_cluster_resource_packages/{user_cluster_resource_package_id}",
+		Path:   "/v6.0/user_cluster_resource_packages/{user_cluster_resource_package_id}",
 	}
 }
 
@@ -170,9 +167,6 @@ func (inv *ActionUserClusterResourcePackageShowInvocation) callAsQuery() (*Actio
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserClusterResourcePackageShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -183,4 +177,3 @@ func (inv *ActionUserClusterResourcePackageShowInvocation) convertMetaInputToQue
 		}
 	}
 }
-

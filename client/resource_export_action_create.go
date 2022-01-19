@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionExportCreate is a type for action Export#Create
 type ActionExportCreate struct {
@@ -18,7 +17,7 @@ func NewActionExportCreate(client *Client) *ActionExportCreate {
 // ActionExportCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionExportCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionExportCreateMetaGlobalInput) SetIncludes(value string) *ActionEx
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionExportCreateMetaGlobalInput) SetNo(value bool) *ActionExportCreateMetaGlobalInput {
 	in.No = value
@@ -71,15 +71,15 @@ func (in *ActionExportCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionExportCreateInput is a type for action input parameters
 type ActionExportCreateInput struct {
-	AllVps bool `json:"all_vps"`
-	Dataset int64 `json:"dataset"`
-	Enabled bool `json:"enabled"`
-	RootSquash bool `json:"root_squash"`
-	Rw bool `json:"rw"`
-	Snapshot int64 `json:"snapshot"`
-	SubtreeCheck bool `json:"subtree_check"`
-	Sync bool `json:"sync"`
-	Threads int64 `json:"threads"`
+	AllVps       bool  `json:"all_vps"`
+	Dataset      int64 `json:"dataset"`
+	Enabled      bool  `json:"enabled"`
+	RootSquash   bool  `json:"root_squash"`
+	Rw           bool  `json:"rw"`
+	Snapshot     int64 `json:"snapshot"`
+	SubtreeCheck bool  `json:"subtree_check"`
+	Sync         bool  `json:"sync"`
+	Threads      int64 `json:"threads"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -95,6 +95,7 @@ func (in *ActionExportCreateInput) SetAllVps(value bool) *ActionExportCreateInpu
 	in._selectedParameters["AllVps"] = nil
 	return in
 }
+
 // SetDataset sets parameter Dataset to value and selects it for sending
 func (in *ActionExportCreateInput) SetDataset(value int64) *ActionExportCreateInput {
 	in.Dataset = value
@@ -106,6 +107,7 @@ func (in *ActionExportCreateInput) SetDataset(value int64) *ActionExportCreateIn
 	in._selectedParameters["Dataset"] = nil
 	return in
 }
+
 // SetEnabled sets parameter Enabled to value and selects it for sending
 func (in *ActionExportCreateInput) SetEnabled(value bool) *ActionExportCreateInput {
 	in.Enabled = value
@@ -117,6 +119,7 @@ func (in *ActionExportCreateInput) SetEnabled(value bool) *ActionExportCreateInp
 	in._selectedParameters["Enabled"] = nil
 	return in
 }
+
 // SetRootSquash sets parameter RootSquash to value and selects it for sending
 func (in *ActionExportCreateInput) SetRootSquash(value bool) *ActionExportCreateInput {
 	in.RootSquash = value
@@ -128,6 +131,7 @@ func (in *ActionExportCreateInput) SetRootSquash(value bool) *ActionExportCreate
 	in._selectedParameters["RootSquash"] = nil
 	return in
 }
+
 // SetRw sets parameter Rw to value and selects it for sending
 func (in *ActionExportCreateInput) SetRw(value bool) *ActionExportCreateInput {
 	in.Rw = value
@@ -139,6 +143,7 @@ func (in *ActionExportCreateInput) SetRw(value bool) *ActionExportCreateInput {
 	in._selectedParameters["Rw"] = nil
 	return in
 }
+
 // SetSnapshot sets parameter Snapshot to value and selects it for sending
 func (in *ActionExportCreateInput) SetSnapshot(value int64) *ActionExportCreateInput {
 	in.Snapshot = value
@@ -150,6 +155,7 @@ func (in *ActionExportCreateInput) SetSnapshot(value int64) *ActionExportCreateI
 	in._selectedParameters["Snapshot"] = nil
 	return in
 }
+
 // SetSubtreeCheck sets parameter SubtreeCheck to value and selects it for sending
 func (in *ActionExportCreateInput) SetSubtreeCheck(value bool) *ActionExportCreateInput {
 	in.SubtreeCheck = value
@@ -161,6 +167,7 @@ func (in *ActionExportCreateInput) SetSubtreeCheck(value bool) *ActionExportCrea
 	in._selectedParameters["SubtreeCheck"] = nil
 	return in
 }
+
 // SetSync sets parameter Sync to value and selects it for sending
 func (in *ActionExportCreateInput) SetSync(value bool) *ActionExportCreateInput {
 	in.Sync = value
@@ -172,6 +179,7 @@ func (in *ActionExportCreateInput) SetSync(value bool) *ActionExportCreateInput 
 	in._selectedParameters["Sync"] = nil
 	return in
 }
+
 // SetThreads sets parameter Threads to value and selects it for sending
 func (in *ActionExportCreateInput) SetThreads(value int64) *ActionExportCreateInput {
 	in.Threads = value
@@ -210,28 +218,28 @@ func (in *ActionExportCreateInput) AnySelected() bool {
 // ActionExportCreateRequest is a type for the entire action request
 type ActionExportCreateRequest struct {
 	Export map[string]interface{} `json:"export"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta   map[string]interface{} `json:"_meta"`
 }
 
 // ActionExportCreateOutput is a type for action output parameters
 type ActionExportCreateOutput struct {
-	AllVps bool `json:"all_vps"`
-	CreatedAt string `json:"created_at"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Enabled bool `json:"enabled"`
-	ExpirationDate string `json:"expiration_date"`
-	HostIpAddress *ActionHostIpAddressShowOutput `json:"host_ip_address"`
-	Id int64 `json:"id"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	Path string `json:"path"`
-	RootSquash bool `json:"root_squash"`
-	Rw bool `json:"rw"`
-	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	SubtreeCheck bool `json:"subtree_check"`
-	Sync bool `json:"sync"`
-	Threads int64 `json:"threads"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
+	AllVps         bool                             `json:"all_vps"`
+	CreatedAt      string                           `json:"created_at"`
+	Dataset        *ActionDatasetShowOutput         `json:"dataset"`
+	Enabled        bool                             `json:"enabled"`
+	ExpirationDate string                           `json:"expiration_date"`
+	HostIpAddress  *ActionHostIpAddressShowOutput   `json:"host_ip_address"`
+	Id             int64                            `json:"id"`
+	IpAddress      *ActionIpAddressShowOutput       `json:"ip_address"`
+	Path           string                           `json:"path"`
+	RootSquash     bool                             `json:"root_squash"`
+	Rw             bool                             `json:"rw"`
+	Snapshot       *ActionDatasetSnapshotShowOutput `json:"snapshot"`
+	SubtreeCheck   bool                             `json:"subtree_check"`
+	Sync           bool                             `json:"sync"`
+	Threads        int64                            `json:"threads"`
+	UpdatedAt      string                           `json:"updated_at"`
+	User           *ActionUserShowOutput            `json:"user"`
 }
 
 // ActionExportCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -254,12 +262,11 @@ type ActionExportCreateResponse struct {
 	Output *ActionExportCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionExportCreate) Prepare() *ActionExportCreateInvocation {
 	return &ActionExportCreateInvocation{
 		Action: action,
-		Path: "/v6.0/exports",
+		Path:   "/v6.0/exports",
 	}
 }
 
@@ -275,7 +282,6 @@ type ActionExportCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionExportCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionExportCreateInvocation) NewInput() *ActionExportCreateInput {
@@ -298,6 +304,7 @@ func (inv *ActionExportCreateInvocation) IsParameterSelected(param string) bool 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionExportCreateInvocation) NewMetaInput() *ActionExportCreateMetaGlobalInput {
@@ -325,7 +332,6 @@ func (inv *ActionExportCreateInvocation) IsMetaParameterSelected(param string) b
 func (inv *ActionExportCreateInvocation) Call() (*ActionExportCreateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionExportCreateInvocation) callAsBody() (*ActionExportCreateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -386,11 +392,11 @@ func (resp *ActionExportCreateResponse) WatchOperation(timeout float64, updateIn
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -413,12 +419,10 @@ func (resp *ActionExportCreateResponse) CancelOperation() (*ActionActionStateCan
 	return req.Call()
 }
 
-
-
 func (inv *ActionExportCreateInvocation) makeAllInputParams() *ActionExportCreateRequest {
 	return &ActionExportCreateRequest{
 		Export: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:   inv.makeMetaInputParams(),
 	}
 }
 

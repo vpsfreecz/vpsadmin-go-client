@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionIntegrityCheckIndex is a type for action Integrity_check#Index
 type ActionIntegrityCheckIndex struct {
@@ -17,9 +16,9 @@ func NewActionIntegrityCheckIndex(client *Client) *ActionIntegrityCheckIndex {
 
 // ActionIntegrityCheckIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionIntegrityCheckIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionIntegrityCheckIndexMetaGlobalInput) SetCount(value bool) *Action
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionIntegrityCheckIndexMetaGlobalInput) SetIncludes(value string) *ActionIntegrityCheckIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionIntegrityCheckIndexMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionIntegrityCheckIndexMetaGlobalInput) SetNo(value bool) *ActionIntegrityCheckIndexMetaGlobalInput {
 	in.No = value
@@ -83,10 +84,10 @@ func (in *ActionIntegrityCheckIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionIntegrityCheckIndexInput is a type for action input parameters
 type ActionIntegrityCheckIndexInput struct {
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
+	Limit  int64  `json:"limit"`
+	Offset int64  `json:"offset"`
 	Status string `json:"status"`
-	User int64 `json:"user"`
+	User   int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -102,6 +103,7 @@ func (in *ActionIntegrityCheckIndexInput) SetLimit(value int64) *ActionIntegrity
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionIntegrityCheckIndexInput) SetOffset(value int64) *ActionIntegrityCheckIndexInput {
 	in.Offset = value
@@ -113,6 +115,7 @@ func (in *ActionIntegrityCheckIndexInput) SetOffset(value int64) *ActionIntegrit
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetStatus sets parameter Status to value and selects it for sending
 func (in *ActionIntegrityCheckIndexInput) SetStatus(value string) *ActionIntegrityCheckIndexInput {
 	in.Status = value
@@ -124,6 +127,7 @@ func (in *ActionIntegrityCheckIndexInput) SetStatus(value string) *ActionIntegri
 	in._selectedParameters["Status"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionIntegrityCheckIndexInput) SetUser(value int64) *ActionIntegrityCheckIndexInput {
 	in.User = value
@@ -159,23 +163,21 @@ func (in *ActionIntegrityCheckIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionIntegrityCheckIndexOutput is a type for action output parameters
 type ActionIntegrityCheckIndexOutput struct {
-	BrokenObjects int64 `json:"broken_objects"`
-	CheckedFacts int64 `json:"checked_facts"`
-	CheckedObjects int64 `json:"checked_objects"`
-	CreatedAt string `json:"created_at"`
-	FalseFacts int64 `json:"false_facts"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	IntegralObjects int64 `json:"integral_objects"`
-	Status string `json:"status"`
-	TrueFacts int64 `json:"true_facts"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
+	BrokenObjects   int64                 `json:"broken_objects"`
+	CheckedFacts    int64                 `json:"checked_facts"`
+	CheckedObjects  int64                 `json:"checked_objects"`
+	CreatedAt       string                `json:"created_at"`
+	FalseFacts      int64                 `json:"false_facts"`
+	FinishedAt      string                `json:"finished_at"`
+	Id              int64                 `json:"id"`
+	IntegralObjects int64                 `json:"integral_objects"`
+	Status          string                `json:"status"`
+	TrueFacts       int64                 `json:"true_facts"`
+	UpdatedAt       string                `json:"updated_at"`
+	User            *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionIntegrityCheckIndexResponse struct {
@@ -190,12 +192,11 @@ type ActionIntegrityCheckIndexResponse struct {
 	Output []*ActionIntegrityCheckIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionIntegrityCheckIndex) Prepare() *ActionIntegrityCheckIndexInvocation {
 	return &ActionIntegrityCheckIndexInvocation{
 		Action: action,
-		Path: "/v6.0/integrity_checks",
+		Path:   "/v6.0/integrity_checks",
 	}
 }
 
@@ -211,7 +212,6 @@ type ActionIntegrityCheckIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionIntegrityCheckIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionIntegrityCheckIndexInvocation) NewInput() *ActionIntegrityCheckIndexInput {
@@ -234,6 +234,7 @@ func (inv *ActionIntegrityCheckIndexInvocation) IsParameterSelected(param string
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionIntegrityCheckIndexInvocation) NewMetaInput() *ActionIntegrityCheckIndexMetaGlobalInput {
@@ -274,8 +275,6 @@ func (inv *ActionIntegrityCheckIndexInvocation) callAsQuery() (*ActionIntegrityC
 	return resp, err
 }
 
-
-
 func (inv *ActionIntegrityCheckIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -306,4 +305,3 @@ func (inv *ActionIntegrityCheckIndexInvocation) convertMetaInputToQueryParams(re
 		}
 	}
 }
-

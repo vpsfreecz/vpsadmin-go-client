@@ -19,7 +19,7 @@ func NewActionIpAddressFree(client *Client) *ActionIpAddressFree {
 // ActionIpAddressFreeMetaGlobalInput is a type for action global meta input parameters
 type ActionIpAddressFreeMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionIpAddressFreeMetaGlobalInput) SetIncludes(value string) *ActionI
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionIpAddressFreeMetaGlobalInput) SetNo(value bool) *ActionIpAddressFreeMetaGlobalInput {
 	in.No = value
@@ -70,7 +71,6 @@ func (in *ActionIpAddressFreeMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionIpAddressFreeRequest is a type for the entire action request
 type ActionIpAddressFreeRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
@@ -78,18 +78,18 @@ type ActionIpAddressFreeRequest struct {
 
 // ActionIpAddressFreeOutput is a type for action output parameters
 type ActionIpAddressFreeOutput struct {
-	Addr string `json:"addr"`
-	ChargedEnvironment *ActionEnvironmentShowOutput `json:"charged_environment"`
-	ClassId int64 `json:"class_id"`
-	Id int64 `json:"id"`
-	MaxRx int64 `json:"max_rx"`
-	MaxTx int64 `json:"max_tx"`
-	Network *ActionNetworkShowOutput `json:"network"`
-	NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Prefix int64 `json:"prefix"`
-	RouteVia *ActionHostIpAddressShowOutput `json:"route_via"`
-	Size int64 `json:"size"`
-	User *ActionUserShowOutput `json:"user"`
+	Addr               string                            `json:"addr"`
+	ChargedEnvironment *ActionEnvironmentShowOutput      `json:"charged_environment"`
+	ClassId            int64                             `json:"class_id"`
+	Id                 int64                             `json:"id"`
+	MaxRx              int64                             `json:"max_rx"`
+	MaxTx              int64                             `json:"max_tx"`
+	Network            *ActionNetworkShowOutput          `json:"network"`
+	NetworkInterface   *ActionNetworkInterfaceShowOutput `json:"network_interface"`
+	Prefix             int64                             `json:"prefix"`
+	RouteVia           *ActionHostIpAddressShowOutput    `json:"route_via"`
+	Size               int64                             `json:"size"`
+	User               *ActionUserShowOutput             `json:"user"`
 }
 
 // ActionIpAddressFreeMetaGlobalOutput is a type for global output metadata parameters
@@ -112,12 +112,11 @@ type ActionIpAddressFreeResponse struct {
 	Output *ActionIpAddressFreeOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionIpAddressFree) Prepare() *ActionIpAddressFreeInvocation {
 	return &ActionIpAddressFreeInvocation{
 		Action: action,
-		Path: "/v6.0/ip_addresses/{ip_address_id}/free",
+		Path:   "/v6.0/ip_addresses/{ip_address_id}/free",
 	}
 }
 
@@ -170,7 +169,6 @@ func (inv *ActionIpAddressFreeInvocation) IsMetaParameterSelected(param string) 
 func (inv *ActionIpAddressFreeInvocation) Call() (*ActionIpAddressFreeResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionIpAddressFreeInvocation) callAsBody() (*ActionIpAddressFreeResponse, error) {
 	input := inv.makeAllInputParams()
@@ -231,11 +229,11 @@ func (resp *ActionIpAddressFreeResponse) WatchOperation(timeout float64, updateI
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -258,14 +256,11 @@ func (resp *ActionIpAddressFreeResponse) CancelOperation() (*ActionActionStateCa
 	return req.Call()
 }
 
-
-
 func (inv *ActionIpAddressFreeInvocation) makeAllInputParams() *ActionIpAddressFreeRequest {
 	return &ActionIpAddressFreeRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionIpAddressFreeInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

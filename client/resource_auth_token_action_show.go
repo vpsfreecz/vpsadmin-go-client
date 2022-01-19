@@ -18,7 +18,7 @@ func NewActionAuthTokenShow(client *Client) *ActionAuthTokenShow {
 
 // ActionAuthTokenShowMetaGlobalInput is a type for action global meta input parameters
 type ActionAuthTokenShowMetaGlobalInput struct {
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	Includes string `json:"includes"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -35,6 +35,7 @@ func (in *ActionAuthTokenShowMetaGlobalInput) SetNo(value bool) *ActionAuthToken
 	in._selectedParameters["No"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionAuthTokenShowMetaGlobalInput) SetIncludes(value string) *ActionAuthTokenShowMetaGlobalInput {
 	in.Includes = value
@@ -70,21 +71,18 @@ func (in *ActionAuthTokenShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionAuthTokenShowOutput is a type for action output parameters
 type ActionAuthTokenShowOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	Token string `json:"token"`
-	ValidTo string `json:"valid_to"`
-	Label string `json:"label"`
-	Lifetime string `json:"lifetime"`
-	Interval int64 `json:"interval"`
-	UseCount int64 `json:"use_count"`
-	CreatedAt string `json:"created_at"`
+	Id        int64                 `json:"id"`
+	User      *ActionUserShowOutput `json:"user"`
+	Token     string                `json:"token"`
+	ValidTo   string                `json:"valid_to"`
+	Label     string                `json:"label"`
+	Lifetime  string                `json:"lifetime"`
+	Interval  int64                 `json:"interval"`
+	UseCount  int64                 `json:"use_count"`
+	CreatedAt string                `json:"created_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionAuthTokenShowResponse struct {
@@ -99,12 +97,11 @@ type ActionAuthTokenShowResponse struct {
 	Output *ActionAuthTokenShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionAuthTokenShow) Prepare() *ActionAuthTokenShowInvocation {
 	return &ActionAuthTokenShowInvocation{
 		Action: action,
-		Path: "/v5.0/auth_tokens/:auth_token_id",
+		Path:   "/v5.0/auth_tokens/:auth_token_id",
 	}
 }
 
@@ -169,9 +166,6 @@ func (inv *ActionAuthTokenShowInvocation) callAsQuery() (*ActionAuthTokenShowRes
 	return resp, err
 }
 
-
-
-
 func (inv *ActionAuthTokenShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("No") {
@@ -182,4 +176,3 @@ func (inv *ActionAuthTokenShowInvocation) convertMetaInputToQueryParams(ret map[
 		}
 	}
 }
-

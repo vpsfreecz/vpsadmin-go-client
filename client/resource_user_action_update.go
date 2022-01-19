@@ -19,7 +19,7 @@ func NewActionUserUpdate(client *Client) *ActionUserUpdate {
 // ActionUserUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserUpdateMetaGlobalInput) SetIncludes(value string) *ActionUser
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserUpdateMetaGlobalInput) SetNo(value bool) *ActionUserUpdateMetaGlobalInput {
 	in.No = value
@@ -72,21 +73,21 @@ func (in *ActionUserUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserUpdateInput is a type for action input parameters
 type ActionUserUpdateInput struct {
-	Address string `json:"address"`
-	ChangeReason string `json:"change_reason"`
-	Email string `json:"email"`
+	Address        string `json:"address"`
+	ChangeReason   string `json:"change_reason"`
+	Email          string `json:"email"`
 	ExpirationDate string `json:"expiration_date"`
-	FullName string `json:"full_name"`
-	Info string `json:"info"`
-	Language int64 `json:"language"`
-	Level int64 `json:"level"`
-	Lockout bool `json:"lockout"`
-	Login string `json:"login"`
-	MailerEnabled bool `json:"mailer_enabled"`
-	NewPassword string `json:"new_password"`
-	ObjectState string `json:"object_state"`
-	Password string `json:"password"`
-	PasswordReset bool `json:"password_reset"`
+	FullName       string `json:"full_name"`
+	Info           string `json:"info"`
+	Language       int64  `json:"language"`
+	Level          int64  `json:"level"`
+	Lockout        bool   `json:"lockout"`
+	Login          string `json:"login"`
+	MailerEnabled  bool   `json:"mailer_enabled"`
+	NewPassword    string `json:"new_password"`
+	ObjectState    string `json:"object_state"`
+	Password       string `json:"password"`
+	PasswordReset  bool   `json:"password_reset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -102,6 +103,7 @@ func (in *ActionUserUpdateInput) SetAddress(value string) *ActionUserUpdateInput
 	in._selectedParameters["Address"] = nil
 	return in
 }
+
 // SetChangeReason sets parameter ChangeReason to value and selects it for sending
 func (in *ActionUserUpdateInput) SetChangeReason(value string) *ActionUserUpdateInput {
 	in.ChangeReason = value
@@ -113,6 +115,7 @@ func (in *ActionUserUpdateInput) SetChangeReason(value string) *ActionUserUpdate
 	in._selectedParameters["ChangeReason"] = nil
 	return in
 }
+
 // SetEmail sets parameter Email to value and selects it for sending
 func (in *ActionUserUpdateInput) SetEmail(value string) *ActionUserUpdateInput {
 	in.Email = value
@@ -124,6 +127,7 @@ func (in *ActionUserUpdateInput) SetEmail(value string) *ActionUserUpdateInput {
 	in._selectedParameters["Email"] = nil
 	return in
 }
+
 // SetExpirationDate sets parameter ExpirationDate to value and selects it for sending
 func (in *ActionUserUpdateInput) SetExpirationDate(value string) *ActionUserUpdateInput {
 	in.ExpirationDate = value
@@ -135,6 +139,7 @@ func (in *ActionUserUpdateInput) SetExpirationDate(value string) *ActionUserUpda
 	in._selectedParameters["ExpirationDate"] = nil
 	return in
 }
+
 // SetFullName sets parameter FullName to value and selects it for sending
 func (in *ActionUserUpdateInput) SetFullName(value string) *ActionUserUpdateInput {
 	in.FullName = value
@@ -146,6 +151,7 @@ func (in *ActionUserUpdateInput) SetFullName(value string) *ActionUserUpdateInpu
 	in._selectedParameters["FullName"] = nil
 	return in
 }
+
 // SetInfo sets parameter Info to value and selects it for sending
 func (in *ActionUserUpdateInput) SetInfo(value string) *ActionUserUpdateInput {
 	in.Info = value
@@ -157,6 +163,7 @@ func (in *ActionUserUpdateInput) SetInfo(value string) *ActionUserUpdateInput {
 	in._selectedParameters["Info"] = nil
 	return in
 }
+
 // SetLanguage sets parameter Language to value and selects it for sending
 func (in *ActionUserUpdateInput) SetLanguage(value int64) *ActionUserUpdateInput {
 	in.Language = value
@@ -168,6 +175,7 @@ func (in *ActionUserUpdateInput) SetLanguage(value int64) *ActionUserUpdateInput
 	in._selectedParameters["Language"] = nil
 	return in
 }
+
 // SetLevel sets parameter Level to value and selects it for sending
 func (in *ActionUserUpdateInput) SetLevel(value int64) *ActionUserUpdateInput {
 	in.Level = value
@@ -179,6 +187,7 @@ func (in *ActionUserUpdateInput) SetLevel(value int64) *ActionUserUpdateInput {
 	in._selectedParameters["Level"] = nil
 	return in
 }
+
 // SetLockout sets parameter Lockout to value and selects it for sending
 func (in *ActionUserUpdateInput) SetLockout(value bool) *ActionUserUpdateInput {
 	in.Lockout = value
@@ -190,6 +199,7 @@ func (in *ActionUserUpdateInput) SetLockout(value bool) *ActionUserUpdateInput {
 	in._selectedParameters["Lockout"] = nil
 	return in
 }
+
 // SetLogin sets parameter Login to value and selects it for sending
 func (in *ActionUserUpdateInput) SetLogin(value string) *ActionUserUpdateInput {
 	in.Login = value
@@ -201,6 +211,7 @@ func (in *ActionUserUpdateInput) SetLogin(value string) *ActionUserUpdateInput {
 	in._selectedParameters["Login"] = nil
 	return in
 }
+
 // SetMailerEnabled sets parameter MailerEnabled to value and selects it for sending
 func (in *ActionUserUpdateInput) SetMailerEnabled(value bool) *ActionUserUpdateInput {
 	in.MailerEnabled = value
@@ -212,6 +223,7 @@ func (in *ActionUserUpdateInput) SetMailerEnabled(value bool) *ActionUserUpdateI
 	in._selectedParameters["MailerEnabled"] = nil
 	return in
 }
+
 // SetNewPassword sets parameter NewPassword to value and selects it for sending
 func (in *ActionUserUpdateInput) SetNewPassword(value string) *ActionUserUpdateInput {
 	in.NewPassword = value
@@ -223,6 +235,7 @@ func (in *ActionUserUpdateInput) SetNewPassword(value string) *ActionUserUpdateI
 	in._selectedParameters["NewPassword"] = nil
 	return in
 }
+
 // SetObjectState sets parameter ObjectState to value and selects it for sending
 func (in *ActionUserUpdateInput) SetObjectState(value string) *ActionUserUpdateInput {
 	in.ObjectState = value
@@ -234,6 +247,7 @@ func (in *ActionUserUpdateInput) SetObjectState(value string) *ActionUserUpdateI
 	in._selectedParameters["ObjectState"] = nil
 	return in
 }
+
 // SetPassword sets parameter Password to value and selects it for sending
 func (in *ActionUserUpdateInput) SetPassword(value string) *ActionUserUpdateInput {
 	in.Password = value
@@ -245,6 +259,7 @@ func (in *ActionUserUpdateInput) SetPassword(value string) *ActionUserUpdateInpu
 	in._selectedParameters["Password"] = nil
 	return in
 }
+
 // SetPasswordReset sets parameter PasswordReset to value and selects it for sending
 func (in *ActionUserUpdateInput) SetPasswordReset(value bool) *ActionUserUpdateInput {
 	in.PasswordReset = value
@@ -288,19 +303,19 @@ type ActionUserUpdateRequest struct {
 
 // ActionUserUpdateOutput is a type for action output parameters
 type ActionUserUpdateOutput struct {
-	Address string `json:"address"`
-	CreatedAt string `json:"created_at"`
-	Email string `json:"email"`
-	FullName string `json:"full_name"`
-	Id int64 `json:"id"`
-	Info string `json:"info"`
-	Language *ActionLanguageShowOutput `json:"language"`
-	LastActivityAt string `json:"last_activity_at"`
-	Level int64 `json:"level"`
-	Lockout bool `json:"lockout"`
-	Login string `json:"login"`
-	MailerEnabled bool `json:"mailer_enabled"`
-	PasswordReset bool `json:"password_reset"`
+	Address        string                    `json:"address"`
+	CreatedAt      string                    `json:"created_at"`
+	Email          string                    `json:"email"`
+	FullName       string                    `json:"full_name"`
+	Id             int64                     `json:"id"`
+	Info           string                    `json:"info"`
+	Language       *ActionLanguageShowOutput `json:"language"`
+	LastActivityAt string                    `json:"last_activity_at"`
+	Level          int64                     `json:"level"`
+	Lockout        bool                      `json:"lockout"`
+	Login          string                    `json:"login"`
+	MailerEnabled  bool                      `json:"mailer_enabled"`
+	PasswordReset  bool                      `json:"password_reset"`
 }
 
 // ActionUserUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -323,12 +338,11 @@ type ActionUserUpdateResponse struct {
 	Output *ActionUserUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserUpdate) Prepare() *ActionUserUpdateInvocation {
 	return &ActionUserUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}",
+		Path:   "/v6.0/users/{user_id}",
 	}
 }
 
@@ -377,6 +391,7 @@ func (inv *ActionUserUpdateInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserUpdateInvocation) NewMetaInput() *ActionUserUpdateMetaGlobalInput {
@@ -404,7 +419,6 @@ func (inv *ActionUserUpdateInvocation) IsMetaParameterSelected(param string) boo
 func (inv *ActionUserUpdateInvocation) Call() (*ActionUserUpdateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionUserUpdateInvocation) callAsBody() (*ActionUserUpdateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -465,11 +479,11 @@ func (resp *ActionUserUpdateResponse) WatchOperation(timeout float64, updateIn f
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -491,8 +505,6 @@ func (resp *ActionUserUpdateResponse) CancelOperation() (*ActionActionStateCance
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 	return req.Call()
 }
-
-
 
 func (inv *ActionUserUpdateInvocation) makeAllInputParams() *ActionUserUpdateRequest {
 	return &ActionUserUpdateRequest{

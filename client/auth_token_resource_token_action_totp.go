@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // AuthTokenActionTokenTotp is a type for action Token#Totp
 type AuthTokenActionTokenTotp struct {
@@ -59,7 +58,7 @@ func (in *AuthTokenActionTokenTotpMetaGlobalInput) AnySelected() bool {
 
 // AuthTokenActionTokenTotpInput is a type for action input parameters
 type AuthTokenActionTokenTotpInput struct {
-	Code string `json:"code"`
+	Code  string `json:"code"`
 	Token string `json:"token"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -76,6 +75,7 @@ func (in *AuthTokenActionTokenTotpInput) SetCode(value string) *AuthTokenActionT
 	in._selectedParameters["Code"] = nil
 	return in
 }
+
 // SetToken sets parameter Token to value and selects it for sending
 func (in *AuthTokenActionTokenTotpInput) SetToken(value string) *AuthTokenActionTokenTotpInput {
 	in.Token = value
@@ -114,17 +114,16 @@ func (in *AuthTokenActionTokenTotpInput) AnySelected() bool {
 // AuthTokenActionTokenTotpRequest is a type for the entire action request
 type AuthTokenActionTokenTotpRequest struct {
 	Token map[string]interface{} `json:"token"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta  map[string]interface{} `json:"_meta"`
 }
 
 // AuthTokenActionTokenTotpOutput is a type for action output parameters
 type AuthTokenActionTokenTotpOutput struct {
-	Complete bool `json:"complete"`
+	Complete   bool   `json:"complete"`
 	NextAction string `json:"next_action"`
-	Token string `json:"token"`
-	ValidTo string `json:"valid_to"`
+	Token      string `json:"token"`
+	ValidTo    string `json:"valid_to"`
 }
-
 
 // Type for action response, including envelope
 type AuthTokenActionTokenTotpResponse struct {
@@ -139,12 +138,11 @@ type AuthTokenActionTokenTotpResponse struct {
 	Output *AuthTokenActionTokenTotpOutput
 }
 
-
 // Prepare the action for invocation
 func (action *AuthTokenActionTokenTotp) Prepare() *AuthTokenActionTokenTotpInvocation {
 	return &AuthTokenActionTokenTotpInvocation{
 		Action: action,
-		Path: "/_auth/token/tokens/totp",
+		Path:   "/_auth/token/tokens/totp",
 	}
 }
 
@@ -160,7 +158,6 @@ type AuthTokenActionTokenTotpInvocation struct {
 	// Global meta input parameters
 	MetaInput *AuthTokenActionTokenTotpMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *AuthTokenActionTokenTotpInvocation) NewInput() *AuthTokenActionTokenTotpInput {
@@ -183,6 +180,7 @@ func (inv *AuthTokenActionTokenTotpInvocation) IsParameterSelected(param string)
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *AuthTokenActionTokenTotpInvocation) NewMetaInput() *AuthTokenActionTokenTotpMetaGlobalInput {
@@ -211,7 +209,6 @@ func (inv *AuthTokenActionTokenTotpInvocation) Call() (*AuthTokenActionTokenTotp
 	return inv.callAsBody()
 }
 
-
 func (inv *AuthTokenActionTokenTotpInvocation) callAsBody() (*AuthTokenActionTokenTotpResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &AuthTokenActionTokenTotpResponse{Action: inv.Action}
@@ -222,13 +219,10 @@ func (inv *AuthTokenActionTokenTotpInvocation) callAsBody() (*AuthTokenActionTok
 	return resp, err
 }
 
-
-
-
 func (inv *AuthTokenActionTokenTotpInvocation) makeAllInputParams() *AuthTokenActionTokenTotpRequest {
 	return &AuthTokenActionTokenTotpRequest{
 		Token: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:  inv.makeMetaInputParams(),
 	}
 }
 

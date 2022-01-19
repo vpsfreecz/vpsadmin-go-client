@@ -27,10 +27,10 @@ func NewResourceIntegrityCheck(client *Client) *ResourceIntegrityCheck {
 	return &ResourceIntegrityCheck{
 		Client: client,
 		Create: actionCreate,
-		New: actionCreate,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		New:    actionCreate,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

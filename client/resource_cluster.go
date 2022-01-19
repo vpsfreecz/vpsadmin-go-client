@@ -30,13 +30,13 @@ func NewResourceCluster(client *Client) *ResourceCluster {
 	actionShow := NewActionClusterShow(client)
 
 	return &ResourceCluster{
-		Client: client,
-		FullStats: actionFullStats,
+		Client:                client,
+		FullStats:             actionFullStats,
 		GenerateMigrationKeys: actionGenerateMigrationKeys,
-		PublicStats: actionPublicStats,
-		Search: actionSearch,
-		SetMaintenance: actionSetMaintenance,
-		Show: actionShow,
-		Find: actionShow,
+		PublicStats:           actionPublicStats,
+		Search:                actionSearch,
+		SetMaintenance:        actionSetMaintenance,
+		Show:                  actionShow,
+		Find:                  actionShow,
 	}
 }

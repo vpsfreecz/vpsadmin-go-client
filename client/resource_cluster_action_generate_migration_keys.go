@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionClusterGenerateMigrationKeys is a type for action Cluster#Generate_migration_keys
 type ActionClusterGenerateMigrationKeys struct {
@@ -57,12 +56,10 @@ func (in *ActionClusterGenerateMigrationKeysMetaGlobalInput) AnySelected() bool 
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionClusterGenerateMigrationKeysRequest is a type for the entire action request
 type ActionClusterGenerateMigrationKeysRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionClusterGenerateMigrationKeysMetaGlobalOutput is a type for global output metadata parameters
 type ActionClusterGenerateMigrationKeysMetaGlobalOutput struct {
@@ -89,7 +86,7 @@ func (action *ActionClusterGenerateMigrationKeys) Call() (*ActionClusterGenerate
 func (action *ActionClusterGenerateMigrationKeys) Prepare() *ActionClusterGenerateMigrationKeysInvocation {
 	return &ActionClusterGenerateMigrationKeysInvocation{
 		Action: action,
-		Path: "/v6.0/cluster/generate_migration_keys",
+		Path:   "/v6.0/cluster/generate_migration_keys",
 	}
 }
 
@@ -103,7 +100,6 @@ type ActionClusterGenerateMigrationKeysInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionClusterGenerateMigrationKeysMetaGlobalInput
 }
-
 
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
@@ -132,7 +128,6 @@ func (inv *ActionClusterGenerateMigrationKeysInvocation) IsMetaParameterSelected
 func (inv *ActionClusterGenerateMigrationKeysInvocation) Call() (*ActionClusterGenerateMigrationKeysResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionClusterGenerateMigrationKeysInvocation) callAsBody() (*ActionClusterGenerateMigrationKeysResponse, error) {
 	input := inv.makeAllInputParams()
@@ -190,11 +185,11 @@ func (resp *ActionClusterGenerateMigrationKeysResponse) WatchOperation(timeout f
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -217,14 +212,11 @@ func (resp *ActionClusterGenerateMigrationKeysResponse) CancelOperation() (*Acti
 	return req.Call()
 }
 
-
-
 func (inv *ActionClusterGenerateMigrationKeysInvocation) makeAllInputParams() *ActionClusterGenerateMigrationKeysRequest {
 	return &ActionClusterGenerateMigrationKeysRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionClusterGenerateMigrationKeysInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

@@ -19,7 +19,7 @@ func NewActionUserTotpDeviceShow(client *Client) *ActionUserTotpDeviceShow {
 // ActionUserTotpDeviceShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserTotpDeviceShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserTotpDeviceShowMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserTotpDeviceShowMetaGlobalInput) SetNo(value bool) *ActionUserTotpDeviceShowMetaGlobalInput {
 	in.No = value
@@ -70,20 +71,17 @@ func (in *ActionUserTotpDeviceShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserTotpDeviceShowOutput is a type for action output parameters
 type ActionUserTotpDeviceShowOutput struct {
-	Confirmed bool `json:"confirmed"`
+	Confirmed bool   `json:"confirmed"`
 	CreatedAt string `json:"created_at"`
-	Enabled bool `json:"enabled"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
+	Enabled   bool   `json:"enabled"`
+	Id        int64  `json:"id"`
+	Label     string `json:"label"`
 	LastUseAt string `json:"last_use_at"`
 	UpdatedAt string `json:"updated_at"`
-	UseCount int64 `json:"use_count"`
+	UseCount  int64  `json:"use_count"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserTotpDeviceShowResponse struct {
@@ -98,12 +96,11 @@ type ActionUserTotpDeviceShowResponse struct {
 	Output *ActionUserTotpDeviceShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserTotpDeviceShow) Prepare() *ActionUserTotpDeviceShowInvocation {
 	return &ActionUserTotpDeviceShowInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/totp_devices/{totp_device_id}",
+		Path:   "/v6.0/users/{user_id}/totp_devices/{totp_device_id}",
 	}
 }
 
@@ -168,9 +165,6 @@ func (inv *ActionUserTotpDeviceShowInvocation) callAsQuery() (*ActionUserTotpDev
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserTotpDeviceShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -181,4 +175,3 @@ func (inv *ActionUserTotpDeviceShowInvocation) convertMetaInputToQueryParams(ret
 		}
 	}
 }
-

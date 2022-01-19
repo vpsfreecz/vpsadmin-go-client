@@ -19,7 +19,7 @@ func NewActionDnsResolverDelete(client *Client) *ActionDnsResolverDelete {
 // ActionDnsResolverDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsResolverDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionDnsResolverDeleteMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDnsResolverDeleteMetaGlobalInput) SetNo(value bool) *ActionDnsResolverDeleteMetaGlobalInput {
 	in.No = value
@@ -115,10 +116,8 @@ func (in *ActionDnsResolverDeleteInput) AnySelected() bool {
 // ActionDnsResolverDeleteRequest is a type for the entire action request
 type ActionDnsResolverDeleteRequest struct {
 	DnsResolver map[string]interface{} `json:"dns_resolver"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta        map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionDnsResolverDeleteResponse struct {
@@ -126,12 +125,11 @@ type ActionDnsResolverDeleteResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDnsResolverDelete) Prepare() *ActionDnsResolverDeleteInvocation {
 	return &ActionDnsResolverDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/dns_resolvers/{dns_resolver_id}",
+		Path:   "/v6.0/dns_resolvers/{dns_resolver_id}",
 	}
 }
 
@@ -180,6 +178,7 @@ func (inv *ActionDnsResolverDeleteInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionDnsResolverDeleteInvocation) NewMetaInput() *ActionDnsResolverDeleteMetaGlobalInput {
@@ -208,7 +207,6 @@ func (inv *ActionDnsResolverDeleteInvocation) Call() (*ActionDnsResolverDeleteRe
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionDnsResolverDeleteInvocation) callAsBody() (*ActionDnsResolverDeleteResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionDnsResolverDeleteResponse{Action: inv.Action}
@@ -216,13 +214,10 @@ func (inv *ActionDnsResolverDeleteInvocation) callAsBody() (*ActionDnsResolverDe
 	return resp, err
 }
 
-
-
-
 func (inv *ActionDnsResolverDeleteInvocation) makeAllInputParams() *ActionDnsResolverDeleteRequest {
 	return &ActionDnsResolverDeleteRequest{
 		DnsResolver: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:        inv.makeMetaInputParams(),
 	}
 }
 

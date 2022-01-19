@@ -19,7 +19,7 @@ func NewActionUserSessionShow(client *Client) *ActionUserSessionShow {
 // ActionUserSessionShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserSessionShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserSessionShowMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserSessionShowMetaGlobalInput) SetNo(value bool) *ActionUserSessionShowMetaGlobalInput {
 	in.No = value
@@ -70,27 +71,24 @@ func (in *ActionUserSessionShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserSessionShowOutput is a type for action output parameters
 type ActionUserSessionShowOutput struct {
-	Admin *ActionUserShowOutput `json:"admin"`
-	ApiIpAddr string `json:"api_ip_addr"`
-	ApiIpPtr string `json:"api_ip_ptr"`
-	AuthType string `json:"auth_type"`
-	ClientIpAddr string `json:"client_ip_addr"`
-	ClientIpPtr string `json:"client_ip_ptr"`
-	ClientVersion string `json:"client_version"`
-	ClosedAt string `json:"closed_at"`
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	LastRequestAt string `json:"last_request_at"`
-	SessionToken *ActionSessionTokenShowOutput `json:"session_token"`
-	SessionTokenStr string `json:"session_token_str"`
-	User *ActionUserShowOutput `json:"user"`
-	UserAgent string `json:"user_agent"`
+	Admin           *ActionUserShowOutput         `json:"admin"`
+	ApiIpAddr       string                        `json:"api_ip_addr"`
+	ApiIpPtr        string                        `json:"api_ip_ptr"`
+	AuthType        string                        `json:"auth_type"`
+	ClientIpAddr    string                        `json:"client_ip_addr"`
+	ClientIpPtr     string                        `json:"client_ip_ptr"`
+	ClientVersion   string                        `json:"client_version"`
+	ClosedAt        string                        `json:"closed_at"`
+	CreatedAt       string                        `json:"created_at"`
+	Id              int64                         `json:"id"`
+	LastRequestAt   string                        `json:"last_request_at"`
+	SessionToken    *ActionSessionTokenShowOutput `json:"session_token"`
+	SessionTokenStr string                        `json:"session_token_str"`
+	User            *ActionUserShowOutput         `json:"user"`
+	UserAgent       string                        `json:"user_agent"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserSessionShowResponse struct {
@@ -105,12 +103,11 @@ type ActionUserSessionShowResponse struct {
 	Output *ActionUserSessionShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserSessionShow) Prepare() *ActionUserSessionShowInvocation {
 	return &ActionUserSessionShowInvocation{
 		Action: action,
-		Path: "/v6.0/user_sessions/{user_session_id}",
+		Path:   "/v6.0/user_sessions/{user_session_id}",
 	}
 }
 
@@ -175,9 +172,6 @@ func (inv *ActionUserSessionShowInvocation) callAsQuery() (*ActionUserSessionSho
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserSessionShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -188,4 +182,3 @@ func (inv *ActionUserSessionShowInvocation) convertMetaInputToQueryParams(ret ma
 		}
 	}
 }
-

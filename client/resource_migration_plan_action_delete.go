@@ -19,7 +19,7 @@ func NewActionMigrationPlanDelete(client *Client) *ActionMigrationPlanDelete {
 // ActionMigrationPlanDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMigrationPlanDeleteMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMigrationPlanDeleteMetaGlobalInput) SetNo(value bool) *ActionMigrationPlanDeleteMetaGlobalInput {
 	in.No = value
@@ -70,13 +71,10 @@ func (in *ActionMigrationPlanDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionMigrationPlanDeleteRequest is a type for the entire action request
 type ActionMigrationPlanDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionMigrationPlanDeleteResponse struct {
@@ -84,12 +82,11 @@ type ActionMigrationPlanDeleteResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMigrationPlanDelete) Prepare() *ActionMigrationPlanDeleteInvocation {
 	return &ActionMigrationPlanDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/migration_plans/{migration_plan_id}",
+		Path:   "/v6.0/migration_plans/{migration_plan_id}",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionMigrationPlanDeleteInvocation) Call() (*ActionMigrationPlanDele
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionMigrationPlanDeleteInvocation) callAsBody() (*ActionMigrationPlanDeleteResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionMigrationPlanDeleteResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionMigrationPlanDeleteInvocation) callAsBody() (*ActionMigrationPl
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMigrationPlanDeleteInvocation) makeAllInputParams() *ActionMigrationPlanDeleteRequest {
 	return &ActionMigrationPlanDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionMigrationPlanDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

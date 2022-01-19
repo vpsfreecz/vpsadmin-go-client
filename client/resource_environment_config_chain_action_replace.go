@@ -19,7 +19,7 @@ func NewActionEnvironmentConfigChainReplace(client *Client) *ActionEnvironmentCo
 // ActionEnvironmentConfigChainReplaceMetaGlobalInput is a type for action global meta input parameters
 type ActionEnvironmentConfigChainReplaceMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionEnvironmentConfigChainReplaceMetaGlobalInput) SetIncludes(value 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionEnvironmentConfigChainReplaceMetaGlobalInput) SetNo(value bool) *ActionEnvironmentConfigChainReplaceMetaGlobalInput {
 	in.No = value
@@ -115,10 +116,8 @@ func (in *ActionEnvironmentConfigChainReplaceInput) AnySelected() bool {
 // ActionEnvironmentConfigChainReplaceRequest is a type for the entire action request
 type ActionEnvironmentConfigChainReplaceRequest struct {
 	ConfigChains map[string]interface{} `json:"config_chains"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta         map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionEnvironmentConfigChainReplaceResponse struct {
@@ -126,12 +125,11 @@ type ActionEnvironmentConfigChainReplaceResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionEnvironmentConfigChainReplace) Prepare() *ActionEnvironmentConfigChainReplaceInvocation {
 	return &ActionEnvironmentConfigChainReplaceInvocation{
 		Action: action,
-		Path: "/v6.0/environments/{environment_id}/config_chains/replace",
+		Path:   "/v6.0/environments/{environment_id}/config_chains/replace",
 	}
 }
 
@@ -180,6 +178,7 @@ func (inv *ActionEnvironmentConfigChainReplaceInvocation) IsParameterSelected(pa
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionEnvironmentConfigChainReplaceInvocation) NewMetaInput() *ActionEnvironmentConfigChainReplaceMetaGlobalInput {
@@ -208,7 +207,6 @@ func (inv *ActionEnvironmentConfigChainReplaceInvocation) Call() (*ActionEnviron
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionEnvironmentConfigChainReplaceInvocation) callAsBody() (*ActionEnvironmentConfigChainReplaceResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionEnvironmentConfigChainReplaceResponse{Action: inv.Action}
@@ -216,13 +214,10 @@ func (inv *ActionEnvironmentConfigChainReplaceInvocation) callAsBody() (*ActionE
 	return resp, err
 }
 
-
-
-
 func (inv *ActionEnvironmentConfigChainReplaceInvocation) makeAllInputParams() *ActionEnvironmentConfigChainReplaceRequest {
 	return &ActionEnvironmentConfigChainReplaceRequest{
 		ConfigChains: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:         inv.makeMetaInputParams(),
 	}
 }
 

@@ -18,9 +18,9 @@ func NewActionUserNamespaceMapEntryIndex(client *Client) *ActionUserNamespaceMap
 
 // ActionUserNamespaceMapEntryIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceMapEntryIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionUserNamespaceMapEntryIndexMetaGlobalInput) SetCount(value bool) 
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserNamespaceMapEntryIndexMetaGlobalInput) SetIncludes(value string) *ActionUserNamespaceMapEntryIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionUserNamespaceMapEntryIndexMetaGlobalInput) SetIncludes(value str
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserNamespaceMapEntryIndexMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceMapEntryIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionUserNamespaceMapEntryIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserNamespaceMapEntryIndexInput is a type for action input parameters
 type ActionUserNamespaceMapEntryIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionUserNamespaceMapEntryIndexInput) SetLimit(value int64) *ActionUs
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionUserNamespaceMapEntryIndexInput) SetOffset(value int64) *ActionUserNamespaceMapEntryIndexInput {
 	in.Offset = value
@@ -136,16 +139,14 @@ func (in *ActionUserNamespaceMapEntryIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserNamespaceMapEntryIndexOutput is a type for action output parameters
 type ActionUserNamespaceMapEntryIndexOutput struct {
-	Count int64 `json:"count"`
-	Id int64 `json:"id"`
-	Kind string `json:"kind"`
-	NsId int64 `json:"ns_id"`
-	VpsId int64 `json:"vps_id"`
+	Count int64  `json:"count"`
+	Id    int64  `json:"id"`
+	Kind  string `json:"kind"`
+	NsId  int64  `json:"ns_id"`
+	VpsId int64  `json:"vps_id"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserNamespaceMapEntryIndexResponse struct {
@@ -160,12 +161,11 @@ type ActionUserNamespaceMapEntryIndexResponse struct {
 	Output []*ActionUserNamespaceMapEntryIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserNamespaceMapEntryIndex) Prepare() *ActionUserNamespaceMapEntryIndexInvocation {
 	return &ActionUserNamespaceMapEntryIndexInvocation{
 		Action: action,
-		Path: "/v6.0/user_namespace_maps/{user_namespace_map_id}/entries",
+		Path:   "/v6.0/user_namespace_maps/{user_namespace_map_id}/entries",
 	}
 }
 
@@ -214,6 +214,7 @@ func (inv *ActionUserNamespaceMapEntryIndexInvocation) IsParameterSelected(param
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserNamespaceMapEntryIndexInvocation) NewMetaInput() *ActionUserNamespaceMapEntryIndexMetaGlobalInput {
@@ -254,8 +255,6 @@ func (inv *ActionUserNamespaceMapEntryIndexInvocation) callAsQuery() (*ActionUse
 	return resp, err
 }
 
-
-
 func (inv *ActionUserNamespaceMapEntryIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -280,4 +279,3 @@ func (inv *ActionUserNamespaceMapEntryIndexInvocation) convertMetaInputToQueryPa
 		}
 	}
 }
-

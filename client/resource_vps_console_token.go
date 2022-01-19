@@ -25,12 +25,12 @@ func NewResourceVpsConsoleToken(client *Client) *ResourceVpsConsoleToken {
 	actionShow := NewActionVpsConsoleTokenShow(client)
 
 	return &ResourceVpsConsoleToken{
-		Client: client,
-		Create: actionCreate,
-		New: actionCreate,
-		Delete: actionDelete,
+		Client:  client,
+		Create:  actionCreate,
+		New:     actionCreate,
+		Delete:  actionDelete,
 		Destroy: actionDelete,
-		Show: actionShow,
-		Find: actionShow,
+		Show:    actionShow,
+		Find:    actionShow,
 	}
 }

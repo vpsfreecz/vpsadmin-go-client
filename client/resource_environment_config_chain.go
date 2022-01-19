@@ -18,9 +18,9 @@ func NewResourceEnvironmentConfigChain(client *Client) *ResourceEnvironmentConfi
 	actionReplace := NewActionEnvironmentConfigChainReplace(client)
 
 	return &ResourceEnvironmentConfigChain{
-		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
+		Client:  client,
+		Index:   actionIndex,
+		List:    actionIndex,
 		Replace: actionReplace,
 	}
 }

@@ -19,7 +19,7 @@ func NewActionSnapshotDownloadShow(client *Client) *ActionSnapshotDownloadShow {
 // ActionSnapshotDownloadShowMetaGlobalInput is a type for action global meta input parameters
 type ActionSnapshotDownloadShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionSnapshotDownloadShowMetaGlobalInput) SetIncludes(value string) *
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionSnapshotDownloadShowMetaGlobalInput) SetNo(value bool) *ActionSnapshotDownloadShowMetaGlobalInput {
 	in.No = value
@@ -70,23 +71,20 @@ func (in *ActionSnapshotDownloadShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionSnapshotDownloadShowOutput is a type for action output parameters
 type ActionSnapshotDownloadShowOutput struct {
-	ExpirationDate string `json:"expiration_date"`
-	FileName string `json:"file_name"`
-	Format string `json:"format"`
-	FromSnapshot *ActionDatasetSnapshotShowOutput `json:"from_snapshot"`
-	Id int64 `json:"id"`
-	Ready bool `json:"ready"`
-	Sha256sum string `json:"sha256sum"`
-	Size int64 `json:"size"`
-	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	Url string `json:"url"`
-	User *ActionUserShowOutput `json:"user"`
+	ExpirationDate string                           `json:"expiration_date"`
+	FileName       string                           `json:"file_name"`
+	Format         string                           `json:"format"`
+	FromSnapshot   *ActionDatasetSnapshotShowOutput `json:"from_snapshot"`
+	Id             int64                            `json:"id"`
+	Ready          bool                             `json:"ready"`
+	Sha256sum      string                           `json:"sha256sum"`
+	Size           int64                            `json:"size"`
+	Snapshot       *ActionDatasetSnapshotShowOutput `json:"snapshot"`
+	Url            string                           `json:"url"`
+	User           *ActionUserShowOutput            `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionSnapshotDownloadShowResponse struct {
@@ -101,12 +99,11 @@ type ActionSnapshotDownloadShowResponse struct {
 	Output *ActionSnapshotDownloadShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionSnapshotDownloadShow) Prepare() *ActionSnapshotDownloadShowInvocation {
 	return &ActionSnapshotDownloadShowInvocation{
 		Action: action,
-		Path: "/v6.0/snapshot_downloads/{snapshot_download_id}",
+		Path:   "/v6.0/snapshot_downloads/{snapshot_download_id}",
 	}
 }
 
@@ -171,9 +168,6 @@ func (inv *ActionSnapshotDownloadShowInvocation) callAsQuery() (*ActionSnapshotD
 	return resp, err
 }
 
-
-
-
 func (inv *ActionSnapshotDownloadShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -184,4 +178,3 @@ func (inv *ActionSnapshotDownloadShowInvocation) convertMetaInputToQueryParams(r
 		}
 	}
 }
-

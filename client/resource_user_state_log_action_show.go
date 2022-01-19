@@ -19,7 +19,7 @@ func NewActionUserStateLogShow(client *Client) *ActionUserStateLogShow {
 // ActionUserStateLogShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserStateLogShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserStateLogShowMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserStateLogShowMetaGlobalInput) SetNo(value bool) *ActionUserStateLogShowMetaGlobalInput {
 	in.No = value
@@ -70,18 +71,15 @@ func (in *ActionUserStateLogShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserStateLogShowOutput is a type for action output parameters
 type ActionUserStateLogShowOutput struct {
-	ChangedAt string `json:"changed_at"`
-	Expiration string `json:"expiration"`
-	Id int64 `json:"id"`
-	Reason string `json:"reason"`
-	State string `json:"state"`
-	User *ActionUserShowOutput `json:"user"`
+	ChangedAt  string                `json:"changed_at"`
+	Expiration string                `json:"expiration"`
+	Id         int64                 `json:"id"`
+	Reason     string                `json:"reason"`
+	State      string                `json:"state"`
+	User       *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserStateLogShowResponse struct {
@@ -96,12 +94,11 @@ type ActionUserStateLogShowResponse struct {
 	Output *ActionUserStateLogShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserStateLogShow) Prepare() *ActionUserStateLogShowInvocation {
 	return &ActionUserStateLogShowInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/state_logs/{state_log_id}",
+		Path:   "/v6.0/users/{user_id}/state_logs/{state_log_id}",
 	}
 }
 
@@ -166,9 +163,6 @@ func (inv *ActionUserStateLogShowInvocation) callAsQuery() (*ActionUserStateLogS
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserStateLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -179,4 +173,3 @@ func (inv *ActionUserStateLogShowInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

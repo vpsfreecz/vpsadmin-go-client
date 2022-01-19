@@ -19,7 +19,7 @@ func NewActionIntegrityFactShow(client *Client) *ActionIntegrityFactShow {
 // ActionIntegrityFactShowMetaGlobalInput is a type for action global meta input parameters
 type ActionIntegrityFactShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionIntegrityFactShowMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionIntegrityFactShowMetaGlobalInput) SetNo(value bool) *ActionIntegrityFactShowMetaGlobalInput {
 	in.No = value
@@ -70,19 +71,16 @@ func (in *ActionIntegrityFactShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionIntegrityFactShowOutput is a type for action output parameters
 type ActionIntegrityFactShowOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
+	CreatedAt       string                           `json:"created_at"`
+	Id              int64                            `json:"id"`
 	IntegrityObject *ActionIntegrityObjectShowOutput `json:"integrity_object"`
-	Message string `json:"message"`
-	Name string `json:"name"`
-	Severity string `json:"severity"`
-	Status string `json:"status"`
+	Message         string                           `json:"message"`
+	Name            string                           `json:"name"`
+	Severity        string                           `json:"severity"`
+	Status          string                           `json:"status"`
 }
-
 
 // Type for action response, including envelope
 type ActionIntegrityFactShowResponse struct {
@@ -97,12 +95,11 @@ type ActionIntegrityFactShowResponse struct {
 	Output *ActionIntegrityFactShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionIntegrityFactShow) Prepare() *ActionIntegrityFactShowInvocation {
 	return &ActionIntegrityFactShowInvocation{
 		Action: action,
-		Path: "/v6.0/integrity_facts/{integrity_fact_id}",
+		Path:   "/v6.0/integrity_facts/{integrity_fact_id}",
 	}
 }
 
@@ -167,9 +164,6 @@ func (inv *ActionIntegrityFactShowInvocation) callAsQuery() (*ActionIntegrityFac
 	return resp, err
 }
 
-
-
-
 func (inv *ActionIntegrityFactShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -180,4 +174,3 @@ func (inv *ActionIntegrityFactShowInvocation) convertMetaInputToQueryParams(ret 
 		}
 	}
 }
-

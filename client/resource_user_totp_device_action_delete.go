@@ -19,7 +19,7 @@ func NewActionUserTotpDeviceDelete(client *Client) *ActionUserTotpDeviceDelete {
 // ActionUserTotpDeviceDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionUserTotpDeviceDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserTotpDeviceDeleteMetaGlobalInput) SetIncludes(value string) *
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserTotpDeviceDeleteMetaGlobalInput) SetNo(value bool) *ActionUserTotpDeviceDeleteMetaGlobalInput {
 	in.No = value
@@ -70,13 +71,10 @@ func (in *ActionUserTotpDeviceDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserTotpDeviceDeleteRequest is a type for the entire action request
 type ActionUserTotpDeviceDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionUserTotpDeviceDeleteResponse struct {
@@ -84,12 +82,11 @@ type ActionUserTotpDeviceDeleteResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserTotpDeviceDelete) Prepare() *ActionUserTotpDeviceDeleteInvocation {
 	return &ActionUserTotpDeviceDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/totp_devices/{totp_device_id}",
+		Path:   "/v6.0/users/{user_id}/totp_devices/{totp_device_id}",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionUserTotpDeviceDeleteInvocation) Call() (*ActionUserTotpDeviceDe
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserTotpDeviceDeleteInvocation) callAsBody() (*ActionUserTotpDeviceDeleteResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserTotpDeviceDeleteResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionUserTotpDeviceDeleteInvocation) callAsBody() (*ActionUserTotpDe
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserTotpDeviceDeleteInvocation) makeAllInputParams() *ActionUserTotpDeviceDeleteRequest {
 	return &ActionUserTotpDeviceDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionUserTotpDeviceDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

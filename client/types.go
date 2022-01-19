@@ -8,7 +8,7 @@ type ProgressCallbackReturn int
 
 const (
 	ContinueWatching = iota
-	StopWatching = iota
+	StopWatching     = iota
 )
 
 type OperationProgressCallback func(*ActionActionStatePollOutput) ProgressCallbackReturn

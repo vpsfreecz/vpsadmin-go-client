@@ -19,7 +19,7 @@ func NewActionUserEnvironmentConfigUpdate(client *Client) *ActionUserEnvironment
 // ActionUserEnvironmentConfigUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserEnvironmentConfigUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserEnvironmentConfigUpdateMetaGlobalInput) SetIncludes(value st
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserEnvironmentConfigUpdateMetaGlobalInput) SetNo(value bool) *ActionUserEnvironmentConfigUpdateMetaGlobalInput {
 	in.No = value
@@ -72,11 +73,11 @@ func (in *ActionUserEnvironmentConfigUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserEnvironmentConfigUpdateInput is a type for action input parameters
 type ActionUserEnvironmentConfigUpdateInput struct {
-	CanCreateVps bool `json:"can_create_vps"`
-	CanDestroyVps bool `json:"can_destroy_vps"`
-	Default bool `json:"default"`
-	MaxVpsCount int64 `json:"max_vps_count"`
-	VpsLifetime int64 `json:"vps_lifetime"`
+	CanCreateVps  bool  `json:"can_create_vps"`
+	CanDestroyVps bool  `json:"can_destroy_vps"`
+	Default       bool  `json:"default"`
+	MaxVpsCount   int64 `json:"max_vps_count"`
+	VpsLifetime   int64 `json:"vps_lifetime"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -92,6 +93,7 @@ func (in *ActionUserEnvironmentConfigUpdateInput) SetCanCreateVps(value bool) *A
 	in._selectedParameters["CanCreateVps"] = nil
 	return in
 }
+
 // SetCanDestroyVps sets parameter CanDestroyVps to value and selects it for sending
 func (in *ActionUserEnvironmentConfigUpdateInput) SetCanDestroyVps(value bool) *ActionUserEnvironmentConfigUpdateInput {
 	in.CanDestroyVps = value
@@ -103,6 +105,7 @@ func (in *ActionUserEnvironmentConfigUpdateInput) SetCanDestroyVps(value bool) *
 	in._selectedParameters["CanDestroyVps"] = nil
 	return in
 }
+
 // SetDefault sets parameter Default to value and selects it for sending
 func (in *ActionUserEnvironmentConfigUpdateInput) SetDefault(value bool) *ActionUserEnvironmentConfigUpdateInput {
 	in.Default = value
@@ -114,6 +117,7 @@ func (in *ActionUserEnvironmentConfigUpdateInput) SetDefault(value bool) *Action
 	in._selectedParameters["Default"] = nil
 	return in
 }
+
 // SetMaxVpsCount sets parameter MaxVpsCount to value and selects it for sending
 func (in *ActionUserEnvironmentConfigUpdateInput) SetMaxVpsCount(value int64) *ActionUserEnvironmentConfigUpdateInput {
 	in.MaxVpsCount = value
@@ -125,6 +129,7 @@ func (in *ActionUserEnvironmentConfigUpdateInput) SetMaxVpsCount(value int64) *A
 	in._selectedParameters["MaxVpsCount"] = nil
 	return in
 }
+
 // SetVpsLifetime sets parameter VpsLifetime to value and selects it for sending
 func (in *ActionUserEnvironmentConfigUpdateInput) SetVpsLifetime(value int64) *ActionUserEnvironmentConfigUpdateInput {
 	in.VpsLifetime = value
@@ -163,10 +168,8 @@ func (in *ActionUserEnvironmentConfigUpdateInput) AnySelected() bool {
 // ActionUserEnvironmentConfigUpdateRequest is a type for the entire action request
 type ActionUserEnvironmentConfigUpdateRequest struct {
 	EnvironmentConfig map[string]interface{} `json:"environment_config"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta              map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionUserEnvironmentConfigUpdateResponse struct {
@@ -174,12 +177,11 @@ type ActionUserEnvironmentConfigUpdateResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserEnvironmentConfigUpdate) Prepare() *ActionUserEnvironmentConfigUpdateInvocation {
 	return &ActionUserEnvironmentConfigUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/environment_configs/{environment_config_id}",
+		Path:   "/v6.0/users/{user_id}/environment_configs/{environment_config_id}",
 	}
 }
 
@@ -228,6 +230,7 @@ func (inv *ActionUserEnvironmentConfigUpdateInvocation) IsParameterSelected(para
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserEnvironmentConfigUpdateInvocation) NewMetaInput() *ActionUserEnvironmentConfigUpdateMetaGlobalInput {
@@ -256,7 +259,6 @@ func (inv *ActionUserEnvironmentConfigUpdateInvocation) Call() (*ActionUserEnvir
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserEnvironmentConfigUpdateInvocation) callAsBody() (*ActionUserEnvironmentConfigUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserEnvironmentConfigUpdateResponse{Action: inv.Action}
@@ -264,13 +266,10 @@ func (inv *ActionUserEnvironmentConfigUpdateInvocation) callAsBody() (*ActionUse
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserEnvironmentConfigUpdateInvocation) makeAllInputParams() *ActionUserEnvironmentConfigUpdateRequest {
 	return &ActionUserEnvironmentConfigUpdateRequest{
 		EnvironmentConfig: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:              inv.makeMetaInputParams(),
 	}
 }
 

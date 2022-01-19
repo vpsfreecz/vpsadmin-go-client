@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionOsTemplateCreate is a type for action Os_template#Create
 type ActionOsTemplateCreate struct {
@@ -18,7 +17,7 @@ func NewActionOsTemplateCreate(client *Client) *ActionOsTemplateCreate {
 // ActionOsTemplateCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOsTemplateCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionOsTemplateCreateMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOsTemplateCreateMetaGlobalInput) SetNo(value bool) *ActionOsTemplateCreateMetaGlobalInput {
 	in.No = value
@@ -71,13 +71,13 @@ func (in *ActionOsTemplateCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOsTemplateCreateInput is a type for action input parameters
 type ActionOsTemplateCreateInput struct {
-	Enabled bool `json:"enabled"`
+	Enabled        bool   `json:"enabled"`
 	HypervisorType string `json:"hypervisor_type"`
-	Info string `json:"info"`
-	Label string `json:"label"`
-	Name string `json:"name"`
-	Order int64 `json:"order"`
-	Supported bool `json:"supported"`
+	Info           string `json:"info"`
+	Label          string `json:"label"`
+	Name           string `json:"name"`
+	Order          int64  `json:"order"`
+	Supported      bool   `json:"supported"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -93,6 +93,7 @@ func (in *ActionOsTemplateCreateInput) SetEnabled(value bool) *ActionOsTemplateC
 	in._selectedParameters["Enabled"] = nil
 	return in
 }
+
 // SetHypervisorType sets parameter HypervisorType to value and selects it for sending
 func (in *ActionOsTemplateCreateInput) SetHypervisorType(value string) *ActionOsTemplateCreateInput {
 	in.HypervisorType = value
@@ -104,6 +105,7 @@ func (in *ActionOsTemplateCreateInput) SetHypervisorType(value string) *ActionOs
 	in._selectedParameters["HypervisorType"] = nil
 	return in
 }
+
 // SetInfo sets parameter Info to value and selects it for sending
 func (in *ActionOsTemplateCreateInput) SetInfo(value string) *ActionOsTemplateCreateInput {
 	in.Info = value
@@ -115,6 +117,7 @@ func (in *ActionOsTemplateCreateInput) SetInfo(value string) *ActionOsTemplateCr
 	in._selectedParameters["Info"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionOsTemplateCreateInput) SetLabel(value string) *ActionOsTemplateCreateInput {
 	in.Label = value
@@ -126,6 +129,7 @@ func (in *ActionOsTemplateCreateInput) SetLabel(value string) *ActionOsTemplateC
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetName sets parameter Name to value and selects it for sending
 func (in *ActionOsTemplateCreateInput) SetName(value string) *ActionOsTemplateCreateInput {
 	in.Name = value
@@ -137,6 +141,7 @@ func (in *ActionOsTemplateCreateInput) SetName(value string) *ActionOsTemplateCr
 	in._selectedParameters["Name"] = nil
 	return in
 }
+
 // SetOrder sets parameter Order to value and selects it for sending
 func (in *ActionOsTemplateCreateInput) SetOrder(value int64) *ActionOsTemplateCreateInput {
 	in.Order = value
@@ -148,6 +153,7 @@ func (in *ActionOsTemplateCreateInput) SetOrder(value int64) *ActionOsTemplateCr
 	in._selectedParameters["Order"] = nil
 	return in
 }
+
 // SetSupported sets parameter Supported to value and selects it for sending
 func (in *ActionOsTemplateCreateInput) SetSupported(value bool) *ActionOsTemplateCreateInput {
 	in.Supported = value
@@ -186,21 +192,20 @@ func (in *ActionOsTemplateCreateInput) AnySelected() bool {
 // ActionOsTemplateCreateRequest is a type for the entire action request
 type ActionOsTemplateCreateRequest struct {
 	OsTemplate map[string]interface{} `json:"os_template"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta       map[string]interface{} `json:"_meta"`
 }
 
 // ActionOsTemplateCreateOutput is a type for action output parameters
 type ActionOsTemplateCreateOutput struct {
-	Enabled bool `json:"enabled"`
+	Enabled        bool   `json:"enabled"`
 	HypervisorType string `json:"hypervisor_type"`
-	Id int64 `json:"id"`
-	Info string `json:"info"`
-	Label string `json:"label"`
-	Name string `json:"name"`
-	Order int64 `json:"order"`
-	Supported bool `json:"supported"`
+	Id             int64  `json:"id"`
+	Info           string `json:"info"`
+	Label          string `json:"label"`
+	Name           string `json:"name"`
+	Order          int64  `json:"order"`
+	Supported      bool   `json:"supported"`
 }
-
 
 // Type for action response, including envelope
 type ActionOsTemplateCreateResponse struct {
@@ -215,12 +220,11 @@ type ActionOsTemplateCreateResponse struct {
 	Output *ActionOsTemplateCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOsTemplateCreate) Prepare() *ActionOsTemplateCreateInvocation {
 	return &ActionOsTemplateCreateInvocation{
 		Action: action,
-		Path: "/v6.0/os_templates",
+		Path:   "/v6.0/os_templates",
 	}
 }
 
@@ -236,7 +240,6 @@ type ActionOsTemplateCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionOsTemplateCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionOsTemplateCreateInvocation) NewInput() *ActionOsTemplateCreateInput {
@@ -259,6 +262,7 @@ func (inv *ActionOsTemplateCreateInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOsTemplateCreateInvocation) NewMetaInput() *ActionOsTemplateCreateMetaGlobalInput {
@@ -287,7 +291,6 @@ func (inv *ActionOsTemplateCreateInvocation) Call() (*ActionOsTemplateCreateResp
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionOsTemplateCreateInvocation) callAsBody() (*ActionOsTemplateCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionOsTemplateCreateResponse{Action: inv.Action}
@@ -298,13 +301,10 @@ func (inv *ActionOsTemplateCreateInvocation) callAsBody() (*ActionOsTemplateCrea
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOsTemplateCreateInvocation) makeAllInputParams() *ActionOsTemplateCreateRequest {
 	return &ActionOsTemplateCreateRequest{
 		OsTemplate: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:       inv.makeMetaInputParams(),
 	}
 }
 

@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionObjectHistoryIndex is a type for action Object_history#Index
 type ActionObjectHistoryIndex struct {
@@ -17,9 +16,9 @@ func NewActionObjectHistoryIndex(client *Client) *ActionObjectHistoryIndex {
 
 // ActionObjectHistoryIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionObjectHistoryIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionObjectHistoryIndexMetaGlobalInput) SetCount(value bool) *ActionO
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionObjectHistoryIndexMetaGlobalInput) SetIncludes(value string) *ActionObjectHistoryIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionObjectHistoryIndexMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionObjectHistoryIndexMetaGlobalInput) SetNo(value bool) *ActionObjectHistoryIndexMetaGlobalInput {
 	in.No = value
@@ -83,13 +84,13 @@ func (in *ActionObjectHistoryIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionObjectHistoryIndexInput is a type for action input parameters
 type ActionObjectHistoryIndexInput struct {
-	EventType string `json:"event_type"`
-	Limit int64 `json:"limit"`
-	Object string `json:"object"`
-	ObjectId int64 `json:"object_id"`
-	Offset int64 `json:"offset"`
-	User int64 `json:"user"`
-	UserSession int64 `json:"user_session"`
+	EventType   string `json:"event_type"`
+	Limit       int64  `json:"limit"`
+	Object      string `json:"object"`
+	ObjectId    int64  `json:"object_id"`
+	Offset      int64  `json:"offset"`
+	User        int64  `json:"user"`
+	UserSession int64  `json:"user_session"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -105,6 +106,7 @@ func (in *ActionObjectHistoryIndexInput) SetEventType(value string) *ActionObjec
 	in._selectedParameters["EventType"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionObjectHistoryIndexInput) SetLimit(value int64) *ActionObjectHistoryIndexInput {
 	in.Limit = value
@@ -116,6 +118,7 @@ func (in *ActionObjectHistoryIndexInput) SetLimit(value int64) *ActionObjectHist
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetObject sets parameter Object to value and selects it for sending
 func (in *ActionObjectHistoryIndexInput) SetObject(value string) *ActionObjectHistoryIndexInput {
 	in.Object = value
@@ -127,6 +130,7 @@ func (in *ActionObjectHistoryIndexInput) SetObject(value string) *ActionObjectHi
 	in._selectedParameters["Object"] = nil
 	return in
 }
+
 // SetObjectId sets parameter ObjectId to value and selects it for sending
 func (in *ActionObjectHistoryIndexInput) SetObjectId(value int64) *ActionObjectHistoryIndexInput {
 	in.ObjectId = value
@@ -138,6 +142,7 @@ func (in *ActionObjectHistoryIndexInput) SetObjectId(value int64) *ActionObjectH
 	in._selectedParameters["ObjectId"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionObjectHistoryIndexInput) SetOffset(value int64) *ActionObjectHistoryIndexInput {
 	in.Offset = value
@@ -149,6 +154,7 @@ func (in *ActionObjectHistoryIndexInput) SetOffset(value int64) *ActionObjectHis
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionObjectHistoryIndexInput) SetUser(value int64) *ActionObjectHistoryIndexInput {
 	in.User = value
@@ -160,6 +166,7 @@ func (in *ActionObjectHistoryIndexInput) SetUser(value int64) *ActionObjectHisto
 	in._selectedParameters["User"] = nil
 	return in
 }
+
 // SetUserSession sets parameter UserSession to value and selects it for sending
 func (in *ActionObjectHistoryIndexInput) SetUserSession(value int64) *ActionObjectHistoryIndexInput {
 	in.UserSession = value
@@ -195,18 +202,16 @@ func (in *ActionObjectHistoryIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionObjectHistoryIndexOutput is a type for action output parameters
 type ActionObjectHistoryIndexOutput struct {
-	CreatedAt string `json:"created_at"`
-	EventType string `json:"event_type"`
-	Id int64 `json:"id"`
-	Object string `json:"object"`
-	ObjectId int64 `json:"object_id"`
-	User *ActionUserShowOutput `json:"user"`
+	CreatedAt   string                       `json:"created_at"`
+	EventType   string                       `json:"event_type"`
+	Id          int64                        `json:"id"`
+	Object      string                       `json:"object"`
+	ObjectId    int64                        `json:"object_id"`
+	User        *ActionUserShowOutput        `json:"user"`
 	UserSession *ActionUserSessionShowOutput `json:"user_session"`
 }
-
 
 // Type for action response, including envelope
 type ActionObjectHistoryIndexResponse struct {
@@ -221,12 +226,11 @@ type ActionObjectHistoryIndexResponse struct {
 	Output []*ActionObjectHistoryIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionObjectHistoryIndex) Prepare() *ActionObjectHistoryIndexInvocation {
 	return &ActionObjectHistoryIndexInvocation{
 		Action: action,
-		Path: "/v6.0/object_histories",
+		Path:   "/v6.0/object_histories",
 	}
 }
 
@@ -242,7 +246,6 @@ type ActionObjectHistoryIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionObjectHistoryIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionObjectHistoryIndexInvocation) NewInput() *ActionObjectHistoryIndexInput {
@@ -265,6 +268,7 @@ func (inv *ActionObjectHistoryIndexInvocation) IsParameterSelected(param string)
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionObjectHistoryIndexInvocation) NewMetaInput() *ActionObjectHistoryIndexMetaGlobalInput {
@@ -305,8 +309,6 @@ func (inv *ActionObjectHistoryIndexInvocation) callAsQuery() (*ActionObjectHisto
 	return resp, err
 }
 
-
-
 func (inv *ActionObjectHistoryIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("EventType") {
@@ -346,4 +348,3 @@ func (inv *ActionObjectHistoryIndexInvocation) convertMetaInputToQueryParams(ret
 		}
 	}
 }
-

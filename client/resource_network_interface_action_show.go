@@ -19,7 +19,7 @@ func NewActionNetworkInterfaceShow(client *Client) *ActionNetworkInterfaceShow {
 // ActionNetworkInterfaceShowMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkInterfaceShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionNetworkInterfaceShowMetaGlobalInput) SetIncludes(value string) *
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNetworkInterfaceShowMetaGlobalInput) SetNo(value bool) *ActionNetworkInterfaceShowMetaGlobalInput {
 	in.No = value
@@ -70,17 +71,14 @@ func (in *ActionNetworkInterfaceShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionNetworkInterfaceShowOutput is a type for action output parameters
 type ActionNetworkInterfaceShowOutput struct {
-	Id int64 `json:"id"`
-	Mac string `json:"mac"`
-	Name string `json:"name"`
-	Type string `json:"type"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	Id   int64                `json:"id"`
+	Mac  string               `json:"mac"`
+	Name string               `json:"name"`
+	Type string               `json:"type"`
+	Vps  *ActionVpsShowOutput `json:"vps"`
 }
-
 
 // Type for action response, including envelope
 type ActionNetworkInterfaceShowResponse struct {
@@ -95,12 +93,11 @@ type ActionNetworkInterfaceShowResponse struct {
 	Output *ActionNetworkInterfaceShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNetworkInterfaceShow) Prepare() *ActionNetworkInterfaceShowInvocation {
 	return &ActionNetworkInterfaceShowInvocation{
 		Action: action,
-		Path: "/v6.0/network_interfaces/{network_interface_id}",
+		Path:   "/v6.0/network_interfaces/{network_interface_id}",
 	}
 }
 
@@ -165,9 +162,6 @@ func (inv *ActionNetworkInterfaceShowInvocation) callAsQuery() (*ActionNetworkIn
 	return resp, err
 }
 
-
-
-
 func (inv *ActionNetworkInterfaceShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -178,4 +172,3 @@ func (inv *ActionNetworkInterfaceShowInvocation) convertMetaInputToQueryParams(r
 		}
 	}
 }
-

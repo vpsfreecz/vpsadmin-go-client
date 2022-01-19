@@ -18,9 +18,9 @@ func NewActionExportHostIndex(client *Client) *ActionExportHostIndex {
 
 // ActionExportHostIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionExportHostIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionExportHostIndexMetaGlobalInput) SetCount(value bool) *ActionExpo
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionExportHostIndexMetaGlobalInput) SetIncludes(value string) *ActionExportHostIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionExportHostIndexMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionExportHostIndexMetaGlobalInput) SetNo(value bool) *ActionExportHostIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionExportHostIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionExportHostIndexInput is a type for action input parameters
 type ActionExportHostIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionExportHostIndexInput) SetLimit(value int64) *ActionExportHostInd
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionExportHostIndexInput) SetOffset(value int64) *ActionExportHostIndexInput {
 	in.Offset = value
@@ -136,17 +139,15 @@ func (in *ActionExportHostIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionExportHostIndexOutput is a type for action output parameters
 type ActionExportHostIndexOutput struct {
-	Id int64 `json:"id"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	RootSquash bool `json:"root_squash"`
-	Rw bool `json:"rw"`
-	SubtreeCheck bool `json:"subtree_check"`
-	Sync bool `json:"sync"`
+	Id           int64                      `json:"id"`
+	IpAddress    *ActionIpAddressShowOutput `json:"ip_address"`
+	RootSquash   bool                       `json:"root_squash"`
+	Rw           bool                       `json:"rw"`
+	SubtreeCheck bool                       `json:"subtree_check"`
+	Sync         bool                       `json:"sync"`
 }
-
 
 // Type for action response, including envelope
 type ActionExportHostIndexResponse struct {
@@ -161,12 +162,11 @@ type ActionExportHostIndexResponse struct {
 	Output []*ActionExportHostIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionExportHostIndex) Prepare() *ActionExportHostIndexInvocation {
 	return &ActionExportHostIndexInvocation{
 		Action: action,
-		Path: "/v6.0/exports/{export_id}/hosts",
+		Path:   "/v6.0/exports/{export_id}/hosts",
 	}
 }
 
@@ -215,6 +215,7 @@ func (inv *ActionExportHostIndexInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionExportHostIndexInvocation) NewMetaInput() *ActionExportHostIndexMetaGlobalInput {
@@ -255,8 +256,6 @@ func (inv *ActionExportHostIndexInvocation) callAsQuery() (*ActionExportHostInde
 	return resp, err
 }
 
-
-
 func (inv *ActionExportHostIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -281,4 +280,3 @@ func (inv *ActionExportHostIndexInvocation) convertMetaInputToQueryParams(ret ma
 		}
 	}
 }
-

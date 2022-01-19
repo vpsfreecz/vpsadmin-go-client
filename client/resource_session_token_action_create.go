@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionSessionTokenCreate is a type for action Session_token#Create
 type ActionSessionTokenCreate struct {
@@ -18,7 +17,7 @@ func NewActionSessionTokenCreate(client *Client) *ActionSessionTokenCreate {
 // ActionSessionTokenCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionSessionTokenCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionSessionTokenCreateMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionSessionTokenCreateMetaGlobalInput) SetNo(value bool) *ActionSessionTokenCreateMetaGlobalInput {
 	in.No = value
@@ -71,10 +71,10 @@ func (in *ActionSessionTokenCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionSessionTokenCreateInput is a type for action input parameters
 type ActionSessionTokenCreateInput struct {
-	Interval int64 `json:"interval"`
-	Label string `json:"label"`
+	Interval int64  `json:"interval"`
+	Label    string `json:"label"`
 	Lifetime string `json:"lifetime"`
-	User int64 `json:"user"`
+	User     int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -90,6 +90,7 @@ func (in *ActionSessionTokenCreateInput) SetInterval(value int64) *ActionSession
 	in._selectedParameters["Interval"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionSessionTokenCreateInput) SetLabel(value string) *ActionSessionTokenCreateInput {
 	in.Label = value
@@ -101,6 +102,7 @@ func (in *ActionSessionTokenCreateInput) SetLabel(value string) *ActionSessionTo
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetLifetime sets parameter Lifetime to value and selects it for sending
 func (in *ActionSessionTokenCreateInput) SetLifetime(value string) *ActionSessionTokenCreateInput {
 	in.Lifetime = value
@@ -112,6 +114,7 @@ func (in *ActionSessionTokenCreateInput) SetLifetime(value string) *ActionSessio
 	in._selectedParameters["Lifetime"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionSessionTokenCreateInput) SetUser(value int64) *ActionSessionTokenCreateInput {
 	in.User = value
@@ -150,22 +153,21 @@ func (in *ActionSessionTokenCreateInput) AnySelected() bool {
 // ActionSessionTokenCreateRequest is a type for the entire action request
 type ActionSessionTokenCreateRequest struct {
 	SessionToken map[string]interface{} `json:"session_token"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta         map[string]interface{} `json:"_meta"`
 }
 
 // ActionSessionTokenCreateOutput is a type for action output parameters
 type ActionSessionTokenCreateOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	Interval int64 `json:"interval"`
-	Label string `json:"label"`
-	Lifetime string `json:"lifetime"`
-	Token string `json:"token"`
-	UseCount int64 `json:"use_count"`
-	User *ActionUserShowOutput `json:"user"`
-	ValidTo string `json:"valid_to"`
+	CreatedAt string                `json:"created_at"`
+	Id        int64                 `json:"id"`
+	Interval  int64                 `json:"interval"`
+	Label     string                `json:"label"`
+	Lifetime  string                `json:"lifetime"`
+	Token     string                `json:"token"`
+	UseCount  int64                 `json:"use_count"`
+	User      *ActionUserShowOutput `json:"user"`
+	ValidTo   string                `json:"valid_to"`
 }
-
 
 // Type for action response, including envelope
 type ActionSessionTokenCreateResponse struct {
@@ -180,12 +182,11 @@ type ActionSessionTokenCreateResponse struct {
 	Output *ActionSessionTokenCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionSessionTokenCreate) Prepare() *ActionSessionTokenCreateInvocation {
 	return &ActionSessionTokenCreateInvocation{
 		Action: action,
-		Path: "/v6.0/session_tokens",
+		Path:   "/v6.0/session_tokens",
 	}
 }
 
@@ -201,7 +202,6 @@ type ActionSessionTokenCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionSessionTokenCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionSessionTokenCreateInvocation) NewInput() *ActionSessionTokenCreateInput {
@@ -224,6 +224,7 @@ func (inv *ActionSessionTokenCreateInvocation) IsParameterSelected(param string)
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionSessionTokenCreateInvocation) NewMetaInput() *ActionSessionTokenCreateMetaGlobalInput {
@@ -252,7 +253,6 @@ func (inv *ActionSessionTokenCreateInvocation) Call() (*ActionSessionTokenCreate
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionSessionTokenCreateInvocation) callAsBody() (*ActionSessionTokenCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionSessionTokenCreateResponse{Action: inv.Action}
@@ -263,13 +263,10 @@ func (inv *ActionSessionTokenCreateInvocation) callAsBody() (*ActionSessionToken
 	return resp, err
 }
 
-
-
-
 func (inv *ActionSessionTokenCreateInvocation) makeAllInputParams() *ActionSessionTokenCreateRequest {
 	return &ActionSessionTokenCreateRequest{
 		SessionToken: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:         inv.makeMetaInputParams(),
 	}
 }
 

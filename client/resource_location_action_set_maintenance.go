@@ -60,7 +60,7 @@ func (in *ActionLocationSetMaintenanceMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationSetMaintenanceInput is a type for action input parameters
 type ActionLocationSetMaintenanceInput struct {
-	Lock bool `json:"lock"`
+	Lock   bool   `json:"lock"`
 	Reason string `json:"reason"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -77,6 +77,7 @@ func (in *ActionLocationSetMaintenanceInput) SetLock(value bool) *ActionLocation
 	in._selectedParameters["Lock"] = nil
 	return in
 }
+
 // SetReason sets parameter Reason to value and selects it for sending
 func (in *ActionLocationSetMaintenanceInput) SetReason(value string) *ActionLocationSetMaintenanceInput {
 	in.Reason = value
@@ -115,10 +116,8 @@ func (in *ActionLocationSetMaintenanceInput) AnySelected() bool {
 // ActionLocationSetMaintenanceRequest is a type for the entire action request
 type ActionLocationSetMaintenanceRequest struct {
 	Location map[string]interface{} `json:"location"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta     map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionLocationSetMaintenanceResponse struct {
@@ -126,12 +125,11 @@ type ActionLocationSetMaintenanceResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionLocationSetMaintenance) Prepare() *ActionLocationSetMaintenanceInvocation {
 	return &ActionLocationSetMaintenanceInvocation{
 		Action: action,
-		Path: "/v6.0/locations/{location_id}/set_maintenance",
+		Path:   "/v6.0/locations/{location_id}/set_maintenance",
 	}
 }
 
@@ -180,6 +178,7 @@ func (inv *ActionLocationSetMaintenanceInvocation) IsParameterSelected(param str
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionLocationSetMaintenanceInvocation) NewMetaInput() *ActionLocationSetMaintenanceMetaGlobalInput {
@@ -208,7 +207,6 @@ func (inv *ActionLocationSetMaintenanceInvocation) Call() (*ActionLocationSetMai
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionLocationSetMaintenanceInvocation) callAsBody() (*ActionLocationSetMaintenanceResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionLocationSetMaintenanceResponse{Action: inv.Action}
@@ -216,13 +214,10 @@ func (inv *ActionLocationSetMaintenanceInvocation) callAsBody() (*ActionLocation
 	return resp, err
 }
 
-
-
-
 func (inv *ActionLocationSetMaintenanceInvocation) makeAllInputParams() *ActionLocationSetMaintenanceRequest {
 	return &ActionLocationSetMaintenanceRequest{
 		Location: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:     inv.makeMetaInputParams(),
 	}
 }
 

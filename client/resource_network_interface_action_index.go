@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionNetworkInterfaceIndex is a type for action Network_interface#Index
 type ActionNetworkInterfaceIndex struct {
@@ -17,9 +16,9 @@ func NewActionNetworkInterfaceIndex(client *Client) *ActionNetworkInterfaceIndex
 
 // ActionNetworkInterfaceIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkInterfaceIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionNetworkInterfaceIndexMetaGlobalInput) SetCount(value bool) *Acti
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionNetworkInterfaceIndexMetaGlobalInput) SetIncludes(value string) *ActionNetworkInterfaceIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionNetworkInterfaceIndexMetaGlobalInput) SetIncludes(value string) 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNetworkInterfaceIndexMetaGlobalInput) SetNo(value bool) *ActionNetworkInterfaceIndexMetaGlobalInput {
 	in.No = value
@@ -83,11 +84,11 @@ func (in *ActionNetworkInterfaceIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkInterfaceIndexInput is a type for action input parameters
 type ActionNetworkInterfaceIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit    int64 `json:"limit"`
 	Location int64 `json:"location"`
-	Offset int64 `json:"offset"`
-	User int64 `json:"user"`
-	Vps int64 `json:"vps"`
+	Offset   int64 `json:"offset"`
+	User     int64 `json:"user"`
+	Vps      int64 `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -103,6 +104,7 @@ func (in *ActionNetworkInterfaceIndexInput) SetLimit(value int64) *ActionNetwork
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionNetworkInterfaceIndexInput) SetLocation(value int64) *ActionNetworkInterfaceIndexInput {
 	in.Location = value
@@ -114,6 +116,7 @@ func (in *ActionNetworkInterfaceIndexInput) SetLocation(value int64) *ActionNetw
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionNetworkInterfaceIndexInput) SetOffset(value int64) *ActionNetworkInterfaceIndexInput {
 	in.Offset = value
@@ -125,6 +128,7 @@ func (in *ActionNetworkInterfaceIndexInput) SetOffset(value int64) *ActionNetwor
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionNetworkInterfaceIndexInput) SetUser(value int64) *ActionNetworkInterfaceIndexInput {
 	in.User = value
@@ -136,6 +140,7 @@ func (in *ActionNetworkInterfaceIndexInput) SetUser(value int64) *ActionNetworkI
 	in._selectedParameters["User"] = nil
 	return in
 }
+
 // SetVps sets parameter Vps to value and selects it for sending
 func (in *ActionNetworkInterfaceIndexInput) SetVps(value int64) *ActionNetworkInterfaceIndexInput {
 	in.Vps = value
@@ -171,16 +176,14 @@ func (in *ActionNetworkInterfaceIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionNetworkInterfaceIndexOutput is a type for action output parameters
 type ActionNetworkInterfaceIndexOutput struct {
-	Id int64 `json:"id"`
-	Mac string `json:"mac"`
-	Name string `json:"name"`
-	Type string `json:"type"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	Id   int64                `json:"id"`
+	Mac  string               `json:"mac"`
+	Name string               `json:"name"`
+	Type string               `json:"type"`
+	Vps  *ActionVpsShowOutput `json:"vps"`
 }
-
 
 // Type for action response, including envelope
 type ActionNetworkInterfaceIndexResponse struct {
@@ -195,12 +198,11 @@ type ActionNetworkInterfaceIndexResponse struct {
 	Output []*ActionNetworkInterfaceIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNetworkInterfaceIndex) Prepare() *ActionNetworkInterfaceIndexInvocation {
 	return &ActionNetworkInterfaceIndexInvocation{
 		Action: action,
-		Path: "/v6.0/network_interfaces",
+		Path:   "/v6.0/network_interfaces",
 	}
 }
 
@@ -216,7 +218,6 @@ type ActionNetworkInterfaceIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionNetworkInterfaceIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionNetworkInterfaceIndexInvocation) NewInput() *ActionNetworkInterfaceIndexInput {
@@ -239,6 +240,7 @@ func (inv *ActionNetworkInterfaceIndexInvocation) IsParameterSelected(param stri
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionNetworkInterfaceIndexInvocation) NewMetaInput() *ActionNetworkInterfaceIndexMetaGlobalInput {
@@ -279,8 +281,6 @@ func (inv *ActionNetworkInterfaceIndexInvocation) callAsQuery() (*ActionNetworkI
 	return resp, err
 }
 
-
-
 func (inv *ActionNetworkInterfaceIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -314,4 +314,3 @@ func (inv *ActionNetworkInterfaceIndexInvocation) convertMetaInputToQueryParams(
 		}
 	}
 }
-

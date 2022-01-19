@@ -19,7 +19,7 @@ func NewActionUserNamespaceMapEntryDelete(client *Client) *ActionUserNamespaceMa
 // ActionUserNamespaceMapEntryDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceMapEntryDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserNamespaceMapEntryDeleteMetaGlobalInput) SetIncludes(value st
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserNamespaceMapEntryDeleteMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceMapEntryDeleteMetaGlobalInput {
 	in.No = value
@@ -70,13 +71,10 @@ func (in *ActionUserNamespaceMapEntryDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserNamespaceMapEntryDeleteRequest is a type for the entire action request
 type ActionUserNamespaceMapEntryDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionUserNamespaceMapEntryDeleteResponse struct {
@@ -84,12 +82,11 @@ type ActionUserNamespaceMapEntryDeleteResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserNamespaceMapEntryDelete) Prepare() *ActionUserNamespaceMapEntryDeleteInvocation {
 	return &ActionUserNamespaceMapEntryDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/user_namespace_maps/{user_namespace_map_id}/entries/{entry_id}",
+		Path:   "/v6.0/user_namespace_maps/{user_namespace_map_id}/entries/{entry_id}",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionUserNamespaceMapEntryDeleteInvocation) Call() (*ActionUserNames
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserNamespaceMapEntryDeleteInvocation) callAsBody() (*ActionUserNamespaceMapEntryDeleteResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserNamespaceMapEntryDeleteResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionUserNamespaceMapEntryDeleteInvocation) callAsBody() (*ActionUse
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserNamespaceMapEntryDeleteInvocation) makeAllInputParams() *ActionUserNamespaceMapEntryDeleteRequest {
 	return &ActionUserNamespaceMapEntryDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionUserNamespaceMapEntryDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

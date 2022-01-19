@@ -19,7 +19,7 @@ func NewActionUserMailTemplateRecipientUpdate(client *Client) *ActionUserMailTem
 // ActionUserMailTemplateRecipientUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserMailTemplateRecipientUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserMailTemplateRecipientUpdateMetaGlobalInput) SetIncludes(valu
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserMailTemplateRecipientUpdateMetaGlobalInput) SetNo(value bool) *ActionUserMailTemplateRecipientUpdateMetaGlobalInput {
 	in.No = value
@@ -72,8 +73,8 @@ func (in *ActionUserMailTemplateRecipientUpdateMetaGlobalInput) AnySelected() bo
 
 // ActionUserMailTemplateRecipientUpdateInput is a type for action input parameters
 type ActionUserMailTemplateRecipientUpdateInput struct {
-	Enabled bool `json:"enabled"`
-	To string `json:"to"`
+	Enabled bool   `json:"enabled"`
+	To      string `json:"to"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -89,6 +90,7 @@ func (in *ActionUserMailTemplateRecipientUpdateInput) SetEnabled(value bool) *Ac
 	in._selectedParameters["Enabled"] = nil
 	return in
 }
+
 // SetTo sets parameter To to value and selects it for sending
 func (in *ActionUserMailTemplateRecipientUpdateInput) SetTo(value string) *ActionUserMailTemplateRecipientUpdateInput {
 	in.To = value
@@ -127,18 +129,17 @@ func (in *ActionUserMailTemplateRecipientUpdateInput) AnySelected() bool {
 // ActionUserMailTemplateRecipientUpdateRequest is a type for the entire action request
 type ActionUserMailTemplateRecipientUpdateRequest struct {
 	MailTemplateRecipient map[string]interface{} `json:"mail_template_recipient"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta                  map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserMailTemplateRecipientUpdateOutput is a type for action output parameters
 type ActionUserMailTemplateRecipientUpdateOutput struct {
 	Description string `json:"description"`
-	Enabled bool `json:"enabled"`
-	Id string `json:"id"`
-	Label string `json:"label"`
-	To string `json:"to"`
+	Enabled     bool   `json:"enabled"`
+	Id          string `json:"id"`
+	Label       string `json:"label"`
+	To          string `json:"to"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserMailTemplateRecipientUpdateResponse struct {
@@ -153,12 +154,11 @@ type ActionUserMailTemplateRecipientUpdateResponse struct {
 	Output *ActionUserMailTemplateRecipientUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserMailTemplateRecipientUpdate) Prepare() *ActionUserMailTemplateRecipientUpdateInvocation {
 	return &ActionUserMailTemplateRecipientUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/mail_template_recipients/{mail_template_recipient_id}",
+		Path:   "/v6.0/users/{user_id}/mail_template_recipients/{mail_template_recipient_id}",
 	}
 }
 
@@ -207,6 +207,7 @@ func (inv *ActionUserMailTemplateRecipientUpdateInvocation) IsParameterSelected(
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserMailTemplateRecipientUpdateInvocation) NewMetaInput() *ActionUserMailTemplateRecipientUpdateMetaGlobalInput {
@@ -235,7 +236,6 @@ func (inv *ActionUserMailTemplateRecipientUpdateInvocation) Call() (*ActionUserM
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserMailTemplateRecipientUpdateInvocation) callAsBody() (*ActionUserMailTemplateRecipientUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserMailTemplateRecipientUpdateResponse{Action: inv.Action}
@@ -246,13 +246,10 @@ func (inv *ActionUserMailTemplateRecipientUpdateInvocation) callAsBody() (*Actio
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserMailTemplateRecipientUpdateInvocation) makeAllInputParams() *ActionUserMailTemplateRecipientUpdateRequest {
 	return &ActionUserMailTemplateRecipientUpdateRequest{
 		MailTemplateRecipient: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:                  inv.makeMetaInputParams(),
 	}
 }
 

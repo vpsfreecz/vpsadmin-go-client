@@ -19,7 +19,7 @@ func NewActionUserMailRoleRecipientShow(client *Client) *ActionUserMailRoleRecip
 // ActionUserMailRoleRecipientShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserMailRoleRecipientShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserMailRoleRecipientShowMetaGlobalInput) SetIncludes(value stri
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserMailRoleRecipientShowMetaGlobalInput) SetNo(value bool) *ActionUserMailRoleRecipientShowMetaGlobalInput {
 	in.No = value
@@ -70,16 +71,13 @@ func (in *ActionUserMailRoleRecipientShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserMailRoleRecipientShowOutput is a type for action output parameters
 type ActionUserMailRoleRecipientShowOutput struct {
 	Description string `json:"description"`
-	Id string `json:"id"`
-	Label string `json:"label"`
-	To string `json:"to"`
+	Id          string `json:"id"`
+	Label       string `json:"label"`
+	To          string `json:"to"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserMailRoleRecipientShowResponse struct {
@@ -94,12 +92,11 @@ type ActionUserMailRoleRecipientShowResponse struct {
 	Output *ActionUserMailRoleRecipientShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserMailRoleRecipientShow) Prepare() *ActionUserMailRoleRecipientShowInvocation {
 	return &ActionUserMailRoleRecipientShowInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/mail_role_recipients/{mail_role_recipient_id}",
+		Path:   "/v6.0/users/{user_id}/mail_role_recipients/{mail_role_recipient_id}",
 	}
 }
 
@@ -164,9 +161,6 @@ func (inv *ActionUserMailRoleRecipientShowInvocation) callAsQuery() (*ActionUser
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserMailRoleRecipientShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -177,4 +171,3 @@ func (inv *ActionUserMailRoleRecipientShowInvocation) convertMetaInputToQueryPar
 		}
 	}
 }
-

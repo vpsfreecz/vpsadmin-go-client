@@ -19,7 +19,7 @@ func NewActionLocationShow(client *Client) *ActionLocationShow {
 // ActionLocationShowMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionLocationShowMetaGlobalInput) SetIncludes(value string) *ActionLo
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionLocationShowMetaGlobalInput) SetNo(value bool) *ActionLocationShowMetaGlobalInput {
 	in.No = value
@@ -70,22 +71,19 @@ func (in *ActionLocationShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionLocationShowOutput is a type for action output parameters
 type ActionLocationShowOutput struct {
-	Description string `json:"description"`
-	Domain string `json:"domain"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	HasIpv6 bool `json:"has_ipv6"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	MaintenanceLock string `json:"maintenance_lock"`
-	MaintenanceLockReason string `json:"maintenance_lock_reason"`
-	RemoteConsoleServer string `json:"remote_console_server"`
-	VpsOnboot bool `json:"vps_onboot"`
+	Description           string                       `json:"description"`
+	Domain                string                       `json:"domain"`
+	Environment           *ActionEnvironmentShowOutput `json:"environment"`
+	HasIpv6               bool                         `json:"has_ipv6"`
+	Id                    int64                        `json:"id"`
+	Label                 string                       `json:"label"`
+	MaintenanceLock       string                       `json:"maintenance_lock"`
+	MaintenanceLockReason string                       `json:"maintenance_lock_reason"`
+	RemoteConsoleServer   string                       `json:"remote_console_server"`
+	VpsOnboot             bool                         `json:"vps_onboot"`
 }
-
 
 // Type for action response, including envelope
 type ActionLocationShowResponse struct {
@@ -100,12 +98,11 @@ type ActionLocationShowResponse struct {
 	Output *ActionLocationShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionLocationShow) Prepare() *ActionLocationShowInvocation {
 	return &ActionLocationShowInvocation{
 		Action: action,
-		Path: "/v6.0/locations/{location_id}",
+		Path:   "/v6.0/locations/{location_id}",
 	}
 }
 
@@ -170,9 +167,6 @@ func (inv *ActionLocationShowInvocation) callAsQuery() (*ActionLocationShowRespo
 	return resp, err
 }
 
-
-
-
 func (inv *ActionLocationShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -183,4 +177,3 @@ func (inv *ActionLocationShowInvocation) convertMetaInputToQueryParams(ret map[s
 		}
 	}
 }
-

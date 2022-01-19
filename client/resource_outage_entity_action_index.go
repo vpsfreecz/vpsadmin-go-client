@@ -18,9 +18,9 @@ func NewActionOutageEntityIndex(client *Client) *ActionOutageEntityIndex {
 
 // ActionOutageEntityIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageEntityIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionOutageEntityIndexMetaGlobalInput) SetCount(value bool) *ActionOu
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionOutageEntityIndexMetaGlobalInput) SetIncludes(value string) *ActionOutageEntityIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionOutageEntityIndexMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOutageEntityIndexMetaGlobalInput) SetNo(value bool) *ActionOutageEntityIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionOutageEntityIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageEntityIndexInput is a type for action input parameters
 type ActionOutageEntityIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionOutageEntityIndexInput) SetLimit(value int64) *ActionOutageEntit
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionOutageEntityIndexInput) SetOffset(value int64) *ActionOutageEntityIndexInput {
 	in.Offset = value
@@ -136,15 +139,13 @@ func (in *ActionOutageEntityIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionOutageEntityIndexOutput is a type for action output parameters
 type ActionOutageEntityIndexOutput struct {
-	EntityId int64 `json:"entity_id"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Name string `json:"name"`
+	EntityId int64  `json:"entity_id"`
+	Id       int64  `json:"id"`
+	Label    string `json:"label"`
+	Name     string `json:"name"`
 }
-
 
 // Type for action response, including envelope
 type ActionOutageEntityIndexResponse struct {
@@ -159,12 +160,11 @@ type ActionOutageEntityIndexResponse struct {
 	Output []*ActionOutageEntityIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOutageEntityIndex) Prepare() *ActionOutageEntityIndexInvocation {
 	return &ActionOutageEntityIndexInvocation{
 		Action: action,
-		Path: "/v6.0/outages/{outage_id}/entities",
+		Path:   "/v6.0/outages/{outage_id}/entities",
 	}
 }
 
@@ -213,6 +213,7 @@ func (inv *ActionOutageEntityIndexInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOutageEntityIndexInvocation) NewMetaInput() *ActionOutageEntityIndexMetaGlobalInput {
@@ -253,8 +254,6 @@ func (inv *ActionOutageEntityIndexInvocation) callAsQuery() (*ActionOutageEntity
 	return resp, err
 }
 
-
-
 func (inv *ActionOutageEntityIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -279,4 +278,3 @@ func (inv *ActionOutageEntityIndexInvocation) convertMetaInputToQueryParams(ret 
 		}
 	}
 }
-

@@ -19,7 +19,7 @@ func NewActionUserTouch(client *Client) *ActionUserTouch {
 // ActionUserTouchMetaGlobalInput is a type for action global meta input parameters
 type ActionUserTouchMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserTouchMetaGlobalInput) SetIncludes(value string) *ActionUserT
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserTouchMetaGlobalInput) SetNo(value bool) *ActionUserTouchMetaGlobalInput {
 	in.No = value
@@ -70,22 +71,17 @@ func (in *ActionUserTouchMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
-
-
 // Type for action response, including envelope
 type ActionUserTouchResponse struct {
 	Action *ActionUserTouch `json:"-"`
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserTouch) Prepare() *ActionUserTouchInvocation {
 	return &ActionUserTouchInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/touch",
+		Path:   "/v6.0/users/{user_id}/touch",
 	}
 }
 
@@ -147,9 +143,6 @@ func (inv *ActionUserTouchInvocation) callAsQuery() (*ActionUserTouchResponse, e
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserTouchInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -160,4 +153,3 @@ func (inv *ActionUserTouchInvocation) convertMetaInputToQueryParams(ret map[stri
 		}
 	}
 }
-

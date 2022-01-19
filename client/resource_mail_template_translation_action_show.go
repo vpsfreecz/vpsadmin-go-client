@@ -19,7 +19,7 @@ func NewActionMailTemplateTranslationShow(client *Client) *ActionMailTemplateTra
 // ActionMailTemplateTranslationShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateTranslationShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMailTemplateTranslationShowMetaGlobalInput) SetIncludes(value st
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMailTemplateTranslationShowMetaGlobalInput) SetNo(value bool) *ActionMailTemplateTranslationShowMetaGlobalInput {
 	in.No = value
@@ -70,22 +71,19 @@ func (in *ActionMailTemplateTranslationShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionMailTemplateTranslationShowOutput is a type for action output parameters
 type ActionMailTemplateTranslationShowOutput struct {
-	CreatedAt string `json:"created_at"`
-	From string `json:"from"`
-	Id int64 `json:"id"`
-	Language *ActionLanguageShowOutput `json:"language"`
-	ReplyTo string `json:"reply_to"`
-	ReturnPath string `json:"return_path"`
-	Subject string `json:"subject"`
-	TextHtml string `json:"text_html"`
-	TextPlain string `json:"text_plain"`
-	UpdatedAt string `json:"updated_at"`
+	CreatedAt  string                    `json:"created_at"`
+	From       string                    `json:"from"`
+	Id         int64                     `json:"id"`
+	Language   *ActionLanguageShowOutput `json:"language"`
+	ReplyTo    string                    `json:"reply_to"`
+	ReturnPath string                    `json:"return_path"`
+	Subject    string                    `json:"subject"`
+	TextHtml   string                    `json:"text_html"`
+	TextPlain  string                    `json:"text_plain"`
+	UpdatedAt  string                    `json:"updated_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionMailTemplateTranslationShowResponse struct {
@@ -100,12 +98,11 @@ type ActionMailTemplateTranslationShowResponse struct {
 	Output *ActionMailTemplateTranslationShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMailTemplateTranslationShow) Prepare() *ActionMailTemplateTranslationShowInvocation {
 	return &ActionMailTemplateTranslationShowInvocation{
 		Action: action,
-		Path: "/v6.0/mail_templates/{mail_template_id}/translations/{translation_id}",
+		Path:   "/v6.0/mail_templates/{mail_template_id}/translations/{translation_id}",
 	}
 }
 
@@ -170,9 +167,6 @@ func (inv *ActionMailTemplateTranslationShowInvocation) callAsQuery() (*ActionMa
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMailTemplateTranslationShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -183,4 +177,3 @@ func (inv *ActionMailTemplateTranslationShowInvocation) convertMetaInputToQueryP
 		}
 	}
 }
-

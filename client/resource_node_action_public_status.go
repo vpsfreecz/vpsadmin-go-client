@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionNodePublicStatus is a type for action Node#Public_status
 type ActionNodePublicStatus struct {
@@ -18,7 +17,7 @@ func NewActionNodePublicStatus(client *Client) *ActionNodePublicStatus {
 // ActionNodePublicStatusMetaGlobalInput is a type for action global meta input parameters
 type ActionNodePublicStatusMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionNodePublicStatusMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNodePublicStatusMetaGlobalInput) SetNo(value bool) *ActionNodePublicStatusMetaGlobalInput {
 	in.No = value
@@ -69,23 +69,20 @@ func (in *ActionNodePublicStatusMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionNodePublicStatusOutput is a type for action output parameters
 type ActionNodePublicStatusOutput struct {
-	CpuIdle float64 `json:"cpu_idle"`
-	HypervisorType string `json:"hypervisor_type"`
-	Kernel string `json:"kernel"`
-	LastReport string `json:"last_report"`
-	Location *ActionLocationShowOutput `json:"location"`
-	MaintenanceLock string `json:"maintenance_lock"`
-	MaintenanceLockReason string `json:"maintenance_lock_reason"`
-	Name string `json:"name"`
-	Status bool `json:"status"`
-	VpsCount int64 `json:"vps_count"`
-	VpsFree int64 `json:"vps_free"`
+	CpuIdle               float64                   `json:"cpu_idle"`
+	HypervisorType        string                    `json:"hypervisor_type"`
+	Kernel                string                    `json:"kernel"`
+	LastReport            string                    `json:"last_report"`
+	Location              *ActionLocationShowOutput `json:"location"`
+	MaintenanceLock       string                    `json:"maintenance_lock"`
+	MaintenanceLockReason string                    `json:"maintenance_lock_reason"`
+	Name                  string                    `json:"name"`
+	Status                bool                      `json:"status"`
+	VpsCount              int64                     `json:"vps_count"`
+	VpsFree               int64                     `json:"vps_free"`
 }
-
 
 // Type for action response, including envelope
 type ActionNodePublicStatusResponse struct {
@@ -109,7 +106,7 @@ func (action *ActionNodePublicStatus) Call() (*ActionNodePublicStatusResponse, e
 func (action *ActionNodePublicStatus) Prepare() *ActionNodePublicStatusInvocation {
 	return &ActionNodePublicStatusInvocation{
 		Action: action,
-		Path: "/v6.0/nodes/public_status",
+		Path:   "/v6.0/nodes/public_status",
 	}
 }
 
@@ -123,7 +120,6 @@ type ActionNodePublicStatusInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionNodePublicStatusMetaGlobalInput
 }
-
 
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
@@ -164,9 +160,6 @@ func (inv *ActionNodePublicStatusInvocation) callAsQuery() (*ActionNodePublicSta
 	return resp, err
 }
 
-
-
-
 func (inv *ActionNodePublicStatusInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -177,4 +170,3 @@ func (inv *ActionNodePublicStatusInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

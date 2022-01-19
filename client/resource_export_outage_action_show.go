@@ -19,7 +19,7 @@ func NewActionExportOutageShow(client *Client) *ActionExportOutageShow {
 // ActionExportOutageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionExportOutageShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionExportOutageShowMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionExportOutageShowMetaGlobalInput) SetNo(value bool) *ActionExportOutageShowMetaGlobalInput {
 	in.No = value
@@ -70,19 +71,16 @@ func (in *ActionExportOutageShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionExportOutageShowOutput is a type for action output parameters
 type ActionExportOutageShowOutput struct {
 	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	Export *ActionExportShowOutput `json:"export"`
-	Id int64 `json:"id"`
-	Location *ActionLocationShowOutput `json:"location"`
-	Node *ActionNodeShowOutput `json:"node"`
-	Outage *ActionOutageShowOutput `json:"outage"`
-	User *ActionUserShowOutput `json:"user"`
+	Export      *ActionExportShowOutput      `json:"export"`
+	Id          int64                        `json:"id"`
+	Location    *ActionLocationShowOutput    `json:"location"`
+	Node        *ActionNodeShowOutput        `json:"node"`
+	Outage      *ActionOutageShowOutput      `json:"outage"`
+	User        *ActionUserShowOutput        `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionExportOutageShowResponse struct {
@@ -97,12 +95,11 @@ type ActionExportOutageShowResponse struct {
 	Output *ActionExportOutageShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionExportOutageShow) Prepare() *ActionExportOutageShowInvocation {
 	return &ActionExportOutageShowInvocation{
 		Action: action,
-		Path: "/v6.0/export_outages/{export_outage_id}",
+		Path:   "/v6.0/export_outages/{export_outage_id}",
 	}
 }
 
@@ -167,9 +164,6 @@ func (inv *ActionExportOutageShowInvocation) callAsQuery() (*ActionExportOutageS
 	return resp, err
 }
 
-
-
-
 func (inv *ActionExportOutageShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -180,4 +174,3 @@ func (inv *ActionExportOutageShowInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

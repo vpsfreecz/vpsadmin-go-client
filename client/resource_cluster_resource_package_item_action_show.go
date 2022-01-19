@@ -19,7 +19,7 @@ func NewActionClusterResourcePackageItemShow(client *Client) *ActionClusterResou
 // ActionClusterResourcePackageItemShowMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourcePackageItemShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionClusterResourcePackageItemShowMetaGlobalInput) SetIncludes(value
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionClusterResourcePackageItemShowMetaGlobalInput) SetNo(value bool) *ActionClusterResourcePackageItemShowMetaGlobalInput {
 	in.No = value
@@ -70,15 +71,12 @@ func (in *ActionClusterResourcePackageItemShowMetaGlobalInput) AnySelected() boo
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionClusterResourcePackageItemShowOutput is a type for action output parameters
 type ActionClusterResourcePackageItemShowOutput struct {
 	ClusterResource *ActionClusterResourceShowOutput `json:"cluster_resource"`
-	Id int64 `json:"id"`
-	Value int64 `json:"value"`
+	Id              int64                            `json:"id"`
+	Value           int64                            `json:"value"`
 }
-
 
 // Type for action response, including envelope
 type ActionClusterResourcePackageItemShowResponse struct {
@@ -93,12 +91,11 @@ type ActionClusterResourcePackageItemShowResponse struct {
 	Output *ActionClusterResourcePackageItemShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionClusterResourcePackageItemShow) Prepare() *ActionClusterResourcePackageItemShowInvocation {
 	return &ActionClusterResourcePackageItemShowInvocation{
 		Action: action,
-		Path: "/v6.0/cluster_resource_packages/{cluster_resource_package_id}/items/{item_id}",
+		Path:   "/v6.0/cluster_resource_packages/{cluster_resource_package_id}/items/{item_id}",
 	}
 }
 
@@ -163,9 +160,6 @@ func (inv *ActionClusterResourcePackageItemShowInvocation) callAsQuery() (*Actio
 	return resp, err
 }
 
-
-
-
 func (inv *ActionClusterResourcePackageItemShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -176,4 +170,3 @@ func (inv *ActionClusterResourcePackageItemShowInvocation) convertMetaInputToQue
 		}
 	}
 }
-

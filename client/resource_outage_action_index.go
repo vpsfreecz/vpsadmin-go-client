@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionOutageIndex is a type for action Outage#Index
 type ActionOutageIndex struct {
@@ -17,9 +16,9 @@ func NewActionOutageIndex(client *Client) *ActionOutageIndex {
 
 // ActionOutageIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionOutageIndexMetaGlobalInput) SetCount(value bool) *ActionOutageIn
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionOutageIndexMetaGlobalInput) SetIncludes(value string) *ActionOutageIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionOutageIndexMetaGlobalInput) SetIncludes(value string) *ActionOut
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOutageIndexMetaGlobalInput) SetNo(value bool) *ActionOutageIndexMetaGlobalInput {
 	in.No = value
@@ -83,23 +84,23 @@ func (in *ActionOutageIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageIndexInput is a type for action input parameters
 type ActionOutageIndexInput struct {
-	Affected bool `json:"affected"`
-	EntityId int64 `json:"entity_id"`
-	EntityName string `json:"entity_name"`
-	Environment int64 `json:"environment"`
-	Export int64 `json:"export"`
-	HandledBy int64 `json:"handled_by"`
-	Limit int64 `json:"limit"`
-	Location int64 `json:"location"`
-	Node int64 `json:"node"`
-	Offset int64 `json:"offset"`
-	Order string `json:"order"`
-	Planned bool `json:"planned"`
-	Since string `json:"since"`
-	State string `json:"state"`
-	Type string `json:"type"`
-	User int64 `json:"user"`
-	Vps int64 `json:"vps"`
+	Affected    bool   `json:"affected"`
+	EntityId    int64  `json:"entity_id"`
+	EntityName  string `json:"entity_name"`
+	Environment int64  `json:"environment"`
+	Export      int64  `json:"export"`
+	HandledBy   int64  `json:"handled_by"`
+	Limit       int64  `json:"limit"`
+	Location    int64  `json:"location"`
+	Node        int64  `json:"node"`
+	Offset      int64  `json:"offset"`
+	Order       string `json:"order"`
+	Planned     bool   `json:"planned"`
+	Since       string `json:"since"`
+	State       string `json:"state"`
+	Type        string `json:"type"`
+	User        int64  `json:"user"`
+	Vps         int64  `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -115,6 +116,7 @@ func (in *ActionOutageIndexInput) SetAffected(value bool) *ActionOutageIndexInpu
 	in._selectedParameters["Affected"] = nil
 	return in
 }
+
 // SetEntityId sets parameter EntityId to value and selects it for sending
 func (in *ActionOutageIndexInput) SetEntityId(value int64) *ActionOutageIndexInput {
 	in.EntityId = value
@@ -126,6 +128,7 @@ func (in *ActionOutageIndexInput) SetEntityId(value int64) *ActionOutageIndexInp
 	in._selectedParameters["EntityId"] = nil
 	return in
 }
+
 // SetEntityName sets parameter EntityName to value and selects it for sending
 func (in *ActionOutageIndexInput) SetEntityName(value string) *ActionOutageIndexInput {
 	in.EntityName = value
@@ -137,6 +140,7 @@ func (in *ActionOutageIndexInput) SetEntityName(value string) *ActionOutageIndex
 	in._selectedParameters["EntityName"] = nil
 	return in
 }
+
 // SetEnvironment sets parameter Environment to value and selects it for sending
 func (in *ActionOutageIndexInput) SetEnvironment(value int64) *ActionOutageIndexInput {
 	in.Environment = value
@@ -148,6 +152,7 @@ func (in *ActionOutageIndexInput) SetEnvironment(value int64) *ActionOutageIndex
 	in._selectedParameters["Environment"] = nil
 	return in
 }
+
 // SetExport sets parameter Export to value and selects it for sending
 func (in *ActionOutageIndexInput) SetExport(value int64) *ActionOutageIndexInput {
 	in.Export = value
@@ -159,6 +164,7 @@ func (in *ActionOutageIndexInput) SetExport(value int64) *ActionOutageIndexInput
 	in._selectedParameters["Export"] = nil
 	return in
 }
+
 // SetHandledBy sets parameter HandledBy to value and selects it for sending
 func (in *ActionOutageIndexInput) SetHandledBy(value int64) *ActionOutageIndexInput {
 	in.HandledBy = value
@@ -170,6 +176,7 @@ func (in *ActionOutageIndexInput) SetHandledBy(value int64) *ActionOutageIndexIn
 	in._selectedParameters["HandledBy"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionOutageIndexInput) SetLimit(value int64) *ActionOutageIndexInput {
 	in.Limit = value
@@ -181,6 +188,7 @@ func (in *ActionOutageIndexInput) SetLimit(value int64) *ActionOutageIndexInput 
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionOutageIndexInput) SetLocation(value int64) *ActionOutageIndexInput {
 	in.Location = value
@@ -192,6 +200,7 @@ func (in *ActionOutageIndexInput) SetLocation(value int64) *ActionOutageIndexInp
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionOutageIndexInput) SetNode(value int64) *ActionOutageIndexInput {
 	in.Node = value
@@ -203,6 +212,7 @@ func (in *ActionOutageIndexInput) SetNode(value int64) *ActionOutageIndexInput {
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionOutageIndexInput) SetOffset(value int64) *ActionOutageIndexInput {
 	in.Offset = value
@@ -214,6 +224,7 @@ func (in *ActionOutageIndexInput) SetOffset(value int64) *ActionOutageIndexInput
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetOrder sets parameter Order to value and selects it for sending
 func (in *ActionOutageIndexInput) SetOrder(value string) *ActionOutageIndexInput {
 	in.Order = value
@@ -225,6 +236,7 @@ func (in *ActionOutageIndexInput) SetOrder(value string) *ActionOutageIndexInput
 	in._selectedParameters["Order"] = nil
 	return in
 }
+
 // SetPlanned sets parameter Planned to value and selects it for sending
 func (in *ActionOutageIndexInput) SetPlanned(value bool) *ActionOutageIndexInput {
 	in.Planned = value
@@ -236,6 +248,7 @@ func (in *ActionOutageIndexInput) SetPlanned(value bool) *ActionOutageIndexInput
 	in._selectedParameters["Planned"] = nil
 	return in
 }
+
 // SetSince sets parameter Since to value and selects it for sending
 func (in *ActionOutageIndexInput) SetSince(value string) *ActionOutageIndexInput {
 	in.Since = value
@@ -247,6 +260,7 @@ func (in *ActionOutageIndexInput) SetSince(value string) *ActionOutageIndexInput
 	in._selectedParameters["Since"] = nil
 	return in
 }
+
 // SetState sets parameter State to value and selects it for sending
 func (in *ActionOutageIndexInput) SetState(value string) *ActionOutageIndexInput {
 	in.State = value
@@ -258,6 +272,7 @@ func (in *ActionOutageIndexInput) SetState(value string) *ActionOutageIndexInput
 	in._selectedParameters["State"] = nil
 	return in
 }
+
 // SetType sets parameter Type to value and selects it for sending
 func (in *ActionOutageIndexInput) SetType(value string) *ActionOutageIndexInput {
 	in.Type = value
@@ -269,6 +284,7 @@ func (in *ActionOutageIndexInput) SetType(value string) *ActionOutageIndexInput 
 	in._selectedParameters["Type"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionOutageIndexInput) SetUser(value int64) *ActionOutageIndexInput {
 	in.User = value
@@ -280,6 +296,7 @@ func (in *ActionOutageIndexInput) SetUser(value int64) *ActionOutageIndexInput {
 	in._selectedParameters["User"] = nil
 	return in
 }
+
 // SetVps sets parameter Vps to value and selects it for sending
 func (in *ActionOutageIndexInput) SetVps(value int64) *ActionOutageIndexInput {
 	in.Vps = value
@@ -315,27 +332,25 @@ func (in *ActionOutageIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionOutageIndexOutput is a type for action output parameters
 type ActionOutageIndexOutput struct {
-	Affected bool `json:"affected"`
-	AffectedDirectVpsCount int64 `json:"affected_direct_vps_count"`
-	AffectedExportCount int64 `json:"affected_export_count"`
-	AffectedIndirectVpsCount int64 `json:"affected_indirect_vps_count"`
-	AffectedUserCount int64 `json:"affected_user_count"`
-	BeginsAt string `json:"begins_at"`
-	CsDescription string `json:"cs_description"`
-	CsSummary string `json:"cs_summary"`
-	Duration int64 `json:"duration"`
-	EnDescription string `json:"en_description"`
-	EnSummary string `json:"en_summary"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	Planned bool `json:"planned"`
-	State string `json:"state"`
-	Type string `json:"type"`
+	Affected                 bool   `json:"affected"`
+	AffectedDirectVpsCount   int64  `json:"affected_direct_vps_count"`
+	AffectedExportCount      int64  `json:"affected_export_count"`
+	AffectedIndirectVpsCount int64  `json:"affected_indirect_vps_count"`
+	AffectedUserCount        int64  `json:"affected_user_count"`
+	BeginsAt                 string `json:"begins_at"`
+	CsDescription            string `json:"cs_description"`
+	CsSummary                string `json:"cs_summary"`
+	Duration                 int64  `json:"duration"`
+	EnDescription            string `json:"en_description"`
+	EnSummary                string `json:"en_summary"`
+	FinishedAt               string `json:"finished_at"`
+	Id                       int64  `json:"id"`
+	Planned                  bool   `json:"planned"`
+	State                    string `json:"state"`
+	Type                     string `json:"type"`
 }
-
 
 // Type for action response, including envelope
 type ActionOutageIndexResponse struct {
@@ -350,12 +365,11 @@ type ActionOutageIndexResponse struct {
 	Output []*ActionOutageIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOutageIndex) Prepare() *ActionOutageIndexInvocation {
 	return &ActionOutageIndexInvocation{
 		Action: action,
-		Path: "/v6.0/outages",
+		Path:   "/v6.0/outages",
 	}
 }
 
@@ -371,7 +385,6 @@ type ActionOutageIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionOutageIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionOutageIndexInvocation) NewInput() *ActionOutageIndexInput {
@@ -394,6 +407,7 @@ func (inv *ActionOutageIndexInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOutageIndexInvocation) NewMetaInput() *ActionOutageIndexMetaGlobalInput {
@@ -433,8 +447,6 @@ func (inv *ActionOutageIndexInvocation) callAsQuery() (*ActionOutageIndexRespons
 	}
 	return resp, err
 }
-
-
 
 func (inv *ActionOutageIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
@@ -505,4 +517,3 @@ func (inv *ActionOutageIndexInvocation) convertMetaInputToQueryParams(ret map[st
 		}
 	}
 }
-

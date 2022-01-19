@@ -19,7 +19,7 @@ func NewActionUserPublicKeyDelete(client *Client) *ActionUserPublicKeyDelete {
 // ActionUserPublicKeyDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPublicKeyDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserPublicKeyDeleteMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserPublicKeyDeleteMetaGlobalInput) SetNo(value bool) *ActionUserPublicKeyDeleteMetaGlobalInput {
 	in.No = value
@@ -70,13 +71,10 @@ func (in *ActionUserPublicKeyDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserPublicKeyDeleteRequest is a type for the entire action request
 type ActionUserPublicKeyDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionUserPublicKeyDeleteResponse struct {
@@ -84,12 +82,11 @@ type ActionUserPublicKeyDeleteResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserPublicKeyDelete) Prepare() *ActionUserPublicKeyDeleteInvocation {
 	return &ActionUserPublicKeyDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/public_keys/{public_key_id}",
+		Path:   "/v6.0/users/{user_id}/public_keys/{public_key_id}",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionUserPublicKeyDeleteInvocation) Call() (*ActionUserPublicKeyDele
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserPublicKeyDeleteInvocation) callAsBody() (*ActionUserPublicKeyDeleteResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserPublicKeyDeleteResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionUserPublicKeyDeleteInvocation) callAsBody() (*ActionUserPublicK
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserPublicKeyDeleteInvocation) makeAllInputParams() *ActionUserPublicKeyDeleteRequest {
 	return &ActionUserPublicKeyDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionUserPublicKeyDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

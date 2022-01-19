@@ -19,7 +19,7 @@ func NewActionSystemConfigShow(client *Client) *ActionSystemConfigShow {
 // ActionSystemConfigShowMetaGlobalInput is a type for action global meta input parameters
 type ActionSystemConfigShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionSystemConfigShowMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionSystemConfigShowMetaGlobalInput) SetNo(value bool) *ActionSystemConfigShowMetaGlobalInput {
 	in.No = value
@@ -70,18 +71,15 @@ func (in *ActionSystemConfigShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionSystemConfigShowOutput is a type for action output parameters
 type ActionSystemConfigShowOutput struct {
-	Category string `json:"category"`
-	Description string `json:"description"`
-	Label string `json:"label"`
-	MinUserLevel int64 `json:"min_user_level"`
-	Name string `json:"name"`
-	Type string `json:"type"`
+	Category     string `json:"category"`
+	Description  string `json:"description"`
+	Label        string `json:"label"`
+	MinUserLevel int64  `json:"min_user_level"`
+	Name         string `json:"name"`
+	Type         string `json:"type"`
 }
-
 
 // Type for action response, including envelope
 type ActionSystemConfigShowResponse struct {
@@ -96,12 +94,11 @@ type ActionSystemConfigShowResponse struct {
 	Output *ActionSystemConfigShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionSystemConfigShow) Prepare() *ActionSystemConfigShowInvocation {
 	return &ActionSystemConfigShowInvocation{
 		Action: action,
-		Path: "/v6.0/system_configs/{category}/{name}",
+		Path:   "/v6.0/system_configs/{category}/{name}",
 	}
 }
 
@@ -166,9 +163,6 @@ func (inv *ActionSystemConfigShowInvocation) callAsQuery() (*ActionSystemConfigS
 	return resp, err
 }
 
-
-
-
 func (inv *ActionSystemConfigShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -179,4 +173,3 @@ func (inv *ActionSystemConfigShowInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

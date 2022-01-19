@@ -26,12 +26,12 @@ func NewResourceVpsFeature(client *Client) *ResourceVpsFeature {
 	actionUpdateAll := NewActionVpsFeatureUpdateAll(client)
 
 	return &ResourceVpsFeature{
-		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Client:    client,
+		Index:     actionIndex,
+		List:      actionIndex,
+		Show:      actionShow,
+		Find:      actionShow,
+		Update:    actionUpdate,
 		UpdateAll: actionUpdateAll,
 	}
 }

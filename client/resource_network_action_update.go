@@ -19,7 +19,7 @@ func NewActionNetworkUpdate(client *Client) *ActionNetworkUpdate {
 // ActionNetworkUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionNetworkUpdateMetaGlobalInput) SetIncludes(value string) *ActionN
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNetworkUpdateMetaGlobalInput) SetNo(value bool) *ActionNetworkUpdateMetaGlobalInput {
 	in.No = value
@@ -72,15 +73,15 @@ func (in *ActionNetworkUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkUpdateInput is a type for action input parameters
 type ActionNetworkUpdateInput struct {
-	Address string `json:"address"`
-	IpVersion int64 `json:"ip_version"`
-	Label string `json:"label"`
-	Managed bool `json:"managed"`
-	Prefix int64 `json:"prefix"`
-	Purpose string `json:"purpose"`
-	Role string `json:"role"`
+	Address     string `json:"address"`
+	IpVersion   int64  `json:"ip_version"`
+	Label       string `json:"label"`
+	Managed     bool   `json:"managed"`
+	Prefix      int64  `json:"prefix"`
+	Purpose     string `json:"purpose"`
+	Role        string `json:"role"`
 	SplitAccess string `json:"split_access"`
-	SplitPrefix int64 `json:"split_prefix"`
+	SplitPrefix int64  `json:"split_prefix"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -96,6 +97,7 @@ func (in *ActionNetworkUpdateInput) SetAddress(value string) *ActionNetworkUpdat
 	in._selectedParameters["Address"] = nil
 	return in
 }
+
 // SetIpVersion sets parameter IpVersion to value and selects it for sending
 func (in *ActionNetworkUpdateInput) SetIpVersion(value int64) *ActionNetworkUpdateInput {
 	in.IpVersion = value
@@ -107,6 +109,7 @@ func (in *ActionNetworkUpdateInput) SetIpVersion(value int64) *ActionNetworkUpda
 	in._selectedParameters["IpVersion"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionNetworkUpdateInput) SetLabel(value string) *ActionNetworkUpdateInput {
 	in.Label = value
@@ -118,6 +121,7 @@ func (in *ActionNetworkUpdateInput) SetLabel(value string) *ActionNetworkUpdateI
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetManaged sets parameter Managed to value and selects it for sending
 func (in *ActionNetworkUpdateInput) SetManaged(value bool) *ActionNetworkUpdateInput {
 	in.Managed = value
@@ -129,6 +133,7 @@ func (in *ActionNetworkUpdateInput) SetManaged(value bool) *ActionNetworkUpdateI
 	in._selectedParameters["Managed"] = nil
 	return in
 }
+
 // SetPrefix sets parameter Prefix to value and selects it for sending
 func (in *ActionNetworkUpdateInput) SetPrefix(value int64) *ActionNetworkUpdateInput {
 	in.Prefix = value
@@ -140,6 +145,7 @@ func (in *ActionNetworkUpdateInput) SetPrefix(value int64) *ActionNetworkUpdateI
 	in._selectedParameters["Prefix"] = nil
 	return in
 }
+
 // SetPurpose sets parameter Purpose to value and selects it for sending
 func (in *ActionNetworkUpdateInput) SetPurpose(value string) *ActionNetworkUpdateInput {
 	in.Purpose = value
@@ -151,6 +157,7 @@ func (in *ActionNetworkUpdateInput) SetPurpose(value string) *ActionNetworkUpdat
 	in._selectedParameters["Purpose"] = nil
 	return in
 }
+
 // SetRole sets parameter Role to value and selects it for sending
 func (in *ActionNetworkUpdateInput) SetRole(value string) *ActionNetworkUpdateInput {
 	in.Role = value
@@ -162,6 +169,7 @@ func (in *ActionNetworkUpdateInput) SetRole(value string) *ActionNetworkUpdateIn
 	in._selectedParameters["Role"] = nil
 	return in
 }
+
 // SetSplitAccess sets parameter SplitAccess to value and selects it for sending
 func (in *ActionNetworkUpdateInput) SetSplitAccess(value string) *ActionNetworkUpdateInput {
 	in.SplitAccess = value
@@ -173,6 +181,7 @@ func (in *ActionNetworkUpdateInput) SetSplitAccess(value string) *ActionNetworkU
 	in._selectedParameters["SplitAccess"] = nil
 	return in
 }
+
 // SetSplitPrefix sets parameter SplitPrefix to value and selects it for sending
 func (in *ActionNetworkUpdateInput) SetSplitPrefix(value int64) *ActionNetworkUpdateInput {
 	in.SplitPrefix = value
@@ -211,29 +220,28 @@ func (in *ActionNetworkUpdateInput) AnySelected() bool {
 // ActionNetworkUpdateRequest is a type for the entire action request
 type ActionNetworkUpdateRequest struct {
 	Network map[string]interface{} `json:"network"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta    map[string]interface{} `json:"_meta"`
 }
 
 // ActionNetworkUpdateOutput is a type for action output parameters
 type ActionNetworkUpdateOutput struct {
-	Address string `json:"address"`
-	Assigned int64 `json:"assigned"`
-	Id int64 `json:"id"`
-	IpVersion int64 `json:"ip_version"`
-	Label string `json:"label"`
-	Managed bool `json:"managed"`
-	Owned int64 `json:"owned"`
-	Prefix int64 `json:"prefix"`
+	Address         string                    `json:"address"`
+	Assigned        int64                     `json:"assigned"`
+	Id              int64                     `json:"id"`
+	IpVersion       int64                     `json:"ip_version"`
+	Label           string                    `json:"label"`
+	Managed         bool                      `json:"managed"`
+	Owned           int64                     `json:"owned"`
+	Prefix          int64                     `json:"prefix"`
 	PrimaryLocation *ActionLocationShowOutput `json:"primary_location"`
-	Purpose string `json:"purpose"`
-	Role string `json:"role"`
-	Size int64 `json:"size"`
-	SplitAccess string `json:"split_access"`
-	SplitPrefix int64 `json:"split_prefix"`
-	Taken int64 `json:"taken"`
-	Used int64 `json:"used"`
+	Purpose         string                    `json:"purpose"`
+	Role            string                    `json:"role"`
+	Size            int64                     `json:"size"`
+	SplitAccess     string                    `json:"split_access"`
+	SplitPrefix     int64                     `json:"split_prefix"`
+	Taken           int64                     `json:"taken"`
+	Used            int64                     `json:"used"`
 }
-
 
 // Type for action response, including envelope
 type ActionNetworkUpdateResponse struct {
@@ -248,12 +256,11 @@ type ActionNetworkUpdateResponse struct {
 	Output *ActionNetworkUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNetworkUpdate) Prepare() *ActionNetworkUpdateInvocation {
 	return &ActionNetworkUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/networks/{network_id}",
+		Path:   "/v6.0/networks/{network_id}",
 	}
 }
 
@@ -302,6 +309,7 @@ func (inv *ActionNetworkUpdateInvocation) IsParameterSelected(param string) bool
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionNetworkUpdateInvocation) NewMetaInput() *ActionNetworkUpdateMetaGlobalInput {
@@ -330,7 +338,6 @@ func (inv *ActionNetworkUpdateInvocation) Call() (*ActionNetworkUpdateResponse, 
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionNetworkUpdateInvocation) callAsBody() (*ActionNetworkUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionNetworkUpdateResponse{Action: inv.Action}
@@ -341,13 +348,10 @@ func (inv *ActionNetworkUpdateInvocation) callAsBody() (*ActionNetworkUpdateResp
 	return resp, err
 }
 
-
-
-
 func (inv *ActionNetworkUpdateInvocation) makeAllInputParams() *ActionNetworkUpdateRequest {
 	return &ActionNetworkUpdateRequest{
 		Network: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:    inv.makeMetaInputParams(),
 	}
 }
 

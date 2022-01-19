@@ -19,7 +19,7 @@ func NewActionOsTemplateUpdate(client *Client) *ActionOsTemplateUpdate {
 // ActionOsTemplateUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionOsTemplateUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOsTemplateUpdateMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOsTemplateUpdateMetaGlobalInput) SetNo(value bool) *ActionOsTemplateUpdateMetaGlobalInput {
 	in.No = value
@@ -72,12 +73,12 @@ func (in *ActionOsTemplateUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionOsTemplateUpdateInput is a type for action input parameters
 type ActionOsTemplateUpdateInput struct {
-	Enabled bool `json:"enabled"`
+	Enabled        bool   `json:"enabled"`
 	HypervisorType string `json:"hypervisor_type"`
-	Info string `json:"info"`
-	Label string `json:"label"`
-	Order int64 `json:"order"`
-	Supported bool `json:"supported"`
+	Info           string `json:"info"`
+	Label          string `json:"label"`
+	Order          int64  `json:"order"`
+	Supported      bool   `json:"supported"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -93,6 +94,7 @@ func (in *ActionOsTemplateUpdateInput) SetEnabled(value bool) *ActionOsTemplateU
 	in._selectedParameters["Enabled"] = nil
 	return in
 }
+
 // SetHypervisorType sets parameter HypervisorType to value and selects it for sending
 func (in *ActionOsTemplateUpdateInput) SetHypervisorType(value string) *ActionOsTemplateUpdateInput {
 	in.HypervisorType = value
@@ -104,6 +106,7 @@ func (in *ActionOsTemplateUpdateInput) SetHypervisorType(value string) *ActionOs
 	in._selectedParameters["HypervisorType"] = nil
 	return in
 }
+
 // SetInfo sets parameter Info to value and selects it for sending
 func (in *ActionOsTemplateUpdateInput) SetInfo(value string) *ActionOsTemplateUpdateInput {
 	in.Info = value
@@ -115,6 +118,7 @@ func (in *ActionOsTemplateUpdateInput) SetInfo(value string) *ActionOsTemplateUp
 	in._selectedParameters["Info"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionOsTemplateUpdateInput) SetLabel(value string) *ActionOsTemplateUpdateInput {
 	in.Label = value
@@ -126,6 +130,7 @@ func (in *ActionOsTemplateUpdateInput) SetLabel(value string) *ActionOsTemplateU
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetOrder sets parameter Order to value and selects it for sending
 func (in *ActionOsTemplateUpdateInput) SetOrder(value int64) *ActionOsTemplateUpdateInput {
 	in.Order = value
@@ -137,6 +142,7 @@ func (in *ActionOsTemplateUpdateInput) SetOrder(value int64) *ActionOsTemplateUp
 	in._selectedParameters["Order"] = nil
 	return in
 }
+
 // SetSupported sets parameter Supported to value and selects it for sending
 func (in *ActionOsTemplateUpdateInput) SetSupported(value bool) *ActionOsTemplateUpdateInput {
 	in.Supported = value
@@ -175,21 +181,20 @@ func (in *ActionOsTemplateUpdateInput) AnySelected() bool {
 // ActionOsTemplateUpdateRequest is a type for the entire action request
 type ActionOsTemplateUpdateRequest struct {
 	OsTemplate map[string]interface{} `json:"os_template"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta       map[string]interface{} `json:"_meta"`
 }
 
 // ActionOsTemplateUpdateOutput is a type for action output parameters
 type ActionOsTemplateUpdateOutput struct {
-	Enabled bool `json:"enabled"`
+	Enabled        bool   `json:"enabled"`
 	HypervisorType string `json:"hypervisor_type"`
-	Id int64 `json:"id"`
-	Info string `json:"info"`
-	Label string `json:"label"`
-	Name string `json:"name"`
-	Order int64 `json:"order"`
-	Supported bool `json:"supported"`
+	Id             int64  `json:"id"`
+	Info           string `json:"info"`
+	Label          string `json:"label"`
+	Name           string `json:"name"`
+	Order          int64  `json:"order"`
+	Supported      bool   `json:"supported"`
 }
-
 
 // Type for action response, including envelope
 type ActionOsTemplateUpdateResponse struct {
@@ -204,12 +209,11 @@ type ActionOsTemplateUpdateResponse struct {
 	Output *ActionOsTemplateUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOsTemplateUpdate) Prepare() *ActionOsTemplateUpdateInvocation {
 	return &ActionOsTemplateUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/os_templates/{os_template_id}",
+		Path:   "/v6.0/os_templates/{os_template_id}",
 	}
 }
 
@@ -258,6 +262,7 @@ func (inv *ActionOsTemplateUpdateInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOsTemplateUpdateInvocation) NewMetaInput() *ActionOsTemplateUpdateMetaGlobalInput {
@@ -286,7 +291,6 @@ func (inv *ActionOsTemplateUpdateInvocation) Call() (*ActionOsTemplateUpdateResp
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionOsTemplateUpdateInvocation) callAsBody() (*ActionOsTemplateUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionOsTemplateUpdateResponse{Action: inv.Action}
@@ -297,13 +301,10 @@ func (inv *ActionOsTemplateUpdateInvocation) callAsBody() (*ActionOsTemplateUpda
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOsTemplateUpdateInvocation) makeAllInputParams() *ActionOsTemplateUpdateRequest {
 	return &ActionOsTemplateUpdateRequest{
 		OsTemplate: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:       inv.makeMetaInputParams(),
 	}
 }
 

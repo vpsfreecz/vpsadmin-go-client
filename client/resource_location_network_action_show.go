@@ -19,7 +19,7 @@ func NewActionLocationNetworkShow(client *Client) *ActionLocationNetworkShow {
 // ActionLocationNetworkShowMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationNetworkShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionLocationNetworkShowMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionLocationNetworkShowMetaGlobalInput) SetNo(value bool) *ActionLocationNetworkShowMetaGlobalInput {
 	in.No = value
@@ -70,19 +71,16 @@ func (in *ActionLocationNetworkShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionLocationNetworkShowOutput is a type for action output parameters
 type ActionLocationNetworkShowOutput struct {
-	Autopick bool `json:"autopick"`
-	Id int64 `json:"id"`
+	Autopick bool                      `json:"autopick"`
+	Id       int64                     `json:"id"`
 	Location *ActionLocationShowOutput `json:"location"`
-	Network *ActionNetworkShowOutput `json:"network"`
-	Primary bool `json:"primary"`
-	Priority int64 `json:"priority"`
-	Userpick bool `json:"userpick"`
+	Network  *ActionNetworkShowOutput  `json:"network"`
+	Primary  bool                      `json:"primary"`
+	Priority int64                     `json:"priority"`
+	Userpick bool                      `json:"userpick"`
 }
-
 
 // Type for action response, including envelope
 type ActionLocationNetworkShowResponse struct {
@@ -97,12 +95,11 @@ type ActionLocationNetworkShowResponse struct {
 	Output *ActionLocationNetworkShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionLocationNetworkShow) Prepare() *ActionLocationNetworkShowInvocation {
 	return &ActionLocationNetworkShowInvocation{
 		Action: action,
-		Path: "/v6.0/location_networks/{location_network_id}",
+		Path:   "/v6.0/location_networks/{location_network_id}",
 	}
 }
 
@@ -167,9 +164,6 @@ func (inv *ActionLocationNetworkShowInvocation) callAsQuery() (*ActionLocationNe
 	return resp, err
 }
 
-
-
-
 func (inv *ActionLocationNetworkShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -180,4 +174,3 @@ func (inv *ActionLocationNetworkShowInvocation) convertMetaInputToQueryParams(re
 		}
 	}
 }
-

@@ -19,7 +19,7 @@ func NewActionVpsFeatureUpdateAll(client *Client) *ActionVpsFeatureUpdateAll {
 // ActionVpsFeatureUpdateAllMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsFeatureUpdateAllMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsFeatureUpdateAllMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsFeatureUpdateAllMetaGlobalInput) SetNo(value bool) *ActionVpsFeatureUpdateAllMetaGlobalInput {
 	in.No = value
@@ -72,14 +73,14 @@ func (in *ActionVpsFeatureUpdateAllMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsFeatureUpdateAllInput is a type for action input parameters
 type ActionVpsFeatureUpdateAllInput struct {
-	Bridge bool `json:"bridge"`
-	Fuse bool `json:"fuse"`
+	Bridge   bool `json:"bridge"`
+	Fuse     bool `json:"fuse"`
 	Iptables bool `json:"iptables"`
-	Kvm bool `json:"kvm"`
-	Lxc bool `json:"lxc"`
-	Nfs bool `json:"nfs"`
-	Ppp bool `json:"ppp"`
-	Tun bool `json:"tun"`
+	Kvm      bool `json:"kvm"`
+	Lxc      bool `json:"lxc"`
+	Nfs      bool `json:"nfs"`
+	Ppp      bool `json:"ppp"`
+	Tun      bool `json:"tun"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -95,6 +96,7 @@ func (in *ActionVpsFeatureUpdateAllInput) SetBridge(value bool) *ActionVpsFeatur
 	in._selectedParameters["Bridge"] = nil
 	return in
 }
+
 // SetFuse sets parameter Fuse to value and selects it for sending
 func (in *ActionVpsFeatureUpdateAllInput) SetFuse(value bool) *ActionVpsFeatureUpdateAllInput {
 	in.Fuse = value
@@ -106,6 +108,7 @@ func (in *ActionVpsFeatureUpdateAllInput) SetFuse(value bool) *ActionVpsFeatureU
 	in._selectedParameters["Fuse"] = nil
 	return in
 }
+
 // SetIptables sets parameter Iptables to value and selects it for sending
 func (in *ActionVpsFeatureUpdateAllInput) SetIptables(value bool) *ActionVpsFeatureUpdateAllInput {
 	in.Iptables = value
@@ -117,6 +120,7 @@ func (in *ActionVpsFeatureUpdateAllInput) SetIptables(value bool) *ActionVpsFeat
 	in._selectedParameters["Iptables"] = nil
 	return in
 }
+
 // SetKvm sets parameter Kvm to value and selects it for sending
 func (in *ActionVpsFeatureUpdateAllInput) SetKvm(value bool) *ActionVpsFeatureUpdateAllInput {
 	in.Kvm = value
@@ -128,6 +132,7 @@ func (in *ActionVpsFeatureUpdateAllInput) SetKvm(value bool) *ActionVpsFeatureUp
 	in._selectedParameters["Kvm"] = nil
 	return in
 }
+
 // SetLxc sets parameter Lxc to value and selects it for sending
 func (in *ActionVpsFeatureUpdateAllInput) SetLxc(value bool) *ActionVpsFeatureUpdateAllInput {
 	in.Lxc = value
@@ -139,6 +144,7 @@ func (in *ActionVpsFeatureUpdateAllInput) SetLxc(value bool) *ActionVpsFeatureUp
 	in._selectedParameters["Lxc"] = nil
 	return in
 }
+
 // SetNfs sets parameter Nfs to value and selects it for sending
 func (in *ActionVpsFeatureUpdateAllInput) SetNfs(value bool) *ActionVpsFeatureUpdateAllInput {
 	in.Nfs = value
@@ -150,6 +156,7 @@ func (in *ActionVpsFeatureUpdateAllInput) SetNfs(value bool) *ActionVpsFeatureUp
 	in._selectedParameters["Nfs"] = nil
 	return in
 }
+
 // SetPpp sets parameter Ppp to value and selects it for sending
 func (in *ActionVpsFeatureUpdateAllInput) SetPpp(value bool) *ActionVpsFeatureUpdateAllInput {
 	in.Ppp = value
@@ -161,6 +168,7 @@ func (in *ActionVpsFeatureUpdateAllInput) SetPpp(value bool) *ActionVpsFeatureUp
 	in._selectedParameters["Ppp"] = nil
 	return in
 }
+
 // SetTun sets parameter Tun to value and selects it for sending
 func (in *ActionVpsFeatureUpdateAllInput) SetTun(value bool) *ActionVpsFeatureUpdateAllInput {
 	in.Tun = value
@@ -199,9 +207,8 @@ func (in *ActionVpsFeatureUpdateAllInput) AnySelected() bool {
 // ActionVpsFeatureUpdateAllRequest is a type for the entire action request
 type ActionVpsFeatureUpdateAllRequest struct {
 	Feature map[string]interface{} `json:"feature"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta    map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionVpsFeatureUpdateAllMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsFeatureUpdateAllMetaGlobalOutput struct {
@@ -219,12 +226,11 @@ type ActionVpsFeatureUpdateAllResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsFeatureUpdateAll) Prepare() *ActionVpsFeatureUpdateAllInvocation {
 	return &ActionVpsFeatureUpdateAllInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/features/update_all",
+		Path:   "/v6.0/vpses/{vps_id}/features/update_all",
 	}
 }
 
@@ -273,6 +279,7 @@ func (inv *ActionVpsFeatureUpdateAllInvocation) IsParameterSelected(param string
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsFeatureUpdateAllInvocation) NewMetaInput() *ActionVpsFeatureUpdateAllMetaGlobalInput {
@@ -300,7 +307,6 @@ func (inv *ActionVpsFeatureUpdateAllInvocation) IsMetaParameterSelected(param st
 func (inv *ActionVpsFeatureUpdateAllInvocation) Call() (*ActionVpsFeatureUpdateAllResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsFeatureUpdateAllInvocation) callAsBody() (*ActionVpsFeatureUpdateAllResponse, error) {
 	input := inv.makeAllInputParams()
@@ -358,11 +364,11 @@ func (resp *ActionVpsFeatureUpdateAllResponse) WatchOperation(timeout float64, u
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -385,12 +391,10 @@ func (resp *ActionVpsFeatureUpdateAllResponse) CancelOperation() (*ActionActionS
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsFeatureUpdateAllInvocation) makeAllInputParams() *ActionVpsFeatureUpdateAllRequest {
 	return &ActionVpsFeatureUpdateAllRequest{
 		Feature: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:    inv.makeMetaInputParams(),
 	}
 }
 

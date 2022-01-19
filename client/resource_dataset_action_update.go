@@ -19,7 +19,7 @@ func NewActionDatasetUpdate(client *Client) *ActionDatasetUpdate {
 // ActionDatasetUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionDatasetUpdateMetaGlobalInput) SetIncludes(value string) *ActionD
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDatasetUpdateMetaGlobalInput) SetNo(value bool) *ActionDatasetUpdateMetaGlobalInput {
 	in.No = value
@@ -72,17 +73,17 @@ func (in *ActionDatasetUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetUpdateInput is a type for action input parameters
 type ActionDatasetUpdateInput struct {
-	AdminLockType string `json:"admin_lock_type"`
-	AdminOverride bool `json:"admin_override"`
-	Atime bool `json:"atime"`
-	Compression bool `json:"compression"`
-	Quota int64 `json:"quota"`
-	Recordsize int64 `json:"recordsize"`
-	Refquota int64 `json:"refquota"`
-	Relatime bool `json:"relatime"`
-	Sharenfs string `json:"sharenfs"`
-	Sync string `json:"sync"`
-	UserNamespaceMap int64 `json:"user_namespace_map"`
+	AdminLockType    string `json:"admin_lock_type"`
+	AdminOverride    bool   `json:"admin_override"`
+	Atime            bool   `json:"atime"`
+	Compression      bool   `json:"compression"`
+	Quota            int64  `json:"quota"`
+	Recordsize       int64  `json:"recordsize"`
+	Refquota         int64  `json:"refquota"`
+	Relatime         bool   `json:"relatime"`
+	Sharenfs         string `json:"sharenfs"`
+	Sync             string `json:"sync"`
+	UserNamespaceMap int64  `json:"user_namespace_map"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -98,6 +99,7 @@ func (in *ActionDatasetUpdateInput) SetAdminLockType(value string) *ActionDatase
 	in._selectedParameters["AdminLockType"] = nil
 	return in
 }
+
 // SetAdminOverride sets parameter AdminOverride to value and selects it for sending
 func (in *ActionDatasetUpdateInput) SetAdminOverride(value bool) *ActionDatasetUpdateInput {
 	in.AdminOverride = value
@@ -109,6 +111,7 @@ func (in *ActionDatasetUpdateInput) SetAdminOverride(value bool) *ActionDatasetU
 	in._selectedParameters["AdminOverride"] = nil
 	return in
 }
+
 // SetAtime sets parameter Atime to value and selects it for sending
 func (in *ActionDatasetUpdateInput) SetAtime(value bool) *ActionDatasetUpdateInput {
 	in.Atime = value
@@ -120,6 +123,7 @@ func (in *ActionDatasetUpdateInput) SetAtime(value bool) *ActionDatasetUpdateInp
 	in._selectedParameters["Atime"] = nil
 	return in
 }
+
 // SetCompression sets parameter Compression to value and selects it for sending
 func (in *ActionDatasetUpdateInput) SetCompression(value bool) *ActionDatasetUpdateInput {
 	in.Compression = value
@@ -131,6 +135,7 @@ func (in *ActionDatasetUpdateInput) SetCompression(value bool) *ActionDatasetUpd
 	in._selectedParameters["Compression"] = nil
 	return in
 }
+
 // SetQuota sets parameter Quota to value and selects it for sending
 func (in *ActionDatasetUpdateInput) SetQuota(value int64) *ActionDatasetUpdateInput {
 	in.Quota = value
@@ -142,6 +147,7 @@ func (in *ActionDatasetUpdateInput) SetQuota(value int64) *ActionDatasetUpdateIn
 	in._selectedParameters["Quota"] = nil
 	return in
 }
+
 // SetRecordsize sets parameter Recordsize to value and selects it for sending
 func (in *ActionDatasetUpdateInput) SetRecordsize(value int64) *ActionDatasetUpdateInput {
 	in.Recordsize = value
@@ -153,6 +159,7 @@ func (in *ActionDatasetUpdateInput) SetRecordsize(value int64) *ActionDatasetUpd
 	in._selectedParameters["Recordsize"] = nil
 	return in
 }
+
 // SetRefquota sets parameter Refquota to value and selects it for sending
 func (in *ActionDatasetUpdateInput) SetRefquota(value int64) *ActionDatasetUpdateInput {
 	in.Refquota = value
@@ -164,6 +171,7 @@ func (in *ActionDatasetUpdateInput) SetRefquota(value int64) *ActionDatasetUpdat
 	in._selectedParameters["Refquota"] = nil
 	return in
 }
+
 // SetRelatime sets parameter Relatime to value and selects it for sending
 func (in *ActionDatasetUpdateInput) SetRelatime(value bool) *ActionDatasetUpdateInput {
 	in.Relatime = value
@@ -175,6 +183,7 @@ func (in *ActionDatasetUpdateInput) SetRelatime(value bool) *ActionDatasetUpdate
 	in._selectedParameters["Relatime"] = nil
 	return in
 }
+
 // SetSharenfs sets parameter Sharenfs to value and selects it for sending
 func (in *ActionDatasetUpdateInput) SetSharenfs(value string) *ActionDatasetUpdateInput {
 	in.Sharenfs = value
@@ -186,6 +195,7 @@ func (in *ActionDatasetUpdateInput) SetSharenfs(value string) *ActionDatasetUpda
 	in._selectedParameters["Sharenfs"] = nil
 	return in
 }
+
 // SetSync sets parameter Sync to value and selects it for sending
 func (in *ActionDatasetUpdateInput) SetSync(value string) *ActionDatasetUpdateInput {
 	in.Sync = value
@@ -197,6 +207,7 @@ func (in *ActionDatasetUpdateInput) SetSync(value string) *ActionDatasetUpdateIn
 	in._selectedParameters["Sync"] = nil
 	return in
 }
+
 // SetUserNamespaceMap sets parameter UserNamespaceMap to value and selects it for sending
 func (in *ActionDatasetUpdateInput) SetUserNamespaceMap(value int64) *ActionDatasetUpdateInput {
 	in.UserNamespaceMap = value
@@ -235,9 +246,8 @@ func (in *ActionDatasetUpdateInput) AnySelected() bool {
 // ActionDatasetUpdateRequest is a type for the entire action request
 type ActionDatasetUpdateRequest struct {
 	Dataset map[string]interface{} `json:"dataset"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta    map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionDatasetUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionDatasetUpdateMetaGlobalOutput struct {
@@ -255,12 +265,11 @@ type ActionDatasetUpdateResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDatasetUpdate) Prepare() *ActionDatasetUpdateInvocation {
 	return &ActionDatasetUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/datasets/{dataset_id}",
+		Path:   "/v6.0/datasets/{dataset_id}",
 	}
 }
 
@@ -309,6 +318,7 @@ func (inv *ActionDatasetUpdateInvocation) IsParameterSelected(param string) bool
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionDatasetUpdateInvocation) NewMetaInput() *ActionDatasetUpdateMetaGlobalInput {
@@ -336,7 +346,6 @@ func (inv *ActionDatasetUpdateInvocation) IsMetaParameterSelected(param string) 
 func (inv *ActionDatasetUpdateInvocation) Call() (*ActionDatasetUpdateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionDatasetUpdateInvocation) callAsBody() (*ActionDatasetUpdateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -394,11 +403,11 @@ func (resp *ActionDatasetUpdateResponse) WatchOperation(timeout float64, updateI
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -421,12 +430,10 @@ func (resp *ActionDatasetUpdateResponse) CancelOperation() (*ActionActionStateCa
 	return req.Call()
 }
 
-
-
 func (inv *ActionDatasetUpdateInvocation) makeAllInputParams() *ActionDatasetUpdateRequest {
 	return &ActionDatasetUpdateRequest{
 		Dataset: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:    inv.makeMetaInputParams(),
 	}
 }
 

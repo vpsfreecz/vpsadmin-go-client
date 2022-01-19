@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionUserIndex is a type for action User#Index
 type ActionUserIndex struct {
@@ -17,9 +16,9 @@ func NewActionUserIndex(client *Client) *ActionUserIndex {
 
 // ActionUserIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionUserIndexMetaGlobalInput) SetCount(value bool) *ActionUserIndexM
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserIndexMetaGlobalInput) SetIncludes(value string) *ActionUserIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionUserIndexMetaGlobalInput) SetIncludes(value string) *ActionUserI
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserIndexMetaGlobalInput) SetNo(value bool) *ActionUserIndexMetaGlobalInput {
 	in.No = value
@@ -83,20 +84,20 @@ func (in *ActionUserIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserIndexInput is a type for action input parameters
 type ActionUserIndexInput struct {
-	Address string `json:"address"`
-	Admin bool `json:"admin"`
-	Email string `json:"email"`
-	FullName string `json:"full_name"`
-	Info string `json:"info"`
-	Language int64 `json:"language"`
-	Level int64 `json:"level"`
-	Limit int64 `json:"limit"`
-	Lockout bool `json:"lockout"`
-	Login string `json:"login"`
-	MailerEnabled bool `json:"mailer_enabled"`
-	ObjectState string `json:"object_state"`
-	Offset int64 `json:"offset"`
-	PasswordReset bool `json:"password_reset"`
+	Address       string `json:"address"`
+	Admin         bool   `json:"admin"`
+	Email         string `json:"email"`
+	FullName      string `json:"full_name"`
+	Info          string `json:"info"`
+	Language      int64  `json:"language"`
+	Level         int64  `json:"level"`
+	Limit         int64  `json:"limit"`
+	Lockout       bool   `json:"lockout"`
+	Login         string `json:"login"`
+	MailerEnabled bool   `json:"mailer_enabled"`
+	ObjectState   string `json:"object_state"`
+	Offset        int64  `json:"offset"`
+	PasswordReset bool   `json:"password_reset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -112,6 +113,7 @@ func (in *ActionUserIndexInput) SetAddress(value string) *ActionUserIndexInput {
 	in._selectedParameters["Address"] = nil
 	return in
 }
+
 // SetAdmin sets parameter Admin to value and selects it for sending
 func (in *ActionUserIndexInput) SetAdmin(value bool) *ActionUserIndexInput {
 	in.Admin = value
@@ -123,6 +125,7 @@ func (in *ActionUserIndexInput) SetAdmin(value bool) *ActionUserIndexInput {
 	in._selectedParameters["Admin"] = nil
 	return in
 }
+
 // SetEmail sets parameter Email to value and selects it for sending
 func (in *ActionUserIndexInput) SetEmail(value string) *ActionUserIndexInput {
 	in.Email = value
@@ -134,6 +137,7 @@ func (in *ActionUserIndexInput) SetEmail(value string) *ActionUserIndexInput {
 	in._selectedParameters["Email"] = nil
 	return in
 }
+
 // SetFullName sets parameter FullName to value and selects it for sending
 func (in *ActionUserIndexInput) SetFullName(value string) *ActionUserIndexInput {
 	in.FullName = value
@@ -145,6 +149,7 @@ func (in *ActionUserIndexInput) SetFullName(value string) *ActionUserIndexInput 
 	in._selectedParameters["FullName"] = nil
 	return in
 }
+
 // SetInfo sets parameter Info to value and selects it for sending
 func (in *ActionUserIndexInput) SetInfo(value string) *ActionUserIndexInput {
 	in.Info = value
@@ -156,6 +161,7 @@ func (in *ActionUserIndexInput) SetInfo(value string) *ActionUserIndexInput {
 	in._selectedParameters["Info"] = nil
 	return in
 }
+
 // SetLanguage sets parameter Language to value and selects it for sending
 func (in *ActionUserIndexInput) SetLanguage(value int64) *ActionUserIndexInput {
 	in.Language = value
@@ -167,6 +173,7 @@ func (in *ActionUserIndexInput) SetLanguage(value int64) *ActionUserIndexInput {
 	in._selectedParameters["Language"] = nil
 	return in
 }
+
 // SetLevel sets parameter Level to value and selects it for sending
 func (in *ActionUserIndexInput) SetLevel(value int64) *ActionUserIndexInput {
 	in.Level = value
@@ -178,6 +185,7 @@ func (in *ActionUserIndexInput) SetLevel(value int64) *ActionUserIndexInput {
 	in._selectedParameters["Level"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserIndexInput) SetLimit(value int64) *ActionUserIndexInput {
 	in.Limit = value
@@ -189,6 +197,7 @@ func (in *ActionUserIndexInput) SetLimit(value int64) *ActionUserIndexInput {
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetLockout sets parameter Lockout to value and selects it for sending
 func (in *ActionUserIndexInput) SetLockout(value bool) *ActionUserIndexInput {
 	in.Lockout = value
@@ -200,6 +209,7 @@ func (in *ActionUserIndexInput) SetLockout(value bool) *ActionUserIndexInput {
 	in._selectedParameters["Lockout"] = nil
 	return in
 }
+
 // SetLogin sets parameter Login to value and selects it for sending
 func (in *ActionUserIndexInput) SetLogin(value string) *ActionUserIndexInput {
 	in.Login = value
@@ -211,6 +221,7 @@ func (in *ActionUserIndexInput) SetLogin(value string) *ActionUserIndexInput {
 	in._selectedParameters["Login"] = nil
 	return in
 }
+
 // SetMailerEnabled sets parameter MailerEnabled to value and selects it for sending
 func (in *ActionUserIndexInput) SetMailerEnabled(value bool) *ActionUserIndexInput {
 	in.MailerEnabled = value
@@ -222,6 +233,7 @@ func (in *ActionUserIndexInput) SetMailerEnabled(value bool) *ActionUserIndexInp
 	in._selectedParameters["MailerEnabled"] = nil
 	return in
 }
+
 // SetObjectState sets parameter ObjectState to value and selects it for sending
 func (in *ActionUserIndexInput) SetObjectState(value string) *ActionUserIndexInput {
 	in.ObjectState = value
@@ -233,6 +245,7 @@ func (in *ActionUserIndexInput) SetObjectState(value string) *ActionUserIndexInp
 	in._selectedParameters["ObjectState"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionUserIndexInput) SetOffset(value int64) *ActionUserIndexInput {
 	in.Offset = value
@@ -244,6 +257,7 @@ func (in *ActionUserIndexInput) SetOffset(value int64) *ActionUserIndexInput {
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetPasswordReset sets parameter PasswordReset to value and selects it for sending
 func (in *ActionUserIndexInput) SetPasswordReset(value bool) *ActionUserIndexInput {
 	in.PasswordReset = value
@@ -279,28 +293,26 @@ func (in *ActionUserIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserIndexOutput is a type for action output parameters
 type ActionUserIndexOutput struct {
-	Address string `json:"address"`
-	CreatedAt string `json:"created_at"`
-	Email string `json:"email"`
-	ExpirationDate string `json:"expiration_date"`
-	FullName string `json:"full_name"`
-	Id int64 `json:"id"`
-	Info string `json:"info"`
-	Language *ActionLanguageShowOutput `json:"language"`
-	LastActivityAt string `json:"last_activity_at"`
-	Level int64 `json:"level"`
-	Lockout bool `json:"lockout"`
-	Login string `json:"login"`
-	MailerEnabled bool `json:"mailer_enabled"`
-	MonthlyPayment int64 `json:"monthly_payment"`
-	ObjectState string `json:"object_state"`
-	PaidUntil string `json:"paid_until"`
-	PasswordReset bool `json:"password_reset"`
+	Address        string                    `json:"address"`
+	CreatedAt      string                    `json:"created_at"`
+	Email          string                    `json:"email"`
+	ExpirationDate string                    `json:"expiration_date"`
+	FullName       string                    `json:"full_name"`
+	Id             int64                     `json:"id"`
+	Info           string                    `json:"info"`
+	Language       *ActionLanguageShowOutput `json:"language"`
+	LastActivityAt string                    `json:"last_activity_at"`
+	Level          int64                     `json:"level"`
+	Lockout        bool                      `json:"lockout"`
+	Login          string                    `json:"login"`
+	MailerEnabled  bool                      `json:"mailer_enabled"`
+	MonthlyPayment int64                     `json:"monthly_payment"`
+	ObjectState    string                    `json:"object_state"`
+	PaidUntil      string                    `json:"paid_until"`
+	PasswordReset  bool                      `json:"password_reset"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserIndexResponse struct {
@@ -315,12 +327,11 @@ type ActionUserIndexResponse struct {
 	Output []*ActionUserIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserIndex) Prepare() *ActionUserIndexInvocation {
 	return &ActionUserIndexInvocation{
 		Action: action,
-		Path: "/v6.0/users",
+		Path:   "/v6.0/users",
 	}
 }
 
@@ -336,7 +347,6 @@ type ActionUserIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionUserIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionUserIndexInvocation) NewInput() *ActionUserIndexInput {
@@ -359,6 +369,7 @@ func (inv *ActionUserIndexInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserIndexInvocation) NewMetaInput() *ActionUserIndexMetaGlobalInput {
@@ -398,8 +409,6 @@ func (inv *ActionUserIndexInvocation) callAsQuery() (*ActionUserIndexResponse, e
 	}
 	return resp, err
 }
-
-
 
 func (inv *ActionUserIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
@@ -461,4 +470,3 @@ func (inv *ActionUserIndexInvocation) convertMetaInputToQueryParams(ret map[stri
 		}
 	}
 }
-

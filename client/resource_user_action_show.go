@@ -19,7 +19,7 @@ func NewActionUserShow(client *Client) *ActionUserShow {
 // ActionUserShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserShowMetaGlobalInput) SetIncludes(value string) *ActionUserSh
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserShowMetaGlobalInput) SetNo(value bool) *ActionUserShowMetaGlobalInput {
 	in.No = value
@@ -70,29 +71,26 @@ func (in *ActionUserShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserShowOutput is a type for action output parameters
 type ActionUserShowOutput struct {
-	Address string `json:"address"`
-	CreatedAt string `json:"created_at"`
-	Email string `json:"email"`
-	ExpirationDate string `json:"expiration_date"`
-	FullName string `json:"full_name"`
-	Id int64 `json:"id"`
-	Info string `json:"info"`
-	Language *ActionLanguageShowOutput `json:"language"`
-	LastActivityAt string `json:"last_activity_at"`
-	Level int64 `json:"level"`
-	Lockout bool `json:"lockout"`
-	Login string `json:"login"`
-	MailerEnabled bool `json:"mailer_enabled"`
-	MonthlyPayment int64 `json:"monthly_payment"`
-	ObjectState string `json:"object_state"`
-	PaidUntil string `json:"paid_until"`
-	PasswordReset bool `json:"password_reset"`
+	Address        string                    `json:"address"`
+	CreatedAt      string                    `json:"created_at"`
+	Email          string                    `json:"email"`
+	ExpirationDate string                    `json:"expiration_date"`
+	FullName       string                    `json:"full_name"`
+	Id             int64                     `json:"id"`
+	Info           string                    `json:"info"`
+	Language       *ActionLanguageShowOutput `json:"language"`
+	LastActivityAt string                    `json:"last_activity_at"`
+	Level          int64                     `json:"level"`
+	Lockout        bool                      `json:"lockout"`
+	Login          string                    `json:"login"`
+	MailerEnabled  bool                      `json:"mailer_enabled"`
+	MonthlyPayment int64                     `json:"monthly_payment"`
+	ObjectState    string                    `json:"object_state"`
+	PaidUntil      string                    `json:"paid_until"`
+	PasswordReset  bool                      `json:"password_reset"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserShowResponse struct {
@@ -107,12 +105,11 @@ type ActionUserShowResponse struct {
 	Output *ActionUserShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserShow) Prepare() *ActionUserShowInvocation {
 	return &ActionUserShowInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}",
+		Path:   "/v6.0/users/{user_id}",
 	}
 }
 
@@ -177,9 +174,6 @@ func (inv *ActionUserShowInvocation) callAsQuery() (*ActionUserShowResponse, err
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -190,4 +184,3 @@ func (inv *ActionUserShowInvocation) convertMetaInputToQueryParams(ret map[strin
 		}
 	}
 }
-

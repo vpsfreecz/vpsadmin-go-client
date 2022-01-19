@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionExportIndex is a type for action Export#Index
 type ActionExportIndex struct {
@@ -17,9 +16,9 @@ func NewActionExportIndex(client *Client) *ActionExportIndex {
 
 // ActionExportIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionExportIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionExportIndexMetaGlobalInput) SetCount(value bool) *ActionExportIn
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionExportIndexMetaGlobalInput) SetIncludes(value string) *ActionExportIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionExportIndexMetaGlobalInput) SetIncludes(value string) *ActionExp
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionExportIndexMetaGlobalInput) SetNo(value bool) *ActionExportIndexMetaGlobalInput {
 	in.No = value
@@ -83,9 +84,9 @@ func (in *ActionExportIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionExportIndexInput is a type for action input parameters
 type ActionExportIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
-	User int64 `json:"user"`
+	User   int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -101,6 +102,7 @@ func (in *ActionExportIndexInput) SetLimit(value int64) *ActionExportIndexInput 
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionExportIndexInput) SetOffset(value int64) *ActionExportIndexInput {
 	in.Offset = value
@@ -112,6 +114,7 @@ func (in *ActionExportIndexInput) SetOffset(value int64) *ActionExportIndexInput
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionExportIndexInput) SetUser(value int64) *ActionExportIndexInput {
 	in.User = value
@@ -147,28 +150,26 @@ func (in *ActionExportIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionExportIndexOutput is a type for action output parameters
 type ActionExportIndexOutput struct {
-	AllVps bool `json:"all_vps"`
-	CreatedAt string `json:"created_at"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Enabled bool `json:"enabled"`
-	ExpirationDate string `json:"expiration_date"`
-	HostIpAddress *ActionHostIpAddressShowOutput `json:"host_ip_address"`
-	Id int64 `json:"id"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	Path string `json:"path"`
-	RootSquash bool `json:"root_squash"`
-	Rw bool `json:"rw"`
-	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	SubtreeCheck bool `json:"subtree_check"`
-	Sync bool `json:"sync"`
-	Threads int64 `json:"threads"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
+	AllVps         bool                             `json:"all_vps"`
+	CreatedAt      string                           `json:"created_at"`
+	Dataset        *ActionDatasetShowOutput         `json:"dataset"`
+	Enabled        bool                             `json:"enabled"`
+	ExpirationDate string                           `json:"expiration_date"`
+	HostIpAddress  *ActionHostIpAddressShowOutput   `json:"host_ip_address"`
+	Id             int64                            `json:"id"`
+	IpAddress      *ActionIpAddressShowOutput       `json:"ip_address"`
+	Path           string                           `json:"path"`
+	RootSquash     bool                             `json:"root_squash"`
+	Rw             bool                             `json:"rw"`
+	Snapshot       *ActionDatasetSnapshotShowOutput `json:"snapshot"`
+	SubtreeCheck   bool                             `json:"subtree_check"`
+	Sync           bool                             `json:"sync"`
+	Threads        int64                            `json:"threads"`
+	UpdatedAt      string                           `json:"updated_at"`
+	User           *ActionUserShowOutput            `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionExportIndexResponse struct {
@@ -183,12 +184,11 @@ type ActionExportIndexResponse struct {
 	Output []*ActionExportIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionExportIndex) Prepare() *ActionExportIndexInvocation {
 	return &ActionExportIndexInvocation{
 		Action: action,
-		Path: "/v6.0/exports",
+		Path:   "/v6.0/exports",
 	}
 }
 
@@ -204,7 +204,6 @@ type ActionExportIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionExportIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionExportIndexInvocation) NewInput() *ActionExportIndexInput {
@@ -227,6 +226,7 @@ func (inv *ActionExportIndexInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionExportIndexInvocation) NewMetaInput() *ActionExportIndexMetaGlobalInput {
@@ -267,8 +267,6 @@ func (inv *ActionExportIndexInvocation) callAsQuery() (*ActionExportIndexRespons
 	return resp, err
 }
 
-
-
 func (inv *ActionExportIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -296,4 +294,3 @@ func (inv *ActionExportIndexInvocation) convertMetaInputToQueryParams(ret map[st
 		}
 	}
 }
-

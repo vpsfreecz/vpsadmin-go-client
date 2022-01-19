@@ -22,10 +22,10 @@ func NewAuthTokenResourceToken(client *Client) *AuthTokenResourceToken {
 	actionTotp := NewAuthTokenActionTokenTotp(client)
 
 	return &AuthTokenResourceToken{
-		Client: client,
-		Renew: actionRenew,
+		Client:  client,
+		Renew:   actionRenew,
 		Request: actionRequest,
-		Revoke: actionRevoke,
-		Totp: actionTotp,
+		Revoke:  actionRevoke,
+		Totp:    actionTotp,
 	}
 }

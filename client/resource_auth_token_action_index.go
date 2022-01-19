@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionAuthTokenIndex is a type for action Auth_token#Index
 type ActionAuthTokenIndex struct {
@@ -17,8 +16,8 @@ func NewActionAuthTokenIndex(client *Client) *ActionAuthTokenIndex {
 
 // ActionAuthTokenIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionAuthTokenIndexMetaGlobalInput struct {
-	No bool `json:"no"`
-	Count bool `json:"count"`
+	No       bool   `json:"no"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -35,6 +34,7 @@ func (in *ActionAuthTokenIndexMetaGlobalInput) SetNo(value bool) *ActionAuthToke
 	in._selectedParameters["No"] = nil
 	return in
 }
+
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionAuthTokenIndexMetaGlobalInput) SetCount(value bool) *ActionAuthTokenIndexMetaGlobalInput {
 	in.Count = value
@@ -46,6 +46,7 @@ func (in *ActionAuthTokenIndexMetaGlobalInput) SetCount(value bool) *ActionAuthT
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionAuthTokenIndexMetaGlobalInput) SetIncludes(value string) *ActionAuthTokenIndexMetaGlobalInput {
 	in.Includes = value
@@ -84,8 +85,8 @@ func (in *ActionAuthTokenIndexMetaGlobalInput) AnySelected() bool {
 // ActionAuthTokenIndexInput is a type for action input parameters
 type ActionAuthTokenIndexInput struct {
 	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
-	User int64 `json:"user"`
+	Limit  int64 `json:"limit"`
+	User   int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -101,6 +102,7 @@ func (in *ActionAuthTokenIndexInput) SetOffset(value int64) *ActionAuthTokenInde
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionAuthTokenIndexInput) SetLimit(value int64) *ActionAuthTokenIndexInput {
 	in.Limit = value
@@ -112,6 +114,7 @@ func (in *ActionAuthTokenIndexInput) SetLimit(value int64) *ActionAuthTokenIndex
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionAuthTokenIndexInput) SetUser(value int64) *ActionAuthTokenIndexInput {
 	in.User = value
@@ -147,20 +150,18 @@ func (in *ActionAuthTokenIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionAuthTokenIndexOutput is a type for action output parameters
 type ActionAuthTokenIndexOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	Token string `json:"token"`
-	ValidTo string `json:"valid_to"`
-	Label string `json:"label"`
-	Lifetime string `json:"lifetime"`
-	Interval int64 `json:"interval"`
-	UseCount int64 `json:"use_count"`
-	CreatedAt string `json:"created_at"`
+	Id        int64                 `json:"id"`
+	User      *ActionUserShowOutput `json:"user"`
+	Token     string                `json:"token"`
+	ValidTo   string                `json:"valid_to"`
+	Label     string                `json:"label"`
+	Lifetime  string                `json:"lifetime"`
+	Interval  int64                 `json:"interval"`
+	UseCount  int64                 `json:"use_count"`
+	CreatedAt string                `json:"created_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionAuthTokenIndexResponse struct {
@@ -175,12 +176,11 @@ type ActionAuthTokenIndexResponse struct {
 	Output []*ActionAuthTokenIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionAuthTokenIndex) Prepare() *ActionAuthTokenIndexInvocation {
 	return &ActionAuthTokenIndexInvocation{
 		Action: action,
-		Path: "/v5.0/auth_tokens",
+		Path:   "/v5.0/auth_tokens",
 	}
 }
 
@@ -196,7 +196,6 @@ type ActionAuthTokenIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionAuthTokenIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionAuthTokenIndexInvocation) NewInput() *ActionAuthTokenIndexInput {
@@ -219,6 +218,7 @@ func (inv *ActionAuthTokenIndexInvocation) IsParameterSelected(param string) boo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionAuthTokenIndexInvocation) NewMetaInput() *ActionAuthTokenIndexMetaGlobalInput {
@@ -259,8 +259,6 @@ func (inv *ActionAuthTokenIndexInvocation) callAsQuery() (*ActionAuthTokenIndexR
 	return resp, err
 }
 
-
-
 func (inv *ActionAuthTokenIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Offset") {
@@ -288,4 +286,3 @@ func (inv *ActionAuthTokenIndexInvocation) convertMetaInputToQueryParams(ret map
 		}
 	}
 }
-

@@ -13,7 +13,7 @@ func NewResourceApiServer(client *Client) *ResourceApiServer {
 	actionUnlockTransactionSigningKey := NewActionApiServerUnlockTransactionSigningKey(client)
 
 	return &ResourceApiServer{
-		Client: client,
+		Client:                      client,
 		UnlockTransactionSigningKey: actionUnlockTransactionSigningKey,
 	}
 }

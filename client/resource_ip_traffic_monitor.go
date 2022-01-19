@@ -21,9 +21,9 @@ func NewResourceIpTrafficMonitor(client *Client) *ResourceIpTrafficMonitor {
 
 	return &ResourceIpTrafficMonitor{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

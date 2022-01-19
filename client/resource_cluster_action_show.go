@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionClusterShow is a type for action Cluster#Show
 type ActionClusterShow struct {
@@ -57,14 +56,11 @@ func (in *ActionClusterShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionClusterShowOutput is a type for action output parameters
 type ActionClusterShowOutput struct {
-	MaintenanceLock bool `json:"maintenance_lock"`
+	MaintenanceLock       bool   `json:"maintenance_lock"`
 	MaintenanceLockReason string `json:"maintenance_lock_reason"`
 }
-
 
 // Type for action response, including envelope
 type ActionClusterShowResponse struct {
@@ -88,7 +84,7 @@ func (action *ActionClusterShow) Call() (*ActionClusterShowResponse, error) {
 func (action *ActionClusterShow) Prepare() *ActionClusterShowInvocation {
 	return &ActionClusterShowInvocation{
 		Action: action,
-		Path: "/v6.0/cluster",
+		Path:   "/v6.0/cluster",
 	}
 }
 
@@ -102,7 +98,6 @@ type ActionClusterShowInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionClusterShowMetaGlobalInput
 }
-
 
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
@@ -143,9 +138,6 @@ func (inv *ActionClusterShowInvocation) callAsQuery() (*ActionClusterShowRespons
 	return resp, err
 }
 
-
-
-
 func (inv *ActionClusterShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("No") {
@@ -153,4 +145,3 @@ func (inv *ActionClusterShowInvocation) convertMetaInputToQueryParams(ret map[st
 		}
 	}
 }
-

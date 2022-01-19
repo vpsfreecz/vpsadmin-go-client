@@ -19,7 +19,7 @@ func NewActionOutageHandlerCreate(client *Client) *ActionOutageHandlerCreate {
 // ActionOutageHandlerCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageHandlerCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOutageHandlerCreateMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOutageHandlerCreateMetaGlobalInput) SetNo(value bool) *ActionOutageHandlerCreateMetaGlobalInput {
 	in.No = value
@@ -73,8 +74,8 @@ func (in *ActionOutageHandlerCreateMetaGlobalInput) AnySelected() bool {
 // ActionOutageHandlerCreateInput is a type for action input parameters
 type ActionOutageHandlerCreateInput struct {
 	FullName string `json:"full_name"`
-	Note string `json:"note"`
-	User int64 `json:"user"`
+	Note     string `json:"note"`
+	User     int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -90,6 +91,7 @@ func (in *ActionOutageHandlerCreateInput) SetFullName(value string) *ActionOutag
 	in._selectedParameters["FullName"] = nil
 	return in
 }
+
 // SetNote sets parameter Note to value and selects it for sending
 func (in *ActionOutageHandlerCreateInput) SetNote(value string) *ActionOutageHandlerCreateInput {
 	in.Note = value
@@ -101,6 +103,7 @@ func (in *ActionOutageHandlerCreateInput) SetNote(value string) *ActionOutageHan
 	in._selectedParameters["Note"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionOutageHandlerCreateInput) SetUser(value int64) *ActionOutageHandlerCreateInput {
 	in.User = value
@@ -139,17 +142,16 @@ func (in *ActionOutageHandlerCreateInput) AnySelected() bool {
 // ActionOutageHandlerCreateRequest is a type for the entire action request
 type ActionOutageHandlerCreateRequest struct {
 	Handler map[string]interface{} `json:"handler"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta    map[string]interface{} `json:"_meta"`
 }
 
 // ActionOutageHandlerCreateOutput is a type for action output parameters
 type ActionOutageHandlerCreateOutput struct {
-	FullName string `json:"full_name"`
-	Id int64 `json:"id"`
-	Note string `json:"note"`
-	User *ActionUserShowOutput `json:"user"`
+	FullName string                `json:"full_name"`
+	Id       int64                 `json:"id"`
+	Note     string                `json:"note"`
+	User     *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionOutageHandlerCreateResponse struct {
@@ -164,12 +166,11 @@ type ActionOutageHandlerCreateResponse struct {
 	Output *ActionOutageHandlerCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOutageHandlerCreate) Prepare() *ActionOutageHandlerCreateInvocation {
 	return &ActionOutageHandlerCreateInvocation{
 		Action: action,
-		Path: "/v6.0/outages/{outage_id}/handlers",
+		Path:   "/v6.0/outages/{outage_id}/handlers",
 	}
 }
 
@@ -218,6 +219,7 @@ func (inv *ActionOutageHandlerCreateInvocation) IsParameterSelected(param string
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOutageHandlerCreateInvocation) NewMetaInput() *ActionOutageHandlerCreateMetaGlobalInput {
@@ -246,7 +248,6 @@ func (inv *ActionOutageHandlerCreateInvocation) Call() (*ActionOutageHandlerCrea
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionOutageHandlerCreateInvocation) callAsBody() (*ActionOutageHandlerCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionOutageHandlerCreateResponse{Action: inv.Action}
@@ -257,13 +258,10 @@ func (inv *ActionOutageHandlerCreateInvocation) callAsBody() (*ActionOutageHandl
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOutageHandlerCreateInvocation) makeAllInputParams() *ActionOutageHandlerCreateRequest {
 	return &ActionOutageHandlerCreateRequest{
 		Handler: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:    inv.makeMetaInputParams(),
 	}
 }
 

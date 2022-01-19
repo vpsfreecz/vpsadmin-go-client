@@ -19,7 +19,7 @@ func NewActionDnsResolverShow(client *Client) *ActionDnsResolverShow {
 // ActionDnsResolverShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsResolverShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionDnsResolverShowMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDnsResolverShowMetaGlobalInput) SetNo(value bool) *ActionDnsResolverShowMetaGlobalInput {
 	in.No = value
@@ -70,17 +71,14 @@ func (in *ActionDnsResolverShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionDnsResolverShowOutput is a type for action output parameters
 type ActionDnsResolverShowOutput struct {
-	Id int64 `json:"id"`
-	IpAddr string `json:"ip_addr"`
-	IsUniversal bool `json:"is_universal"`
-	Label string `json:"label"`
-	Location *ActionLocationShowOutput `json:"location"`
+	Id          int64                     `json:"id"`
+	IpAddr      string                    `json:"ip_addr"`
+	IsUniversal bool                      `json:"is_universal"`
+	Label       string                    `json:"label"`
+	Location    *ActionLocationShowOutput `json:"location"`
 }
-
 
 // Type for action response, including envelope
 type ActionDnsResolverShowResponse struct {
@@ -95,12 +93,11 @@ type ActionDnsResolverShowResponse struct {
 	Output *ActionDnsResolverShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDnsResolverShow) Prepare() *ActionDnsResolverShowInvocation {
 	return &ActionDnsResolverShowInvocation{
 		Action: action,
-		Path: "/v6.0/dns_resolvers/{dns_resolver_id}",
+		Path:   "/v6.0/dns_resolvers/{dns_resolver_id}",
 	}
 }
 
@@ -165,9 +162,6 @@ func (inv *ActionDnsResolverShowInvocation) callAsQuery() (*ActionDnsResolverSho
 	return resp, err
 }
 
-
-
-
 func (inv *ActionDnsResolverShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -178,4 +172,3 @@ func (inv *ActionDnsResolverShowInvocation) convertMetaInputToQueryParams(ret ma
 		}
 	}
 }
-

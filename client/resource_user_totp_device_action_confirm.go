@@ -103,14 +103,13 @@ func (in *ActionUserTotpDeviceConfirmInput) AnySelected() bool {
 // ActionUserTotpDeviceConfirmRequest is a type for the entire action request
 type ActionUserTotpDeviceConfirmRequest struct {
 	TotpDevice map[string]interface{} `json:"totp_device"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta       map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserTotpDeviceConfirmOutput is a type for action output parameters
 type ActionUserTotpDeviceConfirmOutput struct {
 	RecoveryCode string `json:"recovery_code"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserTotpDeviceConfirmResponse struct {
@@ -125,12 +124,11 @@ type ActionUserTotpDeviceConfirmResponse struct {
 	Output *ActionUserTotpDeviceConfirmOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserTotpDeviceConfirm) Prepare() *ActionUserTotpDeviceConfirmInvocation {
 	return &ActionUserTotpDeviceConfirmInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/totp_devices/{totp_device_id}/confirm",
+		Path:   "/v6.0/users/{user_id}/totp_devices/{totp_device_id}/confirm",
 	}
 }
 
@@ -179,6 +177,7 @@ func (inv *ActionUserTotpDeviceConfirmInvocation) IsParameterSelected(param stri
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserTotpDeviceConfirmInvocation) NewMetaInput() *ActionUserTotpDeviceConfirmMetaGlobalInput {
@@ -207,7 +206,6 @@ func (inv *ActionUserTotpDeviceConfirmInvocation) Call() (*ActionUserTotpDeviceC
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserTotpDeviceConfirmInvocation) callAsBody() (*ActionUserTotpDeviceConfirmResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserTotpDeviceConfirmResponse{Action: inv.Action}
@@ -218,13 +216,10 @@ func (inv *ActionUserTotpDeviceConfirmInvocation) callAsBody() (*ActionUserTotpD
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserTotpDeviceConfirmInvocation) makeAllInputParams() *ActionUserTotpDeviceConfirmRequest {
 	return &ActionUserTotpDeviceConfirmRequest{
 		TotpDevice: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:       inv.makeMetaInputParams(),
 	}
 }
 

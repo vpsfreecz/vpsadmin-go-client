@@ -27,10 +27,10 @@ func NewResourceMigrationPlanVpsMigration(client *Client) *ResourceMigrationPlan
 	return &ResourceMigrationPlanVpsMigration{
 		Client: client,
 		Create: actionCreate,
-		New: actionCreate,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		New:    actionCreate,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

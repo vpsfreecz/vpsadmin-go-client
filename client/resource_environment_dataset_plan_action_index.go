@@ -18,9 +18,9 @@ func NewActionEnvironmentDatasetPlanIndex(client *Client) *ActionEnvironmentData
 
 // ActionEnvironmentDatasetPlanIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionEnvironmentDatasetPlanIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionEnvironmentDatasetPlanIndexMetaGlobalInput) SetCount(value bool)
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionEnvironmentDatasetPlanIndexMetaGlobalInput) SetIncludes(value string) *ActionEnvironmentDatasetPlanIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionEnvironmentDatasetPlanIndexMetaGlobalInput) SetIncludes(value st
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionEnvironmentDatasetPlanIndexMetaGlobalInput) SetNo(value bool) *ActionEnvironmentDatasetPlanIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionEnvironmentDatasetPlanIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionEnvironmentDatasetPlanIndexInput is a type for action input parameters
 type ActionEnvironmentDatasetPlanIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionEnvironmentDatasetPlanIndexInput) SetLimit(value int64) *ActionE
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionEnvironmentDatasetPlanIndexInput) SetOffset(value int64) *ActionEnvironmentDatasetPlanIndexInput {
 	in.Offset = value
@@ -136,16 +139,14 @@ func (in *ActionEnvironmentDatasetPlanIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionEnvironmentDatasetPlanIndexOutput is a type for action output parameters
 type ActionEnvironmentDatasetPlanIndexOutput struct {
 	DatasetPlan *ActionDatasetPlanShowOutput `json:"dataset_plan"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	UserAdd bool `json:"user_add"`
-	UserRemove bool `json:"user_remove"`
+	Id          int64                        `json:"id"`
+	Label       string                       `json:"label"`
+	UserAdd     bool                         `json:"user_add"`
+	UserRemove  bool                         `json:"user_remove"`
 }
-
 
 // Type for action response, including envelope
 type ActionEnvironmentDatasetPlanIndexResponse struct {
@@ -160,12 +161,11 @@ type ActionEnvironmentDatasetPlanIndexResponse struct {
 	Output []*ActionEnvironmentDatasetPlanIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionEnvironmentDatasetPlanIndex) Prepare() *ActionEnvironmentDatasetPlanIndexInvocation {
 	return &ActionEnvironmentDatasetPlanIndexInvocation{
 		Action: action,
-		Path: "/v6.0/environments/{environment_id}/dataset_plans",
+		Path:   "/v6.0/environments/{environment_id}/dataset_plans",
 	}
 }
 
@@ -214,6 +214,7 @@ func (inv *ActionEnvironmentDatasetPlanIndexInvocation) IsParameterSelected(para
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionEnvironmentDatasetPlanIndexInvocation) NewMetaInput() *ActionEnvironmentDatasetPlanIndexMetaGlobalInput {
@@ -254,8 +255,6 @@ func (inv *ActionEnvironmentDatasetPlanIndexInvocation) callAsQuery() (*ActionEn
 	return resp, err
 }
 
-
-
 func (inv *ActionEnvironmentDatasetPlanIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -280,4 +279,3 @@ func (inv *ActionEnvironmentDatasetPlanIndexInvocation) convertMetaInputToQueryP
 		}
 	}
 }
-

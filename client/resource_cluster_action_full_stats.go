@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionClusterFullStats is a type for action Cluster#Full_stats
 type ActionClusterFullStats struct {
@@ -57,25 +56,22 @@ func (in *ActionClusterFullStatsMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionClusterFullStatsOutput is a type for action output parameters
 type ActionClusterFullStatsOutput struct {
-	Ipv4Count int64 `json:"ipv4_count"`
-	Ipv4Used int64 `json:"ipv4_used"`
-	NodeCount int64 `json:"node_count"`
-	NodesOnline int64 `json:"nodes_online"`
-	UserActive int64 `json:"user_active"`
-	UserCount int64 `json:"user_count"`
-	UserDeleted int64 `json:"user_deleted"`
+	Ipv4Count     int64 `json:"ipv4_count"`
+	Ipv4Used      int64 `json:"ipv4_used"`
+	NodeCount     int64 `json:"node_count"`
+	NodesOnline   int64 `json:"nodes_online"`
+	UserActive    int64 `json:"user_active"`
+	UserCount     int64 `json:"user_count"`
+	UserDeleted   int64 `json:"user_deleted"`
 	UserSuspended int64 `json:"user_suspended"`
-	VpsCount int64 `json:"vps_count"`
-	VpsDeleted int64 `json:"vps_deleted"`
-	VpsRunning int64 `json:"vps_running"`
-	VpsStopped int64 `json:"vps_stopped"`
-	VpsSuspended int64 `json:"vps_suspended"`
+	VpsCount      int64 `json:"vps_count"`
+	VpsDeleted    int64 `json:"vps_deleted"`
+	VpsRunning    int64 `json:"vps_running"`
+	VpsStopped    int64 `json:"vps_stopped"`
+	VpsSuspended  int64 `json:"vps_suspended"`
 }
-
 
 // Type for action response, including envelope
 type ActionClusterFullStatsResponse struct {
@@ -99,7 +95,7 @@ func (action *ActionClusterFullStats) Call() (*ActionClusterFullStatsResponse, e
 func (action *ActionClusterFullStats) Prepare() *ActionClusterFullStatsInvocation {
 	return &ActionClusterFullStatsInvocation{
 		Action: action,
-		Path: "/v6.0/cluster/full_stats",
+		Path:   "/v6.0/cluster/full_stats",
 	}
 }
 
@@ -113,7 +109,6 @@ type ActionClusterFullStatsInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionClusterFullStatsMetaGlobalInput
 }
-
 
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
@@ -154,9 +149,6 @@ func (inv *ActionClusterFullStatsInvocation) callAsQuery() (*ActionClusterFullSt
 	return resp, err
 }
 
-
-
-
 func (inv *ActionClusterFullStatsInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("No") {
@@ -164,4 +156,3 @@ func (inv *ActionClusterFullStatsInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

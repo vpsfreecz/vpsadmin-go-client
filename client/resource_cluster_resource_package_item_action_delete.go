@@ -19,7 +19,7 @@ func NewActionClusterResourcePackageItemDelete(client *Client) *ActionClusterRes
 // ActionClusterResourcePackageItemDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourcePackageItemDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionClusterResourcePackageItemDeleteMetaGlobalInput) SetIncludes(val
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionClusterResourcePackageItemDeleteMetaGlobalInput) SetNo(value bool) *ActionClusterResourcePackageItemDeleteMetaGlobalInput {
 	in.No = value
@@ -70,13 +71,10 @@ func (in *ActionClusterResourcePackageItemDeleteMetaGlobalInput) AnySelected() b
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionClusterResourcePackageItemDeleteRequest is a type for the entire action request
 type ActionClusterResourcePackageItemDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionClusterResourcePackageItemDeleteResponse struct {
@@ -84,12 +82,11 @@ type ActionClusterResourcePackageItemDeleteResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionClusterResourcePackageItemDelete) Prepare() *ActionClusterResourcePackageItemDeleteInvocation {
 	return &ActionClusterResourcePackageItemDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/cluster_resource_packages/{cluster_resource_package_id}/items/{item_id}",
+		Path:   "/v6.0/cluster_resource_packages/{cluster_resource_package_id}/items/{item_id}",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionClusterResourcePackageItemDeleteInvocation) Call() (*ActionClus
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionClusterResourcePackageItemDeleteInvocation) callAsBody() (*ActionClusterResourcePackageItemDeleteResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionClusterResourcePackageItemDeleteResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionClusterResourcePackageItemDeleteInvocation) callAsBody() (*Acti
 	return resp, err
 }
 
-
-
-
 func (inv *ActionClusterResourcePackageItemDeleteInvocation) makeAllInputParams() *ActionClusterResourcePackageItemDeleteRequest {
 	return &ActionClusterResourcePackageItemDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionClusterResourcePackageItemDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

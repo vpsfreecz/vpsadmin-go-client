@@ -19,7 +19,7 @@ func NewActionUserAccountShow(client *Client) *ActionUserAccountShow {
 // ActionUserAccountShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserAccountShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserAccountShowMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserAccountShowMetaGlobalInput) SetNo(value bool) *ActionUserAccountShowMetaGlobalInput {
 	in.No = value
@@ -70,15 +71,12 @@ func (in *ActionUserAccountShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserAccountShowOutput is a type for action output parameters
 type ActionUserAccountShowOutput struct {
-	Id int64 `json:"id"`
-	MonthlyPayment int64 `json:"monthly_payment"`
-	PaidUntil string `json:"paid_until"`
+	Id             int64  `json:"id"`
+	MonthlyPayment int64  `json:"monthly_payment"`
+	PaidUntil      string `json:"paid_until"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserAccountShowResponse struct {
@@ -93,12 +91,11 @@ type ActionUserAccountShowResponse struct {
 	Output *ActionUserAccountShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserAccountShow) Prepare() *ActionUserAccountShowInvocation {
 	return &ActionUserAccountShowInvocation{
 		Action: action,
-		Path: "/v6.0/user_accounts/{user_account_id}",
+		Path:   "/v6.0/user_accounts/{user_account_id}",
 	}
 }
 
@@ -163,9 +160,6 @@ func (inv *ActionUserAccountShowInvocation) callAsQuery() (*ActionUserAccountSho
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserAccountShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -176,4 +170,3 @@ func (inv *ActionUserAccountShowInvocation) convertMetaInputToQueryParams(ret ma
 		}
 	}
 }
-

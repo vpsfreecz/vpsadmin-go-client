@@ -19,7 +19,7 @@ func NewActionVpsMigrate(client *Client) *ActionVpsMigrate {
 // ActionVpsMigrateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMigrateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsMigrateMetaGlobalInput) SetIncludes(value string) *ActionVpsM
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsMigrateMetaGlobalInput) SetNo(value bool) *ActionVpsMigrateMetaGlobalInput {
 	in.No = value
@@ -72,16 +73,16 @@ func (in *ActionVpsMigrateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMigrateInput is a type for action input parameters
 type ActionVpsMigrateInput struct {
-	CleanupData bool `json:"cleanup_data"`
-	MaintenanceWindow bool `json:"maintenance_window"`
-	NoStart bool `json:"no_start"`
-	Node int64 `json:"node"`
-	Reason string `json:"reason"`
-	ReplaceIpAddresses bool `json:"replace_ip_addresses"`
-	SendMail bool `json:"send_mail"`
-	SkipStart bool `json:"skip_start"`
-	Swap string `json:"swap"`
-	TransferIpAddresses bool `json:"transfer_ip_addresses"`
+	CleanupData         bool   `json:"cleanup_data"`
+	MaintenanceWindow   bool   `json:"maintenance_window"`
+	NoStart             bool   `json:"no_start"`
+	Node                int64  `json:"node"`
+	Reason              string `json:"reason"`
+	ReplaceIpAddresses  bool   `json:"replace_ip_addresses"`
+	SendMail            bool   `json:"send_mail"`
+	SkipStart           bool   `json:"skip_start"`
+	Swap                string `json:"swap"`
+	TransferIpAddresses bool   `json:"transfer_ip_addresses"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -97,6 +98,7 @@ func (in *ActionVpsMigrateInput) SetCleanupData(value bool) *ActionVpsMigrateInp
 	in._selectedParameters["CleanupData"] = nil
 	return in
 }
+
 // SetMaintenanceWindow sets parameter MaintenanceWindow to value and selects it for sending
 func (in *ActionVpsMigrateInput) SetMaintenanceWindow(value bool) *ActionVpsMigrateInput {
 	in.MaintenanceWindow = value
@@ -108,6 +110,7 @@ func (in *ActionVpsMigrateInput) SetMaintenanceWindow(value bool) *ActionVpsMigr
 	in._selectedParameters["MaintenanceWindow"] = nil
 	return in
 }
+
 // SetNoStart sets parameter NoStart to value and selects it for sending
 func (in *ActionVpsMigrateInput) SetNoStart(value bool) *ActionVpsMigrateInput {
 	in.NoStart = value
@@ -119,6 +122,7 @@ func (in *ActionVpsMigrateInput) SetNoStart(value bool) *ActionVpsMigrateInput {
 	in._selectedParameters["NoStart"] = nil
 	return in
 }
+
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionVpsMigrateInput) SetNode(value int64) *ActionVpsMigrateInput {
 	in.Node = value
@@ -130,6 +134,7 @@ func (in *ActionVpsMigrateInput) SetNode(value int64) *ActionVpsMigrateInput {
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetReason sets parameter Reason to value and selects it for sending
 func (in *ActionVpsMigrateInput) SetReason(value string) *ActionVpsMigrateInput {
 	in.Reason = value
@@ -141,6 +146,7 @@ func (in *ActionVpsMigrateInput) SetReason(value string) *ActionVpsMigrateInput 
 	in._selectedParameters["Reason"] = nil
 	return in
 }
+
 // SetReplaceIpAddresses sets parameter ReplaceIpAddresses to value and selects it for sending
 func (in *ActionVpsMigrateInput) SetReplaceIpAddresses(value bool) *ActionVpsMigrateInput {
 	in.ReplaceIpAddresses = value
@@ -152,6 +158,7 @@ func (in *ActionVpsMigrateInput) SetReplaceIpAddresses(value bool) *ActionVpsMig
 	in._selectedParameters["ReplaceIpAddresses"] = nil
 	return in
 }
+
 // SetSendMail sets parameter SendMail to value and selects it for sending
 func (in *ActionVpsMigrateInput) SetSendMail(value bool) *ActionVpsMigrateInput {
 	in.SendMail = value
@@ -163,6 +170,7 @@ func (in *ActionVpsMigrateInput) SetSendMail(value bool) *ActionVpsMigrateInput 
 	in._selectedParameters["SendMail"] = nil
 	return in
 }
+
 // SetSkipStart sets parameter SkipStart to value and selects it for sending
 func (in *ActionVpsMigrateInput) SetSkipStart(value bool) *ActionVpsMigrateInput {
 	in.SkipStart = value
@@ -174,6 +182,7 @@ func (in *ActionVpsMigrateInput) SetSkipStart(value bool) *ActionVpsMigrateInput
 	in._selectedParameters["SkipStart"] = nil
 	return in
 }
+
 // SetSwap sets parameter Swap to value and selects it for sending
 func (in *ActionVpsMigrateInput) SetSwap(value string) *ActionVpsMigrateInput {
 	in.Swap = value
@@ -185,6 +194,7 @@ func (in *ActionVpsMigrateInput) SetSwap(value string) *ActionVpsMigrateInput {
 	in._selectedParameters["Swap"] = nil
 	return in
 }
+
 // SetTransferIpAddresses sets parameter TransferIpAddresses to value and selects it for sending
 func (in *ActionVpsMigrateInput) SetTransferIpAddresses(value bool) *ActionVpsMigrateInput {
 	in.TransferIpAddresses = value
@@ -222,10 +232,9 @@ func (in *ActionVpsMigrateInput) AnySelected() bool {
 
 // ActionVpsMigrateRequest is a type for the entire action request
 type ActionVpsMigrateRequest struct {
-	Vps map[string]interface{} `json:"vps"`
+	Vps  map[string]interface{} `json:"vps"`
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionVpsMigrateMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsMigrateMetaGlobalOutput struct {
@@ -243,12 +252,11 @@ type ActionVpsMigrateResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsMigrate) Prepare() *ActionVpsMigrateInvocation {
 	return &ActionVpsMigrateInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/migrate",
+		Path:   "/v6.0/vpses/{vps_id}/migrate",
 	}
 }
 
@@ -297,6 +305,7 @@ func (inv *ActionVpsMigrateInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsMigrateInvocation) NewMetaInput() *ActionVpsMigrateMetaGlobalInput {
@@ -324,7 +333,6 @@ func (inv *ActionVpsMigrateInvocation) IsMetaParameterSelected(param string) boo
 func (inv *ActionVpsMigrateInvocation) Call() (*ActionVpsMigrateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsMigrateInvocation) callAsBody() (*ActionVpsMigrateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -382,11 +390,11 @@ func (resp *ActionVpsMigrateResponse) WatchOperation(timeout float64, updateIn f
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -409,11 +417,9 @@ func (resp *ActionVpsMigrateResponse) CancelOperation() (*ActionActionStateCance
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsMigrateInvocation) makeAllInputParams() *ActionVpsMigrateRequest {
 	return &ActionVpsMigrateRequest{
-		Vps: inv.makeInputParams(),
+		Vps:  inv.makeInputParams(),
 		Meta: inv.makeMetaInputParams(),
 	}
 }

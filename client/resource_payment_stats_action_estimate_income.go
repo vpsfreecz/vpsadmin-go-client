@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionPaymentStatsEstimateIncome is a type for action Payment_stats#Estimate_income
 type ActionPaymentStatsEstimateIncome struct {
@@ -59,10 +58,10 @@ func (in *ActionPaymentStatsEstimateIncomeMetaGlobalInput) AnySelected() bool {
 
 // ActionPaymentStatsEstimateIncomeInput is a type for action input parameters
 type ActionPaymentStatsEstimateIncomeInput struct {
-	Duration int64 `json:"duration"`
-	Month int64 `json:"month"`
-	Select string `json:"select"`
-	Year int64 `json:"year"`
+	Duration int64  `json:"duration"`
+	Month    int64  `json:"month"`
+	Select   string `json:"select"`
+	Year     int64  `json:"year"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -78,6 +77,7 @@ func (in *ActionPaymentStatsEstimateIncomeInput) SetDuration(value int64) *Actio
 	in._selectedParameters["Duration"] = nil
 	return in
 }
+
 // SetMonth sets parameter Month to value and selects it for sending
 func (in *ActionPaymentStatsEstimateIncomeInput) SetMonth(value int64) *ActionPaymentStatsEstimateIncomeInput {
 	in.Month = value
@@ -89,6 +89,7 @@ func (in *ActionPaymentStatsEstimateIncomeInput) SetMonth(value int64) *ActionPa
 	in._selectedParameters["Month"] = nil
 	return in
 }
+
 // SetSelect sets parameter Select to value and selects it for sending
 func (in *ActionPaymentStatsEstimateIncomeInput) SetSelect(value string) *ActionPaymentStatsEstimateIncomeInput {
 	in.Select = value
@@ -100,6 +101,7 @@ func (in *ActionPaymentStatsEstimateIncomeInput) SetSelect(value string) *Action
 	in._selectedParameters["Select"] = nil
 	return in
 }
+
 // SetYear sets parameter Year to value and selects it for sending
 func (in *ActionPaymentStatsEstimateIncomeInput) SetYear(value int64) *ActionPaymentStatsEstimateIncomeInput {
 	in.Year = value
@@ -135,13 +137,11 @@ func (in *ActionPaymentStatsEstimateIncomeInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionPaymentStatsEstimateIncomeOutput is a type for action output parameters
 type ActionPaymentStatsEstimateIncomeOutput struct {
 	EstimatedIncome int64 `json:"estimated_income"`
-	UserCount int64 `json:"user_count"`
+	UserCount       int64 `json:"user_count"`
 }
-
 
 // Type for action response, including envelope
 type ActionPaymentStatsEstimateIncomeResponse struct {
@@ -156,12 +156,11 @@ type ActionPaymentStatsEstimateIncomeResponse struct {
 	Output *ActionPaymentStatsEstimateIncomeOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionPaymentStatsEstimateIncome) Prepare() *ActionPaymentStatsEstimateIncomeInvocation {
 	return &ActionPaymentStatsEstimateIncomeInvocation{
 		Action: action,
-		Path: "/v6.0/payment_stat/estimate_income",
+		Path:   "/v6.0/payment_stat/estimate_income",
 	}
 }
 
@@ -177,7 +176,6 @@ type ActionPaymentStatsEstimateIncomeInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionPaymentStatsEstimateIncomeMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionPaymentStatsEstimateIncomeInvocation) NewInput() *ActionPaymentStatsEstimateIncomeInput {
@@ -200,6 +198,7 @@ func (inv *ActionPaymentStatsEstimateIncomeInvocation) IsParameterSelected(param
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionPaymentStatsEstimateIncomeInvocation) NewMetaInput() *ActionPaymentStatsEstimateIncomeMetaGlobalInput {
@@ -240,8 +239,6 @@ func (inv *ActionPaymentStatsEstimateIncomeInvocation) callAsQuery() (*ActionPay
 	return resp, err
 }
 
-
-
 func (inv *ActionPaymentStatsEstimateIncomeInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Duration") {
@@ -266,4 +263,3 @@ func (inv *ActionPaymentStatsEstimateIncomeInvocation) convertMetaInputToQueryPa
 		}
 	}
 }
-

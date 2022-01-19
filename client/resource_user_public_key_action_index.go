@@ -18,9 +18,9 @@ func NewActionUserPublicKeyIndex(client *Client) *ActionUserPublicKeyIndex {
 
 // ActionUserPublicKeyIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPublicKeyIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionUserPublicKeyIndexMetaGlobalInput) SetCount(value bool) *ActionU
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserPublicKeyIndexMetaGlobalInput) SetIncludes(value string) *ActionUserPublicKeyIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionUserPublicKeyIndexMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserPublicKeyIndexMetaGlobalInput) SetNo(value bool) *ActionUserPublicKeyIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionUserPublicKeyIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserPublicKeyIndexInput is a type for action input parameters
 type ActionUserPublicKeyIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionUserPublicKeyIndexInput) SetLimit(value int64) *ActionUserPublic
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionUserPublicKeyIndexInput) SetOffset(value int64) *ActionUserPublicKeyIndexInput {
 	in.Offset = value
@@ -136,19 +139,17 @@ func (in *ActionUserPublicKeyIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserPublicKeyIndexOutput is a type for action output parameters
 type ActionUserPublicKeyIndexOutput struct {
-	AutoAdd bool `json:"auto_add"`
-	Comment string `json:"comment"`
-	CreatedAt string `json:"created_at"`
+	AutoAdd     bool   `json:"auto_add"`
+	Comment     string `json:"comment"`
+	CreatedAt   string `json:"created_at"`
 	Fingerprint string `json:"fingerprint"`
-	Id int64 `json:"id"`
-	Key string `json:"key"`
-	Label string `json:"label"`
-	UpdatedAt string `json:"updated_at"`
+	Id          int64  `json:"id"`
+	Key         string `json:"key"`
+	Label       string `json:"label"`
+	UpdatedAt   string `json:"updated_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserPublicKeyIndexResponse struct {
@@ -163,12 +164,11 @@ type ActionUserPublicKeyIndexResponse struct {
 	Output []*ActionUserPublicKeyIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserPublicKeyIndex) Prepare() *ActionUserPublicKeyIndexInvocation {
 	return &ActionUserPublicKeyIndexInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/public_keys",
+		Path:   "/v6.0/users/{user_id}/public_keys",
 	}
 }
 
@@ -217,6 +217,7 @@ func (inv *ActionUserPublicKeyIndexInvocation) IsParameterSelected(param string)
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserPublicKeyIndexInvocation) NewMetaInput() *ActionUserPublicKeyIndexMetaGlobalInput {
@@ -257,8 +258,6 @@ func (inv *ActionUserPublicKeyIndexInvocation) callAsQuery() (*ActionUserPublicK
 	return resp, err
 }
 
-
-
 func (inv *ActionUserPublicKeyIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -283,4 +282,3 @@ func (inv *ActionUserPublicKeyIndexInvocation) convertMetaInputToQueryParams(ret
 		}
 	}
 }
-

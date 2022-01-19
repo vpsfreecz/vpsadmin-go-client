@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionMigrationPlanIndex is a type for action Migration_plan#Index
 type ActionMigrationPlanIndex struct {
@@ -17,9 +16,9 @@ func NewActionMigrationPlanIndex(client *Client) *ActionMigrationPlanIndex {
 
 // ActionMigrationPlanIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionMigrationPlanIndexMetaGlobalInput) SetCount(value bool) *ActionM
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionMigrationPlanIndexMetaGlobalInput) SetIncludes(value string) *ActionMigrationPlanIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionMigrationPlanIndexMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMigrationPlanIndexMetaGlobalInput) SetNo(value bool) *ActionMigrationPlanIndexMetaGlobalInput {
 	in.No = value
@@ -83,10 +84,10 @@ func (in *ActionMigrationPlanIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMigrationPlanIndexInput is a type for action input parameters
 type ActionMigrationPlanIndexInput struct {
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
-	State string `json:"state"`
-	User int64 `json:"user"`
+	Limit  int64  `json:"limit"`
+	Offset int64  `json:"offset"`
+	State  string `json:"state"`
+	User   int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -102,6 +103,7 @@ func (in *ActionMigrationPlanIndexInput) SetLimit(value int64) *ActionMigrationP
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionMigrationPlanIndexInput) SetOffset(value int64) *ActionMigrationPlanIndexInput {
 	in.Offset = value
@@ -113,6 +115,7 @@ func (in *ActionMigrationPlanIndexInput) SetOffset(value int64) *ActionMigration
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetState sets parameter State to value and selects it for sending
 func (in *ActionMigrationPlanIndexInput) SetState(value string) *ActionMigrationPlanIndexInput {
 	in.State = value
@@ -124,6 +127,7 @@ func (in *ActionMigrationPlanIndexInput) SetState(value string) *ActionMigration
 	in._selectedParameters["State"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionMigrationPlanIndexInput) SetUser(value int64) *ActionMigrationPlanIndexInput {
 	in.User = value
@@ -159,20 +163,18 @@ func (in *ActionMigrationPlanIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionMigrationPlanIndexOutput is a type for action output parameters
 type ActionMigrationPlanIndexOutput struct {
-	Concurrency int64 `json:"concurrency"`
-	CreatedAt string `json:"created_at"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	Reason string `json:"reason"`
-	SendMail bool `json:"send_mail"`
-	State string `json:"state"`
-	StopOnError bool `json:"stop_on_error"`
-	User *ActionUserShowOutput `json:"user"`
+	Concurrency int64                 `json:"concurrency"`
+	CreatedAt   string                `json:"created_at"`
+	FinishedAt  string                `json:"finished_at"`
+	Id          int64                 `json:"id"`
+	Reason      string                `json:"reason"`
+	SendMail    bool                  `json:"send_mail"`
+	State       string                `json:"state"`
+	StopOnError bool                  `json:"stop_on_error"`
+	User        *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionMigrationPlanIndexResponse struct {
@@ -187,12 +189,11 @@ type ActionMigrationPlanIndexResponse struct {
 	Output []*ActionMigrationPlanIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMigrationPlanIndex) Prepare() *ActionMigrationPlanIndexInvocation {
 	return &ActionMigrationPlanIndexInvocation{
 		Action: action,
-		Path: "/v6.0/migration_plans",
+		Path:   "/v6.0/migration_plans",
 	}
 }
 
@@ -208,7 +209,6 @@ type ActionMigrationPlanIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionMigrationPlanIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionMigrationPlanIndexInvocation) NewInput() *ActionMigrationPlanIndexInput {
@@ -231,6 +231,7 @@ func (inv *ActionMigrationPlanIndexInvocation) IsParameterSelected(param string)
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionMigrationPlanIndexInvocation) NewMetaInput() *ActionMigrationPlanIndexMetaGlobalInput {
@@ -271,8 +272,6 @@ func (inv *ActionMigrationPlanIndexInvocation) callAsQuery() (*ActionMigrationPl
 	return resp, err
 }
 
-
-
 func (inv *ActionMigrationPlanIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -303,4 +302,3 @@ func (inv *ActionMigrationPlanIndexInvocation) convertMetaInputToQueryParams(ret
 		}
 	}
 }
-

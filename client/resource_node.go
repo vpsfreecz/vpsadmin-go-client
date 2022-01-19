@@ -42,18 +42,18 @@ func NewResourceNode(client *Client) *ResourceNode {
 	actionUpdate := NewActionNodeUpdate(client)
 
 	return &ResourceNode{
-		Client: client,
-		Status: NewResourceNodeStatus(client),
-		Create: actionCreate,
-		New: actionCreate,
-		Evacuate: actionEvacuate,
-		Index: actionIndex,
-		List: actionIndex,
-		OverviewList: actionOverviewList,
-		PublicStatus: actionPublicStatus,
+		Client:         client,
+		Status:         NewResourceNodeStatus(client),
+		Create:         actionCreate,
+		New:            actionCreate,
+		Evacuate:       actionEvacuate,
+		Index:          actionIndex,
+		List:           actionIndex,
+		OverviewList:   actionOverviewList,
+		PublicStatus:   actionPublicStatus,
 		SetMaintenance: actionSetMaintenance,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Show:           actionShow,
+		Find:           actionShow,
+		Update:         actionUpdate,
 	}
 }

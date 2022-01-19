@@ -19,7 +19,7 @@ func NewActionVpsMaintenanceWindowShow(client *Client) *ActionVpsMaintenanceWind
 // ActionVpsMaintenanceWindowShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMaintenanceWindowShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsMaintenanceWindowShowMetaGlobalInput) SetIncludes(value strin
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsMaintenanceWindowShowMetaGlobalInput) SetNo(value bool) *ActionVpsMaintenanceWindowShowMetaGlobalInput {
 	in.No = value
@@ -70,16 +71,13 @@ func (in *ActionVpsMaintenanceWindowShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionVpsMaintenanceWindowShowOutput is a type for action output parameters
 type ActionVpsMaintenanceWindowShowOutput struct {
 	ClosesAt int64 `json:"closes_at"`
-	IsOpen bool `json:"is_open"`
-	OpensAt int64 `json:"opens_at"`
-	Weekday int64 `json:"weekday"`
+	IsOpen   bool  `json:"is_open"`
+	OpensAt  int64 `json:"opens_at"`
+	Weekday  int64 `json:"weekday"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsMaintenanceWindowShowResponse struct {
@@ -94,12 +92,11 @@ type ActionVpsMaintenanceWindowShowResponse struct {
 	Output *ActionVpsMaintenanceWindowShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsMaintenanceWindowShow) Prepare() *ActionVpsMaintenanceWindowShowInvocation {
 	return &ActionVpsMaintenanceWindowShowInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/maintenance_windows/{maintenance_window_id}",
+		Path:   "/v6.0/vpses/{vps_id}/maintenance_windows/{maintenance_window_id}",
 	}
 }
 
@@ -164,9 +161,6 @@ func (inv *ActionVpsMaintenanceWindowShowInvocation) callAsQuery() (*ActionVpsMa
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsMaintenanceWindowShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -177,4 +171,3 @@ func (inv *ActionVpsMaintenanceWindowShowInvocation) convertMetaInputToQueryPara
 		}
 	}
 }
-

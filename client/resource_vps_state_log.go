@@ -21,9 +21,9 @@ func NewResourceVpsStateLog(client *Client) *ResourceVpsStateLog {
 
 	return &ResourceVpsStateLog{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

@@ -19,7 +19,7 @@ func NewActionNewsLogDelete(client *Client) *ActionNewsLogDelete {
 // ActionNewsLogDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionNewsLogDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionNewsLogDeleteMetaGlobalInput) SetIncludes(value string) *ActionN
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNewsLogDeleteMetaGlobalInput) SetNo(value bool) *ActionNewsLogDeleteMetaGlobalInput {
 	in.No = value
@@ -70,13 +71,10 @@ func (in *ActionNewsLogDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionNewsLogDeleteRequest is a type for the entire action request
 type ActionNewsLogDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionNewsLogDeleteResponse struct {
@@ -84,12 +82,11 @@ type ActionNewsLogDeleteResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNewsLogDelete) Prepare() *ActionNewsLogDeleteInvocation {
 	return &ActionNewsLogDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/news_logs/{news_log_id}",
+		Path:   "/v6.0/news_logs/{news_log_id}",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionNewsLogDeleteInvocation) Call() (*ActionNewsLogDeleteResponse, 
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionNewsLogDeleteInvocation) callAsBody() (*ActionNewsLogDeleteResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionNewsLogDeleteResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionNewsLogDeleteInvocation) callAsBody() (*ActionNewsLogDeleteResp
 	return resp, err
 }
 
-
-
-
 func (inv *ActionNewsLogDeleteInvocation) makeAllInputParams() *ActionNewsLogDeleteRequest {
 	return &ActionNewsLogDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionNewsLogDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

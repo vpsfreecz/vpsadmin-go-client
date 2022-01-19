@@ -19,7 +19,7 @@ func NewActionVpsConfigReplace(client *Client) *ActionVpsConfigReplace {
 // ActionVpsConfigReplaceMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsConfigReplaceMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsConfigReplaceMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsConfigReplaceMetaGlobalInput) SetNo(value bool) *ActionVpsConfigReplaceMetaGlobalInput {
 	in.No = value
@@ -115,9 +116,8 @@ func (in *ActionVpsConfigReplaceInput) AnySelected() bool {
 // ActionVpsConfigReplaceRequest is a type for the entire action request
 type ActionVpsConfigReplaceRequest struct {
 	Configs map[string]interface{} `json:"configs"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta    map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionVpsConfigReplaceMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsConfigReplaceMetaGlobalOutput struct {
@@ -135,12 +135,11 @@ type ActionVpsConfigReplaceResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsConfigReplace) Prepare() *ActionVpsConfigReplaceInvocation {
 	return &ActionVpsConfigReplaceInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/configs/replace",
+		Path:   "/v6.0/vpses/{vps_id}/configs/replace",
 	}
 }
 
@@ -189,6 +188,7 @@ func (inv *ActionVpsConfigReplaceInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsConfigReplaceInvocation) NewMetaInput() *ActionVpsConfigReplaceMetaGlobalInput {
@@ -216,7 +216,6 @@ func (inv *ActionVpsConfigReplaceInvocation) IsMetaParameterSelected(param strin
 func (inv *ActionVpsConfigReplaceInvocation) Call() (*ActionVpsConfigReplaceResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsConfigReplaceInvocation) callAsBody() (*ActionVpsConfigReplaceResponse, error) {
 	input := inv.makeAllInputParams()
@@ -274,11 +273,11 @@ func (resp *ActionVpsConfigReplaceResponse) WatchOperation(timeout float64, upda
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -301,12 +300,10 @@ func (resp *ActionVpsConfigReplaceResponse) CancelOperation() (*ActionActionStat
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsConfigReplaceInvocation) makeAllInputParams() *ActionVpsConfigReplaceRequest {
 	return &ActionVpsConfigReplaceRequest{
 		Configs: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:    inv.makeMetaInputParams(),
 	}
 }
 

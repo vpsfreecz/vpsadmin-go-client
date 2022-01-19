@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionOsTemplateIndex is a type for action Os_template#Index
 type ActionOsTemplateIndex struct {
@@ -17,9 +16,9 @@ func NewActionOsTemplateIndex(client *Client) *ActionOsTemplateIndex {
 
 // ActionOsTemplateIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOsTemplateIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionOsTemplateIndexMetaGlobalInput) SetCount(value bool) *ActionOsTe
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionOsTemplateIndexMetaGlobalInput) SetIncludes(value string) *ActionOsTemplateIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionOsTemplateIndexMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOsTemplateIndexMetaGlobalInput) SetNo(value bool) *ActionOsTemplateIndexMetaGlobalInput {
 	in.No = value
@@ -84,9 +85,9 @@ func (in *ActionOsTemplateIndexMetaGlobalInput) AnySelected() bool {
 // ActionOsTemplateIndexInput is a type for action input parameters
 type ActionOsTemplateIndexInput struct {
 	HypervisorType string `json:"hypervisor_type"`
-	Limit int64 `json:"limit"`
-	Location int64 `json:"location"`
-	Offset int64 `json:"offset"`
+	Limit          int64  `json:"limit"`
+	Location       int64  `json:"location"`
+	Offset         int64  `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -102,6 +103,7 @@ func (in *ActionOsTemplateIndexInput) SetHypervisorType(value string) *ActionOsT
 	in._selectedParameters["HypervisorType"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionOsTemplateIndexInput) SetLimit(value int64) *ActionOsTemplateIndexInput {
 	in.Limit = value
@@ -113,6 +115,7 @@ func (in *ActionOsTemplateIndexInput) SetLimit(value int64) *ActionOsTemplateInd
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionOsTemplateIndexInput) SetLocation(value int64) *ActionOsTemplateIndexInput {
 	in.Location = value
@@ -124,6 +127,7 @@ func (in *ActionOsTemplateIndexInput) SetLocation(value int64) *ActionOsTemplate
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionOsTemplateIndexInput) SetOffset(value int64) *ActionOsTemplateIndexInput {
 	in.Offset = value
@@ -159,19 +163,17 @@ func (in *ActionOsTemplateIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionOsTemplateIndexOutput is a type for action output parameters
 type ActionOsTemplateIndexOutput struct {
-	Enabled bool `json:"enabled"`
+	Enabled        bool   `json:"enabled"`
 	HypervisorType string `json:"hypervisor_type"`
-	Id int64 `json:"id"`
-	Info string `json:"info"`
-	Label string `json:"label"`
-	Name string `json:"name"`
-	Order int64 `json:"order"`
-	Supported bool `json:"supported"`
+	Id             int64  `json:"id"`
+	Info           string `json:"info"`
+	Label          string `json:"label"`
+	Name           string `json:"name"`
+	Order          int64  `json:"order"`
+	Supported      bool   `json:"supported"`
 }
-
 
 // Type for action response, including envelope
 type ActionOsTemplateIndexResponse struct {
@@ -186,12 +188,11 @@ type ActionOsTemplateIndexResponse struct {
 	Output []*ActionOsTemplateIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOsTemplateIndex) Prepare() *ActionOsTemplateIndexInvocation {
 	return &ActionOsTemplateIndexInvocation{
 		Action: action,
-		Path: "/v6.0/os_templates",
+		Path:   "/v6.0/os_templates",
 	}
 }
 
@@ -207,7 +208,6 @@ type ActionOsTemplateIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionOsTemplateIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionOsTemplateIndexInvocation) NewInput() *ActionOsTemplateIndexInput {
@@ -230,6 +230,7 @@ func (inv *ActionOsTemplateIndexInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOsTemplateIndexInvocation) NewMetaInput() *ActionOsTemplateIndexMetaGlobalInput {
@@ -270,8 +271,6 @@ func (inv *ActionOsTemplateIndexInvocation) callAsQuery() (*ActionOsTemplateInde
 	return resp, err
 }
 
-
-
 func (inv *ActionOsTemplateIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("HypervisorType") {
@@ -302,4 +301,3 @@ func (inv *ActionOsTemplateIndexInvocation) convertMetaInputToQueryParams(ret ma
 		}
 	}
 }
-

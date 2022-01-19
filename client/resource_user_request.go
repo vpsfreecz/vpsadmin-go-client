@@ -14,8 +14,8 @@ type ResourceUserRequest struct {
 func NewResourceUserRequest(client *Client) *ResourceUserRequest {
 
 	return &ResourceUserRequest{
-		Client: client,
-		Change: NewResourceUserRequestChange(client),
+		Client:       client,
+		Change:       NewResourceUserRequestChange(client),
 		Registration: NewResourceUserRequestRegistration(client),
 	}
 }

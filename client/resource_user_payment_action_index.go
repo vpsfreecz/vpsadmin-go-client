@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionUserPaymentIndex is a type for action User_payment#Index
 type ActionUserPaymentIndex struct {
@@ -17,9 +16,9 @@ func NewActionUserPaymentIndex(client *Client) *ActionUserPaymentIndex {
 
 // ActionUserPaymentIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPaymentIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionUserPaymentIndexMetaGlobalInput) SetCount(value bool) *ActionUse
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserPaymentIndexMetaGlobalInput) SetIncludes(value string) *ActionUserPaymentIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionUserPaymentIndexMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserPaymentIndexMetaGlobalInput) SetNo(value bool) *ActionUserPaymentIndexMetaGlobalInput {
 	in.No = value
@@ -84,9 +85,9 @@ func (in *ActionUserPaymentIndexMetaGlobalInput) AnySelected() bool {
 // ActionUserPaymentIndexInput is a type for action input parameters
 type ActionUserPaymentIndexInput struct {
 	AccountedBy int64 `json:"accounted_by"`
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
-	User int64 `json:"user"`
+	Limit       int64 `json:"limit"`
+	Offset      int64 `json:"offset"`
+	User        int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -102,6 +103,7 @@ func (in *ActionUserPaymentIndexInput) SetAccountedBy(value int64) *ActionUserPa
 	in._selectedParameters["AccountedBy"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserPaymentIndexInput) SetLimit(value int64) *ActionUserPaymentIndexInput {
 	in.Limit = value
@@ -113,6 +115,7 @@ func (in *ActionUserPaymentIndexInput) SetLimit(value int64) *ActionUserPaymentI
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionUserPaymentIndexInput) SetOffset(value int64) *ActionUserPaymentIndexInput {
 	in.Offset = value
@@ -124,6 +127,7 @@ func (in *ActionUserPaymentIndexInput) SetOffset(value int64) *ActionUserPayment
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionUserPaymentIndexInput) SetUser(value int64) *ActionUserPaymentIndexInput {
 	in.User = value
@@ -159,19 +163,17 @@ func (in *ActionUserPaymentIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserPaymentIndexOutput is a type for action output parameters
 type ActionUserPaymentIndexOutput struct {
-	AccountedBy *ActionUserShowOutput `json:"accounted_by"`
-	Amount int64 `json:"amount"`
-	CreatedAt string `json:"created_at"`
-	FromDate string `json:"from_date"`
-	Id int64 `json:"id"`
+	AccountedBy     *ActionUserShowOutput            `json:"accounted_by"`
+	Amount          int64                            `json:"amount"`
+	CreatedAt       string                           `json:"created_at"`
+	FromDate        string                           `json:"from_date"`
+	Id              int64                            `json:"id"`
 	IncomingPayment *ActionIncomingPaymentShowOutput `json:"incoming_payment"`
-	ToDate string `json:"to_date"`
-	User *ActionUserShowOutput `json:"user"`
+	ToDate          string                           `json:"to_date"`
+	User            *ActionUserShowOutput            `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserPaymentIndexResponse struct {
@@ -186,12 +188,11 @@ type ActionUserPaymentIndexResponse struct {
 	Output []*ActionUserPaymentIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserPaymentIndex) Prepare() *ActionUserPaymentIndexInvocation {
 	return &ActionUserPaymentIndexInvocation{
 		Action: action,
-		Path: "/v6.0/user_payments",
+		Path:   "/v6.0/user_payments",
 	}
 }
 
@@ -207,7 +208,6 @@ type ActionUserPaymentIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionUserPaymentIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionUserPaymentIndexInvocation) NewInput() *ActionUserPaymentIndexInput {
@@ -230,6 +230,7 @@ func (inv *ActionUserPaymentIndexInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserPaymentIndexInvocation) NewMetaInput() *ActionUserPaymentIndexMetaGlobalInput {
@@ -270,8 +271,6 @@ func (inv *ActionUserPaymentIndexInvocation) callAsQuery() (*ActionUserPaymentIn
 	return resp, err
 }
 
-
-
 func (inv *ActionUserPaymentIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("AccountedBy") {
@@ -302,4 +301,3 @@ func (inv *ActionUserPaymentIndexInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

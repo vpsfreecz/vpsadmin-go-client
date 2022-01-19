@@ -19,7 +19,7 @@ func NewActionExportHostDelete(client *Client) *ActionExportHostDelete {
 // ActionExportHostDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionExportHostDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionExportHostDeleteMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionExportHostDeleteMetaGlobalInput) SetNo(value bool) *ActionExportHostDeleteMetaGlobalInput {
 	in.No = value
@@ -70,12 +71,10 @@ func (in *ActionExportHostDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionExportHostDeleteRequest is a type for the entire action request
 type ActionExportHostDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionExportHostDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionExportHostDeleteMetaGlobalOutput struct {
@@ -93,12 +92,11 @@ type ActionExportHostDeleteResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionExportHostDelete) Prepare() *ActionExportHostDeleteInvocation {
 	return &ActionExportHostDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/exports/{export_id}/hosts/{host_id}",
+		Path:   "/v6.0/exports/{export_id}/hosts/{host_id}",
 	}
 }
 
@@ -151,7 +149,6 @@ func (inv *ActionExportHostDeleteInvocation) IsMetaParameterSelected(param strin
 func (inv *ActionExportHostDeleteInvocation) Call() (*ActionExportHostDeleteResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionExportHostDeleteInvocation) callAsBody() (*ActionExportHostDeleteResponse, error) {
 	input := inv.makeAllInputParams()
@@ -209,11 +206,11 @@ func (resp *ActionExportHostDeleteResponse) WatchOperation(timeout float64, upda
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -236,14 +233,11 @@ func (resp *ActionExportHostDeleteResponse) CancelOperation() (*ActionActionStat
 	return req.Call()
 }
 
-
-
 func (inv *ActionExportHostDeleteInvocation) makeAllInputParams() *ActionExportHostDeleteRequest {
 	return &ActionExportHostDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionExportHostDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

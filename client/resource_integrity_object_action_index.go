@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionIntegrityObjectIndex is a type for action Integrity_object#Index
 type ActionIntegrityObjectIndex struct {
@@ -17,9 +16,9 @@ func NewActionIntegrityObjectIndex(client *Client) *ActionIntegrityObjectIndex {
 
 // ActionIntegrityObjectIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionIntegrityObjectIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionIntegrityObjectIndexMetaGlobalInput) SetCount(value bool) *Actio
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionIntegrityObjectIndexMetaGlobalInput) SetIncludes(value string) *ActionIntegrityObjectIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionIntegrityObjectIndexMetaGlobalInput) SetIncludes(value string) *
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionIntegrityObjectIndexMetaGlobalInput) SetNo(value bool) *ActionIntegrityObjectIndexMetaGlobalInput {
 	in.No = value
@@ -83,14 +84,14 @@ func (in *ActionIntegrityObjectIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionIntegrityObjectIndexInput is a type for action input parameters
 type ActionIntegrityObjectIndexInput struct {
-	ClassName string `json:"class_name"`
-	IntegrityCheck int64 `json:"integrity_check"`
-	Limit int64 `json:"limit"`
-	Node int64 `json:"node"`
-	Offset int64 `json:"offset"`
-	Parent int64 `json:"parent"`
-	RowId int64 `json:"row_id"`
-	Status string `json:"status"`
+	ClassName      string `json:"class_name"`
+	IntegrityCheck int64  `json:"integrity_check"`
+	Limit          int64  `json:"limit"`
+	Node           int64  `json:"node"`
+	Offset         int64  `json:"offset"`
+	Parent         int64  `json:"parent"`
+	RowId          int64  `json:"row_id"`
+	Status         string `json:"status"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -106,6 +107,7 @@ func (in *ActionIntegrityObjectIndexInput) SetClassName(value string) *ActionInt
 	in._selectedParameters["ClassName"] = nil
 	return in
 }
+
 // SetIntegrityCheck sets parameter IntegrityCheck to value and selects it for sending
 func (in *ActionIntegrityObjectIndexInput) SetIntegrityCheck(value int64) *ActionIntegrityObjectIndexInput {
 	in.IntegrityCheck = value
@@ -117,6 +119,7 @@ func (in *ActionIntegrityObjectIndexInput) SetIntegrityCheck(value int64) *Actio
 	in._selectedParameters["IntegrityCheck"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionIntegrityObjectIndexInput) SetLimit(value int64) *ActionIntegrityObjectIndexInput {
 	in.Limit = value
@@ -128,6 +131,7 @@ func (in *ActionIntegrityObjectIndexInput) SetLimit(value int64) *ActionIntegrit
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionIntegrityObjectIndexInput) SetNode(value int64) *ActionIntegrityObjectIndexInput {
 	in.Node = value
@@ -139,6 +143,7 @@ func (in *ActionIntegrityObjectIndexInput) SetNode(value int64) *ActionIntegrity
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionIntegrityObjectIndexInput) SetOffset(value int64) *ActionIntegrityObjectIndexInput {
 	in.Offset = value
@@ -150,6 +155,7 @@ func (in *ActionIntegrityObjectIndexInput) SetOffset(value int64) *ActionIntegri
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetParent sets parameter Parent to value and selects it for sending
 func (in *ActionIntegrityObjectIndexInput) SetParent(value int64) *ActionIntegrityObjectIndexInput {
 	in.Parent = value
@@ -161,6 +167,7 @@ func (in *ActionIntegrityObjectIndexInput) SetParent(value int64) *ActionIntegri
 	in._selectedParameters["Parent"] = nil
 	return in
 }
+
 // SetRowId sets parameter RowId to value and selects it for sending
 func (in *ActionIntegrityObjectIndexInput) SetRowId(value int64) *ActionIntegrityObjectIndexInput {
 	in.RowId = value
@@ -172,6 +179,7 @@ func (in *ActionIntegrityObjectIndexInput) SetRowId(value int64) *ActionIntegrit
 	in._selectedParameters["RowId"] = nil
 	return in
 }
+
 // SetStatus sets parameter Status to value and selects it for sending
 func (in *ActionIntegrityObjectIndexInput) SetStatus(value string) *ActionIntegrityObjectIndexInput {
 	in.Status = value
@@ -207,23 +215,21 @@ func (in *ActionIntegrityObjectIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionIntegrityObjectIndexOutput is a type for action output parameters
 type ActionIntegrityObjectIndexOutput struct {
-	CheckedFacts int64 `json:"checked_facts"`
-	ClassName string `json:"class_name"`
-	CreatedAt string `json:"created_at"`
-	FalseFacts int64 `json:"false_facts"`
-	Id int64 `json:"id"`
-	IntegrityCheck *ActionIntegrityCheckShowOutput `json:"integrity_check"`
-	Node *ActionNodeShowOutput `json:"node"`
-	Parent *ActionIntegrityObjectShowOutput `json:"parent"`
-	RowId int64 `json:"row_id"`
-	Status string `json:"status"`
-	TrueFacts int64 `json:"true_facts"`
-	UpdatedAt string `json:"updated_at"`
+	CheckedFacts   int64                            `json:"checked_facts"`
+	ClassName      string                           `json:"class_name"`
+	CreatedAt      string                           `json:"created_at"`
+	FalseFacts     int64                            `json:"false_facts"`
+	Id             int64                            `json:"id"`
+	IntegrityCheck *ActionIntegrityCheckShowOutput  `json:"integrity_check"`
+	Node           *ActionNodeShowOutput            `json:"node"`
+	Parent         *ActionIntegrityObjectShowOutput `json:"parent"`
+	RowId          int64                            `json:"row_id"`
+	Status         string                           `json:"status"`
+	TrueFacts      int64                            `json:"true_facts"`
+	UpdatedAt      string                           `json:"updated_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionIntegrityObjectIndexResponse struct {
@@ -238,12 +244,11 @@ type ActionIntegrityObjectIndexResponse struct {
 	Output []*ActionIntegrityObjectIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionIntegrityObjectIndex) Prepare() *ActionIntegrityObjectIndexInvocation {
 	return &ActionIntegrityObjectIndexInvocation{
 		Action: action,
-		Path: "/v6.0/integrity_objects",
+		Path:   "/v6.0/integrity_objects",
 	}
 }
 
@@ -259,7 +264,6 @@ type ActionIntegrityObjectIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionIntegrityObjectIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionIntegrityObjectIndexInvocation) NewInput() *ActionIntegrityObjectIndexInput {
@@ -282,6 +286,7 @@ func (inv *ActionIntegrityObjectIndexInvocation) IsParameterSelected(param strin
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionIntegrityObjectIndexInvocation) NewMetaInput() *ActionIntegrityObjectIndexMetaGlobalInput {
@@ -321,8 +326,6 @@ func (inv *ActionIntegrityObjectIndexInvocation) callAsQuery() (*ActionIntegrity
 	}
 	return resp, err
 }
-
-
 
 func (inv *ActionIntegrityObjectIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
@@ -366,4 +369,3 @@ func (inv *ActionIntegrityObjectIndexInvocation) convertMetaInputToQueryParams(r
 		}
 	}
 }
-

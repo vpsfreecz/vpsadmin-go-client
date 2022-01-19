@@ -37,16 +37,16 @@ func NewResourceIpAddress(client *Client) *ResourceIpAddress {
 	actionUpdate := NewActionIpAddressUpdate(client)
 
 	return &ResourceIpAddress{
-		Client: client,
-		Assign: actionAssign,
+		Client:                client,
+		Assign:                actionAssign,
 		AssignWithHostAddress: actionAssignWithHostAddress,
-		Create: actionCreate,
-		New: actionCreate,
-		Free: actionFree,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Create:                actionCreate,
+		New:                   actionCreate,
+		Free:                  actionFree,
+		Index:                 actionIndex,
+		List:                  actionIndex,
+		Show:                  actionShow,
+		Find:                  actionShow,
+		Update:                actionUpdate,
 	}
 }

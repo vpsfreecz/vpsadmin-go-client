@@ -19,7 +19,7 @@ func NewActionVpsFeatureUpdate(client *Client) *ActionVpsFeatureUpdate {
 // ActionVpsFeatureUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsFeatureUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsFeatureUpdateMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsFeatureUpdateMetaGlobalInput) SetNo(value bool) *ActionVpsFeatureUpdateMetaGlobalInput {
 	in.No = value
@@ -115,9 +116,8 @@ func (in *ActionVpsFeatureUpdateInput) AnySelected() bool {
 // ActionVpsFeatureUpdateRequest is a type for the entire action request
 type ActionVpsFeatureUpdateRequest struct {
 	Feature map[string]interface{} `json:"feature"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta    map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionVpsFeatureUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsFeatureUpdateMetaGlobalOutput struct {
@@ -135,12 +135,11 @@ type ActionVpsFeatureUpdateResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsFeatureUpdate) Prepare() *ActionVpsFeatureUpdateInvocation {
 	return &ActionVpsFeatureUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/features/{feature_id}",
+		Path:   "/v6.0/vpses/{vps_id}/features/{feature_id}",
 	}
 }
 
@@ -189,6 +188,7 @@ func (inv *ActionVpsFeatureUpdateInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsFeatureUpdateInvocation) NewMetaInput() *ActionVpsFeatureUpdateMetaGlobalInput {
@@ -216,7 +216,6 @@ func (inv *ActionVpsFeatureUpdateInvocation) IsMetaParameterSelected(param strin
 func (inv *ActionVpsFeatureUpdateInvocation) Call() (*ActionVpsFeatureUpdateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsFeatureUpdateInvocation) callAsBody() (*ActionVpsFeatureUpdateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -274,11 +273,11 @@ func (resp *ActionVpsFeatureUpdateResponse) WatchOperation(timeout float64, upda
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -301,12 +300,10 @@ func (resp *ActionVpsFeatureUpdateResponse) CancelOperation() (*ActionActionStat
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsFeatureUpdateInvocation) makeAllInputParams() *ActionVpsFeatureUpdateRequest {
 	return &ActionVpsFeatureUpdateRequest{
 		Feature: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:    inv.makeMetaInputParams(),
 	}
 }
 

@@ -19,7 +19,7 @@ func NewActionDnsResolverUpdate(client *Client) *ActionDnsResolverUpdate {
 // ActionDnsResolverUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsResolverUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionDnsResolverUpdateMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDnsResolverUpdateMetaGlobalInput) SetNo(value bool) *ActionDnsResolverUpdateMetaGlobalInput {
 	in.No = value
@@ -72,10 +73,10 @@ func (in *ActionDnsResolverUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsResolverUpdateInput is a type for action input parameters
 type ActionDnsResolverUpdateInput struct {
-	IpAddr string `json:"ip_addr"`
-	IsUniversal bool `json:"is_universal"`
-	Label string `json:"label"`
-	Location int64 `json:"location"`
+	IpAddr      string `json:"ip_addr"`
+	IsUniversal bool   `json:"is_universal"`
+	Label       string `json:"label"`
+	Location    int64  `json:"location"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -91,6 +92,7 @@ func (in *ActionDnsResolverUpdateInput) SetIpAddr(value string) *ActionDnsResolv
 	in._selectedParameters["IpAddr"] = nil
 	return in
 }
+
 // SetIsUniversal sets parameter IsUniversal to value and selects it for sending
 func (in *ActionDnsResolverUpdateInput) SetIsUniversal(value bool) *ActionDnsResolverUpdateInput {
 	in.IsUniversal = value
@@ -102,6 +104,7 @@ func (in *ActionDnsResolverUpdateInput) SetIsUniversal(value bool) *ActionDnsRes
 	in._selectedParameters["IsUniversal"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionDnsResolverUpdateInput) SetLabel(value string) *ActionDnsResolverUpdateInput {
 	in.Label = value
@@ -113,6 +116,7 @@ func (in *ActionDnsResolverUpdateInput) SetLabel(value string) *ActionDnsResolve
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionDnsResolverUpdateInput) SetLocation(value int64) *ActionDnsResolverUpdateInput {
 	in.Location = value
@@ -151,18 +155,17 @@ func (in *ActionDnsResolverUpdateInput) AnySelected() bool {
 // ActionDnsResolverUpdateRequest is a type for the entire action request
 type ActionDnsResolverUpdateRequest struct {
 	DnsResolver map[string]interface{} `json:"dns_resolver"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta        map[string]interface{} `json:"_meta"`
 }
 
 // ActionDnsResolverUpdateOutput is a type for action output parameters
 type ActionDnsResolverUpdateOutput struct {
-	Id int64 `json:"id"`
-	IpAddr string `json:"ip_addr"`
-	IsUniversal bool `json:"is_universal"`
-	Label string `json:"label"`
-	Location *ActionLocationShowOutput `json:"location"`
+	Id          int64                     `json:"id"`
+	IpAddr      string                    `json:"ip_addr"`
+	IsUniversal bool                      `json:"is_universal"`
+	Label       string                    `json:"label"`
+	Location    *ActionLocationShowOutput `json:"location"`
 }
-
 
 // Type for action response, including envelope
 type ActionDnsResolverUpdateResponse struct {
@@ -177,12 +180,11 @@ type ActionDnsResolverUpdateResponse struct {
 	Output *ActionDnsResolverUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDnsResolverUpdate) Prepare() *ActionDnsResolverUpdateInvocation {
 	return &ActionDnsResolverUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/dns_resolvers/{dns_resolver_id}",
+		Path:   "/v6.0/dns_resolvers/{dns_resolver_id}",
 	}
 }
 
@@ -231,6 +233,7 @@ func (inv *ActionDnsResolverUpdateInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionDnsResolverUpdateInvocation) NewMetaInput() *ActionDnsResolverUpdateMetaGlobalInput {
@@ -259,7 +262,6 @@ func (inv *ActionDnsResolverUpdateInvocation) Call() (*ActionDnsResolverUpdateRe
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionDnsResolverUpdateInvocation) callAsBody() (*ActionDnsResolverUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionDnsResolverUpdateResponse{Action: inv.Action}
@@ -270,13 +272,10 @@ func (inv *ActionDnsResolverUpdateInvocation) callAsBody() (*ActionDnsResolverUp
 	return resp, err
 }
 
-
-
-
 func (inv *ActionDnsResolverUpdateInvocation) makeAllInputParams() *ActionDnsResolverUpdateRequest {
 	return &ActionDnsResolverUpdateRequest{
 		DnsResolver: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:        inv.makeMetaInputParams(),
 	}
 }
 

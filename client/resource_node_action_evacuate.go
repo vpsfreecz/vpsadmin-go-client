@@ -60,13 +60,13 @@ func (in *ActionNodeEvacuateMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeEvacuateInput is a type for action input parameters
 type ActionNodeEvacuateInput struct {
-	CleanupData bool `json:"cleanup_data"`
-	Concurrency int64 `json:"concurrency"`
-	DstNode int64 `json:"dst_node"`
-	MaintenanceWindow bool `json:"maintenance_window"`
-	Reason string `json:"reason"`
-	SendMail bool `json:"send_mail"`
-	StopOnError bool `json:"stop_on_error"`
+	CleanupData       bool   `json:"cleanup_data"`
+	Concurrency       int64  `json:"concurrency"`
+	DstNode           int64  `json:"dst_node"`
+	MaintenanceWindow bool   `json:"maintenance_window"`
+	Reason            string `json:"reason"`
+	SendMail          bool   `json:"send_mail"`
+	StopOnError       bool   `json:"stop_on_error"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -82,6 +82,7 @@ func (in *ActionNodeEvacuateInput) SetCleanupData(value bool) *ActionNodeEvacuat
 	in._selectedParameters["CleanupData"] = nil
 	return in
 }
+
 // SetConcurrency sets parameter Concurrency to value and selects it for sending
 func (in *ActionNodeEvacuateInput) SetConcurrency(value int64) *ActionNodeEvacuateInput {
 	in.Concurrency = value
@@ -93,6 +94,7 @@ func (in *ActionNodeEvacuateInput) SetConcurrency(value int64) *ActionNodeEvacua
 	in._selectedParameters["Concurrency"] = nil
 	return in
 }
+
 // SetDstNode sets parameter DstNode to value and selects it for sending
 func (in *ActionNodeEvacuateInput) SetDstNode(value int64) *ActionNodeEvacuateInput {
 	in.DstNode = value
@@ -104,6 +106,7 @@ func (in *ActionNodeEvacuateInput) SetDstNode(value int64) *ActionNodeEvacuateIn
 	in._selectedParameters["DstNode"] = nil
 	return in
 }
+
 // SetMaintenanceWindow sets parameter MaintenanceWindow to value and selects it for sending
 func (in *ActionNodeEvacuateInput) SetMaintenanceWindow(value bool) *ActionNodeEvacuateInput {
 	in.MaintenanceWindow = value
@@ -115,6 +118,7 @@ func (in *ActionNodeEvacuateInput) SetMaintenanceWindow(value bool) *ActionNodeE
 	in._selectedParameters["MaintenanceWindow"] = nil
 	return in
 }
+
 // SetReason sets parameter Reason to value and selects it for sending
 func (in *ActionNodeEvacuateInput) SetReason(value string) *ActionNodeEvacuateInput {
 	in.Reason = value
@@ -126,6 +130,7 @@ func (in *ActionNodeEvacuateInput) SetReason(value string) *ActionNodeEvacuateIn
 	in._selectedParameters["Reason"] = nil
 	return in
 }
+
 // SetSendMail sets parameter SendMail to value and selects it for sending
 func (in *ActionNodeEvacuateInput) SetSendMail(value bool) *ActionNodeEvacuateInput {
 	in.SendMail = value
@@ -137,6 +142,7 @@ func (in *ActionNodeEvacuateInput) SetSendMail(value bool) *ActionNodeEvacuateIn
 	in._selectedParameters["SendMail"] = nil
 	return in
 }
+
 // SetStopOnError sets parameter StopOnError to value and selects it for sending
 func (in *ActionNodeEvacuateInput) SetStopOnError(value bool) *ActionNodeEvacuateInput {
 	in.StopOnError = value
@@ -183,7 +189,6 @@ type ActionNodeEvacuateOutput struct {
 	MigrationPlanId int64 `json:"migration_plan_id"`
 }
 
-
 // Type for action response, including envelope
 type ActionNodeEvacuateResponse struct {
 	Action *ActionNodeEvacuate `json:"-"`
@@ -197,12 +202,11 @@ type ActionNodeEvacuateResponse struct {
 	Output *ActionNodeEvacuateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNodeEvacuate) Prepare() *ActionNodeEvacuateInvocation {
 	return &ActionNodeEvacuateInvocation{
 		Action: action,
-		Path: "/v6.0/nodes/{node_id}/evacuate",
+		Path:   "/v6.0/nodes/{node_id}/evacuate",
 	}
 }
 
@@ -251,6 +255,7 @@ func (inv *ActionNodeEvacuateInvocation) IsParameterSelected(param string) bool 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionNodeEvacuateInvocation) NewMetaInput() *ActionNodeEvacuateMetaGlobalInput {
@@ -279,7 +284,6 @@ func (inv *ActionNodeEvacuateInvocation) Call() (*ActionNodeEvacuateResponse, er
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionNodeEvacuateInvocation) callAsBody() (*ActionNodeEvacuateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionNodeEvacuateResponse{Action: inv.Action}
@@ -289,9 +293,6 @@ func (inv *ActionNodeEvacuateInvocation) callAsBody() (*ActionNodeEvacuateRespon
 	}
 	return resp, err
 }
-
-
-
 
 func (inv *ActionNodeEvacuateInvocation) makeAllInputParams() *ActionNodeEvacuateRequest {
 	return &ActionNodeEvacuateRequest{

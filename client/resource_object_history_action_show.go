@@ -19,7 +19,7 @@ func NewActionObjectHistoryShow(client *Client) *ActionObjectHistoryShow {
 // ActionObjectHistoryShowMetaGlobalInput is a type for action global meta input parameters
 type ActionObjectHistoryShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionObjectHistoryShowMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionObjectHistoryShowMetaGlobalInput) SetNo(value bool) *ActionObjectHistoryShowMetaGlobalInput {
 	in.No = value
@@ -70,19 +71,16 @@ func (in *ActionObjectHistoryShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionObjectHistoryShowOutput is a type for action output parameters
 type ActionObjectHistoryShowOutput struct {
-	CreatedAt string `json:"created_at"`
-	EventType string `json:"event_type"`
-	Id int64 `json:"id"`
-	Object string `json:"object"`
-	ObjectId int64 `json:"object_id"`
-	User *ActionUserShowOutput `json:"user"`
+	CreatedAt   string                       `json:"created_at"`
+	EventType   string                       `json:"event_type"`
+	Id          int64                        `json:"id"`
+	Object      string                       `json:"object"`
+	ObjectId    int64                        `json:"object_id"`
+	User        *ActionUserShowOutput        `json:"user"`
 	UserSession *ActionUserSessionShowOutput `json:"user_session"`
 }
-
 
 // Type for action response, including envelope
 type ActionObjectHistoryShowResponse struct {
@@ -97,12 +95,11 @@ type ActionObjectHistoryShowResponse struct {
 	Output *ActionObjectHistoryShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionObjectHistoryShow) Prepare() *ActionObjectHistoryShowInvocation {
 	return &ActionObjectHistoryShowInvocation{
 		Action: action,
-		Path: "/v6.0/object_histories/{object_history_id}",
+		Path:   "/v6.0/object_histories/{object_history_id}",
 	}
 }
 
@@ -167,9 +164,6 @@ func (inv *ActionObjectHistoryShowInvocation) callAsQuery() (*ActionObjectHistor
 	return resp, err
 }
 
-
-
-
 func (inv *ActionObjectHistoryShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -180,4 +174,3 @@ func (inv *ActionObjectHistoryShowInvocation) convertMetaInputToQueryParams(ret 
 		}
 	}
 }
-

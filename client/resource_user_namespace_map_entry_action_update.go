@@ -19,7 +19,7 @@ func NewActionUserNamespaceMapEntryUpdate(client *Client) *ActionUserNamespaceMa
 // ActionUserNamespaceMapEntryUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceMapEntryUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserNamespaceMapEntryUpdateMetaGlobalInput) SetIncludes(value st
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserNamespaceMapEntryUpdateMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceMapEntryUpdateMetaGlobalInput {
 	in.No = value
@@ -73,7 +74,7 @@ func (in *ActionUserNamespaceMapEntryUpdateMetaGlobalInput) AnySelected() bool {
 // ActionUserNamespaceMapEntryUpdateInput is a type for action input parameters
 type ActionUserNamespaceMapEntryUpdateInput struct {
 	Count int64 `json:"count"`
-	NsId int64 `json:"ns_id"`
+	NsId  int64 `json:"ns_id"`
 	VpsId int64 `json:"vps_id"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -90,6 +91,7 @@ func (in *ActionUserNamespaceMapEntryUpdateInput) SetCount(value int64) *ActionU
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetNsId sets parameter NsId to value and selects it for sending
 func (in *ActionUserNamespaceMapEntryUpdateInput) SetNsId(value int64) *ActionUserNamespaceMapEntryUpdateInput {
 	in.NsId = value
@@ -101,6 +103,7 @@ func (in *ActionUserNamespaceMapEntryUpdateInput) SetNsId(value int64) *ActionUs
 	in._selectedParameters["NsId"] = nil
 	return in
 }
+
 // SetVpsId sets parameter VpsId to value and selects it for sending
 func (in *ActionUserNamespaceMapEntryUpdateInput) SetVpsId(value int64) *ActionUserNamespaceMapEntryUpdateInput {
 	in.VpsId = value
@@ -139,18 +142,17 @@ func (in *ActionUserNamespaceMapEntryUpdateInput) AnySelected() bool {
 // ActionUserNamespaceMapEntryUpdateRequest is a type for the entire action request
 type ActionUserNamespaceMapEntryUpdateRequest struct {
 	Entry map[string]interface{} `json:"entry"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta  map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserNamespaceMapEntryUpdateOutput is a type for action output parameters
 type ActionUserNamespaceMapEntryUpdateOutput struct {
-	Count int64 `json:"count"`
-	Id int64 `json:"id"`
-	Kind string `json:"kind"`
-	NsId int64 `json:"ns_id"`
-	VpsId int64 `json:"vps_id"`
+	Count int64  `json:"count"`
+	Id    int64  `json:"id"`
+	Kind  string `json:"kind"`
+	NsId  int64  `json:"ns_id"`
+	VpsId int64  `json:"vps_id"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserNamespaceMapEntryUpdateResponse struct {
@@ -165,12 +167,11 @@ type ActionUserNamespaceMapEntryUpdateResponse struct {
 	Output *ActionUserNamespaceMapEntryUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserNamespaceMapEntryUpdate) Prepare() *ActionUserNamespaceMapEntryUpdateInvocation {
 	return &ActionUserNamespaceMapEntryUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/user_namespace_maps/{user_namespace_map_id}/entries/{entry_id}",
+		Path:   "/v6.0/user_namespace_maps/{user_namespace_map_id}/entries/{entry_id}",
 	}
 }
 
@@ -219,6 +220,7 @@ func (inv *ActionUserNamespaceMapEntryUpdateInvocation) IsParameterSelected(para
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserNamespaceMapEntryUpdateInvocation) NewMetaInput() *ActionUserNamespaceMapEntryUpdateMetaGlobalInput {
@@ -247,7 +249,6 @@ func (inv *ActionUserNamespaceMapEntryUpdateInvocation) Call() (*ActionUserNames
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserNamespaceMapEntryUpdateInvocation) callAsBody() (*ActionUserNamespaceMapEntryUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserNamespaceMapEntryUpdateResponse{Action: inv.Action}
@@ -258,13 +259,10 @@ func (inv *ActionUserNamespaceMapEntryUpdateInvocation) callAsBody() (*ActionUse
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserNamespaceMapEntryUpdateInvocation) makeAllInputParams() *ActionUserNamespaceMapEntryUpdateRequest {
 	return &ActionUserNamespaceMapEntryUpdateRequest{
 		Entry: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:  inv.makeMetaInputParams(),
 	}
 }
 

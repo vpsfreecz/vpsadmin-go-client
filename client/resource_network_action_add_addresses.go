@@ -60,9 +60,9 @@ func (in *ActionNetworkAddAddressesMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkAddAddressesInput is a type for action input parameters
 type ActionNetworkAddAddressesInput struct {
-	Count int64 `json:"count"`
+	Count       int64 `json:"count"`
 	Environment int64 `json:"environment"`
-	User int64 `json:"user"`
+	User        int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -78,6 +78,7 @@ func (in *ActionNetworkAddAddressesInput) SetCount(value int64) *ActionNetworkAd
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetEnvironment sets parameter Environment to value and selects it for sending
 func (in *ActionNetworkAddAddressesInput) SetEnvironment(value int64) *ActionNetworkAddAddressesInput {
 	in.Environment = value
@@ -89,6 +90,7 @@ func (in *ActionNetworkAddAddressesInput) SetEnvironment(value int64) *ActionNet
 	in._selectedParameters["Environment"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionNetworkAddAddressesInput) SetUser(value int64) *ActionNetworkAddAddressesInput {
 	in.User = value
@@ -127,14 +129,13 @@ func (in *ActionNetworkAddAddressesInput) AnySelected() bool {
 // ActionNetworkAddAddressesRequest is a type for the entire action request
 type ActionNetworkAddAddressesRequest struct {
 	Network map[string]interface{} `json:"network"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta    map[string]interface{} `json:"_meta"`
 }
 
 // ActionNetworkAddAddressesOutput is a type for action output parameters
 type ActionNetworkAddAddressesOutput struct {
 	Count int64 `json:"count"`
 }
-
 
 // Type for action response, including envelope
 type ActionNetworkAddAddressesResponse struct {
@@ -149,12 +150,11 @@ type ActionNetworkAddAddressesResponse struct {
 	Output *ActionNetworkAddAddressesOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNetworkAddAddresses) Prepare() *ActionNetworkAddAddressesInvocation {
 	return &ActionNetworkAddAddressesInvocation{
 		Action: action,
-		Path: "/v6.0/networks/{network_id}/add_addresses",
+		Path:   "/v6.0/networks/{network_id}/add_addresses",
 	}
 }
 
@@ -203,6 +203,7 @@ func (inv *ActionNetworkAddAddressesInvocation) IsParameterSelected(param string
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionNetworkAddAddressesInvocation) NewMetaInput() *ActionNetworkAddAddressesMetaGlobalInput {
@@ -231,7 +232,6 @@ func (inv *ActionNetworkAddAddressesInvocation) Call() (*ActionNetworkAddAddress
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionNetworkAddAddressesInvocation) callAsBody() (*ActionNetworkAddAddressesResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionNetworkAddAddressesResponse{Action: inv.Action}
@@ -242,13 +242,10 @@ func (inv *ActionNetworkAddAddressesInvocation) callAsBody() (*ActionNetworkAddA
 	return resp, err
 }
 
-
-
-
 func (inv *ActionNetworkAddAddressesInvocation) makeAllInputParams() *ActionNetworkAddAddressesRequest {
 	return &ActionNetworkAddAddressesRequest{
 		Network: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:    inv.makeMetaInputParams(),
 	}
 }
 

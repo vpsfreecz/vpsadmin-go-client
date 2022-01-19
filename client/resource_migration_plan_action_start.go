@@ -19,7 +19,7 @@ func NewActionMigrationPlanStart(client *Client) *ActionMigrationPlanStart {
 // ActionMigrationPlanStartMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanStartMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMigrationPlanStartMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMigrationPlanStartMetaGlobalInput) SetNo(value bool) *ActionMigrationPlanStartMetaGlobalInput {
 	in.No = value
@@ -70,7 +71,6 @@ func (in *ActionMigrationPlanStartMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionMigrationPlanStartRequest is a type for the entire action request
 type ActionMigrationPlanStartRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
@@ -78,17 +78,16 @@ type ActionMigrationPlanStartRequest struct {
 
 // ActionMigrationPlanStartOutput is a type for action output parameters
 type ActionMigrationPlanStartOutput struct {
-	Concurrency int64 `json:"concurrency"`
-	CreatedAt string `json:"created_at"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	Reason string `json:"reason"`
-	SendMail bool `json:"send_mail"`
-	State string `json:"state"`
-	StopOnError bool `json:"stop_on_error"`
-	User *ActionUserShowOutput `json:"user"`
+	Concurrency int64                 `json:"concurrency"`
+	CreatedAt   string                `json:"created_at"`
+	FinishedAt  string                `json:"finished_at"`
+	Id          int64                 `json:"id"`
+	Reason      string                `json:"reason"`
+	SendMail    bool                  `json:"send_mail"`
+	State       string                `json:"state"`
+	StopOnError bool                  `json:"stop_on_error"`
+	User        *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionMigrationPlanStartResponse struct {
@@ -103,12 +102,11 @@ type ActionMigrationPlanStartResponse struct {
 	Output *ActionMigrationPlanStartOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMigrationPlanStart) Prepare() *ActionMigrationPlanStartInvocation {
 	return &ActionMigrationPlanStartInvocation{
 		Action: action,
-		Path: "/v6.0/migration_plans/{migration_plan_id}/start",
+		Path:   "/v6.0/migration_plans/{migration_plan_id}/start",
 	}
 }
 
@@ -162,7 +160,6 @@ func (inv *ActionMigrationPlanStartInvocation) Call() (*ActionMigrationPlanStart
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionMigrationPlanStartInvocation) callAsBody() (*ActionMigrationPlanStartResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionMigrationPlanStartResponse{Action: inv.Action}
@@ -173,15 +170,11 @@ func (inv *ActionMigrationPlanStartInvocation) callAsBody() (*ActionMigrationPla
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMigrationPlanStartInvocation) makeAllInputParams() *ActionMigrationPlanStartRequest {
 	return &ActionMigrationPlanStartRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionMigrationPlanStartInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

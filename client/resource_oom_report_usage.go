@@ -21,9 +21,9 @@ func NewResourceOomReportUsage(client *Client) *ResourceOomReportUsage {
 
 	return &ResourceOomReportUsage{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

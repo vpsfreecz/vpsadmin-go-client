@@ -19,7 +19,7 @@ func NewActionEnvironmentShow(client *Client) *ActionEnvironmentShow {
 // ActionEnvironmentShowMetaGlobalInput is a type for action global meta input parameters
 type ActionEnvironmentShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionEnvironmentShowMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionEnvironmentShowMetaGlobalInput) SetNo(value bool) *ActionEnvironmentShowMetaGlobalInput {
 	in.No = value
@@ -70,23 +71,20 @@ func (in *ActionEnvironmentShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionEnvironmentShowOutput is a type for action output parameters
 type ActionEnvironmentShowOutput struct {
-	CanCreateVps bool `json:"can_create_vps"`
-	CanDestroyVps bool `json:"can_destroy_vps"`
-	Description string `json:"description"`
-	Domain string `json:"domain"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	MaintenanceLock string `json:"maintenance_lock"`
+	CanCreateVps          bool   `json:"can_create_vps"`
+	CanDestroyVps         bool   `json:"can_destroy_vps"`
+	Description           string `json:"description"`
+	Domain                string `json:"domain"`
+	Id                    int64  `json:"id"`
+	Label                 string `json:"label"`
+	MaintenanceLock       string `json:"maintenance_lock"`
 	MaintenanceLockReason string `json:"maintenance_lock_reason"`
-	MaxVpsCount int64 `json:"max_vps_count"`
-	UserIpOwnership bool `json:"user_ip_ownership"`
-	VpsLifetime int64 `json:"vps_lifetime"`
+	MaxVpsCount           int64  `json:"max_vps_count"`
+	UserIpOwnership       bool   `json:"user_ip_ownership"`
+	VpsLifetime           int64  `json:"vps_lifetime"`
 }
-
 
 // Type for action response, including envelope
 type ActionEnvironmentShowResponse struct {
@@ -101,12 +99,11 @@ type ActionEnvironmentShowResponse struct {
 	Output *ActionEnvironmentShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionEnvironmentShow) Prepare() *ActionEnvironmentShowInvocation {
 	return &ActionEnvironmentShowInvocation{
 		Action: action,
-		Path: "/v6.0/environments/{environment_id}",
+		Path:   "/v6.0/environments/{environment_id}",
 	}
 }
 
@@ -171,9 +168,6 @@ func (inv *ActionEnvironmentShowInvocation) callAsQuery() (*ActionEnvironmentSho
 	return resp, err
 }
 
-
-
-
 func (inv *ActionEnvironmentShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -184,4 +178,3 @@ func (inv *ActionEnvironmentShowInvocation) convertMetaInputToQueryParams(ret ma
 		}
 	}
 }
-

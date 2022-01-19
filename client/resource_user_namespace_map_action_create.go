@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionUserNamespaceMapCreate is a type for action User_namespace_map#Create
 type ActionUserNamespaceMapCreate struct {
@@ -18,7 +17,7 @@ func NewActionUserNamespaceMapCreate(client *Client) *ActionUserNamespaceMapCrea
 // ActionUserNamespaceMapCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceMapCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionUserNamespaceMapCreateMetaGlobalInput) SetIncludes(value string)
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserNamespaceMapCreateMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceMapCreateMetaGlobalInput {
 	in.No = value
@@ -71,8 +71,8 @@ func (in *ActionUserNamespaceMapCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserNamespaceMapCreateInput is a type for action input parameters
 type ActionUserNamespaceMapCreateInput struct {
-	Label string `json:"label"`
-	UserNamespace int64 `json:"user_namespace"`
+	Label         string `json:"label"`
+	UserNamespace int64  `json:"user_namespace"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -88,6 +88,7 @@ func (in *ActionUserNamespaceMapCreateInput) SetLabel(value string) *ActionUserN
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetUserNamespace sets parameter UserNamespace to value and selects it for sending
 func (in *ActionUserNamespaceMapCreateInput) SetUserNamespace(value int64) *ActionUserNamespaceMapCreateInput {
 	in.UserNamespace = value
@@ -126,16 +127,15 @@ func (in *ActionUserNamespaceMapCreateInput) AnySelected() bool {
 // ActionUserNamespaceMapCreateRequest is a type for the entire action request
 type ActionUserNamespaceMapCreateRequest struct {
 	UserNamespaceMap map[string]interface{} `json:"user_namespace_map"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta             map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserNamespaceMapCreateOutput is a type for action output parameters
 type ActionUserNamespaceMapCreateOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
+	Id            int64                          `json:"id"`
+	Label         string                         `json:"label"`
 	UserNamespace *ActionUserNamespaceShowOutput `json:"user_namespace"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserNamespaceMapCreateResponse struct {
@@ -150,12 +150,11 @@ type ActionUserNamespaceMapCreateResponse struct {
 	Output *ActionUserNamespaceMapCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserNamespaceMapCreate) Prepare() *ActionUserNamespaceMapCreateInvocation {
 	return &ActionUserNamespaceMapCreateInvocation{
 		Action: action,
-		Path: "/v6.0/user_namespace_maps",
+		Path:   "/v6.0/user_namespace_maps",
 	}
 }
 
@@ -171,7 +170,6 @@ type ActionUserNamespaceMapCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionUserNamespaceMapCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionUserNamespaceMapCreateInvocation) NewInput() *ActionUserNamespaceMapCreateInput {
@@ -194,6 +192,7 @@ func (inv *ActionUserNamespaceMapCreateInvocation) IsParameterSelected(param str
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserNamespaceMapCreateInvocation) NewMetaInput() *ActionUserNamespaceMapCreateMetaGlobalInput {
@@ -222,7 +221,6 @@ func (inv *ActionUserNamespaceMapCreateInvocation) Call() (*ActionUserNamespaceM
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserNamespaceMapCreateInvocation) callAsBody() (*ActionUserNamespaceMapCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserNamespaceMapCreateResponse{Action: inv.Action}
@@ -233,13 +231,10 @@ func (inv *ActionUserNamespaceMapCreateInvocation) callAsBody() (*ActionUserName
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserNamespaceMapCreateInvocation) makeAllInputParams() *ActionUserNamespaceMapCreateRequest {
 	return &ActionUserNamespaceMapCreateRequest{
 		UserNamespaceMap: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:             inv.makeMetaInputParams(),
 	}
 }
 

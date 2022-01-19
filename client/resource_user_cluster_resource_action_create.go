@@ -19,7 +19,7 @@ func NewActionUserClusterResourceCreate(client *Client) *ActionUserClusterResour
 // ActionUserClusterResourceCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserClusterResourceCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserClusterResourceCreateMetaGlobalInput) SetIncludes(value stri
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserClusterResourceCreateMetaGlobalInput) SetNo(value bool) *ActionUserClusterResourceCreateMetaGlobalInput {
 	in.No = value
@@ -73,8 +74,8 @@ func (in *ActionUserClusterResourceCreateMetaGlobalInput) AnySelected() bool {
 // ActionUserClusterResourceCreateInput is a type for action input parameters
 type ActionUserClusterResourceCreateInput struct {
 	ClusterResource int64 `json:"cluster_resource"`
-	Environment int64 `json:"environment"`
-	Value int64 `json:"value"`
+	Environment     int64 `json:"environment"`
+	Value           int64 `json:"value"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -90,6 +91,7 @@ func (in *ActionUserClusterResourceCreateInput) SetClusterResource(value int64) 
 	in._selectedParameters["ClusterResource"] = nil
 	return in
 }
+
 // SetEnvironment sets parameter Environment to value and selects it for sending
 func (in *ActionUserClusterResourceCreateInput) SetEnvironment(value int64) *ActionUserClusterResourceCreateInput {
 	in.Environment = value
@@ -101,6 +103,7 @@ func (in *ActionUserClusterResourceCreateInput) SetEnvironment(value int64) *Act
 	in._selectedParameters["Environment"] = nil
 	return in
 }
+
 // SetValue sets parameter Value to value and selects it for sending
 func (in *ActionUserClusterResourceCreateInput) SetValue(value int64) *ActionUserClusterResourceCreateInput {
 	in.Value = value
@@ -139,19 +142,18 @@ func (in *ActionUserClusterResourceCreateInput) AnySelected() bool {
 // ActionUserClusterResourceCreateRequest is a type for the entire action request
 type ActionUserClusterResourceCreateRequest struct {
 	ClusterResource map[string]interface{} `json:"cluster_resource"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta            map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserClusterResourceCreateOutput is a type for action output parameters
 type ActionUserClusterResourceCreateOutput struct {
 	ClusterResource *ActionClusterResourceShowOutput `json:"cluster_resource"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	Free int64 `json:"free"`
-	Id int64 `json:"id"`
-	Used int64 `json:"used"`
-	Value int64 `json:"value"`
+	Environment     *ActionEnvironmentShowOutput     `json:"environment"`
+	Free            int64                            `json:"free"`
+	Id              int64                            `json:"id"`
+	Used            int64                            `json:"used"`
+	Value           int64                            `json:"value"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserClusterResourceCreateResponse struct {
@@ -166,12 +168,11 @@ type ActionUserClusterResourceCreateResponse struct {
 	Output *ActionUserClusterResourceCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserClusterResourceCreate) Prepare() *ActionUserClusterResourceCreateInvocation {
 	return &ActionUserClusterResourceCreateInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/cluster_resources",
+		Path:   "/v6.0/users/{user_id}/cluster_resources",
 	}
 }
 
@@ -220,6 +221,7 @@ func (inv *ActionUserClusterResourceCreateInvocation) IsParameterSelected(param 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserClusterResourceCreateInvocation) NewMetaInput() *ActionUserClusterResourceCreateMetaGlobalInput {
@@ -248,7 +250,6 @@ func (inv *ActionUserClusterResourceCreateInvocation) Call() (*ActionUserCluster
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserClusterResourceCreateInvocation) callAsBody() (*ActionUserClusterResourceCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserClusterResourceCreateResponse{Action: inv.Action}
@@ -259,13 +260,10 @@ func (inv *ActionUserClusterResourceCreateInvocation) callAsBody() (*ActionUserC
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserClusterResourceCreateInvocation) makeAllInputParams() *ActionUserClusterResourceCreateRequest {
 	return &ActionUserClusterResourceCreateRequest{
 		ClusterResource: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:            inv.makeMetaInputParams(),
 	}
 }
 

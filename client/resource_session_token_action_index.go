@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionSessionTokenIndex is a type for action Session_token#Index
 type ActionSessionTokenIndex struct {
@@ -17,9 +16,9 @@ func NewActionSessionTokenIndex(client *Client) *ActionSessionTokenIndex {
 
 // ActionSessionTokenIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionSessionTokenIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionSessionTokenIndexMetaGlobalInput) SetCount(value bool) *ActionSe
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionSessionTokenIndexMetaGlobalInput) SetIncludes(value string) *ActionSessionTokenIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionSessionTokenIndexMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionSessionTokenIndexMetaGlobalInput) SetNo(value bool) *ActionSessionTokenIndexMetaGlobalInput {
 	in.No = value
@@ -83,9 +84,9 @@ func (in *ActionSessionTokenIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionSessionTokenIndexInput is a type for action input parameters
 type ActionSessionTokenIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
-	User int64 `json:"user"`
+	User   int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -101,6 +102,7 @@ func (in *ActionSessionTokenIndexInput) SetLimit(value int64) *ActionSessionToke
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionSessionTokenIndexInput) SetOffset(value int64) *ActionSessionTokenIndexInput {
 	in.Offset = value
@@ -112,6 +114,7 @@ func (in *ActionSessionTokenIndexInput) SetOffset(value int64) *ActionSessionTok
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionSessionTokenIndexInput) SetUser(value int64) *ActionSessionTokenIndexInput {
 	in.User = value
@@ -147,20 +150,18 @@ func (in *ActionSessionTokenIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionSessionTokenIndexOutput is a type for action output parameters
 type ActionSessionTokenIndexOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	Interval int64 `json:"interval"`
-	Label string `json:"label"`
-	Lifetime string `json:"lifetime"`
-	Token string `json:"token"`
-	UseCount int64 `json:"use_count"`
-	User *ActionUserShowOutput `json:"user"`
-	ValidTo string `json:"valid_to"`
+	CreatedAt string                `json:"created_at"`
+	Id        int64                 `json:"id"`
+	Interval  int64                 `json:"interval"`
+	Label     string                `json:"label"`
+	Lifetime  string                `json:"lifetime"`
+	Token     string                `json:"token"`
+	UseCount  int64                 `json:"use_count"`
+	User      *ActionUserShowOutput `json:"user"`
+	ValidTo   string                `json:"valid_to"`
 }
-
 
 // Type for action response, including envelope
 type ActionSessionTokenIndexResponse struct {
@@ -175,12 +176,11 @@ type ActionSessionTokenIndexResponse struct {
 	Output []*ActionSessionTokenIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionSessionTokenIndex) Prepare() *ActionSessionTokenIndexInvocation {
 	return &ActionSessionTokenIndexInvocation{
 		Action: action,
-		Path: "/v6.0/session_tokens",
+		Path:   "/v6.0/session_tokens",
 	}
 }
 
@@ -196,7 +196,6 @@ type ActionSessionTokenIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionSessionTokenIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionSessionTokenIndexInvocation) NewInput() *ActionSessionTokenIndexInput {
@@ -219,6 +218,7 @@ func (inv *ActionSessionTokenIndexInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionSessionTokenIndexInvocation) NewMetaInput() *ActionSessionTokenIndexMetaGlobalInput {
@@ -259,8 +259,6 @@ func (inv *ActionSessionTokenIndexInvocation) callAsQuery() (*ActionSessionToken
 	return resp, err
 }
 
-
-
 func (inv *ActionSessionTokenIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -288,4 +286,3 @@ func (inv *ActionSessionTokenIndexInvocation) convertMetaInputToQueryParams(ret 
 		}
 	}
 }
-

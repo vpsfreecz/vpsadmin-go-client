@@ -30,11 +30,11 @@ func NewResourceVpsConfig(client *Client) *ResourceVpsConfig {
 	return &ResourceVpsConfig{
 		Client: client,
 		Create: actionCreate,
-		New: actionCreate,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		New:    actionCreate,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 		Update: actionUpdate,
 	}
 }

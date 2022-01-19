@@ -19,7 +19,7 @@ func NewActionUserPaymentShow(client *Client) *ActionUserPaymentShow {
 // ActionUserPaymentShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPaymentShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserPaymentShowMetaGlobalInput) SetIncludes(value string) *Actio
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserPaymentShowMetaGlobalInput) SetNo(value bool) *ActionUserPaymentShowMetaGlobalInput {
 	in.No = value
@@ -70,20 +71,17 @@ func (in *ActionUserPaymentShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserPaymentShowOutput is a type for action output parameters
 type ActionUserPaymentShowOutput struct {
-	AccountedBy *ActionUserShowOutput `json:"accounted_by"`
-	Amount int64 `json:"amount"`
-	CreatedAt string `json:"created_at"`
-	FromDate string `json:"from_date"`
-	Id int64 `json:"id"`
+	AccountedBy     *ActionUserShowOutput            `json:"accounted_by"`
+	Amount          int64                            `json:"amount"`
+	CreatedAt       string                           `json:"created_at"`
+	FromDate        string                           `json:"from_date"`
+	Id              int64                            `json:"id"`
 	IncomingPayment *ActionIncomingPaymentShowOutput `json:"incoming_payment"`
-	ToDate string `json:"to_date"`
-	User *ActionUserShowOutput `json:"user"`
+	ToDate          string                           `json:"to_date"`
+	User            *ActionUserShowOutput            `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserPaymentShowResponse struct {
@@ -98,12 +96,11 @@ type ActionUserPaymentShowResponse struct {
 	Output *ActionUserPaymentShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserPaymentShow) Prepare() *ActionUserPaymentShowInvocation {
 	return &ActionUserPaymentShowInvocation{
 		Action: action,
-		Path: "/v6.0/user_payments/{user_payment_id}",
+		Path:   "/v6.0/user_payments/{user_payment_id}",
 	}
 }
 
@@ -168,9 +165,6 @@ func (inv *ActionUserPaymentShowInvocation) callAsQuery() (*ActionUserPaymentSho
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserPaymentShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -181,4 +175,3 @@ func (inv *ActionUserPaymentShowInvocation) convertMetaInputToQueryParams(ret ma
 		}
 	}
 }
-

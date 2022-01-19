@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionUserSessionIndex is a type for action User_session#Index
 type ActionUserSessionIndex struct {
@@ -17,9 +16,9 @@ func NewActionUserSessionIndex(client *Client) *ActionUserSessionIndex {
 
 // ActionUserSessionIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserSessionIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionUserSessionIndexMetaGlobalInput) SetCount(value bool) *ActionUse
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserSessionIndexMetaGlobalInput) SetIncludes(value string) *ActionUserSessionIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionUserSessionIndexMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserSessionIndexMetaGlobalInput) SetNo(value bool) *ActionUserSessionIndexMetaGlobalInput {
 	in.No = value
@@ -83,16 +84,16 @@ func (in *ActionUserSessionIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserSessionIndexInput is a type for action input parameters
 type ActionUserSessionIndexInput struct {
-	Admin int64 `json:"admin"`
-	ApiIpAddr string `json:"api_ip_addr"`
-	AuthType string `json:"auth_type"`
-	ClientIpAddr string `json:"client_ip_addr"`
+	Admin         int64  `json:"admin"`
+	ApiIpAddr     string `json:"api_ip_addr"`
+	AuthType      string `json:"auth_type"`
+	ClientIpAddr  string `json:"client_ip_addr"`
 	ClientVersion string `json:"client_version"`
-	IpAddr string `json:"ip_addr"`
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
-	User int64 `json:"user"`
-	UserAgent string `json:"user_agent"`
+	IpAddr        string `json:"ip_addr"`
+	Limit         int64  `json:"limit"`
+	Offset        int64  `json:"offset"`
+	User          int64  `json:"user"`
+	UserAgent     string `json:"user_agent"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -108,6 +109,7 @@ func (in *ActionUserSessionIndexInput) SetAdmin(value int64) *ActionUserSessionI
 	in._selectedParameters["Admin"] = nil
 	return in
 }
+
 // SetApiIpAddr sets parameter ApiIpAddr to value and selects it for sending
 func (in *ActionUserSessionIndexInput) SetApiIpAddr(value string) *ActionUserSessionIndexInput {
 	in.ApiIpAddr = value
@@ -119,6 +121,7 @@ func (in *ActionUserSessionIndexInput) SetApiIpAddr(value string) *ActionUserSes
 	in._selectedParameters["ApiIpAddr"] = nil
 	return in
 }
+
 // SetAuthType sets parameter AuthType to value and selects it for sending
 func (in *ActionUserSessionIndexInput) SetAuthType(value string) *ActionUserSessionIndexInput {
 	in.AuthType = value
@@ -130,6 +133,7 @@ func (in *ActionUserSessionIndexInput) SetAuthType(value string) *ActionUserSess
 	in._selectedParameters["AuthType"] = nil
 	return in
 }
+
 // SetClientIpAddr sets parameter ClientIpAddr to value and selects it for sending
 func (in *ActionUserSessionIndexInput) SetClientIpAddr(value string) *ActionUserSessionIndexInput {
 	in.ClientIpAddr = value
@@ -141,6 +145,7 @@ func (in *ActionUserSessionIndexInput) SetClientIpAddr(value string) *ActionUser
 	in._selectedParameters["ClientIpAddr"] = nil
 	return in
 }
+
 // SetClientVersion sets parameter ClientVersion to value and selects it for sending
 func (in *ActionUserSessionIndexInput) SetClientVersion(value string) *ActionUserSessionIndexInput {
 	in.ClientVersion = value
@@ -152,6 +157,7 @@ func (in *ActionUserSessionIndexInput) SetClientVersion(value string) *ActionUse
 	in._selectedParameters["ClientVersion"] = nil
 	return in
 }
+
 // SetIpAddr sets parameter IpAddr to value and selects it for sending
 func (in *ActionUserSessionIndexInput) SetIpAddr(value string) *ActionUserSessionIndexInput {
 	in.IpAddr = value
@@ -163,6 +169,7 @@ func (in *ActionUserSessionIndexInput) SetIpAddr(value string) *ActionUserSessio
 	in._selectedParameters["IpAddr"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserSessionIndexInput) SetLimit(value int64) *ActionUserSessionIndexInput {
 	in.Limit = value
@@ -174,6 +181,7 @@ func (in *ActionUserSessionIndexInput) SetLimit(value int64) *ActionUserSessionI
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionUserSessionIndexInput) SetOffset(value int64) *ActionUserSessionIndexInput {
 	in.Offset = value
@@ -185,6 +193,7 @@ func (in *ActionUserSessionIndexInput) SetOffset(value int64) *ActionUserSession
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionUserSessionIndexInput) SetUser(value int64) *ActionUserSessionIndexInput {
 	in.User = value
@@ -196,6 +205,7 @@ func (in *ActionUserSessionIndexInput) SetUser(value int64) *ActionUserSessionIn
 	in._selectedParameters["User"] = nil
 	return in
 }
+
 // SetUserAgent sets parameter UserAgent to value and selects it for sending
 func (in *ActionUserSessionIndexInput) SetUserAgent(value string) *ActionUserSessionIndexInput {
 	in.UserAgent = value
@@ -231,26 +241,24 @@ func (in *ActionUserSessionIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserSessionIndexOutput is a type for action output parameters
 type ActionUserSessionIndexOutput struct {
-	Admin *ActionUserShowOutput `json:"admin"`
-	ApiIpAddr string `json:"api_ip_addr"`
-	ApiIpPtr string `json:"api_ip_ptr"`
-	AuthType string `json:"auth_type"`
-	ClientIpAddr string `json:"client_ip_addr"`
-	ClientIpPtr string `json:"client_ip_ptr"`
-	ClientVersion string `json:"client_version"`
-	ClosedAt string `json:"closed_at"`
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	LastRequestAt string `json:"last_request_at"`
-	SessionToken *ActionSessionTokenShowOutput `json:"session_token"`
-	SessionTokenStr string `json:"session_token_str"`
-	User *ActionUserShowOutput `json:"user"`
-	UserAgent string `json:"user_agent"`
+	Admin           *ActionUserShowOutput         `json:"admin"`
+	ApiIpAddr       string                        `json:"api_ip_addr"`
+	ApiIpPtr        string                        `json:"api_ip_ptr"`
+	AuthType        string                        `json:"auth_type"`
+	ClientIpAddr    string                        `json:"client_ip_addr"`
+	ClientIpPtr     string                        `json:"client_ip_ptr"`
+	ClientVersion   string                        `json:"client_version"`
+	ClosedAt        string                        `json:"closed_at"`
+	CreatedAt       string                        `json:"created_at"`
+	Id              int64                         `json:"id"`
+	LastRequestAt   string                        `json:"last_request_at"`
+	SessionToken    *ActionSessionTokenShowOutput `json:"session_token"`
+	SessionTokenStr string                        `json:"session_token_str"`
+	User            *ActionUserShowOutput         `json:"user"`
+	UserAgent       string                        `json:"user_agent"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserSessionIndexResponse struct {
@@ -265,12 +273,11 @@ type ActionUserSessionIndexResponse struct {
 	Output []*ActionUserSessionIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserSessionIndex) Prepare() *ActionUserSessionIndexInvocation {
 	return &ActionUserSessionIndexInvocation{
 		Action: action,
-		Path: "/v6.0/user_sessions",
+		Path:   "/v6.0/user_sessions",
 	}
 }
 
@@ -286,7 +293,6 @@ type ActionUserSessionIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionUserSessionIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionUserSessionIndexInvocation) NewInput() *ActionUserSessionIndexInput {
@@ -309,6 +315,7 @@ func (inv *ActionUserSessionIndexInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserSessionIndexInvocation) NewMetaInput() *ActionUserSessionIndexMetaGlobalInput {
@@ -348,8 +355,6 @@ func (inv *ActionUserSessionIndexInvocation) callAsQuery() (*ActionUserSessionIn
 	}
 	return resp, err
 }
-
-
 
 func (inv *ActionUserSessionIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
@@ -399,4 +404,3 @@ func (inv *ActionUserSessionIndexInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

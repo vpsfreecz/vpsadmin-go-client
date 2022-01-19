@@ -21,9 +21,9 @@ func NewResourceVpsOutageMount(client *Client) *ResourceVpsOutageMount {
 
 	return &ResourceVpsOutageMount{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

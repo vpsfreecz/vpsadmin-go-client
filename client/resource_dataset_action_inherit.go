@@ -19,7 +19,7 @@ func NewActionDatasetInherit(client *Client) *ActionDatasetInherit {
 // ActionDatasetInheritMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetInheritMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionDatasetInheritMetaGlobalInput) SetIncludes(value string) *Action
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDatasetInheritMetaGlobalInput) SetNo(value bool) *ActionDatasetInheritMetaGlobalInput {
 	in.No = value
@@ -115,9 +116,8 @@ func (in *ActionDatasetInheritInput) AnySelected() bool {
 // ActionDatasetInheritRequest is a type for the entire action request
 type ActionDatasetInheritRequest struct {
 	Dataset map[string]interface{} `json:"dataset"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta    map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionDatasetInheritMetaGlobalOutput is a type for global output metadata parameters
 type ActionDatasetInheritMetaGlobalOutput struct {
@@ -135,12 +135,11 @@ type ActionDatasetInheritResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDatasetInherit) Prepare() *ActionDatasetInheritInvocation {
 	return &ActionDatasetInheritInvocation{
 		Action: action,
-		Path: "/v6.0/datasets/{dataset_id}/inherit",
+		Path:   "/v6.0/datasets/{dataset_id}/inherit",
 	}
 }
 
@@ -189,6 +188,7 @@ func (inv *ActionDatasetInheritInvocation) IsParameterSelected(param string) boo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionDatasetInheritInvocation) NewMetaInput() *ActionDatasetInheritMetaGlobalInput {
@@ -216,7 +216,6 @@ func (inv *ActionDatasetInheritInvocation) IsMetaParameterSelected(param string)
 func (inv *ActionDatasetInheritInvocation) Call() (*ActionDatasetInheritResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionDatasetInheritInvocation) callAsBody() (*ActionDatasetInheritResponse, error) {
 	input := inv.makeAllInputParams()
@@ -274,11 +273,11 @@ func (resp *ActionDatasetInheritResponse) WatchOperation(timeout float64, update
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -301,12 +300,10 @@ func (resp *ActionDatasetInheritResponse) CancelOperation() (*ActionActionStateC
 	return req.Call()
 }
 
-
-
 func (inv *ActionDatasetInheritInvocation) makeAllInputParams() *ActionDatasetInheritRequest {
 	return &ActionDatasetInheritRequest{
 		Dataset: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:    inv.makeMetaInputParams(),
 	}
 }
 

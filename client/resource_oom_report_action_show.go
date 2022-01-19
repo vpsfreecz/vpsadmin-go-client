@@ -19,7 +19,7 @@ func NewActionOomReportShow(client *Client) *ActionOomReportShow {
 // ActionOomReportShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOomReportShowMetaGlobalInput) SetIncludes(value string) *ActionO
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOomReportShowMetaGlobalInput) SetNo(value bool) *ActionOomReportShowMetaGlobalInput {
 	in.No = value
@@ -70,20 +71,17 @@ func (in *ActionOomReportShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionOomReportShowOutput is a type for action output parameters
 type ActionOomReportShowOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	InvokedByName string `json:"invoked_by_name"`
-	InvokedByPid int64 `json:"invoked_by_pid"`
-	KilledName string `json:"killed_name"`
-	KilledPid int64 `json:"killed_pid"`
-	ReportedAt string `json:"reported_at"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	CreatedAt     string               `json:"created_at"`
+	Id            int64                `json:"id"`
+	InvokedByName string               `json:"invoked_by_name"`
+	InvokedByPid  int64                `json:"invoked_by_pid"`
+	KilledName    string               `json:"killed_name"`
+	KilledPid     int64                `json:"killed_pid"`
+	ReportedAt    string               `json:"reported_at"`
+	Vps           *ActionVpsShowOutput `json:"vps"`
 }
-
 
 // Type for action response, including envelope
 type ActionOomReportShowResponse struct {
@@ -98,12 +96,11 @@ type ActionOomReportShowResponse struct {
 	Output *ActionOomReportShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOomReportShow) Prepare() *ActionOomReportShowInvocation {
 	return &ActionOomReportShowInvocation{
 		Action: action,
-		Path: "/v6.0/oom_reports/{oom_report_id}",
+		Path:   "/v6.0/oom_reports/{oom_report_id}",
 	}
 }
 
@@ -168,9 +165,6 @@ func (inv *ActionOomReportShowInvocation) callAsQuery() (*ActionOomReportShowRes
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOomReportShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -181,4 +175,3 @@ func (inv *ActionOomReportShowInvocation) convertMetaInputToQueryParams(ret map[
 		}
 	}
 }
-

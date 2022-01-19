@@ -18,9 +18,9 @@ func NewActionUserEnvironmentConfigIndex(client *Client) *ActionUserEnvironmentC
 
 // ActionUserEnvironmentConfigIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserEnvironmentConfigIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionUserEnvironmentConfigIndexMetaGlobalInput) SetCount(value bool) 
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserEnvironmentConfigIndexMetaGlobalInput) SetIncludes(value string) *ActionUserEnvironmentConfigIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionUserEnvironmentConfigIndexMetaGlobalInput) SetIncludes(value str
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserEnvironmentConfigIndexMetaGlobalInput) SetNo(value bool) *ActionUserEnvironmentConfigIndexMetaGlobalInput {
 	in.No = value
@@ -85,8 +87,8 @@ func (in *ActionUserEnvironmentConfigIndexMetaGlobalInput) AnySelected() bool {
 // ActionUserEnvironmentConfigIndexInput is a type for action input parameters
 type ActionUserEnvironmentConfigIndexInput struct {
 	Environment int64 `json:"environment"`
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
+	Limit       int64 `json:"limit"`
+	Offset      int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -102,6 +104,7 @@ func (in *ActionUserEnvironmentConfigIndexInput) SetEnvironment(value int64) *Ac
 	in._selectedParameters["Environment"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserEnvironmentConfigIndexInput) SetLimit(value int64) *ActionUserEnvironmentConfigIndexInput {
 	in.Limit = value
@@ -113,6 +116,7 @@ func (in *ActionUserEnvironmentConfigIndexInput) SetLimit(value int64) *ActionUs
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionUserEnvironmentConfigIndexInput) SetOffset(value int64) *ActionUserEnvironmentConfigIndexInput {
 	in.Offset = value
@@ -148,18 +152,16 @@ func (in *ActionUserEnvironmentConfigIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserEnvironmentConfigIndexOutput is a type for action output parameters
 type ActionUserEnvironmentConfigIndexOutput struct {
-	CanCreateVps bool `json:"can_create_vps"`
-	CanDestroyVps bool `json:"can_destroy_vps"`
-	Default bool `json:"default"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	Id int64 `json:"id"`
-	MaxVpsCount int64 `json:"max_vps_count"`
-	VpsLifetime int64 `json:"vps_lifetime"`
+	CanCreateVps  bool                         `json:"can_create_vps"`
+	CanDestroyVps bool                         `json:"can_destroy_vps"`
+	Default       bool                         `json:"default"`
+	Environment   *ActionEnvironmentShowOutput `json:"environment"`
+	Id            int64                        `json:"id"`
+	MaxVpsCount   int64                        `json:"max_vps_count"`
+	VpsLifetime   int64                        `json:"vps_lifetime"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserEnvironmentConfigIndexResponse struct {
@@ -174,12 +176,11 @@ type ActionUserEnvironmentConfigIndexResponse struct {
 	Output []*ActionUserEnvironmentConfigIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserEnvironmentConfigIndex) Prepare() *ActionUserEnvironmentConfigIndexInvocation {
 	return &ActionUserEnvironmentConfigIndexInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/environment_configs",
+		Path:   "/v6.0/users/{user_id}/environment_configs",
 	}
 }
 
@@ -228,6 +229,7 @@ func (inv *ActionUserEnvironmentConfigIndexInvocation) IsParameterSelected(param
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserEnvironmentConfigIndexInvocation) NewMetaInput() *ActionUserEnvironmentConfigIndexMetaGlobalInput {
@@ -268,8 +270,6 @@ func (inv *ActionUserEnvironmentConfigIndexInvocation) callAsQuery() (*ActionUse
 	return resp, err
 }
 
-
-
 func (inv *ActionUserEnvironmentConfigIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Environment") {
@@ -297,4 +297,3 @@ func (inv *ActionUserEnvironmentConfigIndexInvocation) convertMetaInputToQueryPa
 		}
 	}
 }
-

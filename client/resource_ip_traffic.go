@@ -23,11 +23,11 @@ func NewResourceIpTraffic(client *Client) *ResourceIpTraffic {
 	actionUserTop := NewActionIpTrafficUserTop(client)
 
 	return &ResourceIpTraffic{
-		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Client:  client,
+		Index:   actionIndex,
+		List:    actionIndex,
+		Show:    actionShow,
+		Find:    actionShow,
 		UserTop: actionUserTop,
 	}
 }

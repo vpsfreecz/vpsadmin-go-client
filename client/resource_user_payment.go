@@ -27,10 +27,10 @@ func NewResourceUserPayment(client *Client) *ResourceUserPayment {
 	return &ResourceUserPayment{
 		Client: client,
 		Create: actionCreate,
-		New: actionCreate,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		New:    actionCreate,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

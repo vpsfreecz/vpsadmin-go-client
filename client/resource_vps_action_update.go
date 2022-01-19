@@ -19,7 +19,7 @@ func NewActionVpsUpdate(client *Client) *ActionVpsUpdate {
 // ActionVpsUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsUpdateMetaGlobalInput) SetIncludes(value string) *ActionVpsUp
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsUpdateMetaGlobalInput) SetNo(value bool) *ActionVpsUpdateMetaGlobalInput {
 	in.No = value
@@ -72,25 +73,25 @@ func (in *ActionVpsUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsUpdateInput is a type for action input parameters
 type ActionVpsUpdateInput struct {
-	AdminLockType string `json:"admin_lock_type"`
-	AdminOverride bool `json:"admin_override"`
-	ChangeReason string `json:"change_reason"`
-	Config string `json:"config"`
-	Cpu int64 `json:"cpu"`
-	CpuLimit int64 `json:"cpu_limit"`
-	DnsResolver int64 `json:"dns_resolver"`
+	AdminLockType  string `json:"admin_lock_type"`
+	AdminOverride  bool   `json:"admin_override"`
+	ChangeReason   string `json:"change_reason"`
+	Config         string `json:"config"`
+	Cpu            int64  `json:"cpu"`
+	CpuLimit       int64  `json:"cpu_limit"`
+	DnsResolver    int64  `json:"dns_resolver"`
 	ExpirationDate string `json:"expiration_date"`
-	Hostname string `json:"hostname"`
-	Info string `json:"info"`
-	ManageHostname bool `json:"manage_hostname"`
-	Memory int64 `json:"memory"`
-	Node int64 `json:"node"`
-	ObjectState string `json:"object_state"`
-	Onboot bool `json:"onboot"`
-	Onstartall bool `json:"onstartall"`
-	OsTemplate int64 `json:"os_template"`
-	Swap int64 `json:"swap"`
-	User int64 `json:"user"`
+	Hostname       string `json:"hostname"`
+	Info           string `json:"info"`
+	ManageHostname bool   `json:"manage_hostname"`
+	Memory         int64  `json:"memory"`
+	Node           int64  `json:"node"`
+	ObjectState    string `json:"object_state"`
+	Onboot         bool   `json:"onboot"`
+	Onstartall     bool   `json:"onstartall"`
+	OsTemplate     int64  `json:"os_template"`
+	Swap           int64  `json:"swap"`
+	User           int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -106,6 +107,7 @@ func (in *ActionVpsUpdateInput) SetAdminLockType(value string) *ActionVpsUpdateI
 	in._selectedParameters["AdminLockType"] = nil
 	return in
 }
+
 // SetAdminOverride sets parameter AdminOverride to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetAdminOverride(value bool) *ActionVpsUpdateInput {
 	in.AdminOverride = value
@@ -117,6 +119,7 @@ func (in *ActionVpsUpdateInput) SetAdminOverride(value bool) *ActionVpsUpdateInp
 	in._selectedParameters["AdminOverride"] = nil
 	return in
 }
+
 // SetChangeReason sets parameter ChangeReason to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetChangeReason(value string) *ActionVpsUpdateInput {
 	in.ChangeReason = value
@@ -128,6 +131,7 @@ func (in *ActionVpsUpdateInput) SetChangeReason(value string) *ActionVpsUpdateIn
 	in._selectedParameters["ChangeReason"] = nil
 	return in
 }
+
 // SetConfig sets parameter Config to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetConfig(value string) *ActionVpsUpdateInput {
 	in.Config = value
@@ -139,6 +143,7 @@ func (in *ActionVpsUpdateInput) SetConfig(value string) *ActionVpsUpdateInput {
 	in._selectedParameters["Config"] = nil
 	return in
 }
+
 // SetCpu sets parameter Cpu to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetCpu(value int64) *ActionVpsUpdateInput {
 	in.Cpu = value
@@ -150,6 +155,7 @@ func (in *ActionVpsUpdateInput) SetCpu(value int64) *ActionVpsUpdateInput {
 	in._selectedParameters["Cpu"] = nil
 	return in
 }
+
 // SetCpuLimit sets parameter CpuLimit to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetCpuLimit(value int64) *ActionVpsUpdateInput {
 	in.CpuLimit = value
@@ -161,6 +167,7 @@ func (in *ActionVpsUpdateInput) SetCpuLimit(value int64) *ActionVpsUpdateInput {
 	in._selectedParameters["CpuLimit"] = nil
 	return in
 }
+
 // SetDnsResolver sets parameter DnsResolver to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetDnsResolver(value int64) *ActionVpsUpdateInput {
 	in.DnsResolver = value
@@ -172,6 +179,7 @@ func (in *ActionVpsUpdateInput) SetDnsResolver(value int64) *ActionVpsUpdateInpu
 	in._selectedParameters["DnsResolver"] = nil
 	return in
 }
+
 // SetExpirationDate sets parameter ExpirationDate to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetExpirationDate(value string) *ActionVpsUpdateInput {
 	in.ExpirationDate = value
@@ -183,6 +191,7 @@ func (in *ActionVpsUpdateInput) SetExpirationDate(value string) *ActionVpsUpdate
 	in._selectedParameters["ExpirationDate"] = nil
 	return in
 }
+
 // SetHostname sets parameter Hostname to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetHostname(value string) *ActionVpsUpdateInput {
 	in.Hostname = value
@@ -194,6 +203,7 @@ func (in *ActionVpsUpdateInput) SetHostname(value string) *ActionVpsUpdateInput 
 	in._selectedParameters["Hostname"] = nil
 	return in
 }
+
 // SetInfo sets parameter Info to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetInfo(value string) *ActionVpsUpdateInput {
 	in.Info = value
@@ -205,6 +215,7 @@ func (in *ActionVpsUpdateInput) SetInfo(value string) *ActionVpsUpdateInput {
 	in._selectedParameters["Info"] = nil
 	return in
 }
+
 // SetManageHostname sets parameter ManageHostname to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetManageHostname(value bool) *ActionVpsUpdateInput {
 	in.ManageHostname = value
@@ -216,6 +227,7 @@ func (in *ActionVpsUpdateInput) SetManageHostname(value bool) *ActionVpsUpdateIn
 	in._selectedParameters["ManageHostname"] = nil
 	return in
 }
+
 // SetMemory sets parameter Memory to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetMemory(value int64) *ActionVpsUpdateInput {
 	in.Memory = value
@@ -227,6 +239,7 @@ func (in *ActionVpsUpdateInput) SetMemory(value int64) *ActionVpsUpdateInput {
 	in._selectedParameters["Memory"] = nil
 	return in
 }
+
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetNode(value int64) *ActionVpsUpdateInput {
 	in.Node = value
@@ -238,6 +251,7 @@ func (in *ActionVpsUpdateInput) SetNode(value int64) *ActionVpsUpdateInput {
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetObjectState sets parameter ObjectState to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetObjectState(value string) *ActionVpsUpdateInput {
 	in.ObjectState = value
@@ -249,6 +263,7 @@ func (in *ActionVpsUpdateInput) SetObjectState(value string) *ActionVpsUpdateInp
 	in._selectedParameters["ObjectState"] = nil
 	return in
 }
+
 // SetOnboot sets parameter Onboot to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetOnboot(value bool) *ActionVpsUpdateInput {
 	in.Onboot = value
@@ -260,6 +275,7 @@ func (in *ActionVpsUpdateInput) SetOnboot(value bool) *ActionVpsUpdateInput {
 	in._selectedParameters["Onboot"] = nil
 	return in
 }
+
 // SetOnstartall sets parameter Onstartall to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetOnstartall(value bool) *ActionVpsUpdateInput {
 	in.Onstartall = value
@@ -271,6 +287,7 @@ func (in *ActionVpsUpdateInput) SetOnstartall(value bool) *ActionVpsUpdateInput 
 	in._selectedParameters["Onstartall"] = nil
 	return in
 }
+
 // SetOsTemplate sets parameter OsTemplate to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetOsTemplate(value int64) *ActionVpsUpdateInput {
 	in.OsTemplate = value
@@ -282,6 +299,7 @@ func (in *ActionVpsUpdateInput) SetOsTemplate(value int64) *ActionVpsUpdateInput
 	in._selectedParameters["OsTemplate"] = nil
 	return in
 }
+
 // SetSwap sets parameter Swap to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetSwap(value int64) *ActionVpsUpdateInput {
 	in.Swap = value
@@ -293,6 +311,7 @@ func (in *ActionVpsUpdateInput) SetSwap(value int64) *ActionVpsUpdateInput {
 	in._selectedParameters["Swap"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetUser(value int64) *ActionVpsUpdateInput {
 	in.User = value
@@ -330,10 +349,9 @@ func (in *ActionVpsUpdateInput) AnySelected() bool {
 
 // ActionVpsUpdateRequest is a type for the entire action request
 type ActionVpsUpdateRequest struct {
-	Vps map[string]interface{} `json:"vps"`
+	Vps  map[string]interface{} `json:"vps"`
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionVpsUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsUpdateMetaGlobalOutput struct {
@@ -351,12 +369,11 @@ type ActionVpsUpdateResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsUpdate) Prepare() *ActionVpsUpdateInvocation {
 	return &ActionVpsUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}",
+		Path:   "/v6.0/vpses/{vps_id}",
 	}
 }
 
@@ -405,6 +422,7 @@ func (inv *ActionVpsUpdateInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsUpdateInvocation) NewMetaInput() *ActionVpsUpdateMetaGlobalInput {
@@ -432,7 +450,6 @@ func (inv *ActionVpsUpdateInvocation) IsMetaParameterSelected(param string) bool
 func (inv *ActionVpsUpdateInvocation) Call() (*ActionVpsUpdateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsUpdateInvocation) callAsBody() (*ActionVpsUpdateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -490,11 +507,11 @@ func (resp *ActionVpsUpdateResponse) WatchOperation(timeout float64, updateIn fl
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -517,11 +534,9 @@ func (resp *ActionVpsUpdateResponse) CancelOperation() (*ActionActionStateCancel
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsUpdateInvocation) makeAllInputParams() *ActionVpsUpdateRequest {
 	return &ActionVpsUpdateRequest{
-		Vps: inv.makeInputParams(),
+		Vps:  inv.makeInputParams(),
 		Meta: inv.makeMetaInputParams(),
 	}
 }

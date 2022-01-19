@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionUserCreate is a type for action User#Create
 type ActionUserCreate struct {
@@ -18,7 +17,7 @@ func NewActionUserCreate(client *Client) *ActionUserCreate {
 // ActionUserCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionUserCreateMetaGlobalInput) SetIncludes(value string) *ActionUser
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserCreateMetaGlobalInput) SetNo(value bool) *ActionUserCreateMetaGlobalInput {
 	in.No = value
@@ -71,22 +71,22 @@ func (in *ActionUserCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserCreateInput is a type for action input parameters
 type ActionUserCreateInput struct {
-	Address string `json:"address"`
-	Email string `json:"email"`
-	Environment int64 `json:"environment"`
-	FullName string `json:"full_name"`
-	Info string `json:"info"`
-	Language int64 `json:"language"`
-	Level int64 `json:"level"`
-	Location int64 `json:"location"`
-	Lockout bool `json:"lockout"`
-	Login string `json:"login"`
-	MailerEnabled bool `json:"mailer_enabled"`
-	Node int64 `json:"node"`
-	OsTemplate int64 `json:"os_template"`
-	Password string `json:"password"`
-	PasswordReset bool `json:"password_reset"`
-	Vps bool `json:"vps"`
+	Address       string `json:"address"`
+	Email         string `json:"email"`
+	Environment   int64  `json:"environment"`
+	FullName      string `json:"full_name"`
+	Info          string `json:"info"`
+	Language      int64  `json:"language"`
+	Level         int64  `json:"level"`
+	Location      int64  `json:"location"`
+	Lockout       bool   `json:"lockout"`
+	Login         string `json:"login"`
+	MailerEnabled bool   `json:"mailer_enabled"`
+	Node          int64  `json:"node"`
+	OsTemplate    int64  `json:"os_template"`
+	Password      string `json:"password"`
+	PasswordReset bool   `json:"password_reset"`
+	Vps           bool   `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -102,6 +102,7 @@ func (in *ActionUserCreateInput) SetAddress(value string) *ActionUserCreateInput
 	in._selectedParameters["Address"] = nil
 	return in
 }
+
 // SetEmail sets parameter Email to value and selects it for sending
 func (in *ActionUserCreateInput) SetEmail(value string) *ActionUserCreateInput {
 	in.Email = value
@@ -113,6 +114,7 @@ func (in *ActionUserCreateInput) SetEmail(value string) *ActionUserCreateInput {
 	in._selectedParameters["Email"] = nil
 	return in
 }
+
 // SetEnvironment sets parameter Environment to value and selects it for sending
 func (in *ActionUserCreateInput) SetEnvironment(value int64) *ActionUserCreateInput {
 	in.Environment = value
@@ -124,6 +126,7 @@ func (in *ActionUserCreateInput) SetEnvironment(value int64) *ActionUserCreateIn
 	in._selectedParameters["Environment"] = nil
 	return in
 }
+
 // SetFullName sets parameter FullName to value and selects it for sending
 func (in *ActionUserCreateInput) SetFullName(value string) *ActionUserCreateInput {
 	in.FullName = value
@@ -135,6 +138,7 @@ func (in *ActionUserCreateInput) SetFullName(value string) *ActionUserCreateInpu
 	in._selectedParameters["FullName"] = nil
 	return in
 }
+
 // SetInfo sets parameter Info to value and selects it for sending
 func (in *ActionUserCreateInput) SetInfo(value string) *ActionUserCreateInput {
 	in.Info = value
@@ -146,6 +150,7 @@ func (in *ActionUserCreateInput) SetInfo(value string) *ActionUserCreateInput {
 	in._selectedParameters["Info"] = nil
 	return in
 }
+
 // SetLanguage sets parameter Language to value and selects it for sending
 func (in *ActionUserCreateInput) SetLanguage(value int64) *ActionUserCreateInput {
 	in.Language = value
@@ -157,6 +162,7 @@ func (in *ActionUserCreateInput) SetLanguage(value int64) *ActionUserCreateInput
 	in._selectedParameters["Language"] = nil
 	return in
 }
+
 // SetLevel sets parameter Level to value and selects it for sending
 func (in *ActionUserCreateInput) SetLevel(value int64) *ActionUserCreateInput {
 	in.Level = value
@@ -168,6 +174,7 @@ func (in *ActionUserCreateInput) SetLevel(value int64) *ActionUserCreateInput {
 	in._selectedParameters["Level"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionUserCreateInput) SetLocation(value int64) *ActionUserCreateInput {
 	in.Location = value
@@ -179,6 +186,7 @@ func (in *ActionUserCreateInput) SetLocation(value int64) *ActionUserCreateInput
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetLockout sets parameter Lockout to value and selects it for sending
 func (in *ActionUserCreateInput) SetLockout(value bool) *ActionUserCreateInput {
 	in.Lockout = value
@@ -190,6 +198,7 @@ func (in *ActionUserCreateInput) SetLockout(value bool) *ActionUserCreateInput {
 	in._selectedParameters["Lockout"] = nil
 	return in
 }
+
 // SetLogin sets parameter Login to value and selects it for sending
 func (in *ActionUserCreateInput) SetLogin(value string) *ActionUserCreateInput {
 	in.Login = value
@@ -201,6 +210,7 @@ func (in *ActionUserCreateInput) SetLogin(value string) *ActionUserCreateInput {
 	in._selectedParameters["Login"] = nil
 	return in
 }
+
 // SetMailerEnabled sets parameter MailerEnabled to value and selects it for sending
 func (in *ActionUserCreateInput) SetMailerEnabled(value bool) *ActionUserCreateInput {
 	in.MailerEnabled = value
@@ -212,6 +222,7 @@ func (in *ActionUserCreateInput) SetMailerEnabled(value bool) *ActionUserCreateI
 	in._selectedParameters["MailerEnabled"] = nil
 	return in
 }
+
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionUserCreateInput) SetNode(value int64) *ActionUserCreateInput {
 	in.Node = value
@@ -223,6 +234,7 @@ func (in *ActionUserCreateInput) SetNode(value int64) *ActionUserCreateInput {
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetOsTemplate sets parameter OsTemplate to value and selects it for sending
 func (in *ActionUserCreateInput) SetOsTemplate(value int64) *ActionUserCreateInput {
 	in.OsTemplate = value
@@ -234,6 +246,7 @@ func (in *ActionUserCreateInput) SetOsTemplate(value int64) *ActionUserCreateInp
 	in._selectedParameters["OsTemplate"] = nil
 	return in
 }
+
 // SetPassword sets parameter Password to value and selects it for sending
 func (in *ActionUserCreateInput) SetPassword(value string) *ActionUserCreateInput {
 	in.Password = value
@@ -245,6 +258,7 @@ func (in *ActionUserCreateInput) SetPassword(value string) *ActionUserCreateInpu
 	in._selectedParameters["Password"] = nil
 	return in
 }
+
 // SetPasswordReset sets parameter PasswordReset to value and selects it for sending
 func (in *ActionUserCreateInput) SetPasswordReset(value bool) *ActionUserCreateInput {
 	in.PasswordReset = value
@@ -256,6 +270,7 @@ func (in *ActionUserCreateInput) SetPasswordReset(value bool) *ActionUserCreateI
 	in._selectedParameters["PasswordReset"] = nil
 	return in
 }
+
 // SetVps sets parameter Vps to value and selects it for sending
 func (in *ActionUserCreateInput) SetVps(value bool) *ActionUserCreateInput {
 	in.Vps = value
@@ -299,21 +314,21 @@ type ActionUserCreateRequest struct {
 
 // ActionUserCreateOutput is a type for action output parameters
 type ActionUserCreateOutput struct {
-	Address string `json:"address"`
-	CreatedAt string `json:"created_at"`
-	Email string `json:"email"`
-	ExpirationDate string `json:"expiration_date"`
-	FullName string `json:"full_name"`
-	Id int64 `json:"id"`
-	Info string `json:"info"`
-	Language *ActionLanguageShowOutput `json:"language"`
-	LastActivityAt string `json:"last_activity_at"`
-	Level int64 `json:"level"`
-	Lockout bool `json:"lockout"`
-	Login string `json:"login"`
-	MailerEnabled bool `json:"mailer_enabled"`
-	ObjectState string `json:"object_state"`
-	PasswordReset bool `json:"password_reset"`
+	Address        string                    `json:"address"`
+	CreatedAt      string                    `json:"created_at"`
+	Email          string                    `json:"email"`
+	ExpirationDate string                    `json:"expiration_date"`
+	FullName       string                    `json:"full_name"`
+	Id             int64                     `json:"id"`
+	Info           string                    `json:"info"`
+	Language       *ActionLanguageShowOutput `json:"language"`
+	LastActivityAt string                    `json:"last_activity_at"`
+	Level          int64                     `json:"level"`
+	Lockout        bool                      `json:"lockout"`
+	Login          string                    `json:"login"`
+	MailerEnabled  bool                      `json:"mailer_enabled"`
+	ObjectState    string                    `json:"object_state"`
+	PasswordReset  bool                      `json:"password_reset"`
 }
 
 // ActionUserCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -336,12 +351,11 @@ type ActionUserCreateResponse struct {
 	Output *ActionUserCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserCreate) Prepare() *ActionUserCreateInvocation {
 	return &ActionUserCreateInvocation{
 		Action: action,
-		Path: "/v6.0/users",
+		Path:   "/v6.0/users",
 	}
 }
 
@@ -357,7 +371,6 @@ type ActionUserCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionUserCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionUserCreateInvocation) NewInput() *ActionUserCreateInput {
@@ -380,6 +393,7 @@ func (inv *ActionUserCreateInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserCreateInvocation) NewMetaInput() *ActionUserCreateMetaGlobalInput {
@@ -407,7 +421,6 @@ func (inv *ActionUserCreateInvocation) IsMetaParameterSelected(param string) boo
 func (inv *ActionUserCreateInvocation) Call() (*ActionUserCreateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionUserCreateInvocation) callAsBody() (*ActionUserCreateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -468,11 +481,11 @@ func (resp *ActionUserCreateResponse) WatchOperation(timeout float64, updateIn f
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -494,8 +507,6 @@ func (resp *ActionUserCreateResponse) CancelOperation() (*ActionActionStateCance
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 	return req.Call()
 }
-
-
 
 func (inv *ActionUserCreateInvocation) makeAllInputParams() *ActionUserCreateRequest {
 	return &ActionUserCreateRequest{

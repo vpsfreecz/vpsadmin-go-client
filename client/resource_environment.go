@@ -35,16 +35,16 @@ func NewResourceEnvironment(client *Client) *ResourceEnvironment {
 	actionUpdate := NewActionEnvironmentUpdate(client)
 
 	return &ResourceEnvironment{
-		Client: client,
-		ConfigChain: NewResourceEnvironmentConfigChain(client),
-		DatasetPlan: NewResourceEnvironmentDatasetPlan(client),
-		Create: actionCreate,
-		New: actionCreate,
-		Index: actionIndex,
-		List: actionIndex,
+		Client:         client,
+		ConfigChain:    NewResourceEnvironmentConfigChain(client),
+		DatasetPlan:    NewResourceEnvironmentDatasetPlan(client),
+		Create:         actionCreate,
+		New:            actionCreate,
+		Index:          actionIndex,
+		List:           actionIndex,
 		SetMaintenance: actionSetMaintenance,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Show:           actionShow,
+		Find:           actionShow,
+		Update:         actionUpdate,
 	}
 }

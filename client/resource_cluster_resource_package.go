@@ -35,16 +35,16 @@ func NewResourceClusterResourcePackage(client *Client) *ResourceClusterResourceP
 	actionUpdate := NewActionClusterResourcePackageUpdate(client)
 
 	return &ResourceClusterResourcePackage{
-		Client: client,
-		Item: NewResourceClusterResourcePackageItem(client),
-		Create: actionCreate,
-		New: actionCreate,
-		Delete: actionDelete,
+		Client:  client,
+		Item:    NewResourceClusterResourcePackageItem(client),
+		Create:  actionCreate,
+		New:     actionCreate,
+		Delete:  actionDelete,
 		Destroy: actionDelete,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Index:   actionIndex,
+		List:    actionIndex,
+		Show:    actionShow,
+		Find:    actionShow,
+		Update:  actionUpdate,
 	}
 }

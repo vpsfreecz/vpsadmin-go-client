@@ -18,9 +18,9 @@ func NewActionUserMailTemplateRecipientIndex(client *Client) *ActionUserMailTemp
 
 // ActionUserMailTemplateRecipientIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserMailTemplateRecipientIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionUserMailTemplateRecipientIndexMetaGlobalInput) SetCount(value bo
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserMailTemplateRecipientIndexMetaGlobalInput) SetIncludes(value string) *ActionUserMailTemplateRecipientIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionUserMailTemplateRecipientIndexMetaGlobalInput) SetIncludes(value
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserMailTemplateRecipientIndexMetaGlobalInput) SetNo(value bool) *ActionUserMailTemplateRecipientIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionUserMailTemplateRecipientIndexMetaGlobalInput) AnySelected() boo
 
 // ActionUserMailTemplateRecipientIndexInput is a type for action input parameters
 type ActionUserMailTemplateRecipientIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionUserMailTemplateRecipientIndexInput) SetLimit(value int64) *Acti
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionUserMailTemplateRecipientIndexInput) SetOffset(value int64) *ActionUserMailTemplateRecipientIndexInput {
 	in.Offset = value
@@ -136,16 +139,14 @@ func (in *ActionUserMailTemplateRecipientIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserMailTemplateRecipientIndexOutput is a type for action output parameters
 type ActionUserMailTemplateRecipientIndexOutput struct {
 	Description string `json:"description"`
-	Enabled bool `json:"enabled"`
-	Id string `json:"id"`
-	Label string `json:"label"`
-	To string `json:"to"`
+	Enabled     bool   `json:"enabled"`
+	Id          string `json:"id"`
+	Label       string `json:"label"`
+	To          string `json:"to"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserMailTemplateRecipientIndexResponse struct {
@@ -160,12 +161,11 @@ type ActionUserMailTemplateRecipientIndexResponse struct {
 	Output []*ActionUserMailTemplateRecipientIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserMailTemplateRecipientIndex) Prepare() *ActionUserMailTemplateRecipientIndexInvocation {
 	return &ActionUserMailTemplateRecipientIndexInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/mail_template_recipients",
+		Path:   "/v6.0/users/{user_id}/mail_template_recipients",
 	}
 }
 
@@ -214,6 +214,7 @@ func (inv *ActionUserMailTemplateRecipientIndexInvocation) IsParameterSelected(p
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserMailTemplateRecipientIndexInvocation) NewMetaInput() *ActionUserMailTemplateRecipientIndexMetaGlobalInput {
@@ -254,8 +255,6 @@ func (inv *ActionUserMailTemplateRecipientIndexInvocation) callAsQuery() (*Actio
 	return resp, err
 }
 
-
-
 func (inv *ActionUserMailTemplateRecipientIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -280,4 +279,3 @@ func (inv *ActionUserMailTemplateRecipientIndexInvocation) convertMetaInputToQue
 		}
 	}
 }
-

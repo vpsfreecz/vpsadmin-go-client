@@ -21,9 +21,9 @@ func NewResourceDatasetPropertyHistory(client *Client) *ResourceDatasetPropertyH
 
 	return &ResourceDatasetPropertyHistory{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

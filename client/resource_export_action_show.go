@@ -19,7 +19,7 @@ func NewActionExportShow(client *Client) *ActionExportShow {
 // ActionExportShowMetaGlobalInput is a type for action global meta input parameters
 type ActionExportShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionExportShowMetaGlobalInput) SetIncludes(value string) *ActionExpo
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionExportShowMetaGlobalInput) SetNo(value bool) *ActionExportShowMetaGlobalInput {
 	in.No = value
@@ -70,29 +71,26 @@ func (in *ActionExportShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionExportShowOutput is a type for action output parameters
 type ActionExportShowOutput struct {
-	AllVps bool `json:"all_vps"`
-	CreatedAt string `json:"created_at"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Enabled bool `json:"enabled"`
-	ExpirationDate string `json:"expiration_date"`
-	HostIpAddress *ActionHostIpAddressShowOutput `json:"host_ip_address"`
-	Id int64 `json:"id"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	Path string `json:"path"`
-	RootSquash bool `json:"root_squash"`
-	Rw bool `json:"rw"`
-	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	SubtreeCheck bool `json:"subtree_check"`
-	Sync bool `json:"sync"`
-	Threads int64 `json:"threads"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
+	AllVps         bool                             `json:"all_vps"`
+	CreatedAt      string                           `json:"created_at"`
+	Dataset        *ActionDatasetShowOutput         `json:"dataset"`
+	Enabled        bool                             `json:"enabled"`
+	ExpirationDate string                           `json:"expiration_date"`
+	HostIpAddress  *ActionHostIpAddressShowOutput   `json:"host_ip_address"`
+	Id             int64                            `json:"id"`
+	IpAddress      *ActionIpAddressShowOutput       `json:"ip_address"`
+	Path           string                           `json:"path"`
+	RootSquash     bool                             `json:"root_squash"`
+	Rw             bool                             `json:"rw"`
+	Snapshot       *ActionDatasetSnapshotShowOutput `json:"snapshot"`
+	SubtreeCheck   bool                             `json:"subtree_check"`
+	Sync           bool                             `json:"sync"`
+	Threads        int64                            `json:"threads"`
+	UpdatedAt      string                           `json:"updated_at"`
+	User           *ActionUserShowOutput            `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionExportShowResponse struct {
@@ -107,12 +105,11 @@ type ActionExportShowResponse struct {
 	Output *ActionExportShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionExportShow) Prepare() *ActionExportShowInvocation {
 	return &ActionExportShowInvocation{
 		Action: action,
-		Path: "/v6.0/exports/{export_id}",
+		Path:   "/v6.0/exports/{export_id}",
 	}
 }
 
@@ -177,9 +174,6 @@ func (inv *ActionExportShowInvocation) callAsQuery() (*ActionExportShowResponse,
 	return resp, err
 }
 
-
-
-
 func (inv *ActionExportShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -190,4 +184,3 @@ func (inv *ActionExportShowInvocation) convertMetaInputToQueryParams(ret map[str
 		}
 	}
 }
-

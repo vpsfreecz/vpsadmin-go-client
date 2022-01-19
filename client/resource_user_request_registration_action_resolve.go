@@ -19,7 +19,7 @@ func NewActionUserRequestRegistrationResolve(client *Client) *ActionUserRequestR
 // ActionUserRequestRegistrationResolveMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestRegistrationResolveMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserRequestRegistrationResolveMetaGlobalInput) SetIncludes(value
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveMetaGlobalInput) SetNo(value bool) *ActionUserRequestRegistrationResolveMetaGlobalInput {
 	in.No = value
@@ -72,24 +73,24 @@ func (in *ActionUserRequestRegistrationResolveMetaGlobalInput) AnySelected() boo
 
 // ActionUserRequestRegistrationResolveInput is a type for action input parameters
 type ActionUserRequestRegistrationResolveInput struct {
-	Action string `json:"action"`
-	Activate bool `json:"activate"`
-	Address string `json:"address"`
-	CreateVps bool `json:"create_vps"`
-	Currency string `json:"currency"`
-	Email string `json:"email"`
-	FullName string `json:"full_name"`
-	How string `json:"how"`
-	Language int64 `json:"language"`
-	Location int64 `json:"location"`
-	Login string `json:"login"`
-	Node int64 `json:"node"`
-	Note string `json:"note"`
-	OrgId string `json:"org_id"`
-	OrgName string `json:"org_name"`
-	OsTemplate int64 `json:"os_template"`
-	Reason string `json:"reason"`
-	YearOfBirth int64 `json:"year_of_birth"`
+	Action      string `json:"action"`
+	Activate    bool   `json:"activate"`
+	Address     string `json:"address"`
+	CreateVps   bool   `json:"create_vps"`
+	Currency    string `json:"currency"`
+	Email       string `json:"email"`
+	FullName    string `json:"full_name"`
+	How         string `json:"how"`
+	Language    int64  `json:"language"`
+	Location    int64  `json:"location"`
+	Login       string `json:"login"`
+	Node        int64  `json:"node"`
+	Note        string `json:"note"`
+	OrgId       string `json:"org_id"`
+	OrgName     string `json:"org_name"`
+	OsTemplate  int64  `json:"os_template"`
+	Reason      string `json:"reason"`
+	YearOfBirth int64  `json:"year_of_birth"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -105,6 +106,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetAction(value string) *Ac
 	in._selectedParameters["Action"] = nil
 	return in
 }
+
 // SetActivate sets parameter Activate to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetActivate(value bool) *ActionUserRequestRegistrationResolveInput {
 	in.Activate = value
@@ -116,6 +118,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetActivate(value bool) *Ac
 	in._selectedParameters["Activate"] = nil
 	return in
 }
+
 // SetAddress sets parameter Address to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetAddress(value string) *ActionUserRequestRegistrationResolveInput {
 	in.Address = value
@@ -127,6 +130,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetAddress(value string) *A
 	in._selectedParameters["Address"] = nil
 	return in
 }
+
 // SetCreateVps sets parameter CreateVps to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetCreateVps(value bool) *ActionUserRequestRegistrationResolveInput {
 	in.CreateVps = value
@@ -138,6 +142,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetCreateVps(value bool) *A
 	in._selectedParameters["CreateVps"] = nil
 	return in
 }
+
 // SetCurrency sets parameter Currency to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetCurrency(value string) *ActionUserRequestRegistrationResolveInput {
 	in.Currency = value
@@ -149,6 +154,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetCurrency(value string) *
 	in._selectedParameters["Currency"] = nil
 	return in
 }
+
 // SetEmail sets parameter Email to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetEmail(value string) *ActionUserRequestRegistrationResolveInput {
 	in.Email = value
@@ -160,6 +166,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetEmail(value string) *Act
 	in._selectedParameters["Email"] = nil
 	return in
 }
+
 // SetFullName sets parameter FullName to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetFullName(value string) *ActionUserRequestRegistrationResolveInput {
 	in.FullName = value
@@ -171,6 +178,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetFullName(value string) *
 	in._selectedParameters["FullName"] = nil
 	return in
 }
+
 // SetHow sets parameter How to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetHow(value string) *ActionUserRequestRegistrationResolveInput {
 	in.How = value
@@ -182,6 +190,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetHow(value string) *Actio
 	in._selectedParameters["How"] = nil
 	return in
 }
+
 // SetLanguage sets parameter Language to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetLanguage(value int64) *ActionUserRequestRegistrationResolveInput {
 	in.Language = value
@@ -193,6 +202,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetLanguage(value int64) *A
 	in._selectedParameters["Language"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetLocation(value int64) *ActionUserRequestRegistrationResolveInput {
 	in.Location = value
@@ -204,6 +214,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetLocation(value int64) *A
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetLogin sets parameter Login to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetLogin(value string) *ActionUserRequestRegistrationResolveInput {
 	in.Login = value
@@ -215,6 +226,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetLogin(value string) *Act
 	in._selectedParameters["Login"] = nil
 	return in
 }
+
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetNode(value int64) *ActionUserRequestRegistrationResolveInput {
 	in.Node = value
@@ -226,6 +238,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetNode(value int64) *Actio
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetNote sets parameter Note to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetNote(value string) *ActionUserRequestRegistrationResolveInput {
 	in.Note = value
@@ -237,6 +250,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetNote(value string) *Acti
 	in._selectedParameters["Note"] = nil
 	return in
 }
+
 // SetOrgId sets parameter OrgId to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetOrgId(value string) *ActionUserRequestRegistrationResolveInput {
 	in.OrgId = value
@@ -248,6 +262,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetOrgId(value string) *Act
 	in._selectedParameters["OrgId"] = nil
 	return in
 }
+
 // SetOrgName sets parameter OrgName to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetOrgName(value string) *ActionUserRequestRegistrationResolveInput {
 	in.OrgName = value
@@ -259,6 +274,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetOrgName(value string) *A
 	in._selectedParameters["OrgName"] = nil
 	return in
 }
+
 // SetOsTemplate sets parameter OsTemplate to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetOsTemplate(value int64) *ActionUserRequestRegistrationResolveInput {
 	in.OsTemplate = value
@@ -270,6 +286,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetOsTemplate(value int64) 
 	in._selectedParameters["OsTemplate"] = nil
 	return in
 }
+
 // SetReason sets parameter Reason to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetReason(value string) *ActionUserRequestRegistrationResolveInput {
 	in.Reason = value
@@ -281,6 +298,7 @@ func (in *ActionUserRequestRegistrationResolveInput) SetReason(value string) *Ac
 	in._selectedParameters["Reason"] = nil
 	return in
 }
+
 // SetYearOfBirth sets parameter YearOfBirth to value and selects it for sending
 func (in *ActionUserRequestRegistrationResolveInput) SetYearOfBirth(value int64) *ActionUserRequestRegistrationResolveInput {
 	in.YearOfBirth = value
@@ -319,10 +337,8 @@ func (in *ActionUserRequestRegistrationResolveInput) AnySelected() bool {
 // ActionUserRequestRegistrationResolveRequest is a type for the entire action request
 type ActionUserRequestRegistrationResolveRequest struct {
 	Registration map[string]interface{} `json:"registration"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta         map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionUserRequestRegistrationResolveResponse struct {
@@ -330,12 +346,11 @@ type ActionUserRequestRegistrationResolveResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserRequestRegistrationResolve) Prepare() *ActionUserRequestRegistrationResolveInvocation {
 	return &ActionUserRequestRegistrationResolveInvocation{
 		Action: action,
-		Path: "/v6.0/user_request/registrations/{registration_id}/resolve",
+		Path:   "/v6.0/user_request/registrations/{registration_id}/resolve",
 	}
 }
 
@@ -384,6 +399,7 @@ func (inv *ActionUserRequestRegistrationResolveInvocation) IsParameterSelected(p
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserRequestRegistrationResolveInvocation) NewMetaInput() *ActionUserRequestRegistrationResolveMetaGlobalInput {
@@ -412,7 +428,6 @@ func (inv *ActionUserRequestRegistrationResolveInvocation) Call() (*ActionUserRe
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserRequestRegistrationResolveInvocation) callAsBody() (*ActionUserRequestRegistrationResolveResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserRequestRegistrationResolveResponse{Action: inv.Action}
@@ -420,13 +435,10 @@ func (inv *ActionUserRequestRegistrationResolveInvocation) callAsBody() (*Action
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserRequestRegistrationResolveInvocation) makeAllInputParams() *ActionUserRequestRegistrationResolveRequest {
 	return &ActionUserRequestRegistrationResolveRequest{
 		Registration: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:         inv.makeMetaInputParams(),
 	}
 }
 

@@ -21,9 +21,9 @@ func NewResourceTransactionChain(client *Client) *ResourceTransactionChain {
 
 	return &ResourceTransactionChain{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

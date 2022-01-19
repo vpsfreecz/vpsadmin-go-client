@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionAuthTokenCreate is a type for action Auth_token#Create
 type ActionAuthTokenCreate struct {
@@ -17,7 +16,7 @@ func NewActionAuthTokenCreate(client *Client) *ActionAuthTokenCreate {
 
 // ActionAuthTokenCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionAuthTokenCreateMetaGlobalInput struct {
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	Includes string `json:"includes"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -34,6 +33,7 @@ func (in *ActionAuthTokenCreateMetaGlobalInput) SetNo(value bool) *ActionAuthTok
 	in._selectedParameters["No"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionAuthTokenCreateMetaGlobalInput) SetIncludes(value string) *ActionAuthTokenCreateMetaGlobalInput {
 	in.Includes = value
@@ -71,10 +71,10 @@ func (in *ActionAuthTokenCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionAuthTokenCreateInput is a type for action input parameters
 type ActionAuthTokenCreateInput struct {
-	User int64 `json:"user"`
-	Label string `json:"label"`
+	User     int64  `json:"user"`
+	Label    string `json:"label"`
 	Lifetime string `json:"lifetime"`
-	Interval int64 `json:"interval"`
+	Interval int64  `json:"interval"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -90,6 +90,7 @@ func (in *ActionAuthTokenCreateInput) SetUser(value int64) *ActionAuthTokenCreat
 	in._selectedParameters["User"] = nil
 	return in
 }
+
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionAuthTokenCreateInput) SetLabel(value string) *ActionAuthTokenCreateInput {
 	in.Label = value
@@ -101,6 +102,7 @@ func (in *ActionAuthTokenCreateInput) SetLabel(value string) *ActionAuthTokenCre
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetLifetime sets parameter Lifetime to value and selects it for sending
 func (in *ActionAuthTokenCreateInput) SetLifetime(value string) *ActionAuthTokenCreateInput {
 	in.Lifetime = value
@@ -112,6 +114,7 @@ func (in *ActionAuthTokenCreateInput) SetLifetime(value string) *ActionAuthToken
 	in._selectedParameters["Lifetime"] = nil
 	return in
 }
+
 // SetInterval sets parameter Interval to value and selects it for sending
 func (in *ActionAuthTokenCreateInput) SetInterval(value int64) *ActionAuthTokenCreateInput {
 	in.Interval = value
@@ -150,22 +153,21 @@ func (in *ActionAuthTokenCreateInput) AnySelected() bool {
 // ActionAuthTokenCreateRequest is a type for the entire action request
 type ActionAuthTokenCreateRequest struct {
 	AuthToken map[string]interface{} `json:"auth_token"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta      map[string]interface{} `json:"_meta"`
 }
 
 // ActionAuthTokenCreateOutput is a type for action output parameters
 type ActionAuthTokenCreateOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	Token string `json:"token"`
-	ValidTo string `json:"valid_to"`
-	Label string `json:"label"`
-	Lifetime string `json:"lifetime"`
-	Interval int64 `json:"interval"`
-	UseCount int64 `json:"use_count"`
-	CreatedAt string `json:"created_at"`
+	Id        int64                 `json:"id"`
+	User      *ActionUserShowOutput `json:"user"`
+	Token     string                `json:"token"`
+	ValidTo   string                `json:"valid_to"`
+	Label     string                `json:"label"`
+	Lifetime  string                `json:"lifetime"`
+	Interval  int64                 `json:"interval"`
+	UseCount  int64                 `json:"use_count"`
+	CreatedAt string                `json:"created_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionAuthTokenCreateResponse struct {
@@ -180,12 +182,11 @@ type ActionAuthTokenCreateResponse struct {
 	Output *ActionAuthTokenCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionAuthTokenCreate) Prepare() *ActionAuthTokenCreateInvocation {
 	return &ActionAuthTokenCreateInvocation{
 		Action: action,
-		Path: "/v5.0/auth_tokens",
+		Path:   "/v5.0/auth_tokens",
 	}
 }
 
@@ -201,7 +202,6 @@ type ActionAuthTokenCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionAuthTokenCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionAuthTokenCreateInvocation) NewInput() *ActionAuthTokenCreateInput {
@@ -224,6 +224,7 @@ func (inv *ActionAuthTokenCreateInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionAuthTokenCreateInvocation) NewMetaInput() *ActionAuthTokenCreateMetaGlobalInput {
@@ -252,7 +253,6 @@ func (inv *ActionAuthTokenCreateInvocation) Call() (*ActionAuthTokenCreateRespon
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionAuthTokenCreateInvocation) callAsBody() (*ActionAuthTokenCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionAuthTokenCreateResponse{Action: inv.Action}
@@ -263,13 +263,10 @@ func (inv *ActionAuthTokenCreateInvocation) callAsBody() (*ActionAuthTokenCreate
 	return resp, err
 }
 
-
-
-
 func (inv *ActionAuthTokenCreateInvocation) makeAllInputParams() *ActionAuthTokenCreateRequest {
 	return &ActionAuthTokenCreateRequest{
 		AuthToken: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:      inv.makeMetaInputParams(),
 	}
 }
 

@@ -19,7 +19,7 @@ func NewActionUserMailRoleRecipientUpdate(client *Client) *ActionUserMailRoleRec
 // ActionUserMailRoleRecipientUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserMailRoleRecipientUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserMailRoleRecipientUpdateMetaGlobalInput) SetIncludes(value st
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserMailRoleRecipientUpdateMetaGlobalInput) SetNo(value bool) *ActionUserMailRoleRecipientUpdateMetaGlobalInput {
 	in.No = value
@@ -115,17 +116,16 @@ func (in *ActionUserMailRoleRecipientUpdateInput) AnySelected() bool {
 // ActionUserMailRoleRecipientUpdateRequest is a type for the entire action request
 type ActionUserMailRoleRecipientUpdateRequest struct {
 	MailRoleRecipient map[string]interface{} `json:"mail_role_recipient"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta              map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserMailRoleRecipientUpdateOutput is a type for action output parameters
 type ActionUserMailRoleRecipientUpdateOutput struct {
 	Description string `json:"description"`
-	Id string `json:"id"`
-	Label string `json:"label"`
-	To string `json:"to"`
+	Id          string `json:"id"`
+	Label       string `json:"label"`
+	To          string `json:"to"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserMailRoleRecipientUpdateResponse struct {
@@ -140,12 +140,11 @@ type ActionUserMailRoleRecipientUpdateResponse struct {
 	Output *ActionUserMailRoleRecipientUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserMailRoleRecipientUpdate) Prepare() *ActionUserMailRoleRecipientUpdateInvocation {
 	return &ActionUserMailRoleRecipientUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/mail_role_recipients/{mail_role_recipient_id}",
+		Path:   "/v6.0/users/{user_id}/mail_role_recipients/{mail_role_recipient_id}",
 	}
 }
 
@@ -194,6 +193,7 @@ func (inv *ActionUserMailRoleRecipientUpdateInvocation) IsParameterSelected(para
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserMailRoleRecipientUpdateInvocation) NewMetaInput() *ActionUserMailRoleRecipientUpdateMetaGlobalInput {
@@ -222,7 +222,6 @@ func (inv *ActionUserMailRoleRecipientUpdateInvocation) Call() (*ActionUserMailR
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserMailRoleRecipientUpdateInvocation) callAsBody() (*ActionUserMailRoleRecipientUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserMailRoleRecipientUpdateResponse{Action: inv.Action}
@@ -233,13 +232,10 @@ func (inv *ActionUserMailRoleRecipientUpdateInvocation) callAsBody() (*ActionUse
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserMailRoleRecipientUpdateInvocation) makeAllInputParams() *ActionUserMailRoleRecipientUpdateRequest {
 	return &ActionUserMailRoleRecipientUpdateRequest{
 		MailRoleRecipient: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:              inv.makeMetaInputParams(),
 	}
 }
 

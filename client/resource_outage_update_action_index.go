@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionOutageUpdateIndex is a type for action Outage_update#Index
 type ActionOutageUpdateIndex struct {
@@ -17,9 +16,9 @@ func NewActionOutageUpdateIndex(client *Client) *ActionOutageUpdateIndex {
 
 // ActionOutageUpdateIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageUpdateIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionOutageUpdateIndexMetaGlobalInput) SetCount(value bool) *ActionOu
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionOutageUpdateIndexMetaGlobalInput) SetIncludes(value string) *ActionOutageUpdateIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionOutageUpdateIndexMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOutageUpdateIndexMetaGlobalInput) SetNo(value bool) *ActionOutageUpdateIndexMetaGlobalInput {
 	in.No = value
@@ -83,11 +84,11 @@ func (in *ActionOutageUpdateIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageUpdateIndexInput is a type for action input parameters
 type ActionOutageUpdateIndexInput struct {
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
-	Outage int64 `json:"outage"`
-	ReportedBy int64 `json:"reported_by"`
-	Since string `json:"since"`
+	Limit      int64  `json:"limit"`
+	Offset     int64  `json:"offset"`
+	Outage     int64  `json:"outage"`
+	ReportedBy int64  `json:"reported_by"`
+	Since      string `json:"since"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -103,6 +104,7 @@ func (in *ActionOutageUpdateIndexInput) SetLimit(value int64) *ActionOutageUpdat
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionOutageUpdateIndexInput) SetOffset(value int64) *ActionOutageUpdateIndexInput {
 	in.Offset = value
@@ -114,6 +116,7 @@ func (in *ActionOutageUpdateIndexInput) SetOffset(value int64) *ActionOutageUpda
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetOutage sets parameter Outage to value and selects it for sending
 func (in *ActionOutageUpdateIndexInput) SetOutage(value int64) *ActionOutageUpdateIndexInput {
 	in.Outage = value
@@ -125,6 +128,7 @@ func (in *ActionOutageUpdateIndexInput) SetOutage(value int64) *ActionOutageUpda
 	in._selectedParameters["Outage"] = nil
 	return in
 }
+
 // SetReportedBy sets parameter ReportedBy to value and selects it for sending
 func (in *ActionOutageUpdateIndexInput) SetReportedBy(value int64) *ActionOutageUpdateIndexInput {
 	in.ReportedBy = value
@@ -136,6 +140,7 @@ func (in *ActionOutageUpdateIndexInput) SetReportedBy(value int64) *ActionOutage
 	in._selectedParameters["ReportedBy"] = nil
 	return in
 }
+
 // SetSince sets parameter Since to value and selects it for sending
 func (in *ActionOutageUpdateIndexInput) SetSince(value string) *ActionOutageUpdateIndexInput {
 	in.Since = value
@@ -171,25 +176,23 @@ func (in *ActionOutageUpdateIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionOutageUpdateIndexOutput is a type for action output parameters
 type ActionOutageUpdateIndexOutput struct {
-	BeginsAt string `json:"begins_at"`
-	CreatedAt string `json:"created_at"`
-	CsDescription string `json:"cs_description"`
-	CsSummary string `json:"cs_summary"`
-	Duration int64 `json:"duration"`
-	EnDescription string `json:"en_description"`
-	EnSummary string `json:"en_summary"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	Outage *ActionOutageShowOutput `json:"outage"`
-	ReportedBy *ActionUserShowOutput `json:"reported_by"`
-	ReporterName string `json:"reporter_name"`
-	State string `json:"state"`
-	Type string `json:"type"`
+	BeginsAt      string                  `json:"begins_at"`
+	CreatedAt     string                  `json:"created_at"`
+	CsDescription string                  `json:"cs_description"`
+	CsSummary     string                  `json:"cs_summary"`
+	Duration      int64                   `json:"duration"`
+	EnDescription string                  `json:"en_description"`
+	EnSummary     string                  `json:"en_summary"`
+	FinishedAt    string                  `json:"finished_at"`
+	Id            int64                   `json:"id"`
+	Outage        *ActionOutageShowOutput `json:"outage"`
+	ReportedBy    *ActionUserShowOutput   `json:"reported_by"`
+	ReporterName  string                  `json:"reporter_name"`
+	State         string                  `json:"state"`
+	Type          string                  `json:"type"`
 }
-
 
 // Type for action response, including envelope
 type ActionOutageUpdateIndexResponse struct {
@@ -204,12 +207,11 @@ type ActionOutageUpdateIndexResponse struct {
 	Output []*ActionOutageUpdateIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOutageUpdateIndex) Prepare() *ActionOutageUpdateIndexInvocation {
 	return &ActionOutageUpdateIndexInvocation{
 		Action: action,
-		Path: "/v6.0/outage_updates",
+		Path:   "/v6.0/outage_updates",
 	}
 }
 
@@ -225,7 +227,6 @@ type ActionOutageUpdateIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionOutageUpdateIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionOutageUpdateIndexInvocation) NewInput() *ActionOutageUpdateIndexInput {
@@ -248,6 +249,7 @@ func (inv *ActionOutageUpdateIndexInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOutageUpdateIndexInvocation) NewMetaInput() *ActionOutageUpdateIndexMetaGlobalInput {
@@ -288,8 +290,6 @@ func (inv *ActionOutageUpdateIndexInvocation) callAsQuery() (*ActionOutageUpdate
 	return resp, err
 }
 
-
-
 func (inv *ActionOutageUpdateIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -323,4 +323,3 @@ func (inv *ActionOutageUpdateIndexInvocation) convertMetaInputToQueryParams(ret 
 		}
 	}
 }
-

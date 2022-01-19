@@ -19,7 +19,7 @@ func NewActionUserEnvironmentConfigShow(client *Client) *ActionUserEnvironmentCo
 // ActionUserEnvironmentConfigShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserEnvironmentConfigShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserEnvironmentConfigShowMetaGlobalInput) SetIncludes(value stri
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserEnvironmentConfigShowMetaGlobalInput) SetNo(value bool) *ActionUserEnvironmentConfigShowMetaGlobalInput {
 	in.No = value
@@ -70,19 +71,16 @@ func (in *ActionUserEnvironmentConfigShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserEnvironmentConfigShowOutput is a type for action output parameters
 type ActionUserEnvironmentConfigShowOutput struct {
-	CanCreateVps bool `json:"can_create_vps"`
-	CanDestroyVps bool `json:"can_destroy_vps"`
-	Default bool `json:"default"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	Id int64 `json:"id"`
-	MaxVpsCount int64 `json:"max_vps_count"`
-	VpsLifetime int64 `json:"vps_lifetime"`
+	CanCreateVps  bool                         `json:"can_create_vps"`
+	CanDestroyVps bool                         `json:"can_destroy_vps"`
+	Default       bool                         `json:"default"`
+	Environment   *ActionEnvironmentShowOutput `json:"environment"`
+	Id            int64                        `json:"id"`
+	MaxVpsCount   int64                        `json:"max_vps_count"`
+	VpsLifetime   int64                        `json:"vps_lifetime"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserEnvironmentConfigShowResponse struct {
@@ -97,12 +95,11 @@ type ActionUserEnvironmentConfigShowResponse struct {
 	Output *ActionUserEnvironmentConfigShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserEnvironmentConfigShow) Prepare() *ActionUserEnvironmentConfigShowInvocation {
 	return &ActionUserEnvironmentConfigShowInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/environment_configs/{environment_config_id}",
+		Path:   "/v6.0/users/{user_id}/environment_configs/{environment_config_id}",
 	}
 }
 
@@ -167,9 +164,6 @@ func (inv *ActionUserEnvironmentConfigShowInvocation) callAsQuery() (*ActionUser
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserEnvironmentConfigShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -180,4 +174,3 @@ func (inv *ActionUserEnvironmentConfigShowInvocation) convertMetaInputToQueryPar
 		}
 	}
 }
-

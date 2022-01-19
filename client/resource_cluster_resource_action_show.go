@@ -19,7 +19,7 @@ func NewActionClusterResourceShow(client *Client) *ActionClusterResourceShow {
 // ActionClusterResourceShowMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourceShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionClusterResourceShowMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionClusterResourceShowMetaGlobalInput) SetNo(value bool) *ActionClusterResourceShowMetaGlobalInput {
 	in.No = value
@@ -70,18 +71,15 @@ func (in *ActionClusterResourceShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionClusterResourceShowOutput is a type for action output parameters
 type ActionClusterResourceShowOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Max int64 `json:"max"`
-	Min int64 `json:"min"`
-	Name string `json:"name"`
-	Stepsize int64 `json:"stepsize"`
+	Id       int64  `json:"id"`
+	Label    string `json:"label"`
+	Max      int64  `json:"max"`
+	Min      int64  `json:"min"`
+	Name     string `json:"name"`
+	Stepsize int64  `json:"stepsize"`
 }
-
 
 // Type for action response, including envelope
 type ActionClusterResourceShowResponse struct {
@@ -96,12 +94,11 @@ type ActionClusterResourceShowResponse struct {
 	Output *ActionClusterResourceShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionClusterResourceShow) Prepare() *ActionClusterResourceShowInvocation {
 	return &ActionClusterResourceShowInvocation{
 		Action: action,
-		Path: "/v6.0/cluster_resources/{cluster_resource_id}",
+		Path:   "/v6.0/cluster_resources/{cluster_resource_id}",
 	}
 }
 
@@ -166,9 +163,6 @@ func (inv *ActionClusterResourceShowInvocation) callAsQuery() (*ActionClusterRes
 	return resp, err
 }
 
-
-
-
 func (inv *ActionClusterResourceShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -179,4 +173,3 @@ func (inv *ActionClusterResourceShowInvocation) convertMetaInputToQueryParams(re
 		}
 	}
 }
-

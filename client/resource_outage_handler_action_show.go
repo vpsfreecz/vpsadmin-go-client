@@ -19,7 +19,7 @@ func NewActionOutageHandlerShow(client *Client) *ActionOutageHandlerShow {
 // ActionOutageHandlerShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageHandlerShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOutageHandlerShowMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOutageHandlerShowMetaGlobalInput) SetNo(value bool) *ActionOutageHandlerShowMetaGlobalInput {
 	in.No = value
@@ -70,16 +71,13 @@ func (in *ActionOutageHandlerShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionOutageHandlerShowOutput is a type for action output parameters
 type ActionOutageHandlerShowOutput struct {
-	FullName string `json:"full_name"`
-	Id int64 `json:"id"`
-	Note string `json:"note"`
-	User *ActionUserShowOutput `json:"user"`
+	FullName string                `json:"full_name"`
+	Id       int64                 `json:"id"`
+	Note     string                `json:"note"`
+	User     *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionOutageHandlerShowResponse struct {
@@ -94,12 +92,11 @@ type ActionOutageHandlerShowResponse struct {
 	Output *ActionOutageHandlerShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOutageHandlerShow) Prepare() *ActionOutageHandlerShowInvocation {
 	return &ActionOutageHandlerShowInvocation{
 		Action: action,
-		Path: "/v6.0/outages/{outage_id}/handlers/{handler_id}",
+		Path:   "/v6.0/outages/{outage_id}/handlers/{handler_id}",
 	}
 }
 
@@ -164,9 +161,6 @@ func (inv *ActionOutageHandlerShowInvocation) callAsQuery() (*ActionOutageHandle
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOutageHandlerShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -177,4 +171,3 @@ func (inv *ActionOutageHandlerShowInvocation) convertMetaInputToQueryParams(ret 
 		}
 	}
 }
-

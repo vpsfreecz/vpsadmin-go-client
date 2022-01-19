@@ -24,10 +24,10 @@ func NewResourceUserEnvironmentConfig(client *Client) *ResourceUserEnvironmentCo
 
 	return &ResourceUserEnvironmentConfig{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 		Update: actionUpdate,
 	}
 }

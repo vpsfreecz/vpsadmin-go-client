@@ -18,9 +18,9 @@ func NewActionEnvironmentConfigChainIndex(client *Client) *ActionEnvironmentConf
 
 // ActionEnvironmentConfigChainIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionEnvironmentConfigChainIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionEnvironmentConfigChainIndexMetaGlobalInput) SetCount(value bool)
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionEnvironmentConfigChainIndexMetaGlobalInput) SetIncludes(value string) *ActionEnvironmentConfigChainIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionEnvironmentConfigChainIndexMetaGlobalInput) SetIncludes(value st
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionEnvironmentConfigChainIndexMetaGlobalInput) SetNo(value bool) *ActionEnvironmentConfigChainIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionEnvironmentConfigChainIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionEnvironmentConfigChainIndexInput is a type for action input parameters
 type ActionEnvironmentConfigChainIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionEnvironmentConfigChainIndexInput) SetLimit(value int64) *ActionE
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionEnvironmentConfigChainIndexInput) SetOffset(value int64) *ActionEnvironmentConfigChainIndexInput {
 	in.Offset = value
@@ -136,12 +139,10 @@ func (in *ActionEnvironmentConfigChainIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionEnvironmentConfigChainIndexOutput is a type for action output parameters
 type ActionEnvironmentConfigChainIndexOutput struct {
 	VpsConfig *ActionVpsConfigShowOutput `json:"vps_config"`
 }
-
 
 // Type for action response, including envelope
 type ActionEnvironmentConfigChainIndexResponse struct {
@@ -156,12 +157,11 @@ type ActionEnvironmentConfigChainIndexResponse struct {
 	Output []*ActionEnvironmentConfigChainIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionEnvironmentConfigChainIndex) Prepare() *ActionEnvironmentConfigChainIndexInvocation {
 	return &ActionEnvironmentConfigChainIndexInvocation{
 		Action: action,
-		Path: "/v6.0/environments/{environment_id}/config_chains",
+		Path:   "/v6.0/environments/{environment_id}/config_chains",
 	}
 }
 
@@ -210,6 +210,7 @@ func (inv *ActionEnvironmentConfigChainIndexInvocation) IsParameterSelected(para
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionEnvironmentConfigChainIndexInvocation) NewMetaInput() *ActionEnvironmentConfigChainIndexMetaGlobalInput {
@@ -250,8 +251,6 @@ func (inv *ActionEnvironmentConfigChainIndexInvocation) callAsQuery() (*ActionEn
 	return resp, err
 }
 
-
-
 func (inv *ActionEnvironmentConfigChainIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -276,4 +275,3 @@ func (inv *ActionEnvironmentConfigChainIndexInvocation) convertMetaInputToQueryP
 		}
 	}
 }
-

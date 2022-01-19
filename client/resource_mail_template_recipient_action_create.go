@@ -19,7 +19,7 @@ func NewActionMailTemplateRecipientCreate(client *Client) *ActionMailTemplateRec
 // ActionMailTemplateRecipientCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateRecipientCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMailTemplateRecipientCreateMetaGlobalInput) SetIncludes(value st
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMailTemplateRecipientCreateMetaGlobalInput) SetNo(value bool) *ActionMailTemplateRecipientCreateMetaGlobalInput {
 	in.No = value
@@ -115,15 +116,14 @@ func (in *ActionMailTemplateRecipientCreateInput) AnySelected() bool {
 // ActionMailTemplateRecipientCreateRequest is a type for the entire action request
 type ActionMailTemplateRecipientCreateRequest struct {
 	Recipient map[string]interface{} `json:"recipient"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta      map[string]interface{} `json:"_meta"`
 }
 
 // ActionMailTemplateRecipientCreateOutput is a type for action output parameters
 type ActionMailTemplateRecipientCreateOutput struct {
-	Id int64 `json:"id"`
+	Id            int64                          `json:"id"`
 	MailRecipient *ActionMailRecipientShowOutput `json:"mail_recipient"`
 }
-
 
 // Type for action response, including envelope
 type ActionMailTemplateRecipientCreateResponse struct {
@@ -138,12 +138,11 @@ type ActionMailTemplateRecipientCreateResponse struct {
 	Output *ActionMailTemplateRecipientCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMailTemplateRecipientCreate) Prepare() *ActionMailTemplateRecipientCreateInvocation {
 	return &ActionMailTemplateRecipientCreateInvocation{
 		Action: action,
-		Path: "/v6.0/mail_templates/{mail_template_id}/recipients",
+		Path:   "/v6.0/mail_templates/{mail_template_id}/recipients",
 	}
 }
 
@@ -192,6 +191,7 @@ func (inv *ActionMailTemplateRecipientCreateInvocation) IsParameterSelected(para
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionMailTemplateRecipientCreateInvocation) NewMetaInput() *ActionMailTemplateRecipientCreateMetaGlobalInput {
@@ -220,7 +220,6 @@ func (inv *ActionMailTemplateRecipientCreateInvocation) Call() (*ActionMailTempl
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionMailTemplateRecipientCreateInvocation) callAsBody() (*ActionMailTemplateRecipientCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionMailTemplateRecipientCreateResponse{Action: inv.Action}
@@ -231,13 +230,10 @@ func (inv *ActionMailTemplateRecipientCreateInvocation) callAsBody() (*ActionMai
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMailTemplateRecipientCreateInvocation) makeAllInputParams() *ActionMailTemplateRecipientCreateRequest {
 	return &ActionMailTemplateRecipientCreateRequest{
 		Recipient: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:      inv.makeMetaInputParams(),
 	}
 }
 

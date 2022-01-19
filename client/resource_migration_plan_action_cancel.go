@@ -19,7 +19,7 @@ func NewActionMigrationPlanCancel(client *Client) *ActionMigrationPlanCancel {
 // ActionMigrationPlanCancelMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanCancelMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMigrationPlanCancelMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMigrationPlanCancelMetaGlobalInput) SetNo(value bool) *ActionMigrationPlanCancelMetaGlobalInput {
 	in.No = value
@@ -70,7 +71,6 @@ func (in *ActionMigrationPlanCancelMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionMigrationPlanCancelRequest is a type for the entire action request
 type ActionMigrationPlanCancelRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
@@ -78,17 +78,16 @@ type ActionMigrationPlanCancelRequest struct {
 
 // ActionMigrationPlanCancelOutput is a type for action output parameters
 type ActionMigrationPlanCancelOutput struct {
-	Concurrency int64 `json:"concurrency"`
-	CreatedAt string `json:"created_at"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	Reason string `json:"reason"`
-	SendMail bool `json:"send_mail"`
-	State string `json:"state"`
-	StopOnError bool `json:"stop_on_error"`
-	User *ActionUserShowOutput `json:"user"`
+	Concurrency int64                 `json:"concurrency"`
+	CreatedAt   string                `json:"created_at"`
+	FinishedAt  string                `json:"finished_at"`
+	Id          int64                 `json:"id"`
+	Reason      string                `json:"reason"`
+	SendMail    bool                  `json:"send_mail"`
+	State       string                `json:"state"`
+	StopOnError bool                  `json:"stop_on_error"`
+	User        *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionMigrationPlanCancelResponse struct {
@@ -103,12 +102,11 @@ type ActionMigrationPlanCancelResponse struct {
 	Output *ActionMigrationPlanCancelOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMigrationPlanCancel) Prepare() *ActionMigrationPlanCancelInvocation {
 	return &ActionMigrationPlanCancelInvocation{
 		Action: action,
-		Path: "/v6.0/migration_plans/{migration_plan_id}/cancel",
+		Path:   "/v6.0/migration_plans/{migration_plan_id}/cancel",
 	}
 }
 
@@ -162,7 +160,6 @@ func (inv *ActionMigrationPlanCancelInvocation) Call() (*ActionMigrationPlanCanc
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionMigrationPlanCancelInvocation) callAsBody() (*ActionMigrationPlanCancelResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionMigrationPlanCancelResponse{Action: inv.Action}
@@ -173,15 +170,11 @@ func (inv *ActionMigrationPlanCancelInvocation) callAsBody() (*ActionMigrationPl
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMigrationPlanCancelInvocation) makeAllInputParams() *ActionMigrationPlanCancelRequest {
 	return &ActionMigrationPlanCancelRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionMigrationPlanCancelInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

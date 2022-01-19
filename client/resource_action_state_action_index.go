@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionActionStateIndex is a type for action Action_state#Index
 type ActionActionStateIndex struct {
@@ -18,7 +17,7 @@ func NewActionActionStateIndex(client *Client) *ActionActionStateIndex {
 // ActionActionStateIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionActionStateIndexMetaGlobalInput struct {
 	Count bool `json:"count"`
-	No bool `json:"no"`
+	No    bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionActionStateIndexMetaGlobalInput) SetCount(value bool) *ActionAct
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionActionStateIndexMetaGlobalInput) SetNo(value bool) *ActionActionStateIndexMetaGlobalInput {
 	in.No = value
@@ -71,9 +71,9 @@ func (in *ActionActionStateIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionActionStateIndexInput is a type for action input parameters
 type ActionActionStateIndexInput struct {
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
-	Order string `json:"order"`
+	Limit  int64  `json:"limit"`
+	Offset int64  `json:"offset"`
+	Order  string `json:"order"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -89,6 +89,7 @@ func (in *ActionActionStateIndexInput) SetLimit(value int64) *ActionActionStateI
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionActionStateIndexInput) SetOffset(value int64) *ActionActionStateIndexInput {
 	in.Offset = value
@@ -100,6 +101,7 @@ func (in *ActionActionStateIndexInput) SetOffset(value int64) *ActionActionState
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetOrder sets parameter Order to value and selects it for sending
 func (in *ActionActionStateIndexInput) SetOrder(value string) *ActionActionStateIndexInput {
 	in.Order = value
@@ -135,21 +137,19 @@ func (in *ActionActionStateIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionActionStateIndexOutput is a type for action output parameters
 type ActionActionStateIndexOutput struct {
-	CanCancel bool `json:"can_cancel"`
+	CanCancel bool   `json:"can_cancel"`
 	CreatedAt string `json:"created_at"`
-	Current int64 `json:"current"`
-	Finished bool `json:"finished"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Status bool `json:"status"`
-	Total int64 `json:"total"`
-	Unit string `json:"unit"`
+	Current   int64  `json:"current"`
+	Finished  bool   `json:"finished"`
+	Id        int64  `json:"id"`
+	Label     string `json:"label"`
+	Status    bool   `json:"status"`
+	Total     int64  `json:"total"`
+	Unit      string `json:"unit"`
 	UpdatedAt string `json:"updated_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionActionStateIndexResponse struct {
@@ -164,12 +164,11 @@ type ActionActionStateIndexResponse struct {
 	Output []*ActionActionStateIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionActionStateIndex) Prepare() *ActionActionStateIndexInvocation {
 	return &ActionActionStateIndexInvocation{
 		Action: action,
-		Path: "/v6.0/action_states",
+		Path:   "/v6.0/action_states",
 	}
 }
 
@@ -185,7 +184,6 @@ type ActionActionStateIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionActionStateIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionActionStateIndexInvocation) NewInput() *ActionActionStateIndexInput {
@@ -208,6 +206,7 @@ func (inv *ActionActionStateIndexInvocation) IsParameterSelected(param string) b
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionActionStateIndexInvocation) NewMetaInput() *ActionActionStateIndexMetaGlobalInput {
@@ -248,8 +247,6 @@ func (inv *ActionActionStateIndexInvocation) callAsQuery() (*ActionActionStateIn
 	return resp, err
 }
 
-
-
 func (inv *ActionActionStateIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -274,4 +271,3 @@ func (inv *ActionActionStateIndexInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

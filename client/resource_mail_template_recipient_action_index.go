@@ -18,9 +18,9 @@ func NewActionMailTemplateRecipientIndex(client *Client) *ActionMailTemplateReci
 
 // ActionMailTemplateRecipientIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateRecipientIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionMailTemplateRecipientIndexMetaGlobalInput) SetCount(value bool) 
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionMailTemplateRecipientIndexMetaGlobalInput) SetIncludes(value string) *ActionMailTemplateRecipientIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionMailTemplateRecipientIndexMetaGlobalInput) SetIncludes(value str
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMailTemplateRecipientIndexMetaGlobalInput) SetNo(value bool) *ActionMailTemplateRecipientIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionMailTemplateRecipientIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMailTemplateRecipientIndexInput is a type for action input parameters
 type ActionMailTemplateRecipientIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionMailTemplateRecipientIndexInput) SetLimit(value int64) *ActionMa
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionMailTemplateRecipientIndexInput) SetOffset(value int64) *ActionMailTemplateRecipientIndexInput {
 	in.Offset = value
@@ -136,13 +139,11 @@ func (in *ActionMailTemplateRecipientIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionMailTemplateRecipientIndexOutput is a type for action output parameters
 type ActionMailTemplateRecipientIndexOutput struct {
-	Id int64 `json:"id"`
+	Id            int64                          `json:"id"`
 	MailRecipient *ActionMailRecipientShowOutput `json:"mail_recipient"`
 }
-
 
 // Type for action response, including envelope
 type ActionMailTemplateRecipientIndexResponse struct {
@@ -157,12 +158,11 @@ type ActionMailTemplateRecipientIndexResponse struct {
 	Output []*ActionMailTemplateRecipientIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMailTemplateRecipientIndex) Prepare() *ActionMailTemplateRecipientIndexInvocation {
 	return &ActionMailTemplateRecipientIndexInvocation{
 		Action: action,
-		Path: "/v6.0/mail_templates/{mail_template_id}/recipients",
+		Path:   "/v6.0/mail_templates/{mail_template_id}/recipients",
 	}
 }
 
@@ -211,6 +211,7 @@ func (inv *ActionMailTemplateRecipientIndexInvocation) IsParameterSelected(param
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionMailTemplateRecipientIndexInvocation) NewMetaInput() *ActionMailTemplateRecipientIndexMetaGlobalInput {
@@ -251,8 +252,6 @@ func (inv *ActionMailTemplateRecipientIndexInvocation) callAsQuery() (*ActionMai
 	return resp, err
 }
 
-
-
 func (inv *ActionMailTemplateRecipientIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -277,4 +276,3 @@ func (inv *ActionMailTemplateRecipientIndexInvocation) convertMetaInputToQueryPa
 		}
 	}
 }
-

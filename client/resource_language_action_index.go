@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionLanguageIndex is a type for action Language#Index
 type ActionLanguageIndex struct {
@@ -17,9 +16,9 @@ func NewActionLanguageIndex(client *Client) *ActionLanguageIndex {
 
 // ActionLanguageIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionLanguageIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionLanguageIndexMetaGlobalInput) SetCount(value bool) *ActionLangua
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionLanguageIndexMetaGlobalInput) SetIncludes(value string) *ActionLanguageIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionLanguageIndexMetaGlobalInput) SetIncludes(value string) *ActionL
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionLanguageIndexMetaGlobalInput) SetNo(value bool) *ActionLanguageIndexMetaGlobalInput {
 	in.No = value
@@ -83,7 +84,7 @@ func (in *ActionLanguageIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionLanguageIndexInput is a type for action input parameters
 type ActionLanguageIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -100,6 +101,7 @@ func (in *ActionLanguageIndexInput) SetLimit(value int64) *ActionLanguageIndexIn
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionLanguageIndexInput) SetOffset(value int64) *ActionLanguageIndexInput {
 	in.Offset = value
@@ -135,14 +137,12 @@ func (in *ActionLanguageIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionLanguageIndexOutput is a type for action output parameters
 type ActionLanguageIndexOutput struct {
-	Code string `json:"code"`
-	Id int64 `json:"id"`
+	Code  string `json:"code"`
+	Id    int64  `json:"id"`
 	Label string `json:"label"`
 }
-
 
 // Type for action response, including envelope
 type ActionLanguageIndexResponse struct {
@@ -157,12 +157,11 @@ type ActionLanguageIndexResponse struct {
 	Output []*ActionLanguageIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionLanguageIndex) Prepare() *ActionLanguageIndexInvocation {
 	return &ActionLanguageIndexInvocation{
 		Action: action,
-		Path: "/v6.0/languages",
+		Path:   "/v6.0/languages",
 	}
 }
 
@@ -178,7 +177,6 @@ type ActionLanguageIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionLanguageIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionLanguageIndexInvocation) NewInput() *ActionLanguageIndexInput {
@@ -201,6 +199,7 @@ func (inv *ActionLanguageIndexInvocation) IsParameterSelected(param string) bool
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionLanguageIndexInvocation) NewMetaInput() *ActionLanguageIndexMetaGlobalInput {
@@ -241,8 +240,6 @@ func (inv *ActionLanguageIndexInvocation) callAsQuery() (*ActionLanguageIndexRes
 	return resp, err
 }
 
-
-
 func (inv *ActionLanguageIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -267,4 +264,3 @@ func (inv *ActionLanguageIndexInvocation) convertMetaInputToQueryParams(ret map[
 		}
 	}
 }
-

@@ -31,14 +31,14 @@ func NewResourceLocation(client *Client) *ResourceLocation {
 	actionUpdate := NewActionLocationUpdate(client)
 
 	return &ResourceLocation{
-		Client: client,
-		Create: actionCreate,
-		New: actionCreate,
-		Index: actionIndex,
-		List: actionIndex,
+		Client:         client,
+		Create:         actionCreate,
+		New:            actionCreate,
+		Index:          actionIndex,
+		List:           actionIndex,
 		SetMaintenance: actionSetMaintenance,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
+		Show:           actionShow,
+		Find:           actionShow,
+		Update:         actionUpdate,
 	}
 }

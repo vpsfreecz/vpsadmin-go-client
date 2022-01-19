@@ -21,9 +21,9 @@ func NewResourceObjectHistory(client *Client) *ResourceObjectHistory {
 
 	return &ResourceObjectHistory{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

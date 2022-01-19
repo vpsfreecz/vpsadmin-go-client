@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionNodeIndex is a type for action Node#Index
 type ActionNodeIndex struct {
@@ -17,9 +16,9 @@ func NewActionNodeIndex(client *Client) *ActionNodeIndex {
 
 // ActionNodeIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionNodeIndexMetaGlobalInput) SetCount(value bool) *ActionNodeIndexM
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionNodeIndexMetaGlobalInput) SetIncludes(value string) *ActionNodeIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionNodeIndexMetaGlobalInput) SetIncludes(value string) *ActionNodeI
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNodeIndexMetaGlobalInput) SetNo(value bool) *ActionNodeIndexMetaGlobalInput {
 	in.No = value
@@ -83,13 +84,13 @@ func (in *ActionNodeIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeIndexInput is a type for action input parameters
 type ActionNodeIndexInput struct {
-	Environment int64 `json:"environment"`
+	Environment    int64  `json:"environment"`
 	HypervisorType string `json:"hypervisor_type"`
-	Limit int64 `json:"limit"`
-	Location int64 `json:"location"`
-	Offset int64 `json:"offset"`
-	State string `json:"state"`
-	Type string `json:"type"`
+	Limit          int64  `json:"limit"`
+	Location       int64  `json:"location"`
+	Offset         int64  `json:"offset"`
+	State          string `json:"state"`
+	Type           string `json:"type"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -105,6 +106,7 @@ func (in *ActionNodeIndexInput) SetEnvironment(value int64) *ActionNodeIndexInpu
 	in._selectedParameters["Environment"] = nil
 	return in
 }
+
 // SetHypervisorType sets parameter HypervisorType to value and selects it for sending
 func (in *ActionNodeIndexInput) SetHypervisorType(value string) *ActionNodeIndexInput {
 	in.HypervisorType = value
@@ -116,6 +118,7 @@ func (in *ActionNodeIndexInput) SetHypervisorType(value string) *ActionNodeIndex
 	in._selectedParameters["HypervisorType"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionNodeIndexInput) SetLimit(value int64) *ActionNodeIndexInput {
 	in.Limit = value
@@ -127,6 +130,7 @@ func (in *ActionNodeIndexInput) SetLimit(value int64) *ActionNodeIndexInput {
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionNodeIndexInput) SetLocation(value int64) *ActionNodeIndexInput {
 	in.Location = value
@@ -138,6 +142,7 @@ func (in *ActionNodeIndexInput) SetLocation(value int64) *ActionNodeIndexInput {
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionNodeIndexInput) SetOffset(value int64) *ActionNodeIndexInput {
 	in.Offset = value
@@ -149,6 +154,7 @@ func (in *ActionNodeIndexInput) SetOffset(value int64) *ActionNodeIndexInput {
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetState sets parameter State to value and selects it for sending
 func (in *ActionNodeIndexInput) SetState(value string) *ActionNodeIndexInput {
 	in.State = value
@@ -160,6 +166,7 @@ func (in *ActionNodeIndexInput) SetState(value string) *ActionNodeIndexInput {
 	in._selectedParameters["State"] = nil
 	return in
 }
+
 // SetType sets parameter Type to value and selects it for sending
 func (in *ActionNodeIndexInput) SetType(value string) *ActionNodeIndexInput {
 	in.Type = value
@@ -195,49 +202,47 @@ func (in *ActionNodeIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionNodeIndexOutput is a type for action output parameters
 type ActionNodeIndexOutput struct {
-	Active bool `json:"active"`
-	ArcC int64 `json:"arc_c"`
-	ArcCMax int64 `json:"arc_c_max"`
-	ArcHitpercent int64 `json:"arc_hitpercent"`
-	ArcSize int64 `json:"arc_size"`
-	CpuGuest float64 `json:"cpu_guest"`
-	CpuIdle float64 `json:"cpu_idle"`
-	CpuIowait float64 `json:"cpu_iowait"`
-	CpuIrq float64 `json:"cpu_irq"`
-	CpuNice float64 `json:"cpu_nice"`
-	CpuSoftirq float64 `json:"cpu_softirq"`
-	CpuSystem float64 `json:"cpu_system"`
-	CpuUser float64 `json:"cpu_user"`
-	Cpus int64 `json:"cpus"`
-	DomainName string `json:"domain_name"`
-	HypervisorType string `json:"hypervisor_type"`
-	Id int64 `json:"id"`
-	IpAddr string `json:"ip_addr"`
-	Kernel string `json:"kernel"`
-	Loadavg float64 `json:"loadavg"`
-	Location *ActionLocationShowOutput `json:"location"`
-	MaintenanceLock string `json:"maintenance_lock"`
-	MaintenanceLockReason string `json:"maintenance_lock_reason"`
-	MaxRx int64 `json:"max_rx"`
-	MaxTx int64 `json:"max_tx"`
-	MaxVps int64 `json:"max_vps"`
-	Name string `json:"name"`
-	NetInterface string `json:"net_interface"`
-	ProcessCount int64 `json:"process_count"`
-	Status bool `json:"status"`
-	TotalMemory int64 `json:"total_memory"`
-	TotalSwap int64 `json:"total_swap"`
-	Type string `json:"type"`
-	Uptime int64 `json:"uptime"`
-	UsedMemory int64 `json:"used_memory"`
-	UsedSwap int64 `json:"used_swap"`
-	VePrivate string `json:"ve_private"`
-	Version string `json:"version"`
+	Active                bool                      `json:"active"`
+	ArcC                  int64                     `json:"arc_c"`
+	ArcCMax               int64                     `json:"arc_c_max"`
+	ArcHitpercent         int64                     `json:"arc_hitpercent"`
+	ArcSize               int64                     `json:"arc_size"`
+	CpuGuest              float64                   `json:"cpu_guest"`
+	CpuIdle               float64                   `json:"cpu_idle"`
+	CpuIowait             float64                   `json:"cpu_iowait"`
+	CpuIrq                float64                   `json:"cpu_irq"`
+	CpuNice               float64                   `json:"cpu_nice"`
+	CpuSoftirq            float64                   `json:"cpu_softirq"`
+	CpuSystem             float64                   `json:"cpu_system"`
+	CpuUser               float64                   `json:"cpu_user"`
+	Cpus                  int64                     `json:"cpus"`
+	DomainName            string                    `json:"domain_name"`
+	HypervisorType        string                    `json:"hypervisor_type"`
+	Id                    int64                     `json:"id"`
+	IpAddr                string                    `json:"ip_addr"`
+	Kernel                string                    `json:"kernel"`
+	Loadavg               float64                   `json:"loadavg"`
+	Location              *ActionLocationShowOutput `json:"location"`
+	MaintenanceLock       string                    `json:"maintenance_lock"`
+	MaintenanceLockReason string                    `json:"maintenance_lock_reason"`
+	MaxRx                 int64                     `json:"max_rx"`
+	MaxTx                 int64                     `json:"max_tx"`
+	MaxVps                int64                     `json:"max_vps"`
+	Name                  string                    `json:"name"`
+	NetInterface          string                    `json:"net_interface"`
+	ProcessCount          int64                     `json:"process_count"`
+	Status                bool                      `json:"status"`
+	TotalMemory           int64                     `json:"total_memory"`
+	TotalSwap             int64                     `json:"total_swap"`
+	Type                  string                    `json:"type"`
+	Uptime                int64                     `json:"uptime"`
+	UsedMemory            int64                     `json:"used_memory"`
+	UsedSwap              int64                     `json:"used_swap"`
+	VePrivate             string                    `json:"ve_private"`
+	Version               string                    `json:"version"`
 }
-
 
 // Type for action response, including envelope
 type ActionNodeIndexResponse struct {
@@ -252,12 +257,11 @@ type ActionNodeIndexResponse struct {
 	Output []*ActionNodeIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNodeIndex) Prepare() *ActionNodeIndexInvocation {
 	return &ActionNodeIndexInvocation{
 		Action: action,
-		Path: "/v6.0/nodes",
+		Path:   "/v6.0/nodes",
 	}
 }
 
@@ -273,7 +277,6 @@ type ActionNodeIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionNodeIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionNodeIndexInvocation) NewInput() *ActionNodeIndexInput {
@@ -296,6 +299,7 @@ func (inv *ActionNodeIndexInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionNodeIndexInvocation) NewMetaInput() *ActionNodeIndexMetaGlobalInput {
@@ -336,8 +340,6 @@ func (inv *ActionNodeIndexInvocation) callAsQuery() (*ActionNodeIndexResponse, e
 	return resp, err
 }
 
-
-
 func (inv *ActionNodeIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Environment") {
@@ -377,4 +379,3 @@ func (inv *ActionNodeIndexInvocation) convertMetaInputToQueryParams(ret map[stri
 		}
 	}
 }
-

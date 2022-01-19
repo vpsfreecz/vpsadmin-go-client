@@ -19,7 +19,7 @@ func NewActionExportDelete(client *Client) *ActionExportDelete {
 // ActionExportDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionExportDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionExportDeleteMetaGlobalInput) SetIncludes(value string) *ActionEx
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionExportDeleteMetaGlobalInput) SetNo(value bool) *ActionExportDeleteMetaGlobalInput {
 	in.No = value
@@ -70,12 +71,10 @@ func (in *ActionExportDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionExportDeleteRequest is a type for the entire action request
 type ActionExportDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionExportDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionExportDeleteMetaGlobalOutput struct {
@@ -93,12 +92,11 @@ type ActionExportDeleteResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionExportDelete) Prepare() *ActionExportDeleteInvocation {
 	return &ActionExportDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/exports/{export_id}",
+		Path:   "/v6.0/exports/{export_id}",
 	}
 }
 
@@ -151,7 +149,6 @@ func (inv *ActionExportDeleteInvocation) IsMetaParameterSelected(param string) b
 func (inv *ActionExportDeleteInvocation) Call() (*ActionExportDeleteResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionExportDeleteInvocation) callAsBody() (*ActionExportDeleteResponse, error) {
 	input := inv.makeAllInputParams()
@@ -209,11 +206,11 @@ func (resp *ActionExportDeleteResponse) WatchOperation(timeout float64, updateIn
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -236,14 +233,11 @@ func (resp *ActionExportDeleteResponse) CancelOperation() (*ActionActionStateCan
 	return req.Call()
 }
 
-
-
 func (inv *ActionExportDeleteInvocation) makeAllInputParams() *ActionExportDeleteRequest {
 	return &ActionExportDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionExportDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

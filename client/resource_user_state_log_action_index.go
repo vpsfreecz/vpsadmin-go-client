@@ -18,9 +18,9 @@ func NewActionUserStateLogIndex(client *Client) *ActionUserStateLogIndex {
 
 // ActionUserStateLogIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserStateLogIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionUserStateLogIndexMetaGlobalInput) SetCount(value bool) *ActionUs
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserStateLogIndexMetaGlobalInput) SetIncludes(value string) *ActionUserStateLogIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionUserStateLogIndexMetaGlobalInput) SetIncludes(value string) *Act
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserStateLogIndexMetaGlobalInput) SetNo(value bool) *ActionUserStateLogIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionUserStateLogIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserStateLogIndexInput is a type for action input parameters
 type ActionUserStateLogIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionUserStateLogIndexInput) SetLimit(value int64) *ActionUserStateLo
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionUserStateLogIndexInput) SetOffset(value int64) *ActionUserStateLogIndexInput {
 	in.Offset = value
@@ -136,17 +139,15 @@ func (in *ActionUserStateLogIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserStateLogIndexOutput is a type for action output parameters
 type ActionUserStateLogIndexOutput struct {
-	ChangedAt string `json:"changed_at"`
-	Expiration string `json:"expiration"`
-	Id int64 `json:"id"`
-	Reason string `json:"reason"`
-	State string `json:"state"`
-	User *ActionUserShowOutput `json:"user"`
+	ChangedAt  string                `json:"changed_at"`
+	Expiration string                `json:"expiration"`
+	Id         int64                 `json:"id"`
+	Reason     string                `json:"reason"`
+	State      string                `json:"state"`
+	User       *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserStateLogIndexResponse struct {
@@ -161,12 +162,11 @@ type ActionUserStateLogIndexResponse struct {
 	Output []*ActionUserStateLogIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserStateLogIndex) Prepare() *ActionUserStateLogIndexInvocation {
 	return &ActionUserStateLogIndexInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/state_logs",
+		Path:   "/v6.0/users/{user_id}/state_logs",
 	}
 }
 
@@ -215,6 +215,7 @@ func (inv *ActionUserStateLogIndexInvocation) IsParameterSelected(param string) 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserStateLogIndexInvocation) NewMetaInput() *ActionUserStateLogIndexMetaGlobalInput {
@@ -255,8 +256,6 @@ func (inv *ActionUserStateLogIndexInvocation) callAsQuery() (*ActionUserStateLog
 	return resp, err
 }
 
-
-
 func (inv *ActionUserStateLogIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -281,4 +280,3 @@ func (inv *ActionUserStateLogIndexInvocation) convertMetaInputToQueryParams(ret 
 		}
 	}
 }
-

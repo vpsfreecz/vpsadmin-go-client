@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionUserRequestChangeCreate is a type for action User_request.Change#Create
 type ActionUserRequestChangeCreate struct {
@@ -18,7 +17,7 @@ func NewActionUserRequestChangeCreate(client *Client) *ActionUserRequestChangeCr
 // ActionUserRequestChangeCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestChangeCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionUserRequestChangeCreateMetaGlobalInput) SetIncludes(value string
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserRequestChangeCreateMetaGlobalInput) SetNo(value bool) *ActionUserRequestChangeCreateMetaGlobalInput {
 	in.No = value
@@ -71,10 +71,10 @@ func (in *ActionUserRequestChangeCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserRequestChangeCreateInput is a type for action input parameters
 type ActionUserRequestChangeCreateInput struct {
-	Address string `json:"address"`
+	Address      string `json:"address"`
 	ChangeReason string `json:"change_reason"`
-	Email string `json:"email"`
-	FullName string `json:"full_name"`
+	Email        string `json:"email"`
+	FullName     string `json:"full_name"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -90,6 +90,7 @@ func (in *ActionUserRequestChangeCreateInput) SetAddress(value string) *ActionUs
 	in._selectedParameters["Address"] = nil
 	return in
 }
+
 // SetChangeReason sets parameter ChangeReason to value and selects it for sending
 func (in *ActionUserRequestChangeCreateInput) SetChangeReason(value string) *ActionUserRequestChangeCreateInput {
 	in.ChangeReason = value
@@ -101,6 +102,7 @@ func (in *ActionUserRequestChangeCreateInput) SetChangeReason(value string) *Act
 	in._selectedParameters["ChangeReason"] = nil
 	return in
 }
+
 // SetEmail sets parameter Email to value and selects it for sending
 func (in *ActionUserRequestChangeCreateInput) SetEmail(value string) *ActionUserRequestChangeCreateInput {
 	in.Email = value
@@ -112,6 +114,7 @@ func (in *ActionUserRequestChangeCreateInput) SetEmail(value string) *ActionUser
 	in._selectedParameters["Email"] = nil
 	return in
 }
+
 // SetFullName sets parameter FullName to value and selects it for sending
 func (in *ActionUserRequestChangeCreateInput) SetFullName(value string) *ActionUserRequestChangeCreateInput {
 	in.FullName = value
@@ -150,29 +153,28 @@ func (in *ActionUserRequestChangeCreateInput) AnySelected() bool {
 // ActionUserRequestChangeCreateRequest is a type for the entire action request
 type ActionUserRequestChangeCreateRequest struct {
 	Change map[string]interface{} `json:"change"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta   map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserRequestChangeCreateOutput is a type for action output parameters
 type ActionUserRequestChangeCreateOutput struct {
-	Address string `json:"address"`
-	Admin *ActionUserShowOutput `json:"admin"`
-	AdminResponse string `json:"admin_response"`
-	ApiIpAddr string `json:"api_ip_addr"`
-	ApiIpPtr string `json:"api_ip_ptr"`
-	ChangeReason string `json:"change_reason"`
-	ClientIpAddr string `json:"client_ip_addr"`
-	ClientIpPtr string `json:"client_ip_ptr"`
-	CreatedAt string `json:"created_at"`
-	Email string `json:"email"`
-	FullName string `json:"full_name"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	State string `json:"state"`
-	UpdatedAt string `json:"updated_at"`
-	User *ActionUserShowOutput `json:"user"`
+	Address       string                `json:"address"`
+	Admin         *ActionUserShowOutput `json:"admin"`
+	AdminResponse string                `json:"admin_response"`
+	ApiIpAddr     string                `json:"api_ip_addr"`
+	ApiIpPtr      string                `json:"api_ip_ptr"`
+	ChangeReason  string                `json:"change_reason"`
+	ClientIpAddr  string                `json:"client_ip_addr"`
+	ClientIpPtr   string                `json:"client_ip_ptr"`
+	CreatedAt     string                `json:"created_at"`
+	Email         string                `json:"email"`
+	FullName      string                `json:"full_name"`
+	Id            int64                 `json:"id"`
+	Label         string                `json:"label"`
+	State         string                `json:"state"`
+	UpdatedAt     string                `json:"updated_at"`
+	User          *ActionUserShowOutput `json:"user"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserRequestChangeCreateResponse struct {
@@ -187,12 +189,11 @@ type ActionUserRequestChangeCreateResponse struct {
 	Output *ActionUserRequestChangeCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserRequestChangeCreate) Prepare() *ActionUserRequestChangeCreateInvocation {
 	return &ActionUserRequestChangeCreateInvocation{
 		Action: action,
-		Path: "/v6.0/user_request/changes",
+		Path:   "/v6.0/user_request/changes",
 	}
 }
 
@@ -208,7 +209,6 @@ type ActionUserRequestChangeCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionUserRequestChangeCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionUserRequestChangeCreateInvocation) NewInput() *ActionUserRequestChangeCreateInput {
@@ -231,6 +231,7 @@ func (inv *ActionUserRequestChangeCreateInvocation) IsParameterSelected(param st
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserRequestChangeCreateInvocation) NewMetaInput() *ActionUserRequestChangeCreateMetaGlobalInput {
@@ -259,7 +260,6 @@ func (inv *ActionUserRequestChangeCreateInvocation) Call() (*ActionUserRequestCh
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserRequestChangeCreateInvocation) callAsBody() (*ActionUserRequestChangeCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserRequestChangeCreateResponse{Action: inv.Action}
@@ -270,13 +270,10 @@ func (inv *ActionUserRequestChangeCreateInvocation) callAsBody() (*ActionUserReq
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserRequestChangeCreateInvocation) makeAllInputParams() *ActionUserRequestChangeCreateRequest {
 	return &ActionUserRequestChangeCreateRequest{
 		Change: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:   inv.makeMetaInputParams(),
 	}
 }
 

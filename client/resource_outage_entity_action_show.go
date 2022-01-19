@@ -19,7 +19,7 @@ func NewActionOutageEntityShow(client *Client) *ActionOutageEntityShow {
 // ActionOutageEntityShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageEntityShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOutageEntityShowMetaGlobalInput) SetIncludes(value string) *Acti
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOutageEntityShowMetaGlobalInput) SetNo(value bool) *ActionOutageEntityShowMetaGlobalInput {
 	in.No = value
@@ -70,16 +71,13 @@ func (in *ActionOutageEntityShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionOutageEntityShowOutput is a type for action output parameters
 type ActionOutageEntityShowOutput struct {
-	EntityId int64 `json:"entity_id"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Name string `json:"name"`
+	EntityId int64  `json:"entity_id"`
+	Id       int64  `json:"id"`
+	Label    string `json:"label"`
+	Name     string `json:"name"`
 }
-
 
 // Type for action response, including envelope
 type ActionOutageEntityShowResponse struct {
@@ -94,12 +92,11 @@ type ActionOutageEntityShowResponse struct {
 	Output *ActionOutageEntityShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOutageEntityShow) Prepare() *ActionOutageEntityShowInvocation {
 	return &ActionOutageEntityShowInvocation{
 		Action: action,
-		Path: "/v6.0/outages/{outage_id}/entities/{entity_id}",
+		Path:   "/v6.0/outages/{outage_id}/entities/{entity_id}",
 	}
 }
 
@@ -164,9 +161,6 @@ func (inv *ActionOutageEntityShowInvocation) callAsQuery() (*ActionOutageEntityS
 	return resp, err
 }
 
-
-
-
 func (inv *ActionOutageEntityShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -177,4 +171,3 @@ func (inv *ActionOutageEntityShowInvocation) convertMetaInputToQueryParams(ret m
 		}
 	}
 }
-

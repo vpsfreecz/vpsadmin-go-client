@@ -18,9 +18,9 @@ func NewActionOomReportUsageIndex(client *Client) *ActionOomReportUsageIndex {
 
 // ActionOomReportUsageIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportUsageIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionOomReportUsageIndexMetaGlobalInput) SetCount(value bool) *Action
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionOomReportUsageIndexMetaGlobalInput) SetIncludes(value string) *ActionOomReportUsageIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionOomReportUsageIndexMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOomReportUsageIndexMetaGlobalInput) SetNo(value bool) *ActionOomReportUsageIndexMetaGlobalInput {
 	in.No = value
@@ -84,7 +86,7 @@ func (in *ActionOomReportUsageIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportUsageIndexInput is a type for action input parameters
 type ActionOomReportUsageIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -101,6 +103,7 @@ func (in *ActionOomReportUsageIndexInput) SetLimit(value int64) *ActionOomReport
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionOomReportUsageIndexInput) SetOffset(value int64) *ActionOomReportUsageIndexInput {
 	in.Offset = value
@@ -136,16 +139,14 @@ func (in *ActionOomReportUsageIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionOomReportUsageIndexOutput is a type for action output parameters
 type ActionOomReportUsageIndexOutput struct {
-	Failcnt int64 `json:"failcnt"`
-	Id int64 `json:"id"`
-	Limit int64 `json:"limit"`
+	Failcnt int64  `json:"failcnt"`
+	Id      int64  `json:"id"`
+	Limit   int64  `json:"limit"`
 	Memtype string `json:"memtype"`
-	Usage int64 `json:"usage"`
+	Usage   int64  `json:"usage"`
 }
-
 
 // Type for action response, including envelope
 type ActionOomReportUsageIndexResponse struct {
@@ -160,12 +161,11 @@ type ActionOomReportUsageIndexResponse struct {
 	Output []*ActionOomReportUsageIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOomReportUsageIndex) Prepare() *ActionOomReportUsageIndexInvocation {
 	return &ActionOomReportUsageIndexInvocation{
 		Action: action,
-		Path: "/v6.0/oom_reports/{oom_report_id}/usages",
+		Path:   "/v6.0/oom_reports/{oom_report_id}/usages",
 	}
 }
 
@@ -214,6 +214,7 @@ func (inv *ActionOomReportUsageIndexInvocation) IsParameterSelected(param string
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOomReportUsageIndexInvocation) NewMetaInput() *ActionOomReportUsageIndexMetaGlobalInput {
@@ -254,8 +255,6 @@ func (inv *ActionOomReportUsageIndexInvocation) callAsQuery() (*ActionOomReportU
 	return resp, err
 }
 
-
-
 func (inv *ActionOomReportUsageIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -280,4 +279,3 @@ func (inv *ActionOomReportUsageIndexInvocation) convertMetaInputToQueryParams(re
 		}
 	}
 }
-

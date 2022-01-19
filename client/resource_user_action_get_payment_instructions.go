@@ -58,13 +58,10 @@ func (in *ActionUserGetPaymentInstructionsMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserGetPaymentInstructionsOutput is a type for action output parameters
 type ActionUserGetPaymentInstructionsOutput struct {
 	Instructions string `json:"instructions"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserGetPaymentInstructionsResponse struct {
@@ -79,12 +76,11 @@ type ActionUserGetPaymentInstructionsResponse struct {
 	Output *ActionUserGetPaymentInstructionsOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserGetPaymentInstructions) Prepare() *ActionUserGetPaymentInstructionsInvocation {
 	return &ActionUserGetPaymentInstructionsInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/get_payment_instructions",
+		Path:   "/v6.0/users/{user_id}/get_payment_instructions",
 	}
 }
 
@@ -149,9 +145,6 @@ func (inv *ActionUserGetPaymentInstructionsInvocation) callAsQuery() (*ActionUse
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserGetPaymentInstructionsInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("No") {
@@ -159,4 +152,3 @@ func (inv *ActionUserGetPaymentInstructionsInvocation) convertMetaInputToQueryPa
 		}
 	}
 }
-

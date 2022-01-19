@@ -18,9 +18,9 @@ func NewActionUserTotpDeviceIndex(client *Client) *ActionUserTotpDeviceIndex {
 
 // ActionUserTotpDeviceIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserTotpDeviceIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -36,6 +36,7 @@ func (in *ActionUserTotpDeviceIndexMetaGlobalInput) SetCount(value bool) *Action
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserTotpDeviceIndexMetaGlobalInput) SetIncludes(value string) *ActionUserTotpDeviceIndexMetaGlobalInput {
 	in.Includes = value
@@ -47,6 +48,7 @@ func (in *ActionUserTotpDeviceIndexMetaGlobalInput) SetIncludes(value string) *A
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserTotpDeviceIndexMetaGlobalInput) SetNo(value bool) *ActionUserTotpDeviceIndexMetaGlobalInput {
 	in.No = value
@@ -84,10 +86,10 @@ func (in *ActionUserTotpDeviceIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserTotpDeviceIndexInput is a type for action input parameters
 type ActionUserTotpDeviceIndexInput struct {
-	Confirmed bool `json:"confirmed"`
-	Enabled bool `json:"enabled"`
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
+	Confirmed bool  `json:"confirmed"`
+	Enabled   bool  `json:"enabled"`
+	Limit     int64 `json:"limit"`
+	Offset    int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -103,6 +105,7 @@ func (in *ActionUserTotpDeviceIndexInput) SetConfirmed(value bool) *ActionUserTo
 	in._selectedParameters["Confirmed"] = nil
 	return in
 }
+
 // SetEnabled sets parameter Enabled to value and selects it for sending
 func (in *ActionUserTotpDeviceIndexInput) SetEnabled(value bool) *ActionUserTotpDeviceIndexInput {
 	in.Enabled = value
@@ -114,6 +117,7 @@ func (in *ActionUserTotpDeviceIndexInput) SetEnabled(value bool) *ActionUserTotp
 	in._selectedParameters["Enabled"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserTotpDeviceIndexInput) SetLimit(value int64) *ActionUserTotpDeviceIndexInput {
 	in.Limit = value
@@ -125,6 +129,7 @@ func (in *ActionUserTotpDeviceIndexInput) SetLimit(value int64) *ActionUserTotpD
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionUserTotpDeviceIndexInput) SetOffset(value int64) *ActionUserTotpDeviceIndexInput {
 	in.Offset = value
@@ -160,19 +165,17 @@ func (in *ActionUserTotpDeviceIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserTotpDeviceIndexOutput is a type for action output parameters
 type ActionUserTotpDeviceIndexOutput struct {
-	Confirmed bool `json:"confirmed"`
+	Confirmed bool   `json:"confirmed"`
 	CreatedAt string `json:"created_at"`
-	Enabled bool `json:"enabled"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
+	Enabled   bool   `json:"enabled"`
+	Id        int64  `json:"id"`
+	Label     string `json:"label"`
 	LastUseAt string `json:"last_use_at"`
 	UpdatedAt string `json:"updated_at"`
-	UseCount int64 `json:"use_count"`
+	UseCount  int64  `json:"use_count"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserTotpDeviceIndexResponse struct {
@@ -187,12 +190,11 @@ type ActionUserTotpDeviceIndexResponse struct {
 	Output []*ActionUserTotpDeviceIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserTotpDeviceIndex) Prepare() *ActionUserTotpDeviceIndexInvocation {
 	return &ActionUserTotpDeviceIndexInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}/totp_devices",
+		Path:   "/v6.0/users/{user_id}/totp_devices",
 	}
 }
 
@@ -241,6 +243,7 @@ func (inv *ActionUserTotpDeviceIndexInvocation) IsParameterSelected(param string
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserTotpDeviceIndexInvocation) NewMetaInput() *ActionUserTotpDeviceIndexMetaGlobalInput {
@@ -281,8 +284,6 @@ func (inv *ActionUserTotpDeviceIndexInvocation) callAsQuery() (*ActionUserTotpDe
 	return resp, err
 }
 
-
-
 func (inv *ActionUserTotpDeviceIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Confirmed") {
@@ -313,4 +314,3 @@ func (inv *ActionUserTotpDeviceIndexInvocation) convertMetaInputToQueryParams(re
 		}
 	}
 }
-

@@ -19,7 +19,7 @@ func NewActionNetworkShow(client *Client) *ActionNetworkShow {
 // ActionNetworkShowMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionNetworkShowMetaGlobalInput) SetIncludes(value string) *ActionNet
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNetworkShowMetaGlobalInput) SetNo(value bool) *ActionNetworkShowMetaGlobalInput {
 	in.No = value
@@ -70,28 +71,25 @@ func (in *ActionNetworkShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionNetworkShowOutput is a type for action output parameters
 type ActionNetworkShowOutput struct {
-	Address string `json:"address"`
-	Assigned int64 `json:"assigned"`
-	Id int64 `json:"id"`
-	IpVersion int64 `json:"ip_version"`
-	Label string `json:"label"`
-	Managed bool `json:"managed"`
-	Owned int64 `json:"owned"`
-	Prefix int64 `json:"prefix"`
+	Address         string                    `json:"address"`
+	Assigned        int64                     `json:"assigned"`
+	Id              int64                     `json:"id"`
+	IpVersion       int64                     `json:"ip_version"`
+	Label           string                    `json:"label"`
+	Managed         bool                      `json:"managed"`
+	Owned           int64                     `json:"owned"`
+	Prefix          int64                     `json:"prefix"`
 	PrimaryLocation *ActionLocationShowOutput `json:"primary_location"`
-	Purpose string `json:"purpose"`
-	Role string `json:"role"`
-	Size int64 `json:"size"`
-	SplitAccess string `json:"split_access"`
-	SplitPrefix int64 `json:"split_prefix"`
-	Taken int64 `json:"taken"`
-	Used int64 `json:"used"`
+	Purpose         string                    `json:"purpose"`
+	Role            string                    `json:"role"`
+	Size            int64                     `json:"size"`
+	SplitAccess     string                    `json:"split_access"`
+	SplitPrefix     int64                     `json:"split_prefix"`
+	Taken           int64                     `json:"taken"`
+	Used            int64                     `json:"used"`
 }
-
 
 // Type for action response, including envelope
 type ActionNetworkShowResponse struct {
@@ -106,12 +104,11 @@ type ActionNetworkShowResponse struct {
 	Output *ActionNetworkShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNetworkShow) Prepare() *ActionNetworkShowInvocation {
 	return &ActionNetworkShowInvocation{
 		Action: action,
-		Path: "/v6.0/networks/{network_id}",
+		Path:   "/v6.0/networks/{network_id}",
 	}
 }
 
@@ -176,9 +173,6 @@ func (inv *ActionNetworkShowInvocation) callAsQuery() (*ActionNetworkShowRespons
 	return resp, err
 }
 
-
-
-
 func (inv *ActionNetworkShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -189,4 +183,3 @@ func (inv *ActionNetworkShowInvocation) convertMetaInputToQueryParams(ret map[st
 		}
 	}
 }
-

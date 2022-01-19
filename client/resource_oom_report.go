@@ -27,12 +27,12 @@ func NewResourceOomReport(client *Client) *ResourceOomReport {
 
 	return &ResourceOomReport{
 		Client: client,
-		Stat: NewResourceOomReportStat(client),
-		Task: NewResourceOomReportTask(client),
-		Usage: NewResourceOomReportUsage(client),
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Stat:   NewResourceOomReportStat(client),
+		Task:   NewResourceOomReportTask(client),
+		Usage:  NewResourceOomReportUsage(client),
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

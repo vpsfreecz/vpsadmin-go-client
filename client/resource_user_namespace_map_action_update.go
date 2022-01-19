@@ -19,7 +19,7 @@ func NewActionUserNamespaceMapUpdate(client *Client) *ActionUserNamespaceMapUpda
 // ActionUserNamespaceMapUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceMapUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserNamespaceMapUpdateMetaGlobalInput) SetIncludes(value string)
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserNamespaceMapUpdateMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceMapUpdateMetaGlobalInput {
 	in.No = value
@@ -72,8 +73,8 @@ func (in *ActionUserNamespaceMapUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserNamespaceMapUpdateInput is a type for action input parameters
 type ActionUserNamespaceMapUpdateInput struct {
-	Label string `json:"label"`
-	UserNamespace int64 `json:"user_namespace"`
+	Label         string `json:"label"`
+	UserNamespace int64  `json:"user_namespace"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -89,6 +90,7 @@ func (in *ActionUserNamespaceMapUpdateInput) SetLabel(value string) *ActionUserN
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetUserNamespace sets parameter UserNamespace to value and selects it for sending
 func (in *ActionUserNamespaceMapUpdateInput) SetUserNamespace(value int64) *ActionUserNamespaceMapUpdateInput {
 	in.UserNamespace = value
@@ -127,16 +129,15 @@ func (in *ActionUserNamespaceMapUpdateInput) AnySelected() bool {
 // ActionUserNamespaceMapUpdateRequest is a type for the entire action request
 type ActionUserNamespaceMapUpdateRequest struct {
 	UserNamespaceMap map[string]interface{} `json:"user_namespace_map"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta             map[string]interface{} `json:"_meta"`
 }
 
 // ActionUserNamespaceMapUpdateOutput is a type for action output parameters
 type ActionUserNamespaceMapUpdateOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
+	Id            int64                          `json:"id"`
+	Label         string                         `json:"label"`
 	UserNamespace *ActionUserNamespaceShowOutput `json:"user_namespace"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserNamespaceMapUpdateResponse struct {
@@ -151,12 +152,11 @@ type ActionUserNamespaceMapUpdateResponse struct {
 	Output *ActionUserNamespaceMapUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserNamespaceMapUpdate) Prepare() *ActionUserNamespaceMapUpdateInvocation {
 	return &ActionUserNamespaceMapUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/user_namespace_maps/{user_namespace_map_id}",
+		Path:   "/v6.0/user_namespace_maps/{user_namespace_map_id}",
 	}
 }
 
@@ -205,6 +205,7 @@ func (inv *ActionUserNamespaceMapUpdateInvocation) IsParameterSelected(param str
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserNamespaceMapUpdateInvocation) NewMetaInput() *ActionUserNamespaceMapUpdateMetaGlobalInput {
@@ -233,7 +234,6 @@ func (inv *ActionUserNamespaceMapUpdateInvocation) Call() (*ActionUserNamespaceM
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserNamespaceMapUpdateInvocation) callAsBody() (*ActionUserNamespaceMapUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserNamespaceMapUpdateResponse{Action: inv.Action}
@@ -244,13 +244,10 @@ func (inv *ActionUserNamespaceMapUpdateInvocation) callAsBody() (*ActionUserName
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserNamespaceMapUpdateInvocation) makeAllInputParams() *ActionUserNamespaceMapUpdateRequest {
 	return &ActionUserNamespaceMapUpdateRequest{
 		UserNamespaceMap: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:             inv.makeMetaInputParams(),
 	}
 }
 

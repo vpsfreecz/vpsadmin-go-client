@@ -19,7 +19,7 @@ func NewActionLocationNetworkDelete(client *Client) *ActionLocationNetworkDelete
 // ActionLocationNetworkDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationNetworkDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionLocationNetworkDeleteMetaGlobalInput) SetIncludes(value string) 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionLocationNetworkDeleteMetaGlobalInput) SetNo(value bool) *ActionLocationNetworkDeleteMetaGlobalInput {
 	in.No = value
@@ -70,13 +71,10 @@ func (in *ActionLocationNetworkDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionLocationNetworkDeleteRequest is a type for the entire action request
 type ActionLocationNetworkDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionLocationNetworkDeleteResponse struct {
@@ -84,12 +82,11 @@ type ActionLocationNetworkDeleteResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionLocationNetworkDelete) Prepare() *ActionLocationNetworkDeleteInvocation {
 	return &ActionLocationNetworkDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/location_networks/{location_network_id}",
+		Path:   "/v6.0/location_networks/{location_network_id}",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionLocationNetworkDeleteInvocation) Call() (*ActionLocationNetwork
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionLocationNetworkDeleteInvocation) callAsBody() (*ActionLocationNetworkDeleteResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionLocationNetworkDeleteResponse{Action: inv.Action}
@@ -151,15 +147,11 @@ func (inv *ActionLocationNetworkDeleteInvocation) callAsBody() (*ActionLocationN
 	return resp, err
 }
 
-
-
-
 func (inv *ActionLocationNetworkDeleteInvocation) makeAllInputParams() *ActionLocationNetworkDeleteRequest {
 	return &ActionLocationNetworkDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionLocationNetworkDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

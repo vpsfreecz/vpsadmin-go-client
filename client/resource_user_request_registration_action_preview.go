@@ -19,7 +19,7 @@ func NewActionUserRequestRegistrationPreview(client *Client) *ActionUserRequestR
 // ActionUserRequestRegistrationPreviewMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestRegistrationPreviewMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserRequestRegistrationPreviewMetaGlobalInput) SetIncludes(value
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserRequestRegistrationPreviewMetaGlobalInput) SetNo(value bool) *ActionUserRequestRegistrationPreviewMetaGlobalInput {
 	in.No = value
@@ -70,27 +71,24 @@ func (in *ActionUserRequestRegistrationPreviewMetaGlobalInput) AnySelected() boo
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserRequestRegistrationPreviewOutput is a type for action output parameters
 type ActionUserRequestRegistrationPreviewOutput struct {
-	Address string `json:"address"`
-	AdminResponse string `json:"admin_response"`
-	Currency string `json:"currency"`
-	Email string `json:"email"`
-	FullName string `json:"full_name"`
-	How string `json:"how"`
-	Id int64 `json:"id"`
-	Language *ActionLanguageShowOutput `json:"language"`
-	Location *ActionLocationShowOutput `json:"location"`
-	Login string `json:"login"`
-	Note string `json:"note"`
-	OrgId string `json:"org_id"`
-	OrgName string `json:"org_name"`
-	OsTemplate *ActionOsTemplateShowOutput `json:"os_template"`
-	YearOfBirth int64 `json:"year_of_birth"`
+	Address       string                      `json:"address"`
+	AdminResponse string                      `json:"admin_response"`
+	Currency      string                      `json:"currency"`
+	Email         string                      `json:"email"`
+	FullName      string                      `json:"full_name"`
+	How           string                      `json:"how"`
+	Id            int64                       `json:"id"`
+	Language      *ActionLanguageShowOutput   `json:"language"`
+	Location      *ActionLocationShowOutput   `json:"location"`
+	Login         string                      `json:"login"`
+	Note          string                      `json:"note"`
+	OrgId         string                      `json:"org_id"`
+	OrgName       string                      `json:"org_name"`
+	OsTemplate    *ActionOsTemplateShowOutput `json:"os_template"`
+	YearOfBirth   int64                       `json:"year_of_birth"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserRequestRegistrationPreviewResponse struct {
@@ -105,12 +103,11 @@ type ActionUserRequestRegistrationPreviewResponse struct {
 	Output *ActionUserRequestRegistrationPreviewOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserRequestRegistrationPreview) Prepare() *ActionUserRequestRegistrationPreviewInvocation {
 	return &ActionUserRequestRegistrationPreviewInvocation{
 		Action: action,
-		Path: "/v6.0/user_request/registrations/{registration_id}/{token}",
+		Path:   "/v6.0/user_request/registrations/{registration_id}/{token}",
 	}
 }
 
@@ -175,9 +172,6 @@ func (inv *ActionUserRequestRegistrationPreviewInvocation) callAsQuery() (*Actio
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserRequestRegistrationPreviewInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -188,4 +182,3 @@ func (inv *ActionUserRequestRegistrationPreviewInvocation) convertMetaInputToQue
 		}
 	}
 }
-

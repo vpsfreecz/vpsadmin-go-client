@@ -19,7 +19,7 @@ func NewActionHelpBoxShow(client *Client) *ActionHelpBoxShow {
 // ActionHelpBoxShowMetaGlobalInput is a type for action global meta input parameters
 type ActionHelpBoxShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionHelpBoxShowMetaGlobalInput) SetIncludes(value string) *ActionHel
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionHelpBoxShowMetaGlobalInput) SetNo(value bool) *ActionHelpBoxShowMetaGlobalInput {
 	in.No = value
@@ -70,18 +71,15 @@ func (in *ActionHelpBoxShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionHelpBoxShowOutput is a type for action output parameters
 type ActionHelpBoxShowOutput struct {
-	Action string `json:"action"`
-	Content string `json:"content"`
-	Id int64 `json:"id"`
+	Action   string                    `json:"action"`
+	Content  string                    `json:"content"`
+	Id       int64                     `json:"id"`
 	Language *ActionLanguageShowOutput `json:"language"`
-	Order int64 `json:"order"`
-	Page string `json:"page"`
+	Order    int64                     `json:"order"`
+	Page     string                    `json:"page"`
 }
-
 
 // Type for action response, including envelope
 type ActionHelpBoxShowResponse struct {
@@ -96,12 +94,11 @@ type ActionHelpBoxShowResponse struct {
 	Output *ActionHelpBoxShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionHelpBoxShow) Prepare() *ActionHelpBoxShowInvocation {
 	return &ActionHelpBoxShowInvocation{
 		Action: action,
-		Path: "/v6.0/help_boxes/{help_box_id}",
+		Path:   "/v6.0/help_boxes/{help_box_id}",
 	}
 }
 
@@ -166,9 +163,6 @@ func (inv *ActionHelpBoxShowInvocation) callAsQuery() (*ActionHelpBoxShowRespons
 	return resp, err
 }
 
-
-
-
 func (inv *ActionHelpBoxShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -179,4 +173,3 @@ func (inv *ActionHelpBoxShowInvocation) convertMetaInputToQueryParams(ret map[st
 		}
 	}
 }
-

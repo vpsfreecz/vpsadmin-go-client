@@ -19,7 +19,7 @@ func NewActionVpsReinstall(client *Client) *ActionVpsReinstall {
 // ActionVpsReinstallMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsReinstallMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsReinstallMetaGlobalInput) SetIncludes(value string) *ActionVp
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsReinstallMetaGlobalInput) SetNo(value bool) *ActionVpsReinstallMetaGlobalInput {
 	in.No = value
@@ -114,10 +115,9 @@ func (in *ActionVpsReinstallInput) AnySelected() bool {
 
 // ActionVpsReinstallRequest is a type for the entire action request
 type ActionVpsReinstallRequest struct {
-	Vps map[string]interface{} `json:"vps"`
+	Vps  map[string]interface{} `json:"vps"`
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionVpsReinstallMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsReinstallMetaGlobalOutput struct {
@@ -135,12 +135,11 @@ type ActionVpsReinstallResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsReinstall) Prepare() *ActionVpsReinstallInvocation {
 	return &ActionVpsReinstallInvocation{
 		Action: action,
-		Path: "/v6.0/vpses/{vps_id}/reinstall",
+		Path:   "/v6.0/vpses/{vps_id}/reinstall",
 	}
 }
 
@@ -189,6 +188,7 @@ func (inv *ActionVpsReinstallInvocation) IsParameterSelected(param string) bool 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsReinstallInvocation) NewMetaInput() *ActionVpsReinstallMetaGlobalInput {
@@ -216,7 +216,6 @@ func (inv *ActionVpsReinstallInvocation) IsMetaParameterSelected(param string) b
 func (inv *ActionVpsReinstallInvocation) Call() (*ActionVpsReinstallResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionVpsReinstallInvocation) callAsBody() (*ActionVpsReinstallResponse, error) {
 	input := inv.makeAllInputParams()
@@ -274,11 +273,11 @@ func (resp *ActionVpsReinstallResponse) WatchOperation(timeout float64, updateIn
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -301,11 +300,9 @@ func (resp *ActionVpsReinstallResponse) CancelOperation() (*ActionActionStateCan
 	return req.Call()
 }
 
-
-
 func (inv *ActionVpsReinstallInvocation) makeAllInputParams() *ActionVpsReinstallRequest {
 	return &ActionVpsReinstallRequest{
-		Vps: inv.makeInputParams(),
+		Vps:  inv.makeInputParams(),
 		Meta: inv.makeMetaInputParams(),
 	}
 }

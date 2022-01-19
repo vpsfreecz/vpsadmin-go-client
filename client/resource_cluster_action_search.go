@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionClusterSearch is a type for action Cluster#Search
 type ActionClusterSearch struct {
@@ -102,17 +101,16 @@ func (in *ActionClusterSearchInput) AnySelected() bool {
 // ActionClusterSearchRequest is a type for the entire action request
 type ActionClusterSearchRequest struct {
 	Cluster map[string]interface{} `json:"cluster"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta    map[string]interface{} `json:"_meta"`
 }
 
 // ActionClusterSearchOutput is a type for action output parameters
 type ActionClusterSearchOutput struct {
 	Attribute string `json:"attribute"`
-	Id int64 `json:"id"`
-	Resource string `json:"resource"`
-	Value string `json:"value"`
+	Id        int64  `json:"id"`
+	Resource  string `json:"resource"`
+	Value     string `json:"value"`
 }
-
 
 // Type for action response, including envelope
 type ActionClusterSearchResponse struct {
@@ -127,12 +125,11 @@ type ActionClusterSearchResponse struct {
 	Output []*ActionClusterSearchOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionClusterSearch) Prepare() *ActionClusterSearchInvocation {
 	return &ActionClusterSearchInvocation{
 		Action: action,
-		Path: "/v6.0/cluster/search",
+		Path:   "/v6.0/cluster/search",
 	}
 }
 
@@ -148,7 +145,6 @@ type ActionClusterSearchInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionClusterSearchMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionClusterSearchInvocation) NewInput() *ActionClusterSearchInput {
@@ -171,6 +167,7 @@ func (inv *ActionClusterSearchInvocation) IsParameterSelected(param string) bool
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionClusterSearchInvocation) NewMetaInput() *ActionClusterSearchMetaGlobalInput {
@@ -199,7 +196,6 @@ func (inv *ActionClusterSearchInvocation) Call() (*ActionClusterSearchResponse, 
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionClusterSearchInvocation) callAsBody() (*ActionClusterSearchResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionClusterSearchResponse{Action: inv.Action}
@@ -210,13 +206,10 @@ func (inv *ActionClusterSearchInvocation) callAsBody() (*ActionClusterSearchResp
 	return resp, err
 }
 
-
-
-
 func (inv *ActionClusterSearchInvocation) makeAllInputParams() *ActionClusterSearchRequest {
 	return &ActionClusterSearchRequest{
 		Cluster: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:    inv.makeMetaInputParams(),
 	}
 }
 

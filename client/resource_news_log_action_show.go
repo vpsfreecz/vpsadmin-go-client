@@ -19,7 +19,7 @@ func NewActionNewsLogShow(client *Client) *ActionNewsLogShow {
 // ActionNewsLogShowMetaGlobalInput is a type for action global meta input parameters
 type ActionNewsLogShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionNewsLogShowMetaGlobalInput) SetIncludes(value string) *ActionNew
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNewsLogShowMetaGlobalInput) SetNo(value bool) *ActionNewsLogShowMetaGlobalInput {
 	in.No = value
@@ -70,17 +71,14 @@ func (in *ActionNewsLogShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionNewsLogShowOutput is a type for action output parameters
 type ActionNewsLogShowOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	Message string `json:"message"`
+	CreatedAt   string `json:"created_at"`
+	Id          int64  `json:"id"`
+	Message     string `json:"message"`
 	PublishedAt string `json:"published_at"`
-	UpdatedAt string `json:"updated_at"`
+	UpdatedAt   string `json:"updated_at"`
 }
-
 
 // Type for action response, including envelope
 type ActionNewsLogShowResponse struct {
@@ -95,12 +93,11 @@ type ActionNewsLogShowResponse struct {
 	Output *ActionNewsLogShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNewsLogShow) Prepare() *ActionNewsLogShowInvocation {
 	return &ActionNewsLogShowInvocation{
 		Action: action,
-		Path: "/v6.0/news_logs/{news_log_id}",
+		Path:   "/v6.0/news_logs/{news_log_id}",
 	}
 }
 
@@ -165,9 +162,6 @@ func (inv *ActionNewsLogShowInvocation) callAsQuery() (*ActionNewsLogShowRespons
 	return resp, err
 }
 
-
-
-
 func (inv *ActionNewsLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -178,4 +172,3 @@ func (inv *ActionNewsLogShowInvocation) convertMetaInputToQueryParams(ret map[st
 		}
 	}
 }
-

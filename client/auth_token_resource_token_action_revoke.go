@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // AuthTokenActionTokenRevoke is a type for action Token#Revoke
 type AuthTokenActionTokenRevoke struct {
@@ -57,13 +56,10 @@ func (in *AuthTokenActionTokenRevokeMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // AuthTokenActionTokenRevokeRequest is a type for the entire action request
 type AuthTokenActionTokenRevokeRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type AuthTokenActionTokenRevokeResponse struct {
@@ -80,7 +76,7 @@ func (action *AuthTokenActionTokenRevoke) Call() (*AuthTokenActionTokenRevokeRes
 func (action *AuthTokenActionTokenRevoke) Prepare() *AuthTokenActionTokenRevokeInvocation {
 	return &AuthTokenActionTokenRevokeInvocation{
 		Action: action,
-		Path: "/_auth/token/tokens/revoke",
+		Path:   "/_auth/token/tokens/revoke",
 	}
 }
 
@@ -94,7 +90,6 @@ type AuthTokenActionTokenRevokeInvocation struct {
 	// Global meta input parameters
 	MetaInput *AuthTokenActionTokenRevokeMetaGlobalInput
 }
-
 
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
@@ -124,7 +119,6 @@ func (inv *AuthTokenActionTokenRevokeInvocation) Call() (*AuthTokenActionTokenRe
 	return inv.callAsBody()
 }
 
-
 func (inv *AuthTokenActionTokenRevokeInvocation) callAsBody() (*AuthTokenActionTokenRevokeResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &AuthTokenActionTokenRevokeResponse{Action: inv.Action}
@@ -132,15 +126,11 @@ func (inv *AuthTokenActionTokenRevokeInvocation) callAsBody() (*AuthTokenActionT
 	return resp, err
 }
 
-
-
-
 func (inv *AuthTokenActionTokenRevokeInvocation) makeAllInputParams() *AuthTokenActionTokenRevokeRequest {
 	return &AuthTokenActionTokenRevokeRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *AuthTokenActionTokenRevokeInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

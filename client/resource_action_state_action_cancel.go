@@ -58,12 +58,10 @@ func (in *ActionActionStateCancelMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionActionStateCancelRequest is a type for the entire action request
 type ActionActionStateCancelRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionActionStateCancelMetaGlobalOutput is a type for global output metadata parameters
 type ActionActionStateCancelMetaGlobalOutput struct {
@@ -81,12 +79,11 @@ type ActionActionStateCancelResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionActionStateCancel) Prepare() *ActionActionStateCancelInvocation {
 	return &ActionActionStateCancelInvocation{
 		Action: action,
-		Path: "/v6.0/action_states/{action_state_id}/cancel",
+		Path:   "/v6.0/action_states/{action_state_id}/cancel",
 	}
 }
 
@@ -139,7 +136,6 @@ func (inv *ActionActionStateCancelInvocation) IsMetaParameterSelected(param stri
 func (inv *ActionActionStateCancelInvocation) Call() (*ActionActionStateCancelResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionActionStateCancelInvocation) callAsBody() (*ActionActionStateCancelResponse, error) {
 	input := inv.makeAllInputParams()
@@ -197,11 +193,11 @@ func (resp *ActionActionStateCancelResponse) WatchOperation(timeout float64, upd
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -224,14 +220,11 @@ func (resp *ActionActionStateCancelResponse) CancelOperation() (*ActionActionSta
 	return req.Call()
 }
 
-
-
 func (inv *ActionActionStateCancelInvocation) makeAllInputParams() *ActionActionStateCancelRequest {
 	return &ActionActionStateCancelRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionActionStateCancelInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

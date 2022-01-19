@@ -58,7 +58,6 @@ func (in *ActionUserTotpEnableMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionUserTotpEnableRequest is a type for the entire action request
 type ActionUserTotpEnableRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
@@ -66,10 +65,9 @@ type ActionUserTotpEnableRequest struct {
 
 // ActionUserTotpEnableOutput is a type for action output parameters
 type ActionUserTotpEnableOutput struct {
-	Secret string `json:"secret"`
+	Secret          string `json:"secret"`
 	ProvisioningUri string `json:"provisioning_uri"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserTotpEnableResponse struct {
@@ -84,12 +82,11 @@ type ActionUserTotpEnableResponse struct {
 	Output *ActionUserTotpEnableOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserTotpEnable) Prepare() *ActionUserTotpEnableInvocation {
 	return &ActionUserTotpEnableInvocation{
 		Action: action,
-		Path: "/v5.0/users/totp_enable/{user_id}",
+		Path:   "/v5.0/users/totp_enable/{user_id}",
 	}
 }
 
@@ -143,7 +140,6 @@ func (inv *ActionUserTotpEnableInvocation) Call() (*ActionUserTotpEnableResponse
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserTotpEnableInvocation) callAsBody() (*ActionUserTotpEnableResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserTotpEnableResponse{Action: inv.Action}
@@ -154,15 +150,11 @@ func (inv *ActionUserTotpEnableInvocation) callAsBody() (*ActionUserTotpEnableRe
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserTotpEnableInvocation) makeAllInputParams() *ActionUserTotpEnableRequest {
 	return &ActionUserTotpEnableRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionUserTotpEnableInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

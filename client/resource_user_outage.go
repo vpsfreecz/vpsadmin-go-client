@@ -21,9 +21,9 @@ func NewResourceUserOutage(client *Client) *ResourceUserOutage {
 
 	return &ResourceUserOutage{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
+		Find:   actionShow,
 	}
 }

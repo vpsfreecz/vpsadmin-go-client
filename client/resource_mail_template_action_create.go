@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionMailTemplateCreate is a type for action Mail_template#Create
 type ActionMailTemplateCreate struct {
@@ -18,7 +17,7 @@ func NewActionMailTemplateCreate(client *Client) *ActionMailTemplateCreate {
 // ActionMailTemplateCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -34,6 +33,7 @@ func (in *ActionMailTemplateCreateMetaGlobalInput) SetIncludes(value string) *Ac
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMailTemplateCreateMetaGlobalInput) SetNo(value bool) *ActionMailTemplateCreateMetaGlobalInput {
 	in.No = value
@@ -71,9 +71,9 @@ func (in *ActionMailTemplateCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionMailTemplateCreateInput is a type for action input parameters
 type ActionMailTemplateCreateInput struct {
-	Label string `json:"label"`
-	Name string `json:"name"`
-	TemplateId string `json:"template_id"`
+	Label          string `json:"label"`
+	Name           string `json:"name"`
+	TemplateId     string `json:"template_id"`
 	UserVisibility string `json:"user_visibility"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -90,6 +90,7 @@ func (in *ActionMailTemplateCreateInput) SetLabel(value string) *ActionMailTempl
 	in._selectedParameters["Label"] = nil
 	return in
 }
+
 // SetName sets parameter Name to value and selects it for sending
 func (in *ActionMailTemplateCreateInput) SetName(value string) *ActionMailTemplateCreateInput {
 	in.Name = value
@@ -101,6 +102,7 @@ func (in *ActionMailTemplateCreateInput) SetName(value string) *ActionMailTempla
 	in._selectedParameters["Name"] = nil
 	return in
 }
+
 // SetTemplateId sets parameter TemplateId to value and selects it for sending
 func (in *ActionMailTemplateCreateInput) SetTemplateId(value string) *ActionMailTemplateCreateInput {
 	in.TemplateId = value
@@ -112,6 +114,7 @@ func (in *ActionMailTemplateCreateInput) SetTemplateId(value string) *ActionMail
 	in._selectedParameters["TemplateId"] = nil
 	return in
 }
+
 // SetUserVisibility sets parameter UserVisibility to value and selects it for sending
 func (in *ActionMailTemplateCreateInput) SetUserVisibility(value string) *ActionMailTemplateCreateInput {
 	in.UserVisibility = value
@@ -150,20 +153,19 @@ func (in *ActionMailTemplateCreateInput) AnySelected() bool {
 // ActionMailTemplateCreateRequest is a type for the entire action request
 type ActionMailTemplateCreateRequest struct {
 	MailTemplate map[string]interface{} `json:"mail_template"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta         map[string]interface{} `json:"_meta"`
 }
 
 // ActionMailTemplateCreateOutput is a type for action output parameters
 type ActionMailTemplateCreateOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Name string `json:"name"`
-	TemplateId string `json:"template_id"`
-	UpdatedAt string `json:"updated_at"`
+	CreatedAt      string `json:"created_at"`
+	Id             int64  `json:"id"`
+	Label          string `json:"label"`
+	Name           string `json:"name"`
+	TemplateId     string `json:"template_id"`
+	UpdatedAt      string `json:"updated_at"`
 	UserVisibility string `json:"user_visibility"`
 }
-
 
 // Type for action response, including envelope
 type ActionMailTemplateCreateResponse struct {
@@ -178,12 +180,11 @@ type ActionMailTemplateCreateResponse struct {
 	Output *ActionMailTemplateCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMailTemplateCreate) Prepare() *ActionMailTemplateCreateInvocation {
 	return &ActionMailTemplateCreateInvocation{
 		Action: action,
-		Path: "/v6.0/mail_templates",
+		Path:   "/v6.0/mail_templates",
 	}
 }
 
@@ -199,7 +200,6 @@ type ActionMailTemplateCreateInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionMailTemplateCreateMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionMailTemplateCreateInvocation) NewInput() *ActionMailTemplateCreateInput {
@@ -222,6 +222,7 @@ func (inv *ActionMailTemplateCreateInvocation) IsParameterSelected(param string)
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionMailTemplateCreateInvocation) NewMetaInput() *ActionMailTemplateCreateMetaGlobalInput {
@@ -250,7 +251,6 @@ func (inv *ActionMailTemplateCreateInvocation) Call() (*ActionMailTemplateCreate
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionMailTemplateCreateInvocation) callAsBody() (*ActionMailTemplateCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionMailTemplateCreateResponse{Action: inv.Action}
@@ -261,13 +261,10 @@ func (inv *ActionMailTemplateCreateInvocation) callAsBody() (*ActionMailTemplate
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMailTemplateCreateInvocation) makeAllInputParams() *ActionMailTemplateCreateRequest {
 	return &ActionMailTemplateCreateRequest{
 		MailTemplate: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:         inv.makeMetaInputParams(),
 	}
 }
 

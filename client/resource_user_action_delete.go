@@ -19,7 +19,7 @@ func NewActionUserDelete(client *Client) *ActionUserDelete {
 // ActionUserDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionUserDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserDeleteMetaGlobalInput) SetIncludes(value string) *ActionUser
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserDeleteMetaGlobalInput) SetNo(value bool) *ActionUserDeleteMetaGlobalInput {
 	in.No = value
@@ -72,9 +73,9 @@ func (in *ActionUserDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionUserDeleteInput is a type for action input parameters
 type ActionUserDeleteInput struct {
-	ChangeReason string `json:"change_reason"`
+	ChangeReason   string `json:"change_reason"`
 	ExpirationDate string `json:"expiration_date"`
-	ObjectState string `json:"object_state"`
+	ObjectState    string `json:"object_state"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -90,6 +91,7 @@ func (in *ActionUserDeleteInput) SetChangeReason(value string) *ActionUserDelete
 	in._selectedParameters["ChangeReason"] = nil
 	return in
 }
+
 // SetExpirationDate sets parameter ExpirationDate to value and selects it for sending
 func (in *ActionUserDeleteInput) SetExpirationDate(value string) *ActionUserDeleteInput {
 	in.ExpirationDate = value
@@ -101,6 +103,7 @@ func (in *ActionUserDeleteInput) SetExpirationDate(value string) *ActionUserDele
 	in._selectedParameters["ExpirationDate"] = nil
 	return in
 }
+
 // SetObjectState sets parameter ObjectState to value and selects it for sending
 func (in *ActionUserDeleteInput) SetObjectState(value string) *ActionUserDeleteInput {
 	in.ObjectState = value
@@ -142,7 +145,6 @@ type ActionUserDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
 
-
 // ActionUserDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionUserDeleteMetaGlobalOutput struct {
 	ActionStateId int64 `json:"action_state_id"`
@@ -159,12 +161,11 @@ type ActionUserDeleteResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserDelete) Prepare() *ActionUserDeleteInvocation {
 	return &ActionUserDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/users/{user_id}",
+		Path:   "/v6.0/users/{user_id}",
 	}
 }
 
@@ -213,6 +214,7 @@ func (inv *ActionUserDeleteInvocation) IsParameterSelected(param string) bool {
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserDeleteInvocation) NewMetaInput() *ActionUserDeleteMetaGlobalInput {
@@ -240,7 +242,6 @@ func (inv *ActionUserDeleteInvocation) IsMetaParameterSelected(param string) boo
 func (inv *ActionUserDeleteInvocation) Call() (*ActionUserDeleteResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionUserDeleteInvocation) callAsBody() (*ActionUserDeleteResponse, error) {
 	input := inv.makeAllInputParams()
@@ -298,11 +299,11 @@ func (resp *ActionUserDeleteResponse) WatchOperation(timeout float64, updateIn f
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -324,8 +325,6 @@ func (resp *ActionUserDeleteResponse) CancelOperation() (*ActionActionStateCance
 	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 	return req.Call()
 }
-
-
 
 func (inv *ActionUserDeleteInvocation) makeAllInputParams() *ActionUserDeleteRequest {
 	return &ActionUserDeleteRequest{

@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionApiServerUnlockTransactionSigningKey is a type for action Api_server#Unlock_transaction_signing_key
 type ActionApiServerUnlockTransactionSigningKey struct {
@@ -99,21 +98,17 @@ func (in *ActionApiServerUnlockTransactionSigningKeyInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
-
 // Type for action response, including envelope
 type ActionApiServerUnlockTransactionSigningKeyResponse struct {
 	Action *ActionApiServerUnlockTransactionSigningKey `json:"-"`
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionApiServerUnlockTransactionSigningKey) Prepare() *ActionApiServerUnlockTransactionSigningKeyInvocation {
 	return &ActionApiServerUnlockTransactionSigningKeyInvocation{
 		Action: action,
-		Path: "/v6.0/api_servers/unlock_transaction_signing_key",
+		Path:   "/v6.0/api_servers/unlock_transaction_signing_key",
 	}
 }
 
@@ -129,7 +124,6 @@ type ActionApiServerUnlockTransactionSigningKeyInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionApiServerUnlockTransactionSigningKeyMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) NewInput() *ActionApiServerUnlockTransactionSigningKeyInput {
@@ -152,6 +146,7 @@ func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) IsParameterSele
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) NewMetaInput() *ActionApiServerUnlockTransactionSigningKeyMetaGlobalInput {
@@ -189,8 +184,6 @@ func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) callAsQuery() (
 	return resp, err
 }
 
-
-
 func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Passphrase") {
@@ -206,4 +199,3 @@ func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) convertMetaInpu
 		}
 	}
 }
-

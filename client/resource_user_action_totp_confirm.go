@@ -111,7 +111,6 @@ type ActionUserTotpConfirmOutput struct {
 	RecoveryCode string `json:"recovery_code"`
 }
 
-
 // Type for action response, including envelope
 type ActionUserTotpConfirmResponse struct {
 	Action *ActionUserTotpConfirm `json:"-"`
@@ -125,12 +124,11 @@ type ActionUserTotpConfirmResponse struct {
 	Output *ActionUserTotpConfirmOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserTotpConfirm) Prepare() *ActionUserTotpConfirmInvocation {
 	return &ActionUserTotpConfirmInvocation{
 		Action: action,
-		Path: "/v5.0/users/totp_confirm/{user_id}",
+		Path:   "/v5.0/users/totp_confirm/{user_id}",
 	}
 }
 
@@ -179,6 +177,7 @@ func (inv *ActionUserTotpConfirmInvocation) IsParameterSelected(param string) bo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserTotpConfirmInvocation) NewMetaInput() *ActionUserTotpConfirmMetaGlobalInput {
@@ -207,7 +206,6 @@ func (inv *ActionUserTotpConfirmInvocation) Call() (*ActionUserTotpConfirmRespon
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionUserTotpConfirmInvocation) callAsBody() (*ActionUserTotpConfirmResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionUserTotpConfirmResponse{Action: inv.Action}
@@ -217,9 +215,6 @@ func (inv *ActionUserTotpConfirmInvocation) callAsBody() (*ActionUserTotpConfirm
 	}
 	return resp, err
 }
-
-
-
 
 func (inv *ActionUserTotpConfirmInvocation) makeAllInputParams() *ActionUserTotpConfirmRequest {
 	return &ActionUserTotpConfirmRequest{

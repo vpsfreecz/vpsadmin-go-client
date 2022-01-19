@@ -39,10 +39,10 @@ func (auth *TokenAuth) Authenticate(request *http.Request) {
 }
 
 type TokenAuthOptions struct {
-	Interval int64
-	Lifetime string
-	Password string
-	User string
+	Interval     int64
+	Lifetime     string
+	Password     string
+	User         string
 	TotpCallback func(input *AuthTokenActionTokenTotpInput) error
 }
 
@@ -57,7 +57,7 @@ func (client *Client) SetNewTokenAuth(options *TokenAuthOptions) error {
 		Interval: options.Interval,
 		Lifetime: options.Lifetime,
 		Password: options.Password,
-		User: options.User,
+		User:     options.User,
 	})
 
 	resp, err := request.Call()
@@ -78,7 +78,7 @@ func (client *Client) SetNewTokenAuth(options *TokenAuthOptions) error {
 		options,
 		resp.Output.NextAction,
 		resp.Output.Token,
-	);
+	)
 }
 
 func (auth *TokenAuth) setDefaultOptions(options *TokenAuthOptions) {
@@ -125,7 +125,7 @@ func (auth *TokenAuth) nextAuthenticationStep(options *TokenAuthOptions, action 
 			options,
 			resp.Output.NextAction,
 			resp.Output.Token,
-		);
+		)
 	}
 
 	return fmt.Errorf("Unsupported authentication action '%s'", action)
@@ -135,8 +135,8 @@ func (auth *TokenAuth) nextAuthenticationStep(options *TokenAuthOptions, action 
 func (client *Client) SetExistingTokenAuth(token string) {
 	client.Authentication = &TokenAuth{
 		Resource: NewAuthTokenResourceToken(client),
-		Token: token,
-		Mode: HttpHeader,
+		Token:    token,
+		Mode:     HttpHeader,
 	}
 }
 

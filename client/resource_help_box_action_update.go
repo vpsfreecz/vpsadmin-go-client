@@ -19,7 +19,7 @@ func NewActionHelpBoxUpdate(client *Client) *ActionHelpBoxUpdate {
 // ActionHelpBoxUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionHelpBoxUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionHelpBoxUpdateMetaGlobalInput) SetIncludes(value string) *ActionH
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionHelpBoxUpdateMetaGlobalInput) SetNo(value bool) *ActionHelpBoxUpdateMetaGlobalInput {
 	in.No = value
@@ -72,11 +73,11 @@ func (in *ActionHelpBoxUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionHelpBoxUpdateInput is a type for action input parameters
 type ActionHelpBoxUpdateInput struct {
-	Action string `json:"action"`
-	Content string `json:"content"`
-	Language int64 `json:"language"`
-	Order int64 `json:"order"`
-	Page string `json:"page"`
+	Action   string `json:"action"`
+	Content  string `json:"content"`
+	Language int64  `json:"language"`
+	Order    int64  `json:"order"`
+	Page     string `json:"page"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -92,6 +93,7 @@ func (in *ActionHelpBoxUpdateInput) SetAction(value string) *ActionHelpBoxUpdate
 	in._selectedParameters["Action"] = nil
 	return in
 }
+
 // SetContent sets parameter Content to value and selects it for sending
 func (in *ActionHelpBoxUpdateInput) SetContent(value string) *ActionHelpBoxUpdateInput {
 	in.Content = value
@@ -103,6 +105,7 @@ func (in *ActionHelpBoxUpdateInput) SetContent(value string) *ActionHelpBoxUpdat
 	in._selectedParameters["Content"] = nil
 	return in
 }
+
 // SetLanguage sets parameter Language to value and selects it for sending
 func (in *ActionHelpBoxUpdateInput) SetLanguage(value int64) *ActionHelpBoxUpdateInput {
 	in.Language = value
@@ -114,6 +117,7 @@ func (in *ActionHelpBoxUpdateInput) SetLanguage(value int64) *ActionHelpBoxUpdat
 	in._selectedParameters["Language"] = nil
 	return in
 }
+
 // SetOrder sets parameter Order to value and selects it for sending
 func (in *ActionHelpBoxUpdateInput) SetOrder(value int64) *ActionHelpBoxUpdateInput {
 	in.Order = value
@@ -125,6 +129,7 @@ func (in *ActionHelpBoxUpdateInput) SetOrder(value int64) *ActionHelpBoxUpdateIn
 	in._selectedParameters["Order"] = nil
 	return in
 }
+
 // SetPage sets parameter Page to value and selects it for sending
 func (in *ActionHelpBoxUpdateInput) SetPage(value string) *ActionHelpBoxUpdateInput {
 	in.Page = value
@@ -163,19 +168,18 @@ func (in *ActionHelpBoxUpdateInput) AnySelected() bool {
 // ActionHelpBoxUpdateRequest is a type for the entire action request
 type ActionHelpBoxUpdateRequest struct {
 	HelpBox map[string]interface{} `json:"help_box"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta    map[string]interface{} `json:"_meta"`
 }
 
 // ActionHelpBoxUpdateOutput is a type for action output parameters
 type ActionHelpBoxUpdateOutput struct {
-	Action string `json:"action"`
-	Content string `json:"content"`
-	Id int64 `json:"id"`
+	Action   string                    `json:"action"`
+	Content  string                    `json:"content"`
+	Id       int64                     `json:"id"`
 	Language *ActionLanguageShowOutput `json:"language"`
-	Order int64 `json:"order"`
-	Page string `json:"page"`
+	Order    int64                     `json:"order"`
+	Page     string                    `json:"page"`
 }
-
 
 // Type for action response, including envelope
 type ActionHelpBoxUpdateResponse struct {
@@ -190,12 +194,11 @@ type ActionHelpBoxUpdateResponse struct {
 	Output *ActionHelpBoxUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionHelpBoxUpdate) Prepare() *ActionHelpBoxUpdateInvocation {
 	return &ActionHelpBoxUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/help_boxes/{help_box_id}",
+		Path:   "/v6.0/help_boxes/{help_box_id}",
 	}
 }
 
@@ -244,6 +247,7 @@ func (inv *ActionHelpBoxUpdateInvocation) IsParameterSelected(param string) bool
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionHelpBoxUpdateInvocation) NewMetaInput() *ActionHelpBoxUpdateMetaGlobalInput {
@@ -272,7 +276,6 @@ func (inv *ActionHelpBoxUpdateInvocation) Call() (*ActionHelpBoxUpdateResponse, 
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionHelpBoxUpdateInvocation) callAsBody() (*ActionHelpBoxUpdateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionHelpBoxUpdateResponse{Action: inv.Action}
@@ -283,13 +286,10 @@ func (inv *ActionHelpBoxUpdateInvocation) callAsBody() (*ActionHelpBoxUpdateResp
 	return resp, err
 }
 
-
-
-
 func (inv *ActionHelpBoxUpdateInvocation) makeAllInputParams() *ActionHelpBoxUpdateRequest {
 	return &ActionHelpBoxUpdateRequest{
 		HelpBox: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:    inv.makeMetaInputParams(),
 	}
 }
 

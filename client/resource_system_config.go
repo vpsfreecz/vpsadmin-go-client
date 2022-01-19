@@ -22,9 +22,9 @@ func NewResourceSystemConfig(client *Client) *ResourceSystemConfig {
 
 	return &ResourceSystemConfig{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
+		Index:  actionIndex,
+		List:   actionIndex,
+		Show:   actionShow,
 		Update: actionUpdate,
 	}
 }

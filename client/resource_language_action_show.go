@@ -19,7 +19,7 @@ func NewActionLanguageShow(client *Client) *ActionLanguageShow {
 // ActionLanguageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionLanguageShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionLanguageShowMetaGlobalInput) SetIncludes(value string) *ActionLa
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionLanguageShowMetaGlobalInput) SetNo(value bool) *ActionLanguageShowMetaGlobalInput {
 	in.No = value
@@ -70,15 +71,12 @@ func (in *ActionLanguageShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionLanguageShowOutput is a type for action output parameters
 type ActionLanguageShowOutput struct {
-	Code string `json:"code"`
-	Id int64 `json:"id"`
+	Code  string `json:"code"`
+	Id    int64  `json:"id"`
 	Label string `json:"label"`
 }
-
 
 // Type for action response, including envelope
 type ActionLanguageShowResponse struct {
@@ -93,12 +91,11 @@ type ActionLanguageShowResponse struct {
 	Output *ActionLanguageShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionLanguageShow) Prepare() *ActionLanguageShowInvocation {
 	return &ActionLanguageShowInvocation{
 		Action: action,
-		Path: "/v6.0/languages/{language_id}",
+		Path:   "/v6.0/languages/{language_id}",
 	}
 }
 
@@ -163,9 +160,6 @@ func (inv *ActionLanguageShowInvocation) callAsQuery() (*ActionLanguageShowRespo
 	return resp, err
 }
 
-
-
-
 func (inv *ActionLanguageShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -176,4 +170,3 @@ func (inv *ActionLanguageShowInvocation) convertMetaInputToQueryParams(ret map[s
 		}
 	}
 }
-

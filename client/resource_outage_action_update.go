@@ -19,7 +19,7 @@ func NewActionOutageUpdate(client *Client) *ActionOutageUpdate {
 // ActionOutageUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageUpdateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionOutageUpdateMetaGlobalInput) SetIncludes(value string) *ActionOu
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOutageUpdateMetaGlobalInput) SetNo(value bool) *ActionOutageUpdateMetaGlobalInput {
 	in.No = value
@@ -72,16 +73,16 @@ func (in *ActionOutageUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageUpdateInput is a type for action input parameters
 type ActionOutageUpdateInput struct {
-	BeginsAt string `json:"begins_at"`
+	BeginsAt      string `json:"begins_at"`
 	CsDescription string `json:"cs_description"`
-	CsSummary string `json:"cs_summary"`
-	Duration int64 `json:"duration"`
+	CsSummary     string `json:"cs_summary"`
+	Duration      int64  `json:"duration"`
 	EnDescription string `json:"en_description"`
-	EnSummary string `json:"en_summary"`
-	FinishedAt string `json:"finished_at"`
-	SendMail bool `json:"send_mail"`
-	State string `json:"state"`
-	Type string `json:"type"`
+	EnSummary     string `json:"en_summary"`
+	FinishedAt    string `json:"finished_at"`
+	SendMail      bool   `json:"send_mail"`
+	State         string `json:"state"`
+	Type          string `json:"type"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -97,6 +98,7 @@ func (in *ActionOutageUpdateInput) SetBeginsAt(value string) *ActionOutageUpdate
 	in._selectedParameters["BeginsAt"] = nil
 	return in
 }
+
 // SetCsDescription sets parameter CsDescription to value and selects it for sending
 func (in *ActionOutageUpdateInput) SetCsDescription(value string) *ActionOutageUpdateInput {
 	in.CsDescription = value
@@ -108,6 +110,7 @@ func (in *ActionOutageUpdateInput) SetCsDescription(value string) *ActionOutageU
 	in._selectedParameters["CsDescription"] = nil
 	return in
 }
+
 // SetCsSummary sets parameter CsSummary to value and selects it for sending
 func (in *ActionOutageUpdateInput) SetCsSummary(value string) *ActionOutageUpdateInput {
 	in.CsSummary = value
@@ -119,6 +122,7 @@ func (in *ActionOutageUpdateInput) SetCsSummary(value string) *ActionOutageUpdat
 	in._selectedParameters["CsSummary"] = nil
 	return in
 }
+
 // SetDuration sets parameter Duration to value and selects it for sending
 func (in *ActionOutageUpdateInput) SetDuration(value int64) *ActionOutageUpdateInput {
 	in.Duration = value
@@ -130,6 +134,7 @@ func (in *ActionOutageUpdateInput) SetDuration(value int64) *ActionOutageUpdateI
 	in._selectedParameters["Duration"] = nil
 	return in
 }
+
 // SetEnDescription sets parameter EnDescription to value and selects it for sending
 func (in *ActionOutageUpdateInput) SetEnDescription(value string) *ActionOutageUpdateInput {
 	in.EnDescription = value
@@ -141,6 +146,7 @@ func (in *ActionOutageUpdateInput) SetEnDescription(value string) *ActionOutageU
 	in._selectedParameters["EnDescription"] = nil
 	return in
 }
+
 // SetEnSummary sets parameter EnSummary to value and selects it for sending
 func (in *ActionOutageUpdateInput) SetEnSummary(value string) *ActionOutageUpdateInput {
 	in.EnSummary = value
@@ -152,6 +158,7 @@ func (in *ActionOutageUpdateInput) SetEnSummary(value string) *ActionOutageUpdat
 	in._selectedParameters["EnSummary"] = nil
 	return in
 }
+
 // SetFinishedAt sets parameter FinishedAt to value and selects it for sending
 func (in *ActionOutageUpdateInput) SetFinishedAt(value string) *ActionOutageUpdateInput {
 	in.FinishedAt = value
@@ -163,6 +170,7 @@ func (in *ActionOutageUpdateInput) SetFinishedAt(value string) *ActionOutageUpda
 	in._selectedParameters["FinishedAt"] = nil
 	return in
 }
+
 // SetSendMail sets parameter SendMail to value and selects it for sending
 func (in *ActionOutageUpdateInput) SetSendMail(value bool) *ActionOutageUpdateInput {
 	in.SendMail = value
@@ -174,6 +182,7 @@ func (in *ActionOutageUpdateInput) SetSendMail(value bool) *ActionOutageUpdateIn
 	in._selectedParameters["SendMail"] = nil
 	return in
 }
+
 // SetState sets parameter State to value and selects it for sending
 func (in *ActionOutageUpdateInput) SetState(value string) *ActionOutageUpdateInput {
 	in.State = value
@@ -185,6 +194,7 @@ func (in *ActionOutageUpdateInput) SetState(value string) *ActionOutageUpdateInp
 	in._selectedParameters["State"] = nil
 	return in
 }
+
 // SetType sets parameter Type to value and selects it for sending
 func (in *ActionOutageUpdateInput) SetType(value string) *ActionOutageUpdateInput {
 	in.Type = value
@@ -223,27 +233,27 @@ func (in *ActionOutageUpdateInput) AnySelected() bool {
 // ActionOutageUpdateRequest is a type for the entire action request
 type ActionOutageUpdateRequest struct {
 	Outage map[string]interface{} `json:"outage"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta   map[string]interface{} `json:"_meta"`
 }
 
 // ActionOutageUpdateOutput is a type for action output parameters
 type ActionOutageUpdateOutput struct {
-	Affected bool `json:"affected"`
-	AffectedDirectVpsCount int64 `json:"affected_direct_vps_count"`
-	AffectedExportCount int64 `json:"affected_export_count"`
-	AffectedIndirectVpsCount int64 `json:"affected_indirect_vps_count"`
-	AffectedUserCount int64 `json:"affected_user_count"`
-	BeginsAt string `json:"begins_at"`
-	CsDescription string `json:"cs_description"`
-	CsSummary string `json:"cs_summary"`
-	Duration int64 `json:"duration"`
-	EnDescription string `json:"en_description"`
-	EnSummary string `json:"en_summary"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	Planned bool `json:"planned"`
-	State string `json:"state"`
-	Type string `json:"type"`
+	Affected                 bool   `json:"affected"`
+	AffectedDirectVpsCount   int64  `json:"affected_direct_vps_count"`
+	AffectedExportCount      int64  `json:"affected_export_count"`
+	AffectedIndirectVpsCount int64  `json:"affected_indirect_vps_count"`
+	AffectedUserCount        int64  `json:"affected_user_count"`
+	BeginsAt                 string `json:"begins_at"`
+	CsDescription            string `json:"cs_description"`
+	CsSummary                string `json:"cs_summary"`
+	Duration                 int64  `json:"duration"`
+	EnDescription            string `json:"en_description"`
+	EnSummary                string `json:"en_summary"`
+	FinishedAt               string `json:"finished_at"`
+	Id                       int64  `json:"id"`
+	Planned                  bool   `json:"planned"`
+	State                    string `json:"state"`
+	Type                     string `json:"type"`
 }
 
 // ActionOutageUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -266,12 +276,11 @@ type ActionOutageUpdateResponse struct {
 	Output *ActionOutageUpdateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOutageUpdate) Prepare() *ActionOutageUpdateInvocation {
 	return &ActionOutageUpdateInvocation{
 		Action: action,
-		Path: "/v6.0/outages/{outage_id}",
+		Path:   "/v6.0/outages/{outage_id}",
 	}
 }
 
@@ -320,6 +329,7 @@ func (inv *ActionOutageUpdateInvocation) IsParameterSelected(param string) bool 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOutageUpdateInvocation) NewMetaInput() *ActionOutageUpdateMetaGlobalInput {
@@ -347,7 +357,6 @@ func (inv *ActionOutageUpdateInvocation) IsMetaParameterSelected(param string) b
 func (inv *ActionOutageUpdateInvocation) Call() (*ActionOutageUpdateResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionOutageUpdateInvocation) callAsBody() (*ActionOutageUpdateResponse, error) {
 	input := inv.makeAllInputParams()
@@ -408,11 +417,11 @@ func (resp *ActionOutageUpdateResponse) WatchOperation(timeout float64, updateIn
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -435,12 +444,10 @@ func (resp *ActionOutageUpdateResponse) CancelOperation() (*ActionActionStateCan
 	return req.Call()
 }
 
-
-
 func (inv *ActionOutageUpdateInvocation) makeAllInputParams() *ActionOutageUpdateRequest {
 	return &ActionOutageUpdateRequest{
 		Outage: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:   inv.makeMetaInputParams(),
 	}
 }
 

@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionHelpBoxIndex is a type for action Help_box#Index
 type ActionHelpBoxIndex struct {
@@ -17,9 +16,9 @@ func NewActionHelpBoxIndex(client *Client) *ActionHelpBoxIndex {
 
 // ActionHelpBoxIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionHelpBoxIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionHelpBoxIndexMetaGlobalInput) SetCount(value bool) *ActionHelpBox
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionHelpBoxIndexMetaGlobalInput) SetIncludes(value string) *ActionHelpBoxIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionHelpBoxIndexMetaGlobalInput) SetIncludes(value string) *ActionHe
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionHelpBoxIndexMetaGlobalInput) SetNo(value bool) *ActionHelpBoxIndexMetaGlobalInput {
 	in.No = value
@@ -83,11 +84,11 @@ func (in *ActionHelpBoxIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionHelpBoxIndexInput is a type for action input parameters
 type ActionHelpBoxIndexInput struct {
-	Action string `json:"action"`
-	Language int64 `json:"language"`
-	Limit int64 `json:"limit"`
-	Offset int64 `json:"offset"`
-	Page string `json:"page"`
+	Action   string `json:"action"`
+	Language int64  `json:"language"`
+	Limit    int64  `json:"limit"`
+	Offset   int64  `json:"offset"`
+	Page     string `json:"page"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -103,6 +104,7 @@ func (in *ActionHelpBoxIndexInput) SetAction(value string) *ActionHelpBoxIndexIn
 	in._selectedParameters["Action"] = nil
 	return in
 }
+
 // SetLanguage sets parameter Language to value and selects it for sending
 func (in *ActionHelpBoxIndexInput) SetLanguage(value int64) *ActionHelpBoxIndexInput {
 	in.Language = value
@@ -114,6 +116,7 @@ func (in *ActionHelpBoxIndexInput) SetLanguage(value int64) *ActionHelpBoxIndexI
 	in._selectedParameters["Language"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionHelpBoxIndexInput) SetLimit(value int64) *ActionHelpBoxIndexInput {
 	in.Limit = value
@@ -125,6 +128,7 @@ func (in *ActionHelpBoxIndexInput) SetLimit(value int64) *ActionHelpBoxIndexInpu
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionHelpBoxIndexInput) SetOffset(value int64) *ActionHelpBoxIndexInput {
 	in.Offset = value
@@ -136,6 +140,7 @@ func (in *ActionHelpBoxIndexInput) SetOffset(value int64) *ActionHelpBoxIndexInp
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetPage sets parameter Page to value and selects it for sending
 func (in *ActionHelpBoxIndexInput) SetPage(value string) *ActionHelpBoxIndexInput {
 	in.Page = value
@@ -171,17 +176,15 @@ func (in *ActionHelpBoxIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionHelpBoxIndexOutput is a type for action output parameters
 type ActionHelpBoxIndexOutput struct {
-	Action string `json:"action"`
-	Content string `json:"content"`
-	Id int64 `json:"id"`
+	Action   string                    `json:"action"`
+	Content  string                    `json:"content"`
+	Id       int64                     `json:"id"`
 	Language *ActionLanguageShowOutput `json:"language"`
-	Order int64 `json:"order"`
-	Page string `json:"page"`
+	Order    int64                     `json:"order"`
+	Page     string                    `json:"page"`
 }
-
 
 // Type for action response, including envelope
 type ActionHelpBoxIndexResponse struct {
@@ -196,12 +199,11 @@ type ActionHelpBoxIndexResponse struct {
 	Output []*ActionHelpBoxIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionHelpBoxIndex) Prepare() *ActionHelpBoxIndexInvocation {
 	return &ActionHelpBoxIndexInvocation{
 		Action: action,
-		Path: "/v6.0/help_boxes",
+		Path:   "/v6.0/help_boxes",
 	}
 }
 
@@ -217,7 +219,6 @@ type ActionHelpBoxIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionHelpBoxIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionHelpBoxIndexInvocation) NewInput() *ActionHelpBoxIndexInput {
@@ -240,6 +241,7 @@ func (inv *ActionHelpBoxIndexInvocation) IsParameterSelected(param string) bool 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionHelpBoxIndexInvocation) NewMetaInput() *ActionHelpBoxIndexMetaGlobalInput {
@@ -280,8 +282,6 @@ func (inv *ActionHelpBoxIndexInvocation) callAsQuery() (*ActionHelpBoxIndexRespo
 	return resp, err
 }
 
-
-
 func (inv *ActionHelpBoxIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Action") {
@@ -315,4 +315,3 @@ func (inv *ActionHelpBoxIndexInvocation) convertMetaInputToQueryParams(ret map[s
 		}
 	}
 }
-

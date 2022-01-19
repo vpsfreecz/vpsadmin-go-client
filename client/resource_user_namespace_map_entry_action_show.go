@@ -19,7 +19,7 @@ func NewActionUserNamespaceMapEntryShow(client *Client) *ActionUserNamespaceMapE
 // ActionUserNamespaceMapEntryShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceMapEntryShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionUserNamespaceMapEntryShowMetaGlobalInput) SetIncludes(value stri
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionUserNamespaceMapEntryShowMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceMapEntryShowMetaGlobalInput {
 	in.No = value
@@ -70,17 +71,14 @@ func (in *ActionUserNamespaceMapEntryShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionUserNamespaceMapEntryShowOutput is a type for action output parameters
 type ActionUserNamespaceMapEntryShowOutput struct {
-	Count int64 `json:"count"`
-	Id int64 `json:"id"`
-	Kind string `json:"kind"`
-	NsId int64 `json:"ns_id"`
-	VpsId int64 `json:"vps_id"`
+	Count int64  `json:"count"`
+	Id    int64  `json:"id"`
+	Kind  string `json:"kind"`
+	NsId  int64  `json:"ns_id"`
+	VpsId int64  `json:"vps_id"`
 }
-
 
 // Type for action response, including envelope
 type ActionUserNamespaceMapEntryShowResponse struct {
@@ -95,12 +93,11 @@ type ActionUserNamespaceMapEntryShowResponse struct {
 	Output *ActionUserNamespaceMapEntryShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionUserNamespaceMapEntryShow) Prepare() *ActionUserNamespaceMapEntryShowInvocation {
 	return &ActionUserNamespaceMapEntryShowInvocation{
 		Action: action,
-		Path: "/v6.0/user_namespace_maps/{user_namespace_map_id}/entries/{entry_id}",
+		Path:   "/v6.0/user_namespace_maps/{user_namespace_map_id}/entries/{entry_id}",
 	}
 }
 
@@ -165,9 +162,6 @@ func (inv *ActionUserNamespaceMapEntryShowInvocation) callAsQuery() (*ActionUser
 	return resp, err
 }
 
-
-
-
 func (inv *ActionUserNamespaceMapEntryShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -178,4 +172,3 @@ func (inv *ActionUserNamespaceMapEntryShowInvocation) convertMetaInputToQueryPar
 		}
 	}
 }
-

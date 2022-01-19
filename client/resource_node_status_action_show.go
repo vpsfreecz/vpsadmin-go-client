@@ -19,7 +19,7 @@ func NewActionNodeStatusShow(client *Client) *ActionNodeStatusShow {
 // ActionNodeStatusShowMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeStatusShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionNodeStatusShowMetaGlobalInput) SetIncludes(value string) *Action
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionNodeStatusShowMetaGlobalInput) SetNo(value bool) *ActionNodeStatusShowMetaGlobalInput {
 	in.No = value
@@ -70,36 +71,33 @@ func (in *ActionNodeStatusShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionNodeStatusShowOutput is a type for action output parameters
 type ActionNodeStatusShowOutput struct {
-	ArcC int64 `json:"arc_c"`
-	ArcCMax int64 `json:"arc_c_max"`
+	ArcC          int64   `json:"arc_c"`
+	ArcCMax       int64   `json:"arc_c_max"`
 	ArcHitpercent float64 `json:"arc_hitpercent"`
-	ArcSize int64 `json:"arc_size"`
-	CpuGuest float64 `json:"cpu_guest"`
-	CpuIdle float64 `json:"cpu_idle"`
-	CpuIowait float64 `json:"cpu_iowait"`
-	CpuIrq float64 `json:"cpu_irq"`
-	CpuNice float64 `json:"cpu_nice"`
-	CpuSoftirq float64 `json:"cpu_softirq"`
-	CpuSystem float64 `json:"cpu_system"`
-	CpuUser float64 `json:"cpu_user"`
-	Cpus int64 `json:"cpus"`
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	Kernel string `json:"kernel"`
-	Loadavg float64 `json:"loadavg"`
-	ProcessCount int64 `json:"process_count"`
-	TotalMemory int64 `json:"total_memory"`
-	TotalSwap int64 `json:"total_swap"`
-	Uptime int64 `json:"uptime"`
-	UsedMemory int64 `json:"used_memory"`
-	UsedSwap int64 `json:"used_swap"`
-	Version string `json:"version"`
+	ArcSize       int64   `json:"arc_size"`
+	CpuGuest      float64 `json:"cpu_guest"`
+	CpuIdle       float64 `json:"cpu_idle"`
+	CpuIowait     float64 `json:"cpu_iowait"`
+	CpuIrq        float64 `json:"cpu_irq"`
+	CpuNice       float64 `json:"cpu_nice"`
+	CpuSoftirq    float64 `json:"cpu_softirq"`
+	CpuSystem     float64 `json:"cpu_system"`
+	CpuUser       float64 `json:"cpu_user"`
+	Cpus          int64   `json:"cpus"`
+	CreatedAt     string  `json:"created_at"`
+	Id            int64   `json:"id"`
+	Kernel        string  `json:"kernel"`
+	Loadavg       float64 `json:"loadavg"`
+	ProcessCount  int64   `json:"process_count"`
+	TotalMemory   int64   `json:"total_memory"`
+	TotalSwap     int64   `json:"total_swap"`
+	Uptime        int64   `json:"uptime"`
+	UsedMemory    int64   `json:"used_memory"`
+	UsedSwap      int64   `json:"used_swap"`
+	Version       string  `json:"version"`
 }
-
 
 // Type for action response, including envelope
 type ActionNodeStatusShowResponse struct {
@@ -114,12 +112,11 @@ type ActionNodeStatusShowResponse struct {
 	Output *ActionNodeStatusShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionNodeStatusShow) Prepare() *ActionNodeStatusShowInvocation {
 	return &ActionNodeStatusShowInvocation{
 		Action: action,
-		Path: "/v6.0/nodes/{node_id}/statuses/{status_id}",
+		Path:   "/v6.0/nodes/{node_id}/statuses/{status_id}",
 	}
 }
 
@@ -184,9 +181,6 @@ func (inv *ActionNodeStatusShowInvocation) callAsQuery() (*ActionNodeStatusShowR
 	return resp, err
 }
 
-
-
-
 func (inv *ActionNodeStatusShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -197,4 +191,3 @@ func (inv *ActionNodeStatusShowInvocation) convertMetaInputToQueryParams(ret map
 		}
 	}
 }
-

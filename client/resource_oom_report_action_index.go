@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionOomReportIndex is a type for action Oom_report#Index
 type ActionOomReportIndex struct {
@@ -17,9 +16,9 @@ func NewActionOomReportIndex(client *Client) *ActionOomReportIndex {
 
 // ActionOomReportIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionOomReportIndexMetaGlobalInput) SetCount(value bool) *ActionOomRe
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionOomReportIndexMetaGlobalInput) SetIncludes(value string) *ActionOomReportIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionOomReportIndexMetaGlobalInput) SetIncludes(value string) *Action
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionOomReportIndexMetaGlobalInput) SetNo(value bool) *ActionOomReportIndexMetaGlobalInput {
 	in.No = value
@@ -83,15 +84,15 @@ func (in *ActionOomReportIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportIndexInput is a type for action input parameters
 type ActionOomReportIndexInput struct {
-	Environment int64 `json:"environment"`
-	Limit int64 `json:"limit"`
-	Location int64 `json:"location"`
-	Node int64 `json:"node"`
-	Offset int64 `json:"offset"`
-	Since string `json:"since"`
-	Until string `json:"until"`
-	User int64 `json:"user"`
-	Vps int64 `json:"vps"`
+	Environment int64  `json:"environment"`
+	Limit       int64  `json:"limit"`
+	Location    int64  `json:"location"`
+	Node        int64  `json:"node"`
+	Offset      int64  `json:"offset"`
+	Since       string `json:"since"`
+	Until       string `json:"until"`
+	User        int64  `json:"user"`
+	Vps         int64  `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -107,6 +108,7 @@ func (in *ActionOomReportIndexInput) SetEnvironment(value int64) *ActionOomRepor
 	in._selectedParameters["Environment"] = nil
 	return in
 }
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionOomReportIndexInput) SetLimit(value int64) *ActionOomReportIndexInput {
 	in.Limit = value
@@ -118,6 +120,7 @@ func (in *ActionOomReportIndexInput) SetLimit(value int64) *ActionOomReportIndex
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionOomReportIndexInput) SetLocation(value int64) *ActionOomReportIndexInput {
 	in.Location = value
@@ -129,6 +132,7 @@ func (in *ActionOomReportIndexInput) SetLocation(value int64) *ActionOomReportIn
 	in._selectedParameters["Location"] = nil
 	return in
 }
+
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionOomReportIndexInput) SetNode(value int64) *ActionOomReportIndexInput {
 	in.Node = value
@@ -140,6 +144,7 @@ func (in *ActionOomReportIndexInput) SetNode(value int64) *ActionOomReportIndexI
 	in._selectedParameters["Node"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionOomReportIndexInput) SetOffset(value int64) *ActionOomReportIndexInput {
 	in.Offset = value
@@ -151,6 +156,7 @@ func (in *ActionOomReportIndexInput) SetOffset(value int64) *ActionOomReportInde
 	in._selectedParameters["Offset"] = nil
 	return in
 }
+
 // SetSince sets parameter Since to value and selects it for sending
 func (in *ActionOomReportIndexInput) SetSince(value string) *ActionOomReportIndexInput {
 	in.Since = value
@@ -162,6 +168,7 @@ func (in *ActionOomReportIndexInput) SetSince(value string) *ActionOomReportInde
 	in._selectedParameters["Since"] = nil
 	return in
 }
+
 // SetUntil sets parameter Until to value and selects it for sending
 func (in *ActionOomReportIndexInput) SetUntil(value string) *ActionOomReportIndexInput {
 	in.Until = value
@@ -173,6 +180,7 @@ func (in *ActionOomReportIndexInput) SetUntil(value string) *ActionOomReportInde
 	in._selectedParameters["Until"] = nil
 	return in
 }
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionOomReportIndexInput) SetUser(value int64) *ActionOomReportIndexInput {
 	in.User = value
@@ -184,6 +192,7 @@ func (in *ActionOomReportIndexInput) SetUser(value int64) *ActionOomReportIndexI
 	in._selectedParameters["User"] = nil
 	return in
 }
+
 // SetVps sets parameter Vps to value and selects it for sending
 func (in *ActionOomReportIndexInput) SetVps(value int64) *ActionOomReportIndexInput {
 	in.Vps = value
@@ -219,19 +228,17 @@ func (in *ActionOomReportIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionOomReportIndexOutput is a type for action output parameters
 type ActionOomReportIndexOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id int64 `json:"id"`
-	InvokedByName string `json:"invoked_by_name"`
-	InvokedByPid int64 `json:"invoked_by_pid"`
-	KilledName string `json:"killed_name"`
-	KilledPid int64 `json:"killed_pid"`
-	ReportedAt string `json:"reported_at"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	CreatedAt     string               `json:"created_at"`
+	Id            int64                `json:"id"`
+	InvokedByName string               `json:"invoked_by_name"`
+	InvokedByPid  int64                `json:"invoked_by_pid"`
+	KilledName    string               `json:"killed_name"`
+	KilledPid     int64                `json:"killed_pid"`
+	ReportedAt    string               `json:"reported_at"`
+	Vps           *ActionVpsShowOutput `json:"vps"`
 }
-
 
 // Type for action response, including envelope
 type ActionOomReportIndexResponse struct {
@@ -246,12 +253,11 @@ type ActionOomReportIndexResponse struct {
 	Output []*ActionOomReportIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionOomReportIndex) Prepare() *ActionOomReportIndexInvocation {
 	return &ActionOomReportIndexInvocation{
 		Action: action,
-		Path: "/v6.0/oom_reports",
+		Path:   "/v6.0/oom_reports",
 	}
 }
 
@@ -267,7 +273,6 @@ type ActionOomReportIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionOomReportIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionOomReportIndexInvocation) NewInput() *ActionOomReportIndexInput {
@@ -290,6 +295,7 @@ func (inv *ActionOomReportIndexInvocation) IsParameterSelected(param string) boo
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOomReportIndexInvocation) NewMetaInput() *ActionOomReportIndexMetaGlobalInput {
@@ -329,8 +335,6 @@ func (inv *ActionOomReportIndexInvocation) callAsQuery() (*ActionOomReportIndexR
 	}
 	return resp, err
 }
-
-
 
 func (inv *ActionOomReportIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
@@ -377,4 +381,3 @@ func (inv *ActionOomReportIndexInvocation) convertMetaInputToQueryParams(ret map
 		}
 	}
 }
-

@@ -19,7 +19,7 @@ func NewActionMigrationPlanVpsMigrationShow(client *Client) *ActionMigrationPlan
 // ActionMigrationPlanVpsMigrationShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanVpsMigrationShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMigrationPlanVpsMigrationShowMetaGlobalInput) SetIncludes(value 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMigrationPlanVpsMigrationShowMetaGlobalInput) SetNo(value bool) *ActionMigrationPlanVpsMigrationShowMetaGlobalInput {
 	in.No = value
@@ -70,23 +71,20 @@ func (in *ActionMigrationPlanVpsMigrationShowMetaGlobalInput) AnySelected() bool
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionMigrationPlanVpsMigrationShowOutput is a type for action output parameters
 type ActionMigrationPlanVpsMigrationShowOutput struct {
-	CleanupData bool `json:"cleanup_data"`
-	CreatedAt string `json:"created_at"`
-	DstNode *ActionNodeShowOutput `json:"dst_node"`
-	FinishedAt string `json:"finished_at"`
-	Id int64 `json:"id"`
-	MaintenanceWindow bool `json:"maintenance_window"`
-	SrcNode *ActionNodeShowOutput `json:"src_node"`
-	StartedAt string `json:"started_at"`
-	State string `json:"state"`
-	TransactionChain *ActionTransactionChainShowOutput `json:"transaction_chain"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	CleanupData       bool                              `json:"cleanup_data"`
+	CreatedAt         string                            `json:"created_at"`
+	DstNode           *ActionNodeShowOutput             `json:"dst_node"`
+	FinishedAt        string                            `json:"finished_at"`
+	Id                int64                             `json:"id"`
+	MaintenanceWindow bool                              `json:"maintenance_window"`
+	SrcNode           *ActionNodeShowOutput             `json:"src_node"`
+	StartedAt         string                            `json:"started_at"`
+	State             string                            `json:"state"`
+	TransactionChain  *ActionTransactionChainShowOutput `json:"transaction_chain"`
+	Vps               *ActionVpsShowOutput              `json:"vps"`
 }
-
 
 // Type for action response, including envelope
 type ActionMigrationPlanVpsMigrationShowResponse struct {
@@ -101,12 +99,11 @@ type ActionMigrationPlanVpsMigrationShowResponse struct {
 	Output *ActionMigrationPlanVpsMigrationShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMigrationPlanVpsMigrationShow) Prepare() *ActionMigrationPlanVpsMigrationShowInvocation {
 	return &ActionMigrationPlanVpsMigrationShowInvocation{
 		Action: action,
-		Path: "/v6.0/migration_plans/{migration_plan_id}/vps_migrations/{vps_migration_id}",
+		Path:   "/v6.0/migration_plans/{migration_plan_id}/vps_migrations/{vps_migration_id}",
 	}
 }
 
@@ -171,9 +168,6 @@ func (inv *ActionMigrationPlanVpsMigrationShowInvocation) callAsQuery() (*Action
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMigrationPlanVpsMigrationShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -184,4 +178,3 @@ func (inv *ActionMigrationPlanVpsMigrationShowInvocation) convertMetaInputToQuer
 		}
 	}
 }
-

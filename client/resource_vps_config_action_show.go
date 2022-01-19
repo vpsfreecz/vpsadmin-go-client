@@ -19,7 +19,7 @@ func NewActionVpsConfigShow(client *Client) *ActionVpsConfigShow {
 // ActionVpsConfigShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsConfigShowMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionVpsConfigShowMetaGlobalInput) SetIncludes(value string) *ActionV
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionVpsConfigShowMetaGlobalInput) SetNo(value bool) *ActionVpsConfigShowMetaGlobalInput {
 	in.No = value
@@ -70,16 +71,13 @@ func (in *ActionVpsConfigShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionVpsConfigShowOutput is a type for action output parameters
 type ActionVpsConfigShowOutput struct {
 	Config string `json:"config"`
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Name string `json:"name"`
+	Id     int64  `json:"id"`
+	Label  string `json:"label"`
+	Name   string `json:"name"`
 }
-
 
 // Type for action response, including envelope
 type ActionVpsConfigShowResponse struct {
@@ -94,12 +92,11 @@ type ActionVpsConfigShowResponse struct {
 	Output *ActionVpsConfigShowOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionVpsConfigShow) Prepare() *ActionVpsConfigShowInvocation {
 	return &ActionVpsConfigShowInvocation{
 		Action: action,
-		Path: "/v6.0/vps_configs/{vps_config_id}",
+		Path:   "/v6.0/vps_configs/{vps_config_id}",
 	}
 }
 
@@ -164,9 +161,6 @@ func (inv *ActionVpsConfigShowInvocation) callAsQuery() (*ActionVpsConfigShowRes
 	return resp, err
 }
 
-
-
-
 func (inv *ActionVpsConfigShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
@@ -177,4 +171,3 @@ func (inv *ActionVpsConfigShowInvocation) convertMetaInputToQueryParams(ret map[
 		}
 	}
 }
-

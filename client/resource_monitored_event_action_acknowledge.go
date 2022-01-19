@@ -19,7 +19,7 @@ func NewActionMonitoredEventAcknowledge(client *Client) *ActionMonitoredEventAck
 // ActionMonitoredEventAcknowledgeMetaGlobalInput is a type for action global meta input parameters
 type ActionMonitoredEventAcknowledgeMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionMonitoredEventAcknowledgeMetaGlobalInput) SetIncludes(value stri
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionMonitoredEventAcknowledgeMetaGlobalInput) SetNo(value bool) *ActionMonitoredEventAcknowledgeMetaGlobalInput {
 	in.No = value
@@ -115,10 +116,8 @@ func (in *ActionMonitoredEventAcknowledgeInput) AnySelected() bool {
 // ActionMonitoredEventAcknowledgeRequest is a type for the entire action request
 type ActionMonitoredEventAcknowledgeRequest struct {
 	MonitoredEvent map[string]interface{} `json:"monitored_event"`
-	Meta map[string]interface{} `json:"_meta"`
+	Meta           map[string]interface{} `json:"_meta"`
 }
-
-
 
 // Type for action response, including envelope
 type ActionMonitoredEventAcknowledgeResponse struct {
@@ -126,12 +125,11 @@ type ActionMonitoredEventAcknowledgeResponse struct {
 	*Envelope
 }
 
-
 // Prepare the action for invocation
 func (action *ActionMonitoredEventAcknowledge) Prepare() *ActionMonitoredEventAcknowledgeInvocation {
 	return &ActionMonitoredEventAcknowledgeInvocation{
 		Action: action,
-		Path: "/v6.0/monitored_events/{monitored_event_id}/acknowledge",
+		Path:   "/v6.0/monitored_events/{monitored_event_id}/acknowledge",
 	}
 }
 
@@ -180,6 +178,7 @@ func (inv *ActionMonitoredEventAcknowledgeInvocation) IsParameterSelected(param 
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionMonitoredEventAcknowledgeInvocation) NewMetaInput() *ActionMonitoredEventAcknowledgeMetaGlobalInput {
@@ -208,7 +207,6 @@ func (inv *ActionMonitoredEventAcknowledgeInvocation) Call() (*ActionMonitoredEv
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionMonitoredEventAcknowledgeInvocation) callAsBody() (*ActionMonitoredEventAcknowledgeResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionMonitoredEventAcknowledgeResponse{Action: inv.Action}
@@ -216,13 +214,10 @@ func (inv *ActionMonitoredEventAcknowledgeInvocation) callAsBody() (*ActionMonit
 	return resp, err
 }
 
-
-
-
 func (inv *ActionMonitoredEventAcknowledgeInvocation) makeAllInputParams() *ActionMonitoredEventAcknowledgeRequest {
 	return &ActionMonitoredEventAcknowledgeRequest{
 		MonitoredEvent: inv.makeInputParams(),
-		Meta: inv.makeMetaInputParams(),
+		Meta:           inv.makeMetaInputParams(),
 	}
 }
 

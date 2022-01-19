@@ -19,7 +19,7 @@ func NewActionDatasetSnapshotDelete(client *Client) *ActionDatasetSnapshotDelete
 // ActionDatasetSnapshotDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetSnapshotDeleteMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionDatasetSnapshotDeleteMetaGlobalInput) SetIncludes(value string) 
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionDatasetSnapshotDeleteMetaGlobalInput) SetNo(value bool) *ActionDatasetSnapshotDeleteMetaGlobalInput {
 	in.No = value
@@ -70,12 +71,10 @@ func (in *ActionDatasetSnapshotDeleteMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionDatasetSnapshotDeleteRequest is a type for the entire action request
 type ActionDatasetSnapshotDeleteRequest struct {
 	Meta map[string]interface{} `json:"_meta"`
 }
-
 
 // ActionDatasetSnapshotDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionDatasetSnapshotDeleteMetaGlobalOutput struct {
@@ -93,12 +92,11 @@ type ActionDatasetSnapshotDeleteResponse struct {
 	}
 }
 
-
 // Prepare the action for invocation
 func (action *ActionDatasetSnapshotDelete) Prepare() *ActionDatasetSnapshotDeleteInvocation {
 	return &ActionDatasetSnapshotDeleteInvocation{
 		Action: action,
-		Path: "/v6.0/datasets/{dataset_id}/snapshots/{snapshot_id}",
+		Path:   "/v6.0/datasets/{dataset_id}/snapshots/{snapshot_id}",
 	}
 }
 
@@ -151,7 +149,6 @@ func (inv *ActionDatasetSnapshotDeleteInvocation) IsMetaParameterSelected(param 
 func (inv *ActionDatasetSnapshotDeleteInvocation) Call() (*ActionDatasetSnapshotDeleteResponse, error) {
 	return inv.callAsBody()
 }
-
 
 func (inv *ActionDatasetSnapshotDeleteInvocation) callAsBody() (*ActionDatasetSnapshotDeleteResponse, error) {
 	input := inv.makeAllInputParams()
@@ -209,11 +206,11 @@ func (resp *ActionDatasetSnapshotDeleteResponse) WatchOperation(timeout float64,
 		req = resp.Action.Client.ActionState.Poll.Prepare()
 		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
 		req.SetInput(&ActionActionStatePollInput{
-			Timeout: timeout,
+			Timeout:  timeout,
 			UpdateIn: updateIn,
-			Status: pollResp.Output.Status,
-			Current: pollResp.Output.Current,
-			Total: pollResp.Output.Total,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
 		})
 		pollResp, err = req.Call()
 
@@ -236,14 +233,11 @@ func (resp *ActionDatasetSnapshotDeleteResponse) CancelOperation() (*ActionActio
 	return req.Call()
 }
 
-
-
 func (inv *ActionDatasetSnapshotDeleteInvocation) makeAllInputParams() *ActionDatasetSnapshotDeleteRequest {
 	return &ActionDatasetSnapshotDeleteRequest{
 		Meta: inv.makeMetaInputParams(),
 	}
 }
-
 
 func (inv *ActionDatasetSnapshotDeleteInvocation) makeMetaInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})

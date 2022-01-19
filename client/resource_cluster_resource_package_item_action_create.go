@@ -19,7 +19,7 @@ func NewActionClusterResourcePackageItemCreate(client *Client) *ActionClusterRes
 // ActionClusterResourcePackageItemCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourcePackageItemCreateMetaGlobalInput struct {
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +35,7 @@ func (in *ActionClusterResourcePackageItemCreateMetaGlobalInput) SetIncludes(val
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionClusterResourcePackageItemCreateMetaGlobalInput) SetNo(value bool) *ActionClusterResourcePackageItemCreateMetaGlobalInput {
 	in.No = value
@@ -73,7 +74,7 @@ func (in *ActionClusterResourcePackageItemCreateMetaGlobalInput) AnySelected() b
 // ActionClusterResourcePackageItemCreateInput is a type for action input parameters
 type ActionClusterResourcePackageItemCreateInput struct {
 	ClusterResource int64 `json:"cluster_resource"`
-	Value int64 `json:"value"`
+	Value           int64 `json:"value"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -89,6 +90,7 @@ func (in *ActionClusterResourcePackageItemCreateInput) SetClusterResource(value 
 	in._selectedParameters["ClusterResource"] = nil
 	return in
 }
+
 // SetValue sets parameter Value to value and selects it for sending
 func (in *ActionClusterResourcePackageItemCreateInput) SetValue(value int64) *ActionClusterResourcePackageItemCreateInput {
 	in.Value = value
@@ -133,10 +135,9 @@ type ActionClusterResourcePackageItemCreateRequest struct {
 // ActionClusterResourcePackageItemCreateOutput is a type for action output parameters
 type ActionClusterResourcePackageItemCreateOutput struct {
 	ClusterResource *ActionClusterResourceShowOutput `json:"cluster_resource"`
-	Id int64 `json:"id"`
-	Value int64 `json:"value"`
+	Id              int64                            `json:"id"`
+	Value           int64                            `json:"value"`
 }
-
 
 // Type for action response, including envelope
 type ActionClusterResourcePackageItemCreateResponse struct {
@@ -151,12 +152,11 @@ type ActionClusterResourcePackageItemCreateResponse struct {
 	Output *ActionClusterResourcePackageItemCreateOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionClusterResourcePackageItemCreate) Prepare() *ActionClusterResourcePackageItemCreateInvocation {
 	return &ActionClusterResourcePackageItemCreateInvocation{
 		Action: action,
-		Path: "/v6.0/cluster_resource_packages/{cluster_resource_package_id}/items",
+		Path:   "/v6.0/cluster_resource_packages/{cluster_resource_package_id}/items",
 	}
 }
 
@@ -205,6 +205,7 @@ func (inv *ActionClusterResourcePackageItemCreateInvocation) IsParameterSelected
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionClusterResourcePackageItemCreateInvocation) NewMetaInput() *ActionClusterResourcePackageItemCreateMetaGlobalInput {
@@ -233,7 +234,6 @@ func (inv *ActionClusterResourcePackageItemCreateInvocation) Call() (*ActionClus
 	return inv.callAsBody()
 }
 
-
 func (inv *ActionClusterResourcePackageItemCreateInvocation) callAsBody() (*ActionClusterResourcePackageItemCreateResponse, error) {
 	input := inv.makeAllInputParams()
 	resp := &ActionClusterResourcePackageItemCreateResponse{Action: inv.Action}
@@ -243,9 +243,6 @@ func (inv *ActionClusterResourcePackageItemCreateInvocation) callAsBody() (*Acti
 	}
 	return resp, err
 }
-
-
-
 
 func (inv *ActionClusterResourcePackageItemCreateInvocation) makeAllInputParams() *ActionClusterResourcePackageItemCreateRequest {
 	return &ActionClusterResourcePackageItemCreateRequest{

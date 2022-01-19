@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionClusterPublicStats is a type for action Cluster#Public_stats
 type ActionClusterPublicStats struct {
@@ -57,15 +56,12 @@ func (in *ActionClusterPublicStatsMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
-
 // ActionClusterPublicStatsOutput is a type for action output parameters
 type ActionClusterPublicStatsOutput struct {
-	Ipv4Left int64 `json:"ipv4_left"`
+	Ipv4Left  int64 `json:"ipv4_left"`
 	UserCount int64 `json:"user_count"`
-	VpsCount int64 `json:"vps_count"`
+	VpsCount  int64 `json:"vps_count"`
 }
-
 
 // Type for action response, including envelope
 type ActionClusterPublicStatsResponse struct {
@@ -89,7 +85,7 @@ func (action *ActionClusterPublicStats) Call() (*ActionClusterPublicStatsRespons
 func (action *ActionClusterPublicStats) Prepare() *ActionClusterPublicStatsInvocation {
 	return &ActionClusterPublicStatsInvocation{
 		Action: action,
-		Path: "/v6.0/cluster/public_stats",
+		Path:   "/v6.0/cluster/public_stats",
 	}
 }
 
@@ -103,7 +99,6 @@ type ActionClusterPublicStatsInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionClusterPublicStatsMetaGlobalInput
 }
-
 
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
@@ -144,9 +139,6 @@ func (inv *ActionClusterPublicStatsInvocation) callAsQuery() (*ActionClusterPubl
 	return resp, err
 }
 
-
-
-
 func (inv *ActionClusterPublicStatsInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("No") {
@@ -154,4 +146,3 @@ func (inv *ActionClusterPublicStatsInvocation) convertMetaInputToQueryParams(ret
 		}
 	}
 }
-

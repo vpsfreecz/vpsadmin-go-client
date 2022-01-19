@@ -1,7 +1,6 @@
 package client
 
-import (
-)
+import ()
 
 // ActionClusterResourceIndex is a type for action Cluster_resource#Index
 type ActionClusterResourceIndex struct {
@@ -17,9 +16,9 @@ func NewActionClusterResourceIndex(client *Client) *ActionClusterResourceIndex {
 
 // ActionClusterResourceIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourceIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
+	Count    bool   `json:"count"`
 	Includes string `json:"includes"`
-	No bool `json:"no"`
+	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -35,6 +34,7 @@ func (in *ActionClusterResourceIndexMetaGlobalInput) SetCount(value bool) *Actio
 	in._selectedParameters["Count"] = nil
 	return in
 }
+
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionClusterResourceIndexMetaGlobalInput) SetIncludes(value string) *ActionClusterResourceIndexMetaGlobalInput {
 	in.Includes = value
@@ -46,6 +46,7 @@ func (in *ActionClusterResourceIndexMetaGlobalInput) SetIncludes(value string) *
 	in._selectedParameters["Includes"] = nil
 	return in
 }
+
 // SetNo sets parameter No to value and selects it for sending
 func (in *ActionClusterResourceIndexMetaGlobalInput) SetNo(value bool) *ActionClusterResourceIndexMetaGlobalInput {
 	in.No = value
@@ -83,7 +84,7 @@ func (in *ActionClusterResourceIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterResourceIndexInput is a type for action input parameters
 type ActionClusterResourceIndexInput struct {
-	Limit int64 `json:"limit"`
+	Limit  int64 `json:"limit"`
 	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -100,6 +101,7 @@ func (in *ActionClusterResourceIndexInput) SetLimit(value int64) *ActionClusterR
 	in._selectedParameters["Limit"] = nil
 	return in
 }
+
 // SetOffset sets parameter Offset to value and selects it for sending
 func (in *ActionClusterResourceIndexInput) SetOffset(value int64) *ActionClusterResourceIndexInput {
 	in.Offset = value
@@ -135,17 +137,15 @@ func (in *ActionClusterResourceIndexInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
-
 // ActionClusterResourceIndexOutput is a type for action output parameters
 type ActionClusterResourceIndexOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Max int64 `json:"max"`
-	Min int64 `json:"min"`
-	Name string `json:"name"`
-	Stepsize int64 `json:"stepsize"`
+	Id       int64  `json:"id"`
+	Label    string `json:"label"`
+	Max      int64  `json:"max"`
+	Min      int64  `json:"min"`
+	Name     string `json:"name"`
+	Stepsize int64  `json:"stepsize"`
 }
-
 
 // Type for action response, including envelope
 type ActionClusterResourceIndexResponse struct {
@@ -160,12 +160,11 @@ type ActionClusterResourceIndexResponse struct {
 	Output []*ActionClusterResourceIndexOutput
 }
 
-
 // Prepare the action for invocation
 func (action *ActionClusterResourceIndex) Prepare() *ActionClusterResourceIndexInvocation {
 	return &ActionClusterResourceIndexInvocation{
 		Action: action,
-		Path: "/v6.0/cluster_resources",
+		Path:   "/v6.0/cluster_resources",
 	}
 }
 
@@ -181,7 +180,6 @@ type ActionClusterResourceIndexInvocation struct {
 	// Global meta input parameters
 	MetaInput *ActionClusterResourceIndexMetaGlobalInput
 }
-
 
 // NewInput returns a new struct for input parameters and sets it as with SetInput
 func (inv *ActionClusterResourceIndexInvocation) NewInput() *ActionClusterResourceIndexInput {
@@ -204,6 +202,7 @@ func (inv *ActionClusterResourceIndexInvocation) IsParameterSelected(param strin
 	_, exists := inv.Input._selectedParameters[param]
 	return exists
 }
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionClusterResourceIndexInvocation) NewMetaInput() *ActionClusterResourceIndexMetaGlobalInput {
@@ -244,8 +243,6 @@ func (inv *ActionClusterResourceIndexInvocation) callAsQuery() (*ActionClusterRe
 	return resp, err
 }
 
-
-
 func (inv *ActionClusterResourceIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
@@ -270,4 +267,3 @@ func (inv *ActionClusterResourceIndexInvocation) convertMetaInputToQueryParams(r
 		}
 	}
 }
-
