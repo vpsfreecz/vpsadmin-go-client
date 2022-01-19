@@ -18,23 +18,12 @@ func NewActionVpsMountDelete(client *Client) *ActionVpsMountDelete {
 
 // ActionVpsMountDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMountDeleteMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsMountDeleteMetaGlobalInput) SetNo(value bool) *ActionVpsMountDeleteMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsMountDeleteMetaGlobalInput) SetIncludes(value string) *ActionVpsMountDeleteMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionVpsMountDeleteMetaGlobalInput) SetIncludes(value string) *Action
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsMountDeleteMetaGlobalInput) SetNo(value bool) *ActionVpsMountDeleteMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -249,11 +249,11 @@ func (inv *ActionVpsMountDeleteInvocation) makeMetaInputParams() map[string]inte
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

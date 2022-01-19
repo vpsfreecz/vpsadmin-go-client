@@ -18,23 +18,12 @@ func NewActionIpAddressAssign(client *Client) *ActionIpAddressAssign {
 
 // ActionIpAddressAssignMetaGlobalInput is a type for action global meta input parameters
 type ActionIpAddressAssignMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionIpAddressAssignMetaGlobalInput) SetNo(value bool) *ActionIpAddressAssignMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionIpAddressAssignMetaGlobalInput) SetIncludes(value string) *ActionIpAddressAssignMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionIpAddressAssignMetaGlobalInput) SetIncludes(value string) *Actio
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionIpAddressAssignMetaGlobalInput) SetNo(value bool) *ActionIpAddressAssignMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -132,18 +132,18 @@ type ActionIpAddressAssignRequest struct {
 
 // ActionIpAddressAssignOutput is a type for action output parameters
 type ActionIpAddressAssignOutput struct {
-	Id int64 `json:"id"`
-	NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Network *ActionNetworkShowOutput `json:"network"`
-	User *ActionUserShowOutput `json:"user"`
 	Addr string `json:"addr"`
-	Prefix int64 `json:"prefix"`
-	Size int64 `json:"size"`
-	RouteVia *ActionHostIpAddressShowOutput `json:"route_via"`
-	MaxTx int64 `json:"max_tx"`
-	MaxRx int64 `json:"max_rx"`
-	ClassId int64 `json:"class_id"`
 	ChargedEnvironment *ActionEnvironmentShowOutput `json:"charged_environment"`
+	ClassId int64 `json:"class_id"`
+	Id int64 `json:"id"`
+	MaxRx int64 `json:"max_rx"`
+	MaxTx int64 `json:"max_tx"`
+	Network *ActionNetworkShowOutput `json:"network"`
+	NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
+	Prefix int64 `json:"prefix"`
+	RouteVia *ActionHostIpAddressShowOutput `json:"route_via"`
+	Size int64 `json:"size"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 // ActionIpAddressAssignMetaGlobalOutput is a type for global output metadata parameters
@@ -363,11 +363,11 @@ func (inv *ActionIpAddressAssignInvocation) makeMetaInputParams() map[string]int
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

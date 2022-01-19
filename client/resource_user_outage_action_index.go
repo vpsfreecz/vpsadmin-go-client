@@ -17,24 +17,13 @@ func NewActionUserOutageIndex(client *Client) *ActionUserOutageIndex {
 
 // ActionUserOutageIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserOutageIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserOutageIndexMetaGlobalInput) SetNo(value bool) *ActionUserOutageIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionUserOutageIndexMetaGlobalInput) SetCount(value bool) *ActionUserOutageIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionUserOutageIndexMetaGlobalInput) SetIncludes(value string) *Actio
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserOutageIndexMetaGlobalInput) SetNo(value bool) *ActionUserOutageIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,25 +83,14 @@ func (in *ActionUserOutageIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserOutageIndexInput is a type for action input parameters
 type ActionUserOutageIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	Outage int64 `json:"outage"`
 	User int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserOutageIndexInput) SetOffset(value int64) *ActionUserOutageIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserOutageIndexInput) SetLimit(value int64) *ActionUserOutageIndexInput {
 	in.Limit = value
@@ -111,6 +100,17 @@ func (in *ActionUserOutageIndexInput) SetLimit(value int64) *ActionUserOutageInd
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionUserOutageIndexInput) SetOffset(value int64) *ActionUserOutageIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetOutage sets parameter Outage to value and selects it for sending
@@ -162,6 +162,7 @@ func (in *ActionUserOutageIndexInput) AnySelected() bool {
 
 // ActionUserOutageIndexOutput is a type for action output parameters
 type ActionUserOutageIndexOutput struct {
+	ExportCount int64 `json:"export_count"`
 	Id int64 `json:"id"`
 	Outage *ActionOutageShowOutput `json:"outage"`
 	User *ActionUserShowOutput `json:"user"`
@@ -270,11 +271,11 @@ func (inv *ActionUserOutageIndexInvocation) callAsQuery() (*ActionUserOutageInde
 
 func (inv *ActionUserOutageIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["user_outage[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["user_outage[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["user_outage[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Outage") {
 			ret["user_outage[outage]"] = convertInt64ToString(inv.Input.Outage)
@@ -287,14 +288,14 @@ func (inv *ActionUserOutageIndexInvocation) convertInputToQueryParams(ret map[st
 
 func (inv *ActionUserOutageIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

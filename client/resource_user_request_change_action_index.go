@@ -17,24 +17,13 @@ func NewActionUserRequestChangeIndex(client *Client) *ActionUserRequestChangeInd
 
 // ActionUserRequestChangeIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestChangeIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserRequestChangeIndexMetaGlobalInput) SetNo(value bool) *ActionUserRequestChangeIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionUserRequestChangeIndexMetaGlobalInput) SetCount(value bool) *ActionUserRequestChangeIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionUserRequestChangeIndexMetaGlobalInput) SetIncludes(value string)
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserRequestChangeIndexMetaGlobalInput) SetNo(value bool) *ActionUserRequestChangeIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,60 +83,27 @@ func (in *ActionUserRequestChangeIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserRequestChangeIndexInput is a type for action input parameters
 type ActionUserRequestChangeIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
-	User int64 `json:"user"`
-	State string `json:"state"`
+	Admin int64 `json:"admin"`
 	ApiIpAddr string `json:"api_ip_addr"`
 	ClientIpAddr string `json:"client_ip_addr"`
 	ClientIpPtr string `json:"client_ip_ptr"`
-	Admin int64 `json:"admin"`
+	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
+	State string `json:"state"`
+	User int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserRequestChangeIndexInput) SetOffset(value int64) *ActionUserRequestChangeIndexInput {
-	in.Offset = value
+// SetAdmin sets parameter Admin to value and selects it for sending
+func (in *ActionUserRequestChangeIndexInput) SetAdmin(value int64) *ActionUserRequestChangeIndexInput {
+	in.Admin = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-// SetLimit sets parameter Limit to value and selects it for sending
-func (in *ActionUserRequestChangeIndexInput) SetLimit(value int64) *ActionUserRequestChangeIndexInput {
-	in.Limit = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Limit"] = nil
-	return in
-}
-// SetUser sets parameter User to value and selects it for sending
-func (in *ActionUserRequestChangeIndexInput) SetUser(value int64) *ActionUserRequestChangeIndexInput {
-	in.User = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["User"] = nil
-	return in
-}
-// SetState sets parameter State to value and selects it for sending
-func (in *ActionUserRequestChangeIndexInput) SetState(value string) *ActionUserRequestChangeIndexInput {
-	in.State = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["State"] = nil
+	in._selectedParameters["Admin"] = nil
 	return in
 }
 // SetApiIpAddr sets parameter ApiIpAddr to value and selects it for sending
@@ -172,15 +139,48 @@ func (in *ActionUserRequestChangeIndexInput) SetClientIpPtr(value string) *Actio
 	in._selectedParameters["ClientIpPtr"] = nil
 	return in
 }
-// SetAdmin sets parameter Admin to value and selects it for sending
-func (in *ActionUserRequestChangeIndexInput) SetAdmin(value int64) *ActionUserRequestChangeIndexInput {
-	in.Admin = value
+// SetLimit sets parameter Limit to value and selects it for sending
+func (in *ActionUserRequestChangeIndexInput) SetLimit(value int64) *ActionUserRequestChangeIndexInput {
+	in.Limit = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Admin"] = nil
+	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionUserRequestChangeIndexInput) SetOffset(value int64) *ActionUserRequestChangeIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
+	return in
+}
+// SetState sets parameter State to value and selects it for sending
+func (in *ActionUserRequestChangeIndexInput) SetState(value string) *ActionUserRequestChangeIndexInput {
+	in.State = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["State"] = nil
+	return in
+}
+// SetUser sets parameter User to value and selects it for sending
+func (in *ActionUserRequestChangeIndexInput) SetUser(value int64) *ActionUserRequestChangeIndexInput {
+	in.User = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["User"] = nil
 	return in
 }
 
@@ -210,22 +210,22 @@ func (in *ActionUserRequestChangeIndexInput) AnySelected() bool {
 
 // ActionUserRequestChangeIndexOutput is a type for action output parameters
 type ActionUserRequestChangeIndexOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	State string `json:"state"`
-	ApiIpAddr string `json:"api_ip_addr"`
-	ApiIpPtr string `json:"api_ip_ptr"`
-	ClientIpAddr string `json:"client_ip_addr"`
-	ClientIpPtr string `json:"client_ip_ptr"`
+	Address string `json:"address"`
 	Admin *ActionUserShowOutput `json:"admin"`
 	AdminResponse string `json:"admin_response"`
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
-	Label string `json:"label"`
+	ApiIpAddr string `json:"api_ip_addr"`
+	ApiIpPtr string `json:"api_ip_ptr"`
 	ChangeReason string `json:"change_reason"`
-	FullName string `json:"full_name"`
+	ClientIpAddr string `json:"client_ip_addr"`
+	ClientIpPtr string `json:"client_ip_ptr"`
+	CreatedAt string `json:"created_at"`
 	Email string `json:"email"`
-	Address string `json:"address"`
+	FullName string `json:"full_name"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	State string `json:"state"`
+	UpdatedAt string `json:"updated_at"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -330,17 +330,8 @@ func (inv *ActionUserRequestChangeIndexInvocation) callAsQuery() (*ActionUserReq
 
 func (inv *ActionUserRequestChangeIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["change[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
-		if inv.IsParameterSelected("Limit") {
-			ret["change[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("User") {
-			ret["change[user]"] = convertInt64ToString(inv.Input.User)
-		}
-		if inv.IsParameterSelected("State") {
-			ret["change[state]"] = inv.Input.State
+		if inv.IsParameterSelected("Admin") {
+			ret["change[admin]"] = convertInt64ToString(inv.Input.Admin)
 		}
 		if inv.IsParameterSelected("ApiIpAddr") {
 			ret["change[api_ip_addr]"] = inv.Input.ApiIpAddr
@@ -351,22 +342,31 @@ func (inv *ActionUserRequestChangeIndexInvocation) convertInputToQueryParams(ret
 		if inv.IsParameterSelected("ClientIpPtr") {
 			ret["change[client_ip_ptr]"] = inv.Input.ClientIpPtr
 		}
-		if inv.IsParameterSelected("Admin") {
-			ret["change[admin]"] = convertInt64ToString(inv.Input.Admin)
+		if inv.IsParameterSelected("Limit") {
+			ret["change[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["change[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
+		if inv.IsParameterSelected("State") {
+			ret["change[state]"] = inv.Input.State
+		}
+		if inv.IsParameterSelected("User") {
+			ret["change[user]"] = convertInt64ToString(inv.Input.User)
 		}
 	}
 }
 
 func (inv *ActionUserRequestChangeIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

@@ -17,24 +17,13 @@ func NewActionSystemConfigIndex(client *Client) *ActionSystemConfigIndex {
 
 // ActionSystemConfigIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionSystemConfigIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionSystemConfigIndexMetaGlobalInput) SetNo(value bool) *ActionSystemConfigIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionSystemConfigIndexMetaGlobalInput) SetCount(value bool) *ActionSystemConfigIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionSystemConfigIndexMetaGlobalInput) SetIncludes(value string) *Act
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionSystemConfigIndexMetaGlobalInput) SetNo(value bool) *ActionSystemConfigIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,22 +83,22 @@ func (in *ActionSystemConfigIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionSystemConfigIndexInput is a type for action input parameters
 type ActionSystemConfigIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
 	Category string `json:"category"`
+	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionSystemConfigIndexInput) SetOffset(value int64) *ActionSystemConfigIndexInput {
-	in.Offset = value
+// SetCategory sets parameter Category to value and selects it for sending
+func (in *ActionSystemConfigIndexInput) SetCategory(value string) *ActionSystemConfigIndexInput {
+	in.Category = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
+	in._selectedParameters["Category"] = nil
 	return in
 }
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -112,15 +112,15 @@ func (in *ActionSystemConfigIndexInput) SetLimit(value int64) *ActionSystemConfi
 	in._selectedParameters["Limit"] = nil
 	return in
 }
-// SetCategory sets parameter Category to value and selects it for sending
-func (in *ActionSystemConfigIndexInput) SetCategory(value string) *ActionSystemConfigIndexInput {
-	in.Category = value
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionSystemConfigIndexInput) SetOffset(value int64) *ActionSystemConfigIndexInput {
+	in.Offset = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Category"] = nil
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -151,11 +151,11 @@ func (in *ActionSystemConfigIndexInput) AnySelected() bool {
 // ActionSystemConfigIndexOutput is a type for action output parameters
 type ActionSystemConfigIndexOutput struct {
 	Category string `json:"category"`
+	Description string `json:"description"`
+	Label string `json:"label"`
+	MinUserLevel int64 `json:"min_user_level"`
 	Name string `json:"name"`
 	Type string `json:"type"`
-	Label string `json:"label"`
-	Description string `json:"description"`
-	MinUserLevel int64 `json:"min_user_level"`
 }
 
 
@@ -260,28 +260,28 @@ func (inv *ActionSystemConfigIndexInvocation) callAsQuery() (*ActionSystemConfig
 
 func (inv *ActionSystemConfigIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["system_config[offset]"] = convertInt64ToString(inv.Input.Offset)
+		if inv.IsParameterSelected("Category") {
+			ret["system_config[category]"] = inv.Input.Category
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["system_config[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
-		if inv.IsParameterSelected("Category") {
-			ret["system_config[category]"] = inv.Input.Category
+		if inv.IsParameterSelected("Offset") {
+			ret["system_config[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }
 
 func (inv *ActionSystemConfigIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

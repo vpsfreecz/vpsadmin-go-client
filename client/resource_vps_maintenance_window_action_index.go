@@ -18,24 +18,13 @@ func NewActionVpsMaintenanceWindowIndex(client *Client) *ActionVpsMaintenanceWin
 
 // ActionVpsMaintenanceWindowIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMaintenanceWindowIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsMaintenanceWindowIndexMetaGlobalInput) SetNo(value bool) *ActionVpsMaintenanceWindowIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionVpsMaintenanceWindowIndexMetaGlobalInput) SetCount(value bool) *ActionVpsMaintenanceWindowIndexMetaGlobalInput {
 	in.Count = value
@@ -56,6 +45,17 @@ func (in *ActionVpsMaintenanceWindowIndexMetaGlobalInput) SetIncludes(value stri
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsMaintenanceWindowIndexMetaGlobalInput) SetNo(value bool) *ActionVpsMaintenanceWindowIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -84,23 +84,12 @@ func (in *ActionVpsMaintenanceWindowIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMaintenanceWindowIndexInput is a type for action input parameters
 type ActionVpsMaintenanceWindowIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionVpsMaintenanceWindowIndexInput) SetOffset(value int64) *ActionVpsMaintenanceWindowIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionVpsMaintenanceWindowIndexInput) SetLimit(value int64) *ActionVpsMaintenanceWindowIndexInput {
 	in.Limit = value
@@ -110,6 +99,17 @@ func (in *ActionVpsMaintenanceWindowIndexInput) SetLimit(value int64) *ActionVps
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionVpsMaintenanceWindowIndexInput) SetOffset(value int64) *ActionVpsMaintenanceWindowIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -139,10 +139,10 @@ func (in *ActionVpsMaintenanceWindowIndexInput) AnySelected() bool {
 
 // ActionVpsMaintenanceWindowIndexOutput is a type for action output parameters
 type ActionVpsMaintenanceWindowIndexOutput struct {
-	Weekday int64 `json:"weekday"`
+	ClosesAt int64 `json:"closes_at"`
 	IsOpen bool `json:"is_open"`
 	OpensAt int64 `json:"opens_at"`
-	ClosesAt int64 `json:"closes_at"`
+	Weekday int64 `json:"weekday"`
 }
 
 
@@ -257,25 +257,25 @@ func (inv *ActionVpsMaintenanceWindowIndexInvocation) callAsQuery() (*ActionVpsM
 
 func (inv *ActionVpsMaintenanceWindowIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["maintenance_window[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["maintenance_window[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["maintenance_window[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }
 
 func (inv *ActionVpsMaintenanceWindowIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

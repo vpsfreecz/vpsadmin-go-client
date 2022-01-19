@@ -9,25 +9,25 @@ type ResourceIpTraffic struct {
 	Index *ActionIpTrafficIndex
 	// Action Ip_traffic#Index
 	List *ActionIpTrafficIndex
-	// Action Ip_traffic#User_top
-	UserTop *ActionIpTrafficUserTop
 	// Action Ip_traffic#Show
 	Show *ActionIpTrafficShow
 	// Action Ip_traffic#Show
 	Find *ActionIpTrafficShow
+	// Action Ip_traffic#User_top
+	UserTop *ActionIpTrafficUserTop
 }
 
 func NewResourceIpTraffic(client *Client) *ResourceIpTraffic {
 	actionIndex := NewActionIpTrafficIndex(client)
-	actionUserTop := NewActionIpTrafficUserTop(client)
 	actionShow := NewActionIpTrafficShow(client)
+	actionUserTop := NewActionIpTrafficUserTop(client)
 
 	return &ResourceIpTraffic{
 		Client: client,
 		Index: actionIndex,
 		List: actionIndex,
-		UserTop: actionUserTop,
 		Show: actionShow,
 		Find: actionShow,
+		UserTop: actionUserTop,
 	}
 }

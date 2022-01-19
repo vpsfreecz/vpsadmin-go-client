@@ -18,24 +18,13 @@ func NewActionUserStateLogIndex(client *Client) *ActionUserStateLogIndex {
 
 // ActionUserStateLogIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserStateLogIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserStateLogIndexMetaGlobalInput) SetNo(value bool) *ActionUserStateLogIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionUserStateLogIndexMetaGlobalInput) SetCount(value bool) *ActionUserStateLogIndexMetaGlobalInput {
 	in.Count = value
@@ -56,6 +45,17 @@ func (in *ActionUserStateLogIndexMetaGlobalInput) SetIncludes(value string) *Act
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserStateLogIndexMetaGlobalInput) SetNo(value bool) *ActionUserStateLogIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -84,23 +84,12 @@ func (in *ActionUserStateLogIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserStateLogIndexInput is a type for action input parameters
 type ActionUserStateLogIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserStateLogIndexInput) SetOffset(value int64) *ActionUserStateLogIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserStateLogIndexInput) SetLimit(value int64) *ActionUserStateLogIndexInput {
 	in.Limit = value
@@ -110,6 +99,17 @@ func (in *ActionUserStateLogIndexInput) SetLimit(value int64) *ActionUserStateLo
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionUserStateLogIndexInput) SetOffset(value int64) *ActionUserStateLogIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -139,12 +139,12 @@ func (in *ActionUserStateLogIndexInput) AnySelected() bool {
 
 // ActionUserStateLogIndexOutput is a type for action output parameters
 type ActionUserStateLogIndexOutput struct {
-	Id int64 `json:"id"`
-	State string `json:"state"`
 	ChangedAt string `json:"changed_at"`
 	Expiration string `json:"expiration"`
-	User *ActionUserShowOutput `json:"user"`
+	Id int64 `json:"id"`
 	Reason string `json:"reason"`
+	State string `json:"state"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -259,25 +259,25 @@ func (inv *ActionUserStateLogIndexInvocation) callAsQuery() (*ActionUserStateLog
 
 func (inv *ActionUserStateLogIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["state_log[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["state_log[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["state_log[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }
 
 func (inv *ActionUserStateLogIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

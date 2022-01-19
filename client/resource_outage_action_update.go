@@ -18,23 +18,12 @@ func NewActionOutageUpdate(client *Client) *ActionOutageUpdate {
 
 // ActionOutageUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionOutageUpdateMetaGlobalInput) SetNo(value bool) *ActionOutageUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionOutageUpdateMetaGlobalInput) SetIncludes(value string) *ActionOutageUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionOutageUpdateMetaGlobalInput) SetIncludes(value string) *ActionOu
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionOutageUpdateMetaGlobalInput) SetNo(value bool) *ActionOutageUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -73,15 +73,15 @@ func (in *ActionOutageUpdateMetaGlobalInput) AnySelected() bool {
 // ActionOutageUpdateInput is a type for action input parameters
 type ActionOutageUpdateInput struct {
 	BeginsAt string `json:"begins_at"`
-	FinishedAt string `json:"finished_at"`
+	CsDescription string `json:"cs_description"`
+	CsSummary string `json:"cs_summary"`
 	Duration int64 `json:"duration"`
+	EnDescription string `json:"en_description"`
+	EnSummary string `json:"en_summary"`
+	FinishedAt string `json:"finished_at"`
+	SendMail bool `json:"send_mail"`
 	State string `json:"state"`
 	Type string `json:"type"`
-	EnSummary string `json:"en_summary"`
-	EnDescription string `json:"en_description"`
-	CsSummary string `json:"cs_summary"`
-	CsDescription string `json:"cs_description"`
-	SendMail bool `json:"send_mail"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -97,15 +97,26 @@ func (in *ActionOutageUpdateInput) SetBeginsAt(value string) *ActionOutageUpdate
 	in._selectedParameters["BeginsAt"] = nil
 	return in
 }
-// SetFinishedAt sets parameter FinishedAt to value and selects it for sending
-func (in *ActionOutageUpdateInput) SetFinishedAt(value string) *ActionOutageUpdateInput {
-	in.FinishedAt = value
+// SetCsDescription sets parameter CsDescription to value and selects it for sending
+func (in *ActionOutageUpdateInput) SetCsDescription(value string) *ActionOutageUpdateInput {
+	in.CsDescription = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["FinishedAt"] = nil
+	in._selectedParameters["CsDescription"] = nil
+	return in
+}
+// SetCsSummary sets parameter CsSummary to value and selects it for sending
+func (in *ActionOutageUpdateInput) SetCsSummary(value string) *ActionOutageUpdateInput {
+	in.CsSummary = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["CsSummary"] = nil
 	return in
 }
 // SetDuration sets parameter Duration to value and selects it for sending
@@ -117,6 +128,50 @@ func (in *ActionOutageUpdateInput) SetDuration(value int64) *ActionOutageUpdateI
 	}
 
 	in._selectedParameters["Duration"] = nil
+	return in
+}
+// SetEnDescription sets parameter EnDescription to value and selects it for sending
+func (in *ActionOutageUpdateInput) SetEnDescription(value string) *ActionOutageUpdateInput {
+	in.EnDescription = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnDescription"] = nil
+	return in
+}
+// SetEnSummary sets parameter EnSummary to value and selects it for sending
+func (in *ActionOutageUpdateInput) SetEnSummary(value string) *ActionOutageUpdateInput {
+	in.EnSummary = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnSummary"] = nil
+	return in
+}
+// SetFinishedAt sets parameter FinishedAt to value and selects it for sending
+func (in *ActionOutageUpdateInput) SetFinishedAt(value string) *ActionOutageUpdateInput {
+	in.FinishedAt = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FinishedAt"] = nil
+	return in
+}
+// SetSendMail sets parameter SendMail to value and selects it for sending
+func (in *ActionOutageUpdateInput) SetSendMail(value bool) *ActionOutageUpdateInput {
+	in.SendMail = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["SendMail"] = nil
 	return in
 }
 // SetState sets parameter State to value and selects it for sending
@@ -139,61 +194,6 @@ func (in *ActionOutageUpdateInput) SetType(value string) *ActionOutageUpdateInpu
 	}
 
 	in._selectedParameters["Type"] = nil
-	return in
-}
-// SetEnSummary sets parameter EnSummary to value and selects it for sending
-func (in *ActionOutageUpdateInput) SetEnSummary(value string) *ActionOutageUpdateInput {
-	in.EnSummary = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["EnSummary"] = nil
-	return in
-}
-// SetEnDescription sets parameter EnDescription to value and selects it for sending
-func (in *ActionOutageUpdateInput) SetEnDescription(value string) *ActionOutageUpdateInput {
-	in.EnDescription = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["EnDescription"] = nil
-	return in
-}
-// SetCsSummary sets parameter CsSummary to value and selects it for sending
-func (in *ActionOutageUpdateInput) SetCsSummary(value string) *ActionOutageUpdateInput {
-	in.CsSummary = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["CsSummary"] = nil
-	return in
-}
-// SetCsDescription sets parameter CsDescription to value and selects it for sending
-func (in *ActionOutageUpdateInput) SetCsDescription(value string) *ActionOutageUpdateInput {
-	in.CsDescription = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["CsDescription"] = nil
-	return in
-}
-// SetSendMail sets parameter SendMail to value and selects it for sending
-func (in *ActionOutageUpdateInput) SetSendMail(value bool) *ActionOutageUpdateInput {
-	in.SendMail = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["SendMail"] = nil
 	return in
 }
 
@@ -228,21 +228,22 @@ type ActionOutageUpdateRequest struct {
 
 // ActionOutageUpdateOutput is a type for action output parameters
 type ActionOutageUpdateOutput struct {
-	Id int64 `json:"id"`
+	Affected bool `json:"affected"`
+	AffectedDirectVpsCount int64 `json:"affected_direct_vps_count"`
+	AffectedExportCount int64 `json:"affected_export_count"`
+	AffectedIndirectVpsCount int64 `json:"affected_indirect_vps_count"`
+	AffectedUserCount int64 `json:"affected_user_count"`
 	BeginsAt string `json:"begins_at"`
-	FinishedAt string `json:"finished_at"`
+	CsDescription string `json:"cs_description"`
+	CsSummary string `json:"cs_summary"`
 	Duration int64 `json:"duration"`
+	EnDescription string `json:"en_description"`
+	EnSummary string `json:"en_summary"`
+	FinishedAt string `json:"finished_at"`
+	Id int64 `json:"id"`
 	Planned bool `json:"planned"`
 	State string `json:"state"`
 	Type string `json:"type"`
-	EnSummary string `json:"en_summary"`
-	EnDescription string `json:"en_description"`
-	CsSummary string `json:"cs_summary"`
-	CsDescription string `json:"cs_description"`
-	Affected bool `json:"affected"`
-	AffectedUserCount int64 `json:"affected_user_count"`
-	AffectedDirectVpsCount int64 `json:"affected_direct_vps_count"`
-	AffectedIndirectVpsCount int64 `json:"affected_indirect_vps_count"`
 }
 
 // ActionOutageUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -450,32 +451,32 @@ func (inv *ActionOutageUpdateInvocation) makeInputParams() map[string]interface{
 		if inv.IsParameterSelected("BeginsAt") {
 			ret["begins_at"] = inv.Input.BeginsAt
 		}
-		if inv.IsParameterSelected("FinishedAt") {
-			ret["finished_at"] = inv.Input.FinishedAt
+		if inv.IsParameterSelected("CsDescription") {
+			ret["cs_description"] = inv.Input.CsDescription
+		}
+		if inv.IsParameterSelected("CsSummary") {
+			ret["cs_summary"] = inv.Input.CsSummary
 		}
 		if inv.IsParameterSelected("Duration") {
 			ret["duration"] = inv.Input.Duration
+		}
+		if inv.IsParameterSelected("EnDescription") {
+			ret["en_description"] = inv.Input.EnDescription
+		}
+		if inv.IsParameterSelected("EnSummary") {
+			ret["en_summary"] = inv.Input.EnSummary
+		}
+		if inv.IsParameterSelected("FinishedAt") {
+			ret["finished_at"] = inv.Input.FinishedAt
+		}
+		if inv.IsParameterSelected("SendMail") {
+			ret["send_mail"] = inv.Input.SendMail
 		}
 		if inv.IsParameterSelected("State") {
 			ret["state"] = inv.Input.State
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["type"] = inv.Input.Type
-		}
-		if inv.IsParameterSelected("EnSummary") {
-			ret["en_summary"] = inv.Input.EnSummary
-		}
-		if inv.IsParameterSelected("EnDescription") {
-			ret["en_description"] = inv.Input.EnDescription
-		}
-		if inv.IsParameterSelected("CsSummary") {
-			ret["cs_summary"] = inv.Input.CsSummary
-		}
-		if inv.IsParameterSelected("CsDescription") {
-			ret["cs_description"] = inv.Input.CsDescription
-		}
-		if inv.IsParameterSelected("SendMail") {
-			ret["send_mail"] = inv.Input.SendMail
 		}
 	}
 
@@ -486,11 +487,11 @@ func (inv *ActionOutageUpdateInvocation) makeMetaInputParams() map[string]interf
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

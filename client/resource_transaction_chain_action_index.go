@@ -17,24 +17,13 @@ func NewActionTransactionChainIndex(client *Client) *ActionTransactionChainIndex
 
 // ActionTransactionChainIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionTransactionChainIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionTransactionChainIndexMetaGlobalInput) SetNo(value bool) *ActionTransactionChainIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionTransactionChainIndexMetaGlobalInput) SetCount(value bool) *ActionTransactionChainIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionTransactionChainIndexMetaGlobalInput) SetIncludes(value string) 
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionTransactionChainIndexMetaGlobalInput) SetNo(value bool) *ActionTransactionChainIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,27 +83,27 @@ func (in *ActionTransactionChainIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionTransactionChainIndexInput is a type for action input parameters
 type ActionTransactionChainIndexInput struct {
-	Offset int64 `json:"offset"`
+	ClassName string `json:"class_name"`
 	Limit int64 `json:"limit"`
 	Name string `json:"name"`
+	Offset int64 `json:"offset"`
+	RowId int64 `json:"row_id"`
 	State string `json:"state"`
 	User int64 `json:"user"`
 	UserSession int64 `json:"user_session"`
-	ClassName string `json:"class_name"`
-	RowId int64 `json:"row_id"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionTransactionChainIndexInput) SetOffset(value int64) *ActionTransactionChainIndexInput {
-	in.Offset = value
+// SetClassName sets parameter ClassName to value and selects it for sending
+func (in *ActionTransactionChainIndexInput) SetClassName(value string) *ActionTransactionChainIndexInput {
+	in.ClassName = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
+	in._selectedParameters["ClassName"] = nil
 	return in
 }
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -126,6 +126,28 @@ func (in *ActionTransactionChainIndexInput) SetName(value string) *ActionTransac
 	}
 
 	in._selectedParameters["Name"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionTransactionChainIndexInput) SetOffset(value int64) *ActionTransactionChainIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
+	return in
+}
+// SetRowId sets parameter RowId to value and selects it for sending
+func (in *ActionTransactionChainIndexInput) SetRowId(value int64) *ActionTransactionChainIndexInput {
+	in.RowId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["RowId"] = nil
 	return in
 }
 // SetState sets parameter State to value and selects it for sending
@@ -161,28 +183,6 @@ func (in *ActionTransactionChainIndexInput) SetUserSession(value int64) *ActionT
 	in._selectedParameters["UserSession"] = nil
 	return in
 }
-// SetClassName sets parameter ClassName to value and selects it for sending
-func (in *ActionTransactionChainIndexInput) SetClassName(value string) *ActionTransactionChainIndexInput {
-	in.ClassName = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["ClassName"] = nil
-	return in
-}
-// SetRowId sets parameter RowId to value and selects it for sending
-func (in *ActionTransactionChainIndexInput) SetRowId(value int64) *ActionTransactionChainIndexInput {
-	in.RowId = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["RowId"] = nil
-	return in
-}
 
 // SelectParameters sets parameters from ActionTransactionChainIndexInput
 // that will be sent to the API.
@@ -210,14 +210,14 @@ func (in *ActionTransactionChainIndexInput) AnySelected() bool {
 
 // ActionTransactionChainIndexOutput is a type for action output parameters
 type ActionTransactionChainIndexOutput struct {
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	Label string `json:"label"`
-	State string `json:"state"`
-	Size int64 `json:"size"`
-	Progress int64 `json:"progress"`
-	User *ActionUserShowOutput `json:"user"`
 	CreatedAt string `json:"created_at"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	Name string `json:"name"`
+	Progress int64 `json:"progress"`
+	Size int64 `json:"size"`
+	State string `json:"state"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -322,14 +322,20 @@ func (inv *ActionTransactionChainIndexInvocation) callAsQuery() (*ActionTransact
 
 func (inv *ActionTransactionChainIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["transaction_chain[offset]"] = convertInt64ToString(inv.Input.Offset)
+		if inv.IsParameterSelected("ClassName") {
+			ret["transaction_chain[class_name]"] = inv.Input.ClassName
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["transaction_chain[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 		if inv.IsParameterSelected("Name") {
 			ret["transaction_chain[name]"] = inv.Input.Name
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["transaction_chain[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
+		if inv.IsParameterSelected("RowId") {
+			ret["transaction_chain[row_id]"] = convertInt64ToString(inv.Input.RowId)
 		}
 		if inv.IsParameterSelected("State") {
 			ret["transaction_chain[state]"] = inv.Input.State
@@ -340,25 +346,19 @@ func (inv *ActionTransactionChainIndexInvocation) convertInputToQueryParams(ret 
 		if inv.IsParameterSelected("UserSession") {
 			ret["transaction_chain[user_session]"] = convertInt64ToString(inv.Input.UserSession)
 		}
-		if inv.IsParameterSelected("ClassName") {
-			ret["transaction_chain[class_name]"] = inv.Input.ClassName
-		}
-		if inv.IsParameterSelected("RowId") {
-			ret["transaction_chain[row_id]"] = convertInt64ToString(inv.Input.RowId)
-		}
 	}
 }
 
 func (inv *ActionTransactionChainIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

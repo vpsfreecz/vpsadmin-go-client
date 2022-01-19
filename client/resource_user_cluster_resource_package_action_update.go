@@ -18,23 +18,12 @@ func NewActionUserClusterResourcePackageUpdate(client *Client) *ActionUserCluste
 
 // ActionUserClusterResourcePackageUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserClusterResourcePackageUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserClusterResourcePackageUpdateMetaGlobalInput) SetNo(value bool) *ActionUserClusterResourcePackageUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserClusterResourcePackageUpdateMetaGlobalInput) SetIncludes(value string) *ActionUserClusterResourcePackageUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionUserClusterResourcePackageUpdateMetaGlobalInput) SetIncludes(val
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserClusterResourcePackageUpdateMetaGlobalInput) SetNo(value bool) *ActionUserClusterResourcePackageUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -120,16 +120,16 @@ type ActionUserClusterResourcePackageUpdateRequest struct {
 
 // ActionUserClusterResourcePackageUpdateOutput is a type for action output parameters
 type ActionUserClusterResourcePackageUpdateOutput struct {
-	Id int64 `json:"id"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	User *ActionUserShowOutput `json:"user"`
-	ClusterResourcePackage *ActionClusterResourcePackageShowOutput `json:"cluster_resource_package"`
 	AddedBy *ActionUserShowOutput `json:"added_by"`
-	Label string `json:"label"`
-	IsPersonal bool `json:"is_personal"`
+	ClusterResourcePackage *ActionClusterResourcePackageShowOutput `json:"cluster_resource_package"`
 	Comment string `json:"comment"`
 	CreatedAt string `json:"created_at"`
+	Environment *ActionEnvironmentShowOutput `json:"environment"`
+	Id int64 `json:"id"`
+	IsPersonal bool `json:"is_personal"`
+	Label string `json:"label"`
 	UpdatedAt string `json:"updated_at"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -265,11 +265,11 @@ func (inv *ActionUserClusterResourcePackageUpdateInvocation) makeMetaInputParams
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

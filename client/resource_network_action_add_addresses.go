@@ -61,8 +61,8 @@ func (in *ActionNetworkAddAddressesMetaGlobalInput) AnySelected() bool {
 // ActionNetworkAddAddressesInput is a type for action input parameters
 type ActionNetworkAddAddressesInput struct {
 	Count int64 `json:"count"`
-	User int64 `json:"user"`
 	Environment int64 `json:"environment"`
+	User int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -78,17 +78,6 @@ func (in *ActionNetworkAddAddressesInput) SetCount(value int64) *ActionNetworkAd
 	in._selectedParameters["Count"] = nil
 	return in
 }
-// SetUser sets parameter User to value and selects it for sending
-func (in *ActionNetworkAddAddressesInput) SetUser(value int64) *ActionNetworkAddAddressesInput {
-	in.User = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["User"] = nil
-	return in
-}
 // SetEnvironment sets parameter Environment to value and selects it for sending
 func (in *ActionNetworkAddAddressesInput) SetEnvironment(value int64) *ActionNetworkAddAddressesInput {
 	in.Environment = value
@@ -98,6 +87,17 @@ func (in *ActionNetworkAddAddressesInput) SetEnvironment(value int64) *ActionNet
 	}
 
 	in._selectedParameters["Environment"] = nil
+	return in
+}
+// SetUser sets parameter User to value and selects it for sending
+func (in *ActionNetworkAddAddressesInput) SetUser(value int64) *ActionNetworkAddAddressesInput {
+	in.User = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["User"] = nil
 	return in
 }
 
@@ -259,11 +259,11 @@ func (inv *ActionNetworkAddAddressesInvocation) makeInputParams() map[string]int
 		if inv.IsParameterSelected("Count") {
 			ret["count"] = inv.Input.Count
 		}
-		if inv.IsParameterSelected("User") {
-			ret["user"] = inv.Input.User
-		}
 		if inv.IsParameterSelected("Environment") {
 			ret["environment"] = inv.Input.Environment
+		}
+		if inv.IsParameterSelected("User") {
+			ret["user"] = inv.Input.User
 		}
 	}
 

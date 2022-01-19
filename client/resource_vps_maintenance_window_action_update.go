@@ -18,23 +18,12 @@ func NewActionVpsMaintenanceWindowUpdate(client *Client) *ActionVpsMaintenanceWi
 
 // ActionVpsMaintenanceWindowUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMaintenanceWindowUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsMaintenanceWindowUpdateMetaGlobalInput) SetNo(value bool) *ActionVpsMaintenanceWindowUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsMaintenanceWindowUpdateMetaGlobalInput) SetIncludes(value string) *ActionVpsMaintenanceWindowUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionVpsMaintenanceWindowUpdateMetaGlobalInput) SetIncludes(value str
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsMaintenanceWindowUpdateMetaGlobalInput) SetNo(value bool) *ActionVpsMaintenanceWindowUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,13 +72,24 @@ func (in *ActionVpsMaintenanceWindowUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMaintenanceWindowUpdateInput is a type for action input parameters
 type ActionVpsMaintenanceWindowUpdateInput struct {
+	ClosesAt int64 `json:"closes_at"`
 	IsOpen bool `json:"is_open"`
 	OpensAt int64 `json:"opens_at"`
-	ClosesAt int64 `json:"closes_at"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
+// SetClosesAt sets parameter ClosesAt to value and selects it for sending
+func (in *ActionVpsMaintenanceWindowUpdateInput) SetClosesAt(value int64) *ActionVpsMaintenanceWindowUpdateInput {
+	in.ClosesAt = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ClosesAt"] = nil
+	return in
+}
 // SetIsOpen sets parameter IsOpen to value and selects it for sending
 func (in *ActionVpsMaintenanceWindowUpdateInput) SetIsOpen(value bool) *ActionVpsMaintenanceWindowUpdateInput {
 	in.IsOpen = value
@@ -99,17 +110,6 @@ func (in *ActionVpsMaintenanceWindowUpdateInput) SetOpensAt(value int64) *Action
 	}
 
 	in._selectedParameters["OpensAt"] = nil
-	return in
-}
-// SetClosesAt sets parameter ClosesAt to value and selects it for sending
-func (in *ActionVpsMaintenanceWindowUpdateInput) SetClosesAt(value int64) *ActionVpsMaintenanceWindowUpdateInput {
-	in.ClosesAt = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["ClosesAt"] = nil
 	return in
 }
 
@@ -144,10 +144,10 @@ type ActionVpsMaintenanceWindowUpdateRequest struct {
 
 // ActionVpsMaintenanceWindowUpdateOutput is a type for action output parameters
 type ActionVpsMaintenanceWindowUpdateOutput struct {
-	Weekday int64 `json:"weekday"`
+	ClosesAt int64 `json:"closes_at"`
 	IsOpen bool `json:"is_open"`
 	OpensAt int64 `json:"opens_at"`
-	ClosesAt int64 `json:"closes_at"`
+	Weekday int64 `json:"weekday"`
 }
 
 
@@ -271,14 +271,14 @@ func (inv *ActionVpsMaintenanceWindowUpdateInvocation) makeInputParams() map[str
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("ClosesAt") {
+			ret["closes_at"] = inv.Input.ClosesAt
+		}
 		if inv.IsParameterSelected("IsOpen") {
 			ret["is_open"] = inv.Input.IsOpen
 		}
 		if inv.IsParameterSelected("OpensAt") {
 			ret["opens_at"] = inv.Input.OpensAt
-		}
-		if inv.IsParameterSelected("ClosesAt") {
-			ret["closes_at"] = inv.Input.ClosesAt
 		}
 	}
 
@@ -289,11 +289,11 @@ func (inv *ActionVpsMaintenanceWindowUpdateInvocation) makeMetaInputParams() map
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

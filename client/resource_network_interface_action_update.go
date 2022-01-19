@@ -18,23 +18,12 @@ func NewActionNetworkInterfaceUpdate(client *Client) *ActionNetworkInterfaceUpda
 
 // ActionNetworkInterfaceUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkInterfaceUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionNetworkInterfaceUpdateMetaGlobalInput) SetNo(value bool) *ActionNetworkInterfaceUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionNetworkInterfaceUpdateMetaGlobalInput) SetIncludes(value string) *ActionNetworkInterfaceUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionNetworkInterfaceUpdateMetaGlobalInput) SetIncludes(value string)
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionNetworkInterfaceUpdateMetaGlobalInput) SetNo(value bool) *ActionNetworkInterfaceUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -121,10 +121,10 @@ type ActionNetworkInterfaceUpdateRequest struct {
 // ActionNetworkInterfaceUpdateOutput is a type for action output parameters
 type ActionNetworkInterfaceUpdateOutput struct {
 	Id int64 `json:"id"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	Mac string `json:"mac"`
 	Name string `json:"name"`
 	Type string `json:"type"`
-	Mac string `json:"mac"`
+	Vps *ActionVpsShowOutput `json:"vps"`
 }
 
 // ActionNetworkInterfaceUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -341,11 +341,11 @@ func (inv *ActionNetworkInterfaceUpdateInvocation) makeMetaInputParams() map[str
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

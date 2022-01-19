@@ -5,104 +5,112 @@ type ResourceVps struct {
 	// Pointer to client
 	Client *Client
 
-	// Resource Vps.State_log
-	StateLog *ResourceVpsStateLog
 	// Resource Vps.Config
 	Config *ResourceVpsConfig
-	// Resource Vps.Feature
-	Feature *ResourceVpsFeature
-	// Resource Vps.Mount
-	Mount *ResourceVpsMount
-	// Resource Vps.Maintenance_window
-	MaintenanceWindow *ResourceVpsMaintenanceWindow
 	// Resource Vps.Console_token
 	ConsoleToken *ResourceVpsConsoleToken
+	// Resource Vps.Feature
+	Feature *ResourceVpsFeature
+	// Resource Vps.Maintenance_window
+	MaintenanceWindow *ResourceVpsMaintenanceWindow
+	// Resource Vps.Mount
+	Mount *ResourceVpsMount
+	// Resource Vps.State_log
+	StateLog *ResourceVpsStateLog
 	// Resource Vps.Status
 	Status *ResourceVpsStatus
-	// Action Vps#Index
-	Index *ActionVpsIndex
-	// Action Vps#Index
-	List *ActionVpsIndex
+	// Action Vps#Boot
+	Boot *ActionVpsBoot
+	// Action Vps#Clone
+	Clone *ActionVpsClone
 	// Action Vps#Create
 	Create *ActionVpsCreate
 	// Action Vps#Create
 	New *ActionVpsCreate
-	// Action Vps#Show
-	Show *ActionVpsShow
-	// Action Vps#Show
-	Find *ActionVpsShow
-	// Action Vps#Update
-	Update *ActionVpsUpdate
 	// Action Vps#Delete
 	Delete *ActionVpsDelete
 	// Action Vps#Delete
 	Destroy *ActionVpsDelete
-	// Action Vps#Start
-	Start *ActionVpsStart
-	// Action Vps#Restart
-	Restart *ActionVpsRestart
-	// Action Vps#Stop
-	Stop *ActionVpsStop
+	// Action Vps#Deploy_public_key
+	DeployPublicKey *ActionVpsDeployPublicKey
+	// Action Vps#Index
+	Index *ActionVpsIndex
+	// Action Vps#Index
+	List *ActionVpsIndex
+	// Action Vps#Migrate
+	Migrate *ActionVpsMigrate
 	// Action Vps#Passwd
 	Passwd *ActionVpsPasswd
 	// Action Vps#Reinstall
 	Reinstall *ActionVpsReinstall
-	// Action Vps#Migrate
-	Migrate *ActionVpsMigrate
-	// Action Vps#Clone
-	Clone *ActionVpsClone
-	// Action Vps#Swap_with
-	SwapWith *ActionVpsSwapWith
-	// Action Vps#Deploy_public_key
-	DeployPublicKey *ActionVpsDeployPublicKey
+	// Action Vps#Replace
+	Replace *ActionVpsReplace
+	// Action Vps#Restart
+	Restart *ActionVpsRestart
 	// Action Vps#Set_maintenance
 	SetMaintenance *ActionVpsSetMaintenance
+	// Action Vps#Show
+	Show *ActionVpsShow
+	// Action Vps#Show
+	Find *ActionVpsShow
+	// Action Vps#Start
+	Start *ActionVpsStart
+	// Action Vps#Stop
+	Stop *ActionVpsStop
+	// Action Vps#Swap_with
+	SwapWith *ActionVpsSwapWith
+	// Action Vps#Update
+	Update *ActionVpsUpdate
 }
 
 func NewResourceVps(client *Client) *ResourceVps {
-	actionIndex := NewActionVpsIndex(client)
+	actionBoot := NewActionVpsBoot(client)
+	actionClone := NewActionVpsClone(client)
 	actionCreate := NewActionVpsCreate(client)
-	actionShow := NewActionVpsShow(client)
-	actionUpdate := NewActionVpsUpdate(client)
 	actionDelete := NewActionVpsDelete(client)
-	actionStart := NewActionVpsStart(client)
-	actionRestart := NewActionVpsRestart(client)
-	actionStop := NewActionVpsStop(client)
+	actionDeployPublicKey := NewActionVpsDeployPublicKey(client)
+	actionIndex := NewActionVpsIndex(client)
+	actionMigrate := NewActionVpsMigrate(client)
 	actionPasswd := NewActionVpsPasswd(client)
 	actionReinstall := NewActionVpsReinstall(client)
-	actionMigrate := NewActionVpsMigrate(client)
-	actionClone := NewActionVpsClone(client)
-	actionSwapWith := NewActionVpsSwapWith(client)
-	actionDeployPublicKey := NewActionVpsDeployPublicKey(client)
+	actionReplace := NewActionVpsReplace(client)
+	actionRestart := NewActionVpsRestart(client)
 	actionSetMaintenance := NewActionVpsSetMaintenance(client)
+	actionShow := NewActionVpsShow(client)
+	actionStart := NewActionVpsStart(client)
+	actionStop := NewActionVpsStop(client)
+	actionSwapWith := NewActionVpsSwapWith(client)
+	actionUpdate := NewActionVpsUpdate(client)
 
 	return &ResourceVps{
 		Client: client,
-		StateLog: NewResourceVpsStateLog(client),
 		Config: NewResourceVpsConfig(client),
-		Feature: NewResourceVpsFeature(client),
-		Mount: NewResourceVpsMount(client),
-		MaintenanceWindow: NewResourceVpsMaintenanceWindow(client),
 		ConsoleToken: NewResourceVpsConsoleToken(client),
+		Feature: NewResourceVpsFeature(client),
+		MaintenanceWindow: NewResourceVpsMaintenanceWindow(client),
+		Mount: NewResourceVpsMount(client),
+		StateLog: NewResourceVpsStateLog(client),
 		Status: NewResourceVpsStatus(client),
-		Index: actionIndex,
-		List: actionIndex,
+		Boot: actionBoot,
+		Clone: actionClone,
 		Create: actionCreate,
 		New: actionCreate,
-		Show: actionShow,
-		Find: actionShow,
-		Update: actionUpdate,
 		Delete: actionDelete,
 		Destroy: actionDelete,
-		Start: actionStart,
-		Restart: actionRestart,
-		Stop: actionStop,
+		DeployPublicKey: actionDeployPublicKey,
+		Index: actionIndex,
+		List: actionIndex,
+		Migrate: actionMigrate,
 		Passwd: actionPasswd,
 		Reinstall: actionReinstall,
-		Migrate: actionMigrate,
-		Clone: actionClone,
-		SwapWith: actionSwapWith,
-		DeployPublicKey: actionDeployPublicKey,
+		Replace: actionReplace,
+		Restart: actionRestart,
 		SetMaintenance: actionSetMaintenance,
+		Show: actionShow,
+		Find: actionShow,
+		Start: actionStart,
+		Stop: actionStop,
+		SwapWith: actionSwapWith,
+		Update: actionUpdate,
 	}
 }

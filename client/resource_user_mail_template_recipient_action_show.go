@@ -18,23 +18,12 @@ func NewActionUserMailTemplateRecipientShow(client *Client) *ActionUserMailTempl
 
 // ActionUserMailTemplateRecipientShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserMailTemplateRecipientShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserMailTemplateRecipientShowMetaGlobalInput) SetNo(value bool) *ActionUserMailTemplateRecipientShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserMailTemplateRecipientShowMetaGlobalInput) SetIncludes(value string) *ActionUserMailTemplateRecipientShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionUserMailTemplateRecipientShowMetaGlobalInput) SetIncludes(value 
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserMailTemplateRecipientShowMetaGlobalInput) SetNo(value bool) *ActionUserMailTemplateRecipientShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,11 +74,11 @@ func (in *ActionUserMailTemplateRecipientShowMetaGlobalInput) AnySelected() bool
 
 // ActionUserMailTemplateRecipientShowOutput is a type for action output parameters
 type ActionUserMailTemplateRecipientShowOutput struct {
+	Description string `json:"description"`
+	Enabled bool `json:"enabled"`
 	Id string `json:"id"`
 	Label string `json:"label"`
-	Description string `json:"description"`
 	To string `json:"to"`
-	Enabled bool `json:"enabled"`
 }
 
 
@@ -170,11 +170,11 @@ func (inv *ActionUserMailTemplateRecipientShowInvocation) callAsQuery() (*Action
 
 func (inv *ActionUserMailTemplateRecipientShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

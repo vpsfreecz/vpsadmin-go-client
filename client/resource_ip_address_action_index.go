@@ -17,24 +17,13 @@ func NewActionIpAddressIndex(client *Client) *ActionIpAddressIndex {
 
 // ActionIpAddressIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionIpAddressIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionIpAddressIndexMetaGlobalInput) SetNo(value bool) *ActionIpAddressIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionIpAddressIndexMetaGlobalInput) SetCount(value bool) *ActionIpAddressIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionIpAddressIndexMetaGlobalInput) SetIncludes(value string) *Action
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionIpAddressIndexMetaGlobalInput) SetNo(value bool) *ActionIpAddressIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,112 +83,36 @@ func (in *ActionIpAddressIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionIpAddressIndexInput is a type for action input parameters
 type ActionIpAddressIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
-	NetworkInterface int64 `json:"network_interface"`
-	Vps int64 `json:"vps"`
-	Version int64 `json:"version"`
-	Network int64 `json:"network"`
-	Location int64 `json:"location"`
-	User int64 `json:"user"`
-	AssignedToInterface bool `json:"assigned_to_interface"`
-	Role string `json:"role"`
-	Purpose string `json:"purpose"`
 	Addr string `json:"addr"`
-	Prefix int64 `json:"prefix"`
-	Size int64 `json:"size"`
-	MaxTx int64 `json:"max_tx"`
+	AssignedToInterface bool `json:"assigned_to_interface"`
+	Limit int64 `json:"limit"`
+	Location int64 `json:"location"`
 	MaxRx int64 `json:"max_rx"`
+	MaxTx int64 `json:"max_tx"`
+	Network int64 `json:"network"`
+	NetworkInterface int64 `json:"network_interface"`
+	Offset int64 `json:"offset"`
+	Order string `json:"order"`
+	Prefix int64 `json:"prefix"`
+	Purpose string `json:"purpose"`
+	Role string `json:"role"`
+	Size int64 `json:"size"`
+	User int64 `json:"user"`
+	Version int64 `json:"version"`
+	Vps int64 `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetOffset(value int64) *ActionIpAddressIndexInput {
-	in.Offset = value
+// SetAddr sets parameter Addr to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetAddr(value string) *ActionIpAddressIndexInput {
+	in.Addr = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-// SetLimit sets parameter Limit to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetLimit(value int64) *ActionIpAddressIndexInput {
-	in.Limit = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Limit"] = nil
-	return in
-}
-// SetNetworkInterface sets parameter NetworkInterface to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetNetworkInterface(value int64) *ActionIpAddressIndexInput {
-	in.NetworkInterface = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["NetworkInterface"] = nil
-	return in
-}
-// SetVps sets parameter Vps to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetVps(value int64) *ActionIpAddressIndexInput {
-	in.Vps = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Vps"] = nil
-	return in
-}
-// SetVersion sets parameter Version to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetVersion(value int64) *ActionIpAddressIndexInput {
-	in.Version = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Version"] = nil
-	return in
-}
-// SetNetwork sets parameter Network to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetNetwork(value int64) *ActionIpAddressIndexInput {
-	in.Network = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Network"] = nil
-	return in
-}
-// SetLocation sets parameter Location to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetLocation(value int64) *ActionIpAddressIndexInput {
-	in.Location = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Location"] = nil
-	return in
-}
-// SetUser sets parameter User to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetUser(value int64) *ActionIpAddressIndexInput {
-	in.User = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["User"] = nil
+	in._selectedParameters["Addr"] = nil
 	return in
 }
 // SetAssignedToInterface sets parameter AssignedToInterface to value and selects it for sending
@@ -202,59 +126,37 @@ func (in *ActionIpAddressIndexInput) SetAssignedToInterface(value bool) *ActionI
 	in._selectedParameters["AssignedToInterface"] = nil
 	return in
 }
-// SetRole sets parameter Role to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetRole(value string) *ActionIpAddressIndexInput {
-	in.Role = value
+// SetLimit sets parameter Limit to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetLimit(value int64) *ActionIpAddressIndexInput {
+	in.Limit = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Role"] = nil
+	in._selectedParameters["Limit"] = nil
 	return in
 }
-// SetPurpose sets parameter Purpose to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetPurpose(value string) *ActionIpAddressIndexInput {
-	in.Purpose = value
+// SetLocation sets parameter Location to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetLocation(value int64) *ActionIpAddressIndexInput {
+	in.Location = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Purpose"] = nil
+	in._selectedParameters["Location"] = nil
 	return in
 }
-// SetAddr sets parameter Addr to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetAddr(value string) *ActionIpAddressIndexInput {
-	in.Addr = value
+// SetMaxRx sets parameter MaxRx to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetMaxRx(value int64) *ActionIpAddressIndexInput {
+	in.MaxRx = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Addr"] = nil
-	return in
-}
-// SetPrefix sets parameter Prefix to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetPrefix(value int64) *ActionIpAddressIndexInput {
-	in.Prefix = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Prefix"] = nil
-	return in
-}
-// SetSize sets parameter Size to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetSize(value int64) *ActionIpAddressIndexInput {
-	in.Size = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Size"] = nil
+	in._selectedParameters["MaxRx"] = nil
 	return in
 }
 // SetMaxTx sets parameter MaxTx to value and selects it for sending
@@ -268,15 +170,125 @@ func (in *ActionIpAddressIndexInput) SetMaxTx(value int64) *ActionIpAddressIndex
 	in._selectedParameters["MaxTx"] = nil
 	return in
 }
-// SetMaxRx sets parameter MaxRx to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetMaxRx(value int64) *ActionIpAddressIndexInput {
-	in.MaxRx = value
+// SetNetwork sets parameter Network to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetNetwork(value int64) *ActionIpAddressIndexInput {
+	in.Network = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["MaxRx"] = nil
+	in._selectedParameters["Network"] = nil
+	return in
+}
+// SetNetworkInterface sets parameter NetworkInterface to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetNetworkInterface(value int64) *ActionIpAddressIndexInput {
+	in.NetworkInterface = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["NetworkInterface"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetOffset(value int64) *ActionIpAddressIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
+	return in
+}
+// SetOrder sets parameter Order to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetOrder(value string) *ActionIpAddressIndexInput {
+	in.Order = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Order"] = nil
+	return in
+}
+// SetPrefix sets parameter Prefix to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetPrefix(value int64) *ActionIpAddressIndexInput {
+	in.Prefix = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Prefix"] = nil
+	return in
+}
+// SetPurpose sets parameter Purpose to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetPurpose(value string) *ActionIpAddressIndexInput {
+	in.Purpose = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Purpose"] = nil
+	return in
+}
+// SetRole sets parameter Role to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetRole(value string) *ActionIpAddressIndexInput {
+	in.Role = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Role"] = nil
+	return in
+}
+// SetSize sets parameter Size to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetSize(value int64) *ActionIpAddressIndexInput {
+	in.Size = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Size"] = nil
+	return in
+}
+// SetUser sets parameter User to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetUser(value int64) *ActionIpAddressIndexInput {
+	in.User = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["User"] = nil
+	return in
+}
+// SetVersion sets parameter Version to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetVersion(value int64) *ActionIpAddressIndexInput {
+	in.Version = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Version"] = nil
+	return in
+}
+// SetVps sets parameter Vps to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetVps(value int64) *ActionIpAddressIndexInput {
+	in.Vps = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Vps"] = nil
 	return in
 }
 
@@ -306,18 +318,18 @@ func (in *ActionIpAddressIndexInput) AnySelected() bool {
 
 // ActionIpAddressIndexOutput is a type for action output parameters
 type ActionIpAddressIndexOutput struct {
-	Id int64 `json:"id"`
-	NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Network *ActionNetworkShowOutput `json:"network"`
-	User *ActionUserShowOutput `json:"user"`
 	Addr string `json:"addr"`
-	Prefix int64 `json:"prefix"`
-	Size int64 `json:"size"`
-	RouteVia *ActionHostIpAddressShowOutput `json:"route_via"`
-	MaxTx int64 `json:"max_tx"`
-	MaxRx int64 `json:"max_rx"`
-	ClassId int64 `json:"class_id"`
 	ChargedEnvironment *ActionEnvironmentShowOutput `json:"charged_environment"`
+	ClassId int64 `json:"class_id"`
+	Id int64 `json:"id"`
+	MaxRx int64 `json:"max_rx"`
+	MaxTx int64 `json:"max_tx"`
+	Network *ActionNetworkShowOutput `json:"network"`
+	NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
+	Prefix int64 `json:"prefix"`
+	RouteVia *ActionHostIpAddressShowOutput `json:"route_via"`
+	Size int64 `json:"size"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -422,67 +434,70 @@ func (inv *ActionIpAddressIndexInvocation) callAsQuery() (*ActionIpAddressIndexR
 
 func (inv *ActionIpAddressIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["ip_address[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
-		if inv.IsParameterSelected("Limit") {
-			ret["ip_address[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("NetworkInterface") {
-			ret["ip_address[network_interface]"] = convertInt64ToString(inv.Input.NetworkInterface)
-		}
-		if inv.IsParameterSelected("Vps") {
-			ret["ip_address[vps]"] = convertInt64ToString(inv.Input.Vps)
-		}
-		if inv.IsParameterSelected("Version") {
-			ret["ip_address[version]"] = convertInt64ToString(inv.Input.Version)
-		}
-		if inv.IsParameterSelected("Network") {
-			ret["ip_address[network]"] = convertInt64ToString(inv.Input.Network)
-		}
-		if inv.IsParameterSelected("Location") {
-			ret["ip_address[location]"] = convertInt64ToString(inv.Input.Location)
-		}
-		if inv.IsParameterSelected("User") {
-			ret["ip_address[user]"] = convertInt64ToString(inv.Input.User)
+		if inv.IsParameterSelected("Addr") {
+			ret["ip_address[addr]"] = inv.Input.Addr
 		}
 		if inv.IsParameterSelected("AssignedToInterface") {
 			ret["ip_address[assigned_to_interface]"] = convertBoolToString(inv.Input.AssignedToInterface)
 		}
-		if inv.IsParameterSelected("Role") {
-			ret["ip_address[role]"] = inv.Input.Role
+		if inv.IsParameterSelected("Limit") {
+			ret["ip_address[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
-		if inv.IsParameterSelected("Purpose") {
-			ret["ip_address[purpose]"] = inv.Input.Purpose
+		if inv.IsParameterSelected("Location") {
+			ret["ip_address[location]"] = convertInt64ToString(inv.Input.Location)
 		}
-		if inv.IsParameterSelected("Addr") {
-			ret["ip_address[addr]"] = inv.Input.Addr
-		}
-		if inv.IsParameterSelected("Prefix") {
-			ret["ip_address[prefix]"] = convertInt64ToString(inv.Input.Prefix)
-		}
-		if inv.IsParameterSelected("Size") {
-			ret["ip_address[size]"] = convertInt64ToString(inv.Input.Size)
+		if inv.IsParameterSelected("MaxRx") {
+			ret["ip_address[max_rx]"] = convertInt64ToString(inv.Input.MaxRx)
 		}
 		if inv.IsParameterSelected("MaxTx") {
 			ret["ip_address[max_tx]"] = convertInt64ToString(inv.Input.MaxTx)
 		}
-		if inv.IsParameterSelected("MaxRx") {
-			ret["ip_address[max_rx]"] = convertInt64ToString(inv.Input.MaxRx)
+		if inv.IsParameterSelected("Network") {
+			ret["ip_address[network]"] = convertInt64ToString(inv.Input.Network)
+		}
+		if inv.IsParameterSelected("NetworkInterface") {
+			ret["ip_address[network_interface]"] = convertInt64ToString(inv.Input.NetworkInterface)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["ip_address[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
+		if inv.IsParameterSelected("Order") {
+			ret["ip_address[order]"] = inv.Input.Order
+		}
+		if inv.IsParameterSelected("Prefix") {
+			ret["ip_address[prefix]"] = convertInt64ToString(inv.Input.Prefix)
+		}
+		if inv.IsParameterSelected("Purpose") {
+			ret["ip_address[purpose]"] = inv.Input.Purpose
+		}
+		if inv.IsParameterSelected("Role") {
+			ret["ip_address[role]"] = inv.Input.Role
+		}
+		if inv.IsParameterSelected("Size") {
+			ret["ip_address[size]"] = convertInt64ToString(inv.Input.Size)
+		}
+		if inv.IsParameterSelected("User") {
+			ret["ip_address[user]"] = convertInt64ToString(inv.Input.User)
+		}
+		if inv.IsParameterSelected("Version") {
+			ret["ip_address[version]"] = convertInt64ToString(inv.Input.Version)
+		}
+		if inv.IsParameterSelected("Vps") {
+			ret["ip_address[vps]"] = convertInt64ToString(inv.Input.Vps)
 		}
 	}
 }
 
 func (inv *ActionIpAddressIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

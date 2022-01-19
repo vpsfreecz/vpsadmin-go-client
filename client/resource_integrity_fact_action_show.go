@@ -18,23 +18,12 @@ func NewActionIntegrityFactShow(client *Client) *ActionIntegrityFactShow {
 
 // ActionIntegrityFactShowMetaGlobalInput is a type for action global meta input parameters
 type ActionIntegrityFactShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionIntegrityFactShowMetaGlobalInput) SetNo(value bool) *ActionIntegrityFactShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionIntegrityFactShowMetaGlobalInput) SetIncludes(value string) *ActionIntegrityFactShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionIntegrityFactShowMetaGlobalInput) SetIncludes(value string) *Act
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionIntegrityFactShowMetaGlobalInput) SetNo(value bool) *ActionIntegrityFactShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,13 +74,13 @@ func (in *ActionIntegrityFactShowMetaGlobalInput) AnySelected() bool {
 
 // ActionIntegrityFactShowOutput is a type for action output parameters
 type ActionIntegrityFactShowOutput struct {
+	CreatedAt string `json:"created_at"`
 	Id int64 `json:"id"`
 	IntegrityObject *ActionIntegrityObjectShowOutput `json:"integrity_object"`
-	Name string `json:"name"`
-	Status string `json:"status"`
-	Severity string `json:"severity"`
 	Message string `json:"message"`
-	CreatedAt string `json:"created_at"`
+	Name string `json:"name"`
+	Severity string `json:"severity"`
+	Status string `json:"status"`
 }
 
 
@@ -172,11 +172,11 @@ func (inv *ActionIntegrityFactShowInvocation) callAsQuery() (*ActionIntegrityFac
 
 func (inv *ActionIntegrityFactShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

@@ -18,23 +18,12 @@ func NewActionObjectHistoryShow(client *Client) *ActionObjectHistoryShow {
 
 // ActionObjectHistoryShowMetaGlobalInput is a type for action global meta input parameters
 type ActionObjectHistoryShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionObjectHistoryShowMetaGlobalInput) SetNo(value bool) *ActionObjectHistoryShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionObjectHistoryShowMetaGlobalInput) SetIncludes(value string) *ActionObjectHistoryShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionObjectHistoryShowMetaGlobalInput) SetIncludes(value string) *Act
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionObjectHistoryShowMetaGlobalInput) SetNo(value bool) *ActionObjectHistoryShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,13 +74,13 @@ func (in *ActionObjectHistoryShowMetaGlobalInput) AnySelected() bool {
 
 // ActionObjectHistoryShowOutput is a type for action output parameters
 type ActionObjectHistoryShowOutput struct {
+	CreatedAt string `json:"created_at"`
+	EventType string `json:"event_type"`
 	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	UserSession *ActionUserSessionShowOutput `json:"user_session"`
 	Object string `json:"object"`
 	ObjectId int64 `json:"object_id"`
-	EventType string `json:"event_type"`
-	CreatedAt string `json:"created_at"`
+	User *ActionUserShowOutput `json:"user"`
+	UserSession *ActionUserSessionShowOutput `json:"user_session"`
 }
 
 
@@ -172,11 +172,11 @@ func (inv *ActionObjectHistoryShowInvocation) callAsQuery() (*ActionObjectHistor
 
 func (inv *ActionObjectHistoryShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

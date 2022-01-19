@@ -17,23 +17,12 @@ func NewActionUserPaymentCreate(client *Client) *ActionUserPaymentCreate {
 
 // ActionUserPaymentCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPaymentCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserPaymentCreateMetaGlobalInput) SetNo(value bool) *ActionUserPaymentCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserPaymentCreateMetaGlobalInput) SetIncludes(value string) *ActionUserPaymentCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionUserPaymentCreateMetaGlobalInput) SetIncludes(value string) *Act
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserPaymentCreateMetaGlobalInput) SetNo(value bool) *ActionUserPaymentCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,13 +71,24 @@ func (in *ActionUserPaymentCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserPaymentCreateInput is a type for action input parameters
 type ActionUserPaymentCreateInput struct {
+	Amount int64 `json:"amount"`
 	IncomingPayment int64 `json:"incoming_payment"`
 	User int64 `json:"user"`
-	Amount int64 `json:"amount"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
+// SetAmount sets parameter Amount to value and selects it for sending
+func (in *ActionUserPaymentCreateInput) SetAmount(value int64) *ActionUserPaymentCreateInput {
+	in.Amount = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Amount"] = nil
+	return in
+}
 // SetIncomingPayment sets parameter IncomingPayment to value and selects it for sending
 func (in *ActionUserPaymentCreateInput) SetIncomingPayment(value int64) *ActionUserPaymentCreateInput {
 	in.IncomingPayment = value
@@ -98,17 +109,6 @@ func (in *ActionUserPaymentCreateInput) SetUser(value int64) *ActionUserPaymentC
 	}
 
 	in._selectedParameters["User"] = nil
-	return in
-}
-// SetAmount sets parameter Amount to value and selects it for sending
-func (in *ActionUserPaymentCreateInput) SetAmount(value int64) *ActionUserPaymentCreateInput {
-	in.Amount = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Amount"] = nil
 	return in
 }
 
@@ -143,14 +143,14 @@ type ActionUserPaymentCreateRequest struct {
 
 // ActionUserPaymentCreateOutput is a type for action output parameters
 type ActionUserPaymentCreateOutput struct {
+	AccountedBy *ActionUserShowOutput `json:"accounted_by"`
+	Amount int64 `json:"amount"`
+	CreatedAt string `json:"created_at"`
+	FromDate string `json:"from_date"`
 	Id int64 `json:"id"`
 	IncomingPayment *ActionIncomingPaymentShowOutput `json:"incoming_payment"`
-	User *ActionUserShowOutput `json:"user"`
-	Amount int64 `json:"amount"`
-	AccountedBy *ActionUserShowOutput `json:"accounted_by"`
-	FromDate string `json:"from_date"`
 	ToDate string `json:"to_date"`
-	CreatedAt string `json:"created_at"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 // ActionUserPaymentCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -345,14 +345,14 @@ func (inv *ActionUserPaymentCreateInvocation) makeInputParams() map[string]inter
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("Amount") {
+			ret["amount"] = inv.Input.Amount
+		}
 		if inv.IsParameterSelected("IncomingPayment") {
 			ret["incoming_payment"] = inv.Input.IncomingPayment
 		}
 		if inv.IsParameterSelected("User") {
 			ret["user"] = inv.Input.User
-		}
-		if inv.IsParameterSelected("Amount") {
-			ret["amount"] = inv.Input.Amount
 		}
 	}
 
@@ -363,11 +363,11 @@ func (inv *ActionUserPaymentCreateInvocation) makeMetaInputParams() map[string]i
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

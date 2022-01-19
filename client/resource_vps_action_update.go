@@ -18,23 +18,12 @@ func NewActionVpsUpdate(client *Client) *ActionVpsUpdate {
 
 // ActionVpsUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsUpdateMetaGlobalInput) SetNo(value bool) *ActionVpsUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsUpdateMetaGlobalInput) SetIncludes(value string) *ActionVpsUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionVpsUpdateMetaGlobalInput) SetIncludes(value string) *ActionVpsUp
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsUpdateMetaGlobalInput) SetNo(value bool) *ActionVpsUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,82 +72,93 @@ func (in *ActionVpsUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsUpdateInput is a type for action input parameters
 type ActionVpsUpdateInput struct {
-	User int64 `json:"user"`
-	Hostname string `json:"hostname"`
-	ManageHostname bool `json:"manage_hostname"`
-	OsTemplate int64 `json:"os_template"`
-	Info string `json:"info"`
+	AdminLockType string `json:"admin_lock_type"`
+	AdminOverride bool `json:"admin_override"`
+	ChangeReason string `json:"change_reason"`
+	Config string `json:"config"`
+	Cpu int64 `json:"cpu"`
+	CpuLimit int64 `json:"cpu_limit"`
 	DnsResolver int64 `json:"dns_resolver"`
+	ExpirationDate string `json:"expiration_date"`
+	Hostname string `json:"hostname"`
+	Info string `json:"info"`
+	ManageHostname bool `json:"manage_hostname"`
+	Memory int64 `json:"memory"`
 	Node int64 `json:"node"`
+	ObjectState string `json:"object_state"`
 	Onboot bool `json:"onboot"`
 	Onstartall bool `json:"onstartall"`
-	Config string `json:"config"`
-	CpuLimit int64 `json:"cpu_limit"`
-	Memory int64 `json:"memory"`
+	OsTemplate int64 `json:"os_template"`
 	Swap int64 `json:"swap"`
-	Cpu int64 `json:"cpu"`
-	ChangeReason string `json:"change_reason"`
-	AdminOverride bool `json:"admin_override"`
-	AdminLockType string `json:"admin_lock_type"`
-	ObjectState string `json:"object_state"`
-	ExpirationDate string `json:"expiration_date"`
+	User int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetUser sets parameter User to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetUser(value int64) *ActionVpsUpdateInput {
-	in.User = value
+// SetAdminLockType sets parameter AdminLockType to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetAdminLockType(value string) *ActionVpsUpdateInput {
+	in.AdminLockType = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["User"] = nil
+	in._selectedParameters["AdminLockType"] = nil
 	return in
 }
-// SetHostname sets parameter Hostname to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetHostname(value string) *ActionVpsUpdateInput {
-	in.Hostname = value
+// SetAdminOverride sets parameter AdminOverride to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetAdminOverride(value bool) *ActionVpsUpdateInput {
+	in.AdminOverride = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Hostname"] = nil
+	in._selectedParameters["AdminOverride"] = nil
 	return in
 }
-// SetManageHostname sets parameter ManageHostname to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetManageHostname(value bool) *ActionVpsUpdateInput {
-	in.ManageHostname = value
+// SetChangeReason sets parameter ChangeReason to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetChangeReason(value string) *ActionVpsUpdateInput {
+	in.ChangeReason = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["ManageHostname"] = nil
+	in._selectedParameters["ChangeReason"] = nil
 	return in
 }
-// SetOsTemplate sets parameter OsTemplate to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetOsTemplate(value int64) *ActionVpsUpdateInput {
-	in.OsTemplate = value
+// SetConfig sets parameter Config to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetConfig(value string) *ActionVpsUpdateInput {
+	in.Config = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["OsTemplate"] = nil
+	in._selectedParameters["Config"] = nil
 	return in
 }
-// SetInfo sets parameter Info to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetInfo(value string) *ActionVpsUpdateInput {
-	in.Info = value
+// SetCpu sets parameter Cpu to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetCpu(value int64) *ActionVpsUpdateInput {
+	in.Cpu = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Info"] = nil
+	in._selectedParameters["Cpu"] = nil
+	return in
+}
+// SetCpuLimit sets parameter CpuLimit to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetCpuLimit(value int64) *ActionVpsUpdateInput {
+	in.CpuLimit = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["CpuLimit"] = nil
 	return in
 }
 // SetDnsResolver sets parameter DnsResolver to value and selects it for sending
@@ -161,6 +172,61 @@ func (in *ActionVpsUpdateInput) SetDnsResolver(value int64) *ActionVpsUpdateInpu
 	in._selectedParameters["DnsResolver"] = nil
 	return in
 }
+// SetExpirationDate sets parameter ExpirationDate to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetExpirationDate(value string) *ActionVpsUpdateInput {
+	in.ExpirationDate = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ExpirationDate"] = nil
+	return in
+}
+// SetHostname sets parameter Hostname to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetHostname(value string) *ActionVpsUpdateInput {
+	in.Hostname = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Hostname"] = nil
+	return in
+}
+// SetInfo sets parameter Info to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetInfo(value string) *ActionVpsUpdateInput {
+	in.Info = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Info"] = nil
+	return in
+}
+// SetManageHostname sets parameter ManageHostname to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetManageHostname(value bool) *ActionVpsUpdateInput {
+	in.ManageHostname = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ManageHostname"] = nil
+	return in
+}
+// SetMemory sets parameter Memory to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetMemory(value int64) *ActionVpsUpdateInput {
+	in.Memory = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Memory"] = nil
+	return in
+}
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetNode(value int64) *ActionVpsUpdateInput {
 	in.Node = value
@@ -170,6 +236,17 @@ func (in *ActionVpsUpdateInput) SetNode(value int64) *ActionVpsUpdateInput {
 	}
 
 	in._selectedParameters["Node"] = nil
+	return in
+}
+// SetObjectState sets parameter ObjectState to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetObjectState(value string) *ActionVpsUpdateInput {
+	in.ObjectState = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ObjectState"] = nil
 	return in
 }
 // SetOnboot sets parameter Onboot to value and selects it for sending
@@ -194,37 +271,15 @@ func (in *ActionVpsUpdateInput) SetOnstartall(value bool) *ActionVpsUpdateInput 
 	in._selectedParameters["Onstartall"] = nil
 	return in
 }
-// SetConfig sets parameter Config to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetConfig(value string) *ActionVpsUpdateInput {
-	in.Config = value
+// SetOsTemplate sets parameter OsTemplate to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetOsTemplate(value int64) *ActionVpsUpdateInput {
+	in.OsTemplate = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Config"] = nil
-	return in
-}
-// SetCpuLimit sets parameter CpuLimit to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetCpuLimit(value int64) *ActionVpsUpdateInput {
-	in.CpuLimit = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["CpuLimit"] = nil
-	return in
-}
-// SetMemory sets parameter Memory to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetMemory(value int64) *ActionVpsUpdateInput {
-	in.Memory = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Memory"] = nil
+	in._selectedParameters["OsTemplate"] = nil
 	return in
 }
 // SetSwap sets parameter Swap to value and selects it for sending
@@ -238,70 +293,15 @@ func (in *ActionVpsUpdateInput) SetSwap(value int64) *ActionVpsUpdateInput {
 	in._selectedParameters["Swap"] = nil
 	return in
 }
-// SetCpu sets parameter Cpu to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetCpu(value int64) *ActionVpsUpdateInput {
-	in.Cpu = value
+// SetUser sets parameter User to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetUser(value int64) *ActionVpsUpdateInput {
+	in.User = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Cpu"] = nil
-	return in
-}
-// SetChangeReason sets parameter ChangeReason to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetChangeReason(value string) *ActionVpsUpdateInput {
-	in.ChangeReason = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["ChangeReason"] = nil
-	return in
-}
-// SetAdminOverride sets parameter AdminOverride to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetAdminOverride(value bool) *ActionVpsUpdateInput {
-	in.AdminOverride = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["AdminOverride"] = nil
-	return in
-}
-// SetAdminLockType sets parameter AdminLockType to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetAdminLockType(value string) *ActionVpsUpdateInput {
-	in.AdminLockType = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["AdminLockType"] = nil
-	return in
-}
-// SetObjectState sets parameter ObjectState to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetObjectState(value string) *ActionVpsUpdateInput {
-	in.ObjectState = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["ObjectState"] = nil
-	return in
-}
-// SetExpirationDate sets parameter ExpirationDate to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetExpirationDate(value string) *ActionVpsUpdateInput {
-	in.ExpirationDate = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["ExpirationDate"] = nil
+	in._selectedParameters["User"] = nil
 	return in
 }
 
@@ -530,26 +530,47 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("User") {
-			ret["user"] = inv.Input.User
+		if inv.IsParameterSelected("AdminLockType") {
+			ret["admin_lock_type"] = inv.Input.AdminLockType
 		}
-		if inv.IsParameterSelected("Hostname") {
-			ret["hostname"] = inv.Input.Hostname
+		if inv.IsParameterSelected("AdminOverride") {
+			ret["admin_override"] = inv.Input.AdminOverride
 		}
-		if inv.IsParameterSelected("ManageHostname") {
-			ret["manage_hostname"] = inv.Input.ManageHostname
+		if inv.IsParameterSelected("ChangeReason") {
+			ret["change_reason"] = inv.Input.ChangeReason
 		}
-		if inv.IsParameterSelected("OsTemplate") {
-			ret["os_template"] = inv.Input.OsTemplate
+		if inv.IsParameterSelected("Config") {
+			ret["config"] = inv.Input.Config
 		}
-		if inv.IsParameterSelected("Info") {
-			ret["info"] = inv.Input.Info
+		if inv.IsParameterSelected("Cpu") {
+			ret["cpu"] = inv.Input.Cpu
+		}
+		if inv.IsParameterSelected("CpuLimit") {
+			ret["cpu_limit"] = inv.Input.CpuLimit
 		}
 		if inv.IsParameterSelected("DnsResolver") {
 			ret["dns_resolver"] = inv.Input.DnsResolver
 		}
+		if inv.IsParameterSelected("ExpirationDate") {
+			ret["expiration_date"] = inv.Input.ExpirationDate
+		}
+		if inv.IsParameterSelected("Hostname") {
+			ret["hostname"] = inv.Input.Hostname
+		}
+		if inv.IsParameterSelected("Info") {
+			ret["info"] = inv.Input.Info
+		}
+		if inv.IsParameterSelected("ManageHostname") {
+			ret["manage_hostname"] = inv.Input.ManageHostname
+		}
+		if inv.IsParameterSelected("Memory") {
+			ret["memory"] = inv.Input.Memory
+		}
 		if inv.IsParameterSelected("Node") {
 			ret["node"] = inv.Input.Node
+		}
+		if inv.IsParameterSelected("ObjectState") {
+			ret["object_state"] = inv.Input.ObjectState
 		}
 		if inv.IsParameterSelected("Onboot") {
 			ret["onboot"] = inv.Input.Onboot
@@ -557,35 +578,14 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 		if inv.IsParameterSelected("Onstartall") {
 			ret["onstartall"] = inv.Input.Onstartall
 		}
-		if inv.IsParameterSelected("Config") {
-			ret["config"] = inv.Input.Config
-		}
-		if inv.IsParameterSelected("CpuLimit") {
-			ret["cpu_limit"] = inv.Input.CpuLimit
-		}
-		if inv.IsParameterSelected("Memory") {
-			ret["memory"] = inv.Input.Memory
+		if inv.IsParameterSelected("OsTemplate") {
+			ret["os_template"] = inv.Input.OsTemplate
 		}
 		if inv.IsParameterSelected("Swap") {
 			ret["swap"] = inv.Input.Swap
 		}
-		if inv.IsParameterSelected("Cpu") {
-			ret["cpu"] = inv.Input.Cpu
-		}
-		if inv.IsParameterSelected("ChangeReason") {
-			ret["change_reason"] = inv.Input.ChangeReason
-		}
-		if inv.IsParameterSelected("AdminOverride") {
-			ret["admin_override"] = inv.Input.AdminOverride
-		}
-		if inv.IsParameterSelected("AdminLockType") {
-			ret["admin_lock_type"] = inv.Input.AdminLockType
-		}
-		if inv.IsParameterSelected("ObjectState") {
-			ret["object_state"] = inv.Input.ObjectState
-		}
-		if inv.IsParameterSelected("ExpirationDate") {
-			ret["expiration_date"] = inv.Input.ExpirationDate
+		if inv.IsParameterSelected("User") {
+			ret["user"] = inv.Input.User
 		}
 	}
 
@@ -596,11 +596,11 @@ func (inv *ActionVpsUpdateInvocation) makeMetaInputParams() map[string]interface
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

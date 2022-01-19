@@ -17,23 +17,12 @@ func NewActionNewsLogCreate(client *Client) *ActionNewsLogCreate {
 
 // ActionNewsLogCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionNewsLogCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionNewsLogCreateMetaGlobalInput) SetNo(value bool) *ActionNewsLogCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionNewsLogCreateMetaGlobalInput) SetIncludes(value string) *ActionNewsLogCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionNewsLogCreateMetaGlobalInput) SetIncludes(value string) *ActionN
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionNewsLogCreateMetaGlobalInput) SetNo(value bool) *ActionNewsLogCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -131,10 +131,10 @@ type ActionNewsLogCreateRequest struct {
 
 // ActionNewsLogCreateOutput is a type for action output parameters
 type ActionNewsLogCreateOutput struct {
+	CreatedAt string `json:"created_at"`
 	Id int64 `json:"id"`
 	Message string `json:"message"`
 	PublishedAt string `json:"published_at"`
-	CreatedAt string `json:"created_at"`
 	UpdatedAt string `json:"updated_at"`
 }
 
@@ -264,11 +264,11 @@ func (inv *ActionNewsLogCreateInvocation) makeMetaInputParams() map[string]inter
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

@@ -18,23 +18,12 @@ func NewActionIpTrafficShow(client *Client) *ActionIpTrafficShow {
 
 // ActionIpTrafficShowMetaGlobalInput is a type for action global meta input parameters
 type ActionIpTrafficShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionIpTrafficShowMetaGlobalInput) SetNo(value bool) *ActionIpTrafficShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionIpTrafficShowMetaGlobalInput) SetIncludes(value string) *ActionIpTrafficShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionIpTrafficShowMetaGlobalInput) SetIncludes(value string) *ActionI
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionIpTrafficShowMetaGlobalInput) SetNo(value bool) *ActionIpTrafficShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,16 +74,16 @@ func (in *ActionIpTrafficShowMetaGlobalInput) AnySelected() bool {
 
 // ActionIpTrafficShowOutput is a type for action output parameters
 type ActionIpTrafficShowOutput struct {
-	Id int64 `json:"id"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	User *ActionUserShowOutput `json:"user"`
-	Role string `json:"role"`
-	Protocol string `json:"protocol"`
-	PacketsIn int64 `json:"packets_in"`
-	PacketsOut int64 `json:"packets_out"`
 	BytesIn int64 `json:"bytes_in"`
 	BytesOut int64 `json:"bytes_out"`
 	CreatedAt string `json:"created_at"`
+	Id int64 `json:"id"`
+	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
+	PacketsIn int64 `json:"packets_in"`
+	PacketsOut int64 `json:"packets_out"`
+	Protocol string `json:"protocol"`
+	Role string `json:"role"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -175,11 +175,11 @@ func (inv *ActionIpTrafficShowInvocation) callAsQuery() (*ActionIpTrafficShowRes
 
 func (inv *ActionIpTrafficShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

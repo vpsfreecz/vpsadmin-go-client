@@ -17,24 +17,13 @@ func NewActionVpsOutageMountIndex(client *Client) *ActionVpsOutageMountIndex {
 
 // ActionVpsOutageMountIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsOutageMountIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsOutageMountIndexMetaGlobalInput) SetNo(value bool) *ActionVpsOutageMountIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionVpsOutageMountIndexMetaGlobalInput) SetCount(value bool) *ActionVpsOutageMountIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionVpsOutageMountIndexMetaGlobalInput) SetIncludes(value string) *A
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsOutageMountIndexMetaGlobalInput) SetNo(value bool) *ActionVpsOutageMountIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,26 +83,15 @@ func (in *ActionVpsOutageMountIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsOutageMountIndexInput is a type for action input parameters
 type ActionVpsOutageMountIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	Outage int64 `json:"outage"`
-	Vps int64 `json:"vps"`
 	User int64 `json:"user"`
+	Vps int64 `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionVpsOutageMountIndexInput) SetOffset(value int64) *ActionVpsOutageMountIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionVpsOutageMountIndexInput) SetLimit(value int64) *ActionVpsOutageMountIndexInput {
 	in.Limit = value
@@ -112,6 +101,17 @@ func (in *ActionVpsOutageMountIndexInput) SetLimit(value int64) *ActionVpsOutage
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionVpsOutageMountIndexInput) SetOffset(value int64) *ActionVpsOutageMountIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetOutage sets parameter Outage to value and selects it for sending
@@ -125,17 +125,6 @@ func (in *ActionVpsOutageMountIndexInput) SetOutage(value int64) *ActionVpsOutag
 	in._selectedParameters["Outage"] = nil
 	return in
 }
-// SetVps sets parameter Vps to value and selects it for sending
-func (in *ActionVpsOutageMountIndexInput) SetVps(value int64) *ActionVpsOutageMountIndexInput {
-	in.Vps = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Vps"] = nil
-	return in
-}
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionVpsOutageMountIndexInput) SetUser(value int64) *ActionVpsOutageMountIndexInput {
 	in.User = value
@@ -145,6 +134,17 @@ func (in *ActionVpsOutageMountIndexInput) SetUser(value int64) *ActionVpsOutageM
 	}
 
 	in._selectedParameters["User"] = nil
+	return in
+}
+// SetVps sets parameter Vps to value and selects it for sending
+func (in *ActionVpsOutageMountIndexInput) SetVps(value int64) *ActionVpsOutageMountIndexInput {
+	in.Vps = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Vps"] = nil
 	return in
 }
 
@@ -175,8 +175,8 @@ func (in *ActionVpsOutageMountIndexInput) AnySelected() bool {
 // ActionVpsOutageMountIndexOutput is a type for action output parameters
 type ActionVpsOutageMountIndexOutput struct {
 	Id int64 `json:"id"`
-	VpsOutage *ActionVpsOutageShowOutput `json:"vps_outage"`
 	Mount *ActionVpsMountShowOutput `json:"mount"`
+	VpsOutage *ActionVpsOutageShowOutput `json:"vps_outage"`
 }
 
 
@@ -281,34 +281,34 @@ func (inv *ActionVpsOutageMountIndexInvocation) callAsQuery() (*ActionVpsOutageM
 
 func (inv *ActionVpsOutageMountIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["vps_outage_mount[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["vps_outage_mount[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["vps_outage_mount[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Outage") {
 			ret["vps_outage_mount[outage]"] = convertInt64ToString(inv.Input.Outage)
 		}
-		if inv.IsParameterSelected("Vps") {
-			ret["vps_outage_mount[vps]"] = convertInt64ToString(inv.Input.Vps)
-		}
 		if inv.IsParameterSelected("User") {
 			ret["vps_outage_mount[user]"] = convertInt64ToString(inv.Input.User)
+		}
+		if inv.IsParameterSelected("Vps") {
+			ret["vps_outage_mount[vps]"] = convertInt64ToString(inv.Input.Vps)
 		}
 	}
 }
 
 func (inv *ActionVpsOutageMountIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

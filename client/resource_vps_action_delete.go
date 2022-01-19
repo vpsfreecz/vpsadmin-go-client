@@ -18,23 +18,12 @@ func NewActionVpsDelete(client *Client) *ActionVpsDelete {
 
 // ActionVpsDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsDeleteMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsDeleteMetaGlobalInput) SetNo(value bool) *ActionVpsDeleteMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsDeleteMetaGlobalInput) SetIncludes(value string) *ActionVpsDeleteMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionVpsDeleteMetaGlobalInput) SetIncludes(value string) *ActionVpsDe
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsDeleteMetaGlobalInput) SetNo(value bool) *ActionVpsDeleteMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,14 +72,36 @@ func (in *ActionVpsDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsDeleteInput is a type for action input parameters
 type ActionVpsDeleteInput struct {
+	ChangeReason string `json:"change_reason"`
+	ExpirationDate string `json:"expiration_date"`
 	Lazy bool `json:"lazy"`
 	ObjectState string `json:"object_state"`
-	ExpirationDate string `json:"expiration_date"`
-	ChangeReason string `json:"change_reason"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
+// SetChangeReason sets parameter ChangeReason to value and selects it for sending
+func (in *ActionVpsDeleteInput) SetChangeReason(value string) *ActionVpsDeleteInput {
+	in.ChangeReason = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ChangeReason"] = nil
+	return in
+}
+// SetExpirationDate sets parameter ExpirationDate to value and selects it for sending
+func (in *ActionVpsDeleteInput) SetExpirationDate(value string) *ActionVpsDeleteInput {
+	in.ExpirationDate = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ExpirationDate"] = nil
+	return in
+}
 // SetLazy sets parameter Lazy to value and selects it for sending
 func (in *ActionVpsDeleteInput) SetLazy(value bool) *ActionVpsDeleteInput {
 	in.Lazy = value
@@ -100,28 +122,6 @@ func (in *ActionVpsDeleteInput) SetObjectState(value string) *ActionVpsDeleteInp
 	}
 
 	in._selectedParameters["ObjectState"] = nil
-	return in
-}
-// SetExpirationDate sets parameter ExpirationDate to value and selects it for sending
-func (in *ActionVpsDeleteInput) SetExpirationDate(value string) *ActionVpsDeleteInput {
-	in.ExpirationDate = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["ExpirationDate"] = nil
-	return in
-}
-// SetChangeReason sets parameter ChangeReason to value and selects it for sending
-func (in *ActionVpsDeleteInput) SetChangeReason(value string) *ActionVpsDeleteInput {
-	in.ChangeReason = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["ChangeReason"] = nil
 	return in
 }
 
@@ -350,17 +350,17 @@ func (inv *ActionVpsDeleteInvocation) makeInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("ChangeReason") {
+			ret["change_reason"] = inv.Input.ChangeReason
+		}
+		if inv.IsParameterSelected("ExpirationDate") {
+			ret["expiration_date"] = inv.Input.ExpirationDate
+		}
 		if inv.IsParameterSelected("Lazy") {
 			ret["lazy"] = inv.Input.Lazy
 		}
 		if inv.IsParameterSelected("ObjectState") {
 			ret["object_state"] = inv.Input.ObjectState
-		}
-		if inv.IsParameterSelected("ExpirationDate") {
-			ret["expiration_date"] = inv.Input.ExpirationDate
-		}
-		if inv.IsParameterSelected("ChangeReason") {
-			ret["change_reason"] = inv.Input.ChangeReason
 		}
 	}
 
@@ -371,11 +371,11 @@ func (inv *ActionVpsDeleteInvocation) makeMetaInputParams() map[string]interface
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

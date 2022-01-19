@@ -62,15 +62,15 @@ func (in *ActionActionStateShowMetaGlobalInput) AnySelected() bool {
 
 // ActionActionStateShowOutput is a type for action output parameters
 type ActionActionStateShowOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Finished bool `json:"finished"`
-	Status bool `json:"status"`
-	Current int64 `json:"current"`
-	Total int64 `json:"total"`
-	Unit string `json:"unit"`
 	CanCancel bool `json:"can_cancel"`
 	CreatedAt string `json:"created_at"`
+	Current int64 `json:"current"`
+	Finished bool `json:"finished"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	Status bool `json:"status"`
+	Total int64 `json:"total"`
+	Unit string `json:"unit"`
 	UpdatedAt string `json:"updated_at"`
 }
 

@@ -18,23 +18,12 @@ func NewActionDatasetUpdate(client *Client) *ActionDatasetUpdate {
 
 // ActionDatasetUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionDatasetUpdateMetaGlobalInput) SetNo(value bool) *ActionDatasetUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionDatasetUpdateMetaGlobalInput) SetIncludes(value string) *ActionDatasetUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionDatasetUpdateMetaGlobalInput) SetIncludes(value string) *ActionD
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionDatasetUpdateMetaGlobalInput) SetNo(value bool) *ActionDatasetUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,30 +72,41 @@ func (in *ActionDatasetUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetUpdateInput is a type for action input parameters
 type ActionDatasetUpdateInput struct {
-	UserNamespaceMap int64 `json:"user_namespace_map"`
+	AdminLockType string `json:"admin_lock_type"`
+	AdminOverride bool `json:"admin_override"`
 	Atime bool `json:"atime"`
 	Compression bool `json:"compression"`
-	Recordsize int64 `json:"recordsize"`
 	Quota int64 `json:"quota"`
+	Recordsize int64 `json:"recordsize"`
 	Refquota int64 `json:"refquota"`
 	Relatime bool `json:"relatime"`
-	Sync string `json:"sync"`
 	Sharenfs string `json:"sharenfs"`
-	AdminOverride bool `json:"admin_override"`
-	AdminLockType string `json:"admin_lock_type"`
+	Sync string `json:"sync"`
+	UserNamespaceMap int64 `json:"user_namespace_map"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetUserNamespaceMap sets parameter UserNamespaceMap to value and selects it for sending
-func (in *ActionDatasetUpdateInput) SetUserNamespaceMap(value int64) *ActionDatasetUpdateInput {
-	in.UserNamespaceMap = value
+// SetAdminLockType sets parameter AdminLockType to value and selects it for sending
+func (in *ActionDatasetUpdateInput) SetAdminLockType(value string) *ActionDatasetUpdateInput {
+	in.AdminLockType = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["UserNamespaceMap"] = nil
+	in._selectedParameters["AdminLockType"] = nil
+	return in
+}
+// SetAdminOverride sets parameter AdminOverride to value and selects it for sending
+func (in *ActionDatasetUpdateInput) SetAdminOverride(value bool) *ActionDatasetUpdateInput {
+	in.AdminOverride = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AdminOverride"] = nil
 	return in
 }
 // SetAtime sets parameter Atime to value and selects it for sending
@@ -120,17 +131,6 @@ func (in *ActionDatasetUpdateInput) SetCompression(value bool) *ActionDatasetUpd
 	in._selectedParameters["Compression"] = nil
 	return in
 }
-// SetRecordsize sets parameter Recordsize to value and selects it for sending
-func (in *ActionDatasetUpdateInput) SetRecordsize(value int64) *ActionDatasetUpdateInput {
-	in.Recordsize = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Recordsize"] = nil
-	return in
-}
 // SetQuota sets parameter Quota to value and selects it for sending
 func (in *ActionDatasetUpdateInput) SetQuota(value int64) *ActionDatasetUpdateInput {
 	in.Quota = value
@@ -140,6 +140,17 @@ func (in *ActionDatasetUpdateInput) SetQuota(value int64) *ActionDatasetUpdateIn
 	}
 
 	in._selectedParameters["Quota"] = nil
+	return in
+}
+// SetRecordsize sets parameter Recordsize to value and selects it for sending
+func (in *ActionDatasetUpdateInput) SetRecordsize(value int64) *ActionDatasetUpdateInput {
+	in.Recordsize = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Recordsize"] = nil
 	return in
 }
 // SetRefquota sets parameter Refquota to value and selects it for sending
@@ -164,17 +175,6 @@ func (in *ActionDatasetUpdateInput) SetRelatime(value bool) *ActionDatasetUpdate
 	in._selectedParameters["Relatime"] = nil
 	return in
 }
-// SetSync sets parameter Sync to value and selects it for sending
-func (in *ActionDatasetUpdateInput) SetSync(value string) *ActionDatasetUpdateInput {
-	in.Sync = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Sync"] = nil
-	return in
-}
 // SetSharenfs sets parameter Sharenfs to value and selects it for sending
 func (in *ActionDatasetUpdateInput) SetSharenfs(value string) *ActionDatasetUpdateInput {
 	in.Sharenfs = value
@@ -186,26 +186,26 @@ func (in *ActionDatasetUpdateInput) SetSharenfs(value string) *ActionDatasetUpda
 	in._selectedParameters["Sharenfs"] = nil
 	return in
 }
-// SetAdminOverride sets parameter AdminOverride to value and selects it for sending
-func (in *ActionDatasetUpdateInput) SetAdminOverride(value bool) *ActionDatasetUpdateInput {
-	in.AdminOverride = value
+// SetSync sets parameter Sync to value and selects it for sending
+func (in *ActionDatasetUpdateInput) SetSync(value string) *ActionDatasetUpdateInput {
+	in.Sync = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["AdminOverride"] = nil
+	in._selectedParameters["Sync"] = nil
 	return in
 }
-// SetAdminLockType sets parameter AdminLockType to value and selects it for sending
-func (in *ActionDatasetUpdateInput) SetAdminLockType(value string) *ActionDatasetUpdateInput {
-	in.AdminLockType = value
+// SetUserNamespaceMap sets parameter UserNamespaceMap to value and selects it for sending
+func (in *ActionDatasetUpdateInput) SetUserNamespaceMap(value int64) *ActionDatasetUpdateInput {
+	in.UserNamespaceMap = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["AdminLockType"] = nil
+	in._selectedParameters["UserNamespaceMap"] = nil
 	return in
 }
 
@@ -434,8 +434,11 @@ func (inv *ActionDatasetUpdateInvocation) makeInputParams() map[string]interface
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("UserNamespaceMap") {
-			ret["user_namespace_map"] = inv.Input.UserNamespaceMap
+		if inv.IsParameterSelected("AdminLockType") {
+			ret["admin_lock_type"] = inv.Input.AdminLockType
+		}
+		if inv.IsParameterSelected("AdminOverride") {
+			ret["admin_override"] = inv.Input.AdminOverride
 		}
 		if inv.IsParameterSelected("Atime") {
 			ret["atime"] = inv.Input.Atime
@@ -443,11 +446,11 @@ func (inv *ActionDatasetUpdateInvocation) makeInputParams() map[string]interface
 		if inv.IsParameterSelected("Compression") {
 			ret["compression"] = inv.Input.Compression
 		}
-		if inv.IsParameterSelected("Recordsize") {
-			ret["recordsize"] = inv.Input.Recordsize
-		}
 		if inv.IsParameterSelected("Quota") {
 			ret["quota"] = inv.Input.Quota
+		}
+		if inv.IsParameterSelected("Recordsize") {
+			ret["recordsize"] = inv.Input.Recordsize
 		}
 		if inv.IsParameterSelected("Refquota") {
 			ret["refquota"] = inv.Input.Refquota
@@ -455,17 +458,14 @@ func (inv *ActionDatasetUpdateInvocation) makeInputParams() map[string]interface
 		if inv.IsParameterSelected("Relatime") {
 			ret["relatime"] = inv.Input.Relatime
 		}
-		if inv.IsParameterSelected("Sync") {
-			ret["sync"] = inv.Input.Sync
-		}
 		if inv.IsParameterSelected("Sharenfs") {
 			ret["sharenfs"] = inv.Input.Sharenfs
 		}
-		if inv.IsParameterSelected("AdminOverride") {
-			ret["admin_override"] = inv.Input.AdminOverride
+		if inv.IsParameterSelected("Sync") {
+			ret["sync"] = inv.Input.Sync
 		}
-		if inv.IsParameterSelected("AdminLockType") {
-			ret["admin_lock_type"] = inv.Input.AdminLockType
+		if inv.IsParameterSelected("UserNamespaceMap") {
+			ret["user_namespace_map"] = inv.Input.UserNamespaceMap
 		}
 	}
 
@@ -476,11 +476,11 @@ func (inv *ActionDatasetUpdateInvocation) makeMetaInputParams() map[string]inter
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

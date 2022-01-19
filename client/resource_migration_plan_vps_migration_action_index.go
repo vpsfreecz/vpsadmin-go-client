@@ -18,24 +18,13 @@ func NewActionMigrationPlanVpsMigrationIndex(client *Client) *ActionMigrationPla
 
 // ActionMigrationPlanVpsMigrationIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanVpsMigrationIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionMigrationPlanVpsMigrationIndexMetaGlobalInput) SetNo(value bool) *ActionMigrationPlanVpsMigrationIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionMigrationPlanVpsMigrationIndexMetaGlobalInput) SetCount(value bool) *ActionMigrationPlanVpsMigrationIndexMetaGlobalInput {
 	in.Count = value
@@ -56,6 +45,17 @@ func (in *ActionMigrationPlanVpsMigrationIndexMetaGlobalInput) SetIncludes(value
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMigrationPlanVpsMigrationIndexMetaGlobalInput) SetNo(value bool) *ActionMigrationPlanVpsMigrationIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -84,24 +84,24 @@ func (in *ActionMigrationPlanVpsMigrationIndexMetaGlobalInput) AnySelected() boo
 
 // ActionMigrationPlanVpsMigrationIndexInput is a type for action input parameters
 type ActionMigrationPlanVpsMigrationIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
-	State string `json:"state"`
-	SrcNode int64 `json:"src_node"`
 	DstNode int64 `json:"dst_node"`
+	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
+	SrcNode int64 `json:"src_node"`
+	State string `json:"state"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionMigrationPlanVpsMigrationIndexInput) SetOffset(value int64) *ActionMigrationPlanVpsMigrationIndexInput {
-	in.Offset = value
+// SetDstNode sets parameter DstNode to value and selects it for sending
+func (in *ActionMigrationPlanVpsMigrationIndexInput) SetDstNode(value int64) *ActionMigrationPlanVpsMigrationIndexInput {
+	in.DstNode = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
+	in._selectedParameters["DstNode"] = nil
 	return in
 }
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -115,15 +115,15 @@ func (in *ActionMigrationPlanVpsMigrationIndexInput) SetLimit(value int64) *Acti
 	in._selectedParameters["Limit"] = nil
 	return in
 }
-// SetState sets parameter State to value and selects it for sending
-func (in *ActionMigrationPlanVpsMigrationIndexInput) SetState(value string) *ActionMigrationPlanVpsMigrationIndexInput {
-	in.State = value
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionMigrationPlanVpsMigrationIndexInput) SetOffset(value int64) *ActionMigrationPlanVpsMigrationIndexInput {
+	in.Offset = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["State"] = nil
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetSrcNode sets parameter SrcNode to value and selects it for sending
@@ -137,15 +137,15 @@ func (in *ActionMigrationPlanVpsMigrationIndexInput) SetSrcNode(value int64) *Ac
 	in._selectedParameters["SrcNode"] = nil
 	return in
 }
-// SetDstNode sets parameter DstNode to value and selects it for sending
-func (in *ActionMigrationPlanVpsMigrationIndexInput) SetDstNode(value int64) *ActionMigrationPlanVpsMigrationIndexInput {
-	in.DstNode = value
+// SetState sets parameter State to value and selects it for sending
+func (in *ActionMigrationPlanVpsMigrationIndexInput) SetState(value string) *ActionMigrationPlanVpsMigrationIndexInput {
+	in.State = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["DstNode"] = nil
+	in._selectedParameters["State"] = nil
 	return in
 }
 
@@ -175,17 +175,17 @@ func (in *ActionMigrationPlanVpsMigrationIndexInput) AnySelected() bool {
 
 // ActionMigrationPlanVpsMigrationIndexOutput is a type for action output parameters
 type ActionMigrationPlanVpsMigrationIndexOutput struct {
-	Id int64 `json:"id"`
-	State string `json:"state"`
-	TransactionChain *ActionTransactionChainShowOutput `json:"transaction_chain"`
-	SrcNode *ActionNodeShowOutput `json:"src_node"`
-	Vps *ActionVpsShowOutput `json:"vps"`
-	DstNode *ActionNodeShowOutput `json:"dst_node"`
-	MaintenanceWindow bool `json:"maintenance_window"`
 	CleanupData bool `json:"cleanup_data"`
 	CreatedAt string `json:"created_at"`
-	StartedAt string `json:"started_at"`
+	DstNode *ActionNodeShowOutput `json:"dst_node"`
 	FinishedAt string `json:"finished_at"`
+	Id int64 `json:"id"`
+	MaintenanceWindow bool `json:"maintenance_window"`
+	SrcNode *ActionNodeShowOutput `json:"src_node"`
+	StartedAt string `json:"started_at"`
+	State string `json:"state"`
+	TransactionChain *ActionTransactionChainShowOutput `json:"transaction_chain"`
+	Vps *ActionVpsShowOutput `json:"vps"`
 }
 
 
@@ -300,34 +300,34 @@ func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) callAsQuery() (*Actio
 
 func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["vps_migration[offset]"] = convertInt64ToString(inv.Input.Offset)
+		if inv.IsParameterSelected("DstNode") {
+			ret["vps_migration[dst_node]"] = convertInt64ToString(inv.Input.DstNode)
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["vps_migration[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
-		if inv.IsParameterSelected("State") {
-			ret["vps_migration[state]"] = inv.Input.State
+		if inv.IsParameterSelected("Offset") {
+			ret["vps_migration[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("SrcNode") {
 			ret["vps_migration[src_node]"] = convertInt64ToString(inv.Input.SrcNode)
 		}
-		if inv.IsParameterSelected("DstNode") {
-			ret["vps_migration[dst_node]"] = convertInt64ToString(inv.Input.DstNode)
+		if inv.IsParameterSelected("State") {
+			ret["vps_migration[state]"] = inv.Input.State
 		}
 	}
 }
 
 func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

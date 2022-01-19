@@ -17,24 +17,13 @@ func NewActionObjectHistoryIndex(client *Client) *ActionObjectHistoryIndex {
 
 // ActionObjectHistoryIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionObjectHistoryIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionObjectHistoryIndexMetaGlobalInput) SetNo(value bool) *ActionObjectHistoryIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionObjectHistoryIndexMetaGlobalInput) SetCount(value bool) *ActionObjectHistoryIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionObjectHistoryIndexMetaGlobalInput) SetIncludes(value string) *Ac
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionObjectHistoryIndexMetaGlobalInput) SetNo(value bool) *ActionObjectHistoryIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,26 +83,26 @@ func (in *ActionObjectHistoryIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionObjectHistoryIndexInput is a type for action input parameters
 type ActionObjectHistoryIndexInput struct {
-	Offset int64 `json:"offset"`
+	EventType string `json:"event_type"`
 	Limit int64 `json:"limit"`
-	User int64 `json:"user"`
-	UserSession int64 `json:"user_session"`
 	Object string `json:"object"`
 	ObjectId int64 `json:"object_id"`
-	EventType string `json:"event_type"`
+	Offset int64 `json:"offset"`
+	User int64 `json:"user"`
+	UserSession int64 `json:"user_session"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionObjectHistoryIndexInput) SetOffset(value int64) *ActionObjectHistoryIndexInput {
-	in.Offset = value
+// SetEventType sets parameter EventType to value and selects it for sending
+func (in *ActionObjectHistoryIndexInput) SetEventType(value string) *ActionObjectHistoryIndexInput {
+	in.EventType = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
+	in._selectedParameters["EventType"] = nil
 	return in
 }
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -114,28 +114,6 @@ func (in *ActionObjectHistoryIndexInput) SetLimit(value int64) *ActionObjectHist
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-// SetUser sets parameter User to value and selects it for sending
-func (in *ActionObjectHistoryIndexInput) SetUser(value int64) *ActionObjectHistoryIndexInput {
-	in.User = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["User"] = nil
-	return in
-}
-// SetUserSession sets parameter UserSession to value and selects it for sending
-func (in *ActionObjectHistoryIndexInput) SetUserSession(value int64) *ActionObjectHistoryIndexInput {
-	in.UserSession = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["UserSession"] = nil
 	return in
 }
 // SetObject sets parameter Object to value and selects it for sending
@@ -160,15 +138,37 @@ func (in *ActionObjectHistoryIndexInput) SetObjectId(value int64) *ActionObjectH
 	in._selectedParameters["ObjectId"] = nil
 	return in
 }
-// SetEventType sets parameter EventType to value and selects it for sending
-func (in *ActionObjectHistoryIndexInput) SetEventType(value string) *ActionObjectHistoryIndexInput {
-	in.EventType = value
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionObjectHistoryIndexInput) SetOffset(value int64) *ActionObjectHistoryIndexInput {
+	in.Offset = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["EventType"] = nil
+	in._selectedParameters["Offset"] = nil
+	return in
+}
+// SetUser sets parameter User to value and selects it for sending
+func (in *ActionObjectHistoryIndexInput) SetUser(value int64) *ActionObjectHistoryIndexInput {
+	in.User = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["User"] = nil
+	return in
+}
+// SetUserSession sets parameter UserSession to value and selects it for sending
+func (in *ActionObjectHistoryIndexInput) SetUserSession(value int64) *ActionObjectHistoryIndexInput {
+	in.UserSession = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["UserSession"] = nil
 	return in
 }
 
@@ -198,13 +198,13 @@ func (in *ActionObjectHistoryIndexInput) AnySelected() bool {
 
 // ActionObjectHistoryIndexOutput is a type for action output parameters
 type ActionObjectHistoryIndexOutput struct {
+	CreatedAt string `json:"created_at"`
+	EventType string `json:"event_type"`
 	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	UserSession *ActionUserSessionShowOutput `json:"user_session"`
 	Object string `json:"object"`
 	ObjectId int64 `json:"object_id"`
-	EventType string `json:"event_type"`
-	CreatedAt string `json:"created_at"`
+	User *ActionUserShowOutput `json:"user"`
+	UserSession *ActionUserSessionShowOutput `json:"user_session"`
 }
 
 
@@ -309,17 +309,11 @@ func (inv *ActionObjectHistoryIndexInvocation) callAsQuery() (*ActionObjectHisto
 
 func (inv *ActionObjectHistoryIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["object_history[offset]"] = convertInt64ToString(inv.Input.Offset)
+		if inv.IsParameterSelected("EventType") {
+			ret["object_history[event_type]"] = inv.Input.EventType
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["object_history[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("User") {
-			ret["object_history[user]"] = convertInt64ToString(inv.Input.User)
-		}
-		if inv.IsParameterSelected("UserSession") {
-			ret["object_history[user_session]"] = convertInt64ToString(inv.Input.UserSession)
 		}
 		if inv.IsParameterSelected("Object") {
 			ret["object_history[object]"] = inv.Input.Object
@@ -327,22 +321,28 @@ func (inv *ActionObjectHistoryIndexInvocation) convertInputToQueryParams(ret map
 		if inv.IsParameterSelected("ObjectId") {
 			ret["object_history[object_id]"] = convertInt64ToString(inv.Input.ObjectId)
 		}
-		if inv.IsParameterSelected("EventType") {
-			ret["object_history[event_type]"] = inv.Input.EventType
+		if inv.IsParameterSelected("Offset") {
+			ret["object_history[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
+		if inv.IsParameterSelected("User") {
+			ret["object_history[user]"] = convertInt64ToString(inv.Input.User)
+		}
+		if inv.IsParameterSelected("UserSession") {
+			ret["object_history[user_session]"] = convertInt64ToString(inv.Input.UserSession)
 		}
 	}
 }
 
 func (inv *ActionObjectHistoryIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

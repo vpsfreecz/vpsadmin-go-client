@@ -5,6 +5,10 @@ type ResourceUserPayment struct {
 	// Pointer to client
 	Client *Client
 
+	// Action User_payment#Create
+	Create *ActionUserPaymentCreate
+	// Action User_payment#Create
+	New *ActionUserPaymentCreate
 	// Action User_payment#Index
 	Index *ActionUserPaymentIndex
 	// Action User_payment#Index
@@ -13,24 +17,20 @@ type ResourceUserPayment struct {
 	Show *ActionUserPaymentShow
 	// Action User_payment#Show
 	Find *ActionUserPaymentShow
-	// Action User_payment#Create
-	Create *ActionUserPaymentCreate
-	// Action User_payment#Create
-	New *ActionUserPaymentCreate
 }
 
 func NewResourceUserPayment(client *Client) *ResourceUserPayment {
+	actionCreate := NewActionUserPaymentCreate(client)
 	actionIndex := NewActionUserPaymentIndex(client)
 	actionShow := NewActionUserPaymentShow(client)
-	actionCreate := NewActionUserPaymentCreate(client)
 
 	return &ResourceUserPayment{
 		Client: client,
+		Create: actionCreate,
+		New: actionCreate,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Create: actionCreate,
-		New: actionCreate,
 	}
 }

@@ -18,23 +18,12 @@ func NewActionUserTotpDeviceUpdate(client *Client) *ActionUserTotpDeviceUpdate {
 
 // ActionUserTotpDeviceUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserTotpDeviceUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserTotpDeviceUpdateMetaGlobalInput) SetNo(value bool) *ActionUserTotpDeviceUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserTotpDeviceUpdateMetaGlobalInput) SetIncludes(value string) *ActionUserTotpDeviceUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionUserTotpDeviceUpdateMetaGlobalInput) SetIncludes(value string) *
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserTotpDeviceUpdateMetaGlobalInput) SetNo(value bool) *ActionUserTotpDeviceUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,23 +72,12 @@ func (in *ActionUserTotpDeviceUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserTotpDeviceUpdateInput is a type for action input parameters
 type ActionUserTotpDeviceUpdateInput struct {
-	Label string `json:"label"`
 	Enabled bool `json:"enabled"`
+	Label string `json:"label"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetLabel sets parameter Label to value and selects it for sending
-func (in *ActionUserTotpDeviceUpdateInput) SetLabel(value string) *ActionUserTotpDeviceUpdateInput {
-	in.Label = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Label"] = nil
-	return in
-}
 // SetEnabled sets parameter Enabled to value and selects it for sending
 func (in *ActionUserTotpDeviceUpdateInput) SetEnabled(value bool) *ActionUserTotpDeviceUpdateInput {
 	in.Enabled = value
@@ -98,6 +87,17 @@ func (in *ActionUserTotpDeviceUpdateInput) SetEnabled(value bool) *ActionUserTot
 	}
 
 	in._selectedParameters["Enabled"] = nil
+	return in
+}
+// SetLabel sets parameter Label to value and selects it for sending
+func (in *ActionUserTotpDeviceUpdateInput) SetLabel(value string) *ActionUserTotpDeviceUpdateInput {
+	in.Label = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Label"] = nil
 	return in
 }
 
@@ -132,14 +132,14 @@ type ActionUserTotpDeviceUpdateRequest struct {
 
 // ActionUserTotpDeviceUpdateOutput is a type for action output parameters
 type ActionUserTotpDeviceUpdateOutput struct {
+	Confirmed bool `json:"confirmed"`
+	CreatedAt string `json:"created_at"`
+	Enabled bool `json:"enabled"`
 	Id int64 `json:"id"`
 	Label string `json:"label"`
-	Confirmed bool `json:"confirmed"`
-	Enabled bool `json:"enabled"`
 	LastUseAt string `json:"last_use_at"`
-	UseCount int64 `json:"use_count"`
-	CreatedAt string `json:"created_at"`
 	UpdatedAt string `json:"updated_at"`
+	UseCount int64 `json:"use_count"`
 }
 
 
@@ -263,11 +263,11 @@ func (inv *ActionUserTotpDeviceUpdateInvocation) makeInputParams() map[string]in
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Label") {
-			ret["label"] = inv.Input.Label
-		}
 		if inv.IsParameterSelected("Enabled") {
 			ret["enabled"] = inv.Input.Enabled
+		}
+		if inv.IsParameterSelected("Label") {
+			ret["label"] = inv.Input.Label
 		}
 	}
 
@@ -278,11 +278,11 @@ func (inv *ActionUserTotpDeviceUpdateInvocation) makeMetaInputParams() map[strin
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

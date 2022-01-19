@@ -5,6 +5,12 @@ type ResourceNetwork struct {
 	// Pointer to client
 	Client *Client
 
+	// Action Network#Add_addresses
+	AddAddresses *ActionNetworkAddAddresses
+	// Action Network#Create
+	Create *ActionNetworkCreate
+	// Action Network#Create
+	New *ActionNetworkCreate
 	// Action Network#Index
 	Index *ActionNetworkIndex
 	// Action Network#Index
@@ -13,32 +19,26 @@ type ResourceNetwork struct {
 	Show *ActionNetworkShow
 	// Action Network#Show
 	Find *ActionNetworkShow
-	// Action Network#Create
-	Create *ActionNetworkCreate
-	// Action Network#Create
-	New *ActionNetworkCreate
 	// Action Network#Update
 	Update *ActionNetworkUpdate
-	// Action Network#Add_addresses
-	AddAddresses *ActionNetworkAddAddresses
 }
 
 func NewResourceNetwork(client *Client) *ResourceNetwork {
+	actionAddAddresses := NewActionNetworkAddAddresses(client)
+	actionCreate := NewActionNetworkCreate(client)
 	actionIndex := NewActionNetworkIndex(client)
 	actionShow := NewActionNetworkShow(client)
-	actionCreate := NewActionNetworkCreate(client)
 	actionUpdate := NewActionNetworkUpdate(client)
-	actionAddAddresses := NewActionNetworkAddAddresses(client)
 
 	return &ResourceNetwork{
 		Client: client,
+		AddAddresses: actionAddAddresses,
+		Create: actionCreate,
+		New: actionCreate,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Create: actionCreate,
-		New: actionCreate,
 		Update: actionUpdate,
-		AddAddresses: actionAddAddresses,
 	}
 }

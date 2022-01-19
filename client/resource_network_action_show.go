@@ -18,23 +18,12 @@ func NewActionNetworkShow(client *Client) *ActionNetworkShow {
 
 // ActionNetworkShowMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionNetworkShowMetaGlobalInput) SetNo(value bool) *ActionNetworkShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionNetworkShowMetaGlobalInput) SetIncludes(value string) *ActionNetworkShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionNetworkShowMetaGlobalInput) SetIncludes(value string) *ActionNet
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionNetworkShowMetaGlobalInput) SetNo(value bool) *ActionNetworkShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,21 +74,22 @@ func (in *ActionNetworkShowMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkShowOutput is a type for action output parameters
 type ActionNetworkShowOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	IpVersion int64 `json:"ip_version"`
 	Address string `json:"address"`
-	Prefix int64 `json:"prefix"`
-	Role string `json:"role"`
+	Assigned int64 `json:"assigned"`
+	Id int64 `json:"id"`
+	IpVersion int64 `json:"ip_version"`
+	Label string `json:"label"`
 	Managed bool `json:"managed"`
+	Owned int64 `json:"owned"`
+	Prefix int64 `json:"prefix"`
+	PrimaryLocation *ActionLocationShowOutput `json:"primary_location"`
+	Purpose string `json:"purpose"`
+	Role string `json:"role"`
+	Size int64 `json:"size"`
 	SplitAccess string `json:"split_access"`
 	SplitPrefix int64 `json:"split_prefix"`
-	Autopick bool `json:"autopick"`
-	Purpose string `json:"purpose"`
-	Size int64 `json:"size"`
+	Taken int64 `json:"taken"`
 	Used int64 `json:"used"`
-	Assigned int64 `json:"assigned"`
-	Owned int64 `json:"owned"`
 }
 
 
@@ -180,11 +181,11 @@ func (inv *ActionNetworkShowInvocation) callAsQuery() (*ActionNetworkShowRespons
 
 func (inv *ActionNetworkShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

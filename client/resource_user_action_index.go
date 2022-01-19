@@ -17,24 +17,13 @@ func NewActionUserIndex(client *Client) *ActionUserIndex {
 
 // ActionUserIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserIndexMetaGlobalInput) SetNo(value bool) *ActionUserIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionUserIndexMetaGlobalInput) SetCount(value bool) *ActionUserIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionUserIndexMetaGlobalInput) SetIncludes(value string) *ActionUserI
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserIndexMetaGlobalInput) SetNo(value bool) *ActionUserIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,79 +83,24 @@ func (in *ActionUserIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserIndexInput is a type for action input parameters
 type ActionUserIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
-	Login string `json:"login"`
-	FullName string `json:"full_name"`
-	Email string `json:"email"`
 	Address string `json:"address"`
-	Level int64 `json:"level"`
-	Info string `json:"info"`
-	MailerEnabled bool `json:"mailer_enabled"`
-	PasswordReset bool `json:"password_reset"`
-	Lockout bool `json:"lockout"`
-	Language int64 `json:"language"`
 	Admin bool `json:"admin"`
+	Email string `json:"email"`
+	FullName string `json:"full_name"`
+	Info string `json:"info"`
+	Language int64 `json:"language"`
+	Level int64 `json:"level"`
+	Limit int64 `json:"limit"`
+	Lockout bool `json:"lockout"`
+	Login string `json:"login"`
+	MailerEnabled bool `json:"mailer_enabled"`
 	ObjectState string `json:"object_state"`
+	Offset int64 `json:"offset"`
+	PasswordReset bool `json:"password_reset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserIndexInput) SetOffset(value int64) *ActionUserIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-// SetLimit sets parameter Limit to value and selects it for sending
-func (in *ActionUserIndexInput) SetLimit(value int64) *ActionUserIndexInput {
-	in.Limit = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Limit"] = nil
-	return in
-}
-// SetLogin sets parameter Login to value and selects it for sending
-func (in *ActionUserIndexInput) SetLogin(value string) *ActionUserIndexInput {
-	in.Login = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Login"] = nil
-	return in
-}
-// SetFullName sets parameter FullName to value and selects it for sending
-func (in *ActionUserIndexInput) SetFullName(value string) *ActionUserIndexInput {
-	in.FullName = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["FullName"] = nil
-	return in
-}
-// SetEmail sets parameter Email to value and selects it for sending
-func (in *ActionUserIndexInput) SetEmail(value string) *ActionUserIndexInput {
-	in.Email = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Email"] = nil
-	return in
-}
 // SetAddress sets parameter Address to value and selects it for sending
 func (in *ActionUserIndexInput) SetAddress(value string) *ActionUserIndexInput {
 	in.Address = value
@@ -165,72 +110,6 @@ func (in *ActionUserIndexInput) SetAddress(value string) *ActionUserIndexInput {
 	}
 
 	in._selectedParameters["Address"] = nil
-	return in
-}
-// SetLevel sets parameter Level to value and selects it for sending
-func (in *ActionUserIndexInput) SetLevel(value int64) *ActionUserIndexInput {
-	in.Level = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Level"] = nil
-	return in
-}
-// SetInfo sets parameter Info to value and selects it for sending
-func (in *ActionUserIndexInput) SetInfo(value string) *ActionUserIndexInput {
-	in.Info = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Info"] = nil
-	return in
-}
-// SetMailerEnabled sets parameter MailerEnabled to value and selects it for sending
-func (in *ActionUserIndexInput) SetMailerEnabled(value bool) *ActionUserIndexInput {
-	in.MailerEnabled = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["MailerEnabled"] = nil
-	return in
-}
-// SetPasswordReset sets parameter PasswordReset to value and selects it for sending
-func (in *ActionUserIndexInput) SetPasswordReset(value bool) *ActionUserIndexInput {
-	in.PasswordReset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["PasswordReset"] = nil
-	return in
-}
-// SetLockout sets parameter Lockout to value and selects it for sending
-func (in *ActionUserIndexInput) SetLockout(value bool) *ActionUserIndexInput {
-	in.Lockout = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Lockout"] = nil
-	return in
-}
-// SetLanguage sets parameter Language to value and selects it for sending
-func (in *ActionUserIndexInput) SetLanguage(value int64) *ActionUserIndexInput {
-	in.Language = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Language"] = nil
 	return in
 }
 // SetAdmin sets parameter Admin to value and selects it for sending
@@ -244,6 +123,105 @@ func (in *ActionUserIndexInput) SetAdmin(value bool) *ActionUserIndexInput {
 	in._selectedParameters["Admin"] = nil
 	return in
 }
+// SetEmail sets parameter Email to value and selects it for sending
+func (in *ActionUserIndexInput) SetEmail(value string) *ActionUserIndexInput {
+	in.Email = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Email"] = nil
+	return in
+}
+// SetFullName sets parameter FullName to value and selects it for sending
+func (in *ActionUserIndexInput) SetFullName(value string) *ActionUserIndexInput {
+	in.FullName = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FullName"] = nil
+	return in
+}
+// SetInfo sets parameter Info to value and selects it for sending
+func (in *ActionUserIndexInput) SetInfo(value string) *ActionUserIndexInput {
+	in.Info = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Info"] = nil
+	return in
+}
+// SetLanguage sets parameter Language to value and selects it for sending
+func (in *ActionUserIndexInput) SetLanguage(value int64) *ActionUserIndexInput {
+	in.Language = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Language"] = nil
+	return in
+}
+// SetLevel sets parameter Level to value and selects it for sending
+func (in *ActionUserIndexInput) SetLevel(value int64) *ActionUserIndexInput {
+	in.Level = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Level"] = nil
+	return in
+}
+// SetLimit sets parameter Limit to value and selects it for sending
+func (in *ActionUserIndexInput) SetLimit(value int64) *ActionUserIndexInput {
+	in.Limit = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetLockout sets parameter Lockout to value and selects it for sending
+func (in *ActionUserIndexInput) SetLockout(value bool) *ActionUserIndexInput {
+	in.Lockout = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Lockout"] = nil
+	return in
+}
+// SetLogin sets parameter Login to value and selects it for sending
+func (in *ActionUserIndexInput) SetLogin(value string) *ActionUserIndexInput {
+	in.Login = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Login"] = nil
+	return in
+}
+// SetMailerEnabled sets parameter MailerEnabled to value and selects it for sending
+func (in *ActionUserIndexInput) SetMailerEnabled(value bool) *ActionUserIndexInput {
+	in.MailerEnabled = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["MailerEnabled"] = nil
+	return in
+}
 // SetObjectState sets parameter ObjectState to value and selects it for sending
 func (in *ActionUserIndexInput) SetObjectState(value string) *ActionUserIndexInput {
 	in.ObjectState = value
@@ -253,6 +231,28 @@ func (in *ActionUserIndexInput) SetObjectState(value string) *ActionUserIndexInp
 	}
 
 	in._selectedParameters["ObjectState"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionUserIndexInput) SetOffset(value int64) *ActionUserIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
+	return in
+}
+// SetPasswordReset sets parameter PasswordReset to value and selects it for sending
+func (in *ActionUserIndexInput) SetPasswordReset(value bool) *ActionUserIndexInput {
+	in.PasswordReset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PasswordReset"] = nil
 	return in
 }
 
@@ -282,23 +282,23 @@ func (in *ActionUserIndexInput) AnySelected() bool {
 
 // ActionUserIndexOutput is a type for action output parameters
 type ActionUserIndexOutput struct {
-	Id int64 `json:"id"`
-	Login string `json:"login"`
-	FullName string `json:"full_name"`
-	Email string `json:"email"`
 	Address string `json:"address"`
-	Level int64 `json:"level"`
+	CreatedAt string `json:"created_at"`
+	Email string `json:"email"`
+	ExpirationDate string `json:"expiration_date"`
+	FullName string `json:"full_name"`
+	Id int64 `json:"id"`
 	Info string `json:"info"`
-	MailerEnabled bool `json:"mailer_enabled"`
-	PasswordReset bool `json:"password_reset"`
-	Lockout bool `json:"lockout"`
 	Language *ActionLanguageShowOutput `json:"language"`
 	LastActivityAt string `json:"last_activity_at"`
-	CreatedAt string `json:"created_at"`
-	ObjectState string `json:"object_state"`
-	ExpirationDate string `json:"expiration_date"`
+	Level int64 `json:"level"`
+	Lockout bool `json:"lockout"`
+	Login string `json:"login"`
+	MailerEnabled bool `json:"mailer_enabled"`
 	MonthlyPayment int64 `json:"monthly_payment"`
+	ObjectState string `json:"object_state"`
 	PaidUntil string `json:"paid_until"`
+	PasswordReset bool `json:"password_reset"`
 }
 
 
@@ -403,61 +403,61 @@ func (inv *ActionUserIndexInvocation) callAsQuery() (*ActionUserIndexResponse, e
 
 func (inv *ActionUserIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["user[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
-		if inv.IsParameterSelected("Limit") {
-			ret["user[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Login") {
-			ret["user[login]"] = inv.Input.Login
-		}
-		if inv.IsParameterSelected("FullName") {
-			ret["user[full_name]"] = inv.Input.FullName
-		}
-		if inv.IsParameterSelected("Email") {
-			ret["user[email]"] = inv.Input.Email
-		}
 		if inv.IsParameterSelected("Address") {
 			ret["user[address]"] = inv.Input.Address
-		}
-		if inv.IsParameterSelected("Level") {
-			ret["user[level]"] = convertInt64ToString(inv.Input.Level)
-		}
-		if inv.IsParameterSelected("Info") {
-			ret["user[info]"] = inv.Input.Info
-		}
-		if inv.IsParameterSelected("MailerEnabled") {
-			ret["user[mailer_enabled]"] = convertBoolToString(inv.Input.MailerEnabled)
-		}
-		if inv.IsParameterSelected("PasswordReset") {
-			ret["user[password_reset]"] = convertBoolToString(inv.Input.PasswordReset)
-		}
-		if inv.IsParameterSelected("Lockout") {
-			ret["user[lockout]"] = convertBoolToString(inv.Input.Lockout)
-		}
-		if inv.IsParameterSelected("Language") {
-			ret["user[language]"] = convertInt64ToString(inv.Input.Language)
 		}
 		if inv.IsParameterSelected("Admin") {
 			ret["user[admin]"] = convertBoolToString(inv.Input.Admin)
 		}
+		if inv.IsParameterSelected("Email") {
+			ret["user[email]"] = inv.Input.Email
+		}
+		if inv.IsParameterSelected("FullName") {
+			ret["user[full_name]"] = inv.Input.FullName
+		}
+		if inv.IsParameterSelected("Info") {
+			ret["user[info]"] = inv.Input.Info
+		}
+		if inv.IsParameterSelected("Language") {
+			ret["user[language]"] = convertInt64ToString(inv.Input.Language)
+		}
+		if inv.IsParameterSelected("Level") {
+			ret["user[level]"] = convertInt64ToString(inv.Input.Level)
+		}
+		if inv.IsParameterSelected("Limit") {
+			ret["user[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Lockout") {
+			ret["user[lockout]"] = convertBoolToString(inv.Input.Lockout)
+		}
+		if inv.IsParameterSelected("Login") {
+			ret["user[login]"] = inv.Input.Login
+		}
+		if inv.IsParameterSelected("MailerEnabled") {
+			ret["user[mailer_enabled]"] = convertBoolToString(inv.Input.MailerEnabled)
+		}
 		if inv.IsParameterSelected("ObjectState") {
 			ret["user[object_state]"] = inv.Input.ObjectState
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["user[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
+		if inv.IsParameterSelected("PasswordReset") {
+			ret["user[password_reset]"] = convertBoolToString(inv.Input.PasswordReset)
 		}
 	}
 }
 
 func (inv *ActionUserIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

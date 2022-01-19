@@ -18,23 +18,12 @@ func NewActionSessionTokenShow(client *Client) *ActionSessionTokenShow {
 
 // ActionSessionTokenShowMetaGlobalInput is a type for action global meta input parameters
 type ActionSessionTokenShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionSessionTokenShowMetaGlobalInput) SetNo(value bool) *ActionSessionTokenShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionSessionTokenShowMetaGlobalInput) SetIncludes(value string) *ActionSessionTokenShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionSessionTokenShowMetaGlobalInput) SetIncludes(value string) *Acti
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionSessionTokenShowMetaGlobalInput) SetNo(value bool) *ActionSessionTokenShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,15 +74,15 @@ func (in *ActionSessionTokenShowMetaGlobalInput) AnySelected() bool {
 
 // ActionSessionTokenShowOutput is a type for action output parameters
 type ActionSessionTokenShowOutput struct {
+	CreatedAt string `json:"created_at"`
 	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	Token string `json:"token"`
-	ValidTo string `json:"valid_to"`
+	Interval int64 `json:"interval"`
 	Label string `json:"label"`
 	Lifetime string `json:"lifetime"`
-	Interval int64 `json:"interval"`
+	Token string `json:"token"`
 	UseCount int64 `json:"use_count"`
-	CreatedAt string `json:"created_at"`
+	User *ActionUserShowOutput `json:"user"`
+	ValidTo string `json:"valid_to"`
 }
 
 
@@ -174,11 +174,11 @@ func (inv *ActionSessionTokenShowInvocation) callAsQuery() (*ActionSessionTokenS
 
 func (inv *ActionSessionTokenShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

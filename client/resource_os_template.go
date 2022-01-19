@@ -5,6 +5,14 @@ type ResourceOsTemplate struct {
 	// Pointer to client
 	Client *Client
 
+	// Action Os_template#Create
+	Create *ActionOsTemplateCreate
+	// Action Os_template#Create
+	New *ActionOsTemplateCreate
+	// Action Os_template#Delete
+	Delete *ActionOsTemplateDelete
+	// Action Os_template#Delete
+	Destroy *ActionOsTemplateDelete
 	// Action Os_template#Index
 	Index *ActionOsTemplateIndex
 	// Action Os_template#Index
@@ -13,35 +21,27 @@ type ResourceOsTemplate struct {
 	Show *ActionOsTemplateShow
 	// Action Os_template#Show
 	Find *ActionOsTemplateShow
-	// Action Os_template#Create
-	Create *ActionOsTemplateCreate
-	// Action Os_template#Create
-	New *ActionOsTemplateCreate
 	// Action Os_template#Update
 	Update *ActionOsTemplateUpdate
-	// Action Os_template#Delete
-	Delete *ActionOsTemplateDelete
-	// Action Os_template#Delete
-	Destroy *ActionOsTemplateDelete
 }
 
 func NewResourceOsTemplate(client *Client) *ResourceOsTemplate {
+	actionCreate := NewActionOsTemplateCreate(client)
+	actionDelete := NewActionOsTemplateDelete(client)
 	actionIndex := NewActionOsTemplateIndex(client)
 	actionShow := NewActionOsTemplateShow(client)
-	actionCreate := NewActionOsTemplateCreate(client)
 	actionUpdate := NewActionOsTemplateUpdate(client)
-	actionDelete := NewActionOsTemplateDelete(client)
 
 	return &ResourceOsTemplate{
 		Client: client,
+		Create: actionCreate,
+		New: actionCreate,
+		Delete: actionDelete,
+		Destroy: actionDelete,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Create: actionCreate,
-		New: actionCreate,
 		Update: actionUpdate,
-		Delete: actionDelete,
-		Destroy: actionDelete,
 	}
 }

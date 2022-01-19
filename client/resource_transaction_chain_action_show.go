@@ -18,23 +18,12 @@ func NewActionTransactionChainShow(client *Client) *ActionTransactionChainShow {
 
 // ActionTransactionChainShowMetaGlobalInput is a type for action global meta input parameters
 type ActionTransactionChainShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionTransactionChainShowMetaGlobalInput) SetNo(value bool) *ActionTransactionChainShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionTransactionChainShowMetaGlobalInput) SetIncludes(value string) *ActionTransactionChainShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionTransactionChainShowMetaGlobalInput) SetIncludes(value string) *
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionTransactionChainShowMetaGlobalInput) SetNo(value bool) *ActionTransactionChainShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,14 +74,14 @@ func (in *ActionTransactionChainShowMetaGlobalInput) AnySelected() bool {
 
 // ActionTransactionChainShowOutput is a type for action output parameters
 type ActionTransactionChainShowOutput struct {
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	Label string `json:"label"`
-	State string `json:"state"`
-	Size int64 `json:"size"`
-	Progress int64 `json:"progress"`
-	User *ActionUserShowOutput `json:"user"`
 	CreatedAt string `json:"created_at"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	Name string `json:"name"`
+	Progress int64 `json:"progress"`
+	Size int64 `json:"size"`
+	State string `json:"state"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -173,11 +173,11 @@ func (inv *ActionTransactionChainShowInvocation) callAsQuery() (*ActionTransacti
 
 func (inv *ActionTransactionChainShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

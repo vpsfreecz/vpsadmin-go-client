@@ -5,14 +5,6 @@ type ResourceDatasetSnapshot struct {
 	// Pointer to client
 	Client *Client
 
-	// Action Dataset.Snapshot#Index
-	Index *ActionDatasetSnapshotIndex
-	// Action Dataset.Snapshot#Index
-	List *ActionDatasetSnapshotIndex
-	// Action Dataset.Snapshot#Show
-	Show *ActionDatasetSnapshotShow
-	// Action Dataset.Snapshot#Show
-	Find *ActionDatasetSnapshotShow
 	// Action Dataset.Snapshot#Create
 	Create *ActionDatasetSnapshotCreate
 	// Action Dataset.Snapshot#Create
@@ -21,27 +13,35 @@ type ResourceDatasetSnapshot struct {
 	Delete *ActionDatasetSnapshotDelete
 	// Action Dataset.Snapshot#Delete
 	Destroy *ActionDatasetSnapshotDelete
+	// Action Dataset.Snapshot#Index
+	Index *ActionDatasetSnapshotIndex
+	// Action Dataset.Snapshot#Index
+	List *ActionDatasetSnapshotIndex
 	// Action Dataset.Snapshot#Rollback
 	Rollback *ActionDatasetSnapshotRollback
+	// Action Dataset.Snapshot#Show
+	Show *ActionDatasetSnapshotShow
+	// Action Dataset.Snapshot#Show
+	Find *ActionDatasetSnapshotShow
 }
 
 func NewResourceDatasetSnapshot(client *Client) *ResourceDatasetSnapshot {
-	actionIndex := NewActionDatasetSnapshotIndex(client)
-	actionShow := NewActionDatasetSnapshotShow(client)
 	actionCreate := NewActionDatasetSnapshotCreate(client)
 	actionDelete := NewActionDatasetSnapshotDelete(client)
+	actionIndex := NewActionDatasetSnapshotIndex(client)
 	actionRollback := NewActionDatasetSnapshotRollback(client)
+	actionShow := NewActionDatasetSnapshotShow(client)
 
 	return &ResourceDatasetSnapshot{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
 		Create: actionCreate,
 		New: actionCreate,
 		Delete: actionDelete,
 		Destroy: actionDelete,
+		Index: actionIndex,
+		List: actionIndex,
 		Rollback: actionRollback,
+		Show: actionShow,
+		Find: actionShow,
 	}
 }

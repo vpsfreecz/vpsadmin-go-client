@@ -18,23 +18,12 @@ func NewActionUserNamespaceMapEntryCreate(client *Client) *ActionUserNamespaceMa
 
 // ActionUserNamespaceMapEntryCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceMapEntryCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserNamespaceMapEntryCreateMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceMapEntryCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserNamespaceMapEntryCreateMetaGlobalInput) SetIncludes(value string) *ActionUserNamespaceMapEntryCreateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionUserNamespaceMapEntryCreateMetaGlobalInput) SetIncludes(value st
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserNamespaceMapEntryCreateMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceMapEntryCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,14 +72,25 @@ func (in *ActionUserNamespaceMapEntryCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserNamespaceMapEntryCreateInput is a type for action input parameters
 type ActionUserNamespaceMapEntryCreateInput struct {
-	Kind string `json:"kind"`
-	VpsId int64 `json:"vps_id"`
-	NsId int64 `json:"ns_id"`
 	Count int64 `json:"count"`
+	Kind string `json:"kind"`
+	NsId int64 `json:"ns_id"`
+	VpsId int64 `json:"vps_id"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
+// SetCount sets parameter Count to value and selects it for sending
+func (in *ActionUserNamespaceMapEntryCreateInput) SetCount(value int64) *ActionUserNamespaceMapEntryCreateInput {
+	in.Count = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Count"] = nil
+	return in
+}
 // SetKind sets parameter Kind to value and selects it for sending
 func (in *ActionUserNamespaceMapEntryCreateInput) SetKind(value string) *ActionUserNamespaceMapEntryCreateInput {
 	in.Kind = value
@@ -89,17 +100,6 @@ func (in *ActionUserNamespaceMapEntryCreateInput) SetKind(value string) *ActionU
 	}
 
 	in._selectedParameters["Kind"] = nil
-	return in
-}
-// SetVpsId sets parameter VpsId to value and selects it for sending
-func (in *ActionUserNamespaceMapEntryCreateInput) SetVpsId(value int64) *ActionUserNamespaceMapEntryCreateInput {
-	in.VpsId = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["VpsId"] = nil
 	return in
 }
 // SetNsId sets parameter NsId to value and selects it for sending
@@ -113,15 +113,15 @@ func (in *ActionUserNamespaceMapEntryCreateInput) SetNsId(value int64) *ActionUs
 	in._selectedParameters["NsId"] = nil
 	return in
 }
-// SetCount sets parameter Count to value and selects it for sending
-func (in *ActionUserNamespaceMapEntryCreateInput) SetCount(value int64) *ActionUserNamespaceMapEntryCreateInput {
-	in.Count = value
+// SetVpsId sets parameter VpsId to value and selects it for sending
+func (in *ActionUserNamespaceMapEntryCreateInput) SetVpsId(value int64) *ActionUserNamespaceMapEntryCreateInput {
+	in.VpsId = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Count"] = nil
+	in._selectedParameters["VpsId"] = nil
 	return in
 }
 
@@ -156,11 +156,11 @@ type ActionUserNamespaceMapEntryCreateRequest struct {
 
 // ActionUserNamespaceMapEntryCreateOutput is a type for action output parameters
 type ActionUserNamespaceMapEntryCreateOutput struct {
+	Count int64 `json:"count"`
 	Id int64 `json:"id"`
 	Kind string `json:"kind"`
-	VpsId int64 `json:"vps_id"`
 	NsId int64 `json:"ns_id"`
-	Count int64 `json:"count"`
+	VpsId int64 `json:"vps_id"`
 }
 
 
@@ -284,17 +284,17 @@ func (inv *ActionUserNamespaceMapEntryCreateInvocation) makeInputParams() map[st
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("Count") {
+			ret["count"] = inv.Input.Count
+		}
 		if inv.IsParameterSelected("Kind") {
 			ret["kind"] = inv.Input.Kind
-		}
-		if inv.IsParameterSelected("VpsId") {
-			ret["vps_id"] = inv.Input.VpsId
 		}
 		if inv.IsParameterSelected("NsId") {
 			ret["ns_id"] = inv.Input.NsId
 		}
-		if inv.IsParameterSelected("Count") {
-			ret["count"] = inv.Input.Count
+		if inv.IsParameterSelected("VpsId") {
+			ret["vps_id"] = inv.Input.VpsId
 		}
 	}
 
@@ -305,11 +305,11 @@ func (inv *ActionUserNamespaceMapEntryCreateInvocation) makeMetaInputParams() ma
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

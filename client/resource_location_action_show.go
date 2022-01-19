@@ -18,23 +18,12 @@ func NewActionLocationShow(client *Client) *ActionLocationShow {
 
 // ActionLocationShowMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionLocationShowMetaGlobalInput) SetNo(value bool) *ActionLocationShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionLocationShowMetaGlobalInput) SetIncludes(value string) *ActionLocationShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionLocationShowMetaGlobalInput) SetIncludes(value string) *ActionLo
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionLocationShowMetaGlobalInput) SetNo(value bool) *ActionLocationShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,16 +74,16 @@ func (in *ActionLocationShowMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationShowOutput is a type for action output parameters
 type ActionLocationShowOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
 	Description string `json:"description"`
-	HasIpv6 bool `json:"has_ipv6"`
-	VpsOnboot bool `json:"vps_onboot"`
-	RemoteConsoleServer string `json:"remote_console_server"`
 	Domain string `json:"domain"`
 	Environment *ActionEnvironmentShowOutput `json:"environment"`
+	HasIpv6 bool `json:"has_ipv6"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
 	MaintenanceLock string `json:"maintenance_lock"`
 	MaintenanceLockReason string `json:"maintenance_lock_reason"`
+	RemoteConsoleServer string `json:"remote_console_server"`
+	VpsOnboot bool `json:"vps_onboot"`
 }
 
 
@@ -175,11 +175,11 @@ func (inv *ActionLocationShowInvocation) callAsQuery() (*ActionLocationShowRespo
 
 func (inv *ActionLocationShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

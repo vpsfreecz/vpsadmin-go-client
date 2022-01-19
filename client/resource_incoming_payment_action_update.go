@@ -18,23 +18,12 @@ func NewActionIncomingPaymentUpdate(client *Client) *ActionIncomingPaymentUpdate
 
 // ActionIncomingPaymentUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionIncomingPaymentUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionIncomingPaymentUpdateMetaGlobalInput) SetNo(value bool) *ActionIncomingPaymentUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionIncomingPaymentUpdateMetaGlobalInput) SetIncludes(value string) *ActionIncomingPaymentUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionIncomingPaymentUpdateMetaGlobalInput) SetIncludes(value string) 
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionIncomingPaymentUpdateMetaGlobalInput) SetNo(value bool) *ActionIncomingPaymentUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -120,23 +120,23 @@ type ActionIncomingPaymentUpdateRequest struct {
 
 // ActionIncomingPaymentUpdateOutput is a type for action output parameters
 type ActionIncomingPaymentUpdateOutput struct {
-	Id int64 `json:"id"`
-	TransactionId string `json:"transaction_id"`
-	State string `json:"state"`
-	Date string `json:"date"`
+	AccountName string `json:"account_name"`
 	Amount int64 `json:"amount"`
+	Comment string `json:"comment"`
+	CreatedAt string `json:"created_at"`
 	Currency string `json:"currency"`
+	Date string `json:"date"`
+	Id int64 `json:"id"`
+	Ks string `json:"ks"`
 	SrcAmount int64 `json:"src_amount"`
 	SrcCurrency string `json:"src_currency"`
-	AccountName string `json:"account_name"`
+	Ss string `json:"ss"`
+	State string `json:"state"`
+	TransactionId string `json:"transaction_id"`
+	TransactionType string `json:"transaction_type"`
 	UserIdent string `json:"user_ident"`
 	UserMessage string `json:"user_message"`
 	Vs string `json:"vs"`
-	Ks string `json:"ks"`
-	Ss string `json:"ss"`
-	TransactionType string `json:"transaction_type"`
-	Comment string `json:"comment"`
-	CreatedAt string `json:"created_at"`
 }
 
 
@@ -272,11 +272,11 @@ func (inv *ActionIncomingPaymentUpdateInvocation) makeMetaInputParams() map[stri
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

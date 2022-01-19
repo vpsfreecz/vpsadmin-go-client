@@ -18,24 +18,13 @@ func NewActionMailTemplateTranslationIndex(client *Client) *ActionMailTemplateTr
 
 // ActionMailTemplateTranslationIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateTranslationIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionMailTemplateTranslationIndexMetaGlobalInput) SetNo(value bool) *ActionMailTemplateTranslationIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionMailTemplateTranslationIndexMetaGlobalInput) SetCount(value bool) *ActionMailTemplateTranslationIndexMetaGlobalInput {
 	in.Count = value
@@ -56,6 +45,17 @@ func (in *ActionMailTemplateTranslationIndexMetaGlobalInput) SetIncludes(value s
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMailTemplateTranslationIndexMetaGlobalInput) SetNo(value bool) *ActionMailTemplateTranslationIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -84,23 +84,12 @@ func (in *ActionMailTemplateTranslationIndexMetaGlobalInput) AnySelected() bool 
 
 // ActionMailTemplateTranslationIndexInput is a type for action input parameters
 type ActionMailTemplateTranslationIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionMailTemplateTranslationIndexInput) SetOffset(value int64) *ActionMailTemplateTranslationIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionMailTemplateTranslationIndexInput) SetLimit(value int64) *ActionMailTemplateTranslationIndexInput {
 	in.Limit = value
@@ -110,6 +99,17 @@ func (in *ActionMailTemplateTranslationIndexInput) SetLimit(value int64) *Action
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionMailTemplateTranslationIndexInput) SetOffset(value int64) *ActionMailTemplateTranslationIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -139,15 +139,15 @@ func (in *ActionMailTemplateTranslationIndexInput) AnySelected() bool {
 
 // ActionMailTemplateTranslationIndexOutput is a type for action output parameters
 type ActionMailTemplateTranslationIndexOutput struct {
+	CreatedAt string `json:"created_at"`
+	From string `json:"from"`
 	Id int64 `json:"id"`
 	Language *ActionLanguageShowOutput `json:"language"`
-	From string `json:"from"`
 	ReplyTo string `json:"reply_to"`
 	ReturnPath string `json:"return_path"`
 	Subject string `json:"subject"`
-	TextPlain string `json:"text_plain"`
 	TextHtml string `json:"text_html"`
-	CreatedAt string `json:"created_at"`
+	TextPlain string `json:"text_plain"`
 	UpdatedAt string `json:"updated_at"`
 }
 
@@ -263,25 +263,25 @@ func (inv *ActionMailTemplateTranslationIndexInvocation) callAsQuery() (*ActionM
 
 func (inv *ActionMailTemplateTranslationIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["translation[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["translation[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["translation[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }
 
 func (inv *ActionMailTemplateTranslationIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

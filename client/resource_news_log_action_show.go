@@ -18,23 +18,12 @@ func NewActionNewsLogShow(client *Client) *ActionNewsLogShow {
 
 // ActionNewsLogShowMetaGlobalInput is a type for action global meta input parameters
 type ActionNewsLogShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionNewsLogShowMetaGlobalInput) SetNo(value bool) *ActionNewsLogShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionNewsLogShowMetaGlobalInput) SetIncludes(value string) *ActionNewsLogShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionNewsLogShowMetaGlobalInput) SetIncludes(value string) *ActionNew
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionNewsLogShowMetaGlobalInput) SetNo(value bool) *ActionNewsLogShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,10 +74,10 @@ func (in *ActionNewsLogShowMetaGlobalInput) AnySelected() bool {
 
 // ActionNewsLogShowOutput is a type for action output parameters
 type ActionNewsLogShowOutput struct {
+	CreatedAt string `json:"created_at"`
 	Id int64 `json:"id"`
 	Message string `json:"message"`
 	PublishedAt string `json:"published_at"`
-	CreatedAt string `json:"created_at"`
 	UpdatedAt string `json:"updated_at"`
 }
 
@@ -170,11 +170,11 @@ func (inv *ActionNewsLogShowInvocation) callAsQuery() (*ActionNewsLogShowRespons
 
 func (inv *ActionNewsLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

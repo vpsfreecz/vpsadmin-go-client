@@ -17,24 +17,13 @@ func NewActionIpTrafficUserTop(client *Client) *ActionIpTrafficUserTop {
 
 // ActionIpTrafficUserTopMetaGlobalInput is a type for action global meta input parameters
 type ActionIpTrafficUserTopMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionIpTrafficUserTopMetaGlobalInput) SetNo(value bool) *ActionIpTrafficUserTopMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionIpTrafficUserTopMetaGlobalInput) SetCount(value bool) *ActionIpTrafficUserTopMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionIpTrafficUserTopMetaGlobalInput) SetIncludes(value string) *Acti
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionIpTrafficUserTopMetaGlobalInput) SetNo(value bool) *ActionIpTrafficUserTopMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,77 +83,33 @@ func (in *ActionIpTrafficUserTopMetaGlobalInput) AnySelected() bool {
 
 // ActionIpTrafficUserTopInput is a type for action input parameters
 type ActionIpTrafficUserTopInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
-	Role string `json:"role"`
-	Protocol string `json:"protocol"`
-	IpVersion int64 `json:"ip_version"`
+	Accumulate string `json:"accumulate"`
 	Environment int64 `json:"environment"`
+	From string `json:"from"`
+	IpVersion int64 `json:"ip_version"`
+	Limit int64 `json:"limit"`
 	Location int64 `json:"location"`
+	Month int64 `json:"month"`
 	Network int64 `json:"network"`
 	Node int64 `json:"node"`
-	Year int64 `json:"year"`
-	Month int64 `json:"month"`
-	From string `json:"from"`
+	Offset int64 `json:"offset"`
+	Protocol string `json:"protocol"`
+	Role string `json:"role"`
 	To string `json:"to"`
-	Accumulate string `json:"accumulate"`
+	Year int64 `json:"year"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionIpTrafficUserTopInput) SetOffset(value int64) *ActionIpTrafficUserTopInput {
-	in.Offset = value
+// SetAccumulate sets parameter Accumulate to value and selects it for sending
+func (in *ActionIpTrafficUserTopInput) SetAccumulate(value string) *ActionIpTrafficUserTopInput {
+	in.Accumulate = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-// SetLimit sets parameter Limit to value and selects it for sending
-func (in *ActionIpTrafficUserTopInput) SetLimit(value int64) *ActionIpTrafficUserTopInput {
-	in.Limit = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Limit"] = nil
-	return in
-}
-// SetRole sets parameter Role to value and selects it for sending
-func (in *ActionIpTrafficUserTopInput) SetRole(value string) *ActionIpTrafficUserTopInput {
-	in.Role = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Role"] = nil
-	return in
-}
-// SetProtocol sets parameter Protocol to value and selects it for sending
-func (in *ActionIpTrafficUserTopInput) SetProtocol(value string) *ActionIpTrafficUserTopInput {
-	in.Protocol = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Protocol"] = nil
-	return in
-}
-// SetIpVersion sets parameter IpVersion to value and selects it for sending
-func (in *ActionIpTrafficUserTopInput) SetIpVersion(value int64) *ActionIpTrafficUserTopInput {
-	in.IpVersion = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["IpVersion"] = nil
+	in._selectedParameters["Accumulate"] = nil
 	return in
 }
 // SetEnvironment sets parameter Environment to value and selects it for sending
@@ -167,6 +123,39 @@ func (in *ActionIpTrafficUserTopInput) SetEnvironment(value int64) *ActionIpTraf
 	in._selectedParameters["Environment"] = nil
 	return in
 }
+// SetFrom sets parameter From to value and selects it for sending
+func (in *ActionIpTrafficUserTopInput) SetFrom(value string) *ActionIpTrafficUserTopInput {
+	in.From = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["From"] = nil
+	return in
+}
+// SetIpVersion sets parameter IpVersion to value and selects it for sending
+func (in *ActionIpTrafficUserTopInput) SetIpVersion(value int64) *ActionIpTrafficUserTopInput {
+	in.IpVersion = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["IpVersion"] = nil
+	return in
+}
+// SetLimit sets parameter Limit to value and selects it for sending
+func (in *ActionIpTrafficUserTopInput) SetLimit(value int64) *ActionIpTrafficUserTopInput {
+	in.Limit = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Limit"] = nil
+	return in
+}
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionIpTrafficUserTopInput) SetLocation(value int64) *ActionIpTrafficUserTopInput {
 	in.Location = value
@@ -176,6 +165,17 @@ func (in *ActionIpTrafficUserTopInput) SetLocation(value int64) *ActionIpTraffic
 	}
 
 	in._selectedParameters["Location"] = nil
+	return in
+}
+// SetMonth sets parameter Month to value and selects it for sending
+func (in *ActionIpTrafficUserTopInput) SetMonth(value int64) *ActionIpTrafficUserTopInput {
+	in.Month = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Month"] = nil
 	return in
 }
 // SetNetwork sets parameter Network to value and selects it for sending
@@ -200,37 +200,37 @@ func (in *ActionIpTrafficUserTopInput) SetNode(value int64) *ActionIpTrafficUser
 	in._selectedParameters["Node"] = nil
 	return in
 }
-// SetYear sets parameter Year to value and selects it for sending
-func (in *ActionIpTrafficUserTopInput) SetYear(value int64) *ActionIpTrafficUserTopInput {
-	in.Year = value
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionIpTrafficUserTopInput) SetOffset(value int64) *ActionIpTrafficUserTopInput {
+	in.Offset = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Year"] = nil
+	in._selectedParameters["Offset"] = nil
 	return in
 }
-// SetMonth sets parameter Month to value and selects it for sending
-func (in *ActionIpTrafficUserTopInput) SetMonth(value int64) *ActionIpTrafficUserTopInput {
-	in.Month = value
+// SetProtocol sets parameter Protocol to value and selects it for sending
+func (in *ActionIpTrafficUserTopInput) SetProtocol(value string) *ActionIpTrafficUserTopInput {
+	in.Protocol = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Month"] = nil
+	in._selectedParameters["Protocol"] = nil
 	return in
 }
-// SetFrom sets parameter From to value and selects it for sending
-func (in *ActionIpTrafficUserTopInput) SetFrom(value string) *ActionIpTrafficUserTopInput {
-	in.From = value
+// SetRole sets parameter Role to value and selects it for sending
+func (in *ActionIpTrafficUserTopInput) SetRole(value string) *ActionIpTrafficUserTopInput {
+	in.Role = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["From"] = nil
+	in._selectedParameters["Role"] = nil
 	return in
 }
 // SetTo sets parameter To to value and selects it for sending
@@ -244,15 +244,15 @@ func (in *ActionIpTrafficUserTopInput) SetTo(value string) *ActionIpTrafficUserT
 	in._selectedParameters["To"] = nil
 	return in
 }
-// SetAccumulate sets parameter Accumulate to value and selects it for sending
-func (in *ActionIpTrafficUserTopInput) SetAccumulate(value string) *ActionIpTrafficUserTopInput {
-	in.Accumulate = value
+// SetYear sets parameter Year to value and selects it for sending
+func (in *ActionIpTrafficUserTopInput) SetYear(value int64) *ActionIpTrafficUserTopInput {
+	in.Year = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Accumulate"] = nil
+	in._selectedParameters["Year"] = nil
 	return in
 }
 
@@ -282,12 +282,12 @@ func (in *ActionIpTrafficUserTopInput) AnySelected() bool {
 
 // ActionIpTrafficUserTopOutput is a type for action output parameters
 type ActionIpTrafficUserTopOutput struct {
-	User *ActionUserShowOutput `json:"user"`
-	PacketsIn int64 `json:"packets_in"`
-	PacketsOut int64 `json:"packets_out"`
 	BytesIn int64 `json:"bytes_in"`
 	BytesOut int64 `json:"bytes_out"`
 	CreatedAt string `json:"created_at"`
+	PacketsIn int64 `json:"packets_in"`
+	PacketsOut int64 `json:"packets_out"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -392,26 +392,26 @@ func (inv *ActionIpTrafficUserTopInvocation) callAsQuery() (*ActionIpTrafficUser
 
 func (inv *ActionIpTrafficUserTopInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["ip_traffic[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
-		if inv.IsParameterSelected("Limit") {
-			ret["ip_traffic[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Role") {
-			ret["ip_traffic[role]"] = inv.Input.Role
-		}
-		if inv.IsParameterSelected("Protocol") {
-			ret["ip_traffic[protocol]"] = inv.Input.Protocol
-		}
-		if inv.IsParameterSelected("IpVersion") {
-			ret["ip_traffic[ip_version]"] = convertInt64ToString(inv.Input.IpVersion)
+		if inv.IsParameterSelected("Accumulate") {
+			ret["ip_traffic[accumulate]"] = inv.Input.Accumulate
 		}
 		if inv.IsParameterSelected("Environment") {
 			ret["ip_traffic[environment]"] = convertInt64ToString(inv.Input.Environment)
 		}
+		if inv.IsParameterSelected("From") {
+			ret["ip_traffic[from]"] = inv.Input.From
+		}
+		if inv.IsParameterSelected("IpVersion") {
+			ret["ip_traffic[ip_version]"] = convertInt64ToString(inv.Input.IpVersion)
+		}
+		if inv.IsParameterSelected("Limit") {
+			ret["ip_traffic[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
 		if inv.IsParameterSelected("Location") {
 			ret["ip_traffic[location]"] = convertInt64ToString(inv.Input.Location)
+		}
+		if inv.IsParameterSelected("Month") {
+			ret["ip_traffic[month]"] = convertInt64ToString(inv.Input.Month)
 		}
 		if inv.IsParameterSelected("Network") {
 			ret["ip_traffic[network]"] = convertInt64ToString(inv.Input.Network)
@@ -419,34 +419,34 @@ func (inv *ActionIpTrafficUserTopInvocation) convertInputToQueryParams(ret map[s
 		if inv.IsParameterSelected("Node") {
 			ret["ip_traffic[node]"] = convertInt64ToString(inv.Input.Node)
 		}
-		if inv.IsParameterSelected("Year") {
-			ret["ip_traffic[year]"] = convertInt64ToString(inv.Input.Year)
+		if inv.IsParameterSelected("Offset") {
+			ret["ip_traffic[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
-		if inv.IsParameterSelected("Month") {
-			ret["ip_traffic[month]"] = convertInt64ToString(inv.Input.Month)
+		if inv.IsParameterSelected("Protocol") {
+			ret["ip_traffic[protocol]"] = inv.Input.Protocol
 		}
-		if inv.IsParameterSelected("From") {
-			ret["ip_traffic[from]"] = inv.Input.From
+		if inv.IsParameterSelected("Role") {
+			ret["ip_traffic[role]"] = inv.Input.Role
 		}
 		if inv.IsParameterSelected("To") {
 			ret["ip_traffic[to]"] = inv.Input.To
 		}
-		if inv.IsParameterSelected("Accumulate") {
-			ret["ip_traffic[accumulate]"] = inv.Input.Accumulate
+		if inv.IsParameterSelected("Year") {
+			ret["ip_traffic[year]"] = convertInt64ToString(inv.Input.Year)
 		}
 	}
 }
 
 func (inv *ActionIpTrafficUserTopInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

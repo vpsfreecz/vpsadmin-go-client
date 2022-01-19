@@ -18,23 +18,12 @@ func NewActionDnsResolverUpdate(client *Client) *ActionDnsResolverUpdate {
 
 // ActionDnsResolverUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsResolverUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionDnsResolverUpdateMetaGlobalInput) SetNo(value bool) *ActionDnsResolverUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionDnsResolverUpdateMetaGlobalInput) SetIncludes(value string) *ActionDnsResolverUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionDnsResolverUpdateMetaGlobalInput) SetIncludes(value string) *Act
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionDnsResolverUpdateMetaGlobalInput) SetNo(value bool) *ActionDnsResolverUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -73,8 +73,8 @@ func (in *ActionDnsResolverUpdateMetaGlobalInput) AnySelected() bool {
 // ActionDnsResolverUpdateInput is a type for action input parameters
 type ActionDnsResolverUpdateInput struct {
 	IpAddr string `json:"ip_addr"`
-	Label string `json:"label"`
 	IsUniversal bool `json:"is_universal"`
+	Label string `json:"label"`
 	Location int64 `json:"location"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -91,17 +91,6 @@ func (in *ActionDnsResolverUpdateInput) SetIpAddr(value string) *ActionDnsResolv
 	in._selectedParameters["IpAddr"] = nil
 	return in
 }
-// SetLabel sets parameter Label to value and selects it for sending
-func (in *ActionDnsResolverUpdateInput) SetLabel(value string) *ActionDnsResolverUpdateInput {
-	in.Label = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Label"] = nil
-	return in
-}
 // SetIsUniversal sets parameter IsUniversal to value and selects it for sending
 func (in *ActionDnsResolverUpdateInput) SetIsUniversal(value bool) *ActionDnsResolverUpdateInput {
 	in.IsUniversal = value
@@ -111,6 +100,17 @@ func (in *ActionDnsResolverUpdateInput) SetIsUniversal(value bool) *ActionDnsRes
 	}
 
 	in._selectedParameters["IsUniversal"] = nil
+	return in
+}
+// SetLabel sets parameter Label to value and selects it for sending
+func (in *ActionDnsResolverUpdateInput) SetLabel(value string) *ActionDnsResolverUpdateInput {
+	in.Label = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Label"] = nil
 	return in
 }
 // SetLocation sets parameter Location to value and selects it for sending
@@ -158,8 +158,8 @@ type ActionDnsResolverUpdateRequest struct {
 type ActionDnsResolverUpdateOutput struct {
 	Id int64 `json:"id"`
 	IpAddr string `json:"ip_addr"`
-	Label string `json:"label"`
 	IsUniversal bool `json:"is_universal"`
+	Label string `json:"label"`
 	Location *ActionLocationShowOutput `json:"location"`
 }
 
@@ -287,11 +287,11 @@ func (inv *ActionDnsResolverUpdateInvocation) makeInputParams() map[string]inter
 		if inv.IsParameterSelected("IpAddr") {
 			ret["ip_addr"] = inv.Input.IpAddr
 		}
-		if inv.IsParameterSelected("Label") {
-			ret["label"] = inv.Input.Label
-		}
 		if inv.IsParameterSelected("IsUniversal") {
 			ret["is_universal"] = inv.Input.IsUniversal
+		}
+		if inv.IsParameterSelected("Label") {
+			ret["label"] = inv.Input.Label
 		}
 		if inv.IsParameterSelected("Location") {
 			ret["location"] = inv.Input.Location
@@ -305,11 +305,11 @@ func (inv *ActionDnsResolverUpdateInvocation) makeMetaInputParams() map[string]i
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

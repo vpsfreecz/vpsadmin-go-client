@@ -18,23 +18,12 @@ func NewActionDatasetSnapshotShow(client *Client) *ActionDatasetSnapshotShow {
 
 // ActionDatasetSnapshotShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetSnapshotShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionDatasetSnapshotShowMetaGlobalInput) SetNo(value bool) *ActionDatasetSnapshotShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionDatasetSnapshotShowMetaGlobalInput) SetIncludes(value string) *ActionDatasetSnapshotShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionDatasetSnapshotShowMetaGlobalInput) SetIncludes(value string) *A
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionDatasetSnapshotShowMetaGlobalInput) SetNo(value bool) *ActionDatasetSnapshotShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,14 +74,14 @@ func (in *ActionDatasetSnapshotShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetSnapshotShowOutput is a type for action output parameters
 type ActionDatasetSnapshotShowOutput struct {
-	Id int64 `json:"id"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Name string `json:"name"`
-	Label string `json:"label"`
 	CreatedAt string `json:"created_at"`
-	HistoryId int64 `json:"history_id"`
-	Mount *ActionVpsMountShowOutput `json:"mount"`
+	Dataset *ActionDatasetShowOutput `json:"dataset"`
 	Export *ActionExportShowOutput `json:"export"`
+	HistoryId int64 `json:"history_id"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	Mount *ActionVpsMountShowOutput `json:"mount"`
+	Name string `json:"name"`
 }
 
 
@@ -173,11 +173,11 @@ func (inv *ActionDatasetSnapshotShowInvocation) callAsQuery() (*ActionDatasetSna
 
 func (inv *ActionDatasetSnapshotShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

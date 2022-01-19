@@ -17,23 +17,12 @@ func NewActionNodeOverviewList(client *Client) *ActionNodeOverviewList {
 
 // ActionNodeOverviewListMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeOverviewListMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionNodeOverviewListMetaGlobalInput) SetNo(value bool) *ActionNodeOverviewListMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionNodeOverviewListMetaGlobalInput) SetIncludes(value string) *ActionNodeOverviewListMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionNodeOverviewListMetaGlobalInput) SetIncludes(value string) *Acti
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionNodeOverviewListMetaGlobalInput) SetNo(value bool) *ActionNodeOverviewListMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -73,50 +73,51 @@ func (in *ActionNodeOverviewListMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeOverviewListOutput is a type for action output parameters
 type ActionNodeOverviewListOutput struct {
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	DomainName string `json:"domain_name"`
-	Type string `json:"type"`
-	HypervisorType string `json:"hypervisor_type"`
-	Location *ActionLocationShowOutput `json:"location"`
-	IpAddr string `json:"ip_addr"`
-	NetInterface string `json:"net_interface"`
-	MaxTx int64 `json:"max_tx"`
-	MaxRx int64 `json:"max_rx"`
-	Cpus int64 `json:"cpus"`
-	TotalMemory int64 `json:"total_memory"`
-	TotalSwap int64 `json:"total_swap"`
-	MaxVps int64 `json:"max_vps"`
-	VePrivate string `json:"ve_private"`
-	Status bool `json:"status"`
-	Uptime int64 `json:"uptime"`
-	Loadavg float64 `json:"loadavg"`
-	ProcessCount int64 `json:"process_count"`
-	CpuUser float64 `json:"cpu_user"`
-	CpuNice float64 `json:"cpu_nice"`
-	CpuSystem float64 `json:"cpu_system"`
+	Active bool `json:"active"`
+	ArcC int64 `json:"arc_c"`
+	ArcCMax int64 `json:"arc_c_max"`
+	ArcHitpercent int64 `json:"arc_hitpercent"`
+	ArcSize int64 `json:"arc_size"`
+	CpuGuest float64 `json:"cpu_guest"`
 	CpuIdle float64 `json:"cpu_idle"`
 	CpuIowait float64 `json:"cpu_iowait"`
 	CpuIrq float64 `json:"cpu_irq"`
+	CpuNice float64 `json:"cpu_nice"`
 	CpuSoftirq float64 `json:"cpu_softirq"`
-	CpuGuest float64 `json:"cpu_guest"`
-	UsedMemory int64 `json:"used_memory"`
-	UsedSwap int64 `json:"used_swap"`
-	ArcCMax int64 `json:"arc_c_max"`
-	ArcC int64 `json:"arc_c"`
-	ArcSize int64 `json:"arc_size"`
-	ArcHitpercent int64 `json:"arc_hitpercent"`
-	Version string `json:"version"`
+	CpuSystem float64 `json:"cpu_system"`
+	CpuUser float64 `json:"cpu_user"`
+	Cpus int64 `json:"cpus"`
+	DomainName string `json:"domain_name"`
+	HypervisorType string `json:"hypervisor_type"`
+	Id int64 `json:"id"`
+	IpAddr string `json:"ip_addr"`
 	Kernel string `json:"kernel"`
 	LastReport string `json:"last_report"`
-	VpsRunning int64 `json:"vps_running"`
-	VpsStopped int64 `json:"vps_stopped"`
-	VpsDeleted int64 `json:"vps_deleted"`
-	VpsTotal int64 `json:"vps_total"`
-	VpsFree int64 `json:"vps_free"`
-	VpsMax int64 `json:"vps_max"`
+	Loadavg float64 `json:"loadavg"`
+	Location *ActionLocationShowOutput `json:"location"`
 	MaintenanceLock string `json:"maintenance_lock"`
 	MaintenanceLockReason string `json:"maintenance_lock_reason"`
+	MaxRx int64 `json:"max_rx"`
+	MaxTx int64 `json:"max_tx"`
+	MaxVps int64 `json:"max_vps"`
+	Name string `json:"name"`
+	NetInterface string `json:"net_interface"`
+	ProcessCount int64 `json:"process_count"`
+	Status bool `json:"status"`
+	TotalMemory int64 `json:"total_memory"`
+	TotalSwap int64 `json:"total_swap"`
+	Type string `json:"type"`
+	Uptime int64 `json:"uptime"`
+	UsedMemory int64 `json:"used_memory"`
+	UsedSwap int64 `json:"used_swap"`
+	VePrivate string `json:"ve_private"`
+	Version string `json:"version"`
+	VpsDeleted int64 `json:"vps_deleted"`
+	VpsFree int64 `json:"vps_free"`
+	VpsMax int64 `json:"vps_max"`
+	VpsRunning int64 `json:"vps_running"`
+	VpsStopped int64 `json:"vps_stopped"`
+	VpsTotal int64 `json:"vps_total"`
 }
 
 
@@ -202,11 +203,11 @@ func (inv *ActionNodeOverviewListInvocation) callAsQuery() (*ActionNodeOverviewL
 
 func (inv *ActionNodeOverviewListInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

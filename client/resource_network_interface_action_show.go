@@ -18,23 +18,12 @@ func NewActionNetworkInterfaceShow(client *Client) *ActionNetworkInterfaceShow {
 
 // ActionNetworkInterfaceShowMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkInterfaceShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionNetworkInterfaceShowMetaGlobalInput) SetNo(value bool) *ActionNetworkInterfaceShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionNetworkInterfaceShowMetaGlobalInput) SetIncludes(value string) *ActionNetworkInterfaceShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionNetworkInterfaceShowMetaGlobalInput) SetIncludes(value string) *
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionNetworkInterfaceShowMetaGlobalInput) SetNo(value bool) *ActionNetworkInterfaceShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -75,10 +75,10 @@ func (in *ActionNetworkInterfaceShowMetaGlobalInput) AnySelected() bool {
 // ActionNetworkInterfaceShowOutput is a type for action output parameters
 type ActionNetworkInterfaceShowOutput struct {
 	Id int64 `json:"id"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	Mac string `json:"mac"`
 	Name string `json:"name"`
 	Type string `json:"type"`
-	Mac string `json:"mac"`
+	Vps *ActionVpsShowOutput `json:"vps"`
 }
 
 
@@ -170,11 +170,11 @@ func (inv *ActionNetworkInterfaceShowInvocation) callAsQuery() (*ActionNetworkIn
 
 func (inv *ActionNetworkInterfaceShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

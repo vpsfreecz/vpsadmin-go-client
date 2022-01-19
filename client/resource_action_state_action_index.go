@@ -17,23 +17,12 @@ func NewActionActionStateIndex(client *Client) *ActionActionStateIndex {
 
 // ActionActionStateIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionActionStateIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionActionStateIndexMetaGlobalInput) SetNo(value bool) *ActionActionStateIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionActionStateIndexMetaGlobalInput) SetCount(value bool) *ActionActionStateIndexMetaGlobalInput {
 	in.Count = value
@@ -43,6 +32,17 @@ func (in *ActionActionStateIndexMetaGlobalInput) SetCount(value bool) *ActionAct
 	}
 
 	in._selectedParameters["Count"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionActionStateIndexMetaGlobalInput) SetNo(value bool) *ActionActionStateIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,24 +71,13 @@ func (in *ActionActionStateIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionActionStateIndexInput is a type for action input parameters
 type ActionActionStateIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	Order string `json:"order"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionActionStateIndexInput) SetOffset(value int64) *ActionActionStateIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionActionStateIndexInput) SetLimit(value int64) *ActionActionStateIndexInput {
 	in.Limit = value
@@ -98,6 +87,17 @@ func (in *ActionActionStateIndexInput) SetLimit(value int64) *ActionActionStateI
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionActionStateIndexInput) SetOffset(value int64) *ActionActionStateIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetOrder sets parameter Order to value and selects it for sending
@@ -138,15 +138,15 @@ func (in *ActionActionStateIndexInput) AnySelected() bool {
 
 // ActionActionStateIndexOutput is a type for action output parameters
 type ActionActionStateIndexOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Finished bool `json:"finished"`
-	Status bool `json:"status"`
-	Current int64 `json:"current"`
-	Total int64 `json:"total"`
-	Unit string `json:"unit"`
 	CanCancel bool `json:"can_cancel"`
 	CreatedAt string `json:"created_at"`
+	Current int64 `json:"current"`
+	Finished bool `json:"finished"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	Status bool `json:"status"`
+	Total int64 `json:"total"`
+	Unit string `json:"unit"`
 	UpdatedAt string `json:"updated_at"`
 }
 
@@ -252,11 +252,11 @@ func (inv *ActionActionStateIndexInvocation) callAsQuery() (*ActionActionStateIn
 
 func (inv *ActionActionStateIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["action_state[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["action_state[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["action_state[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["action_state[order]"] = inv.Input.Order
@@ -266,11 +266,11 @@ func (inv *ActionActionStateIndexInvocation) convertInputToQueryParams(ret map[s
 
 func (inv *ActionActionStateIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

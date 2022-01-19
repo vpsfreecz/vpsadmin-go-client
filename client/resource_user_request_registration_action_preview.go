@@ -18,23 +18,12 @@ func NewActionUserRequestRegistrationPreview(client *Client) *ActionUserRequestR
 
 // ActionUserRequestRegistrationPreviewMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestRegistrationPreviewMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserRequestRegistrationPreviewMetaGlobalInput) SetNo(value bool) *ActionUserRequestRegistrationPreviewMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserRequestRegistrationPreviewMetaGlobalInput) SetIncludes(value string) *ActionUserRequestRegistrationPreviewMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionUserRequestRegistrationPreviewMetaGlobalInput) SetIncludes(value
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserRequestRegistrationPreviewMetaGlobalInput) SetNo(value bool) *ActionUserRequestRegistrationPreviewMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,21 +74,21 @@ func (in *ActionUserRequestRegistrationPreviewMetaGlobalInput) AnySelected() boo
 
 // ActionUserRequestRegistrationPreviewOutput is a type for action output parameters
 type ActionUserRequestRegistrationPreviewOutput struct {
-	Id int64 `json:"id"`
-	AdminResponse string `json:"admin_response"`
-	Login string `json:"login"`
-	FullName string `json:"full_name"`
-	OrgName string `json:"org_name"`
-	OrgId string `json:"org_id"`
-	Email string `json:"email"`
 	Address string `json:"address"`
-	YearOfBirth int64 `json:"year_of_birth"`
-	How string `json:"how"`
-	Note string `json:"note"`
-	OsTemplate *ActionOsTemplateShowOutput `json:"os_template"`
-	Location *ActionLocationShowOutput `json:"location"`
+	AdminResponse string `json:"admin_response"`
 	Currency string `json:"currency"`
+	Email string `json:"email"`
+	FullName string `json:"full_name"`
+	How string `json:"how"`
+	Id int64 `json:"id"`
 	Language *ActionLanguageShowOutput `json:"language"`
+	Location *ActionLocationShowOutput `json:"location"`
+	Login string `json:"login"`
+	Note string `json:"note"`
+	OrgId string `json:"org_id"`
+	OrgName string `json:"org_name"`
+	OsTemplate *ActionOsTemplateShowOutput `json:"os_template"`
+	YearOfBirth int64 `json:"year_of_birth"`
 }
 
 
@@ -180,11 +180,11 @@ func (inv *ActionUserRequestRegistrationPreviewInvocation) callAsQuery() (*Actio
 
 func (inv *ActionUserRequestRegistrationPreviewInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

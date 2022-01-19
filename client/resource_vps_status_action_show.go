@@ -18,23 +18,12 @@ func NewActionVpsStatusShow(client *Client) *ActionVpsStatusShow {
 
 // ActionVpsStatusShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsStatusShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsStatusShowMetaGlobalInput) SetNo(value bool) *ActionVpsStatusShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsStatusShowMetaGlobalInput) SetIncludes(value string) *ActionVpsStatusShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionVpsStatusShowMetaGlobalInput) SetIncludes(value string) *ActionV
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsStatusShowMetaGlobalInput) SetNo(value bool) *ActionVpsStatusShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,25 +74,26 @@ func (in *ActionVpsStatusShowMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsStatusShowOutput is a type for action output parameters
 type ActionVpsStatusShowOutput struct {
-	Id int64 `json:"id"`
-	Status bool `json:"status"`
-	IsRunning bool `json:"is_running"`
-	Uptime int64 `json:"uptime"`
-	Loadavg float64 `json:"loadavg"`
-	ProcessCount int64 `json:"process_count"`
-	Cpus int64 `json:"cpus"`
-	CpuUser float64 `json:"cpu_user"`
-	CpuNice float64 `json:"cpu_nice"`
-	CpuSystem float64 `json:"cpu_system"`
 	CpuIdle float64 `json:"cpu_idle"`
 	CpuIowait float64 `json:"cpu_iowait"`
 	CpuIrq float64 `json:"cpu_irq"`
+	CpuNice float64 `json:"cpu_nice"`
 	CpuSoftirq float64 `json:"cpu_softirq"`
-	TotalMemory int64 `json:"total_memory"`
-	UsedMemory int64 `json:"used_memory"`
-	TotalSwap int64 `json:"total_swap"`
-	UsedSwap int64 `json:"used_swap"`
+	CpuSystem float64 `json:"cpu_system"`
+	CpuUser float64 `json:"cpu_user"`
+	Cpus int64 `json:"cpus"`
 	CreatedAt string `json:"created_at"`
+	Id int64 `json:"id"`
+	InRescueMode bool `json:"in_rescue_mode"`
+	IsRunning bool `json:"is_running"`
+	Loadavg float64 `json:"loadavg"`
+	ProcessCount int64 `json:"process_count"`
+	Status bool `json:"status"`
+	TotalMemory int64 `json:"total_memory"`
+	TotalSwap int64 `json:"total_swap"`
+	Uptime int64 `json:"uptime"`
+	UsedMemory int64 `json:"used_memory"`
+	UsedSwap int64 `json:"used_swap"`
 }
 
 
@@ -184,11 +185,11 @@ func (inv *ActionVpsStatusShowInvocation) callAsQuery() (*ActionVpsStatusShowRes
 
 func (inv *ActionVpsStatusShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

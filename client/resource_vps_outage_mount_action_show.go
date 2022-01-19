@@ -18,23 +18,12 @@ func NewActionVpsOutageMountShow(client *Client) *ActionVpsOutageMountShow {
 
 // ActionVpsOutageMountShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsOutageMountShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsOutageMountShowMetaGlobalInput) SetNo(value bool) *ActionVpsOutageMountShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsOutageMountShowMetaGlobalInput) SetIncludes(value string) *ActionVpsOutageMountShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionVpsOutageMountShowMetaGlobalInput) SetIncludes(value string) *Ac
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsOutageMountShowMetaGlobalInput) SetNo(value bool) *ActionVpsOutageMountShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -75,8 +75,8 @@ func (in *ActionVpsOutageMountShowMetaGlobalInput) AnySelected() bool {
 // ActionVpsOutageMountShowOutput is a type for action output parameters
 type ActionVpsOutageMountShowOutput struct {
 	Id int64 `json:"id"`
-	VpsOutage *ActionVpsOutageShowOutput `json:"vps_outage"`
 	Mount *ActionVpsMountShowOutput `json:"mount"`
+	VpsOutage *ActionVpsOutageShowOutput `json:"vps_outage"`
 }
 
 
@@ -168,11 +168,11 @@ func (inv *ActionVpsOutageMountShowInvocation) callAsQuery() (*ActionVpsOutageMo
 
 func (inv *ActionVpsOutageMountShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

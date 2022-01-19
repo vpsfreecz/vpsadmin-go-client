@@ -17,24 +17,13 @@ func NewActionOutageUpdateIndex(client *Client) *ActionOutageUpdateIndex {
 
 // ActionOutageUpdateIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageUpdateIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionOutageUpdateIndexMetaGlobalInput) SetNo(value bool) *ActionOutageUpdateIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionOutageUpdateIndexMetaGlobalInput) SetCount(value bool) *ActionOutageUpdateIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionOutageUpdateIndexMetaGlobalInput) SetIncludes(value string) *Act
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionOutageUpdateIndexMetaGlobalInput) SetNo(value bool) *ActionOutageUpdateIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,8 +83,8 @@ func (in *ActionOutageUpdateIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageUpdateIndexInput is a type for action input parameters
 type ActionOutageUpdateIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	Outage int64 `json:"outage"`
 	ReportedBy int64 `json:"reported_by"`
 	Since string `json:"since"`
@@ -92,17 +92,6 @@ type ActionOutageUpdateIndexInput struct {
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionOutageUpdateIndexInput) SetOffset(value int64) *ActionOutageUpdateIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionOutageUpdateIndexInput) SetLimit(value int64) *ActionOutageUpdateIndexInput {
 	in.Limit = value
@@ -112,6 +101,17 @@ func (in *ActionOutageUpdateIndexInput) SetLimit(value int64) *ActionOutageUpdat
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionOutageUpdateIndexInput) SetOffset(value int64) *ActionOutageUpdateIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetOutage sets parameter Outage to value and selects it for sending
@@ -174,20 +174,20 @@ func (in *ActionOutageUpdateIndexInput) AnySelected() bool {
 
 // ActionOutageUpdateIndexOutput is a type for action output parameters
 type ActionOutageUpdateIndexOutput struct {
+	BeginsAt string `json:"begins_at"`
+	CreatedAt string `json:"created_at"`
+	CsDescription string `json:"cs_description"`
+	CsSummary string `json:"cs_summary"`
+	Duration int64 `json:"duration"`
+	EnDescription string `json:"en_description"`
+	EnSummary string `json:"en_summary"`
+	FinishedAt string `json:"finished_at"`
 	Id int64 `json:"id"`
 	Outage *ActionOutageShowOutput `json:"outage"`
-	BeginsAt string `json:"begins_at"`
-	FinishedAt string `json:"finished_at"`
-	Duration int64 `json:"duration"`
-	State string `json:"state"`
-	Type string `json:"type"`
-	EnSummary string `json:"en_summary"`
-	EnDescription string `json:"en_description"`
-	CsSummary string `json:"cs_summary"`
-	CsDescription string `json:"cs_description"`
 	ReportedBy *ActionUserShowOutput `json:"reported_by"`
 	ReporterName string `json:"reporter_name"`
-	CreatedAt string `json:"created_at"`
+	State string `json:"state"`
+	Type string `json:"type"`
 }
 
 
@@ -292,11 +292,11 @@ func (inv *ActionOutageUpdateIndexInvocation) callAsQuery() (*ActionOutageUpdate
 
 func (inv *ActionOutageUpdateIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["outage_update[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["outage_update[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["outage_update[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Outage") {
 			ret["outage_update[outage]"] = convertInt64ToString(inv.Input.Outage)
@@ -312,14 +312,14 @@ func (inv *ActionOutageUpdateIndexInvocation) convertInputToQueryParams(ret map[
 
 func (inv *ActionOutageUpdateIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

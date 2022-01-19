@@ -18,23 +18,12 @@ func NewActionIpAddressUpdate(client *Client) *ActionIpAddressUpdate {
 
 // ActionIpAddressUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionIpAddressUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionIpAddressUpdateMetaGlobalInput) SetNo(value bool) *ActionIpAddressUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionIpAddressUpdateMetaGlobalInput) SetIncludes(value string) *ActionIpAddressUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionIpAddressUpdateMetaGlobalInput) SetIncludes(value string) *Actio
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionIpAddressUpdateMetaGlobalInput) SetNo(value bool) *ActionIpAddressUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,23 +72,23 @@ func (in *ActionIpAddressUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionIpAddressUpdateInput is a type for action input parameters
 type ActionIpAddressUpdateInput struct {
-	MaxTx int64 `json:"max_tx"`
-	MaxRx int64 `json:"max_rx"`
-	User int64 `json:"user"`
 	Environment int64 `json:"environment"`
+	MaxRx int64 `json:"max_rx"`
+	MaxTx int64 `json:"max_tx"`
+	User int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetMaxTx sets parameter MaxTx to value and selects it for sending
-func (in *ActionIpAddressUpdateInput) SetMaxTx(value int64) *ActionIpAddressUpdateInput {
-	in.MaxTx = value
+// SetEnvironment sets parameter Environment to value and selects it for sending
+func (in *ActionIpAddressUpdateInput) SetEnvironment(value int64) *ActionIpAddressUpdateInput {
+	in.Environment = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["MaxTx"] = nil
+	in._selectedParameters["Environment"] = nil
 	return in
 }
 // SetMaxRx sets parameter MaxRx to value and selects it for sending
@@ -102,6 +102,17 @@ func (in *ActionIpAddressUpdateInput) SetMaxRx(value int64) *ActionIpAddressUpda
 	in._selectedParameters["MaxRx"] = nil
 	return in
 }
+// SetMaxTx sets parameter MaxTx to value and selects it for sending
+func (in *ActionIpAddressUpdateInput) SetMaxTx(value int64) *ActionIpAddressUpdateInput {
+	in.MaxTx = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["MaxTx"] = nil
+	return in
+}
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionIpAddressUpdateInput) SetUser(value int64) *ActionIpAddressUpdateInput {
 	in.User = value
@@ -111,17 +122,6 @@ func (in *ActionIpAddressUpdateInput) SetUser(value int64) *ActionIpAddressUpdat
 	}
 
 	in._selectedParameters["User"] = nil
-	return in
-}
-// SetEnvironment sets parameter Environment to value and selects it for sending
-func (in *ActionIpAddressUpdateInput) SetEnvironment(value int64) *ActionIpAddressUpdateInput {
-	in.Environment = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Environment"] = nil
 	return in
 }
 
@@ -156,18 +156,18 @@ type ActionIpAddressUpdateRequest struct {
 
 // ActionIpAddressUpdateOutput is a type for action output parameters
 type ActionIpAddressUpdateOutput struct {
-	Id int64 `json:"id"`
-	NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Network *ActionNetworkShowOutput `json:"network"`
-	User *ActionUserShowOutput `json:"user"`
 	Addr string `json:"addr"`
-	Prefix int64 `json:"prefix"`
-	Size int64 `json:"size"`
-	RouteVia *ActionHostIpAddressShowOutput `json:"route_via"`
-	MaxTx int64 `json:"max_tx"`
-	MaxRx int64 `json:"max_rx"`
-	ClassId int64 `json:"class_id"`
 	ChargedEnvironment *ActionEnvironmentShowOutput `json:"charged_environment"`
+	ClassId int64 `json:"class_id"`
+	Id int64 `json:"id"`
+	MaxRx int64 `json:"max_rx"`
+	MaxTx int64 `json:"max_tx"`
+	Network *ActionNetworkShowOutput `json:"network"`
+	NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
+	Prefix int64 `json:"prefix"`
+	RouteVia *ActionHostIpAddressShowOutput `json:"route_via"`
+	Size int64 `json:"size"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 // ActionIpAddressUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -372,17 +372,17 @@ func (inv *ActionIpAddressUpdateInvocation) makeInputParams() map[string]interfa
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("MaxTx") {
-			ret["max_tx"] = inv.Input.MaxTx
+		if inv.IsParameterSelected("Environment") {
+			ret["environment"] = inv.Input.Environment
 		}
 		if inv.IsParameterSelected("MaxRx") {
 			ret["max_rx"] = inv.Input.MaxRx
 		}
+		if inv.IsParameterSelected("MaxTx") {
+			ret["max_tx"] = inv.Input.MaxTx
+		}
 		if inv.IsParameterSelected("User") {
 			ret["user"] = inv.Input.User
-		}
-		if inv.IsParameterSelected("Environment") {
-			ret["environment"] = inv.Input.Environment
 		}
 	}
 
@@ -393,11 +393,11 @@ func (inv *ActionIpAddressUpdateInvocation) makeMetaInputParams() map[string]int
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

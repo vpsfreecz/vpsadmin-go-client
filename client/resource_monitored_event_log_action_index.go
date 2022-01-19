@@ -18,24 +18,13 @@ func NewActionMonitoredEventLogIndex(client *Client) *ActionMonitoredEventLogInd
 
 // ActionMonitoredEventLogIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMonitoredEventLogIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionMonitoredEventLogIndexMetaGlobalInput) SetNo(value bool) *ActionMonitoredEventLogIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionMonitoredEventLogIndexMetaGlobalInput) SetCount(value bool) *ActionMonitoredEventLogIndexMetaGlobalInput {
 	in.Count = value
@@ -56,6 +45,17 @@ func (in *ActionMonitoredEventLogIndexMetaGlobalInput) SetIncludes(value string)
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMonitoredEventLogIndexMetaGlobalInput) SetNo(value bool) *ActionMonitoredEventLogIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -84,25 +84,14 @@ func (in *ActionMonitoredEventLogIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMonitoredEventLogIndexInput is a type for action input parameters
 type ActionMonitoredEventLogIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
-	Passed bool `json:"passed"`
+	Offset int64 `json:"offset"`
 	Order string `json:"order"`
+	Passed bool `json:"passed"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionMonitoredEventLogIndexInput) SetOffset(value int64) *ActionMonitoredEventLogIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionMonitoredEventLogIndexInput) SetLimit(value int64) *ActionMonitoredEventLogIndexInput {
 	in.Limit = value
@@ -114,15 +103,15 @@ func (in *ActionMonitoredEventLogIndexInput) SetLimit(value int64) *ActionMonito
 	in._selectedParameters["Limit"] = nil
 	return in
 }
-// SetPassed sets parameter Passed to value and selects it for sending
-func (in *ActionMonitoredEventLogIndexInput) SetPassed(value bool) *ActionMonitoredEventLogIndexInput {
-	in.Passed = value
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionMonitoredEventLogIndexInput) SetOffset(value int64) *ActionMonitoredEventLogIndexInput {
+	in.Offset = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Passed"] = nil
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetOrder sets parameter Order to value and selects it for sending
@@ -134,6 +123,17 @@ func (in *ActionMonitoredEventLogIndexInput) SetOrder(value string) *ActionMonit
 	}
 
 	in._selectedParameters["Order"] = nil
+	return in
+}
+// SetPassed sets parameter Passed to value and selects it for sending
+func (in *ActionMonitoredEventLogIndexInput) SetPassed(value bool) *ActionMonitoredEventLogIndexInput {
+	in.Passed = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Passed"] = nil
 	return in
 }
 
@@ -163,9 +163,9 @@ func (in *ActionMonitoredEventLogIndexInput) AnySelected() bool {
 
 // ActionMonitoredEventLogIndexOutput is a type for action output parameters
 type ActionMonitoredEventLogIndexOutput struct {
+	CreatedAt string `json:"created_at"`
 	Id int64 `json:"id"`
 	Passed bool `json:"passed"`
-	CreatedAt string `json:"created_at"`
 }
 
 
@@ -280,31 +280,31 @@ func (inv *ActionMonitoredEventLogIndexInvocation) callAsQuery() (*ActionMonitor
 
 func (inv *ActionMonitoredEventLogIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["log[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["log[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
-		if inv.IsParameterSelected("Passed") {
-			ret["log[passed]"] = convertBoolToString(inv.Input.Passed)
+		if inv.IsParameterSelected("Offset") {
+			ret["log[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["log[order]"] = inv.Input.Order
+		}
+		if inv.IsParameterSelected("Passed") {
+			ret["log[passed]"] = convertBoolToString(inv.Input.Passed)
 		}
 	}
 }
 
 func (inv *ActionMonitoredEventLogIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

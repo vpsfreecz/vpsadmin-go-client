@@ -18,24 +18,13 @@ func NewActionUserClusterResourcePackageItemIndex(client *Client) *ActionUserClu
 
 // ActionUserClusterResourcePackageItemIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserClusterResourcePackageItemIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserClusterResourcePackageItemIndexMetaGlobalInput) SetNo(value bool) *ActionUserClusterResourcePackageItemIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionUserClusterResourcePackageItemIndexMetaGlobalInput) SetCount(value bool) *ActionUserClusterResourcePackageItemIndexMetaGlobalInput {
 	in.Count = value
@@ -56,6 +45,17 @@ func (in *ActionUserClusterResourcePackageItemIndexMetaGlobalInput) SetIncludes(
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserClusterResourcePackageItemIndexMetaGlobalInput) SetNo(value bool) *ActionUserClusterResourcePackageItemIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -84,23 +84,12 @@ func (in *ActionUserClusterResourcePackageItemIndexMetaGlobalInput) AnySelected(
 
 // ActionUserClusterResourcePackageItemIndexInput is a type for action input parameters
 type ActionUserClusterResourcePackageItemIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserClusterResourcePackageItemIndexInput) SetOffset(value int64) *ActionUserClusterResourcePackageItemIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserClusterResourcePackageItemIndexInput) SetLimit(value int64) *ActionUserClusterResourcePackageItemIndexInput {
 	in.Limit = value
@@ -110,6 +99,17 @@ func (in *ActionUserClusterResourcePackageItemIndexInput) SetLimit(value int64) 
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionUserClusterResourcePackageItemIndexInput) SetOffset(value int64) *ActionUserClusterResourcePackageItemIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -139,8 +139,8 @@ func (in *ActionUserClusterResourcePackageItemIndexInput) AnySelected() bool {
 
 // ActionUserClusterResourcePackageItemIndexOutput is a type for action output parameters
 type ActionUserClusterResourcePackageItemIndexOutput struct {
-	Id int64 `json:"id"`
 	ClusterResource *ActionClusterResourceShowOutput `json:"cluster_resource"`
+	Id int64 `json:"id"`
 	Value int64 `json:"value"`
 }
 
@@ -256,25 +256,25 @@ func (inv *ActionUserClusterResourcePackageItemIndexInvocation) callAsQuery() (*
 
 func (inv *ActionUserClusterResourcePackageItemIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["item[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["item[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["item[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }
 
 func (inv *ActionUserClusterResourcePackageItemIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

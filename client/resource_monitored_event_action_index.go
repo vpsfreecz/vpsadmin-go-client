@@ -17,24 +17,13 @@ func NewActionMonitoredEventIndex(client *Client) *ActionMonitoredEventIndex {
 
 // ActionMonitoredEventIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMonitoredEventIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionMonitoredEventIndexMetaGlobalInput) SetNo(value bool) *ActionMonitoredEventIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionMonitoredEventIndexMetaGlobalInput) SetCount(value bool) *ActionMonitoredEventIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionMonitoredEventIndexMetaGlobalInput) SetIncludes(value string) *A
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMonitoredEventIndexMetaGlobalInput) SetNo(value bool) *ActionMonitoredEventIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,29 +83,18 @@ func (in *ActionMonitoredEventIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMonitoredEventIndexInput is a type for action input parameters
 type ActionMonitoredEventIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
 	Monitor string `json:"monitor"`
-	ObjectName string `json:"object_name"`
 	ObjectId int64 `json:"object_id"`
+	ObjectName string `json:"object_name"`
+	Offset int64 `json:"offset"`
+	Order string `json:"order"`
 	State string `json:"state"`
 	User int64 `json:"user"`
-	Order string `json:"order"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionMonitoredEventIndexInput) SetOffset(value int64) *ActionMonitoredEventIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionMonitoredEventIndexInput) SetLimit(value int64) *ActionMonitoredEventIndexInput {
 	in.Limit = value
@@ -128,6 +117,17 @@ func (in *ActionMonitoredEventIndexInput) SetMonitor(value string) *ActionMonito
 	in._selectedParameters["Monitor"] = nil
 	return in
 }
+// SetObjectId sets parameter ObjectId to value and selects it for sending
+func (in *ActionMonitoredEventIndexInput) SetObjectId(value int64) *ActionMonitoredEventIndexInput {
+	in.ObjectId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ObjectId"] = nil
+	return in
+}
 // SetObjectName sets parameter ObjectName to value and selects it for sending
 func (in *ActionMonitoredEventIndexInput) SetObjectName(value string) *ActionMonitoredEventIndexInput {
 	in.ObjectName = value
@@ -139,15 +139,26 @@ func (in *ActionMonitoredEventIndexInput) SetObjectName(value string) *ActionMon
 	in._selectedParameters["ObjectName"] = nil
 	return in
 }
-// SetObjectId sets parameter ObjectId to value and selects it for sending
-func (in *ActionMonitoredEventIndexInput) SetObjectId(value int64) *ActionMonitoredEventIndexInput {
-	in.ObjectId = value
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionMonitoredEventIndexInput) SetOffset(value int64) *ActionMonitoredEventIndexInput {
+	in.Offset = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["ObjectId"] = nil
+	in._selectedParameters["Offset"] = nil
+	return in
+}
+// SetOrder sets parameter Order to value and selects it for sending
+func (in *ActionMonitoredEventIndexInput) SetOrder(value string) *ActionMonitoredEventIndexInput {
+	in.Order = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Order"] = nil
 	return in
 }
 // SetState sets parameter State to value and selects it for sending
@@ -170,17 +181,6 @@ func (in *ActionMonitoredEventIndexInput) SetUser(value int64) *ActionMonitoredE
 	}
 
 	in._selectedParameters["User"] = nil
-	return in
-}
-// SetOrder sets parameter Order to value and selects it for sending
-func (in *ActionMonitoredEventIndexInput) SetOrder(value string) *ActionMonitoredEventIndexInput {
-	in.Order = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Order"] = nil
 	return in
 }
 
@@ -210,17 +210,17 @@ func (in *ActionMonitoredEventIndexInput) AnySelected() bool {
 
 // ActionMonitoredEventIndexOutput is a type for action output parameters
 type ActionMonitoredEventIndexOutput struct {
-	Id int64 `json:"id"`
-	Monitor string `json:"monitor"`
-	Label string `json:"label"`
-	Issue string `json:"issue"`
-	ObjectName string `json:"object_name"`
-	ObjectId int64 `json:"object_id"`
-	State string `json:"state"`
-	User *ActionUserShowOutput `json:"user"`
 	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
+	Id int64 `json:"id"`
+	Issue string `json:"issue"`
+	Label string `json:"label"`
+	Monitor string `json:"monitor"`
+	ObjectId int64 `json:"object_id"`
+	ObjectName string `json:"object_name"`
 	SavedUntil string `json:"saved_until"`
+	State string `json:"state"`
+	UpdatedAt string `json:"updated_at"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -325,20 +325,23 @@ func (inv *ActionMonitoredEventIndexInvocation) callAsQuery() (*ActionMonitoredE
 
 func (inv *ActionMonitoredEventIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["monitored_event[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["monitored_event[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 		if inv.IsParameterSelected("Monitor") {
 			ret["monitored_event[monitor]"] = inv.Input.Monitor
 		}
+		if inv.IsParameterSelected("ObjectId") {
+			ret["monitored_event[object_id]"] = convertInt64ToString(inv.Input.ObjectId)
+		}
 		if inv.IsParameterSelected("ObjectName") {
 			ret["monitored_event[object_name]"] = inv.Input.ObjectName
 		}
-		if inv.IsParameterSelected("ObjectId") {
-			ret["monitored_event[object_id]"] = convertInt64ToString(inv.Input.ObjectId)
+		if inv.IsParameterSelected("Offset") {
+			ret["monitored_event[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
+		if inv.IsParameterSelected("Order") {
+			ret["monitored_event[order]"] = inv.Input.Order
 		}
 		if inv.IsParameterSelected("State") {
 			ret["monitored_event[state]"] = inv.Input.State
@@ -346,22 +349,19 @@ func (inv *ActionMonitoredEventIndexInvocation) convertInputToQueryParams(ret ma
 		if inv.IsParameterSelected("User") {
 			ret["monitored_event[user]"] = convertInt64ToString(inv.Input.User)
 		}
-		if inv.IsParameterSelected("Order") {
-			ret["monitored_event[order]"] = inv.Input.Order
-		}
 	}
 }
 
 func (inv *ActionMonitoredEventIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

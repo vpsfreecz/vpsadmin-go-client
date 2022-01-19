@@ -18,23 +18,12 @@ func NewActionVpsConfigUpdate(client *Client) *ActionVpsConfigUpdate {
 
 // ActionVpsConfigUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsConfigUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsConfigUpdateMetaGlobalInput) SetNo(value bool) *ActionVpsConfigUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsConfigUpdateMetaGlobalInput) SetIncludes(value string) *ActionVpsConfigUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionVpsConfigUpdateMetaGlobalInput) SetIncludes(value string) *Actio
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsConfigUpdateMetaGlobalInput) SetNo(value bool) *ActionVpsConfigUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,22 +72,22 @@ func (in *ActionVpsConfigUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsConfigUpdateInput is a type for action input parameters
 type ActionVpsConfigUpdateInput struct {
-	Name string `json:"name"`
-	Label string `json:"label"`
 	Config string `json:"config"`
+	Label string `json:"label"`
+	Name string `json:"name"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetName sets parameter Name to value and selects it for sending
-func (in *ActionVpsConfigUpdateInput) SetName(value string) *ActionVpsConfigUpdateInput {
-	in.Name = value
+// SetConfig sets parameter Config to value and selects it for sending
+func (in *ActionVpsConfigUpdateInput) SetConfig(value string) *ActionVpsConfigUpdateInput {
+	in.Config = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Name"] = nil
+	in._selectedParameters["Config"] = nil
 	return in
 }
 // SetLabel sets parameter Label to value and selects it for sending
@@ -101,15 +101,15 @@ func (in *ActionVpsConfigUpdateInput) SetLabel(value string) *ActionVpsConfigUpd
 	in._selectedParameters["Label"] = nil
 	return in
 }
-// SetConfig sets parameter Config to value and selects it for sending
-func (in *ActionVpsConfigUpdateInput) SetConfig(value string) *ActionVpsConfigUpdateInput {
-	in.Config = value
+// SetName sets parameter Name to value and selects it for sending
+func (in *ActionVpsConfigUpdateInput) SetName(value string) *ActionVpsConfigUpdateInput {
+	in.Name = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Config"] = nil
+	in._selectedParameters["Name"] = nil
 	return in
 }
 
@@ -338,14 +338,14 @@ func (inv *ActionVpsConfigUpdateInvocation) makeInputParams() map[string]interfa
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Name") {
-			ret["name"] = inv.Input.Name
+		if inv.IsParameterSelected("Config") {
+			ret["config"] = inv.Input.Config
 		}
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
 		}
-		if inv.IsParameterSelected("Config") {
-			ret["config"] = inv.Input.Config
+		if inv.IsParameterSelected("Name") {
+			ret["name"] = inv.Input.Name
 		}
 	}
 
@@ -356,11 +356,11 @@ func (inv *ActionVpsConfigUpdateInvocation) makeMetaInputParams() map[string]int
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

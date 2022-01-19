@@ -18,23 +18,12 @@ func NewActionTransactionShow(client *Client) *ActionTransactionShow {
 
 // ActionTransactionShowMetaGlobalInput is a type for action global meta input parameters
 type ActionTransactionShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionTransactionShowMetaGlobalInput) SetNo(value bool) *ActionTransactionShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionTransactionShowMetaGlobalInput) SetIncludes(value string) *ActionTransactionShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionTransactionShowMetaGlobalInput) SetIncludes(value string) *Actio
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionTransactionShowMetaGlobalInput) SetNo(value bool) *ActionTransactionShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,23 +74,23 @@ func (in *ActionTransactionShowMetaGlobalInput) AnySelected() bool {
 
 // ActionTransactionShowOutput is a type for action output parameters
 type ActionTransactionShowOutput struct {
-	Id int64 `json:"id"`
-	TransactionChain *ActionTransactionChainShowOutput `json:"transaction_chain"`
-	Node *ActionNodeShowOutput `json:"node"`
-	User *ActionUserShowOutput `json:"user"`
-	Type int64 `json:"type"`
-	Name string `json:"name"`
-	Vps *ActionVpsShowOutput `json:"vps"`
-	DependsOn *ActionTransactionShowOutput `json:"depends_on"`
-	Urgent bool `json:"urgent"`
-	Priority int64 `json:"priority"`
-	Success int64 `json:"success"`
-	Done string `json:"done"`
-	Input string `json:"input"`
-	Output string `json:"output"`
 	CreatedAt string `json:"created_at"`
-	StartedAt string `json:"started_at"`
+	DependsOn *ActionTransactionShowOutput `json:"depends_on"`
+	Done string `json:"done"`
 	FinishedAt string `json:"finished_at"`
+	Id int64 `json:"id"`
+	Input string `json:"input"`
+	Name string `json:"name"`
+	Node *ActionNodeShowOutput `json:"node"`
+	Output string `json:"output"`
+	Priority int64 `json:"priority"`
+	StartedAt string `json:"started_at"`
+	Success int64 `json:"success"`
+	TransactionChain *ActionTransactionChainShowOutput `json:"transaction_chain"`
+	Type int64 `json:"type"`
+	Urgent bool `json:"urgent"`
+	User *ActionUserShowOutput `json:"user"`
+	Vps *ActionVpsShowOutput `json:"vps"`
 }
 
 
@@ -182,11 +182,11 @@ func (inv *ActionTransactionShowInvocation) callAsQuery() (*ActionTransactionSho
 
 func (inv *ActionTransactionShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

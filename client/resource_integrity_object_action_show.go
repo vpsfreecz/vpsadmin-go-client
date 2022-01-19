@@ -18,23 +18,12 @@ func NewActionIntegrityObjectShow(client *Client) *ActionIntegrityObjectShow {
 
 // ActionIntegrityObjectShowMetaGlobalInput is a type for action global meta input parameters
 type ActionIntegrityObjectShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionIntegrityObjectShowMetaGlobalInput) SetNo(value bool) *ActionIntegrityObjectShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionIntegrityObjectShowMetaGlobalInput) SetIncludes(value string) *ActionIntegrityObjectShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionIntegrityObjectShowMetaGlobalInput) SetIncludes(value string) *A
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionIntegrityObjectShowMetaGlobalInput) SetNo(value bool) *ActionIntegrityObjectShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,17 +74,17 @@ func (in *ActionIntegrityObjectShowMetaGlobalInput) AnySelected() bool {
 
 // ActionIntegrityObjectShowOutput is a type for action output parameters
 type ActionIntegrityObjectShowOutput struct {
+	CheckedFacts int64 `json:"checked_facts"`
+	ClassName string `json:"class_name"`
+	CreatedAt string `json:"created_at"`
+	FalseFacts int64 `json:"false_facts"`
 	Id int64 `json:"id"`
 	IntegrityCheck *ActionIntegrityCheckShowOutput `json:"integrity_check"`
 	Node *ActionNodeShowOutput `json:"node"`
-	ClassName string `json:"class_name"`
-	RowId int64 `json:"row_id"`
 	Parent *ActionIntegrityObjectShowOutput `json:"parent"`
+	RowId int64 `json:"row_id"`
 	Status string `json:"status"`
-	CheckedFacts int64 `json:"checked_facts"`
 	TrueFacts int64 `json:"true_facts"`
-	FalseFacts int64 `json:"false_facts"`
-	CreatedAt string `json:"created_at"`
 	UpdatedAt string `json:"updated_at"`
 }
 
@@ -177,11 +177,11 @@ func (inv *ActionIntegrityObjectShowInvocation) callAsQuery() (*ActionIntegrityO
 
 func (inv *ActionIntegrityObjectShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

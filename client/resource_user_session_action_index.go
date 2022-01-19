@@ -17,24 +17,13 @@ func NewActionUserSessionIndex(client *Client) *ActionUserSessionIndex {
 
 // ActionUserSessionIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserSessionIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserSessionIndexMetaGlobalInput) SetNo(value bool) *ActionUserSessionIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionUserSessionIndexMetaGlobalInput) SetCount(value bool) *ActionUserSessionIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionUserSessionIndexMetaGlobalInput) SetIncludes(value string) *Acti
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserSessionIndexMetaGlobalInput) SetNo(value bool) *ActionUserSessionIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,62 +83,29 @@ func (in *ActionUserSessionIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserSessionIndexInput is a type for action input parameters
 type ActionUserSessionIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
-	User int64 `json:"user"`
-	AuthType string `json:"auth_type"`
-	ApiIpAddr string `json:"api_ip_addr"`
-	ClientIpAddr string `json:"client_ip_addr"`
-	UserAgent string `json:"user_agent"`
-	ClientVersion string `json:"client_version"`
 	Admin int64 `json:"admin"`
+	ApiIpAddr string `json:"api_ip_addr"`
+	AuthType string `json:"auth_type"`
+	ClientIpAddr string `json:"client_ip_addr"`
+	ClientVersion string `json:"client_version"`
 	IpAddr string `json:"ip_addr"`
+	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
+	User int64 `json:"user"`
+	UserAgent string `json:"user_agent"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserSessionIndexInput) SetOffset(value int64) *ActionUserSessionIndexInput {
-	in.Offset = value
+// SetAdmin sets parameter Admin to value and selects it for sending
+func (in *ActionUserSessionIndexInput) SetAdmin(value int64) *ActionUserSessionIndexInput {
+	in.Admin = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-// SetLimit sets parameter Limit to value and selects it for sending
-func (in *ActionUserSessionIndexInput) SetLimit(value int64) *ActionUserSessionIndexInput {
-	in.Limit = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Limit"] = nil
-	return in
-}
-// SetUser sets parameter User to value and selects it for sending
-func (in *ActionUserSessionIndexInput) SetUser(value int64) *ActionUserSessionIndexInput {
-	in.User = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["User"] = nil
-	return in
-}
-// SetAuthType sets parameter AuthType to value and selects it for sending
-func (in *ActionUserSessionIndexInput) SetAuthType(value string) *ActionUserSessionIndexInput {
-	in.AuthType = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["AuthType"] = nil
+	in._selectedParameters["Admin"] = nil
 	return in
 }
 // SetApiIpAddr sets parameter ApiIpAddr to value and selects it for sending
@@ -152,6 +119,17 @@ func (in *ActionUserSessionIndexInput) SetApiIpAddr(value string) *ActionUserSes
 	in._selectedParameters["ApiIpAddr"] = nil
 	return in
 }
+// SetAuthType sets parameter AuthType to value and selects it for sending
+func (in *ActionUserSessionIndexInput) SetAuthType(value string) *ActionUserSessionIndexInput {
+	in.AuthType = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AuthType"] = nil
+	return in
+}
 // SetClientIpAddr sets parameter ClientIpAddr to value and selects it for sending
 func (in *ActionUserSessionIndexInput) SetClientIpAddr(value string) *ActionUserSessionIndexInput {
 	in.ClientIpAddr = value
@@ -161,17 +139,6 @@ func (in *ActionUserSessionIndexInput) SetClientIpAddr(value string) *ActionUser
 	}
 
 	in._selectedParameters["ClientIpAddr"] = nil
-	return in
-}
-// SetUserAgent sets parameter UserAgent to value and selects it for sending
-func (in *ActionUserSessionIndexInput) SetUserAgent(value string) *ActionUserSessionIndexInput {
-	in.UserAgent = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["UserAgent"] = nil
 	return in
 }
 // SetClientVersion sets parameter ClientVersion to value and selects it for sending
@@ -185,17 +152,6 @@ func (in *ActionUserSessionIndexInput) SetClientVersion(value string) *ActionUse
 	in._selectedParameters["ClientVersion"] = nil
 	return in
 }
-// SetAdmin sets parameter Admin to value and selects it for sending
-func (in *ActionUserSessionIndexInput) SetAdmin(value int64) *ActionUserSessionIndexInput {
-	in.Admin = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Admin"] = nil
-	return in
-}
 // SetIpAddr sets parameter IpAddr to value and selects it for sending
 func (in *ActionUserSessionIndexInput) SetIpAddr(value string) *ActionUserSessionIndexInput {
 	in.IpAddr = value
@@ -205,6 +161,50 @@ func (in *ActionUserSessionIndexInput) SetIpAddr(value string) *ActionUserSessio
 	}
 
 	in._selectedParameters["IpAddr"] = nil
+	return in
+}
+// SetLimit sets parameter Limit to value and selects it for sending
+func (in *ActionUserSessionIndexInput) SetLimit(value int64) *ActionUserSessionIndexInput {
+	in.Limit = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionUserSessionIndexInput) SetOffset(value int64) *ActionUserSessionIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
+	return in
+}
+// SetUser sets parameter User to value and selects it for sending
+func (in *ActionUserSessionIndexInput) SetUser(value int64) *ActionUserSessionIndexInput {
+	in.User = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["User"] = nil
+	return in
+}
+// SetUserAgent sets parameter UserAgent to value and selects it for sending
+func (in *ActionUserSessionIndexInput) SetUserAgent(value string) *ActionUserSessionIndexInput {
+	in.UserAgent = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["UserAgent"] = nil
 	return in
 }
 
@@ -234,21 +234,21 @@ func (in *ActionUserSessionIndexInput) AnySelected() bool {
 
 // ActionUserSessionIndexOutput is a type for action output parameters
 type ActionUserSessionIndexOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	AuthType string `json:"auth_type"`
+	Admin *ActionUserShowOutput `json:"admin"`
 	ApiIpAddr string `json:"api_ip_addr"`
 	ApiIpPtr string `json:"api_ip_ptr"`
+	AuthType string `json:"auth_type"`
 	ClientIpAddr string `json:"client_ip_addr"`
 	ClientIpPtr string `json:"client_ip_ptr"`
-	UserAgent string `json:"user_agent"`
 	ClientVersion string `json:"client_version"`
+	ClosedAt string `json:"closed_at"`
+	CreatedAt string `json:"created_at"`
+	Id int64 `json:"id"`
+	LastRequestAt string `json:"last_request_at"`
 	SessionToken *ActionSessionTokenShowOutput `json:"session_token"`
 	SessionTokenStr string `json:"session_token_str"`
-	CreatedAt string `json:"created_at"`
-	LastRequestAt string `json:"last_request_at"`
-	ClosedAt string `json:"closed_at"`
-	Admin *ActionUserShowOutput `json:"admin"`
+	User *ActionUserShowOutput `json:"user"`
+	UserAgent string `json:"user_agent"`
 }
 
 
@@ -353,49 +353,49 @@ func (inv *ActionUserSessionIndexInvocation) callAsQuery() (*ActionUserSessionIn
 
 func (inv *ActionUserSessionIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["user_session[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
-		if inv.IsParameterSelected("Limit") {
-			ret["user_session[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("User") {
-			ret["user_session[user]"] = convertInt64ToString(inv.Input.User)
-		}
-		if inv.IsParameterSelected("AuthType") {
-			ret["user_session[auth_type]"] = inv.Input.AuthType
+		if inv.IsParameterSelected("Admin") {
+			ret["user_session[admin]"] = convertInt64ToString(inv.Input.Admin)
 		}
 		if inv.IsParameterSelected("ApiIpAddr") {
 			ret["user_session[api_ip_addr]"] = inv.Input.ApiIpAddr
 		}
+		if inv.IsParameterSelected("AuthType") {
+			ret["user_session[auth_type]"] = inv.Input.AuthType
+		}
 		if inv.IsParameterSelected("ClientIpAddr") {
 			ret["user_session[client_ip_addr]"] = inv.Input.ClientIpAddr
-		}
-		if inv.IsParameterSelected("UserAgent") {
-			ret["user_session[user_agent]"] = inv.Input.UserAgent
 		}
 		if inv.IsParameterSelected("ClientVersion") {
 			ret["user_session[client_version]"] = inv.Input.ClientVersion
 		}
-		if inv.IsParameterSelected("Admin") {
-			ret["user_session[admin]"] = convertInt64ToString(inv.Input.Admin)
-		}
 		if inv.IsParameterSelected("IpAddr") {
 			ret["user_session[ip_addr]"] = inv.Input.IpAddr
+		}
+		if inv.IsParameterSelected("Limit") {
+			ret["user_session[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["user_session[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
+		if inv.IsParameterSelected("User") {
+			ret["user_session[user]"] = convertInt64ToString(inv.Input.User)
+		}
+		if inv.IsParameterSelected("UserAgent") {
+			ret["user_session[user_agent]"] = inv.Input.UserAgent
 		}
 	}
 }
 
 func (inv *ActionUserSessionIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

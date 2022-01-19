@@ -5,6 +5,10 @@ type ResourceIntegrityCheck struct {
 	// Pointer to client
 	Client *Client
 
+	// Action Integrity_check#Create
+	Create *ActionIntegrityCheckCreate
+	// Action Integrity_check#Create
+	New *ActionIntegrityCheckCreate
 	// Action Integrity_check#Index
 	Index *ActionIntegrityCheckIndex
 	// Action Integrity_check#Index
@@ -13,24 +17,20 @@ type ResourceIntegrityCheck struct {
 	Show *ActionIntegrityCheckShow
 	// Action Integrity_check#Show
 	Find *ActionIntegrityCheckShow
-	// Action Integrity_check#Create
-	Create *ActionIntegrityCheckCreate
-	// Action Integrity_check#Create
-	New *ActionIntegrityCheckCreate
 }
 
 func NewResourceIntegrityCheck(client *Client) *ResourceIntegrityCheck {
+	actionCreate := NewActionIntegrityCheckCreate(client)
 	actionIndex := NewActionIntegrityCheckIndex(client)
 	actionShow := NewActionIntegrityCheckShow(client)
-	actionCreate := NewActionIntegrityCheckCreate(client)
 
 	return &ResourceIntegrityCheck{
 		Client: client,
+		Create: actionCreate,
+		New: actionCreate,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Create: actionCreate,
-		New: actionCreate,
 	}
 }

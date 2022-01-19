@@ -17,24 +17,13 @@ func NewActionMailRecipientIndex(client *Client) *ActionMailRecipientIndex {
 
 // ActionMailRecipientIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMailRecipientIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionMailRecipientIndexMetaGlobalInput) SetNo(value bool) *ActionMailRecipientIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionMailRecipientIndexMetaGlobalInput) SetCount(value bool) *ActionMailRecipientIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionMailRecipientIndexMetaGlobalInput) SetIncludes(value string) *Ac
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMailRecipientIndexMetaGlobalInput) SetNo(value bool) *ActionMailRecipientIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,23 +83,12 @@ func (in *ActionMailRecipientIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMailRecipientIndexInput is a type for action input parameters
 type ActionMailRecipientIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionMailRecipientIndexInput) SetOffset(value int64) *ActionMailRecipientIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionMailRecipientIndexInput) SetLimit(value int64) *ActionMailRecipientIndexInput {
 	in.Limit = value
@@ -109,6 +98,17 @@ func (in *ActionMailRecipientIndexInput) SetLimit(value int64) *ActionMailRecipi
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionMailRecipientIndexInput) SetOffset(value int64) *ActionMailRecipientIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -138,11 +138,11 @@ func (in *ActionMailRecipientIndexInput) AnySelected() bool {
 
 // ActionMailRecipientIndexOutput is a type for action output parameters
 type ActionMailRecipientIndexOutput struct {
+	Bcc string `json:"bcc"`
+	Cc string `json:"cc"`
 	Id int64 `json:"id"`
 	Label string `json:"label"`
 	To string `json:"to"`
-	Cc string `json:"cc"`
-	Bcc string `json:"bcc"`
 }
 
 
@@ -247,25 +247,25 @@ func (inv *ActionMailRecipientIndexInvocation) callAsQuery() (*ActionMailRecipie
 
 func (inv *ActionMailRecipientIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["mail_recipient[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["mail_recipient[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["mail_recipient[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }
 
 func (inv *ActionMailRecipientIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

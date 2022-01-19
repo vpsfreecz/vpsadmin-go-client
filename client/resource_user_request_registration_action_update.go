@@ -18,23 +18,12 @@ func NewActionUserRequestRegistrationUpdate(client *Client) *ActionUserRequestRe
 
 // ActionUserRequestRegistrationUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestRegistrationUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserRequestRegistrationUpdateMetaGlobalInput) SetNo(value bool) *ActionUserRequestRegistrationUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateMetaGlobalInput) SetIncludes(value string) *ActionUserRequestRegistrationUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionUserRequestRegistrationUpdateMetaGlobalInput) SetIncludes(value 
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserRequestRegistrationUpdateMetaGlobalInput) SetNo(value bool) *ActionUserRequestRegistrationUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,78 +72,23 @@ func (in *ActionUserRequestRegistrationUpdateMetaGlobalInput) AnySelected() bool
 
 // ActionUserRequestRegistrationUpdateInput is a type for action input parameters
 type ActionUserRequestRegistrationUpdateInput struct {
-	Login string `json:"login"`
-	FullName string `json:"full_name"`
-	OrgName string `json:"org_name"`
-	OrgId string `json:"org_id"`
-	Email string `json:"email"`
 	Address string `json:"address"`
-	YearOfBirth int64 `json:"year_of_birth"`
-	How string `json:"how"`
-	Note string `json:"note"`
-	OsTemplate int64 `json:"os_template"`
-	Location int64 `json:"location"`
 	Currency string `json:"currency"`
+	Email string `json:"email"`
+	FullName string `json:"full_name"`
+	How string `json:"how"`
 	Language int64 `json:"language"`
+	Location int64 `json:"location"`
+	Login string `json:"login"`
+	Note string `json:"note"`
+	OrgId string `json:"org_id"`
+	OrgName string `json:"org_name"`
+	OsTemplate int64 `json:"os_template"`
+	YearOfBirth int64 `json:"year_of_birth"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetLogin sets parameter Login to value and selects it for sending
-func (in *ActionUserRequestRegistrationUpdateInput) SetLogin(value string) *ActionUserRequestRegistrationUpdateInput {
-	in.Login = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Login"] = nil
-	return in
-}
-// SetFullName sets parameter FullName to value and selects it for sending
-func (in *ActionUserRequestRegistrationUpdateInput) SetFullName(value string) *ActionUserRequestRegistrationUpdateInput {
-	in.FullName = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["FullName"] = nil
-	return in
-}
-// SetOrgName sets parameter OrgName to value and selects it for sending
-func (in *ActionUserRequestRegistrationUpdateInput) SetOrgName(value string) *ActionUserRequestRegistrationUpdateInput {
-	in.OrgName = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["OrgName"] = nil
-	return in
-}
-// SetOrgId sets parameter OrgId to value and selects it for sending
-func (in *ActionUserRequestRegistrationUpdateInput) SetOrgId(value string) *ActionUserRequestRegistrationUpdateInput {
-	in.OrgId = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["OrgId"] = nil
-	return in
-}
-// SetEmail sets parameter Email to value and selects it for sending
-func (in *ActionUserRequestRegistrationUpdateInput) SetEmail(value string) *ActionUserRequestRegistrationUpdateInput {
-	in.Email = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Email"] = nil
-	return in
-}
 // SetAddress sets parameter Address to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetAddress(value string) *ActionUserRequestRegistrationUpdateInput {
 	in.Address = value
@@ -153,61 +98,6 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetAddress(value string) *Ac
 	}
 
 	in._selectedParameters["Address"] = nil
-	return in
-}
-// SetYearOfBirth sets parameter YearOfBirth to value and selects it for sending
-func (in *ActionUserRequestRegistrationUpdateInput) SetYearOfBirth(value int64) *ActionUserRequestRegistrationUpdateInput {
-	in.YearOfBirth = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["YearOfBirth"] = nil
-	return in
-}
-// SetHow sets parameter How to value and selects it for sending
-func (in *ActionUserRequestRegistrationUpdateInput) SetHow(value string) *ActionUserRequestRegistrationUpdateInput {
-	in.How = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["How"] = nil
-	return in
-}
-// SetNote sets parameter Note to value and selects it for sending
-func (in *ActionUserRequestRegistrationUpdateInput) SetNote(value string) *ActionUserRequestRegistrationUpdateInput {
-	in.Note = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Note"] = nil
-	return in
-}
-// SetOsTemplate sets parameter OsTemplate to value and selects it for sending
-func (in *ActionUserRequestRegistrationUpdateInput) SetOsTemplate(value int64) *ActionUserRequestRegistrationUpdateInput {
-	in.OsTemplate = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["OsTemplate"] = nil
-	return in
-}
-// SetLocation sets parameter Location to value and selects it for sending
-func (in *ActionUserRequestRegistrationUpdateInput) SetLocation(value int64) *ActionUserRequestRegistrationUpdateInput {
-	in.Location = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Location"] = nil
 	return in
 }
 // SetCurrency sets parameter Currency to value and selects it for sending
@@ -221,6 +111,39 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetCurrency(value string) *A
 	in._selectedParameters["Currency"] = nil
 	return in
 }
+// SetEmail sets parameter Email to value and selects it for sending
+func (in *ActionUserRequestRegistrationUpdateInput) SetEmail(value string) *ActionUserRequestRegistrationUpdateInput {
+	in.Email = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Email"] = nil
+	return in
+}
+// SetFullName sets parameter FullName to value and selects it for sending
+func (in *ActionUserRequestRegistrationUpdateInput) SetFullName(value string) *ActionUserRequestRegistrationUpdateInput {
+	in.FullName = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FullName"] = nil
+	return in
+}
+// SetHow sets parameter How to value and selects it for sending
+func (in *ActionUserRequestRegistrationUpdateInput) SetHow(value string) *ActionUserRequestRegistrationUpdateInput {
+	in.How = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["How"] = nil
+	return in
+}
 // SetLanguage sets parameter Language to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetLanguage(value int64) *ActionUserRequestRegistrationUpdateInput {
 	in.Language = value
@@ -230,6 +153,83 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetLanguage(value int64) *Ac
 	}
 
 	in._selectedParameters["Language"] = nil
+	return in
+}
+// SetLocation sets parameter Location to value and selects it for sending
+func (in *ActionUserRequestRegistrationUpdateInput) SetLocation(value int64) *ActionUserRequestRegistrationUpdateInput {
+	in.Location = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Location"] = nil
+	return in
+}
+// SetLogin sets parameter Login to value and selects it for sending
+func (in *ActionUserRequestRegistrationUpdateInput) SetLogin(value string) *ActionUserRequestRegistrationUpdateInput {
+	in.Login = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Login"] = nil
+	return in
+}
+// SetNote sets parameter Note to value and selects it for sending
+func (in *ActionUserRequestRegistrationUpdateInput) SetNote(value string) *ActionUserRequestRegistrationUpdateInput {
+	in.Note = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Note"] = nil
+	return in
+}
+// SetOrgId sets parameter OrgId to value and selects it for sending
+func (in *ActionUserRequestRegistrationUpdateInput) SetOrgId(value string) *ActionUserRequestRegistrationUpdateInput {
+	in.OrgId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["OrgId"] = nil
+	return in
+}
+// SetOrgName sets parameter OrgName to value and selects it for sending
+func (in *ActionUserRequestRegistrationUpdateInput) SetOrgName(value string) *ActionUserRequestRegistrationUpdateInput {
+	in.OrgName = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["OrgName"] = nil
+	return in
+}
+// SetOsTemplate sets parameter OsTemplate to value and selects it for sending
+func (in *ActionUserRequestRegistrationUpdateInput) SetOsTemplate(value int64) *ActionUserRequestRegistrationUpdateInput {
+	in.OsTemplate = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["OsTemplate"] = nil
+	return in
+}
+// SetYearOfBirth sets parameter YearOfBirth to value and selects it for sending
+func (in *ActionUserRequestRegistrationUpdateInput) SetYearOfBirth(value int64) *ActionUserRequestRegistrationUpdateInput {
+	in.YearOfBirth = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["YearOfBirth"] = nil
 	return in
 }
 
@@ -264,20 +264,20 @@ type ActionUserRequestRegistrationUpdateRequest struct {
 
 // ActionUserRequestRegistrationUpdateOutput is a type for action output parameters
 type ActionUserRequestRegistrationUpdateOutput struct {
-	Id int64 `json:"id"`
-	Login string `json:"login"`
-	FullName string `json:"full_name"`
-	OrgName string `json:"org_name"`
-	OrgId string `json:"org_id"`
-	Email string `json:"email"`
 	Address string `json:"address"`
-	YearOfBirth int64 `json:"year_of_birth"`
-	How string `json:"how"`
-	Note string `json:"note"`
-	OsTemplate *ActionOsTemplateShowOutput `json:"os_template"`
-	Location *ActionLocationShowOutput `json:"location"`
 	Currency string `json:"currency"`
+	Email string `json:"email"`
+	FullName string `json:"full_name"`
+	How string `json:"how"`
+	Id int64 `json:"id"`
 	Language *ActionLanguageShowOutput `json:"language"`
+	Location *ActionLocationShowOutput `json:"location"`
+	Login string `json:"login"`
+	Note string `json:"note"`
+	OrgId string `json:"org_id"`
+	OrgName string `json:"org_name"`
+	OsTemplate *ActionOsTemplateShowOutput `json:"os_template"`
+	YearOfBirth int64 `json:"year_of_birth"`
 }
 
 
@@ -401,44 +401,44 @@ func (inv *ActionUserRequestRegistrationUpdateInvocation) makeInputParams() map[
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Login") {
-			ret["login"] = inv.Input.Login
-		}
-		if inv.IsParameterSelected("FullName") {
-			ret["full_name"] = inv.Input.FullName
-		}
-		if inv.IsParameterSelected("OrgName") {
-			ret["org_name"] = inv.Input.OrgName
-		}
-		if inv.IsParameterSelected("OrgId") {
-			ret["org_id"] = inv.Input.OrgId
-		}
-		if inv.IsParameterSelected("Email") {
-			ret["email"] = inv.Input.Email
-		}
 		if inv.IsParameterSelected("Address") {
 			ret["address"] = inv.Input.Address
-		}
-		if inv.IsParameterSelected("YearOfBirth") {
-			ret["year_of_birth"] = inv.Input.YearOfBirth
-		}
-		if inv.IsParameterSelected("How") {
-			ret["how"] = inv.Input.How
-		}
-		if inv.IsParameterSelected("Note") {
-			ret["note"] = inv.Input.Note
-		}
-		if inv.IsParameterSelected("OsTemplate") {
-			ret["os_template"] = inv.Input.OsTemplate
-		}
-		if inv.IsParameterSelected("Location") {
-			ret["location"] = inv.Input.Location
 		}
 		if inv.IsParameterSelected("Currency") {
 			ret["currency"] = inv.Input.Currency
 		}
+		if inv.IsParameterSelected("Email") {
+			ret["email"] = inv.Input.Email
+		}
+		if inv.IsParameterSelected("FullName") {
+			ret["full_name"] = inv.Input.FullName
+		}
+		if inv.IsParameterSelected("How") {
+			ret["how"] = inv.Input.How
+		}
 		if inv.IsParameterSelected("Language") {
 			ret["language"] = inv.Input.Language
+		}
+		if inv.IsParameterSelected("Location") {
+			ret["location"] = inv.Input.Location
+		}
+		if inv.IsParameterSelected("Login") {
+			ret["login"] = inv.Input.Login
+		}
+		if inv.IsParameterSelected("Note") {
+			ret["note"] = inv.Input.Note
+		}
+		if inv.IsParameterSelected("OrgId") {
+			ret["org_id"] = inv.Input.OrgId
+		}
+		if inv.IsParameterSelected("OrgName") {
+			ret["org_name"] = inv.Input.OrgName
+		}
+		if inv.IsParameterSelected("OsTemplate") {
+			ret["os_template"] = inv.Input.OsTemplate
+		}
+		if inv.IsParameterSelected("YearOfBirth") {
+			ret["year_of_birth"] = inv.Input.YearOfBirth
 		}
 	}
 
@@ -449,11 +449,11 @@ func (inv *ActionUserRequestRegistrationUpdateInvocation) makeMetaInputParams() 
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

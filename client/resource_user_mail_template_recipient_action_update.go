@@ -18,23 +18,12 @@ func NewActionUserMailTemplateRecipientUpdate(client *Client) *ActionUserMailTem
 
 // ActionUserMailTemplateRecipientUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserMailTemplateRecipientUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserMailTemplateRecipientUpdateMetaGlobalInput) SetNo(value bool) *ActionUserMailTemplateRecipientUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserMailTemplateRecipientUpdateMetaGlobalInput) SetIncludes(value string) *ActionUserMailTemplateRecipientUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionUserMailTemplateRecipientUpdateMetaGlobalInput) SetIncludes(valu
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserMailTemplateRecipientUpdateMetaGlobalInput) SetNo(value bool) *ActionUserMailTemplateRecipientUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,23 +72,12 @@ func (in *ActionUserMailTemplateRecipientUpdateMetaGlobalInput) AnySelected() bo
 
 // ActionUserMailTemplateRecipientUpdateInput is a type for action input parameters
 type ActionUserMailTemplateRecipientUpdateInput struct {
-	To string `json:"to"`
 	Enabled bool `json:"enabled"`
+	To string `json:"to"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetTo sets parameter To to value and selects it for sending
-func (in *ActionUserMailTemplateRecipientUpdateInput) SetTo(value string) *ActionUserMailTemplateRecipientUpdateInput {
-	in.To = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["To"] = nil
-	return in
-}
 // SetEnabled sets parameter Enabled to value and selects it for sending
 func (in *ActionUserMailTemplateRecipientUpdateInput) SetEnabled(value bool) *ActionUserMailTemplateRecipientUpdateInput {
 	in.Enabled = value
@@ -98,6 +87,17 @@ func (in *ActionUserMailTemplateRecipientUpdateInput) SetEnabled(value bool) *Ac
 	}
 
 	in._selectedParameters["Enabled"] = nil
+	return in
+}
+// SetTo sets parameter To to value and selects it for sending
+func (in *ActionUserMailTemplateRecipientUpdateInput) SetTo(value string) *ActionUserMailTemplateRecipientUpdateInput {
+	in.To = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["To"] = nil
 	return in
 }
 
@@ -132,11 +132,11 @@ type ActionUserMailTemplateRecipientUpdateRequest struct {
 
 // ActionUserMailTemplateRecipientUpdateOutput is a type for action output parameters
 type ActionUserMailTemplateRecipientUpdateOutput struct {
+	Description string `json:"description"`
+	Enabled bool `json:"enabled"`
 	Id string `json:"id"`
 	Label string `json:"label"`
-	Description string `json:"description"`
 	To string `json:"to"`
-	Enabled bool `json:"enabled"`
 }
 
 
@@ -260,11 +260,11 @@ func (inv *ActionUserMailTemplateRecipientUpdateInvocation) makeInputParams() ma
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("To") {
-			ret["to"] = inv.Input.To
-		}
 		if inv.IsParameterSelected("Enabled") {
 			ret["enabled"] = inv.Input.Enabled
+		}
+		if inv.IsParameterSelected("To") {
+			ret["to"] = inv.Input.To
 		}
 	}
 
@@ -275,11 +275,11 @@ func (inv *ActionUserMailTemplateRecipientUpdateInvocation) makeMetaInputParams(
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

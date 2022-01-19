@@ -17,24 +17,13 @@ func NewActionIntegrityFactIndex(client *Client) *ActionIntegrityFactIndex {
 
 // ActionIntegrityFactIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionIntegrityFactIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionIntegrityFactIndexMetaGlobalInput) SetNo(value bool) *ActionIntegrityFactIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionIntegrityFactIndexMetaGlobalInput) SetCount(value bool) *ActionIntegrityFactIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionIntegrityFactIndexMetaGlobalInput) SetIncludes(value string) *Ac
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionIntegrityFactIndexMetaGlobalInput) SetNo(value bool) *ActionIntegrityFactIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,39 +83,28 @@ func (in *ActionIntegrityFactIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionIntegrityFactIndexInput is a type for action input parameters
 type ActionIntegrityFactIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
-	IntegrityCheck int64 `json:"integrity_check"`
-	Node int64 `json:"node"`
 	ClassName string `json:"class_name"`
+	IntegrityCheck int64 `json:"integrity_check"`
 	IntegrityObject int64 `json:"integrity_object"`
+	Limit int64 `json:"limit"`
 	Name string `json:"name"`
-	Status string `json:"status"`
+	Node int64 `json:"node"`
+	Offset int64 `json:"offset"`
 	Severity string `json:"severity"`
+	Status string `json:"status"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionIntegrityFactIndexInput) SetOffset(value int64) *ActionIntegrityFactIndexInput {
-	in.Offset = value
+// SetClassName sets parameter ClassName to value and selects it for sending
+func (in *ActionIntegrityFactIndexInput) SetClassName(value string) *ActionIntegrityFactIndexInput {
+	in.ClassName = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-// SetLimit sets parameter Limit to value and selects it for sending
-func (in *ActionIntegrityFactIndexInput) SetLimit(value int64) *ActionIntegrityFactIndexInput {
-	in.Limit = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Limit"] = nil
+	in._selectedParameters["ClassName"] = nil
 	return in
 }
 // SetIntegrityCheck sets parameter IntegrityCheck to value and selects it for sending
@@ -129,28 +118,6 @@ func (in *ActionIntegrityFactIndexInput) SetIntegrityCheck(value int64) *ActionI
 	in._selectedParameters["IntegrityCheck"] = nil
 	return in
 }
-// SetNode sets parameter Node to value and selects it for sending
-func (in *ActionIntegrityFactIndexInput) SetNode(value int64) *ActionIntegrityFactIndexInput {
-	in.Node = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Node"] = nil
-	return in
-}
-// SetClassName sets parameter ClassName to value and selects it for sending
-func (in *ActionIntegrityFactIndexInput) SetClassName(value string) *ActionIntegrityFactIndexInput {
-	in.ClassName = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["ClassName"] = nil
-	return in
-}
 // SetIntegrityObject sets parameter IntegrityObject to value and selects it for sending
 func (in *ActionIntegrityFactIndexInput) SetIntegrityObject(value int64) *ActionIntegrityFactIndexInput {
 	in.IntegrityObject = value
@@ -160,6 +127,17 @@ func (in *ActionIntegrityFactIndexInput) SetIntegrityObject(value int64) *Action
 	}
 
 	in._selectedParameters["IntegrityObject"] = nil
+	return in
+}
+// SetLimit sets parameter Limit to value and selects it for sending
+func (in *ActionIntegrityFactIndexInput) SetLimit(value int64) *ActionIntegrityFactIndexInput {
+	in.Limit = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Limit"] = nil
 	return in
 }
 // SetName sets parameter Name to value and selects it for sending
@@ -173,15 +151,26 @@ func (in *ActionIntegrityFactIndexInput) SetName(value string) *ActionIntegrityF
 	in._selectedParameters["Name"] = nil
 	return in
 }
-// SetStatus sets parameter Status to value and selects it for sending
-func (in *ActionIntegrityFactIndexInput) SetStatus(value string) *ActionIntegrityFactIndexInput {
-	in.Status = value
+// SetNode sets parameter Node to value and selects it for sending
+func (in *ActionIntegrityFactIndexInput) SetNode(value int64) *ActionIntegrityFactIndexInput {
+	in.Node = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Status"] = nil
+	in._selectedParameters["Node"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionIntegrityFactIndexInput) SetOffset(value int64) *ActionIntegrityFactIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetSeverity sets parameter Severity to value and selects it for sending
@@ -193,6 +182,17 @@ func (in *ActionIntegrityFactIndexInput) SetSeverity(value string) *ActionIntegr
 	}
 
 	in._selectedParameters["Severity"] = nil
+	return in
+}
+// SetStatus sets parameter Status to value and selects it for sending
+func (in *ActionIntegrityFactIndexInput) SetStatus(value string) *ActionIntegrityFactIndexInput {
+	in.Status = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Status"] = nil
 	return in
 }
 
@@ -222,13 +222,13 @@ func (in *ActionIntegrityFactIndexInput) AnySelected() bool {
 
 // ActionIntegrityFactIndexOutput is a type for action output parameters
 type ActionIntegrityFactIndexOutput struct {
+	CreatedAt string `json:"created_at"`
 	Id int64 `json:"id"`
 	IntegrityObject *ActionIntegrityObjectShowOutput `json:"integrity_object"`
-	Name string `json:"name"`
-	Status string `json:"status"`
-	Severity string `json:"severity"`
 	Message string `json:"message"`
-	CreatedAt string `json:"created_at"`
+	Name string `json:"name"`
+	Severity string `json:"severity"`
+	Status string `json:"status"`
 }
 
 
@@ -333,46 +333,46 @@ func (inv *ActionIntegrityFactIndexInvocation) callAsQuery() (*ActionIntegrityFa
 
 func (inv *ActionIntegrityFactIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["integrity_fact[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
-		if inv.IsParameterSelected("Limit") {
-			ret["integrity_fact[limit]"] = convertInt64ToString(inv.Input.Limit)
+		if inv.IsParameterSelected("ClassName") {
+			ret["integrity_fact[class_name]"] = inv.Input.ClassName
 		}
 		if inv.IsParameterSelected("IntegrityCheck") {
 			ret["integrity_fact[integrity_check]"] = convertInt64ToString(inv.Input.IntegrityCheck)
 		}
-		if inv.IsParameterSelected("Node") {
-			ret["integrity_fact[node]"] = convertInt64ToString(inv.Input.Node)
-		}
-		if inv.IsParameterSelected("ClassName") {
-			ret["integrity_fact[class_name]"] = inv.Input.ClassName
-		}
 		if inv.IsParameterSelected("IntegrityObject") {
 			ret["integrity_fact[integrity_object]"] = convertInt64ToString(inv.Input.IntegrityObject)
+		}
+		if inv.IsParameterSelected("Limit") {
+			ret["integrity_fact[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 		if inv.IsParameterSelected("Name") {
 			ret["integrity_fact[name]"] = inv.Input.Name
 		}
-		if inv.IsParameterSelected("Status") {
-			ret["integrity_fact[status]"] = inv.Input.Status
+		if inv.IsParameterSelected("Node") {
+			ret["integrity_fact[node]"] = convertInt64ToString(inv.Input.Node)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["integrity_fact[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Severity") {
 			ret["integrity_fact[severity]"] = inv.Input.Severity
+		}
+		if inv.IsParameterSelected("Status") {
+			ret["integrity_fact[status]"] = inv.Input.Status
 		}
 	}
 }
 
 func (inv *ActionIntegrityFactIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

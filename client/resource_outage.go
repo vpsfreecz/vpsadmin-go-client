@@ -9,42 +9,42 @@ type ResourceOutage struct {
 	Entity *ResourceOutageEntity
 	// Resource Outage.Handler
 	Handler *ResourceOutageHandler
-	// Action Outage#Index
-	Index *ActionOutageIndex
-	// Action Outage#Index
-	List *ActionOutageIndex
-	// Action Outage#Show
-	Show *ActionOutageShow
-	// Action Outage#Show
-	Find *ActionOutageShow
 	// Action Outage#Create
 	Create *ActionOutageCreate
 	// Action Outage#Create
 	New *ActionOutageCreate
-	// Action Outage#Update
-	Update *ActionOutageUpdate
+	// Action Outage#Index
+	Index *ActionOutageIndex
+	// Action Outage#Index
+	List *ActionOutageIndex
 	// Action Outage#Rebuild_affected_vps
 	RebuildAffectedVps *ActionOutageRebuildAffectedVps
+	// Action Outage#Show
+	Show *ActionOutageShow
+	// Action Outage#Show
+	Find *ActionOutageShow
+	// Action Outage#Update
+	Update *ActionOutageUpdate
 }
 
 func NewResourceOutage(client *Client) *ResourceOutage {
-	actionIndex := NewActionOutageIndex(client)
-	actionShow := NewActionOutageShow(client)
 	actionCreate := NewActionOutageCreate(client)
-	actionUpdate := NewActionOutageUpdate(client)
+	actionIndex := NewActionOutageIndex(client)
 	actionRebuildAffectedVps := NewActionOutageRebuildAffectedVps(client)
+	actionShow := NewActionOutageShow(client)
+	actionUpdate := NewActionOutageUpdate(client)
 
 	return &ResourceOutage{
 		Client: client,
 		Entity: NewResourceOutageEntity(client),
 		Handler: NewResourceOutageHandler(client),
-		Index: actionIndex,
-		List: actionIndex,
-		Show: actionShow,
-		Find: actionShow,
 		Create: actionCreate,
 		New: actionCreate,
-		Update: actionUpdate,
+		Index: actionIndex,
+		List: actionIndex,
 		RebuildAffectedVps: actionRebuildAffectedVps,
+		Show: actionShow,
+		Find: actionShow,
+		Update: actionUpdate,
 	}
 }

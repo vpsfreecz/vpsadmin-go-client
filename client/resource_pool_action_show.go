@@ -18,23 +18,12 @@ func NewActionPoolShow(client *Client) *ActionPoolShow {
 
 // ActionPoolShowMetaGlobalInput is a type for action global meta input parameters
 type ActionPoolShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionPoolShowMetaGlobalInput) SetNo(value bool) *ActionPoolShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionPoolShowMetaGlobalInput) SetIncludes(value string) *ActionPoolShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionPoolShowMetaGlobalInput) SetIncludes(value string) *ActionPoolSh
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionPoolShowMetaGlobalInput) SetNo(value bool) *ActionPoolShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,25 +74,25 @@ func (in *ActionPoolShowMetaGlobalInput) AnySelected() bool {
 
 // ActionPoolShowOutput is a type for action output parameters
 type ActionPoolShowOutput struct {
-	Id int64 `json:"id"`
-	Node *ActionNodeShowOutput `json:"node"`
-	Label string `json:"label"`
-	Filesystem string `json:"filesystem"`
-	Role string `json:"role"`
-	RefquotaCheck bool `json:"refquota_check"`
 	Atime bool `json:"atime"`
-	Compression bool `json:"compression"`
-	Recordsize int64 `json:"recordsize"`
-	Quota int64 `json:"quota"`
-	Refquota int64 `json:"refquota"`
-	Relatime bool `json:"relatime"`
-	Sync string `json:"sync"`
-	Sharenfs string `json:"sharenfs"`
-	Used int64 `json:"used"`
-	Referenced int64 `json:"referenced"`
 	Avail int64 `json:"avail"`
+	Compression bool `json:"compression"`
+	Filesystem string `json:"filesystem"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
 	MaintenanceLock string `json:"maintenance_lock"`
 	MaintenanceLockReason string `json:"maintenance_lock_reason"`
+	Node *ActionNodeShowOutput `json:"node"`
+	Quota int64 `json:"quota"`
+	Recordsize int64 `json:"recordsize"`
+	Referenced int64 `json:"referenced"`
+	Refquota int64 `json:"refquota"`
+	RefquotaCheck bool `json:"refquota_check"`
+	Relatime bool `json:"relatime"`
+	Role string `json:"role"`
+	Sharenfs string `json:"sharenfs"`
+	Sync string `json:"sync"`
+	Used int64 `json:"used"`
 }
 
 
@@ -184,11 +184,11 @@ func (inv *ActionPoolShowInvocation) callAsQuery() (*ActionPoolShowResponse, err
 
 func (inv *ActionPoolShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

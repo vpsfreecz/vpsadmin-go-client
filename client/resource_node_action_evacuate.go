@@ -60,48 +60,26 @@ func (in *ActionNodeEvacuateMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeEvacuateInput is a type for action input parameters
 type ActionNodeEvacuateInput struct {
-	DstNode int64 `json:"dst_node"`
-	StopOnError bool `json:"stop_on_error"`
-	MaintenanceWindow bool `json:"maintenance_window"`
-	Concurrency int64 `json:"concurrency"`
 	CleanupData bool `json:"cleanup_data"`
-	SendMail bool `json:"send_mail"`
+	Concurrency int64 `json:"concurrency"`
+	DstNode int64 `json:"dst_node"`
+	MaintenanceWindow bool `json:"maintenance_window"`
 	Reason string `json:"reason"`
+	SendMail bool `json:"send_mail"`
+	StopOnError bool `json:"stop_on_error"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetDstNode sets parameter DstNode to value and selects it for sending
-func (in *ActionNodeEvacuateInput) SetDstNode(value int64) *ActionNodeEvacuateInput {
-	in.DstNode = value
+// SetCleanupData sets parameter CleanupData to value and selects it for sending
+func (in *ActionNodeEvacuateInput) SetCleanupData(value bool) *ActionNodeEvacuateInput {
+	in.CleanupData = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["DstNode"] = nil
-	return in
-}
-// SetStopOnError sets parameter StopOnError to value and selects it for sending
-func (in *ActionNodeEvacuateInput) SetStopOnError(value bool) *ActionNodeEvacuateInput {
-	in.StopOnError = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["StopOnError"] = nil
-	return in
-}
-// SetMaintenanceWindow sets parameter MaintenanceWindow to value and selects it for sending
-func (in *ActionNodeEvacuateInput) SetMaintenanceWindow(value bool) *ActionNodeEvacuateInput {
-	in.MaintenanceWindow = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["MaintenanceWindow"] = nil
+	in._selectedParameters["CleanupData"] = nil
 	return in
 }
 // SetConcurrency sets parameter Concurrency to value and selects it for sending
@@ -115,15 +93,37 @@ func (in *ActionNodeEvacuateInput) SetConcurrency(value int64) *ActionNodeEvacua
 	in._selectedParameters["Concurrency"] = nil
 	return in
 }
-// SetCleanupData sets parameter CleanupData to value and selects it for sending
-func (in *ActionNodeEvacuateInput) SetCleanupData(value bool) *ActionNodeEvacuateInput {
-	in.CleanupData = value
+// SetDstNode sets parameter DstNode to value and selects it for sending
+func (in *ActionNodeEvacuateInput) SetDstNode(value int64) *ActionNodeEvacuateInput {
+	in.DstNode = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["CleanupData"] = nil
+	in._selectedParameters["DstNode"] = nil
+	return in
+}
+// SetMaintenanceWindow sets parameter MaintenanceWindow to value and selects it for sending
+func (in *ActionNodeEvacuateInput) SetMaintenanceWindow(value bool) *ActionNodeEvacuateInput {
+	in.MaintenanceWindow = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["MaintenanceWindow"] = nil
+	return in
+}
+// SetReason sets parameter Reason to value and selects it for sending
+func (in *ActionNodeEvacuateInput) SetReason(value string) *ActionNodeEvacuateInput {
+	in.Reason = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Reason"] = nil
 	return in
 }
 // SetSendMail sets parameter SendMail to value and selects it for sending
@@ -137,15 +137,15 @@ func (in *ActionNodeEvacuateInput) SetSendMail(value bool) *ActionNodeEvacuateIn
 	in._selectedParameters["SendMail"] = nil
 	return in
 }
-// SetReason sets parameter Reason to value and selects it for sending
-func (in *ActionNodeEvacuateInput) SetReason(value string) *ActionNodeEvacuateInput {
-	in.Reason = value
+// SetStopOnError sets parameter StopOnError to value and selects it for sending
+func (in *ActionNodeEvacuateInput) SetStopOnError(value bool) *ActionNodeEvacuateInput {
+	in.StopOnError = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Reason"] = nil
+	in._selectedParameters["StopOnError"] = nil
 	return in
 }
 
@@ -304,26 +304,26 @@ func (inv *ActionNodeEvacuateInvocation) makeInputParams() map[string]interface{
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("DstNode") {
-			ret["dst_node"] = inv.Input.DstNode
-		}
-		if inv.IsParameterSelected("StopOnError") {
-			ret["stop_on_error"] = inv.Input.StopOnError
-		}
-		if inv.IsParameterSelected("MaintenanceWindow") {
-			ret["maintenance_window"] = inv.Input.MaintenanceWindow
+		if inv.IsParameterSelected("CleanupData") {
+			ret["cleanup_data"] = inv.Input.CleanupData
 		}
 		if inv.IsParameterSelected("Concurrency") {
 			ret["concurrency"] = inv.Input.Concurrency
 		}
-		if inv.IsParameterSelected("CleanupData") {
-			ret["cleanup_data"] = inv.Input.CleanupData
+		if inv.IsParameterSelected("DstNode") {
+			ret["dst_node"] = inv.Input.DstNode
+		}
+		if inv.IsParameterSelected("MaintenanceWindow") {
+			ret["maintenance_window"] = inv.Input.MaintenanceWindow
+		}
+		if inv.IsParameterSelected("Reason") {
+			ret["reason"] = inv.Input.Reason
 		}
 		if inv.IsParameterSelected("SendMail") {
 			ret["send_mail"] = inv.Input.SendMail
 		}
-		if inv.IsParameterSelected("Reason") {
-			ret["reason"] = inv.Input.Reason
+		if inv.IsParameterSelected("StopOnError") {
+			ret["stop_on_error"] = inv.Input.StopOnError
 		}
 	}
 

@@ -18,23 +18,12 @@ func NewActionSystemConfigShow(client *Client) *ActionSystemConfigShow {
 
 // ActionSystemConfigShowMetaGlobalInput is a type for action global meta input parameters
 type ActionSystemConfigShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionSystemConfigShowMetaGlobalInput) SetNo(value bool) *ActionSystemConfigShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionSystemConfigShowMetaGlobalInput) SetIncludes(value string) *ActionSystemConfigShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionSystemConfigShowMetaGlobalInput) SetIncludes(value string) *Acti
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionSystemConfigShowMetaGlobalInput) SetNo(value bool) *ActionSystemConfigShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -75,11 +75,11 @@ func (in *ActionSystemConfigShowMetaGlobalInput) AnySelected() bool {
 // ActionSystemConfigShowOutput is a type for action output parameters
 type ActionSystemConfigShowOutput struct {
 	Category string `json:"category"`
+	Description string `json:"description"`
+	Label string `json:"label"`
+	MinUserLevel int64 `json:"min_user_level"`
 	Name string `json:"name"`
 	Type string `json:"type"`
-	Label string `json:"label"`
-	Description string `json:"description"`
-	MinUserLevel int64 `json:"min_user_level"`
 }
 
 
@@ -171,11 +171,11 @@ func (inv *ActionSystemConfigShowInvocation) callAsQuery() (*ActionSystemConfigS
 
 func (inv *ActionSystemConfigShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

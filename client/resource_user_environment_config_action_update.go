@@ -18,23 +18,12 @@ func NewActionUserEnvironmentConfigUpdate(client *Client) *ActionUserEnvironment
 
 // ActionUserEnvironmentConfigUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserEnvironmentConfigUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserEnvironmentConfigUpdateMetaGlobalInput) SetNo(value bool) *ActionUserEnvironmentConfigUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserEnvironmentConfigUpdateMetaGlobalInput) SetIncludes(value string) *ActionUserEnvironmentConfigUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionUserEnvironmentConfigUpdateMetaGlobalInput) SetIncludes(value st
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserEnvironmentConfigUpdateMetaGlobalInput) SetNo(value bool) *ActionUserEnvironmentConfigUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,9 +74,9 @@ func (in *ActionUserEnvironmentConfigUpdateMetaGlobalInput) AnySelected() bool {
 type ActionUserEnvironmentConfigUpdateInput struct {
 	CanCreateVps bool `json:"can_create_vps"`
 	CanDestroyVps bool `json:"can_destroy_vps"`
-	VpsLifetime int64 `json:"vps_lifetime"`
-	MaxVpsCount int64 `json:"max_vps_count"`
 	Default bool `json:"default"`
+	MaxVpsCount int64 `json:"max_vps_count"`
+	VpsLifetime int64 `json:"vps_lifetime"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -103,15 +103,15 @@ func (in *ActionUserEnvironmentConfigUpdateInput) SetCanDestroyVps(value bool) *
 	in._selectedParameters["CanDestroyVps"] = nil
 	return in
 }
-// SetVpsLifetime sets parameter VpsLifetime to value and selects it for sending
-func (in *ActionUserEnvironmentConfigUpdateInput) SetVpsLifetime(value int64) *ActionUserEnvironmentConfigUpdateInput {
-	in.VpsLifetime = value
+// SetDefault sets parameter Default to value and selects it for sending
+func (in *ActionUserEnvironmentConfigUpdateInput) SetDefault(value bool) *ActionUserEnvironmentConfigUpdateInput {
+	in.Default = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["VpsLifetime"] = nil
+	in._selectedParameters["Default"] = nil
 	return in
 }
 // SetMaxVpsCount sets parameter MaxVpsCount to value and selects it for sending
@@ -125,15 +125,15 @@ func (in *ActionUserEnvironmentConfigUpdateInput) SetMaxVpsCount(value int64) *A
 	in._selectedParameters["MaxVpsCount"] = nil
 	return in
 }
-// SetDefault sets parameter Default to value and selects it for sending
-func (in *ActionUserEnvironmentConfigUpdateInput) SetDefault(value bool) *ActionUserEnvironmentConfigUpdateInput {
-	in.Default = value
+// SetVpsLifetime sets parameter VpsLifetime to value and selects it for sending
+func (in *ActionUserEnvironmentConfigUpdateInput) SetVpsLifetime(value int64) *ActionUserEnvironmentConfigUpdateInput {
+	in.VpsLifetime = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Default"] = nil
+	in._selectedParameters["VpsLifetime"] = nil
 	return in
 }
 
@@ -284,14 +284,14 @@ func (inv *ActionUserEnvironmentConfigUpdateInvocation) makeInputParams() map[st
 		if inv.IsParameterSelected("CanDestroyVps") {
 			ret["can_destroy_vps"] = inv.Input.CanDestroyVps
 		}
-		if inv.IsParameterSelected("VpsLifetime") {
-			ret["vps_lifetime"] = inv.Input.VpsLifetime
+		if inv.IsParameterSelected("Default") {
+			ret["default"] = inv.Input.Default
 		}
 		if inv.IsParameterSelected("MaxVpsCount") {
 			ret["max_vps_count"] = inv.Input.MaxVpsCount
 		}
-		if inv.IsParameterSelected("Default") {
-			ret["default"] = inv.Input.Default
+		if inv.IsParameterSelected("VpsLifetime") {
+			ret["vps_lifetime"] = inv.Input.VpsLifetime
 		}
 	}
 
@@ -302,11 +302,11 @@ func (inv *ActionUserEnvironmentConfigUpdateInvocation) makeMetaInputParams() ma
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

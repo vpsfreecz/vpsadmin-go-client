@@ -17,24 +17,13 @@ func NewActionSnapshotDownloadIndex(client *Client) *ActionSnapshotDownloadIndex
 
 // ActionSnapshotDownloadIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionSnapshotDownloadIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionSnapshotDownloadIndexMetaGlobalInput) SetNo(value bool) *ActionSnapshotDownloadIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionSnapshotDownloadIndexMetaGlobalInput) SetCount(value bool) *ActionSnapshotDownloadIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionSnapshotDownloadIndexMetaGlobalInput) SetIncludes(value string) 
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionSnapshotDownloadIndexMetaGlobalInput) SetNo(value bool) *ActionSnapshotDownloadIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,23 +83,23 @@ func (in *ActionSnapshotDownloadIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionSnapshotDownloadIndexInput is a type for action input parameters
 type ActionSnapshotDownloadIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
 	Dataset int64 `json:"dataset"`
+	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	Snapshot int64 `json:"snapshot"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionSnapshotDownloadIndexInput) SetOffset(value int64) *ActionSnapshotDownloadIndexInput {
-	in.Offset = value
+// SetDataset sets parameter Dataset to value and selects it for sending
+func (in *ActionSnapshotDownloadIndexInput) SetDataset(value int64) *ActionSnapshotDownloadIndexInput {
+	in.Dataset = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
+	in._selectedParameters["Dataset"] = nil
 	return in
 }
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -113,15 +113,15 @@ func (in *ActionSnapshotDownloadIndexInput) SetLimit(value int64) *ActionSnapsho
 	in._selectedParameters["Limit"] = nil
 	return in
 }
-// SetDataset sets parameter Dataset to value and selects it for sending
-func (in *ActionSnapshotDownloadIndexInput) SetDataset(value int64) *ActionSnapshotDownloadIndexInput {
-	in.Dataset = value
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionSnapshotDownloadIndexInput) SetOffset(value int64) *ActionSnapshotDownloadIndexInput {
+	in.Offset = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Dataset"] = nil
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetSnapshot sets parameter Snapshot to value and selects it for sending
@@ -162,17 +162,17 @@ func (in *ActionSnapshotDownloadIndexInput) AnySelected() bool {
 
 // ActionSnapshotDownloadIndexOutput is a type for action output parameters
 type ActionSnapshotDownloadIndexOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	FromSnapshot *ActionDatasetSnapshotShowOutput `json:"from_snapshot"`
-	Format string `json:"format"`
-	FileName string `json:"file_name"`
-	Url string `json:"url"`
-	Size int64 `json:"size"`
-	Sha256sum string `json:"sha256sum"`
-	Ready bool `json:"ready"`
 	ExpirationDate string `json:"expiration_date"`
+	FileName string `json:"file_name"`
+	Format string `json:"format"`
+	FromSnapshot *ActionDatasetSnapshotShowOutput `json:"from_snapshot"`
+	Id int64 `json:"id"`
+	Ready bool `json:"ready"`
+	Sha256sum string `json:"sha256sum"`
+	Size int64 `json:"size"`
+	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
+	Url string `json:"url"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -277,14 +277,14 @@ func (inv *ActionSnapshotDownloadIndexInvocation) callAsQuery() (*ActionSnapshot
 
 func (inv *ActionSnapshotDownloadIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["snapshot_download[offset]"] = convertInt64ToString(inv.Input.Offset)
+		if inv.IsParameterSelected("Dataset") {
+			ret["snapshot_download[dataset]"] = convertInt64ToString(inv.Input.Dataset)
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["snapshot_download[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
-		if inv.IsParameterSelected("Dataset") {
-			ret["snapshot_download[dataset]"] = convertInt64ToString(inv.Input.Dataset)
+		if inv.IsParameterSelected("Offset") {
+			ret["snapshot_download[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Snapshot") {
 			ret["snapshot_download[snapshot]"] = convertInt64ToString(inv.Input.Snapshot)
@@ -294,14 +294,14 @@ func (inv *ActionSnapshotDownloadIndexInvocation) convertInputToQueryParams(ret 
 
 func (inv *ActionSnapshotDownloadIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

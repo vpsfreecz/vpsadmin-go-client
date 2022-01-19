@@ -17,23 +17,12 @@ func NewActionLocationNetworkCreate(client *Client) *ActionLocationNetworkCreate
 
 // ActionLocationNetworkCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationNetworkCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionLocationNetworkCreateMetaGlobalInput) SetNo(value bool) *ActionLocationNetworkCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionLocationNetworkCreateMetaGlobalInput) SetIncludes(value string) *ActionLocationNetworkCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionLocationNetworkCreateMetaGlobalInput) SetIncludes(value string) 
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionLocationNetworkCreateMetaGlobalInput) SetNo(value bool) *ActionLocationNetworkCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,15 +71,27 @@ func (in *ActionLocationNetworkCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationNetworkCreateInput is a type for action input parameters
 type ActionLocationNetworkCreateInput struct {
+	Autopick bool `json:"autopick"`
 	Location int64 `json:"location"`
 	Network int64 `json:"network"`
+	Primary bool `json:"primary"`
 	Priority int64 `json:"priority"`
-	Autopick bool `json:"autopick"`
 	Userpick bool `json:"userpick"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
+// SetAutopick sets parameter Autopick to value and selects it for sending
+func (in *ActionLocationNetworkCreateInput) SetAutopick(value bool) *ActionLocationNetworkCreateInput {
+	in.Autopick = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Autopick"] = nil
+	return in
+}
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionLocationNetworkCreateInput) SetLocation(value int64) *ActionLocationNetworkCreateInput {
 	in.Location = value
@@ -102,6 +114,17 @@ func (in *ActionLocationNetworkCreateInput) SetNetwork(value int64) *ActionLocat
 	in._selectedParameters["Network"] = nil
 	return in
 }
+// SetPrimary sets parameter Primary to value and selects it for sending
+func (in *ActionLocationNetworkCreateInput) SetPrimary(value bool) *ActionLocationNetworkCreateInput {
+	in.Primary = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Primary"] = nil
+	return in
+}
 // SetPriority sets parameter Priority to value and selects it for sending
 func (in *ActionLocationNetworkCreateInput) SetPriority(value int64) *ActionLocationNetworkCreateInput {
 	in.Priority = value
@@ -111,17 +134,6 @@ func (in *ActionLocationNetworkCreateInput) SetPriority(value int64) *ActionLoca
 	}
 
 	in._selectedParameters["Priority"] = nil
-	return in
-}
-// SetAutopick sets parameter Autopick to value and selects it for sending
-func (in *ActionLocationNetworkCreateInput) SetAutopick(value bool) *ActionLocationNetworkCreateInput {
-	in.Autopick = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Autopick"] = nil
 	return in
 }
 // SetUserpick sets parameter Userpick to value and selects it for sending
@@ -167,11 +179,12 @@ type ActionLocationNetworkCreateRequest struct {
 
 // ActionLocationNetworkCreateOutput is a type for action output parameters
 type ActionLocationNetworkCreateOutput struct {
+	Autopick bool `json:"autopick"`
 	Id int64 `json:"id"`
 	Location *ActionLocationShowOutput `json:"location"`
 	Network *ActionNetworkShowOutput `json:"network"`
+	Primary bool `json:"primary"`
 	Priority int64 `json:"priority"`
-	Autopick bool `json:"autopick"`
 	Userpick bool `json:"userpick"`
 }
 
@@ -286,17 +299,20 @@ func (inv *ActionLocationNetworkCreateInvocation) makeInputParams() map[string]i
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("Autopick") {
+			ret["autopick"] = inv.Input.Autopick
+		}
 		if inv.IsParameterSelected("Location") {
 			ret["location"] = inv.Input.Location
 		}
 		if inv.IsParameterSelected("Network") {
 			ret["network"] = inv.Input.Network
 		}
+		if inv.IsParameterSelected("Primary") {
+			ret["primary"] = inv.Input.Primary
+		}
 		if inv.IsParameterSelected("Priority") {
 			ret["priority"] = inv.Input.Priority
-		}
-		if inv.IsParameterSelected("Autopick") {
-			ret["autopick"] = inv.Input.Autopick
 		}
 		if inv.IsParameterSelected("Userpick") {
 			ret["userpick"] = inv.Input.Userpick
@@ -310,11 +326,11 @@ func (inv *ActionLocationNetworkCreateInvocation) makeMetaInputParams() map[stri
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

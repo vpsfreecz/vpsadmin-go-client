@@ -18,23 +18,12 @@ func NewActionMailTemplateShow(client *Client) *ActionMailTemplateShow {
 
 // ActionMailTemplateShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionMailTemplateShowMetaGlobalInput) SetNo(value bool) *ActionMailTemplateShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionMailTemplateShowMetaGlobalInput) SetIncludes(value string) *ActionMailTemplateShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionMailTemplateShowMetaGlobalInput) SetIncludes(value string) *Acti
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMailTemplateShowMetaGlobalInput) SetNo(value bool) *ActionMailTemplateShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,13 +74,13 @@ func (in *ActionMailTemplateShowMetaGlobalInput) AnySelected() bool {
 
 // ActionMailTemplateShowOutput is a type for action output parameters
 type ActionMailTemplateShowOutput struct {
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	Label string `json:"label"`
-	TemplateId string `json:"template_id"`
-	UserVisibility string `json:"user_visibility"`
 	CreatedAt string `json:"created_at"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	Name string `json:"name"`
+	TemplateId string `json:"template_id"`
 	UpdatedAt string `json:"updated_at"`
+	UserVisibility string `json:"user_visibility"`
 }
 
 
@@ -172,11 +172,11 @@ func (inv *ActionMailTemplateShowInvocation) callAsQuery() (*ActionMailTemplateS
 
 func (inv *ActionMailTemplateShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

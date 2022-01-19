@@ -17,24 +17,13 @@ func NewActionEnvironmentIndex(client *Client) *ActionEnvironmentIndex {
 
 // ActionEnvironmentIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionEnvironmentIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionEnvironmentIndexMetaGlobalInput) SetNo(value bool) *ActionEnvironmentIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionEnvironmentIndexMetaGlobalInput) SetCount(value bool) *ActionEnvironmentIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionEnvironmentIndexMetaGlobalInput) SetIncludes(value string) *Acti
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionEnvironmentIndexMetaGlobalInput) SetNo(value bool) *ActionEnvironmentIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,36 +83,14 @@ func (in *ActionEnvironmentIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionEnvironmentIndexInput is a type for action input parameters
 type ActionEnvironmentIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
 	HasHypervisor bool `json:"has_hypervisor"`
 	HasStorage bool `json:"has_storage"`
+	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionEnvironmentIndexInput) SetOffset(value int64) *ActionEnvironmentIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-// SetLimit sets parameter Limit to value and selects it for sending
-func (in *ActionEnvironmentIndexInput) SetLimit(value int64) *ActionEnvironmentIndexInput {
-	in.Limit = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Limit"] = nil
-	return in
-}
 // SetHasHypervisor sets parameter HasHypervisor to value and selects it for sending
 func (in *ActionEnvironmentIndexInput) SetHasHypervisor(value bool) *ActionEnvironmentIndexInput {
 	in.HasHypervisor = value
@@ -133,6 +111,28 @@ func (in *ActionEnvironmentIndexInput) SetHasStorage(value bool) *ActionEnvironm
 	}
 
 	in._selectedParameters["HasStorage"] = nil
+	return in
+}
+// SetLimit sets parameter Limit to value and selects it for sending
+func (in *ActionEnvironmentIndexInput) SetLimit(value int64) *ActionEnvironmentIndexInput {
+	in.Limit = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionEnvironmentIndexInput) SetOffset(value int64) *ActionEnvironmentIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -162,17 +162,17 @@ func (in *ActionEnvironmentIndexInput) AnySelected() bool {
 
 // ActionEnvironmentIndexOutput is a type for action output parameters
 type ActionEnvironmentIndexOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Description string `json:"description"`
-	Domain string `json:"domain"`
 	CanCreateVps bool `json:"can_create_vps"`
 	CanDestroyVps bool `json:"can_destroy_vps"`
-	VpsLifetime int64 `json:"vps_lifetime"`
-	MaxVpsCount int64 `json:"max_vps_count"`
-	UserIpOwnership bool `json:"user_ip_ownership"`
+	Description string `json:"description"`
+	Domain string `json:"domain"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
 	MaintenanceLock string `json:"maintenance_lock"`
 	MaintenanceLockReason string `json:"maintenance_lock_reason"`
+	MaxVpsCount int64 `json:"max_vps_count"`
+	UserIpOwnership bool `json:"user_ip_ownership"`
+	VpsLifetime int64 `json:"vps_lifetime"`
 }
 
 
@@ -277,31 +277,31 @@ func (inv *ActionEnvironmentIndexInvocation) callAsQuery() (*ActionEnvironmentIn
 
 func (inv *ActionEnvironmentIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["environment[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
-		if inv.IsParameterSelected("Limit") {
-			ret["environment[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
 		if inv.IsParameterSelected("HasHypervisor") {
 			ret["environment[has_hypervisor]"] = convertBoolToString(inv.Input.HasHypervisor)
 		}
 		if inv.IsParameterSelected("HasStorage") {
 			ret["environment[has_storage]"] = convertBoolToString(inv.Input.HasStorage)
 		}
+		if inv.IsParameterSelected("Limit") {
+			ret["environment[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["environment[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
 	}
 }
 
 func (inv *ActionEnvironmentIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

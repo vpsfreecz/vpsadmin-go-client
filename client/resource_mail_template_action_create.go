@@ -17,23 +17,12 @@ func NewActionMailTemplateCreate(client *Client) *ActionMailTemplateCreate {
 
 // ActionMailTemplateCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionMailTemplateCreateMetaGlobalInput) SetNo(value bool) *ActionMailTemplateCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionMailTemplateCreateMetaGlobalInput) SetIncludes(value string) *ActionMailTemplateCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionMailTemplateCreateMetaGlobalInput) SetIncludes(value string) *Ac
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMailTemplateCreateMetaGlobalInput) SetNo(value bool) *ActionMailTemplateCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,25 +71,14 @@ func (in *ActionMailTemplateCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionMailTemplateCreateInput is a type for action input parameters
 type ActionMailTemplateCreateInput struct {
-	Name string `json:"name"`
 	Label string `json:"label"`
+	Name string `json:"name"`
 	TemplateId string `json:"template_id"`
 	UserVisibility string `json:"user_visibility"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetName sets parameter Name to value and selects it for sending
-func (in *ActionMailTemplateCreateInput) SetName(value string) *ActionMailTemplateCreateInput {
-	in.Name = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Name"] = nil
-	return in
-}
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionMailTemplateCreateInput) SetLabel(value string) *ActionMailTemplateCreateInput {
 	in.Label = value
@@ -99,6 +88,17 @@ func (in *ActionMailTemplateCreateInput) SetLabel(value string) *ActionMailTempl
 	}
 
 	in._selectedParameters["Label"] = nil
+	return in
+}
+// SetName sets parameter Name to value and selects it for sending
+func (in *ActionMailTemplateCreateInput) SetName(value string) *ActionMailTemplateCreateInput {
+	in.Name = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Name"] = nil
 	return in
 }
 // SetTemplateId sets parameter TemplateId to value and selects it for sending
@@ -155,13 +155,13 @@ type ActionMailTemplateCreateRequest struct {
 
 // ActionMailTemplateCreateOutput is a type for action output parameters
 type ActionMailTemplateCreateOutput struct {
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	Label string `json:"label"`
-	TemplateId string `json:"template_id"`
-	UserVisibility string `json:"user_visibility"`
 	CreatedAt string `json:"created_at"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	Name string `json:"name"`
+	TemplateId string `json:"template_id"`
 	UpdatedAt string `json:"updated_at"`
+	UserVisibility string `json:"user_visibility"`
 }
 
 
@@ -275,11 +275,11 @@ func (inv *ActionMailTemplateCreateInvocation) makeInputParams() map[string]inte
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Name") {
-			ret["name"] = inv.Input.Name
-		}
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
+		}
+		if inv.IsParameterSelected("Name") {
+			ret["name"] = inv.Input.Name
 		}
 		if inv.IsParameterSelected("TemplateId") {
 			ret["template_id"] = inv.Input.TemplateId
@@ -296,11 +296,11 @@ func (inv *ActionMailTemplateCreateInvocation) makeMetaInputParams() map[string]
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

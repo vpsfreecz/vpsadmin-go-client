@@ -17,24 +17,13 @@ func NewActionDnsResolverIndex(client *Client) *ActionDnsResolverIndex {
 
 // ActionDnsResolverIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsResolverIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionDnsResolverIndexMetaGlobalInput) SetNo(value bool) *ActionDnsResolverIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionDnsResolverIndexMetaGlobalInput) SetCount(value bool) *ActionDnsResolverIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionDnsResolverIndexMetaGlobalInput) SetIncludes(value string) *Acti
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionDnsResolverIndexMetaGlobalInput) SetNo(value bool) *ActionDnsResolverIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,24 +83,13 @@ func (in *ActionDnsResolverIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsResolverIndexInput is a type for action input parameters
 type ActionDnsResolverIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	Vps int64 `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionDnsResolverIndexInput) SetOffset(value int64) *ActionDnsResolverIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionDnsResolverIndexInput) SetLimit(value int64) *ActionDnsResolverIndexInput {
 	in.Limit = value
@@ -110,6 +99,17 @@ func (in *ActionDnsResolverIndexInput) SetLimit(value int64) *ActionDnsResolverI
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionDnsResolverIndexInput) SetOffset(value int64) *ActionDnsResolverIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetVps sets parameter Vps to value and selects it for sending
@@ -152,8 +152,8 @@ func (in *ActionDnsResolverIndexInput) AnySelected() bool {
 type ActionDnsResolverIndexOutput struct {
 	Id int64 `json:"id"`
 	IpAddr string `json:"ip_addr"`
-	Label string `json:"label"`
 	IsUniversal bool `json:"is_universal"`
+	Label string `json:"label"`
 	Location *ActionLocationShowOutput `json:"location"`
 }
 
@@ -259,11 +259,11 @@ func (inv *ActionDnsResolverIndexInvocation) callAsQuery() (*ActionDnsResolverIn
 
 func (inv *ActionDnsResolverIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["dns_resolver[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["dns_resolver[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["dns_resolver[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Vps") {
 			ret["dns_resolver[vps]"] = convertInt64ToString(inv.Input.Vps)
@@ -273,14 +273,14 @@ func (inv *ActionDnsResolverIndexInvocation) convertInputToQueryParams(ret map[s
 
 func (inv *ActionDnsResolverIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

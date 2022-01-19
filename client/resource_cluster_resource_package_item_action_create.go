@@ -18,23 +18,12 @@ func NewActionClusterResourcePackageItemCreate(client *Client) *ActionClusterRes
 
 // ActionClusterResourcePackageItemCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourcePackageItemCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionClusterResourcePackageItemCreateMetaGlobalInput) SetNo(value bool) *ActionClusterResourcePackageItemCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionClusterResourcePackageItemCreateMetaGlobalInput) SetIncludes(value string) *ActionClusterResourcePackageItemCreateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionClusterResourcePackageItemCreateMetaGlobalInput) SetIncludes(val
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionClusterResourcePackageItemCreateMetaGlobalInput) SetNo(value bool) *ActionClusterResourcePackageItemCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -132,8 +132,8 @@ type ActionClusterResourcePackageItemCreateRequest struct {
 
 // ActionClusterResourcePackageItemCreateOutput is a type for action output parameters
 type ActionClusterResourcePackageItemCreateOutput struct {
-	Id int64 `json:"id"`
 	ClusterResource *ActionClusterResourceShowOutput `json:"cluster_resource"`
+	Id int64 `json:"id"`
 	Value int64 `json:"value"`
 }
 
@@ -273,11 +273,11 @@ func (inv *ActionClusterResourcePackageItemCreateInvocation) makeMetaInputParams
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

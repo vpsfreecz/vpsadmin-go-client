@@ -17,24 +17,13 @@ func NewActionExportIndex(client *Client) *ActionExportIndex {
 
 // ActionExportIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionExportIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionExportIndexMetaGlobalInput) SetNo(value bool) *ActionExportIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionExportIndexMetaGlobalInput) SetCount(value bool) *ActionExportIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionExportIndexMetaGlobalInput) SetIncludes(value string) *ActionExp
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionExportIndexMetaGlobalInput) SetNo(value bool) *ActionExportIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,24 +83,13 @@ func (in *ActionExportIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionExportIndexInput is a type for action input parameters
 type ActionExportIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	User int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionExportIndexInput) SetOffset(value int64) *ActionExportIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionExportIndexInput) SetLimit(value int64) *ActionExportIndexInput {
 	in.Limit = value
@@ -110,6 +99,17 @@ func (in *ActionExportIndexInput) SetLimit(value int64) *ActionExportIndexInput 
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionExportIndexInput) SetOffset(value int64) *ActionExportIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetUser sets parameter User to value and selects it for sending
@@ -150,23 +150,23 @@ func (in *ActionExportIndexInput) AnySelected() bool {
 
 // ActionExportIndexOutput is a type for action output parameters
 type ActionExportIndexOutput struct {
-	Id int64 `json:"id"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	User *ActionUserShowOutput `json:"user"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	HostIpAddress *ActionHostIpAddressShowOutput `json:"host_ip_address"`
-	Path string `json:"path"`
 	AllVps bool `json:"all_vps"`
-	Rw bool `json:"rw"`
-	Sync bool `json:"sync"`
-	SubtreeCheck bool `json:"subtree_check"`
-	RootSquash bool `json:"root_squash"`
-	Threads int64 `json:"threads"`
+	CreatedAt string `json:"created_at"`
+	Dataset *ActionDatasetShowOutput `json:"dataset"`
 	Enabled bool `json:"enabled"`
 	ExpirationDate string `json:"expiration_date"`
-	CreatedAt string `json:"created_at"`
+	HostIpAddress *ActionHostIpAddressShowOutput `json:"host_ip_address"`
+	Id int64 `json:"id"`
+	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
+	Path string `json:"path"`
+	RootSquash bool `json:"root_squash"`
+	Rw bool `json:"rw"`
+	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
+	SubtreeCheck bool `json:"subtree_check"`
+	Sync bool `json:"sync"`
+	Threads int64 `json:"threads"`
 	UpdatedAt string `json:"updated_at"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -271,11 +271,11 @@ func (inv *ActionExportIndexInvocation) callAsQuery() (*ActionExportIndexRespons
 
 func (inv *ActionExportIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["export[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["export[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["export[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("User") {
 			ret["export[user]"] = convertInt64ToString(inv.Input.User)
@@ -285,14 +285,14 @@ func (inv *ActionExportIndexInvocation) convertInputToQueryParams(ret map[string
 
 func (inv *ActionExportIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

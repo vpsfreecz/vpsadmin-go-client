@@ -18,23 +18,12 @@ func NewActionSystemConfigUpdate(client *Client) *ActionSystemConfigUpdate {
 
 // ActionSystemConfigUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionSystemConfigUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionSystemConfigUpdateMetaGlobalInput) SetNo(value bool) *ActionSystemConfigUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionSystemConfigUpdateMetaGlobalInput) SetIncludes(value string) *ActionSystemConfigUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionSystemConfigUpdateMetaGlobalInput) SetIncludes(value string) *Ac
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionSystemConfigUpdateMetaGlobalInput) SetNo(value bool) *ActionSystemConfigUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -79,11 +79,11 @@ type ActionSystemConfigUpdateRequest struct {
 // ActionSystemConfigUpdateOutput is a type for action output parameters
 type ActionSystemConfigUpdateOutput struct {
 	Category string `json:"category"`
+	Description string `json:"description"`
+	Label string `json:"label"`
+	MinUserLevel int64 `json:"min_user_level"`
 	Name string `json:"name"`
 	Type string `json:"type"`
-	Label string `json:"label"`
-	Description string `json:"description"`
-	MinUserLevel int64 `json:"min_user_level"`
 }
 
 
@@ -184,11 +184,11 @@ func (inv *ActionSystemConfigUpdateInvocation) makeMetaInputParams() map[string]
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

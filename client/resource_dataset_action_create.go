@@ -17,23 +17,12 @@ func NewActionDatasetCreate(client *Client) *ActionDatasetCreate {
 
 // ActionDatasetCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionDatasetCreateMetaGlobalInput) SetNo(value bool) *ActionDatasetCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionDatasetCreateMetaGlobalInput) SetIncludes(value string) *ActionDatasetCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionDatasetCreateMetaGlobalInput) SetIncludes(value string) *ActionD
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionDatasetCreateMetaGlobalInput) SetNo(value bool) *ActionDatasetCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,32 +71,54 @@ func (in *ActionDatasetCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetCreateInput is a type for action input parameters
 type ActionDatasetCreateInput struct {
-	Name string `json:"name"`
+	Atime bool `json:"atime"`
+	Automount bool `json:"automount"`
+	Compression bool `json:"compression"`
 	Dataset int64 `json:"dataset"`
 	InheritUserNamespaceMap bool `json:"inherit_user_namespace_map"`
-	UserNamespaceMap int64 `json:"user_namespace_map"`
-	Automount bool `json:"automount"`
-	Atime bool `json:"atime"`
-	Compression bool `json:"compression"`
-	Recordsize int64 `json:"recordsize"`
+	Name string `json:"name"`
 	Quota int64 `json:"quota"`
+	Recordsize int64 `json:"recordsize"`
 	Refquota int64 `json:"refquota"`
 	Relatime bool `json:"relatime"`
-	Sync string `json:"sync"`
 	Sharenfs string `json:"sharenfs"`
+	Sync string `json:"sync"`
+	UserNamespaceMap int64 `json:"user_namespace_map"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetName sets parameter Name to value and selects it for sending
-func (in *ActionDatasetCreateInput) SetName(value string) *ActionDatasetCreateInput {
-	in.Name = value
+// SetAtime sets parameter Atime to value and selects it for sending
+func (in *ActionDatasetCreateInput) SetAtime(value bool) *ActionDatasetCreateInput {
+	in.Atime = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Name"] = nil
+	in._selectedParameters["Atime"] = nil
+	return in
+}
+// SetAutomount sets parameter Automount to value and selects it for sending
+func (in *ActionDatasetCreateInput) SetAutomount(value bool) *ActionDatasetCreateInput {
+	in.Automount = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Automount"] = nil
+	return in
+}
+// SetCompression sets parameter Compression to value and selects it for sending
+func (in *ActionDatasetCreateInput) SetCompression(value bool) *ActionDatasetCreateInput {
+	in.Compression = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Compression"] = nil
 	return in
 }
 // SetDataset sets parameter Dataset to value and selects it for sending
@@ -121,59 +143,15 @@ func (in *ActionDatasetCreateInput) SetInheritUserNamespaceMap(value bool) *Acti
 	in._selectedParameters["InheritUserNamespaceMap"] = nil
 	return in
 }
-// SetUserNamespaceMap sets parameter UserNamespaceMap to value and selects it for sending
-func (in *ActionDatasetCreateInput) SetUserNamespaceMap(value int64) *ActionDatasetCreateInput {
-	in.UserNamespaceMap = value
+// SetName sets parameter Name to value and selects it for sending
+func (in *ActionDatasetCreateInput) SetName(value string) *ActionDatasetCreateInput {
+	in.Name = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["UserNamespaceMap"] = nil
-	return in
-}
-// SetAutomount sets parameter Automount to value and selects it for sending
-func (in *ActionDatasetCreateInput) SetAutomount(value bool) *ActionDatasetCreateInput {
-	in.Automount = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Automount"] = nil
-	return in
-}
-// SetAtime sets parameter Atime to value and selects it for sending
-func (in *ActionDatasetCreateInput) SetAtime(value bool) *ActionDatasetCreateInput {
-	in.Atime = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Atime"] = nil
-	return in
-}
-// SetCompression sets parameter Compression to value and selects it for sending
-func (in *ActionDatasetCreateInput) SetCompression(value bool) *ActionDatasetCreateInput {
-	in.Compression = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Compression"] = nil
-	return in
-}
-// SetRecordsize sets parameter Recordsize to value and selects it for sending
-func (in *ActionDatasetCreateInput) SetRecordsize(value int64) *ActionDatasetCreateInput {
-	in.Recordsize = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Recordsize"] = nil
+	in._selectedParameters["Name"] = nil
 	return in
 }
 // SetQuota sets parameter Quota to value and selects it for sending
@@ -185,6 +163,17 @@ func (in *ActionDatasetCreateInput) SetQuota(value int64) *ActionDatasetCreateIn
 	}
 
 	in._selectedParameters["Quota"] = nil
+	return in
+}
+// SetRecordsize sets parameter Recordsize to value and selects it for sending
+func (in *ActionDatasetCreateInput) SetRecordsize(value int64) *ActionDatasetCreateInput {
+	in.Recordsize = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Recordsize"] = nil
 	return in
 }
 // SetRefquota sets parameter Refquota to value and selects it for sending
@@ -209,6 +198,17 @@ func (in *ActionDatasetCreateInput) SetRelatime(value bool) *ActionDatasetCreate
 	in._selectedParameters["Relatime"] = nil
 	return in
 }
+// SetSharenfs sets parameter Sharenfs to value and selects it for sending
+func (in *ActionDatasetCreateInput) SetSharenfs(value string) *ActionDatasetCreateInput {
+	in.Sharenfs = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Sharenfs"] = nil
+	return in
+}
 // SetSync sets parameter Sync to value and selects it for sending
 func (in *ActionDatasetCreateInput) SetSync(value string) *ActionDatasetCreateInput {
 	in.Sync = value
@@ -220,15 +220,15 @@ func (in *ActionDatasetCreateInput) SetSync(value string) *ActionDatasetCreateIn
 	in._selectedParameters["Sync"] = nil
 	return in
 }
-// SetSharenfs sets parameter Sharenfs to value and selects it for sending
-func (in *ActionDatasetCreateInput) SetSharenfs(value string) *ActionDatasetCreateInput {
-	in.Sharenfs = value
+// SetUserNamespaceMap sets parameter UserNamespaceMap to value and selects it for sending
+func (in *ActionDatasetCreateInput) SetUserNamespaceMap(value int64) *ActionDatasetCreateInput {
+	in.UserNamespaceMap = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Sharenfs"] = nil
+	in._selectedParameters["UserNamespaceMap"] = nil
 	return in
 }
 
@@ -263,25 +263,25 @@ type ActionDatasetCreateRequest struct {
 
 // ActionDatasetCreateOutput is a type for action output parameters
 type ActionDatasetCreateOutput struct {
+	Atime bool `json:"atime"`
+	Avail int64 `json:"avail"`
+	Compression bool `json:"compression"`
+	CurrentHistoryId int64 `json:"current_history_id"`
+	Environment *ActionEnvironmentShowOutput `json:"environment"`
+	Export *ActionExportShowOutput `json:"export"`
 	Id int64 `json:"id"`
 	Name string `json:"name"`
 	Parent *ActionDatasetShowOutput `json:"parent"`
-	User *ActionUserShowOutput `json:"user"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
-	CurrentHistoryId int64 `json:"current_history_id"`
-	Atime bool `json:"atime"`
-	Compression bool `json:"compression"`
-	Recordsize int64 `json:"recordsize"`
 	Quota int64 `json:"quota"`
+	Recordsize int64 `json:"recordsize"`
+	Referenced int64 `json:"referenced"`
 	Refquota int64 `json:"refquota"`
 	Relatime bool `json:"relatime"`
-	Sync string `json:"sync"`
 	Sharenfs string `json:"sharenfs"`
+	Sync string `json:"sync"`
 	Used int64 `json:"used"`
-	Referenced int64 `json:"referenced"`
-	Avail int64 `json:"avail"`
-	Export *ActionExportShowOutput `json:"export"`
+	User *ActionUserShowOutput `json:"user"`
+	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
 }
 
 // ActionDatasetCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -476,8 +476,14 @@ func (inv *ActionDatasetCreateInvocation) makeInputParams() map[string]interface
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Name") {
-			ret["name"] = inv.Input.Name
+		if inv.IsParameterSelected("Atime") {
+			ret["atime"] = inv.Input.Atime
+		}
+		if inv.IsParameterSelected("Automount") {
+			ret["automount"] = inv.Input.Automount
+		}
+		if inv.IsParameterSelected("Compression") {
+			ret["compression"] = inv.Input.Compression
 		}
 		if inv.IsParameterSelected("Dataset") {
 			ret["dataset"] = inv.Input.Dataset
@@ -485,23 +491,14 @@ func (inv *ActionDatasetCreateInvocation) makeInputParams() map[string]interface
 		if inv.IsParameterSelected("InheritUserNamespaceMap") {
 			ret["inherit_user_namespace_map"] = inv.Input.InheritUserNamespaceMap
 		}
-		if inv.IsParameterSelected("UserNamespaceMap") {
-			ret["user_namespace_map"] = inv.Input.UserNamespaceMap
-		}
-		if inv.IsParameterSelected("Automount") {
-			ret["automount"] = inv.Input.Automount
-		}
-		if inv.IsParameterSelected("Atime") {
-			ret["atime"] = inv.Input.Atime
-		}
-		if inv.IsParameterSelected("Compression") {
-			ret["compression"] = inv.Input.Compression
-		}
-		if inv.IsParameterSelected("Recordsize") {
-			ret["recordsize"] = inv.Input.Recordsize
+		if inv.IsParameterSelected("Name") {
+			ret["name"] = inv.Input.Name
 		}
 		if inv.IsParameterSelected("Quota") {
 			ret["quota"] = inv.Input.Quota
+		}
+		if inv.IsParameterSelected("Recordsize") {
+			ret["recordsize"] = inv.Input.Recordsize
 		}
 		if inv.IsParameterSelected("Refquota") {
 			ret["refquota"] = inv.Input.Refquota
@@ -509,11 +506,14 @@ func (inv *ActionDatasetCreateInvocation) makeInputParams() map[string]interface
 		if inv.IsParameterSelected("Relatime") {
 			ret["relatime"] = inv.Input.Relatime
 		}
+		if inv.IsParameterSelected("Sharenfs") {
+			ret["sharenfs"] = inv.Input.Sharenfs
+		}
 		if inv.IsParameterSelected("Sync") {
 			ret["sync"] = inv.Input.Sync
 		}
-		if inv.IsParameterSelected("Sharenfs") {
-			ret["sharenfs"] = inv.Input.Sharenfs
+		if inv.IsParameterSelected("UserNamespaceMap") {
+			ret["user_namespace_map"] = inv.Input.UserNamespaceMap
 		}
 	}
 
@@ -524,11 +524,11 @@ func (inv *ActionDatasetCreateInvocation) makeMetaInputParams() map[string]inter
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

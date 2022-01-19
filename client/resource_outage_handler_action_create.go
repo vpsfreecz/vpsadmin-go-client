@@ -18,23 +18,12 @@ func NewActionOutageHandlerCreate(client *Client) *ActionOutageHandlerCreate {
 
 // ActionOutageHandlerCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageHandlerCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionOutageHandlerCreateMetaGlobalInput) SetNo(value bool) *ActionOutageHandlerCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionOutageHandlerCreateMetaGlobalInput) SetIncludes(value string) *ActionOutageHandlerCreateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionOutageHandlerCreateMetaGlobalInput) SetIncludes(value string) *A
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionOutageHandlerCreateMetaGlobalInput) SetNo(value bool) *ActionOutageHandlerCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,24 +72,13 @@ func (in *ActionOutageHandlerCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageHandlerCreateInput is a type for action input parameters
 type ActionOutageHandlerCreateInput struct {
-	User int64 `json:"user"`
 	FullName string `json:"full_name"`
 	Note string `json:"note"`
+	User int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetUser sets parameter User to value and selects it for sending
-func (in *ActionOutageHandlerCreateInput) SetUser(value int64) *ActionOutageHandlerCreateInput {
-	in.User = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["User"] = nil
-	return in
-}
 // SetFullName sets parameter FullName to value and selects it for sending
 func (in *ActionOutageHandlerCreateInput) SetFullName(value string) *ActionOutageHandlerCreateInput {
 	in.FullName = value
@@ -110,6 +99,17 @@ func (in *ActionOutageHandlerCreateInput) SetNote(value string) *ActionOutageHan
 	}
 
 	in._selectedParameters["Note"] = nil
+	return in
+}
+// SetUser sets parameter User to value and selects it for sending
+func (in *ActionOutageHandlerCreateInput) SetUser(value int64) *ActionOutageHandlerCreateInput {
+	in.User = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["User"] = nil
 	return in
 }
 
@@ -144,10 +144,10 @@ type ActionOutageHandlerCreateRequest struct {
 
 // ActionOutageHandlerCreateOutput is a type for action output parameters
 type ActionOutageHandlerCreateOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
 	FullName string `json:"full_name"`
+	Id int64 `json:"id"`
 	Note string `json:"note"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -271,14 +271,14 @@ func (inv *ActionOutageHandlerCreateInvocation) makeInputParams() map[string]int
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("User") {
-			ret["user"] = inv.Input.User
-		}
 		if inv.IsParameterSelected("FullName") {
 			ret["full_name"] = inv.Input.FullName
 		}
 		if inv.IsParameterSelected("Note") {
 			ret["note"] = inv.Input.Note
+		}
+		if inv.IsParameterSelected("User") {
+			ret["user"] = inv.Input.User
 		}
 	}
 
@@ -289,11 +289,11 @@ func (inv *ActionOutageHandlerCreateInvocation) makeMetaInputParams() map[string
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

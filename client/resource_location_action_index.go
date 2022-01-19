@@ -17,24 +17,13 @@ func NewActionLocationIndex(client *Client) *ActionLocationIndex {
 
 // ActionLocationIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionLocationIndexMetaGlobalInput) SetNo(value bool) *ActionLocationIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionLocationIndexMetaGlobalInput) SetCount(value bool) *ActionLocationIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionLocationIndexMetaGlobalInput) SetIncludes(value string) *ActionL
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionLocationIndexMetaGlobalInput) SetNo(value bool) *ActionLocationIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,38 +83,20 @@ func (in *ActionLocationIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationIndexInput is a type for action input parameters
 type ActionLocationIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
 	Environment int64 `json:"environment"`
 	HasHypervisor bool `json:"has_hypervisor"`
 	HasStorage bool `json:"has_storage"`
 	HypervisorType string `json:"hypervisor_type"`
+	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
+	SharesAnyNetworksWith int64 `json:"shares_any_networks_with"`
+	SharesNetworksPrimary bool `json:"shares_networks_primary"`
+	SharesV4NetworksWith int64 `json:"shares_v4_networks_with"`
+	SharesV6NetworksWith int64 `json:"shares_v6_networks_with"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionLocationIndexInput) SetOffset(value int64) *ActionLocationIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-// SetLimit sets parameter Limit to value and selects it for sending
-func (in *ActionLocationIndexInput) SetLimit(value int64) *ActionLocationIndexInput {
-	in.Limit = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Limit"] = nil
-	return in
-}
 // SetEnvironment sets parameter Environment to value and selects it for sending
 func (in *ActionLocationIndexInput) SetEnvironment(value int64) *ActionLocationIndexInput {
 	in.Environment = value
@@ -159,6 +141,72 @@ func (in *ActionLocationIndexInput) SetHypervisorType(value string) *ActionLocat
 	in._selectedParameters["HypervisorType"] = nil
 	return in
 }
+// SetLimit sets parameter Limit to value and selects it for sending
+func (in *ActionLocationIndexInput) SetLimit(value int64) *ActionLocationIndexInput {
+	in.Limit = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionLocationIndexInput) SetOffset(value int64) *ActionLocationIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
+	return in
+}
+// SetSharesAnyNetworksWith sets parameter SharesAnyNetworksWith to value and selects it for sending
+func (in *ActionLocationIndexInput) SetSharesAnyNetworksWith(value int64) *ActionLocationIndexInput {
+	in.SharesAnyNetworksWith = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["SharesAnyNetworksWith"] = nil
+	return in
+}
+// SetSharesNetworksPrimary sets parameter SharesNetworksPrimary to value and selects it for sending
+func (in *ActionLocationIndexInput) SetSharesNetworksPrimary(value bool) *ActionLocationIndexInput {
+	in.SharesNetworksPrimary = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["SharesNetworksPrimary"] = nil
+	return in
+}
+// SetSharesV4NetworksWith sets parameter SharesV4NetworksWith to value and selects it for sending
+func (in *ActionLocationIndexInput) SetSharesV4NetworksWith(value int64) *ActionLocationIndexInput {
+	in.SharesV4NetworksWith = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["SharesV4NetworksWith"] = nil
+	return in
+}
+// SetSharesV6NetworksWith sets parameter SharesV6NetworksWith to value and selects it for sending
+func (in *ActionLocationIndexInput) SetSharesV6NetworksWith(value int64) *ActionLocationIndexInput {
+	in.SharesV6NetworksWith = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["SharesV6NetworksWith"] = nil
+	return in
+}
 
 // SelectParameters sets parameters from ActionLocationIndexInput
 // that will be sent to the API.
@@ -186,16 +234,16 @@ func (in *ActionLocationIndexInput) AnySelected() bool {
 
 // ActionLocationIndexOutput is a type for action output parameters
 type ActionLocationIndexOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
 	Description string `json:"description"`
-	HasIpv6 bool `json:"has_ipv6"`
-	VpsOnboot bool `json:"vps_onboot"`
-	RemoteConsoleServer string `json:"remote_console_server"`
 	Domain string `json:"domain"`
 	Environment *ActionEnvironmentShowOutput `json:"environment"`
+	HasIpv6 bool `json:"has_ipv6"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
 	MaintenanceLock string `json:"maintenance_lock"`
 	MaintenanceLockReason string `json:"maintenance_lock_reason"`
+	RemoteConsoleServer string `json:"remote_console_server"`
+	VpsOnboot bool `json:"vps_onboot"`
 }
 
 
@@ -300,12 +348,6 @@ func (inv *ActionLocationIndexInvocation) callAsQuery() (*ActionLocationIndexRes
 
 func (inv *ActionLocationIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["location[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
-		if inv.IsParameterSelected("Limit") {
-			ret["location[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
 		if inv.IsParameterSelected("Environment") {
 			ret["location[environment]"] = convertInt64ToString(inv.Input.Environment)
 		}
@@ -318,19 +360,37 @@ func (inv *ActionLocationIndexInvocation) convertInputToQueryParams(ret map[stri
 		if inv.IsParameterSelected("HypervisorType") {
 			ret["location[hypervisor_type]"] = inv.Input.HypervisorType
 		}
+		if inv.IsParameterSelected("Limit") {
+			ret["location[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["location[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
+		if inv.IsParameterSelected("SharesAnyNetworksWith") {
+			ret["location[shares_any_networks_with]"] = convertInt64ToString(inv.Input.SharesAnyNetworksWith)
+		}
+		if inv.IsParameterSelected("SharesNetworksPrimary") {
+			ret["location[shares_networks_primary]"] = convertBoolToString(inv.Input.SharesNetworksPrimary)
+		}
+		if inv.IsParameterSelected("SharesV4NetworksWith") {
+			ret["location[shares_v4_networks_with]"] = convertInt64ToString(inv.Input.SharesV4NetworksWith)
+		}
+		if inv.IsParameterSelected("SharesV6NetworksWith") {
+			ret["location[shares_v6_networks_with]"] = convertInt64ToString(inv.Input.SharesV6NetworksWith)
+		}
 	}
 }
 
 func (inv *ActionLocationIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

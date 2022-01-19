@@ -18,23 +18,12 @@ func NewActionHostIpAddressAssign(client *Client) *ActionHostIpAddressAssign {
 
 // ActionHostIpAddressAssignMetaGlobalInput is a type for action global meta input parameters
 type ActionHostIpAddressAssignMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionHostIpAddressAssignMetaGlobalInput) SetNo(value bool) *ActionHostIpAddressAssignMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionHostIpAddressAssignMetaGlobalInput) SetIncludes(value string) *ActionHostIpAddressAssignMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionHostIpAddressAssignMetaGlobalInput) SetIncludes(value string) *A
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionHostIpAddressAssignMetaGlobalInput) SetNo(value bool) *ActionHostIpAddressAssignMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -78,10 +78,10 @@ type ActionHostIpAddressAssignRequest struct {
 
 // ActionHostIpAddressAssignOutput is a type for action output parameters
 type ActionHostIpAddressAssignOutput struct {
-	Id int64 `json:"id"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
 	Addr string `json:"addr"`
 	Assigned bool `json:"assigned"`
+	Id int64 `json:"id"`
+	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
 }
 
 // ActionHostIpAddressAssignMetaGlobalOutput is a type for global output metadata parameters
@@ -263,11 +263,11 @@ func (inv *ActionHostIpAddressAssignInvocation) makeMetaInputParams() map[string
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

@@ -17,23 +17,12 @@ func NewActionLocationCreate(client *Client) *ActionLocationCreate {
 
 // ActionLocationCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionLocationCreateMetaGlobalInput) SetNo(value bool) *ActionLocationCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionLocationCreateMetaGlobalInput) SetIncludes(value string) *ActionLocationCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionLocationCreateMetaGlobalInput) SetIncludes(value string) *Action
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionLocationCreateMetaGlobalInput) SetNo(value bool) *ActionLocationCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,28 +71,17 @@ func (in *ActionLocationCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationCreateInput is a type for action input parameters
 type ActionLocationCreateInput struct {
-	Label string `json:"label"`
 	Description string `json:"description"`
-	HasIpv6 bool `json:"has_ipv6"`
-	VpsOnboot bool `json:"vps_onboot"`
-	RemoteConsoleServer string `json:"remote_console_server"`
 	Domain string `json:"domain"`
 	Environment int64 `json:"environment"`
+	HasIpv6 bool `json:"has_ipv6"`
+	Label string `json:"label"`
+	RemoteConsoleServer string `json:"remote_console_server"`
+	VpsOnboot bool `json:"vps_onboot"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetLabel sets parameter Label to value and selects it for sending
-func (in *ActionLocationCreateInput) SetLabel(value string) *ActionLocationCreateInput {
-	in.Label = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Label"] = nil
-	return in
-}
 // SetDescription sets parameter Description to value and selects it for sending
 func (in *ActionLocationCreateInput) SetDescription(value string) *ActionLocationCreateInput {
 	in.Description = value
@@ -102,39 +91,6 @@ func (in *ActionLocationCreateInput) SetDescription(value string) *ActionLocatio
 	}
 
 	in._selectedParameters["Description"] = nil
-	return in
-}
-// SetHasIpv6 sets parameter HasIpv6 to value and selects it for sending
-func (in *ActionLocationCreateInput) SetHasIpv6(value bool) *ActionLocationCreateInput {
-	in.HasIpv6 = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["HasIpv6"] = nil
-	return in
-}
-// SetVpsOnboot sets parameter VpsOnboot to value and selects it for sending
-func (in *ActionLocationCreateInput) SetVpsOnboot(value bool) *ActionLocationCreateInput {
-	in.VpsOnboot = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["VpsOnboot"] = nil
-	return in
-}
-// SetRemoteConsoleServer sets parameter RemoteConsoleServer to value and selects it for sending
-func (in *ActionLocationCreateInput) SetRemoteConsoleServer(value string) *ActionLocationCreateInput {
-	in.RemoteConsoleServer = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["RemoteConsoleServer"] = nil
 	return in
 }
 // SetDomain sets parameter Domain to value and selects it for sending
@@ -157,6 +113,50 @@ func (in *ActionLocationCreateInput) SetEnvironment(value int64) *ActionLocation
 	}
 
 	in._selectedParameters["Environment"] = nil
+	return in
+}
+// SetHasIpv6 sets parameter HasIpv6 to value and selects it for sending
+func (in *ActionLocationCreateInput) SetHasIpv6(value bool) *ActionLocationCreateInput {
+	in.HasIpv6 = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["HasIpv6"] = nil
+	return in
+}
+// SetLabel sets parameter Label to value and selects it for sending
+func (in *ActionLocationCreateInput) SetLabel(value string) *ActionLocationCreateInput {
+	in.Label = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Label"] = nil
+	return in
+}
+// SetRemoteConsoleServer sets parameter RemoteConsoleServer to value and selects it for sending
+func (in *ActionLocationCreateInput) SetRemoteConsoleServer(value string) *ActionLocationCreateInput {
+	in.RemoteConsoleServer = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["RemoteConsoleServer"] = nil
+	return in
+}
+// SetVpsOnboot sets parameter VpsOnboot to value and selects it for sending
+func (in *ActionLocationCreateInput) SetVpsOnboot(value bool) *ActionLocationCreateInput {
+	in.VpsOnboot = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["VpsOnboot"] = nil
 	return in
 }
 
@@ -191,14 +191,14 @@ type ActionLocationCreateRequest struct {
 
 // ActionLocationCreateOutput is a type for action output parameters
 type ActionLocationCreateOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
 	Description string `json:"description"`
-	HasIpv6 bool `json:"has_ipv6"`
-	VpsOnboot bool `json:"vps_onboot"`
-	RemoteConsoleServer string `json:"remote_console_server"`
 	Domain string `json:"domain"`
 	Environment *ActionEnvironmentShowOutput `json:"environment"`
+	HasIpv6 bool `json:"has_ipv6"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	RemoteConsoleServer string `json:"remote_console_server"`
+	VpsOnboot bool `json:"vps_onboot"`
 }
 
 
@@ -312,26 +312,26 @@ func (inv *ActionLocationCreateInvocation) makeInputParams() map[string]interfac
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Label") {
-			ret["label"] = inv.Input.Label
-		}
 		if inv.IsParameterSelected("Description") {
 			ret["description"] = inv.Input.Description
-		}
-		if inv.IsParameterSelected("HasIpv6") {
-			ret["has_ipv6"] = inv.Input.HasIpv6
-		}
-		if inv.IsParameterSelected("VpsOnboot") {
-			ret["vps_onboot"] = inv.Input.VpsOnboot
-		}
-		if inv.IsParameterSelected("RemoteConsoleServer") {
-			ret["remote_console_server"] = inv.Input.RemoteConsoleServer
 		}
 		if inv.IsParameterSelected("Domain") {
 			ret["domain"] = inv.Input.Domain
 		}
 		if inv.IsParameterSelected("Environment") {
 			ret["environment"] = inv.Input.Environment
+		}
+		if inv.IsParameterSelected("HasIpv6") {
+			ret["has_ipv6"] = inv.Input.HasIpv6
+		}
+		if inv.IsParameterSelected("Label") {
+			ret["label"] = inv.Input.Label
+		}
+		if inv.IsParameterSelected("RemoteConsoleServer") {
+			ret["remote_console_server"] = inv.Input.RemoteConsoleServer
+		}
+		if inv.IsParameterSelected("VpsOnboot") {
+			ret["vps_onboot"] = inv.Input.VpsOnboot
 		}
 	}
 
@@ -342,11 +342,11 @@ func (inv *ActionLocationCreateInvocation) makeMetaInputParams() map[string]inte
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

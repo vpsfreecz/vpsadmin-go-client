@@ -17,24 +17,13 @@ func NewActionNetworkIndex(client *Client) *ActionNetworkIndex {
 
 // ActionNetworkIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionNetworkIndexMetaGlobalInput) SetNo(value bool) *ActionNetworkIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionNetworkIndexMetaGlobalInput) SetCount(value bool) *ActionNetworkIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionNetworkIndexMetaGlobalInput) SetIncludes(value string) *ActionNe
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionNetworkIndexMetaGlobalInput) SetNo(value bool) *ActionNetworkIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,25 +83,14 @@ func (in *ActionNetworkIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkIndexInput is a type for action input parameters
 type ActionNetworkIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
 	Location int64 `json:"location"`
+	Offset int64 `json:"offset"`
 	Purpose string `json:"purpose"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionNetworkIndexInput) SetOffset(value int64) *ActionNetworkIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionNetworkIndexInput) SetLimit(value int64) *ActionNetworkIndexInput {
 	in.Limit = value
@@ -122,6 +111,17 @@ func (in *ActionNetworkIndexInput) SetLocation(value int64) *ActionNetworkIndexI
 	}
 
 	in._selectedParameters["Location"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionNetworkIndexInput) SetOffset(value int64) *ActionNetworkIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetPurpose sets parameter Purpose to value and selects it for sending
@@ -162,21 +162,22 @@ func (in *ActionNetworkIndexInput) AnySelected() bool {
 
 // ActionNetworkIndexOutput is a type for action output parameters
 type ActionNetworkIndexOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	IpVersion int64 `json:"ip_version"`
 	Address string `json:"address"`
-	Prefix int64 `json:"prefix"`
-	Role string `json:"role"`
+	Assigned int64 `json:"assigned"`
+	Id int64 `json:"id"`
+	IpVersion int64 `json:"ip_version"`
+	Label string `json:"label"`
 	Managed bool `json:"managed"`
+	Owned int64 `json:"owned"`
+	Prefix int64 `json:"prefix"`
+	PrimaryLocation *ActionLocationShowOutput `json:"primary_location"`
+	Purpose string `json:"purpose"`
+	Role string `json:"role"`
+	Size int64 `json:"size"`
 	SplitAccess string `json:"split_access"`
 	SplitPrefix int64 `json:"split_prefix"`
-	Autopick bool `json:"autopick"`
-	Purpose string `json:"purpose"`
-	Size int64 `json:"size"`
+	Taken int64 `json:"taken"`
 	Used int64 `json:"used"`
-	Assigned int64 `json:"assigned"`
-	Owned int64 `json:"owned"`
 }
 
 
@@ -281,14 +282,14 @@ func (inv *ActionNetworkIndexInvocation) callAsQuery() (*ActionNetworkIndexRespo
 
 func (inv *ActionNetworkIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["network[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["network[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 		if inv.IsParameterSelected("Location") {
 			ret["network[location]"] = convertInt64ToString(inv.Input.Location)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["network[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Purpose") {
 			ret["network[purpose]"] = inv.Input.Purpose
@@ -298,14 +299,14 @@ func (inv *ActionNetworkIndexInvocation) convertInputToQueryParams(ret map[strin
 
 func (inv *ActionNetworkIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

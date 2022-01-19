@@ -18,23 +18,12 @@ func NewActionVpsMountUpdate(client *Client) *ActionVpsMountUpdate {
 
 // ActionVpsMountUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMountUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsMountUpdateMetaGlobalInput) SetNo(value bool) *ActionVpsMountUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsMountUpdateMetaGlobalInput) SetIncludes(value string) *ActionVpsMountUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionVpsMountUpdateMetaGlobalInput) SetIncludes(value string) *Action
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsMountUpdateMetaGlobalInput) SetNo(value bool) *ActionVpsMountUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,24 +72,13 @@ func (in *ActionVpsMountUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMountUpdateInput is a type for action input parameters
 type ActionVpsMountUpdateInput struct {
-	OnStartFail string `json:"on_start_fail"`
 	Enabled bool `json:"enabled"`
 	MasterEnabled bool `json:"master_enabled"`
+	OnStartFail string `json:"on_start_fail"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOnStartFail sets parameter OnStartFail to value and selects it for sending
-func (in *ActionVpsMountUpdateInput) SetOnStartFail(value string) *ActionVpsMountUpdateInput {
-	in.OnStartFail = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["OnStartFail"] = nil
-	return in
-}
 // SetEnabled sets parameter Enabled to value and selects it for sending
 func (in *ActionVpsMountUpdateInput) SetEnabled(value bool) *ActionVpsMountUpdateInput {
 	in.Enabled = value
@@ -110,6 +99,17 @@ func (in *ActionVpsMountUpdateInput) SetMasterEnabled(value bool) *ActionVpsMoun
 	}
 
 	in._selectedParameters["MasterEnabled"] = nil
+	return in
+}
+// SetOnStartFail sets parameter OnStartFail to value and selects it for sending
+func (in *ActionVpsMountUpdateInput) SetOnStartFail(value string) *ActionVpsMountUpdateInput {
+	in.OnStartFail = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["OnStartFail"] = nil
 	return in
 }
 
@@ -144,18 +144,18 @@ type ActionVpsMountUpdateRequest struct {
 
 // ActionVpsMountUpdateOutput is a type for action output parameters
 type ActionVpsMountUpdateOutput struct {
-	Id int64 `json:"id"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	CurrentState string `json:"current_state"`
 	Dataset *ActionDatasetShowOutput `json:"dataset"`
+	Enabled bool `json:"enabled"`
+	ExpirationDate string `json:"expiration_date"`
+	Id int64 `json:"id"`
+	MasterEnabled bool `json:"master_enabled"`
+	Mode string `json:"mode"`
+	Mountpoint string `json:"mountpoint"`
+	OnStartFail string `json:"on_start_fail"`
 	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
 	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
-	Mountpoint string `json:"mountpoint"`
-	Mode string `json:"mode"`
-	OnStartFail string `json:"on_start_fail"`
-	ExpirationDate string `json:"expiration_date"`
-	Enabled bool `json:"enabled"`
-	MasterEnabled bool `json:"master_enabled"`
-	CurrentState string `json:"current_state"`
+	Vps *ActionVpsShowOutput `json:"vps"`
 }
 
 // ActionVpsMountUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -360,14 +360,14 @@ func (inv *ActionVpsMountUpdateInvocation) makeInputParams() map[string]interfac
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("OnStartFail") {
-			ret["on_start_fail"] = inv.Input.OnStartFail
-		}
 		if inv.IsParameterSelected("Enabled") {
 			ret["enabled"] = inv.Input.Enabled
 		}
 		if inv.IsParameterSelected("MasterEnabled") {
 			ret["master_enabled"] = inv.Input.MasterEnabled
+		}
+		if inv.IsParameterSelected("OnStartFail") {
+			ret["on_start_fail"] = inv.Input.OnStartFail
 		}
 	}
 
@@ -378,11 +378,11 @@ func (inv *ActionVpsMountUpdateInvocation) makeMetaInputParams() map[string]inte
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

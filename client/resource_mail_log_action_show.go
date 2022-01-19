@@ -18,23 +18,12 @@ func NewActionMailLogShow(client *Client) *ActionMailLogShow {
 
 // ActionMailLogShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMailLogShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionMailLogShowMetaGlobalInput) SetNo(value bool) *ActionMailLogShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionMailLogShowMetaGlobalInput) SetIncludes(value string) *ActionMailLogShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionMailLogShowMetaGlobalInput) SetIncludes(value string) *ActionMai
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMailLogShowMetaGlobalInput) SetNo(value bool) *ActionMailLogShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,22 +74,22 @@ func (in *ActionMailLogShowMetaGlobalInput) AnySelected() bool {
 
 // ActionMailLogShowOutput is a type for action output parameters
 type ActionMailLogShowOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	To string `json:"to"`
-	Cc string `json:"cc"`
 	Bcc string `json:"bcc"`
+	Cc string `json:"cc"`
+	CreatedAt string `json:"created_at"`
 	From string `json:"from"`
+	Id int64 `json:"id"`
+	InReplyTo string `json:"in_reply_to"`
+	MailTemplate *ActionMailTemplateShowOutput `json:"mail_template"`
+	MessageId string `json:"message_id"`
+	References string `json:"references"`
 	ReplyTo string `json:"reply_to"`
 	ReturnPath string `json:"return_path"`
-	MessageId string `json:"message_id"`
-	InReplyTo string `json:"in_reply_to"`
-	References string `json:"references"`
 	Subject string `json:"subject"`
-	TextPlain string `json:"text_plain"`
 	TextHtml string `json:"text_html"`
-	MailTemplate *ActionMailTemplateShowOutput `json:"mail_template"`
-	CreatedAt string `json:"created_at"`
+	TextPlain string `json:"text_plain"`
+	To string `json:"to"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -181,11 +181,11 @@ func (inv *ActionMailLogShowInvocation) callAsQuery() (*ActionMailLogShowRespons
 
 func (inv *ActionMailLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

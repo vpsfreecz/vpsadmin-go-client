@@ -18,23 +18,12 @@ func NewActionUserRequestChangeShow(client *Client) *ActionUserRequestChangeShow
 
 // ActionUserRequestChangeShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestChangeShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserRequestChangeShowMetaGlobalInput) SetNo(value bool) *ActionUserRequestChangeShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserRequestChangeShowMetaGlobalInput) SetIncludes(value string) *ActionUserRequestChangeShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionUserRequestChangeShowMetaGlobalInput) SetIncludes(value string) 
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserRequestChangeShowMetaGlobalInput) SetNo(value bool) *ActionUserRequestChangeShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,22 +74,22 @@ func (in *ActionUserRequestChangeShowMetaGlobalInput) AnySelected() bool {
 
 // ActionUserRequestChangeShowOutput is a type for action output parameters
 type ActionUserRequestChangeShowOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	State string `json:"state"`
-	ApiIpAddr string `json:"api_ip_addr"`
-	ApiIpPtr string `json:"api_ip_ptr"`
-	ClientIpAddr string `json:"client_ip_addr"`
-	ClientIpPtr string `json:"client_ip_ptr"`
+	Address string `json:"address"`
 	Admin *ActionUserShowOutput `json:"admin"`
 	AdminResponse string `json:"admin_response"`
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
-	Label string `json:"label"`
+	ApiIpAddr string `json:"api_ip_addr"`
+	ApiIpPtr string `json:"api_ip_ptr"`
 	ChangeReason string `json:"change_reason"`
-	FullName string `json:"full_name"`
+	ClientIpAddr string `json:"client_ip_addr"`
+	ClientIpPtr string `json:"client_ip_ptr"`
+	CreatedAt string `json:"created_at"`
 	Email string `json:"email"`
-	Address string `json:"address"`
+	FullName string `json:"full_name"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	State string `json:"state"`
+	UpdatedAt string `json:"updated_at"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -181,11 +181,11 @@ func (inv *ActionUserRequestChangeShowInvocation) callAsQuery() (*ActionUserRequ
 
 func (inv *ActionUserRequestChangeShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

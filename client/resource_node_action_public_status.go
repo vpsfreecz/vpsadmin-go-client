@@ -17,23 +17,12 @@ func NewActionNodePublicStatus(client *Client) *ActionNodePublicStatus {
 
 // ActionNodePublicStatusMetaGlobalInput is a type for action global meta input parameters
 type ActionNodePublicStatusMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionNodePublicStatusMetaGlobalInput) SetNo(value bool) *ActionNodePublicStatusMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionNodePublicStatusMetaGlobalInput) SetIncludes(value string) *ActionNodePublicStatusMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionNodePublicStatusMetaGlobalInput) SetIncludes(value string) *Acti
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionNodePublicStatusMetaGlobalInput) SetNo(value bool) *ActionNodePublicStatusMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -73,16 +73,17 @@ func (in *ActionNodePublicStatusMetaGlobalInput) AnySelected() bool {
 
 // ActionNodePublicStatusOutput is a type for action output parameters
 type ActionNodePublicStatusOutput struct {
-	Status bool `json:"status"`
-	Name string `json:"name"`
-	Location *ActionLocationShowOutput `json:"location"`
-	LastReport string `json:"last_report"`
-	VpsCount int64 `json:"vps_count"`
-	VpsFree int64 `json:"vps_free"`
-	Kernel string `json:"kernel"`
 	CpuIdle float64 `json:"cpu_idle"`
+	HypervisorType string `json:"hypervisor_type"`
+	Kernel string `json:"kernel"`
+	LastReport string `json:"last_report"`
+	Location *ActionLocationShowOutput `json:"location"`
 	MaintenanceLock string `json:"maintenance_lock"`
 	MaintenanceLockReason string `json:"maintenance_lock_reason"`
+	Name string `json:"name"`
+	Status bool `json:"status"`
+	VpsCount int64 `json:"vps_count"`
+	VpsFree int64 `json:"vps_free"`
 }
 
 
@@ -168,11 +169,11 @@ func (inv *ActionNodePublicStatusInvocation) callAsQuery() (*ActionNodePublicSta
 
 func (inv *ActionNodePublicStatusInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

@@ -17,24 +17,13 @@ func NewActionMailLogIndex(client *Client) *ActionMailLogIndex {
 
 // ActionMailLogIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMailLogIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionMailLogIndexMetaGlobalInput) SetNo(value bool) *ActionMailLogIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionMailLogIndexMetaGlobalInput) SetCount(value bool) *ActionMailLogIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionMailLogIndexMetaGlobalInput) SetIncludes(value string) *ActionMa
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMailLogIndexMetaGlobalInput) SetNo(value bool) *ActionMailLogIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,23 +83,12 @@ func (in *ActionMailLogIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMailLogIndexInput is a type for action input parameters
 type ActionMailLogIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionMailLogIndexInput) SetOffset(value int64) *ActionMailLogIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionMailLogIndexInput) SetLimit(value int64) *ActionMailLogIndexInput {
 	in.Limit = value
@@ -109,6 +98,17 @@ func (in *ActionMailLogIndexInput) SetLimit(value int64) *ActionMailLogIndexInpu
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionMailLogIndexInput) SetOffset(value int64) *ActionMailLogIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -138,22 +138,22 @@ func (in *ActionMailLogIndexInput) AnySelected() bool {
 
 // ActionMailLogIndexOutput is a type for action output parameters
 type ActionMailLogIndexOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	To string `json:"to"`
-	Cc string `json:"cc"`
 	Bcc string `json:"bcc"`
+	Cc string `json:"cc"`
+	CreatedAt string `json:"created_at"`
 	From string `json:"from"`
+	Id int64 `json:"id"`
+	InReplyTo string `json:"in_reply_to"`
+	MailTemplate *ActionMailTemplateShowOutput `json:"mail_template"`
+	MessageId string `json:"message_id"`
+	References string `json:"references"`
 	ReplyTo string `json:"reply_to"`
 	ReturnPath string `json:"return_path"`
-	MessageId string `json:"message_id"`
-	InReplyTo string `json:"in_reply_to"`
-	References string `json:"references"`
 	Subject string `json:"subject"`
-	TextPlain string `json:"text_plain"`
 	TextHtml string `json:"text_html"`
-	MailTemplate *ActionMailTemplateShowOutput `json:"mail_template"`
-	CreatedAt string `json:"created_at"`
+	TextPlain string `json:"text_plain"`
+	To string `json:"to"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -258,25 +258,25 @@ func (inv *ActionMailLogIndexInvocation) callAsQuery() (*ActionMailLogIndexRespo
 
 func (inv *ActionMailLogIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["mail_log[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["mail_log[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["mail_log[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }
 
 func (inv *ActionMailLogIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

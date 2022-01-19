@@ -17,23 +17,12 @@ func NewActionUserNamespaceMapCreate(client *Client) *ActionUserNamespaceMapCrea
 
 // ActionUserNamespaceMapCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceMapCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserNamespaceMapCreateMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceMapCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserNamespaceMapCreateMetaGlobalInput) SetIncludes(value string) *ActionUserNamespaceMapCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionUserNamespaceMapCreateMetaGlobalInput) SetIncludes(value string)
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserNamespaceMapCreateMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceMapCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,23 +71,12 @@ func (in *ActionUserNamespaceMapCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserNamespaceMapCreateInput is a type for action input parameters
 type ActionUserNamespaceMapCreateInput struct {
-	UserNamespace int64 `json:"user_namespace"`
 	Label string `json:"label"`
+	UserNamespace int64 `json:"user_namespace"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetUserNamespace sets parameter UserNamespace to value and selects it for sending
-func (in *ActionUserNamespaceMapCreateInput) SetUserNamespace(value int64) *ActionUserNamespaceMapCreateInput {
-	in.UserNamespace = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["UserNamespace"] = nil
-	return in
-}
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionUserNamespaceMapCreateInput) SetLabel(value string) *ActionUserNamespaceMapCreateInput {
 	in.Label = value
@@ -97,6 +86,17 @@ func (in *ActionUserNamespaceMapCreateInput) SetLabel(value string) *ActionUserN
 	}
 
 	in._selectedParameters["Label"] = nil
+	return in
+}
+// SetUserNamespace sets parameter UserNamespace to value and selects it for sending
+func (in *ActionUserNamespaceMapCreateInput) SetUserNamespace(value int64) *ActionUserNamespaceMapCreateInput {
+	in.UserNamespace = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["UserNamespace"] = nil
 	return in
 }
 
@@ -132,8 +132,8 @@ type ActionUserNamespaceMapCreateRequest struct {
 // ActionUserNamespaceMapCreateOutput is a type for action output parameters
 type ActionUserNamespaceMapCreateOutput struct {
 	Id int64 `json:"id"`
-	UserNamespace *ActionUserNamespaceShowOutput `json:"user_namespace"`
 	Label string `json:"label"`
+	UserNamespace *ActionUserNamespaceShowOutput `json:"user_namespace"`
 }
 
 
@@ -247,11 +247,11 @@ func (inv *ActionUserNamespaceMapCreateInvocation) makeInputParams() map[string]
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("UserNamespace") {
-			ret["user_namespace"] = inv.Input.UserNamespace
-		}
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
+		}
+		if inv.IsParameterSelected("UserNamespace") {
+			ret["user_namespace"] = inv.Input.UserNamespace
 		}
 	}
 
@@ -262,11 +262,11 @@ func (inv *ActionUserNamespaceMapCreateInvocation) makeMetaInputParams() map[str
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

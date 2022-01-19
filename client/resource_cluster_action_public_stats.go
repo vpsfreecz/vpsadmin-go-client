@@ -61,9 +61,9 @@ func (in *ActionClusterPublicStatsMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterPublicStatsOutput is a type for action output parameters
 type ActionClusterPublicStatsOutput struct {
+	Ipv4Left int64 `json:"ipv4_left"`
 	UserCount int64 `json:"user_count"`
 	VpsCount int64 `json:"vps_count"`
-	Ipv4Left int64 `json:"ipv4_left"`
 }
 
 

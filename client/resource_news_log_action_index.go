@@ -17,24 +17,13 @@ func NewActionNewsLogIndex(client *Client) *ActionNewsLogIndex {
 
 // ActionNewsLogIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionNewsLogIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionNewsLogIndexMetaGlobalInput) SetNo(value bool) *ActionNewsLogIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionNewsLogIndexMetaGlobalInput) SetCount(value bool) *ActionNewsLogIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionNewsLogIndexMetaGlobalInput) SetIncludes(value string) *ActionNe
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionNewsLogIndexMetaGlobalInput) SetNo(value bool) *ActionNewsLogIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,24 +83,13 @@ func (in *ActionNewsLogIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionNewsLogIndexInput is a type for action input parameters
 type ActionNewsLogIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	Since string `json:"since"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionNewsLogIndexInput) SetOffset(value int64) *ActionNewsLogIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionNewsLogIndexInput) SetLimit(value int64) *ActionNewsLogIndexInput {
 	in.Limit = value
@@ -110,6 +99,17 @@ func (in *ActionNewsLogIndexInput) SetLimit(value int64) *ActionNewsLogIndexInpu
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionNewsLogIndexInput) SetOffset(value int64) *ActionNewsLogIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetSince sets parameter Since to value and selects it for sending
@@ -150,10 +150,10 @@ func (in *ActionNewsLogIndexInput) AnySelected() bool {
 
 // ActionNewsLogIndexOutput is a type for action output parameters
 type ActionNewsLogIndexOutput struct {
+	CreatedAt string `json:"created_at"`
 	Id int64 `json:"id"`
 	Message string `json:"message"`
 	PublishedAt string `json:"published_at"`
-	CreatedAt string `json:"created_at"`
 	UpdatedAt string `json:"updated_at"`
 }
 
@@ -259,11 +259,11 @@ func (inv *ActionNewsLogIndexInvocation) callAsQuery() (*ActionNewsLogIndexRespo
 
 func (inv *ActionNewsLogIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["news_log[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["news_log[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["news_log[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Since") {
 			ret["news_log[since]"] = inv.Input.Since
@@ -273,14 +273,14 @@ func (inv *ActionNewsLogIndexInvocation) convertInputToQueryParams(ret map[strin
 
 func (inv *ActionNewsLogIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

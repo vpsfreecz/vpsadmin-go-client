@@ -5,6 +5,14 @@ type ResourceLocationNetwork struct {
 	// Pointer to client
 	Client *Client
 
+	// Action Location_network#Create
+	Create *ActionLocationNetworkCreate
+	// Action Location_network#Create
+	New *ActionLocationNetworkCreate
+	// Action Location_network#Delete
+	Delete *ActionLocationNetworkDelete
+	// Action Location_network#Delete
+	Destroy *ActionLocationNetworkDelete
 	// Action Location_network#Index
 	Index *ActionLocationNetworkIndex
 	// Action Location_network#Index
@@ -13,35 +21,27 @@ type ResourceLocationNetwork struct {
 	Show *ActionLocationNetworkShow
 	// Action Location_network#Show
 	Find *ActionLocationNetworkShow
-	// Action Location_network#Create
-	Create *ActionLocationNetworkCreate
-	// Action Location_network#Create
-	New *ActionLocationNetworkCreate
 	// Action Location_network#Update
 	Update *ActionLocationNetworkUpdate
-	// Action Location_network#Delete
-	Delete *ActionLocationNetworkDelete
-	// Action Location_network#Delete
-	Destroy *ActionLocationNetworkDelete
 }
 
 func NewResourceLocationNetwork(client *Client) *ResourceLocationNetwork {
+	actionCreate := NewActionLocationNetworkCreate(client)
+	actionDelete := NewActionLocationNetworkDelete(client)
 	actionIndex := NewActionLocationNetworkIndex(client)
 	actionShow := NewActionLocationNetworkShow(client)
-	actionCreate := NewActionLocationNetworkCreate(client)
 	actionUpdate := NewActionLocationNetworkUpdate(client)
-	actionDelete := NewActionLocationNetworkDelete(client)
 
 	return &ResourceLocationNetwork{
 		Client: client,
+		Create: actionCreate,
+		New: actionCreate,
+		Delete: actionDelete,
+		Destroy: actionDelete,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Create: actionCreate,
-		New: actionCreate,
 		Update: actionUpdate,
-		Delete: actionDelete,
-		Destroy: actionDelete,
 	}
 }

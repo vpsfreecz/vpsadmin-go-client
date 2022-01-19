@@ -18,23 +18,12 @@ func NewActionDatasetShow(client *Client) *ActionDatasetShow {
 
 // ActionDatasetShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionDatasetShowMetaGlobalInput) SetNo(value bool) *ActionDatasetShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionDatasetShowMetaGlobalInput) SetIncludes(value string) *ActionDatasetShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionDatasetShowMetaGlobalInput) SetIncludes(value string) *ActionDat
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionDatasetShowMetaGlobalInput) SetNo(value bool) *ActionDatasetShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,25 +74,25 @@ func (in *ActionDatasetShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetShowOutput is a type for action output parameters
 type ActionDatasetShowOutput struct {
+	Atime bool `json:"atime"`
+	Avail int64 `json:"avail"`
+	Compression bool `json:"compression"`
+	CurrentHistoryId int64 `json:"current_history_id"`
+	Environment *ActionEnvironmentShowOutput `json:"environment"`
+	Export *ActionExportShowOutput `json:"export"`
 	Id int64 `json:"id"`
 	Name string `json:"name"`
 	Parent *ActionDatasetShowOutput `json:"parent"`
-	User *ActionUserShowOutput `json:"user"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
-	CurrentHistoryId int64 `json:"current_history_id"`
-	Atime bool `json:"atime"`
-	Compression bool `json:"compression"`
-	Recordsize int64 `json:"recordsize"`
 	Quota int64 `json:"quota"`
+	Recordsize int64 `json:"recordsize"`
+	Referenced int64 `json:"referenced"`
 	Refquota int64 `json:"refquota"`
 	Relatime bool `json:"relatime"`
-	Sync string `json:"sync"`
 	Sharenfs string `json:"sharenfs"`
+	Sync string `json:"sync"`
 	Used int64 `json:"used"`
-	Referenced int64 `json:"referenced"`
-	Avail int64 `json:"avail"`
-	Export *ActionExportShowOutput `json:"export"`
+	User *ActionUserShowOutput `json:"user"`
+	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
 }
 
 
@@ -184,11 +184,11 @@ func (inv *ActionDatasetShowInvocation) callAsQuery() (*ActionDatasetShowRespons
 
 func (inv *ActionDatasetShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

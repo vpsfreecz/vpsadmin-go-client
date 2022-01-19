@@ -18,23 +18,12 @@ func NewActionUserOutageShow(client *Client) *ActionUserOutageShow {
 
 // ActionUserOutageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserOutageShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserOutageShowMetaGlobalInput) SetNo(value bool) *ActionUserOutageShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserOutageShowMetaGlobalInput) SetIncludes(value string) *ActionUserOutageShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionUserOutageShowMetaGlobalInput) SetIncludes(value string) *Action
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserOutageShowMetaGlobalInput) SetNo(value bool) *ActionUserOutageShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,6 +74,7 @@ func (in *ActionUserOutageShowMetaGlobalInput) AnySelected() bool {
 
 // ActionUserOutageShowOutput is a type for action output parameters
 type ActionUserOutageShowOutput struct {
+	ExportCount int64 `json:"export_count"`
 	Id int64 `json:"id"`
 	Outage *ActionOutageShowOutput `json:"outage"`
 	User *ActionUserShowOutput `json:"user"`
@@ -169,11 +170,11 @@ func (inv *ActionUserOutageShowInvocation) callAsQuery() (*ActionUserOutageShowR
 
 func (inv *ActionUserOutageShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

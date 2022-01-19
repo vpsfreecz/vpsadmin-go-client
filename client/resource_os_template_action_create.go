@@ -17,23 +17,12 @@ func NewActionOsTemplateCreate(client *Client) *ActionOsTemplateCreate {
 
 // ActionOsTemplateCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOsTemplateCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionOsTemplateCreateMetaGlobalInput) SetNo(value bool) *ActionOsTemplateCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionOsTemplateCreateMetaGlobalInput) SetIncludes(value string) *ActionOsTemplateCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionOsTemplateCreateMetaGlobalInput) SetIncludes(value string) *Acti
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionOsTemplateCreateMetaGlobalInput) SetNo(value bool) *ActionOsTemplateCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,37 +71,37 @@ func (in *ActionOsTemplateCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOsTemplateCreateInput is a type for action input parameters
 type ActionOsTemplateCreateInput struct {
-	Name string `json:"name"`
-	Label string `json:"label"`
-	Info string `json:"info"`
 	Enabled bool `json:"enabled"`
-	Supported bool `json:"supported"`
-	Order int64 `json:"order"`
 	HypervisorType string `json:"hypervisor_type"`
+	Info string `json:"info"`
+	Label string `json:"label"`
+	Name string `json:"name"`
+	Order int64 `json:"order"`
+	Supported bool `json:"supported"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetName sets parameter Name to value and selects it for sending
-func (in *ActionOsTemplateCreateInput) SetName(value string) *ActionOsTemplateCreateInput {
-	in.Name = value
+// SetEnabled sets parameter Enabled to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetEnabled(value bool) *ActionOsTemplateCreateInput {
+	in.Enabled = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Name"] = nil
+	in._selectedParameters["Enabled"] = nil
 	return in
 }
-// SetLabel sets parameter Label to value and selects it for sending
-func (in *ActionOsTemplateCreateInput) SetLabel(value string) *ActionOsTemplateCreateInput {
-	in.Label = value
+// SetHypervisorType sets parameter HypervisorType to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetHypervisorType(value string) *ActionOsTemplateCreateInput {
+	in.HypervisorType = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Label"] = nil
+	in._selectedParameters["HypervisorType"] = nil
 	return in
 }
 // SetInfo sets parameter Info to value and selects it for sending
@@ -115,26 +115,26 @@ func (in *ActionOsTemplateCreateInput) SetInfo(value string) *ActionOsTemplateCr
 	in._selectedParameters["Info"] = nil
 	return in
 }
-// SetEnabled sets parameter Enabled to value and selects it for sending
-func (in *ActionOsTemplateCreateInput) SetEnabled(value bool) *ActionOsTemplateCreateInput {
-	in.Enabled = value
+// SetLabel sets parameter Label to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetLabel(value string) *ActionOsTemplateCreateInput {
+	in.Label = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Enabled"] = nil
+	in._selectedParameters["Label"] = nil
 	return in
 }
-// SetSupported sets parameter Supported to value and selects it for sending
-func (in *ActionOsTemplateCreateInput) SetSupported(value bool) *ActionOsTemplateCreateInput {
-	in.Supported = value
+// SetName sets parameter Name to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetName(value string) *ActionOsTemplateCreateInput {
+	in.Name = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Supported"] = nil
+	in._selectedParameters["Name"] = nil
 	return in
 }
 // SetOrder sets parameter Order to value and selects it for sending
@@ -148,15 +148,15 @@ func (in *ActionOsTemplateCreateInput) SetOrder(value int64) *ActionOsTemplateCr
 	in._selectedParameters["Order"] = nil
 	return in
 }
-// SetHypervisorType sets parameter HypervisorType to value and selects it for sending
-func (in *ActionOsTemplateCreateInput) SetHypervisorType(value string) *ActionOsTemplateCreateInput {
-	in.HypervisorType = value
+// SetSupported sets parameter Supported to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetSupported(value bool) *ActionOsTemplateCreateInput {
+	in.Supported = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["HypervisorType"] = nil
+	in._selectedParameters["Supported"] = nil
 	return in
 }
 
@@ -191,14 +191,14 @@ type ActionOsTemplateCreateRequest struct {
 
 // ActionOsTemplateCreateOutput is a type for action output parameters
 type ActionOsTemplateCreateOutput struct {
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	Label string `json:"label"`
-	Info string `json:"info"`
 	Enabled bool `json:"enabled"`
-	Supported bool `json:"supported"`
-	Order int64 `json:"order"`
 	HypervisorType string `json:"hypervisor_type"`
+	Id int64 `json:"id"`
+	Info string `json:"info"`
+	Label string `json:"label"`
+	Name string `json:"name"`
+	Order int64 `json:"order"`
+	Supported bool `json:"supported"`
 }
 
 
@@ -312,26 +312,26 @@ func (inv *ActionOsTemplateCreateInvocation) makeInputParams() map[string]interf
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Name") {
-			ret["name"] = inv.Input.Name
+		if inv.IsParameterSelected("Enabled") {
+			ret["enabled"] = inv.Input.Enabled
 		}
-		if inv.IsParameterSelected("Label") {
-			ret["label"] = inv.Input.Label
+		if inv.IsParameterSelected("HypervisorType") {
+			ret["hypervisor_type"] = inv.Input.HypervisorType
 		}
 		if inv.IsParameterSelected("Info") {
 			ret["info"] = inv.Input.Info
 		}
-		if inv.IsParameterSelected("Enabled") {
-			ret["enabled"] = inv.Input.Enabled
+		if inv.IsParameterSelected("Label") {
+			ret["label"] = inv.Input.Label
 		}
-		if inv.IsParameterSelected("Supported") {
-			ret["supported"] = inv.Input.Supported
+		if inv.IsParameterSelected("Name") {
+			ret["name"] = inv.Input.Name
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["order"] = inv.Input.Order
 		}
-		if inv.IsParameterSelected("HypervisorType") {
-			ret["hypervisor_type"] = inv.Input.HypervisorType
+		if inv.IsParameterSelected("Supported") {
+			ret["supported"] = inv.Input.Supported
 		}
 	}
 
@@ -342,11 +342,11 @@ func (inv *ActionOsTemplateCreateInvocation) makeMetaInputParams() map[string]in
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

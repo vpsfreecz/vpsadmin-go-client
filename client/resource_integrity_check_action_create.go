@@ -17,23 +17,12 @@ func NewActionIntegrityCheckCreate(client *Client) *ActionIntegrityCheckCreate {
 
 // ActionIntegrityCheckCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionIntegrityCheckCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionIntegrityCheckCreateMetaGlobalInput) SetNo(value bool) *ActionIntegrityCheckCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionIntegrityCheckCreateMetaGlobalInput) SetIncludes(value string) *ActionIntegrityCheckCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionIntegrityCheckCreateMetaGlobalInput) SetIncludes(value string) *
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionIntegrityCheckCreateMetaGlobalInput) SetNo(value bool) *ActionIntegrityCheckCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,9 +72,9 @@ func (in *ActionIntegrityCheckCreateMetaGlobalInput) AnySelected() bool {
 // ActionIntegrityCheckCreateInput is a type for action input parameters
 type ActionIntegrityCheckCreateInput struct {
 	Node int64 `json:"node"`
+	SkipMaintenance bool `json:"skip_maintenance"`
 	Storage bool `json:"storage"`
 	Vps bool `json:"vps"`
-	SkipMaintenance bool `json:"skip_maintenance"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -88,6 +88,17 @@ func (in *ActionIntegrityCheckCreateInput) SetNode(value int64) *ActionIntegrity
 	}
 
 	in._selectedParameters["Node"] = nil
+	return in
+}
+// SetSkipMaintenance sets parameter SkipMaintenance to value and selects it for sending
+func (in *ActionIntegrityCheckCreateInput) SetSkipMaintenance(value bool) *ActionIntegrityCheckCreateInput {
+	in.SkipMaintenance = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["SkipMaintenance"] = nil
 	return in
 }
 // SetStorage sets parameter Storage to value and selects it for sending
@@ -110,17 +121,6 @@ func (in *ActionIntegrityCheckCreateInput) SetVps(value bool) *ActionIntegrityCh
 	}
 
 	in._selectedParameters["Vps"] = nil
-	return in
-}
-// SetSkipMaintenance sets parameter SkipMaintenance to value and selects it for sending
-func (in *ActionIntegrityCheckCreateInput) SetSkipMaintenance(value bool) *ActionIntegrityCheckCreateInput {
-	in.SkipMaintenance = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["SkipMaintenance"] = nil
 	return in
 }
 
@@ -155,18 +155,18 @@ type ActionIntegrityCheckCreateRequest struct {
 
 // ActionIntegrityCheckCreateOutput is a type for action output parameters
 type ActionIntegrityCheckCreateOutput struct {
-	Id int64 `json:"id"`
-	Status string `json:"status"`
-	User *ActionUserShowOutput `json:"user"`
-	CheckedObjects int64 `json:"checked_objects"`
-	IntegralObjects int64 `json:"integral_objects"`
 	BrokenObjects int64 `json:"broken_objects"`
 	CheckedFacts int64 `json:"checked_facts"`
-	TrueFacts int64 `json:"true_facts"`
-	FalseFacts int64 `json:"false_facts"`
+	CheckedObjects int64 `json:"checked_objects"`
 	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
+	FalseFacts int64 `json:"false_facts"`
 	FinishedAt string `json:"finished_at"`
+	Id int64 `json:"id"`
+	IntegralObjects int64 `json:"integral_objects"`
+	Status string `json:"status"`
+	TrueFacts int64 `json:"true_facts"`
+	UpdatedAt string `json:"updated_at"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -283,14 +283,14 @@ func (inv *ActionIntegrityCheckCreateInvocation) makeInputParams() map[string]in
 		if inv.IsParameterSelected("Node") {
 			ret["node"] = inv.Input.Node
 		}
+		if inv.IsParameterSelected("SkipMaintenance") {
+			ret["skip_maintenance"] = inv.Input.SkipMaintenance
+		}
 		if inv.IsParameterSelected("Storage") {
 			ret["storage"] = inv.Input.Storage
 		}
 		if inv.IsParameterSelected("Vps") {
 			ret["vps"] = inv.Input.Vps
-		}
-		if inv.IsParameterSelected("SkipMaintenance") {
-			ret["skip_maintenance"] = inv.Input.SkipMaintenance
 		}
 	}
 
@@ -301,11 +301,11 @@ func (inv *ActionIntegrityCheckCreateInvocation) makeMetaInputParams() map[strin
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

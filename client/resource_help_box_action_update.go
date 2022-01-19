@@ -18,23 +18,12 @@ func NewActionHelpBoxUpdate(client *Client) *ActionHelpBoxUpdate {
 
 // ActionHelpBoxUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionHelpBoxUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionHelpBoxUpdateMetaGlobalInput) SetNo(value bool) *ActionHelpBoxUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionHelpBoxUpdateMetaGlobalInput) SetIncludes(value string) *ActionHelpBoxUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionHelpBoxUpdateMetaGlobalInput) SetIncludes(value string) *ActionH
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionHelpBoxUpdateMetaGlobalInput) SetNo(value bool) *ActionHelpBoxUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,26 +72,15 @@ func (in *ActionHelpBoxUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionHelpBoxUpdateInput is a type for action input parameters
 type ActionHelpBoxUpdateInput struct {
-	Page string `json:"page"`
 	Action string `json:"action"`
-	Language int64 `json:"language"`
 	Content string `json:"content"`
+	Language int64 `json:"language"`
 	Order int64 `json:"order"`
+	Page string `json:"page"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetPage sets parameter Page to value and selects it for sending
-func (in *ActionHelpBoxUpdateInput) SetPage(value string) *ActionHelpBoxUpdateInput {
-	in.Page = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Page"] = nil
-	return in
-}
 // SetAction sets parameter Action to value and selects it for sending
 func (in *ActionHelpBoxUpdateInput) SetAction(value string) *ActionHelpBoxUpdateInput {
 	in.Action = value
@@ -101,17 +90,6 @@ func (in *ActionHelpBoxUpdateInput) SetAction(value string) *ActionHelpBoxUpdate
 	}
 
 	in._selectedParameters["Action"] = nil
-	return in
-}
-// SetLanguage sets parameter Language to value and selects it for sending
-func (in *ActionHelpBoxUpdateInput) SetLanguage(value int64) *ActionHelpBoxUpdateInput {
-	in.Language = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Language"] = nil
 	return in
 }
 // SetContent sets parameter Content to value and selects it for sending
@@ -125,6 +103,17 @@ func (in *ActionHelpBoxUpdateInput) SetContent(value string) *ActionHelpBoxUpdat
 	in._selectedParameters["Content"] = nil
 	return in
 }
+// SetLanguage sets parameter Language to value and selects it for sending
+func (in *ActionHelpBoxUpdateInput) SetLanguage(value int64) *ActionHelpBoxUpdateInput {
+	in.Language = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Language"] = nil
+	return in
+}
 // SetOrder sets parameter Order to value and selects it for sending
 func (in *ActionHelpBoxUpdateInput) SetOrder(value int64) *ActionHelpBoxUpdateInput {
 	in.Order = value
@@ -134,6 +123,17 @@ func (in *ActionHelpBoxUpdateInput) SetOrder(value int64) *ActionHelpBoxUpdateIn
 	}
 
 	in._selectedParameters["Order"] = nil
+	return in
+}
+// SetPage sets parameter Page to value and selects it for sending
+func (in *ActionHelpBoxUpdateInput) SetPage(value string) *ActionHelpBoxUpdateInput {
+	in.Page = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Page"] = nil
 	return in
 }
 
@@ -168,12 +168,12 @@ type ActionHelpBoxUpdateRequest struct {
 
 // ActionHelpBoxUpdateOutput is a type for action output parameters
 type ActionHelpBoxUpdateOutput struct {
-	Id int64 `json:"id"`
-	Page string `json:"page"`
 	Action string `json:"action"`
-	Language *ActionLanguageShowOutput `json:"language"`
 	Content string `json:"content"`
+	Id int64 `json:"id"`
+	Language *ActionLanguageShowOutput `json:"language"`
 	Order int64 `json:"order"`
+	Page string `json:"page"`
 }
 
 
@@ -297,20 +297,20 @@ func (inv *ActionHelpBoxUpdateInvocation) makeInputParams() map[string]interface
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Page") {
-			ret["page"] = inv.Input.Page
-		}
 		if inv.IsParameterSelected("Action") {
 			ret["action"] = inv.Input.Action
-		}
-		if inv.IsParameterSelected("Language") {
-			ret["language"] = inv.Input.Language
 		}
 		if inv.IsParameterSelected("Content") {
 			ret["content"] = inv.Input.Content
 		}
+		if inv.IsParameterSelected("Language") {
+			ret["language"] = inv.Input.Language
+		}
 		if inv.IsParameterSelected("Order") {
 			ret["order"] = inv.Input.Order
+		}
+		if inv.IsParameterSelected("Page") {
+			ret["page"] = inv.Input.Page
 		}
 	}
 
@@ -321,11 +321,11 @@ func (inv *ActionHelpBoxUpdateInvocation) makeMetaInputParams() map[string]inter
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

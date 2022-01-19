@@ -18,23 +18,12 @@ func NewActionDatasetPropertyHistoryShow(client *Client) *ActionDatasetPropertyH
 
 // ActionDatasetPropertyHistoryShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetPropertyHistoryShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionDatasetPropertyHistoryShowMetaGlobalInput) SetNo(value bool) *ActionDatasetPropertyHistoryShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionDatasetPropertyHistoryShowMetaGlobalInput) SetIncludes(value string) *ActionDatasetPropertyHistoryShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionDatasetPropertyHistoryShowMetaGlobalInput) SetIncludes(value str
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionDatasetPropertyHistoryShowMetaGlobalInput) SetNo(value bool) *ActionDatasetPropertyHistoryShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,10 +74,10 @@ func (in *ActionDatasetPropertyHistoryShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetPropertyHistoryShowOutput is a type for action output parameters
 type ActionDatasetPropertyHistoryShowOutput struct {
+	CreatedAt string `json:"created_at"`
 	Id int64 `json:"id"`
 	Name string `json:"name"`
 	Value int64 `json:"value"`
-	CreatedAt string `json:"created_at"`
 }
 
 
@@ -169,11 +169,11 @@ func (inv *ActionDatasetPropertyHistoryShowInvocation) callAsQuery() (*ActionDat
 
 func (inv *ActionDatasetPropertyHistoryShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

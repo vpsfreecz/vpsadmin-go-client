@@ -18,23 +18,12 @@ func NewActionIpTrafficMonitorShow(client *Client) *ActionIpTrafficMonitorShow {
 
 // ActionIpTrafficMonitorShowMetaGlobalInput is a type for action global meta input parameters
 type ActionIpTrafficMonitorShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionIpTrafficMonitorShowMetaGlobalInput) SetNo(value bool) *ActionIpTrafficMonitorShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionIpTrafficMonitorShowMetaGlobalInput) SetIncludes(value string) *ActionIpTrafficMonitorShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionIpTrafficMonitorShowMetaGlobalInput) SetIncludes(value string) *
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionIpTrafficMonitorShowMetaGlobalInput) SetNo(value bool) *ActionIpTrafficMonitorShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,65 +74,65 @@ func (in *ActionIpTrafficMonitorShowMetaGlobalInput) AnySelected() bool {
 
 // ActionIpTrafficMonitorShowOutput is a type for action output parameters
 type ActionIpTrafficMonitorShowOutput struct {
-	Id int64 `json:"id"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	User *ActionUserShowOutput `json:"user"`
-	Packets int64 `json:"packets"`
-	PacketsIn int64 `json:"packets_in"`
-	PacketsOut int64 `json:"packets_out"`
 	Bytes int64 `json:"bytes"`
 	BytesIn int64 `json:"bytes_in"`
 	BytesOut int64 `json:"bytes_out"`
-	PublicPackets int64 `json:"public_packets"`
-	PublicPacketsIn int64 `json:"public_packets_in"`
-	PublicPacketsOut int64 `json:"public_packets_out"`
-	PublicBytes int64 `json:"public_bytes"`
-	PublicBytesIn int64 `json:"public_bytes_in"`
-	PublicBytesOut int64 `json:"public_bytes_out"`
-	PublicTcpPackets int64 `json:"public_tcp_packets"`
-	PublicTcpPacketsIn int64 `json:"public_tcp_packets_in"`
-	PublicTcpPacketsOut int64 `json:"public_tcp_packets_out"`
-	PublicTcpBytes int64 `json:"public_tcp_bytes"`
-	PublicTcpBytesIn int64 `json:"public_tcp_bytes_in"`
-	PublicTcpBytesOut int64 `json:"public_tcp_bytes_out"`
-	PublicUdpPackets int64 `json:"public_udp_packets"`
-	PublicUdpPacketsIn int64 `json:"public_udp_packets_in"`
-	PublicUdpPacketsOut int64 `json:"public_udp_packets_out"`
-	PublicUdpBytes int64 `json:"public_udp_bytes"`
-	PublicUdpBytesIn int64 `json:"public_udp_bytes_in"`
-	PublicUdpBytesOut int64 `json:"public_udp_bytes_out"`
-	PublicOtherPackets int64 `json:"public_other_packets"`
-	PublicOtherPacketsIn int64 `json:"public_other_packets_in"`
-	PublicOtherPacketsOut int64 `json:"public_other_packets_out"`
-	PublicOtherBytes int64 `json:"public_other_bytes"`
-	PublicOtherBytesIn int64 `json:"public_other_bytes_in"`
-	PublicOtherBytesOut int64 `json:"public_other_bytes_out"`
-	PrivatePackets int64 `json:"private_packets"`
-	PrivatePacketsIn int64 `json:"private_packets_in"`
-	PrivatePacketsOut int64 `json:"private_packets_out"`
+	Delta int64 `json:"delta"`
+	Id int64 `json:"id"`
+	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
+	Packets int64 `json:"packets"`
+	PacketsIn int64 `json:"packets_in"`
+	PacketsOut int64 `json:"packets_out"`
 	PrivateBytes int64 `json:"private_bytes"`
 	PrivateBytesIn int64 `json:"private_bytes_in"`
 	PrivateBytesOut int64 `json:"private_bytes_out"`
-	PrivateTcpPackets int64 `json:"private_tcp_packets"`
-	PrivateTcpPacketsIn int64 `json:"private_tcp_packets_in"`
-	PrivateTcpPacketsOut int64 `json:"private_tcp_packets_out"`
-	PrivateTcpBytes int64 `json:"private_tcp_bytes"`
-	PrivateTcpBytesIn int64 `json:"private_tcp_bytes_in"`
-	PrivateTcpBytesOut int64 `json:"private_tcp_bytes_out"`
-	PrivateUdpPackets int64 `json:"private_udp_packets"`
-	PrivateUdpPacketsIn int64 `json:"private_udp_packets_in"`
-	PrivateUdpPacketsOut int64 `json:"private_udp_packets_out"`
-	PrivateUdpBytes int64 `json:"private_udp_bytes"`
-	PrivateUdpBytesIn int64 `json:"private_udp_bytes_in"`
-	PrivateUdpBytesOut int64 `json:"private_udp_bytes_out"`
-	PrivateOtherPackets int64 `json:"private_other_packets"`
-	PrivateOtherPacketsIn int64 `json:"private_other_packets_in"`
-	PrivateOtherPacketsOut int64 `json:"private_other_packets_out"`
 	PrivateOtherBytes int64 `json:"private_other_bytes"`
 	PrivateOtherBytesIn int64 `json:"private_other_bytes_in"`
 	PrivateOtherBytesOut int64 `json:"private_other_bytes_out"`
+	PrivateOtherPackets int64 `json:"private_other_packets"`
+	PrivateOtherPacketsIn int64 `json:"private_other_packets_in"`
+	PrivateOtherPacketsOut int64 `json:"private_other_packets_out"`
+	PrivatePackets int64 `json:"private_packets"`
+	PrivatePacketsIn int64 `json:"private_packets_in"`
+	PrivatePacketsOut int64 `json:"private_packets_out"`
+	PrivateTcpBytes int64 `json:"private_tcp_bytes"`
+	PrivateTcpBytesIn int64 `json:"private_tcp_bytes_in"`
+	PrivateTcpBytesOut int64 `json:"private_tcp_bytes_out"`
+	PrivateTcpPackets int64 `json:"private_tcp_packets"`
+	PrivateTcpPacketsIn int64 `json:"private_tcp_packets_in"`
+	PrivateTcpPacketsOut int64 `json:"private_tcp_packets_out"`
+	PrivateUdpBytes int64 `json:"private_udp_bytes"`
+	PrivateUdpBytesIn int64 `json:"private_udp_bytes_in"`
+	PrivateUdpBytesOut int64 `json:"private_udp_bytes_out"`
+	PrivateUdpPackets int64 `json:"private_udp_packets"`
+	PrivateUdpPacketsIn int64 `json:"private_udp_packets_in"`
+	PrivateUdpPacketsOut int64 `json:"private_udp_packets_out"`
+	PublicBytes int64 `json:"public_bytes"`
+	PublicBytesIn int64 `json:"public_bytes_in"`
+	PublicBytesOut int64 `json:"public_bytes_out"`
+	PublicOtherBytes int64 `json:"public_other_bytes"`
+	PublicOtherBytesIn int64 `json:"public_other_bytes_in"`
+	PublicOtherBytesOut int64 `json:"public_other_bytes_out"`
+	PublicOtherPackets int64 `json:"public_other_packets"`
+	PublicOtherPacketsIn int64 `json:"public_other_packets_in"`
+	PublicOtherPacketsOut int64 `json:"public_other_packets_out"`
+	PublicPackets int64 `json:"public_packets"`
+	PublicPacketsIn int64 `json:"public_packets_in"`
+	PublicPacketsOut int64 `json:"public_packets_out"`
+	PublicTcpBytes int64 `json:"public_tcp_bytes"`
+	PublicTcpBytesIn int64 `json:"public_tcp_bytes_in"`
+	PublicTcpBytesOut int64 `json:"public_tcp_bytes_out"`
+	PublicTcpPackets int64 `json:"public_tcp_packets"`
+	PublicTcpPacketsIn int64 `json:"public_tcp_packets_in"`
+	PublicTcpPacketsOut int64 `json:"public_tcp_packets_out"`
+	PublicUdpBytes int64 `json:"public_udp_bytes"`
+	PublicUdpBytesIn int64 `json:"public_udp_bytes_in"`
+	PublicUdpBytesOut int64 `json:"public_udp_bytes_out"`
+	PublicUdpPackets int64 `json:"public_udp_packets"`
+	PublicUdpPacketsIn int64 `json:"public_udp_packets_in"`
+	PublicUdpPacketsOut int64 `json:"public_udp_packets_out"`
 	UpdatedAt string `json:"updated_at"`
-	Delta int64 `json:"delta"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -224,11 +224,11 @@ func (inv *ActionIpTrafficMonitorShowInvocation) callAsQuery() (*ActionIpTraffic
 
 func (inv *ActionIpTrafficMonitorShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

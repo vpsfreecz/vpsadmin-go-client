@@ -18,23 +18,12 @@ func NewActionVpsStateLogShow(client *Client) *ActionVpsStateLogShow {
 
 // ActionVpsStateLogShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsStateLogShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsStateLogShowMetaGlobalInput) SetNo(value bool) *ActionVpsStateLogShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsStateLogShowMetaGlobalInput) SetIncludes(value string) *ActionVpsStateLogShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionVpsStateLogShowMetaGlobalInput) SetIncludes(value string) *Actio
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsStateLogShowMetaGlobalInput) SetNo(value bool) *ActionVpsStateLogShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,12 +74,12 @@ func (in *ActionVpsStateLogShowMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsStateLogShowOutput is a type for action output parameters
 type ActionVpsStateLogShowOutput struct {
-	Id int64 `json:"id"`
-	State string `json:"state"`
 	ChangedAt string `json:"changed_at"`
 	Expiration string `json:"expiration"`
-	User *ActionUserShowOutput `json:"user"`
+	Id int64 `json:"id"`
 	Reason string `json:"reason"`
+	State string `json:"state"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -171,11 +171,11 @@ func (inv *ActionVpsStateLogShowInvocation) callAsQuery() (*ActionVpsStateLogSho
 
 func (inv *ActionVpsStateLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

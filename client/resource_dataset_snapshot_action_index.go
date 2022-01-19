@@ -18,24 +18,13 @@ func NewActionDatasetSnapshotIndex(client *Client) *ActionDatasetSnapshotIndex {
 
 // ActionDatasetSnapshotIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetSnapshotIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionDatasetSnapshotIndexMetaGlobalInput) SetNo(value bool) *ActionDatasetSnapshotIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionDatasetSnapshotIndexMetaGlobalInput) SetCount(value bool) *ActionDatasetSnapshotIndexMetaGlobalInput {
 	in.Count = value
@@ -56,6 +45,17 @@ func (in *ActionDatasetSnapshotIndexMetaGlobalInput) SetIncludes(value string) *
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionDatasetSnapshotIndexMetaGlobalInput) SetNo(value bool) *ActionDatasetSnapshotIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -84,23 +84,12 @@ func (in *ActionDatasetSnapshotIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetSnapshotIndexInput is a type for action input parameters
 type ActionDatasetSnapshotIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionDatasetSnapshotIndexInput) SetOffset(value int64) *ActionDatasetSnapshotIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionDatasetSnapshotIndexInput) SetLimit(value int64) *ActionDatasetSnapshotIndexInput {
 	in.Limit = value
@@ -110,6 +99,17 @@ func (in *ActionDatasetSnapshotIndexInput) SetLimit(value int64) *ActionDatasetS
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionDatasetSnapshotIndexInput) SetOffset(value int64) *ActionDatasetSnapshotIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -139,14 +139,14 @@ func (in *ActionDatasetSnapshotIndexInput) AnySelected() bool {
 
 // ActionDatasetSnapshotIndexOutput is a type for action output parameters
 type ActionDatasetSnapshotIndexOutput struct {
-	Id int64 `json:"id"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Name string `json:"name"`
-	Label string `json:"label"`
 	CreatedAt string `json:"created_at"`
-	HistoryId int64 `json:"history_id"`
-	Mount *ActionVpsMountShowOutput `json:"mount"`
+	Dataset *ActionDatasetShowOutput `json:"dataset"`
 	Export *ActionExportShowOutput `json:"export"`
+	HistoryId int64 `json:"history_id"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	Mount *ActionVpsMountShowOutput `json:"mount"`
+	Name string `json:"name"`
 }
 
 
@@ -261,25 +261,25 @@ func (inv *ActionDatasetSnapshotIndexInvocation) callAsQuery() (*ActionDatasetSn
 
 func (inv *ActionDatasetSnapshotIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["snapshot[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["snapshot[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["snapshot[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }
 
 func (inv *ActionDatasetSnapshotIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

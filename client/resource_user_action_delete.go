@@ -18,23 +18,12 @@ func NewActionUserDelete(client *Client) *ActionUserDelete {
 
 // ActionUserDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionUserDeleteMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserDeleteMetaGlobalInput) SetNo(value bool) *ActionUserDeleteMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserDeleteMetaGlobalInput) SetIncludes(value string) *ActionUserDeleteMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionUserDeleteMetaGlobalInput) SetIncludes(value string) *ActionUser
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserDeleteMetaGlobalInput) SetNo(value bool) *ActionUserDeleteMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,22 +72,22 @@ func (in *ActionUserDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionUserDeleteInput is a type for action input parameters
 type ActionUserDeleteInput struct {
-	ObjectState string `json:"object_state"`
-	ExpirationDate string `json:"expiration_date"`
 	ChangeReason string `json:"change_reason"`
+	ExpirationDate string `json:"expiration_date"`
+	ObjectState string `json:"object_state"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetObjectState sets parameter ObjectState to value and selects it for sending
-func (in *ActionUserDeleteInput) SetObjectState(value string) *ActionUserDeleteInput {
-	in.ObjectState = value
+// SetChangeReason sets parameter ChangeReason to value and selects it for sending
+func (in *ActionUserDeleteInput) SetChangeReason(value string) *ActionUserDeleteInput {
+	in.ChangeReason = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["ObjectState"] = nil
+	in._selectedParameters["ChangeReason"] = nil
 	return in
 }
 // SetExpirationDate sets parameter ExpirationDate to value and selects it for sending
@@ -101,15 +101,15 @@ func (in *ActionUserDeleteInput) SetExpirationDate(value string) *ActionUserDele
 	in._selectedParameters["ExpirationDate"] = nil
 	return in
 }
-// SetChangeReason sets parameter ChangeReason to value and selects it for sending
-func (in *ActionUserDeleteInput) SetChangeReason(value string) *ActionUserDeleteInput {
-	in.ChangeReason = value
+// SetObjectState sets parameter ObjectState to value and selects it for sending
+func (in *ActionUserDeleteInput) SetObjectState(value string) *ActionUserDeleteInput {
+	in.ObjectState = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["ChangeReason"] = nil
+	in._selectedParameters["ObjectState"] = nil
 	return in
 }
 
@@ -338,14 +338,14 @@ func (inv *ActionUserDeleteInvocation) makeInputParams() map[string]interface{} 
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("ObjectState") {
-			ret["object_state"] = inv.Input.ObjectState
+		if inv.IsParameterSelected("ChangeReason") {
+			ret["change_reason"] = inv.Input.ChangeReason
 		}
 		if inv.IsParameterSelected("ExpirationDate") {
 			ret["expiration_date"] = inv.Input.ExpirationDate
 		}
-		if inv.IsParameterSelected("ChangeReason") {
-			ret["change_reason"] = inv.Input.ChangeReason
+		if inv.IsParameterSelected("ObjectState") {
+			ret["object_state"] = inv.Input.ObjectState
 		}
 	}
 
@@ -356,11 +356,11 @@ func (inv *ActionUserDeleteInvocation) makeMetaInputParams() map[string]interfac
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

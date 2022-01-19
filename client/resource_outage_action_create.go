@@ -17,23 +17,12 @@ func NewActionOutageCreate(client *Client) *ActionOutageCreate {
 
 // ActionOutageCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionOutageCreateMetaGlobalInput) SetNo(value bool) *ActionOutageCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionOutageCreateMetaGlobalInput) SetIncludes(value string) *ActionOutageCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionOutageCreateMetaGlobalInput) SetIncludes(value string) *ActionOu
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionOutageCreateMetaGlobalInput) SetNo(value bool) *ActionOutageCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,14 +72,14 @@ func (in *ActionOutageCreateMetaGlobalInput) AnySelected() bool {
 // ActionOutageCreateInput is a type for action input parameters
 type ActionOutageCreateInput struct {
 	BeginsAt string `json:"begins_at"`
-	FinishedAt string `json:"finished_at"`
+	CsDescription string `json:"cs_description"`
+	CsSummary string `json:"cs_summary"`
 	Duration int64 `json:"duration"`
+	EnDescription string `json:"en_description"`
+	EnSummary string `json:"en_summary"`
+	FinishedAt string `json:"finished_at"`
 	Planned bool `json:"planned"`
 	Type string `json:"type"`
-	EnSummary string `json:"en_summary"`
-	EnDescription string `json:"en_description"`
-	CsSummary string `json:"cs_summary"`
-	CsDescription string `json:"cs_description"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -95,15 +95,26 @@ func (in *ActionOutageCreateInput) SetBeginsAt(value string) *ActionOutageCreate
 	in._selectedParameters["BeginsAt"] = nil
 	return in
 }
-// SetFinishedAt sets parameter FinishedAt to value and selects it for sending
-func (in *ActionOutageCreateInput) SetFinishedAt(value string) *ActionOutageCreateInput {
-	in.FinishedAt = value
+// SetCsDescription sets parameter CsDescription to value and selects it for sending
+func (in *ActionOutageCreateInput) SetCsDescription(value string) *ActionOutageCreateInput {
+	in.CsDescription = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["FinishedAt"] = nil
+	in._selectedParameters["CsDescription"] = nil
+	return in
+}
+// SetCsSummary sets parameter CsSummary to value and selects it for sending
+func (in *ActionOutageCreateInput) SetCsSummary(value string) *ActionOutageCreateInput {
+	in.CsSummary = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["CsSummary"] = nil
 	return in
 }
 // SetDuration sets parameter Duration to value and selects it for sending
@@ -115,6 +126,39 @@ func (in *ActionOutageCreateInput) SetDuration(value int64) *ActionOutageCreateI
 	}
 
 	in._selectedParameters["Duration"] = nil
+	return in
+}
+// SetEnDescription sets parameter EnDescription to value and selects it for sending
+func (in *ActionOutageCreateInput) SetEnDescription(value string) *ActionOutageCreateInput {
+	in.EnDescription = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnDescription"] = nil
+	return in
+}
+// SetEnSummary sets parameter EnSummary to value and selects it for sending
+func (in *ActionOutageCreateInput) SetEnSummary(value string) *ActionOutageCreateInput {
+	in.EnSummary = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnSummary"] = nil
+	return in
+}
+// SetFinishedAt sets parameter FinishedAt to value and selects it for sending
+func (in *ActionOutageCreateInput) SetFinishedAt(value string) *ActionOutageCreateInput {
+	in.FinishedAt = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FinishedAt"] = nil
 	return in
 }
 // SetPlanned sets parameter Planned to value and selects it for sending
@@ -137,50 +181,6 @@ func (in *ActionOutageCreateInput) SetType(value string) *ActionOutageCreateInpu
 	}
 
 	in._selectedParameters["Type"] = nil
-	return in
-}
-// SetEnSummary sets parameter EnSummary to value and selects it for sending
-func (in *ActionOutageCreateInput) SetEnSummary(value string) *ActionOutageCreateInput {
-	in.EnSummary = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["EnSummary"] = nil
-	return in
-}
-// SetEnDescription sets parameter EnDescription to value and selects it for sending
-func (in *ActionOutageCreateInput) SetEnDescription(value string) *ActionOutageCreateInput {
-	in.EnDescription = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["EnDescription"] = nil
-	return in
-}
-// SetCsSummary sets parameter CsSummary to value and selects it for sending
-func (in *ActionOutageCreateInput) SetCsSummary(value string) *ActionOutageCreateInput {
-	in.CsSummary = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["CsSummary"] = nil
-	return in
-}
-// SetCsDescription sets parameter CsDescription to value and selects it for sending
-func (in *ActionOutageCreateInput) SetCsDescription(value string) *ActionOutageCreateInput {
-	in.CsDescription = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["CsDescription"] = nil
 	return in
 }
 
@@ -215,21 +215,22 @@ type ActionOutageCreateRequest struct {
 
 // ActionOutageCreateOutput is a type for action output parameters
 type ActionOutageCreateOutput struct {
-	Id int64 `json:"id"`
+	Affected bool `json:"affected"`
+	AffectedDirectVpsCount int64 `json:"affected_direct_vps_count"`
+	AffectedExportCount int64 `json:"affected_export_count"`
+	AffectedIndirectVpsCount int64 `json:"affected_indirect_vps_count"`
+	AffectedUserCount int64 `json:"affected_user_count"`
 	BeginsAt string `json:"begins_at"`
-	FinishedAt string `json:"finished_at"`
+	CsDescription string `json:"cs_description"`
+	CsSummary string `json:"cs_summary"`
 	Duration int64 `json:"duration"`
+	EnDescription string `json:"en_description"`
+	EnSummary string `json:"en_summary"`
+	FinishedAt string `json:"finished_at"`
+	Id int64 `json:"id"`
 	Planned bool `json:"planned"`
 	State string `json:"state"`
 	Type string `json:"type"`
-	EnSummary string `json:"en_summary"`
-	EnDescription string `json:"en_description"`
-	CsSummary string `json:"cs_summary"`
-	CsDescription string `json:"cs_description"`
-	Affected bool `json:"affected"`
-	AffectedUserCount int64 `json:"affected_user_count"`
-	AffectedDirectVpsCount int64 `json:"affected_direct_vps_count"`
-	AffectedIndirectVpsCount int64 `json:"affected_indirect_vps_count"`
 }
 
 
@@ -346,29 +347,29 @@ func (inv *ActionOutageCreateInvocation) makeInputParams() map[string]interface{
 		if inv.IsParameterSelected("BeginsAt") {
 			ret["begins_at"] = inv.Input.BeginsAt
 		}
-		if inv.IsParameterSelected("FinishedAt") {
-			ret["finished_at"] = inv.Input.FinishedAt
+		if inv.IsParameterSelected("CsDescription") {
+			ret["cs_description"] = inv.Input.CsDescription
+		}
+		if inv.IsParameterSelected("CsSummary") {
+			ret["cs_summary"] = inv.Input.CsSummary
 		}
 		if inv.IsParameterSelected("Duration") {
 			ret["duration"] = inv.Input.Duration
+		}
+		if inv.IsParameterSelected("EnDescription") {
+			ret["en_description"] = inv.Input.EnDescription
+		}
+		if inv.IsParameterSelected("EnSummary") {
+			ret["en_summary"] = inv.Input.EnSummary
+		}
+		if inv.IsParameterSelected("FinishedAt") {
+			ret["finished_at"] = inv.Input.FinishedAt
 		}
 		if inv.IsParameterSelected("Planned") {
 			ret["planned"] = inv.Input.Planned
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["type"] = inv.Input.Type
-		}
-		if inv.IsParameterSelected("EnSummary") {
-			ret["en_summary"] = inv.Input.EnSummary
-		}
-		if inv.IsParameterSelected("EnDescription") {
-			ret["en_description"] = inv.Input.EnDescription
-		}
-		if inv.IsParameterSelected("CsSummary") {
-			ret["cs_summary"] = inv.Input.CsSummary
-		}
-		if inv.IsParameterSelected("CsDescription") {
-			ret["cs_description"] = inv.Input.CsDescription
 		}
 	}
 
@@ -379,11 +380,11 @@ func (inv *ActionOutageCreateInvocation) makeMetaInputParams() map[string]interf
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

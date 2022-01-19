@@ -9,28 +9,28 @@ type ResourceVpsConsoleToken struct {
 	Create *ActionVpsConsoleTokenCreate
 	// Action Vps.Console_token#Create
 	New *ActionVpsConsoleTokenCreate
-	// Action Vps.Console_token#Show
-	Show *ActionVpsConsoleTokenShow
-	// Action Vps.Console_token#Show
-	Find *ActionVpsConsoleTokenShow
 	// Action Vps.Console_token#Delete
 	Delete *ActionVpsConsoleTokenDelete
 	// Action Vps.Console_token#Delete
 	Destroy *ActionVpsConsoleTokenDelete
+	// Action Vps.Console_token#Show
+	Show *ActionVpsConsoleTokenShow
+	// Action Vps.Console_token#Show
+	Find *ActionVpsConsoleTokenShow
 }
 
 func NewResourceVpsConsoleToken(client *Client) *ResourceVpsConsoleToken {
 	actionCreate := NewActionVpsConsoleTokenCreate(client)
-	actionShow := NewActionVpsConsoleTokenShow(client)
 	actionDelete := NewActionVpsConsoleTokenDelete(client)
+	actionShow := NewActionVpsConsoleTokenShow(client)
 
 	return &ResourceVpsConsoleToken{
 		Client: client,
 		Create: actionCreate,
 		New: actionCreate,
-		Show: actionShow,
-		Find: actionShow,
 		Delete: actionDelete,
 		Destroy: actionDelete,
+		Show: actionShow,
+		Find: actionShow,
 	}
 }

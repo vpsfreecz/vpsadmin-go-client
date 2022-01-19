@@ -17,24 +17,13 @@ func NewActionVpsOutageIndex(client *Client) *ActionVpsOutageIndex {
 
 // ActionVpsOutageIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsOutageIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsOutageIndexMetaGlobalInput) SetNo(value bool) *ActionVpsOutageIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionVpsOutageIndexMetaGlobalInput) SetCount(value bool) *ActionVpsOutageIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionVpsOutageIndexMetaGlobalInput) SetIncludes(value string) *Action
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsOutageIndexMetaGlobalInput) SetNo(value bool) *ActionVpsOutageIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,72 +83,28 @@ func (in *ActionVpsOutageIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsOutageIndexInput is a type for action input parameters
 type ActionVpsOutageIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
-	Outage int64 `json:"outage"`
-	Vps int64 `json:"vps"`
-	User int64 `json:"user"`
+	Direct bool `json:"direct"`
 	Environment int64 `json:"environment"`
+	Limit int64 `json:"limit"`
 	Location int64 `json:"location"`
 	Node int64 `json:"node"`
-	Direct bool `json:"direct"`
+	Offset int64 `json:"offset"`
+	Outage int64 `json:"outage"`
+	User int64 `json:"user"`
+	Vps int64 `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionVpsOutageIndexInput) SetOffset(value int64) *ActionVpsOutageIndexInput {
-	in.Offset = value
+// SetDirect sets parameter Direct to value and selects it for sending
+func (in *ActionVpsOutageIndexInput) SetDirect(value bool) *ActionVpsOutageIndexInput {
+	in.Direct = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-// SetLimit sets parameter Limit to value and selects it for sending
-func (in *ActionVpsOutageIndexInput) SetLimit(value int64) *ActionVpsOutageIndexInput {
-	in.Limit = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Limit"] = nil
-	return in
-}
-// SetOutage sets parameter Outage to value and selects it for sending
-func (in *ActionVpsOutageIndexInput) SetOutage(value int64) *ActionVpsOutageIndexInput {
-	in.Outage = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Outage"] = nil
-	return in
-}
-// SetVps sets parameter Vps to value and selects it for sending
-func (in *ActionVpsOutageIndexInput) SetVps(value int64) *ActionVpsOutageIndexInput {
-	in.Vps = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Vps"] = nil
-	return in
-}
-// SetUser sets parameter User to value and selects it for sending
-func (in *ActionVpsOutageIndexInput) SetUser(value int64) *ActionVpsOutageIndexInput {
-	in.User = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["User"] = nil
+	in._selectedParameters["Direct"] = nil
 	return in
 }
 // SetEnvironment sets parameter Environment to value and selects it for sending
@@ -160,6 +116,17 @@ func (in *ActionVpsOutageIndexInput) SetEnvironment(value int64) *ActionVpsOutag
 	}
 
 	in._selectedParameters["Environment"] = nil
+	return in
+}
+// SetLimit sets parameter Limit to value and selects it for sending
+func (in *ActionVpsOutageIndexInput) SetLimit(value int64) *ActionVpsOutageIndexInput {
+	in.Limit = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Limit"] = nil
 	return in
 }
 // SetLocation sets parameter Location to value and selects it for sending
@@ -184,15 +151,48 @@ func (in *ActionVpsOutageIndexInput) SetNode(value int64) *ActionVpsOutageIndexI
 	in._selectedParameters["Node"] = nil
 	return in
 }
-// SetDirect sets parameter Direct to value and selects it for sending
-func (in *ActionVpsOutageIndexInput) SetDirect(value bool) *ActionVpsOutageIndexInput {
-	in.Direct = value
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionVpsOutageIndexInput) SetOffset(value int64) *ActionVpsOutageIndexInput {
+	in.Offset = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Direct"] = nil
+	in._selectedParameters["Offset"] = nil
+	return in
+}
+// SetOutage sets parameter Outage to value and selects it for sending
+func (in *ActionVpsOutageIndexInput) SetOutage(value int64) *ActionVpsOutageIndexInput {
+	in.Outage = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Outage"] = nil
+	return in
+}
+// SetUser sets parameter User to value and selects it for sending
+func (in *ActionVpsOutageIndexInput) SetUser(value int64) *ActionVpsOutageIndexInput {
+	in.User = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["User"] = nil
+	return in
+}
+// SetVps sets parameter Vps to value and selects it for sending
+func (in *ActionVpsOutageIndexInput) SetVps(value int64) *ActionVpsOutageIndexInput {
+	in.Vps = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Vps"] = nil
 	return in
 }
 
@@ -222,14 +222,14 @@ func (in *ActionVpsOutageIndexInput) AnySelected() bool {
 
 // ActionVpsOutageIndexOutput is a type for action output parameters
 type ActionVpsOutageIndexOutput struct {
-	Id int64 `json:"id"`
-	Outage *ActionOutageShowOutput `json:"outage"`
-	Vps *ActionVpsShowOutput `json:"vps"`
-	User *ActionUserShowOutput `json:"user"`
+	Direct bool `json:"direct"`
 	Environment *ActionEnvironmentShowOutput `json:"environment"`
+	Id int64 `json:"id"`
 	Location *ActionLocationShowOutput `json:"location"`
 	Node *ActionNodeShowOutput `json:"node"`
-	Direct bool `json:"direct"`
+	Outage *ActionOutageShowOutput `json:"outage"`
+	User *ActionUserShowOutput `json:"user"`
+	Vps *ActionVpsShowOutput `json:"vps"`
 }
 
 
@@ -334,23 +334,14 @@ func (inv *ActionVpsOutageIndexInvocation) callAsQuery() (*ActionVpsOutageIndexR
 
 func (inv *ActionVpsOutageIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["vps_outage[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
-		if inv.IsParameterSelected("Limit") {
-			ret["vps_outage[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Outage") {
-			ret["vps_outage[outage]"] = convertInt64ToString(inv.Input.Outage)
-		}
-		if inv.IsParameterSelected("Vps") {
-			ret["vps_outage[vps]"] = convertInt64ToString(inv.Input.Vps)
-		}
-		if inv.IsParameterSelected("User") {
-			ret["vps_outage[user]"] = convertInt64ToString(inv.Input.User)
+		if inv.IsParameterSelected("Direct") {
+			ret["vps_outage[direct]"] = convertBoolToString(inv.Input.Direct)
 		}
 		if inv.IsParameterSelected("Environment") {
 			ret["vps_outage[environment]"] = convertInt64ToString(inv.Input.Environment)
+		}
+		if inv.IsParameterSelected("Limit") {
+			ret["vps_outage[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 		if inv.IsParameterSelected("Location") {
 			ret["vps_outage[location]"] = convertInt64ToString(inv.Input.Location)
@@ -358,22 +349,31 @@ func (inv *ActionVpsOutageIndexInvocation) convertInputToQueryParams(ret map[str
 		if inv.IsParameterSelected("Node") {
 			ret["vps_outage[node]"] = convertInt64ToString(inv.Input.Node)
 		}
-		if inv.IsParameterSelected("Direct") {
-			ret["vps_outage[direct]"] = convertBoolToString(inv.Input.Direct)
+		if inv.IsParameterSelected("Offset") {
+			ret["vps_outage[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
+		if inv.IsParameterSelected("Outage") {
+			ret["vps_outage[outage]"] = convertInt64ToString(inv.Input.Outage)
+		}
+		if inv.IsParameterSelected("User") {
+			ret["vps_outage[user]"] = convertInt64ToString(inv.Input.User)
+		}
+		if inv.IsParameterSelected("Vps") {
+			ret["vps_outage[vps]"] = convertInt64ToString(inv.Input.Vps)
 		}
 	}
 }
 
 func (inv *ActionVpsOutageIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

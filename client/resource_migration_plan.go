@@ -7,6 +7,16 @@ type ResourceMigrationPlan struct {
 
 	// Resource Migration_plan.Vps_migration
 	VpsMigration *ResourceMigrationPlanVpsMigration
+	// Action Migration_plan#Cancel
+	Cancel *ActionMigrationPlanCancel
+	// Action Migration_plan#Create
+	Create *ActionMigrationPlanCreate
+	// Action Migration_plan#Create
+	New *ActionMigrationPlanCreate
+	// Action Migration_plan#Delete
+	Delete *ActionMigrationPlanDelete
+	// Action Migration_plan#Delete
+	Destroy *ActionMigrationPlanDelete
 	// Action Migration_plan#Index
 	Index *ActionMigrationPlanIndex
 	// Action Migration_plan#Index
@@ -15,40 +25,30 @@ type ResourceMigrationPlan struct {
 	Show *ActionMigrationPlanShow
 	// Action Migration_plan#Show
 	Find *ActionMigrationPlanShow
-	// Action Migration_plan#Create
-	Create *ActionMigrationPlanCreate
-	// Action Migration_plan#Create
-	New *ActionMigrationPlanCreate
 	// Action Migration_plan#Start
 	Start *ActionMigrationPlanStart
-	// Action Migration_plan#Cancel
-	Cancel *ActionMigrationPlanCancel
-	// Action Migration_plan#Delete
-	Delete *ActionMigrationPlanDelete
-	// Action Migration_plan#Delete
-	Destroy *ActionMigrationPlanDelete
 }
 
 func NewResourceMigrationPlan(client *Client) *ResourceMigrationPlan {
+	actionCancel := NewActionMigrationPlanCancel(client)
+	actionCreate := NewActionMigrationPlanCreate(client)
+	actionDelete := NewActionMigrationPlanDelete(client)
 	actionIndex := NewActionMigrationPlanIndex(client)
 	actionShow := NewActionMigrationPlanShow(client)
-	actionCreate := NewActionMigrationPlanCreate(client)
 	actionStart := NewActionMigrationPlanStart(client)
-	actionCancel := NewActionMigrationPlanCancel(client)
-	actionDelete := NewActionMigrationPlanDelete(client)
 
 	return &ResourceMigrationPlan{
 		Client: client,
 		VpsMigration: NewResourceMigrationPlanVpsMigration(client),
+		Cancel: actionCancel,
+		Create: actionCreate,
+		New: actionCreate,
+		Delete: actionDelete,
+		Destroy: actionDelete,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Create: actionCreate,
-		New: actionCreate,
 		Start: actionStart,
-		Cancel: actionCancel,
-		Delete: actionDelete,
-		Destroy: actionDelete,
 	}
 }

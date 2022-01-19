@@ -18,23 +18,12 @@ func NewActionMonitoredEventShow(client *Client) *ActionMonitoredEventShow {
 
 // ActionMonitoredEventShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMonitoredEventShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionMonitoredEventShowMetaGlobalInput) SetNo(value bool) *ActionMonitoredEventShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionMonitoredEventShowMetaGlobalInput) SetIncludes(value string) *ActionMonitoredEventShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionMonitoredEventShowMetaGlobalInput) SetIncludes(value string) *Ac
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMonitoredEventShowMetaGlobalInput) SetNo(value bool) *ActionMonitoredEventShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,17 +74,17 @@ func (in *ActionMonitoredEventShowMetaGlobalInput) AnySelected() bool {
 
 // ActionMonitoredEventShowOutput is a type for action output parameters
 type ActionMonitoredEventShowOutput struct {
-	Id int64 `json:"id"`
-	Monitor string `json:"monitor"`
-	Label string `json:"label"`
-	Issue string `json:"issue"`
-	ObjectName string `json:"object_name"`
-	ObjectId int64 `json:"object_id"`
-	State string `json:"state"`
-	User *ActionUserShowOutput `json:"user"`
 	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
+	Id int64 `json:"id"`
+	Issue string `json:"issue"`
+	Label string `json:"label"`
+	Monitor string `json:"monitor"`
+	ObjectId int64 `json:"object_id"`
+	ObjectName string `json:"object_name"`
 	SavedUntil string `json:"saved_until"`
+	State string `json:"state"`
+	UpdatedAt string `json:"updated_at"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -176,11 +176,11 @@ func (inv *ActionMonitoredEventShowInvocation) callAsQuery() (*ActionMonitoredEv
 
 func (inv *ActionMonitoredEventShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

@@ -17,23 +17,12 @@ func NewActionVpsConfigCreate(client *Client) *ActionVpsConfigCreate {
 
 // ActionVpsConfigCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsConfigCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsConfigCreateMetaGlobalInput) SetNo(value bool) *ActionVpsConfigCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsConfigCreateMetaGlobalInput) SetIncludes(value string) *ActionVpsConfigCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionVpsConfigCreateMetaGlobalInput) SetIncludes(value string) *Actio
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsConfigCreateMetaGlobalInput) SetNo(value bool) *ActionVpsConfigCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,22 +71,22 @@ func (in *ActionVpsConfigCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsConfigCreateInput is a type for action input parameters
 type ActionVpsConfigCreateInput struct {
-	Name string `json:"name"`
-	Label string `json:"label"`
 	Config string `json:"config"`
+	Label string `json:"label"`
+	Name string `json:"name"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetName sets parameter Name to value and selects it for sending
-func (in *ActionVpsConfigCreateInput) SetName(value string) *ActionVpsConfigCreateInput {
-	in.Name = value
+// SetConfig sets parameter Config to value and selects it for sending
+func (in *ActionVpsConfigCreateInput) SetConfig(value string) *ActionVpsConfigCreateInput {
+	in.Config = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Name"] = nil
+	in._selectedParameters["Config"] = nil
 	return in
 }
 // SetLabel sets parameter Label to value and selects it for sending
@@ -100,15 +100,15 @@ func (in *ActionVpsConfigCreateInput) SetLabel(value string) *ActionVpsConfigCre
 	in._selectedParameters["Label"] = nil
 	return in
 }
-// SetConfig sets parameter Config to value and selects it for sending
-func (in *ActionVpsConfigCreateInput) SetConfig(value string) *ActionVpsConfigCreateInput {
-	in.Config = value
+// SetName sets parameter Name to value and selects it for sending
+func (in *ActionVpsConfigCreateInput) SetName(value string) *ActionVpsConfigCreateInput {
+	in.Name = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Config"] = nil
+	in._selectedParameters["Name"] = nil
 	return in
 }
 
@@ -143,10 +143,10 @@ type ActionVpsConfigCreateRequest struct {
 
 // ActionVpsConfigCreateOutput is a type for action output parameters
 type ActionVpsConfigCreateOutput struct {
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	Label string `json:"label"`
 	Config string `json:"config"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	Name string `json:"name"`
 }
 
 // ActionVpsConfigCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -341,14 +341,14 @@ func (inv *ActionVpsConfigCreateInvocation) makeInputParams() map[string]interfa
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Name") {
-			ret["name"] = inv.Input.Name
+		if inv.IsParameterSelected("Config") {
+			ret["config"] = inv.Input.Config
 		}
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
 		}
-		if inv.IsParameterSelected("Config") {
-			ret["config"] = inv.Input.Config
+		if inv.IsParameterSelected("Name") {
+			ret["name"] = inv.Input.Name
 		}
 	}
 
@@ -359,11 +359,11 @@ func (inv *ActionVpsConfigCreateInvocation) makeMetaInputParams() map[string]int
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

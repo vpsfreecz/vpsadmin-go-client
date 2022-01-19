@@ -18,24 +18,13 @@ func NewActionUserClusterResourceIndex(client *Client) *ActionUserClusterResourc
 
 // ActionUserClusterResourceIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserClusterResourceIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserClusterResourceIndexMetaGlobalInput) SetNo(value bool) *ActionUserClusterResourceIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionUserClusterResourceIndexMetaGlobalInput) SetCount(value bool) *ActionUserClusterResourceIndexMetaGlobalInput {
 	in.Count = value
@@ -56,6 +45,17 @@ func (in *ActionUserClusterResourceIndexMetaGlobalInput) SetIncludes(value strin
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserClusterResourceIndexMetaGlobalInput) SetNo(value bool) *ActionUserClusterResourceIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -84,22 +84,22 @@ func (in *ActionUserClusterResourceIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserClusterResourceIndexInput is a type for action input parameters
 type ActionUserClusterResourceIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
 	Environment int64 `json:"environment"`
+	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserClusterResourceIndexInput) SetOffset(value int64) *ActionUserClusterResourceIndexInput {
-	in.Offset = value
+// SetEnvironment sets parameter Environment to value and selects it for sending
+func (in *ActionUserClusterResourceIndexInput) SetEnvironment(value int64) *ActionUserClusterResourceIndexInput {
+	in.Environment = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
+	in._selectedParameters["Environment"] = nil
 	return in
 }
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -113,15 +113,15 @@ func (in *ActionUserClusterResourceIndexInput) SetLimit(value int64) *ActionUser
 	in._selectedParameters["Limit"] = nil
 	return in
 }
-// SetEnvironment sets parameter Environment to value and selects it for sending
-func (in *ActionUserClusterResourceIndexInput) SetEnvironment(value int64) *ActionUserClusterResourceIndexInput {
-	in.Environment = value
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionUserClusterResourceIndexInput) SetOffset(value int64) *ActionUserClusterResourceIndexInput {
+	in.Offset = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Environment"] = nil
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -151,12 +151,12 @@ func (in *ActionUserClusterResourceIndexInput) AnySelected() bool {
 
 // ActionUserClusterResourceIndexOutput is a type for action output parameters
 type ActionUserClusterResourceIndexOutput struct {
-	Id int64 `json:"id"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
 	ClusterResource *ActionClusterResourceShowOutput `json:"cluster_resource"`
-	Value int64 `json:"value"`
-	Used int64 `json:"used"`
+	Environment *ActionEnvironmentShowOutput `json:"environment"`
 	Free int64 `json:"free"`
+	Id int64 `json:"id"`
+	Used int64 `json:"used"`
+	Value int64 `json:"value"`
 }
 
 
@@ -271,28 +271,28 @@ func (inv *ActionUserClusterResourceIndexInvocation) callAsQuery() (*ActionUserC
 
 func (inv *ActionUserClusterResourceIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["cluster_resource[offset]"] = convertInt64ToString(inv.Input.Offset)
+		if inv.IsParameterSelected("Environment") {
+			ret["cluster_resource[environment]"] = convertInt64ToString(inv.Input.Environment)
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["cluster_resource[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
-		if inv.IsParameterSelected("Environment") {
-			ret["cluster_resource[environment]"] = convertInt64ToString(inv.Input.Environment)
+		if inv.IsParameterSelected("Offset") {
+			ret["cluster_resource[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }
 
 func (inv *ActionUserClusterResourceIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

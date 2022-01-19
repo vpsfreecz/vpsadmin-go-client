@@ -7,6 +7,14 @@ type ResourceExport struct {
 
 	// Resource Export.Host
 	Host *ResourceExportHost
+	// Action Export#Create
+	Create *ActionExportCreate
+	// Action Export#Create
+	New *ActionExportCreate
+	// Action Export#Delete
+	Delete *ActionExportDelete
+	// Action Export#Delete
+	Destroy *ActionExportDelete
 	// Action Export#Index
 	Index *ActionExportIndex
 	// Action Export#Index
@@ -15,36 +23,28 @@ type ResourceExport struct {
 	Show *ActionExportShow
 	// Action Export#Show
 	Find *ActionExportShow
-	// Action Export#Create
-	Create *ActionExportCreate
-	// Action Export#Create
-	New *ActionExportCreate
 	// Action Export#Update
 	Update *ActionExportUpdate
-	// Action Export#Delete
-	Delete *ActionExportDelete
-	// Action Export#Delete
-	Destroy *ActionExportDelete
 }
 
 func NewResourceExport(client *Client) *ResourceExport {
+	actionCreate := NewActionExportCreate(client)
+	actionDelete := NewActionExportDelete(client)
 	actionIndex := NewActionExportIndex(client)
 	actionShow := NewActionExportShow(client)
-	actionCreate := NewActionExportCreate(client)
 	actionUpdate := NewActionExportUpdate(client)
-	actionDelete := NewActionExportDelete(client)
 
 	return &ResourceExport{
 		Client: client,
 		Host: NewResourceExportHost(client),
+		Create: actionCreate,
+		New: actionCreate,
+		Delete: actionDelete,
+		Destroy: actionDelete,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Create: actionCreate,
-		New: actionCreate,
 		Update: actionUpdate,
-		Delete: actionDelete,
-		Destroy: actionDelete,
 	}
 }

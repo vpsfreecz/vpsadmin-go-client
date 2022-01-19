@@ -18,23 +18,12 @@ func NewActionMailTemplateTranslationUpdate(client *Client) *ActionMailTemplateT
 
 // ActionMailTemplateTranslationUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateTranslationUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionMailTemplateTranslationUpdateMetaGlobalInput) SetNo(value bool) *ActionMailTemplateTranslationUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionMailTemplateTranslationUpdateMetaGlobalInput) SetIncludes(value string) *ActionMailTemplateTranslationUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionMailTemplateTranslationUpdateMetaGlobalInput) SetIncludes(value 
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMailTemplateTranslationUpdateMetaGlobalInput) SetNo(value bool) *ActionMailTemplateTranslationUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,28 +72,17 @@ func (in *ActionMailTemplateTranslationUpdateMetaGlobalInput) AnySelected() bool
 
 // ActionMailTemplateTranslationUpdateInput is a type for action input parameters
 type ActionMailTemplateTranslationUpdateInput struct {
-	Language int64 `json:"language"`
 	From string `json:"from"`
+	Language int64 `json:"language"`
 	ReplyTo string `json:"reply_to"`
 	ReturnPath string `json:"return_path"`
 	Subject string `json:"subject"`
-	TextPlain string `json:"text_plain"`
 	TextHtml string `json:"text_html"`
+	TextPlain string `json:"text_plain"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetLanguage sets parameter Language to value and selects it for sending
-func (in *ActionMailTemplateTranslationUpdateInput) SetLanguage(value int64) *ActionMailTemplateTranslationUpdateInput {
-	in.Language = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Language"] = nil
-	return in
-}
 // SetFrom sets parameter From to value and selects it for sending
 func (in *ActionMailTemplateTranslationUpdateInput) SetFrom(value string) *ActionMailTemplateTranslationUpdateInput {
 	in.From = value
@@ -103,6 +92,17 @@ func (in *ActionMailTemplateTranslationUpdateInput) SetFrom(value string) *Actio
 	}
 
 	in._selectedParameters["From"] = nil
+	return in
+}
+// SetLanguage sets parameter Language to value and selects it for sending
+func (in *ActionMailTemplateTranslationUpdateInput) SetLanguage(value int64) *ActionMailTemplateTranslationUpdateInput {
+	in.Language = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Language"] = nil
 	return in
 }
 // SetReplyTo sets parameter ReplyTo to value and selects it for sending
@@ -138,17 +138,6 @@ func (in *ActionMailTemplateTranslationUpdateInput) SetSubject(value string) *Ac
 	in._selectedParameters["Subject"] = nil
 	return in
 }
-// SetTextPlain sets parameter TextPlain to value and selects it for sending
-func (in *ActionMailTemplateTranslationUpdateInput) SetTextPlain(value string) *ActionMailTemplateTranslationUpdateInput {
-	in.TextPlain = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["TextPlain"] = nil
-	return in
-}
 // SetTextHtml sets parameter TextHtml to value and selects it for sending
 func (in *ActionMailTemplateTranslationUpdateInput) SetTextHtml(value string) *ActionMailTemplateTranslationUpdateInput {
 	in.TextHtml = value
@@ -158,6 +147,17 @@ func (in *ActionMailTemplateTranslationUpdateInput) SetTextHtml(value string) *A
 	}
 
 	in._selectedParameters["TextHtml"] = nil
+	return in
+}
+// SetTextPlain sets parameter TextPlain to value and selects it for sending
+func (in *ActionMailTemplateTranslationUpdateInput) SetTextPlain(value string) *ActionMailTemplateTranslationUpdateInput {
+	in.TextPlain = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["TextPlain"] = nil
 	return in
 }
 
@@ -192,15 +192,15 @@ type ActionMailTemplateTranslationUpdateRequest struct {
 
 // ActionMailTemplateTranslationUpdateOutput is a type for action output parameters
 type ActionMailTemplateTranslationUpdateOutput struct {
+	CreatedAt string `json:"created_at"`
+	From string `json:"from"`
 	Id int64 `json:"id"`
 	Language *ActionLanguageShowOutput `json:"language"`
-	From string `json:"from"`
 	ReplyTo string `json:"reply_to"`
 	ReturnPath string `json:"return_path"`
 	Subject string `json:"subject"`
-	TextPlain string `json:"text_plain"`
 	TextHtml string `json:"text_html"`
-	CreatedAt string `json:"created_at"`
+	TextPlain string `json:"text_plain"`
 	UpdatedAt string `json:"updated_at"`
 }
 
@@ -325,11 +325,11 @@ func (inv *ActionMailTemplateTranslationUpdateInvocation) makeInputParams() map[
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Language") {
-			ret["language"] = inv.Input.Language
-		}
 		if inv.IsParameterSelected("From") {
 			ret["from"] = inv.Input.From
+		}
+		if inv.IsParameterSelected("Language") {
+			ret["language"] = inv.Input.Language
 		}
 		if inv.IsParameterSelected("ReplyTo") {
 			ret["reply_to"] = inv.Input.ReplyTo
@@ -340,11 +340,11 @@ func (inv *ActionMailTemplateTranslationUpdateInvocation) makeInputParams() map[
 		if inv.IsParameterSelected("Subject") {
 			ret["subject"] = inv.Input.Subject
 		}
-		if inv.IsParameterSelected("TextPlain") {
-			ret["text_plain"] = inv.Input.TextPlain
-		}
 		if inv.IsParameterSelected("TextHtml") {
 			ret["text_html"] = inv.Input.TextHtml
+		}
+		if inv.IsParameterSelected("TextPlain") {
+			ret["text_plain"] = inv.Input.TextPlain
 		}
 	}
 
@@ -355,11 +355,11 @@ func (inv *ActionMailTemplateTranslationUpdateInvocation) makeMetaInputParams() 
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

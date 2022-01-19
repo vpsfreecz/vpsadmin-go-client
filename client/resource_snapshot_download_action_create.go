@@ -17,23 +17,12 @@ func NewActionSnapshotDownloadCreate(client *Client) *ActionSnapshotDownloadCrea
 
 // ActionSnapshotDownloadCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionSnapshotDownloadCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionSnapshotDownloadCreateMetaGlobalInput) SetNo(value bool) *ActionSnapshotDownloadCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionSnapshotDownloadCreateMetaGlobalInput) SetIncludes(value string) *ActionSnapshotDownloadCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionSnapshotDownloadCreateMetaGlobalInput) SetIncludes(value string)
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionSnapshotDownloadCreateMetaGlobalInput) SetNo(value bool) *ActionSnapshotDownloadCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,23 +71,23 @@ func (in *ActionSnapshotDownloadCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionSnapshotDownloadCreateInput is a type for action input parameters
 type ActionSnapshotDownloadCreateInput struct {
-	Snapshot int64 `json:"snapshot"`
-	FromSnapshot int64 `json:"from_snapshot"`
 	Format string `json:"format"`
+	FromSnapshot int64 `json:"from_snapshot"`
 	SendMail bool `json:"send_mail"`
+	Snapshot int64 `json:"snapshot"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetSnapshot sets parameter Snapshot to value and selects it for sending
-func (in *ActionSnapshotDownloadCreateInput) SetSnapshot(value int64) *ActionSnapshotDownloadCreateInput {
-	in.Snapshot = value
+// SetFormat sets parameter Format to value and selects it for sending
+func (in *ActionSnapshotDownloadCreateInput) SetFormat(value string) *ActionSnapshotDownloadCreateInput {
+	in.Format = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Snapshot"] = nil
+	in._selectedParameters["Format"] = nil
 	return in
 }
 // SetFromSnapshot sets parameter FromSnapshot to value and selects it for sending
@@ -101,17 +101,6 @@ func (in *ActionSnapshotDownloadCreateInput) SetFromSnapshot(value int64) *Actio
 	in._selectedParameters["FromSnapshot"] = nil
 	return in
 }
-// SetFormat sets parameter Format to value and selects it for sending
-func (in *ActionSnapshotDownloadCreateInput) SetFormat(value string) *ActionSnapshotDownloadCreateInput {
-	in.Format = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Format"] = nil
-	return in
-}
 // SetSendMail sets parameter SendMail to value and selects it for sending
 func (in *ActionSnapshotDownloadCreateInput) SetSendMail(value bool) *ActionSnapshotDownloadCreateInput {
 	in.SendMail = value
@@ -121,6 +110,17 @@ func (in *ActionSnapshotDownloadCreateInput) SetSendMail(value bool) *ActionSnap
 	}
 
 	in._selectedParameters["SendMail"] = nil
+	return in
+}
+// SetSnapshot sets parameter Snapshot to value and selects it for sending
+func (in *ActionSnapshotDownloadCreateInput) SetSnapshot(value int64) *ActionSnapshotDownloadCreateInput {
+	in.Snapshot = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Snapshot"] = nil
 	return in
 }
 
@@ -155,17 +155,17 @@ type ActionSnapshotDownloadCreateRequest struct {
 
 // ActionSnapshotDownloadCreateOutput is a type for action output parameters
 type ActionSnapshotDownloadCreateOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	FromSnapshot *ActionDatasetSnapshotShowOutput `json:"from_snapshot"`
-	Format string `json:"format"`
-	FileName string `json:"file_name"`
-	Url string `json:"url"`
-	Size int64 `json:"size"`
-	Sha256sum string `json:"sha256sum"`
-	Ready bool `json:"ready"`
 	ExpirationDate string `json:"expiration_date"`
+	FileName string `json:"file_name"`
+	Format string `json:"format"`
+	FromSnapshot *ActionDatasetSnapshotShowOutput `json:"from_snapshot"`
+	Id int64 `json:"id"`
+	Ready bool `json:"ready"`
+	Sha256sum string `json:"sha256sum"`
+	Size int64 `json:"size"`
+	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
+	Url string `json:"url"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 // ActionSnapshotDownloadCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -360,17 +360,17 @@ func (inv *ActionSnapshotDownloadCreateInvocation) makeInputParams() map[string]
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Snapshot") {
-			ret["snapshot"] = inv.Input.Snapshot
+		if inv.IsParameterSelected("Format") {
+			ret["format"] = inv.Input.Format
 		}
 		if inv.IsParameterSelected("FromSnapshot") {
 			ret["from_snapshot"] = inv.Input.FromSnapshot
 		}
-		if inv.IsParameterSelected("Format") {
-			ret["format"] = inv.Input.Format
-		}
 		if inv.IsParameterSelected("SendMail") {
 			ret["send_mail"] = inv.Input.SendMail
+		}
+		if inv.IsParameterSelected("Snapshot") {
+			ret["snapshot"] = inv.Input.Snapshot
 		}
 	}
 
@@ -381,11 +381,11 @@ func (inv *ActionSnapshotDownloadCreateInvocation) makeMetaInputParams() map[str
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

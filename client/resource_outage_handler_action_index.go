@@ -18,24 +18,13 @@ func NewActionOutageHandlerIndex(client *Client) *ActionOutageHandlerIndex {
 
 // ActionOutageHandlerIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageHandlerIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionOutageHandlerIndexMetaGlobalInput) SetNo(value bool) *ActionOutageHandlerIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionOutageHandlerIndexMetaGlobalInput) SetCount(value bool) *ActionOutageHandlerIndexMetaGlobalInput {
 	in.Count = value
@@ -56,6 +45,17 @@ func (in *ActionOutageHandlerIndexMetaGlobalInput) SetIncludes(value string) *Ac
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionOutageHandlerIndexMetaGlobalInput) SetNo(value bool) *ActionOutageHandlerIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -84,23 +84,12 @@ func (in *ActionOutageHandlerIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageHandlerIndexInput is a type for action input parameters
 type ActionOutageHandlerIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionOutageHandlerIndexInput) SetOffset(value int64) *ActionOutageHandlerIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionOutageHandlerIndexInput) SetLimit(value int64) *ActionOutageHandlerIndexInput {
 	in.Limit = value
@@ -110,6 +99,17 @@ func (in *ActionOutageHandlerIndexInput) SetLimit(value int64) *ActionOutageHand
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionOutageHandlerIndexInput) SetOffset(value int64) *ActionOutageHandlerIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -139,10 +139,10 @@ func (in *ActionOutageHandlerIndexInput) AnySelected() bool {
 
 // ActionOutageHandlerIndexOutput is a type for action output parameters
 type ActionOutageHandlerIndexOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
 	FullName string `json:"full_name"`
+	Id int64 `json:"id"`
 	Note string `json:"note"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -257,25 +257,25 @@ func (inv *ActionOutageHandlerIndexInvocation) callAsQuery() (*ActionOutageHandl
 
 func (inv *ActionOutageHandlerIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["handler[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["handler[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["handler[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }
 
 func (inv *ActionOutageHandlerIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

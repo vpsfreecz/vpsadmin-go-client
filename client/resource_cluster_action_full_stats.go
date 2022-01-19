@@ -61,19 +61,19 @@ func (in *ActionClusterFullStatsMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterFullStatsOutput is a type for action output parameters
 type ActionClusterFullStatsOutput struct {
-	NodesOnline int64 `json:"nodes_online"`
+	Ipv4Count int64 `json:"ipv4_count"`
+	Ipv4Used int64 `json:"ipv4_used"`
 	NodeCount int64 `json:"node_count"`
+	NodesOnline int64 `json:"nodes_online"`
+	UserActive int64 `json:"user_active"`
+	UserCount int64 `json:"user_count"`
+	UserDeleted int64 `json:"user_deleted"`
+	UserSuspended int64 `json:"user_suspended"`
+	VpsCount int64 `json:"vps_count"`
+	VpsDeleted int64 `json:"vps_deleted"`
 	VpsRunning int64 `json:"vps_running"`
 	VpsStopped int64 `json:"vps_stopped"`
 	VpsSuspended int64 `json:"vps_suspended"`
-	VpsDeleted int64 `json:"vps_deleted"`
-	VpsCount int64 `json:"vps_count"`
-	UserActive int64 `json:"user_active"`
-	UserSuspended int64 `json:"user_suspended"`
-	UserDeleted int64 `json:"user_deleted"`
-	UserCount int64 `json:"user_count"`
-	Ipv4Used int64 `json:"ipv4_used"`
-	Ipv4Count int64 `json:"ipv4_count"`
 }
 
 

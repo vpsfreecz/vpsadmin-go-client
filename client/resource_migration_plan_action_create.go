@@ -17,23 +17,12 @@ func NewActionMigrationPlanCreate(client *Client) *ActionMigrationPlanCreate {
 
 // ActionMigrationPlanCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionMigrationPlanCreateMetaGlobalInput) SetNo(value bool) *ActionMigrationPlanCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionMigrationPlanCreateMetaGlobalInput) SetIncludes(value string) *ActionMigrationPlanCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionMigrationPlanCreateMetaGlobalInput) SetIncludes(value string) *A
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMigrationPlanCreateMetaGlobalInput) SetNo(value bool) *ActionMigrationPlanCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,36 +71,14 @@ func (in *ActionMigrationPlanCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionMigrationPlanCreateInput is a type for action input parameters
 type ActionMigrationPlanCreateInput struct {
-	StopOnError bool `json:"stop_on_error"`
-	SendMail bool `json:"send_mail"`
 	Concurrency int64 `json:"concurrency"`
 	Reason string `json:"reason"`
+	SendMail bool `json:"send_mail"`
+	StopOnError bool `json:"stop_on_error"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetStopOnError sets parameter StopOnError to value and selects it for sending
-func (in *ActionMigrationPlanCreateInput) SetStopOnError(value bool) *ActionMigrationPlanCreateInput {
-	in.StopOnError = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["StopOnError"] = nil
-	return in
-}
-// SetSendMail sets parameter SendMail to value and selects it for sending
-func (in *ActionMigrationPlanCreateInput) SetSendMail(value bool) *ActionMigrationPlanCreateInput {
-	in.SendMail = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["SendMail"] = nil
-	return in
-}
 // SetConcurrency sets parameter Concurrency to value and selects it for sending
 func (in *ActionMigrationPlanCreateInput) SetConcurrency(value int64) *ActionMigrationPlanCreateInput {
 	in.Concurrency = value
@@ -121,6 +99,28 @@ func (in *ActionMigrationPlanCreateInput) SetReason(value string) *ActionMigrati
 	}
 
 	in._selectedParameters["Reason"] = nil
+	return in
+}
+// SetSendMail sets parameter SendMail to value and selects it for sending
+func (in *ActionMigrationPlanCreateInput) SetSendMail(value bool) *ActionMigrationPlanCreateInput {
+	in.SendMail = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["SendMail"] = nil
+	return in
+}
+// SetStopOnError sets parameter StopOnError to value and selects it for sending
+func (in *ActionMigrationPlanCreateInput) SetStopOnError(value bool) *ActionMigrationPlanCreateInput {
+	in.StopOnError = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["StopOnError"] = nil
 	return in
 }
 
@@ -155,15 +155,15 @@ type ActionMigrationPlanCreateRequest struct {
 
 // ActionMigrationPlanCreateOutput is a type for action output parameters
 type ActionMigrationPlanCreateOutput struct {
-	Id int64 `json:"id"`
-	State string `json:"state"`
-	StopOnError bool `json:"stop_on_error"`
-	SendMail bool `json:"send_mail"`
 	Concurrency int64 `json:"concurrency"`
-	Reason string `json:"reason"`
-	User *ActionUserShowOutput `json:"user"`
 	CreatedAt string `json:"created_at"`
 	FinishedAt string `json:"finished_at"`
+	Id int64 `json:"id"`
+	Reason string `json:"reason"`
+	SendMail bool `json:"send_mail"`
+	State string `json:"state"`
+	StopOnError bool `json:"stop_on_error"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -277,17 +277,17 @@ func (inv *ActionMigrationPlanCreateInvocation) makeInputParams() map[string]int
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("StopOnError") {
-			ret["stop_on_error"] = inv.Input.StopOnError
-		}
-		if inv.IsParameterSelected("SendMail") {
-			ret["send_mail"] = inv.Input.SendMail
-		}
 		if inv.IsParameterSelected("Concurrency") {
 			ret["concurrency"] = inv.Input.Concurrency
 		}
 		if inv.IsParameterSelected("Reason") {
 			ret["reason"] = inv.Input.Reason
+		}
+		if inv.IsParameterSelected("SendMail") {
+			ret["send_mail"] = inv.Input.SendMail
+		}
+		if inv.IsParameterSelected("StopOnError") {
+			ret["stop_on_error"] = inv.Input.StopOnError
 		}
 	}
 
@@ -298,11 +298,11 @@ func (inv *ActionMigrationPlanCreateInvocation) makeMetaInputParams() map[string
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

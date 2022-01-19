@@ -17,24 +17,13 @@ func NewActionNodeIndex(client *Client) *ActionNodeIndex {
 
 // ActionNodeIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionNodeIndexMetaGlobalInput) SetNo(value bool) *ActionNodeIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionNodeIndexMetaGlobalInput) SetCount(value bool) *ActionNodeIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionNodeIndexMetaGlobalInput) SetIncludes(value string) *ActionNodeI
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionNodeIndexMetaGlobalInput) SetNo(value bool) *ActionNodeIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,25 +83,37 @@ func (in *ActionNodeIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeIndexInput is a type for action input parameters
 type ActionNodeIndexInput struct {
-	Offset int64 `json:"offset"`
+	Environment int64 `json:"environment"`
+	HypervisorType string `json:"hypervisor_type"`
 	Limit int64 `json:"limit"`
 	Location int64 `json:"location"`
-	Environment int64 `json:"environment"`
+	Offset int64 `json:"offset"`
+	State string `json:"state"`
 	Type string `json:"type"`
-	HypervisorType string `json:"hypervisor_type"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionNodeIndexInput) SetOffset(value int64) *ActionNodeIndexInput {
-	in.Offset = value
+// SetEnvironment sets parameter Environment to value and selects it for sending
+func (in *ActionNodeIndexInput) SetEnvironment(value int64) *ActionNodeIndexInput {
+	in.Environment = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
+	in._selectedParameters["Environment"] = nil
+	return in
+}
+// SetHypervisorType sets parameter HypervisorType to value and selects it for sending
+func (in *ActionNodeIndexInput) SetHypervisorType(value string) *ActionNodeIndexInput {
+	in.HypervisorType = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["HypervisorType"] = nil
 	return in
 }
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -126,15 +138,26 @@ func (in *ActionNodeIndexInput) SetLocation(value int64) *ActionNodeIndexInput {
 	in._selectedParameters["Location"] = nil
 	return in
 }
-// SetEnvironment sets parameter Environment to value and selects it for sending
-func (in *ActionNodeIndexInput) SetEnvironment(value int64) *ActionNodeIndexInput {
-	in.Environment = value
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionNodeIndexInput) SetOffset(value int64) *ActionNodeIndexInput {
+	in.Offset = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Environment"] = nil
+	in._selectedParameters["Offset"] = nil
+	return in
+}
+// SetState sets parameter State to value and selects it for sending
+func (in *ActionNodeIndexInput) SetState(value string) *ActionNodeIndexInput {
+	in.State = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["State"] = nil
 	return in
 }
 // SetType sets parameter Type to value and selects it for sending
@@ -146,17 +169,6 @@ func (in *ActionNodeIndexInput) SetType(value string) *ActionNodeIndexInput {
 	}
 
 	in._selectedParameters["Type"] = nil
-	return in
-}
-// SetHypervisorType sets parameter HypervisorType to value and selects it for sending
-func (in *ActionNodeIndexInput) SetHypervisorType(value string) *ActionNodeIndexInput {
-	in.HypervisorType = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["HypervisorType"] = nil
 	return in
 }
 
@@ -186,43 +198,44 @@ func (in *ActionNodeIndexInput) AnySelected() bool {
 
 // ActionNodeIndexOutput is a type for action output parameters
 type ActionNodeIndexOutput struct {
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	DomainName string `json:"domain_name"`
-	Type string `json:"type"`
-	HypervisorType string `json:"hypervisor_type"`
-	Location *ActionLocationShowOutput `json:"location"`
-	IpAddr string `json:"ip_addr"`
-	NetInterface string `json:"net_interface"`
-	MaxTx int64 `json:"max_tx"`
-	MaxRx int64 `json:"max_rx"`
-	Cpus int64 `json:"cpus"`
-	TotalMemory int64 `json:"total_memory"`
-	TotalSwap int64 `json:"total_swap"`
-	MaxVps int64 `json:"max_vps"`
-	VePrivate string `json:"ve_private"`
-	Status bool `json:"status"`
-	Uptime int64 `json:"uptime"`
-	Loadavg float64 `json:"loadavg"`
-	ProcessCount int64 `json:"process_count"`
-	CpuUser float64 `json:"cpu_user"`
-	CpuNice float64 `json:"cpu_nice"`
-	CpuSystem float64 `json:"cpu_system"`
+	Active bool `json:"active"`
+	ArcC int64 `json:"arc_c"`
+	ArcCMax int64 `json:"arc_c_max"`
+	ArcHitpercent int64 `json:"arc_hitpercent"`
+	ArcSize int64 `json:"arc_size"`
+	CpuGuest float64 `json:"cpu_guest"`
 	CpuIdle float64 `json:"cpu_idle"`
 	CpuIowait float64 `json:"cpu_iowait"`
 	CpuIrq float64 `json:"cpu_irq"`
+	CpuNice float64 `json:"cpu_nice"`
 	CpuSoftirq float64 `json:"cpu_softirq"`
-	CpuGuest float64 `json:"cpu_guest"`
-	UsedMemory int64 `json:"used_memory"`
-	UsedSwap int64 `json:"used_swap"`
-	ArcCMax int64 `json:"arc_c_max"`
-	ArcC int64 `json:"arc_c"`
-	ArcSize int64 `json:"arc_size"`
-	ArcHitpercent int64 `json:"arc_hitpercent"`
-	Version string `json:"version"`
+	CpuSystem float64 `json:"cpu_system"`
+	CpuUser float64 `json:"cpu_user"`
+	Cpus int64 `json:"cpus"`
+	DomainName string `json:"domain_name"`
+	HypervisorType string `json:"hypervisor_type"`
+	Id int64 `json:"id"`
+	IpAddr string `json:"ip_addr"`
 	Kernel string `json:"kernel"`
+	Loadavg float64 `json:"loadavg"`
+	Location *ActionLocationShowOutput `json:"location"`
 	MaintenanceLock string `json:"maintenance_lock"`
 	MaintenanceLockReason string `json:"maintenance_lock_reason"`
+	MaxRx int64 `json:"max_rx"`
+	MaxTx int64 `json:"max_tx"`
+	MaxVps int64 `json:"max_vps"`
+	Name string `json:"name"`
+	NetInterface string `json:"net_interface"`
+	ProcessCount int64 `json:"process_count"`
+	Status bool `json:"status"`
+	TotalMemory int64 `json:"total_memory"`
+	TotalSwap int64 `json:"total_swap"`
+	Type string `json:"type"`
+	Uptime int64 `json:"uptime"`
+	UsedMemory int64 `json:"used_memory"`
+	UsedSwap int64 `json:"used_swap"`
+	VePrivate string `json:"ve_private"`
+	Version string `json:"version"`
 }
 
 
@@ -327,8 +340,11 @@ func (inv *ActionNodeIndexInvocation) callAsQuery() (*ActionNodeIndexResponse, e
 
 func (inv *ActionNodeIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["node[offset]"] = convertInt64ToString(inv.Input.Offset)
+		if inv.IsParameterSelected("Environment") {
+			ret["node[environment]"] = convertInt64ToString(inv.Input.Environment)
+		}
+		if inv.IsParameterSelected("HypervisorType") {
+			ret["node[hypervisor_type]"] = inv.Input.HypervisorType
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["node[limit]"] = convertInt64ToString(inv.Input.Limit)
@@ -336,28 +352,28 @@ func (inv *ActionNodeIndexInvocation) convertInputToQueryParams(ret map[string]s
 		if inv.IsParameterSelected("Location") {
 			ret["node[location]"] = convertInt64ToString(inv.Input.Location)
 		}
-		if inv.IsParameterSelected("Environment") {
-			ret["node[environment]"] = convertInt64ToString(inv.Input.Environment)
+		if inv.IsParameterSelected("Offset") {
+			ret["node[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
+		if inv.IsParameterSelected("State") {
+			ret["node[state]"] = inv.Input.State
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["node[type]"] = inv.Input.Type
-		}
-		if inv.IsParameterSelected("HypervisorType") {
-			ret["node[hypervisor_type]"] = inv.Input.HypervisorType
 		}
 	}
 }
 
 func (inv *ActionNodeIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

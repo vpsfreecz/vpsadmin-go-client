@@ -60,35 +60,24 @@ func (in *ActionActionStatePollMetaGlobalInput) AnySelected() bool {
 
 // ActionActionStatePollInput is a type for action input parameters
 type ActionActionStatePollInput struct {
-	Timeout float64 `json:"timeout"`
-	UpdateIn float64 `json:"update_in"`
-	Status bool `json:"status"`
 	Current int64 `json:"current"`
+	Status bool `json:"status"`
+	Timeout float64 `json:"timeout"`
 	Total int64 `json:"total"`
+	UpdateIn float64 `json:"update_in"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetTimeout sets parameter Timeout to value and selects it for sending
-func (in *ActionActionStatePollInput) SetTimeout(value float64) *ActionActionStatePollInput {
-	in.Timeout = value
+// SetCurrent sets parameter Current to value and selects it for sending
+func (in *ActionActionStatePollInput) SetCurrent(value int64) *ActionActionStatePollInput {
+	in.Current = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Timeout"] = nil
-	return in
-}
-// SetUpdateIn sets parameter UpdateIn to value and selects it for sending
-func (in *ActionActionStatePollInput) SetUpdateIn(value float64) *ActionActionStatePollInput {
-	in.UpdateIn = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["UpdateIn"] = nil
+	in._selectedParameters["Current"] = nil
 	return in
 }
 // SetStatus sets parameter Status to value and selects it for sending
@@ -102,15 +91,15 @@ func (in *ActionActionStatePollInput) SetStatus(value bool) *ActionActionStatePo
 	in._selectedParameters["Status"] = nil
 	return in
 }
-// SetCurrent sets parameter Current to value and selects it for sending
-func (in *ActionActionStatePollInput) SetCurrent(value int64) *ActionActionStatePollInput {
-	in.Current = value
+// SetTimeout sets parameter Timeout to value and selects it for sending
+func (in *ActionActionStatePollInput) SetTimeout(value float64) *ActionActionStatePollInput {
+	in.Timeout = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Current"] = nil
+	in._selectedParameters["Timeout"] = nil
 	return in
 }
 // SetTotal sets parameter Total to value and selects it for sending
@@ -122,6 +111,17 @@ func (in *ActionActionStatePollInput) SetTotal(value int64) *ActionActionStatePo
 	}
 
 	in._selectedParameters["Total"] = nil
+	return in
+}
+// SetUpdateIn sets parameter UpdateIn to value and selects it for sending
+func (in *ActionActionStatePollInput) SetUpdateIn(value float64) *ActionActionStatePollInput {
+	in.UpdateIn = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["UpdateIn"] = nil
 	return in
 }
 
@@ -151,15 +151,15 @@ func (in *ActionActionStatePollInput) AnySelected() bool {
 
 // ActionActionStatePollOutput is a type for action output parameters
 type ActionActionStatePollOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Finished bool `json:"finished"`
-	Status bool `json:"status"`
-	Current int64 `json:"current"`
-	Total int64 `json:"total"`
-	Unit string `json:"unit"`
 	CanCancel bool `json:"can_cancel"`
 	CreatedAt string `json:"created_at"`
+	Current int64 `json:"current"`
+	Finished bool `json:"finished"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	Status bool `json:"status"`
+	Total int64 `json:"total"`
+	Unit string `json:"unit"`
 	UpdatedAt string `json:"updated_at"`
 }
 
@@ -275,20 +275,20 @@ func (inv *ActionActionStatePollInvocation) callAsQuery() (*ActionActionStatePol
 
 func (inv *ActionActionStatePollInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Timeout") {
-			ret["action_state[timeout]"] = convertFloat64ToString(inv.Input.Timeout)
-		}
-		if inv.IsParameterSelected("UpdateIn") {
-			ret["action_state[update_in]"] = convertFloat64ToString(inv.Input.UpdateIn)
+		if inv.IsParameterSelected("Current") {
+			ret["action_state[current]"] = convertInt64ToString(inv.Input.Current)
 		}
 		if inv.IsParameterSelected("Status") {
 			ret["action_state[status]"] = convertBoolToString(inv.Input.Status)
 		}
-		if inv.IsParameterSelected("Current") {
-			ret["action_state[current]"] = convertInt64ToString(inv.Input.Current)
+		if inv.IsParameterSelected("Timeout") {
+			ret["action_state[timeout]"] = convertFloat64ToString(inv.Input.Timeout)
 		}
 		if inv.IsParameterSelected("Total") {
 			ret["action_state[total]"] = convertInt64ToString(inv.Input.Total)
+		}
+		if inv.IsParameterSelected("UpdateIn") {
+			ret["action_state[update_in]"] = convertFloat64ToString(inv.Input.UpdateIn)
 		}
 	}
 }

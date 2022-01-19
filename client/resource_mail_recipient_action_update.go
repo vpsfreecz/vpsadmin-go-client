@@ -18,23 +18,12 @@ func NewActionMailRecipientUpdate(client *Client) *ActionMailRecipientUpdate {
 
 // ActionMailRecipientUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionMailRecipientUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionMailRecipientUpdateMetaGlobalInput) SetNo(value bool) *ActionMailRecipientUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionMailRecipientUpdateMetaGlobalInput) SetIncludes(value string) *ActionMailRecipientUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionMailRecipientUpdateMetaGlobalInput) SetIncludes(value string) *A
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMailRecipientUpdateMetaGlobalInput) SetNo(value bool) *ActionMailRecipientUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,14 +72,36 @@ func (in *ActionMailRecipientUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionMailRecipientUpdateInput is a type for action input parameters
 type ActionMailRecipientUpdateInput struct {
+	Bcc string `json:"bcc"`
+	Cc string `json:"cc"`
 	Label string `json:"label"`
 	To string `json:"to"`
-	Cc string `json:"cc"`
-	Bcc string `json:"bcc"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
+// SetBcc sets parameter Bcc to value and selects it for sending
+func (in *ActionMailRecipientUpdateInput) SetBcc(value string) *ActionMailRecipientUpdateInput {
+	in.Bcc = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Bcc"] = nil
+	return in
+}
+// SetCc sets parameter Cc to value and selects it for sending
+func (in *ActionMailRecipientUpdateInput) SetCc(value string) *ActionMailRecipientUpdateInput {
+	in.Cc = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Cc"] = nil
+	return in
+}
 // SetLabel sets parameter Label to value and selects it for sending
 func (in *ActionMailRecipientUpdateInput) SetLabel(value string) *ActionMailRecipientUpdateInput {
 	in.Label = value
@@ -100,28 +122,6 @@ func (in *ActionMailRecipientUpdateInput) SetTo(value string) *ActionMailRecipie
 	}
 
 	in._selectedParameters["To"] = nil
-	return in
-}
-// SetCc sets parameter Cc to value and selects it for sending
-func (in *ActionMailRecipientUpdateInput) SetCc(value string) *ActionMailRecipientUpdateInput {
-	in.Cc = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Cc"] = nil
-	return in
-}
-// SetBcc sets parameter Bcc to value and selects it for sending
-func (in *ActionMailRecipientUpdateInput) SetBcc(value string) *ActionMailRecipientUpdateInput {
-	in.Bcc = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Bcc"] = nil
 	return in
 }
 
@@ -156,11 +156,11 @@ type ActionMailRecipientUpdateRequest struct {
 
 // ActionMailRecipientUpdateOutput is a type for action output parameters
 type ActionMailRecipientUpdateOutput struct {
+	Bcc string `json:"bcc"`
+	Cc string `json:"cc"`
 	Id int64 `json:"id"`
 	Label string `json:"label"`
 	To string `json:"to"`
-	Cc string `json:"cc"`
-	Bcc string `json:"bcc"`
 }
 
 
@@ -284,17 +284,17 @@ func (inv *ActionMailRecipientUpdateInvocation) makeInputParams() map[string]int
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("Bcc") {
+			ret["bcc"] = inv.Input.Bcc
+		}
+		if inv.IsParameterSelected("Cc") {
+			ret["cc"] = inv.Input.Cc
+		}
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
 		}
 		if inv.IsParameterSelected("To") {
 			ret["to"] = inv.Input.To
-		}
-		if inv.IsParameterSelected("Cc") {
-			ret["cc"] = inv.Input.Cc
-		}
-		if inv.IsParameterSelected("Bcc") {
-			ret["bcc"] = inv.Input.Bcc
 		}
 	}
 
@@ -305,11 +305,11 @@ func (inv *ActionMailRecipientUpdateInvocation) makeMetaInputParams() map[string
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

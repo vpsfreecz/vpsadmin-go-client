@@ -17,23 +17,12 @@ func NewActionVpsCreate(client *Client) *ActionVpsCreate {
 
 // ActionVpsCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsCreateMetaGlobalInput) SetNo(value bool) *ActionVpsCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsCreateMetaGlobalInput) SetIncludes(value string) *ActionVpsCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionVpsCreateMetaGlobalInput) SetIncludes(value string) *ActionVpsCr
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsCreateMetaGlobalInput) SetNo(value bool) *ActionVpsCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,30 +71,97 @@ func (in *ActionVpsCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsCreateInput is a type for action input parameters
 type ActionVpsCreateInput struct {
-	Environment int64 `json:"environment"`
-	Location int64 `json:"location"`
-	User int64 `json:"user"`
-	Hostname string `json:"hostname"`
-	OsTemplate int64 `json:"os_template"`
-	Info string `json:"info"`
+	AddressLocation int64 `json:"address_location"`
+	Config string `json:"config"`
+	Cpu int64 `json:"cpu"`
+	CpuLimit int64 `json:"cpu_limit"`
+	Diskspace int64 `json:"diskspace"`
 	DnsResolver int64 `json:"dns_resolver"`
+	Environment int64 `json:"environment"`
+	Hostname string `json:"hostname"`
+	Info string `json:"info"`
+	Ipv4 int64 `json:"ipv4"`
+	Ipv4Private int64 `json:"ipv4_private"`
+	Ipv6 int64 `json:"ipv6"`
+	Location int64 `json:"location"`
+	Memory int64 `json:"memory"`
 	Node int64 `json:"node"`
 	Onboot bool `json:"onboot"`
 	Onstartall bool `json:"onstartall"`
-	Config string `json:"config"`
-	CpuLimit int64 `json:"cpu_limit"`
-	Memory int64 `json:"memory"`
+	OsTemplate int64 `json:"os_template"`
 	Swap int64 `json:"swap"`
-	Cpu int64 `json:"cpu"`
-	Diskspace int64 `json:"diskspace"`
-	Ipv4 int64 `json:"ipv4"`
-	Ipv6 int64 `json:"ipv6"`
-	Ipv4Private int64 `json:"ipv4_private"`
+	User int64 `json:"user"`
 	UserNamespaceMap int64 `json:"user_namespace_map"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
+// SetAddressLocation sets parameter AddressLocation to value and selects it for sending
+func (in *ActionVpsCreateInput) SetAddressLocation(value int64) *ActionVpsCreateInput {
+	in.AddressLocation = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AddressLocation"] = nil
+	return in
+}
+// SetConfig sets parameter Config to value and selects it for sending
+func (in *ActionVpsCreateInput) SetConfig(value string) *ActionVpsCreateInput {
+	in.Config = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Config"] = nil
+	return in
+}
+// SetCpu sets parameter Cpu to value and selects it for sending
+func (in *ActionVpsCreateInput) SetCpu(value int64) *ActionVpsCreateInput {
+	in.Cpu = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Cpu"] = nil
+	return in
+}
+// SetCpuLimit sets parameter CpuLimit to value and selects it for sending
+func (in *ActionVpsCreateInput) SetCpuLimit(value int64) *ActionVpsCreateInput {
+	in.CpuLimit = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["CpuLimit"] = nil
+	return in
+}
+// SetDiskspace sets parameter Diskspace to value and selects it for sending
+func (in *ActionVpsCreateInput) SetDiskspace(value int64) *ActionVpsCreateInput {
+	in.Diskspace = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Diskspace"] = nil
+	return in
+}
+// SetDnsResolver sets parameter DnsResolver to value and selects it for sending
+func (in *ActionVpsCreateInput) SetDnsResolver(value int64) *ActionVpsCreateInput {
+	in.DnsResolver = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["DnsResolver"] = nil
+	return in
+}
 // SetEnvironment sets parameter Environment to value and selects it for sending
 func (in *ActionVpsCreateInput) SetEnvironment(value int64) *ActionVpsCreateInput {
 	in.Environment = value
@@ -104,28 +171,6 @@ func (in *ActionVpsCreateInput) SetEnvironment(value int64) *ActionVpsCreateInpu
 	}
 
 	in._selectedParameters["Environment"] = nil
-	return in
-}
-// SetLocation sets parameter Location to value and selects it for sending
-func (in *ActionVpsCreateInput) SetLocation(value int64) *ActionVpsCreateInput {
-	in.Location = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Location"] = nil
-	return in
-}
-// SetUser sets parameter User to value and selects it for sending
-func (in *ActionVpsCreateInput) SetUser(value int64) *ActionVpsCreateInput {
-	in.User = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["User"] = nil
 	return in
 }
 // SetHostname sets parameter Hostname to value and selects it for sending
@@ -139,17 +184,6 @@ func (in *ActionVpsCreateInput) SetHostname(value string) *ActionVpsCreateInput 
 	in._selectedParameters["Hostname"] = nil
 	return in
 }
-// SetOsTemplate sets parameter OsTemplate to value and selects it for sending
-func (in *ActionVpsCreateInput) SetOsTemplate(value int64) *ActionVpsCreateInput {
-	in.OsTemplate = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["OsTemplate"] = nil
-	return in
-}
 // SetInfo sets parameter Info to value and selects it for sending
 func (in *ActionVpsCreateInput) SetInfo(value string) *ActionVpsCreateInput {
 	in.Info = value
@@ -161,15 +195,59 @@ func (in *ActionVpsCreateInput) SetInfo(value string) *ActionVpsCreateInput {
 	in._selectedParameters["Info"] = nil
 	return in
 }
-// SetDnsResolver sets parameter DnsResolver to value and selects it for sending
-func (in *ActionVpsCreateInput) SetDnsResolver(value int64) *ActionVpsCreateInput {
-	in.DnsResolver = value
+// SetIpv4 sets parameter Ipv4 to value and selects it for sending
+func (in *ActionVpsCreateInput) SetIpv4(value int64) *ActionVpsCreateInput {
+	in.Ipv4 = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["DnsResolver"] = nil
+	in._selectedParameters["Ipv4"] = nil
+	return in
+}
+// SetIpv4Private sets parameter Ipv4Private to value and selects it for sending
+func (in *ActionVpsCreateInput) SetIpv4Private(value int64) *ActionVpsCreateInput {
+	in.Ipv4Private = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Ipv4Private"] = nil
+	return in
+}
+// SetIpv6 sets parameter Ipv6 to value and selects it for sending
+func (in *ActionVpsCreateInput) SetIpv6(value int64) *ActionVpsCreateInput {
+	in.Ipv6 = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Ipv6"] = nil
+	return in
+}
+// SetLocation sets parameter Location to value and selects it for sending
+func (in *ActionVpsCreateInput) SetLocation(value int64) *ActionVpsCreateInput {
+	in.Location = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Location"] = nil
+	return in
+}
+// SetMemory sets parameter Memory to value and selects it for sending
+func (in *ActionVpsCreateInput) SetMemory(value int64) *ActionVpsCreateInput {
+	in.Memory = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Memory"] = nil
 	return in
 }
 // SetNode sets parameter Node to value and selects it for sending
@@ -205,37 +283,15 @@ func (in *ActionVpsCreateInput) SetOnstartall(value bool) *ActionVpsCreateInput 
 	in._selectedParameters["Onstartall"] = nil
 	return in
 }
-// SetConfig sets parameter Config to value and selects it for sending
-func (in *ActionVpsCreateInput) SetConfig(value string) *ActionVpsCreateInput {
-	in.Config = value
+// SetOsTemplate sets parameter OsTemplate to value and selects it for sending
+func (in *ActionVpsCreateInput) SetOsTemplate(value int64) *ActionVpsCreateInput {
+	in.OsTemplate = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Config"] = nil
-	return in
-}
-// SetCpuLimit sets parameter CpuLimit to value and selects it for sending
-func (in *ActionVpsCreateInput) SetCpuLimit(value int64) *ActionVpsCreateInput {
-	in.CpuLimit = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["CpuLimit"] = nil
-	return in
-}
-// SetMemory sets parameter Memory to value and selects it for sending
-func (in *ActionVpsCreateInput) SetMemory(value int64) *ActionVpsCreateInput {
-	in.Memory = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Memory"] = nil
+	in._selectedParameters["OsTemplate"] = nil
 	return in
 }
 // SetSwap sets parameter Swap to value and selects it for sending
@@ -249,59 +305,15 @@ func (in *ActionVpsCreateInput) SetSwap(value int64) *ActionVpsCreateInput {
 	in._selectedParameters["Swap"] = nil
 	return in
 }
-// SetCpu sets parameter Cpu to value and selects it for sending
-func (in *ActionVpsCreateInput) SetCpu(value int64) *ActionVpsCreateInput {
-	in.Cpu = value
+// SetUser sets parameter User to value and selects it for sending
+func (in *ActionVpsCreateInput) SetUser(value int64) *ActionVpsCreateInput {
+	in.User = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Cpu"] = nil
-	return in
-}
-// SetDiskspace sets parameter Diskspace to value and selects it for sending
-func (in *ActionVpsCreateInput) SetDiskspace(value int64) *ActionVpsCreateInput {
-	in.Diskspace = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Diskspace"] = nil
-	return in
-}
-// SetIpv4 sets parameter Ipv4 to value and selects it for sending
-func (in *ActionVpsCreateInput) SetIpv4(value int64) *ActionVpsCreateInput {
-	in.Ipv4 = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Ipv4"] = nil
-	return in
-}
-// SetIpv6 sets parameter Ipv6 to value and selects it for sending
-func (in *ActionVpsCreateInput) SetIpv6(value int64) *ActionVpsCreateInput {
-	in.Ipv6 = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Ipv6"] = nil
-	return in
-}
-// SetIpv4Private sets parameter Ipv4Private to value and selects it for sending
-func (in *ActionVpsCreateInput) SetIpv4Private(value int64) *ActionVpsCreateInput {
-	in.Ipv4Private = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Ipv4Private"] = nil
+	in._selectedParameters["User"] = nil
 	return in
 }
 // SetUserNamespaceMap sets parameter UserNamespaceMap to value and selects it for sending
@@ -347,39 +359,41 @@ type ActionVpsCreateRequest struct {
 
 // ActionVpsCreateOutput is a type for action output parameters
 type ActionVpsCreateOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	Hostname string `json:"hostname"`
-	ManageHostname bool `json:"manage_hostname"`
-	OsTemplate *ActionOsTemplateShowOutput `json:"os_template"`
-	Info string `json:"info"`
-	DnsResolver *ActionDnsResolverShowOutput `json:"dns_resolver"`
-	Node *ActionNodeShowOutput `json:"node"`
-	Onboot bool `json:"onboot"`
-	Onstartall bool `json:"onstartall"`
 	Config string `json:"config"`
-	CpuLimit int64 `json:"cpu_limit"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	CreatedAt string `json:"created_at"`
-	Memory int64 `json:"memory"`
-	Swap int64 `json:"swap"`
 	Cpu int64 `json:"cpu"`
-	IsRunning bool `json:"is_running"`
-	Uptime int64 `json:"uptime"`
-	Loadavg float64 `json:"loadavg"`
-	ProcessCount int64 `json:"process_count"`
-	CpuUser float64 `json:"cpu_user"`
-	CpuNice float64 `json:"cpu_nice"`
-	CpuSystem float64 `json:"cpu_system"`
 	CpuIdle float64 `json:"cpu_idle"`
 	CpuIowait float64 `json:"cpu_iowait"`
 	CpuIrq float64 `json:"cpu_irq"`
+	CpuLimit int64 `json:"cpu_limit"`
+	CpuNice float64 `json:"cpu_nice"`
 	CpuSoftirq float64 `json:"cpu_softirq"`
+	CpuSystem float64 `json:"cpu_system"`
+	CpuUser float64 `json:"cpu_user"`
+	CreatedAt string `json:"created_at"`
+	Dataset *ActionDatasetShowOutput `json:"dataset"`
+	Diskspace int64 `json:"diskspace"`
+	DnsResolver *ActionDnsResolverShowOutput `json:"dns_resolver"`
+	ExpirationDate string `json:"expiration_date"`
+	Hostname string `json:"hostname"`
+	Id int64 `json:"id"`
+	InRescueMode bool `json:"in_rescue_mode"`
+	Info string `json:"info"`
+	IsRunning bool `json:"is_running"`
+	Loadavg float64 `json:"loadavg"`
+	ManageHostname bool `json:"manage_hostname"`
+	Memory int64 `json:"memory"`
+	Node *ActionNodeShowOutput `json:"node"`
+	ObjectState string `json:"object_state"`
+	Onboot bool `json:"onboot"`
+	Onstartall bool `json:"onstartall"`
+	OsTemplate *ActionOsTemplateShowOutput `json:"os_template"`
+	ProcessCount int64 `json:"process_count"`
+	Swap int64 `json:"swap"`
+	Uptime int64 `json:"uptime"`
+	UsedDiskspace int64 `json:"used_diskspace"`
 	UsedMemory int64 `json:"used_memory"`
 	UsedSwap int64 `json:"used_swap"`
-	UsedDiskspace int64 `json:"used_diskspace"`
-	ObjectState string `json:"object_state"`
-	ExpirationDate string `json:"expiration_date"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 // ActionVpsCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -574,26 +588,47 @@ func (inv *ActionVpsCreateInvocation) makeInputParams() map[string]interface{} {
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("AddressLocation") {
+			ret["address_location"] = inv.Input.AddressLocation
+		}
+		if inv.IsParameterSelected("Config") {
+			ret["config"] = inv.Input.Config
+		}
+		if inv.IsParameterSelected("Cpu") {
+			ret["cpu"] = inv.Input.Cpu
+		}
+		if inv.IsParameterSelected("CpuLimit") {
+			ret["cpu_limit"] = inv.Input.CpuLimit
+		}
+		if inv.IsParameterSelected("Diskspace") {
+			ret["diskspace"] = inv.Input.Diskspace
+		}
+		if inv.IsParameterSelected("DnsResolver") {
+			ret["dns_resolver"] = inv.Input.DnsResolver
+		}
 		if inv.IsParameterSelected("Environment") {
 			ret["environment"] = inv.Input.Environment
-		}
-		if inv.IsParameterSelected("Location") {
-			ret["location"] = inv.Input.Location
-		}
-		if inv.IsParameterSelected("User") {
-			ret["user"] = inv.Input.User
 		}
 		if inv.IsParameterSelected("Hostname") {
 			ret["hostname"] = inv.Input.Hostname
 		}
-		if inv.IsParameterSelected("OsTemplate") {
-			ret["os_template"] = inv.Input.OsTemplate
-		}
 		if inv.IsParameterSelected("Info") {
 			ret["info"] = inv.Input.Info
 		}
-		if inv.IsParameterSelected("DnsResolver") {
-			ret["dns_resolver"] = inv.Input.DnsResolver
+		if inv.IsParameterSelected("Ipv4") {
+			ret["ipv4"] = inv.Input.Ipv4
+		}
+		if inv.IsParameterSelected("Ipv4Private") {
+			ret["ipv4_private"] = inv.Input.Ipv4Private
+		}
+		if inv.IsParameterSelected("Ipv6") {
+			ret["ipv6"] = inv.Input.Ipv6
+		}
+		if inv.IsParameterSelected("Location") {
+			ret["location"] = inv.Input.Location
+		}
+		if inv.IsParameterSelected("Memory") {
+			ret["memory"] = inv.Input.Memory
 		}
 		if inv.IsParameterSelected("Node") {
 			ret["node"] = inv.Input.Node
@@ -604,32 +639,14 @@ func (inv *ActionVpsCreateInvocation) makeInputParams() map[string]interface{} {
 		if inv.IsParameterSelected("Onstartall") {
 			ret["onstartall"] = inv.Input.Onstartall
 		}
-		if inv.IsParameterSelected("Config") {
-			ret["config"] = inv.Input.Config
-		}
-		if inv.IsParameterSelected("CpuLimit") {
-			ret["cpu_limit"] = inv.Input.CpuLimit
-		}
-		if inv.IsParameterSelected("Memory") {
-			ret["memory"] = inv.Input.Memory
+		if inv.IsParameterSelected("OsTemplate") {
+			ret["os_template"] = inv.Input.OsTemplate
 		}
 		if inv.IsParameterSelected("Swap") {
 			ret["swap"] = inv.Input.Swap
 		}
-		if inv.IsParameterSelected("Cpu") {
-			ret["cpu"] = inv.Input.Cpu
-		}
-		if inv.IsParameterSelected("Diskspace") {
-			ret["diskspace"] = inv.Input.Diskspace
-		}
-		if inv.IsParameterSelected("Ipv4") {
-			ret["ipv4"] = inv.Input.Ipv4
-		}
-		if inv.IsParameterSelected("Ipv6") {
-			ret["ipv6"] = inv.Input.Ipv6
-		}
-		if inv.IsParameterSelected("Ipv4Private") {
-			ret["ipv4_private"] = inv.Input.Ipv4Private
+		if inv.IsParameterSelected("User") {
+			ret["user"] = inv.Input.User
 		}
 		if inv.IsParameterSelected("UserNamespaceMap") {
 			ret["user_namespace_map"] = inv.Input.UserNamespaceMap
@@ -643,11 +660,11 @@ func (inv *ActionVpsCreateInvocation) makeMetaInputParams() map[string]interface
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

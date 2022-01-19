@@ -59,23 +59,12 @@ func (in *AuthTokenActionTokenTotpMetaGlobalInput) AnySelected() bool {
 
 // AuthTokenActionTokenTotpInput is a type for action input parameters
 type AuthTokenActionTokenTotpInput struct {
-	Token string `json:"token"`
 	Code string `json:"code"`
+	Token string `json:"token"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetToken sets parameter Token to value and selects it for sending
-func (in *AuthTokenActionTokenTotpInput) SetToken(value string) *AuthTokenActionTokenTotpInput {
-	in.Token = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Token"] = nil
-	return in
-}
 // SetCode sets parameter Code to value and selects it for sending
 func (in *AuthTokenActionTokenTotpInput) SetCode(value string) *AuthTokenActionTokenTotpInput {
 	in.Code = value
@@ -85,6 +74,17 @@ func (in *AuthTokenActionTokenTotpInput) SetCode(value string) *AuthTokenActionT
 	}
 
 	in._selectedParameters["Code"] = nil
+	return in
+}
+// SetToken sets parameter Token to value and selects it for sending
+func (in *AuthTokenActionTokenTotpInput) SetToken(value string) *AuthTokenActionTokenTotpInput {
+	in.Token = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Token"] = nil
 	return in
 }
 
@@ -119,10 +119,10 @@ type AuthTokenActionTokenTotpRequest struct {
 
 // AuthTokenActionTokenTotpOutput is a type for action output parameters
 type AuthTokenActionTokenTotpOutput struct {
-	Token string `json:"token"`
-	ValidTo string `json:"valid_to"`
 	Complete bool `json:"complete"`
 	NextAction string `json:"next_action"`
+	Token string `json:"token"`
+	ValidTo string `json:"valid_to"`
 }
 
 
@@ -236,11 +236,11 @@ func (inv *AuthTokenActionTokenTotpInvocation) makeInputParams() map[string]inte
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Token") {
-			ret["token"] = inv.Input.Token
-		}
 		if inv.IsParameterSelected("Code") {
 			ret["code"] = inv.Input.Code
+		}
+		if inv.IsParameterSelected("Token") {
+			ret["token"] = inv.Input.Token
 		}
 	}
 

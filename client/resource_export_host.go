@@ -5,6 +5,14 @@ type ResourceExportHost struct {
 	// Pointer to client
 	Client *Client
 
+	// Action Export.Host#Create
+	Create *ActionExportHostCreate
+	// Action Export.Host#Create
+	New *ActionExportHostCreate
+	// Action Export.Host#Delete
+	Delete *ActionExportHostDelete
+	// Action Export.Host#Delete
+	Destroy *ActionExportHostDelete
 	// Action Export.Host#Index
 	Index *ActionExportHostIndex
 	// Action Export.Host#Index
@@ -13,35 +21,27 @@ type ResourceExportHost struct {
 	Show *ActionExportHostShow
 	// Action Export.Host#Show
 	Find *ActionExportHostShow
-	// Action Export.Host#Create
-	Create *ActionExportHostCreate
-	// Action Export.Host#Create
-	New *ActionExportHostCreate
 	// Action Export.Host#Update
 	Update *ActionExportHostUpdate
-	// Action Export.Host#Delete
-	Delete *ActionExportHostDelete
-	// Action Export.Host#Delete
-	Destroy *ActionExportHostDelete
 }
 
 func NewResourceExportHost(client *Client) *ResourceExportHost {
+	actionCreate := NewActionExportHostCreate(client)
+	actionDelete := NewActionExportHostDelete(client)
 	actionIndex := NewActionExportHostIndex(client)
 	actionShow := NewActionExportHostShow(client)
-	actionCreate := NewActionExportHostCreate(client)
 	actionUpdate := NewActionExportHostUpdate(client)
-	actionDelete := NewActionExportHostDelete(client)
 
 	return &ResourceExportHost{
 		Client: client,
+		Create: actionCreate,
+		New: actionCreate,
+		Delete: actionDelete,
+		Destroy: actionDelete,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Create: actionCreate,
-		New: actionCreate,
 		Update: actionUpdate,
-		Delete: actionDelete,
-		Destroy: actionDelete,
 	}
 }

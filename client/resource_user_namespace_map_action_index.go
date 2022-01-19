@@ -17,24 +17,13 @@ func NewActionUserNamespaceMapIndex(client *Client) *ActionUserNamespaceMapIndex
 
 // ActionUserNamespaceMapIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceMapIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserNamespaceMapIndexMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceMapIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionUserNamespaceMapIndexMetaGlobalInput) SetCount(value bool) *ActionUserNamespaceMapIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionUserNamespaceMapIndexMetaGlobalInput) SetIncludes(value string) 
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserNamespaceMapIndexMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceMapIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,25 +83,14 @@ func (in *ActionUserNamespaceMapIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserNamespaceMapIndexInput is a type for action input parameters
 type ActionUserNamespaceMapIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	User int64 `json:"user"`
 	UserNamespace int64 `json:"user_namespace"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserNamespaceMapIndexInput) SetOffset(value int64) *ActionUserNamespaceMapIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserNamespaceMapIndexInput) SetLimit(value int64) *ActionUserNamespaceMapIndexInput {
 	in.Limit = value
@@ -111,6 +100,17 @@ func (in *ActionUserNamespaceMapIndexInput) SetLimit(value int64) *ActionUserNam
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionUserNamespaceMapIndexInput) SetOffset(value int64) *ActionUserNamespaceMapIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetUser sets parameter User to value and selects it for sending
@@ -163,8 +163,8 @@ func (in *ActionUserNamespaceMapIndexInput) AnySelected() bool {
 // ActionUserNamespaceMapIndexOutput is a type for action output parameters
 type ActionUserNamespaceMapIndexOutput struct {
 	Id int64 `json:"id"`
-	UserNamespace *ActionUserNamespaceShowOutput `json:"user_namespace"`
 	Label string `json:"label"`
+	UserNamespace *ActionUserNamespaceShowOutput `json:"user_namespace"`
 }
 
 
@@ -269,11 +269,11 @@ func (inv *ActionUserNamespaceMapIndexInvocation) callAsQuery() (*ActionUserName
 
 func (inv *ActionUserNamespaceMapIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["user_namespace_map[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["user_namespace_map[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["user_namespace_map[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("User") {
 			ret["user_namespace_map[user]"] = convertInt64ToString(inv.Input.User)
@@ -286,14 +286,14 @@ func (inv *ActionUserNamespaceMapIndexInvocation) convertInputToQueryParams(ret 
 
 func (inv *ActionUserNamespaceMapIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

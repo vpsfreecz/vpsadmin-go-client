@@ -18,24 +18,13 @@ func NewActionUserMailTemplateRecipientIndex(client *Client) *ActionUserMailTemp
 
 // ActionUserMailTemplateRecipientIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserMailTemplateRecipientIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserMailTemplateRecipientIndexMetaGlobalInput) SetNo(value bool) *ActionUserMailTemplateRecipientIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionUserMailTemplateRecipientIndexMetaGlobalInput) SetCount(value bool) *ActionUserMailTemplateRecipientIndexMetaGlobalInput {
 	in.Count = value
@@ -56,6 +45,17 @@ func (in *ActionUserMailTemplateRecipientIndexMetaGlobalInput) SetIncludes(value
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserMailTemplateRecipientIndexMetaGlobalInput) SetNo(value bool) *ActionUserMailTemplateRecipientIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -84,23 +84,12 @@ func (in *ActionUserMailTemplateRecipientIndexMetaGlobalInput) AnySelected() boo
 
 // ActionUserMailTemplateRecipientIndexInput is a type for action input parameters
 type ActionUserMailTemplateRecipientIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserMailTemplateRecipientIndexInput) SetOffset(value int64) *ActionUserMailTemplateRecipientIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserMailTemplateRecipientIndexInput) SetLimit(value int64) *ActionUserMailTemplateRecipientIndexInput {
 	in.Limit = value
@@ -110,6 +99,17 @@ func (in *ActionUserMailTemplateRecipientIndexInput) SetLimit(value int64) *Acti
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionUserMailTemplateRecipientIndexInput) SetOffset(value int64) *ActionUserMailTemplateRecipientIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -139,11 +139,11 @@ func (in *ActionUserMailTemplateRecipientIndexInput) AnySelected() bool {
 
 // ActionUserMailTemplateRecipientIndexOutput is a type for action output parameters
 type ActionUserMailTemplateRecipientIndexOutput struct {
+	Description string `json:"description"`
+	Enabled bool `json:"enabled"`
 	Id string `json:"id"`
 	Label string `json:"label"`
-	Description string `json:"description"`
 	To string `json:"to"`
-	Enabled bool `json:"enabled"`
 }
 
 
@@ -258,25 +258,25 @@ func (inv *ActionUserMailTemplateRecipientIndexInvocation) callAsQuery() (*Actio
 
 func (inv *ActionUserMailTemplateRecipientIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["mail_template_recipient[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["mail_template_recipient[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["mail_template_recipient[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }
 
 func (inv *ActionUserMailTemplateRecipientIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

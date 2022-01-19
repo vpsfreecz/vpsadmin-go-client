@@ -17,23 +17,12 @@ func NewActionUserRequestChangeCreate(client *Client) *ActionUserRequestChangeCr
 
 // ActionUserRequestChangeCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestChangeCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserRequestChangeCreateMetaGlobalInput) SetNo(value bool) *ActionUserRequestChangeCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserRequestChangeCreateMetaGlobalInput) SetIncludes(value string) *ActionUserRequestChangeCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionUserRequestChangeCreateMetaGlobalInput) SetIncludes(value string
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserRequestChangeCreateMetaGlobalInput) SetNo(value bool) *ActionUserRequestChangeCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,14 +71,25 @@ func (in *ActionUserRequestChangeCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserRequestChangeCreateInput is a type for action input parameters
 type ActionUserRequestChangeCreateInput struct {
-	ChangeReason string `json:"change_reason"`
-	FullName string `json:"full_name"`
-	Email string `json:"email"`
 	Address string `json:"address"`
+	ChangeReason string `json:"change_reason"`
+	Email string `json:"email"`
+	FullName string `json:"full_name"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
+// SetAddress sets parameter Address to value and selects it for sending
+func (in *ActionUserRequestChangeCreateInput) SetAddress(value string) *ActionUserRequestChangeCreateInput {
+	in.Address = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Address"] = nil
+	return in
+}
 // SetChangeReason sets parameter ChangeReason to value and selects it for sending
 func (in *ActionUserRequestChangeCreateInput) SetChangeReason(value string) *ActionUserRequestChangeCreateInput {
 	in.ChangeReason = value
@@ -88,17 +99,6 @@ func (in *ActionUserRequestChangeCreateInput) SetChangeReason(value string) *Act
 	}
 
 	in._selectedParameters["ChangeReason"] = nil
-	return in
-}
-// SetFullName sets parameter FullName to value and selects it for sending
-func (in *ActionUserRequestChangeCreateInput) SetFullName(value string) *ActionUserRequestChangeCreateInput {
-	in.FullName = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["FullName"] = nil
 	return in
 }
 // SetEmail sets parameter Email to value and selects it for sending
@@ -112,15 +112,15 @@ func (in *ActionUserRequestChangeCreateInput) SetEmail(value string) *ActionUser
 	in._selectedParameters["Email"] = nil
 	return in
 }
-// SetAddress sets parameter Address to value and selects it for sending
-func (in *ActionUserRequestChangeCreateInput) SetAddress(value string) *ActionUserRequestChangeCreateInput {
-	in.Address = value
+// SetFullName sets parameter FullName to value and selects it for sending
+func (in *ActionUserRequestChangeCreateInput) SetFullName(value string) *ActionUserRequestChangeCreateInput {
+	in.FullName = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Address"] = nil
+	in._selectedParameters["FullName"] = nil
 	return in
 }
 
@@ -155,22 +155,22 @@ type ActionUserRequestChangeCreateRequest struct {
 
 // ActionUserRequestChangeCreateOutput is a type for action output parameters
 type ActionUserRequestChangeCreateOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	State string `json:"state"`
-	ApiIpAddr string `json:"api_ip_addr"`
-	ApiIpPtr string `json:"api_ip_ptr"`
-	ClientIpAddr string `json:"client_ip_addr"`
-	ClientIpPtr string `json:"client_ip_ptr"`
+	Address string `json:"address"`
 	Admin *ActionUserShowOutput `json:"admin"`
 	AdminResponse string `json:"admin_response"`
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
-	Label string `json:"label"`
+	ApiIpAddr string `json:"api_ip_addr"`
+	ApiIpPtr string `json:"api_ip_ptr"`
 	ChangeReason string `json:"change_reason"`
-	FullName string `json:"full_name"`
+	ClientIpAddr string `json:"client_ip_addr"`
+	ClientIpPtr string `json:"client_ip_ptr"`
+	CreatedAt string `json:"created_at"`
 	Email string `json:"email"`
-	Address string `json:"address"`
+	FullName string `json:"full_name"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	State string `json:"state"`
+	UpdatedAt string `json:"updated_at"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -284,17 +284,17 @@ func (inv *ActionUserRequestChangeCreateInvocation) makeInputParams() map[string
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("Address") {
+			ret["address"] = inv.Input.Address
+		}
 		if inv.IsParameterSelected("ChangeReason") {
 			ret["change_reason"] = inv.Input.ChangeReason
-		}
-		if inv.IsParameterSelected("FullName") {
-			ret["full_name"] = inv.Input.FullName
 		}
 		if inv.IsParameterSelected("Email") {
 			ret["email"] = inv.Input.Email
 		}
-		if inv.IsParameterSelected("Address") {
-			ret["address"] = inv.Input.Address
+		if inv.IsParameterSelected("FullName") {
+			ret["full_name"] = inv.Input.FullName
 		}
 	}
 
@@ -305,11 +305,11 @@ func (inv *ActionUserRequestChangeCreateInvocation) makeMetaInputParams() map[st
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

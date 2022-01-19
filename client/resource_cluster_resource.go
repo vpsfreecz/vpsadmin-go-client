@@ -5,6 +5,10 @@ type ResourceClusterResource struct {
 	// Pointer to client
 	Client *Client
 
+	// Action Cluster_resource#Create
+	Create *ActionClusterResourceCreate
+	// Action Cluster_resource#Create
+	New *ActionClusterResourceCreate
 	// Action Cluster_resource#Index
 	Index *ActionClusterResourceIndex
 	// Action Cluster_resource#Index
@@ -13,28 +17,24 @@ type ResourceClusterResource struct {
 	Show *ActionClusterResourceShow
 	// Action Cluster_resource#Show
 	Find *ActionClusterResourceShow
-	// Action Cluster_resource#Create
-	Create *ActionClusterResourceCreate
-	// Action Cluster_resource#Create
-	New *ActionClusterResourceCreate
 	// Action Cluster_resource#Update
 	Update *ActionClusterResourceUpdate
 }
 
 func NewResourceClusterResource(client *Client) *ResourceClusterResource {
+	actionCreate := NewActionClusterResourceCreate(client)
 	actionIndex := NewActionClusterResourceIndex(client)
 	actionShow := NewActionClusterResourceShow(client)
-	actionCreate := NewActionClusterResourceCreate(client)
 	actionUpdate := NewActionClusterResourceUpdate(client)
 
 	return &ResourceClusterResource{
 		Client: client,
+		Create: actionCreate,
+		New: actionCreate,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Create: actionCreate,
-		New: actionCreate,
 		Update: actionUpdate,
 	}
 }

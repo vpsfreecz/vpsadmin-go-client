@@ -39,10 +39,10 @@ func (auth *TokenAuth) Authenticate(request *http.Request) {
 }
 
 type TokenAuthOptions struct {
-	User string
-	Password string
-	Lifetime string
 	Interval int64
+	Lifetime string
+	Password string
+	User string
 	TotpCallback func(input *AuthTokenActionTokenTotpInput) error
 }
 
@@ -54,10 +54,10 @@ func (client *Client) SetNewTokenAuth(options *TokenAuthOptions) error {
 
 	request := resource.Request.Prepare()
 	request.SetInput(&AuthTokenActionTokenRequestInput{
-		User: options.User,
-		Password: options.Password,
-		Lifetime: options.Lifetime,
 		Interval: options.Interval,
+		Lifetime: options.Lifetime,
+		Password: options.Password,
+		User: options.User,
 	})
 
 	resp, err := request.Call()

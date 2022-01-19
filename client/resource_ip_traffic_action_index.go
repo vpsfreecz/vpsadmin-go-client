@@ -17,24 +17,13 @@ func NewActionIpTrafficIndex(client *Client) *ActionIpTrafficIndex {
 
 // ActionIpTrafficIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionIpTrafficIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionIpTrafficIndexMetaGlobalInput) SetNo(value bool) *ActionIpTrafficIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionIpTrafficIndexMetaGlobalInput) SetCount(value bool) *ActionIpTrafficIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionIpTrafficIndexMetaGlobalInput) SetIncludes(value string) *Action
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionIpTrafficIndexMetaGlobalInput) SetNo(value bool) *ActionIpTrafficIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,103 +83,37 @@ func (in *ActionIpTrafficIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionIpTrafficIndexInput is a type for action input parameters
 type ActionIpTrafficIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
-	IpAddress int64 `json:"ip_address"`
-	User int64 `json:"user"`
-	Role string `json:"role"`
-	Protocol string `json:"protocol"`
-	IpVersion int64 `json:"ip_version"`
+	Accumulate string `json:"accumulate"`
 	Environment int64 `json:"environment"`
+	From string `json:"from"`
+	IpAddress int64 `json:"ip_address"`
+	IpVersion int64 `json:"ip_version"`
+	Limit int64 `json:"limit"`
 	Location int64 `json:"location"`
+	Month int64 `json:"month"`
 	Network int64 `json:"network"`
 	Node int64 `json:"node"`
+	Offset int64 `json:"offset"`
+	Order string `json:"order"`
+	Protocol string `json:"protocol"`
+	Role string `json:"role"`
+	To string `json:"to"`
+	User int64 `json:"user"`
 	Vps int64 `json:"vps"`
 	Year int64 `json:"year"`
-	Month int64 `json:"month"`
-	From string `json:"from"`
-	To string `json:"to"`
-	Accumulate string `json:"accumulate"`
-	Order string `json:"order"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionIpTrafficIndexInput) SetOffset(value int64) *ActionIpTrafficIndexInput {
-	in.Offset = value
+// SetAccumulate sets parameter Accumulate to value and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetAccumulate(value string) *ActionIpTrafficIndexInput {
+	in.Accumulate = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-// SetLimit sets parameter Limit to value and selects it for sending
-func (in *ActionIpTrafficIndexInput) SetLimit(value int64) *ActionIpTrafficIndexInput {
-	in.Limit = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Limit"] = nil
-	return in
-}
-// SetIpAddress sets parameter IpAddress to value and selects it for sending
-func (in *ActionIpTrafficIndexInput) SetIpAddress(value int64) *ActionIpTrafficIndexInput {
-	in.IpAddress = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["IpAddress"] = nil
-	return in
-}
-// SetUser sets parameter User to value and selects it for sending
-func (in *ActionIpTrafficIndexInput) SetUser(value int64) *ActionIpTrafficIndexInput {
-	in.User = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["User"] = nil
-	return in
-}
-// SetRole sets parameter Role to value and selects it for sending
-func (in *ActionIpTrafficIndexInput) SetRole(value string) *ActionIpTrafficIndexInput {
-	in.Role = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Role"] = nil
-	return in
-}
-// SetProtocol sets parameter Protocol to value and selects it for sending
-func (in *ActionIpTrafficIndexInput) SetProtocol(value string) *ActionIpTrafficIndexInput {
-	in.Protocol = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Protocol"] = nil
-	return in
-}
-// SetIpVersion sets parameter IpVersion to value and selects it for sending
-func (in *ActionIpTrafficIndexInput) SetIpVersion(value int64) *ActionIpTrafficIndexInput {
-	in.IpVersion = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["IpVersion"] = nil
+	in._selectedParameters["Accumulate"] = nil
 	return in
 }
 // SetEnvironment sets parameter Environment to value and selects it for sending
@@ -193,6 +127,50 @@ func (in *ActionIpTrafficIndexInput) SetEnvironment(value int64) *ActionIpTraffi
 	in._selectedParameters["Environment"] = nil
 	return in
 }
+// SetFrom sets parameter From to value and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetFrom(value string) *ActionIpTrafficIndexInput {
+	in.From = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["From"] = nil
+	return in
+}
+// SetIpAddress sets parameter IpAddress to value and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetIpAddress(value int64) *ActionIpTrafficIndexInput {
+	in.IpAddress = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["IpAddress"] = nil
+	return in
+}
+// SetIpVersion sets parameter IpVersion to value and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetIpVersion(value int64) *ActionIpTrafficIndexInput {
+	in.IpVersion = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["IpVersion"] = nil
+	return in
+}
+// SetLimit sets parameter Limit to value and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetLimit(value int64) *ActionIpTrafficIndexInput {
+	in.Limit = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Limit"] = nil
+	return in
+}
 // SetLocation sets parameter Location to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetLocation(value int64) *ActionIpTrafficIndexInput {
 	in.Location = value
@@ -202,6 +180,17 @@ func (in *ActionIpTrafficIndexInput) SetLocation(value int64) *ActionIpTrafficIn
 	}
 
 	in._selectedParameters["Location"] = nil
+	return in
+}
+// SetMonth sets parameter Month to value and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetMonth(value int64) *ActionIpTrafficIndexInput {
+	in.Month = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Month"] = nil
 	return in
 }
 // SetNetwork sets parameter Network to value and selects it for sending
@@ -226,6 +215,72 @@ func (in *ActionIpTrafficIndexInput) SetNode(value int64) *ActionIpTrafficIndexI
 	in._selectedParameters["Node"] = nil
 	return in
 }
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetOffset(value int64) *ActionIpTrafficIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
+	return in
+}
+// SetOrder sets parameter Order to value and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetOrder(value string) *ActionIpTrafficIndexInput {
+	in.Order = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Order"] = nil
+	return in
+}
+// SetProtocol sets parameter Protocol to value and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetProtocol(value string) *ActionIpTrafficIndexInput {
+	in.Protocol = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Protocol"] = nil
+	return in
+}
+// SetRole sets parameter Role to value and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetRole(value string) *ActionIpTrafficIndexInput {
+	in.Role = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Role"] = nil
+	return in
+}
+// SetTo sets parameter To to value and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetTo(value string) *ActionIpTrafficIndexInput {
+	in.To = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["To"] = nil
+	return in
+}
+// SetUser sets parameter User to value and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetUser(value int64) *ActionIpTrafficIndexInput {
+	in.User = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["User"] = nil
+	return in
+}
 // SetVps sets parameter Vps to value and selects it for sending
 func (in *ActionIpTrafficIndexInput) SetVps(value int64) *ActionIpTrafficIndexInput {
 	in.Vps = value
@@ -246,61 +301,6 @@ func (in *ActionIpTrafficIndexInput) SetYear(value int64) *ActionIpTrafficIndexI
 	}
 
 	in._selectedParameters["Year"] = nil
-	return in
-}
-// SetMonth sets parameter Month to value and selects it for sending
-func (in *ActionIpTrafficIndexInput) SetMonth(value int64) *ActionIpTrafficIndexInput {
-	in.Month = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Month"] = nil
-	return in
-}
-// SetFrom sets parameter From to value and selects it for sending
-func (in *ActionIpTrafficIndexInput) SetFrom(value string) *ActionIpTrafficIndexInput {
-	in.From = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["From"] = nil
-	return in
-}
-// SetTo sets parameter To to value and selects it for sending
-func (in *ActionIpTrafficIndexInput) SetTo(value string) *ActionIpTrafficIndexInput {
-	in.To = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["To"] = nil
-	return in
-}
-// SetAccumulate sets parameter Accumulate to value and selects it for sending
-func (in *ActionIpTrafficIndexInput) SetAccumulate(value string) *ActionIpTrafficIndexInput {
-	in.Accumulate = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Accumulate"] = nil
-	return in
-}
-// SetOrder sets parameter Order to value and selects it for sending
-func (in *ActionIpTrafficIndexInput) SetOrder(value string) *ActionIpTrafficIndexInput {
-	in.Order = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Order"] = nil
 	return in
 }
 
@@ -330,16 +330,16 @@ func (in *ActionIpTrafficIndexInput) AnySelected() bool {
 
 // ActionIpTrafficIndexOutput is a type for action output parameters
 type ActionIpTrafficIndexOutput struct {
-	Id int64 `json:"id"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	User *ActionUserShowOutput `json:"user"`
-	Role string `json:"role"`
-	Protocol string `json:"protocol"`
-	PacketsIn int64 `json:"packets_in"`
-	PacketsOut int64 `json:"packets_out"`
 	BytesIn int64 `json:"bytes_in"`
 	BytesOut int64 `json:"bytes_out"`
 	CreatedAt string `json:"created_at"`
+	Id int64 `json:"id"`
+	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
+	PacketsIn int64 `json:"packets_in"`
+	PacketsOut int64 `json:"packets_out"`
+	Protocol string `json:"protocol"`
+	Role string `json:"role"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -444,32 +444,29 @@ func (inv *ActionIpTrafficIndexInvocation) callAsQuery() (*ActionIpTrafficIndexR
 
 func (inv *ActionIpTrafficIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["ip_traffic[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
-		if inv.IsParameterSelected("Limit") {
-			ret["ip_traffic[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("IpAddress") {
-			ret["ip_traffic[ip_address]"] = convertInt64ToString(inv.Input.IpAddress)
-		}
-		if inv.IsParameterSelected("User") {
-			ret["ip_traffic[user]"] = convertInt64ToString(inv.Input.User)
-		}
-		if inv.IsParameterSelected("Role") {
-			ret["ip_traffic[role]"] = inv.Input.Role
-		}
-		if inv.IsParameterSelected("Protocol") {
-			ret["ip_traffic[protocol]"] = inv.Input.Protocol
-		}
-		if inv.IsParameterSelected("IpVersion") {
-			ret["ip_traffic[ip_version]"] = convertInt64ToString(inv.Input.IpVersion)
+		if inv.IsParameterSelected("Accumulate") {
+			ret["ip_traffic[accumulate]"] = inv.Input.Accumulate
 		}
 		if inv.IsParameterSelected("Environment") {
 			ret["ip_traffic[environment]"] = convertInt64ToString(inv.Input.Environment)
 		}
+		if inv.IsParameterSelected("From") {
+			ret["ip_traffic[from]"] = inv.Input.From
+		}
+		if inv.IsParameterSelected("IpAddress") {
+			ret["ip_traffic[ip_address]"] = convertInt64ToString(inv.Input.IpAddress)
+		}
+		if inv.IsParameterSelected("IpVersion") {
+			ret["ip_traffic[ip_version]"] = convertInt64ToString(inv.Input.IpVersion)
+		}
+		if inv.IsParameterSelected("Limit") {
+			ret["ip_traffic[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
 		if inv.IsParameterSelected("Location") {
 			ret["ip_traffic[location]"] = convertInt64ToString(inv.Input.Location)
+		}
+		if inv.IsParameterSelected("Month") {
+			ret["ip_traffic[month]"] = convertInt64ToString(inv.Input.Month)
 		}
 		if inv.IsParameterSelected("Network") {
 			ret["ip_traffic[network]"] = convertInt64ToString(inv.Input.Network)
@@ -477,40 +474,43 @@ func (inv *ActionIpTrafficIndexInvocation) convertInputToQueryParams(ret map[str
 		if inv.IsParameterSelected("Node") {
 			ret["ip_traffic[node]"] = convertInt64ToString(inv.Input.Node)
 		}
+		if inv.IsParameterSelected("Offset") {
+			ret["ip_traffic[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
+		if inv.IsParameterSelected("Order") {
+			ret["ip_traffic[order]"] = inv.Input.Order
+		}
+		if inv.IsParameterSelected("Protocol") {
+			ret["ip_traffic[protocol]"] = inv.Input.Protocol
+		}
+		if inv.IsParameterSelected("Role") {
+			ret["ip_traffic[role]"] = inv.Input.Role
+		}
+		if inv.IsParameterSelected("To") {
+			ret["ip_traffic[to]"] = inv.Input.To
+		}
+		if inv.IsParameterSelected("User") {
+			ret["ip_traffic[user]"] = convertInt64ToString(inv.Input.User)
+		}
 		if inv.IsParameterSelected("Vps") {
 			ret["ip_traffic[vps]"] = convertInt64ToString(inv.Input.Vps)
 		}
 		if inv.IsParameterSelected("Year") {
 			ret["ip_traffic[year]"] = convertInt64ToString(inv.Input.Year)
 		}
-		if inv.IsParameterSelected("Month") {
-			ret["ip_traffic[month]"] = convertInt64ToString(inv.Input.Month)
-		}
-		if inv.IsParameterSelected("From") {
-			ret["ip_traffic[from]"] = inv.Input.From
-		}
-		if inv.IsParameterSelected("To") {
-			ret["ip_traffic[to]"] = inv.Input.To
-		}
-		if inv.IsParameterSelected("Accumulate") {
-			ret["ip_traffic[accumulate]"] = inv.Input.Accumulate
-		}
-		if inv.IsParameterSelected("Order") {
-			ret["ip_traffic[order]"] = inv.Input.Order
-		}
 	}
 }
 
 func (inv *ActionIpTrafficIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

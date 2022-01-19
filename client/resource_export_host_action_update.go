@@ -18,23 +18,12 @@ func NewActionExportHostUpdate(client *Client) *ActionExportHostUpdate {
 
 // ActionExportHostUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionExportHostUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionExportHostUpdateMetaGlobalInput) SetNo(value bool) *ActionExportHostUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionExportHostUpdateMetaGlobalInput) SetIncludes(value string) *ActionExportHostUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionExportHostUpdateMetaGlobalInput) SetIncludes(value string) *Acti
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionExportHostUpdateMetaGlobalInput) SetNo(value bool) *ActionExportHostUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,14 +72,25 @@ func (in *ActionExportHostUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionExportHostUpdateInput is a type for action input parameters
 type ActionExportHostUpdateInput struct {
-	Rw bool `json:"rw"`
-	Sync bool `json:"sync"`
-	SubtreeCheck bool `json:"subtree_check"`
 	RootSquash bool `json:"root_squash"`
+	Rw bool `json:"rw"`
+	SubtreeCheck bool `json:"subtree_check"`
+	Sync bool `json:"sync"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
+// SetRootSquash sets parameter RootSquash to value and selects it for sending
+func (in *ActionExportHostUpdateInput) SetRootSquash(value bool) *ActionExportHostUpdateInput {
+	in.RootSquash = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["RootSquash"] = nil
+	return in
+}
 // SetRw sets parameter Rw to value and selects it for sending
 func (in *ActionExportHostUpdateInput) SetRw(value bool) *ActionExportHostUpdateInput {
 	in.Rw = value
@@ -89,17 +100,6 @@ func (in *ActionExportHostUpdateInput) SetRw(value bool) *ActionExportHostUpdate
 	}
 
 	in._selectedParameters["Rw"] = nil
-	return in
-}
-// SetSync sets parameter Sync to value and selects it for sending
-func (in *ActionExportHostUpdateInput) SetSync(value bool) *ActionExportHostUpdateInput {
-	in.Sync = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Sync"] = nil
 	return in
 }
 // SetSubtreeCheck sets parameter SubtreeCheck to value and selects it for sending
@@ -113,15 +113,15 @@ func (in *ActionExportHostUpdateInput) SetSubtreeCheck(value bool) *ActionExport
 	in._selectedParameters["SubtreeCheck"] = nil
 	return in
 }
-// SetRootSquash sets parameter RootSquash to value and selects it for sending
-func (in *ActionExportHostUpdateInput) SetRootSquash(value bool) *ActionExportHostUpdateInput {
-	in.RootSquash = value
+// SetSync sets parameter Sync to value and selects it for sending
+func (in *ActionExportHostUpdateInput) SetSync(value bool) *ActionExportHostUpdateInput {
+	in.Sync = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["RootSquash"] = nil
+	in._selectedParameters["Sync"] = nil
 	return in
 }
 
@@ -158,10 +158,10 @@ type ActionExportHostUpdateRequest struct {
 type ActionExportHostUpdateOutput struct {
 	Id int64 `json:"id"`
 	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	Rw bool `json:"rw"`
-	Sync bool `json:"sync"`
-	SubtreeCheck bool `json:"subtree_check"`
 	RootSquash bool `json:"root_squash"`
+	Rw bool `json:"rw"`
+	SubtreeCheck bool `json:"subtree_check"`
+	Sync bool `json:"sync"`
 }
 
 // ActionExportHostUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -366,17 +366,17 @@ func (inv *ActionExportHostUpdateInvocation) makeInputParams() map[string]interf
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("RootSquash") {
+			ret["root_squash"] = inv.Input.RootSquash
+		}
 		if inv.IsParameterSelected("Rw") {
 			ret["rw"] = inv.Input.Rw
-		}
-		if inv.IsParameterSelected("Sync") {
-			ret["sync"] = inv.Input.Sync
 		}
 		if inv.IsParameterSelected("SubtreeCheck") {
 			ret["subtree_check"] = inv.Input.SubtreeCheck
 		}
-		if inv.IsParameterSelected("RootSquash") {
-			ret["root_squash"] = inv.Input.RootSquash
+		if inv.IsParameterSelected("Sync") {
+			ret["sync"] = inv.Input.Sync
 		}
 	}
 
@@ -387,11 +387,11 @@ func (inv *ActionExportHostUpdateInvocation) makeMetaInputParams() map[string]in
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

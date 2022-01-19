@@ -18,23 +18,12 @@ func NewActionUserUpdate(client *Client) *ActionUserUpdate {
 
 // ActionUserUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserUpdateMetaGlobalInput) SetNo(value bool) *ActionUserUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserUpdateMetaGlobalInput) SetIncludes(value string) *ActionUserUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionUserUpdateMetaGlobalInput) SetIncludes(value string) *ActionUser
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserUpdateMetaGlobalInput) SetNo(value bool) *ActionUserUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,45 +72,45 @@ func (in *ActionUserUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserUpdateInput is a type for action input parameters
 type ActionUserUpdateInput struct {
-	Login string `json:"login"`
-	FullName string `json:"full_name"`
-	Email string `json:"email"`
 	Address string `json:"address"`
-	Level int64 `json:"level"`
+	ChangeReason string `json:"change_reason"`
+	Email string `json:"email"`
+	ExpirationDate string `json:"expiration_date"`
+	FullName string `json:"full_name"`
 	Info string `json:"info"`
-	MailerEnabled bool `json:"mailer_enabled"`
-	PasswordReset bool `json:"password_reset"`
-	Lockout bool `json:"lockout"`
 	Language int64 `json:"language"`
-	Password string `json:"password"`
+	Level int64 `json:"level"`
+	Lockout bool `json:"lockout"`
+	Login string `json:"login"`
+	MailerEnabled bool `json:"mailer_enabled"`
 	NewPassword string `json:"new_password"`
 	ObjectState string `json:"object_state"`
-	ExpirationDate string `json:"expiration_date"`
-	ChangeReason string `json:"change_reason"`
+	Password string `json:"password"`
+	PasswordReset bool `json:"password_reset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetLogin sets parameter Login to value and selects it for sending
-func (in *ActionUserUpdateInput) SetLogin(value string) *ActionUserUpdateInput {
-	in.Login = value
+// SetAddress sets parameter Address to value and selects it for sending
+func (in *ActionUserUpdateInput) SetAddress(value string) *ActionUserUpdateInput {
+	in.Address = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Login"] = nil
+	in._selectedParameters["Address"] = nil
 	return in
 }
-// SetFullName sets parameter FullName to value and selects it for sending
-func (in *ActionUserUpdateInput) SetFullName(value string) *ActionUserUpdateInput {
-	in.FullName = value
+// SetChangeReason sets parameter ChangeReason to value and selects it for sending
+func (in *ActionUserUpdateInput) SetChangeReason(value string) *ActionUserUpdateInput {
+	in.ChangeReason = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["FullName"] = nil
+	in._selectedParameters["ChangeReason"] = nil
 	return in
 }
 // SetEmail sets parameter Email to value and selects it for sending
@@ -124,26 +124,26 @@ func (in *ActionUserUpdateInput) SetEmail(value string) *ActionUserUpdateInput {
 	in._selectedParameters["Email"] = nil
 	return in
 }
-// SetAddress sets parameter Address to value and selects it for sending
-func (in *ActionUserUpdateInput) SetAddress(value string) *ActionUserUpdateInput {
-	in.Address = value
+// SetExpirationDate sets parameter ExpirationDate to value and selects it for sending
+func (in *ActionUserUpdateInput) SetExpirationDate(value string) *ActionUserUpdateInput {
+	in.ExpirationDate = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Address"] = nil
+	in._selectedParameters["ExpirationDate"] = nil
 	return in
 }
-// SetLevel sets parameter Level to value and selects it for sending
-func (in *ActionUserUpdateInput) SetLevel(value int64) *ActionUserUpdateInput {
-	in.Level = value
+// SetFullName sets parameter FullName to value and selects it for sending
+func (in *ActionUserUpdateInput) SetFullName(value string) *ActionUserUpdateInput {
+	in.FullName = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Level"] = nil
+	in._selectedParameters["FullName"] = nil
 	return in
 }
 // SetInfo sets parameter Info to value and selects it for sending
@@ -157,26 +157,26 @@ func (in *ActionUserUpdateInput) SetInfo(value string) *ActionUserUpdateInput {
 	in._selectedParameters["Info"] = nil
 	return in
 }
-// SetMailerEnabled sets parameter MailerEnabled to value and selects it for sending
-func (in *ActionUserUpdateInput) SetMailerEnabled(value bool) *ActionUserUpdateInput {
-	in.MailerEnabled = value
+// SetLanguage sets parameter Language to value and selects it for sending
+func (in *ActionUserUpdateInput) SetLanguage(value int64) *ActionUserUpdateInput {
+	in.Language = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["MailerEnabled"] = nil
+	in._selectedParameters["Language"] = nil
 	return in
 }
-// SetPasswordReset sets parameter PasswordReset to value and selects it for sending
-func (in *ActionUserUpdateInput) SetPasswordReset(value bool) *ActionUserUpdateInput {
-	in.PasswordReset = value
+// SetLevel sets parameter Level to value and selects it for sending
+func (in *ActionUserUpdateInput) SetLevel(value int64) *ActionUserUpdateInput {
+	in.Level = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["PasswordReset"] = nil
+	in._selectedParameters["Level"] = nil
 	return in
 }
 // SetLockout sets parameter Lockout to value and selects it for sending
@@ -190,26 +190,26 @@ func (in *ActionUserUpdateInput) SetLockout(value bool) *ActionUserUpdateInput {
 	in._selectedParameters["Lockout"] = nil
 	return in
 }
-// SetLanguage sets parameter Language to value and selects it for sending
-func (in *ActionUserUpdateInput) SetLanguage(value int64) *ActionUserUpdateInput {
-	in.Language = value
+// SetLogin sets parameter Login to value and selects it for sending
+func (in *ActionUserUpdateInput) SetLogin(value string) *ActionUserUpdateInput {
+	in.Login = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Language"] = nil
+	in._selectedParameters["Login"] = nil
 	return in
 }
-// SetPassword sets parameter Password to value and selects it for sending
-func (in *ActionUserUpdateInput) SetPassword(value string) *ActionUserUpdateInput {
-	in.Password = value
+// SetMailerEnabled sets parameter MailerEnabled to value and selects it for sending
+func (in *ActionUserUpdateInput) SetMailerEnabled(value bool) *ActionUserUpdateInput {
+	in.MailerEnabled = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Password"] = nil
+	in._selectedParameters["MailerEnabled"] = nil
 	return in
 }
 // SetNewPassword sets parameter NewPassword to value and selects it for sending
@@ -234,26 +234,26 @@ func (in *ActionUserUpdateInput) SetObjectState(value string) *ActionUserUpdateI
 	in._selectedParameters["ObjectState"] = nil
 	return in
 }
-// SetExpirationDate sets parameter ExpirationDate to value and selects it for sending
-func (in *ActionUserUpdateInput) SetExpirationDate(value string) *ActionUserUpdateInput {
-	in.ExpirationDate = value
+// SetPassword sets parameter Password to value and selects it for sending
+func (in *ActionUserUpdateInput) SetPassword(value string) *ActionUserUpdateInput {
+	in.Password = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["ExpirationDate"] = nil
+	in._selectedParameters["Password"] = nil
 	return in
 }
-// SetChangeReason sets parameter ChangeReason to value and selects it for sending
-func (in *ActionUserUpdateInput) SetChangeReason(value string) *ActionUserUpdateInput {
-	in.ChangeReason = value
+// SetPasswordReset sets parameter PasswordReset to value and selects it for sending
+func (in *ActionUserUpdateInput) SetPasswordReset(value bool) *ActionUserUpdateInput {
+	in.PasswordReset = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["ChangeReason"] = nil
+	in._selectedParameters["PasswordReset"] = nil
 	return in
 }
 
@@ -288,19 +288,19 @@ type ActionUserUpdateRequest struct {
 
 // ActionUserUpdateOutput is a type for action output parameters
 type ActionUserUpdateOutput struct {
-	Id int64 `json:"id"`
-	Login string `json:"login"`
-	FullName string `json:"full_name"`
-	Email string `json:"email"`
 	Address string `json:"address"`
-	Level int64 `json:"level"`
+	CreatedAt string `json:"created_at"`
+	Email string `json:"email"`
+	FullName string `json:"full_name"`
+	Id int64 `json:"id"`
 	Info string `json:"info"`
-	MailerEnabled bool `json:"mailer_enabled"`
-	PasswordReset bool `json:"password_reset"`
-	Lockout bool `json:"lockout"`
 	Language *ActionLanguageShowOutput `json:"language"`
 	LastActivityAt string `json:"last_activity_at"`
-	CreatedAt string `json:"created_at"`
+	Level int64 `json:"level"`
+	Lockout bool `json:"lockout"`
+	Login string `json:"login"`
+	MailerEnabled bool `json:"mailer_enabled"`
+	PasswordReset bool `json:"password_reset"`
 }
 
 // ActionUserUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -505,38 +505,38 @@ func (inv *ActionUserUpdateInvocation) makeInputParams() map[string]interface{} 
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Login") {
-			ret["login"] = inv.Input.Login
+		if inv.IsParameterSelected("Address") {
+			ret["address"] = inv.Input.Address
 		}
-		if inv.IsParameterSelected("FullName") {
-			ret["full_name"] = inv.Input.FullName
+		if inv.IsParameterSelected("ChangeReason") {
+			ret["change_reason"] = inv.Input.ChangeReason
 		}
 		if inv.IsParameterSelected("Email") {
 			ret["email"] = inv.Input.Email
 		}
-		if inv.IsParameterSelected("Address") {
-			ret["address"] = inv.Input.Address
+		if inv.IsParameterSelected("ExpirationDate") {
+			ret["expiration_date"] = inv.Input.ExpirationDate
 		}
-		if inv.IsParameterSelected("Level") {
-			ret["level"] = inv.Input.Level
+		if inv.IsParameterSelected("FullName") {
+			ret["full_name"] = inv.Input.FullName
 		}
 		if inv.IsParameterSelected("Info") {
 			ret["info"] = inv.Input.Info
 		}
-		if inv.IsParameterSelected("MailerEnabled") {
-			ret["mailer_enabled"] = inv.Input.MailerEnabled
+		if inv.IsParameterSelected("Language") {
+			ret["language"] = inv.Input.Language
 		}
-		if inv.IsParameterSelected("PasswordReset") {
-			ret["password_reset"] = inv.Input.PasswordReset
+		if inv.IsParameterSelected("Level") {
+			ret["level"] = inv.Input.Level
 		}
 		if inv.IsParameterSelected("Lockout") {
 			ret["lockout"] = inv.Input.Lockout
 		}
-		if inv.IsParameterSelected("Language") {
-			ret["language"] = inv.Input.Language
+		if inv.IsParameterSelected("Login") {
+			ret["login"] = inv.Input.Login
 		}
-		if inv.IsParameterSelected("Password") {
-			ret["password"] = inv.Input.Password
+		if inv.IsParameterSelected("MailerEnabled") {
+			ret["mailer_enabled"] = inv.Input.MailerEnabled
 		}
 		if inv.IsParameterSelected("NewPassword") {
 			ret["new_password"] = inv.Input.NewPassword
@@ -544,11 +544,11 @@ func (inv *ActionUserUpdateInvocation) makeInputParams() map[string]interface{} 
 		if inv.IsParameterSelected("ObjectState") {
 			ret["object_state"] = inv.Input.ObjectState
 		}
-		if inv.IsParameterSelected("ExpirationDate") {
-			ret["expiration_date"] = inv.Input.ExpirationDate
+		if inv.IsParameterSelected("Password") {
+			ret["password"] = inv.Input.Password
 		}
-		if inv.IsParameterSelected("ChangeReason") {
-			ret["change_reason"] = inv.Input.ChangeReason
+		if inv.IsParameterSelected("PasswordReset") {
+			ret["password_reset"] = inv.Input.PasswordReset
 		}
 	}
 
@@ -559,11 +559,11 @@ func (inv *ActionUserUpdateInvocation) makeMetaInputParams() map[string]interfac
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

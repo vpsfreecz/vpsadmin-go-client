@@ -17,23 +17,12 @@ func NewActionUserCurrent(client *Client) *ActionUserCurrent {
 
 // ActionUserCurrentMetaGlobalInput is a type for action global meta input parameters
 type ActionUserCurrentMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserCurrentMetaGlobalInput) SetNo(value bool) *ActionUserCurrentMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserCurrentMetaGlobalInput) SetIncludes(value string) *ActionUserCurrentMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionUserCurrentMetaGlobalInput) SetIncludes(value string) *ActionUse
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserCurrentMetaGlobalInput) SetNo(value bool) *ActionUserCurrentMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -73,23 +73,23 @@ func (in *ActionUserCurrentMetaGlobalInput) AnySelected() bool {
 
 // ActionUserCurrentOutput is a type for action output parameters
 type ActionUserCurrentOutput struct {
-	Id int64 `json:"id"`
-	Login string `json:"login"`
-	FullName string `json:"full_name"`
-	Email string `json:"email"`
 	Address string `json:"address"`
-	Level int64 `json:"level"`
+	CreatedAt string `json:"created_at"`
+	Email string `json:"email"`
+	ExpirationDate string `json:"expiration_date"`
+	FullName string `json:"full_name"`
+	Id int64 `json:"id"`
 	Info string `json:"info"`
-	MailerEnabled bool `json:"mailer_enabled"`
-	PasswordReset bool `json:"password_reset"`
-	Lockout bool `json:"lockout"`
 	Language *ActionLanguageShowOutput `json:"language"`
 	LastActivityAt string `json:"last_activity_at"`
-	CreatedAt string `json:"created_at"`
-	ObjectState string `json:"object_state"`
-	ExpirationDate string `json:"expiration_date"`
+	Level int64 `json:"level"`
+	Lockout bool `json:"lockout"`
+	Login string `json:"login"`
+	MailerEnabled bool `json:"mailer_enabled"`
 	MonthlyPayment int64 `json:"monthly_payment"`
+	ObjectState string `json:"object_state"`
 	PaidUntil string `json:"paid_until"`
+	PasswordReset bool `json:"password_reset"`
 }
 
 
@@ -175,11 +175,11 @@ func (inv *ActionUserCurrentInvocation) callAsQuery() (*ActionUserCurrentRespons
 
 func (inv *ActionUserCurrentInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

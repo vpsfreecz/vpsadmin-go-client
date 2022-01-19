@@ -17,24 +17,13 @@ func NewActionUserNamespaceIndex(client *Client) *ActionUserNamespaceIndex {
 
 // ActionUserNamespaceIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserNamespaceIndexMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionUserNamespaceIndexMetaGlobalInput) SetCount(value bool) *ActionUserNamespaceIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionUserNamespaceIndexMetaGlobalInput) SetIncludes(value string) *Ac
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserNamespaceIndexMetaGlobalInput) SetNo(value bool) *ActionUserNamespaceIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,24 +83,24 @@ func (in *ActionUserNamespaceIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserNamespaceIndexInput is a type for action input parameters
 type ActionUserNamespaceIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
-	User int64 `json:"user"`
 	BlockCount int64 `json:"block_count"`
+	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	Size int64 `json:"size"`
+	User int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserNamespaceIndexInput) SetOffset(value int64) *ActionUserNamespaceIndexInput {
-	in.Offset = value
+// SetBlockCount sets parameter BlockCount to value and selects it for sending
+func (in *ActionUserNamespaceIndexInput) SetBlockCount(value int64) *ActionUserNamespaceIndexInput {
+	in.BlockCount = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
+	in._selectedParameters["BlockCount"] = nil
 	return in
 }
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -114,26 +114,15 @@ func (in *ActionUserNamespaceIndexInput) SetLimit(value int64) *ActionUserNamesp
 	in._selectedParameters["Limit"] = nil
 	return in
 }
-// SetUser sets parameter User to value and selects it for sending
-func (in *ActionUserNamespaceIndexInput) SetUser(value int64) *ActionUserNamespaceIndexInput {
-	in.User = value
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionUserNamespaceIndexInput) SetOffset(value int64) *ActionUserNamespaceIndexInput {
+	in.Offset = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["User"] = nil
-	return in
-}
-// SetBlockCount sets parameter BlockCount to value and selects it for sending
-func (in *ActionUserNamespaceIndexInput) SetBlockCount(value int64) *ActionUserNamespaceIndexInput {
-	in.BlockCount = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["BlockCount"] = nil
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetSize sets parameter Size to value and selects it for sending
@@ -145,6 +134,17 @@ func (in *ActionUserNamespaceIndexInput) SetSize(value int64) *ActionUserNamespa
 	}
 
 	in._selectedParameters["Size"] = nil
+	return in
+}
+// SetUser sets parameter User to value and selects it for sending
+func (in *ActionUserNamespaceIndexInput) SetUser(value int64) *ActionUserNamespaceIndexInput {
+	in.User = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["User"] = nil
 	return in
 }
 
@@ -174,11 +174,11 @@ func (in *ActionUserNamespaceIndexInput) AnySelected() bool {
 
 // ActionUserNamespaceIndexOutput is a type for action output parameters
 type ActionUserNamespaceIndexOutput struct {
-	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	Offset int64 `json:"offset"`
 	BlockCount int64 `json:"block_count"`
+	Id int64 `json:"id"`
+	Offset int64 `json:"offset"`
 	Size int64 `json:"size"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -283,34 +283,34 @@ func (inv *ActionUserNamespaceIndexInvocation) callAsQuery() (*ActionUserNamespa
 
 func (inv *ActionUserNamespaceIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["user_namespace[offset]"] = convertInt64ToString(inv.Input.Offset)
+		if inv.IsParameterSelected("BlockCount") {
+			ret["user_namespace[block_count]"] = convertInt64ToString(inv.Input.BlockCount)
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["user_namespace[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
-		if inv.IsParameterSelected("User") {
-			ret["user_namespace[user]"] = convertInt64ToString(inv.Input.User)
-		}
-		if inv.IsParameterSelected("BlockCount") {
-			ret["user_namespace[block_count]"] = convertInt64ToString(inv.Input.BlockCount)
+		if inv.IsParameterSelected("Offset") {
+			ret["user_namespace[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Size") {
 			ret["user_namespace[size]"] = convertInt64ToString(inv.Input.Size)
+		}
+		if inv.IsParameterSelected("User") {
+			ret["user_namespace[user]"] = convertInt64ToString(inv.Input.User)
 		}
 	}
 }
 
 func (inv *ActionUserNamespaceIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

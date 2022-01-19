@@ -17,24 +17,13 @@ func NewActionHelpBoxIndex(client *Client) *ActionHelpBoxIndex {
 
 // ActionHelpBoxIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionHelpBoxIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionHelpBoxIndexMetaGlobalInput) SetNo(value bool) *ActionHelpBoxIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionHelpBoxIndexMetaGlobalInput) SetCount(value bool) *ActionHelpBoxIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionHelpBoxIndexMetaGlobalInput) SetIncludes(value string) *ActionHe
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionHelpBoxIndexMetaGlobalInput) SetNo(value bool) *ActionHelpBoxIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,48 +83,15 @@ func (in *ActionHelpBoxIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionHelpBoxIndexInput is a type for action input parameters
 type ActionHelpBoxIndexInput struct {
-	Offset int64 `json:"offset"`
-	Limit int64 `json:"limit"`
-	Page string `json:"page"`
 	Action string `json:"action"`
 	Language int64 `json:"language"`
+	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
+	Page string `json:"page"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionHelpBoxIndexInput) SetOffset(value int64) *ActionHelpBoxIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-// SetLimit sets parameter Limit to value and selects it for sending
-func (in *ActionHelpBoxIndexInput) SetLimit(value int64) *ActionHelpBoxIndexInput {
-	in.Limit = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Limit"] = nil
-	return in
-}
-// SetPage sets parameter Page to value and selects it for sending
-func (in *ActionHelpBoxIndexInput) SetPage(value string) *ActionHelpBoxIndexInput {
-	in.Page = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Page"] = nil
-	return in
-}
 // SetAction sets parameter Action to value and selects it for sending
 func (in *ActionHelpBoxIndexInput) SetAction(value string) *ActionHelpBoxIndexInput {
 	in.Action = value
@@ -145,6 +112,39 @@ func (in *ActionHelpBoxIndexInput) SetLanguage(value int64) *ActionHelpBoxIndexI
 	}
 
 	in._selectedParameters["Language"] = nil
+	return in
+}
+// SetLimit sets parameter Limit to value and selects it for sending
+func (in *ActionHelpBoxIndexInput) SetLimit(value int64) *ActionHelpBoxIndexInput {
+	in.Limit = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionHelpBoxIndexInput) SetOffset(value int64) *ActionHelpBoxIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
+	return in
+}
+// SetPage sets parameter Page to value and selects it for sending
+func (in *ActionHelpBoxIndexInput) SetPage(value string) *ActionHelpBoxIndexInput {
+	in.Page = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Page"] = nil
 	return in
 }
 
@@ -174,12 +174,12 @@ func (in *ActionHelpBoxIndexInput) AnySelected() bool {
 
 // ActionHelpBoxIndexOutput is a type for action output parameters
 type ActionHelpBoxIndexOutput struct {
-	Id int64 `json:"id"`
-	Page string `json:"page"`
 	Action string `json:"action"`
-	Language *ActionLanguageShowOutput `json:"language"`
 	Content string `json:"content"`
+	Id int64 `json:"id"`
+	Language *ActionLanguageShowOutput `json:"language"`
 	Order int64 `json:"order"`
+	Page string `json:"page"`
 }
 
 
@@ -284,34 +284,34 @@ func (inv *ActionHelpBoxIndexInvocation) callAsQuery() (*ActionHelpBoxIndexRespo
 
 func (inv *ActionHelpBoxIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["help_box[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
-		if inv.IsParameterSelected("Limit") {
-			ret["help_box[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Page") {
-			ret["help_box[page]"] = inv.Input.Page
-		}
 		if inv.IsParameterSelected("Action") {
 			ret["help_box[action]"] = inv.Input.Action
 		}
 		if inv.IsParameterSelected("Language") {
 			ret["help_box[language]"] = convertInt64ToString(inv.Input.Language)
 		}
+		if inv.IsParameterSelected("Limit") {
+			ret["help_box[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["help_box[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
+		if inv.IsParameterSelected("Page") {
+			ret["help_box[page]"] = inv.Input.Page
+		}
 	}
 }
 
 func (inv *ActionHelpBoxIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

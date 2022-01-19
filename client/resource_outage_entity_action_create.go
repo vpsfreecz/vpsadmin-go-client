@@ -18,23 +18,12 @@ func NewActionOutageEntityCreate(client *Client) *ActionOutageEntityCreate {
 
 // ActionOutageEntityCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageEntityCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionOutageEntityCreateMetaGlobalInput) SetNo(value bool) *ActionOutageEntityCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionOutageEntityCreateMetaGlobalInput) SetIncludes(value string) *ActionOutageEntityCreateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionOutageEntityCreateMetaGlobalInput) SetIncludes(value string) *Ac
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionOutageEntityCreateMetaGlobalInput) SetNo(value bool) *ActionOutageEntityCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,23 +72,12 @@ func (in *ActionOutageEntityCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageEntityCreateInput is a type for action input parameters
 type ActionOutageEntityCreateInput struct {
-	Name string `json:"name"`
 	EntityId int64 `json:"entity_id"`
+	Name string `json:"name"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetName sets parameter Name to value and selects it for sending
-func (in *ActionOutageEntityCreateInput) SetName(value string) *ActionOutageEntityCreateInput {
-	in.Name = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Name"] = nil
-	return in
-}
 // SetEntityId sets parameter EntityId to value and selects it for sending
 func (in *ActionOutageEntityCreateInput) SetEntityId(value int64) *ActionOutageEntityCreateInput {
 	in.EntityId = value
@@ -98,6 +87,17 @@ func (in *ActionOutageEntityCreateInput) SetEntityId(value int64) *ActionOutageE
 	}
 
 	in._selectedParameters["EntityId"] = nil
+	return in
+}
+// SetName sets parameter Name to value and selects it for sending
+func (in *ActionOutageEntityCreateInput) SetName(value string) *ActionOutageEntityCreateInput {
+	in.Name = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Name"] = nil
 	return in
 }
 
@@ -132,10 +132,10 @@ type ActionOutageEntityCreateRequest struct {
 
 // ActionOutageEntityCreateOutput is a type for action output parameters
 type ActionOutageEntityCreateOutput struct {
-	Id int64 `json:"id"`
-	Name string `json:"name"`
 	EntityId int64 `json:"entity_id"`
+	Id int64 `json:"id"`
 	Label string `json:"label"`
+	Name string `json:"name"`
 }
 
 
@@ -259,11 +259,11 @@ func (inv *ActionOutageEntityCreateInvocation) makeInputParams() map[string]inte
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Name") {
-			ret["name"] = inv.Input.Name
-		}
 		if inv.IsParameterSelected("EntityId") {
 			ret["entity_id"] = inv.Input.EntityId
+		}
+		if inv.IsParameterSelected("Name") {
+			ret["name"] = inv.Input.Name
 		}
 	}
 
@@ -274,11 +274,11 @@ func (inv *ActionOutageEntityCreateInvocation) makeMetaInputParams() map[string]
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

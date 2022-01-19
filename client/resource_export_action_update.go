@@ -18,23 +18,12 @@ func NewActionExportUpdate(client *Client) *ActionExportUpdate {
 
 // ActionExportUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionExportUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionExportUpdateMetaGlobalInput) SetNo(value bool) *ActionExportUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionExportUpdateMetaGlobalInput) SetIncludes(value string) *ActionExportUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionExportUpdateMetaGlobalInput) SetIncludes(value string) *ActionEx
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionExportUpdateMetaGlobalInput) SetNo(value bool) *ActionExportUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -73,12 +73,12 @@ func (in *ActionExportUpdateMetaGlobalInput) AnySelected() bool {
 // ActionExportUpdateInput is a type for action input parameters
 type ActionExportUpdateInput struct {
 	AllVps bool `json:"all_vps"`
-	Rw bool `json:"rw"`
-	Sync bool `json:"sync"`
-	SubtreeCheck bool `json:"subtree_check"`
-	RootSquash bool `json:"root_squash"`
-	Threads int64 `json:"threads"`
 	Enabled bool `json:"enabled"`
+	RootSquash bool `json:"root_squash"`
+	Rw bool `json:"rw"`
+	SubtreeCheck bool `json:"subtree_check"`
+	Sync bool `json:"sync"`
+	Threads int64 `json:"threads"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -94,37 +94,15 @@ func (in *ActionExportUpdateInput) SetAllVps(value bool) *ActionExportUpdateInpu
 	in._selectedParameters["AllVps"] = nil
 	return in
 }
-// SetRw sets parameter Rw to value and selects it for sending
-func (in *ActionExportUpdateInput) SetRw(value bool) *ActionExportUpdateInput {
-	in.Rw = value
+// SetEnabled sets parameter Enabled to value and selects it for sending
+func (in *ActionExportUpdateInput) SetEnabled(value bool) *ActionExportUpdateInput {
+	in.Enabled = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Rw"] = nil
-	return in
-}
-// SetSync sets parameter Sync to value and selects it for sending
-func (in *ActionExportUpdateInput) SetSync(value bool) *ActionExportUpdateInput {
-	in.Sync = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Sync"] = nil
-	return in
-}
-// SetSubtreeCheck sets parameter SubtreeCheck to value and selects it for sending
-func (in *ActionExportUpdateInput) SetSubtreeCheck(value bool) *ActionExportUpdateInput {
-	in.SubtreeCheck = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["SubtreeCheck"] = nil
+	in._selectedParameters["Enabled"] = nil
 	return in
 }
 // SetRootSquash sets parameter RootSquash to value and selects it for sending
@@ -138,6 +116,39 @@ func (in *ActionExportUpdateInput) SetRootSquash(value bool) *ActionExportUpdate
 	in._selectedParameters["RootSquash"] = nil
 	return in
 }
+// SetRw sets parameter Rw to value and selects it for sending
+func (in *ActionExportUpdateInput) SetRw(value bool) *ActionExportUpdateInput {
+	in.Rw = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Rw"] = nil
+	return in
+}
+// SetSubtreeCheck sets parameter SubtreeCheck to value and selects it for sending
+func (in *ActionExportUpdateInput) SetSubtreeCheck(value bool) *ActionExportUpdateInput {
+	in.SubtreeCheck = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["SubtreeCheck"] = nil
+	return in
+}
+// SetSync sets parameter Sync to value and selects it for sending
+func (in *ActionExportUpdateInput) SetSync(value bool) *ActionExportUpdateInput {
+	in.Sync = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Sync"] = nil
+	return in
+}
 // SetThreads sets parameter Threads to value and selects it for sending
 func (in *ActionExportUpdateInput) SetThreads(value int64) *ActionExportUpdateInput {
 	in.Threads = value
@@ -147,17 +158,6 @@ func (in *ActionExportUpdateInput) SetThreads(value int64) *ActionExportUpdateIn
 	}
 
 	in._selectedParameters["Threads"] = nil
-	return in
-}
-// SetEnabled sets parameter Enabled to value and selects it for sending
-func (in *ActionExportUpdateInput) SetEnabled(value bool) *ActionExportUpdateInput {
-	in.Enabled = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Enabled"] = nil
 	return in
 }
 
@@ -192,23 +192,23 @@ type ActionExportUpdateRequest struct {
 
 // ActionExportUpdateOutput is a type for action output parameters
 type ActionExportUpdateOutput struct {
-	Id int64 `json:"id"`
-	Dataset *ActionDatasetShowOutput `json:"dataset"`
-	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	User *ActionUserShowOutput `json:"user"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	HostIpAddress *ActionHostIpAddressShowOutput `json:"host_ip_address"`
-	Path string `json:"path"`
 	AllVps bool `json:"all_vps"`
-	Rw bool `json:"rw"`
-	Sync bool `json:"sync"`
-	SubtreeCheck bool `json:"subtree_check"`
-	RootSquash bool `json:"root_squash"`
-	Threads int64 `json:"threads"`
+	CreatedAt string `json:"created_at"`
+	Dataset *ActionDatasetShowOutput `json:"dataset"`
 	Enabled bool `json:"enabled"`
 	ExpirationDate string `json:"expiration_date"`
-	CreatedAt string `json:"created_at"`
+	HostIpAddress *ActionHostIpAddressShowOutput `json:"host_ip_address"`
+	Id int64 `json:"id"`
+	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
+	Path string `json:"path"`
+	RootSquash bool `json:"root_squash"`
+	Rw bool `json:"rw"`
+	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
+	SubtreeCheck bool `json:"subtree_check"`
+	Sync bool `json:"sync"`
+	Threads int64 `json:"threads"`
 	UpdatedAt string `json:"updated_at"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 // ActionExportUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -416,23 +416,23 @@ func (inv *ActionExportUpdateInvocation) makeInputParams() map[string]interface{
 		if inv.IsParameterSelected("AllVps") {
 			ret["all_vps"] = inv.Input.AllVps
 		}
-		if inv.IsParameterSelected("Rw") {
-			ret["rw"] = inv.Input.Rw
-		}
-		if inv.IsParameterSelected("Sync") {
-			ret["sync"] = inv.Input.Sync
-		}
-		if inv.IsParameterSelected("SubtreeCheck") {
-			ret["subtree_check"] = inv.Input.SubtreeCheck
+		if inv.IsParameterSelected("Enabled") {
+			ret["enabled"] = inv.Input.Enabled
 		}
 		if inv.IsParameterSelected("RootSquash") {
 			ret["root_squash"] = inv.Input.RootSquash
 		}
+		if inv.IsParameterSelected("Rw") {
+			ret["rw"] = inv.Input.Rw
+		}
+		if inv.IsParameterSelected("SubtreeCheck") {
+			ret["subtree_check"] = inv.Input.SubtreeCheck
+		}
+		if inv.IsParameterSelected("Sync") {
+			ret["sync"] = inv.Input.Sync
+		}
 		if inv.IsParameterSelected("Threads") {
 			ret["threads"] = inv.Input.Threads
-		}
-		if inv.IsParameterSelected("Enabled") {
-			ret["enabled"] = inv.Input.Enabled
 		}
 	}
 
@@ -443,11 +443,11 @@ func (inv *ActionExportUpdateInvocation) makeMetaInputParams() map[string]interf
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

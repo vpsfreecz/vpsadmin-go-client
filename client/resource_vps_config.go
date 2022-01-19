@@ -5,14 +5,14 @@ type ResourceVpsConfig struct {
 	// Pointer to client
 	Client *Client
 
-	// Action Vps_config#Index
-	Index *ActionVpsConfigIndex
-	// Action Vps_config#Index
-	List *ActionVpsConfigIndex
 	// Action Vps_config#Create
 	Create *ActionVpsConfigCreate
 	// Action Vps_config#Create
 	New *ActionVpsConfigCreate
+	// Action Vps_config#Index
+	Index *ActionVpsConfigIndex
+	// Action Vps_config#Index
+	List *ActionVpsConfigIndex
 	// Action Vps_config#Show
 	Show *ActionVpsConfigShow
 	// Action Vps_config#Show
@@ -22,17 +22,17 @@ type ResourceVpsConfig struct {
 }
 
 func NewResourceVpsConfig(client *Client) *ResourceVpsConfig {
-	actionIndex := NewActionVpsConfigIndex(client)
 	actionCreate := NewActionVpsConfigCreate(client)
+	actionIndex := NewActionVpsConfigIndex(client)
 	actionShow := NewActionVpsConfigShow(client)
 	actionUpdate := NewActionVpsConfigUpdate(client)
 
 	return &ResourceVpsConfig{
 		Client: client,
-		Index: actionIndex,
-		List: actionIndex,
 		Create: actionCreate,
 		New: actionCreate,
+		Index: actionIndex,
+		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
 		Update: actionUpdate,

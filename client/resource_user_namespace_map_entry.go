@@ -5,6 +5,14 @@ type ResourceUserNamespaceMapEntry struct {
 	// Pointer to client
 	Client *Client
 
+	// Action User_namespace_map.Entry#Create
+	Create *ActionUserNamespaceMapEntryCreate
+	// Action User_namespace_map.Entry#Create
+	New *ActionUserNamespaceMapEntryCreate
+	// Action User_namespace_map.Entry#Delete
+	Delete *ActionUserNamespaceMapEntryDelete
+	// Action User_namespace_map.Entry#Delete
+	Destroy *ActionUserNamespaceMapEntryDelete
 	// Action User_namespace_map.Entry#Index
 	Index *ActionUserNamespaceMapEntryIndex
 	// Action User_namespace_map.Entry#Index
@@ -13,35 +21,27 @@ type ResourceUserNamespaceMapEntry struct {
 	Show *ActionUserNamespaceMapEntryShow
 	// Action User_namespace_map.Entry#Show
 	Find *ActionUserNamespaceMapEntryShow
-	// Action User_namespace_map.Entry#Create
-	Create *ActionUserNamespaceMapEntryCreate
-	// Action User_namespace_map.Entry#Create
-	New *ActionUserNamespaceMapEntryCreate
 	// Action User_namespace_map.Entry#Update
 	Update *ActionUserNamespaceMapEntryUpdate
-	// Action User_namespace_map.Entry#Delete
-	Delete *ActionUserNamespaceMapEntryDelete
-	// Action User_namespace_map.Entry#Delete
-	Destroy *ActionUserNamespaceMapEntryDelete
 }
 
 func NewResourceUserNamespaceMapEntry(client *Client) *ResourceUserNamespaceMapEntry {
+	actionCreate := NewActionUserNamespaceMapEntryCreate(client)
+	actionDelete := NewActionUserNamespaceMapEntryDelete(client)
 	actionIndex := NewActionUserNamespaceMapEntryIndex(client)
 	actionShow := NewActionUserNamespaceMapEntryShow(client)
-	actionCreate := NewActionUserNamespaceMapEntryCreate(client)
 	actionUpdate := NewActionUserNamespaceMapEntryUpdate(client)
-	actionDelete := NewActionUserNamespaceMapEntryDelete(client)
 
 	return &ResourceUserNamespaceMapEntry{
 		Client: client,
+		Create: actionCreate,
+		New: actionCreate,
+		Delete: actionDelete,
+		Destroy: actionDelete,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Create: actionCreate,
-		New: actionCreate,
 		Update: actionUpdate,
-		Delete: actionDelete,
-		Destroy: actionDelete,
 	}
 }

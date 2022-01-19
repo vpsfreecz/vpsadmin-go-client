@@ -17,23 +17,12 @@ func NewActionPoolCreate(client *Client) *ActionPoolCreate {
 
 // ActionPoolCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionPoolCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionPoolCreateMetaGlobalInput) SetNo(value bool) *ActionPoolCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionPoolCreateMetaGlobalInput) SetIncludes(value string) *ActionPoolCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionPoolCreateMetaGlobalInput) SetIncludes(value string) *ActionPool
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionPoolCreateMetaGlobalInput) SetNo(value bool) *ActionPoolCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,78 +71,23 @@ func (in *ActionPoolCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionPoolCreateInput is a type for action input parameters
 type ActionPoolCreateInput struct {
-	Node int64 `json:"node"`
-	Label string `json:"label"`
-	Filesystem string `json:"filesystem"`
-	Role string `json:"role"`
-	RefquotaCheck bool `json:"refquota_check"`
 	Atime bool `json:"atime"`
 	Compression bool `json:"compression"`
-	Recordsize int64 `json:"recordsize"`
+	Filesystem string `json:"filesystem"`
+	Label string `json:"label"`
+	Node int64 `json:"node"`
 	Quota int64 `json:"quota"`
+	Recordsize int64 `json:"recordsize"`
 	Refquota int64 `json:"refquota"`
+	RefquotaCheck bool `json:"refquota_check"`
 	Relatime bool `json:"relatime"`
-	Sync string `json:"sync"`
+	Role string `json:"role"`
 	Sharenfs string `json:"sharenfs"`
+	Sync string `json:"sync"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNode sets parameter Node to value and selects it for sending
-func (in *ActionPoolCreateInput) SetNode(value int64) *ActionPoolCreateInput {
-	in.Node = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Node"] = nil
-	return in
-}
-// SetLabel sets parameter Label to value and selects it for sending
-func (in *ActionPoolCreateInput) SetLabel(value string) *ActionPoolCreateInput {
-	in.Label = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Label"] = nil
-	return in
-}
-// SetFilesystem sets parameter Filesystem to value and selects it for sending
-func (in *ActionPoolCreateInput) SetFilesystem(value string) *ActionPoolCreateInput {
-	in.Filesystem = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Filesystem"] = nil
-	return in
-}
-// SetRole sets parameter Role to value and selects it for sending
-func (in *ActionPoolCreateInput) SetRole(value string) *ActionPoolCreateInput {
-	in.Role = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Role"] = nil
-	return in
-}
-// SetRefquotaCheck sets parameter RefquotaCheck to value and selects it for sending
-func (in *ActionPoolCreateInput) SetRefquotaCheck(value bool) *ActionPoolCreateInput {
-	in.RefquotaCheck = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["RefquotaCheck"] = nil
-	return in
-}
 // SetAtime sets parameter Atime to value and selects it for sending
 func (in *ActionPoolCreateInput) SetAtime(value bool) *ActionPoolCreateInput {
 	in.Atime = value
@@ -165,15 +110,37 @@ func (in *ActionPoolCreateInput) SetCompression(value bool) *ActionPoolCreateInp
 	in._selectedParameters["Compression"] = nil
 	return in
 }
-// SetRecordsize sets parameter Recordsize to value and selects it for sending
-func (in *ActionPoolCreateInput) SetRecordsize(value int64) *ActionPoolCreateInput {
-	in.Recordsize = value
+// SetFilesystem sets parameter Filesystem to value and selects it for sending
+func (in *ActionPoolCreateInput) SetFilesystem(value string) *ActionPoolCreateInput {
+	in.Filesystem = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Recordsize"] = nil
+	in._selectedParameters["Filesystem"] = nil
+	return in
+}
+// SetLabel sets parameter Label to value and selects it for sending
+func (in *ActionPoolCreateInput) SetLabel(value string) *ActionPoolCreateInput {
+	in.Label = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Label"] = nil
+	return in
+}
+// SetNode sets parameter Node to value and selects it for sending
+func (in *ActionPoolCreateInput) SetNode(value int64) *ActionPoolCreateInput {
+	in.Node = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Node"] = nil
 	return in
 }
 // SetQuota sets parameter Quota to value and selects it for sending
@@ -187,6 +154,17 @@ func (in *ActionPoolCreateInput) SetQuota(value int64) *ActionPoolCreateInput {
 	in._selectedParameters["Quota"] = nil
 	return in
 }
+// SetRecordsize sets parameter Recordsize to value and selects it for sending
+func (in *ActionPoolCreateInput) SetRecordsize(value int64) *ActionPoolCreateInput {
+	in.Recordsize = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Recordsize"] = nil
+	return in
+}
 // SetRefquota sets parameter Refquota to value and selects it for sending
 func (in *ActionPoolCreateInput) SetRefquota(value int64) *ActionPoolCreateInput {
 	in.Refquota = value
@@ -196,6 +174,17 @@ func (in *ActionPoolCreateInput) SetRefquota(value int64) *ActionPoolCreateInput
 	}
 
 	in._selectedParameters["Refquota"] = nil
+	return in
+}
+// SetRefquotaCheck sets parameter RefquotaCheck to value and selects it for sending
+func (in *ActionPoolCreateInput) SetRefquotaCheck(value bool) *ActionPoolCreateInput {
+	in.RefquotaCheck = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["RefquotaCheck"] = nil
 	return in
 }
 // SetRelatime sets parameter Relatime to value and selects it for sending
@@ -209,15 +198,15 @@ func (in *ActionPoolCreateInput) SetRelatime(value bool) *ActionPoolCreateInput 
 	in._selectedParameters["Relatime"] = nil
 	return in
 }
-// SetSync sets parameter Sync to value and selects it for sending
-func (in *ActionPoolCreateInput) SetSync(value string) *ActionPoolCreateInput {
-	in.Sync = value
+// SetRole sets parameter Role to value and selects it for sending
+func (in *ActionPoolCreateInput) SetRole(value string) *ActionPoolCreateInput {
+	in.Role = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Sync"] = nil
+	in._selectedParameters["Role"] = nil
 	return in
 }
 // SetSharenfs sets parameter Sharenfs to value and selects it for sending
@@ -229,6 +218,17 @@ func (in *ActionPoolCreateInput) SetSharenfs(value string) *ActionPoolCreateInpu
 	}
 
 	in._selectedParameters["Sharenfs"] = nil
+	return in
+}
+// SetSync sets parameter Sync to value and selects it for sending
+func (in *ActionPoolCreateInput) SetSync(value string) *ActionPoolCreateInput {
+	in.Sync = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Sync"] = nil
 	return in
 }
 
@@ -263,23 +263,23 @@ type ActionPoolCreateRequest struct {
 
 // ActionPoolCreateOutput is a type for action output parameters
 type ActionPoolCreateOutput struct {
-	Id int64 `json:"id"`
-	Node *ActionNodeShowOutput `json:"node"`
-	Label string `json:"label"`
-	Filesystem string `json:"filesystem"`
-	Role string `json:"role"`
-	RefquotaCheck bool `json:"refquota_check"`
 	Atime bool `json:"atime"`
-	Compression bool `json:"compression"`
-	Recordsize int64 `json:"recordsize"`
-	Quota int64 `json:"quota"`
-	Refquota int64 `json:"refquota"`
-	Relatime bool `json:"relatime"`
-	Sync string `json:"sync"`
-	Sharenfs string `json:"sharenfs"`
-	Used int64 `json:"used"`
-	Referenced int64 `json:"referenced"`
 	Avail int64 `json:"avail"`
+	Compression bool `json:"compression"`
+	Filesystem string `json:"filesystem"`
+	Id int64 `json:"id"`
+	Label string `json:"label"`
+	Node *ActionNodeShowOutput `json:"node"`
+	Quota int64 `json:"quota"`
+	Recordsize int64 `json:"recordsize"`
+	Referenced int64 `json:"referenced"`
+	Refquota int64 `json:"refquota"`
+	RefquotaCheck bool `json:"refquota_check"`
+	Relatime bool `json:"relatime"`
+	Role string `json:"role"`
+	Sharenfs string `json:"sharenfs"`
+	Sync string `json:"sync"`
+	Used int64 `json:"used"`
 }
 
 // ActionPoolCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -474,44 +474,44 @@ func (inv *ActionPoolCreateInvocation) makeInputParams() map[string]interface{} 
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Node") {
-			ret["node"] = inv.Input.Node
-		}
-		if inv.IsParameterSelected("Label") {
-			ret["label"] = inv.Input.Label
-		}
-		if inv.IsParameterSelected("Filesystem") {
-			ret["filesystem"] = inv.Input.Filesystem
-		}
-		if inv.IsParameterSelected("Role") {
-			ret["role"] = inv.Input.Role
-		}
-		if inv.IsParameterSelected("RefquotaCheck") {
-			ret["refquota_check"] = inv.Input.RefquotaCheck
-		}
 		if inv.IsParameterSelected("Atime") {
 			ret["atime"] = inv.Input.Atime
 		}
 		if inv.IsParameterSelected("Compression") {
 			ret["compression"] = inv.Input.Compression
 		}
-		if inv.IsParameterSelected("Recordsize") {
-			ret["recordsize"] = inv.Input.Recordsize
+		if inv.IsParameterSelected("Filesystem") {
+			ret["filesystem"] = inv.Input.Filesystem
+		}
+		if inv.IsParameterSelected("Label") {
+			ret["label"] = inv.Input.Label
+		}
+		if inv.IsParameterSelected("Node") {
+			ret["node"] = inv.Input.Node
 		}
 		if inv.IsParameterSelected("Quota") {
 			ret["quota"] = inv.Input.Quota
 		}
+		if inv.IsParameterSelected("Recordsize") {
+			ret["recordsize"] = inv.Input.Recordsize
+		}
 		if inv.IsParameterSelected("Refquota") {
 			ret["refquota"] = inv.Input.Refquota
+		}
+		if inv.IsParameterSelected("RefquotaCheck") {
+			ret["refquota_check"] = inv.Input.RefquotaCheck
 		}
 		if inv.IsParameterSelected("Relatime") {
 			ret["relatime"] = inv.Input.Relatime
 		}
-		if inv.IsParameterSelected("Sync") {
-			ret["sync"] = inv.Input.Sync
+		if inv.IsParameterSelected("Role") {
+			ret["role"] = inv.Input.Role
 		}
 		if inv.IsParameterSelected("Sharenfs") {
 			ret["sharenfs"] = inv.Input.Sharenfs
+		}
+		if inv.IsParameterSelected("Sync") {
+			ret["sync"] = inv.Input.Sync
 		}
 	}
 
@@ -522,11 +522,11 @@ func (inv *ActionPoolCreateInvocation) makeMetaInputParams() map[string]interfac
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

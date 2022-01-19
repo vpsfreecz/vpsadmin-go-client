@@ -17,24 +17,13 @@ func NewActionSessionTokenIndex(client *Client) *ActionSessionTokenIndex {
 
 // ActionSessionTokenIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionSessionTokenIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionSessionTokenIndexMetaGlobalInput) SetNo(value bool) *ActionSessionTokenIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionSessionTokenIndexMetaGlobalInput) SetCount(value bool) *ActionSessionTokenIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionSessionTokenIndexMetaGlobalInput) SetIncludes(value string) *Act
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionSessionTokenIndexMetaGlobalInput) SetNo(value bool) *ActionSessionTokenIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,24 +83,13 @@ func (in *ActionSessionTokenIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionSessionTokenIndexInput is a type for action input parameters
 type ActionSessionTokenIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	User int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionSessionTokenIndexInput) SetOffset(value int64) *ActionSessionTokenIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionSessionTokenIndexInput) SetLimit(value int64) *ActionSessionTokenIndexInput {
 	in.Limit = value
@@ -110,6 +99,17 @@ func (in *ActionSessionTokenIndexInput) SetLimit(value int64) *ActionSessionToke
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionSessionTokenIndexInput) SetOffset(value int64) *ActionSessionTokenIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetUser sets parameter User to value and selects it for sending
@@ -150,15 +150,15 @@ func (in *ActionSessionTokenIndexInput) AnySelected() bool {
 
 // ActionSessionTokenIndexOutput is a type for action output parameters
 type ActionSessionTokenIndexOutput struct {
+	CreatedAt string `json:"created_at"`
 	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	Token string `json:"token"`
-	ValidTo string `json:"valid_to"`
+	Interval int64 `json:"interval"`
 	Label string `json:"label"`
 	Lifetime string `json:"lifetime"`
-	Interval int64 `json:"interval"`
+	Token string `json:"token"`
 	UseCount int64 `json:"use_count"`
-	CreatedAt string `json:"created_at"`
+	User *ActionUserShowOutput `json:"user"`
+	ValidTo string `json:"valid_to"`
 }
 
 
@@ -263,11 +263,11 @@ func (inv *ActionSessionTokenIndexInvocation) callAsQuery() (*ActionSessionToken
 
 func (inv *ActionSessionTokenIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["session_token[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["session_token[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["session_token[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("User") {
 			ret["session_token[user]"] = convertInt64ToString(inv.Input.User)
@@ -277,14 +277,14 @@ func (inv *ActionSessionTokenIndexInvocation) convertInputToQueryParams(ret map[
 
 func (inv *ActionSessionTokenIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

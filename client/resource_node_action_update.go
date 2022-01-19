@@ -18,23 +18,12 @@ func NewActionNodeUpdate(client *Client) *ActionNodeUpdate {
 
 // ActionNodeUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeUpdateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionNodeUpdateMetaGlobalInput) SetNo(value bool) *ActionNodeUpdateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionNodeUpdateMetaGlobalInput) SetIncludes(value string) *ActionNodeUpdateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionNodeUpdateMetaGlobalInput) SetIncludes(value string) *ActionNode
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionNodeUpdateMetaGlobalInput) SetNo(value bool) *ActionNodeUpdateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,43 +72,44 @@ func (in *ActionNodeUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeUpdateInput is a type for action input parameters
 type ActionNodeUpdateInput struct {
-	Name string `json:"name"`
-	Type string `json:"type"`
-	HypervisorType string `json:"hypervisor_type"`
-	Location int64 `json:"location"`
-	IpAddr string `json:"ip_addr"`
-	NetInterface string `json:"net_interface"`
-	MaxTx int64 `json:"max_tx"`
-	MaxRx int64 `json:"max_rx"`
+	Active bool `json:"active"`
 	Cpus int64 `json:"cpus"`
+	HypervisorType string `json:"hypervisor_type"`
+	IpAddr string `json:"ip_addr"`
+	Location int64 `json:"location"`
+	MaxRx int64 `json:"max_rx"`
+	MaxTx int64 `json:"max_tx"`
+	MaxVps int64 `json:"max_vps"`
+	Name string `json:"name"`
+	NetInterface string `json:"net_interface"`
 	TotalMemory int64 `json:"total_memory"`
 	TotalSwap int64 `json:"total_swap"`
-	MaxVps int64 `json:"max_vps"`
+	Type string `json:"type"`
 	VePrivate string `json:"ve_private"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetName sets parameter Name to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetName(value string) *ActionNodeUpdateInput {
-	in.Name = value
+// SetActive sets parameter Active to value and selects it for sending
+func (in *ActionNodeUpdateInput) SetActive(value bool) *ActionNodeUpdateInput {
+	in.Active = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Name"] = nil
+	in._selectedParameters["Active"] = nil
 	return in
 }
-// SetType sets parameter Type to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetType(value string) *ActionNodeUpdateInput {
-	in.Type = value
+// SetCpus sets parameter Cpus to value and selects it for sending
+func (in *ActionNodeUpdateInput) SetCpus(value int64) *ActionNodeUpdateInput {
+	in.Cpus = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Type"] = nil
+	in._selectedParameters["Cpus"] = nil
 	return in
 }
 // SetHypervisorType sets parameter HypervisorType to value and selects it for sending
@@ -122,17 +123,6 @@ func (in *ActionNodeUpdateInput) SetHypervisorType(value string) *ActionNodeUpda
 	in._selectedParameters["HypervisorType"] = nil
 	return in
 }
-// SetLocation sets parameter Location to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetLocation(value int64) *ActionNodeUpdateInput {
-	in.Location = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Location"] = nil
-	return in
-}
 // SetIpAddr sets parameter IpAddr to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetIpAddr(value string) *ActionNodeUpdateInput {
 	in.IpAddr = value
@@ -144,26 +134,15 @@ func (in *ActionNodeUpdateInput) SetIpAddr(value string) *ActionNodeUpdateInput 
 	in._selectedParameters["IpAddr"] = nil
 	return in
 }
-// SetNetInterface sets parameter NetInterface to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetNetInterface(value string) *ActionNodeUpdateInput {
-	in.NetInterface = value
+// SetLocation sets parameter Location to value and selects it for sending
+func (in *ActionNodeUpdateInput) SetLocation(value int64) *ActionNodeUpdateInput {
+	in.Location = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["NetInterface"] = nil
-	return in
-}
-// SetMaxTx sets parameter MaxTx to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetMaxTx(value int64) *ActionNodeUpdateInput {
-	in.MaxTx = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["MaxTx"] = nil
+	in._selectedParameters["Location"] = nil
 	return in
 }
 // SetMaxRx sets parameter MaxRx to value and selects it for sending
@@ -177,15 +156,48 @@ func (in *ActionNodeUpdateInput) SetMaxRx(value int64) *ActionNodeUpdateInput {
 	in._selectedParameters["MaxRx"] = nil
 	return in
 }
-// SetCpus sets parameter Cpus to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetCpus(value int64) *ActionNodeUpdateInput {
-	in.Cpus = value
+// SetMaxTx sets parameter MaxTx to value and selects it for sending
+func (in *ActionNodeUpdateInput) SetMaxTx(value int64) *ActionNodeUpdateInput {
+	in.MaxTx = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Cpus"] = nil
+	in._selectedParameters["MaxTx"] = nil
+	return in
+}
+// SetMaxVps sets parameter MaxVps to value and selects it for sending
+func (in *ActionNodeUpdateInput) SetMaxVps(value int64) *ActionNodeUpdateInput {
+	in.MaxVps = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["MaxVps"] = nil
+	return in
+}
+// SetName sets parameter Name to value and selects it for sending
+func (in *ActionNodeUpdateInput) SetName(value string) *ActionNodeUpdateInput {
+	in.Name = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Name"] = nil
+	return in
+}
+// SetNetInterface sets parameter NetInterface to value and selects it for sending
+func (in *ActionNodeUpdateInput) SetNetInterface(value string) *ActionNodeUpdateInput {
+	in.NetInterface = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["NetInterface"] = nil
 	return in
 }
 // SetTotalMemory sets parameter TotalMemory to value and selects it for sending
@@ -210,15 +222,15 @@ func (in *ActionNodeUpdateInput) SetTotalSwap(value int64) *ActionNodeUpdateInpu
 	in._selectedParameters["TotalSwap"] = nil
 	return in
 }
-// SetMaxVps sets parameter MaxVps to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetMaxVps(value int64) *ActionNodeUpdateInput {
-	in.MaxVps = value
+// SetType sets parameter Type to value and selects it for sending
+func (in *ActionNodeUpdateInput) SetType(value string) *ActionNodeUpdateInput {
+	in.Type = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["MaxVps"] = nil
+	in._selectedParameters["Type"] = nil
 	return in
 }
 // SetVePrivate sets parameter VePrivate to value and selects it for sending
@@ -374,32 +386,35 @@ func (inv *ActionNodeUpdateInvocation) makeInputParams() map[string]interface{} 
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Name") {
-			ret["name"] = inv.Input.Name
+		if inv.IsParameterSelected("Active") {
+			ret["active"] = inv.Input.Active
 		}
-		if inv.IsParameterSelected("Type") {
-			ret["type"] = inv.Input.Type
+		if inv.IsParameterSelected("Cpus") {
+			ret["cpus"] = inv.Input.Cpus
 		}
 		if inv.IsParameterSelected("HypervisorType") {
 			ret["hypervisor_type"] = inv.Input.HypervisorType
 		}
-		if inv.IsParameterSelected("Location") {
-			ret["location"] = inv.Input.Location
-		}
 		if inv.IsParameterSelected("IpAddr") {
 			ret["ip_addr"] = inv.Input.IpAddr
 		}
-		if inv.IsParameterSelected("NetInterface") {
-			ret["net_interface"] = inv.Input.NetInterface
-		}
-		if inv.IsParameterSelected("MaxTx") {
-			ret["max_tx"] = inv.Input.MaxTx
+		if inv.IsParameterSelected("Location") {
+			ret["location"] = inv.Input.Location
 		}
 		if inv.IsParameterSelected("MaxRx") {
 			ret["max_rx"] = inv.Input.MaxRx
 		}
-		if inv.IsParameterSelected("Cpus") {
-			ret["cpus"] = inv.Input.Cpus
+		if inv.IsParameterSelected("MaxTx") {
+			ret["max_tx"] = inv.Input.MaxTx
+		}
+		if inv.IsParameterSelected("MaxVps") {
+			ret["max_vps"] = inv.Input.MaxVps
+		}
+		if inv.IsParameterSelected("Name") {
+			ret["name"] = inv.Input.Name
+		}
+		if inv.IsParameterSelected("NetInterface") {
+			ret["net_interface"] = inv.Input.NetInterface
 		}
 		if inv.IsParameterSelected("TotalMemory") {
 			ret["total_memory"] = inv.Input.TotalMemory
@@ -407,8 +422,8 @@ func (inv *ActionNodeUpdateInvocation) makeInputParams() map[string]interface{} 
 		if inv.IsParameterSelected("TotalSwap") {
 			ret["total_swap"] = inv.Input.TotalSwap
 		}
-		if inv.IsParameterSelected("MaxVps") {
-			ret["max_vps"] = inv.Input.MaxVps
+		if inv.IsParameterSelected("Type") {
+			ret["type"] = inv.Input.Type
 		}
 		if inv.IsParameterSelected("VePrivate") {
 			ret["ve_private"] = inv.Input.VePrivate
@@ -422,11 +437,11 @@ func (inv *ActionNodeUpdateInvocation) makeMetaInputParams() map[string]interfac
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

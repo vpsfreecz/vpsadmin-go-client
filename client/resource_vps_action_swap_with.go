@@ -18,23 +18,12 @@ func NewActionVpsSwapWith(client *Client) *ActionVpsSwapWith {
 
 // ActionVpsSwapWithMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsSwapWithMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsSwapWithMetaGlobalInput) SetNo(value bool) *ActionVpsSwapWithMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsSwapWithMetaGlobalInput) SetIncludes(value string) *ActionVpsSwapWithMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionVpsSwapWithMetaGlobalInput) SetIncludes(value string) *ActionVps
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsSwapWithMetaGlobalInput) SetNo(value bool) *ActionVpsSwapWithMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,37 +72,15 @@ func (in *ActionVpsSwapWithMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsSwapWithInput is a type for action input parameters
 type ActionVpsSwapWithInput struct {
-	Vps int64 `json:"vps"`
-	Resources bool `json:"resources"`
 	Configs bool `json:"configs"`
-	Hostname bool `json:"hostname"`
 	Expirations bool `json:"expirations"`
+	Hostname bool `json:"hostname"`
+	Resources bool `json:"resources"`
+	Vps int64 `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetVps sets parameter Vps to value and selects it for sending
-func (in *ActionVpsSwapWithInput) SetVps(value int64) *ActionVpsSwapWithInput {
-	in.Vps = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Vps"] = nil
-	return in
-}
-// SetResources sets parameter Resources to value and selects it for sending
-func (in *ActionVpsSwapWithInput) SetResources(value bool) *ActionVpsSwapWithInput {
-	in.Resources = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Resources"] = nil
-	return in
-}
 // SetConfigs sets parameter Configs to value and selects it for sending
 func (in *ActionVpsSwapWithInput) SetConfigs(value bool) *ActionVpsSwapWithInput {
 	in.Configs = value
@@ -112,6 +90,17 @@ func (in *ActionVpsSwapWithInput) SetConfigs(value bool) *ActionVpsSwapWithInput
 	}
 
 	in._selectedParameters["Configs"] = nil
+	return in
+}
+// SetExpirations sets parameter Expirations to value and selects it for sending
+func (in *ActionVpsSwapWithInput) SetExpirations(value bool) *ActionVpsSwapWithInput {
+	in.Expirations = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Expirations"] = nil
 	return in
 }
 // SetHostname sets parameter Hostname to value and selects it for sending
@@ -125,15 +114,26 @@ func (in *ActionVpsSwapWithInput) SetHostname(value bool) *ActionVpsSwapWithInpu
 	in._selectedParameters["Hostname"] = nil
 	return in
 }
-// SetExpirations sets parameter Expirations to value and selects it for sending
-func (in *ActionVpsSwapWithInput) SetExpirations(value bool) *ActionVpsSwapWithInput {
-	in.Expirations = value
+// SetResources sets parameter Resources to value and selects it for sending
+func (in *ActionVpsSwapWithInput) SetResources(value bool) *ActionVpsSwapWithInput {
+	in.Resources = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Expirations"] = nil
+	in._selectedParameters["Resources"] = nil
+	return in
+}
+// SetVps sets parameter Vps to value and selects it for sending
+func (in *ActionVpsSwapWithInput) SetVps(value int64) *ActionVpsSwapWithInput {
+	in.Vps = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Vps"] = nil
 	return in
 }
 
@@ -362,20 +362,20 @@ func (inv *ActionVpsSwapWithInvocation) makeInputParams() map[string]interface{}
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Vps") {
-			ret["vps"] = inv.Input.Vps
-		}
-		if inv.IsParameterSelected("Resources") {
-			ret["resources"] = inv.Input.Resources
-		}
 		if inv.IsParameterSelected("Configs") {
 			ret["configs"] = inv.Input.Configs
+		}
+		if inv.IsParameterSelected("Expirations") {
+			ret["expirations"] = inv.Input.Expirations
 		}
 		if inv.IsParameterSelected("Hostname") {
 			ret["hostname"] = inv.Input.Hostname
 		}
-		if inv.IsParameterSelected("Expirations") {
-			ret["expirations"] = inv.Input.Expirations
+		if inv.IsParameterSelected("Resources") {
+			ret["resources"] = inv.Input.Resources
+		}
+		if inv.IsParameterSelected("Vps") {
+			ret["vps"] = inv.Input.Vps
 		}
 	}
 
@@ -386,11 +386,11 @@ func (inv *ActionVpsSwapWithInvocation) makeMetaInputParams() map[string]interfa
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

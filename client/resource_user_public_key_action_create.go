@@ -18,23 +18,12 @@ func NewActionUserPublicKeyCreate(client *Client) *ActionUserPublicKeyCreate {
 
 // ActionUserPublicKeyCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPublicKeyCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionUserPublicKeyCreateMetaGlobalInput) SetNo(value bool) *ActionUserPublicKeyCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionUserPublicKeyCreateMetaGlobalInput) SetIncludes(value string) *ActionUserPublicKeyCreateMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionUserPublicKeyCreateMetaGlobalInput) SetIncludes(value string) *A
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionUserPublicKeyCreateMetaGlobalInput) SetNo(value bool) *ActionUserPublicKeyCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -72,22 +72,22 @@ func (in *ActionUserPublicKeyCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserPublicKeyCreateInput is a type for action input parameters
 type ActionUserPublicKeyCreateInput struct {
-	Label string `json:"label"`
-	Key string `json:"key"`
 	AutoAdd bool `json:"auto_add"`
+	Key string `json:"key"`
+	Label string `json:"label"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetLabel sets parameter Label to value and selects it for sending
-func (in *ActionUserPublicKeyCreateInput) SetLabel(value string) *ActionUserPublicKeyCreateInput {
-	in.Label = value
+// SetAutoAdd sets parameter AutoAdd to value and selects it for sending
+func (in *ActionUserPublicKeyCreateInput) SetAutoAdd(value bool) *ActionUserPublicKeyCreateInput {
+	in.AutoAdd = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Label"] = nil
+	in._selectedParameters["AutoAdd"] = nil
 	return in
 }
 // SetKey sets parameter Key to value and selects it for sending
@@ -101,15 +101,15 @@ func (in *ActionUserPublicKeyCreateInput) SetKey(value string) *ActionUserPublic
 	in._selectedParameters["Key"] = nil
 	return in
 }
-// SetAutoAdd sets parameter AutoAdd to value and selects it for sending
-func (in *ActionUserPublicKeyCreateInput) SetAutoAdd(value bool) *ActionUserPublicKeyCreateInput {
-	in.AutoAdd = value
+// SetLabel sets parameter Label to value and selects it for sending
+func (in *ActionUserPublicKeyCreateInput) SetLabel(value string) *ActionUserPublicKeyCreateInput {
+	in.Label = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["AutoAdd"] = nil
+	in._selectedParameters["Label"] = nil
 	return in
 }
 
@@ -144,13 +144,13 @@ type ActionUserPublicKeyCreateRequest struct {
 
 // ActionUserPublicKeyCreateOutput is a type for action output parameters
 type ActionUserPublicKeyCreateOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	Key string `json:"key"`
 	AutoAdd bool `json:"auto_add"`
-	Fingerprint string `json:"fingerprint"`
 	Comment string `json:"comment"`
 	CreatedAt string `json:"created_at"`
+	Fingerprint string `json:"fingerprint"`
+	Id int64 `json:"id"`
+	Key string `json:"key"`
+	Label string `json:"label"`
 	UpdatedAt string `json:"updated_at"`
 }
 
@@ -275,14 +275,14 @@ func (inv *ActionUserPublicKeyCreateInvocation) makeInputParams() map[string]int
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Label") {
-			ret["label"] = inv.Input.Label
+		if inv.IsParameterSelected("AutoAdd") {
+			ret["auto_add"] = inv.Input.AutoAdd
 		}
 		if inv.IsParameterSelected("Key") {
 			ret["key"] = inv.Input.Key
 		}
-		if inv.IsParameterSelected("AutoAdd") {
-			ret["auto_add"] = inv.Input.AutoAdd
+		if inv.IsParameterSelected("Label") {
+			ret["label"] = inv.Input.Label
 		}
 	}
 
@@ -293,11 +293,11 @@ func (inv *ActionUserPublicKeyCreateInvocation) makeMetaInputParams() map[string
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

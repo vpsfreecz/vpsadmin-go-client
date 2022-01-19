@@ -17,23 +17,12 @@ func NewActionNetworkCreate(client *Client) *ActionNetworkCreate {
 
 // ActionNetworkCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionNetworkCreateMetaGlobalInput) SetNo(value bool) *ActionNetworkCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionNetworkCreateMetaGlobalInput) SetIncludes(value string) *ActionNetworkCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionNetworkCreateMetaGlobalInput) SetIncludes(value string) *ActionN
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionNetworkCreateMetaGlobalInput) SetNo(value bool) *ActionNetworkCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,41 +71,29 @@ func (in *ActionNetworkCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkCreateInput is a type for action input parameters
 type ActionNetworkCreateInput struct {
-	Label string `json:"label"`
-	IpVersion int64 `json:"ip_version"`
+	AddIpAddresses bool `json:"add_ip_addresses"`
 	Address string `json:"address"`
-	Prefix int64 `json:"prefix"`
-	Role string `json:"role"`
+	IpVersion int64 `json:"ip_version"`
+	Label string `json:"label"`
 	Managed bool `json:"managed"`
+	Prefix int64 `json:"prefix"`
+	Purpose string `json:"purpose"`
+	Role string `json:"role"`
 	SplitAccess string `json:"split_access"`
 	SplitPrefix int64 `json:"split_prefix"`
-	Autopick bool `json:"autopick"`
-	Purpose string `json:"purpose"`
-	AddIpAddresses bool `json:"add_ip_addresses"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetLabel sets parameter Label to value and selects it for sending
-func (in *ActionNetworkCreateInput) SetLabel(value string) *ActionNetworkCreateInput {
-	in.Label = value
+// SetAddIpAddresses sets parameter AddIpAddresses to value and selects it for sending
+func (in *ActionNetworkCreateInput) SetAddIpAddresses(value bool) *ActionNetworkCreateInput {
+	in.AddIpAddresses = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Label"] = nil
-	return in
-}
-// SetIpVersion sets parameter IpVersion to value and selects it for sending
-func (in *ActionNetworkCreateInput) SetIpVersion(value int64) *ActionNetworkCreateInput {
-	in.IpVersion = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["IpVersion"] = nil
+	in._selectedParameters["AddIpAddresses"] = nil
 	return in
 }
 // SetAddress sets parameter Address to value and selects it for sending
@@ -119,26 +107,26 @@ func (in *ActionNetworkCreateInput) SetAddress(value string) *ActionNetworkCreat
 	in._selectedParameters["Address"] = nil
 	return in
 }
-// SetPrefix sets parameter Prefix to value and selects it for sending
-func (in *ActionNetworkCreateInput) SetPrefix(value int64) *ActionNetworkCreateInput {
-	in.Prefix = value
+// SetIpVersion sets parameter IpVersion to value and selects it for sending
+func (in *ActionNetworkCreateInput) SetIpVersion(value int64) *ActionNetworkCreateInput {
+	in.IpVersion = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Prefix"] = nil
+	in._selectedParameters["IpVersion"] = nil
 	return in
 }
-// SetRole sets parameter Role to value and selects it for sending
-func (in *ActionNetworkCreateInput) SetRole(value string) *ActionNetworkCreateInput {
-	in.Role = value
+// SetLabel sets parameter Label to value and selects it for sending
+func (in *ActionNetworkCreateInput) SetLabel(value string) *ActionNetworkCreateInput {
+	in.Label = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Role"] = nil
+	in._selectedParameters["Label"] = nil
 	return in
 }
 // SetManaged sets parameter Managed to value and selects it for sending
@@ -150,6 +138,39 @@ func (in *ActionNetworkCreateInput) SetManaged(value bool) *ActionNetworkCreateI
 	}
 
 	in._selectedParameters["Managed"] = nil
+	return in
+}
+// SetPrefix sets parameter Prefix to value and selects it for sending
+func (in *ActionNetworkCreateInput) SetPrefix(value int64) *ActionNetworkCreateInput {
+	in.Prefix = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Prefix"] = nil
+	return in
+}
+// SetPurpose sets parameter Purpose to value and selects it for sending
+func (in *ActionNetworkCreateInput) SetPurpose(value string) *ActionNetworkCreateInput {
+	in.Purpose = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Purpose"] = nil
+	return in
+}
+// SetRole sets parameter Role to value and selects it for sending
+func (in *ActionNetworkCreateInput) SetRole(value string) *ActionNetworkCreateInput {
+	in.Role = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Role"] = nil
 	return in
 }
 // SetSplitAccess sets parameter SplitAccess to value and selects it for sending
@@ -172,39 +193,6 @@ func (in *ActionNetworkCreateInput) SetSplitPrefix(value int64) *ActionNetworkCr
 	}
 
 	in._selectedParameters["SplitPrefix"] = nil
-	return in
-}
-// SetAutopick sets parameter Autopick to value and selects it for sending
-func (in *ActionNetworkCreateInput) SetAutopick(value bool) *ActionNetworkCreateInput {
-	in.Autopick = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Autopick"] = nil
-	return in
-}
-// SetPurpose sets parameter Purpose to value and selects it for sending
-func (in *ActionNetworkCreateInput) SetPurpose(value string) *ActionNetworkCreateInput {
-	in.Purpose = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Purpose"] = nil
-	return in
-}
-// SetAddIpAddresses sets parameter AddIpAddresses to value and selects it for sending
-func (in *ActionNetworkCreateInput) SetAddIpAddresses(value bool) *ActionNetworkCreateInput {
-	in.AddIpAddresses = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["AddIpAddresses"] = nil
 	return in
 }
 
@@ -239,21 +227,22 @@ type ActionNetworkCreateRequest struct {
 
 // ActionNetworkCreateOutput is a type for action output parameters
 type ActionNetworkCreateOutput struct {
-	Id int64 `json:"id"`
-	Label string `json:"label"`
-	IpVersion int64 `json:"ip_version"`
 	Address string `json:"address"`
-	Prefix int64 `json:"prefix"`
-	Role string `json:"role"`
+	Assigned int64 `json:"assigned"`
+	Id int64 `json:"id"`
+	IpVersion int64 `json:"ip_version"`
+	Label string `json:"label"`
 	Managed bool `json:"managed"`
+	Owned int64 `json:"owned"`
+	Prefix int64 `json:"prefix"`
+	PrimaryLocation *ActionLocationShowOutput `json:"primary_location"`
+	Purpose string `json:"purpose"`
+	Role string `json:"role"`
+	Size int64 `json:"size"`
 	SplitAccess string `json:"split_access"`
 	SplitPrefix int64 `json:"split_prefix"`
-	Autopick bool `json:"autopick"`
-	Purpose string `json:"purpose"`
-	Size int64 `json:"size"`
+	Taken int64 `json:"taken"`
 	Used int64 `json:"used"`
-	Assigned int64 `json:"assigned"`
-	Owned int64 `json:"owned"`
 }
 
 // ActionNetworkCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -448,38 +437,35 @@ func (inv *ActionNetworkCreateInvocation) makeInputParams() map[string]interface
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Label") {
-			ret["label"] = inv.Input.Label
-		}
-		if inv.IsParameterSelected("IpVersion") {
-			ret["ip_version"] = inv.Input.IpVersion
+		if inv.IsParameterSelected("AddIpAddresses") {
+			ret["add_ip_addresses"] = inv.Input.AddIpAddresses
 		}
 		if inv.IsParameterSelected("Address") {
 			ret["address"] = inv.Input.Address
 		}
-		if inv.IsParameterSelected("Prefix") {
-			ret["prefix"] = inv.Input.Prefix
+		if inv.IsParameterSelected("IpVersion") {
+			ret["ip_version"] = inv.Input.IpVersion
 		}
-		if inv.IsParameterSelected("Role") {
-			ret["role"] = inv.Input.Role
+		if inv.IsParameterSelected("Label") {
+			ret["label"] = inv.Input.Label
 		}
 		if inv.IsParameterSelected("Managed") {
 			ret["managed"] = inv.Input.Managed
+		}
+		if inv.IsParameterSelected("Prefix") {
+			ret["prefix"] = inv.Input.Prefix
+		}
+		if inv.IsParameterSelected("Purpose") {
+			ret["purpose"] = inv.Input.Purpose
+		}
+		if inv.IsParameterSelected("Role") {
+			ret["role"] = inv.Input.Role
 		}
 		if inv.IsParameterSelected("SplitAccess") {
 			ret["split_access"] = inv.Input.SplitAccess
 		}
 		if inv.IsParameterSelected("SplitPrefix") {
 			ret["split_prefix"] = inv.Input.SplitPrefix
-		}
-		if inv.IsParameterSelected("Autopick") {
-			ret["autopick"] = inv.Input.Autopick
-		}
-		if inv.IsParameterSelected("Purpose") {
-			ret["purpose"] = inv.Input.Purpose
-		}
-		if inv.IsParameterSelected("AddIpAddresses") {
-			ret["add_ip_addresses"] = inv.Input.AddIpAddresses
 		}
 	}
 
@@ -490,11 +476,11 @@ func (inv *ActionNetworkCreateInvocation) makeMetaInputParams() map[string]inter
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

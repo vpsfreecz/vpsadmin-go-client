@@ -17,24 +17,13 @@ func NewActionIncomingPaymentIndex(client *Client) *ActionIncomingPaymentIndex {
 
 // ActionIncomingPaymentIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionIncomingPaymentIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionIncomingPaymentIndexMetaGlobalInput) SetNo(value bool) *ActionIncomingPaymentIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionIncomingPaymentIndexMetaGlobalInput) SetCount(value bool) *ActionIncomingPaymentIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionIncomingPaymentIndexMetaGlobalInput) SetIncludes(value string) *
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionIncomingPaymentIndexMetaGlobalInput) SetNo(value bool) *ActionIncomingPaymentIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,24 +83,13 @@ func (in *ActionIncomingPaymentIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionIncomingPaymentIndexInput is a type for action input parameters
 type ActionIncomingPaymentIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	State string `json:"state"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionIncomingPaymentIndexInput) SetOffset(value int64) *ActionIncomingPaymentIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionIncomingPaymentIndexInput) SetLimit(value int64) *ActionIncomingPaymentIndexInput {
 	in.Limit = value
@@ -110,6 +99,17 @@ func (in *ActionIncomingPaymentIndexInput) SetLimit(value int64) *ActionIncoming
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionIncomingPaymentIndexInput) SetOffset(value int64) *ActionIncomingPaymentIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetState sets parameter State to value and selects it for sending
@@ -150,23 +150,23 @@ func (in *ActionIncomingPaymentIndexInput) AnySelected() bool {
 
 // ActionIncomingPaymentIndexOutput is a type for action output parameters
 type ActionIncomingPaymentIndexOutput struct {
-	Id int64 `json:"id"`
-	TransactionId string `json:"transaction_id"`
-	State string `json:"state"`
-	Date string `json:"date"`
+	AccountName string `json:"account_name"`
 	Amount int64 `json:"amount"`
+	Comment string `json:"comment"`
+	CreatedAt string `json:"created_at"`
 	Currency string `json:"currency"`
+	Date string `json:"date"`
+	Id int64 `json:"id"`
+	Ks string `json:"ks"`
 	SrcAmount int64 `json:"src_amount"`
 	SrcCurrency string `json:"src_currency"`
-	AccountName string `json:"account_name"`
+	Ss string `json:"ss"`
+	State string `json:"state"`
+	TransactionId string `json:"transaction_id"`
+	TransactionType string `json:"transaction_type"`
 	UserIdent string `json:"user_ident"`
 	UserMessage string `json:"user_message"`
 	Vs string `json:"vs"`
-	Ks string `json:"ks"`
-	Ss string `json:"ss"`
-	TransactionType string `json:"transaction_type"`
-	Comment string `json:"comment"`
-	CreatedAt string `json:"created_at"`
 }
 
 
@@ -271,11 +271,11 @@ func (inv *ActionIncomingPaymentIndexInvocation) callAsQuery() (*ActionIncomingP
 
 func (inv *ActionIncomingPaymentIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["incoming_payment[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["incoming_payment[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["incoming_payment[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("State") {
 			ret["incoming_payment[state]"] = inv.Input.State
@@ -285,14 +285,14 @@ func (inv *ActionIncomingPaymentIndexInvocation) convertInputToQueryParams(ret m
 
 func (inv *ActionIncomingPaymentIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

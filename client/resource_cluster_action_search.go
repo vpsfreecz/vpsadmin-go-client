@@ -107,9 +107,9 @@ type ActionClusterSearchRequest struct {
 
 // ActionClusterSearchOutput is a type for action output parameters
 type ActionClusterSearchOutput struct {
-	Resource string `json:"resource"`
-	Id int64 `json:"id"`
 	Attribute string `json:"attribute"`
+	Id int64 `json:"id"`
+	Resource string `json:"resource"`
 	Value string `json:"value"`
 }
 

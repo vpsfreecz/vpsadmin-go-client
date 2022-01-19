@@ -18,24 +18,13 @@ func NewActionExportHostIndex(client *Client) *ActionExportHostIndex {
 
 // ActionExportHostIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionExportHostIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionExportHostIndexMetaGlobalInput) SetNo(value bool) *ActionExportHostIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionExportHostIndexMetaGlobalInput) SetCount(value bool) *ActionExportHostIndexMetaGlobalInput {
 	in.Count = value
@@ -56,6 +45,17 @@ func (in *ActionExportHostIndexMetaGlobalInput) SetIncludes(value string) *Actio
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionExportHostIndexMetaGlobalInput) SetNo(value bool) *ActionExportHostIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -84,23 +84,12 @@ func (in *ActionExportHostIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionExportHostIndexInput is a type for action input parameters
 type ActionExportHostIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionExportHostIndexInput) SetOffset(value int64) *ActionExportHostIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionExportHostIndexInput) SetLimit(value int64) *ActionExportHostIndexInput {
 	in.Limit = value
@@ -110,6 +99,17 @@ func (in *ActionExportHostIndexInput) SetLimit(value int64) *ActionExportHostInd
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionExportHostIndexInput) SetOffset(value int64) *ActionExportHostIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -141,10 +141,10 @@ func (in *ActionExportHostIndexInput) AnySelected() bool {
 type ActionExportHostIndexOutput struct {
 	Id int64 `json:"id"`
 	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
-	Rw bool `json:"rw"`
-	Sync bool `json:"sync"`
-	SubtreeCheck bool `json:"subtree_check"`
 	RootSquash bool `json:"root_squash"`
+	Rw bool `json:"rw"`
+	SubtreeCheck bool `json:"subtree_check"`
+	Sync bool `json:"sync"`
 }
 
 
@@ -259,25 +259,25 @@ func (inv *ActionExportHostIndexInvocation) callAsQuery() (*ActionExportHostInde
 
 func (inv *ActionExportHostIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["host[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["host[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["host[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }
 
 func (inv *ActionExportHostIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

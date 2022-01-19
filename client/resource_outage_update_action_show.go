@@ -18,23 +18,12 @@ func NewActionOutageUpdateShow(client *Client) *ActionOutageUpdateShow {
 
 // ActionOutageUpdateShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageUpdateShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionOutageUpdateShowMetaGlobalInput) SetNo(value bool) *ActionOutageUpdateShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionOutageUpdateShowMetaGlobalInput) SetIncludes(value string) *ActionOutageUpdateShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionOutageUpdateShowMetaGlobalInput) SetIncludes(value string) *Acti
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionOutageUpdateShowMetaGlobalInput) SetNo(value bool) *ActionOutageUpdateShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,20 +74,20 @@ func (in *ActionOutageUpdateShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageUpdateShowOutput is a type for action output parameters
 type ActionOutageUpdateShowOutput struct {
+	BeginsAt string `json:"begins_at"`
+	CreatedAt string `json:"created_at"`
+	CsDescription string `json:"cs_description"`
+	CsSummary string `json:"cs_summary"`
+	Duration int64 `json:"duration"`
+	EnDescription string `json:"en_description"`
+	EnSummary string `json:"en_summary"`
+	FinishedAt string `json:"finished_at"`
 	Id int64 `json:"id"`
 	Outage *ActionOutageShowOutput `json:"outage"`
-	BeginsAt string `json:"begins_at"`
-	FinishedAt string `json:"finished_at"`
-	Duration int64 `json:"duration"`
-	State string `json:"state"`
-	Type string `json:"type"`
-	EnSummary string `json:"en_summary"`
-	EnDescription string `json:"en_description"`
-	CsSummary string `json:"cs_summary"`
-	CsDescription string `json:"cs_description"`
 	ReportedBy *ActionUserShowOutput `json:"reported_by"`
 	ReporterName string `json:"reporter_name"`
-	CreatedAt string `json:"created_at"`
+	State string `json:"state"`
+	Type string `json:"type"`
 }
 
 
@@ -179,11 +179,11 @@ func (inv *ActionOutageUpdateShowInvocation) callAsQuery() (*ActionOutageUpdateS
 
 func (inv *ActionOutageUpdateShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

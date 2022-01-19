@@ -5,6 +5,14 @@ type ResourceDnsResolver struct {
 	// Pointer to client
 	Client *Client
 
+	// Action Dns_resolver#Create
+	Create *ActionDnsResolverCreate
+	// Action Dns_resolver#Create
+	New *ActionDnsResolverCreate
+	// Action Dns_resolver#Delete
+	Delete *ActionDnsResolverDelete
+	// Action Dns_resolver#Delete
+	Destroy *ActionDnsResolverDelete
 	// Action Dns_resolver#Index
 	Index *ActionDnsResolverIndex
 	// Action Dns_resolver#Index
@@ -13,35 +21,27 @@ type ResourceDnsResolver struct {
 	Show *ActionDnsResolverShow
 	// Action Dns_resolver#Show
 	Find *ActionDnsResolverShow
-	// Action Dns_resolver#Create
-	Create *ActionDnsResolverCreate
-	// Action Dns_resolver#Create
-	New *ActionDnsResolverCreate
 	// Action Dns_resolver#Update
 	Update *ActionDnsResolverUpdate
-	// Action Dns_resolver#Delete
-	Delete *ActionDnsResolverDelete
-	// Action Dns_resolver#Delete
-	Destroy *ActionDnsResolverDelete
 }
 
 func NewResourceDnsResolver(client *Client) *ResourceDnsResolver {
+	actionCreate := NewActionDnsResolverCreate(client)
+	actionDelete := NewActionDnsResolverDelete(client)
 	actionIndex := NewActionDnsResolverIndex(client)
 	actionShow := NewActionDnsResolverShow(client)
-	actionCreate := NewActionDnsResolverCreate(client)
 	actionUpdate := NewActionDnsResolverUpdate(client)
-	actionDelete := NewActionDnsResolverDelete(client)
 
 	return &ResourceDnsResolver{
 		Client: client,
+		Create: actionCreate,
+		New: actionCreate,
+		Delete: actionDelete,
+		Destroy: actionDelete,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Create: actionCreate,
-		New: actionCreate,
 		Update: actionUpdate,
-		Delete: actionDelete,
-		Destroy: actionDelete,
 	}
 }

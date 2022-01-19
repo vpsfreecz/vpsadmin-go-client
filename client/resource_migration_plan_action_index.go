@@ -17,24 +17,13 @@ func NewActionMigrationPlanIndex(client *Client) *ActionMigrationPlanIndex {
 
 // ActionMigrationPlanIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionMigrationPlanIndexMetaGlobalInput) SetNo(value bool) *ActionMigrationPlanIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionMigrationPlanIndexMetaGlobalInput) SetCount(value bool) *ActionMigrationPlanIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionMigrationPlanIndexMetaGlobalInput) SetIncludes(value string) *Ac
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionMigrationPlanIndexMetaGlobalInput) SetNo(value bool) *ActionMigrationPlanIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,25 +83,14 @@ func (in *ActionMigrationPlanIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMigrationPlanIndexInput is a type for action input parameters
 type ActionMigrationPlanIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	State string `json:"state"`
 	User int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionMigrationPlanIndexInput) SetOffset(value int64) *ActionMigrationPlanIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionMigrationPlanIndexInput) SetLimit(value int64) *ActionMigrationPlanIndexInput {
 	in.Limit = value
@@ -111,6 +100,17 @@ func (in *ActionMigrationPlanIndexInput) SetLimit(value int64) *ActionMigrationP
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionMigrationPlanIndexInput) SetOffset(value int64) *ActionMigrationPlanIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 // SetState sets parameter State to value and selects it for sending
@@ -162,15 +162,15 @@ func (in *ActionMigrationPlanIndexInput) AnySelected() bool {
 
 // ActionMigrationPlanIndexOutput is a type for action output parameters
 type ActionMigrationPlanIndexOutput struct {
-	Id int64 `json:"id"`
-	State string `json:"state"`
-	StopOnError bool `json:"stop_on_error"`
-	SendMail bool `json:"send_mail"`
 	Concurrency int64 `json:"concurrency"`
-	Reason string `json:"reason"`
-	User *ActionUserShowOutput `json:"user"`
 	CreatedAt string `json:"created_at"`
 	FinishedAt string `json:"finished_at"`
+	Id int64 `json:"id"`
+	Reason string `json:"reason"`
+	SendMail bool `json:"send_mail"`
+	State string `json:"state"`
+	StopOnError bool `json:"stop_on_error"`
+	User *ActionUserShowOutput `json:"user"`
 }
 
 
@@ -275,11 +275,11 @@ func (inv *ActionMigrationPlanIndexInvocation) callAsQuery() (*ActionMigrationPl
 
 func (inv *ActionMigrationPlanIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["migration_plan[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["migration_plan[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["migration_plan[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("State") {
 			ret["migration_plan[state]"] = inv.Input.State
@@ -292,14 +292,14 @@ func (inv *ActionMigrationPlanIndexInvocation) convertInputToQueryParams(ret map
 
 func (inv *ActionMigrationPlanIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

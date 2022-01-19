@@ -17,24 +17,13 @@ func NewActionOsTemplateIndex(client *Client) *ActionOsTemplateIndex {
 
 // ActionOsTemplateIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOsTemplateIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionOsTemplateIndexMetaGlobalInput) SetNo(value bool) *ActionOsTemplateIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionOsTemplateIndexMetaGlobalInput) SetCount(value bool) *ActionOsTemplateIndexMetaGlobalInput {
 	in.Count = value
@@ -55,6 +44,17 @@ func (in *ActionOsTemplateIndexMetaGlobalInput) SetIncludes(value string) *Actio
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionOsTemplateIndexMetaGlobalInput) SetNo(value bool) *ActionOsTemplateIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -83,23 +83,23 @@ func (in *ActionOsTemplateIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOsTemplateIndexInput is a type for action input parameters
 type ActionOsTemplateIndexInput struct {
-	Offset int64 `json:"offset"`
+	HypervisorType string `json:"hypervisor_type"`
 	Limit int64 `json:"limit"`
 	Location int64 `json:"location"`
-	HypervisorType string `json:"hypervisor_type"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionOsTemplateIndexInput) SetOffset(value int64) *ActionOsTemplateIndexInput {
-	in.Offset = value
+// SetHypervisorType sets parameter HypervisorType to value and selects it for sending
+func (in *ActionOsTemplateIndexInput) SetHypervisorType(value string) *ActionOsTemplateIndexInput {
+	in.HypervisorType = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Offset"] = nil
+	in._selectedParameters["HypervisorType"] = nil
 	return in
 }
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -124,15 +124,15 @@ func (in *ActionOsTemplateIndexInput) SetLocation(value int64) *ActionOsTemplate
 	in._selectedParameters["Location"] = nil
 	return in
 }
-// SetHypervisorType sets parameter HypervisorType to value and selects it for sending
-func (in *ActionOsTemplateIndexInput) SetHypervisorType(value string) *ActionOsTemplateIndexInput {
-	in.HypervisorType = value
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionOsTemplateIndexInput) SetOffset(value int64) *ActionOsTemplateIndexInput {
+	in.Offset = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["HypervisorType"] = nil
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -162,14 +162,14 @@ func (in *ActionOsTemplateIndexInput) AnySelected() bool {
 
 // ActionOsTemplateIndexOutput is a type for action output parameters
 type ActionOsTemplateIndexOutput struct {
-	Id int64 `json:"id"`
-	Name string `json:"name"`
-	Label string `json:"label"`
-	Info string `json:"info"`
 	Enabled bool `json:"enabled"`
-	Supported bool `json:"supported"`
-	Order int64 `json:"order"`
 	HypervisorType string `json:"hypervisor_type"`
+	Id int64 `json:"id"`
+	Info string `json:"info"`
+	Label string `json:"label"`
+	Name string `json:"name"`
+	Order int64 `json:"order"`
+	Supported bool `json:"supported"`
 }
 
 
@@ -274,8 +274,8 @@ func (inv *ActionOsTemplateIndexInvocation) callAsQuery() (*ActionOsTemplateInde
 
 func (inv *ActionOsTemplateIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["os_template[offset]"] = convertInt64ToString(inv.Input.Offset)
+		if inv.IsParameterSelected("HypervisorType") {
+			ret["os_template[hypervisor_type]"] = inv.Input.HypervisorType
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["os_template[limit]"] = convertInt64ToString(inv.Input.Limit)
@@ -283,22 +283,22 @@ func (inv *ActionOsTemplateIndexInvocation) convertInputToQueryParams(ret map[st
 		if inv.IsParameterSelected("Location") {
 			ret["os_template[location]"] = convertInt64ToString(inv.Input.Location)
 		}
-		if inv.IsParameterSelected("HypervisorType") {
-			ret["os_template[hypervisor_type]"] = inv.Input.HypervisorType
+		if inv.IsParameterSelected("Offset") {
+			ret["os_template[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }
 
 func (inv *ActionOsTemplateIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

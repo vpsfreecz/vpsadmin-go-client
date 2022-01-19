@@ -9,6 +9,14 @@ type ResourceMailTemplate struct {
 	Recipient *ResourceMailTemplateRecipient
 	// Resource Mail_template.Translation
 	Translation *ResourceMailTemplateTranslation
+	// Action Mail_template#Create
+	Create *ActionMailTemplateCreate
+	// Action Mail_template#Create
+	New *ActionMailTemplateCreate
+	// Action Mail_template#Delete
+	Delete *ActionMailTemplateDelete
+	// Action Mail_template#Delete
+	Destroy *ActionMailTemplateDelete
 	// Action Mail_template#Index
 	Index *ActionMailTemplateIndex
 	// Action Mail_template#Index
@@ -17,37 +25,29 @@ type ResourceMailTemplate struct {
 	Show *ActionMailTemplateShow
 	// Action Mail_template#Show
 	Find *ActionMailTemplateShow
-	// Action Mail_template#Create
-	Create *ActionMailTemplateCreate
-	// Action Mail_template#Create
-	New *ActionMailTemplateCreate
 	// Action Mail_template#Update
 	Update *ActionMailTemplateUpdate
-	// Action Mail_template#Delete
-	Delete *ActionMailTemplateDelete
-	// Action Mail_template#Delete
-	Destroy *ActionMailTemplateDelete
 }
 
 func NewResourceMailTemplate(client *Client) *ResourceMailTemplate {
+	actionCreate := NewActionMailTemplateCreate(client)
+	actionDelete := NewActionMailTemplateDelete(client)
 	actionIndex := NewActionMailTemplateIndex(client)
 	actionShow := NewActionMailTemplateShow(client)
-	actionCreate := NewActionMailTemplateCreate(client)
 	actionUpdate := NewActionMailTemplateUpdate(client)
-	actionDelete := NewActionMailTemplateDelete(client)
 
 	return &ResourceMailTemplate{
 		Client: client,
 		Recipient: NewResourceMailTemplateRecipient(client),
 		Translation: NewResourceMailTemplateTranslation(client),
+		Create: actionCreate,
+		New: actionCreate,
+		Delete: actionDelete,
+		Destroy: actionDelete,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Create: actionCreate,
-		New: actionCreate,
 		Update: actionUpdate,
-		Delete: actionDelete,
-		Destroy: actionDelete,
 	}
 }

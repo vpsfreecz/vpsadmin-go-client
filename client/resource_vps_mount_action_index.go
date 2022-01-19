@@ -18,24 +18,13 @@ func NewActionVpsMountIndex(client *Client) *ActionVpsMountIndex {
 
 // ActionVpsMountIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMountIndexMetaGlobalInput struct {
-	No bool `json:"no"`
 	Count bool `json:"count"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsMountIndexMetaGlobalInput) SetNo(value bool) *ActionVpsMountIndexMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetCount sets parameter Count to value and selects it for sending
 func (in *ActionVpsMountIndexMetaGlobalInput) SetCount(value bool) *ActionVpsMountIndexMetaGlobalInput {
 	in.Count = value
@@ -56,6 +45,17 @@ func (in *ActionVpsMountIndexMetaGlobalInput) SetIncludes(value string) *ActionV
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsMountIndexMetaGlobalInput) SetNo(value bool) *ActionVpsMountIndexMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -84,23 +84,12 @@ func (in *ActionVpsMountIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMountIndexInput is a type for action input parameters
 type ActionVpsMountIndexInput struct {
-	Offset int64 `json:"offset"`
 	Limit int64 `json:"limit"`
+	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionVpsMountIndexInput) SetOffset(value int64) *ActionVpsMountIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionVpsMountIndexInput) SetLimit(value int64) *ActionVpsMountIndexInput {
 	in.Limit = value
@@ -110,6 +99,17 @@ func (in *ActionVpsMountIndexInput) SetLimit(value int64) *ActionVpsMountIndexIn
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+// SetOffset sets parameter Offset to value and selects it for sending
+func (in *ActionVpsMountIndexInput) SetOffset(value int64) *ActionVpsMountIndexInput {
+	in.Offset = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -139,18 +139,18 @@ func (in *ActionVpsMountIndexInput) AnySelected() bool {
 
 // ActionVpsMountIndexOutput is a type for action output parameters
 type ActionVpsMountIndexOutput struct {
-	Id int64 `json:"id"`
-	Vps *ActionVpsShowOutput `json:"vps"`
+	CurrentState string `json:"current_state"`
 	Dataset *ActionDatasetShowOutput `json:"dataset"`
+	Enabled bool `json:"enabled"`
+	ExpirationDate string `json:"expiration_date"`
+	Id int64 `json:"id"`
+	MasterEnabled bool `json:"master_enabled"`
+	Mode string `json:"mode"`
+	Mountpoint string `json:"mountpoint"`
+	OnStartFail string `json:"on_start_fail"`
 	Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
 	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
-	Mountpoint string `json:"mountpoint"`
-	Mode string `json:"mode"`
-	OnStartFail string `json:"on_start_fail"`
-	ExpirationDate string `json:"expiration_date"`
-	Enabled bool `json:"enabled"`
-	MasterEnabled bool `json:"master_enabled"`
-	CurrentState string `json:"current_state"`
+	Vps *ActionVpsShowOutput `json:"vps"`
 }
 
 
@@ -265,25 +265,25 @@ func (inv *ActionVpsMountIndexInvocation) callAsQuery() (*ActionVpsMountIndexRes
 
 func (inv *ActionVpsMountIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Offset") {
-			ret["mount[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Limit") {
 			ret["mount[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("Offset") {
+			ret["mount[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }
 
 func (inv *ActionVpsMountIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

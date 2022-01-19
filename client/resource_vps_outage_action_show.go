@@ -18,23 +18,12 @@ func NewActionVpsOutageShow(client *Client) *ActionVpsOutageShow {
 
 // ActionVpsOutageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsOutageShowMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionVpsOutageShowMetaGlobalInput) SetNo(value bool) *ActionVpsOutageShowMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionVpsOutageShowMetaGlobalInput) SetIncludes(value string) *ActionVpsOutageShowMetaGlobalInput {
 	in.Includes = value
@@ -44,6 +33,17 @@ func (in *ActionVpsOutageShowMetaGlobalInput) SetIncludes(value string) *ActionV
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionVpsOutageShowMetaGlobalInput) SetNo(value bool) *ActionVpsOutageShowMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -74,14 +74,14 @@ func (in *ActionVpsOutageShowMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsOutageShowOutput is a type for action output parameters
 type ActionVpsOutageShowOutput struct {
-	Id int64 `json:"id"`
-	Outage *ActionOutageShowOutput `json:"outage"`
-	Vps *ActionVpsShowOutput `json:"vps"`
-	User *ActionUserShowOutput `json:"user"`
+	Direct bool `json:"direct"`
 	Environment *ActionEnvironmentShowOutput `json:"environment"`
+	Id int64 `json:"id"`
 	Location *ActionLocationShowOutput `json:"location"`
 	Node *ActionNodeShowOutput `json:"node"`
-	Direct bool `json:"direct"`
+	Outage *ActionOutageShowOutput `json:"outage"`
+	User *ActionUserShowOutput `json:"user"`
+	Vps *ActionVpsShowOutput `json:"vps"`
 }
 
 
@@ -173,11 +173,11 @@ func (inv *ActionVpsOutageShowInvocation) callAsQuery() (*ActionVpsOutageShowRes
 
 func (inv *ActionVpsOutageShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["_meta[includes]"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
 }

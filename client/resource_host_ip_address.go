@@ -5,6 +5,10 @@ type ResourceHostIpAddress struct {
 	// Pointer to client
 	Client *Client
 
+	// Action Host_ip_address#Assign
+	Assign *ActionHostIpAddressAssign
+	// Action Host_ip_address#Free
+	Free *ActionHostIpAddressFree
 	// Action Host_ip_address#Index
 	Index *ActionHostIpAddressIndex
 	// Action Host_ip_address#Index
@@ -13,25 +17,21 @@ type ResourceHostIpAddress struct {
 	Show *ActionHostIpAddressShow
 	// Action Host_ip_address#Show
 	Find *ActionHostIpAddressShow
-	// Action Host_ip_address#Assign
-	Assign *ActionHostIpAddressAssign
-	// Action Host_ip_address#Free
-	Free *ActionHostIpAddressFree
 }
 
 func NewResourceHostIpAddress(client *Client) *ResourceHostIpAddress {
-	actionIndex := NewActionHostIpAddressIndex(client)
-	actionShow := NewActionHostIpAddressShow(client)
 	actionAssign := NewActionHostIpAddressAssign(client)
 	actionFree := NewActionHostIpAddressFree(client)
+	actionIndex := NewActionHostIpAddressIndex(client)
+	actionShow := NewActionHostIpAddressShow(client)
 
 	return &ResourceHostIpAddress{
 		Client: client,
+		Assign: actionAssign,
+		Free: actionFree,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Assign: actionAssign,
-		Free: actionFree,
 	}
 }

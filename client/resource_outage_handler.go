@@ -5,6 +5,14 @@ type ResourceOutageHandler struct {
 	// Pointer to client
 	Client *Client
 
+	// Action Outage.Handler#Create
+	Create *ActionOutageHandlerCreate
+	// Action Outage.Handler#Create
+	New *ActionOutageHandlerCreate
+	// Action Outage.Handler#Delete
+	Delete *ActionOutageHandlerDelete
+	// Action Outage.Handler#Delete
+	Destroy *ActionOutageHandlerDelete
 	// Action Outage.Handler#Index
 	Index *ActionOutageHandlerIndex
 	// Action Outage.Handler#Index
@@ -13,35 +21,27 @@ type ResourceOutageHandler struct {
 	Show *ActionOutageHandlerShow
 	// Action Outage.Handler#Show
 	Find *ActionOutageHandlerShow
-	// Action Outage.Handler#Create
-	Create *ActionOutageHandlerCreate
-	// Action Outage.Handler#Create
-	New *ActionOutageHandlerCreate
 	// Action Outage.Handler#Update
 	Update *ActionOutageHandlerUpdate
-	// Action Outage.Handler#Delete
-	Delete *ActionOutageHandlerDelete
-	// Action Outage.Handler#Delete
-	Destroy *ActionOutageHandlerDelete
 }
 
 func NewResourceOutageHandler(client *Client) *ResourceOutageHandler {
+	actionCreate := NewActionOutageHandlerCreate(client)
+	actionDelete := NewActionOutageHandlerDelete(client)
 	actionIndex := NewActionOutageHandlerIndex(client)
 	actionShow := NewActionOutageHandlerShow(client)
-	actionCreate := NewActionOutageHandlerCreate(client)
 	actionUpdate := NewActionOutageHandlerUpdate(client)
-	actionDelete := NewActionOutageHandlerDelete(client)
 
 	return &ResourceOutageHandler{
 		Client: client,
+		Create: actionCreate,
+		New: actionCreate,
+		Delete: actionDelete,
+		Destroy: actionDelete,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Create: actionCreate,
-		New: actionCreate,
 		Update: actionUpdate,
-		Delete: actionDelete,
-		Destroy: actionDelete,
 	}
 }

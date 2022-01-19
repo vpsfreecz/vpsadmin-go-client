@@ -17,23 +17,12 @@ func NewActionSessionTokenCreate(client *Client) *ActionSessionTokenCreate {
 
 // ActionSessionTokenCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionSessionTokenCreateMetaGlobalInput struct {
-	No bool `json:"no"`
 	Includes string `json:"includes"`
+	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetNo sets parameter No to value and selects it for sending
-func (in *ActionSessionTokenCreateMetaGlobalInput) SetNo(value bool) *ActionSessionTokenCreateMetaGlobalInput {
-	in.No = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["No"] = nil
-	return in
-}
 // SetIncludes sets parameter Includes to value and selects it for sending
 func (in *ActionSessionTokenCreateMetaGlobalInput) SetIncludes(value string) *ActionSessionTokenCreateMetaGlobalInput {
 	in.Includes = value
@@ -43,6 +32,17 @@ func (in *ActionSessionTokenCreateMetaGlobalInput) SetIncludes(value string) *Ac
 	}
 
 	in._selectedParameters["Includes"] = nil
+	return in
+}
+// SetNo sets parameter No to value and selects it for sending
+func (in *ActionSessionTokenCreateMetaGlobalInput) SetNo(value bool) *ActionSessionTokenCreateMetaGlobalInput {
+	in.No = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["No"] = nil
 	return in
 }
 
@@ -71,23 +71,23 @@ func (in *ActionSessionTokenCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionSessionTokenCreateInput is a type for action input parameters
 type ActionSessionTokenCreateInput struct {
-	User int64 `json:"user"`
+	Interval int64 `json:"interval"`
 	Label string `json:"label"`
 	Lifetime string `json:"lifetime"`
-	Interval int64 `json:"interval"`
+	User int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetUser sets parameter User to value and selects it for sending
-func (in *ActionSessionTokenCreateInput) SetUser(value int64) *ActionSessionTokenCreateInput {
-	in.User = value
+// SetInterval sets parameter Interval to value and selects it for sending
+func (in *ActionSessionTokenCreateInput) SetInterval(value int64) *ActionSessionTokenCreateInput {
+	in.Interval = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["User"] = nil
+	in._selectedParameters["Interval"] = nil
 	return in
 }
 // SetLabel sets parameter Label to value and selects it for sending
@@ -112,15 +112,15 @@ func (in *ActionSessionTokenCreateInput) SetLifetime(value string) *ActionSessio
 	in._selectedParameters["Lifetime"] = nil
 	return in
 }
-// SetInterval sets parameter Interval to value and selects it for sending
-func (in *ActionSessionTokenCreateInput) SetInterval(value int64) *ActionSessionTokenCreateInput {
-	in.Interval = value
+// SetUser sets parameter User to value and selects it for sending
+func (in *ActionSessionTokenCreateInput) SetUser(value int64) *ActionSessionTokenCreateInput {
+	in.User = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Interval"] = nil
+	in._selectedParameters["User"] = nil
 	return in
 }
 
@@ -155,15 +155,15 @@ type ActionSessionTokenCreateRequest struct {
 
 // ActionSessionTokenCreateOutput is a type for action output parameters
 type ActionSessionTokenCreateOutput struct {
+	CreatedAt string `json:"created_at"`
 	Id int64 `json:"id"`
-	User *ActionUserShowOutput `json:"user"`
-	Token string `json:"token"`
-	ValidTo string `json:"valid_to"`
+	Interval int64 `json:"interval"`
 	Label string `json:"label"`
 	Lifetime string `json:"lifetime"`
-	Interval int64 `json:"interval"`
+	Token string `json:"token"`
 	UseCount int64 `json:"use_count"`
-	CreatedAt string `json:"created_at"`
+	User *ActionUserShowOutput `json:"user"`
+	ValidTo string `json:"valid_to"`
 }
 
 
@@ -277,8 +277,8 @@ func (inv *ActionSessionTokenCreateInvocation) makeInputParams() map[string]inte
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("User") {
-			ret["user"] = inv.Input.User
+		if inv.IsParameterSelected("Interval") {
+			ret["interval"] = inv.Input.Interval
 		}
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
@@ -286,8 +286,8 @@ func (inv *ActionSessionTokenCreateInvocation) makeInputParams() map[string]inte
 		if inv.IsParameterSelected("Lifetime") {
 			ret["lifetime"] = inv.Input.Lifetime
 		}
-		if inv.IsParameterSelected("Interval") {
-			ret["interval"] = inv.Input.Interval
+		if inv.IsParameterSelected("User") {
+			ret["user"] = inv.Input.User
 		}
 	}
 
@@ -298,11 +298,11 @@ func (inv *ActionSessionTokenCreateInvocation) makeMetaInputParams() map[string]
 	ret := make(map[string]interface{})
 
 	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["no"] = inv.MetaInput.No
-		}
 		if inv.IsMetaParameterSelected("Includes") {
 			ret["includes"] = inv.MetaInput.Includes
+		}
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
 		}
 	}
 

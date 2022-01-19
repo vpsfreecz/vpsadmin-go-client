@@ -7,6 +7,14 @@ type ResourceClusterResourcePackage struct {
 
 	// Resource Cluster_resource_package.Item
 	Item *ResourceClusterResourcePackageItem
+	// Action Cluster_resource_package#Create
+	Create *ActionClusterResourcePackageCreate
+	// Action Cluster_resource_package#Create
+	New *ActionClusterResourcePackageCreate
+	// Action Cluster_resource_package#Delete
+	Delete *ActionClusterResourcePackageDelete
+	// Action Cluster_resource_package#Delete
+	Destroy *ActionClusterResourcePackageDelete
 	// Action Cluster_resource_package#Index
 	Index *ActionClusterResourcePackageIndex
 	// Action Cluster_resource_package#Index
@@ -15,36 +23,28 @@ type ResourceClusterResourcePackage struct {
 	Show *ActionClusterResourcePackageShow
 	// Action Cluster_resource_package#Show
 	Find *ActionClusterResourcePackageShow
-	// Action Cluster_resource_package#Create
-	Create *ActionClusterResourcePackageCreate
-	// Action Cluster_resource_package#Create
-	New *ActionClusterResourcePackageCreate
 	// Action Cluster_resource_package#Update
 	Update *ActionClusterResourcePackageUpdate
-	// Action Cluster_resource_package#Delete
-	Delete *ActionClusterResourcePackageDelete
-	// Action Cluster_resource_package#Delete
-	Destroy *ActionClusterResourcePackageDelete
 }
 
 func NewResourceClusterResourcePackage(client *Client) *ResourceClusterResourcePackage {
+	actionCreate := NewActionClusterResourcePackageCreate(client)
+	actionDelete := NewActionClusterResourcePackageDelete(client)
 	actionIndex := NewActionClusterResourcePackageIndex(client)
 	actionShow := NewActionClusterResourcePackageShow(client)
-	actionCreate := NewActionClusterResourcePackageCreate(client)
 	actionUpdate := NewActionClusterResourcePackageUpdate(client)
-	actionDelete := NewActionClusterResourcePackageDelete(client)
 
 	return &ResourceClusterResourcePackage{
 		Client: client,
 		Item: NewResourceClusterResourcePackageItem(client),
+		Create: actionCreate,
+		New: actionCreate,
+		Delete: actionDelete,
+		Destroy: actionDelete,
 		Index: actionIndex,
 		List: actionIndex,
 		Show: actionShow,
 		Find: actionShow,
-		Create: actionCreate,
-		New: actionCreate,
 		Update: actionUpdate,
-		Delete: actionDelete,
-		Destroy: actionDelete,
 	}
 }

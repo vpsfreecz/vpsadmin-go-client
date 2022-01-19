@@ -59,23 +59,23 @@ func (in *ActionPaymentStatsEstimateIncomeMetaGlobalInput) AnySelected() bool {
 
 // ActionPaymentStatsEstimateIncomeInput is a type for action input parameters
 type ActionPaymentStatsEstimateIncomeInput struct {
-	Year int64 `json:"year"`
+	Duration int64 `json:"duration"`
 	Month int64 `json:"month"`
 	Select string `json:"select"`
-	Duration int64 `json:"duration"`
+	Year int64 `json:"year"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
 
-// SetYear sets parameter Year to value and selects it for sending
-func (in *ActionPaymentStatsEstimateIncomeInput) SetYear(value int64) *ActionPaymentStatsEstimateIncomeInput {
-	in.Year = value
+// SetDuration sets parameter Duration to value and selects it for sending
+func (in *ActionPaymentStatsEstimateIncomeInput) SetDuration(value int64) *ActionPaymentStatsEstimateIncomeInput {
+	in.Duration = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Year"] = nil
+	in._selectedParameters["Duration"] = nil
 	return in
 }
 // SetMonth sets parameter Month to value and selects it for sending
@@ -100,15 +100,15 @@ func (in *ActionPaymentStatsEstimateIncomeInput) SetSelect(value string) *Action
 	in._selectedParameters["Select"] = nil
 	return in
 }
-// SetDuration sets parameter Duration to value and selects it for sending
-func (in *ActionPaymentStatsEstimateIncomeInput) SetDuration(value int64) *ActionPaymentStatsEstimateIncomeInput {
-	in.Duration = value
+// SetYear sets parameter Year to value and selects it for sending
+func (in *ActionPaymentStatsEstimateIncomeInput) SetYear(value int64) *ActionPaymentStatsEstimateIncomeInput {
+	in.Year = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Duration"] = nil
+	in._selectedParameters["Year"] = nil
 	return in
 }
 
@@ -138,8 +138,8 @@ func (in *ActionPaymentStatsEstimateIncomeInput) AnySelected() bool {
 
 // ActionPaymentStatsEstimateIncomeOutput is a type for action output parameters
 type ActionPaymentStatsEstimateIncomeOutput struct {
-	UserCount int64 `json:"user_count"`
 	EstimatedIncome int64 `json:"estimated_income"`
+	UserCount int64 `json:"user_count"`
 }
 
 
@@ -244,8 +244,8 @@ func (inv *ActionPaymentStatsEstimateIncomeInvocation) callAsQuery() (*ActionPay
 
 func (inv *ActionPaymentStatsEstimateIncomeInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Year") {
-			ret["payment_stats[year]"] = convertInt64ToString(inv.Input.Year)
+		if inv.IsParameterSelected("Duration") {
+			ret["payment_stats[duration]"] = convertInt64ToString(inv.Input.Duration)
 		}
 		if inv.IsParameterSelected("Month") {
 			ret["payment_stats[month]"] = convertInt64ToString(inv.Input.Month)
@@ -253,8 +253,8 @@ func (inv *ActionPaymentStatsEstimateIncomeInvocation) convertInputToQueryParams
 		if inv.IsParameterSelected("Select") {
 			ret["payment_stats[select]"] = inv.Input.Select
 		}
-		if inv.IsParameterSelected("Duration") {
-			ret["payment_stats[duration]"] = convertInt64ToString(inv.Input.Duration)
+		if inv.IsParameterSelected("Year") {
+			ret["payment_stats[year]"] = convertInt64ToString(inv.Input.Year)
 		}
 	}
 }
