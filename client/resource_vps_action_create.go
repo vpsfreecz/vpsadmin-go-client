@@ -89,6 +89,7 @@ type ActionVpsCreateInput struct {
 	Onboot           bool   `json:"onboot"`
 	Onstartall       bool   `json:"onstartall"`
 	OsTemplate       int64  `json:"os_template"`
+	StartMenuTimeout int64  `json:"start_menu_timeout"`
 	Swap             int64  `json:"swap"`
 	User             int64  `json:"user"`
 	UserNamespaceMap int64  `json:"user_namespace_map"`
@@ -312,6 +313,18 @@ func (in *ActionVpsCreateInput) SetOsTemplate(value int64) *ActionVpsCreateInput
 	return in
 }
 
+// SetStartMenuTimeout sets parameter StartMenuTimeout to value and selects it for sending
+func (in *ActionVpsCreateInput) SetStartMenuTimeout(value int64) *ActionVpsCreateInput {
+	in.StartMenuTimeout = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["StartMenuTimeout"] = nil
+	return in
+}
+
 // SetSwap sets parameter Swap to value and selects it for sending
 func (in *ActionVpsCreateInput) SetSwap(value int64) *ActionVpsCreateInput {
 	in.Swap = value
@@ -379,41 +392,42 @@ type ActionVpsCreateRequest struct {
 
 // ActionVpsCreateOutput is a type for action output parameters
 type ActionVpsCreateOutput struct {
-	Config         string                       `json:"config"`
-	Cpu            int64                        `json:"cpu"`
-	CpuIdle        float64                      `json:"cpu_idle"`
-	CpuIowait      float64                      `json:"cpu_iowait"`
-	CpuIrq         float64                      `json:"cpu_irq"`
-	CpuLimit       int64                        `json:"cpu_limit"`
-	CpuNice        float64                      `json:"cpu_nice"`
-	CpuSoftirq     float64                      `json:"cpu_softirq"`
-	CpuSystem      float64                      `json:"cpu_system"`
-	CpuUser        float64                      `json:"cpu_user"`
-	CreatedAt      string                       `json:"created_at"`
-	Dataset        *ActionDatasetShowOutput     `json:"dataset"`
-	Diskspace      int64                        `json:"diskspace"`
-	DnsResolver    *ActionDnsResolverShowOutput `json:"dns_resolver"`
-	ExpirationDate string                       `json:"expiration_date"`
-	Hostname       string                       `json:"hostname"`
-	Id             int64                        `json:"id"`
-	InRescueMode   bool                         `json:"in_rescue_mode"`
-	Info           string                       `json:"info"`
-	IsRunning      bool                         `json:"is_running"`
-	Loadavg        float64                      `json:"loadavg"`
-	ManageHostname bool                         `json:"manage_hostname"`
-	Memory         int64                        `json:"memory"`
-	Node           *ActionNodeShowOutput        `json:"node"`
-	ObjectState    string                       `json:"object_state"`
-	Onboot         bool                         `json:"onboot"`
-	Onstartall     bool                         `json:"onstartall"`
-	OsTemplate     *ActionOsTemplateShowOutput  `json:"os_template"`
-	ProcessCount   int64                        `json:"process_count"`
-	Swap           int64                        `json:"swap"`
-	Uptime         int64                        `json:"uptime"`
-	UsedDiskspace  int64                        `json:"used_diskspace"`
-	UsedMemory     int64                        `json:"used_memory"`
-	UsedSwap       int64                        `json:"used_swap"`
-	User           *ActionUserShowOutput        `json:"user"`
+	Config           string                       `json:"config"`
+	Cpu              int64                        `json:"cpu"`
+	CpuIdle          float64                      `json:"cpu_idle"`
+	CpuIowait        float64                      `json:"cpu_iowait"`
+	CpuIrq           float64                      `json:"cpu_irq"`
+	CpuLimit         int64                        `json:"cpu_limit"`
+	CpuNice          float64                      `json:"cpu_nice"`
+	CpuSoftirq       float64                      `json:"cpu_softirq"`
+	CpuSystem        float64                      `json:"cpu_system"`
+	CpuUser          float64                      `json:"cpu_user"`
+	CreatedAt        string                       `json:"created_at"`
+	Dataset          *ActionDatasetShowOutput     `json:"dataset"`
+	Diskspace        int64                        `json:"diskspace"`
+	DnsResolver      *ActionDnsResolverShowOutput `json:"dns_resolver"`
+	ExpirationDate   string                       `json:"expiration_date"`
+	Hostname         string                       `json:"hostname"`
+	Id               int64                        `json:"id"`
+	InRescueMode     bool                         `json:"in_rescue_mode"`
+	Info             string                       `json:"info"`
+	IsRunning        bool                         `json:"is_running"`
+	Loadavg          float64                      `json:"loadavg"`
+	ManageHostname   bool                         `json:"manage_hostname"`
+	Memory           int64                        `json:"memory"`
+	Node             *ActionNodeShowOutput        `json:"node"`
+	ObjectState      string                       `json:"object_state"`
+	Onboot           bool                         `json:"onboot"`
+	Onstartall       bool                         `json:"onstartall"`
+	OsTemplate       *ActionOsTemplateShowOutput  `json:"os_template"`
+	ProcessCount     int64                        `json:"process_count"`
+	StartMenuTimeout int64                        `json:"start_menu_timeout"`
+	Swap             int64                        `json:"swap"`
+	Uptime           int64                        `json:"uptime"`
+	UsedDiskspace    int64                        `json:"used_diskspace"`
+	UsedMemory       int64                        `json:"used_memory"`
+	UsedSwap         int64                        `json:"used_swap"`
+	User             *ActionUserShowOutput        `json:"user"`
 }
 
 // ActionVpsCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -657,6 +671,9 @@ func (inv *ActionVpsCreateInvocation) makeInputParams() map[string]interface{} {
 		}
 		if inv.IsParameterSelected("OsTemplate") {
 			ret["os_template"] = inv.Input.OsTemplate
+		}
+		if inv.IsParameterSelected("StartMenuTimeout") {
+			ret["start_menu_timeout"] = inv.Input.StartMenuTimeout
 		}
 		if inv.IsParameterSelected("Swap") {
 			ret["swap"] = inv.Input.Swap

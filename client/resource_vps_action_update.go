@@ -73,25 +73,26 @@ func (in *ActionVpsUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsUpdateInput is a type for action input parameters
 type ActionVpsUpdateInput struct {
-	AdminLockType  string `json:"admin_lock_type"`
-	AdminOverride  bool   `json:"admin_override"`
-	ChangeReason   string `json:"change_reason"`
-	Config         string `json:"config"`
-	Cpu            int64  `json:"cpu"`
-	CpuLimit       int64  `json:"cpu_limit"`
-	DnsResolver    int64  `json:"dns_resolver"`
-	ExpirationDate string `json:"expiration_date"`
-	Hostname       string `json:"hostname"`
-	Info           string `json:"info"`
-	ManageHostname bool   `json:"manage_hostname"`
-	Memory         int64  `json:"memory"`
-	Node           int64  `json:"node"`
-	ObjectState    string `json:"object_state"`
-	Onboot         bool   `json:"onboot"`
-	Onstartall     bool   `json:"onstartall"`
-	OsTemplate     int64  `json:"os_template"`
-	Swap           int64  `json:"swap"`
-	User           int64  `json:"user"`
+	AdminLockType    string `json:"admin_lock_type"`
+	AdminOverride    bool   `json:"admin_override"`
+	ChangeReason     string `json:"change_reason"`
+	Config           string `json:"config"`
+	Cpu              int64  `json:"cpu"`
+	CpuLimit         int64  `json:"cpu_limit"`
+	DnsResolver      int64  `json:"dns_resolver"`
+	ExpirationDate   string `json:"expiration_date"`
+	Hostname         string `json:"hostname"`
+	Info             string `json:"info"`
+	ManageHostname   bool   `json:"manage_hostname"`
+	Memory           int64  `json:"memory"`
+	Node             int64  `json:"node"`
+	ObjectState      string `json:"object_state"`
+	Onboot           bool   `json:"onboot"`
+	Onstartall       bool   `json:"onstartall"`
+	OsTemplate       int64  `json:"os_template"`
+	StartMenuTimeout int64  `json:"start_menu_timeout"`
+	Swap             int64  `json:"swap"`
+	User             int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 }
@@ -297,6 +298,18 @@ func (in *ActionVpsUpdateInput) SetOsTemplate(value int64) *ActionVpsUpdateInput
 	}
 
 	in._selectedParameters["OsTemplate"] = nil
+	return in
+}
+
+// SetStartMenuTimeout sets parameter StartMenuTimeout to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetStartMenuTimeout(value int64) *ActionVpsUpdateInput {
+	in.StartMenuTimeout = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["StartMenuTimeout"] = nil
 	return in
 }
 
@@ -595,6 +608,9 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 		}
 		if inv.IsParameterSelected("OsTemplate") {
 			ret["os_template"] = inv.Input.OsTemplate
+		}
+		if inv.IsParameterSelected("StartMenuTimeout") {
+			ret["start_menu_timeout"] = inv.Input.StartMenuTimeout
 		}
 		if inv.IsParameterSelected("Swap") {
 			ret["swap"] = inv.Input.Swap

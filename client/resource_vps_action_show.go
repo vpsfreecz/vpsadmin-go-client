@@ -104,6 +104,7 @@ type ActionVpsShowOutput struct {
 	Onstartall            bool                         `json:"onstartall"`
 	OsTemplate            *ActionOsTemplateShowOutput  `json:"os_template"`
 	ProcessCount          int64                        `json:"process_count"`
+	StartMenuTimeout      int64                        `json:"start_menu_timeout"`
 	Swap                  int64                        `json:"swap"`
 	Uptime                int64                        `json:"uptime"`
 	UsedDiskspace         int64                        `json:"used_diskspace"`
