@@ -19,6 +19,8 @@ type ActionClusterSearchMetaGlobalInput struct {
 	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetNo sets parameter No to value and selects it for sending
@@ -61,6 +63,8 @@ type ActionClusterSearchInput struct {
 	Value string `json:"value"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetValue sets parameter Value to value and selects it for sending
@@ -85,6 +89,21 @@ func (in *ActionClusterSearchInput) SelectParameters(params ...string) *ActionCl
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionClusterSearchInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionClusterSearchInput) UnselectParameters(params ...string) *ActionClusterSearchInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -168,6 +187,16 @@ func (inv *ActionClusterSearchInvocation) IsParameterSelected(param string) bool
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionClusterSearchInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionClusterSearchInvocation) NewMetaInput() *ActionClusterSearchMetaGlobalInput {
@@ -188,6 +217,16 @@ func (inv *ActionClusterSearchInvocation) IsMetaParameterSelected(param string) 
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionClusterSearchInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

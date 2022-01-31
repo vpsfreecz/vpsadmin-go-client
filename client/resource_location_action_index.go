@@ -21,6 +21,8 @@ type ActionLocationIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -96,6 +98,8 @@ type ActionLocationIndexInput struct {
 	SharesV6NetworksWith  int64  `json:"shares_v6_networks_with"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetEnvironment sets parameter Environment to value and selects it for sending
@@ -106,7 +110,26 @@ func (in *ActionLocationIndexInput) SetEnvironment(value int64) *ActionLocationI
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
+	return in
+}
+
+// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
+func (in *ActionLocationIndexInput) SetEnvironmentNil(set bool) *ActionLocationIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Environment"] = nil
+		in.SelectParameters("Environment")
+	} else {
+		delete(in._nilParameters, "Environment")
+	}
 	return in
 }
 
@@ -178,7 +201,26 @@ func (in *ActionLocationIndexInput) SetSharesAnyNetworksWith(value int64) *Actio
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetSharesAnyNetworksWithNil(false)
 	in._selectedParameters["SharesAnyNetworksWith"] = nil
+	return in
+}
+
+// SetSharesAnyNetworksWithNil sets parameter SharesAnyNetworksWith to nil and selects it for sending
+func (in *ActionLocationIndexInput) SetSharesAnyNetworksWithNil(set bool) *ActionLocationIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["SharesAnyNetworksWith"] = nil
+		in.SelectParameters("SharesAnyNetworksWith")
+	} else {
+		delete(in._nilParameters, "SharesAnyNetworksWith")
+	}
 	return in
 }
 
@@ -202,7 +244,26 @@ func (in *ActionLocationIndexInput) SetSharesV4NetworksWith(value int64) *Action
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetSharesV4NetworksWithNil(false)
 	in._selectedParameters["SharesV4NetworksWith"] = nil
+	return in
+}
+
+// SetSharesV4NetworksWithNil sets parameter SharesV4NetworksWith to nil and selects it for sending
+func (in *ActionLocationIndexInput) SetSharesV4NetworksWithNil(set bool) *ActionLocationIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["SharesV4NetworksWith"] = nil
+		in.SelectParameters("SharesV4NetworksWith")
+	} else {
+		delete(in._nilParameters, "SharesV4NetworksWith")
+	}
 	return in
 }
 
@@ -214,7 +275,26 @@ func (in *ActionLocationIndexInput) SetSharesV6NetworksWith(value int64) *Action
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetSharesV6NetworksWithNil(false)
 	in._selectedParameters["SharesV6NetworksWith"] = nil
+	return in
+}
+
+// SetSharesV6NetworksWithNil sets parameter SharesV6NetworksWith to nil and selects it for sending
+func (in *ActionLocationIndexInput) SetSharesV6NetworksWithNil(set bool) *ActionLocationIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["SharesV6NetworksWith"] = nil
+		in.SelectParameters("SharesV6NetworksWith")
+	} else {
+		delete(in._nilParameters, "SharesV6NetworksWith")
+	}
 	return in
 }
 
@@ -228,6 +308,21 @@ func (in *ActionLocationIndexInput) SelectParameters(params ...string) *ActionLo
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionLocationIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionLocationIndexInput) UnselectParameters(params ...string) *ActionLocationIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -311,6 +406,16 @@ func (inv *ActionLocationIndexInvocation) IsParameterSelected(param string) bool
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionLocationIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionLocationIndexInvocation) NewMetaInput() *ActionLocationIndexMetaGlobalInput {
@@ -331,6 +436,16 @@ func (inv *ActionLocationIndexInvocation) IsMetaParameterSelected(param string) 
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionLocationIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

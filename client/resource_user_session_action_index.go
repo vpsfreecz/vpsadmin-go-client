@@ -21,6 +21,8 @@ type ActionUserSessionIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -96,6 +98,8 @@ type ActionUserSessionIndexInput struct {
 	UserAgent     string `json:"user_agent"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetAdmin sets parameter Admin to value and selects it for sending
@@ -106,7 +110,26 @@ func (in *ActionUserSessionIndexInput) SetAdmin(value int64) *ActionUserSessionI
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetAdminNil(false)
 	in._selectedParameters["Admin"] = nil
+	return in
+}
+
+// SetAdminNil sets parameter Admin to nil and selects it for sending
+func (in *ActionUserSessionIndexInput) SetAdminNil(set bool) *ActionUserSessionIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Admin"] = nil
+		in.SelectParameters("Admin")
+	} else {
+		delete(in._nilParameters, "Admin")
+	}
 	return in
 }
 
@@ -202,7 +225,26 @@ func (in *ActionUserSessionIndexInput) SetUser(value int64) *ActionUserSessionIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
+	return in
+}
+
+// SetUserNil sets parameter User to nil and selects it for sending
+func (in *ActionUserSessionIndexInput) SetUserNil(set bool) *ActionUserSessionIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["User"] = nil
+		in.SelectParameters("User")
+	} else {
+		delete(in._nilParameters, "User")
+	}
 	return in
 }
 
@@ -228,6 +270,21 @@ func (in *ActionUserSessionIndexInput) SelectParameters(params ...string) *Actio
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionUserSessionIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionUserSessionIndexInput) UnselectParameters(params ...string) *ActionUserSessionIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -316,6 +373,16 @@ func (inv *ActionUserSessionIndexInvocation) IsParameterSelected(param string) b
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionUserSessionIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserSessionIndexInvocation) NewMetaInput() *ActionUserSessionIndexMetaGlobalInput {
@@ -336,6 +403,16 @@ func (inv *ActionUserSessionIndexInvocation) IsMetaParameterSelected(param strin
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionUserSessionIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

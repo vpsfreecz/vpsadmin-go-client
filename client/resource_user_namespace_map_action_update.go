@@ -22,6 +22,8 @@ type ActionUserNamespaceMapUpdateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -77,6 +79,8 @@ type ActionUserNamespaceMapUpdateInput struct {
 	UserNamespace int64  `json:"user_namespace"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetLabel sets parameter Label to value and selects it for sending
@@ -99,7 +103,26 @@ func (in *ActionUserNamespaceMapUpdateInput) SetUserNamespace(value int64) *Acti
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNamespaceNil(false)
 	in._selectedParameters["UserNamespace"] = nil
+	return in
+}
+
+// SetUserNamespaceNil sets parameter UserNamespace to nil and selects it for sending
+func (in *ActionUserNamespaceMapUpdateInput) SetUserNamespaceNil(set bool) *ActionUserNamespaceMapUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["UserNamespace"] = nil
+		in.SelectParameters("UserNamespace")
+	} else {
+		delete(in._nilParameters, "UserNamespace")
+	}
 	return in
 }
 
@@ -113,6 +136,21 @@ func (in *ActionUserNamespaceMapUpdateInput) SelectParameters(params ...string) 
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionUserNamespaceMapUpdateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionUserNamespaceMapUpdateInput) UnselectParameters(params ...string) *ActionUserNamespaceMapUpdateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -206,6 +244,16 @@ func (inv *ActionUserNamespaceMapUpdateInvocation) IsParameterSelected(param str
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionUserNamespaceMapUpdateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserNamespaceMapUpdateInvocation) NewMetaInput() *ActionUserNamespaceMapUpdateMetaGlobalInput {
@@ -226,6 +274,16 @@ func (inv *ActionUserNamespaceMapUpdateInvocation) IsMetaParameterSelected(param
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionUserNamespaceMapUpdateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -259,7 +317,11 @@ func (inv *ActionUserNamespaceMapUpdateInvocation) makeInputParams() map[string]
 			ret["label"] = inv.Input.Label
 		}
 		if inv.IsParameterSelected("UserNamespace") {
-			ret["user_namespace"] = inv.Input.UserNamespace
+			if inv.IsParameterNil("UserNamespace") {
+				ret["user_namespace"] = nil
+			} else {
+				ret["user_namespace"] = inv.Input.UserNamespace
+			}
 		}
 	}
 

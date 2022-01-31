@@ -21,6 +21,8 @@ type ActionExportOutageIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -94,6 +96,8 @@ type ActionExportOutageIndexInput struct {
 	User        int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetEnvironment sets parameter Environment to value and selects it for sending
@@ -104,7 +108,26 @@ func (in *ActionExportOutageIndexInput) SetEnvironment(value int64) *ActionExpor
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
+	return in
+}
+
+// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
+func (in *ActionExportOutageIndexInput) SetEnvironmentNil(set bool) *ActionExportOutageIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Environment"] = nil
+		in.SelectParameters("Environment")
+	} else {
+		delete(in._nilParameters, "Environment")
+	}
 	return in
 }
 
@@ -116,7 +139,26 @@ func (in *ActionExportOutageIndexInput) SetExport(value int64) *ActionExportOuta
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetExportNil(false)
 	in._selectedParameters["Export"] = nil
+	return in
+}
+
+// SetExportNil sets parameter Export to nil and selects it for sending
+func (in *ActionExportOutageIndexInput) SetExportNil(set bool) *ActionExportOutageIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Export"] = nil
+		in.SelectParameters("Export")
+	} else {
+		delete(in._nilParameters, "Export")
+	}
 	return in
 }
 
@@ -140,7 +182,26 @@ func (in *ActionExportOutageIndexInput) SetLocation(value int64) *ActionExportOu
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
+	return in
+}
+
+// SetLocationNil sets parameter Location to nil and selects it for sending
+func (in *ActionExportOutageIndexInput) SetLocationNil(set bool) *ActionExportOutageIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Location"] = nil
+		in.SelectParameters("Location")
+	} else {
+		delete(in._nilParameters, "Location")
+	}
 	return in
 }
 
@@ -152,7 +213,26 @@ func (in *ActionExportOutageIndexInput) SetNode(value int64) *ActionExportOutage
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
+	return in
+}
+
+// SetNodeNil sets parameter Node to nil and selects it for sending
+func (in *ActionExportOutageIndexInput) SetNodeNil(set bool) *ActionExportOutageIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Node"] = nil
+		in.SelectParameters("Node")
+	} else {
+		delete(in._nilParameters, "Node")
+	}
 	return in
 }
 
@@ -176,7 +256,26 @@ func (in *ActionExportOutageIndexInput) SetOutage(value int64) *ActionExportOuta
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetOutageNil(false)
 	in._selectedParameters["Outage"] = nil
+	return in
+}
+
+// SetOutageNil sets parameter Outage to nil and selects it for sending
+func (in *ActionExportOutageIndexInput) SetOutageNil(set bool) *ActionExportOutageIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Outage"] = nil
+		in.SelectParameters("Outage")
+	} else {
+		delete(in._nilParameters, "Outage")
+	}
 	return in
 }
 
@@ -188,7 +287,26 @@ func (in *ActionExportOutageIndexInput) SetUser(value int64) *ActionExportOutage
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
+	return in
+}
+
+// SetUserNil sets parameter User to nil and selects it for sending
+func (in *ActionExportOutageIndexInput) SetUserNil(set bool) *ActionExportOutageIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["User"] = nil
+		in.SelectParameters("User")
+	} else {
+		delete(in._nilParameters, "User")
+	}
 	return in
 }
 
@@ -202,6 +320,21 @@ func (in *ActionExportOutageIndexInput) SelectParameters(params ...string) *Acti
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionExportOutageIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionExportOutageIndexInput) UnselectParameters(params ...string) *ActionExportOutageIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -282,6 +415,16 @@ func (inv *ActionExportOutageIndexInvocation) IsParameterSelected(param string) 
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionExportOutageIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionExportOutageIndexInvocation) NewMetaInput() *ActionExportOutageIndexMetaGlobalInput {
@@ -302,6 +445,16 @@ func (inv *ActionExportOutageIndexInvocation) IsMetaParameterSelected(param stri
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionExportOutageIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

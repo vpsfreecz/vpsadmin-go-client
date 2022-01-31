@@ -20,6 +20,8 @@ type ActionLocationNetworkCreateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -79,6 +81,8 @@ type ActionLocationNetworkCreateInput struct {
 	Userpick bool  `json:"userpick"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetAutopick sets parameter Autopick to value and selects it for sending
@@ -101,7 +105,26 @@ func (in *ActionLocationNetworkCreateInput) SetLocation(value int64) *ActionLoca
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
+	return in
+}
+
+// SetLocationNil sets parameter Location to nil and selects it for sending
+func (in *ActionLocationNetworkCreateInput) SetLocationNil(set bool) *ActionLocationNetworkCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Location"] = nil
+		in.SelectParameters("Location")
+	} else {
+		delete(in._nilParameters, "Location")
+	}
 	return in
 }
 
@@ -113,7 +136,26 @@ func (in *ActionLocationNetworkCreateInput) SetNetwork(value int64) *ActionLocat
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetNetworkNil(false)
 	in._selectedParameters["Network"] = nil
+	return in
+}
+
+// SetNetworkNil sets parameter Network to nil and selects it for sending
+func (in *ActionLocationNetworkCreateInput) SetNetworkNil(set bool) *ActionLocationNetworkCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Network"] = nil
+		in.SelectParameters("Network")
+	} else {
+		delete(in._nilParameters, "Network")
+	}
 	return in
 }
 
@@ -163,6 +205,21 @@ func (in *ActionLocationNetworkCreateInput) SelectParameters(params ...string) *
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionLocationNetworkCreateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionLocationNetworkCreateInput) UnselectParameters(params ...string) *ActionLocationNetworkCreateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -249,6 +306,16 @@ func (inv *ActionLocationNetworkCreateInvocation) IsParameterSelected(param stri
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionLocationNetworkCreateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionLocationNetworkCreateInvocation) NewMetaInput() *ActionLocationNetworkCreateMetaGlobalInput {
@@ -269,6 +336,16 @@ func (inv *ActionLocationNetworkCreateInvocation) IsMetaParameterSelected(param 
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionLocationNetworkCreateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -302,10 +379,18 @@ func (inv *ActionLocationNetworkCreateInvocation) makeInputParams() map[string]i
 			ret["autopick"] = inv.Input.Autopick
 		}
 		if inv.IsParameterSelected("Location") {
-			ret["location"] = inv.Input.Location
+			if inv.IsParameterNil("Location") {
+				ret["location"] = nil
+			} else {
+				ret["location"] = inv.Input.Location
+			}
 		}
 		if inv.IsParameterSelected("Network") {
-			ret["network"] = inv.Input.Network
+			if inv.IsParameterNil("Network") {
+				ret["network"] = nil
+			} else {
+				ret["network"] = inv.Input.Network
+			}
 		}
 		if inv.IsParameterSelected("Primary") {
 			ret["primary"] = inv.Input.Primary

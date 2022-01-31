@@ -21,6 +21,8 @@ type ActionOutageUpdateIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -91,6 +93,8 @@ type ActionOutageUpdateIndexInput struct {
 	Since      string `json:"since"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -125,7 +129,26 @@ func (in *ActionOutageUpdateIndexInput) SetOutage(value int64) *ActionOutageUpda
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetOutageNil(false)
 	in._selectedParameters["Outage"] = nil
+	return in
+}
+
+// SetOutageNil sets parameter Outage to nil and selects it for sending
+func (in *ActionOutageUpdateIndexInput) SetOutageNil(set bool) *ActionOutageUpdateIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Outage"] = nil
+		in.SelectParameters("Outage")
+	} else {
+		delete(in._nilParameters, "Outage")
+	}
 	return in
 }
 
@@ -137,7 +160,26 @@ func (in *ActionOutageUpdateIndexInput) SetReportedBy(value int64) *ActionOutage
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetReportedByNil(false)
 	in._selectedParameters["ReportedBy"] = nil
+	return in
+}
+
+// SetReportedByNil sets parameter ReportedBy to nil and selects it for sending
+func (in *ActionOutageUpdateIndexInput) SetReportedByNil(set bool) *ActionOutageUpdateIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["ReportedBy"] = nil
+		in.SelectParameters("ReportedBy")
+	} else {
+		delete(in._nilParameters, "ReportedBy")
+	}
 	return in
 }
 
@@ -163,6 +205,21 @@ func (in *ActionOutageUpdateIndexInput) SelectParameters(params ...string) *Acti
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionOutageUpdateIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionOutageUpdateIndexInput) UnselectParameters(params ...string) *ActionOutageUpdateIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -250,6 +307,16 @@ func (inv *ActionOutageUpdateIndexInvocation) IsParameterSelected(param string) 
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionOutageUpdateIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOutageUpdateIndexInvocation) NewMetaInput() *ActionOutageUpdateIndexMetaGlobalInput {
@@ -270,6 +337,16 @@ func (inv *ActionOutageUpdateIndexInvocation) IsMetaParameterSelected(param stri
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionOutageUpdateIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

@@ -21,6 +21,8 @@ type ActionUserIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -100,6 +102,8 @@ type ActionUserIndexInput struct {
 	PasswordReset bool   `json:"password_reset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetAddress sets parameter Address to value and selects it for sending
@@ -170,7 +174,26 @@ func (in *ActionUserIndexInput) SetLanguage(value int64) *ActionUserIndexInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetLanguageNil(false)
 	in._selectedParameters["Language"] = nil
+	return in
+}
+
+// SetLanguageNil sets parameter Language to nil and selects it for sending
+func (in *ActionUserIndexInput) SetLanguageNil(set bool) *ActionUserIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Language"] = nil
+		in.SelectParameters("Language")
+	} else {
+		delete(in._nilParameters, "Language")
+	}
 	return in
 }
 
@@ -285,6 +308,21 @@ func (in *ActionUserIndexInput) SelectParameters(params ...string) *ActionUserIn
 	return in
 }
 
+// UnselectParameters unsets parameters from ActionUserIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionUserIndexInput) UnselectParameters(params ...string) *ActionUserIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
+	}
+
+	return in
+}
+
 func (in *ActionUserIndexInput) AnySelected() bool {
 	if in._selectedParameters == nil {
 		return false
@@ -370,6 +408,16 @@ func (inv *ActionUserIndexInvocation) IsParameterSelected(param string) bool {
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionUserIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserIndexInvocation) NewMetaInput() *ActionUserIndexMetaGlobalInput {
@@ -390,6 +438,16 @@ func (inv *ActionUserIndexInvocation) IsMetaParameterSelected(param string) bool
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionUserIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

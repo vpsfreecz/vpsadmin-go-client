@@ -21,6 +21,8 @@ type ActionExportIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -89,6 +91,8 @@ type ActionExportIndexInput struct {
 	User   int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -123,7 +127,26 @@ func (in *ActionExportIndexInput) SetUser(value int64) *ActionExportIndexInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
+	return in
+}
+
+// SetUserNil sets parameter User to nil and selects it for sending
+func (in *ActionExportIndexInput) SetUserNil(set bool) *ActionExportIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["User"] = nil
+		in.SelectParameters("User")
+	} else {
+		delete(in._nilParameters, "User")
+	}
 	return in
 }
 
@@ -137,6 +160,21 @@ func (in *ActionExportIndexInput) SelectParameters(params ...string) *ActionExpo
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionExportIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionExportIndexInput) UnselectParameters(params ...string) *ActionExportIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -227,6 +265,16 @@ func (inv *ActionExportIndexInvocation) IsParameterSelected(param string) bool {
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionExportIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionExportIndexInvocation) NewMetaInput() *ActionExportIndexMetaGlobalInput {
@@ -247,6 +295,16 @@ func (inv *ActionExportIndexInvocation) IsMetaParameterSelected(param string) bo
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionExportIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

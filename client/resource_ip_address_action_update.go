@@ -22,6 +22,8 @@ type ActionIpAddressUpdateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -79,6 +81,8 @@ type ActionIpAddressUpdateInput struct {
 	User        int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetEnvironment sets parameter Environment to value and selects it for sending
@@ -89,7 +93,26 @@ func (in *ActionIpAddressUpdateInput) SetEnvironment(value int64) *ActionIpAddre
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
+	return in
+}
+
+// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
+func (in *ActionIpAddressUpdateInput) SetEnvironmentNil(set bool) *ActionIpAddressUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Environment"] = nil
+		in.SelectParameters("Environment")
+	} else {
+		delete(in._nilParameters, "Environment")
+	}
 	return in
 }
 
@@ -125,7 +148,26 @@ func (in *ActionIpAddressUpdateInput) SetUser(value int64) *ActionIpAddressUpdat
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
+	return in
+}
+
+// SetUserNil sets parameter User to nil and selects it for sending
+func (in *ActionIpAddressUpdateInput) SetUserNil(set bool) *ActionIpAddressUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["User"] = nil
+		in.SelectParameters("User")
+	} else {
+		delete(in._nilParameters, "User")
+	}
 	return in
 }
 
@@ -139,6 +181,21 @@ func (in *ActionIpAddressUpdateInput) SelectParameters(params ...string) *Action
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionIpAddressUpdateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionIpAddressUpdateInput) UnselectParameters(params ...string) *ActionIpAddressUpdateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -248,6 +305,16 @@ func (inv *ActionIpAddressUpdateInvocation) IsParameterSelected(param string) bo
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionIpAddressUpdateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionIpAddressUpdateInvocation) NewMetaInput() *ActionIpAddressUpdateMetaGlobalInput {
@@ -268,6 +335,16 @@ func (inv *ActionIpAddressUpdateInvocation) IsMetaParameterSelected(param string
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionIpAddressUpdateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -374,7 +451,11 @@ func (inv *ActionIpAddressUpdateInvocation) makeInputParams() map[string]interfa
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Environment") {
-			ret["environment"] = inv.Input.Environment
+			if inv.IsParameterNil("Environment") {
+				ret["environment"] = nil
+			} else {
+				ret["environment"] = inv.Input.Environment
+			}
 		}
 		if inv.IsParameterSelected("MaxRx") {
 			ret["max_rx"] = inv.Input.MaxRx
@@ -383,7 +464,11 @@ func (inv *ActionIpAddressUpdateInvocation) makeInputParams() map[string]interfa
 			ret["max_tx"] = inv.Input.MaxTx
 		}
 		if inv.IsParameterSelected("User") {
-			ret["user"] = inv.Input.User
+			if inv.IsParameterNil("User") {
+				ret["user"] = nil
+			} else {
+				ret["user"] = inv.Input.User
+			}
 		}
 	}
 

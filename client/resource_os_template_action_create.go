@@ -20,6 +20,8 @@ type ActionOsTemplateCreateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -80,6 +82,8 @@ type ActionOsTemplateCreateInput struct {
 	Supported      bool   `json:"supported"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetEnabled sets parameter Enabled to value and selects it for sending
@@ -181,6 +185,21 @@ func (in *ActionOsTemplateCreateInput) SelectParameters(params ...string) *Actio
 	return in
 }
 
+// UnselectParameters unsets parameters from ActionOsTemplateCreateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionOsTemplateCreateInput) UnselectParameters(params ...string) *ActionOsTemplateCreateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
+	}
+
+	return in
+}
+
 func (in *ActionOsTemplateCreateInput) AnySelected() bool {
 	if in._selectedParameters == nil {
 		return false
@@ -263,6 +282,16 @@ func (inv *ActionOsTemplateCreateInvocation) IsParameterSelected(param string) b
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionOsTemplateCreateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOsTemplateCreateInvocation) NewMetaInput() *ActionOsTemplateCreateMetaGlobalInput {
@@ -283,6 +312,16 @@ func (inv *ActionOsTemplateCreateInvocation) IsMetaParameterSelected(param strin
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionOsTemplateCreateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

@@ -21,6 +21,8 @@ type ActionOsTemplateIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -90,6 +92,8 @@ type ActionOsTemplateIndexInput struct {
 	Offset         int64  `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetHypervisorType sets parameter HypervisorType to value and selects it for sending
@@ -124,7 +128,26 @@ func (in *ActionOsTemplateIndexInput) SetLocation(value int64) *ActionOsTemplate
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
+	return in
+}
+
+// SetLocationNil sets parameter Location to nil and selects it for sending
+func (in *ActionOsTemplateIndexInput) SetLocationNil(set bool) *ActionOsTemplateIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Location"] = nil
+		in.SelectParameters("Location")
+	} else {
+		delete(in._nilParameters, "Location")
+	}
 	return in
 }
 
@@ -150,6 +173,21 @@ func (in *ActionOsTemplateIndexInput) SelectParameters(params ...string) *Action
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionOsTemplateIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionOsTemplateIndexInput) UnselectParameters(params ...string) *ActionOsTemplateIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -231,6 +269,16 @@ func (inv *ActionOsTemplateIndexInvocation) IsParameterSelected(param string) bo
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionOsTemplateIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOsTemplateIndexInvocation) NewMetaInput() *ActionOsTemplateIndexMetaGlobalInput {
@@ -251,6 +299,16 @@ func (inv *ActionOsTemplateIndexInvocation) IsMetaParameterSelected(param string
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionOsTemplateIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

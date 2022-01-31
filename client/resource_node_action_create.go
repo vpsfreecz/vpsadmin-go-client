@@ -20,6 +20,8 @@ type ActionNodeCreateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -88,6 +90,8 @@ type ActionNodeCreateInput struct {
 	VePrivate      string `json:"ve_private"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCpus sets parameter Cpus to value and selects it for sending
@@ -146,7 +150,26 @@ func (in *ActionNodeCreateInput) SetLocation(value int64) *ActionNodeCreateInput
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
+	return in
+}
+
+// SetLocationNil sets parameter Location to nil and selects it for sending
+func (in *ActionNodeCreateInput) SetLocationNil(set bool) *ActionNodeCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Location"] = nil
+		in.SelectParameters("Location")
+	} else {
+		delete(in._nilParameters, "Location")
+	}
 	return in
 }
 
@@ -285,6 +308,21 @@ func (in *ActionNodeCreateInput) SelectParameters(params ...string) *ActionNodeC
 	return in
 }
 
+// UnselectParameters unsets parameters from ActionNodeCreateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionNodeCreateInput) UnselectParameters(params ...string) *ActionNodeCreateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
+	}
+
+	return in
+}
+
 func (in *ActionNodeCreateInput) AnySelected() bool {
 	if in._selectedParameters == nil {
 		return false
@@ -402,6 +440,16 @@ func (inv *ActionNodeCreateInvocation) IsParameterSelected(param string) bool {
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionNodeCreateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionNodeCreateInvocation) NewMetaInput() *ActionNodeCreateMetaGlobalInput {
@@ -422,6 +470,16 @@ func (inv *ActionNodeCreateInvocation) IsMetaParameterSelected(param string) boo
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionNodeCreateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -540,7 +598,11 @@ func (inv *ActionNodeCreateInvocation) makeInputParams() map[string]interface{} 
 			ret["ip_addr"] = inv.Input.IpAddr
 		}
 		if inv.IsParameterSelected("Location") {
-			ret["location"] = inv.Input.Location
+			if inv.IsParameterNil("Location") {
+				ret["location"] = nil
+			} else {
+				ret["location"] = inv.Input.Location
+			}
 		}
 		if inv.IsParameterSelected("Maintenance") {
 			ret["maintenance"] = inv.Input.Maintenance

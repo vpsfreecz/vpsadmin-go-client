@@ -22,6 +22,8 @@ type ActionIpAddressAssignMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -77,6 +79,8 @@ type ActionIpAddressAssignInput struct {
 	RouteVia         int64 `json:"route_via"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetNetworkInterface sets parameter NetworkInterface to value and selects it for sending
@@ -87,7 +91,26 @@ func (in *ActionIpAddressAssignInput) SetNetworkInterface(value int64) *ActionIp
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetNetworkInterfaceNil(false)
 	in._selectedParameters["NetworkInterface"] = nil
+	return in
+}
+
+// SetNetworkInterfaceNil sets parameter NetworkInterface to nil and selects it for sending
+func (in *ActionIpAddressAssignInput) SetNetworkInterfaceNil(set bool) *ActionIpAddressAssignInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["NetworkInterface"] = nil
+		in.SelectParameters("NetworkInterface")
+	} else {
+		delete(in._nilParameters, "NetworkInterface")
+	}
 	return in
 }
 
@@ -99,7 +122,26 @@ func (in *ActionIpAddressAssignInput) SetRouteVia(value int64) *ActionIpAddressA
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetRouteViaNil(false)
 	in._selectedParameters["RouteVia"] = nil
+	return in
+}
+
+// SetRouteViaNil sets parameter RouteVia to nil and selects it for sending
+func (in *ActionIpAddressAssignInput) SetRouteViaNil(set bool) *ActionIpAddressAssignInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["RouteVia"] = nil
+		in.SelectParameters("RouteVia")
+	} else {
+		delete(in._nilParameters, "RouteVia")
+	}
 	return in
 }
 
@@ -113,6 +155,21 @@ func (in *ActionIpAddressAssignInput) SelectParameters(params ...string) *Action
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionIpAddressAssignInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionIpAddressAssignInput) UnselectParameters(params ...string) *ActionIpAddressAssignInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -222,6 +279,16 @@ func (inv *ActionIpAddressAssignInvocation) IsParameterSelected(param string) bo
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionIpAddressAssignInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionIpAddressAssignInvocation) NewMetaInput() *ActionIpAddressAssignMetaGlobalInput {
@@ -242,6 +309,16 @@ func (inv *ActionIpAddressAssignInvocation) IsMetaParameterSelected(param string
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionIpAddressAssignInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -348,10 +425,18 @@ func (inv *ActionIpAddressAssignInvocation) makeInputParams() map[string]interfa
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("NetworkInterface") {
-			ret["network_interface"] = inv.Input.NetworkInterface
+			if inv.IsParameterNil("NetworkInterface") {
+				ret["network_interface"] = nil
+			} else {
+				ret["network_interface"] = inv.Input.NetworkInterface
+			}
 		}
 		if inv.IsParameterSelected("RouteVia") {
-			ret["route_via"] = inv.Input.RouteVia
+			if inv.IsParameterNil("RouteVia") {
+				ret["route_via"] = nil
+			} else {
+				ret["route_via"] = inv.Input.RouteVia
+			}
 		}
 	}
 

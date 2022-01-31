@@ -21,6 +21,8 @@ type ActionIntegrityFactIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -95,6 +97,8 @@ type ActionIntegrityFactIndexInput struct {
 	Status          string `json:"status"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetClassName sets parameter ClassName to value and selects it for sending
@@ -117,7 +121,26 @@ func (in *ActionIntegrityFactIndexInput) SetIntegrityCheck(value int64) *ActionI
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetIntegrityCheckNil(false)
 	in._selectedParameters["IntegrityCheck"] = nil
+	return in
+}
+
+// SetIntegrityCheckNil sets parameter IntegrityCheck to nil and selects it for sending
+func (in *ActionIntegrityFactIndexInput) SetIntegrityCheckNil(set bool) *ActionIntegrityFactIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["IntegrityCheck"] = nil
+		in.SelectParameters("IntegrityCheck")
+	} else {
+		delete(in._nilParameters, "IntegrityCheck")
+	}
 	return in
 }
 
@@ -129,7 +152,26 @@ func (in *ActionIntegrityFactIndexInput) SetIntegrityObject(value int64) *Action
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetIntegrityObjectNil(false)
 	in._selectedParameters["IntegrityObject"] = nil
+	return in
+}
+
+// SetIntegrityObjectNil sets parameter IntegrityObject to nil and selects it for sending
+func (in *ActionIntegrityFactIndexInput) SetIntegrityObjectNil(set bool) *ActionIntegrityFactIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["IntegrityObject"] = nil
+		in.SelectParameters("IntegrityObject")
+	} else {
+		delete(in._nilParameters, "IntegrityObject")
+	}
 	return in
 }
 
@@ -165,7 +207,26 @@ func (in *ActionIntegrityFactIndexInput) SetNode(value int64) *ActionIntegrityFa
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
+	return in
+}
+
+// SetNodeNil sets parameter Node to nil and selects it for sending
+func (in *ActionIntegrityFactIndexInput) SetNodeNil(set bool) *ActionIntegrityFactIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Node"] = nil
+		in.SelectParameters("Node")
+	} else {
+		delete(in._nilParameters, "Node")
+	}
 	return in
 }
 
@@ -215,6 +276,21 @@ func (in *ActionIntegrityFactIndexInput) SelectParameters(params ...string) *Act
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionIntegrityFactIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionIntegrityFactIndexInput) UnselectParameters(params ...string) *ActionIntegrityFactIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -295,6 +371,16 @@ func (inv *ActionIntegrityFactIndexInvocation) IsParameterSelected(param string)
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionIntegrityFactIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionIntegrityFactIndexInvocation) NewMetaInput() *ActionIntegrityFactIndexMetaGlobalInput {
@@ -315,6 +401,16 @@ func (inv *ActionIntegrityFactIndexInvocation) IsMetaParameterSelected(param str
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionIntegrityFactIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

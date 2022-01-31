@@ -20,6 +20,8 @@ type ActionExportCreateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -82,6 +84,8 @@ type ActionExportCreateInput struct {
 	Threads      int64 `json:"threads"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetAllVps sets parameter AllVps to value and selects it for sending
@@ -104,7 +108,26 @@ func (in *ActionExportCreateInput) SetDataset(value int64) *ActionExportCreateIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetDatasetNil(false)
 	in._selectedParameters["Dataset"] = nil
+	return in
+}
+
+// SetDatasetNil sets parameter Dataset to nil and selects it for sending
+func (in *ActionExportCreateInput) SetDatasetNil(set bool) *ActionExportCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Dataset"] = nil
+		in.SelectParameters("Dataset")
+	} else {
+		delete(in._nilParameters, "Dataset")
+	}
 	return in
 }
 
@@ -152,7 +175,26 @@ func (in *ActionExportCreateInput) SetSnapshot(value int64) *ActionExportCreateI
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetSnapshotNil(false)
 	in._selectedParameters["Snapshot"] = nil
+	return in
+}
+
+// SetSnapshotNil sets parameter Snapshot to nil and selects it for sending
+func (in *ActionExportCreateInput) SetSnapshotNil(set bool) *ActionExportCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Snapshot"] = nil
+		in.SelectParameters("Snapshot")
+	} else {
+		delete(in._nilParameters, "Snapshot")
+	}
 	return in
 }
 
@@ -202,6 +244,21 @@ func (in *ActionExportCreateInput) SelectParameters(params ...string) *ActionExp
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionExportCreateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionExportCreateInput) UnselectParameters(params ...string) *ActionExportCreateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -305,6 +362,16 @@ func (inv *ActionExportCreateInvocation) IsParameterSelected(param string) bool 
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionExportCreateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionExportCreateInvocation) NewMetaInput() *ActionExportCreateMetaGlobalInput {
@@ -325,6 +392,16 @@ func (inv *ActionExportCreateInvocation) IsMetaParameterSelected(param string) b
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionExportCreateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -434,7 +511,11 @@ func (inv *ActionExportCreateInvocation) makeInputParams() map[string]interface{
 			ret["all_vps"] = inv.Input.AllVps
 		}
 		if inv.IsParameterSelected("Dataset") {
-			ret["dataset"] = inv.Input.Dataset
+			if inv.IsParameterNil("Dataset") {
+				ret["dataset"] = nil
+			} else {
+				ret["dataset"] = inv.Input.Dataset
+			}
 		}
 		if inv.IsParameterSelected("Enabled") {
 			ret["enabled"] = inv.Input.Enabled
@@ -446,7 +527,11 @@ func (inv *ActionExportCreateInvocation) makeInputParams() map[string]interface{
 			ret["rw"] = inv.Input.Rw
 		}
 		if inv.IsParameterSelected("Snapshot") {
-			ret["snapshot"] = inv.Input.Snapshot
+			if inv.IsParameterNil("Snapshot") {
+				ret["snapshot"] = nil
+			} else {
+				ret["snapshot"] = inv.Input.Snapshot
+			}
 		}
 		if inv.IsParameterSelected("SubtreeCheck") {
 			ret["subtree_check"] = inv.Input.SubtreeCheck

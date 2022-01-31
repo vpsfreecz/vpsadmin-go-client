@@ -22,6 +22,8 @@ type ActionUserClusterResourceCreateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -78,6 +80,8 @@ type ActionUserClusterResourceCreateInput struct {
 	Value           int64 `json:"value"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetClusterResource sets parameter ClusterResource to value and selects it for sending
@@ -88,7 +92,26 @@ func (in *ActionUserClusterResourceCreateInput) SetClusterResource(value int64) 
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetClusterResourceNil(false)
 	in._selectedParameters["ClusterResource"] = nil
+	return in
+}
+
+// SetClusterResourceNil sets parameter ClusterResource to nil and selects it for sending
+func (in *ActionUserClusterResourceCreateInput) SetClusterResourceNil(set bool) *ActionUserClusterResourceCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["ClusterResource"] = nil
+		in.SelectParameters("ClusterResource")
+	} else {
+		delete(in._nilParameters, "ClusterResource")
+	}
 	return in
 }
 
@@ -100,7 +123,26 @@ func (in *ActionUserClusterResourceCreateInput) SetEnvironment(value int64) *Act
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
+	return in
+}
+
+// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
+func (in *ActionUserClusterResourceCreateInput) SetEnvironmentNil(set bool) *ActionUserClusterResourceCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Environment"] = nil
+		in.SelectParameters("Environment")
+	} else {
+		delete(in._nilParameters, "Environment")
+	}
 	return in
 }
 
@@ -126,6 +168,21 @@ func (in *ActionUserClusterResourceCreateInput) SelectParameters(params ...strin
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionUserClusterResourceCreateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionUserClusterResourceCreateInput) UnselectParameters(params ...string) *ActionUserClusterResourceCreateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -222,6 +279,16 @@ func (inv *ActionUserClusterResourceCreateInvocation) IsParameterSelected(param 
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionUserClusterResourceCreateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserClusterResourceCreateInvocation) NewMetaInput() *ActionUserClusterResourceCreateMetaGlobalInput {
@@ -242,6 +309,16 @@ func (inv *ActionUserClusterResourceCreateInvocation) IsMetaParameterSelected(pa
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionUserClusterResourceCreateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -272,10 +349,18 @@ func (inv *ActionUserClusterResourceCreateInvocation) makeInputParams() map[stri
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("ClusterResource") {
-			ret["cluster_resource"] = inv.Input.ClusterResource
+			if inv.IsParameterNil("ClusterResource") {
+				ret["cluster_resource"] = nil
+			} else {
+				ret["cluster_resource"] = inv.Input.ClusterResource
+			}
 		}
 		if inv.IsParameterSelected("Environment") {
-			ret["environment"] = inv.Input.Environment
+			if inv.IsParameterNil("Environment") {
+				ret["environment"] = nil
+			} else {
+				ret["environment"] = inv.Input.Environment
+			}
 		}
 		if inv.IsParameterSelected("Value") {
 			ret["value"] = inv.Input.Value

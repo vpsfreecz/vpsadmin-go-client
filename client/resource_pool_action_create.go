@@ -20,6 +20,8 @@ type ActionPoolCreateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -86,6 +88,8 @@ type ActionPoolCreateInput struct {
 	Sync          string `json:"sync"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetAtime sets parameter Atime to value and selects it for sending
@@ -144,7 +148,26 @@ func (in *ActionPoolCreateInput) SetNode(value int64) *ActionPoolCreateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
+	return in
+}
+
+// SetNodeNil sets parameter Node to nil and selects it for sending
+func (in *ActionPoolCreateInput) SetNodeNil(set bool) *ActionPoolCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Node"] = nil
+		in.SelectParameters("Node")
+	} else {
+		delete(in._nilParameters, "Node")
+	}
 	return in
 }
 
@@ -259,6 +282,21 @@ func (in *ActionPoolCreateInput) SelectParameters(params ...string) *ActionPoolC
 	return in
 }
 
+// UnselectParameters unsets parameters from ActionPoolCreateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionPoolCreateInput) UnselectParameters(params ...string) *ActionPoolCreateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
+	}
+
+	return in
+}
+
 func (in *ActionPoolCreateInput) AnySelected() bool {
 	if in._selectedParameters == nil {
 		return false
@@ -357,6 +395,16 @@ func (inv *ActionPoolCreateInvocation) IsParameterSelected(param string) bool {
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionPoolCreateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionPoolCreateInvocation) NewMetaInput() *ActionPoolCreateMetaGlobalInput {
@@ -377,6 +425,16 @@ func (inv *ActionPoolCreateInvocation) IsMetaParameterSelected(param string) boo
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionPoolCreateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -495,7 +553,11 @@ func (inv *ActionPoolCreateInvocation) makeInputParams() map[string]interface{} 
 			ret["label"] = inv.Input.Label
 		}
 		if inv.IsParameterSelected("Node") {
-			ret["node"] = inv.Input.Node
+			if inv.IsParameterNil("Node") {
+				ret["node"] = nil
+			} else {
+				ret["node"] = inv.Input.Node
+			}
 		}
 		if inv.IsParameterSelected("Quota") {
 			ret["quota"] = inv.Input.Quota

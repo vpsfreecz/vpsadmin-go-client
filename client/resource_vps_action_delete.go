@@ -22,6 +22,8 @@ type ActionVpsDeleteMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -79,6 +81,8 @@ type ActionVpsDeleteInput struct {
 	ObjectState    string `json:"object_state"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetChangeReason sets parameter ChangeReason to value and selects it for sending
@@ -139,6 +143,21 @@ func (in *ActionVpsDeleteInput) SelectParameters(params ...string) *ActionVpsDel
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionVpsDeleteInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionVpsDeleteInput) UnselectParameters(params ...string) *ActionVpsDeleteInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -228,6 +247,16 @@ func (inv *ActionVpsDeleteInvocation) IsParameterSelected(param string) bool {
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionVpsDeleteInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsDeleteInvocation) NewMetaInput() *ActionVpsDeleteMetaGlobalInput {
@@ -248,6 +277,16 @@ func (inv *ActionVpsDeleteInvocation) IsMetaParameterSelected(param string) bool
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionVpsDeleteInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

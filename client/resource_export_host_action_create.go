@@ -22,6 +22,8 @@ type ActionExportHostCreateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -80,6 +82,8 @@ type ActionExportHostCreateInput struct {
 	Sync         bool  `json:"sync"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIpAddress sets parameter IpAddress to value and selects it for sending
@@ -90,7 +94,26 @@ func (in *ActionExportHostCreateInput) SetIpAddress(value int64) *ActionExportHo
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetIpAddressNil(false)
 	in._selectedParameters["IpAddress"] = nil
+	return in
+}
+
+// SetIpAddressNil sets parameter IpAddress to nil and selects it for sending
+func (in *ActionExportHostCreateInput) SetIpAddressNil(set bool) *ActionExportHostCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["IpAddress"] = nil
+		in.SelectParameters("IpAddress")
+	} else {
+		delete(in._nilParameters, "IpAddress")
+	}
 	return in
 }
 
@@ -152,6 +175,21 @@ func (in *ActionExportHostCreateInput) SelectParameters(params ...string) *Actio
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionExportHostCreateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionExportHostCreateInput) UnselectParameters(params ...string) *ActionExportHostCreateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -255,6 +293,16 @@ func (inv *ActionExportHostCreateInvocation) IsParameterSelected(param string) b
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionExportHostCreateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionExportHostCreateInvocation) NewMetaInput() *ActionExportHostCreateMetaGlobalInput {
@@ -275,6 +323,16 @@ func (inv *ActionExportHostCreateInvocation) IsMetaParameterSelected(param strin
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionExportHostCreateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -381,7 +439,11 @@ func (inv *ActionExportHostCreateInvocation) makeInputParams() map[string]interf
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("IpAddress") {
-			ret["ip_address"] = inv.Input.IpAddress
+			if inv.IsParameterNil("IpAddress") {
+				ret["ip_address"] = nil
+			} else {
+				ret["ip_address"] = inv.Input.IpAddress
+			}
 		}
 		if inv.IsParameterSelected("RootSquash") {
 			ret["root_squash"] = inv.Input.RootSquash

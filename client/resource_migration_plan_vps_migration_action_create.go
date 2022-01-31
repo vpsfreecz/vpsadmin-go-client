@@ -22,6 +22,8 @@ type ActionMigrationPlanVpsMigrationCreateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -79,6 +81,8 @@ type ActionMigrationPlanVpsMigrationCreateInput struct {
 	Vps               int64 `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCleanupData sets parameter CleanupData to value and selects it for sending
@@ -101,7 +105,26 @@ func (in *ActionMigrationPlanVpsMigrationCreateInput) SetDstNode(value int64) *A
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetDstNodeNil(false)
 	in._selectedParameters["DstNode"] = nil
+	return in
+}
+
+// SetDstNodeNil sets parameter DstNode to nil and selects it for sending
+func (in *ActionMigrationPlanVpsMigrationCreateInput) SetDstNodeNil(set bool) *ActionMigrationPlanVpsMigrationCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["DstNode"] = nil
+		in.SelectParameters("DstNode")
+	} else {
+		delete(in._nilParameters, "DstNode")
+	}
 	return in
 }
 
@@ -125,7 +148,26 @@ func (in *ActionMigrationPlanVpsMigrationCreateInput) SetVps(value int64) *Actio
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetVpsNil(false)
 	in._selectedParameters["Vps"] = nil
+	return in
+}
+
+// SetVpsNil sets parameter Vps to nil and selects it for sending
+func (in *ActionMigrationPlanVpsMigrationCreateInput) SetVpsNil(set bool) *ActionMigrationPlanVpsMigrationCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Vps"] = nil
+		in.SelectParameters("Vps")
+	} else {
+		delete(in._nilParameters, "Vps")
+	}
 	return in
 }
 
@@ -139,6 +181,21 @@ func (in *ActionMigrationPlanVpsMigrationCreateInput) SelectParameters(params ..
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionMigrationPlanVpsMigrationCreateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionMigrationPlanVpsMigrationCreateInput) UnselectParameters(params ...string) *ActionMigrationPlanVpsMigrationCreateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -240,6 +297,16 @@ func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) IsParameterSelected(
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) NewMetaInput() *ActionMigrationPlanVpsMigrationCreateMetaGlobalInput {
@@ -260,6 +327,16 @@ func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) IsMetaParameterSelec
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -293,13 +370,21 @@ func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) makeInputParams() ma
 			ret["cleanup_data"] = inv.Input.CleanupData
 		}
 		if inv.IsParameterSelected("DstNode") {
-			ret["dst_node"] = inv.Input.DstNode
+			if inv.IsParameterNil("DstNode") {
+				ret["dst_node"] = nil
+			} else {
+				ret["dst_node"] = inv.Input.DstNode
+			}
 		}
 		if inv.IsParameterSelected("MaintenanceWindow") {
 			ret["maintenance_window"] = inv.Input.MaintenanceWindow
 		}
 		if inv.IsParameterSelected("Vps") {
-			ret["vps"] = inv.Input.Vps
+			if inv.IsParameterNil("Vps") {
+				ret["vps"] = nil
+			} else {
+				ret["vps"] = inv.Input.Vps
+			}
 		}
 	}
 

@@ -20,6 +20,8 @@ type ActionSnapshotDownloadCreateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -77,6 +79,8 @@ type ActionSnapshotDownloadCreateInput struct {
 	Snapshot     int64  `json:"snapshot"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetFormat sets parameter Format to value and selects it for sending
@@ -99,7 +103,26 @@ func (in *ActionSnapshotDownloadCreateInput) SetFromSnapshot(value int64) *Actio
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetFromSnapshotNil(false)
 	in._selectedParameters["FromSnapshot"] = nil
+	return in
+}
+
+// SetFromSnapshotNil sets parameter FromSnapshot to nil and selects it for sending
+func (in *ActionSnapshotDownloadCreateInput) SetFromSnapshotNil(set bool) *ActionSnapshotDownloadCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["FromSnapshot"] = nil
+		in.SelectParameters("FromSnapshot")
+	} else {
+		delete(in._nilParameters, "FromSnapshot")
+	}
 	return in
 }
 
@@ -123,7 +146,26 @@ func (in *ActionSnapshotDownloadCreateInput) SetSnapshot(value int64) *ActionSna
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetSnapshotNil(false)
 	in._selectedParameters["Snapshot"] = nil
+	return in
+}
+
+// SetSnapshotNil sets parameter Snapshot to nil and selects it for sending
+func (in *ActionSnapshotDownloadCreateInput) SetSnapshotNil(set bool) *ActionSnapshotDownloadCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Snapshot"] = nil
+		in.SelectParameters("Snapshot")
+	} else {
+		delete(in._nilParameters, "Snapshot")
+	}
 	return in
 }
 
@@ -137,6 +179,21 @@ func (in *ActionSnapshotDownloadCreateInput) SelectParameters(params ...string) 
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionSnapshotDownloadCreateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionSnapshotDownloadCreateInput) UnselectParameters(params ...string) *ActionSnapshotDownloadCreateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -234,6 +291,16 @@ func (inv *ActionSnapshotDownloadCreateInvocation) IsParameterSelected(param str
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionSnapshotDownloadCreateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionSnapshotDownloadCreateInvocation) NewMetaInput() *ActionSnapshotDownloadCreateMetaGlobalInput {
@@ -254,6 +321,16 @@ func (inv *ActionSnapshotDownloadCreateInvocation) IsMetaParameterSelected(param
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionSnapshotDownloadCreateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -363,13 +440,21 @@ func (inv *ActionSnapshotDownloadCreateInvocation) makeInputParams() map[string]
 			ret["format"] = inv.Input.Format
 		}
 		if inv.IsParameterSelected("FromSnapshot") {
-			ret["from_snapshot"] = inv.Input.FromSnapshot
+			if inv.IsParameterNil("FromSnapshot") {
+				ret["from_snapshot"] = nil
+			} else {
+				ret["from_snapshot"] = inv.Input.FromSnapshot
+			}
 		}
 		if inv.IsParameterSelected("SendMail") {
 			ret["send_mail"] = inv.Input.SendMail
 		}
 		if inv.IsParameterSelected("Snapshot") {
-			ret["snapshot"] = inv.Input.Snapshot
+			if inv.IsParameterNil("Snapshot") {
+				ret["snapshot"] = nil
+			} else {
+				ret["snapshot"] = inv.Input.Snapshot
+			}
 		}
 	}
 

@@ -22,6 +22,8 @@ type ActionMailTemplateTranslationUpdateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -82,6 +84,8 @@ type ActionMailTemplateTranslationUpdateInput struct {
 	TextPlain  string `json:"text_plain"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetFrom sets parameter From to value and selects it for sending
@@ -104,7 +108,26 @@ func (in *ActionMailTemplateTranslationUpdateInput) SetLanguage(value int64) *Ac
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetLanguageNil(false)
 	in._selectedParameters["Language"] = nil
+	return in
+}
+
+// SetLanguageNil sets parameter Language to nil and selects it for sending
+func (in *ActionMailTemplateTranslationUpdateInput) SetLanguageNil(set bool) *ActionMailTemplateTranslationUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Language"] = nil
+		in.SelectParameters("Language")
+	} else {
+		delete(in._nilParameters, "Language")
+	}
 	return in
 }
 
@@ -178,6 +201,21 @@ func (in *ActionMailTemplateTranslationUpdateInput) SelectParameters(params ...s
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionMailTemplateTranslationUpdateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionMailTemplateTranslationUpdateInput) UnselectParameters(params ...string) *ActionMailTemplateTranslationUpdateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -278,6 +316,16 @@ func (inv *ActionMailTemplateTranslationUpdateInvocation) IsParameterSelected(pa
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionMailTemplateTranslationUpdateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionMailTemplateTranslationUpdateInvocation) NewMetaInput() *ActionMailTemplateTranslationUpdateMetaGlobalInput {
@@ -298,6 +346,16 @@ func (inv *ActionMailTemplateTranslationUpdateInvocation) IsMetaParameterSelecte
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionMailTemplateTranslationUpdateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -331,7 +389,11 @@ func (inv *ActionMailTemplateTranslationUpdateInvocation) makeInputParams() map[
 			ret["from"] = inv.Input.From
 		}
 		if inv.IsParameterSelected("Language") {
-			ret["language"] = inv.Input.Language
+			if inv.IsParameterNil("Language") {
+				ret["language"] = nil
+			} else {
+				ret["language"] = inv.Input.Language
+			}
 		}
 		if inv.IsParameterSelected("ReplyTo") {
 			ret["reply_to"] = inv.Input.ReplyTo

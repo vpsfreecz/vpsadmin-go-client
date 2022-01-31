@@ -20,6 +20,8 @@ type ActionIpAddressCreateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -82,6 +84,8 @@ type ActionIpAddressCreateInput struct {
 	User             int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetAddr sets parameter Addr to value and selects it for sending
@@ -128,7 +132,26 @@ func (in *ActionIpAddressCreateInput) SetNetwork(value int64) *ActionIpAddressCr
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetNetworkNil(false)
 	in._selectedParameters["Network"] = nil
+	return in
+}
+
+// SetNetworkNil sets parameter Network to nil and selects it for sending
+func (in *ActionIpAddressCreateInput) SetNetworkNil(set bool) *ActionIpAddressCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Network"] = nil
+		in.SelectParameters("Network")
+	} else {
+		delete(in._nilParameters, "Network")
+	}
 	return in
 }
 
@@ -140,7 +163,26 @@ func (in *ActionIpAddressCreateInput) SetNetworkInterface(value int64) *ActionIp
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetNetworkInterfaceNil(false)
 	in._selectedParameters["NetworkInterface"] = nil
+	return in
+}
+
+// SetNetworkInterfaceNil sets parameter NetworkInterface to nil and selects it for sending
+func (in *ActionIpAddressCreateInput) SetNetworkInterfaceNil(set bool) *ActionIpAddressCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["NetworkInterface"] = nil
+		in.SelectParameters("NetworkInterface")
+	} else {
+		delete(in._nilParameters, "NetworkInterface")
+	}
 	return in
 }
 
@@ -164,7 +206,26 @@ func (in *ActionIpAddressCreateInput) SetRouteVia(value int64) *ActionIpAddressC
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetRouteViaNil(false)
 	in._selectedParameters["RouteVia"] = nil
+	return in
+}
+
+// SetRouteViaNil sets parameter RouteVia to nil and selects it for sending
+func (in *ActionIpAddressCreateInput) SetRouteViaNil(set bool) *ActionIpAddressCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["RouteVia"] = nil
+		in.SelectParameters("RouteVia")
+	} else {
+		delete(in._nilParameters, "RouteVia")
+	}
 	return in
 }
 
@@ -188,7 +249,26 @@ func (in *ActionIpAddressCreateInput) SetUser(value int64) *ActionIpAddressCreat
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
+	return in
+}
+
+// SetUserNil sets parameter User to nil and selects it for sending
+func (in *ActionIpAddressCreateInput) SetUserNil(set bool) *ActionIpAddressCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["User"] = nil
+		in.SelectParameters("User")
+	} else {
+		delete(in._nilParameters, "User")
+	}
 	return in
 }
 
@@ -202,6 +282,21 @@ func (in *ActionIpAddressCreateInput) SelectParameters(params ...string) *Action
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionIpAddressCreateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionIpAddressCreateInput) UnselectParameters(params ...string) *ActionIpAddressCreateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -293,6 +388,16 @@ func (inv *ActionIpAddressCreateInvocation) IsParameterSelected(param string) bo
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionIpAddressCreateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionIpAddressCreateInvocation) NewMetaInput() *ActionIpAddressCreateMetaGlobalInput {
@@ -313,6 +418,16 @@ func (inv *ActionIpAddressCreateInvocation) IsMetaParameterSelected(param string
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionIpAddressCreateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -352,22 +467,38 @@ func (inv *ActionIpAddressCreateInvocation) makeInputParams() map[string]interfa
 			ret["max_tx"] = inv.Input.MaxTx
 		}
 		if inv.IsParameterSelected("Network") {
-			ret["network"] = inv.Input.Network
+			if inv.IsParameterNil("Network") {
+				ret["network"] = nil
+			} else {
+				ret["network"] = inv.Input.Network
+			}
 		}
 		if inv.IsParameterSelected("NetworkInterface") {
-			ret["network_interface"] = inv.Input.NetworkInterface
+			if inv.IsParameterNil("NetworkInterface") {
+				ret["network_interface"] = nil
+			} else {
+				ret["network_interface"] = inv.Input.NetworkInterface
+			}
 		}
 		if inv.IsParameterSelected("Prefix") {
 			ret["prefix"] = inv.Input.Prefix
 		}
 		if inv.IsParameterSelected("RouteVia") {
-			ret["route_via"] = inv.Input.RouteVia
+			if inv.IsParameterNil("RouteVia") {
+				ret["route_via"] = nil
+			} else {
+				ret["route_via"] = inv.Input.RouteVia
+			}
 		}
 		if inv.IsParameterSelected("Size") {
 			ret["size"] = inv.Input.Size
 		}
 		if inv.IsParameterSelected("User") {
-			ret["user"] = inv.Input.User
+			if inv.IsParameterNil("User") {
+				ret["user"] = nil
+			} else {
+				ret["user"] = inv.Input.User
+			}
 		}
 	}
 

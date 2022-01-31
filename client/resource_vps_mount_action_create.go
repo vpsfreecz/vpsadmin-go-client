@@ -22,6 +22,8 @@ type ActionVpsMountCreateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -81,6 +83,8 @@ type ActionVpsMountCreateInput struct {
 	UserNamespaceMap int64  `json:"user_namespace_map"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetDataset sets parameter Dataset to value and selects it for sending
@@ -91,7 +95,26 @@ func (in *ActionVpsMountCreateInput) SetDataset(value int64) *ActionVpsMountCrea
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetDatasetNil(false)
 	in._selectedParameters["Dataset"] = nil
+	return in
+}
+
+// SetDatasetNil sets parameter Dataset to nil and selects it for sending
+func (in *ActionVpsMountCreateInput) SetDatasetNil(set bool) *ActionVpsMountCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Dataset"] = nil
+		in.SelectParameters("Dataset")
+	} else {
+		delete(in._nilParameters, "Dataset")
+	}
 	return in
 }
 
@@ -139,7 +162,26 @@ func (in *ActionVpsMountCreateInput) SetSnapshot(value int64) *ActionVpsMountCre
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetSnapshotNil(false)
 	in._selectedParameters["Snapshot"] = nil
+	return in
+}
+
+// SetSnapshotNil sets parameter Snapshot to nil and selects it for sending
+func (in *ActionVpsMountCreateInput) SetSnapshotNil(set bool) *ActionVpsMountCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Snapshot"] = nil
+		in.SelectParameters("Snapshot")
+	} else {
+		delete(in._nilParameters, "Snapshot")
+	}
 	return in
 }
 
@@ -151,7 +193,26 @@ func (in *ActionVpsMountCreateInput) SetUserNamespaceMap(value int64) *ActionVps
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNamespaceMapNil(false)
 	in._selectedParameters["UserNamespaceMap"] = nil
+	return in
+}
+
+// SetUserNamespaceMapNil sets parameter UserNamespaceMap to nil and selects it for sending
+func (in *ActionVpsMountCreateInput) SetUserNamespaceMapNil(set bool) *ActionVpsMountCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["UserNamespaceMap"] = nil
+		in.SelectParameters("UserNamespaceMap")
+	} else {
+		delete(in._nilParameters, "UserNamespaceMap")
+	}
 	return in
 }
 
@@ -165,6 +226,21 @@ func (in *ActionVpsMountCreateInput) SelectParameters(params ...string) *ActionV
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionVpsMountCreateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionVpsMountCreateInput) UnselectParameters(params ...string) *ActionVpsMountCreateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -274,6 +350,16 @@ func (inv *ActionVpsMountCreateInvocation) IsParameterSelected(param string) boo
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionVpsMountCreateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsMountCreateInvocation) NewMetaInput() *ActionVpsMountCreateMetaGlobalInput {
@@ -294,6 +380,16 @@ func (inv *ActionVpsMountCreateInvocation) IsMetaParameterSelected(param string)
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionVpsMountCreateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -400,7 +496,11 @@ func (inv *ActionVpsMountCreateInvocation) makeInputParams() map[string]interfac
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Dataset") {
-			ret["dataset"] = inv.Input.Dataset
+			if inv.IsParameterNil("Dataset") {
+				ret["dataset"] = nil
+			} else {
+				ret["dataset"] = inv.Input.Dataset
+			}
 		}
 		if inv.IsParameterSelected("Mode") {
 			ret["mode"] = inv.Input.Mode
@@ -412,10 +512,18 @@ func (inv *ActionVpsMountCreateInvocation) makeInputParams() map[string]interfac
 			ret["on_start_fail"] = inv.Input.OnStartFail
 		}
 		if inv.IsParameterSelected("Snapshot") {
-			ret["snapshot"] = inv.Input.Snapshot
+			if inv.IsParameterNil("Snapshot") {
+				ret["snapshot"] = nil
+			} else {
+				ret["snapshot"] = inv.Input.Snapshot
+			}
 		}
 		if inv.IsParameterSelected("UserNamespaceMap") {
-			ret["user_namespace_map"] = inv.Input.UserNamespaceMap
+			if inv.IsParameterNil("UserNamespaceMap") {
+				ret["user_namespace_map"] = nil
+			} else {
+				ret["user_namespace_map"] = inv.Input.UserNamespaceMap
+			}
 		}
 	}
 

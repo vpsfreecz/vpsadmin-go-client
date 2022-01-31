@@ -21,6 +21,8 @@ type ActionTransactionIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -93,6 +95,8 @@ type ActionTransactionIndexInput struct {
 	Type             int64  `json:"type"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetDone sets parameter Done to value and selects it for sending
@@ -127,7 +131,26 @@ func (in *ActionTransactionIndexInput) SetNode(value int64) *ActionTransactionIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
+	return in
+}
+
+// SetNodeNil sets parameter Node to nil and selects it for sending
+func (in *ActionTransactionIndexInput) SetNodeNil(set bool) *ActionTransactionIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Node"] = nil
+		in.SelectParameters("Node")
+	} else {
+		delete(in._nilParameters, "Node")
+	}
 	return in
 }
 
@@ -163,7 +186,26 @@ func (in *ActionTransactionIndexInput) SetTransactionChain(value int64) *ActionT
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetTransactionChainNil(false)
 	in._selectedParameters["TransactionChain"] = nil
+	return in
+}
+
+// SetTransactionChainNil sets parameter TransactionChain to nil and selects it for sending
+func (in *ActionTransactionIndexInput) SetTransactionChainNil(set bool) *ActionTransactionIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TransactionChain"] = nil
+		in.SelectParameters("TransactionChain")
+	} else {
+		delete(in._nilParameters, "TransactionChain")
+	}
 	return in
 }
 
@@ -189,6 +231,21 @@ func (in *ActionTransactionIndexInput) SelectParameters(params ...string) *Actio
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionTransactionIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionTransactionIndexInput) UnselectParameters(params ...string) *ActionTransactionIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -279,6 +336,16 @@ func (inv *ActionTransactionIndexInvocation) IsParameterSelected(param string) b
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionTransactionIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionTransactionIndexInvocation) NewMetaInput() *ActionTransactionIndexMetaGlobalInput {
@@ -299,6 +366,16 @@ func (inv *ActionTransactionIndexInvocation) IsMetaParameterSelected(param strin
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionTransactionIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

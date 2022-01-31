@@ -22,6 +22,8 @@ type ActionNetworkUpdateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -84,6 +86,8 @@ type ActionNetworkUpdateInput struct {
 	SplitPrefix int64  `json:"split_prefix"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetAddress sets parameter Address to value and selects it for sending
@@ -209,6 +213,21 @@ func (in *ActionNetworkUpdateInput) SelectParameters(params ...string) *ActionNe
 	return in
 }
 
+// UnselectParameters unsets parameters from ActionNetworkUpdateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionNetworkUpdateInput) UnselectParameters(params ...string) *ActionNetworkUpdateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
+	}
+
+	return in
+}
+
 func (in *ActionNetworkUpdateInput) AnySelected() bool {
 	if in._selectedParameters == nil {
 		return false
@@ -310,6 +329,16 @@ func (inv *ActionNetworkUpdateInvocation) IsParameterSelected(param string) bool
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionNetworkUpdateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionNetworkUpdateInvocation) NewMetaInput() *ActionNetworkUpdateMetaGlobalInput {
@@ -330,6 +359,16 @@ func (inv *ActionNetworkUpdateInvocation) IsMetaParameterSelected(param string) 
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionNetworkUpdateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

@@ -21,6 +21,8 @@ type ActionActionStateShowMetaGlobalInput struct {
 	No bool `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetNo sets parameter No to value and selects it for sending
@@ -135,6 +137,16 @@ func (inv *ActionActionStateShowInvocation) IsMetaParameterSelected(param string
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionActionStateShowInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

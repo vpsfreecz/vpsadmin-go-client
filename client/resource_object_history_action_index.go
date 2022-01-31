@@ -21,6 +21,8 @@ type ActionObjectHistoryIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -93,6 +95,8 @@ type ActionObjectHistoryIndexInput struct {
 	UserSession int64  `json:"user_session"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetEventType sets parameter EventType to value and selects it for sending
@@ -163,7 +167,26 @@ func (in *ActionObjectHistoryIndexInput) SetUser(value int64) *ActionObjectHisto
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
+	return in
+}
+
+// SetUserNil sets parameter User to nil and selects it for sending
+func (in *ActionObjectHistoryIndexInput) SetUserNil(set bool) *ActionObjectHistoryIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["User"] = nil
+		in.SelectParameters("User")
+	} else {
+		delete(in._nilParameters, "User")
+	}
 	return in
 }
 
@@ -175,7 +198,26 @@ func (in *ActionObjectHistoryIndexInput) SetUserSession(value int64) *ActionObje
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserSessionNil(false)
 	in._selectedParameters["UserSession"] = nil
+	return in
+}
+
+// SetUserSessionNil sets parameter UserSession to nil and selects it for sending
+func (in *ActionObjectHistoryIndexInput) SetUserSessionNil(set bool) *ActionObjectHistoryIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["UserSession"] = nil
+		in.SelectParameters("UserSession")
+	} else {
+		delete(in._nilParameters, "UserSession")
+	}
 	return in
 }
 
@@ -189,6 +231,21 @@ func (in *ActionObjectHistoryIndexInput) SelectParameters(params ...string) *Act
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionObjectHistoryIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionObjectHistoryIndexInput) UnselectParameters(params ...string) *ActionObjectHistoryIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -269,6 +326,16 @@ func (inv *ActionObjectHistoryIndexInvocation) IsParameterSelected(param string)
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionObjectHistoryIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionObjectHistoryIndexInvocation) NewMetaInput() *ActionObjectHistoryIndexMetaGlobalInput {
@@ -289,6 +356,16 @@ func (inv *ActionObjectHistoryIndexInvocation) IsMetaParameterSelected(param str
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionObjectHistoryIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

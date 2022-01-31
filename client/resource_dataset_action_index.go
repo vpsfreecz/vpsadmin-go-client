@@ -21,6 +21,8 @@ type ActionDatasetIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -93,6 +95,8 @@ type ActionDatasetIndexInput struct {
 	UserNamespaceMap int64  `json:"user_namespace_map"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetDataset sets parameter Dataset to value and selects it for sending
@@ -103,7 +107,26 @@ func (in *ActionDatasetIndexInput) SetDataset(value int64) *ActionDatasetIndexIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetDatasetNil(false)
 	in._selectedParameters["Dataset"] = nil
+	return in
+}
+
+// SetDatasetNil sets parameter Dataset to nil and selects it for sending
+func (in *ActionDatasetIndexInput) SetDatasetNil(set bool) *ActionDatasetIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Dataset"] = nil
+		in.SelectParameters("Dataset")
+	} else {
+		delete(in._nilParameters, "Dataset")
+	}
 	return in
 }
 
@@ -163,7 +186,26 @@ func (in *ActionDatasetIndexInput) SetUser(value int64) *ActionDatasetIndexInput
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
+	return in
+}
+
+// SetUserNil sets parameter User to nil and selects it for sending
+func (in *ActionDatasetIndexInput) SetUserNil(set bool) *ActionDatasetIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["User"] = nil
+		in.SelectParameters("User")
+	} else {
+		delete(in._nilParameters, "User")
+	}
 	return in
 }
 
@@ -175,7 +217,26 @@ func (in *ActionDatasetIndexInput) SetUserNamespaceMap(value int64) *ActionDatas
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNamespaceMapNil(false)
 	in._selectedParameters["UserNamespaceMap"] = nil
+	return in
+}
+
+// SetUserNamespaceMapNil sets parameter UserNamespaceMap to nil and selects it for sending
+func (in *ActionDatasetIndexInput) SetUserNamespaceMapNil(set bool) *ActionDatasetIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["UserNamespaceMap"] = nil
+		in.SelectParameters("UserNamespaceMap")
+	} else {
+		delete(in._nilParameters, "UserNamespaceMap")
+	}
 	return in
 }
 
@@ -189,6 +250,21 @@ func (in *ActionDatasetIndexInput) SelectParameters(params ...string) *ActionDat
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionDatasetIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionDatasetIndexInput) UnselectParameters(params ...string) *ActionDatasetIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -281,6 +357,16 @@ func (inv *ActionDatasetIndexInvocation) IsParameterSelected(param string) bool 
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionDatasetIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionDatasetIndexInvocation) NewMetaInput() *ActionDatasetIndexMetaGlobalInput {
@@ -301,6 +387,16 @@ func (inv *ActionDatasetIndexInvocation) IsMetaParameterSelected(param string) b
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionDatasetIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

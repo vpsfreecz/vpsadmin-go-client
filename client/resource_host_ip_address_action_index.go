@@ -21,6 +21,8 @@ type ActionHostIpAddressIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -104,6 +106,8 @@ type ActionHostIpAddressIndexInput struct {
 	Vps              int64  `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetAddr sets parameter Addr to value and selects it for sending
@@ -138,7 +142,26 @@ func (in *ActionHostIpAddressIndexInput) SetIpAddress(value int64) *ActionHostIp
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetIpAddressNil(false)
 	in._selectedParameters["IpAddress"] = nil
+	return in
+}
+
+// SetIpAddressNil sets parameter IpAddress to nil and selects it for sending
+func (in *ActionHostIpAddressIndexInput) SetIpAddressNil(set bool) *ActionHostIpAddressIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["IpAddress"] = nil
+		in.SelectParameters("IpAddress")
+	} else {
+		delete(in._nilParameters, "IpAddress")
+	}
 	return in
 }
 
@@ -162,7 +185,26 @@ func (in *ActionHostIpAddressIndexInput) SetLocation(value int64) *ActionHostIpA
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
+	return in
+}
+
+// SetLocationNil sets parameter Location to nil and selects it for sending
+func (in *ActionHostIpAddressIndexInput) SetLocationNil(set bool) *ActionHostIpAddressIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Location"] = nil
+		in.SelectParameters("Location")
+	} else {
+		delete(in._nilParameters, "Location")
+	}
 	return in
 }
 
@@ -198,7 +240,26 @@ func (in *ActionHostIpAddressIndexInput) SetNetwork(value int64) *ActionHostIpAd
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetNetworkNil(false)
 	in._selectedParameters["Network"] = nil
+	return in
+}
+
+// SetNetworkNil sets parameter Network to nil and selects it for sending
+func (in *ActionHostIpAddressIndexInput) SetNetworkNil(set bool) *ActionHostIpAddressIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Network"] = nil
+		in.SelectParameters("Network")
+	} else {
+		delete(in._nilParameters, "Network")
+	}
 	return in
 }
 
@@ -210,7 +271,26 @@ func (in *ActionHostIpAddressIndexInput) SetNetworkInterface(value int64) *Actio
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetNetworkInterfaceNil(false)
 	in._selectedParameters["NetworkInterface"] = nil
+	return in
+}
+
+// SetNetworkInterfaceNil sets parameter NetworkInterface to nil and selects it for sending
+func (in *ActionHostIpAddressIndexInput) SetNetworkInterfaceNil(set bool) *ActionHostIpAddressIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["NetworkInterface"] = nil
+		in.SelectParameters("NetworkInterface")
+	} else {
+		delete(in._nilParameters, "NetworkInterface")
+	}
 	return in
 }
 
@@ -294,7 +374,26 @@ func (in *ActionHostIpAddressIndexInput) SetUser(value int64) *ActionHostIpAddre
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
+	return in
+}
+
+// SetUserNil sets parameter User to nil and selects it for sending
+func (in *ActionHostIpAddressIndexInput) SetUserNil(set bool) *ActionHostIpAddressIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["User"] = nil
+		in.SelectParameters("User")
+	} else {
+		delete(in._nilParameters, "User")
+	}
 	return in
 }
 
@@ -318,7 +417,26 @@ func (in *ActionHostIpAddressIndexInput) SetVps(value int64) *ActionHostIpAddres
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetVpsNil(false)
 	in._selectedParameters["Vps"] = nil
+	return in
+}
+
+// SetVpsNil sets parameter Vps to nil and selects it for sending
+func (in *ActionHostIpAddressIndexInput) SetVpsNil(set bool) *ActionHostIpAddressIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Vps"] = nil
+		in.SelectParameters("Vps")
+	} else {
+		delete(in._nilParameters, "Vps")
+	}
 	return in
 }
 
@@ -332,6 +450,21 @@ func (in *ActionHostIpAddressIndexInput) SelectParameters(params ...string) *Act
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionHostIpAddressIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionHostIpAddressIndexInput) UnselectParameters(params ...string) *ActionHostIpAddressIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -409,6 +542,16 @@ func (inv *ActionHostIpAddressIndexInvocation) IsParameterSelected(param string)
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionHostIpAddressIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionHostIpAddressIndexInvocation) NewMetaInput() *ActionHostIpAddressIndexMetaGlobalInput {
@@ -429,6 +572,16 @@ func (inv *ActionHostIpAddressIndexInvocation) IsMetaParameterSelected(param str
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionHostIpAddressIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

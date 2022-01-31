@@ -22,6 +22,8 @@ type ActionVpsConfigUpdateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -78,6 +80,8 @@ type ActionVpsConfigUpdateInput struct {
 	Name   string `json:"name"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetConfig sets parameter Config to value and selects it for sending
@@ -126,6 +130,21 @@ func (in *ActionVpsConfigUpdateInput) SelectParameters(params ...string) *Action
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionVpsConfigUpdateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionVpsConfigUpdateInput) UnselectParameters(params ...string) *ActionVpsConfigUpdateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -215,6 +234,16 @@ func (inv *ActionVpsConfigUpdateInvocation) IsParameterSelected(param string) bo
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionVpsConfigUpdateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsConfigUpdateInvocation) NewMetaInput() *ActionVpsConfigUpdateMetaGlobalInput {
@@ -235,6 +264,16 @@ func (inv *ActionVpsConfigUpdateInvocation) IsMetaParameterSelected(param string
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionVpsConfigUpdateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

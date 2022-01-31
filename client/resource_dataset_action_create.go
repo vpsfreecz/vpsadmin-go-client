@@ -20,6 +20,8 @@ type ActionDatasetCreateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -86,6 +88,8 @@ type ActionDatasetCreateInput struct {
 	UserNamespaceMap        int64  `json:"user_namespace_map"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetAtime sets parameter Atime to value and selects it for sending
@@ -132,7 +136,26 @@ func (in *ActionDatasetCreateInput) SetDataset(value int64) *ActionDatasetCreate
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetDatasetNil(false)
 	in._selectedParameters["Dataset"] = nil
+	return in
+}
+
+// SetDatasetNil sets parameter Dataset to nil and selects it for sending
+func (in *ActionDatasetCreateInput) SetDatasetNil(set bool) *ActionDatasetCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Dataset"] = nil
+		in.SelectParameters("Dataset")
+	} else {
+		delete(in._nilParameters, "Dataset")
+	}
 	return in
 }
 
@@ -240,7 +263,26 @@ func (in *ActionDatasetCreateInput) SetUserNamespaceMap(value int64) *ActionData
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNamespaceMapNil(false)
 	in._selectedParameters["UserNamespaceMap"] = nil
+	return in
+}
+
+// SetUserNamespaceMapNil sets parameter UserNamespaceMap to nil and selects it for sending
+func (in *ActionDatasetCreateInput) SetUserNamespaceMapNil(set bool) *ActionDatasetCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["UserNamespaceMap"] = nil
+		in.SelectParameters("UserNamespaceMap")
+	} else {
+		delete(in._nilParameters, "UserNamespaceMap")
+	}
 	return in
 }
 
@@ -254,6 +296,21 @@ func (in *ActionDatasetCreateInput) SelectParameters(params ...string) *ActionDa
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionDatasetCreateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionDatasetCreateInput) UnselectParameters(params ...string) *ActionDatasetCreateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -359,6 +416,16 @@ func (inv *ActionDatasetCreateInvocation) IsParameterSelected(param string) bool
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionDatasetCreateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionDatasetCreateInvocation) NewMetaInput() *ActionDatasetCreateMetaGlobalInput {
@@ -379,6 +446,16 @@ func (inv *ActionDatasetCreateInvocation) IsMetaParameterSelected(param string) 
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionDatasetCreateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -494,7 +571,11 @@ func (inv *ActionDatasetCreateInvocation) makeInputParams() map[string]interface
 			ret["compression"] = inv.Input.Compression
 		}
 		if inv.IsParameterSelected("Dataset") {
-			ret["dataset"] = inv.Input.Dataset
+			if inv.IsParameterNil("Dataset") {
+				ret["dataset"] = nil
+			} else {
+				ret["dataset"] = inv.Input.Dataset
+			}
 		}
 		if inv.IsParameterSelected("InheritUserNamespaceMap") {
 			ret["inherit_user_namespace_map"] = inv.Input.InheritUserNamespaceMap
@@ -521,7 +602,11 @@ func (inv *ActionDatasetCreateInvocation) makeInputParams() map[string]interface
 			ret["sync"] = inv.Input.Sync
 		}
 		if inv.IsParameterSelected("UserNamespaceMap") {
-			ret["user_namespace_map"] = inv.Input.UserNamespaceMap
+			if inv.IsParameterNil("UserNamespaceMap") {
+				ret["user_namespace_map"] = nil
+			} else {
+				ret["user_namespace_map"] = inv.Input.UserNamespaceMap
+			}
 		}
 	}
 

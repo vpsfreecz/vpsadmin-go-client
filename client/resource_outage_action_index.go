@@ -21,6 +21,8 @@ type ActionOutageIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -103,6 +105,8 @@ type ActionOutageIndexInput struct {
 	Vps         int64  `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetAffected sets parameter Affected to value and selects it for sending
@@ -149,7 +153,26 @@ func (in *ActionOutageIndexInput) SetEnvironment(value int64) *ActionOutageIndex
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
+	return in
+}
+
+// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
+func (in *ActionOutageIndexInput) SetEnvironmentNil(set bool) *ActionOutageIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Environment"] = nil
+		in.SelectParameters("Environment")
+	} else {
+		delete(in._nilParameters, "Environment")
+	}
 	return in
 }
 
@@ -161,7 +184,26 @@ func (in *ActionOutageIndexInput) SetExport(value int64) *ActionOutageIndexInput
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetExportNil(false)
 	in._selectedParameters["Export"] = nil
+	return in
+}
+
+// SetExportNil sets parameter Export to nil and selects it for sending
+func (in *ActionOutageIndexInput) SetExportNil(set bool) *ActionOutageIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Export"] = nil
+		in.SelectParameters("Export")
+	} else {
+		delete(in._nilParameters, "Export")
+	}
 	return in
 }
 
@@ -173,7 +215,26 @@ func (in *ActionOutageIndexInput) SetHandledBy(value int64) *ActionOutageIndexIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetHandledByNil(false)
 	in._selectedParameters["HandledBy"] = nil
+	return in
+}
+
+// SetHandledByNil sets parameter HandledBy to nil and selects it for sending
+func (in *ActionOutageIndexInput) SetHandledByNil(set bool) *ActionOutageIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["HandledBy"] = nil
+		in.SelectParameters("HandledBy")
+	} else {
+		delete(in._nilParameters, "HandledBy")
+	}
 	return in
 }
 
@@ -197,7 +258,26 @@ func (in *ActionOutageIndexInput) SetLocation(value int64) *ActionOutageIndexInp
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
+	return in
+}
+
+// SetLocationNil sets parameter Location to nil and selects it for sending
+func (in *ActionOutageIndexInput) SetLocationNil(set bool) *ActionOutageIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Location"] = nil
+		in.SelectParameters("Location")
+	} else {
+		delete(in._nilParameters, "Location")
+	}
 	return in
 }
 
@@ -209,7 +289,26 @@ func (in *ActionOutageIndexInput) SetNode(value int64) *ActionOutageIndexInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
+	return in
+}
+
+// SetNodeNil sets parameter Node to nil and selects it for sending
+func (in *ActionOutageIndexInput) SetNodeNil(set bool) *ActionOutageIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Node"] = nil
+		in.SelectParameters("Node")
+	} else {
+		delete(in._nilParameters, "Node")
+	}
 	return in
 }
 
@@ -293,7 +392,26 @@ func (in *ActionOutageIndexInput) SetUser(value int64) *ActionOutageIndexInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
+	return in
+}
+
+// SetUserNil sets parameter User to nil and selects it for sending
+func (in *ActionOutageIndexInput) SetUserNil(set bool) *ActionOutageIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["User"] = nil
+		in.SelectParameters("User")
+	} else {
+		delete(in._nilParameters, "User")
+	}
 	return in
 }
 
@@ -305,7 +423,26 @@ func (in *ActionOutageIndexInput) SetVps(value int64) *ActionOutageIndexInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetVpsNil(false)
 	in._selectedParameters["Vps"] = nil
+	return in
+}
+
+// SetVpsNil sets parameter Vps to nil and selects it for sending
+func (in *ActionOutageIndexInput) SetVpsNil(set bool) *ActionOutageIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Vps"] = nil
+		in.SelectParameters("Vps")
+	} else {
+		delete(in._nilParameters, "Vps")
+	}
 	return in
 }
 
@@ -319,6 +456,21 @@ func (in *ActionOutageIndexInput) SelectParameters(params ...string) *ActionOuta
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionOutageIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionOutageIndexInput) UnselectParameters(params ...string) *ActionOutageIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -408,6 +560,16 @@ func (inv *ActionOutageIndexInvocation) IsParameterSelected(param string) bool {
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionOutageIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionOutageIndexInvocation) NewMetaInput() *ActionOutageIndexMetaGlobalInput {
@@ -428,6 +590,16 @@ func (inv *ActionOutageIndexInvocation) IsMetaParameterSelected(param string) bo
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionOutageIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

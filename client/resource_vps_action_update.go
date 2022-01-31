@@ -22,6 +22,8 @@ type ActionVpsUpdateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -95,6 +97,8 @@ type ActionVpsUpdateInput struct {
 	User             int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetAdminLockType sets parameter AdminLockType to value and selects it for sending
@@ -177,7 +181,26 @@ func (in *ActionVpsUpdateInput) SetDnsResolver(value int64) *ActionVpsUpdateInpu
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetDnsResolverNil(false)
 	in._selectedParameters["DnsResolver"] = nil
+	return in
+}
+
+// SetDnsResolverNil sets parameter DnsResolver to nil and selects it for sending
+func (in *ActionVpsUpdateInput) SetDnsResolverNil(set bool) *ActionVpsUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["DnsResolver"] = nil
+		in.SelectParameters("DnsResolver")
+	} else {
+		delete(in._nilParameters, "DnsResolver")
+	}
 	return in
 }
 
@@ -249,7 +272,26 @@ func (in *ActionVpsUpdateInput) SetNode(value int64) *ActionVpsUpdateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
+	return in
+}
+
+// SetNodeNil sets parameter Node to nil and selects it for sending
+func (in *ActionVpsUpdateInput) SetNodeNil(set bool) *ActionVpsUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Node"] = nil
+		in.SelectParameters("Node")
+	} else {
+		delete(in._nilParameters, "Node")
+	}
 	return in
 }
 
@@ -297,7 +339,26 @@ func (in *ActionVpsUpdateInput) SetOsTemplate(value int64) *ActionVpsUpdateInput
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetOsTemplateNil(false)
 	in._selectedParameters["OsTemplate"] = nil
+	return in
+}
+
+// SetOsTemplateNil sets parameter OsTemplate to nil and selects it for sending
+func (in *ActionVpsUpdateInput) SetOsTemplateNil(set bool) *ActionVpsUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["OsTemplate"] = nil
+		in.SelectParameters("OsTemplate")
+	} else {
+		delete(in._nilParameters, "OsTemplate")
+	}
 	return in
 }
 
@@ -333,7 +394,26 @@ func (in *ActionVpsUpdateInput) SetUser(value int64) *ActionVpsUpdateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
+	return in
+}
+
+// SetUserNil sets parameter User to nil and selects it for sending
+func (in *ActionVpsUpdateInput) SetUserNil(set bool) *ActionVpsUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["User"] = nil
+		in.SelectParameters("User")
+	} else {
+		delete(in._nilParameters, "User")
+	}
 	return in
 }
 
@@ -347,6 +427,21 @@ func (in *ActionVpsUpdateInput) SelectParameters(params ...string) *ActionVpsUpd
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionVpsUpdateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionVpsUpdateInput) UnselectParameters(params ...string) *ActionVpsUpdateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -436,6 +531,16 @@ func (inv *ActionVpsUpdateInvocation) IsParameterSelected(param string) bool {
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionVpsUpdateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsUpdateInvocation) NewMetaInput() *ActionVpsUpdateMetaGlobalInput {
@@ -456,6 +561,16 @@ func (inv *ActionVpsUpdateInvocation) IsMetaParameterSelected(param string) bool
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionVpsUpdateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -577,7 +692,11 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 			ret["cpu_limit"] = inv.Input.CpuLimit
 		}
 		if inv.IsParameterSelected("DnsResolver") {
-			ret["dns_resolver"] = inv.Input.DnsResolver
+			if inv.IsParameterNil("DnsResolver") {
+				ret["dns_resolver"] = nil
+			} else {
+				ret["dns_resolver"] = inv.Input.DnsResolver
+			}
 		}
 		if inv.IsParameterSelected("ExpirationDate") {
 			ret["expiration_date"] = inv.Input.ExpirationDate
@@ -595,7 +714,11 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 			ret["memory"] = inv.Input.Memory
 		}
 		if inv.IsParameterSelected("Node") {
-			ret["node"] = inv.Input.Node
+			if inv.IsParameterNil("Node") {
+				ret["node"] = nil
+			} else {
+				ret["node"] = inv.Input.Node
+			}
 		}
 		if inv.IsParameterSelected("ObjectState") {
 			ret["object_state"] = inv.Input.ObjectState
@@ -607,7 +730,11 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 			ret["onstartall"] = inv.Input.Onstartall
 		}
 		if inv.IsParameterSelected("OsTemplate") {
-			ret["os_template"] = inv.Input.OsTemplate
+			if inv.IsParameterNil("OsTemplate") {
+				ret["os_template"] = nil
+			} else {
+				ret["os_template"] = inv.Input.OsTemplate
+			}
 		}
 		if inv.IsParameterSelected("StartMenuTimeout") {
 			ret["start_menu_timeout"] = inv.Input.StartMenuTimeout
@@ -616,7 +743,11 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 			ret["swap"] = inv.Input.Swap
 		}
 		if inv.IsParameterSelected("User") {
-			ret["user"] = inv.Input.User
+			if inv.IsParameterNil("User") {
+				ret["user"] = nil
+			} else {
+				ret["user"] = inv.Input.User
+			}
 		}
 	}
 

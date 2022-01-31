@@ -20,6 +20,8 @@ type ActionUserPaymentCreateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -76,6 +78,8 @@ type ActionUserPaymentCreateInput struct {
 	User            int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetAmount sets parameter Amount to value and selects it for sending
@@ -98,7 +102,26 @@ func (in *ActionUserPaymentCreateInput) SetIncomingPayment(value int64) *ActionU
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetIncomingPaymentNil(false)
 	in._selectedParameters["IncomingPayment"] = nil
+	return in
+}
+
+// SetIncomingPaymentNil sets parameter IncomingPayment to nil and selects it for sending
+func (in *ActionUserPaymentCreateInput) SetIncomingPaymentNil(set bool) *ActionUserPaymentCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["IncomingPayment"] = nil
+		in.SelectParameters("IncomingPayment")
+	} else {
+		delete(in._nilParameters, "IncomingPayment")
+	}
 	return in
 }
 
@@ -110,7 +133,26 @@ func (in *ActionUserPaymentCreateInput) SetUser(value int64) *ActionUserPaymentC
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
+	return in
+}
+
+// SetUserNil sets parameter User to nil and selects it for sending
+func (in *ActionUserPaymentCreateInput) SetUserNil(set bool) *ActionUserPaymentCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["User"] = nil
+		in.SelectParameters("User")
+	} else {
+		delete(in._nilParameters, "User")
+	}
 	return in
 }
 
@@ -124,6 +166,21 @@ func (in *ActionUserPaymentCreateInput) SelectParameters(params ...string) *Acti
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionUserPaymentCreateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionUserPaymentCreateInput) UnselectParameters(params ...string) *ActionUserPaymentCreateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -218,6 +275,16 @@ func (inv *ActionUserPaymentCreateInvocation) IsParameterSelected(param string) 
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionUserPaymentCreateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserPaymentCreateInvocation) NewMetaInput() *ActionUserPaymentCreateMetaGlobalInput {
@@ -238,6 +305,16 @@ func (inv *ActionUserPaymentCreateInvocation) IsMetaParameterSelected(param stri
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionUserPaymentCreateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -347,10 +424,18 @@ func (inv *ActionUserPaymentCreateInvocation) makeInputParams() map[string]inter
 			ret["amount"] = inv.Input.Amount
 		}
 		if inv.IsParameterSelected("IncomingPayment") {
-			ret["incoming_payment"] = inv.Input.IncomingPayment
+			if inv.IsParameterNil("IncomingPayment") {
+				ret["incoming_payment"] = nil
+			} else {
+				ret["incoming_payment"] = inv.Input.IncomingPayment
+			}
 		}
 		if inv.IsParameterSelected("User") {
-			ret["user"] = inv.Input.User
+			if inv.IsParameterNil("User") {
+				ret["user"] = nil
+			} else {
+				ret["user"] = inv.Input.User
+			}
 		}
 	}
 

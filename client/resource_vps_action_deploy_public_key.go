@@ -22,6 +22,8 @@ type ActionVpsDeployPublicKeyMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -76,6 +78,8 @@ type ActionVpsDeployPublicKeyInput struct {
 	PublicKey int64 `json:"public_key"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetPublicKey sets parameter PublicKey to value and selects it for sending
@@ -86,7 +90,26 @@ func (in *ActionVpsDeployPublicKeyInput) SetPublicKey(value int64) *ActionVpsDep
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetPublicKeyNil(false)
 	in._selectedParameters["PublicKey"] = nil
+	return in
+}
+
+// SetPublicKeyNil sets parameter PublicKey to nil and selects it for sending
+func (in *ActionVpsDeployPublicKeyInput) SetPublicKeyNil(set bool) *ActionVpsDeployPublicKeyInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["PublicKey"] = nil
+		in.SelectParameters("PublicKey")
+	} else {
+		delete(in._nilParameters, "PublicKey")
+	}
 	return in
 }
 
@@ -100,6 +123,21 @@ func (in *ActionVpsDeployPublicKeyInput) SelectParameters(params ...string) *Act
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionVpsDeployPublicKeyInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionVpsDeployPublicKeyInput) UnselectParameters(params ...string) *ActionVpsDeployPublicKeyInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -189,6 +227,16 @@ func (inv *ActionVpsDeployPublicKeyInvocation) IsParameterSelected(param string)
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionVpsDeployPublicKeyInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsDeployPublicKeyInvocation) NewMetaInput() *ActionVpsDeployPublicKeyMetaGlobalInput {
@@ -209,6 +257,16 @@ func (inv *ActionVpsDeployPublicKeyInvocation) IsMetaParameterSelected(param str
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionVpsDeployPublicKeyInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -312,7 +370,11 @@ func (inv *ActionVpsDeployPublicKeyInvocation) makeInputParams() map[string]inte
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("PublicKey") {
-			ret["public_key"] = inv.Input.PublicKey
+			if inv.IsParameterNil("PublicKey") {
+				ret["public_key"] = nil
+			} else {
+				ret["public_key"] = inv.Input.PublicKey
+			}
 		}
 	}
 

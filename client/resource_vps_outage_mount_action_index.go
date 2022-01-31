@@ -21,6 +21,8 @@ type ActionVpsOutageMountIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -91,6 +93,8 @@ type ActionVpsOutageMountIndexInput struct {
 	Vps    int64 `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -125,7 +129,26 @@ func (in *ActionVpsOutageMountIndexInput) SetOutage(value int64) *ActionVpsOutag
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetOutageNil(false)
 	in._selectedParameters["Outage"] = nil
+	return in
+}
+
+// SetOutageNil sets parameter Outage to nil and selects it for sending
+func (in *ActionVpsOutageMountIndexInput) SetOutageNil(set bool) *ActionVpsOutageMountIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Outage"] = nil
+		in.SelectParameters("Outage")
+	} else {
+		delete(in._nilParameters, "Outage")
+	}
 	return in
 }
 
@@ -137,7 +160,26 @@ func (in *ActionVpsOutageMountIndexInput) SetUser(value int64) *ActionVpsOutageM
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
+	return in
+}
+
+// SetUserNil sets parameter User to nil and selects it for sending
+func (in *ActionVpsOutageMountIndexInput) SetUserNil(set bool) *ActionVpsOutageMountIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["User"] = nil
+		in.SelectParameters("User")
+	} else {
+		delete(in._nilParameters, "User")
+	}
 	return in
 }
 
@@ -149,7 +191,26 @@ func (in *ActionVpsOutageMountIndexInput) SetVps(value int64) *ActionVpsOutageMo
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetVpsNil(false)
 	in._selectedParameters["Vps"] = nil
+	return in
+}
+
+// SetVpsNil sets parameter Vps to nil and selects it for sending
+func (in *ActionVpsOutageMountIndexInput) SetVpsNil(set bool) *ActionVpsOutageMountIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Vps"] = nil
+		in.SelectParameters("Vps")
+	} else {
+		delete(in._nilParameters, "Vps")
+	}
 	return in
 }
 
@@ -163,6 +224,21 @@ func (in *ActionVpsOutageMountIndexInput) SelectParameters(params ...string) *Ac
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionVpsOutageMountIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionVpsOutageMountIndexInput) UnselectParameters(params ...string) *ActionVpsOutageMountIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -239,6 +315,16 @@ func (inv *ActionVpsOutageMountIndexInvocation) IsParameterSelected(param string
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionVpsOutageMountIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionVpsOutageMountIndexInvocation) NewMetaInput() *ActionVpsOutageMountIndexMetaGlobalInput {
@@ -259,6 +345,16 @@ func (inv *ActionVpsOutageMountIndexInvocation) IsMetaParameterSelected(param st
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionVpsOutageMountIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

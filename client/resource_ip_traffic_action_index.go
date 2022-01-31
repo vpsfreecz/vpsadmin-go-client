@@ -21,6 +21,8 @@ type ActionIpTrafficIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -104,6 +106,8 @@ type ActionIpTrafficIndexInput struct {
 	Year        int64  `json:"year"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetAccumulate sets parameter Accumulate to value and selects it for sending
@@ -126,7 +130,26 @@ func (in *ActionIpTrafficIndexInput) SetEnvironment(value int64) *ActionIpTraffi
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
+	return in
+}
+
+// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetEnvironmentNil(set bool) *ActionIpTrafficIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Environment"] = nil
+		in.SelectParameters("Environment")
+	} else {
+		delete(in._nilParameters, "Environment")
+	}
 	return in
 }
 
@@ -150,7 +173,26 @@ func (in *ActionIpTrafficIndexInput) SetIpAddress(value int64) *ActionIpTrafficI
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetIpAddressNil(false)
 	in._selectedParameters["IpAddress"] = nil
+	return in
+}
+
+// SetIpAddressNil sets parameter IpAddress to nil and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetIpAddressNil(set bool) *ActionIpTrafficIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["IpAddress"] = nil
+		in.SelectParameters("IpAddress")
+	} else {
+		delete(in._nilParameters, "IpAddress")
+	}
 	return in
 }
 
@@ -186,7 +228,26 @@ func (in *ActionIpTrafficIndexInput) SetLocation(value int64) *ActionIpTrafficIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
+	return in
+}
+
+// SetLocationNil sets parameter Location to nil and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetLocationNil(set bool) *ActionIpTrafficIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Location"] = nil
+		in.SelectParameters("Location")
+	} else {
+		delete(in._nilParameters, "Location")
+	}
 	return in
 }
 
@@ -210,7 +271,26 @@ func (in *ActionIpTrafficIndexInput) SetNetwork(value int64) *ActionIpTrafficInd
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetNetworkNil(false)
 	in._selectedParameters["Network"] = nil
+	return in
+}
+
+// SetNetworkNil sets parameter Network to nil and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetNetworkNil(set bool) *ActionIpTrafficIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Network"] = nil
+		in.SelectParameters("Network")
+	} else {
+		delete(in._nilParameters, "Network")
+	}
 	return in
 }
 
@@ -222,7 +302,26 @@ func (in *ActionIpTrafficIndexInput) SetNode(value int64) *ActionIpTrafficIndexI
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
+	return in
+}
+
+// SetNodeNil sets parameter Node to nil and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetNodeNil(set bool) *ActionIpTrafficIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Node"] = nil
+		in.SelectParameters("Node")
+	} else {
+		delete(in._nilParameters, "Node")
+	}
 	return in
 }
 
@@ -294,7 +393,26 @@ func (in *ActionIpTrafficIndexInput) SetUser(value int64) *ActionIpTrafficIndexI
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
+	return in
+}
+
+// SetUserNil sets parameter User to nil and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetUserNil(set bool) *ActionIpTrafficIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["User"] = nil
+		in.SelectParameters("User")
+	} else {
+		delete(in._nilParameters, "User")
+	}
 	return in
 }
 
@@ -306,7 +424,26 @@ func (in *ActionIpTrafficIndexInput) SetVps(value int64) *ActionIpTrafficIndexIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetVpsNil(false)
 	in._selectedParameters["Vps"] = nil
+	return in
+}
+
+// SetVpsNil sets parameter Vps to nil and selects it for sending
+func (in *ActionIpTrafficIndexInput) SetVpsNil(set bool) *ActionIpTrafficIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Vps"] = nil
+		in.SelectParameters("Vps")
+	} else {
+		delete(in._nilParameters, "Vps")
+	}
 	return in
 }
 
@@ -332,6 +469,21 @@ func (in *ActionIpTrafficIndexInput) SelectParameters(params ...string) *ActionI
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionIpTrafficIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionIpTrafficIndexInput) UnselectParameters(params ...string) *ActionIpTrafficIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -415,6 +567,16 @@ func (inv *ActionIpTrafficIndexInvocation) IsParameterSelected(param string) boo
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionIpTrafficIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionIpTrafficIndexInvocation) NewMetaInput() *ActionIpTrafficIndexMetaGlobalInput {
@@ -435,6 +597,16 @@ func (inv *ActionIpTrafficIndexInvocation) IsMetaParameterSelected(param string)
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionIpTrafficIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

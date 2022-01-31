@@ -22,6 +22,8 @@ type ActionDnsResolverDeleteMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -76,6 +78,8 @@ type ActionDnsResolverDeleteInput struct {
 	Force bool `json:"force"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetForce sets parameter Force to value and selects it for sending
@@ -100,6 +104,21 @@ func (in *ActionDnsResolverDeleteInput) SelectParameters(params ...string) *Acti
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionDnsResolverDeleteInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionDnsResolverDeleteInput) UnselectParameters(params ...string) *ActionDnsResolverDeleteInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -179,6 +198,16 @@ func (inv *ActionDnsResolverDeleteInvocation) IsParameterSelected(param string) 
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionDnsResolverDeleteInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionDnsResolverDeleteInvocation) NewMetaInput() *ActionDnsResolverDeleteMetaGlobalInput {
@@ -199,6 +228,16 @@ func (inv *ActionDnsResolverDeleteInvocation) IsMetaParameterSelected(param stri
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionDnsResolverDeleteInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

@@ -23,6 +23,8 @@ type ActionUserEnvironmentConfigIndexMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetCount sets parameter Count to value and selects it for sending
@@ -91,6 +93,8 @@ type ActionUserEnvironmentConfigIndexInput struct {
 	Offset      int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetEnvironment sets parameter Environment to value and selects it for sending
@@ -101,7 +105,26 @@ func (in *ActionUserEnvironmentConfigIndexInput) SetEnvironment(value int64) *Ac
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
+	return in
+}
+
+// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
+func (in *ActionUserEnvironmentConfigIndexInput) SetEnvironmentNil(set bool) *ActionUserEnvironmentConfigIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Environment"] = nil
+		in.SelectParameters("Environment")
+	} else {
+		delete(in._nilParameters, "Environment")
+	}
 	return in
 }
 
@@ -139,6 +162,21 @@ func (in *ActionUserEnvironmentConfigIndexInput) SelectParameters(params ...stri
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionUserEnvironmentConfigIndexInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionUserEnvironmentConfigIndexInput) UnselectParameters(params ...string) *ActionUserEnvironmentConfigIndexInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -230,6 +268,16 @@ func (inv *ActionUserEnvironmentConfigIndexInvocation) IsParameterSelected(param
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionUserEnvironmentConfigIndexInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserEnvironmentConfigIndexInvocation) NewMetaInput() *ActionUserEnvironmentConfigIndexMetaGlobalInput {
@@ -250,6 +298,16 @@ func (inv *ActionUserEnvironmentConfigIndexInvocation) IsMetaParameterSelected(p
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionUserEnvironmentConfigIndexInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 

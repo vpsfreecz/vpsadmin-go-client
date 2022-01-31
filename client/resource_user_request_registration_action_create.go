@@ -20,6 +20,8 @@ type ActionUserRequestRegistrationCreateMetaGlobalInput struct {
 	No       bool   `json:"no"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetIncludes sets parameter Includes to value and selects it for sending
@@ -86,6 +88,8 @@ type ActionUserRequestRegistrationCreateInput struct {
 	YearOfBirth int64  `json:"year_of_birth"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
 }
 
 // SetAddress sets parameter Address to value and selects it for sending
@@ -156,7 +160,26 @@ func (in *ActionUserRequestRegistrationCreateInput) SetLanguage(value int64) *Ac
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetLanguageNil(false)
 	in._selectedParameters["Language"] = nil
+	return in
+}
+
+// SetLanguageNil sets parameter Language to nil and selects it for sending
+func (in *ActionUserRequestRegistrationCreateInput) SetLanguageNil(set bool) *ActionUserRequestRegistrationCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Language"] = nil
+		in.SelectParameters("Language")
+	} else {
+		delete(in._nilParameters, "Language")
+	}
 	return in
 }
 
@@ -168,7 +191,26 @@ func (in *ActionUserRequestRegistrationCreateInput) SetLocation(value int64) *Ac
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
+	return in
+}
+
+// SetLocationNil sets parameter Location to nil and selects it for sending
+func (in *ActionUserRequestRegistrationCreateInput) SetLocationNil(set bool) *ActionUserRequestRegistrationCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Location"] = nil
+		in.SelectParameters("Location")
+	} else {
+		delete(in._nilParameters, "Location")
+	}
 	return in
 }
 
@@ -228,7 +270,26 @@ func (in *ActionUserRequestRegistrationCreateInput) SetOsTemplate(value int64) *
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetOsTemplateNil(false)
 	in._selectedParameters["OsTemplate"] = nil
+	return in
+}
+
+// SetOsTemplateNil sets parameter OsTemplate to nil and selects it for sending
+func (in *ActionUserRequestRegistrationCreateInput) SetOsTemplateNil(set bool) *ActionUserRequestRegistrationCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["OsTemplate"] = nil
+		in.SelectParameters("OsTemplate")
+	} else {
+		delete(in._nilParameters, "OsTemplate")
+	}
 	return in
 }
 
@@ -254,6 +315,21 @@ func (in *ActionUserRequestRegistrationCreateInput) SelectParameters(params ...s
 
 	for _, param := range params {
 		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionUserRequestRegistrationCreateInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionUserRequestRegistrationCreateInput) UnselectParameters(params ...string) *ActionUserRequestRegistrationCreateInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
 	}
 
 	return in
@@ -389,6 +465,16 @@ func (inv *ActionUserRequestRegistrationCreateInvocation) IsParameterSelected(pa
 	return exists
 }
 
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionUserRequestRegistrationCreateInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
+}
+
 // NewMetaInput returns a new struct for global meta input parameters and sets
 // it as with SetMetaInput
 func (inv *ActionUserRequestRegistrationCreateInvocation) NewMetaInput() *ActionUserRequestRegistrationCreateMetaGlobalInput {
@@ -409,6 +495,16 @@ func (inv *ActionUserRequestRegistrationCreateInvocation) IsMetaParameterSelecte
 	}
 
 	_, exists := inv.MetaInput._selectedParameters[param]
+	return exists
+}
+
+// IsMetaParameterNil returns true if global meta param is to be sent to the API as nil
+func (inv *ActionUserRequestRegistrationCreateInvocation) IsMetaParameterNil(param string) bool {
+	if inv.MetaInput._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.MetaInput._nilParameters[param]
 	return exists
 }
 
@@ -454,10 +550,18 @@ func (inv *ActionUserRequestRegistrationCreateInvocation) makeInputParams() map[
 			ret["how"] = inv.Input.How
 		}
 		if inv.IsParameterSelected("Language") {
-			ret["language"] = inv.Input.Language
+			if inv.IsParameterNil("Language") {
+				ret["language"] = nil
+			} else {
+				ret["language"] = inv.Input.Language
+			}
 		}
 		if inv.IsParameterSelected("Location") {
-			ret["location"] = inv.Input.Location
+			if inv.IsParameterNil("Location") {
+				ret["location"] = nil
+			} else {
+				ret["location"] = inv.Input.Location
+			}
 		}
 		if inv.IsParameterSelected("Login") {
 			ret["login"] = inv.Input.Login
@@ -472,7 +576,11 @@ func (inv *ActionUserRequestRegistrationCreateInvocation) makeInputParams() map[
 			ret["org_name"] = inv.Input.OrgName
 		}
 		if inv.IsParameterSelected("OsTemplate") {
-			ret["os_template"] = inv.Input.OsTemplate
+			if inv.IsParameterNil("OsTemplate") {
+				ret["os_template"] = nil
+			} else {
+				ret["os_template"] = inv.Input.OsTemplate
+			}
 		}
 		if inv.IsParameterSelected("YearOfBirth") {
 			ret["year_of_birth"] = inv.Input.YearOfBirth
