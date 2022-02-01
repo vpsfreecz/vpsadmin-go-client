@@ -76,6 +76,7 @@ func (in *ActionVpsMountCreateMetaGlobalInput) AnySelected() bool {
 // ActionVpsMountCreateInput is a type for action input parameters
 type ActionVpsMountCreateInput struct {
 	Dataset          int64  `json:"dataset"`
+	Enabled          bool   `json:"enabled"`
 	Mode             string `json:"mode"`
 	Mountpoint       string `json:"mountpoint"`
 	OnStartFail      string `json:"on_start_fail"`
@@ -115,6 +116,18 @@ func (in *ActionVpsMountCreateInput) SetDatasetNil(set bool) *ActionVpsMountCrea
 	} else {
 		delete(in._nilParameters, "Dataset")
 	}
+	return in
+}
+
+// SetEnabled sets parameter Enabled to value and selects it for sending
+func (in *ActionVpsMountCreateInput) SetEnabled(value bool) *ActionVpsMountCreateInput {
+	in.Enabled = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Enabled"] = nil
 	return in
 }
 
@@ -501,6 +514,9 @@ func (inv *ActionVpsMountCreateInvocation) makeInputParams() map[string]interfac
 			} else {
 				ret["dataset"] = inv.Input.Dataset
 			}
+		}
+		if inv.IsParameterSelected("Enabled") {
+			ret["enabled"] = inv.Input.Enabled
 		}
 		if inv.IsParameterSelected("Mode") {
 			ret["mode"] = inv.Input.Mode
