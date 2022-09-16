@@ -75,11 +75,37 @@ func (in *ActionNetworkInterfaceUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkInterfaceUpdateInput is a type for action input parameters
 type ActionNetworkInterfaceUpdateInput struct {
-	Name string `json:"name"`
+	MaxRx int64  `json:"max_rx"`
+	MaxTx int64  `json:"max_tx"`
+	Name  string `json:"name"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetMaxRx sets parameter MaxRx to value and selects it for sending
+func (in *ActionNetworkInterfaceUpdateInput) SetMaxRx(value int64) *ActionNetworkInterfaceUpdateInput {
+	in.MaxRx = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["MaxRx"] = nil
+	return in
+}
+
+// SetMaxTx sets parameter MaxTx to value and selects it for sending
+func (in *ActionNetworkInterfaceUpdateInput) SetMaxTx(value int64) *ActionNetworkInterfaceUpdateInput {
+	in.MaxTx = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["MaxTx"] = nil
+	return in
 }
 
 // SetName sets parameter Name to value and selects it for sending
@@ -140,11 +166,13 @@ type ActionNetworkInterfaceUpdateRequest struct {
 
 // ActionNetworkInterfaceUpdateOutput is a type for action output parameters
 type ActionNetworkInterfaceUpdateOutput struct {
-	Id   int64                `json:"id"`
-	Mac  string               `json:"mac"`
-	Name string               `json:"name"`
-	Type string               `json:"type"`
-	Vps  *ActionVpsShowOutput `json:"vps"`
+	Id    int64                `json:"id"`
+	Mac   string               `json:"mac"`
+	MaxRx int64                `json:"max_rx"`
+	MaxTx int64                `json:"max_tx"`
+	Name  string               `json:"name"`
+	Type  string               `json:"type"`
+	Vps   *ActionVpsShowOutput `json:"vps"`
 }
 
 // ActionNetworkInterfaceUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -366,6 +394,12 @@ func (inv *ActionNetworkInterfaceUpdateInvocation) makeInputParams() map[string]
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("MaxRx") {
+			ret["max_rx"] = inv.Input.MaxRx
+		}
+		if inv.IsParameterSelected("MaxTx") {
+			ret["max_tx"] = inv.Input.MaxTx
+		}
 		if inv.IsParameterSelected("Name") {
 			ret["name"] = inv.Input.Name
 		}

@@ -74,13 +74,19 @@ func (in *ActionNodePublicStatusMetaGlobalInput) AnySelected() bool {
 // ActionNodePublicStatusOutput is a type for action output parameters
 type ActionNodePublicStatusOutput struct {
 	CpuIdle               float64                   `json:"cpu_idle"`
+	Fqdn                  string                    `json:"fqdn"`
 	HypervisorType        string                    `json:"hypervisor_type"`
+	Id                    int64                     `json:"id"`
 	Kernel                string                    `json:"kernel"`
 	LastReport            string                    `json:"last_report"`
 	Location              *ActionLocationShowOutput `json:"location"`
 	MaintenanceLock       string                    `json:"maintenance_lock"`
 	MaintenanceLockReason string                    `json:"maintenance_lock_reason"`
 	Name                  string                    `json:"name"`
+	PoolCheckedAt         string                    `json:"pool_checked_at"`
+	PoolScan              string                    `json:"pool_scan"`
+	PoolState             string                    `json:"pool_state"`
+	PoolStatus            bool                      `json:"pool_status"`
 	Status                bool                      `json:"status"`
 	VpsCount              int64                     `json:"vps_count"`
 	VpsFree               int64                     `json:"vps_free"`

@@ -389,6 +389,8 @@ func (in *ActionVpsIndexInput) AnySelected() bool {
 
 // ActionVpsIndexOutput is a type for action output parameters
 type ActionVpsIndexOutput struct {
+	AutostartEnable       bool                         `json:"autostart_enable"`
+	AutostartPriority     int64                        `json:"autostart_priority"`
 	Config                string                       `json:"config"`
 	Cpu                   int64                        `json:"cpu"`
 	CpuIdle               float64                      `json:"cpu_idle"`
@@ -416,10 +418,11 @@ type ActionVpsIndexOutput struct {
 	Memory                int64                        `json:"memory"`
 	Node                  *ActionNodeShowOutput        `json:"node"`
 	ObjectState           string                       `json:"object_state"`
-	Onboot                bool                         `json:"onboot"`
 	Onstartall            bool                         `json:"onstartall"`
 	OsTemplate            *ActionOsTemplateShowOutput  `json:"os_template"`
+	Pool                  *ActionPoolShowOutput        `json:"pool"`
 	ProcessCount          int64                        `json:"process_count"`
+	RemindAfterDate       string                       `json:"remind_after_date"`
 	StartMenuTimeout      int64                        `json:"start_menu_timeout"`
 	Swap                  int64                        `json:"swap"`
 	Uptime                int64                        `json:"uptime"`

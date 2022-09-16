@@ -75,21 +75,22 @@ func (in *ActionUserUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserUpdateInput is a type for action input parameters
 type ActionUserUpdateInput struct {
-	Address        string `json:"address"`
-	ChangeReason   string `json:"change_reason"`
-	Email          string `json:"email"`
-	ExpirationDate string `json:"expiration_date"`
-	FullName       string `json:"full_name"`
-	Info           string `json:"info"`
-	Language       int64  `json:"language"`
-	Level          int64  `json:"level"`
-	Lockout        bool   `json:"lockout"`
-	Login          string `json:"login"`
-	MailerEnabled  bool   `json:"mailer_enabled"`
-	NewPassword    string `json:"new_password"`
-	ObjectState    string `json:"object_state"`
-	Password       string `json:"password"`
-	PasswordReset  bool   `json:"password_reset"`
+	Address         string `json:"address"`
+	ChangeReason    string `json:"change_reason"`
+	Email           string `json:"email"`
+	ExpirationDate  string `json:"expiration_date"`
+	FullName        string `json:"full_name"`
+	Info            string `json:"info"`
+	Language        int64  `json:"language"`
+	Level           int64  `json:"level"`
+	Lockout         bool   `json:"lockout"`
+	Login           string `json:"login"`
+	MailerEnabled   bool   `json:"mailer_enabled"`
+	NewPassword     string `json:"new_password"`
+	ObjectState     string `json:"object_state"`
+	Password        string `json:"password"`
+	PasswordReset   bool   `json:"password_reset"`
+	RemindAfterDate string `json:"remind_after_date"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -292,6 +293,18 @@ func (in *ActionUserUpdateInput) SetPasswordReset(value bool) *ActionUserUpdateI
 	}
 
 	in._selectedParameters["PasswordReset"] = nil
+	return in
+}
+
+// SetRemindAfterDate sets parameter RemindAfterDate to value and selects it for sending
+func (in *ActionUserUpdateInput) SetRemindAfterDate(value string) *ActionUserUpdateInput {
+	in.RemindAfterDate = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["RemindAfterDate"] = nil
 	return in
 }
 
@@ -623,6 +636,9 @@ func (inv *ActionUserUpdateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("PasswordReset") {
 			ret["password_reset"] = inv.Input.PasswordReset
+		}
+		if inv.IsParameterSelected("RemindAfterDate") {
+			ret["remind_after_date"] = inv.Input.RemindAfterDate
 		}
 	}
 

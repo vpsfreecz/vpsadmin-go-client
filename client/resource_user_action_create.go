@@ -428,21 +428,22 @@ type ActionUserCreateRequest struct {
 
 // ActionUserCreateOutput is a type for action output parameters
 type ActionUserCreateOutput struct {
-	Address        string                    `json:"address"`
-	CreatedAt      string                    `json:"created_at"`
-	Email          string                    `json:"email"`
-	ExpirationDate string                    `json:"expiration_date"`
-	FullName       string                    `json:"full_name"`
-	Id             int64                     `json:"id"`
-	Info           string                    `json:"info"`
-	Language       *ActionLanguageShowOutput `json:"language"`
-	LastActivityAt string                    `json:"last_activity_at"`
-	Level          int64                     `json:"level"`
-	Lockout        bool                      `json:"lockout"`
-	Login          string                    `json:"login"`
-	MailerEnabled  bool                      `json:"mailer_enabled"`
-	ObjectState    string                    `json:"object_state"`
-	PasswordReset  bool                      `json:"password_reset"`
+	Address         string                    `json:"address"`
+	CreatedAt       string                    `json:"created_at"`
+	Email           string                    `json:"email"`
+	ExpirationDate  string                    `json:"expiration_date"`
+	FullName        string                    `json:"full_name"`
+	Id              int64                     `json:"id"`
+	Info            string                    `json:"info"`
+	Language        *ActionLanguageShowOutput `json:"language"`
+	LastActivityAt  string                    `json:"last_activity_at"`
+	Level           int64                     `json:"level"`
+	Lockout         bool                      `json:"lockout"`
+	Login           string                    `json:"login"`
+	MailerEnabled   bool                      `json:"mailer_enabled"`
+	ObjectState     string                    `json:"object_state"`
+	PasswordReset   bool                      `json:"password_reset"`
+	RemindAfterDate string                    `json:"remind_after_date"`
 }
 
 // ActionUserCreateMetaGlobalOutput is a type for global output metadata parameters

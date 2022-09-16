@@ -77,12 +77,15 @@ func (in *ActionPoolShowMetaGlobalInput) AnySelected() bool {
 type ActionPoolShowOutput struct {
 	Atime                 bool                  `json:"atime"`
 	Avail                 int64                 `json:"avail"`
+	CheckedAt             string                `json:"checked_at"`
 	Compression           bool                  `json:"compression"`
 	Filesystem            string                `json:"filesystem"`
 	Id                    int64                 `json:"id"`
 	Label                 string                `json:"label"`
 	MaintenanceLock       string                `json:"maintenance_lock"`
 	MaintenanceLockReason string                `json:"maintenance_lock_reason"`
+	MaxDatasets           int64                 `json:"max_datasets"`
+	Name                  string                `json:"name"`
 	Node                  *ActionNodeShowOutput `json:"node"`
 	Quota                 int64                 `json:"quota"`
 	Recordsize            int64                 `json:"recordsize"`
@@ -91,7 +94,9 @@ type ActionPoolShowOutput struct {
 	RefquotaCheck         bool                  `json:"refquota_check"`
 	Relatime              bool                  `json:"relatime"`
 	Role                  string                `json:"role"`
+	Scan                  string                `json:"scan"`
 	Sharenfs              string                `json:"sharenfs"`
+	State                 string                `json:"state"`
 	Sync                  string                `json:"sync"`
 	Used                  int64                 `json:"used"`
 }

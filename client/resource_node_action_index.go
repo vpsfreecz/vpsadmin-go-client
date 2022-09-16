@@ -276,6 +276,7 @@ type ActionNodeIndexOutput struct {
 	CpuUser               float64                   `json:"cpu_user"`
 	Cpus                  int64                     `json:"cpus"`
 	DomainName            string                    `json:"domain_name"`
+	Fqdn                  string                    `json:"fqdn"`
 	HypervisorType        string                    `json:"hypervisor_type"`
 	Id                    int64                     `json:"id"`
 	IpAddr                string                    `json:"ip_addr"`
@@ -289,6 +290,10 @@ type ActionNodeIndexOutput struct {
 	MaxVps                int64                     `json:"max_vps"`
 	Name                  string                    `json:"name"`
 	NetInterface          string                    `json:"net_interface"`
+	PoolCheckedAt         string                    `json:"pool_checked_at"`
+	PoolScan              string                    `json:"pool_scan"`
+	PoolState             string                    `json:"pool_state"`
+	PoolStatus            bool                      `json:"pool_status"`
 	ProcessCount          int64                     `json:"process_count"`
 	Status                bool                      `json:"status"`
 	TotalMemory           int64                     `json:"total_memory"`

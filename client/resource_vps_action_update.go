@@ -75,26 +75,28 @@ func (in *ActionVpsUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsUpdateInput is a type for action input parameters
 type ActionVpsUpdateInput struct {
-	AdminLockType    string `json:"admin_lock_type"`
-	AdminOverride    bool   `json:"admin_override"`
-	ChangeReason     string `json:"change_reason"`
-	Config           string `json:"config"`
-	Cpu              int64  `json:"cpu"`
-	CpuLimit         int64  `json:"cpu_limit"`
-	DnsResolver      int64  `json:"dns_resolver"`
-	ExpirationDate   string `json:"expiration_date"`
-	Hostname         string `json:"hostname"`
-	Info             string `json:"info"`
-	ManageHostname   bool   `json:"manage_hostname"`
-	Memory           int64  `json:"memory"`
-	Node             int64  `json:"node"`
-	ObjectState      string `json:"object_state"`
-	Onboot           bool   `json:"onboot"`
-	Onstartall       bool   `json:"onstartall"`
-	OsTemplate       int64  `json:"os_template"`
-	StartMenuTimeout int64  `json:"start_menu_timeout"`
-	Swap             int64  `json:"swap"`
-	User             int64  `json:"user"`
+	AdminLockType     string `json:"admin_lock_type"`
+	AdminOverride     bool   `json:"admin_override"`
+	AutostartEnable   bool   `json:"autostart_enable"`
+	AutostartPriority int64  `json:"autostart_priority"`
+	ChangeReason      string `json:"change_reason"`
+	Config            string `json:"config"`
+	Cpu               int64  `json:"cpu"`
+	CpuLimit          int64  `json:"cpu_limit"`
+	DnsResolver       int64  `json:"dns_resolver"`
+	ExpirationDate    string `json:"expiration_date"`
+	Hostname          string `json:"hostname"`
+	Info              string `json:"info"`
+	ManageHostname    bool   `json:"manage_hostname"`
+	Memory            int64  `json:"memory"`
+	Node              int64  `json:"node"`
+	ObjectState       string `json:"object_state"`
+	Onstartall        bool   `json:"onstartall"`
+	OsTemplate        int64  `json:"os_template"`
+	RemindAfterDate   string `json:"remind_after_date"`
+	StartMenuTimeout  int64  `json:"start_menu_timeout"`
+	Swap              int64  `json:"swap"`
+	User              int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -122,6 +124,30 @@ func (in *ActionVpsUpdateInput) SetAdminOverride(value bool) *ActionVpsUpdateInp
 	}
 
 	in._selectedParameters["AdminOverride"] = nil
+	return in
+}
+
+// SetAutostartEnable sets parameter AutostartEnable to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetAutostartEnable(value bool) *ActionVpsUpdateInput {
+	in.AutostartEnable = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AutostartEnable"] = nil
+	return in
+}
+
+// SetAutostartPriority sets parameter AutostartPriority to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetAutostartPriority(value int64) *ActionVpsUpdateInput {
+	in.AutostartPriority = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AutostartPriority"] = nil
 	return in
 }
 
@@ -307,18 +333,6 @@ func (in *ActionVpsUpdateInput) SetObjectState(value string) *ActionVpsUpdateInp
 	return in
 }
 
-// SetOnboot sets parameter Onboot to value and selects it for sending
-func (in *ActionVpsUpdateInput) SetOnboot(value bool) *ActionVpsUpdateInput {
-	in.Onboot = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Onboot"] = nil
-	return in
-}
-
 // SetOnstartall sets parameter Onstartall to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetOnstartall(value bool) *ActionVpsUpdateInput {
 	in.Onstartall = value
@@ -359,6 +373,18 @@ func (in *ActionVpsUpdateInput) SetOsTemplateNil(set bool) *ActionVpsUpdateInput
 	} else {
 		delete(in._nilParameters, "OsTemplate")
 	}
+	return in
+}
+
+// SetRemindAfterDate sets parameter RemindAfterDate to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetRemindAfterDate(value string) *ActionVpsUpdateInput {
+	in.RemindAfterDate = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["RemindAfterDate"] = nil
 	return in
 }
 
@@ -679,6 +705,12 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 		if inv.IsParameterSelected("AdminOverride") {
 			ret["admin_override"] = inv.Input.AdminOverride
 		}
+		if inv.IsParameterSelected("AutostartEnable") {
+			ret["autostart_enable"] = inv.Input.AutostartEnable
+		}
+		if inv.IsParameterSelected("AutostartPriority") {
+			ret["autostart_priority"] = inv.Input.AutostartPriority
+		}
 		if inv.IsParameterSelected("ChangeReason") {
 			ret["change_reason"] = inv.Input.ChangeReason
 		}
@@ -723,9 +755,6 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 		if inv.IsParameterSelected("ObjectState") {
 			ret["object_state"] = inv.Input.ObjectState
 		}
-		if inv.IsParameterSelected("Onboot") {
-			ret["onboot"] = inv.Input.Onboot
-		}
 		if inv.IsParameterSelected("Onstartall") {
 			ret["onstartall"] = inv.Input.Onstartall
 		}
@@ -735,6 +764,9 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 			} else {
 				ret["os_template"] = inv.Input.OsTemplate
 			}
+		}
+		if inv.IsParameterSelected("RemindAfterDate") {
+			ret["remind_after_date"] = inv.Input.RemindAfterDate
 		}
 		if inv.IsParameterSelected("StartMenuTimeout") {
 			ret["start_menu_timeout"] = inv.Input.StartMenuTimeout

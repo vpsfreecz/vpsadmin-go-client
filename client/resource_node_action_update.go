@@ -77,6 +77,7 @@ func (in *ActionNodeUpdateMetaGlobalInput) AnySelected() bool {
 type ActionNodeUpdateInput struct {
 	Active         bool   `json:"active"`
 	Cpus           int64  `json:"cpus"`
+	Fqdn           string `json:"fqdn"`
 	HypervisorType string `json:"hypervisor_type"`
 	IpAddr         string `json:"ip_addr"`
 	Location       int64  `json:"location"`
@@ -116,6 +117,18 @@ func (in *ActionNodeUpdateInput) SetCpus(value int64) *ActionNodeUpdateInput {
 	}
 
 	in._selectedParameters["Cpus"] = nil
+	return in
+}
+
+// SetFqdn sets parameter Fqdn to value and selects it for sending
+func (in *ActionNodeUpdateInput) SetFqdn(value string) *ActionNodeUpdateInput {
+	in.Fqdn = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Fqdn"] = nil
 	return in
 }
 
@@ -457,6 +470,9 @@ func (inv *ActionNodeUpdateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("Cpus") {
 			ret["cpus"] = inv.Input.Cpus
+		}
+		if inv.IsParameterSelected("Fqdn") {
+			ret["fqdn"] = inv.Input.Fqdn
 		}
 		if inv.IsParameterSelected("HypervisorType") {
 			ret["hypervisor_type"] = inv.Input.HypervisorType

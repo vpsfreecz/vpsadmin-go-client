@@ -75,23 +75,24 @@ func (in *ActionUserShowMetaGlobalInput) AnySelected() bool {
 
 // ActionUserShowOutput is a type for action output parameters
 type ActionUserShowOutput struct {
-	Address        string                    `json:"address"`
-	CreatedAt      string                    `json:"created_at"`
-	Email          string                    `json:"email"`
-	ExpirationDate string                    `json:"expiration_date"`
-	FullName       string                    `json:"full_name"`
-	Id             int64                     `json:"id"`
-	Info           string                    `json:"info"`
-	Language       *ActionLanguageShowOutput `json:"language"`
-	LastActivityAt string                    `json:"last_activity_at"`
-	Level          int64                     `json:"level"`
-	Lockout        bool                      `json:"lockout"`
-	Login          string                    `json:"login"`
-	MailerEnabled  bool                      `json:"mailer_enabled"`
-	MonthlyPayment int64                     `json:"monthly_payment"`
-	ObjectState    string                    `json:"object_state"`
-	PaidUntil      string                    `json:"paid_until"`
-	PasswordReset  bool                      `json:"password_reset"`
+	Address         string                    `json:"address"`
+	CreatedAt       string                    `json:"created_at"`
+	Email           string                    `json:"email"`
+	ExpirationDate  string                    `json:"expiration_date"`
+	FullName        string                    `json:"full_name"`
+	Id              int64                     `json:"id"`
+	Info            string                    `json:"info"`
+	Language        *ActionLanguageShowOutput `json:"language"`
+	LastActivityAt  string                    `json:"last_activity_at"`
+	Level           int64                     `json:"level"`
+	Lockout         bool                      `json:"lockout"`
+	Login           string                    `json:"login"`
+	MailerEnabled   bool                      `json:"mailer_enabled"`
+	MonthlyPayment  int64                     `json:"monthly_payment"`
+	ObjectState     string                    `json:"object_state"`
+	PaidUntil       string                    `json:"paid_until"`
+	PasswordReset   bool                      `json:"password_reset"`
+	RemindAfterDate string                    `json:"remind_after_date"`
 }
 
 // Type for action response, including envelope

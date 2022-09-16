@@ -75,11 +75,13 @@ func (in *ActionNetworkInterfaceShowMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkInterfaceShowOutput is a type for action output parameters
 type ActionNetworkInterfaceShowOutput struct {
-	Id   int64                `json:"id"`
-	Mac  string               `json:"mac"`
-	Name string               `json:"name"`
-	Type string               `json:"type"`
-	Vps  *ActionVpsShowOutput `json:"vps"`
+	Id    int64                `json:"id"`
+	Mac   string               `json:"mac"`
+	MaxRx int64                `json:"max_rx"`
+	MaxTx int64                `json:"max_tx"`
+	Name  string               `json:"name"`
+	Type  string               `json:"type"`
+	Vps   *ActionVpsShowOutput `json:"vps"`
 }
 
 // Type for action response, including envelope

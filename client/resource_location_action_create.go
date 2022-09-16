@@ -79,7 +79,6 @@ type ActionLocationCreateInput struct {
 	HasIpv6             bool   `json:"has_ipv6"`
 	Label               string `json:"label"`
 	RemoteConsoleServer string `json:"remote_console_server"`
-	VpsOnboot           bool   `json:"vps_onboot"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -177,18 +176,6 @@ func (in *ActionLocationCreateInput) SetRemoteConsoleServer(value string) *Actio
 	return in
 }
 
-// SetVpsOnboot sets parameter VpsOnboot to value and selects it for sending
-func (in *ActionLocationCreateInput) SetVpsOnboot(value bool) *ActionLocationCreateInput {
-	in.VpsOnboot = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["VpsOnboot"] = nil
-	return in
-}
-
 // SelectParameters sets parameters from ActionLocationCreateInput
 // that will be sent to the API.
 // SelectParameters can be called multiple times.
@@ -242,7 +229,6 @@ type ActionLocationCreateOutput struct {
 	Id                  int64                        `json:"id"`
 	Label               string                       `json:"label"`
 	RemoteConsoleServer string                       `json:"remote_console_server"`
-	VpsOnboot           bool                         `json:"vps_onboot"`
 }
 
 // Type for action response, including envelope
@@ -391,9 +377,6 @@ func (inv *ActionLocationCreateInvocation) makeInputParams() map[string]interfac
 		}
 		if inv.IsParameterSelected("RemoteConsoleServer") {
 			ret["remote_console_server"] = inv.Input.RemoteConsoleServer
-		}
-		if inv.IsParameterSelected("VpsOnboot") {
-			ret["vps_onboot"] = inv.Input.VpsOnboot
 		}
 	}
 

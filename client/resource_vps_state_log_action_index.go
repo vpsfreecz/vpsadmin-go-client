@@ -160,12 +160,13 @@ func (in *ActionVpsStateLogIndexInput) AnySelected() bool {
 
 // ActionVpsStateLogIndexOutput is a type for action output parameters
 type ActionVpsStateLogIndexOutput struct {
-	ChangedAt  string                `json:"changed_at"`
-	Expiration string                `json:"expiration"`
-	Id         int64                 `json:"id"`
-	Reason     string                `json:"reason"`
-	State      string                `json:"state"`
-	User       *ActionUserShowOutput `json:"user"`
+	ChangedAt   string                `json:"changed_at"`
+	Expiration  string                `json:"expiration"`
+	Id          int64                 `json:"id"`
+	Reason      string                `json:"reason"`
+	RemindAfter string                `json:"remind_after"`
+	State       string                `json:"state"`
+	User        *ActionUserShowOutput `json:"user"`
 }
 
 // Type for action response, including envelope

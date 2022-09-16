@@ -84,7 +84,6 @@ type ActionLocationShowOutput struct {
 	MaintenanceLock       string                       `json:"maintenance_lock"`
 	MaintenanceLockReason string                       `json:"maintenance_lock_reason"`
 	RemoteConsoleServer   string                       `json:"remote_console_server"`
-	VpsOnboot             bool                         `json:"vps_onboot"`
 }
 
 // Type for action response, including envelope

@@ -87,10 +87,13 @@ func (in *ActionPoolIndexMetaGlobalInput) AnySelected() bool {
 // ActionPoolIndexInput is a type for action input parameters
 type ActionPoolIndexInput struct {
 	Atime         bool   `json:"atime"`
+	CheckedAt     string `json:"checked_at"`
 	Compression   bool   `json:"compression"`
 	Filesystem    string `json:"filesystem"`
 	Label         string `json:"label"`
 	Limit         int64  `json:"limit"`
+	MaxDatasets   int64  `json:"max_datasets"`
+	Name          string `json:"name"`
 	Node          int64  `json:"node"`
 	Offset        int64  `json:"offset"`
 	Quota         int64  `json:"quota"`
@@ -99,7 +102,9 @@ type ActionPoolIndexInput struct {
 	RefquotaCheck bool   `json:"refquota_check"`
 	Relatime      bool   `json:"relatime"`
 	Role          string `json:"role"`
+	Scan          string `json:"scan"`
 	Sharenfs      string `json:"sharenfs"`
+	State         string `json:"state"`
 	Sync          string `json:"sync"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -116,6 +121,18 @@ func (in *ActionPoolIndexInput) SetAtime(value bool) *ActionPoolIndexInput {
 	}
 
 	in._selectedParameters["Atime"] = nil
+	return in
+}
+
+// SetCheckedAt sets parameter CheckedAt to value and selects it for sending
+func (in *ActionPoolIndexInput) SetCheckedAt(value string) *ActionPoolIndexInput {
+	in.CheckedAt = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["CheckedAt"] = nil
 	return in
 }
 
@@ -164,6 +181,30 @@ func (in *ActionPoolIndexInput) SetLimit(value int64) *ActionPoolIndexInput {
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+
+// SetMaxDatasets sets parameter MaxDatasets to value and selects it for sending
+func (in *ActionPoolIndexInput) SetMaxDatasets(value int64) *ActionPoolIndexInput {
+	in.MaxDatasets = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["MaxDatasets"] = nil
+	return in
+}
+
+// SetName sets parameter Name to value and selects it for sending
+func (in *ActionPoolIndexInput) SetName(value string) *ActionPoolIndexInput {
+	in.Name = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Name"] = nil
 	return in
 }
 
@@ -282,6 +323,18 @@ func (in *ActionPoolIndexInput) SetRole(value string) *ActionPoolIndexInput {
 	return in
 }
 
+// SetScan sets parameter Scan to value and selects it for sending
+func (in *ActionPoolIndexInput) SetScan(value string) *ActionPoolIndexInput {
+	in.Scan = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Scan"] = nil
+	return in
+}
+
 // SetSharenfs sets parameter Sharenfs to value and selects it for sending
 func (in *ActionPoolIndexInput) SetSharenfs(value string) *ActionPoolIndexInput {
 	in.Sharenfs = value
@@ -291,6 +344,18 @@ func (in *ActionPoolIndexInput) SetSharenfs(value string) *ActionPoolIndexInput 
 	}
 
 	in._selectedParameters["Sharenfs"] = nil
+	return in
+}
+
+// SetState sets parameter State to value and selects it for sending
+func (in *ActionPoolIndexInput) SetState(value string) *ActionPoolIndexInput {
+	in.State = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["State"] = nil
 	return in
 }
 
@@ -348,12 +413,15 @@ func (in *ActionPoolIndexInput) AnySelected() bool {
 type ActionPoolIndexOutput struct {
 	Atime                 bool                  `json:"atime"`
 	Avail                 int64                 `json:"avail"`
+	CheckedAt             string                `json:"checked_at"`
 	Compression           bool                  `json:"compression"`
 	Filesystem            string                `json:"filesystem"`
 	Id                    int64                 `json:"id"`
 	Label                 string                `json:"label"`
 	MaintenanceLock       string                `json:"maintenance_lock"`
 	MaintenanceLockReason string                `json:"maintenance_lock_reason"`
+	MaxDatasets           int64                 `json:"max_datasets"`
+	Name                  string                `json:"name"`
 	Node                  *ActionNodeShowOutput `json:"node"`
 	Quota                 int64                 `json:"quota"`
 	Recordsize            int64                 `json:"recordsize"`
@@ -362,7 +430,9 @@ type ActionPoolIndexOutput struct {
 	RefquotaCheck         bool                  `json:"refquota_check"`
 	Relatime              bool                  `json:"relatime"`
 	Role                  string                `json:"role"`
+	Scan                  string                `json:"scan"`
 	Sharenfs              string                `json:"sharenfs"`
+	State                 string                `json:"state"`
 	Sync                  string                `json:"sync"`
 	Used                  int64                 `json:"used"`
 }
@@ -488,6 +558,9 @@ func (inv *ActionPoolIndexInvocation) convertInputToQueryParams(ret map[string]s
 		if inv.IsParameterSelected("Atime") {
 			ret["pool[atime]"] = convertBoolToString(inv.Input.Atime)
 		}
+		if inv.IsParameterSelected("CheckedAt") {
+			ret["pool[checked_at]"] = inv.Input.CheckedAt
+		}
 		if inv.IsParameterSelected("Compression") {
 			ret["pool[compression]"] = convertBoolToString(inv.Input.Compression)
 		}
@@ -499,6 +572,12 @@ func (inv *ActionPoolIndexInvocation) convertInputToQueryParams(ret map[string]s
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["pool[limit]"] = convertInt64ToString(inv.Input.Limit)
+		}
+		if inv.IsParameterSelected("MaxDatasets") {
+			ret["pool[max_datasets]"] = convertInt64ToString(inv.Input.MaxDatasets)
+		}
+		if inv.IsParameterSelected("Name") {
+			ret["pool[name]"] = inv.Input.Name
 		}
 		if inv.IsParameterSelected("Node") {
 			ret["pool[node]"] = convertInt64ToString(inv.Input.Node)
@@ -524,8 +603,14 @@ func (inv *ActionPoolIndexInvocation) convertInputToQueryParams(ret map[string]s
 		if inv.IsParameterSelected("Role") {
 			ret["pool[role]"] = inv.Input.Role
 		}
+		if inv.IsParameterSelected("Scan") {
+			ret["pool[scan]"] = inv.Input.Scan
+		}
 		if inv.IsParameterSelected("Sharenfs") {
 			ret["pool[sharenfs]"] = inv.Input.Sharenfs
+		}
+		if inv.IsParameterSelected("State") {
+			ret["pool[state]"] = inv.Input.State
 		}
 		if inv.IsParameterSelected("Sync") {
 			ret["pool[sync]"] = inv.Input.Sync

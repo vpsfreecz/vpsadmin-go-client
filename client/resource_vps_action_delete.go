@@ -75,10 +75,11 @@ func (in *ActionVpsDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsDeleteInput is a type for action input parameters
 type ActionVpsDeleteInput struct {
-	ChangeReason   string `json:"change_reason"`
-	ExpirationDate string `json:"expiration_date"`
-	Lazy           bool   `json:"lazy"`
-	ObjectState    string `json:"object_state"`
+	ChangeReason    string `json:"change_reason"`
+	ExpirationDate  string `json:"expiration_date"`
+	Lazy            bool   `json:"lazy"`
+	ObjectState     string `json:"object_state"`
+	RemindAfterDate string `json:"remind_after_date"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -130,6 +131,18 @@ func (in *ActionVpsDeleteInput) SetObjectState(value string) *ActionVpsDeleteInp
 	}
 
 	in._selectedParameters["ObjectState"] = nil
+	return in
+}
+
+// SetRemindAfterDate sets parameter RemindAfterDate to value and selects it for sending
+func (in *ActionVpsDeleteInput) SetRemindAfterDate(value string) *ActionVpsDeleteInput {
+	in.RemindAfterDate = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["RemindAfterDate"] = nil
 	return in
 }
 
@@ -400,6 +413,9 @@ func (inv *ActionVpsDeleteInvocation) makeInputParams() map[string]interface{} {
 		}
 		if inv.IsParameterSelected("ObjectState") {
 			ret["object_state"] = inv.Input.ObjectState
+		}
+		if inv.IsParameterSelected("RemindAfterDate") {
+			ret["remind_after_date"] = inv.Input.RemindAfterDate
 		}
 	}
 
