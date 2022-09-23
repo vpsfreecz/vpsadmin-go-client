@@ -85,6 +85,7 @@ type ActionNodePublicStatusOutput struct {
 	Name                  string                    `json:"name"`
 	PoolCheckedAt         string                    `json:"pool_checked_at"`
 	PoolScan              string                    `json:"pool_scan"`
+	PoolScanPercent       float64                   `json:"pool_scan_percent"`
 	PoolState             string                    `json:"pool_state"`
 	PoolStatus            bool                      `json:"pool_status"`
 	Status                bool                      `json:"status"`

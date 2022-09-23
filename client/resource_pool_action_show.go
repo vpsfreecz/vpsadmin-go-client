@@ -95,6 +95,7 @@ type ActionPoolShowOutput struct {
 	Relatime              bool                  `json:"relatime"`
 	Role                  string                `json:"role"`
 	Scan                  string                `json:"scan"`
+	ScanPercent           float64               `json:"scan_percent"`
 	Sharenfs              string                `json:"sharenfs"`
 	State                 string                `json:"state"`
 	Sync                  string                `json:"sync"`

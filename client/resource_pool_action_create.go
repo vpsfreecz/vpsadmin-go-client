@@ -73,23 +73,24 @@ func (in *ActionPoolCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionPoolCreateInput is a type for action input parameters
 type ActionPoolCreateInput struct {
-	Atime         bool   `json:"atime"`
-	CheckedAt     string `json:"checked_at"`
-	Compression   bool   `json:"compression"`
-	Filesystem    string `json:"filesystem"`
-	Label         string `json:"label"`
-	MaxDatasets   int64  `json:"max_datasets"`
-	Node          int64  `json:"node"`
-	Quota         int64  `json:"quota"`
-	Recordsize    int64  `json:"recordsize"`
-	Refquota      int64  `json:"refquota"`
-	RefquotaCheck bool   `json:"refquota_check"`
-	Relatime      bool   `json:"relatime"`
-	Role          string `json:"role"`
-	Scan          string `json:"scan"`
-	Sharenfs      string `json:"sharenfs"`
-	State         string `json:"state"`
-	Sync          string `json:"sync"`
+	Atime         bool    `json:"atime"`
+	CheckedAt     string  `json:"checked_at"`
+	Compression   bool    `json:"compression"`
+	Filesystem    string  `json:"filesystem"`
+	Label         string  `json:"label"`
+	MaxDatasets   int64   `json:"max_datasets"`
+	Node          int64   `json:"node"`
+	Quota         int64   `json:"quota"`
+	Recordsize    int64   `json:"recordsize"`
+	Refquota      int64   `json:"refquota"`
+	RefquotaCheck bool    `json:"refquota_check"`
+	Relatime      bool    `json:"relatime"`
+	Role          string  `json:"role"`
+	Scan          string  `json:"scan"`
+	ScanPercent   float64 `json:"scan_percent"`
+	Sharenfs      string  `json:"sharenfs"`
+	State         string  `json:"state"`
+	Sync          string  `json:"sync"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -283,6 +284,18 @@ func (in *ActionPoolCreateInput) SetScan(value string) *ActionPoolCreateInput {
 	return in
 }
 
+// SetScanPercent sets parameter ScanPercent to value and selects it for sending
+func (in *ActionPoolCreateInput) SetScanPercent(value float64) *ActionPoolCreateInput {
+	in.ScanPercent = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ScanPercent"] = nil
+	return in
+}
+
 // SetSharenfs sets parameter Sharenfs to value and selects it for sending
 func (in *ActionPoolCreateInput) SetSharenfs(value string) *ActionPoolCreateInput {
 	in.Sharenfs = value
@@ -383,6 +396,7 @@ type ActionPoolCreateOutput struct {
 	Relatime      bool                  `json:"relatime"`
 	Role          string                `json:"role"`
 	Scan          string                `json:"scan"`
+	ScanPercent   float64               `json:"scan_percent"`
 	Sharenfs      string                `json:"sharenfs"`
 	State         string                `json:"state"`
 	Sync          string                `json:"sync"`
@@ -642,6 +656,9 @@ func (inv *ActionPoolCreateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("Scan") {
 			ret["scan"] = inv.Input.Scan
+		}
+		if inv.IsParameterSelected("ScanPercent") {
+			ret["scan_percent"] = inv.Input.ScanPercent
 		}
 		if inv.IsParameterSelected("Sharenfs") {
 			ret["sharenfs"] = inv.Input.Sharenfs
