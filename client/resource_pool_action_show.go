@@ -79,8 +79,10 @@ type ActionPoolShowOutput struct {
 	Avail                 int64                 `json:"avail"`
 	CheckedAt             string                `json:"checked_at"`
 	Compression           bool                  `json:"compression"`
+	Compressratio         float64               `json:"compressratio"`
 	Filesystem            string                `json:"filesystem"`
 	Id                    int64                 `json:"id"`
+	IsOpen                bool                  `json:"is_open"`
 	Label                 string                `json:"label"`
 	MaintenanceLock       string                `json:"maintenance_lock"`
 	MaintenanceLockReason string                `json:"maintenance_lock_reason"`
@@ -89,6 +91,7 @@ type ActionPoolShowOutput struct {
 	Node                  *ActionNodeShowOutput `json:"node"`
 	Quota                 int64                 `json:"quota"`
 	Recordsize            int64                 `json:"recordsize"`
+	Refcompressratio      float64               `json:"refcompressratio"`
 	Referenced            int64                 `json:"referenced"`
 	Refquota              int64                 `json:"refquota"`
 	RefquotaCheck         bool                  `json:"refquota_check"`

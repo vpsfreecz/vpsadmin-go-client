@@ -85,11 +85,9 @@ type ActionNodeUpdateInput struct {
 	MaxTx          int64  `json:"max_tx"`
 	MaxVps         int64  `json:"max_vps"`
 	Name           string `json:"name"`
-	NetInterface   string `json:"net_interface"`
 	TotalMemory    int64  `json:"total_memory"`
 	TotalSwap      int64  `json:"total_swap"`
 	Type           string `json:"type"`
-	VePrivate      string `json:"ve_private"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -235,18 +233,6 @@ func (in *ActionNodeUpdateInput) SetName(value string) *ActionNodeUpdateInput {
 	return in
 }
 
-// SetNetInterface sets parameter NetInterface to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetNetInterface(value string) *ActionNodeUpdateInput {
-	in.NetInterface = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["NetInterface"] = nil
-	return in
-}
-
 // SetTotalMemory sets parameter TotalMemory to value and selects it for sending
 func (in *ActionNodeUpdateInput) SetTotalMemory(value int64) *ActionNodeUpdateInput {
 	in.TotalMemory = value
@@ -280,18 +266,6 @@ func (in *ActionNodeUpdateInput) SetType(value string) *ActionNodeUpdateInput {
 	}
 
 	in._selectedParameters["Type"] = nil
-	return in
-}
-
-// SetVePrivate sets parameter VePrivate to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetVePrivate(value string) *ActionNodeUpdateInput {
-	in.VePrivate = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["VePrivate"] = nil
 	return in
 }
 
@@ -499,9 +473,6 @@ func (inv *ActionNodeUpdateInvocation) makeInputParams() map[string]interface{} 
 		if inv.IsParameterSelected("Name") {
 			ret["name"] = inv.Input.Name
 		}
-		if inv.IsParameterSelected("NetInterface") {
-			ret["net_interface"] = inv.Input.NetInterface
-		}
 		if inv.IsParameterSelected("TotalMemory") {
 			ret["total_memory"] = inv.Input.TotalMemory
 		}
@@ -510,9 +481,6 @@ func (inv *ActionNodeUpdateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["type"] = inv.Input.Type
-		}
-		if inv.IsParameterSelected("VePrivate") {
-			ret["ve_private"] = inv.Input.VePrivate
 		}
 	}
 

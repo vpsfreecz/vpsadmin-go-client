@@ -73,22 +73,25 @@ func (in *ActionUserCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserCreateInput is a type for action input parameters
 type ActionUserCreateInput struct {
-	Address       string `json:"address"`
-	Email         string `json:"email"`
-	Environment   int64  `json:"environment"`
-	FullName      string `json:"full_name"`
-	Info          string `json:"info"`
-	Language      int64  `json:"language"`
-	Level         int64  `json:"level"`
-	Location      int64  `json:"location"`
-	Lockout       bool   `json:"lockout"`
-	Login         string `json:"login"`
-	MailerEnabled bool   `json:"mailer_enabled"`
-	Node          int64  `json:"node"`
-	OsTemplate    int64  `json:"os_template"`
-	Password      string `json:"password"`
-	PasswordReset bool   `json:"password_reset"`
-	Vps           bool   `json:"vps"`
+	Address                string `json:"address"`
+	Email                  string `json:"email"`
+	EnableSingleSignOn     bool   `json:"enable_single_sign_on"`
+	Environment            int64  `json:"environment"`
+	FullName               string `json:"full_name"`
+	Info                   string `json:"info"`
+	Language               int64  `json:"language"`
+	Level                  int64  `json:"level"`
+	Location               int64  `json:"location"`
+	Lockout                bool   `json:"lockout"`
+	Login                  string `json:"login"`
+	MailerEnabled          bool   `json:"mailer_enabled"`
+	Node                   int64  `json:"node"`
+	OsTemplate             int64  `json:"os_template"`
+	Password               string `json:"password"`
+	PasswordReset          bool   `json:"password_reset"`
+	PreferredLogoutAll     bool   `json:"preferred_logout_all"`
+	PreferredSessionLength int64  `json:"preferred_session_length"`
+	Vps                    bool   `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -116,6 +119,18 @@ func (in *ActionUserCreateInput) SetEmail(value string) *ActionUserCreateInput {
 	}
 
 	in._selectedParameters["Email"] = nil
+	return in
+}
+
+// SetEnableSingleSignOn sets parameter EnableSingleSignOn to value and selects it for sending
+func (in *ActionUserCreateInput) SetEnableSingleSignOn(value bool) *ActionUserCreateInput {
+	in.EnableSingleSignOn = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnableSingleSignOn"] = nil
 	return in
 }
 
@@ -370,6 +385,30 @@ func (in *ActionUserCreateInput) SetPasswordReset(value bool) *ActionUserCreateI
 	return in
 }
 
+// SetPreferredLogoutAll sets parameter PreferredLogoutAll to value and selects it for sending
+func (in *ActionUserCreateInput) SetPreferredLogoutAll(value bool) *ActionUserCreateInput {
+	in.PreferredLogoutAll = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PreferredLogoutAll"] = nil
+	return in
+}
+
+// SetPreferredSessionLength sets parameter PreferredSessionLength to value and selects it for sending
+func (in *ActionUserCreateInput) SetPreferredSessionLength(value int64) *ActionUserCreateInput {
+	in.PreferredSessionLength = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PreferredSessionLength"] = nil
+	return in
+}
+
 // SetVps sets parameter Vps to value and selects it for sending
 func (in *ActionUserCreateInput) SetVps(value bool) *ActionUserCreateInput {
 	in.Vps = value
@@ -428,22 +467,26 @@ type ActionUserCreateRequest struct {
 
 // ActionUserCreateOutput is a type for action output parameters
 type ActionUserCreateOutput struct {
-	Address         string                    `json:"address"`
-	CreatedAt       string                    `json:"created_at"`
-	Email           string                    `json:"email"`
-	ExpirationDate  string                    `json:"expiration_date"`
-	FullName        string                    `json:"full_name"`
-	Id              int64                     `json:"id"`
-	Info            string                    `json:"info"`
-	Language        *ActionLanguageShowOutput `json:"language"`
-	LastActivityAt  string                    `json:"last_activity_at"`
-	Level           int64                     `json:"level"`
-	Lockout         bool                      `json:"lockout"`
-	Login           string                    `json:"login"`
-	MailerEnabled   bool                      `json:"mailer_enabled"`
-	ObjectState     string                    `json:"object_state"`
-	PasswordReset   bool                      `json:"password_reset"`
-	RemindAfterDate string                    `json:"remind_after_date"`
+	Address                string                    `json:"address"`
+	CreatedAt              string                    `json:"created_at"`
+	DokuwikiGroups         string                    `json:"dokuwiki_groups"`
+	Email                  string                    `json:"email"`
+	EnableSingleSignOn     bool                      `json:"enable_single_sign_on"`
+	ExpirationDate         string                    `json:"expiration_date"`
+	FullName               string                    `json:"full_name"`
+	Id                     int64                     `json:"id"`
+	Info                   string                    `json:"info"`
+	Language               *ActionLanguageShowOutput `json:"language"`
+	LastActivityAt         string                    `json:"last_activity_at"`
+	Level                  int64                     `json:"level"`
+	Lockout                bool                      `json:"lockout"`
+	Login                  string                    `json:"login"`
+	MailerEnabled          bool                      `json:"mailer_enabled"`
+	ObjectState            string                    `json:"object_state"`
+	PasswordReset          bool                      `json:"password_reset"`
+	PreferredLogoutAll     bool                      `json:"preferred_logout_all"`
+	PreferredSessionLength int64                     `json:"preferred_session_length"`
+	RemindAfterDate        string                    `json:"remind_after_date"`
 }
 
 // ActionUserCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -660,6 +703,9 @@ func (inv *ActionUserCreateInvocation) makeInputParams() map[string]interface{} 
 		if inv.IsParameterSelected("Email") {
 			ret["email"] = inv.Input.Email
 		}
+		if inv.IsParameterSelected("EnableSingleSignOn") {
+			ret["enable_single_sign_on"] = inv.Input.EnableSingleSignOn
+		}
 		if inv.IsParameterSelected("Environment") {
 			if inv.IsParameterNil("Environment") {
 				ret["environment"] = nil
@@ -718,6 +764,12 @@ func (inv *ActionUserCreateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("PasswordReset") {
 			ret["password_reset"] = inv.Input.PasswordReset
+		}
+		if inv.IsParameterSelected("PreferredLogoutAll") {
+			ret["preferred_logout_all"] = inv.Input.PreferredLogoutAll
+		}
+		if inv.IsParameterSelected("PreferredSessionLength") {
+			ret["preferred_session_length"] = inv.Input.PreferredSessionLength
 		}
 		if inv.IsParameterSelected("Vps") {
 			ret["vps"] = inv.Input.Vps

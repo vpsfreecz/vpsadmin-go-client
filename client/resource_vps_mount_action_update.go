@@ -175,7 +175,6 @@ type ActionVpsMountUpdateOutput struct {
 	Mode             string                            `json:"mode"`
 	Mountpoint       string                            `json:"mountpoint"`
 	OnStartFail      string                            `json:"on_start_fail"`
-	Snapshot         *ActionDatasetSnapshotShowOutput  `json:"snapshot"`
 	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
 	Vps              *ActionVpsShowOutput              `json:"vps"`
 }

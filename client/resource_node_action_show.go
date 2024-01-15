@@ -80,6 +80,7 @@ type ActionNodeShowOutput struct {
 	ArcCMax               int64                     `json:"arc_c_max"`
 	ArcHitpercent         int64                     `json:"arc_hitpercent"`
 	ArcSize               int64                     `json:"arc_size"`
+	CgroupVersion         string                    `json:"cgroup_version"`
 	CpuGuest              float64                   `json:"cpu_guest"`
 	CpuIdle               float64                   `json:"cpu_idle"`
 	CpuIowait             float64                   `json:"cpu_iowait"`
@@ -103,7 +104,6 @@ type ActionNodeShowOutput struct {
 	MaxTx                 int64                     `json:"max_tx"`
 	MaxVps                int64                     `json:"max_vps"`
 	Name                  string                    `json:"name"`
-	NetInterface          string                    `json:"net_interface"`
 	PoolCheckedAt         string                    `json:"pool_checked_at"`
 	PoolScan              string                    `json:"pool_scan"`
 	PoolScanPercent       float64                   `json:"pool_scan_percent"`
@@ -117,7 +117,6 @@ type ActionNodeShowOutput struct {
 	Uptime                int64                     `json:"uptime"`
 	UsedMemory            int64                     `json:"used_memory"`
 	UsedSwap              int64                     `json:"used_swap"`
-	VePrivate             string                    `json:"ve_private"`
 	Version               string                    `json:"version"`
 }
 

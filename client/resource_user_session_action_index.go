@@ -94,6 +94,8 @@ type ActionUserSessionIndexInput struct {
 	IpAddr        string `json:"ip_addr"`
 	Limit         int64  `json:"limit"`
 	Offset        int64  `json:"offset"`
+	State         string `json:"state"`
+	TokenFragment string `json:"token_fragment"`
 	User          int64  `json:"user"`
 	UserAgent     string `json:"user_agent"`
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -217,6 +219,30 @@ func (in *ActionUserSessionIndexInput) SetOffset(value int64) *ActionUserSession
 	return in
 }
 
+// SetState sets parameter State to value and selects it for sending
+func (in *ActionUserSessionIndexInput) SetState(value string) *ActionUserSessionIndexInput {
+	in.State = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["State"] = nil
+	return in
+}
+
+// SetTokenFragment sets parameter TokenFragment to value and selects it for sending
+func (in *ActionUserSessionIndexInput) SetTokenFragment(value string) *ActionUserSessionIndexInput {
+	in.TokenFragment = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["TokenFragment"] = nil
+	return in
+}
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionUserSessionIndexInput) SetUser(value int64) *ActionUserSessionIndexInput {
 	in.User = value
@@ -300,21 +326,25 @@ func (in *ActionUserSessionIndexInput) AnySelected() bool {
 
 // ActionUserSessionIndexOutput is a type for action output parameters
 type ActionUserSessionIndexOutput struct {
-	Admin           *ActionUserShowOutput         `json:"admin"`
-	ApiIpAddr       string                        `json:"api_ip_addr"`
-	ApiIpPtr        string                        `json:"api_ip_ptr"`
-	AuthType        string                        `json:"auth_type"`
-	ClientIpAddr    string                        `json:"client_ip_addr"`
-	ClientIpPtr     string                        `json:"client_ip_ptr"`
-	ClientVersion   string                        `json:"client_version"`
-	ClosedAt        string                        `json:"closed_at"`
-	CreatedAt       string                        `json:"created_at"`
-	Id              int64                         `json:"id"`
-	LastRequestAt   string                        `json:"last_request_at"`
-	SessionToken    *ActionSessionTokenShowOutput `json:"session_token"`
-	SessionTokenStr string                        `json:"session_token_str"`
-	User            *ActionUserShowOutput         `json:"user"`
-	UserAgent       string                        `json:"user_agent"`
+	Admin         *ActionUserShowOutput `json:"admin"`
+	ApiIpAddr     string                `json:"api_ip_addr"`
+	ApiIpPtr      string                `json:"api_ip_ptr"`
+	AuthType      string                `json:"auth_type"`
+	ClientIpAddr  string                `json:"client_ip_addr"`
+	ClientIpPtr   string                `json:"client_ip_ptr"`
+	ClientVersion string                `json:"client_version"`
+	ClosedAt      string                `json:"closed_at"`
+	CreatedAt     string                `json:"created_at"`
+	Id            int64                 `json:"id"`
+	Label         string                `json:"label"`
+	LastRequestAt string                `json:"last_request_at"`
+	RequestCount  int64                 `json:"request_count"`
+	Scope         string                `json:"scope"`
+	TokenFragment string                `json:"token_fragment"`
+	TokenInterval int64                 `json:"token_interval"`
+	TokenLifetime string                `json:"token_lifetime"`
+	User          *ActionUserShowOutput `json:"user"`
+	UserAgent     string                `json:"user_agent"`
 }
 
 // Type for action response, including envelope
@@ -458,6 +488,12 @@ func (inv *ActionUserSessionIndexInvocation) convertInputToQueryParams(ret map[s
 		}
 		if inv.IsParameterSelected("Offset") {
 			ret["user_session[offset]"] = convertInt64ToString(inv.Input.Offset)
+		}
+		if inv.IsParameterSelected("State") {
+			ret["user_session[state]"] = inv.Input.State
+		}
+		if inv.IsParameterSelected("TokenFragment") {
+			ret["user_session[token_fragment]"] = inv.Input.TokenFragment
 		}
 		if inv.IsParameterSelected("User") {
 			ret["user_session[user]"] = convertInt64ToString(inv.Input.User)

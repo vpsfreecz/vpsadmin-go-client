@@ -80,7 +80,6 @@ type ActionVpsMountCreateInput struct {
 	Mode             string `json:"mode"`
 	Mountpoint       string `json:"mountpoint"`
 	OnStartFail      string `json:"on_start_fail"`
-	Snapshot         int64  `json:"snapshot"`
 	UserNamespaceMap int64  `json:"user_namespace_map"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -164,37 +163,6 @@ func (in *ActionVpsMountCreateInput) SetOnStartFail(value string) *ActionVpsMoun
 	}
 
 	in._selectedParameters["OnStartFail"] = nil
-	return in
-}
-
-// SetSnapshot sets parameter Snapshot to value and selects it for sending
-func (in *ActionVpsMountCreateInput) SetSnapshot(value int64) *ActionVpsMountCreateInput {
-	in.Snapshot = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in.SetSnapshotNil(false)
-	in._selectedParameters["Snapshot"] = nil
-	return in
-}
-
-// SetSnapshotNil sets parameter Snapshot to nil and selects it for sending
-func (in *ActionVpsMountCreateInput) SetSnapshotNil(set bool) *ActionVpsMountCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Snapshot"] = nil
-		in.SelectParameters("Snapshot")
-	} else {
-		delete(in._nilParameters, "Snapshot")
-	}
 	return in
 }
 
@@ -284,7 +252,6 @@ type ActionVpsMountCreateOutput struct {
 	Mode             string                            `json:"mode"`
 	Mountpoint       string                            `json:"mountpoint"`
 	OnStartFail      string                            `json:"on_start_fail"`
-	Snapshot         *ActionDatasetSnapshotShowOutput  `json:"snapshot"`
 	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
 	Vps              *ActionVpsShowOutput              `json:"vps"`
 }
@@ -526,13 +493,6 @@ func (inv *ActionVpsMountCreateInvocation) makeInputParams() map[string]interfac
 		}
 		if inv.IsParameterSelected("OnStartFail") {
 			ret["on_start_fail"] = inv.Input.OnStartFail
-		}
-		if inv.IsParameterSelected("Snapshot") {
-			if inv.IsParameterNil("Snapshot") {
-				ret["snapshot"] = nil
-			} else {
-				ret["snapshot"] = inv.Input.Snapshot
-			}
 		}
 		if inv.IsParameterSelected("UserNamespaceMap") {
 			if inv.IsParameterNil("UserNamespaceMap") {

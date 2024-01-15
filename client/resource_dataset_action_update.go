@@ -75,17 +75,16 @@ func (in *ActionDatasetUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetUpdateInput is a type for action input parameters
 type ActionDatasetUpdateInput struct {
-	AdminLockType    string `json:"admin_lock_type"`
-	AdminOverride    bool   `json:"admin_override"`
-	Atime            bool   `json:"atime"`
-	Compression      bool   `json:"compression"`
-	Quota            int64  `json:"quota"`
-	Recordsize       int64  `json:"recordsize"`
-	Refquota         int64  `json:"refquota"`
-	Relatime         bool   `json:"relatime"`
-	Sharenfs         string `json:"sharenfs"`
-	Sync             string `json:"sync"`
-	UserNamespaceMap int64  `json:"user_namespace_map"`
+	AdminLockType string `json:"admin_lock_type"`
+	AdminOverride bool   `json:"admin_override"`
+	Atime         bool   `json:"atime"`
+	Compression   bool   `json:"compression"`
+	Quota         int64  `json:"quota"`
+	Recordsize    int64  `json:"recordsize"`
+	Refquota      int64  `json:"refquota"`
+	Relatime      bool   `json:"relatime"`
+	Sharenfs      string `json:"sharenfs"`
+	Sync          string `json:"sync"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -209,37 +208,6 @@ func (in *ActionDatasetUpdateInput) SetSync(value string) *ActionDatasetUpdateIn
 	}
 
 	in._selectedParameters["Sync"] = nil
-	return in
-}
-
-// SetUserNamespaceMap sets parameter UserNamespaceMap to value and selects it for sending
-func (in *ActionDatasetUpdateInput) SetUserNamespaceMap(value int64) *ActionDatasetUpdateInput {
-	in.UserNamespaceMap = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in.SetUserNamespaceMapNil(false)
-	in._selectedParameters["UserNamespaceMap"] = nil
-	return in
-}
-
-// SetUserNamespaceMapNil sets parameter UserNamespaceMap to nil and selects it for sending
-func (in *ActionDatasetUpdateInput) SetUserNamespaceMapNil(set bool) *ActionDatasetUpdateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["UserNamespaceMap"] = nil
-		in.SelectParameters("UserNamespaceMap")
-	} else {
-		delete(in._nilParameters, "UserNamespaceMap")
-	}
 	return in
 }
 
@@ -528,13 +496,6 @@ func (inv *ActionDatasetUpdateInvocation) makeInputParams() map[string]interface
 		}
 		if inv.IsParameterSelected("Sync") {
 			ret["sync"] = inv.Input.Sync
-		}
-		if inv.IsParameterSelected("UserNamespaceMap") {
-			if inv.IsParameterNil("UserNamespaceMap") {
-				ret["user_namespace_map"] = nil
-			} else {
-				ret["user_namespace_map"] = inv.Input.UserNamespaceMap
-			}
 		}
 	}
 

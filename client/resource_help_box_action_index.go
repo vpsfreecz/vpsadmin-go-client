@@ -91,6 +91,7 @@ type ActionHelpBoxIndexInput struct {
 	Limit    int64  `json:"limit"`
 	Offset   int64  `json:"offset"`
 	Page     string `json:"page"`
+	View     bool   `json:"view"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -173,6 +174,18 @@ func (in *ActionHelpBoxIndexInput) SetPage(value string) *ActionHelpBoxIndexInpu
 	}
 
 	in._selectedParameters["Page"] = nil
+	return in
+}
+
+// SetView sets parameter View to value and selects it for sending
+func (in *ActionHelpBoxIndexInput) SetView(value bool) *ActionHelpBoxIndexInput {
+	in.View = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["View"] = nil
 	return in
 }
 
@@ -356,6 +369,9 @@ func (inv *ActionHelpBoxIndexInvocation) convertInputToQueryParams(ret map[strin
 		}
 		if inv.IsParameterSelected("Page") {
 			ret["help_box[page]"] = inv.Input.Page
+		}
+		if inv.IsParameterSelected("View") {
+			ret["help_box[view]"] = convertBoolToString(inv.Input.View)
 		}
 	}
 }

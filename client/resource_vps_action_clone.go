@@ -76,7 +76,6 @@ func (in *ActionVpsCloneMetaGlobalInput) AnySelected() bool {
 // ActionVpsCloneInput is a type for action input parameters
 type ActionVpsCloneInput struct {
 	AddressLocation int64  `json:"address_location"`
-	Configs         bool   `json:"configs"`
 	DatasetPlans    bool   `json:"dataset_plans"`
 	Environment     int64  `json:"environment"`
 	Features        bool   `json:"features"`
@@ -123,18 +122,6 @@ func (in *ActionVpsCloneInput) SetAddressLocationNil(set bool) *ActionVpsCloneIn
 	} else {
 		delete(in._nilParameters, "AddressLocation")
 	}
-	return in
-}
-
-// SetConfigs sets parameter Configs to value and selects it for sending
-func (in *ActionVpsCloneInput) SetConfigs(value bool) *ActionVpsCloneInput {
-	in.Configs = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Configs"] = nil
 	return in
 }
 
@@ -404,42 +391,45 @@ type ActionVpsCloneRequest struct {
 
 // ActionVpsCloneOutput is a type for action output parameters
 type ActionVpsCloneOutput struct {
-	AutostartEnable   bool                         `json:"autostart_enable"`
-	AutostartPriority int64                        `json:"autostart_priority"`
-	Config            string                       `json:"config"`
-	Cpu               int64                        `json:"cpu"`
-	CpuIdle           float64                      `json:"cpu_idle"`
-	CpuIowait         float64                      `json:"cpu_iowait"`
-	CpuIrq            float64                      `json:"cpu_irq"`
-	CpuLimit          int64                        `json:"cpu_limit"`
-	CpuNice           float64                      `json:"cpu_nice"`
-	CpuSoftirq        float64                      `json:"cpu_softirq"`
-	CpuSystem         float64                      `json:"cpu_system"`
-	CpuUser           float64                      `json:"cpu_user"`
-	CreatedAt         string                       `json:"created_at"`
-	Dataset           *ActionDatasetShowOutput     `json:"dataset"`
-	Diskspace         int64                        `json:"diskspace"`
-	DnsResolver       *ActionDnsResolverShowOutput `json:"dns_resolver"`
-	Hostname          string                       `json:"hostname"`
-	Id                int64                        `json:"id"`
-	InRescueMode      bool                         `json:"in_rescue_mode"`
-	Info              string                       `json:"info"`
-	IsRunning         bool                         `json:"is_running"`
-	Loadavg           float64                      `json:"loadavg"`
-	ManageHostname    bool                         `json:"manage_hostname"`
-	Memory            int64                        `json:"memory"`
-	Node              *ActionNodeShowOutput        `json:"node"`
-	Onstartall        bool                         `json:"onstartall"`
-	OsTemplate        *ActionOsTemplateShowOutput  `json:"os_template"`
-	Pool              *ActionPoolShowOutput        `json:"pool"`
-	ProcessCount      int64                        `json:"process_count"`
-	StartMenuTimeout  int64                        `json:"start_menu_timeout"`
-	Swap              int64                        `json:"swap"`
-	Uptime            int64                        `json:"uptime"`
-	UsedDiskspace     int64                        `json:"used_diskspace"`
-	UsedMemory        int64                        `json:"used_memory"`
-	UsedSwap          int64                        `json:"used_swap"`
-	User              *ActionUserShowOutput        `json:"user"`
+	AllowAdminModifications bool                              `json:"allow_admin_modifications"`
+	AutostartEnable         bool                              `json:"autostart_enable"`
+	AutostartPriority       int64                             `json:"autostart_priority"`
+	CgroupVersion           string                            `json:"cgroup_version"`
+	Config                  string                            `json:"config"`
+	Cpu                     int64                             `json:"cpu"`
+	CpuIdle                 float64                           `json:"cpu_idle"`
+	CpuIowait               float64                           `json:"cpu_iowait"`
+	CpuIrq                  float64                           `json:"cpu_irq"`
+	CpuLimit                int64                             `json:"cpu_limit"`
+	CpuNice                 float64                           `json:"cpu_nice"`
+	CpuSoftirq              float64                           `json:"cpu_softirq"`
+	CpuSystem               float64                           `json:"cpu_system"`
+	CpuUser                 float64                           `json:"cpu_user"`
+	CreatedAt               string                            `json:"created_at"`
+	Dataset                 *ActionDatasetShowOutput          `json:"dataset"`
+	Diskspace               int64                             `json:"diskspace"`
+	DnsResolver             *ActionDnsResolverShowOutput      `json:"dns_resolver"`
+	Hostname                string                            `json:"hostname"`
+	Id                      int64                             `json:"id"`
+	InRescueMode            bool                              `json:"in_rescue_mode"`
+	Info                    string                            `json:"info"`
+	IsRunning               bool                              `json:"is_running"`
+	Loadavg                 float64                           `json:"loadavg"`
+	ManageHostname          bool                              `json:"manage_hostname"`
+	Memory                  int64                             `json:"memory"`
+	Node                    *ActionNodeShowOutput             `json:"node"`
+	Onstartall              bool                              `json:"onstartall"`
+	OsTemplate              *ActionOsTemplateShowOutput       `json:"os_template"`
+	Pool                    *ActionPoolShowOutput             `json:"pool"`
+	ProcessCount            int64                             `json:"process_count"`
+	StartMenuTimeout        int64                             `json:"start_menu_timeout"`
+	Swap                    int64                             `json:"swap"`
+	Uptime                  int64                             `json:"uptime"`
+	UsedDiskspace           int64                             `json:"used_diskspace"`
+	UsedMemory              int64                             `json:"used_memory"`
+	UsedSwap                int64                             `json:"used_swap"`
+	User                    *ActionUserShowOutput             `json:"user"`
+	UserNamespaceMap        *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
 }
 
 // ActionVpsCloneMetaGlobalOutput is a type for global output metadata parameters
@@ -667,9 +657,6 @@ func (inv *ActionVpsCloneInvocation) makeInputParams() map[string]interface{} {
 			} else {
 				ret["address_location"] = inv.Input.AddressLocation
 			}
-		}
-		if inv.IsParameterSelected("Configs") {
-			ret["configs"] = inv.Input.Configs
 		}
 		if inv.IsParameterSelected("DatasetPlans") {
 			ret["dataset_plans"] = inv.Input.DatasetPlans

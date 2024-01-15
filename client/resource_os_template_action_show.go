@@ -75,6 +75,9 @@ func (in *ActionOsTemplateShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOsTemplateShowOutput is a type for action output parameters
 type ActionOsTemplateShowOutput struct {
+	Arch           string `json:"arch"`
+	CgroupVersion  string `json:"cgroup_version"`
+	Distribution   string `json:"distribution"`
 	Enabled        bool   `json:"enabled"`
 	HypervisorType string `json:"hypervisor_type"`
 	Id             int64  `json:"id"`
@@ -83,6 +86,9 @@ type ActionOsTemplateShowOutput struct {
 	Name           string `json:"name"`
 	Order          int64  `json:"order"`
 	Supported      bool   `json:"supported"`
+	Variant        string `json:"variant"`
+	Vendor         string `json:"vendor"`
+	Version        string `json:"version"`
 }
 
 // Type for action response, including envelope

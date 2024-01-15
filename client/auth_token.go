@@ -42,6 +42,7 @@ type TokenAuthOptions struct {
 	Interval     int64
 	Lifetime     string
 	Password     string
+	Scope        string
 	User         string
 	TotpCallback func(input *AuthTokenActionTokenTotpInput) error
 }
@@ -57,6 +58,7 @@ func (client *Client) SetNewTokenAuth(options *TokenAuthOptions) error {
 		Interval: options.Interval,
 		Lifetime: options.Lifetime,
 		Password: options.Password,
+		Scope:    options.Scope,
 		User:     options.User,
 	})
 

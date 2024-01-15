@@ -76,6 +76,8 @@ func (in *ActionVpsMigrateMetaGlobalInput) AnySelected() bool {
 // ActionVpsMigrateInput is a type for action input parameters
 type ActionVpsMigrateInput struct {
 	CleanupData         bool   `json:"cleanup_data"`
+	FinishMinutes       int64  `json:"finish_minutes"`
+	FinishWeekday       int64  `json:"finish_weekday"`
 	MaintenanceWindow   bool   `json:"maintenance_window"`
 	NoStart             bool   `json:"no_start"`
 	Node                int64  `json:"node"`
@@ -100,6 +102,30 @@ func (in *ActionVpsMigrateInput) SetCleanupData(value bool) *ActionVpsMigrateInp
 	}
 
 	in._selectedParameters["CleanupData"] = nil
+	return in
+}
+
+// SetFinishMinutes sets parameter FinishMinutes to value and selects it for sending
+func (in *ActionVpsMigrateInput) SetFinishMinutes(value int64) *ActionVpsMigrateInput {
+	in.FinishMinutes = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FinishMinutes"] = nil
+	return in
+}
+
+// SetFinishWeekday sets parameter FinishWeekday to value and selects it for sending
+func (in *ActionVpsMigrateInput) SetFinishWeekday(value int64) *ActionVpsMigrateInput {
+	in.FinishWeekday = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FinishWeekday"] = nil
 	return in
 }
 
@@ -488,6 +514,12 @@ func (inv *ActionVpsMigrateInvocation) makeInputParams() map[string]interface{} 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("CleanupData") {
 			ret["cleanup_data"] = inv.Input.CleanupData
+		}
+		if inv.IsParameterSelected("FinishMinutes") {
+			ret["finish_minutes"] = inv.Input.FinishMinutes
+		}
+		if inv.IsParameterSelected("FinishWeekday") {
+			ret["finish_weekday"] = inv.Input.FinishWeekday
 		}
 		if inv.IsParameterSelected("MaintenanceWindow") {
 			ret["maintenance_window"] = inv.Input.MaintenanceWindow

@@ -90,8 +90,6 @@ type ActionIpAddressIndexInput struct {
 	AssignedToInterface bool   `json:"assigned_to_interface"`
 	Limit               int64  `json:"limit"`
 	Location            int64  `json:"location"`
-	MaxRx               int64  `json:"max_rx"`
-	MaxTx               int64  `json:"max_tx"`
 	Network             int64  `json:"network"`
 	NetworkInterface    int64  `json:"network_interface"`
 	Offset              int64  `json:"offset"`
@@ -173,30 +171,6 @@ func (in *ActionIpAddressIndexInput) SetLocationNil(set bool) *ActionIpAddressIn
 	} else {
 		delete(in._nilParameters, "Location")
 	}
-	return in
-}
-
-// SetMaxRx sets parameter MaxRx to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetMaxRx(value int64) *ActionIpAddressIndexInput {
-	in.MaxRx = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["MaxRx"] = nil
-	return in
-}
-
-// SetMaxTx sets parameter MaxTx to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetMaxTx(value int64) *ActionIpAddressIndexInput {
-	in.MaxTx = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["MaxTx"] = nil
 	return in
 }
 
@@ -450,10 +424,7 @@ func (in *ActionIpAddressIndexInput) AnySelected() bool {
 type ActionIpAddressIndexOutput struct {
 	Addr               string                            `json:"addr"`
 	ChargedEnvironment *ActionEnvironmentShowOutput      `json:"charged_environment"`
-	ClassId            int64                             `json:"class_id"`
 	Id                 int64                             `json:"id"`
-	MaxRx              int64                             `json:"max_rx"`
-	MaxTx              int64                             `json:"max_tx"`
 	Network            *ActionNetworkShowOutput          `json:"network"`
 	NetworkInterface   *ActionNetworkInterfaceShowOutput `json:"network_interface"`
 	Prefix             int64                             `json:"prefix"`
@@ -591,12 +562,6 @@ func (inv *ActionIpAddressIndexInvocation) convertInputToQueryParams(ret map[str
 		}
 		if inv.IsParameterSelected("Location") {
 			ret["ip_address[location]"] = convertInt64ToString(inv.Input.Location)
-		}
-		if inv.IsParameterSelected("MaxRx") {
-			ret["ip_address[max_rx]"] = convertInt64ToString(inv.Input.MaxRx)
-		}
-		if inv.IsParameterSelected("MaxTx") {
-			ret["ip_address[max_tx]"] = convertInt64ToString(inv.Input.MaxTx)
 		}
 		if inv.IsParameterSelected("Network") {
 			ret["ip_address[network]"] = convertInt64ToString(inv.Input.Network)

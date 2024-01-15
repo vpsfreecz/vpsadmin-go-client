@@ -75,28 +75,31 @@ func (in *ActionVpsUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsUpdateInput is a type for action input parameters
 type ActionVpsUpdateInput struct {
-	AdminLockType     string `json:"admin_lock_type"`
-	AdminOverride     bool   `json:"admin_override"`
-	AutostartEnable   bool   `json:"autostart_enable"`
-	AutostartPriority int64  `json:"autostart_priority"`
-	ChangeReason      string `json:"change_reason"`
-	Config            string `json:"config"`
-	Cpu               int64  `json:"cpu"`
-	CpuLimit          int64  `json:"cpu_limit"`
-	DnsResolver       int64  `json:"dns_resolver"`
-	ExpirationDate    string `json:"expiration_date"`
-	Hostname          string `json:"hostname"`
-	Info              string `json:"info"`
-	ManageHostname    bool   `json:"manage_hostname"`
-	Memory            int64  `json:"memory"`
-	Node              int64  `json:"node"`
-	ObjectState       string `json:"object_state"`
-	Onstartall        bool   `json:"onstartall"`
-	OsTemplate        int64  `json:"os_template"`
-	RemindAfterDate   string `json:"remind_after_date"`
-	StartMenuTimeout  int64  `json:"start_menu_timeout"`
-	Swap              int64  `json:"swap"`
-	User              int64  `json:"user"`
+	AdminLockType           string `json:"admin_lock_type"`
+	AdminOverride           bool   `json:"admin_override"`
+	AllowAdminModifications bool   `json:"allow_admin_modifications"`
+	AutostartEnable         bool   `json:"autostart_enable"`
+	AutostartPriority       int64  `json:"autostart_priority"`
+	CgroupVersion           string `json:"cgroup_version"`
+	ChangeReason            string `json:"change_reason"`
+	Config                  string `json:"config"`
+	Cpu                     int64  `json:"cpu"`
+	CpuLimit                int64  `json:"cpu_limit"`
+	DnsResolver             int64  `json:"dns_resolver"`
+	ExpirationDate          string `json:"expiration_date"`
+	Hostname                string `json:"hostname"`
+	Info                    string `json:"info"`
+	ManageHostname          bool   `json:"manage_hostname"`
+	Memory                  int64  `json:"memory"`
+	Node                    int64  `json:"node"`
+	ObjectState             string `json:"object_state"`
+	Onstartall              bool   `json:"onstartall"`
+	OsTemplate              int64  `json:"os_template"`
+	RemindAfterDate         string `json:"remind_after_date"`
+	StartMenuTimeout        int64  `json:"start_menu_timeout"`
+	Swap                    int64  `json:"swap"`
+	User                    int64  `json:"user"`
+	UserNamespaceMap        int64  `json:"user_namespace_map"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -127,6 +130,18 @@ func (in *ActionVpsUpdateInput) SetAdminOverride(value bool) *ActionVpsUpdateInp
 	return in
 }
 
+// SetAllowAdminModifications sets parameter AllowAdminModifications to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetAllowAdminModifications(value bool) *ActionVpsUpdateInput {
+	in.AllowAdminModifications = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AllowAdminModifications"] = nil
+	return in
+}
+
 // SetAutostartEnable sets parameter AutostartEnable to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetAutostartEnable(value bool) *ActionVpsUpdateInput {
 	in.AutostartEnable = value
@@ -148,6 +163,18 @@ func (in *ActionVpsUpdateInput) SetAutostartPriority(value int64) *ActionVpsUpda
 	}
 
 	in._selectedParameters["AutostartPriority"] = nil
+	return in
+}
+
+// SetCgroupVersion sets parameter CgroupVersion to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetCgroupVersion(value string) *ActionVpsUpdateInput {
+	in.CgroupVersion = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["CgroupVersion"] = nil
 	return in
 }
 
@@ -443,6 +470,37 @@ func (in *ActionVpsUpdateInput) SetUserNil(set bool) *ActionVpsUpdateInput {
 	return in
 }
 
+// SetUserNamespaceMap sets parameter UserNamespaceMap to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetUserNamespaceMap(value int64) *ActionVpsUpdateInput {
+	in.UserNamespaceMap = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetUserNamespaceMapNil(false)
+	in._selectedParameters["UserNamespaceMap"] = nil
+	return in
+}
+
+// SetUserNamespaceMapNil sets parameter UserNamespaceMap to nil and selects it for sending
+func (in *ActionVpsUpdateInput) SetUserNamespaceMapNil(set bool) *ActionVpsUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["UserNamespaceMap"] = nil
+		in.SelectParameters("UserNamespaceMap")
+	} else {
+		delete(in._nilParameters, "UserNamespaceMap")
+	}
+	return in
+}
+
 // SelectParameters sets parameters from ActionVpsUpdateInput
 // that will be sent to the API.
 // SelectParameters can be called multiple times.
@@ -705,11 +763,17 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 		if inv.IsParameterSelected("AdminOverride") {
 			ret["admin_override"] = inv.Input.AdminOverride
 		}
+		if inv.IsParameterSelected("AllowAdminModifications") {
+			ret["allow_admin_modifications"] = inv.Input.AllowAdminModifications
+		}
 		if inv.IsParameterSelected("AutostartEnable") {
 			ret["autostart_enable"] = inv.Input.AutostartEnable
 		}
 		if inv.IsParameterSelected("AutostartPriority") {
 			ret["autostart_priority"] = inv.Input.AutostartPriority
+		}
+		if inv.IsParameterSelected("CgroupVersion") {
+			ret["cgroup_version"] = inv.Input.CgroupVersion
 		}
 		if inv.IsParameterSelected("ChangeReason") {
 			ret["change_reason"] = inv.Input.ChangeReason
@@ -779,6 +843,13 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 				ret["user"] = nil
 			} else {
 				ret["user"] = inv.Input.User
+			}
+		}
+		if inv.IsParameterSelected("UserNamespaceMap") {
+			if inv.IsParameterNil("UserNamespaceMap") {
+				ret["user_namespace_map"] = nil
+			} else {
+				ret["user_namespace_map"] = inv.Input.UserNamespaceMap
 			}
 		}
 	}

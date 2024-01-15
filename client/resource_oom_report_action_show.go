@@ -75,6 +75,8 @@ func (in *ActionOomReportShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportShowOutput is a type for action output parameters
 type ActionOomReportShowOutput struct {
+	Cgroup        string               `json:"cgroup"`
+	Count         int64                `json:"count"`
 	CreatedAt     string               `json:"created_at"`
 	Id            int64                `json:"id"`
 	InvokedByName string               `json:"invoked_by_name"`

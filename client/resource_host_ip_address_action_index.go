@@ -91,8 +91,6 @@ type ActionHostIpAddressIndexInput struct {
 	IpAddress        int64  `json:"ip_address"`
 	Limit            int64  `json:"limit"`
 	Location         int64  `json:"location"`
-	MaxRx            int64  `json:"max_rx"`
-	MaxTx            int64  `json:"max_tx"`
 	Network          int64  `json:"network"`
 	NetworkInterface int64  `json:"network_interface"`
 	Offset           int64  `json:"offset"`
@@ -205,30 +203,6 @@ func (in *ActionHostIpAddressIndexInput) SetLocationNil(set bool) *ActionHostIpA
 	} else {
 		delete(in._nilParameters, "Location")
 	}
-	return in
-}
-
-// SetMaxRx sets parameter MaxRx to value and selects it for sending
-func (in *ActionHostIpAddressIndexInput) SetMaxRx(value int64) *ActionHostIpAddressIndexInput {
-	in.MaxRx = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["MaxRx"] = nil
-	return in
-}
-
-// SetMaxTx sets parameter MaxTx to value and selects it for sending
-func (in *ActionHostIpAddressIndexInput) SetMaxTx(value int64) *ActionHostIpAddressIndexInput {
-	in.MaxTx = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["MaxTx"] = nil
 	return in
 }
 
@@ -618,12 +592,6 @@ func (inv *ActionHostIpAddressIndexInvocation) convertInputToQueryParams(ret map
 		}
 		if inv.IsParameterSelected("Location") {
 			ret["host_ip_address[location]"] = convertInt64ToString(inv.Input.Location)
-		}
-		if inv.IsParameterSelected("MaxRx") {
-			ret["host_ip_address[max_rx]"] = convertInt64ToString(inv.Input.MaxRx)
-		}
-		if inv.IsParameterSelected("MaxTx") {
-			ret["host_ip_address[max_tx]"] = convertInt64ToString(inv.Input.MaxTx)
 		}
 		if inv.IsParameterSelected("Network") {
 			ret["host_ip_address[network]"] = convertInt64ToString(inv.Input.Network)

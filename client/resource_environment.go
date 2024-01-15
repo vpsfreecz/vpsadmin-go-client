@@ -5,8 +5,6 @@ type ResourceEnvironment struct {
 	// Pointer to client
 	Client *Client
 
-	// Resource Environment.Config_chain
-	ConfigChain *ResourceEnvironmentConfigChain
 	// Resource Environment.Dataset_plan
 	DatasetPlan *ResourceEnvironmentDatasetPlan
 	// Action Environment#Create
@@ -36,7 +34,6 @@ func NewResourceEnvironment(client *Client) *ResourceEnvironment {
 
 	return &ResourceEnvironment{
 		Client:         client,
-		ConfigChain:    NewResourceEnvironmentConfigChain(client),
 		DatasetPlan:    NewResourceEnvironmentDatasetPlan(client),
 		Create:         actionCreate,
 		New:            actionCreate,

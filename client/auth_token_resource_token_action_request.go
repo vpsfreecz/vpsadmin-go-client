@@ -63,6 +63,7 @@ type AuthTokenActionTokenRequestInput struct {
 	Interval int64  `json:"interval"`
 	Lifetime string `json:"lifetime"`
 	Password string `json:"password"`
+	Scope    string `json:"scope"`
 	User     string `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -103,6 +104,18 @@ func (in *AuthTokenActionTokenRequestInput) SetPassword(value string) *AuthToken
 	}
 
 	in._selectedParameters["Password"] = nil
+	return in
+}
+
+// SetScope sets parameter Scope to value and selects it for sending
+func (in *AuthTokenActionTokenRequestInput) SetScope(value string) *AuthTokenActionTokenRequestInput {
+	in.Scope = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Scope"] = nil
 	return in
 }
 
@@ -303,6 +316,9 @@ func (inv *AuthTokenActionTokenRequestInvocation) makeInputParams() map[string]i
 		}
 		if inv.IsParameterSelected("Password") {
 			ret["password"] = inv.Input.Password
+		}
+		if inv.IsParameterSelected("Scope") {
+			ret["scope"] = inv.Input.Scope
 		}
 		if inv.IsParameterSelected("User") {
 			ret["user"] = inv.Input.User

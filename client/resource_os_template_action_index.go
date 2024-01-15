@@ -86,6 +86,7 @@ func (in *ActionOsTemplateIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOsTemplateIndexInput is a type for action input parameters
 type ActionOsTemplateIndexInput struct {
+	CgroupVersion  string `json:"cgroup_version"`
 	HypervisorType string `json:"hypervisor_type"`
 	Limit          int64  `json:"limit"`
 	Location       int64  `json:"location"`
@@ -94,6 +95,18 @@ type ActionOsTemplateIndexInput struct {
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetCgroupVersion sets parameter CgroupVersion to value and selects it for sending
+func (in *ActionOsTemplateIndexInput) SetCgroupVersion(value string) *ActionOsTemplateIndexInput {
+	in.CgroupVersion = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["CgroupVersion"] = nil
+	return in
 }
 
 // SetHypervisorType sets parameter HypervisorType to value and selects it for sending
@@ -203,6 +216,9 @@ func (in *ActionOsTemplateIndexInput) AnySelected() bool {
 
 // ActionOsTemplateIndexOutput is a type for action output parameters
 type ActionOsTemplateIndexOutput struct {
+	Arch           string `json:"arch"`
+	CgroupVersion  string `json:"cgroup_version"`
+	Distribution   string `json:"distribution"`
 	Enabled        bool   `json:"enabled"`
 	HypervisorType string `json:"hypervisor_type"`
 	Id             int64  `json:"id"`
@@ -211,6 +227,9 @@ type ActionOsTemplateIndexOutput struct {
 	Name           string `json:"name"`
 	Order          int64  `json:"order"`
 	Supported      bool   `json:"supported"`
+	Variant        string `json:"variant"`
+	Vendor         string `json:"vendor"`
+	Version        string `json:"version"`
 }
 
 // Type for action response, including envelope
@@ -331,6 +350,9 @@ func (inv *ActionOsTemplateIndexInvocation) callAsQuery() (*ActionOsTemplateInde
 
 func (inv *ActionOsTemplateIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("CgroupVersion") {
+			ret["os_template[cgroup_version]"] = inv.Input.CgroupVersion
+		}
 		if inv.IsParameterSelected("HypervisorType") {
 			ret["os_template[hypervisor_type]"] = inv.Input.HypervisorType
 		}

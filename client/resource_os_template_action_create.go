@@ -73,17 +73,58 @@ func (in *ActionOsTemplateCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOsTemplateCreateInput is a type for action input parameters
 type ActionOsTemplateCreateInput struct {
+	Arch           string `json:"arch"`
+	CgroupVersion  string `json:"cgroup_version"`
+	Distribution   string `json:"distribution"`
 	Enabled        bool   `json:"enabled"`
 	HypervisorType string `json:"hypervisor_type"`
 	Info           string `json:"info"`
 	Label          string `json:"label"`
-	Name           string `json:"name"`
 	Order          int64  `json:"order"`
 	Supported      bool   `json:"supported"`
+	Variant        string `json:"variant"`
+	Vendor         string `json:"vendor"`
+	Version        string `json:"version"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetArch sets parameter Arch to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetArch(value string) *ActionOsTemplateCreateInput {
+	in.Arch = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Arch"] = nil
+	return in
+}
+
+// SetCgroupVersion sets parameter CgroupVersion to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetCgroupVersion(value string) *ActionOsTemplateCreateInput {
+	in.CgroupVersion = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["CgroupVersion"] = nil
+	return in
+}
+
+// SetDistribution sets parameter Distribution to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetDistribution(value string) *ActionOsTemplateCreateInput {
+	in.Distribution = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Distribution"] = nil
+	return in
 }
 
 // SetEnabled sets parameter Enabled to value and selects it for sending
@@ -134,18 +175,6 @@ func (in *ActionOsTemplateCreateInput) SetLabel(value string) *ActionOsTemplateC
 	return in
 }
 
-// SetName sets parameter Name to value and selects it for sending
-func (in *ActionOsTemplateCreateInput) SetName(value string) *ActionOsTemplateCreateInput {
-	in.Name = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Name"] = nil
-	return in
-}
-
 // SetOrder sets parameter Order to value and selects it for sending
 func (in *ActionOsTemplateCreateInput) SetOrder(value int64) *ActionOsTemplateCreateInput {
 	in.Order = value
@@ -167,6 +196,42 @@ func (in *ActionOsTemplateCreateInput) SetSupported(value bool) *ActionOsTemplat
 	}
 
 	in._selectedParameters["Supported"] = nil
+	return in
+}
+
+// SetVariant sets parameter Variant to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetVariant(value string) *ActionOsTemplateCreateInput {
+	in.Variant = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Variant"] = nil
+	return in
+}
+
+// SetVendor sets parameter Vendor to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetVendor(value string) *ActionOsTemplateCreateInput {
+	in.Vendor = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Vendor"] = nil
+	return in
+}
+
+// SetVersion sets parameter Version to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetVersion(value string) *ActionOsTemplateCreateInput {
+	in.Version = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Version"] = nil
 	return in
 }
 
@@ -216,6 +281,9 @@ type ActionOsTemplateCreateRequest struct {
 
 // ActionOsTemplateCreateOutput is a type for action output parameters
 type ActionOsTemplateCreateOutput struct {
+	Arch           string `json:"arch"`
+	CgroupVersion  string `json:"cgroup_version"`
+	Distribution   string `json:"distribution"`
 	Enabled        bool   `json:"enabled"`
 	HypervisorType string `json:"hypervisor_type"`
 	Id             int64  `json:"id"`
@@ -224,6 +292,9 @@ type ActionOsTemplateCreateOutput struct {
 	Name           string `json:"name"`
 	Order          int64  `json:"order"`
 	Supported      bool   `json:"supported"`
+	Variant        string `json:"variant"`
+	Vendor         string `json:"vendor"`
+	Version        string `json:"version"`
 }
 
 // Type for action response, including envelope
@@ -351,6 +422,15 @@ func (inv *ActionOsTemplateCreateInvocation) makeInputParams() map[string]interf
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("Arch") {
+			ret["arch"] = inv.Input.Arch
+		}
+		if inv.IsParameterSelected("CgroupVersion") {
+			ret["cgroup_version"] = inv.Input.CgroupVersion
+		}
+		if inv.IsParameterSelected("Distribution") {
+			ret["distribution"] = inv.Input.Distribution
+		}
 		if inv.IsParameterSelected("Enabled") {
 			ret["enabled"] = inv.Input.Enabled
 		}
@@ -363,14 +443,20 @@ func (inv *ActionOsTemplateCreateInvocation) makeInputParams() map[string]interf
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
 		}
-		if inv.IsParameterSelected("Name") {
-			ret["name"] = inv.Input.Name
-		}
 		if inv.IsParameterSelected("Order") {
 			ret["order"] = inv.Input.Order
 		}
 		if inv.IsParameterSelected("Supported") {
 			ret["supported"] = inv.Input.Supported
+		}
+		if inv.IsParameterSelected("Variant") {
+			ret["variant"] = inv.Input.Variant
+		}
+		if inv.IsParameterSelected("Vendor") {
+			ret["vendor"] = inv.Input.Vendor
+		}
+		if inv.IsParameterSelected("Version") {
+			ret["version"] = inv.Input.Version
 		}
 	}
 

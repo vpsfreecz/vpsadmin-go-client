@@ -90,6 +90,7 @@ type ActionPoolIndexInput struct {
 	CheckedAt     string  `json:"checked_at"`
 	Compression   bool    `json:"compression"`
 	Filesystem    string  `json:"filesystem"`
+	IsOpen        bool    `json:"is_open"`
 	Label         string  `json:"label"`
 	Limit         int64   `json:"limit"`
 	MaxDatasets   int64   `json:"max_datasets"`
@@ -158,6 +159,18 @@ func (in *ActionPoolIndexInput) SetFilesystem(value string) *ActionPoolIndexInpu
 	}
 
 	in._selectedParameters["Filesystem"] = nil
+	return in
+}
+
+// SetIsOpen sets parameter IsOpen to value and selects it for sending
+func (in *ActionPoolIndexInput) SetIsOpen(value bool) *ActionPoolIndexInput {
+	in.IsOpen = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["IsOpen"] = nil
 	return in
 }
 
@@ -428,8 +441,10 @@ type ActionPoolIndexOutput struct {
 	Avail                 int64                 `json:"avail"`
 	CheckedAt             string                `json:"checked_at"`
 	Compression           bool                  `json:"compression"`
+	Compressratio         float64               `json:"compressratio"`
 	Filesystem            string                `json:"filesystem"`
 	Id                    int64                 `json:"id"`
+	IsOpen                bool                  `json:"is_open"`
 	Label                 string                `json:"label"`
 	MaintenanceLock       string                `json:"maintenance_lock"`
 	MaintenanceLockReason string                `json:"maintenance_lock_reason"`
@@ -438,6 +453,7 @@ type ActionPoolIndexOutput struct {
 	Node                  *ActionNodeShowOutput `json:"node"`
 	Quota                 int64                 `json:"quota"`
 	Recordsize            int64                 `json:"recordsize"`
+	Refcompressratio      float64               `json:"refcompressratio"`
 	Referenced            int64                 `json:"referenced"`
 	Refquota              int64                 `json:"refquota"`
 	RefquotaCheck         bool                  `json:"refquota_check"`
@@ -580,6 +596,9 @@ func (inv *ActionPoolIndexInvocation) convertInputToQueryParams(ret map[string]s
 		}
 		if inv.IsParameterSelected("Filesystem") {
 			ret["pool[filesystem]"] = inv.Input.Filesystem
+		}
+		if inv.IsParameterSelected("IsOpen") {
+			ret["pool[is_open]"] = convertBoolToString(inv.Input.IsOpen)
 		}
 		if inv.IsParameterSelected("Label") {
 			ret["pool[label]"] = inv.Input.Label

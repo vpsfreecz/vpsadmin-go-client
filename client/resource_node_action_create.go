@@ -83,11 +83,9 @@ type ActionNodeCreateInput struct {
 	MaxTx          int64  `json:"max_tx"`
 	MaxVps         int64  `json:"max_vps"`
 	Name           string `json:"name"`
-	NetInterface   string `json:"net_interface"`
 	TotalMemory    int64  `json:"total_memory"`
 	TotalSwap      int64  `json:"total_swap"`
 	Type           string `json:"type"`
-	VePrivate      string `json:"ve_private"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -233,18 +231,6 @@ func (in *ActionNodeCreateInput) SetName(value string) *ActionNodeCreateInput {
 	return in
 }
 
-// SetNetInterface sets parameter NetInterface to value and selects it for sending
-func (in *ActionNodeCreateInput) SetNetInterface(value string) *ActionNodeCreateInput {
-	in.NetInterface = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["NetInterface"] = nil
-	return in
-}
-
 // SetTotalMemory sets parameter TotalMemory to value and selects it for sending
 func (in *ActionNodeCreateInput) SetTotalMemory(value int64) *ActionNodeCreateInput {
 	in.TotalMemory = value
@@ -278,18 +264,6 @@ func (in *ActionNodeCreateInput) SetType(value string) *ActionNodeCreateInput {
 	}
 
 	in._selectedParameters["Type"] = nil
-	return in
-}
-
-// SetVePrivate sets parameter VePrivate to value and selects it for sending
-func (in *ActionNodeCreateInput) SetVePrivate(value string) *ActionNodeCreateInput {
-	in.VePrivate = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["VePrivate"] = nil
 	return in
 }
 
@@ -344,6 +318,7 @@ type ActionNodeCreateOutput struct {
 	ArcCMax         int64                     `json:"arc_c_max"`
 	ArcHitpercent   int64                     `json:"arc_hitpercent"`
 	ArcSize         int64                     `json:"arc_size"`
+	CgroupVersion   string                    `json:"cgroup_version"`
 	CpuGuest        float64                   `json:"cpu_guest"`
 	CpuIdle         float64                   `json:"cpu_idle"`
 	CpuIowait       float64                   `json:"cpu_iowait"`
@@ -365,7 +340,6 @@ type ActionNodeCreateOutput struct {
 	MaxTx           int64                     `json:"max_tx"`
 	MaxVps          int64                     `json:"max_vps"`
 	Name            string                    `json:"name"`
-	NetInterface    string                    `json:"net_interface"`
 	PoolCheckedAt   string                    `json:"pool_checked_at"`
 	PoolScan        string                    `json:"pool_scan"`
 	PoolScanPercent float64                   `json:"pool_scan_percent"`
@@ -379,7 +353,6 @@ type ActionNodeCreateOutput struct {
 	Uptime          int64                     `json:"uptime"`
 	UsedMemory      int64                     `json:"used_memory"`
 	UsedSwap        int64                     `json:"used_swap"`
-	VePrivate       string                    `json:"ve_private"`
 	Version         string                    `json:"version"`
 }
 
@@ -625,9 +598,6 @@ func (inv *ActionNodeCreateInvocation) makeInputParams() map[string]interface{} 
 		if inv.IsParameterSelected("Name") {
 			ret["name"] = inv.Input.Name
 		}
-		if inv.IsParameterSelected("NetInterface") {
-			ret["net_interface"] = inv.Input.NetInterface
-		}
 		if inv.IsParameterSelected("TotalMemory") {
 			ret["total_memory"] = inv.Input.TotalMemory
 		}
@@ -636,9 +606,6 @@ func (inv *ActionNodeCreateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["type"] = inv.Input.Type
-		}
-		if inv.IsParameterSelected("VePrivate") {
-			ret["ve_private"] = inv.Input.VePrivate
 		}
 	}
 

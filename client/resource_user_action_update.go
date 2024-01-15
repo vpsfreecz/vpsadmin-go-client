@@ -75,22 +75,25 @@ func (in *ActionUserUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserUpdateInput is a type for action input parameters
 type ActionUserUpdateInput struct {
-	Address         string `json:"address"`
-	ChangeReason    string `json:"change_reason"`
-	Email           string `json:"email"`
-	ExpirationDate  string `json:"expiration_date"`
-	FullName        string `json:"full_name"`
-	Info            string `json:"info"`
-	Language        int64  `json:"language"`
-	Level           int64  `json:"level"`
-	Lockout         bool   `json:"lockout"`
-	Login           string `json:"login"`
-	MailerEnabled   bool   `json:"mailer_enabled"`
-	NewPassword     string `json:"new_password"`
-	ObjectState     string `json:"object_state"`
-	Password        string `json:"password"`
-	PasswordReset   bool   `json:"password_reset"`
-	RemindAfterDate string `json:"remind_after_date"`
+	Address                string `json:"address"`
+	ChangeReason           string `json:"change_reason"`
+	Email                  string `json:"email"`
+	EnableSingleSignOn     bool   `json:"enable_single_sign_on"`
+	ExpirationDate         string `json:"expiration_date"`
+	FullName               string `json:"full_name"`
+	Info                   string `json:"info"`
+	Language               int64  `json:"language"`
+	Level                  int64  `json:"level"`
+	Lockout                bool   `json:"lockout"`
+	Login                  string `json:"login"`
+	MailerEnabled          bool   `json:"mailer_enabled"`
+	NewPassword            string `json:"new_password"`
+	ObjectState            string `json:"object_state"`
+	Password               string `json:"password"`
+	PasswordReset          bool   `json:"password_reset"`
+	PreferredLogoutAll     bool   `json:"preferred_logout_all"`
+	PreferredSessionLength int64  `json:"preferred_session_length"`
+	RemindAfterDate        string `json:"remind_after_date"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -130,6 +133,18 @@ func (in *ActionUserUpdateInput) SetEmail(value string) *ActionUserUpdateInput {
 	}
 
 	in._selectedParameters["Email"] = nil
+	return in
+}
+
+// SetEnableSingleSignOn sets parameter EnableSingleSignOn to value and selects it for sending
+func (in *ActionUserUpdateInput) SetEnableSingleSignOn(value bool) *ActionUserUpdateInput {
+	in.EnableSingleSignOn = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnableSingleSignOn"] = nil
 	return in
 }
 
@@ -296,6 +311,30 @@ func (in *ActionUserUpdateInput) SetPasswordReset(value bool) *ActionUserUpdateI
 	return in
 }
 
+// SetPreferredLogoutAll sets parameter PreferredLogoutAll to value and selects it for sending
+func (in *ActionUserUpdateInput) SetPreferredLogoutAll(value bool) *ActionUserUpdateInput {
+	in.PreferredLogoutAll = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PreferredLogoutAll"] = nil
+	return in
+}
+
+// SetPreferredSessionLength sets parameter PreferredSessionLength to value and selects it for sending
+func (in *ActionUserUpdateInput) SetPreferredSessionLength(value int64) *ActionUserUpdateInput {
+	in.PreferredSessionLength = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PreferredSessionLength"] = nil
+	return in
+}
+
 // SetRemindAfterDate sets parameter RemindAfterDate to value and selects it for sending
 func (in *ActionUserUpdateInput) SetRemindAfterDate(value string) *ActionUserUpdateInput {
 	in.RemindAfterDate = value
@@ -354,19 +393,23 @@ type ActionUserUpdateRequest struct {
 
 // ActionUserUpdateOutput is a type for action output parameters
 type ActionUserUpdateOutput struct {
-	Address        string                    `json:"address"`
-	CreatedAt      string                    `json:"created_at"`
-	Email          string                    `json:"email"`
-	FullName       string                    `json:"full_name"`
-	Id             int64                     `json:"id"`
-	Info           string                    `json:"info"`
-	Language       *ActionLanguageShowOutput `json:"language"`
-	LastActivityAt string                    `json:"last_activity_at"`
-	Level          int64                     `json:"level"`
-	Lockout        bool                      `json:"lockout"`
-	Login          string                    `json:"login"`
-	MailerEnabled  bool                      `json:"mailer_enabled"`
-	PasswordReset  bool                      `json:"password_reset"`
+	Address                string                    `json:"address"`
+	CreatedAt              string                    `json:"created_at"`
+	DokuwikiGroups         string                    `json:"dokuwiki_groups"`
+	Email                  string                    `json:"email"`
+	EnableSingleSignOn     bool                      `json:"enable_single_sign_on"`
+	FullName               string                    `json:"full_name"`
+	Id                     int64                     `json:"id"`
+	Info                   string                    `json:"info"`
+	Language               *ActionLanguageShowOutput `json:"language"`
+	LastActivityAt         string                    `json:"last_activity_at"`
+	Level                  int64                     `json:"level"`
+	Lockout                bool                      `json:"lockout"`
+	Login                  string                    `json:"login"`
+	MailerEnabled          bool                      `json:"mailer_enabled"`
+	PasswordReset          bool                      `json:"password_reset"`
+	PreferredLogoutAll     bool                      `json:"preferred_logout_all"`
+	PreferredSessionLength int64                     `json:"preferred_session_length"`
 }
 
 // ActionUserUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -597,6 +640,9 @@ func (inv *ActionUserUpdateInvocation) makeInputParams() map[string]interface{} 
 		if inv.IsParameterSelected("Email") {
 			ret["email"] = inv.Input.Email
 		}
+		if inv.IsParameterSelected("EnableSingleSignOn") {
+			ret["enable_single_sign_on"] = inv.Input.EnableSingleSignOn
+		}
 		if inv.IsParameterSelected("ExpirationDate") {
 			ret["expiration_date"] = inv.Input.ExpirationDate
 		}
@@ -636,6 +682,12 @@ func (inv *ActionUserUpdateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("PasswordReset") {
 			ret["password_reset"] = inv.Input.PasswordReset
+		}
+		if inv.IsParameterSelected("PreferredLogoutAll") {
+			ret["preferred_logout_all"] = inv.Input.PreferredLogoutAll
+		}
+		if inv.IsParameterSelected("PreferredSessionLength") {
+			ret["preferred_session_length"] = inv.Input.PreferredSessionLength
 		}
 		if inv.IsParameterSelected("RemindAfterDate") {
 			ret["remind_after_date"] = inv.Input.RemindAfterDate

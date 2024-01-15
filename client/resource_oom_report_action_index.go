@@ -86,6 +86,7 @@ func (in *ActionOomReportIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportIndexInput is a type for action input parameters
 type ActionOomReportIndexInput struct {
+	Cgroup      string `json:"cgroup"`
 	Environment int64  `json:"environment"`
 	Limit       int64  `json:"limit"`
 	Location    int64  `json:"location"`
@@ -99,6 +100,18 @@ type ActionOomReportIndexInput struct {
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetCgroup sets parameter Cgroup to value and selects it for sending
+func (in *ActionOomReportIndexInput) SetCgroup(value string) *ActionOomReportIndexInput {
+	in.Cgroup = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Cgroup"] = nil
+	return in
 }
 
 // SetEnvironment sets parameter Environment to value and selects it for sending
@@ -344,6 +357,8 @@ func (in *ActionOomReportIndexInput) AnySelected() bool {
 
 // ActionOomReportIndexOutput is a type for action output parameters
 type ActionOomReportIndexOutput struct {
+	Cgroup        string               `json:"cgroup"`
+	Count         int64                `json:"count"`
 	CreatedAt     string               `json:"created_at"`
 	Id            int64                `json:"id"`
 	InvokedByName string               `json:"invoked_by_name"`
@@ -472,6 +487,9 @@ func (inv *ActionOomReportIndexInvocation) callAsQuery() (*ActionOomReportIndexR
 
 func (inv *ActionOomReportIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("Cgroup") {
+			ret["oom_report[cgroup]"] = inv.Input.Cgroup
+		}
 		if inv.IsParameterSelected("Environment") {
 			ret["oom_report[environment]"] = convertInt64ToString(inv.Input.Environment)
 		}

@@ -73,19 +73,17 @@ func (in *ActionDatasetCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetCreateInput is a type for action input parameters
 type ActionDatasetCreateInput struct {
-	Atime                   bool   `json:"atime"`
-	Automount               bool   `json:"automount"`
-	Compression             bool   `json:"compression"`
-	Dataset                 int64  `json:"dataset"`
-	InheritUserNamespaceMap bool   `json:"inherit_user_namespace_map"`
-	Name                    string `json:"name"`
-	Quota                   int64  `json:"quota"`
-	Recordsize              int64  `json:"recordsize"`
-	Refquota                int64  `json:"refquota"`
-	Relatime                bool   `json:"relatime"`
-	Sharenfs                string `json:"sharenfs"`
-	Sync                    string `json:"sync"`
-	UserNamespaceMap        int64  `json:"user_namespace_map"`
+	Atime       bool   `json:"atime"`
+	Automount   bool   `json:"automount"`
+	Compression bool   `json:"compression"`
+	Dataset     int64  `json:"dataset"`
+	Name        string `json:"name"`
+	Quota       int64  `json:"quota"`
+	Recordsize  int64  `json:"recordsize"`
+	Refquota    int64  `json:"refquota"`
+	Relatime    bool   `json:"relatime"`
+	Sharenfs    string `json:"sharenfs"`
+	Sync        string `json:"sync"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -156,18 +154,6 @@ func (in *ActionDatasetCreateInput) SetDatasetNil(set bool) *ActionDatasetCreate
 	} else {
 		delete(in._nilParameters, "Dataset")
 	}
-	return in
-}
-
-// SetInheritUserNamespaceMap sets parameter InheritUserNamespaceMap to value and selects it for sending
-func (in *ActionDatasetCreateInput) SetInheritUserNamespaceMap(value bool) *ActionDatasetCreateInput {
-	in.InheritUserNamespaceMap = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["InheritUserNamespaceMap"] = nil
 	return in
 }
 
@@ -255,37 +241,6 @@ func (in *ActionDatasetCreateInput) SetSync(value string) *ActionDatasetCreateIn
 	return in
 }
 
-// SetUserNamespaceMap sets parameter UserNamespaceMap to value and selects it for sending
-func (in *ActionDatasetCreateInput) SetUserNamespaceMap(value int64) *ActionDatasetCreateInput {
-	in.UserNamespaceMap = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in.SetUserNamespaceMapNil(false)
-	in._selectedParameters["UserNamespaceMap"] = nil
-	return in
-}
-
-// SetUserNamespaceMapNil sets parameter UserNamespaceMap to nil and selects it for sending
-func (in *ActionDatasetCreateInput) SetUserNamespaceMapNil(set bool) *ActionDatasetCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["UserNamespaceMap"] = nil
-		in.SelectParameters("UserNamespaceMap")
-	} else {
-		delete(in._nilParameters, "UserNamespaceMap")
-	}
-	return in
-}
-
 // SelectParameters sets parameters from ActionDatasetCreateInput
 // that will be sent to the API.
 // SelectParameters can be called multiple times.
@@ -335,7 +290,9 @@ type ActionDatasetCreateOutput struct {
 	Atime            bool                              `json:"atime"`
 	Avail            int64                             `json:"avail"`
 	Compression      bool                              `json:"compression"`
+	Compressratio    float64                           `json:"compressratio"`
 	CurrentHistoryId int64                             `json:"current_history_id"`
+	DatasetExpansion *ActionDatasetExpansionShowOutput `json:"dataset_expansion"`
 	Environment      *ActionEnvironmentShowOutput      `json:"environment"`
 	Export           *ActionExportShowOutput           `json:"export"`
 	Id               int64                             `json:"id"`
@@ -343,6 +300,7 @@ type ActionDatasetCreateOutput struct {
 	Parent           *ActionDatasetShowOutput          `json:"parent"`
 	Quota            int64                             `json:"quota"`
 	Recordsize       int64                             `json:"recordsize"`
+	Refcompressratio float64                           `json:"refcompressratio"`
 	Referenced       int64                             `json:"referenced"`
 	Refquota         int64                             `json:"refquota"`
 	Relatime         bool                              `json:"relatime"`
@@ -350,7 +308,6 @@ type ActionDatasetCreateOutput struct {
 	Sync             string                            `json:"sync"`
 	Used             int64                             `json:"used"`
 	User             *ActionUserShowOutput             `json:"user"`
-	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
 }
 
 // ActionDatasetCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -577,9 +534,6 @@ func (inv *ActionDatasetCreateInvocation) makeInputParams() map[string]interface
 				ret["dataset"] = inv.Input.Dataset
 			}
 		}
-		if inv.IsParameterSelected("InheritUserNamespaceMap") {
-			ret["inherit_user_namespace_map"] = inv.Input.InheritUserNamespaceMap
-		}
 		if inv.IsParameterSelected("Name") {
 			ret["name"] = inv.Input.Name
 		}
@@ -600,13 +554,6 @@ func (inv *ActionDatasetCreateInvocation) makeInputParams() map[string]interface
 		}
 		if inv.IsParameterSelected("Sync") {
 			ret["sync"] = inv.Input.Sync
-		}
-		if inv.IsParameterSelected("UserNamespaceMap") {
-			if inv.IsParameterNil("UserNamespaceMap") {
-				ret["user_namespace_map"] = nil
-			} else {
-				ret["user_namespace_map"] = inv.Input.UserNamespaceMap
-			}
 		}
 	}
 

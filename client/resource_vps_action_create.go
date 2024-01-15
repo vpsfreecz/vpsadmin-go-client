@@ -73,30 +73,32 @@ func (in *ActionVpsCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsCreateInput is a type for action input parameters
 type ActionVpsCreateInput struct {
-	AddressLocation   int64  `json:"address_location"`
-	AutostartEnable   bool   `json:"autostart_enable"`
-	AutostartPriority int64  `json:"autostart_priority"`
-	Config            string `json:"config"`
-	Cpu               int64  `json:"cpu"`
-	CpuLimit          int64  `json:"cpu_limit"`
-	Diskspace         int64  `json:"diskspace"`
-	DnsResolver       int64  `json:"dns_resolver"`
-	Environment       int64  `json:"environment"`
-	Hostname          string `json:"hostname"`
-	Info              string `json:"info"`
-	Ipv4              int64  `json:"ipv4"`
-	Ipv4Private       int64  `json:"ipv4_private"`
-	Ipv6              int64  `json:"ipv6"`
-	Location          int64  `json:"location"`
-	Memory            int64  `json:"memory"`
-	Node              int64  `json:"node"`
-	Onstartall        bool   `json:"onstartall"`
-	OsTemplate        int64  `json:"os_template"`
-	Start             bool   `json:"start"`
-	StartMenuTimeout  int64  `json:"start_menu_timeout"`
-	Swap              int64  `json:"swap"`
-	User              int64  `json:"user"`
-	UserNamespaceMap  int64  `json:"user_namespace_map"`
+	AddressLocation         int64  `json:"address_location"`
+	AllowAdminModifications bool   `json:"allow_admin_modifications"`
+	AutostartEnable         bool   `json:"autostart_enable"`
+	AutostartPriority       int64  `json:"autostart_priority"`
+	CgroupVersion           string `json:"cgroup_version"`
+	Config                  string `json:"config"`
+	Cpu                     int64  `json:"cpu"`
+	CpuLimit                int64  `json:"cpu_limit"`
+	Diskspace               int64  `json:"diskspace"`
+	DnsResolver             int64  `json:"dns_resolver"`
+	Environment             int64  `json:"environment"`
+	Hostname                string `json:"hostname"`
+	Info                    string `json:"info"`
+	Ipv4                    int64  `json:"ipv4"`
+	Ipv4Private             int64  `json:"ipv4_private"`
+	Ipv6                    int64  `json:"ipv6"`
+	Location                int64  `json:"location"`
+	Memory                  int64  `json:"memory"`
+	Node                    int64  `json:"node"`
+	Onstartall              bool   `json:"onstartall"`
+	OsTemplate              int64  `json:"os_template"`
+	Start                   bool   `json:"start"`
+	StartMenuTimeout        int64  `json:"start_menu_timeout"`
+	Swap                    int64  `json:"swap"`
+	User                    int64  `json:"user"`
+	UserNamespaceMap        int64  `json:"user_namespace_map"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,6 +136,18 @@ func (in *ActionVpsCreateInput) SetAddressLocationNil(set bool) *ActionVpsCreate
 	return in
 }
 
+// SetAllowAdminModifications sets parameter AllowAdminModifications to value and selects it for sending
+func (in *ActionVpsCreateInput) SetAllowAdminModifications(value bool) *ActionVpsCreateInput {
+	in.AllowAdminModifications = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AllowAdminModifications"] = nil
+	return in
+}
+
 // SetAutostartEnable sets parameter AutostartEnable to value and selects it for sending
 func (in *ActionVpsCreateInput) SetAutostartEnable(value bool) *ActionVpsCreateInput {
 	in.AutostartEnable = value
@@ -155,6 +169,18 @@ func (in *ActionVpsCreateInput) SetAutostartPriority(value int64) *ActionVpsCrea
 	}
 
 	in._selectedParameters["AutostartPriority"] = nil
+	return in
+}
+
+// SetCgroupVersion sets parameter CgroupVersion to value and selects it for sending
+func (in *ActionVpsCreateInput) SetCgroupVersion(value string) *ActionVpsCreateInput {
+	in.CgroupVersion = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["CgroupVersion"] = nil
 	return in
 }
 
@@ -589,45 +615,48 @@ type ActionVpsCreateRequest struct {
 
 // ActionVpsCreateOutput is a type for action output parameters
 type ActionVpsCreateOutput struct {
-	AutostartEnable   bool                         `json:"autostart_enable"`
-	AutostartPriority int64                        `json:"autostart_priority"`
-	Config            string                       `json:"config"`
-	Cpu               int64                        `json:"cpu"`
-	CpuIdle           float64                      `json:"cpu_idle"`
-	CpuIowait         float64                      `json:"cpu_iowait"`
-	CpuIrq            float64                      `json:"cpu_irq"`
-	CpuLimit          int64                        `json:"cpu_limit"`
-	CpuNice           float64                      `json:"cpu_nice"`
-	CpuSoftirq        float64                      `json:"cpu_softirq"`
-	CpuSystem         float64                      `json:"cpu_system"`
-	CpuUser           float64                      `json:"cpu_user"`
-	CreatedAt         string                       `json:"created_at"`
-	Dataset           *ActionDatasetShowOutput     `json:"dataset"`
-	Diskspace         int64                        `json:"diskspace"`
-	DnsResolver       *ActionDnsResolverShowOutput `json:"dns_resolver"`
-	ExpirationDate    string                       `json:"expiration_date"`
-	Hostname          string                       `json:"hostname"`
-	Id                int64                        `json:"id"`
-	InRescueMode      bool                         `json:"in_rescue_mode"`
-	Info              string                       `json:"info"`
-	IsRunning         bool                         `json:"is_running"`
-	Loadavg           float64                      `json:"loadavg"`
-	ManageHostname    bool                         `json:"manage_hostname"`
-	Memory            int64                        `json:"memory"`
-	Node              *ActionNodeShowOutput        `json:"node"`
-	ObjectState       string                       `json:"object_state"`
-	Onstartall        bool                         `json:"onstartall"`
-	OsTemplate        *ActionOsTemplateShowOutput  `json:"os_template"`
-	Pool              *ActionPoolShowOutput        `json:"pool"`
-	ProcessCount      int64                        `json:"process_count"`
-	RemindAfterDate   string                       `json:"remind_after_date"`
-	StartMenuTimeout  int64                        `json:"start_menu_timeout"`
-	Swap              int64                        `json:"swap"`
-	Uptime            int64                        `json:"uptime"`
-	UsedDiskspace     int64                        `json:"used_diskspace"`
-	UsedMemory        int64                        `json:"used_memory"`
-	UsedSwap          int64                        `json:"used_swap"`
-	User              *ActionUserShowOutput        `json:"user"`
+	AllowAdminModifications bool                              `json:"allow_admin_modifications"`
+	AutostartEnable         bool                              `json:"autostart_enable"`
+	AutostartPriority       int64                             `json:"autostart_priority"`
+	CgroupVersion           string                            `json:"cgroup_version"`
+	Config                  string                            `json:"config"`
+	Cpu                     int64                             `json:"cpu"`
+	CpuIdle                 float64                           `json:"cpu_idle"`
+	CpuIowait               float64                           `json:"cpu_iowait"`
+	CpuIrq                  float64                           `json:"cpu_irq"`
+	CpuLimit                int64                             `json:"cpu_limit"`
+	CpuNice                 float64                           `json:"cpu_nice"`
+	CpuSoftirq              float64                           `json:"cpu_softirq"`
+	CpuSystem               float64                           `json:"cpu_system"`
+	CpuUser                 float64                           `json:"cpu_user"`
+	CreatedAt               string                            `json:"created_at"`
+	Dataset                 *ActionDatasetShowOutput          `json:"dataset"`
+	Diskspace               int64                             `json:"diskspace"`
+	DnsResolver             *ActionDnsResolverShowOutput      `json:"dns_resolver"`
+	ExpirationDate          string                            `json:"expiration_date"`
+	Hostname                string                            `json:"hostname"`
+	Id                      int64                             `json:"id"`
+	InRescueMode            bool                              `json:"in_rescue_mode"`
+	Info                    string                            `json:"info"`
+	IsRunning               bool                              `json:"is_running"`
+	Loadavg                 float64                           `json:"loadavg"`
+	ManageHostname          bool                              `json:"manage_hostname"`
+	Memory                  int64                             `json:"memory"`
+	Node                    *ActionNodeShowOutput             `json:"node"`
+	ObjectState             string                            `json:"object_state"`
+	Onstartall              bool                              `json:"onstartall"`
+	OsTemplate              *ActionOsTemplateShowOutput       `json:"os_template"`
+	Pool                    *ActionPoolShowOutput             `json:"pool"`
+	ProcessCount            int64                             `json:"process_count"`
+	RemindAfterDate         string                            `json:"remind_after_date"`
+	StartMenuTimeout        int64                             `json:"start_menu_timeout"`
+	Swap                    int64                             `json:"swap"`
+	Uptime                  int64                             `json:"uptime"`
+	UsedDiskspace           int64                             `json:"used_diskspace"`
+	UsedMemory              int64                             `json:"used_memory"`
+	UsedSwap                int64                             `json:"used_swap"`
+	User                    *ActionUserShowOutput             `json:"user"`
+	UserNamespaceMap        *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
 }
 
 // ActionVpsCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -845,11 +874,17 @@ func (inv *ActionVpsCreateInvocation) makeInputParams() map[string]interface{} {
 				ret["address_location"] = inv.Input.AddressLocation
 			}
 		}
+		if inv.IsParameterSelected("AllowAdminModifications") {
+			ret["allow_admin_modifications"] = inv.Input.AllowAdminModifications
+		}
 		if inv.IsParameterSelected("AutostartEnable") {
 			ret["autostart_enable"] = inv.Input.AutostartEnable
 		}
 		if inv.IsParameterSelected("AutostartPriority") {
 			ret["autostart_priority"] = inv.Input.AutostartPriority
+		}
+		if inv.IsParameterSelected("CgroupVersion") {
+			ret["cgroup_version"] = inv.Input.CgroupVersion
 		}
 		if inv.IsParameterSelected("Config") {
 			ret["config"] = inv.Input.Config

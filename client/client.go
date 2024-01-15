@@ -20,8 +20,12 @@ type Client struct {
 	ClusterResourcePackage *ResourceClusterResourcePackage
 	// Resource Dataset
 	Dataset *ResourceDataset
+	// Resource Dataset_expansion
+	DatasetExpansion *ResourceDatasetExpansion
 	// Resource Dataset_plan
 	DatasetPlan *ResourceDatasetPlan
+	// Resource Debug
+	Debug *ResourceDebug
 	// Resource Dns_resolver
 	DnsResolver *ResourceDnsResolver
 	// Resource Environment
@@ -34,20 +38,14 @@ type Client struct {
 	HelpBox *ResourceHelpBox
 	// Resource Host_ip_address
 	HostIpAddress *ResourceHostIpAddress
+	// Resource Incident_report
+	IncidentReport *ResourceIncidentReport
 	// Resource Incoming_payment
 	IncomingPayment *ResourceIncomingPayment
-	// Resource Integrity_check
-	IntegrityCheck *ResourceIntegrityCheck
-	// Resource Integrity_fact
-	IntegrityFact *ResourceIntegrityFact
-	// Resource Integrity_object
-	IntegrityObject *ResourceIntegrityObject
 	// Resource Ip_address
 	IpAddress *ResourceIpAddress
-	// Resource Ip_traffic
-	IpTraffic *ResourceIpTraffic
-	// Resource Ip_traffic_monitor
-	IpTrafficMonitor *ResourceIpTrafficMonitor
+	// Resource Ip_address_assignment
+	IpAddressAssignment *ResourceIpAddressAssignment
 	// Resource Language
 	Language *ResourceLanguage
 	// Resource Location
@@ -60,6 +58,8 @@ type Client struct {
 	MailRecipient *ResourceMailRecipient
 	// Resource Mail_template
 	MailTemplate *ResourceMailTemplate
+	// Resource Mailbox
+	Mailbox *ResourceMailbox
 	// Resource Migration_plan
 	MigrationPlan *ResourceMigrationPlan
 	// Resource Monitored_event
@@ -68,10 +68,16 @@ type Client struct {
 	Network *ResourceNetwork
 	// Resource Network_interface
 	NetworkInterface *ResourceNetworkInterface
+	// Resource Network_interface_accounting
+	NetworkInterfaceAccounting *ResourceNetworkInterfaceAccounting
+	// Resource Network_interface_monitor
+	NetworkInterfaceMonitor *ResourceNetworkInterfaceMonitor
 	// Resource News_log
 	NewsLog *ResourceNewsLog
 	// Resource Node
 	Node *ResourceNode
+	// Resource Oauth2_client
+	Oauth2Client *ResourceOauth2Client
 	// Resource Object_history
 	ObjectHistory *ResourceObjectHistory
 	// Resource Oom_report
@@ -86,8 +92,6 @@ type Client struct {
 	PaymentStats *ResourcePaymentStats
 	// Resource Pool
 	Pool *ResourcePool
-	// Resource Session_token
-	SessionToken *ResourceSessionToken
 	// Resource Snapshot_download
 	SnapshotDownload *ResourceSnapshotDownload
 	// Resource System_config
@@ -116,8 +120,6 @@ type Client struct {
 	UserSession *ResourceUserSession
 	// Resource Vps
 	Vps *ResourceVps
-	// Resource Vps_config
-	VpsConfig *ResourceVpsConfig
 	// Resource Vps_outage
 	VpsOutage *ResourceVpsOutage
 	// Resource Vps_outage_mount
@@ -134,32 +136,35 @@ func New(url string) *Client {
 	c.ClusterResource = NewResourceClusterResource(c)
 	c.ClusterResourcePackage = NewResourceClusterResourcePackage(c)
 	c.Dataset = NewResourceDataset(c)
+	c.DatasetExpansion = NewResourceDatasetExpansion(c)
 	c.DatasetPlan = NewResourceDatasetPlan(c)
+	c.Debug = NewResourceDebug(c)
 	c.DnsResolver = NewResourceDnsResolver(c)
 	c.Environment = NewResourceEnvironment(c)
 	c.Export = NewResourceExport(c)
 	c.ExportOutage = NewResourceExportOutage(c)
 	c.HelpBox = NewResourceHelpBox(c)
 	c.HostIpAddress = NewResourceHostIpAddress(c)
+	c.IncidentReport = NewResourceIncidentReport(c)
 	c.IncomingPayment = NewResourceIncomingPayment(c)
-	c.IntegrityCheck = NewResourceIntegrityCheck(c)
-	c.IntegrityFact = NewResourceIntegrityFact(c)
-	c.IntegrityObject = NewResourceIntegrityObject(c)
 	c.IpAddress = NewResourceIpAddress(c)
-	c.IpTraffic = NewResourceIpTraffic(c)
-	c.IpTrafficMonitor = NewResourceIpTrafficMonitor(c)
+	c.IpAddressAssignment = NewResourceIpAddressAssignment(c)
 	c.Language = NewResourceLanguage(c)
 	c.Location = NewResourceLocation(c)
 	c.LocationNetwork = NewResourceLocationNetwork(c)
 	c.MailLog = NewResourceMailLog(c)
 	c.MailRecipient = NewResourceMailRecipient(c)
 	c.MailTemplate = NewResourceMailTemplate(c)
+	c.Mailbox = NewResourceMailbox(c)
 	c.MigrationPlan = NewResourceMigrationPlan(c)
 	c.MonitoredEvent = NewResourceMonitoredEvent(c)
 	c.Network = NewResourceNetwork(c)
 	c.NetworkInterface = NewResourceNetworkInterface(c)
+	c.NetworkInterfaceAccounting = NewResourceNetworkInterfaceAccounting(c)
+	c.NetworkInterfaceMonitor = NewResourceNetworkInterfaceMonitor(c)
 	c.NewsLog = NewResourceNewsLog(c)
 	c.Node = NewResourceNode(c)
+	c.Oauth2Client = NewResourceOauth2Client(c)
 	c.ObjectHistory = NewResourceObjectHistory(c)
 	c.OomReport = NewResourceOomReport(c)
 	c.OsTemplate = NewResourceOsTemplate(c)
@@ -167,7 +172,6 @@ func New(url string) *Client {
 	c.OutageUpdate = NewResourceOutageUpdate(c)
 	c.PaymentStats = NewResourcePaymentStats(c)
 	c.Pool = NewResourcePool(c)
-	c.SessionToken = NewResourceSessionToken(c)
 	c.SnapshotDownload = NewResourceSnapshotDownload(c)
 	c.SystemConfig = NewResourceSystemConfig(c)
 	c.Transaction = NewResourceTransaction(c)
@@ -182,7 +186,6 @@ func New(url string) *Client {
 	c.UserRequest = NewResourceUserRequest(c)
 	c.UserSession = NewResourceUserSession(c)
 	c.Vps = NewResourceVps(c)
-	c.VpsConfig = NewResourceVpsConfig(c)
 	c.VpsOutage = NewResourceVpsOutage(c)
 	c.VpsOutageMount = NewResourceVpsOutageMount(c)
 

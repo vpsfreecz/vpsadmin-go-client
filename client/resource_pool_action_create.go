@@ -77,6 +77,7 @@ type ActionPoolCreateInput struct {
 	CheckedAt     string  `json:"checked_at"`
 	Compression   bool    `json:"compression"`
 	Filesystem    string  `json:"filesystem"`
+	IsOpen        bool    `json:"is_open"`
 	Label         string  `json:"label"`
 	MaxDatasets   int64   `json:"max_datasets"`
 	Node          int64   `json:"node"`
@@ -142,6 +143,18 @@ func (in *ActionPoolCreateInput) SetFilesystem(value string) *ActionPoolCreateIn
 	}
 
 	in._selectedParameters["Filesystem"] = nil
+	return in
+}
+
+// SetIsOpen sets parameter IsOpen to value and selects it for sending
+func (in *ActionPoolCreateInput) SetIsOpen(value bool) *ActionPoolCreateInput {
+	in.IsOpen = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["IsOpen"] = nil
 	return in
 }
 
@@ -378,29 +391,32 @@ type ActionPoolCreateRequest struct {
 
 // ActionPoolCreateOutput is a type for action output parameters
 type ActionPoolCreateOutput struct {
-	Atime         bool                  `json:"atime"`
-	Avail         int64                 `json:"avail"`
-	CheckedAt     string                `json:"checked_at"`
-	Compression   bool                  `json:"compression"`
-	Filesystem    string                `json:"filesystem"`
-	Id            int64                 `json:"id"`
-	Label         string                `json:"label"`
-	MaxDatasets   int64                 `json:"max_datasets"`
-	Name          string                `json:"name"`
-	Node          *ActionNodeShowOutput `json:"node"`
-	Quota         int64                 `json:"quota"`
-	Recordsize    int64                 `json:"recordsize"`
-	Referenced    int64                 `json:"referenced"`
-	Refquota      int64                 `json:"refquota"`
-	RefquotaCheck bool                  `json:"refquota_check"`
-	Relatime      bool                  `json:"relatime"`
-	Role          string                `json:"role"`
-	Scan          string                `json:"scan"`
-	ScanPercent   float64               `json:"scan_percent"`
-	Sharenfs      string                `json:"sharenfs"`
-	State         string                `json:"state"`
-	Sync          string                `json:"sync"`
-	Used          int64                 `json:"used"`
+	Atime            bool                  `json:"atime"`
+	Avail            int64                 `json:"avail"`
+	CheckedAt        string                `json:"checked_at"`
+	Compression      bool                  `json:"compression"`
+	Compressratio    float64               `json:"compressratio"`
+	Filesystem       string                `json:"filesystem"`
+	Id               int64                 `json:"id"`
+	IsOpen           bool                  `json:"is_open"`
+	Label            string                `json:"label"`
+	MaxDatasets      int64                 `json:"max_datasets"`
+	Name             string                `json:"name"`
+	Node             *ActionNodeShowOutput `json:"node"`
+	Quota            int64                 `json:"quota"`
+	Recordsize       int64                 `json:"recordsize"`
+	Refcompressratio float64               `json:"refcompressratio"`
+	Referenced       int64                 `json:"referenced"`
+	Refquota         int64                 `json:"refquota"`
+	RefquotaCheck    bool                  `json:"refquota_check"`
+	Relatime         bool                  `json:"relatime"`
+	Role             string                `json:"role"`
+	Scan             string                `json:"scan"`
+	ScanPercent      float64               `json:"scan_percent"`
+	Sharenfs         string                `json:"sharenfs"`
+	State            string                `json:"state"`
+	Sync             string                `json:"sync"`
+	Used             int64                 `json:"used"`
 }
 
 // ActionPoolCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -622,6 +638,9 @@ func (inv *ActionPoolCreateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("Filesystem") {
 			ret["filesystem"] = inv.Input.Filesystem
+		}
+		if inv.IsParameterSelected("IsOpen") {
+			ret["is_open"] = inv.Input.IsOpen
 		}
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label

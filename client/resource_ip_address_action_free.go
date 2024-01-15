@@ -82,10 +82,7 @@ type ActionIpAddressFreeRequest struct {
 type ActionIpAddressFreeOutput struct {
 	Addr               string                            `json:"addr"`
 	ChargedEnvironment *ActionEnvironmentShowOutput      `json:"charged_environment"`
-	ClassId            int64                             `json:"class_id"`
 	Id                 int64                             `json:"id"`
-	MaxRx              int64                             `json:"max_rx"`
-	MaxTx              int64                             `json:"max_tx"`
 	Network            *ActionNetworkShowOutput          `json:"network"`
 	NetworkInterface   *ActionNetworkInterfaceShowOutput `json:"network_interface"`
 	Prefix             int64                             `json:"prefix"`

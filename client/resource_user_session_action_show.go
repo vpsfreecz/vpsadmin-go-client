@@ -75,21 +75,25 @@ func (in *ActionUserSessionShowMetaGlobalInput) AnySelected() bool {
 
 // ActionUserSessionShowOutput is a type for action output parameters
 type ActionUserSessionShowOutput struct {
-	Admin           *ActionUserShowOutput         `json:"admin"`
-	ApiIpAddr       string                        `json:"api_ip_addr"`
-	ApiIpPtr        string                        `json:"api_ip_ptr"`
-	AuthType        string                        `json:"auth_type"`
-	ClientIpAddr    string                        `json:"client_ip_addr"`
-	ClientIpPtr     string                        `json:"client_ip_ptr"`
-	ClientVersion   string                        `json:"client_version"`
-	ClosedAt        string                        `json:"closed_at"`
-	CreatedAt       string                        `json:"created_at"`
-	Id              int64                         `json:"id"`
-	LastRequestAt   string                        `json:"last_request_at"`
-	SessionToken    *ActionSessionTokenShowOutput `json:"session_token"`
-	SessionTokenStr string                        `json:"session_token_str"`
-	User            *ActionUserShowOutput         `json:"user"`
-	UserAgent       string                        `json:"user_agent"`
+	Admin         *ActionUserShowOutput `json:"admin"`
+	ApiIpAddr     string                `json:"api_ip_addr"`
+	ApiIpPtr      string                `json:"api_ip_ptr"`
+	AuthType      string                `json:"auth_type"`
+	ClientIpAddr  string                `json:"client_ip_addr"`
+	ClientIpPtr   string                `json:"client_ip_ptr"`
+	ClientVersion string                `json:"client_version"`
+	ClosedAt      string                `json:"closed_at"`
+	CreatedAt     string                `json:"created_at"`
+	Id            int64                 `json:"id"`
+	Label         string                `json:"label"`
+	LastRequestAt string                `json:"last_request_at"`
+	RequestCount  int64                 `json:"request_count"`
+	Scope         string                `json:"scope"`
+	TokenFragment string                `json:"token_fragment"`
+	TokenInterval int64                 `json:"token_interval"`
+	TokenLifetime string                `json:"token_lifetime"`
+	User          *ActionUserShowOutput `json:"user"`
+	UserAgent     string                `json:"user_agent"`
 }
 
 // Type for action response, including envelope

@@ -75,7 +75,6 @@ func (in *ActionVpsSwapWithMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsSwapWithInput is a type for action input parameters
 type ActionVpsSwapWithInput struct {
-	Configs     bool  `json:"configs"`
 	Expirations bool  `json:"expirations"`
 	Hostname    bool  `json:"hostname"`
 	Resources   bool  `json:"resources"`
@@ -84,18 +83,6 @@ type ActionVpsSwapWithInput struct {
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
-}
-
-// SetConfigs sets parameter Configs to value and selects it for sending
-func (in *ActionVpsSwapWithInput) SetConfigs(value bool) *ActionVpsSwapWithInput {
-	in.Configs = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Configs"] = nil
-	return in
 }
 
 // SetExpirations sets parameter Expirations to value and selects it for sending
@@ -421,9 +408,6 @@ func (inv *ActionVpsSwapWithInvocation) makeInputParams() map[string]interface{}
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Configs") {
-			ret["configs"] = inv.Input.Configs
-		}
 		if inv.IsParameterSelected("Expirations") {
 			ret["expirations"] = inv.Input.Expirations
 		}

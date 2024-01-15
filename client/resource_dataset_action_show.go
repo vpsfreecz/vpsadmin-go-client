@@ -78,7 +78,9 @@ type ActionDatasetShowOutput struct {
 	Atime            bool                              `json:"atime"`
 	Avail            int64                             `json:"avail"`
 	Compression      bool                              `json:"compression"`
+	Compressratio    float64                           `json:"compressratio"`
 	CurrentHistoryId int64                             `json:"current_history_id"`
+	DatasetExpansion *ActionDatasetExpansionShowOutput `json:"dataset_expansion"`
 	Environment      *ActionEnvironmentShowOutput      `json:"environment"`
 	Export           *ActionExportShowOutput           `json:"export"`
 	Id               int64                             `json:"id"`
@@ -86,6 +88,7 @@ type ActionDatasetShowOutput struct {
 	Parent           *ActionDatasetShowOutput          `json:"parent"`
 	Quota            int64                             `json:"quota"`
 	Recordsize       int64                             `json:"recordsize"`
+	Refcompressratio float64                           `json:"refcompressratio"`
 	Referenced       int64                             `json:"referenced"`
 	Refquota         int64                             `json:"refquota"`
 	Relatime         bool                              `json:"relatime"`
@@ -93,7 +96,6 @@ type ActionDatasetShowOutput struct {
 	Sync             string                            `json:"sync"`
 	Used             int64                             `json:"used"`
 	User             *ActionUserShowOutput             `json:"user"`
-	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
 }
 
 // Type for action response, including envelope

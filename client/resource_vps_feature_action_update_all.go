@@ -75,29 +75,27 @@ func (in *ActionVpsFeatureUpdateAllMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsFeatureUpdateAllInput is a type for action input parameters
 type ActionVpsFeatureUpdateAllInput struct {
-	Bridge   bool `json:"bridge"`
-	Fuse     bool `json:"fuse"`
-	Iptables bool `json:"iptables"`
-	Kvm      bool `json:"kvm"`
-	Lxc      bool `json:"lxc"`
-	Nfs      bool `json:"nfs"`
-	Ppp      bool `json:"ppp"`
-	Tun      bool `json:"tun"`
+	ApparmorDirs bool `json:"apparmor_dirs"`
+	Fuse         bool `json:"fuse"`
+	Kvm          bool `json:"kvm"`
+	Lxc          bool `json:"lxc"`
+	Ppp          bool `json:"ppp"`
+	Tun          bool `json:"tun"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
 }
 
-// SetBridge sets parameter Bridge to value and selects it for sending
-func (in *ActionVpsFeatureUpdateAllInput) SetBridge(value bool) *ActionVpsFeatureUpdateAllInput {
-	in.Bridge = value
+// SetApparmorDirs sets parameter ApparmorDirs to value and selects it for sending
+func (in *ActionVpsFeatureUpdateAllInput) SetApparmorDirs(value bool) *ActionVpsFeatureUpdateAllInput {
+	in.ApparmorDirs = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Bridge"] = nil
+	in._selectedParameters["ApparmorDirs"] = nil
 	return in
 }
 
@@ -110,18 +108,6 @@ func (in *ActionVpsFeatureUpdateAllInput) SetFuse(value bool) *ActionVpsFeatureU
 	}
 
 	in._selectedParameters["Fuse"] = nil
-	return in
-}
-
-// SetIptables sets parameter Iptables to value and selects it for sending
-func (in *ActionVpsFeatureUpdateAllInput) SetIptables(value bool) *ActionVpsFeatureUpdateAllInput {
-	in.Iptables = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Iptables"] = nil
 	return in
 }
 
@@ -146,18 +132,6 @@ func (in *ActionVpsFeatureUpdateAllInput) SetLxc(value bool) *ActionVpsFeatureUp
 	}
 
 	in._selectedParameters["Lxc"] = nil
-	return in
-}
-
-// SetNfs sets parameter Nfs to value and selects it for sending
-func (in *ActionVpsFeatureUpdateAllInput) SetNfs(value bool) *ActionVpsFeatureUpdateAllInput {
-	in.Nfs = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Nfs"] = nil
 	return in
 }
 
@@ -441,23 +415,17 @@ func (inv *ActionVpsFeatureUpdateAllInvocation) makeInputParams() map[string]int
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Bridge") {
-			ret["bridge"] = inv.Input.Bridge
+		if inv.IsParameterSelected("ApparmorDirs") {
+			ret["apparmor_dirs"] = inv.Input.ApparmorDirs
 		}
 		if inv.IsParameterSelected("Fuse") {
 			ret["fuse"] = inv.Input.Fuse
-		}
-		if inv.IsParameterSelected("Iptables") {
-			ret["iptables"] = inv.Input.Iptables
 		}
 		if inv.IsParameterSelected("Kvm") {
 			ret["kvm"] = inv.Input.Kvm
 		}
 		if inv.IsParameterSelected("Lxc") {
 			ret["lxc"] = inv.Input.Lxc
-		}
-		if inv.IsParameterSelected("Nfs") {
-			ret["nfs"] = inv.Input.Nfs
 		}
 		if inv.IsParameterSelected("Ppp") {
 			ret["ppp"] = inv.Input.Ppp

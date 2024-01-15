@@ -5,8 +5,6 @@ type ResourceVps struct {
 	// Pointer to client
 	Client *Client
 
-	// Resource Vps.Config
-	Config *ResourceVpsConfig
 	// Resource Vps.Console_token
 	ConsoleToken *ResourceVpsConsoleToken
 	// Resource Vps.Feature
@@ -15,6 +13,8 @@ type ResourceVps struct {
 	MaintenanceWindow *ResourceVpsMaintenanceWindow
 	// Resource Vps.Mount
 	Mount *ResourceVpsMount
+	// Resource Vps.Ssh_host_key
+	SshHostKey *ResourceVpsSshHostKey
 	// Resource Vps.State_log
 	StateLog *ResourceVpsStateLog
 	// Resource Vps.Status
@@ -84,11 +84,11 @@ func NewResourceVps(client *Client) *ResourceVps {
 
 	return &ResourceVps{
 		Client:            client,
-		Config:            NewResourceVpsConfig(client),
 		ConsoleToken:      NewResourceVpsConsoleToken(client),
 		Feature:           NewResourceVpsFeature(client),
 		MaintenanceWindow: NewResourceVpsMaintenanceWindow(client),
 		Mount:             NewResourceVpsMount(client),
+		SshHostKey:        NewResourceVpsSshHostKey(client),
 		StateLog:          NewResourceVpsStateLog(client),
 		Status:            NewResourceVpsStatus(client),
 		Boot:              actionBoot,

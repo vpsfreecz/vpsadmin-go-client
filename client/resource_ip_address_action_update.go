@@ -76,8 +76,6 @@ func (in *ActionIpAddressUpdateMetaGlobalInput) AnySelected() bool {
 // ActionIpAddressUpdateInput is a type for action input parameters
 type ActionIpAddressUpdateInput struct {
 	Environment int64 `json:"environment"`
-	MaxRx       int64 `json:"max_rx"`
-	MaxTx       int64 `json:"max_tx"`
 	User        int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -113,30 +111,6 @@ func (in *ActionIpAddressUpdateInput) SetEnvironmentNil(set bool) *ActionIpAddre
 	} else {
 		delete(in._nilParameters, "Environment")
 	}
-	return in
-}
-
-// SetMaxRx sets parameter MaxRx to value and selects it for sending
-func (in *ActionIpAddressUpdateInput) SetMaxRx(value int64) *ActionIpAddressUpdateInput {
-	in.MaxRx = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["MaxRx"] = nil
-	return in
-}
-
-// SetMaxTx sets parameter MaxTx to value and selects it for sending
-func (in *ActionIpAddressUpdateInput) SetMaxTx(value int64) *ActionIpAddressUpdateInput {
-	in.MaxTx = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["MaxTx"] = nil
 	return in
 }
 
@@ -219,10 +193,7 @@ type ActionIpAddressUpdateRequest struct {
 type ActionIpAddressUpdateOutput struct {
 	Addr               string                            `json:"addr"`
 	ChargedEnvironment *ActionEnvironmentShowOutput      `json:"charged_environment"`
-	ClassId            int64                             `json:"class_id"`
 	Id                 int64                             `json:"id"`
-	MaxRx              int64                             `json:"max_rx"`
-	MaxTx              int64                             `json:"max_tx"`
 	Network            *ActionNetworkShowOutput          `json:"network"`
 	NetworkInterface   *ActionNetworkInterfaceShowOutput `json:"network_interface"`
 	Prefix             int64                             `json:"prefix"`
@@ -456,12 +427,6 @@ func (inv *ActionIpAddressUpdateInvocation) makeInputParams() map[string]interfa
 			} else {
 				ret["environment"] = inv.Input.Environment
 			}
-		}
-		if inv.IsParameterSelected("MaxRx") {
-			ret["max_rx"] = inv.Input.MaxRx
-		}
-		if inv.IsParameterSelected("MaxTx") {
-			ret["max_tx"] = inv.Input.MaxTx
 		}
 		if inv.IsParameterSelected("User") {
 			if inv.IsParameterNil("User") {
