@@ -98,7 +98,7 @@ type ActionOutageIndexInput struct {
 	Offset      int64  `json:"offset"`
 	Order       string `json:"order"`
 	Planned     bool   `json:"planned"`
-	Recent      bool   `json:"recent"`
+	RecentSince string `json:"recent_since"`
 	Since       string `json:"since"`
 	State       string `json:"state"`
 	Type        string `json:"type"`
@@ -349,15 +349,15 @@ func (in *ActionOutageIndexInput) SetPlanned(value bool) *ActionOutageIndexInput
 	return in
 }
 
-// SetRecent sets parameter Recent to value and selects it for sending
-func (in *ActionOutageIndexInput) SetRecent(value bool) *ActionOutageIndexInput {
-	in.Recent = value
+// SetRecentSince sets parameter RecentSince to value and selects it for sending
+func (in *ActionOutageIndexInput) SetRecentSince(value string) *ActionOutageIndexInput {
+	in.RecentSince = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Recent"] = nil
+	in._selectedParameters["RecentSince"] = nil
 	return in
 }
 
@@ -671,8 +671,8 @@ func (inv *ActionOutageIndexInvocation) convertInputToQueryParams(ret map[string
 		if inv.IsParameterSelected("Planned") {
 			ret["outage[planned]"] = convertBoolToString(inv.Input.Planned)
 		}
-		if inv.IsParameterSelected("Recent") {
-			ret["outage[recent]"] = convertBoolToString(inv.Input.Recent)
+		if inv.IsParameterSelected("RecentSince") {
+			ret["outage[recent_since]"] = inv.Input.RecentSince
 		}
 		if inv.IsParameterSelected("Since") {
 			ret["outage[since]"] = inv.Input.Since
