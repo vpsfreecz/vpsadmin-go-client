@@ -87,17 +87,18 @@ func (in *ActionOutageIndexMetaGlobalInput) AnySelected() bool {
 // ActionOutageIndexInput is a type for action input parameters
 type ActionOutageIndexInput struct {
 	Affected    bool   `json:"affected"`
+	Component   int64  `json:"component"`
 	EntityId    int64  `json:"entity_id"`
 	EntityName  string `json:"entity_name"`
 	Environment int64  `json:"environment"`
 	Export      int64  `json:"export"`
 	HandledBy   int64  `json:"handled_by"`
+	Impact      string `json:"impact"`
 	Limit       int64  `json:"limit"`
 	Location    int64  `json:"location"`
 	Node        int64  `json:"node"`
 	Offset      int64  `json:"offset"`
 	Order       string `json:"order"`
-	Planned     bool   `json:"planned"`
 	RecentSince string `json:"recent_since"`
 	Since       string `json:"since"`
 	State       string `json:"state"`
@@ -119,6 +120,37 @@ func (in *ActionOutageIndexInput) SetAffected(value bool) *ActionOutageIndexInpu
 	}
 
 	in._selectedParameters["Affected"] = nil
+	return in
+}
+
+// SetComponent sets parameter Component to value and selects it for sending
+func (in *ActionOutageIndexInput) SetComponent(value int64) *ActionOutageIndexInput {
+	in.Component = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetComponentNil(false)
+	in._selectedParameters["Component"] = nil
+	return in
+}
+
+// SetComponentNil sets parameter Component to nil and selects it for sending
+func (in *ActionOutageIndexInput) SetComponentNil(set bool) *ActionOutageIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Component"] = nil
+		in.SelectParameters("Component")
+	} else {
+		delete(in._nilParameters, "Component")
+	}
 	return in
 }
 
@@ -239,6 +271,18 @@ func (in *ActionOutageIndexInput) SetHandledByNil(set bool) *ActionOutageIndexIn
 	return in
 }
 
+// SetImpact sets parameter Impact to value and selects it for sending
+func (in *ActionOutageIndexInput) SetImpact(value string) *ActionOutageIndexInput {
+	in.Impact = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Impact"] = nil
+	return in
+}
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionOutageIndexInput) SetLimit(value int64) *ActionOutageIndexInput {
 	in.Limit = value
@@ -334,18 +378,6 @@ func (in *ActionOutageIndexInput) SetOrder(value string) *ActionOutageIndexInput
 	}
 
 	in._selectedParameters["Order"] = nil
-	return in
-}
-
-// SetPlanned sets parameter Planned to value and selects it for sending
-func (in *ActionOutageIndexInput) SetPlanned(value bool) *ActionOutageIndexInput {
-	in.Planned = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Planned"] = nil
 	return in
 }
 
@@ -504,6 +536,7 @@ type ActionOutageIndexOutput struct {
 	AffectedExportCount      int64  `json:"affected_export_count"`
 	AffectedIndirectVpsCount int64  `json:"affected_indirect_vps_count"`
 	AffectedUserCount        int64  `json:"affected_user_count"`
+	AutoResolve              bool   `json:"auto_resolve"`
 	BeginsAt                 string `json:"begins_at"`
 	CsDescription            string `json:"cs_description"`
 	CsSummary                string `json:"cs_summary"`
@@ -512,7 +545,7 @@ type ActionOutageIndexOutput struct {
 	EnSummary                string `json:"en_summary"`
 	FinishedAt               string `json:"finished_at"`
 	Id                       int64  `json:"id"`
-	Planned                  bool   `json:"planned"`
+	Impact                   string `json:"impact"`
 	State                    string `json:"state"`
 	Type                     string `json:"type"`
 }
@@ -638,6 +671,9 @@ func (inv *ActionOutageIndexInvocation) convertInputToQueryParams(ret map[string
 		if inv.IsParameterSelected("Affected") {
 			ret["outage[affected]"] = convertBoolToString(inv.Input.Affected)
 		}
+		if inv.IsParameterSelected("Component") {
+			ret["outage[component]"] = convertInt64ToString(inv.Input.Component)
+		}
 		if inv.IsParameterSelected("EntityId") {
 			ret["outage[entity_id]"] = convertInt64ToString(inv.Input.EntityId)
 		}
@@ -653,6 +689,9 @@ func (inv *ActionOutageIndexInvocation) convertInputToQueryParams(ret map[string
 		if inv.IsParameterSelected("HandledBy") {
 			ret["outage[handled_by]"] = convertInt64ToString(inv.Input.HandledBy)
 		}
+		if inv.IsParameterSelected("Impact") {
+			ret["outage[impact]"] = inv.Input.Impact
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["outage[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
@@ -667,9 +706,6 @@ func (inv *ActionOutageIndexInvocation) convertInputToQueryParams(ret map[string
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["outage[order]"] = inv.Input.Order
-		}
-		if inv.IsParameterSelected("Planned") {
-			ret["outage[planned]"] = convertBoolToString(inv.Input.Planned)
 		}
 		if inv.IsParameterSelected("RecentSince") {
 			ret["outage[recent_since]"] = inv.Input.RecentSince

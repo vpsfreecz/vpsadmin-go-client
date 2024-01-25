@@ -18,6 +18,8 @@ type Client struct {
 	ClusterResource *ResourceClusterResource
 	// Resource Cluster_resource_package
 	ClusterResourcePackage *ResourceClusterResourcePackage
+	// Resource Component
+	Component *ResourceComponent
 	// Resource Dataset
 	Dataset *ResourceDataset
 	// Resource Dataset_expansion
@@ -122,8 +124,6 @@ type Client struct {
 	Vps *ResourceVps
 	// Resource Vps_outage
 	VpsOutage *ResourceVpsOutage
-	// Resource Vps_outage_mount
-	VpsOutageMount *ResourceVpsOutageMount
 }
 
 // Create a new client for API at url
@@ -135,6 +135,7 @@ func New(url string) *Client {
 	c.Cluster = NewResourceCluster(c)
 	c.ClusterResource = NewResourceClusterResource(c)
 	c.ClusterResourcePackage = NewResourceClusterResourcePackage(c)
+	c.Component = NewResourceComponent(c)
 	c.Dataset = NewResourceDataset(c)
 	c.DatasetExpansion = NewResourceDatasetExpansion(c)
 	c.DatasetPlan = NewResourceDatasetPlan(c)
@@ -187,7 +188,6 @@ func New(url string) *Client {
 	c.UserSession = NewResourceUserSession(c)
 	c.Vps = NewResourceVps(c)
 	c.VpsOutage = NewResourceVpsOutage(c)
-	c.VpsOutageMount = NewResourceVpsOutageMount(c)
 
 	return c
 }

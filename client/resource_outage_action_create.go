@@ -73,6 +73,7 @@ func (in *ActionOutageCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageCreateInput is a type for action input parameters
 type ActionOutageCreateInput struct {
+	AutoResolve   bool   `json:"auto_resolve"`
 	BeginsAt      string `json:"begins_at"`
 	CsDescription string `json:"cs_description"`
 	CsSummary     string `json:"cs_summary"`
@@ -80,12 +81,24 @@ type ActionOutageCreateInput struct {
 	EnDescription string `json:"en_description"`
 	EnSummary     string `json:"en_summary"`
 	FinishedAt    string `json:"finished_at"`
-	Planned       bool   `json:"planned"`
+	Impact        string `json:"impact"`
 	Type          string `json:"type"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetAutoResolve sets parameter AutoResolve to value and selects it for sending
+func (in *ActionOutageCreateInput) SetAutoResolve(value bool) *ActionOutageCreateInput {
+	in.AutoResolve = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AutoResolve"] = nil
+	return in
 }
 
 // SetBeginsAt sets parameter BeginsAt to value and selects it for sending
@@ -172,15 +185,15 @@ func (in *ActionOutageCreateInput) SetFinishedAt(value string) *ActionOutageCrea
 	return in
 }
 
-// SetPlanned sets parameter Planned to value and selects it for sending
-func (in *ActionOutageCreateInput) SetPlanned(value bool) *ActionOutageCreateInput {
-	in.Planned = value
+// SetImpact sets parameter Impact to value and selects it for sending
+func (in *ActionOutageCreateInput) SetImpact(value string) *ActionOutageCreateInput {
+	in.Impact = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Planned"] = nil
+	in._selectedParameters["Impact"] = nil
 	return in
 }
 
@@ -247,6 +260,7 @@ type ActionOutageCreateOutput struct {
 	AffectedExportCount      int64  `json:"affected_export_count"`
 	AffectedIndirectVpsCount int64  `json:"affected_indirect_vps_count"`
 	AffectedUserCount        int64  `json:"affected_user_count"`
+	AutoResolve              bool   `json:"auto_resolve"`
 	BeginsAt                 string `json:"begins_at"`
 	CsDescription            string `json:"cs_description"`
 	CsSummary                string `json:"cs_summary"`
@@ -255,7 +269,7 @@ type ActionOutageCreateOutput struct {
 	EnSummary                string `json:"en_summary"`
 	FinishedAt               string `json:"finished_at"`
 	Id                       int64  `json:"id"`
-	Planned                  bool   `json:"planned"`
+	Impact                   string `json:"impact"`
 	State                    string `json:"state"`
 	Type                     string `json:"type"`
 }
@@ -385,6 +399,9 @@ func (inv *ActionOutageCreateInvocation) makeInputParams() map[string]interface{
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("AutoResolve") {
+			ret["auto_resolve"] = inv.Input.AutoResolve
+		}
 		if inv.IsParameterSelected("BeginsAt") {
 			ret["begins_at"] = inv.Input.BeginsAt
 		}
@@ -406,8 +423,8 @@ func (inv *ActionOutageCreateInvocation) makeInputParams() map[string]interface{
 		if inv.IsParameterSelected("FinishedAt") {
 			ret["finished_at"] = inv.Input.FinishedAt
 		}
-		if inv.IsParameterSelected("Planned") {
-			ret["planned"] = inv.Input.Planned
+		if inv.IsParameterSelected("Impact") {
+			ret["impact"] = inv.Input.Impact
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["type"] = inv.Input.Type

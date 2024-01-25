@@ -75,6 +75,7 @@ func (in *ActionOutageUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageUpdateInput is a type for action input parameters
 type ActionOutageUpdateInput struct {
+	AutoResolve   bool   `json:"auto_resolve"`
 	BeginsAt      string `json:"begins_at"`
 	CsDescription string `json:"cs_description"`
 	CsSummary     string `json:"cs_summary"`
@@ -82,13 +83,24 @@ type ActionOutageUpdateInput struct {
 	EnDescription string `json:"en_description"`
 	EnSummary     string `json:"en_summary"`
 	FinishedAt    string `json:"finished_at"`
-	SendMail      bool   `json:"send_mail"`
-	State         string `json:"state"`
+	Impact        string `json:"impact"`
 	Type          string `json:"type"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetAutoResolve sets parameter AutoResolve to value and selects it for sending
+func (in *ActionOutageUpdateInput) SetAutoResolve(value bool) *ActionOutageUpdateInput {
+	in.AutoResolve = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AutoResolve"] = nil
+	return in
 }
 
 // SetBeginsAt sets parameter BeginsAt to value and selects it for sending
@@ -175,27 +187,15 @@ func (in *ActionOutageUpdateInput) SetFinishedAt(value string) *ActionOutageUpda
 	return in
 }
 
-// SetSendMail sets parameter SendMail to value and selects it for sending
-func (in *ActionOutageUpdateInput) SetSendMail(value bool) *ActionOutageUpdateInput {
-	in.SendMail = value
+// SetImpact sets parameter Impact to value and selects it for sending
+func (in *ActionOutageUpdateInput) SetImpact(value string) *ActionOutageUpdateInput {
+	in.Impact = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["SendMail"] = nil
-	return in
-}
-
-// SetState sets parameter State to value and selects it for sending
-func (in *ActionOutageUpdateInput) SetState(value string) *ActionOutageUpdateInput {
-	in.State = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["State"] = nil
+	in._selectedParameters["Impact"] = nil
 	return in
 }
 
@@ -262,6 +262,7 @@ type ActionOutageUpdateOutput struct {
 	AffectedExportCount      int64  `json:"affected_export_count"`
 	AffectedIndirectVpsCount int64  `json:"affected_indirect_vps_count"`
 	AffectedUserCount        int64  `json:"affected_user_count"`
+	AutoResolve              bool   `json:"auto_resolve"`
 	BeginsAt                 string `json:"begins_at"`
 	CsDescription            string `json:"cs_description"`
 	CsSummary                string `json:"cs_summary"`
@@ -270,14 +271,9 @@ type ActionOutageUpdateOutput struct {
 	EnSummary                string `json:"en_summary"`
 	FinishedAt               string `json:"finished_at"`
 	Id                       int64  `json:"id"`
-	Planned                  bool   `json:"planned"`
+	Impact                   string `json:"impact"`
 	State                    string `json:"state"`
 	Type                     string `json:"type"`
-}
-
-// ActionOutageUpdateMetaGlobalOutput is a type for global output metadata parameters
-type ActionOutageUpdateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
 }
 
 // Type for action response, including envelope
@@ -287,8 +283,6 @@ type ActionOutageUpdateResponse struct {
 	// Action output encapsulated within a namespace
 	Response *struct {
 		Outage *ActionOutageUpdateOutput `json:"outage"`
-		// Global output metadata
-		Meta *ActionOutageUpdateMetaGlobalOutput `json:"_meta"`
 	}
 
 	// Action output without the namespace
@@ -407,82 +401,6 @@ func (inv *ActionOutageUpdateInvocation) callAsBody() (*ActionOutageUpdateRespon
 	return resp, err
 }
 
-// IsBlocking checks whether the current invocation resulted in a blocking operation
-func (resp *ActionOutageUpdateResponse) IsBlocking() bool {
-	return resp.Response.Meta != nil && resp.Response.Meta.ActionStateId > 0
-}
-
-// OperationStatus queries the current state of the blocking operation
-func (resp *ActionOutageUpdateResponse) OperationStatus() (*ActionActionStateShowResponse, error) {
-	req := resp.Action.Client.ActionState.Show.Prepare()
-	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-	return req.Call()
-}
-
-// WaitForOperation waits for a blocking operation to finish
-func (resp *ActionOutageUpdateResponse) WaitForOperation(timeout float64) (*ActionActionStatePollResponse, error) {
-	req := resp.Action.Client.ActionState.Poll.Prepare()
-	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-
-	input := req.NewInput()
-	input.SetTimeout(timeout)
-
-	return req.Call()
-}
-
-// WatchOperation waits for a blocking operation to finish and calls a callback
-// function with progress updates
-func (resp *ActionOutageUpdateResponse) WatchOperation(timeout float64, updateIn float64, callback OperationProgressCallback) (*ActionActionStatePollResponse, error) {
-	req := resp.Action.Client.ActionState.Poll.Prepare()
-	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-
-	input := req.NewInput()
-	input.SetTimeout(timeout)
-	input.SetUpdateIn(updateIn)
-
-	pollResp, err := req.Call()
-
-	if err != nil {
-		return pollResp, err
-	} else if pollResp.Output.Finished {
-		return pollResp, nil
-	}
-
-	if callback(pollResp.Output) == StopWatching {
-		return pollResp, nil
-	}
-
-	for {
-		req = resp.Action.Client.ActionState.Poll.Prepare()
-		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-		req.SetInput(&ActionActionStatePollInput{
-			Timeout:  timeout,
-			UpdateIn: updateIn,
-			Status:   pollResp.Output.Status,
-			Current:  pollResp.Output.Current,
-			Total:    pollResp.Output.Total,
-		})
-		pollResp, err = req.Call()
-
-		if err != nil {
-			return pollResp, err
-		} else if pollResp.Output.Finished {
-			return pollResp, nil
-		}
-
-		if callback(pollResp.Output) == StopWatching {
-			return pollResp, nil
-		}
-	}
-}
-
-// CancelOperation cancels the current blocking operation
-func (resp *ActionOutageUpdateResponse) CancelOperation() (*ActionActionStateCancelResponse, error) {
-	req := resp.Action.Client.ActionState.Cancel.Prepare()
-	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
-	return req.Call()
-}
-
 func (inv *ActionOutageUpdateInvocation) makeAllInputParams() *ActionOutageUpdateRequest {
 	return &ActionOutageUpdateRequest{
 		Outage: inv.makeInputParams(),
@@ -494,6 +412,9 @@ func (inv *ActionOutageUpdateInvocation) makeInputParams() map[string]interface{
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("AutoResolve") {
+			ret["auto_resolve"] = inv.Input.AutoResolve
+		}
 		if inv.IsParameterSelected("BeginsAt") {
 			ret["begins_at"] = inv.Input.BeginsAt
 		}
@@ -515,11 +436,8 @@ func (inv *ActionOutageUpdateInvocation) makeInputParams() map[string]interface{
 		if inv.IsParameterSelected("FinishedAt") {
 			ret["finished_at"] = inv.Input.FinishedAt
 		}
-		if inv.IsParameterSelected("SendMail") {
-			ret["send_mail"] = inv.Input.SendMail
-		}
-		if inv.IsParameterSelected("State") {
-			ret["state"] = inv.Input.State
+		if inv.IsParameterSelected("Impact") {
+			ret["impact"] = inv.Input.Impact
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["type"] = inv.Input.Type

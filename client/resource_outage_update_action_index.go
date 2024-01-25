@@ -244,6 +244,7 @@ type ActionOutageUpdateIndexOutput struct {
 	EnSummary     string                  `json:"en_summary"`
 	FinishedAt    string                  `json:"finished_at"`
 	Id            int64                   `json:"id"`
+	Impact        string                  `json:"impact"`
 	Outage        *ActionOutageShowOutput `json:"outage"`
 	ReportedBy    *ActionUserShowOutput   `json:"reported_by"`
 	ReporterName  string                  `json:"reporter_name"`

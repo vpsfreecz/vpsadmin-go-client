@@ -80,6 +80,7 @@ type ActionOutageShowOutput struct {
 	AffectedExportCount      int64  `json:"affected_export_count"`
 	AffectedIndirectVpsCount int64  `json:"affected_indirect_vps_count"`
 	AffectedUserCount        int64  `json:"affected_user_count"`
+	AutoResolve              bool   `json:"auto_resolve"`
 	BeginsAt                 string `json:"begins_at"`
 	CsDescription            string `json:"cs_description"`
 	CsSummary                string `json:"cs_summary"`
@@ -88,7 +89,7 @@ type ActionOutageShowOutput struct {
 	EnSummary                string `json:"en_summary"`
 	FinishedAt               string `json:"finished_at"`
 	Id                       int64  `json:"id"`
-	Planned                  bool   `json:"planned"`
+	Impact                   string `json:"impact"`
 	State                    string `json:"state"`
 	Type                     string `json:"type"`
 }
