@@ -88,12 +88,24 @@ func (in *ActionUserPublicKeyIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserPublicKeyIndexInput is a type for action input parameters
 type ActionUserPublicKeyIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionUserPublicKeyIndexInput) SetFromId(value int64) *ActionUserPublicKeyIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -105,18 +117,6 @@ func (in *ActionUserPublicKeyIndexInput) SetLimit(value int64) *ActionUserPublic
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserPublicKeyIndexInput) SetOffset(value int64) *ActionUserPublicKeyIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -187,7 +187,7 @@ type ActionUserPublicKeyIndexResponse struct {
 func (action *ActionUserPublicKeyIndex) Prepare() *ActionUserPublicKeyIndexInvocation {
 	return &ActionUserPublicKeyIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/users/{user_id}/public_keys",
+		Path:   "/v7.0/users/{user_id}/public_keys",
 	}
 }
 
@@ -299,11 +299,11 @@ func (inv *ActionUserPublicKeyIndexInvocation) callAsQuery() (*ActionUserPublicK
 
 func (inv *ActionUserPublicKeyIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["public_key[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["public_key[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["public_key[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

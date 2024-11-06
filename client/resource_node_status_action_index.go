@@ -89,8 +89,8 @@ func (in *ActionNodeStatusIndexMetaGlobalInput) AnySelected() bool {
 // ActionNodeStatusIndexInput is a type for action input parameters
 type ActionNodeStatusIndexInput struct {
 	From   string `json:"from"`
+	FromId int64  `json:"from_id"`
 	Limit  int64  `json:"limit"`
-	Offset int64  `json:"offset"`
 	To     string `json:"to"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -110,6 +110,18 @@ func (in *ActionNodeStatusIndexInput) SetFrom(value string) *ActionNodeStatusInd
 	return in
 }
 
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionNodeStatusIndexInput) SetFromId(value int64) *ActionNodeStatusIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
+}
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionNodeStatusIndexInput) SetLimit(value int64) *ActionNodeStatusIndexInput {
 	in.Limit = value
@@ -119,18 +131,6 @@ func (in *ActionNodeStatusIndexInput) SetLimit(value int64) *ActionNodeStatusInd
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionNodeStatusIndexInput) SetOffset(value int64) *ActionNodeStatusIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -202,7 +202,9 @@ type ActionNodeStatusIndexOutput struct {
 	CreatedAt     string  `json:"created_at"`
 	Id            int64   `json:"id"`
 	Kernel        string  `json:"kernel"`
-	Loadavg       float64 `json:"loadavg"`
+	Loadavg1      float64 `json:"loadavg1"`
+	Loadavg15     float64 `json:"loadavg15"`
+	Loadavg5      float64 `json:"loadavg5"`
 	ProcessCount  int64   `json:"process_count"`
 	TotalMemory   int64   `json:"total_memory"`
 	TotalSwap     int64   `json:"total_swap"`
@@ -229,7 +231,7 @@ type ActionNodeStatusIndexResponse struct {
 func (action *ActionNodeStatusIndex) Prepare() *ActionNodeStatusIndexInvocation {
 	return &ActionNodeStatusIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/nodes/{node_id}/statuses",
+		Path:   "/v7.0/nodes/{node_id}/statuses",
 	}
 }
 
@@ -344,11 +346,11 @@ func (inv *ActionNodeStatusIndexInvocation) convertInputToQueryParams(ret map[st
 		if inv.IsParameterSelected("From") {
 			ret["status[from]"] = inv.Input.From
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["status[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["status[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["status[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("To") {
 			ret["status[to]"] = inv.Input.To

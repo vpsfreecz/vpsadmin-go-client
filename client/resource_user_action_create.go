@@ -73,25 +73,29 @@ func (in *ActionUserCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserCreateInput is a type for action input parameters
 type ActionUserCreateInput struct {
-	Address                string `json:"address"`
-	Email                  string `json:"email"`
-	EnableSingleSignOn     bool   `json:"enable_single_sign_on"`
-	Environment            int64  `json:"environment"`
-	FullName               string `json:"full_name"`
-	Info                   string `json:"info"`
-	Language               int64  `json:"language"`
-	Level                  int64  `json:"level"`
-	Location               int64  `json:"location"`
-	Lockout                bool   `json:"lockout"`
-	Login                  string `json:"login"`
-	MailerEnabled          bool   `json:"mailer_enabled"`
-	Node                   int64  `json:"node"`
-	OsTemplate             int64  `json:"os_template"`
-	Password               string `json:"password"`
-	PasswordReset          bool   `json:"password_reset"`
-	PreferredLogoutAll     bool   `json:"preferred_logout_all"`
-	PreferredSessionLength int64  `json:"preferred_session_length"`
-	Vps                    bool   `json:"vps"`
+	Address                    string `json:"address"`
+	Email                      string `json:"email"`
+	EnableBasicAuth            bool   `json:"enable_basic_auth"`
+	EnableNewLoginNotification bool   `json:"enable_new_login_notification"`
+	EnableOauth2Auth           bool   `json:"enable_oauth2_auth"`
+	EnableSingleSignOn         bool   `json:"enable_single_sign_on"`
+	EnableTokenAuth            bool   `json:"enable_token_auth"`
+	Environment                int64  `json:"environment"`
+	FullName                   string `json:"full_name"`
+	Info                       string `json:"info"`
+	Language                   int64  `json:"language"`
+	Level                      int64  `json:"level"`
+	Location                   int64  `json:"location"`
+	Lockout                    bool   `json:"lockout"`
+	Login                      string `json:"login"`
+	MailerEnabled              bool   `json:"mailer_enabled"`
+	Node                       int64  `json:"node"`
+	OsTemplate                 int64  `json:"os_template"`
+	Password                   string `json:"password"`
+	PasswordReset              bool   `json:"password_reset"`
+	PreferredLogoutAll         bool   `json:"preferred_logout_all"`
+	PreferredSessionLength     int64  `json:"preferred_session_length"`
+	Vps                        bool   `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -122,6 +126,42 @@ func (in *ActionUserCreateInput) SetEmail(value string) *ActionUserCreateInput {
 	return in
 }
 
+// SetEnableBasicAuth sets parameter EnableBasicAuth to value and selects it for sending
+func (in *ActionUserCreateInput) SetEnableBasicAuth(value bool) *ActionUserCreateInput {
+	in.EnableBasicAuth = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnableBasicAuth"] = nil
+	return in
+}
+
+// SetEnableNewLoginNotification sets parameter EnableNewLoginNotification to value and selects it for sending
+func (in *ActionUserCreateInput) SetEnableNewLoginNotification(value bool) *ActionUserCreateInput {
+	in.EnableNewLoginNotification = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnableNewLoginNotification"] = nil
+	return in
+}
+
+// SetEnableOauth2Auth sets parameter EnableOauth2Auth to value and selects it for sending
+func (in *ActionUserCreateInput) SetEnableOauth2Auth(value bool) *ActionUserCreateInput {
+	in.EnableOauth2Auth = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnableOauth2Auth"] = nil
+	return in
+}
+
 // SetEnableSingleSignOn sets parameter EnableSingleSignOn to value and selects it for sending
 func (in *ActionUserCreateInput) SetEnableSingleSignOn(value bool) *ActionUserCreateInput {
 	in.EnableSingleSignOn = value
@@ -131,6 +171,18 @@ func (in *ActionUserCreateInput) SetEnableSingleSignOn(value bool) *ActionUserCr
 	}
 
 	in._selectedParameters["EnableSingleSignOn"] = nil
+	return in
+}
+
+// SetEnableTokenAuth sets parameter EnableTokenAuth to value and selects it for sending
+func (in *ActionUserCreateInput) SetEnableTokenAuth(value bool) *ActionUserCreateInput {
+	in.EnableTokenAuth = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnableTokenAuth"] = nil
 	return in
 }
 
@@ -467,26 +519,30 @@ type ActionUserCreateRequest struct {
 
 // ActionUserCreateOutput is a type for action output parameters
 type ActionUserCreateOutput struct {
-	Address                string                    `json:"address"`
-	CreatedAt              string                    `json:"created_at"`
-	DokuwikiGroups         string                    `json:"dokuwiki_groups"`
-	Email                  string                    `json:"email"`
-	EnableSingleSignOn     bool                      `json:"enable_single_sign_on"`
-	ExpirationDate         string                    `json:"expiration_date"`
-	FullName               string                    `json:"full_name"`
-	Id                     int64                     `json:"id"`
-	Info                   string                    `json:"info"`
-	Language               *ActionLanguageShowOutput `json:"language"`
-	LastActivityAt         string                    `json:"last_activity_at"`
-	Level                  int64                     `json:"level"`
-	Lockout                bool                      `json:"lockout"`
-	Login                  string                    `json:"login"`
-	MailerEnabled          bool                      `json:"mailer_enabled"`
-	ObjectState            string                    `json:"object_state"`
-	PasswordReset          bool                      `json:"password_reset"`
-	PreferredLogoutAll     bool                      `json:"preferred_logout_all"`
-	PreferredSessionLength int64                     `json:"preferred_session_length"`
-	RemindAfterDate        string                    `json:"remind_after_date"`
+	Address                    string                    `json:"address"`
+	CreatedAt                  string                    `json:"created_at"`
+	DokuwikiGroups             string                    `json:"dokuwiki_groups"`
+	Email                      string                    `json:"email"`
+	EnableBasicAuth            bool                      `json:"enable_basic_auth"`
+	EnableNewLoginNotification bool                      `json:"enable_new_login_notification"`
+	EnableOauth2Auth           bool                      `json:"enable_oauth2_auth"`
+	EnableSingleSignOn         bool                      `json:"enable_single_sign_on"`
+	EnableTokenAuth            bool                      `json:"enable_token_auth"`
+	ExpirationDate             string                    `json:"expiration_date"`
+	FullName                   string                    `json:"full_name"`
+	Id                         int64                     `json:"id"`
+	Info                       string                    `json:"info"`
+	Language                   *ActionLanguageShowOutput `json:"language"`
+	LastActivityAt             string                    `json:"last_activity_at"`
+	Level                      int64                     `json:"level"`
+	Lockout                    bool                      `json:"lockout"`
+	Login                      string                    `json:"login"`
+	MailerEnabled              bool                      `json:"mailer_enabled"`
+	ObjectState                string                    `json:"object_state"`
+	PasswordReset              bool                      `json:"password_reset"`
+	PreferredLogoutAll         bool                      `json:"preferred_logout_all"`
+	PreferredSessionLength     int64                     `json:"preferred_session_length"`
+	RemindAfterDate            string                    `json:"remind_after_date"`
 }
 
 // ActionUserCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -513,7 +569,7 @@ type ActionUserCreateResponse struct {
 func (action *ActionUserCreate) Prepare() *ActionUserCreateInvocation {
 	return &ActionUserCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/users",
+		Path:   "/v7.0/users",
 	}
 }
 
@@ -703,8 +759,20 @@ func (inv *ActionUserCreateInvocation) makeInputParams() map[string]interface{} 
 		if inv.IsParameterSelected("Email") {
 			ret["email"] = inv.Input.Email
 		}
+		if inv.IsParameterSelected("EnableBasicAuth") {
+			ret["enable_basic_auth"] = inv.Input.EnableBasicAuth
+		}
+		if inv.IsParameterSelected("EnableNewLoginNotification") {
+			ret["enable_new_login_notification"] = inv.Input.EnableNewLoginNotification
+		}
+		if inv.IsParameterSelected("EnableOauth2Auth") {
+			ret["enable_oauth2_auth"] = inv.Input.EnableOauth2Auth
+		}
 		if inv.IsParameterSelected("EnableSingleSignOn") {
 			ret["enable_single_sign_on"] = inv.Input.EnableSingleSignOn
+		}
+		if inv.IsParameterSelected("EnableTokenAuth") {
+			ret["enable_token_auth"] = inv.Input.EnableTokenAuth
 		}
 		if inv.IsParameterSelected("Environment") {
 			if inv.IsParameterNil("Environment") {

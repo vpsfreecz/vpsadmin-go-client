@@ -88,7 +88,7 @@ type ActionNewsLogDeleteResponse struct {
 func (action *ActionNewsLogDelete) Prepare() *ActionNewsLogDeleteInvocation {
 	return &ActionNewsLogDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/news_logs/{news_log_id}",
+		Path:   "/v7.0/news_logs/{news_log_id}",
 	}
 }
 

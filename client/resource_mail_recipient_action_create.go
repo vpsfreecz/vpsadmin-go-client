@@ -201,7 +201,7 @@ type ActionMailRecipientCreateResponse struct {
 func (action *ActionMailRecipientCreate) Prepare() *ActionMailRecipientCreateInvocation {
 	return &ActionMailRecipientCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/mail_recipients",
+		Path:   "/v7.0/mail_recipients",
 	}
 }
 

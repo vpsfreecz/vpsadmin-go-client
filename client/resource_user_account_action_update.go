@@ -175,7 +175,7 @@ type ActionUserAccountUpdateResponse struct {
 func (action *ActionUserAccountUpdate) Prepare() *ActionUserAccountUpdateInvocation {
 	return &ActionUserAccountUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/user_accounts/{user_account_id}",
+		Path:   "/v7.0/user_accounts/{user_account_id}",
 	}
 }
 

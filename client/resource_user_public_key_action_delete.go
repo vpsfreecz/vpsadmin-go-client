@@ -88,7 +88,7 @@ type ActionUserPublicKeyDeleteResponse struct {
 func (action *ActionUserPublicKeyDelete) Prepare() *ActionUserPublicKeyDeleteInvocation {
 	return &ActionUserPublicKeyDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/users/{user_id}/public_keys/{public_key_id}",
+		Path:   "/v7.0/users/{user_id}/public_keys/{public_key_id}",
 	}
 }
 

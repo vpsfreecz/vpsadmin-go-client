@@ -97,7 +97,7 @@ func (action *ActionClusterFullStats) Call() (*ActionClusterFullStatsResponse, e
 func (action *ActionClusterFullStats) Prepare() *ActionClusterFullStatsInvocation {
 	return &ActionClusterFullStatsInvocation{
 		Action: action,
-		Path:   "/v6.0/cluster/full_stats",
+		Path:   "/v7.0/cluster/full_stats",
 	}
 }
 

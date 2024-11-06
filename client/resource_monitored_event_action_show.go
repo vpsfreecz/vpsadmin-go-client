@@ -76,6 +76,7 @@ func (in *ActionMonitoredEventShowMetaGlobalInput) AnySelected() bool {
 // ActionMonitoredEventShowOutput is a type for action output parameters
 type ActionMonitoredEventShowOutput struct {
 	CreatedAt  string                `json:"created_at"`
+	Duration   float64               `json:"duration"`
 	Id         int64                 `json:"id"`
 	Issue      string                `json:"issue"`
 	Label      string                `json:"label"`
@@ -105,7 +106,7 @@ type ActionMonitoredEventShowResponse struct {
 func (action *ActionMonitoredEventShow) Prepare() *ActionMonitoredEventShowInvocation {
 	return &ActionMonitoredEventShowInvocation{
 		Action: action,
-		Path:   "/v6.0/monitored_events/{monitored_event_id}",
+		Path:   "/v7.0/monitored_events/{monitored_event_id}",
 	}
 }
 

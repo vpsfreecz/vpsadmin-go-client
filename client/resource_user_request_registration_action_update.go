@@ -386,7 +386,7 @@ type ActionUserRequestRegistrationUpdateResponse struct {
 func (action *ActionUserRequestRegistrationUpdate) Prepare() *ActionUserRequestRegistrationUpdateInvocation {
 	return &ActionUserRequestRegistrationUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/user_request/registrations/{registration_id}/{token}",
+		Path:   "/v7.0/user_request/registrations/{registration_id}/{token}",
 	}
 }
 

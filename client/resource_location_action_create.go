@@ -248,7 +248,7 @@ type ActionLocationCreateResponse struct {
 func (action *ActionLocationCreate) Prepare() *ActionLocationCreateInvocation {
 	return &ActionLocationCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/locations",
+		Path:   "/v7.0/locations",
 	}
 }
 

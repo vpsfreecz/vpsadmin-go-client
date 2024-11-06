@@ -210,7 +210,7 @@ type ActionVpsDeleteResponse struct {
 func (action *ActionVpsDelete) Prepare() *ActionVpsDeleteInvocation {
 	return &ActionVpsDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}",
+		Path:   "/v7.0/vpses/{vps_id}",
 	}
 }
 

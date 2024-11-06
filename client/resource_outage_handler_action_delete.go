@@ -88,7 +88,7 @@ type ActionOutageHandlerDeleteResponse struct {
 func (action *ActionOutageHandlerDelete) Prepare() *ActionOutageHandlerDeleteInvocation {
 	return &ActionOutageHandlerDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/outages/{outage_id}/handlers/{handler_id}",
+		Path:   "/v7.0/outages/{outage_id}/handlers/{handler_id}",
 	}
 }
 

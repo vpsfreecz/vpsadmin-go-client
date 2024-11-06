@@ -28,8 +28,26 @@ type Client struct {
 	DatasetPlan *ResourceDatasetPlan
 	// Resource Debug
 	Debug *ResourceDebug
+	// Resource Default_object_cluster_resource
+	DefaultObjectClusterResource *ResourceDefaultObjectClusterResource
+	// Resource Dns_record
+	DnsRecord *ResourceDnsRecord
+	// Resource Dns_record_log
+	DnsRecordLog *ResourceDnsRecordLog
 	// Resource Dns_resolver
 	DnsResolver *ResourceDnsResolver
+	// Resource Dns_server
+	DnsServer *ResourceDnsServer
+	// Resource Dns_server_zone
+	DnsServerZone *ResourceDnsServerZone
+	// Resource Dns_tsig_key
+	DnsTsigKey *ResourceDnsTsigKey
+	// Resource Dns_zone
+	DnsZone *ResourceDnsZone
+	// Resource Dns_zone_transfer
+	DnsZoneTransfer *ResourceDnsZoneTransfer
+	// Resource Dnssec_record
+	DnssecRecord *ResourceDnssecRecord
 	// Resource Environment
 	Environment *ResourceEnvironment
 	// Resource Export
@@ -62,6 +80,8 @@ type Client struct {
 	MailTemplate *ResourceMailTemplate
 	// Resource Mailbox
 	Mailbox *ResourceMailbox
+	// Resource Metrics_access_token
+	MetricsAccessToken *ResourceMetricsAccessToken
 	// Resource Migration_plan
 	MigrationPlan *ResourceMigrationPlan
 	// Resource Monitored_event
@@ -84,6 +104,8 @@ type Client struct {
 	ObjectHistory *ResourceObjectHistory
 	// Resource Oom_report
 	OomReport *ResourceOomReport
+	// Resource Os_family
+	OsFamily *ResourceOsFamily
 	// Resource Os_template
 	OsTemplate *ResourceOsTemplate
 	// Resource Outage
@@ -140,7 +162,16 @@ func New(url string) *Client {
 	c.DatasetExpansion = NewResourceDatasetExpansion(c)
 	c.DatasetPlan = NewResourceDatasetPlan(c)
 	c.Debug = NewResourceDebug(c)
+	c.DefaultObjectClusterResource = NewResourceDefaultObjectClusterResource(c)
+	c.DnsRecord = NewResourceDnsRecord(c)
+	c.DnsRecordLog = NewResourceDnsRecordLog(c)
 	c.DnsResolver = NewResourceDnsResolver(c)
+	c.DnsServer = NewResourceDnsServer(c)
+	c.DnsServerZone = NewResourceDnsServerZone(c)
+	c.DnsTsigKey = NewResourceDnsTsigKey(c)
+	c.DnsZone = NewResourceDnsZone(c)
+	c.DnsZoneTransfer = NewResourceDnsZoneTransfer(c)
+	c.DnssecRecord = NewResourceDnssecRecord(c)
 	c.Environment = NewResourceEnvironment(c)
 	c.Export = NewResourceExport(c)
 	c.ExportOutage = NewResourceExportOutage(c)
@@ -157,6 +188,7 @@ func New(url string) *Client {
 	c.MailRecipient = NewResourceMailRecipient(c)
 	c.MailTemplate = NewResourceMailTemplate(c)
 	c.Mailbox = NewResourceMailbox(c)
+	c.MetricsAccessToken = NewResourceMetricsAccessToken(c)
 	c.MigrationPlan = NewResourceMigrationPlan(c)
 	c.MonitoredEvent = NewResourceMonitoredEvent(c)
 	c.Network = NewResourceNetwork(c)
@@ -168,6 +200,7 @@ func New(url string) *Client {
 	c.Oauth2Client = NewResourceOauth2Client(c)
 	c.ObjectHistory = NewResourceObjectHistory(c)
 	c.OomReport = NewResourceOomReport(c)
+	c.OsFamily = NewResourceOsFamily(c)
 	c.OsTemplate = NewResourceOsTemplate(c)
 	c.Outage = NewResourceOutage(c)
 	c.OutageUpdate = NewResourceOutageUpdate(c)

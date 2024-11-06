@@ -99,7 +99,7 @@ type ActionEnvironmentDatasetPlanShowResponse struct {
 func (action *ActionEnvironmentDatasetPlanShow) Prepare() *ActionEnvironmentDatasetPlanShowInvocation {
 	return &ActionEnvironmentDatasetPlanShowInvocation{
 		Action: action,
-		Path:   "/v6.0/environments/{environment_id}/dataset_plans/{dataset_plan_id}",
+		Path:   "/v7.0/environments/{environment_id}/dataset_plans/{dataset_plan_id}",
 	}
 }
 

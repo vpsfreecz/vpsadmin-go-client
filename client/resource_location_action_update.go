@@ -232,7 +232,7 @@ type ActionLocationUpdateResponse struct {
 func (action *ActionLocationUpdate) Prepare() *ActionLocationUpdateInvocation {
 	return &ActionLocationUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/locations/{location_id}",
+		Path:   "/v7.0/locations/{location_id}",
 	}
 }
 

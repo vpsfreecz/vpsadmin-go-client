@@ -88,16 +88,17 @@ func (in *ActionHostIpAddressIndexMetaGlobalInput) AnySelected() bool {
 type ActionHostIpAddressIndexInput struct {
 	Addr             string `json:"addr"`
 	Assigned         bool   `json:"assigned"`
+	FromId           int64  `json:"from_id"`
 	IpAddress        int64  `json:"ip_address"`
 	Limit            int64  `json:"limit"`
 	Location         int64  `json:"location"`
 	Network          int64  `json:"network"`
 	NetworkInterface int64  `json:"network_interface"`
-	Offset           int64  `json:"offset"`
 	Order            string `json:"order"`
 	Prefix           int64  `json:"prefix"`
 	Purpose          string `json:"purpose"`
 	Role             string `json:"role"`
+	Routed           bool   `json:"routed"`
 	Size             int64  `json:"size"`
 	User             int64  `json:"user"`
 	Version          int64  `json:"version"`
@@ -129,6 +130,18 @@ func (in *ActionHostIpAddressIndexInput) SetAssigned(value bool) *ActionHostIpAd
 	}
 
 	in._selectedParameters["Assigned"] = nil
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionHostIpAddressIndexInput) SetFromId(value int64) *ActionHostIpAddressIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -268,18 +281,6 @@ func (in *ActionHostIpAddressIndexInput) SetNetworkInterfaceNil(set bool) *Actio
 	return in
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionHostIpAddressIndexInput) SetOffset(value int64) *ActionHostIpAddressIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-
 // SetOrder sets parameter Order to value and selects it for sending
 func (in *ActionHostIpAddressIndexInput) SetOrder(value string) *ActionHostIpAddressIndexInput {
 	in.Order = value
@@ -325,6 +326,18 @@ func (in *ActionHostIpAddressIndexInput) SetRole(value string) *ActionHostIpAddr
 	}
 
 	in._selectedParameters["Role"] = nil
+	return in
+}
+
+// SetRouted sets parameter Routed to value and selects it for sending
+func (in *ActionHostIpAddressIndexInput) SetRouted(value bool) *ActionHostIpAddressIndexInput {
+	in.Routed = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Routed"] = nil
 	return in
 }
 
@@ -454,10 +467,12 @@ func (in *ActionHostIpAddressIndexInput) AnySelected() bool {
 
 // ActionHostIpAddressIndexOutput is a type for action output parameters
 type ActionHostIpAddressIndexOutput struct {
-	Addr      string                     `json:"addr"`
-	Assigned  bool                       `json:"assigned"`
-	Id        int64                      `json:"id"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
+	Addr               string                     `json:"addr"`
+	Assigned           bool                       `json:"assigned"`
+	Id                 int64                      `json:"id"`
+	IpAddress          *ActionIpAddressShowOutput `json:"ip_address"`
+	ReverseRecordValue string                     `json:"reverse_record_value"`
+	UserCreated        bool                       `json:"user_created"`
 }
 
 // Type for action response, including envelope
@@ -477,7 +492,7 @@ type ActionHostIpAddressIndexResponse struct {
 func (action *ActionHostIpAddressIndex) Prepare() *ActionHostIpAddressIndexInvocation {
 	return &ActionHostIpAddressIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/host_ip_addresses",
+		Path:   "/v7.0/host_ip_addresses",
 	}
 }
 
@@ -584,6 +599,9 @@ func (inv *ActionHostIpAddressIndexInvocation) convertInputToQueryParams(ret map
 		if inv.IsParameterSelected("Assigned") {
 			ret["host_ip_address[assigned]"] = convertBoolToString(inv.Input.Assigned)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["host_ip_address[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("IpAddress") {
 			ret["host_ip_address[ip_address]"] = convertInt64ToString(inv.Input.IpAddress)
 		}
@@ -599,9 +617,6 @@ func (inv *ActionHostIpAddressIndexInvocation) convertInputToQueryParams(ret map
 		if inv.IsParameterSelected("NetworkInterface") {
 			ret["host_ip_address[network_interface]"] = convertInt64ToString(inv.Input.NetworkInterface)
 		}
-		if inv.IsParameterSelected("Offset") {
-			ret["host_ip_address[offset]"] = convertInt64ToString(inv.Input.Offset)
-		}
 		if inv.IsParameterSelected("Order") {
 			ret["host_ip_address[order]"] = inv.Input.Order
 		}
@@ -613,6 +628,9 @@ func (inv *ActionHostIpAddressIndexInvocation) convertInputToQueryParams(ret map
 		}
 		if inv.IsParameterSelected("Role") {
 			ret["host_ip_address[role]"] = inv.Input.Role
+		}
+		if inv.IsParameterSelected("Routed") {
+			ret["host_ip_address[routed]"] = convertBoolToString(inv.Input.Routed)
 		}
 		if inv.IsParameterSelected("Size") {
 			ret["host_ip_address[size]"] = convertInt64ToString(inv.Input.Size)

@@ -88,7 +88,7 @@ type ActionVpsConsoleTokenDeleteResponse struct {
 func (action *ActionVpsConsoleTokenDelete) Prepare() *ActionVpsConsoleTokenDeleteInvocation {
 	return &ActionVpsConsoleTokenDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/console_token",
+		Path:   "/v7.0/vpses/{vps_id}/console_token",
 	}
 }
 

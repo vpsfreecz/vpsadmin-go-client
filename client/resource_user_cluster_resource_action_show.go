@@ -100,7 +100,7 @@ type ActionUserClusterResourceShowResponse struct {
 func (action *ActionUserClusterResourceShow) Prepare() *ActionUserClusterResourceShowInvocation {
 	return &ActionUserClusterResourceShowInvocation{
 		Action: action,
-		Path:   "/v6.0/users/{user_id}/cluster_resources/{cluster_resource_id}",
+		Path:   "/v7.0/users/{user_id}/cluster_resources/{cluster_resource_id}",
 	}
 }
 

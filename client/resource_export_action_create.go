@@ -323,7 +323,7 @@ type ActionExportCreateResponse struct {
 func (action *ActionExportCreate) Prepare() *ActionExportCreateInvocation {
 	return &ActionExportCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/exports",
+		Path:   "/v7.0/exports",
 	}
 }
 

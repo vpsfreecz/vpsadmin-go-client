@@ -178,7 +178,7 @@ type ActionUserSessionUpdateResponse struct {
 func (action *ActionUserSessionUpdate) Prepare() *ActionUserSessionUpdateInvocation {
 	return &ActionUserSessionUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/user_sessions/{user_session_id}",
+		Path:   "/v7.0/user_sessions/{user_session_id}",
 	}
 }
 

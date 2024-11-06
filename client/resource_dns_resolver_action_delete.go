@@ -138,17 +138,27 @@ type ActionDnsResolverDeleteRequest struct {
 	Meta        map[string]interface{} `json:"_meta"`
 }
 
+// ActionDnsResolverDeleteMetaGlobalOutput is a type for global output metadata parameters
+type ActionDnsResolverDeleteMetaGlobalOutput struct {
+	ActionStateId int64 `json:"action_state_id"`
+}
+
 // Type for action response, including envelope
 type ActionDnsResolverDeleteResponse struct {
 	Action *ActionDnsResolverDelete `json:"-"`
 	*Envelope
+	// Action output encapsulated within a namespace
+	Response *struct {
+		// Global output metadata
+		Meta *ActionDnsResolverDeleteMetaGlobalOutput `json:"_meta"`
+	}
 }
 
 // Prepare the action for invocation
 func (action *ActionDnsResolverDelete) Prepare() *ActionDnsResolverDeleteInvocation {
 	return &ActionDnsResolverDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/dns_resolvers/{dns_resolver_id}",
+		Path:   "/v7.0/dns_resolvers/{dns_resolver_id}",
 	}
 }
 
@@ -251,6 +261,82 @@ func (inv *ActionDnsResolverDeleteInvocation) callAsBody() (*ActionDnsResolverDe
 	resp := &ActionDnsResolverDeleteResponse{Action: inv.Action}
 	err := inv.Action.Client.DoBodyRequest("DELETE", inv.Path, input, resp)
 	return resp, err
+}
+
+// IsBlocking checks whether the current invocation resulted in a blocking operation
+func (resp *ActionDnsResolverDeleteResponse) IsBlocking() bool {
+	return resp.Response.Meta != nil && resp.Response.Meta.ActionStateId > 0
+}
+
+// OperationStatus queries the current state of the blocking operation
+func (resp *ActionDnsResolverDeleteResponse) OperationStatus() (*ActionActionStateShowResponse, error) {
+	req := resp.Action.Client.ActionState.Show.Prepare()
+	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
+	return req.Call()
+}
+
+// WaitForOperation waits for a blocking operation to finish
+func (resp *ActionDnsResolverDeleteResponse) WaitForOperation(timeout float64) (*ActionActionStatePollResponse, error) {
+	req := resp.Action.Client.ActionState.Poll.Prepare()
+	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
+
+	input := req.NewInput()
+	input.SetTimeout(timeout)
+
+	return req.Call()
+}
+
+// WatchOperation waits for a blocking operation to finish and calls a callback
+// function with progress updates
+func (resp *ActionDnsResolverDeleteResponse) WatchOperation(timeout float64, updateIn float64, callback OperationProgressCallback) (*ActionActionStatePollResponse, error) {
+	req := resp.Action.Client.ActionState.Poll.Prepare()
+	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
+
+	input := req.NewInput()
+	input.SetTimeout(timeout)
+	input.SetUpdateIn(updateIn)
+
+	pollResp, err := req.Call()
+
+	if err != nil {
+		return pollResp, err
+	} else if pollResp.Output.Finished {
+		return pollResp, nil
+	}
+
+	if callback(pollResp.Output) == StopWatching {
+		return pollResp, nil
+	}
+
+	for {
+		req = resp.Action.Client.ActionState.Poll.Prepare()
+		req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
+		req.SetInput(&ActionActionStatePollInput{
+			Timeout:  timeout,
+			UpdateIn: updateIn,
+			Status:   pollResp.Output.Status,
+			Current:  pollResp.Output.Current,
+			Total:    pollResp.Output.Total,
+		})
+		pollResp, err = req.Call()
+
+		if err != nil {
+			return pollResp, err
+		} else if pollResp.Output.Finished {
+			return pollResp, nil
+		}
+
+		if callback(pollResp.Output) == StopWatching {
+			return pollResp, nil
+		}
+	}
+}
+
+// CancelOperation cancels the current blocking operation
+func (resp *ActionDnsResolverDeleteResponse) CancelOperation() (*ActionActionStateCancelResponse, error) {
+	req := resp.Action.Client.ActionState.Cancel.Prepare()
+	req.SetPathParamInt("action_state_id", resp.Response.Meta.ActionStateId)
+	return req.Call()
 }
 
 func (inv *ActionDnsResolverDeleteInvocation) makeAllInputParams() *ActionDnsResolverDeleteRequest {

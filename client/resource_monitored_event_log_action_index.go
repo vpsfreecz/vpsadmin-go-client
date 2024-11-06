@@ -88,14 +88,26 @@ func (in *ActionMonitoredEventLogIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMonitoredEventLogIndexInput is a type for action input parameters
 type ActionMonitoredEventLogIndexInput struct {
+	FromId int64  `json:"from_id"`
 	Limit  int64  `json:"limit"`
-	Offset int64  `json:"offset"`
 	Order  string `json:"order"`
 	Passed bool   `json:"passed"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionMonitoredEventLogIndexInput) SetFromId(value int64) *ActionMonitoredEventLogIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -107,18 +119,6 @@ func (in *ActionMonitoredEventLogIndexInput) SetLimit(value int64) *ActionMonito
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionMonitoredEventLogIndexInput) SetOffset(value int64) *ActionMonitoredEventLogIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -208,7 +208,7 @@ type ActionMonitoredEventLogIndexResponse struct {
 func (action *ActionMonitoredEventLogIndex) Prepare() *ActionMonitoredEventLogIndexInvocation {
 	return &ActionMonitoredEventLogIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/monitored_events/{monitored_event_id}/logs",
+		Path:   "/v7.0/monitored_events/{monitored_event_id}/logs",
 	}
 }
 
@@ -320,11 +320,11 @@ func (inv *ActionMonitoredEventLogIndexInvocation) callAsQuery() (*ActionMonitor
 
 func (inv *ActionMonitoredEventLogIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["log[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["log[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["log[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["log[order]"] = inv.Input.Order

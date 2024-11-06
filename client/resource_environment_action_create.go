@@ -257,7 +257,7 @@ type ActionEnvironmentCreateResponse struct {
 func (action *ActionEnvironmentCreate) Prepare() *ActionEnvironmentCreateInvocation {
 	return &ActionEnvironmentCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/environments",
+		Path:   "/v7.0/environments",
 	}
 }
 

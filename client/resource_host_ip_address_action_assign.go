@@ -80,10 +80,12 @@ type ActionHostIpAddressAssignRequest struct {
 
 // ActionHostIpAddressAssignOutput is a type for action output parameters
 type ActionHostIpAddressAssignOutput struct {
-	Addr      string                     `json:"addr"`
-	Assigned  bool                       `json:"assigned"`
-	Id        int64                      `json:"id"`
-	IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
+	Addr               string                     `json:"addr"`
+	Assigned           bool                       `json:"assigned"`
+	Id                 int64                      `json:"id"`
+	IpAddress          *ActionIpAddressShowOutput `json:"ip_address"`
+	ReverseRecordValue string                     `json:"reverse_record_value"`
+	UserCreated        bool                       `json:"user_created"`
 }
 
 // ActionHostIpAddressAssignMetaGlobalOutput is a type for global output metadata parameters
@@ -110,7 +112,7 @@ type ActionHostIpAddressAssignResponse struct {
 func (action *ActionHostIpAddressAssign) Prepare() *ActionHostIpAddressAssignInvocation {
 	return &ActionHostIpAddressAssignInvocation{
 		Action: action,
-		Path:   "/v6.0/host_ip_addresses/{host_ip_address_id}/assign",
+		Path:   "/v7.0/host_ip_addresses/{host_ip_address_id}/assign",
 	}
 }
 

@@ -98,7 +98,7 @@ type ActionVpsMountDeleteResponse struct {
 func (action *ActionVpsMountDelete) Prepare() *ActionVpsMountDeleteInvocation {
 	return &ActionVpsMountDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/mounts/{mount_id}",
+		Path:   "/v7.0/vpses/{vps_id}/mounts/{mount_id}",
 	}
 }
 

@@ -87,11 +87,11 @@ func (in *ActionLocationIndexMetaGlobalInput) AnySelected() bool {
 // ActionLocationIndexInput is a type for action input parameters
 type ActionLocationIndexInput struct {
 	Environment           int64  `json:"environment"`
+	FromId                int64  `json:"from_id"`
 	HasHypervisor         bool   `json:"has_hypervisor"`
 	HasStorage            bool   `json:"has_storage"`
 	HypervisorType        string `json:"hypervisor_type"`
 	Limit                 int64  `json:"limit"`
-	Offset                int64  `json:"offset"`
 	SharesAnyNetworksWith int64  `json:"shares_any_networks_with"`
 	SharesNetworksPrimary bool   `json:"shares_networks_primary"`
 	SharesV4NetworksWith  int64  `json:"shares_v4_networks_with"`
@@ -130,6 +130,18 @@ func (in *ActionLocationIndexInput) SetEnvironmentNil(set bool) *ActionLocationI
 	} else {
 		delete(in._nilParameters, "Environment")
 	}
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionLocationIndexInput) SetFromId(value int64) *ActionLocationIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -178,18 +190,6 @@ func (in *ActionLocationIndexInput) SetLimit(value int64) *ActionLocationIndexIn
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionLocationIndexInput) SetOffset(value int64) *ActionLocationIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -366,7 +366,7 @@ type ActionLocationIndexResponse struct {
 func (action *ActionLocationIndex) Prepare() *ActionLocationIndexInvocation {
 	return &ActionLocationIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/locations",
+		Path:   "/v7.0/locations",
 	}
 }
 
@@ -470,6 +470,9 @@ func (inv *ActionLocationIndexInvocation) convertInputToQueryParams(ret map[stri
 		if inv.IsParameterSelected("Environment") {
 			ret["location[environment]"] = convertInt64ToString(inv.Input.Environment)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["location[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("HasHypervisor") {
 			ret["location[has_hypervisor]"] = convertBoolToString(inv.Input.HasHypervisor)
 		}
@@ -481,9 +484,6 @@ func (inv *ActionLocationIndexInvocation) convertInputToQueryParams(ret map[stri
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["location[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["location[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("SharesAnyNetworksWith") {
 			ret["location[shares_any_networks_with]"] = convertInt64ToString(inv.Input.SharesAnyNetworksWith)

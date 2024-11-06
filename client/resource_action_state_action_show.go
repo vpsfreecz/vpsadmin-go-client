@@ -91,7 +91,7 @@ type ActionActionStateShowResponse struct {
 func (action *ActionActionStateShow) Prepare() *ActionActionStateShowInvocation {
 	return &ActionActionStateShowInvocation{
 		Action: action,
-		Path:   "/v6.0/action_states/{action_state_id}",
+		Path:   "/v7.0/action_states/{action_state_id}",
 	}
 }
 

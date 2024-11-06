@@ -101,7 +101,7 @@ type ActionExportOutageShowResponse struct {
 func (action *ActionExportOutageShow) Prepare() *ActionExportOutageShowInvocation {
 	return &ActionExportOutageShowInvocation{
 		Action: action,
-		Path:   "/v6.0/export_outages/{export_outage_id}",
+		Path:   "/v7.0/export_outages/{export_outage_id}",
 	}
 }
 

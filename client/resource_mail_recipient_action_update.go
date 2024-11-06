@@ -203,7 +203,7 @@ type ActionMailRecipientUpdateResponse struct {
 func (action *ActionMailRecipientUpdate) Prepare() *ActionMailRecipientUpdateInvocation {
 	return &ActionMailRecipientUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/mail_recipients/{mail_recipient_id}",
+		Path:   "/v7.0/mail_recipients/{mail_recipient_id}",
 	}
 }
 

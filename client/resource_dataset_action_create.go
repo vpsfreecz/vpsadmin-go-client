@@ -308,6 +308,7 @@ type ActionDatasetCreateOutput struct {
 	Sync             string                            `json:"sync"`
 	Used             int64                             `json:"used"`
 	User             *ActionUserShowOutput             `json:"user"`
+	Vps              *ActionVpsShowOutput              `json:"vps"`
 }
 
 // ActionDatasetCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -334,7 +335,7 @@ type ActionDatasetCreateResponse struct {
 func (action *ActionDatasetCreate) Prepare() *ActionDatasetCreateInvocation {
 	return &ActionDatasetCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/datasets",
+		Path:   "/v7.0/datasets",
 	}
 }
 

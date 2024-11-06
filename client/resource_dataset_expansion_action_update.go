@@ -210,7 +210,7 @@ type ActionDatasetExpansionUpdateResponse struct {
 func (action *ActionDatasetExpansionUpdate) Prepare() *ActionDatasetExpansionUpdateInvocation {
 	return &ActionDatasetExpansionUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/dataset_expansions/{dataset_expansion_id}",
+		Path:   "/v7.0/dataset_expansions/{dataset_expansion_id}",
 	}
 }
 

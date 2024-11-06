@@ -253,7 +253,7 @@ type ActionDatasetExpansionRegisterExpandedResponse struct {
 func (action *ActionDatasetExpansionRegisterExpanded) Prepare() *ActionDatasetExpansionRegisterExpandedInvocation {
 	return &ActionDatasetExpansionRegisterExpandedInvocation{
 		Action: action,
-		Path:   "/v6.0/dataset_expansions/register_expanded",
+		Path:   "/v7.0/dataset_expansions/register_expanded",
 	}
 }
 

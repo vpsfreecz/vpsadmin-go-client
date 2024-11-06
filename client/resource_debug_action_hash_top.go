@@ -139,7 +139,7 @@ type ActionDebugHashTopResponse struct {
 func (action *ActionDebugHashTop) Prepare() *ActionDebugHashTopInvocation {
 	return &ActionDebugHashTopInvocation{
 		Action: action,
-		Path:   "/v6.0/debugs/hash_top",
+		Path:   "/v7.0/debugs/hash_top",
 	}
 }
 

@@ -89,8 +89,8 @@ func (in *ActionUserEnvironmentConfigIndexMetaGlobalInput) AnySelected() bool {
 // ActionUserEnvironmentConfigIndexInput is a type for action input parameters
 type ActionUserEnvironmentConfigIndexInput struct {
 	Environment int64 `json:"environment"`
+	FromId      int64 `json:"from_id"`
 	Limit       int64 `json:"limit"`
-	Offset      int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -128,6 +128,18 @@ func (in *ActionUserEnvironmentConfigIndexInput) SetEnvironmentNil(set bool) *Ac
 	return in
 }
 
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionUserEnvironmentConfigIndexInput) SetFromId(value int64) *ActionUserEnvironmentConfigIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
+}
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserEnvironmentConfigIndexInput) SetLimit(value int64) *ActionUserEnvironmentConfigIndexInput {
 	in.Limit = value
@@ -137,18 +149,6 @@ func (in *ActionUserEnvironmentConfigIndexInput) SetLimit(value int64) *ActionUs
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserEnvironmentConfigIndexInput) SetOffset(value int64) *ActionUserEnvironmentConfigIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -218,7 +218,7 @@ type ActionUserEnvironmentConfigIndexResponse struct {
 func (action *ActionUserEnvironmentConfigIndex) Prepare() *ActionUserEnvironmentConfigIndexInvocation {
 	return &ActionUserEnvironmentConfigIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/users/{user_id}/environment_configs",
+		Path:   "/v7.0/users/{user_id}/environment_configs",
 	}
 }
 
@@ -333,11 +333,11 @@ func (inv *ActionUserEnvironmentConfigIndexInvocation) convertInputToQueryParams
 		if inv.IsParameterSelected("Environment") {
 			ret["environment_config[environment]"] = convertInt64ToString(inv.Input.Environment)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["environment_config[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["environment_config[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["environment_config[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

@@ -87,10 +87,10 @@ func (in *ActionNodeIndexMetaGlobalInput) AnySelected() bool {
 // ActionNodeIndexInput is a type for action input parameters
 type ActionNodeIndexInput struct {
 	Environment    int64  `json:"environment"`
+	FromId         int64  `json:"from_id"`
 	HypervisorType string `json:"hypervisor_type"`
 	Limit          int64  `json:"limit"`
 	Location       int64  `json:"location"`
-	Offset         int64  `json:"offset"`
 	State          string `json:"state"`
 	Type           string `json:"type"`
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -127,6 +127,18 @@ func (in *ActionNodeIndexInput) SetEnvironmentNil(set bool) *ActionNodeIndexInpu
 	} else {
 		delete(in._nilParameters, "Environment")
 	}
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionNodeIndexInput) SetFromId(value int64) *ActionNodeIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -182,18 +194,6 @@ func (in *ActionNodeIndexInput) SetLocationNil(set bool) *ActionNodeIndexInput {
 	} else {
 		delete(in._nilParameters, "Location")
 	}
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionNodeIndexInput) SetOffset(value int64) *ActionNodeIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -282,7 +282,9 @@ type ActionNodeIndexOutput struct {
 	Id                    int64                     `json:"id"`
 	IpAddr                string                    `json:"ip_addr"`
 	Kernel                string                    `json:"kernel"`
-	Loadavg               float64                   `json:"loadavg"`
+	Loadavg1              float64                   `json:"loadavg1"`
+	Loadavg15             float64                   `json:"loadavg15"`
+	Loadavg5              float64                   `json:"loadavg5"`
 	Location              *ActionLocationShowOutput `json:"location"`
 	MaintenanceLock       string                    `json:"maintenance_lock"`
 	MaintenanceLockReason string                    `json:"maintenance_lock_reason"`
@@ -323,7 +325,7 @@ type ActionNodeIndexResponse struct {
 func (action *ActionNodeIndex) Prepare() *ActionNodeIndexInvocation {
 	return &ActionNodeIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/nodes",
+		Path:   "/v7.0/nodes",
 	}
 }
 
@@ -427,6 +429,9 @@ func (inv *ActionNodeIndexInvocation) convertInputToQueryParams(ret map[string]s
 		if inv.IsParameterSelected("Environment") {
 			ret["node[environment]"] = convertInt64ToString(inv.Input.Environment)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["node[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("HypervisorType") {
 			ret["node[hypervisor_type]"] = inv.Input.HypervisorType
 		}
@@ -435,9 +440,6 @@ func (inv *ActionNodeIndexInvocation) convertInputToQueryParams(ret map[string]s
 		}
 		if inv.IsParameterSelected("Location") {
 			ret["node[location]"] = convertInt64ToString(inv.Input.Location)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["node[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("State") {
 			ret["node[state]"] = inv.Input.State

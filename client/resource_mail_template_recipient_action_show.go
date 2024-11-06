@@ -96,7 +96,7 @@ type ActionMailTemplateRecipientShowResponse struct {
 func (action *ActionMailTemplateRecipientShow) Prepare() *ActionMailTemplateRecipientShowInvocation {
 	return &ActionMailTemplateRecipientShowInvocation{
 		Action: action,
-		Path:   "/v6.0/mail_templates/{mail_template_id}/recipients/{recipient_id}",
+		Path:   "/v7.0/mail_templates/{mail_template_id}/recipients/{recipient_id}",
 	}
 }
 

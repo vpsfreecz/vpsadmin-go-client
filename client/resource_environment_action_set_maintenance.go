@@ -148,7 +148,7 @@ type ActionEnvironmentSetMaintenanceResponse struct {
 func (action *ActionEnvironmentSetMaintenance) Prepare() *ActionEnvironmentSetMaintenanceInvocation {
 	return &ActionEnvironmentSetMaintenanceInvocation{
 		Action: action,
-		Path:   "/v6.0/environments/{environment_id}/set_maintenance",
+		Path:   "/v7.0/environments/{environment_id}/set_maintenance",
 	}
 }
 

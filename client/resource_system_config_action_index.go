@@ -87,8 +87,8 @@ func (in *ActionSystemConfigIndexMetaGlobalInput) AnySelected() bool {
 // ActionSystemConfigIndexInput is a type for action input parameters
 type ActionSystemConfigIndexInput struct {
 	Category string `json:"category"`
+	FromId   int64  `json:"from_id"`
 	Limit    int64  `json:"limit"`
-	Offset   int64  `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -107,6 +107,18 @@ func (in *ActionSystemConfigIndexInput) SetCategory(value string) *ActionSystemC
 	return in
 }
 
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionSystemConfigIndexInput) SetFromId(value int64) *ActionSystemConfigIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
+}
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionSystemConfigIndexInput) SetLimit(value int64) *ActionSystemConfigIndexInput {
 	in.Limit = value
@@ -116,18 +128,6 @@ func (in *ActionSystemConfigIndexInput) SetLimit(value int64) *ActionSystemConfi
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionSystemConfigIndexInput) SetOffset(value int64) *ActionSystemConfigIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -196,7 +196,7 @@ type ActionSystemConfigIndexResponse struct {
 func (action *ActionSystemConfigIndex) Prepare() *ActionSystemConfigIndexInvocation {
 	return &ActionSystemConfigIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/system_configs",
+		Path:   "/v7.0/system_configs",
 	}
 }
 
@@ -300,11 +300,11 @@ func (inv *ActionSystemConfigIndexInvocation) convertInputToQueryParams(ret map[
 		if inv.IsParameterSelected("Category") {
 			ret["system_config[category]"] = inv.Input.Category
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["system_config[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["system_config[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["system_config[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

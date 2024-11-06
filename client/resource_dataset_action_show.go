@@ -96,6 +96,7 @@ type ActionDatasetShowOutput struct {
 	Sync             string                            `json:"sync"`
 	Used             int64                             `json:"used"`
 	User             *ActionUserShowOutput             `json:"user"`
+	Vps              *ActionVpsShowOutput              `json:"vps"`
 }
 
 // Type for action response, including envelope
@@ -115,7 +116,7 @@ type ActionDatasetShowResponse struct {
 func (action *ActionDatasetShow) Prepare() *ActionDatasetShowInvocation {
 	return &ActionDatasetShowInvocation{
 		Action: action,
-		Path:   "/v6.0/datasets/{dataset_id}",
+		Path:   "/v7.0/datasets/{dataset_id}",
 	}
 }
 

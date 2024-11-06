@@ -154,7 +154,7 @@ type ActionVpsPasswdResponse struct {
 func (action *ActionVpsPasswd) Prepare() *ActionVpsPasswdInvocation {
 	return &ActionVpsPasswdInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/passwd",
+		Path:   "/v7.0/vpses/{vps_id}/passwd",
 	}
 }
 

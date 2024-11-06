@@ -261,7 +261,7 @@ type ActionExportUpdateResponse struct {
 func (action *ActionExportUpdate) Prepare() *ActionExportUpdateInvocation {
 	return &ActionExportUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/exports/{export_id}",
+		Path:   "/v7.0/exports/{export_id}",
 	}
 }
 

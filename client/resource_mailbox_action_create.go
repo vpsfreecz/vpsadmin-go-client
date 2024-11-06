@@ -230,7 +230,7 @@ type ActionMailboxCreateResponse struct {
 func (action *ActionMailboxCreate) Prepare() *ActionMailboxCreateInvocation {
 	return &ActionMailboxCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/mailboxes",
+		Path:   "/v7.0/mailboxes",
 	}
 }
 

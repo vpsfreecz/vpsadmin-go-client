@@ -88,7 +88,7 @@ type ActionMailTemplateRecipientDeleteResponse struct {
 func (action *ActionMailTemplateRecipientDelete) Prepare() *ActionMailTemplateRecipientDeleteInvocation {
 	return &ActionMailTemplateRecipientDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/mail_templates/{mail_template_id}/recipients/{recipient_id}",
+		Path:   "/v7.0/mail_templates/{mail_template_id}/recipients/{recipient_id}",
 	}
 }
 

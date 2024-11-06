@@ -87,7 +87,9 @@ type ActionVpsStatusShowOutput struct {
 	Id           int64   `json:"id"`
 	InRescueMode bool    `json:"in_rescue_mode"`
 	IsRunning    bool    `json:"is_running"`
-	Loadavg      float64 `json:"loadavg"`
+	Loadavg1     float64 `json:"loadavg1"`
+	Loadavg15    float64 `json:"loadavg15"`
+	Loadavg5     float64 `json:"loadavg5"`
 	ProcessCount int64   `json:"process_count"`
 	Status       bool    `json:"status"`
 	TotalMemory  int64   `json:"total_memory"`
@@ -114,7 +116,7 @@ type ActionVpsStatusShowResponse struct {
 func (action *ActionVpsStatusShow) Prepare() *ActionVpsStatusShowInvocation {
 	return &ActionVpsStatusShowInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/statuses/{status_id}",
+		Path:   "/v7.0/vpses/{vps_id}/statuses/{status_id}",
 	}
 }
 

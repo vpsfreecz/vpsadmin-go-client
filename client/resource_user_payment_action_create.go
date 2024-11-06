@@ -236,7 +236,7 @@ type ActionUserPaymentCreateResponse struct {
 func (action *ActionUserPaymentCreate) Prepare() *ActionUserPaymentCreateInvocation {
 	return &ActionUserPaymentCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/user_payments",
+		Path:   "/v7.0/user_payments",
 	}
 }
 

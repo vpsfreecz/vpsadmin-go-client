@@ -86,14 +86,26 @@ func (in *ActionUserOutageIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserOutageIndexInput is a type for action input parameters
 type ActionUserOutageIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	Outage int64 `json:"outage"`
 	User   int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionUserOutageIndexInput) SetFromId(value int64) *ActionUserOutageIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -105,18 +117,6 @@ func (in *ActionUserOutageIndexInput) SetLimit(value int64) *ActionUserOutageInd
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserOutageIndexInput) SetOffset(value int64) *ActionUserOutageIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -246,7 +246,7 @@ type ActionUserOutageIndexResponse struct {
 func (action *ActionUserOutageIndex) Prepare() *ActionUserOutageIndexInvocation {
 	return &ActionUserOutageIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/user_outages",
+		Path:   "/v7.0/user_outages",
 	}
 }
 
@@ -347,11 +347,11 @@ func (inv *ActionUserOutageIndexInvocation) callAsQuery() (*ActionUserOutageInde
 
 func (inv *ActionUserOutageIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["user_outage[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["user_outage[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["user_outage[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Outage") {
 			ret["user_outage[outage]"] = convertInt64ToString(inv.Input.Outage)

@@ -177,7 +177,7 @@ type ActionVpsReinstallResponse struct {
 func (action *ActionVpsReinstall) Prepare() *ActionVpsReinstallInvocation {
 	return &ActionVpsReinstallInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/reinstall",
+		Path:   "/v7.0/vpses/{vps_id}/reinstall",
 	}
 }
 

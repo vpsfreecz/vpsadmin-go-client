@@ -217,7 +217,7 @@ type ActionClusterResourceUpdateResponse struct {
 func (action *ActionClusterResourceUpdate) Prepare() *ActionClusterResourceUpdateInvocation {
 	return &ActionClusterResourceUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/cluster_resources/{cluster_resource_id}",
+		Path:   "/v7.0/cluster_resources/{cluster_resource_id}",
 	}
 }
 

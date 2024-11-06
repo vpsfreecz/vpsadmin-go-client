@@ -226,7 +226,7 @@ type ActionIpAddressAssignResponse struct {
 func (action *ActionIpAddressAssign) Prepare() *ActionIpAddressAssignInvocation {
 	return &ActionIpAddressAssignInvocation{
 		Action: action,
-		Path:   "/v6.0/ip_addresses/{ip_address_id}/assign",
+		Path:   "/v7.0/ip_addresses/{ip_address_id}/assign",
 	}
 }
 

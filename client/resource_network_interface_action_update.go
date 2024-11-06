@@ -199,7 +199,7 @@ type ActionNetworkInterfaceUpdateResponse struct {
 func (action *ActionNetworkInterfaceUpdate) Prepare() *ActionNetworkInterfaceUpdateInvocation {
 	return &ActionNetworkInterfaceUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/network_interfaces/{network_interface_id}",
+		Path:   "/v7.0/network_interfaces/{network_interface_id}",
 	}
 }
 

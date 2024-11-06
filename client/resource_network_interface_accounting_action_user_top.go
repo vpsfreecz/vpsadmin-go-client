@@ -88,11 +88,11 @@ func (in *ActionNetworkInterfaceAccountingUserTopMetaGlobalInput) AnySelected() 
 type ActionNetworkInterfaceAccountingUserTopInput struct {
 	Environment int64  `json:"environment"`
 	From        string `json:"from"`
+	FromBytes   int64  `json:"from_bytes"`
 	Limit       int64  `json:"limit"`
 	Location    int64  `json:"location"`
 	Month       int64  `json:"month"`
 	Node        int64  `json:"node"`
-	Offset      int64  `json:"offset"`
 	To          string `json:"to"`
 	Year        int64  `json:"year"`
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -141,6 +141,18 @@ func (in *ActionNetworkInterfaceAccountingUserTopInput) SetFrom(value string) *A
 	}
 
 	in._selectedParameters["From"] = nil
+	return in
+}
+
+// SetFromBytes sets parameter FromBytes to value and selects it for sending
+func (in *ActionNetworkInterfaceAccountingUserTopInput) SetFromBytes(value int64) *ActionNetworkInterfaceAccountingUserTopInput {
+	in.FromBytes = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromBytes"] = nil
 	return in
 }
 
@@ -230,18 +242,6 @@ func (in *ActionNetworkInterfaceAccountingUserTopInput) SetNodeNil(set bool) *Ac
 	return in
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionNetworkInterfaceAccountingUserTopInput) SetOffset(value int64) *ActionNetworkInterfaceAccountingUserTopInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-
 // SetTo sets parameter To to value and selects it for sending
 func (in *ActionNetworkInterfaceAccountingUserTopInput) SetTo(value string) *ActionNetworkInterfaceAccountingUserTopInput {
 	in.To = value
@@ -306,9 +306,11 @@ func (in *ActionNetworkInterfaceAccountingUserTopInput) AnySelected() bool {
 
 // ActionNetworkInterfaceAccountingUserTopOutput is a type for action output parameters
 type ActionNetworkInterfaceAccountingUserTopOutput struct {
+	Bytes      int64                 `json:"bytes"`
 	BytesIn    int64                 `json:"bytes_in"`
 	BytesOut   int64                 `json:"bytes_out"`
 	Month      int64                 `json:"month"`
+	Packets    int64                 `json:"packets"`
 	PacketsIn  int64                 `json:"packets_in"`
 	PacketsOut int64                 `json:"packets_out"`
 	User       *ActionUserShowOutput `json:"user"`
@@ -332,7 +334,7 @@ type ActionNetworkInterfaceAccountingUserTopResponse struct {
 func (action *ActionNetworkInterfaceAccountingUserTop) Prepare() *ActionNetworkInterfaceAccountingUserTopInvocation {
 	return &ActionNetworkInterfaceAccountingUserTopInvocation{
 		Action: action,
-		Path:   "/v6.0/network_interface_accountings/user_top",
+		Path:   "/v7.0/network_interface_accountings/user_top",
 	}
 }
 
@@ -439,6 +441,9 @@ func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) convertInputToQuer
 		if inv.IsParameterSelected("From") {
 			ret["network_interface_accounting[from]"] = inv.Input.From
 		}
+		if inv.IsParameterSelected("FromBytes") {
+			ret["network_interface_accounting[from_bytes]"] = convertInt64ToString(inv.Input.FromBytes)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["network_interface_accounting[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
@@ -450,9 +455,6 @@ func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) convertInputToQuer
 		}
 		if inv.IsParameterSelected("Node") {
 			ret["network_interface_accounting[node]"] = convertInt64ToString(inv.Input.Node)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["network_interface_accounting[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("To") {
 			ret["network_interface_accounting[to]"] = inv.Input.To

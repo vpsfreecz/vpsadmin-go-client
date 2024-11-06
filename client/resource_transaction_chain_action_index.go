@@ -87,9 +87,9 @@ func (in *ActionTransactionChainIndexMetaGlobalInput) AnySelected() bool {
 // ActionTransactionChainIndexInput is a type for action input parameters
 type ActionTransactionChainIndexInput struct {
 	ClassName   string `json:"class_name"`
+	FromId      int64  `json:"from_id"`
 	Limit       int64  `json:"limit"`
 	Name        string `json:"name"`
-	Offset      int64  `json:"offset"`
 	RowId       int64  `json:"row_id"`
 	State       string `json:"state"`
 	User        int64  `json:"user"`
@@ -109,6 +109,18 @@ func (in *ActionTransactionChainIndexInput) SetClassName(value string) *ActionTr
 	}
 
 	in._selectedParameters["ClassName"] = nil
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionTransactionChainIndexInput) SetFromId(value int64) *ActionTransactionChainIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -133,18 +145,6 @@ func (in *ActionTransactionChainIndexInput) SetName(value string) *ActionTransac
 	}
 
 	in._selectedParameters["Name"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionTransactionChainIndexInput) SetOffset(value int64) *ActionTransactionChainIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -301,7 +301,7 @@ type ActionTransactionChainIndexResponse struct {
 func (action *ActionTransactionChainIndex) Prepare() *ActionTransactionChainIndexInvocation {
 	return &ActionTransactionChainIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/transaction_chains",
+		Path:   "/v7.0/transaction_chains",
 	}
 }
 
@@ -405,14 +405,14 @@ func (inv *ActionTransactionChainIndexInvocation) convertInputToQueryParams(ret 
 		if inv.IsParameterSelected("ClassName") {
 			ret["transaction_chain[class_name]"] = inv.Input.ClassName
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["transaction_chain[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["transaction_chain[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 		if inv.IsParameterSelected("Name") {
 			ret["transaction_chain[name]"] = inv.Input.Name
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["transaction_chain[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("RowId") {
 			ret["transaction_chain[row_id]"] = convertInt64ToString(inv.Input.RowId)

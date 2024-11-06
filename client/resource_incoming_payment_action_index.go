@@ -86,13 +86,25 @@ func (in *ActionIncomingPaymentIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionIncomingPaymentIndexInput is a type for action input parameters
 type ActionIncomingPaymentIndexInput struct {
+	FromId int64  `json:"from_id"`
 	Limit  int64  `json:"limit"`
-	Offset int64  `json:"offset"`
 	State  string `json:"state"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionIncomingPaymentIndexInput) SetFromId(value int64) *ActionIncomingPaymentIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -104,18 +116,6 @@ func (in *ActionIncomingPaymentIndexInput) SetLimit(value int64) *ActionIncoming
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionIncomingPaymentIndexInput) SetOffset(value int64) *ActionIncomingPaymentIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -207,7 +207,7 @@ type ActionIncomingPaymentIndexResponse struct {
 func (action *ActionIncomingPaymentIndex) Prepare() *ActionIncomingPaymentIndexInvocation {
 	return &ActionIncomingPaymentIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/incoming_payments",
+		Path:   "/v7.0/incoming_payments",
 	}
 }
 
@@ -308,11 +308,11 @@ func (inv *ActionIncomingPaymentIndexInvocation) callAsQuery() (*ActionIncomingP
 
 func (inv *ActionIncomingPaymentIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["incoming_payment[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["incoming_payment[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["incoming_payment[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("State") {
 			ret["incoming_payment[state]"] = inv.Input.State

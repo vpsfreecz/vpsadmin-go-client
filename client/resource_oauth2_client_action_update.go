@@ -274,7 +274,7 @@ type ActionOauth2ClientUpdateResponse struct {
 func (action *ActionOauth2ClientUpdate) Prepare() *ActionOauth2ClientUpdateInvocation {
 	return &ActionOauth2ClientUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/oauth2_clients/{oauth2_client_id}",
+		Path:   "/v7.0/oauth2_clients/{oauth2_client_id}",
 	}
 }
 

@@ -86,12 +86,24 @@ func (in *ActionComponentIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionComponentIndexInput is a type for action input parameters
 type ActionComponentIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionComponentIndexInput) SetFromId(value int64) *ActionComponentIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -103,18 +115,6 @@ func (in *ActionComponentIndexInput) SetLimit(value int64) *ActionComponentIndex
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionComponentIndexInput) SetOffset(value int64) *ActionComponentIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -181,7 +181,7 @@ type ActionComponentIndexResponse struct {
 func (action *ActionComponentIndex) Prepare() *ActionComponentIndexInvocation {
 	return &ActionComponentIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/components",
+		Path:   "/v7.0/components",
 	}
 }
 
@@ -282,11 +282,11 @@ func (inv *ActionComponentIndexInvocation) callAsQuery() (*ActionComponentIndexR
 
 func (inv *ActionComponentIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["component[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["component[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["component[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

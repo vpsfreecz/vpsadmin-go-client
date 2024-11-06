@@ -89,8 +89,8 @@ func (in *ActionMigrationPlanVpsMigrationIndexMetaGlobalInput) AnySelected() boo
 // ActionMigrationPlanVpsMigrationIndexInput is a type for action input parameters
 type ActionMigrationPlanVpsMigrationIndexInput struct {
 	DstNode int64  `json:"dst_node"`
+	FromId  int64  `json:"from_id"`
 	Limit   int64  `json:"limit"`
-	Offset  int64  `json:"offset"`
 	SrcNode int64  `json:"src_node"`
 	State   string `json:"state"`
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -130,6 +130,18 @@ func (in *ActionMigrationPlanVpsMigrationIndexInput) SetDstNodeNil(set bool) *Ac
 	return in
 }
 
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionMigrationPlanVpsMigrationIndexInput) SetFromId(value int64) *ActionMigrationPlanVpsMigrationIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
+}
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionMigrationPlanVpsMigrationIndexInput) SetLimit(value int64) *ActionMigrationPlanVpsMigrationIndexInput {
 	in.Limit = value
@@ -139,18 +151,6 @@ func (in *ActionMigrationPlanVpsMigrationIndexInput) SetLimit(value int64) *Acti
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionMigrationPlanVpsMigrationIndexInput) SetOffset(value int64) *ActionMigrationPlanVpsMigrationIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -267,7 +267,7 @@ type ActionMigrationPlanVpsMigrationIndexResponse struct {
 func (action *ActionMigrationPlanVpsMigrationIndex) Prepare() *ActionMigrationPlanVpsMigrationIndexInvocation {
 	return &ActionMigrationPlanVpsMigrationIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/migration_plans/{migration_plan_id}/vps_migrations",
+		Path:   "/v7.0/migration_plans/{migration_plan_id}/vps_migrations",
 	}
 }
 
@@ -382,11 +382,11 @@ func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) convertInputToQueryPa
 		if inv.IsParameterSelected("DstNode") {
 			ret["vps_migration[dst_node]"] = convertInt64ToString(inv.Input.DstNode)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["vps_migration[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["vps_migration[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["vps_migration[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("SrcNode") {
 			ret["vps_migration[src_node]"] = convertInt64ToString(inv.Input.SrcNode)

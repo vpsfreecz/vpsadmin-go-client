@@ -148,7 +148,7 @@ type ActionMonitoredEventIgnoreResponse struct {
 func (action *ActionMonitoredEventIgnore) Prepare() *ActionMonitoredEventIgnoreInvocation {
 	return &ActionMonitoredEventIgnoreInvocation{
 		Action: action,
-		Path:   "/v6.0/monitored_events/{monitored_event_id}/ignore",
+		Path:   "/v7.0/monitored_events/{monitored_event_id}/ignore",
 	}
 }
 

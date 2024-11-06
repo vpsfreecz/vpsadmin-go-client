@@ -105,7 +105,7 @@ type ActionOauth2ClientShowResponse struct {
 func (action *ActionOauth2ClientShow) Prepare() *ActionOauth2ClientShowInvocation {
 	return &ActionOauth2ClientShowInvocation{
 		Action: action,
-		Path:   "/v6.0/oauth2_clients/{oauth2_client_id}",
+		Path:   "/v7.0/oauth2_clients/{oauth2_client_id}",
 	}
 }
 

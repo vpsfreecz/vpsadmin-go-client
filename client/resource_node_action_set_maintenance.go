@@ -148,7 +148,7 @@ type ActionNodeSetMaintenanceResponse struct {
 func (action *ActionNodeSetMaintenance) Prepare() *ActionNodeSetMaintenanceInvocation {
 	return &ActionNodeSetMaintenanceInvocation{
 		Action: action,
-		Path:   "/v6.0/nodes/{node_id}/set_maintenance",
+		Path:   "/v7.0/nodes/{node_id}/set_maintenance",
 	}
 }
 

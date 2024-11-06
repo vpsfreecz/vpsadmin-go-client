@@ -88,12 +88,24 @@ func (in *ActionOutageEntityIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageEntityIndexInput is a type for action input parameters
 type ActionOutageEntityIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionOutageEntityIndexInput) SetFromId(value int64) *ActionOutageEntityIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -105,18 +117,6 @@ func (in *ActionOutageEntityIndexInput) SetLimit(value int64) *ActionOutageEntit
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionOutageEntityIndexInput) SetOffset(value int64) *ActionOutageEntityIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -183,7 +183,7 @@ type ActionOutageEntityIndexResponse struct {
 func (action *ActionOutageEntityIndex) Prepare() *ActionOutageEntityIndexInvocation {
 	return &ActionOutageEntityIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/outages/{outage_id}/entities",
+		Path:   "/v7.0/outages/{outage_id}/entities",
 	}
 }
 
@@ -295,11 +295,11 @@ func (inv *ActionOutageEntityIndexInvocation) callAsQuery() (*ActionOutageEntity
 
 func (inv *ActionOutageEntityIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["entity[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["entity[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["entity[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

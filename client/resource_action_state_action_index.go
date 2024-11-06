@@ -73,13 +73,25 @@ func (in *ActionActionStateIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionActionStateIndexInput is a type for action input parameters
 type ActionActionStateIndexInput struct {
+	FromId int64  `json:"from_id"`
 	Limit  int64  `json:"limit"`
-	Offset int64  `json:"offset"`
 	Order  string `json:"order"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionActionStateIndexInput) SetFromId(value int64) *ActionActionStateIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -91,18 +103,6 @@ func (in *ActionActionStateIndexInput) SetLimit(value int64) *ActionActionStateI
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionActionStateIndexInput) SetOffset(value int64) *ActionActionStateIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -187,7 +187,7 @@ type ActionActionStateIndexResponse struct {
 func (action *ActionActionStateIndex) Prepare() *ActionActionStateIndexInvocation {
 	return &ActionActionStateIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/action_states",
+		Path:   "/v7.0/action_states",
 	}
 }
 
@@ -288,11 +288,11 @@ func (inv *ActionActionStateIndexInvocation) callAsQuery() (*ActionActionStateIn
 
 func (inv *ActionActionStateIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["action_state[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["action_state[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["action_state[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["action_state[order]"] = inv.Input.Order

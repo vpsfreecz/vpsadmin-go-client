@@ -101,7 +101,7 @@ type ActionLocationNetworkShowResponse struct {
 func (action *ActionLocationNetworkShow) Prepare() *ActionLocationNetworkShowInvocation {
 	return &ActionLocationNetworkShowInvocation{
 		Action: action,
-		Path:   "/v6.0/location_networks/{location_network_id}",
+		Path:   "/v7.0/location_networks/{location_network_id}",
 	}
 }
 

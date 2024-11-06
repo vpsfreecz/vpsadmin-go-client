@@ -98,7 +98,7 @@ type ActionVpsMaintenanceWindowShowResponse struct {
 func (action *ActionVpsMaintenanceWindowShow) Prepare() *ActionVpsMaintenanceWindowShowInvocation {
 	return &ActionVpsMaintenanceWindowShowInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/maintenance_windows/{maintenance_window_id}",
+		Path:   "/v7.0/vpses/{vps_id}/maintenance_windows/{maintenance_window_id}",
 	}
 }
 

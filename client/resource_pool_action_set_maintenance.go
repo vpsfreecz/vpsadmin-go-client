@@ -148,7 +148,7 @@ type ActionPoolSetMaintenanceResponse struct {
 func (action *ActionPoolSetMaintenance) Prepare() *ActionPoolSetMaintenanceInvocation {
 	return &ActionPoolSetMaintenanceInvocation{
 		Action: action,
-		Path:   "/v6.0/pools/{pool_id}/set_maintenance",
+		Path:   "/v7.0/pools/{pool_id}/set_maintenance",
 	}
 }
 

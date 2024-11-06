@@ -88,12 +88,24 @@ func (in *ActionOomReportUsageIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportUsageIndexInput is a type for action input parameters
 type ActionOomReportUsageIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionOomReportUsageIndexInput) SetFromId(value int64) *ActionOomReportUsageIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -105,18 +117,6 @@ func (in *ActionOomReportUsageIndexInput) SetLimit(value int64) *ActionOomReport
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionOomReportUsageIndexInput) SetOffset(value int64) *ActionOomReportUsageIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -184,7 +184,7 @@ type ActionOomReportUsageIndexResponse struct {
 func (action *ActionOomReportUsageIndex) Prepare() *ActionOomReportUsageIndexInvocation {
 	return &ActionOomReportUsageIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/oom_reports/{oom_report_id}/usages",
+		Path:   "/v7.0/oom_reports/{oom_report_id}/usages",
 	}
 }
 
@@ -296,11 +296,11 @@ func (inv *ActionOomReportUsageIndexInvocation) callAsQuery() (*ActionOomReportU
 
 func (inv *ActionOomReportUsageIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["usage[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["usage[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["usage[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

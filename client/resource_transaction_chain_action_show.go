@@ -102,7 +102,7 @@ type ActionTransactionChainShowResponse struct {
 func (action *ActionTransactionChainShow) Prepare() *ActionTransactionChainShowInvocation {
 	return &ActionTransactionChainShowInvocation{
 		Action: action,
-		Path:   "/v6.0/transaction_chains/{transaction_chain_id}",
+		Path:   "/v7.0/transaction_chains/{transaction_chain_id}",
 	}
 }
 

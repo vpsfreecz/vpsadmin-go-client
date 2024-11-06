@@ -211,7 +211,7 @@ type ActionNetworkAddAddressesResponse struct {
 func (action *ActionNetworkAddAddresses) Prepare() *ActionNetworkAddAddressesInvocation {
 	return &ActionNetworkAddAddressesInvocation{
 		Action: action,
-		Path:   "/v6.0/networks/{network_id}/add_addresses",
+		Path:   "/v7.0/networks/{network_id}/add_addresses",
 	}
 }
 

@@ -88,10 +88,10 @@ func (in *ActionExportOutageIndexMetaGlobalInput) AnySelected() bool {
 type ActionExportOutageIndexInput struct {
 	Environment int64 `json:"environment"`
 	Export      int64 `json:"export"`
+	FromId      int64 `json:"from_id"`
 	Limit       int64 `json:"limit"`
 	Location    int64 `json:"location"`
 	Node        int64 `json:"node"`
-	Offset      int64 `json:"offset"`
 	Outage      int64 `json:"outage"`
 	User        int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -159,6 +159,18 @@ func (in *ActionExportOutageIndexInput) SetExportNil(set bool) *ActionExportOuta
 	} else {
 		delete(in._nilParameters, "Export")
 	}
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionExportOutageIndexInput) SetFromId(value int64) *ActionExportOutageIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -233,18 +245,6 @@ func (in *ActionExportOutageIndexInput) SetNodeNil(set bool) *ActionExportOutage
 	} else {
 		delete(in._nilParameters, "Node")
 	}
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionExportOutageIndexInput) SetOffset(value int64) *ActionExportOutageIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -376,7 +376,7 @@ type ActionExportOutageIndexResponse struct {
 func (action *ActionExportOutageIndex) Prepare() *ActionExportOutageIndexInvocation {
 	return &ActionExportOutageIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/export_outages",
+		Path:   "/v7.0/export_outages",
 	}
 }
 
@@ -483,6 +483,9 @@ func (inv *ActionExportOutageIndexInvocation) convertInputToQueryParams(ret map[
 		if inv.IsParameterSelected("Export") {
 			ret["export_outage[export]"] = convertInt64ToString(inv.Input.Export)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["export_outage[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["export_outage[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
@@ -491,9 +494,6 @@ func (inv *ActionExportOutageIndexInvocation) convertInputToQueryParams(ret map[
 		}
 		if inv.IsParameterSelected("Node") {
 			ret["export_outage[node]"] = convertInt64ToString(inv.Input.Node)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["export_outage[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Outage") {
 			ret["export_outage[outage]"] = convertInt64ToString(inv.Input.Outage)

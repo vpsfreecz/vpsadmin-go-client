@@ -97,7 +97,7 @@ type ActionMonitoredEventLogShowResponse struct {
 func (action *ActionMonitoredEventLogShow) Prepare() *ActionMonitoredEventLogShowInvocation {
 	return &ActionMonitoredEventLogShowInvocation{
 		Action: action,
-		Path:   "/v6.0/monitored_events/{monitored_event_id}/logs/{log_id}",
+		Path:   "/v7.0/monitored_events/{monitored_event_id}/logs/{log_id}",
 	}
 }
 

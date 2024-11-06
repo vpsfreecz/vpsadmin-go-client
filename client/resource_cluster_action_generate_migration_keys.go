@@ -88,7 +88,7 @@ func (action *ActionClusterGenerateMigrationKeys) Call() (*ActionClusterGenerate
 func (action *ActionClusterGenerateMigrationKeys) Prepare() *ActionClusterGenerateMigrationKeysInvocation {
 	return &ActionClusterGenerateMigrationKeysInvocation{
 		Action: action,
-		Path:   "/v6.0/cluster/generate_migration_keys",
+		Path:   "/v7.0/cluster/generate_migration_keys",
 	}
 }
 

@@ -75,12 +75,14 @@ func (in *ActionOsTemplateCreateMetaGlobalInput) AnySelected() bool {
 type ActionOsTemplateCreateInput struct {
 	Arch           string `json:"arch"`
 	CgroupVersion  string `json:"cgroup_version"`
+	Config         string `json:"config"`
 	Distribution   string `json:"distribution"`
 	Enabled        bool   `json:"enabled"`
 	HypervisorType string `json:"hypervisor_type"`
 	Info           string `json:"info"`
 	Label          string `json:"label"`
 	Order          int64  `json:"order"`
+	OsFamily       int64  `json:"os_family"`
 	Supported      bool   `json:"supported"`
 	Variant        string `json:"variant"`
 	Vendor         string `json:"vendor"`
@@ -112,6 +114,18 @@ func (in *ActionOsTemplateCreateInput) SetCgroupVersion(value string) *ActionOsT
 	}
 
 	in._selectedParameters["CgroupVersion"] = nil
+	return in
+}
+
+// SetConfig sets parameter Config to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetConfig(value string) *ActionOsTemplateCreateInput {
+	in.Config = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Config"] = nil
 	return in
 }
 
@@ -184,6 +198,37 @@ func (in *ActionOsTemplateCreateInput) SetOrder(value int64) *ActionOsTemplateCr
 	}
 
 	in._selectedParameters["Order"] = nil
+	return in
+}
+
+// SetOsFamily sets parameter OsFamily to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetOsFamily(value int64) *ActionOsTemplateCreateInput {
+	in.OsFamily = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetOsFamilyNil(false)
+	in._selectedParameters["OsFamily"] = nil
+	return in
+}
+
+// SetOsFamilyNil sets parameter OsFamily to nil and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetOsFamilyNil(set bool) *ActionOsTemplateCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["OsFamily"] = nil
+		in.SelectParameters("OsFamily")
+	} else {
+		delete(in._nilParameters, "OsFamily")
+	}
 	return in
 }
 
@@ -281,20 +326,22 @@ type ActionOsTemplateCreateRequest struct {
 
 // ActionOsTemplateCreateOutput is a type for action output parameters
 type ActionOsTemplateCreateOutput struct {
-	Arch           string `json:"arch"`
-	CgroupVersion  string `json:"cgroup_version"`
-	Distribution   string `json:"distribution"`
-	Enabled        bool   `json:"enabled"`
-	HypervisorType string `json:"hypervisor_type"`
-	Id             int64  `json:"id"`
-	Info           string `json:"info"`
-	Label          string `json:"label"`
-	Name           string `json:"name"`
-	Order          int64  `json:"order"`
-	Supported      bool   `json:"supported"`
-	Variant        string `json:"variant"`
-	Vendor         string `json:"vendor"`
-	Version        string `json:"version"`
+	Arch           string                    `json:"arch"`
+	CgroupVersion  string                    `json:"cgroup_version"`
+	Config         string                    `json:"config"`
+	Distribution   string                    `json:"distribution"`
+	Enabled        bool                      `json:"enabled"`
+	HypervisorType string                    `json:"hypervisor_type"`
+	Id             int64                     `json:"id"`
+	Info           string                    `json:"info"`
+	Label          string                    `json:"label"`
+	Name           string                    `json:"name"`
+	Order          int64                     `json:"order"`
+	OsFamily       *ActionOsFamilyShowOutput `json:"os_family"`
+	Supported      bool                      `json:"supported"`
+	Variant        string                    `json:"variant"`
+	Vendor         string                    `json:"vendor"`
+	Version        string                    `json:"version"`
 }
 
 // Type for action response, including envelope
@@ -314,7 +361,7 @@ type ActionOsTemplateCreateResponse struct {
 func (action *ActionOsTemplateCreate) Prepare() *ActionOsTemplateCreateInvocation {
 	return &ActionOsTemplateCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/os_templates",
+		Path:   "/v7.0/os_templates",
 	}
 }
 
@@ -428,6 +475,9 @@ func (inv *ActionOsTemplateCreateInvocation) makeInputParams() map[string]interf
 		if inv.IsParameterSelected("CgroupVersion") {
 			ret["cgroup_version"] = inv.Input.CgroupVersion
 		}
+		if inv.IsParameterSelected("Config") {
+			ret["config"] = inv.Input.Config
+		}
 		if inv.IsParameterSelected("Distribution") {
 			ret["distribution"] = inv.Input.Distribution
 		}
@@ -445,6 +495,13 @@ func (inv *ActionOsTemplateCreateInvocation) makeInputParams() map[string]interf
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["order"] = inv.Input.Order
+		}
+		if inv.IsParameterSelected("OsFamily") {
+			if inv.IsParameterNil("OsFamily") {
+				ret["os_family"] = nil
+			} else {
+				ret["os_family"] = inv.Input.OsFamily
+			}
 		}
 		if inv.IsParameterSelected("Supported") {
 			ret["supported"] = inv.Input.Supported

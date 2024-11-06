@@ -101,7 +101,7 @@ type ActionUserStateLogShowResponse struct {
 func (action *ActionUserStateLogShow) Prepare() *ActionUserStateLogShowInvocation {
 	return &ActionUserStateLogShowInvocation{
 		Action: action,
-		Path:   "/v6.0/users/{user_id}/state_logs/{state_log_id}",
+		Path:   "/v7.0/users/{user_id}/state_logs/{state_log_id}",
 	}
 }
 

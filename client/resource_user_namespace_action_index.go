@@ -87,8 +87,8 @@ func (in *ActionUserNamespaceIndexMetaGlobalInput) AnySelected() bool {
 // ActionUserNamespaceIndexInput is a type for action input parameters
 type ActionUserNamespaceIndexInput struct {
 	BlockCount int64 `json:"block_count"`
+	FromId     int64 `json:"from_id"`
 	Limit      int64 `json:"limit"`
-	Offset     int64 `json:"offset"`
 	Size       int64 `json:"size"`
 	User       int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -109,6 +109,18 @@ func (in *ActionUserNamespaceIndexInput) SetBlockCount(value int64) *ActionUserN
 	return in
 }
 
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionUserNamespaceIndexInput) SetFromId(value int64) *ActionUserNamespaceIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
+}
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserNamespaceIndexInput) SetLimit(value int64) *ActionUserNamespaceIndexInput {
 	in.Limit = value
@@ -118,18 +130,6 @@ func (in *ActionUserNamespaceIndexInput) SetLimit(value int64) *ActionUserNamesp
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserNamespaceIndexInput) SetOffset(value int64) *ActionUserNamespaceIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -240,7 +240,7 @@ type ActionUserNamespaceIndexResponse struct {
 func (action *ActionUserNamespaceIndex) Prepare() *ActionUserNamespaceIndexInvocation {
 	return &ActionUserNamespaceIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/user_namespaces",
+		Path:   "/v7.0/user_namespaces",
 	}
 }
 
@@ -344,11 +344,11 @@ func (inv *ActionUserNamespaceIndexInvocation) convertInputToQueryParams(ret map
 		if inv.IsParameterSelected("BlockCount") {
 			ret["user_namespace[block_count]"] = convertInt64ToString(inv.Input.BlockCount)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["user_namespace[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["user_namespace[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["user_namespace[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Size") {
 			ret["user_namespace[size]"] = convertInt64ToString(inv.Input.Size)

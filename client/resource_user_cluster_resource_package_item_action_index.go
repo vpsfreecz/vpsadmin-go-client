@@ -88,12 +88,24 @@ func (in *ActionUserClusterResourcePackageItemIndexMetaGlobalInput) AnySelected(
 
 // ActionUserClusterResourcePackageItemIndexInput is a type for action input parameters
 type ActionUserClusterResourcePackageItemIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionUserClusterResourcePackageItemIndexInput) SetFromId(value int64) *ActionUserClusterResourcePackageItemIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -105,18 +117,6 @@ func (in *ActionUserClusterResourcePackageItemIndexInput) SetLimit(value int64) 
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserClusterResourcePackageItemIndexInput) SetOffset(value int64) *ActionUserClusterResourcePackageItemIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -182,7 +182,7 @@ type ActionUserClusterResourcePackageItemIndexResponse struct {
 func (action *ActionUserClusterResourcePackageItemIndex) Prepare() *ActionUserClusterResourcePackageItemIndexInvocation {
 	return &ActionUserClusterResourcePackageItemIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/user_cluster_resource_packages/{user_cluster_resource_package_id}/items",
+		Path:   "/v7.0/user_cluster_resource_packages/{user_cluster_resource_package_id}/items",
 	}
 }
 
@@ -294,11 +294,11 @@ func (inv *ActionUserClusterResourcePackageItemIndexInvocation) callAsQuery() (*
 
 func (inv *ActionUserClusterResourcePackageItemIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["item[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["item[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["item[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

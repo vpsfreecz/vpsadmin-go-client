@@ -426,7 +426,7 @@ type ActionUserRequestRegistrationCreateResponse struct {
 func (action *ActionUserRequestRegistrationCreate) Prepare() *ActionUserRequestRegistrationCreateInvocation {
 	return &ActionUserRequestRegistrationCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/user_request/registrations",
+		Path:   "/v7.0/user_request/registrations",
 	}
 }
 

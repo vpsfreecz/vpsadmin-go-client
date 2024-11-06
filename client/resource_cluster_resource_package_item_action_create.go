@@ -194,7 +194,7 @@ type ActionClusterResourcePackageItemCreateResponse struct {
 func (action *ActionClusterResourcePackageItemCreate) Prepare() *ActionClusterResourcePackageItemCreateInvocation {
 	return &ActionClusterResourcePackageItemCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/cluster_resource_packages/{cluster_resource_package_id}/items",
+		Path:   "/v7.0/cluster_resource_packages/{cluster_resource_package_id}/items",
 	}
 }
 

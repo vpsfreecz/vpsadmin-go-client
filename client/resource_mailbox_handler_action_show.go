@@ -100,7 +100,7 @@ type ActionMailboxHandlerShowResponse struct {
 func (action *ActionMailboxHandlerShow) Prepare() *ActionMailboxHandlerShowInvocation {
 	return &ActionMailboxHandlerShowInvocation{
 		Action: action,
-		Path:   "/v6.0/mailboxes/{mailbox_id}/handler/{handler_id}",
+		Path:   "/v7.0/mailboxes/{mailbox_id}/handler/{handler_id}",
 	}
 }
 

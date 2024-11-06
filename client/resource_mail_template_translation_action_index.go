@@ -88,12 +88,24 @@ func (in *ActionMailTemplateTranslationIndexMetaGlobalInput) AnySelected() bool 
 
 // ActionMailTemplateTranslationIndexInput is a type for action input parameters
 type ActionMailTemplateTranslationIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionMailTemplateTranslationIndexInput) SetFromId(value int64) *ActionMailTemplateTranslationIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -105,18 +117,6 @@ func (in *ActionMailTemplateTranslationIndexInput) SetLimit(value int64) *Action
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionMailTemplateTranslationIndexInput) SetOffset(value int64) *ActionMailTemplateTranslationIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -189,7 +189,7 @@ type ActionMailTemplateTranslationIndexResponse struct {
 func (action *ActionMailTemplateTranslationIndex) Prepare() *ActionMailTemplateTranslationIndexInvocation {
 	return &ActionMailTemplateTranslationIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/mail_templates/{mail_template_id}/translations",
+		Path:   "/v7.0/mail_templates/{mail_template_id}/translations",
 	}
 }
 
@@ -301,11 +301,11 @@ func (inv *ActionMailTemplateTranslationIndexInvocation) callAsQuery() (*ActionM
 
 func (inv *ActionMailTemplateTranslationIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["translation[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["translation[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["translation[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

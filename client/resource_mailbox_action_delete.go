@@ -88,7 +88,7 @@ type ActionMailboxDeleteResponse struct {
 func (action *ActionMailboxDelete) Prepare() *ActionMailboxDeleteInvocation {
 	return &ActionMailboxDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/mailboxes/{mailbox_id}",
+		Path:   "/v7.0/mailboxes/{mailbox_id}",
 	}
 }
 

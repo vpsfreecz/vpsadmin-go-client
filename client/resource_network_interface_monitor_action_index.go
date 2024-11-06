@@ -87,11 +87,11 @@ func (in *ActionNetworkInterfaceMonitorIndexMetaGlobalInput) AnySelected() bool 
 // ActionNetworkInterfaceMonitorIndexInput is a type for action input parameters
 type ActionNetworkInterfaceMonitorIndexInput struct {
 	Environment      int64  `json:"environment"`
+	FromId           int64  `json:"from_id"`
 	Limit            int64  `json:"limit"`
 	Location         int64  `json:"location"`
 	NetworkInterface int64  `json:"network_interface"`
 	Node             int64  `json:"node"`
-	Offset           int64  `json:"offset"`
 	Order            string `json:"order"`
 	User             int64  `json:"user"`
 	Vps              int64  `json:"vps"`
@@ -129,6 +129,18 @@ func (in *ActionNetworkInterfaceMonitorIndexInput) SetEnvironmentNil(set bool) *
 	} else {
 		delete(in._nilParameters, "Environment")
 	}
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionNetworkInterfaceMonitorIndexInput) SetFromId(value int64) *ActionNetworkInterfaceMonitorIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -234,18 +246,6 @@ func (in *ActionNetworkInterfaceMonitorIndexInput) SetNodeNil(set bool) *ActionN
 	} else {
 		delete(in._nilParameters, "Node")
 	}
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionNetworkInterfaceMonitorIndexInput) SetOffset(value int64) *ActionNetworkInterfaceMonitorIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -392,7 +392,7 @@ type ActionNetworkInterfaceMonitorIndexResponse struct {
 func (action *ActionNetworkInterfaceMonitorIndex) Prepare() *ActionNetworkInterfaceMonitorIndexInvocation {
 	return &ActionNetworkInterfaceMonitorIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/network_interface_monitors",
+		Path:   "/v7.0/network_interface_monitors",
 	}
 }
 
@@ -496,6 +496,9 @@ func (inv *ActionNetworkInterfaceMonitorIndexInvocation) convertInputToQueryPara
 		if inv.IsParameterSelected("Environment") {
 			ret["network_interface_monitor[environment]"] = convertInt64ToString(inv.Input.Environment)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["network_interface_monitor[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["network_interface_monitor[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
@@ -507,9 +510,6 @@ func (inv *ActionNetworkInterfaceMonitorIndexInvocation) convertInputToQueryPara
 		}
 		if inv.IsParameterSelected("Node") {
 			ret["network_interface_monitor[node]"] = convertInt64ToString(inv.Input.Node)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["network_interface_monitor[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["network_interface_monitor[order]"] = inv.Input.Order

@@ -259,7 +259,7 @@ type ActionEnvironmentUpdateResponse struct {
 func (action *ActionEnvironmentUpdate) Prepare() *ActionEnvironmentUpdateInvocation {
 	return &ActionEnvironmentUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/environments/{environment_id}",
+		Path:   "/v7.0/environments/{environment_id}",
 	}
 }
 

@@ -103,7 +103,7 @@ type ActionIpAddressShowResponse struct {
 func (action *ActionIpAddressShow) Prepare() *ActionIpAddressShowInvocation {
 	return &ActionIpAddressShowInvocation{
 		Action: action,
-		Path:   "/v6.0/ip_addresses/{ip_address_id}",
+		Path:   "/v7.0/ip_addresses/{ip_address_id}",
 	}
 }
 

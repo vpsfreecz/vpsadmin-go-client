@@ -97,7 +97,7 @@ type ActionLanguageShowResponse struct {
 func (action *ActionLanguageShow) Prepare() *ActionLanguageShowInvocation {
 	return &ActionLanguageShowInvocation{
 		Action: action,
-		Path:   "/v6.0/languages/{language_id}",
+		Path:   "/v7.0/languages/{language_id}",
 	}
 }
 

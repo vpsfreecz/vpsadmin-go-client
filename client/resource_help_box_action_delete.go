@@ -88,7 +88,7 @@ type ActionHelpBoxDeleteResponse struct {
 func (action *ActionHelpBoxDelete) Prepare() *ActionHelpBoxDeleteInvocation {
 	return &ActionHelpBoxDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/help_boxes/{help_box_id}",
+		Path:   "/v7.0/help_boxes/{help_box_id}",
 	}
 }
 

@@ -89,8 +89,8 @@ func (in *ActionVpsSshHostKeyIndexMetaGlobalInput) AnySelected() bool {
 // ActionVpsSshHostKeyIndexInput is a type for action input parameters
 type ActionVpsSshHostKeyIndexInput struct {
 	Algorithm string `json:"algorithm"`
+	FromId    int64  `json:"from_id"`
 	Limit     int64  `json:"limit"`
-	Offset    int64  `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -109,6 +109,18 @@ func (in *ActionVpsSshHostKeyIndexInput) SetAlgorithm(value string) *ActionVpsSs
 	return in
 }
 
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionVpsSshHostKeyIndexInput) SetFromId(value int64) *ActionVpsSshHostKeyIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
+}
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionVpsSshHostKeyIndexInput) SetLimit(value int64) *ActionVpsSshHostKeyIndexInput {
 	in.Limit = value
@@ -118,18 +130,6 @@ func (in *ActionVpsSshHostKeyIndexInput) SetLimit(value int64) *ActionVpsSshHost
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionVpsSshHostKeyIndexInput) SetOffset(value int64) *ActionVpsSshHostKeyIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -198,7 +198,7 @@ type ActionVpsSshHostKeyIndexResponse struct {
 func (action *ActionVpsSshHostKeyIndex) Prepare() *ActionVpsSshHostKeyIndexInvocation {
 	return &ActionVpsSshHostKeyIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/ssh_host_keys",
+		Path:   "/v7.0/vpses/{vps_id}/ssh_host_keys",
 	}
 }
 
@@ -313,11 +313,11 @@ func (inv *ActionVpsSshHostKeyIndexInvocation) convertInputToQueryParams(ret map
 		if inv.IsParameterSelected("Algorithm") {
 			ret["ssh_host_key[algorithm]"] = inv.Input.Algorithm
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["ssh_host_key[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["ssh_host_key[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["ssh_host_key[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

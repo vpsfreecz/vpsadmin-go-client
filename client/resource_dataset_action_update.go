@@ -275,7 +275,7 @@ type ActionDatasetUpdateResponse struct {
 func (action *ActionDatasetUpdate) Prepare() *ActionDatasetUpdateInvocation {
 	return &ActionDatasetUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/datasets/{dataset_id}",
+		Path:   "/v7.0/datasets/{dataset_id}",
 	}
 }
 

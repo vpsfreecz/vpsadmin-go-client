@@ -86,12 +86,24 @@ func (in *ActionClusterResourceIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterResourceIndexInput is a type for action input parameters
 type ActionClusterResourceIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionClusterResourceIndexInput) SetFromId(value int64) *ActionClusterResourceIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -103,18 +115,6 @@ func (in *ActionClusterResourceIndexInput) SetLimit(value int64) *ActionClusterR
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionClusterResourceIndexInput) SetOffset(value int64) *ActionClusterResourceIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -183,7 +183,7 @@ type ActionClusterResourceIndexResponse struct {
 func (action *ActionClusterResourceIndex) Prepare() *ActionClusterResourceIndexInvocation {
 	return &ActionClusterResourceIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/cluster_resources",
+		Path:   "/v7.0/cluster_resources",
 	}
 }
 
@@ -284,11 +284,11 @@ func (inv *ActionClusterResourceIndexInvocation) callAsQuery() (*ActionClusterRe
 
 func (inv *ActionClusterResourceIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["cluster_resource[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["cluster_resource[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["cluster_resource[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

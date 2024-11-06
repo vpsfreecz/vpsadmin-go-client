@@ -104,7 +104,7 @@ type ActionOomReportShowResponse struct {
 func (action *ActionOomReportShow) Prepare() *ActionOomReportShowInvocation {
 	return &ActionOomReportShowInvocation{
 		Action: action,
-		Path:   "/v6.0/oom_reports/{oom_report_id}",
+		Path:   "/v7.0/oom_reports/{oom_report_id}",
 	}
 }
 

@@ -87,13 +87,13 @@ func (in *ActionVpsIndexMetaGlobalInput) AnySelected() bool {
 // ActionVpsIndexInput is a type for action input parameters
 type ActionVpsIndexInput struct {
 	Environment      int64  `json:"environment"`
+	FromId           int64  `json:"from_id"`
 	HostnameAny      string `json:"hostname_any"`
 	HostnameExact    string `json:"hostname_exact"`
 	Limit            int64  `json:"limit"`
 	Location         int64  `json:"location"`
 	Node             int64  `json:"node"`
 	ObjectState      string `json:"object_state"`
-	Offset           int64  `json:"offset"`
 	OsTemplate       int64  `json:"os_template"`
 	User             int64  `json:"user"`
 	UserNamespaceMap int64  `json:"user_namespace_map"`
@@ -131,6 +131,18 @@ func (in *ActionVpsIndexInput) SetEnvironmentNil(set bool) *ActionVpsIndexInput 
 	} else {
 		delete(in._nilParameters, "Environment")
 	}
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionVpsIndexInput) SetFromId(value int64) *ActionVpsIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -241,18 +253,6 @@ func (in *ActionVpsIndexInput) SetObjectState(value string) *ActionVpsIndexInput
 	}
 
 	in._selectedParameters["ObjectState"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionVpsIndexInput) SetOffset(value int64) *ActionVpsIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -413,7 +413,9 @@ type ActionVpsIndexOutput struct {
 	InRescueMode            bool                              `json:"in_rescue_mode"`
 	Info                    string                            `json:"info"`
 	IsRunning               bool                              `json:"is_running"`
-	Loadavg                 float64                           `json:"loadavg"`
+	Loadavg1                float64                           `json:"loadavg1"`
+	Loadavg15               float64                           `json:"loadavg15"`
+	Loadavg5                float64                           `json:"loadavg5"`
 	MaintenanceLock         string                            `json:"maintenance_lock"`
 	MaintenanceLockReason   string                            `json:"maintenance_lock_reason"`
 	ManageHostname          bool                              `json:"manage_hostname"`
@@ -452,7 +454,7 @@ type ActionVpsIndexResponse struct {
 func (action *ActionVpsIndex) Prepare() *ActionVpsIndexInvocation {
 	return &ActionVpsIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses",
+		Path:   "/v7.0/vpses",
 	}
 }
 
@@ -556,6 +558,9 @@ func (inv *ActionVpsIndexInvocation) convertInputToQueryParams(ret map[string]st
 		if inv.IsParameterSelected("Environment") {
 			ret["vps[environment]"] = convertInt64ToString(inv.Input.Environment)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["vps[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("HostnameAny") {
 			ret["vps[hostname_any]"] = inv.Input.HostnameAny
 		}
@@ -573,9 +578,6 @@ func (inv *ActionVpsIndexInvocation) convertInputToQueryParams(ret map[string]st
 		}
 		if inv.IsParameterSelected("ObjectState") {
 			ret["vps[object_state]"] = inv.Input.ObjectState
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["vps[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("OsTemplate") {
 			ret["vps[os_template]"] = convertInt64ToString(inv.Input.OsTemplate)

@@ -158,7 +158,7 @@ type ActionDatasetInheritResponse struct {
 func (action *ActionDatasetInherit) Prepare() *ActionDatasetInheritInvocation {
 	return &ActionDatasetInheritInvocation{
 		Action: action,
-		Path:   "/v6.0/datasets/{dataset_id}/inherit",
+		Path:   "/v7.0/datasets/{dataset_id}/inherit",
 	}
 }
 

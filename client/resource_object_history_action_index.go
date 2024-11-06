@@ -87,10 +87,10 @@ func (in *ActionObjectHistoryIndexMetaGlobalInput) AnySelected() bool {
 // ActionObjectHistoryIndexInput is a type for action input parameters
 type ActionObjectHistoryIndexInput struct {
 	EventType   string `json:"event_type"`
+	FromId      int64  `json:"from_id"`
 	Limit       int64  `json:"limit"`
 	Object      string `json:"object"`
 	ObjectId    int64  `json:"object_id"`
-	Offset      int64  `json:"offset"`
 	User        int64  `json:"user"`
 	UserSession int64  `json:"user_session"`
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -108,6 +108,18 @@ func (in *ActionObjectHistoryIndexInput) SetEventType(value string) *ActionObjec
 	}
 
 	in._selectedParameters["EventType"] = nil
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionObjectHistoryIndexInput) SetFromId(value int64) *ActionObjectHistoryIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -144,18 +156,6 @@ func (in *ActionObjectHistoryIndexInput) SetObjectId(value int64) *ActionObjectH
 	}
 
 	in._selectedParameters["ObjectId"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionObjectHistoryIndexInput) SetOffset(value int64) *ActionObjectHistoryIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -287,7 +287,7 @@ type ActionObjectHistoryIndexResponse struct {
 func (action *ActionObjectHistoryIndex) Prepare() *ActionObjectHistoryIndexInvocation {
 	return &ActionObjectHistoryIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/object_histories",
+		Path:   "/v7.0/object_histories",
 	}
 }
 
@@ -391,6 +391,9 @@ func (inv *ActionObjectHistoryIndexInvocation) convertInputToQueryParams(ret map
 		if inv.IsParameterSelected("EventType") {
 			ret["object_history[event_type]"] = inv.Input.EventType
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["object_history[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["object_history[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
@@ -399,9 +402,6 @@ func (inv *ActionObjectHistoryIndexInvocation) convertInputToQueryParams(ret map
 		}
 		if inv.IsParameterSelected("ObjectId") {
 			ret["object_history[object_id]"] = convertInt64ToString(inv.Input.ObjectId)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["object_history[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("User") {
 			ret["object_history[user]"] = convertInt64ToString(inv.Input.User)

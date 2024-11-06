@@ -226,7 +226,7 @@ type ActionIpAddressAssignWithHostAddressResponse struct {
 func (action *ActionIpAddressAssignWithHostAddress) Prepare() *ActionIpAddressAssignWithHostAddressInvocation {
 	return &ActionIpAddressAssignWithHostAddressInvocation{
 		Action: action,
-		Path:   "/v6.0/ip_addresses/{ip_address_id}/assign_with_host_address",
+		Path:   "/v7.0/ip_addresses/{ip_address_id}/assign_with_host_address",
 	}
 }
 

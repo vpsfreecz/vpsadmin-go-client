@@ -267,7 +267,7 @@ type ActionLocationNetworkCreateResponse struct {
 func (action *ActionLocationNetworkCreate) Prepare() *ActionLocationNetworkCreateInvocation {
 	return &ActionLocationNetworkCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/location_networks",
+		Path:   "/v7.0/location_networks",
 	}
 }
 

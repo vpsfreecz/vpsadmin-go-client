@@ -105,7 +105,7 @@ type ActionEnvironmentShowResponse struct {
 func (action *ActionEnvironmentShow) Prepare() *ActionEnvironmentShowInvocation {
 	return &ActionEnvironmentShowInvocation{
 		Action: action,
-		Path:   "/v6.0/environments/{environment_id}",
+		Path:   "/v7.0/environments/{environment_id}",
 	}
 }
 

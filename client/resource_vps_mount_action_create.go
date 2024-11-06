@@ -280,7 +280,7 @@ type ActionVpsMountCreateResponse struct {
 func (action *ActionVpsMountCreate) Prepare() *ActionVpsMountCreateInvocation {
 	return &ActionVpsMountCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/mounts",
+		Path:   "/v7.0/vpses/{vps_id}/mounts",
 	}
 }
 

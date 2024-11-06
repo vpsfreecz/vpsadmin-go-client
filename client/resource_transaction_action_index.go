@@ -87,9 +87,9 @@ func (in *ActionTransactionIndexMetaGlobalInput) AnySelected() bool {
 // ActionTransactionIndexInput is a type for action input parameters
 type ActionTransactionIndexInput struct {
 	Done             string `json:"done"`
+	FromId           int64  `json:"from_id"`
 	Limit            int64  `json:"limit"`
 	Node             int64  `json:"node"`
-	Offset           int64  `json:"offset"`
 	Success          int64  `json:"success"`
 	TransactionChain int64  `json:"transaction_chain"`
 	Type             int64  `json:"type"`
@@ -108,6 +108,18 @@ func (in *ActionTransactionIndexInput) SetDone(value string) *ActionTransactionI
 	}
 
 	in._selectedParameters["Done"] = nil
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionTransactionIndexInput) SetFromId(value int64) *ActionTransactionIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -151,18 +163,6 @@ func (in *ActionTransactionIndexInput) SetNodeNil(set bool) *ActionTransactionIn
 	} else {
 		delete(in._nilParameters, "Node")
 	}
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionTransactionIndexInput) SetOffset(value int64) *ActionTransactionIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -297,7 +297,7 @@ type ActionTransactionIndexResponse struct {
 func (action *ActionTransactionIndex) Prepare() *ActionTransactionIndexInvocation {
 	return &ActionTransactionIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/transactions",
+		Path:   "/v7.0/transactions",
 	}
 }
 
@@ -401,14 +401,14 @@ func (inv *ActionTransactionIndexInvocation) convertInputToQueryParams(ret map[s
 		if inv.IsParameterSelected("Done") {
 			ret["transaction[done]"] = inv.Input.Done
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["transaction[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["transaction[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 		if inv.IsParameterSelected("Node") {
 			ret["transaction[node]"] = convertInt64ToString(inv.Input.Node)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["transaction[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Success") {
 			ret["transaction[success]"] = convertInt64ToString(inv.Input.Success)

@@ -320,7 +320,7 @@ type ActionVpsMigrateResponse struct {
 func (action *ActionVpsMigrate) Prepare() *ActionVpsMigrateInvocation {
 	return &ActionVpsMigrateInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/migrate",
+		Path:   "/v7.0/vpses/{vps_id}/migrate",
 	}
 }
 

@@ -86,8 +86,8 @@ func (in *ActionOutageUpdateIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageUpdateIndexInput is a type for action input parameters
 type ActionOutageUpdateIndexInput struct {
+	FromId     int64  `json:"from_id"`
 	Limit      int64  `json:"limit"`
-	Offset     int64  `json:"offset"`
 	Outage     int64  `json:"outage"`
 	ReportedBy int64  `json:"reported_by"`
 	Since      string `json:"since"`
@@ -95,6 +95,18 @@ type ActionOutageUpdateIndexInput struct {
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionOutageUpdateIndexInput) SetFromId(value int64) *ActionOutageUpdateIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -106,18 +118,6 @@ func (in *ActionOutageUpdateIndexInput) SetLimit(value int64) *ActionOutageUpdat
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionOutageUpdateIndexInput) SetOffset(value int64) *ActionOutageUpdateIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -269,7 +269,7 @@ type ActionOutageUpdateIndexResponse struct {
 func (action *ActionOutageUpdateIndex) Prepare() *ActionOutageUpdateIndexInvocation {
 	return &ActionOutageUpdateIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/outage_updates",
+		Path:   "/v7.0/outage_updates",
 	}
 }
 
@@ -370,11 +370,11 @@ func (inv *ActionOutageUpdateIndexInvocation) callAsQuery() (*ActionOutageUpdate
 
 func (inv *ActionOutageUpdateIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["outage_update[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["outage_update[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["outage_update[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Outage") {
 			ret["outage_update[outage]"] = convertInt64ToString(inv.Input.Outage)

@@ -86,14 +86,26 @@ func (in *ActionLocationNetworkIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationNetworkIndexInput is a type for action input parameters
 type ActionLocationNetworkIndexInput struct {
+	FromId   int64 `json:"from_id"`
 	Limit    int64 `json:"limit"`
 	Location int64 `json:"location"`
 	Network  int64 `json:"network"`
-	Offset   int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionLocationNetworkIndexInput) SetFromId(value int64) *ActionLocationNetworkIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -170,18 +182,6 @@ func (in *ActionLocationNetworkIndexInput) SetNetworkNil(set bool) *ActionLocati
 	return in
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionLocationNetworkIndexInput) SetOffset(value int64) *ActionLocationNetworkIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-
 // SelectParameters sets parameters from ActionLocationNetworkIndexInput
 // that will be sent to the API.
 // SelectParameters can be called multiple times.
@@ -248,7 +248,7 @@ type ActionLocationNetworkIndexResponse struct {
 func (action *ActionLocationNetworkIndex) Prepare() *ActionLocationNetworkIndexInvocation {
 	return &ActionLocationNetworkIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/location_networks",
+		Path:   "/v7.0/location_networks",
 	}
 }
 
@@ -349,6 +349,9 @@ func (inv *ActionLocationNetworkIndexInvocation) callAsQuery() (*ActionLocationN
 
 func (inv *ActionLocationNetworkIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["location_network[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["location_network[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
@@ -357,9 +360,6 @@ func (inv *ActionLocationNetworkIndexInvocation) convertInputToQueryParams(ret m
 		}
 		if inv.IsParameterSelected("Network") {
 			ret["location_network[network]"] = convertInt64ToString(inv.Input.Network)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["location_network[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

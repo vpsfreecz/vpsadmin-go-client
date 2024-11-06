@@ -89,9 +89,9 @@ func (in *ActionDatasetPropertyHistoryIndexMetaGlobalInput) AnySelected() bool {
 // ActionDatasetPropertyHistoryIndexInput is a type for action input parameters
 type ActionDatasetPropertyHistoryIndexInput struct {
 	From   string `json:"from"`
+	FromId int64  `json:"from_id"`
 	Limit  int64  `json:"limit"`
 	Name   string `json:"name"`
-	Offset int64  `json:"offset"`
 	To     string `json:"to"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -108,6 +108,18 @@ func (in *ActionDatasetPropertyHistoryIndexInput) SetFrom(value string) *ActionD
 	}
 
 	in._selectedParameters["From"] = nil
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionDatasetPropertyHistoryIndexInput) SetFromId(value int64) *ActionDatasetPropertyHistoryIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -132,18 +144,6 @@ func (in *ActionDatasetPropertyHistoryIndexInput) SetName(value string) *ActionD
 	}
 
 	in._selectedParameters["Name"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionDatasetPropertyHistoryIndexInput) SetOffset(value int64) *ActionDatasetPropertyHistoryIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -222,7 +222,7 @@ type ActionDatasetPropertyHistoryIndexResponse struct {
 func (action *ActionDatasetPropertyHistoryIndex) Prepare() *ActionDatasetPropertyHistoryIndexInvocation {
 	return &ActionDatasetPropertyHistoryIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/datasets/{dataset_id}/property_history",
+		Path:   "/v7.0/datasets/{dataset_id}/property_history",
 	}
 }
 
@@ -337,14 +337,14 @@ func (inv *ActionDatasetPropertyHistoryIndexInvocation) convertInputToQueryParam
 		if inv.IsParameterSelected("From") {
 			ret["property_history[from]"] = inv.Input.From
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["property_history[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["property_history[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 		if inv.IsParameterSelected("Name") {
 			ret["property_history[name]"] = inv.Input.Name
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["property_history[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("To") {
 			ret["property_history[to]"] = inv.Input.To

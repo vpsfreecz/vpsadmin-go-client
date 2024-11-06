@@ -86,18 +86,43 @@ func (in *ActionMonitoredEventIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMonitoredEventIndexInput is a type for action input parameters
 type ActionMonitoredEventIndexInput struct {
-	Limit      int64  `json:"limit"`
-	Monitor    string `json:"monitor"`
-	ObjectId   int64  `json:"object_id"`
-	ObjectName string `json:"object_name"`
-	Offset     int64  `json:"offset"`
-	Order      string `json:"order"`
-	State      string `json:"state"`
-	User       int64  `json:"user"`
+	FromDuration float64 `json:"from_duration"`
+	FromId       int64   `json:"from_id"`
+	Limit        int64   `json:"limit"`
+	Monitor      string  `json:"monitor"`
+	ObjectId     int64   `json:"object_id"`
+	ObjectName   string  `json:"object_name"`
+	Order        string  `json:"order"`
+	State        string  `json:"state"`
+	User         int64   `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromDuration sets parameter FromDuration to value and selects it for sending
+func (in *ActionMonitoredEventIndexInput) SetFromDuration(value float64) *ActionMonitoredEventIndexInput {
+	in.FromDuration = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromDuration"] = nil
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionMonitoredEventIndexInput) SetFromId(value int64) *ActionMonitoredEventIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -145,18 +170,6 @@ func (in *ActionMonitoredEventIndexInput) SetObjectName(value string) *ActionMon
 	}
 
 	in._selectedParameters["ObjectName"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionMonitoredEventIndexInput) SetOffset(value int64) *ActionMonitoredEventIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -256,6 +269,7 @@ func (in *ActionMonitoredEventIndexInput) AnySelected() bool {
 // ActionMonitoredEventIndexOutput is a type for action output parameters
 type ActionMonitoredEventIndexOutput struct {
 	CreatedAt  string                `json:"created_at"`
+	Duration   float64               `json:"duration"`
 	Id         int64                 `json:"id"`
 	Issue      string                `json:"issue"`
 	Label      string                `json:"label"`
@@ -285,7 +299,7 @@ type ActionMonitoredEventIndexResponse struct {
 func (action *ActionMonitoredEventIndex) Prepare() *ActionMonitoredEventIndexInvocation {
 	return &ActionMonitoredEventIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/monitored_events",
+		Path:   "/v7.0/monitored_events",
 	}
 }
 
@@ -386,6 +400,12 @@ func (inv *ActionMonitoredEventIndexInvocation) callAsQuery() (*ActionMonitoredE
 
 func (inv *ActionMonitoredEventIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromDuration") {
+			ret["monitored_event[from_duration]"] = convertFloat64ToString(inv.Input.FromDuration)
+		}
+		if inv.IsParameterSelected("FromId") {
+			ret["monitored_event[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["monitored_event[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
@@ -397,9 +417,6 @@ func (inv *ActionMonitoredEventIndexInvocation) convertInputToQueryParams(ret ma
 		}
 		if inv.IsParameterSelected("ObjectName") {
 			ret["monitored_event[object_name]"] = inv.Input.ObjectName
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["monitored_event[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["monitored_event[order]"] = inv.Input.Order

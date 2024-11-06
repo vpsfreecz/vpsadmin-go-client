@@ -103,7 +103,7 @@ type ActionLocationShowResponse struct {
 func (action *ActionLocationShow) Prepare() *ActionLocationShowInvocation {
 	return &ActionLocationShowInvocation{
 		Action: action,
-		Path:   "/v6.0/locations/{location_id}",
+		Path:   "/v7.0/locations/{location_id}",
 	}
 }
 

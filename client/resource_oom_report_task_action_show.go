@@ -81,6 +81,9 @@ type ActionOomReportTaskShowOutput struct {
 	OomScoreAdj   int64  `json:"oom_score_adj"`
 	PgtablesBytes int64  `json:"pgtables_bytes"`
 	Rss           int64  `json:"rss"`
+	RssAnon       int64  `json:"rss_anon"`
+	RssFile       int64  `json:"rss_file"`
+	RssShmem      int64  `json:"rss_shmem"`
 	Swapents      int64  `json:"swapents"`
 	Tgid          int64  `json:"tgid"`
 	TotalVm       int64  `json:"total_vm"`
@@ -105,7 +108,7 @@ type ActionOomReportTaskShowResponse struct {
 func (action *ActionOomReportTaskShow) Prepare() *ActionOomReportTaskShowInvocation {
 	return &ActionOomReportTaskShowInvocation{
 		Action: action,
-		Path:   "/v6.0/oom_reports/{oom_report_id}/tasks/{task_id}",
+		Path:   "/v7.0/oom_reports/{oom_report_id}/tasks/{task_id}",
 	}
 }
 

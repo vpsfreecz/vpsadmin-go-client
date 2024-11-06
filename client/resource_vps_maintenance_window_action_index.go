@@ -88,12 +88,24 @@ func (in *ActionVpsMaintenanceWindowIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMaintenanceWindowIndexInput is a type for action input parameters
 type ActionVpsMaintenanceWindowIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionVpsMaintenanceWindowIndexInput) SetFromId(value int64) *ActionVpsMaintenanceWindowIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -105,18 +117,6 @@ func (in *ActionVpsMaintenanceWindowIndexInput) SetLimit(value int64) *ActionVps
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionVpsMaintenanceWindowIndexInput) SetOffset(value int64) *ActionVpsMaintenanceWindowIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -183,7 +183,7 @@ type ActionVpsMaintenanceWindowIndexResponse struct {
 func (action *ActionVpsMaintenanceWindowIndex) Prepare() *ActionVpsMaintenanceWindowIndexInvocation {
 	return &ActionVpsMaintenanceWindowIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/maintenance_windows",
+		Path:   "/v7.0/vpses/{vps_id}/maintenance_windows",
 	}
 }
 
@@ -295,11 +295,11 @@ func (inv *ActionVpsMaintenanceWindowIndexInvocation) callAsQuery() (*ActionVpsM
 
 func (inv *ActionVpsMaintenanceWindowIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["maintenance_window[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["maintenance_window[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["maintenance_window[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

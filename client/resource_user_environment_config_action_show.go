@@ -101,7 +101,7 @@ type ActionUserEnvironmentConfigShowResponse struct {
 func (action *ActionUserEnvironmentConfigShow) Prepare() *ActionUserEnvironmentConfigShowInvocation {
 	return &ActionUserEnvironmentConfigShowInvocation{
 		Action: action,
-		Path:   "/v6.0/users/{user_id}/environment_configs/{environment_config_id}",
+		Path:   "/v7.0/users/{user_id}/environment_configs/{environment_config_id}",
 	}
 }
 

@@ -98,7 +98,7 @@ type ActionComponentShowResponse struct {
 func (action *ActionComponentShow) Prepare() *ActionComponentShowInvocation {
 	return &ActionComponentShowInvocation{
 		Action: action,
-		Path:   "/v6.0/components/{component_id}",
+		Path:   "/v7.0/components/{component_id}",
 	}
 }
 

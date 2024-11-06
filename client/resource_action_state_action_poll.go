@@ -202,7 +202,7 @@ type ActionActionStatePollResponse struct {
 func (action *ActionActionStatePoll) Prepare() *ActionActionStatePollInvocation {
 	return &ActionActionStatePollInvocation{
 		Action: action,
-		Path:   "/v6.0/action_states/{action_state_id}/poll",
+		Path:   "/v7.0/action_states/{action_state_id}/poll",
 	}
 }
 

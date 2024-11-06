@@ -115,7 +115,7 @@ type ActionIpAddressFreeResponse struct {
 func (action *ActionIpAddressFree) Prepare() *ActionIpAddressFreeInvocation {
 	return &ActionIpAddressFreeInvocation{
 		Action: action,
-		Path:   "/v6.0/ip_addresses/{ip_address_id}/free",
+		Path:   "/v7.0/ip_addresses/{ip_address_id}/free",
 	}
 }
 

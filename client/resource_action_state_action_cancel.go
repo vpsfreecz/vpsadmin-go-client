@@ -85,7 +85,7 @@ type ActionActionStateCancelResponse struct {
 func (action *ActionActionStateCancel) Prepare() *ActionActionStateCancelInvocation {
 	return &ActionActionStateCancelInvocation{
 		Action: action,
-		Path:   "/v6.0/action_states/{action_state_id}/cancel",
+		Path:   "/v7.0/action_states/{action_state_id}/cancel",
 	}
 }
 

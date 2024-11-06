@@ -445,7 +445,7 @@ type ActionUserRequestRegistrationResolveResponse struct {
 func (action *ActionUserRequestRegistrationResolve) Prepare() *ActionUserRequestRegistrationResolveInvocation {
 	return &ActionUserRequestRegistrationResolveInvocation{
 		Action: action,
-		Path:   "/v6.0/user_request/registrations/{registration_id}/resolve",
+		Path:   "/v7.0/user_request/registrations/{registration_id}/resolve",
 	}
 }
 

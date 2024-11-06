@@ -193,7 +193,7 @@ type ActionUserPublicKeyCreateResponse struct {
 func (action *ActionUserPublicKeyCreate) Prepare() *ActionUserPublicKeyCreateInvocation {
 	return &ActionUserPublicKeyCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/users/{user_id}/public_keys",
+		Path:   "/v7.0/users/{user_id}/public_keys",
 	}
 }
 

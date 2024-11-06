@@ -110,7 +110,7 @@ type ActionNetworkShowResponse struct {
 func (action *ActionNetworkShow) Prepare() *ActionNetworkShowInvocation {
 	return &ActionNetworkShowInvocation{
 		Action: action,
-		Path:   "/v6.0/networks/{network_id}",
+		Path:   "/v7.0/networks/{network_id}",
 	}
 }
 

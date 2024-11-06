@@ -88,12 +88,24 @@ func (in *ActionOomReportTaskIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportTaskIndexInput is a type for action input parameters
 type ActionOomReportTaskIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionOomReportTaskIndexInput) SetFromId(value int64) *ActionOomReportTaskIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -105,18 +117,6 @@ func (in *ActionOomReportTaskIndexInput) SetLimit(value int64) *ActionOomReportT
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionOomReportTaskIndexInput) SetOffset(value int64) *ActionOomReportTaskIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -166,6 +166,9 @@ type ActionOomReportTaskIndexOutput struct {
 	OomScoreAdj   int64  `json:"oom_score_adj"`
 	PgtablesBytes int64  `json:"pgtables_bytes"`
 	Rss           int64  `json:"rss"`
+	RssAnon       int64  `json:"rss_anon"`
+	RssFile       int64  `json:"rss_file"`
+	RssShmem      int64  `json:"rss_shmem"`
 	Swapents      int64  `json:"swapents"`
 	Tgid          int64  `json:"tgid"`
 	TotalVm       int64  `json:"total_vm"`
@@ -190,7 +193,7 @@ type ActionOomReportTaskIndexResponse struct {
 func (action *ActionOomReportTaskIndex) Prepare() *ActionOomReportTaskIndexInvocation {
 	return &ActionOomReportTaskIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/oom_reports/{oom_report_id}/tasks",
+		Path:   "/v7.0/oom_reports/{oom_report_id}/tasks",
 	}
 }
 
@@ -302,11 +305,11 @@ func (inv *ActionOomReportTaskIndexInvocation) callAsQuery() (*ActionOomReportTa
 
 func (inv *ActionOomReportTaskIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["task[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["task[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["task[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

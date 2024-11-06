@@ -86,13 +86,25 @@ func (in *ActionExportIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionExportIndexInput is a type for action input parameters
 type ActionExportIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	User   int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionExportIndexInput) SetFromId(value int64) *ActionExportIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -104,18 +116,6 @@ func (in *ActionExportIndexInput) SetLimit(value int64) *ActionExportIndexInput 
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionExportIndexInput) SetOffset(value int64) *ActionExportIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -226,7 +226,7 @@ type ActionExportIndexResponse struct {
 func (action *ActionExportIndex) Prepare() *ActionExportIndexInvocation {
 	return &ActionExportIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/exports",
+		Path:   "/v7.0/exports",
 	}
 }
 
@@ -327,11 +327,11 @@ func (inv *ActionExportIndexInvocation) callAsQuery() (*ActionExportIndexRespons
 
 func (inv *ActionExportIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["export[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["export[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["export[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("User") {
 			ret["export[user]"] = convertInt64ToString(inv.Input.User)

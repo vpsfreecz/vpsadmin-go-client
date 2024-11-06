@@ -92,12 +92,12 @@ type ActionOutageIndexInput struct {
 	EntityName  string `json:"entity_name"`
 	Environment int64  `json:"environment"`
 	Export      int64  `json:"export"`
+	FromId      int64  `json:"from_id"`
 	HandledBy   int64  `json:"handled_by"`
 	Impact      string `json:"impact"`
 	Limit       int64  `json:"limit"`
 	Location    int64  `json:"location"`
 	Node        int64  `json:"node"`
-	Offset      int64  `json:"offset"`
 	Order       string `json:"order"`
 	RecentSince string `json:"recent_since"`
 	Since       string `json:"since"`
@@ -240,6 +240,18 @@ func (in *ActionOutageIndexInput) SetExportNil(set bool) *ActionOutageIndexInput
 	return in
 }
 
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionOutageIndexInput) SetFromId(value int64) *ActionOutageIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
+}
+
 // SetHandledBy sets parameter HandledBy to value and selects it for sending
 func (in *ActionOutageIndexInput) SetHandledBy(value int64) *ActionOutageIndexInput {
 	in.HandledBy = value
@@ -354,18 +366,6 @@ func (in *ActionOutageIndexInput) SetNodeNil(set bool) *ActionOutageIndexInput {
 	} else {
 		delete(in._nilParameters, "Node")
 	}
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionOutageIndexInput) SetOffset(value int64) *ActionOutageIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -567,7 +567,7 @@ type ActionOutageIndexResponse struct {
 func (action *ActionOutageIndex) Prepare() *ActionOutageIndexInvocation {
 	return &ActionOutageIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/outages",
+		Path:   "/v7.0/outages",
 	}
 }
 
@@ -686,6 +686,9 @@ func (inv *ActionOutageIndexInvocation) convertInputToQueryParams(ret map[string
 		if inv.IsParameterSelected("Export") {
 			ret["outage[export]"] = convertInt64ToString(inv.Input.Export)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["outage[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("HandledBy") {
 			ret["outage[handled_by]"] = convertInt64ToString(inv.Input.HandledBy)
 		}
@@ -700,9 +703,6 @@ func (inv *ActionOutageIndexInvocation) convertInputToQueryParams(ret map[string
 		}
 		if inv.IsParameterSelected("Node") {
 			ret["outage[node]"] = convertInt64ToString(inv.Input.Node)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["outage[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["outage[order]"] = inv.Input.Order

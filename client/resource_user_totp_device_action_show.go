@@ -102,7 +102,7 @@ type ActionUserTotpDeviceShowResponse struct {
 func (action *ActionUserTotpDeviceShow) Prepare() *ActionUserTotpDeviceShowInvocation {
 	return &ActionUserTotpDeviceShowInvocation{
 		Action: action,
-		Path:   "/v6.0/users/{user_id}/totp_devices/{totp_device_id}",
+		Path:   "/v7.0/users/{user_id}/totp_devices/{totp_device_id}",
 	}
 }
 

@@ -162,7 +162,7 @@ type ActionClusterResourcePackageItemUpdateResponse struct {
 func (action *ActionClusterResourcePackageItemUpdate) Prepare() *ActionClusterResourcePackageItemUpdateInvocation {
 	return &ActionClusterResourcePackageItemUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/cluster_resource_packages/{cluster_resource_package_id}/items/{item_id}",
+		Path:   "/v7.0/cluster_resource_packages/{cluster_resource_package_id}/items/{item_id}",
 	}
 }
 

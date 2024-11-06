@@ -88,7 +88,7 @@ type ActionDatasetPlanDeleteResponse struct {
 func (action *ActionDatasetPlanDelete) Prepare() *ActionDatasetPlanDeleteInvocation {
 	return &ActionDatasetPlanDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/datasets/{dataset_id}/plans/{plan_id}",
+		Path:   "/v7.0/datasets/{dataset_id}/plans/{plan_id}",
 	}
 }
 

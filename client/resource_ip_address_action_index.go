@@ -88,11 +88,11 @@ func (in *ActionIpAddressIndexMetaGlobalInput) AnySelected() bool {
 type ActionIpAddressIndexInput struct {
 	Addr                string `json:"addr"`
 	AssignedToInterface bool   `json:"assigned_to_interface"`
+	FromId              int64  `json:"from_id"`
 	Limit               int64  `json:"limit"`
 	Location            int64  `json:"location"`
 	Network             int64  `json:"network"`
 	NetworkInterface    int64  `json:"network_interface"`
-	Offset              int64  `json:"offset"`
 	Order               string `json:"order"`
 	Prefix              int64  `json:"prefix"`
 	Purpose             string `json:"purpose"`
@@ -128,6 +128,18 @@ func (in *ActionIpAddressIndexInput) SetAssignedToInterface(value bool) *ActionI
 	}
 
 	in._selectedParameters["AssignedToInterface"] = nil
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetFromId(value int64) *ActionIpAddressIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -233,18 +245,6 @@ func (in *ActionIpAddressIndexInput) SetNetworkInterfaceNil(set bool) *ActionIpA
 	} else {
 		delete(in._nilParameters, "NetworkInterface")
 	}
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionIpAddressIndexInput) SetOffset(value int64) *ActionIpAddressIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -450,7 +450,7 @@ type ActionIpAddressIndexResponse struct {
 func (action *ActionIpAddressIndex) Prepare() *ActionIpAddressIndexInvocation {
 	return &ActionIpAddressIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/ip_addresses",
+		Path:   "/v7.0/ip_addresses",
 	}
 }
 
@@ -557,6 +557,9 @@ func (inv *ActionIpAddressIndexInvocation) convertInputToQueryParams(ret map[str
 		if inv.IsParameterSelected("AssignedToInterface") {
 			ret["ip_address[assigned_to_interface]"] = convertBoolToString(inv.Input.AssignedToInterface)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["ip_address[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["ip_address[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
@@ -568,9 +571,6 @@ func (inv *ActionIpAddressIndexInvocation) convertInputToQueryParams(ret map[str
 		}
 		if inv.IsParameterSelected("NetworkInterface") {
 			ret["ip_address[network_interface]"] = convertInt64ToString(inv.Input.NetworkInterface)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["ip_address[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["ip_address[order]"] = inv.Input.Order

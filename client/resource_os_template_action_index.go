@@ -87,10 +87,10 @@ func (in *ActionOsTemplateIndexMetaGlobalInput) AnySelected() bool {
 // ActionOsTemplateIndexInput is a type for action input parameters
 type ActionOsTemplateIndexInput struct {
 	CgroupVersion  string `json:"cgroup_version"`
+	FromId         int64  `json:"from_id"`
 	HypervisorType string `json:"hypervisor_type"`
 	Limit          int64  `json:"limit"`
 	Location       int64  `json:"location"`
-	Offset         int64  `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -106,6 +106,18 @@ func (in *ActionOsTemplateIndexInput) SetCgroupVersion(value string) *ActionOsTe
 	}
 
 	in._selectedParameters["CgroupVersion"] = nil
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionOsTemplateIndexInput) SetFromId(value int64) *ActionOsTemplateIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -164,18 +176,6 @@ func (in *ActionOsTemplateIndexInput) SetLocationNil(set bool) *ActionOsTemplate
 	return in
 }
 
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionOsTemplateIndexInput) SetOffset(value int64) *ActionOsTemplateIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
-	return in
-}
-
 // SelectParameters sets parameters from ActionOsTemplateIndexInput
 // that will be sent to the API.
 // SelectParameters can be called multiple times.
@@ -216,20 +216,22 @@ func (in *ActionOsTemplateIndexInput) AnySelected() bool {
 
 // ActionOsTemplateIndexOutput is a type for action output parameters
 type ActionOsTemplateIndexOutput struct {
-	Arch           string `json:"arch"`
-	CgroupVersion  string `json:"cgroup_version"`
-	Distribution   string `json:"distribution"`
-	Enabled        bool   `json:"enabled"`
-	HypervisorType string `json:"hypervisor_type"`
-	Id             int64  `json:"id"`
-	Info           string `json:"info"`
-	Label          string `json:"label"`
-	Name           string `json:"name"`
-	Order          int64  `json:"order"`
-	Supported      bool   `json:"supported"`
-	Variant        string `json:"variant"`
-	Vendor         string `json:"vendor"`
-	Version        string `json:"version"`
+	Arch           string                    `json:"arch"`
+	CgroupVersion  string                    `json:"cgroup_version"`
+	Config         string                    `json:"config"`
+	Distribution   string                    `json:"distribution"`
+	Enabled        bool                      `json:"enabled"`
+	HypervisorType string                    `json:"hypervisor_type"`
+	Id             int64                     `json:"id"`
+	Info           string                    `json:"info"`
+	Label          string                    `json:"label"`
+	Name           string                    `json:"name"`
+	Order          int64                     `json:"order"`
+	OsFamily       *ActionOsFamilyShowOutput `json:"os_family"`
+	Supported      bool                      `json:"supported"`
+	Variant        string                    `json:"variant"`
+	Vendor         string                    `json:"vendor"`
+	Version        string                    `json:"version"`
 }
 
 // Type for action response, including envelope
@@ -249,7 +251,7 @@ type ActionOsTemplateIndexResponse struct {
 func (action *ActionOsTemplateIndex) Prepare() *ActionOsTemplateIndexInvocation {
 	return &ActionOsTemplateIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/os_templates",
+		Path:   "/v7.0/os_templates",
 	}
 }
 
@@ -353,6 +355,9 @@ func (inv *ActionOsTemplateIndexInvocation) convertInputToQueryParams(ret map[st
 		if inv.IsParameterSelected("CgroupVersion") {
 			ret["os_template[cgroup_version]"] = inv.Input.CgroupVersion
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["os_template[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("HypervisorType") {
 			ret["os_template[hypervisor_type]"] = inv.Input.HypervisorType
 		}
@@ -361,9 +366,6 @@ func (inv *ActionOsTemplateIndexInvocation) convertInputToQueryParams(ret map[st
 		}
 		if inv.IsParameterSelected("Location") {
 			ret["os_template[location]"] = convertInt64ToString(inv.Input.Location)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["os_template[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

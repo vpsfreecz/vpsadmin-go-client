@@ -88,10 +88,10 @@ func (in *ActionOomReportIndexMetaGlobalInput) AnySelected() bool {
 type ActionOomReportIndexInput struct {
 	Cgroup      string `json:"cgroup"`
 	Environment int64  `json:"environment"`
+	FromId      int64  `json:"from_id"`
 	Limit       int64  `json:"limit"`
 	Location    int64  `json:"location"`
 	Node        int64  `json:"node"`
-	Offset      int64  `json:"offset"`
 	Since       string `json:"since"`
 	Until       string `json:"until"`
 	User        int64  `json:"user"`
@@ -142,6 +142,18 @@ func (in *ActionOomReportIndexInput) SetEnvironmentNil(set bool) *ActionOomRepor
 	} else {
 		delete(in._nilParameters, "Environment")
 	}
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionOomReportIndexInput) SetFromId(value int64) *ActionOomReportIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -216,18 +228,6 @@ func (in *ActionOomReportIndexInput) SetNodeNil(set bool) *ActionOomReportIndexI
 	} else {
 		delete(in._nilParameters, "Node")
 	}
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionOomReportIndexInput) SetOffset(value int64) *ActionOomReportIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -386,7 +386,7 @@ type ActionOomReportIndexResponse struct {
 func (action *ActionOomReportIndex) Prepare() *ActionOomReportIndexInvocation {
 	return &ActionOomReportIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/oom_reports",
+		Path:   "/v7.0/oom_reports",
 	}
 }
 
@@ -493,6 +493,9 @@ func (inv *ActionOomReportIndexInvocation) convertInputToQueryParams(ret map[str
 		if inv.IsParameterSelected("Environment") {
 			ret["oom_report[environment]"] = convertInt64ToString(inv.Input.Environment)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["oom_report[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["oom_report[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
@@ -501,9 +504,6 @@ func (inv *ActionOomReportIndexInvocation) convertInputToQueryParams(ret map[str
 		}
 		if inv.IsParameterSelected("Node") {
 			ret["oom_report[node]"] = convertInt64ToString(inv.Input.Node)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["oom_report[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Since") {
 			ret["oom_report[since]"] = inv.Input.Since

@@ -174,7 +174,7 @@ type ActionDatasetSnapshotCreateResponse struct {
 func (action *ActionDatasetSnapshotCreate) Prepare() *ActionDatasetSnapshotCreateInvocation {
 	return &ActionDatasetSnapshotCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/datasets/{dataset_id}/snapshots",
+		Path:   "/v7.0/datasets/{dataset_id}/snapshots",
 	}
 }
 

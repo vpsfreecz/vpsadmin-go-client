@@ -90,13 +90,13 @@ type ActionPoolIndexInput struct {
 	CheckedAt     string  `json:"checked_at"`
 	Compression   bool    `json:"compression"`
 	Filesystem    string  `json:"filesystem"`
+	FromId        int64   `json:"from_id"`
 	IsOpen        bool    `json:"is_open"`
 	Label         string  `json:"label"`
 	Limit         int64   `json:"limit"`
 	MaxDatasets   int64   `json:"max_datasets"`
 	Name          string  `json:"name"`
 	Node          int64   `json:"node"`
-	Offset        int64   `json:"offset"`
 	Quota         int64   `json:"quota"`
 	Recordsize    int64   `json:"recordsize"`
 	Refquota      int64   `json:"refquota"`
@@ -159,6 +159,18 @@ func (in *ActionPoolIndexInput) SetFilesystem(value string) *ActionPoolIndexInpu
 	}
 
 	in._selectedParameters["Filesystem"] = nil
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionPoolIndexInput) SetFromId(value int64) *ActionPoolIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -250,18 +262,6 @@ func (in *ActionPoolIndexInput) SetNodeNil(set bool) *ActionPoolIndexInput {
 	} else {
 		delete(in._nilParameters, "Node")
 	}
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionPoolIndexInput) SetOffset(value int64) *ActionPoolIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -484,7 +484,7 @@ type ActionPoolIndexResponse struct {
 func (action *ActionPoolIndex) Prepare() *ActionPoolIndexInvocation {
 	return &ActionPoolIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/pools",
+		Path:   "/v7.0/pools",
 	}
 }
 
@@ -597,6 +597,9 @@ func (inv *ActionPoolIndexInvocation) convertInputToQueryParams(ret map[string]s
 		if inv.IsParameterSelected("Filesystem") {
 			ret["pool[filesystem]"] = inv.Input.Filesystem
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["pool[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("IsOpen") {
 			ret["pool[is_open]"] = convertBoolToString(inv.Input.IsOpen)
 		}
@@ -614,9 +617,6 @@ func (inv *ActionPoolIndexInvocation) convertInputToQueryParams(ret map[string]s
 		}
 		if inv.IsParameterSelected("Node") {
 			ret["pool[node]"] = convertInt64ToString(inv.Input.Node)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["pool[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Quota") {
 			ret["pool[quota]"] = convertInt64ToString(inv.Input.Quota)

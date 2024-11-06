@@ -146,7 +146,7 @@ type ActionClusterSetMaintenanceResponse struct {
 func (action *ActionClusterSetMaintenance) Prepare() *ActionClusterSetMaintenanceInvocation {
 	return &ActionClusterSetMaintenanceInvocation{
 		Action: action,
-		Path:   "/v6.0/cluster/set_maintenance",
+		Path:   "/v7.0/cluster/set_maintenance",
 	}
 }
 

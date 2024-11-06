@@ -109,7 +109,7 @@ type ActionIncidentReportShowResponse struct {
 func (action *ActionIncidentReportShow) Prepare() *ActionIncidentReportShowInvocation {
 	return &ActionIncidentReportShowInvocation{
 		Action: action,
-		Path:   "/v6.0/incident_reports/{incident_report_id}",
+		Path:   "/v7.0/incident_reports/{incident_report_id}",
 	}
 }
 

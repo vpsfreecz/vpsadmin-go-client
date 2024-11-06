@@ -105,7 +105,7 @@ type ActionSnapshotDownloadShowResponse struct {
 func (action *ActionSnapshotDownloadShow) Prepare() *ActionSnapshotDownloadShowInvocation {
 	return &ActionSnapshotDownloadShowInvocation{
 		Action: action,
-		Path:   "/v6.0/snapshot_downloads/{snapshot_download_id}",
+		Path:   "/v7.0/snapshot_downloads/{snapshot_download_id}",
 	}
 }
 

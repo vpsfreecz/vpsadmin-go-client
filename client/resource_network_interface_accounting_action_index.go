@@ -88,11 +88,12 @@ func (in *ActionNetworkInterfaceAccountingIndexMetaGlobalInput) AnySelected() bo
 type ActionNetworkInterfaceAccountingIndexInput struct {
 	Environment int64  `json:"environment"`
 	From        string `json:"from"`
+	FromBytes   int64  `json:"from_bytes"`
+	FromDate    string `json:"from_date"`
 	Limit       int64  `json:"limit"`
 	Location    int64  `json:"location"`
 	Month       int64  `json:"month"`
 	Node        int64  `json:"node"`
-	Offset      int64  `json:"offset"`
 	Order       string `json:"order"`
 	To          string `json:"to"`
 	User        int64  `json:"user"`
@@ -144,6 +145,30 @@ func (in *ActionNetworkInterfaceAccountingIndexInput) SetFrom(value string) *Act
 	}
 
 	in._selectedParameters["From"] = nil
+	return in
+}
+
+// SetFromBytes sets parameter FromBytes to value and selects it for sending
+func (in *ActionNetworkInterfaceAccountingIndexInput) SetFromBytes(value int64) *ActionNetworkInterfaceAccountingIndexInput {
+	in.FromBytes = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromBytes"] = nil
+	return in
+}
+
+// SetFromDate sets parameter FromDate to value and selects it for sending
+func (in *ActionNetworkInterfaceAccountingIndexInput) SetFromDate(value string) *ActionNetworkInterfaceAccountingIndexInput {
+	in.FromDate = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromDate"] = nil
 	return in
 }
 
@@ -230,18 +255,6 @@ func (in *ActionNetworkInterfaceAccountingIndexInput) SetNodeNil(set bool) *Acti
 	} else {
 		delete(in._nilParameters, "Node")
 	}
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionNetworkInterfaceAccountingIndexInput) SetOffset(value int64) *ActionNetworkInterfaceAccountingIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -383,11 +396,13 @@ func (in *ActionNetworkInterfaceAccountingIndexInput) AnySelected() bool {
 
 // ActionNetworkInterfaceAccountingIndexOutput is a type for action output parameters
 type ActionNetworkInterfaceAccountingIndexOutput struct {
+	Bytes            int64                             `json:"bytes"`
 	BytesIn          int64                             `json:"bytes_in"`
 	BytesOut         int64                             `json:"bytes_out"`
 	CreatedAt        string                            `json:"created_at"`
 	Month            int64                             `json:"month"`
 	NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
+	Packets          int64                             `json:"packets"`
 	PacketsIn        int64                             `json:"packets_in"`
 	PacketsOut       int64                             `json:"packets_out"`
 	UpdatedAt        string                            `json:"updated_at"`
@@ -411,7 +426,7 @@ type ActionNetworkInterfaceAccountingIndexResponse struct {
 func (action *ActionNetworkInterfaceAccountingIndex) Prepare() *ActionNetworkInterfaceAccountingIndexInvocation {
 	return &ActionNetworkInterfaceAccountingIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/network_interface_accountings",
+		Path:   "/v7.0/network_interface_accountings",
 	}
 }
 
@@ -518,6 +533,12 @@ func (inv *ActionNetworkInterfaceAccountingIndexInvocation) convertInputToQueryP
 		if inv.IsParameterSelected("From") {
 			ret["network_interface_accounting[from]"] = inv.Input.From
 		}
+		if inv.IsParameterSelected("FromBytes") {
+			ret["network_interface_accounting[from_bytes]"] = convertInt64ToString(inv.Input.FromBytes)
+		}
+		if inv.IsParameterSelected("FromDate") {
+			ret["network_interface_accounting[from_date]"] = inv.Input.FromDate
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["network_interface_accounting[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
@@ -529,9 +550,6 @@ func (inv *ActionNetworkInterfaceAccountingIndexInvocation) convertInputToQueryP
 		}
 		if inv.IsParameterSelected("Node") {
 			ret["network_interface_accounting[node]"] = convertInt64ToString(inv.Input.Node)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["network_interface_accounting[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["network_interface_accounting[order]"] = inv.Input.Order

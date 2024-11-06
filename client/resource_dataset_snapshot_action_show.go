@@ -102,7 +102,7 @@ type ActionDatasetSnapshotShowResponse struct {
 func (action *ActionDatasetSnapshotShow) Prepare() *ActionDatasetSnapshotShowInvocation {
 	return &ActionDatasetSnapshotShowInvocation{
 		Action: action,
-		Path:   "/v6.0/datasets/{dataset_id}/snapshots/{snapshot_id}",
+		Path:   "/v7.0/datasets/{dataset_id}/snapshots/{snapshot_id}",
 	}
 }
 

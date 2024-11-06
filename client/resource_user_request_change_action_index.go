@@ -90,8 +90,8 @@ type ActionUserRequestChangeIndexInput struct {
 	ApiIpAddr    string `json:"api_ip_addr"`
 	ClientIpAddr string `json:"client_ip_addr"`
 	ClientIpPtr  string `json:"client_ip_ptr"`
+	FromId       int64  `json:"from_id"`
 	Limit        int64  `json:"limit"`
-	Offset       int64  `json:"offset"`
 	State        string `json:"state"`
 	User         int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -167,6 +167,18 @@ func (in *ActionUserRequestChangeIndexInput) SetClientIpPtr(value string) *Actio
 	return in
 }
 
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionUserRequestChangeIndexInput) SetFromId(value int64) *ActionUserRequestChangeIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
+}
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserRequestChangeIndexInput) SetLimit(value int64) *ActionUserRequestChangeIndexInput {
 	in.Limit = value
@@ -176,18 +188,6 @@ func (in *ActionUserRequestChangeIndexInput) SetLimit(value int64) *ActionUserRe
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserRequestChangeIndexInput) SetOffset(value int64) *ActionUserRequestChangeIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -309,7 +309,7 @@ type ActionUserRequestChangeIndexResponse struct {
 func (action *ActionUserRequestChangeIndex) Prepare() *ActionUserRequestChangeIndexInvocation {
 	return &ActionUserRequestChangeIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/user_request/changes",
+		Path:   "/v7.0/user_request/changes",
 	}
 }
 
@@ -422,11 +422,11 @@ func (inv *ActionUserRequestChangeIndexInvocation) convertInputToQueryParams(ret
 		if inv.IsParameterSelected("ClientIpPtr") {
 			ret["change[client_ip_ptr]"] = inv.Input.ClientIpPtr
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["change[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["change[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["change[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("State") {
 			ret["change[state]"] = inv.Input.State

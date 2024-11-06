@@ -234,7 +234,7 @@ type ActionHelpBoxCreateResponse struct {
 func (action *ActionHelpBoxCreate) Prepare() *ActionHelpBoxCreateInvocation {
 	return &ActionHelpBoxCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/help_boxes",
+		Path:   "/v7.0/help_boxes",
 	}
 }
 

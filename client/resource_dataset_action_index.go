@@ -87,11 +87,12 @@ func (in *ActionDatasetIndexMetaGlobalInput) AnySelected() bool {
 // ActionDatasetIndexInput is a type for action input parameters
 type ActionDatasetIndexInput struct {
 	Dataset int64  `json:"dataset"`
+	FromId  int64  `json:"from_id"`
 	Limit   int64  `json:"limit"`
-	Offset  int64  `json:"offset"`
 	Role    string `json:"role"`
 	ToDepth int64  `json:"to_depth"`
 	User    int64  `json:"user"`
+	Vps     int64  `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -129,6 +130,18 @@ func (in *ActionDatasetIndexInput) SetDatasetNil(set bool) *ActionDatasetIndexIn
 	return in
 }
 
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionDatasetIndexInput) SetFromId(value int64) *ActionDatasetIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
+}
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionDatasetIndexInput) SetLimit(value int64) *ActionDatasetIndexInput {
 	in.Limit = value
@@ -138,18 +151,6 @@ func (in *ActionDatasetIndexInput) SetLimit(value int64) *ActionDatasetIndexInpu
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionDatasetIndexInput) SetOffset(value int64) *ActionDatasetIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -204,6 +205,37 @@ func (in *ActionDatasetIndexInput) SetUserNil(set bool) *ActionDatasetIndexInput
 		in.SelectParameters("User")
 	} else {
 		delete(in._nilParameters, "User")
+	}
+	return in
+}
+
+// SetVps sets parameter Vps to value and selects it for sending
+func (in *ActionDatasetIndexInput) SetVps(value int64) *ActionDatasetIndexInput {
+	in.Vps = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetVpsNil(false)
+	in._selectedParameters["Vps"] = nil
+	return in
+}
+
+// SetVpsNil sets parameter Vps to nil and selects it for sending
+func (in *ActionDatasetIndexInput) SetVpsNil(set bool) *ActionDatasetIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Vps"] = nil
+		in.SelectParameters("Vps")
+	} else {
+		delete(in._nilParameters, "Vps")
 	}
 	return in
 }
@@ -269,6 +301,7 @@ type ActionDatasetIndexOutput struct {
 	Sync             string                            `json:"sync"`
 	Used             int64                             `json:"used"`
 	User             *ActionUserShowOutput             `json:"user"`
+	Vps              *ActionVpsShowOutput              `json:"vps"`
 }
 
 // Type for action response, including envelope
@@ -288,7 +321,7 @@ type ActionDatasetIndexResponse struct {
 func (action *ActionDatasetIndex) Prepare() *ActionDatasetIndexInvocation {
 	return &ActionDatasetIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/datasets",
+		Path:   "/v7.0/datasets",
 	}
 }
 
@@ -392,11 +425,11 @@ func (inv *ActionDatasetIndexInvocation) convertInputToQueryParams(ret map[strin
 		if inv.IsParameterSelected("Dataset") {
 			ret["dataset[dataset]"] = convertInt64ToString(inv.Input.Dataset)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["dataset[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["dataset[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["dataset[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Role") {
 			ret["dataset[role]"] = inv.Input.Role
@@ -406,6 +439,9 @@ func (inv *ActionDatasetIndexInvocation) convertInputToQueryParams(ret map[strin
 		}
 		if inv.IsParameterSelected("User") {
 			ret["dataset[user]"] = convertInt64ToString(inv.Input.User)
+		}
+		if inv.IsParameterSelected("Vps") {
+			ret["dataset[vps]"] = convertInt64ToString(inv.Input.Vps)
 		}
 	}
 }

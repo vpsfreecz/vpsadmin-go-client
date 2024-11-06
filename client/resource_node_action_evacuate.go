@@ -244,7 +244,7 @@ type ActionNodeEvacuateResponse struct {
 func (action *ActionNodeEvacuate) Prepare() *ActionNodeEvacuateInvocation {
 	return &ActionNodeEvacuateInvocation{
 		Action: action,
-		Path:   "/v6.0/nodes/{node_id}/evacuate",
+		Path:   "/v7.0/nodes/{node_id}/evacuate",
 	}
 }
 

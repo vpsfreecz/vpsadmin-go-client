@@ -91,7 +91,9 @@ type ActionNodeStatusShowOutput struct {
 	CreatedAt     string  `json:"created_at"`
 	Id            int64   `json:"id"`
 	Kernel        string  `json:"kernel"`
-	Loadavg       float64 `json:"loadavg"`
+	Loadavg1      float64 `json:"loadavg1"`
+	Loadavg15     float64 `json:"loadavg15"`
+	Loadavg5      float64 `json:"loadavg5"`
 	ProcessCount  int64   `json:"process_count"`
 	TotalMemory   int64   `json:"total_memory"`
 	TotalSwap     int64   `json:"total_swap"`
@@ -118,7 +120,7 @@ type ActionNodeStatusShowResponse struct {
 func (action *ActionNodeStatusShow) Prepare() *ActionNodeStatusShowInvocation {
 	return &ActionNodeStatusShowInvocation{
 		Action: action,
-		Path:   "/v6.0/nodes/{node_id}/statuses/{status_id}",
+		Path:   "/v7.0/nodes/{node_id}/statuses/{status_id}",
 	}
 }
 

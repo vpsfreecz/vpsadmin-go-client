@@ -226,7 +226,7 @@ type ActionIpAddressUpdateResponse struct {
 func (action *ActionIpAddressUpdate) Prepare() *ActionIpAddressUpdateInvocation {
 	return &ActionIpAddressUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/ip_addresses/{ip_address_id}",
+		Path:   "/v7.0/ip_addresses/{ip_address_id}",
 	}
 }
 

@@ -91,9 +91,9 @@ type ActionUserSessionIndexInput struct {
 	AuthType      string `json:"auth_type"`
 	ClientIpAddr  string `json:"client_ip_addr"`
 	ClientVersion string `json:"client_version"`
+	FromId        int64  `json:"from_id"`
 	IpAddr        string `json:"ip_addr"`
 	Limit         int64  `json:"limit"`
-	Offset        int64  `json:"offset"`
 	State         string `json:"state"`
 	TokenFragment string `json:"token_fragment"`
 	User          int64  `json:"user"`
@@ -183,6 +183,18 @@ func (in *ActionUserSessionIndexInput) SetClientVersion(value string) *ActionUse
 	return in
 }
 
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionUserSessionIndexInput) SetFromId(value int64) *ActionUserSessionIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
+}
+
 // SetIpAddr sets parameter IpAddr to value and selects it for sending
 func (in *ActionUserSessionIndexInput) SetIpAddr(value string) *ActionUserSessionIndexInput {
 	in.IpAddr = value
@@ -204,18 +216,6 @@ func (in *ActionUserSessionIndexInput) SetLimit(value int64) *ActionUserSessionI
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserSessionIndexInput) SetOffset(value int64) *ActionUserSessionIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -364,7 +364,7 @@ type ActionUserSessionIndexResponse struct {
 func (action *ActionUserSessionIndex) Prepare() *ActionUserSessionIndexInvocation {
 	return &ActionUserSessionIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/user_sessions",
+		Path:   "/v7.0/user_sessions",
 	}
 }
 
@@ -480,14 +480,14 @@ func (inv *ActionUserSessionIndexInvocation) convertInputToQueryParams(ret map[s
 		if inv.IsParameterSelected("ClientVersion") {
 			ret["user_session[client_version]"] = inv.Input.ClientVersion
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["user_session[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("IpAddr") {
 			ret["user_session[ip_addr]"] = inv.Input.IpAddr
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["user_session[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["user_session[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("State") {
 			ret["user_session[state]"] = inv.Input.State

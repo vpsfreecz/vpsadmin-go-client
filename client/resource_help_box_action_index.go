@@ -87,9 +87,9 @@ func (in *ActionHelpBoxIndexMetaGlobalInput) AnySelected() bool {
 // ActionHelpBoxIndexInput is a type for action input parameters
 type ActionHelpBoxIndexInput struct {
 	Action   string `json:"action"`
+	FromId   int64  `json:"from_id"`
 	Language int64  `json:"language"`
 	Limit    int64  `json:"limit"`
-	Offset   int64  `json:"offset"`
 	Page     string `json:"page"`
 	View     bool   `json:"view"`
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -107,6 +107,18 @@ func (in *ActionHelpBoxIndexInput) SetAction(value string) *ActionHelpBoxIndexIn
 	}
 
 	in._selectedParameters["Action"] = nil
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionHelpBoxIndexInput) SetFromId(value int64) *ActionHelpBoxIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -150,18 +162,6 @@ func (in *ActionHelpBoxIndexInput) SetLimit(value int64) *ActionHelpBoxIndexInpu
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionHelpBoxIndexInput) SetOffset(value int64) *ActionHelpBoxIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -254,7 +254,7 @@ type ActionHelpBoxIndexResponse struct {
 func (action *ActionHelpBoxIndex) Prepare() *ActionHelpBoxIndexInvocation {
 	return &ActionHelpBoxIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/help_boxes",
+		Path:   "/v7.0/help_boxes",
 	}
 }
 
@@ -358,14 +358,14 @@ func (inv *ActionHelpBoxIndexInvocation) convertInputToQueryParams(ret map[strin
 		if inv.IsParameterSelected("Action") {
 			ret["help_box[action]"] = inv.Input.Action
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["help_box[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Language") {
 			ret["help_box[language]"] = convertInt64ToString(inv.Input.Language)
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["help_box[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["help_box[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Page") {
 			ret["help_box[page]"] = inv.Input.Page

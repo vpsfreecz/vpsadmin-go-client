@@ -247,7 +247,7 @@ type ActionMigrationPlanVpsMigrationCreateResponse struct {
 func (action *ActionMigrationPlanVpsMigrationCreate) Prepare() *ActionMigrationPlanVpsMigrationCreateInvocation {
 	return &ActionMigrationPlanVpsMigrationCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/migration_plans/{migration_plan_id}/vps_migrations",
+		Path:   "/v7.0/migration_plans/{migration_plan_id}/vps_migrations",
 	}
 }
 

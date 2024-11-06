@@ -88,6 +88,7 @@ func (in *ActionIpAddressAssignmentIndexMetaGlobalInput) AnySelected() bool {
 type ActionIpAddressAssignmentIndexInput struct {
 	Active            bool   `json:"active"`
 	AssignedByChain   int64  `json:"assigned_by_chain"`
+	FromId            int64  `json:"from_id"`
 	IpAddr            string `json:"ip_addr"`
 	IpAddress         int64  `json:"ip_address"`
 	IpPrefix          int64  `json:"ip_prefix"`
@@ -95,7 +96,6 @@ type ActionIpAddressAssignmentIndexInput struct {
 	Limit             int64  `json:"limit"`
 	Location          int64  `json:"location"`
 	Network           int64  `json:"network"`
-	Offset            int64  `json:"offset"`
 	Order             string `json:"order"`
 	Reconstructed     bool   `json:"reconstructed"`
 	UnassignedByChain int64  `json:"unassigned_by_chain"`
@@ -147,6 +147,18 @@ func (in *ActionIpAddressAssignmentIndexInput) SetAssignedByChainNil(set bool) *
 	} else {
 		delete(in._nilParameters, "AssignedByChain")
 	}
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionIpAddressAssignmentIndexInput) SetFromId(value int64) *ActionIpAddressAssignmentIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -288,18 +300,6 @@ func (in *ActionIpAddressAssignmentIndexInput) SetNetworkNil(set bool) *ActionIp
 	} else {
 		delete(in._nilParameters, "Network")
 	}
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionIpAddressAssignmentIndexInput) SetOffset(value int64) *ActionIpAddressAssignmentIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -494,7 +494,7 @@ type ActionIpAddressAssignmentIndexResponse struct {
 func (action *ActionIpAddressAssignmentIndex) Prepare() *ActionIpAddressAssignmentIndexInvocation {
 	return &ActionIpAddressAssignmentIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/ip_address_assignments",
+		Path:   "/v7.0/ip_address_assignments",
 	}
 }
 
@@ -601,6 +601,9 @@ func (inv *ActionIpAddressAssignmentIndexInvocation) convertInputToQueryParams(r
 		if inv.IsParameterSelected("AssignedByChain") {
 			ret["ip_address_assignment[assigned_by_chain]"] = convertInt64ToString(inv.Input.AssignedByChain)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["ip_address_assignment[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("IpAddr") {
 			ret["ip_address_assignment[ip_addr]"] = inv.Input.IpAddr
 		}
@@ -621,9 +624,6 @@ func (inv *ActionIpAddressAssignmentIndexInvocation) convertInputToQueryParams(r
 		}
 		if inv.IsParameterSelected("Network") {
 			ret["ip_address_assignment[network]"] = convertInt64ToString(inv.Input.Network)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["ip_address_assignment[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["ip_address_assignment[order]"] = inv.Input.Order

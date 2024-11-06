@@ -127,7 +127,7 @@ type ActionApiServerUnlockTransactionSigningKeyResponse struct {
 func (action *ActionApiServerUnlockTransactionSigningKey) Prepare() *ActionApiServerUnlockTransactionSigningKeyInvocation {
 	return &ActionApiServerUnlockTransactionSigningKeyInvocation{
 		Action: action,
-		Path:   "/v6.0/api_servers/unlock_transaction_signing_key",
+		Path:   "/v7.0/api_servers/unlock_transaction_signing_key",
 	}
 }
 

@@ -86,12 +86,24 @@ func (in *ActionMailboxIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMailboxIndexInput is a type for action input parameters
 type ActionMailboxIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionMailboxIndexInput) SetFromId(value int64) *ActionMailboxIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -103,18 +115,6 @@ func (in *ActionMailboxIndexInput) SetLimit(value int64) *ActionMailboxIndexInpu
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionMailboxIndexInput) SetOffset(value int64) *ActionMailboxIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -185,7 +185,7 @@ type ActionMailboxIndexResponse struct {
 func (action *ActionMailboxIndex) Prepare() *ActionMailboxIndexInvocation {
 	return &ActionMailboxIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/mailboxes",
+		Path:   "/v7.0/mailboxes",
 	}
 }
 
@@ -286,11 +286,11 @@ func (inv *ActionMailboxIndexInvocation) callAsQuery() (*ActionMailboxIndexRespo
 
 func (inv *ActionMailboxIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["mailbox[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["mailbox[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["mailbox[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

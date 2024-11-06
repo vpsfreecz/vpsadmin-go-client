@@ -88,7 +88,7 @@ type ActionUserNamespaceMapEntryDeleteResponse struct {
 func (action *ActionUserNamespaceMapEntryDelete) Prepare() *ActionUserNamespaceMapEntryDeleteInvocation {
 	return &ActionUserNamespaceMapEntryDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/user_namespace_maps/{user_namespace_map_id}/entries/{entry_id}",
+		Path:   "/v7.0/user_namespace_maps/{user_namespace_map_id}/entries/{entry_id}",
 	}
 }
 

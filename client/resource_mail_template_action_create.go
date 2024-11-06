@@ -203,7 +203,7 @@ type ActionMailTemplateCreateResponse struct {
 func (action *ActionMailTemplateCreate) Prepare() *ActionMailTemplateCreateInvocation {
 	return &ActionMailTemplateCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/mail_templates",
+		Path:   "/v7.0/mail_templates",
 	}
 }
 

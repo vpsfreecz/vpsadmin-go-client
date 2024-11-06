@@ -113,7 +113,7 @@ type ActionUserSessionShowResponse struct {
 func (action *ActionUserSessionShow) Prepare() *ActionUserSessionShowInvocation {
 	return &ActionUserSessionShowInvocation{
 		Action: action,
-		Path:   "/v6.0/user_sessions/{user_session_id}",
+		Path:   "/v7.0/user_sessions/{user_session_id}",
 	}
 }
 

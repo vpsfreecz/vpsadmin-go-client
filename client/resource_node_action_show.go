@@ -96,7 +96,9 @@ type ActionNodeShowOutput struct {
 	Id                    int64                     `json:"id"`
 	IpAddr                string                    `json:"ip_addr"`
 	Kernel                string                    `json:"kernel"`
-	Loadavg               float64                   `json:"loadavg"`
+	Loadavg1              float64                   `json:"loadavg1"`
+	Loadavg15             float64                   `json:"loadavg15"`
+	Loadavg5              float64                   `json:"loadavg5"`
 	Location              *ActionLocationShowOutput `json:"location"`
 	MaintenanceLock       string                    `json:"maintenance_lock"`
 	MaintenanceLockReason string                    `json:"maintenance_lock_reason"`
@@ -137,7 +139,7 @@ type ActionNodeShowResponse struct {
 func (action *ActionNodeShow) Prepare() *ActionNodeShowInvocation {
 	return &ActionNodeShowInvocation{
 		Action: action,
-		Path:   "/v6.0/nodes/{node_id}",
+		Path:   "/v7.0/nodes/{node_id}",
 	}
 }
 

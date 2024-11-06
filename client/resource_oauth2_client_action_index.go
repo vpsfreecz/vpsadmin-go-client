@@ -86,12 +86,24 @@ func (in *ActionOauth2ClientIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOauth2ClientIndexInput is a type for action input parameters
 type ActionOauth2ClientIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionOauth2ClientIndexInput) SetFromId(value int64) *ActionOauth2ClientIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -103,18 +115,6 @@ func (in *ActionOauth2ClientIndexInput) SetLimit(value int64) *ActionOauth2Clien
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionOauth2ClientIndexInput) SetOffset(value int64) *ActionOauth2ClientIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -188,7 +188,7 @@ type ActionOauth2ClientIndexResponse struct {
 func (action *ActionOauth2ClientIndex) Prepare() *ActionOauth2ClientIndexInvocation {
 	return &ActionOauth2ClientIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/oauth2_clients",
+		Path:   "/v7.0/oauth2_clients",
 	}
 }
 
@@ -289,11 +289,11 @@ func (inv *ActionOauth2ClientIndexInvocation) callAsQuery() (*ActionOauth2Client
 
 func (inv *ActionOauth2ClientIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["oauth2_client[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["oauth2_client[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["oauth2_client[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

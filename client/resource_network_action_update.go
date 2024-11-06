@@ -279,7 +279,7 @@ type ActionNetworkUpdateResponse struct {
 func (action *ActionNetworkUpdate) Prepare() *ActionNetworkUpdateInvocation {
 	return &ActionNetworkUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/networks/{network_id}",
+		Path:   "/v7.0/networks/{network_id}",
 	}
 }
 

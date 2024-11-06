@@ -175,7 +175,7 @@ type ActionNewsLogCreateResponse struct {
 func (action *ActionNewsLogCreate) Prepare() *ActionNewsLogCreateInvocation {
 	return &ActionNewsLogCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/news_logs",
+		Path:   "/v7.0/news_logs",
 	}
 }
 

@@ -334,7 +334,9 @@ type ActionNodeCreateOutput struct {
 	Id              int64                     `json:"id"`
 	IpAddr          string                    `json:"ip_addr"`
 	Kernel          string                    `json:"kernel"`
-	Loadavg         float64                   `json:"loadavg"`
+	Loadavg1        float64                   `json:"loadavg1"`
+	Loadavg15       float64                   `json:"loadavg15"`
+	Loadavg5        float64                   `json:"loadavg5"`
 	Location        *ActionLocationShowOutput `json:"location"`
 	MaxRx           int64                     `json:"max_rx"`
 	MaxTx           int64                     `json:"max_tx"`
@@ -380,7 +382,7 @@ type ActionNodeCreateResponse struct {
 func (action *ActionNodeCreate) Prepare() *ActionNodeCreateInvocation {
 	return &ActionNodeCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/nodes",
+		Path:   "/v7.0/nodes",
 	}
 }
 

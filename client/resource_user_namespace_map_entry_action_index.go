@@ -88,12 +88,24 @@ func (in *ActionUserNamespaceMapEntryIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserNamespaceMapEntryIndexInput is a type for action input parameters
 type ActionUserNamespaceMapEntryIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionUserNamespaceMapEntryIndexInput) SetFromId(value int64) *ActionUserNamespaceMapEntryIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -105,18 +117,6 @@ func (in *ActionUserNamespaceMapEntryIndexInput) SetLimit(value int64) *ActionUs
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserNamespaceMapEntryIndexInput) SetOffset(value int64) *ActionUserNamespaceMapEntryIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -184,7 +184,7 @@ type ActionUserNamespaceMapEntryIndexResponse struct {
 func (action *ActionUserNamespaceMapEntryIndex) Prepare() *ActionUserNamespaceMapEntryIndexInvocation {
 	return &ActionUserNamespaceMapEntryIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/user_namespace_maps/{user_namespace_map_id}/entries",
+		Path:   "/v7.0/user_namespace_maps/{user_namespace_map_id}/entries",
 	}
 }
 
@@ -296,11 +296,11 @@ func (inv *ActionUserNamespaceMapEntryIndexInvocation) callAsQuery() (*ActionUse
 
 func (inv *ActionUserNamespaceMapEntryIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["entry[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["entry[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["entry[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

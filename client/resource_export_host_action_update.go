@@ -211,7 +211,7 @@ type ActionExportHostUpdateResponse struct {
 func (action *ActionExportHostUpdate) Prepare() *ActionExportHostUpdateInvocation {
 	return &ActionExportHostUpdateInvocation{
 		Action: action,
-		Path:   "/v6.0/exports/{export_id}/hosts/{host_id}",
+		Path:   "/v7.0/exports/{export_id}/hosts/{host_id}",
 	}
 }
 

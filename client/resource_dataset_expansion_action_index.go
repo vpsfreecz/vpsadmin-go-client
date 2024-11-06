@@ -86,12 +86,24 @@ func (in *ActionDatasetExpansionIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetExpansionIndexInput is a type for action input parameters
 type ActionDatasetExpansionIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionDatasetExpansionIndexInput) SetFromId(value int64) *ActionDatasetExpansionIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -103,18 +115,6 @@ func (in *ActionDatasetExpansionIndexInput) SetLimit(value int64) *ActionDataset
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionDatasetExpansionIndexInput) SetOffset(value int64) *ActionDatasetExpansionIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -189,7 +189,7 @@ type ActionDatasetExpansionIndexResponse struct {
 func (action *ActionDatasetExpansionIndex) Prepare() *ActionDatasetExpansionIndexInvocation {
 	return &ActionDatasetExpansionIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/dataset_expansions",
+		Path:   "/v7.0/dataset_expansions",
 	}
 }
 
@@ -290,11 +290,11 @@ func (inv *ActionDatasetExpansionIndexInvocation) callAsQuery() (*ActionDatasetE
 
 func (inv *ActionDatasetExpansionIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["dataset_expansion[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["dataset_expansion[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["dataset_expansion[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

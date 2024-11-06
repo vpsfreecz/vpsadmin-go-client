@@ -87,8 +87,8 @@ func (in *ActionClusterResourcePackageIndexMetaGlobalInput) AnySelected() bool {
 // ActionClusterResourcePackageIndexInput is a type for action input parameters
 type ActionClusterResourcePackageIndexInput struct {
 	Environment int64 `json:"environment"`
+	FromId      int64 `json:"from_id"`
 	Limit       int64 `json:"limit"`
-	Offset      int64 `json:"offset"`
 	User        int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -127,6 +127,18 @@ func (in *ActionClusterResourcePackageIndexInput) SetEnvironmentNil(set bool) *A
 	return in
 }
 
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionClusterResourcePackageIndexInput) SetFromId(value int64) *ActionClusterResourcePackageIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
+}
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionClusterResourcePackageIndexInput) SetLimit(value int64) *ActionClusterResourcePackageIndexInput {
 	in.Limit = value
@@ -136,18 +148,6 @@ func (in *ActionClusterResourcePackageIndexInput) SetLimit(value int64) *ActionC
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionClusterResourcePackageIndexInput) SetOffset(value int64) *ActionClusterResourcePackageIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -247,7 +247,7 @@ type ActionClusterResourcePackageIndexResponse struct {
 func (action *ActionClusterResourcePackageIndex) Prepare() *ActionClusterResourcePackageIndexInvocation {
 	return &ActionClusterResourcePackageIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/cluster_resource_packages",
+		Path:   "/v7.0/cluster_resource_packages",
 	}
 }
 
@@ -351,11 +351,11 @@ func (inv *ActionClusterResourcePackageIndexInvocation) convertInputToQueryParam
 		if inv.IsParameterSelected("Environment") {
 			ret["cluster_resource_package[environment]"] = convertInt64ToString(inv.Input.Environment)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["cluster_resource_package[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["cluster_resource_package[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["cluster_resource_package[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("User") {
 			ret["cluster_resource_package[user]"] = convertInt64ToString(inv.Input.User)

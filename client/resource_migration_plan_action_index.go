@@ -86,14 +86,26 @@ func (in *ActionMigrationPlanIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMigrationPlanIndexInput is a type for action input parameters
 type ActionMigrationPlanIndexInput struct {
+	FromId int64  `json:"from_id"`
 	Limit  int64  `json:"limit"`
-	Offset int64  `json:"offset"`
 	State  string `json:"state"`
 	User   int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionMigrationPlanIndexInput) SetFromId(value int64) *ActionMigrationPlanIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -105,18 +117,6 @@ func (in *ActionMigrationPlanIndexInput) SetLimit(value int64) *ActionMigrationP
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionMigrationPlanIndexInput) SetOffset(value int64) *ActionMigrationPlanIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -231,7 +231,7 @@ type ActionMigrationPlanIndexResponse struct {
 func (action *ActionMigrationPlanIndex) Prepare() *ActionMigrationPlanIndexInvocation {
 	return &ActionMigrationPlanIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/migration_plans",
+		Path:   "/v7.0/migration_plans",
 	}
 }
 
@@ -332,11 +332,11 @@ func (inv *ActionMigrationPlanIndexInvocation) callAsQuery() (*ActionMigrationPl
 
 func (inv *ActionMigrationPlanIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["migration_plan[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["migration_plan[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["migration_plan[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("State") {
 			ret["migration_plan[state]"] = inv.Input.State

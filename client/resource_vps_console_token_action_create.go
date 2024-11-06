@@ -101,7 +101,7 @@ type ActionVpsConsoleTokenCreateResponse struct {
 func (action *ActionVpsConsoleTokenCreate) Prepare() *ActionVpsConsoleTokenCreateInvocation {
 	return &ActionVpsConsoleTokenCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/console_token",
+		Path:   "/v7.0/vpses/{vps_id}/console_token",
 	}
 }
 

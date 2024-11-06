@@ -86,7 +86,7 @@ func (action *ActionDebugListObjectCounts) Call() (*ActionDebugListObjectCountsR
 func (action *ActionDebugListObjectCounts) Prepare() *ActionDebugListObjectCountsInvocation {
 	return &ActionDebugListObjectCountsInvocation{
 		Action: action,
-		Path:   "/v6.0/debugs/list_object_counts",
+		Path:   "/v7.0/debugs/list_object_counts",
 	}
 }
 

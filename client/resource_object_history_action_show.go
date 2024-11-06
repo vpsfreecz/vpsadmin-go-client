@@ -101,7 +101,7 @@ type ActionObjectHistoryShowResponse struct {
 func (action *ActionObjectHistoryShow) Prepare() *ActionObjectHistoryShowInvocation {
 	return &ActionObjectHistoryShowInvocation{
 		Action: action,
-		Path:   "/v6.0/object_histories/{object_history_id}",
+		Path:   "/v7.0/object_histories/{object_history_id}",
 	}
 }
 

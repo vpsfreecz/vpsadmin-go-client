@@ -88,7 +88,7 @@ type ActionOauth2ClientDeleteResponse struct {
 func (action *ActionOauth2ClientDelete) Prepare() *ActionOauth2ClientDeleteInvocation {
 	return &ActionOauth2ClientDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/oauth2_clients/{oauth2_client_id}",
+		Path:   "/v7.0/oauth2_clients/{oauth2_client_id}",
 	}
 }
 

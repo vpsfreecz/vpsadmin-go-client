@@ -95,7 +95,9 @@ type ActionNodeOverviewListOutput struct {
 	IpAddr                string                    `json:"ip_addr"`
 	Kernel                string                    `json:"kernel"`
 	LastReport            string                    `json:"last_report"`
-	Loadavg               float64                   `json:"loadavg"`
+	Loadavg1              float64                   `json:"loadavg1"`
+	Loadavg15             float64                   `json:"loadavg15"`
+	Loadavg5              float64                   `json:"loadavg5"`
 	Location              *ActionLocationShowOutput `json:"location"`
 	MaintenanceLock       string                    `json:"maintenance_lock"`
 	MaintenanceLockReason string                    `json:"maintenance_lock_reason"`
@@ -147,7 +149,7 @@ func (action *ActionNodeOverviewList) Call() (*ActionNodeOverviewListResponse, e
 func (action *ActionNodeOverviewList) Prepare() *ActionNodeOverviewListInvocation {
 	return &ActionNodeOverviewListInvocation{
 		Action: action,
-		Path:   "/v6.0/nodes/overview_list",
+		Path:   "/v7.0/nodes/overview_list",
 	}
 }
 

@@ -320,7 +320,7 @@ type ActionIpAddressCreateResponse struct {
 func (action *ActionIpAddressCreate) Prepare() *ActionIpAddressCreateInvocation {
 	return &ActionIpAddressCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/ip_addresses",
+		Path:   "/v7.0/ip_addresses",
 	}
 }
 

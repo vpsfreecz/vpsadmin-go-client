@@ -295,7 +295,7 @@ type ActionIncidentReportCreateResponse struct {
 func (action *ActionIncidentReportCreate) Prepare() *ActionIncidentReportCreateInvocation {
 	return &ActionIncidentReportCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/incident_reports",
+		Path:   "/v7.0/incident_reports",
 	}
 }
 

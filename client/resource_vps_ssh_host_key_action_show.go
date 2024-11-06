@@ -100,7 +100,7 @@ type ActionVpsSshHostKeyShowResponse struct {
 func (action *ActionVpsSshHostKeyShow) Prepare() *ActionVpsSshHostKeyShowInvocation {
 	return &ActionVpsSshHostKeyShowInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/ssh_host_keys/{ssh_host_key_id}",
+		Path:   "/v7.0/vpses/{vps_id}/ssh_host_keys/{ssh_host_key_id}",
 	}
 }
 

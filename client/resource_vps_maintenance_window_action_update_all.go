@@ -189,7 +189,7 @@ type ActionVpsMaintenanceWindowUpdateAllResponse struct {
 func (action *ActionVpsMaintenanceWindowUpdateAll) Prepare() *ActionVpsMaintenanceWindowUpdateAllInvocation {
 	return &ActionVpsMaintenanceWindowUpdateAllInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/maintenance_windows",
+		Path:   "/v7.0/vpses/{vps_id}/maintenance_windows",
 	}
 }
 

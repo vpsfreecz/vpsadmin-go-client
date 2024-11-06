@@ -190,7 +190,7 @@ type ActionVpsBootResponse struct {
 func (action *ActionVpsBoot) Prepare() *ActionVpsBootInvocation {
 	return &ActionVpsBootInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/boot",
+		Path:   "/v7.0/vpses/{vps_id}/boot",
 	}
 }
 

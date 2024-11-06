@@ -73,28 +73,32 @@ func (in *ActionUserCurrentMetaGlobalInput) AnySelected() bool {
 
 // ActionUserCurrentOutput is a type for action output parameters
 type ActionUserCurrentOutput struct {
-	Address                string                    `json:"address"`
-	CreatedAt              string                    `json:"created_at"`
-	DokuwikiGroups         string                    `json:"dokuwiki_groups"`
-	Email                  string                    `json:"email"`
-	EnableSingleSignOn     bool                      `json:"enable_single_sign_on"`
-	ExpirationDate         string                    `json:"expiration_date"`
-	FullName               string                    `json:"full_name"`
-	Id                     int64                     `json:"id"`
-	Info                   string                    `json:"info"`
-	Language               *ActionLanguageShowOutput `json:"language"`
-	LastActivityAt         string                    `json:"last_activity_at"`
-	Level                  int64                     `json:"level"`
-	Lockout                bool                      `json:"lockout"`
-	Login                  string                    `json:"login"`
-	MailerEnabled          bool                      `json:"mailer_enabled"`
-	MonthlyPayment         int64                     `json:"monthly_payment"`
-	ObjectState            string                    `json:"object_state"`
-	PaidUntil              string                    `json:"paid_until"`
-	PasswordReset          bool                      `json:"password_reset"`
-	PreferredLogoutAll     bool                      `json:"preferred_logout_all"`
-	PreferredSessionLength int64                     `json:"preferred_session_length"`
-	RemindAfterDate        string                    `json:"remind_after_date"`
+	Address                    string                    `json:"address"`
+	CreatedAt                  string                    `json:"created_at"`
+	DokuwikiGroups             string                    `json:"dokuwiki_groups"`
+	Email                      string                    `json:"email"`
+	EnableBasicAuth            bool                      `json:"enable_basic_auth"`
+	EnableNewLoginNotification bool                      `json:"enable_new_login_notification"`
+	EnableOauth2Auth           bool                      `json:"enable_oauth2_auth"`
+	EnableSingleSignOn         bool                      `json:"enable_single_sign_on"`
+	EnableTokenAuth            bool                      `json:"enable_token_auth"`
+	ExpirationDate             string                    `json:"expiration_date"`
+	FullName                   string                    `json:"full_name"`
+	Id                         int64                     `json:"id"`
+	Info                       string                    `json:"info"`
+	Language                   *ActionLanguageShowOutput `json:"language"`
+	LastActivityAt             string                    `json:"last_activity_at"`
+	Level                      int64                     `json:"level"`
+	Lockout                    bool                      `json:"lockout"`
+	Login                      string                    `json:"login"`
+	MailerEnabled              bool                      `json:"mailer_enabled"`
+	MonthlyPayment             int64                     `json:"monthly_payment"`
+	ObjectState                string                    `json:"object_state"`
+	PaidUntil                  string                    `json:"paid_until"`
+	PasswordReset              bool                      `json:"password_reset"`
+	PreferredLogoutAll         bool                      `json:"preferred_logout_all"`
+	PreferredSessionLength     int64                     `json:"preferred_session_length"`
+	RemindAfterDate            string                    `json:"remind_after_date"`
 }
 
 // Type for action response, including envelope
@@ -119,7 +123,7 @@ func (action *ActionUserCurrent) Call() (*ActionUserCurrentResponse, error) {
 func (action *ActionUserCurrent) Prepare() *ActionUserCurrentInvocation {
 	return &ActionUserCurrentInvocation{
 		Action: action,
-		Path:   "/v6.0/users/current",
+		Path:   "/v7.0/users/current",
 	}
 }
 

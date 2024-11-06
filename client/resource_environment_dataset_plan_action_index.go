@@ -88,12 +88,24 @@ func (in *ActionEnvironmentDatasetPlanIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionEnvironmentDatasetPlanIndexInput is a type for action input parameters
 type ActionEnvironmentDatasetPlanIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionEnvironmentDatasetPlanIndexInput) SetFromId(value int64) *ActionEnvironmentDatasetPlanIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -105,18 +117,6 @@ func (in *ActionEnvironmentDatasetPlanIndexInput) SetLimit(value int64) *ActionE
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionEnvironmentDatasetPlanIndexInput) SetOffset(value int64) *ActionEnvironmentDatasetPlanIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -184,7 +184,7 @@ type ActionEnvironmentDatasetPlanIndexResponse struct {
 func (action *ActionEnvironmentDatasetPlanIndex) Prepare() *ActionEnvironmentDatasetPlanIndexInvocation {
 	return &ActionEnvironmentDatasetPlanIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/environments/{environment_id}/dataset_plans",
+		Path:   "/v7.0/environments/{environment_id}/dataset_plans",
 	}
 }
 
@@ -296,11 +296,11 @@ func (inv *ActionEnvironmentDatasetPlanIndexInvocation) callAsQuery() (*ActionEn
 
 func (inv *ActionEnvironmentDatasetPlanIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["dataset_plan[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["dataset_plan[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["dataset_plan[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

@@ -75,20 +75,22 @@ func (in *ActionOsTemplateShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOsTemplateShowOutput is a type for action output parameters
 type ActionOsTemplateShowOutput struct {
-	Arch           string `json:"arch"`
-	CgroupVersion  string `json:"cgroup_version"`
-	Distribution   string `json:"distribution"`
-	Enabled        bool   `json:"enabled"`
-	HypervisorType string `json:"hypervisor_type"`
-	Id             int64  `json:"id"`
-	Info           string `json:"info"`
-	Label          string `json:"label"`
-	Name           string `json:"name"`
-	Order          int64  `json:"order"`
-	Supported      bool   `json:"supported"`
-	Variant        string `json:"variant"`
-	Vendor         string `json:"vendor"`
-	Version        string `json:"version"`
+	Arch           string                    `json:"arch"`
+	CgroupVersion  string                    `json:"cgroup_version"`
+	Config         string                    `json:"config"`
+	Distribution   string                    `json:"distribution"`
+	Enabled        bool                      `json:"enabled"`
+	HypervisorType string                    `json:"hypervisor_type"`
+	Id             int64                     `json:"id"`
+	Info           string                    `json:"info"`
+	Label          string                    `json:"label"`
+	Name           string                    `json:"name"`
+	Order          int64                     `json:"order"`
+	OsFamily       *ActionOsFamilyShowOutput `json:"os_family"`
+	Supported      bool                      `json:"supported"`
+	Variant        string                    `json:"variant"`
+	Vendor         string                    `json:"vendor"`
+	Version        string                    `json:"version"`
 }
 
 // Type for action response, including envelope
@@ -108,7 +110,7 @@ type ActionOsTemplateShowResponse struct {
 func (action *ActionOsTemplateShow) Prepare() *ActionOsTemplateShowInvocation {
 	return &ActionOsTemplateShowInvocation{
 		Action: action,
-		Path:   "/v6.0/os_templates/{os_template_id}",
+		Path:   "/v7.0/os_templates/{os_template_id}",
 	}
 }
 

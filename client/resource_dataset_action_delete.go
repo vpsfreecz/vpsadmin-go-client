@@ -98,7 +98,7 @@ type ActionDatasetDeleteResponse struct {
 func (action *ActionDatasetDelete) Prepare() *ActionDatasetDeleteInvocation {
 	return &ActionDatasetDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/datasets/{dataset_id}",
+		Path:   "/v7.0/datasets/{dataset_id}",
 	}
 }
 

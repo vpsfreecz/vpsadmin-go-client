@@ -77,6 +77,7 @@ func (in *ActionVpsReplaceMetaGlobalInput) AnySelected() bool {
 type ActionVpsReplaceInput struct {
 	ExpirationDate string `json:"expiration_date"`
 	Node           int64  `json:"node"`
+	Reason         string `json:"reason"`
 	Start          bool   `json:"start"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -124,6 +125,18 @@ func (in *ActionVpsReplaceInput) SetNodeNil(set bool) *ActionVpsReplaceInput {
 	} else {
 		delete(in._nilParameters, "Node")
 	}
+	return in
+}
+
+// SetReason sets parameter Reason to value and selects it for sending
+func (in *ActionVpsReplaceInput) SetReason(value string) *ActionVpsReplaceInput {
+	in.Reason = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Reason"] = nil
 	return in
 }
 
@@ -208,7 +221,9 @@ type ActionVpsReplaceOutput struct {
 	InRescueMode            bool                              `json:"in_rescue_mode"`
 	Info                    string                            `json:"info"`
 	IsRunning               bool                              `json:"is_running"`
-	Loadavg                 float64                           `json:"loadavg"`
+	Loadavg1                float64                           `json:"loadavg1"`
+	Loadavg15               float64                           `json:"loadavg15"`
+	Loadavg5                float64                           `json:"loadavg5"`
 	ManageHostname          bool                              `json:"manage_hostname"`
 	Memory                  int64                             `json:"memory"`
 	Node                    *ActionNodeShowOutput             `json:"node"`
@@ -250,7 +265,7 @@ type ActionVpsReplaceResponse struct {
 func (action *ActionVpsReplace) Prepare() *ActionVpsReplaceInvocation {
 	return &ActionVpsReplaceInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/replace",
+		Path:   "/v7.0/vpses/{vps_id}/replace",
 	}
 }
 
@@ -454,6 +469,9 @@ func (inv *ActionVpsReplaceInvocation) makeInputParams() map[string]interface{} 
 			} else {
 				ret["node"] = inv.Input.Node
 			}
+		}
+		if inv.IsParameterSelected("Reason") {
+			ret["reason"] = inv.Input.Reason
 		}
 		if inv.IsParameterSelected("Start") {
 			ret["start"] = inv.Input.Start

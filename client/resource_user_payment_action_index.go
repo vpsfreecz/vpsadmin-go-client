@@ -87,8 +87,8 @@ func (in *ActionUserPaymentIndexMetaGlobalInput) AnySelected() bool {
 // ActionUserPaymentIndexInput is a type for action input parameters
 type ActionUserPaymentIndexInput struct {
 	AccountedBy int64 `json:"accounted_by"`
+	FromId      int64 `json:"from_id"`
 	Limit       int64 `json:"limit"`
-	Offset      int64 `json:"offset"`
 	User        int64 `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -127,6 +127,18 @@ func (in *ActionUserPaymentIndexInput) SetAccountedByNil(set bool) *ActionUserPa
 	return in
 }
 
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionUserPaymentIndexInput) SetFromId(value int64) *ActionUserPaymentIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
+}
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserPaymentIndexInput) SetLimit(value int64) *ActionUserPaymentIndexInput {
 	in.Limit = value
@@ -136,18 +148,6 @@ func (in *ActionUserPaymentIndexInput) SetLimit(value int64) *ActionUserPaymentI
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserPaymentIndexInput) SetOffset(value int64) *ActionUserPaymentIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -249,7 +249,7 @@ type ActionUserPaymentIndexResponse struct {
 func (action *ActionUserPaymentIndex) Prepare() *ActionUserPaymentIndexInvocation {
 	return &ActionUserPaymentIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/user_payments",
+		Path:   "/v7.0/user_payments",
 	}
 }
 
@@ -353,11 +353,11 @@ func (inv *ActionUserPaymentIndexInvocation) convertInputToQueryParams(ret map[s
 		if inv.IsParameterSelected("AccountedBy") {
 			ret["user_payment[accounted_by]"] = convertInt64ToString(inv.Input.AccountedBy)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["user_payment[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["user_payment[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["user_payment[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("User") {
 			ret["user_payment[user]"] = convertInt64ToString(inv.Input.User)

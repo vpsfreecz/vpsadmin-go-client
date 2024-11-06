@@ -87,8 +87,8 @@ func (in *ActionSnapshotDownloadIndexMetaGlobalInput) AnySelected() bool {
 // ActionSnapshotDownloadIndexInput is a type for action input parameters
 type ActionSnapshotDownloadIndexInput struct {
 	Dataset  int64 `json:"dataset"`
+	FromId   int64 `json:"from_id"`
 	Limit    int64 `json:"limit"`
-	Offset   int64 `json:"offset"`
 	Snapshot int64 `json:"snapshot"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -127,6 +127,18 @@ func (in *ActionSnapshotDownloadIndexInput) SetDatasetNil(set bool) *ActionSnaps
 	return in
 }
 
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionSnapshotDownloadIndexInput) SetFromId(value int64) *ActionSnapshotDownloadIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
+}
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionSnapshotDownloadIndexInput) SetLimit(value int64) *ActionSnapshotDownloadIndexInput {
 	in.Limit = value
@@ -136,18 +148,6 @@ func (in *ActionSnapshotDownloadIndexInput) SetLimit(value int64) *ActionSnapsho
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionSnapshotDownloadIndexInput) SetOffset(value int64) *ActionSnapshotDownloadIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -252,7 +252,7 @@ type ActionSnapshotDownloadIndexResponse struct {
 func (action *ActionSnapshotDownloadIndex) Prepare() *ActionSnapshotDownloadIndexInvocation {
 	return &ActionSnapshotDownloadIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/snapshot_downloads",
+		Path:   "/v7.0/snapshot_downloads",
 	}
 }
 
@@ -356,11 +356,11 @@ func (inv *ActionSnapshotDownloadIndexInvocation) convertInputToQueryParams(ret 
 		if inv.IsParameterSelected("Dataset") {
 			ret["snapshot_download[dataset]"] = convertInt64ToString(inv.Input.Dataset)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["snapshot_download[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["snapshot_download[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["snapshot_download[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Snapshot") {
 			ret["snapshot_download[snapshot]"] = convertInt64ToString(inv.Input.Snapshot)

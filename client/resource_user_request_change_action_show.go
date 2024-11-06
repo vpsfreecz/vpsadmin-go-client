@@ -110,7 +110,7 @@ type ActionUserRequestChangeShowResponse struct {
 func (action *ActionUserRequestChangeShow) Prepare() *ActionUserRequestChangeShowInvocation {
 	return &ActionUserRequestChangeShowInvocation{
 		Action: action,
-		Path:   "/v6.0/user_request/changes/{change_id}",
+		Path:   "/v7.0/user_request/changes/{change_id}",
 	}
 }
 

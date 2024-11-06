@@ -90,8 +90,8 @@ func (in *ActionUserTotpDeviceIndexMetaGlobalInput) AnySelected() bool {
 type ActionUserTotpDeviceIndexInput struct {
 	Confirmed bool  `json:"confirmed"`
 	Enabled   bool  `json:"enabled"`
+	FromId    int64 `json:"from_id"`
 	Limit     int64 `json:"limit"`
-	Offset    int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -122,6 +122,18 @@ func (in *ActionUserTotpDeviceIndexInput) SetEnabled(value bool) *ActionUserTotp
 	return in
 }
 
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionUserTotpDeviceIndexInput) SetFromId(value int64) *ActionUserTotpDeviceIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
+}
+
 // SetLimit sets parameter Limit to value and selects it for sending
 func (in *ActionUserTotpDeviceIndexInput) SetLimit(value int64) *ActionUserTotpDeviceIndexInput {
 	in.Limit = value
@@ -131,18 +143,6 @@ func (in *ActionUserTotpDeviceIndexInput) SetLimit(value int64) *ActionUserTotpD
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionUserTotpDeviceIndexInput) SetOffset(value int64) *ActionUserTotpDeviceIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -213,7 +213,7 @@ type ActionUserTotpDeviceIndexResponse struct {
 func (action *ActionUserTotpDeviceIndex) Prepare() *ActionUserTotpDeviceIndexInvocation {
 	return &ActionUserTotpDeviceIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/users/{user_id}/totp_devices",
+		Path:   "/v7.0/users/{user_id}/totp_devices",
 	}
 }
 
@@ -331,11 +331,11 @@ func (inv *ActionUserTotpDeviceIndexInvocation) convertInputToQueryParams(ret ma
 		if inv.IsParameterSelected("Enabled") {
 			ret["totp_device[enabled]"] = convertBoolToString(inv.Input.Enabled)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["totp_device[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["totp_device[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["totp_device[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

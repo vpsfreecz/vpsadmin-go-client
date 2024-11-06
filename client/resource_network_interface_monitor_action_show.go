@@ -104,7 +104,7 @@ type ActionNetworkInterfaceMonitorShowResponse struct {
 func (action *ActionNetworkInterfaceMonitorShow) Prepare() *ActionNetworkInterfaceMonitorShowInvocation {
 	return &ActionNetworkInterfaceMonitorShowInvocation{
 		Action: action,
-		Path:   "/v6.0/network_interface_monitors/{network_interface_monitor_id}",
+		Path:   "/v7.0/network_interface_monitors/{network_interface_monitor_id}",
 	}
 }
 

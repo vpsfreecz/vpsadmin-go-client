@@ -88,12 +88,24 @@ func (in *ActionExportHostIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionExportHostIndexInput is a type for action input parameters
 type ActionExportHostIndexInput struct {
+	FromId int64 `json:"from_id"`
 	Limit  int64 `json:"limit"`
-	Offset int64 `json:"offset"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionExportHostIndexInput) SetFromId(value int64) *ActionExportHostIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -105,18 +117,6 @@ func (in *ActionExportHostIndexInput) SetLimit(value int64) *ActionExportHostInd
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionExportHostIndexInput) SetOffset(value int64) *ActionExportHostIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -185,7 +185,7 @@ type ActionExportHostIndexResponse struct {
 func (action *ActionExportHostIndex) Prepare() *ActionExportHostIndexInvocation {
 	return &ActionExportHostIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/exports/{export_id}/hosts",
+		Path:   "/v7.0/exports/{export_id}/hosts",
 	}
 }
 
@@ -297,11 +297,11 @@ func (inv *ActionExportHostIndexInvocation) callAsQuery() (*ActionExportHostInde
 
 func (inv *ActionExportHostIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["host[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["host[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["host[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 	}
 }

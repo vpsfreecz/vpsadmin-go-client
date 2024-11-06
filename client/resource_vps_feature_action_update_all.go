@@ -75,8 +75,8 @@ func (in *ActionVpsFeatureUpdateAllMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsFeatureUpdateAllInput is a type for action input parameters
 type ActionVpsFeatureUpdateAllInput struct {
-	ApparmorDirs bool `json:"apparmor_dirs"`
 	Fuse         bool `json:"fuse"`
+	Impermanence bool `json:"impermanence"`
 	Kvm          bool `json:"kvm"`
 	Lxc          bool `json:"lxc"`
 	Ppp          bool `json:"ppp"`
@@ -85,18 +85,6 @@ type ActionVpsFeatureUpdateAllInput struct {
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
-}
-
-// SetApparmorDirs sets parameter ApparmorDirs to value and selects it for sending
-func (in *ActionVpsFeatureUpdateAllInput) SetApparmorDirs(value bool) *ActionVpsFeatureUpdateAllInput {
-	in.ApparmorDirs = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["ApparmorDirs"] = nil
-	return in
 }
 
 // SetFuse sets parameter Fuse to value and selects it for sending
@@ -108,6 +96,18 @@ func (in *ActionVpsFeatureUpdateAllInput) SetFuse(value bool) *ActionVpsFeatureU
 	}
 
 	in._selectedParameters["Fuse"] = nil
+	return in
+}
+
+// SetImpermanence sets parameter Impermanence to value and selects it for sending
+func (in *ActionVpsFeatureUpdateAllInput) SetImpermanence(value bool) *ActionVpsFeatureUpdateAllInput {
+	in.Impermanence = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Impermanence"] = nil
 	return in
 }
 
@@ -223,7 +223,7 @@ type ActionVpsFeatureUpdateAllResponse struct {
 func (action *ActionVpsFeatureUpdateAll) Prepare() *ActionVpsFeatureUpdateAllInvocation {
 	return &ActionVpsFeatureUpdateAllInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/features/update_all",
+		Path:   "/v7.0/vpses/{vps_id}/features/update_all",
 	}
 }
 
@@ -415,11 +415,11 @@ func (inv *ActionVpsFeatureUpdateAllInvocation) makeInputParams() map[string]int
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("ApparmorDirs") {
-			ret["apparmor_dirs"] = inv.Input.ApparmorDirs
-		}
 		if inv.IsParameterSelected("Fuse") {
 			ret["fuse"] = inv.Input.Fuse
+		}
+		if inv.IsParameterSelected("Impermanence") {
+			ret["impermanence"] = inv.Input.Impermanence
 		}
 		if inv.IsParameterSelected("Kvm") {
 			ret["kvm"] = inv.Input.Kvm

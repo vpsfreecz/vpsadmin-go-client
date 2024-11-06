@@ -109,7 +109,7 @@ type ActionIpAddressAssignmentShowResponse struct {
 func (action *ActionIpAddressAssignmentShow) Prepare() *ActionIpAddressAssignmentShowInvocation {
 	return &ActionIpAddressAssignmentShowInvocation{
 		Action: action,
-		Path:   "/v6.0/ip_address_assignments/{ip_address_assignment_id}",
+		Path:   "/v7.0/ip_address_assignments/{ip_address_assignment_id}",
 	}
 }
 

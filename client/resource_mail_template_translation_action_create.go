@@ -266,7 +266,7 @@ type ActionMailTemplateTranslationCreateResponse struct {
 func (action *ActionMailTemplateTranslationCreate) Prepare() *ActionMailTemplateTranslationCreateInvocation {
 	return &ActionMailTemplateTranslationCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/mail_templates/{mail_template_id}/translations",
+		Path:   "/v7.0/mail_templates/{mail_template_id}/translations",
 	}
 }
 

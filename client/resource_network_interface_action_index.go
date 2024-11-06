@@ -86,15 +86,27 @@ func (in *ActionNetworkInterfaceIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkInterfaceIndexInput is a type for action input parameters
 type ActionNetworkInterfaceIndexInput struct {
+	FromId   int64 `json:"from_id"`
 	Limit    int64 `json:"limit"`
 	Location int64 `json:"location"`
-	Offset   int64 `json:"offset"`
 	User     int64 `json:"user"`
 	Vps      int64 `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionNetworkInterfaceIndexInput) SetFromId(value int64) *ActionNetworkInterfaceIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
+	return in
 }
 
 // SetLimit sets parameter Limit to value and selects it for sending
@@ -137,18 +149,6 @@ func (in *ActionNetworkInterfaceIndexInput) SetLocationNil(set bool) *ActionNetw
 	} else {
 		delete(in._nilParameters, "Location")
 	}
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionNetworkInterfaceIndexInput) SetOffset(value int64) *ActionNetworkInterfaceIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -280,7 +280,7 @@ type ActionNetworkInterfaceIndexResponse struct {
 func (action *ActionNetworkInterfaceIndex) Prepare() *ActionNetworkInterfaceIndexInvocation {
 	return &ActionNetworkInterfaceIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/network_interfaces",
+		Path:   "/v7.0/network_interfaces",
 	}
 }
 
@@ -381,14 +381,14 @@ func (inv *ActionNetworkInterfaceIndexInvocation) callAsQuery() (*ActionNetworkI
 
 func (inv *ActionNetworkInterfaceIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("FromId") {
+			ret["network_interface[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("Limit") {
 			ret["network_interface[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 		if inv.IsParameterSelected("Location") {
 			ret["network_interface[location]"] = convertInt64ToString(inv.Input.Location)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["network_interface[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("User") {
 			ret["network_interface[user]"] = convertInt64ToString(inv.Input.User)

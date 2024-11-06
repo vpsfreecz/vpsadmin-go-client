@@ -297,7 +297,7 @@ type ActionNetworkCreateResponse struct {
 func (action *ActionNetworkCreate) Prepare() *ActionNetworkCreateInvocation {
 	return &ActionNetworkCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/networks",
+		Path:   "/v7.0/networks",
 	}
 }
 

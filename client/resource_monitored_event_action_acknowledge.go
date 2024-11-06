@@ -148,7 +148,7 @@ type ActionMonitoredEventAcknowledgeResponse struct {
 func (action *ActionMonitoredEventAcknowledge) Prepare() *ActionMonitoredEventAcknowledgeInvocation {
 	return &ActionMonitoredEventAcknowledgeInvocation{
 		Action: action,
-		Path:   "/v6.0/monitored_events/{monitored_event_id}/acknowledge",
+		Path:   "/v7.0/monitored_events/{monitored_event_id}/acknowledge",
 	}
 }
 

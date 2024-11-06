@@ -88,11 +88,11 @@ func (in *ActionIncidentReportIndexMetaGlobalInput) AnySelected() bool {
 type ActionIncidentReportIndexInput struct {
 	Codename            string `json:"codename"`
 	FiledBy             int64  `json:"filed_by"`
+	FromId              int64  `json:"from_id"`
 	IpAddr              string `json:"ip_addr"`
 	IpAddressAssignment int64  `json:"ip_address_assignment"`
 	Limit               int64  `json:"limit"`
 	Mailbox             int64  `json:"mailbox"`
-	Offset              int64  `json:"offset"`
 	User                int64  `json:"user"`
 	Vps                 int64  `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -141,6 +141,18 @@ func (in *ActionIncidentReportIndexInput) SetFiledByNil(set bool) *ActionInciden
 	} else {
 		delete(in._nilParameters, "FiledBy")
 	}
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionIncidentReportIndexInput) SetFromId(value int64) *ActionIncidentReportIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -227,18 +239,6 @@ func (in *ActionIncidentReportIndexInput) SetMailboxNil(set bool) *ActionInciden
 	} else {
 		delete(in._nilParameters, "Mailbox")
 	}
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionIncidentReportIndexInput) SetOffset(value int64) *ActionIncidentReportIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -378,7 +378,7 @@ type ActionIncidentReportIndexResponse struct {
 func (action *ActionIncidentReportIndex) Prepare() *ActionIncidentReportIndexInvocation {
 	return &ActionIncidentReportIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/incident_reports",
+		Path:   "/v7.0/incident_reports",
 	}
 }
 
@@ -485,6 +485,9 @@ func (inv *ActionIncidentReportIndexInvocation) convertInputToQueryParams(ret ma
 		if inv.IsParameterSelected("FiledBy") {
 			ret["incident_report[filed_by]"] = convertInt64ToString(inv.Input.FiledBy)
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["incident_report[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("IpAddr") {
 			ret["incident_report[ip_addr]"] = inv.Input.IpAddr
 		}
@@ -496,9 +499,6 @@ func (inv *ActionIncidentReportIndexInvocation) convertInputToQueryParams(ret ma
 		}
 		if inv.IsParameterSelected("Mailbox") {
 			ret["incident_report[mailbox]"] = convertInt64ToString(inv.Input.Mailbox)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["incident_report[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("User") {
 			ret["incident_report[user]"] = convertInt64ToString(inv.Input.User)

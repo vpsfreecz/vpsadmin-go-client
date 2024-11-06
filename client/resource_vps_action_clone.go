@@ -414,7 +414,9 @@ type ActionVpsCloneOutput struct {
 	InRescueMode            bool                              `json:"in_rescue_mode"`
 	Info                    string                            `json:"info"`
 	IsRunning               bool                              `json:"is_running"`
-	Loadavg                 float64                           `json:"loadavg"`
+	Loadavg1                float64                           `json:"loadavg1"`
+	Loadavg15               float64                           `json:"loadavg15"`
+	Loadavg5                float64                           `json:"loadavg5"`
 	ManageHostname          bool                              `json:"manage_hostname"`
 	Memory                  int64                             `json:"memory"`
 	Node                    *ActionNodeShowOutput             `json:"node"`
@@ -456,7 +458,7 @@ type ActionVpsCloneResponse struct {
 func (action *ActionVpsClone) Prepare() *ActionVpsCloneInvocation {
 	return &ActionVpsCloneInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/clone",
+		Path:   "/v7.0/vpses/{vps_id}/clone",
 	}
 }
 

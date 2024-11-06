@@ -212,7 +212,7 @@ type ActionUserRequestChangeCreateResponse struct {
 func (action *ActionUserRequestChangeCreate) Prepare() *ActionUserRequestChangeCreateInvocation {
 	return &ActionUserRequestChangeCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/user_request/changes",
+		Path:   "/v7.0/user_request/changes",
 	}
 }
 

@@ -185,6 +185,7 @@ type ActionDatasetFindByNameOutput struct {
 	Sync             string                            `json:"sync"`
 	Used             int64                             `json:"used"`
 	User             *ActionUserShowOutput             `json:"user"`
+	Vps              *ActionVpsShowOutput              `json:"vps"`
 }
 
 // Type for action response, including envelope
@@ -204,7 +205,7 @@ type ActionDatasetFindByNameResponse struct {
 func (action *ActionDatasetFindByName) Prepare() *ActionDatasetFindByNameInvocation {
 	return &ActionDatasetFindByNameInvocation{
 		Action: action,
-		Path:   "/v6.0/datasets/find_by_name",
+		Path:   "/v7.0/datasets/find_by_name",
 	}
 }
 

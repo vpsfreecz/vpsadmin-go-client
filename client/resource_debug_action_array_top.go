@@ -139,7 +139,7 @@ type ActionDebugArrayTopResponse struct {
 func (action *ActionDebugArrayTop) Prepare() *ActionDebugArrayTopInvocation {
 	return &ActionDebugArrayTopInvocation{
 		Action: action,
-		Path:   "/v6.0/debugs/array_top",
+		Path:   "/v7.0/debugs/array_top",
 	}
 }
 

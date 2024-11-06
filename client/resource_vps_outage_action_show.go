@@ -102,7 +102,7 @@ type ActionVpsOutageShowResponse struct {
 func (action *ActionVpsOutageShow) Prepare() *ActionVpsOutageShowInvocation {
 	return &ActionVpsOutageShowInvocation{
 		Action: action,
-		Path:   "/v6.0/vps_outages/{vps_outage_id}",
+		Path:   "/v7.0/vps_outages/{vps_outage_id}",
 	}
 }
 

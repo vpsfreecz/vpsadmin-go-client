@@ -103,7 +103,7 @@ type ActionMigrationPlanShowResponse struct {
 func (action *ActionMigrationPlanShow) Prepare() *ActionMigrationPlanShowInvocation {
 	return &ActionMigrationPlanShowInvocation{
 		Action: action,
-		Path:   "/v6.0/migration_plans/{migration_plan_id}",
+		Path:   "/v7.0/migration_plans/{migration_plan_id}",
 	}
 }
 

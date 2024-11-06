@@ -98,7 +98,7 @@ type ActionExportDeleteResponse struct {
 func (action *ActionExportDelete) Prepare() *ActionExportDeleteInvocation {
 	return &ActionExportDeleteInvocation{
 		Action: action,
-		Path:   "/v6.0/exports/{export_id}",
+		Path:   "/v7.0/exports/{export_id}",
 	}
 }
 

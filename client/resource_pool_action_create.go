@@ -443,7 +443,7 @@ type ActionPoolCreateResponse struct {
 func (action *ActionPoolCreate) Prepare() *ActionPoolCreateInvocation {
 	return &ActionPoolCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/pools",
+		Path:   "/v7.0/pools",
 	}
 }
 

@@ -248,7 +248,7 @@ type ActionUserSessionCreateResponse struct {
 func (action *ActionUserSessionCreate) Prepare() *ActionUserSessionCreateInvocation {
 	return &ActionUserSessionCreateInvocation{
 		Action: action,
-		Path:   "/v6.0/user_sessions",
+		Path:   "/v7.0/user_sessions",
 	}
 }
 

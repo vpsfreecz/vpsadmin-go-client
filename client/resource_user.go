@@ -9,6 +9,8 @@ type ResourceUser struct {
 	ClusterResource *ResourceUserClusterResource
 	// Resource User.Environment_config
 	EnvironmentConfig *ResourceUserEnvironmentConfig
+	// Resource User.Known_device
+	KnownDevice *ResourceUserKnownDevice
 	// Resource User.Mail_role_recipient
 	MailRoleRecipient *ResourceUserMailRoleRecipient
 	// Resource User.Mail_template_recipient
@@ -59,6 +61,7 @@ func NewResourceUser(client *Client) *ResourceUser {
 		Client:                 client,
 		ClusterResource:        NewResourceUserClusterResource(client),
 		EnvironmentConfig:      NewResourceUserEnvironmentConfig(client),
+		KnownDevice:            NewResourceUserKnownDevice(client),
 		MailRoleRecipient:      NewResourceUserMailRoleRecipient(client),
 		MailTemplateRecipient:  NewResourceUserMailTemplateRecipient(client),
 		PublicKey:              NewResourceUserPublicKey(client),

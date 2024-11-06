@@ -106,7 +106,7 @@ type ActionDatasetExpansionShowResponse struct {
 func (action *ActionDatasetExpansionShow) Prepare() *ActionDatasetExpansionShowInvocation {
 	return &ActionDatasetExpansionShowInvocation{
 		Action: action,
-		Path:   "/v6.0/dataset_expansions/{dataset_expansion_id}",
+		Path:   "/v7.0/dataset_expansions/{dataset_expansion_id}",
 	}
 }
 

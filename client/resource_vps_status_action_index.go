@@ -89,9 +89,9 @@ func (in *ActionVpsStatusIndexMetaGlobalInput) AnySelected() bool {
 // ActionVpsStatusIndexInput is a type for action input parameters
 type ActionVpsStatusIndexInput struct {
 	From      string `json:"from"`
+	FromId    int64  `json:"from_id"`
 	IsRunning bool   `json:"is_running"`
 	Limit     int64  `json:"limit"`
-	Offset    int64  `json:"offset"`
 	Status    bool   `json:"status"`
 	To        string `json:"to"`
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -109,6 +109,18 @@ func (in *ActionVpsStatusIndexInput) SetFrom(value string) *ActionVpsStatusIndex
 	}
 
 	in._selectedParameters["From"] = nil
+	return in
+}
+
+// SetFromId sets parameter FromId to value and selects it for sending
+func (in *ActionVpsStatusIndexInput) SetFromId(value int64) *ActionVpsStatusIndexInput {
+	in.FromId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FromId"] = nil
 	return in
 }
 
@@ -133,18 +145,6 @@ func (in *ActionVpsStatusIndexInput) SetLimit(value int64) *ActionVpsStatusIndex
 	}
 
 	in._selectedParameters["Limit"] = nil
-	return in
-}
-
-// SetOffset sets parameter Offset to value and selects it for sending
-func (in *ActionVpsStatusIndexInput) SetOffset(value int64) *ActionVpsStatusIndexInput {
-	in.Offset = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Offset"] = nil
 	return in
 }
 
@@ -224,7 +224,9 @@ type ActionVpsStatusIndexOutput struct {
 	Id           int64   `json:"id"`
 	InRescueMode bool    `json:"in_rescue_mode"`
 	IsRunning    bool    `json:"is_running"`
-	Loadavg      float64 `json:"loadavg"`
+	Loadavg1     float64 `json:"loadavg1"`
+	Loadavg15    float64 `json:"loadavg15"`
+	Loadavg5     float64 `json:"loadavg5"`
 	ProcessCount int64   `json:"process_count"`
 	Status       bool    `json:"status"`
 	TotalMemory  int64   `json:"total_memory"`
@@ -251,7 +253,7 @@ type ActionVpsStatusIndexResponse struct {
 func (action *ActionVpsStatusIndex) Prepare() *ActionVpsStatusIndexInvocation {
 	return &ActionVpsStatusIndexInvocation{
 		Action: action,
-		Path:   "/v6.0/vpses/{vps_id}/statuses",
+		Path:   "/v7.0/vpses/{vps_id}/statuses",
 	}
 }
 
@@ -366,14 +368,14 @@ func (inv *ActionVpsStatusIndexInvocation) convertInputToQueryParams(ret map[str
 		if inv.IsParameterSelected("From") {
 			ret["status[from]"] = inv.Input.From
 		}
+		if inv.IsParameterSelected("FromId") {
+			ret["status[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
 		if inv.IsParameterSelected("IsRunning") {
 			ret["status[is_running]"] = convertBoolToString(inv.Input.IsRunning)
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["status[limit]"] = convertInt64ToString(inv.Input.Limit)
-		}
-		if inv.IsParameterSelected("Offset") {
-			ret["status[offset]"] = convertInt64ToString(inv.Input.Offset)
 		}
 		if inv.IsParameterSelected("Status") {
 			ret["status[status]"] = convertBoolToString(inv.Input.Status)

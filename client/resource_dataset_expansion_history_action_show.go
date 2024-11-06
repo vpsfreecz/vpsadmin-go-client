@@ -100,7 +100,7 @@ type ActionDatasetExpansionHistoryShowResponse struct {
 func (action *ActionDatasetExpansionHistoryShow) Prepare() *ActionDatasetExpansionHistoryShowInvocation {
 	return &ActionDatasetExpansionHistoryShowInvocation{
 		Action: action,
-		Path:   "/v6.0/dataset_expansions/{dataset_expansion_id}/history/{history_id}",
+		Path:   "/v7.0/dataset_expansions/{dataset_expansion_id}/history/{history_id}",
 	}
 }
 
