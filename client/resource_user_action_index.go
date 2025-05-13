@@ -90,6 +90,7 @@ type ActionUserIndexInput struct {
 	Admin                      bool   `json:"admin"`
 	Email                      string `json:"email"`
 	EnableBasicAuth            bool   `json:"enable_basic_auth"`
+	EnableMultiFactorAuth      bool   `json:"enable_multi_factor_auth"`
 	EnableNewLoginNotification bool   `json:"enable_new_login_notification"`
 	EnableOauth2Auth           bool   `json:"enable_oauth2_auth"`
 	EnableSingleSignOn         bool   `json:"enable_single_sign_on"`
@@ -158,6 +159,18 @@ func (in *ActionUserIndexInput) SetEnableBasicAuth(value bool) *ActionUserIndexI
 	}
 
 	in._selectedParameters["EnableBasicAuth"] = nil
+	return in
+}
+
+// SetEnableMultiFactorAuth sets parameter EnableMultiFactorAuth to value and selects it for sending
+func (in *ActionUserIndexInput) SetEnableMultiFactorAuth(value bool) *ActionUserIndexInput {
+	in.EnableMultiFactorAuth = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnableMultiFactorAuth"] = nil
 	return in
 }
 
@@ -429,6 +442,7 @@ type ActionUserIndexOutput struct {
 	DokuwikiGroups             string                    `json:"dokuwiki_groups"`
 	Email                      string                    `json:"email"`
 	EnableBasicAuth            bool                      `json:"enable_basic_auth"`
+	EnableMultiFactorAuth      bool                      `json:"enable_multi_factor_auth"`
 	EnableNewLoginNotification bool                      `json:"enable_new_login_notification"`
 	EnableOauth2Auth           bool                      `json:"enable_oauth2_auth"`
 	EnableSingleSignOn         bool                      `json:"enable_single_sign_on"`
@@ -581,6 +595,9 @@ func (inv *ActionUserIndexInvocation) convertInputToQueryParams(ret map[string]s
 		}
 		if inv.IsParameterSelected("EnableBasicAuth") {
 			ret["user[enable_basic_auth]"] = convertBoolToString(inv.Input.EnableBasicAuth)
+		}
+		if inv.IsParameterSelected("EnableMultiFactorAuth") {
+			ret["user[enable_multi_factor_auth]"] = convertBoolToString(inv.Input.EnableMultiFactorAuth)
 		}
 		if inv.IsParameterSelected("EnableNewLoginNotification") {
 			ret["user[enable_new_login_notification]"] = convertBoolToString(inv.Input.EnableNewLoginNotification)

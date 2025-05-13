@@ -249,7 +249,6 @@ type ActionDnsZoneIndexOutput struct {
 	Enabled               bool                  `json:"enabled"`
 	Id                    int64                 `json:"id"`
 	Label                 string                `json:"label"`
-	Managed               bool                  `json:"managed"`
 	Name                  string                `json:"name"`
 	ReverseNetworkAddress string                `json:"reverse_network_address"`
 	ReverseNetworkPrefix  string                `json:"reverse_network_prefix"`

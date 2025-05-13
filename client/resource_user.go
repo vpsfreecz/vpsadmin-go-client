@@ -21,6 +21,8 @@ type ResourceUser struct {
 	StateLog *ResourceUserStateLog
 	// Resource User.Totp_device
 	TotpDevice *ResourceUserTotpDevice
+	// Resource User.Webauthn_credential
+	WebauthnCredential *ResourceUserWebauthnCredential
 	// Action User#Create
 	Create *ActionUserCreate
 	// Action User#Create
@@ -67,6 +69,7 @@ func NewResourceUser(client *Client) *ResourceUser {
 		PublicKey:              NewResourceUserPublicKey(client),
 		StateLog:               NewResourceUserStateLog(client),
 		TotpDevice:             NewResourceUserTotpDevice(client),
+		WebauthnCredential:     NewResourceUserWebauthnCredential(client),
 		Create:                 actionCreate,
 		New:                    actionCreate,
 		Current:                actionCurrent,

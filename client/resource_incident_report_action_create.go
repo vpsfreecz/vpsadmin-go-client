@@ -80,6 +80,7 @@ type ActionIncidentReportCreateInput struct {
 	Subject             string `json:"subject"`
 	Text                string `json:"text"`
 	Vps                 int64  `json:"vps"`
+	VpsAction           string `json:"vps_action"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -208,6 +209,18 @@ func (in *ActionIncidentReportCreateInput) SetVpsNil(set bool) *ActionIncidentRe
 	return in
 }
 
+// SetVpsAction sets parameter VpsAction to value and selects it for sending
+func (in *ActionIncidentReportCreateInput) SetVpsAction(value string) *ActionIncidentReportCreateInput {
+	in.VpsAction = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["VpsAction"] = nil
+	return in
+}
+
 // SelectParameters sets parameters from ActionIncidentReportCreateInput
 // that will be sent to the API.
 // SelectParameters can be called multiple times.
@@ -269,6 +282,7 @@ type ActionIncidentReportCreateOutput struct {
 	Text                string                               `json:"text"`
 	User                *ActionUserShowOutput                `json:"user"`
 	Vps                 *ActionVpsShowOutput                 `json:"vps"`
+	VpsAction           string                               `json:"vps_action"`
 }
 
 // ActionIncidentReportCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -507,6 +521,9 @@ func (inv *ActionIncidentReportCreateInvocation) makeInputParams() map[string]in
 			} else {
 				ret["vps"] = inv.Input.Vps
 			}
+		}
+		if inv.IsParameterSelected("VpsAction") {
+			ret["vps_action"] = inv.Input.VpsAction
 		}
 	}
 

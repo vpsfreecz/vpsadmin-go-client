@@ -75,13 +75,26 @@ func (in *ActionNetworkInterfaceUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkInterfaceUpdateInput is a type for action input parameters
 type ActionNetworkInterfaceUpdateInput struct {
-	MaxRx int64  `json:"max_rx"`
-	MaxTx int64  `json:"max_tx"`
-	Name  string `json:"name"`
+	Enable bool   `json:"enable"`
+	MaxRx  int64  `json:"max_rx"`
+	MaxTx  int64  `json:"max_tx"`
+	Name   string `json:"name"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetEnable sets parameter Enable to value and selects it for sending
+func (in *ActionNetworkInterfaceUpdateInput) SetEnable(value bool) *ActionNetworkInterfaceUpdateInput {
+	in.Enable = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Enable"] = nil
+	return in
 }
 
 // SetMaxRx sets parameter MaxRx to value and selects it for sending
@@ -166,13 +179,14 @@ type ActionNetworkInterfaceUpdateRequest struct {
 
 // ActionNetworkInterfaceUpdateOutput is a type for action output parameters
 type ActionNetworkInterfaceUpdateOutput struct {
-	Id    int64                `json:"id"`
-	Mac   string               `json:"mac"`
-	MaxRx int64                `json:"max_rx"`
-	MaxTx int64                `json:"max_tx"`
-	Name  string               `json:"name"`
-	Type  string               `json:"type"`
-	Vps   *ActionVpsShowOutput `json:"vps"`
+	Enable bool                 `json:"enable"`
+	Id     int64                `json:"id"`
+	Mac    string               `json:"mac"`
+	MaxRx  int64                `json:"max_rx"`
+	MaxTx  int64                `json:"max_tx"`
+	Name   string               `json:"name"`
+	Type   string               `json:"type"`
+	Vps    *ActionVpsShowOutput `json:"vps"`
 }
 
 // ActionNetworkInterfaceUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -394,6 +408,9 @@ func (inv *ActionNetworkInterfaceUpdateInvocation) makeInputParams() map[string]
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("Enable") {
+			ret["enable"] = inv.Input.Enable
+		}
 		if inv.IsParameterSelected("MaxRx") {
 			ret["max_rx"] = inv.Input.MaxRx
 		}

@@ -75,31 +75,34 @@ func (in *ActionVpsUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsUpdateInput is a type for action input parameters
 type ActionVpsUpdateInput struct {
-	AdminLockType           string `json:"admin_lock_type"`
-	AdminOverride           bool   `json:"admin_override"`
-	AllowAdminModifications bool   `json:"allow_admin_modifications"`
-	AutostartEnable         bool   `json:"autostart_enable"`
-	AutostartPriority       int64  `json:"autostart_priority"`
-	CgroupVersion           string `json:"cgroup_version"`
-	ChangeReason            string `json:"change_reason"`
-	Config                  string `json:"config"`
-	Cpu                     int64  `json:"cpu"`
-	CpuLimit                int64  `json:"cpu_limit"`
-	DnsResolver             int64  `json:"dns_resolver"`
-	ExpirationDate          string `json:"expiration_date"`
-	Hostname                string `json:"hostname"`
-	Info                    string `json:"info"`
-	ManageHostname          bool   `json:"manage_hostname"`
-	Memory                  int64  `json:"memory"`
-	Node                    int64  `json:"node"`
-	ObjectState             string `json:"object_state"`
-	Onstartall              bool   `json:"onstartall"`
-	OsTemplate              int64  `json:"os_template"`
-	RemindAfterDate         string `json:"remind_after_date"`
-	StartMenuTimeout        int64  `json:"start_menu_timeout"`
-	Swap                    int64  `json:"swap"`
-	User                    int64  `json:"user"`
-	UserNamespaceMap        int64  `json:"user_namespace_map"`
+	AdminLockType              string `json:"admin_lock_type"`
+	AdminOverride              bool   `json:"admin_override"`
+	AllowAdminModifications    bool   `json:"allow_admin_modifications"`
+	AutostartEnable            bool   `json:"autostart_enable"`
+	AutostartPriority          int64  `json:"autostart_priority"`
+	CgroupVersion              string `json:"cgroup_version"`
+	ChangeReason               string `json:"change_reason"`
+	Config                     string `json:"config"`
+	Cpu                        int64  `json:"cpu"`
+	CpuLimit                   int64  `json:"cpu_limit"`
+	DnsResolver                int64  `json:"dns_resolver"`
+	EnableNetwork              bool   `json:"enable_network"`
+	EnableOsTemplateAutoUpdate bool   `json:"enable_os_template_auto_update"`
+	ExpirationDate             string `json:"expiration_date"`
+	Hostname                   string `json:"hostname"`
+	Info                       string `json:"info"`
+	ManageHostname             bool   `json:"manage_hostname"`
+	MapMode                    string `json:"map_mode"`
+	Memory                     int64  `json:"memory"`
+	Node                       int64  `json:"node"`
+	ObjectState                string `json:"object_state"`
+	Onstartall                 bool   `json:"onstartall"`
+	OsTemplate                 int64  `json:"os_template"`
+	RemindAfterDate            string `json:"remind_after_date"`
+	StartMenuTimeout           int64  `json:"start_menu_timeout"`
+	Swap                       int64  `json:"swap"`
+	User                       int64  `json:"user"`
+	UserNamespaceMap           int64  `json:"user_namespace_map"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -257,6 +260,30 @@ func (in *ActionVpsUpdateInput) SetDnsResolverNil(set bool) *ActionVpsUpdateInpu
 	return in
 }
 
+// SetEnableNetwork sets parameter EnableNetwork to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetEnableNetwork(value bool) *ActionVpsUpdateInput {
+	in.EnableNetwork = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnableNetwork"] = nil
+	return in
+}
+
+// SetEnableOsTemplateAutoUpdate sets parameter EnableOsTemplateAutoUpdate to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetEnableOsTemplateAutoUpdate(value bool) *ActionVpsUpdateInput {
+	in.EnableOsTemplateAutoUpdate = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnableOsTemplateAutoUpdate"] = nil
+	return in
+}
+
 // SetExpirationDate sets parameter ExpirationDate to value and selects it for sending
 func (in *ActionVpsUpdateInput) SetExpirationDate(value string) *ActionVpsUpdateInput {
 	in.ExpirationDate = value
@@ -302,6 +329,18 @@ func (in *ActionVpsUpdateInput) SetManageHostname(value bool) *ActionVpsUpdateIn
 	}
 
 	in._selectedParameters["ManageHostname"] = nil
+	return in
+}
+
+// SetMapMode sets parameter MapMode to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetMapMode(value string) *ActionVpsUpdateInput {
+	in.MapMode = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["MapMode"] = nil
 	return in
 }
 
@@ -794,6 +833,12 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 				ret["dns_resolver"] = inv.Input.DnsResolver
 			}
 		}
+		if inv.IsParameterSelected("EnableNetwork") {
+			ret["enable_network"] = inv.Input.EnableNetwork
+		}
+		if inv.IsParameterSelected("EnableOsTemplateAutoUpdate") {
+			ret["enable_os_template_auto_update"] = inv.Input.EnableOsTemplateAutoUpdate
+		}
 		if inv.IsParameterSelected("ExpirationDate") {
 			ret["expiration_date"] = inv.Input.ExpirationDate
 		}
@@ -805,6 +850,9 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 		}
 		if inv.IsParameterSelected("ManageHostname") {
 			ret["manage_hostname"] = inv.Input.ManageHostname
+		}
+		if inv.IsParameterSelected("MapMode") {
+			ret["map_mode"] = inv.Input.MapMode
 		}
 		if inv.IsParameterSelected("Memory") {
 			ret["memory"] = inv.Input.Memory

@@ -274,14 +274,15 @@ func (in *ActionTransactionChainIndexInput) AnySelected() bool {
 
 // ActionTransactionChainIndexOutput is a type for action output parameters
 type ActionTransactionChainIndexOutput struct {
-	CreatedAt string                `json:"created_at"`
-	Id        int64                 `json:"id"`
-	Label     string                `json:"label"`
-	Name      string                `json:"name"`
-	Progress  int64                 `json:"progress"`
-	Size      int64                 `json:"size"`
-	State     string                `json:"state"`
-	User      *ActionUserShowOutput `json:"user"`
+	CreatedAt   string                       `json:"created_at"`
+	Id          int64                        `json:"id"`
+	Label       string                       `json:"label"`
+	Name        string                       `json:"name"`
+	Progress    int64                        `json:"progress"`
+	Size        int64                        `json:"size"`
+	State       string                       `json:"state"`
+	User        *ActionUserShowOutput        `json:"user"`
+	UserSession *ActionUserSessionShowOutput `json:"user_session"`
 }
 
 // Type for action response, including envelope

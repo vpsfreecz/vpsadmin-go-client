@@ -83,11 +83,13 @@ type ActionDnsRecordShowOutput struct {
 	DynamicUpdateUrl     string                   `json:"dynamic_update_url"`
 	Enabled              bool                     `json:"enabled"`
 	Id                   int64                    `json:"id"`
+	Managed              bool                     `json:"managed"`
 	Name                 string                   `json:"name"`
 	Priority             int64                    `json:"priority"`
 	Ttl                  int64                    `json:"ttl"`
 	Type                 string                   `json:"type"`
 	UpdatedAt            string                   `json:"updated_at"`
+	User                 *ActionUserShowOutput    `json:"user"`
 }
 
 // Type for action response, including envelope

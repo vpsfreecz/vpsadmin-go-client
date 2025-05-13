@@ -73,20 +73,24 @@ func (in *ActionOsTemplateCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOsTemplateCreateInput is a type for action input parameters
 type ActionOsTemplateCreateInput struct {
-	Arch           string `json:"arch"`
-	CgroupVersion  string `json:"cgroup_version"`
-	Config         string `json:"config"`
-	Distribution   string `json:"distribution"`
-	Enabled        bool   `json:"enabled"`
-	HypervisorType string `json:"hypervisor_type"`
-	Info           string `json:"info"`
-	Label          string `json:"label"`
-	Order          int64  `json:"order"`
-	OsFamily       int64  `json:"os_family"`
-	Supported      bool   `json:"supported"`
-	Variant        string `json:"variant"`
-	Vendor         string `json:"vendor"`
-	Version        string `json:"version"`
+	Arch              string `json:"arch"`
+	CgroupVersion     string `json:"cgroup_version"`
+	Config            string `json:"config"`
+	Distribution      string `json:"distribution"`
+	EnableCloudInit   bool   `json:"enable_cloud_init"`
+	EnableScript      bool   `json:"enable_script"`
+	Enabled           bool   `json:"enabled"`
+	HypervisorType    string `json:"hypervisor_type"`
+	Info              string `json:"info"`
+	Label             string `json:"label"`
+	ManageDnsResolver bool   `json:"manage_dns_resolver"`
+	ManageHostname    bool   `json:"manage_hostname"`
+	Order             int64  `json:"order"`
+	OsFamily          int64  `json:"os_family"`
+	Supported         bool   `json:"supported"`
+	Variant           string `json:"variant"`
+	Vendor            string `json:"vendor"`
+	Version           string `json:"version"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -141,6 +145,30 @@ func (in *ActionOsTemplateCreateInput) SetDistribution(value string) *ActionOsTe
 	return in
 }
 
+// SetEnableCloudInit sets parameter EnableCloudInit to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetEnableCloudInit(value bool) *ActionOsTemplateCreateInput {
+	in.EnableCloudInit = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnableCloudInit"] = nil
+	return in
+}
+
+// SetEnableScript sets parameter EnableScript to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetEnableScript(value bool) *ActionOsTemplateCreateInput {
+	in.EnableScript = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnableScript"] = nil
+	return in
+}
+
 // SetEnabled sets parameter Enabled to value and selects it for sending
 func (in *ActionOsTemplateCreateInput) SetEnabled(value bool) *ActionOsTemplateCreateInput {
 	in.Enabled = value
@@ -186,6 +214,30 @@ func (in *ActionOsTemplateCreateInput) SetLabel(value string) *ActionOsTemplateC
 	}
 
 	in._selectedParameters["Label"] = nil
+	return in
+}
+
+// SetManageDnsResolver sets parameter ManageDnsResolver to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetManageDnsResolver(value bool) *ActionOsTemplateCreateInput {
+	in.ManageDnsResolver = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ManageDnsResolver"] = nil
+	return in
+}
+
+// SetManageHostname sets parameter ManageHostname to value and selects it for sending
+func (in *ActionOsTemplateCreateInput) SetManageHostname(value bool) *ActionOsTemplateCreateInput {
+	in.ManageHostname = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ManageHostname"] = nil
 	return in
 }
 
@@ -326,22 +378,26 @@ type ActionOsTemplateCreateRequest struct {
 
 // ActionOsTemplateCreateOutput is a type for action output parameters
 type ActionOsTemplateCreateOutput struct {
-	Arch           string                    `json:"arch"`
-	CgroupVersion  string                    `json:"cgroup_version"`
-	Config         string                    `json:"config"`
-	Distribution   string                    `json:"distribution"`
-	Enabled        bool                      `json:"enabled"`
-	HypervisorType string                    `json:"hypervisor_type"`
-	Id             int64                     `json:"id"`
-	Info           string                    `json:"info"`
-	Label          string                    `json:"label"`
-	Name           string                    `json:"name"`
-	Order          int64                     `json:"order"`
-	OsFamily       *ActionOsFamilyShowOutput `json:"os_family"`
-	Supported      bool                      `json:"supported"`
-	Variant        string                    `json:"variant"`
-	Vendor         string                    `json:"vendor"`
-	Version        string                    `json:"version"`
+	Arch              string                    `json:"arch"`
+	CgroupVersion     string                    `json:"cgroup_version"`
+	Config            string                    `json:"config"`
+	Distribution      string                    `json:"distribution"`
+	EnableCloudInit   bool                      `json:"enable_cloud_init"`
+	EnableScript      bool                      `json:"enable_script"`
+	Enabled           bool                      `json:"enabled"`
+	HypervisorType    string                    `json:"hypervisor_type"`
+	Id                int64                     `json:"id"`
+	Info              string                    `json:"info"`
+	Label             string                    `json:"label"`
+	ManageDnsResolver bool                      `json:"manage_dns_resolver"`
+	ManageHostname    bool                      `json:"manage_hostname"`
+	Name              string                    `json:"name"`
+	Order             int64                     `json:"order"`
+	OsFamily          *ActionOsFamilyShowOutput `json:"os_family"`
+	Supported         bool                      `json:"supported"`
+	Variant           string                    `json:"variant"`
+	Vendor            string                    `json:"vendor"`
+	Version           string                    `json:"version"`
 }
 
 // Type for action response, including envelope
@@ -481,6 +537,12 @@ func (inv *ActionOsTemplateCreateInvocation) makeInputParams() map[string]interf
 		if inv.IsParameterSelected("Distribution") {
 			ret["distribution"] = inv.Input.Distribution
 		}
+		if inv.IsParameterSelected("EnableCloudInit") {
+			ret["enable_cloud_init"] = inv.Input.EnableCloudInit
+		}
+		if inv.IsParameterSelected("EnableScript") {
+			ret["enable_script"] = inv.Input.EnableScript
+		}
 		if inv.IsParameterSelected("Enabled") {
 			ret["enabled"] = inv.Input.Enabled
 		}
@@ -492,6 +554,12 @@ func (inv *ActionOsTemplateCreateInvocation) makeInputParams() map[string]interf
 		}
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
+		}
+		if inv.IsParameterSelected("ManageDnsResolver") {
+			ret["manage_dns_resolver"] = inv.Input.ManageDnsResolver
+		}
+		if inv.IsParameterSelected("ManageHostname") {
+			ret["manage_hostname"] = inv.Input.ManageHostname
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["order"] = inv.Input.Order

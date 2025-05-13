@@ -82,6 +82,7 @@ type ActionDnsRecordCreateInput struct {
 	Priority             int64  `json:"priority"`
 	Ttl                  int64  `json:"ttl"`
 	Type                 string `json:"type"`
+	User                 int64  `json:"user"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -215,6 +216,37 @@ func (in *ActionDnsRecordCreateInput) SetType(value string) *ActionDnsRecordCrea
 	return in
 }
 
+// SetUser sets parameter User to value and selects it for sending
+func (in *ActionDnsRecordCreateInput) SetUser(value int64) *ActionDnsRecordCreateInput {
+	in.User = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetUserNil(false)
+	in._selectedParameters["User"] = nil
+	return in
+}
+
+// SetUserNil sets parameter User to nil and selects it for sending
+func (in *ActionDnsRecordCreateInput) SetUserNil(set bool) *ActionDnsRecordCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["User"] = nil
+		in.SelectParameters("User")
+	} else {
+		delete(in._nilParameters, "User")
+	}
+	return in
+}
+
 // SelectParameters sets parameters from ActionDnsRecordCreateInput
 // that will be sent to the API.
 // SelectParameters can be called multiple times.
@@ -269,11 +301,13 @@ type ActionDnsRecordCreateOutput struct {
 	DynamicUpdateUrl     string                   `json:"dynamic_update_url"`
 	Enabled              bool                     `json:"enabled"`
 	Id                   int64                    `json:"id"`
+	Managed              bool                     `json:"managed"`
 	Name                 string                   `json:"name"`
 	Priority             int64                    `json:"priority"`
 	Ttl                  int64                    `json:"ttl"`
 	Type                 string                   `json:"type"`
 	UpdatedAt            string                   `json:"updated_at"`
+	User                 *ActionUserShowOutput    `json:"user"`
 }
 
 // ActionDnsRecordCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -514,6 +548,13 @@ func (inv *ActionDnsRecordCreateInvocation) makeInputParams() map[string]interfa
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["type"] = inv.Input.Type
+		}
+		if inv.IsParameterSelected("User") {
+			if inv.IsParameterNil("User") {
+				ret["user"] = nil
+			} else {
+				ret["user"] = inv.Input.User
+			}
 		}
 	}
 

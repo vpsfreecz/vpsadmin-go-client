@@ -80,6 +80,7 @@ type ActionUserShowOutput struct {
 	DokuwikiGroups             string                    `json:"dokuwiki_groups"`
 	Email                      string                    `json:"email"`
 	EnableBasicAuth            bool                      `json:"enable_basic_auth"`
+	EnableMultiFactorAuth      bool                      `json:"enable_multi_factor_auth"`
 	EnableNewLoginNotification bool                      `json:"enable_new_login_notification"`
 	EnableOauth2Auth           bool                      `json:"enable_oauth2_auth"`
 	EnableSingleSignOn         bool                      `json:"enable_single_sign_on"`

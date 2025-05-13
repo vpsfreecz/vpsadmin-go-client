@@ -104,6 +104,8 @@ type Client struct {
 	ObjectHistory *ResourceObjectHistory
 	// Resource Oom_report
 	OomReport *ResourceOomReport
+	// Resource Oom_report_rule
+	OomReportRule *ResourceOomReportRule
 	// Resource Os_family
 	OsFamily *ResourceOsFamily
 	// Resource Os_template
@@ -146,6 +148,10 @@ type Client struct {
 	Vps *ResourceVps
 	// Resource Vps_outage
 	VpsOutage *ResourceVpsOutage
+	// Resource Vps_user_data
+	VpsUserData *ResourceVpsUserData
+	// Resource Webauthn
+	Webauthn *ResourceWebauthn
 }
 
 // Create a new client for API at url
@@ -200,6 +206,7 @@ func New(url string) *Client {
 	c.Oauth2Client = NewResourceOauth2Client(c)
 	c.ObjectHistory = NewResourceObjectHistory(c)
 	c.OomReport = NewResourceOomReport(c)
+	c.OomReportRule = NewResourceOomReportRule(c)
 	c.OsFamily = NewResourceOsFamily(c)
 	c.OsTemplate = NewResourceOsTemplate(c)
 	c.Outage = NewResourceOutage(c)
@@ -221,6 +228,8 @@ func New(url string) *Client {
 	c.UserSession = NewResourceUserSession(c)
 	c.Vps = NewResourceVps(c)
 	c.VpsOutage = NewResourceVpsOutage(c)
+	c.VpsUserData = NewResourceVpsUserData(c)
+	c.Webauthn = NewResourceWebauthn(c)
 
 	return c
 }

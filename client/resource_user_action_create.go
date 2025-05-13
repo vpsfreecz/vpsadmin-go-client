@@ -76,6 +76,7 @@ type ActionUserCreateInput struct {
 	Address                    string `json:"address"`
 	Email                      string `json:"email"`
 	EnableBasicAuth            bool   `json:"enable_basic_auth"`
+	EnableMultiFactorAuth      bool   `json:"enable_multi_factor_auth"`
 	EnableNewLoginNotification bool   `json:"enable_new_login_notification"`
 	EnableOauth2Auth           bool   `json:"enable_oauth2_auth"`
 	EnableSingleSignOn         bool   `json:"enable_single_sign_on"`
@@ -135,6 +136,18 @@ func (in *ActionUserCreateInput) SetEnableBasicAuth(value bool) *ActionUserCreat
 	}
 
 	in._selectedParameters["EnableBasicAuth"] = nil
+	return in
+}
+
+// SetEnableMultiFactorAuth sets parameter EnableMultiFactorAuth to value and selects it for sending
+func (in *ActionUserCreateInput) SetEnableMultiFactorAuth(value bool) *ActionUserCreateInput {
+	in.EnableMultiFactorAuth = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnableMultiFactorAuth"] = nil
 	return in
 }
 
@@ -524,6 +537,7 @@ type ActionUserCreateOutput struct {
 	DokuwikiGroups             string                    `json:"dokuwiki_groups"`
 	Email                      string                    `json:"email"`
 	EnableBasicAuth            bool                      `json:"enable_basic_auth"`
+	EnableMultiFactorAuth      bool                      `json:"enable_multi_factor_auth"`
 	EnableNewLoginNotification bool                      `json:"enable_new_login_notification"`
 	EnableOauth2Auth           bool                      `json:"enable_oauth2_auth"`
 	EnableSingleSignOn         bool                      `json:"enable_single_sign_on"`
@@ -761,6 +775,9 @@ func (inv *ActionUserCreateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("EnableBasicAuth") {
 			ret["enable_basic_auth"] = inv.Input.EnableBasicAuth
+		}
+		if inv.IsParameterSelected("EnableMultiFactorAuth") {
+			ret["enable_multi_factor_auth"] = inv.Input.EnableMultiFactorAuth
 		}
 		if inv.IsParameterSelected("EnableNewLoginNotification") {
 			ret["enable_new_login_notification"] = inv.Input.EnableNewLoginNotification

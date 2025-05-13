@@ -86,11 +86,13 @@ func (in *ActionOsTemplateIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOsTemplateIndexInput is a type for action input parameters
 type ActionOsTemplateIndexInput struct {
-	CgroupVersion  string `json:"cgroup_version"`
-	FromId         int64  `json:"from_id"`
-	HypervisorType string `json:"hypervisor_type"`
-	Limit          int64  `json:"limit"`
-	Location       int64  `json:"location"`
+	CgroupVersion   string `json:"cgroup_version"`
+	EnableCloudInit bool   `json:"enable_cloud_init"`
+	EnableScript    bool   `json:"enable_script"`
+	FromId          int64  `json:"from_id"`
+	HypervisorType  string `json:"hypervisor_type"`
+	Limit           int64  `json:"limit"`
+	Location        int64  `json:"location"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -106,6 +108,30 @@ func (in *ActionOsTemplateIndexInput) SetCgroupVersion(value string) *ActionOsTe
 	}
 
 	in._selectedParameters["CgroupVersion"] = nil
+	return in
+}
+
+// SetEnableCloudInit sets parameter EnableCloudInit to value and selects it for sending
+func (in *ActionOsTemplateIndexInput) SetEnableCloudInit(value bool) *ActionOsTemplateIndexInput {
+	in.EnableCloudInit = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnableCloudInit"] = nil
+	return in
+}
+
+// SetEnableScript sets parameter EnableScript to value and selects it for sending
+func (in *ActionOsTemplateIndexInput) SetEnableScript(value bool) *ActionOsTemplateIndexInput {
+	in.EnableScript = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnableScript"] = nil
 	return in
 }
 
@@ -216,22 +242,26 @@ func (in *ActionOsTemplateIndexInput) AnySelected() bool {
 
 // ActionOsTemplateIndexOutput is a type for action output parameters
 type ActionOsTemplateIndexOutput struct {
-	Arch           string                    `json:"arch"`
-	CgroupVersion  string                    `json:"cgroup_version"`
-	Config         string                    `json:"config"`
-	Distribution   string                    `json:"distribution"`
-	Enabled        bool                      `json:"enabled"`
-	HypervisorType string                    `json:"hypervisor_type"`
-	Id             int64                     `json:"id"`
-	Info           string                    `json:"info"`
-	Label          string                    `json:"label"`
-	Name           string                    `json:"name"`
-	Order          int64                     `json:"order"`
-	OsFamily       *ActionOsFamilyShowOutput `json:"os_family"`
-	Supported      bool                      `json:"supported"`
-	Variant        string                    `json:"variant"`
-	Vendor         string                    `json:"vendor"`
-	Version        string                    `json:"version"`
+	Arch              string                    `json:"arch"`
+	CgroupVersion     string                    `json:"cgroup_version"`
+	Config            string                    `json:"config"`
+	Distribution      string                    `json:"distribution"`
+	EnableCloudInit   bool                      `json:"enable_cloud_init"`
+	EnableScript      bool                      `json:"enable_script"`
+	Enabled           bool                      `json:"enabled"`
+	HypervisorType    string                    `json:"hypervisor_type"`
+	Id                int64                     `json:"id"`
+	Info              string                    `json:"info"`
+	Label             string                    `json:"label"`
+	ManageDnsResolver bool                      `json:"manage_dns_resolver"`
+	ManageHostname    bool                      `json:"manage_hostname"`
+	Name              string                    `json:"name"`
+	Order             int64                     `json:"order"`
+	OsFamily          *ActionOsFamilyShowOutput `json:"os_family"`
+	Supported         bool                      `json:"supported"`
+	Variant           string                    `json:"variant"`
+	Vendor            string                    `json:"vendor"`
+	Version           string                    `json:"version"`
 }
 
 // Type for action response, including envelope
@@ -354,6 +384,12 @@ func (inv *ActionOsTemplateIndexInvocation) convertInputToQueryParams(ret map[st
 	if inv.Input != nil {
 		if inv.IsParameterSelected("CgroupVersion") {
 			ret["os_template[cgroup_version]"] = inv.Input.CgroupVersion
+		}
+		if inv.IsParameterSelected("EnableCloudInit") {
+			ret["os_template[enable_cloud_init]"] = convertBoolToString(inv.Input.EnableCloudInit)
+		}
+		if inv.IsParameterSelected("EnableScript") {
+			ret["os_template[enable_script]"] = convertBoolToString(inv.Input.EnableScript)
 		}
 		if inv.IsParameterSelected("FromId") {
 			ret["os_template[from_id]"] = convertInt64ToString(inv.Input.FromId)

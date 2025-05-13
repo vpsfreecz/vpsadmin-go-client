@@ -90,6 +90,7 @@ type ActionIncidentReportShowOutput struct {
 	Text                string                               `json:"text"`
 	User                *ActionUserShowOutput                `json:"user"`
 	Vps                 *ActionVpsShowOutput                 `json:"vps"`
+	VpsAction           string                               `json:"vps_action"`
 }
 
 // Type for action response, including envelope

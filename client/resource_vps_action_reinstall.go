@@ -75,7 +75,10 @@ func (in *ActionVpsReinstallMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsReinstallInput is a type for action input parameters
 type ActionVpsReinstallInput struct {
-	OsTemplate int64 `json:"os_template"`
+	OsTemplate      int64  `json:"os_template"`
+	UserDataContent string `json:"user_data_content"`
+	UserDataFormat  string `json:"user_data_format"`
+	VpsUserData     int64  `json:"vps_user_data"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -109,6 +112,61 @@ func (in *ActionVpsReinstallInput) SetOsTemplateNil(set bool) *ActionVpsReinstal
 		in.SelectParameters("OsTemplate")
 	} else {
 		delete(in._nilParameters, "OsTemplate")
+	}
+	return in
+}
+
+// SetUserDataContent sets parameter UserDataContent to value and selects it for sending
+func (in *ActionVpsReinstallInput) SetUserDataContent(value string) *ActionVpsReinstallInput {
+	in.UserDataContent = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["UserDataContent"] = nil
+	return in
+}
+
+// SetUserDataFormat sets parameter UserDataFormat to value and selects it for sending
+func (in *ActionVpsReinstallInput) SetUserDataFormat(value string) *ActionVpsReinstallInput {
+	in.UserDataFormat = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["UserDataFormat"] = nil
+	return in
+}
+
+// SetVpsUserData sets parameter VpsUserData to value and selects it for sending
+func (in *ActionVpsReinstallInput) SetVpsUserData(value int64) *ActionVpsReinstallInput {
+	in.VpsUserData = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetVpsUserDataNil(false)
+	in._selectedParameters["VpsUserData"] = nil
+	return in
+}
+
+// SetVpsUserDataNil sets parameter VpsUserData to nil and selects it for sending
+func (in *ActionVpsReinstallInput) SetVpsUserDataNil(set bool) *ActionVpsReinstallInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["VpsUserData"] = nil
+		in.SelectParameters("VpsUserData")
+	} else {
+		delete(in._nilParameters, "VpsUserData")
 	}
 	return in
 }
@@ -374,6 +432,19 @@ func (inv *ActionVpsReinstallInvocation) makeInputParams() map[string]interface{
 				ret["os_template"] = nil
 			} else {
 				ret["os_template"] = inv.Input.OsTemplate
+			}
+		}
+		if inv.IsParameterSelected("UserDataContent") {
+			ret["user_data_content"] = inv.Input.UserDataContent
+		}
+		if inv.IsParameterSelected("UserDataFormat") {
+			ret["user_data_format"] = inv.Input.UserDataFormat
+		}
+		if inv.IsParameterSelected("VpsUserData") {
+			if inv.IsParameterNil("VpsUserData") {
+				ret["vps_user_data"] = nil
+			} else {
+				ret["vps_user_data"] = inv.Input.VpsUserData
 			}
 		}
 	}
