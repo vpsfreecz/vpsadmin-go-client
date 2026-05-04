@@ -147,8 +147,23 @@ func (inv *ActionUserWebauthnCredentialDeleteInvocation) IsMetaParameterNil(para
 	return exists
 }
 
+func (inv *ActionUserWebauthnCredentialDeleteInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserWebauthnCredentialDeleteInvocation) Call() (*ActionUserWebauthnCredentialDeleteResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

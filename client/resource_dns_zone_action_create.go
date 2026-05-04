@@ -207,26 +207,7 @@ func (in *ActionDnsZoneCreateInput) SetSeedVps(value int64) *ActionDnsZoneCreate
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetSeedVpsNil(false)
 	in._selectedParameters["SeedVps"] = nil
-	return in
-}
-
-// SetSeedVpsNil sets parameter SeedVps to nil and selects it for sending
-func (in *ActionDnsZoneCreateInput) SetSeedVpsNil(set bool) *ActionDnsZoneCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["SeedVps"] = nil
-		in.SelectParameters("SeedVps")
-	} else {
-		delete(in._nilParameters, "SeedVps")
-	}
 	return in
 }
 
@@ -442,8 +423,39 @@ func (inv *ActionDnsZoneCreateInvocation) IsMetaParameterNil(param string) bool 
 	return exists
 }
 
+func (inv *ActionDnsZoneCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("SeedVps") {
+			if !inv.IsParameterNil("SeedVps") {
+				if inv.Input.SeedVps < 0 {
+					verr.Add("seed_vps", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionDnsZoneCreateInvocation) Call() (*ActionDnsZoneCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -572,11 +584,7 @@ func (inv *ActionDnsZoneCreateInvocation) makeInputParams() map[string]interface
 			ret["role"] = inv.Input.Role
 		}
 		if inv.IsParameterSelected("SeedVps") {
-			if inv.IsParameterNil("SeedVps") {
-				ret["seed_vps"] = nil
-			} else {
-				ret["seed_vps"] = inv.Input.SeedVps
-			}
+			ret["seed_vps"] = inv.Input.SeedVps
 		}
 		if inv.IsParameterSelected("Source") {
 			ret["source"] = inv.Input.Source

@@ -277,8 +277,35 @@ func (inv *ActionNewsLogIndexInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionNewsLogIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Since") {
+			if !inv.IsParameterNil("Since") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Since)
+				if !ok {
+					verr.Add("since", "not a valid datetime")
+				} else {
+					inv.Input.Since = normalized
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionNewsLogIndexInvocation) Call() (*ActionNewsLogIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

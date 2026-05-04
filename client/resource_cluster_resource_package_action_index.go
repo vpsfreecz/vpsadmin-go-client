@@ -104,26 +104,7 @@ func (in *ActionClusterResourcePackageIndexInput) SetEnvironment(value int64) *A
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
-	return in
-}
-
-// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
-func (in *ActionClusterResourcePackageIndexInput) SetEnvironmentNil(set bool) *ActionClusterResourcePackageIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Environment"] = nil
-		in.SelectParameters("Environment")
-	} else {
-		delete(in._nilParameters, "Environment")
-	}
 	return in
 }
 
@@ -329,8 +310,39 @@ func (inv *ActionClusterResourcePackageIndexInvocation) IsMetaParameterNil(param
 	return exists
 }
 
+func (inv *ActionClusterResourcePackageIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Environment") {
+			if !inv.IsParameterNil("Environment") {
+				if inv.Input.Environment < 0 {
+					verr.Add("environment", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionClusterResourcePackageIndexInvocation) Call() (*ActionClusterResourcePackageIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 
@@ -358,7 +370,11 @@ func (inv *ActionClusterResourcePackageIndexInvocation) convertInputToQueryParam
 			ret["cluster_resource_package[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 		if inv.IsParameterSelected("User") {
-			ret["cluster_resource_package[user]"] = convertInt64ToString(inv.Input.User)
+			if inv.IsParameterNil("User") {
+				ret["cluster_resource_package[user]"] = ""
+			} else {
+				ret["cluster_resource_package[user]"] = convertInt64ToString(inv.Input.User)
+			}
 		}
 	}
 }

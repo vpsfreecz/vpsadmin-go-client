@@ -147,8 +147,23 @@ func (inv *ActionUserNamespaceMapDeleteInvocation) IsMetaParameterNil(param stri
 	return exists
 }
 
+func (inv *ActionUserNamespaceMapDeleteInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserNamespaceMapDeleteInvocation) Call() (*ActionUserNamespaceMapDeleteResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

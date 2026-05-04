@@ -270,8 +270,35 @@ func (inv *ActionNewsLogUpdateInvocation) IsMetaParameterNil(param string) bool 
 	return exists
 }
 
+func (inv *ActionNewsLogUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("PublishedAt") {
+			if !inv.IsParameterNil("PublishedAt") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.PublishedAt)
+				if !ok {
+					verr.Add("published_at", "not a valid datetime")
+				} else {
+					inv.Input.PublishedAt = normalized
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionNewsLogUpdateInvocation) Call() (*ActionNewsLogUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

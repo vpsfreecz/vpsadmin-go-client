@@ -222,7 +222,26 @@ func (in *ActionUserUpdateInput) SetExpirationDate(value string) *ActionUserUpda
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetExpirationDateNil(false)
 	in._selectedParameters["ExpirationDate"] = nil
+	return in
+}
+
+// SetExpirationDateNil sets parameter ExpirationDate to nil and selects it for sending
+func (in *ActionUserUpdateInput) SetExpirationDateNil(set bool) *ActionUserUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["ExpirationDate"] = nil
+		in.SelectParameters("ExpirationDate")
+	} else {
+		delete(in._nilParameters, "ExpirationDate")
+	}
 	return in
 }
 
@@ -258,26 +277,7 @@ func (in *ActionUserUpdateInput) SetLanguage(value int64) *ActionUserUpdateInput
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLanguageNil(false)
 	in._selectedParameters["Language"] = nil
-	return in
-}
-
-// SetLanguageNil sets parameter Language to nil and selects it for sending
-func (in *ActionUserUpdateInput) SetLanguageNil(set bool) *ActionUserUpdateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Language"] = nil
-		in.SelectParameters("Language")
-	} else {
-		delete(in._nilParameters, "Language")
-	}
 	return in
 }
 
@@ -612,8 +612,52 @@ func (inv *ActionUserUpdateInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionUserUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("ExpirationDate") {
+			if !inv.IsParameterNil("ExpirationDate") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.ExpirationDate)
+				if !ok {
+					verr.Add("expiration_date", "not a valid datetime")
+				} else {
+					inv.Input.ExpirationDate = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("Language") {
+			if !inv.IsParameterNil("Language") {
+				if inv.Input.Language < 0 {
+					verr.Add("language", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("RemindAfterDate") {
+			if !inv.IsParameterNil("RemindAfterDate") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.RemindAfterDate)
+				if !ok {
+					verr.Add("remind_after_date", "not a valid datetime")
+				} else {
+					inv.Input.RemindAfterDate = normalized
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserUpdateInvocation) Call() (*ActionUserUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -742,7 +786,11 @@ func (inv *ActionUserUpdateInvocation) makeInputParams() map[string]interface{} 
 			ret["enable_token_auth"] = inv.Input.EnableTokenAuth
 		}
 		if inv.IsParameterSelected("ExpirationDate") {
-			ret["expiration_date"] = inv.Input.ExpirationDate
+			if inv.IsParameterNil("ExpirationDate") {
+				ret["expiration_date"] = nil
+			} else {
+				ret["expiration_date"] = inv.Input.ExpirationDate
+			}
 		}
 		if inv.IsParameterSelected("FullName") {
 			ret["full_name"] = inv.Input.FullName
@@ -751,11 +799,7 @@ func (inv *ActionUserUpdateInvocation) makeInputParams() map[string]interface{} 
 			ret["info"] = inv.Input.Info
 		}
 		if inv.IsParameterSelected("Language") {
-			if inv.IsParameterNil("Language") {
-				ret["language"] = nil
-			} else {
-				ret["language"] = inv.Input.Language
-			}
+			ret["language"] = inv.Input.Language
 		}
 		if inv.IsParameterSelected("Level") {
 			ret["level"] = inv.Input.Level

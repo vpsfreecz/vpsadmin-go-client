@@ -123,26 +123,7 @@ func (in *ActionOomReportIndexInput) SetEnvironment(value int64) *ActionOomRepor
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
-	return in
-}
-
-// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
-func (in *ActionOomReportIndexInput) SetEnvironmentNil(set bool) *ActionOomReportIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Environment"] = nil
-		in.SelectParameters("Environment")
-	} else {
-		delete(in._nilParameters, "Environment")
-	}
 	return in
 }
 
@@ -178,26 +159,7 @@ func (in *ActionOomReportIndexInput) SetLocation(value int64) *ActionOomReportIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
-	return in
-}
-
-// SetLocationNil sets parameter Location to nil and selects it for sending
-func (in *ActionOomReportIndexInput) SetLocationNil(set bool) *ActionOomReportIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Location"] = nil
-		in.SelectParameters("Location")
-	} else {
-		delete(in._nilParameters, "Location")
-	}
 	return in
 }
 
@@ -209,26 +171,7 @@ func (in *ActionOomReportIndexInput) SetNode(value int64) *ActionOomReportIndexI
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
-	return in
-}
-
-// SetNodeNil sets parameter Node to nil and selects it for sending
-func (in *ActionOomReportIndexInput) SetNodeNil(set bool) *ActionOomReportIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Node"] = nil
-		in.SelectParameters("Node")
-	} else {
-		delete(in._nilParameters, "Node")
-	}
 	return in
 }
 
@@ -240,26 +183,7 @@ func (in *ActionOomReportIndexInput) SetOomReportRule(value int64) *ActionOomRep
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetOomReportRuleNil(false)
 	in._selectedParameters["OomReportRule"] = nil
-	return in
-}
-
-// SetOomReportRuleNil sets parameter OomReportRule to nil and selects it for sending
-func (in *ActionOomReportIndexInput) SetOomReportRuleNil(set bool) *ActionOomReportIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["OomReportRule"] = nil
-		in.SelectParameters("OomReportRule")
-	} else {
-		delete(in._nilParameters, "OomReportRule")
-	}
 	return in
 }
 
@@ -295,26 +219,7 @@ func (in *ActionOomReportIndexInput) SetUser(value int64) *ActionOomReportIndexI
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
-	return in
-}
-
-// SetUserNil sets parameter User to nil and selects it for sending
-func (in *ActionOomReportIndexInput) SetUserNil(set bool) *ActionOomReportIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["User"] = nil
-		in.SelectParameters("User")
-	} else {
-		delete(in._nilParameters, "User")
-	}
 	return in
 }
 
@@ -326,26 +231,7 @@ func (in *ActionOomReportIndexInput) SetVps(value int64) *ActionOomReportIndexIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetVpsNil(false)
 	in._selectedParameters["Vps"] = nil
-	return in
-}
-
-// SetVpsNil sets parameter Vps to nil and selects it for sending
-func (in *ActionOomReportIndexInput) SetVpsNil(set bool) *ActionOomReportIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Vps"] = nil
-		in.SelectParameters("Vps")
-	} else {
-		delete(in._nilParameters, "Vps")
-	}
 	return in
 }
 
@@ -501,8 +387,87 @@ func (inv *ActionOomReportIndexInvocation) IsMetaParameterNil(param string) bool
 	return exists
 }
 
+func (inv *ActionOomReportIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Environment") {
+			if !inv.IsParameterNil("Environment") {
+				if inv.Input.Environment < 0 {
+					verr.Add("environment", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Node") {
+			if !inv.IsParameterNil("Node") {
+				if inv.Input.Node < 0 {
+					verr.Add("node", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("OomReportRule") {
+			if !inv.IsParameterNil("OomReportRule") {
+				if inv.Input.OomReportRule < 0 {
+					verr.Add("oom_report_rule", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Since") {
+			if !inv.IsParameterNil("Since") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Since)
+				if !ok {
+					verr.Add("since", "not a valid datetime")
+				} else {
+					inv.Input.Since = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("Until") {
+			if !inv.IsParameterNil("Until") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Until)
+				if !ok {
+					verr.Add("until", "not a valid datetime")
+				} else {
+					inv.Input.Until = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Vps") {
+			if !inv.IsParameterNil("Vps") {
+				if inv.Input.Vps < 0 {
+					verr.Add("vps", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionOomReportIndexInvocation) Call() (*ActionOomReportIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

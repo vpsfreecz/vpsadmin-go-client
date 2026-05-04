@@ -207,26 +207,7 @@ func (in *ActionUserCreateInput) SetEnvironment(value int64) *ActionUserCreateIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
-	return in
-}
-
-// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
-func (in *ActionUserCreateInput) SetEnvironmentNil(set bool) *ActionUserCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Environment"] = nil
-		in.SelectParameters("Environment")
-	} else {
-		delete(in._nilParameters, "Environment")
-	}
 	return in
 }
 
@@ -262,26 +243,7 @@ func (in *ActionUserCreateInput) SetLanguage(value int64) *ActionUserCreateInput
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLanguageNil(false)
 	in._selectedParameters["Language"] = nil
-	return in
-}
-
-// SetLanguageNil sets parameter Language to nil and selects it for sending
-func (in *ActionUserCreateInput) SetLanguageNil(set bool) *ActionUserCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Language"] = nil
-		in.SelectParameters("Language")
-	} else {
-		delete(in._nilParameters, "Language")
-	}
 	return in
 }
 
@@ -305,26 +267,7 @@ func (in *ActionUserCreateInput) SetLocation(value int64) *ActionUserCreateInput
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
-	return in
-}
-
-// SetLocationNil sets parameter Location to nil and selects it for sending
-func (in *ActionUserCreateInput) SetLocationNil(set bool) *ActionUserCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Location"] = nil
-		in.SelectParameters("Location")
-	} else {
-		delete(in._nilParameters, "Location")
-	}
 	return in
 }
 
@@ -372,26 +315,7 @@ func (in *ActionUserCreateInput) SetNode(value int64) *ActionUserCreateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
-	return in
-}
-
-// SetNodeNil sets parameter Node to nil and selects it for sending
-func (in *ActionUserCreateInput) SetNodeNil(set bool) *ActionUserCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Node"] = nil
-		in.SelectParameters("Node")
-	} else {
-		delete(in._nilParameters, "Node")
-	}
 	return in
 }
 
@@ -403,26 +327,7 @@ func (in *ActionUserCreateInput) SetOsTemplate(value int64) *ActionUserCreateInp
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetOsTemplateNil(false)
 	in._selectedParameters["OsTemplate"] = nil
-	return in
-}
-
-// SetOsTemplateNil sets parameter OsTemplate to nil and selects it for sending
-func (in *ActionUserCreateInput) SetOsTemplateNil(set bool) *ActionUserCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["OsTemplate"] = nil
-		in.SelectParameters("OsTemplate")
-	} else {
-		delete(in._nilParameters, "OsTemplate")
-	}
 	return in
 }
 
@@ -665,8 +570,60 @@ func (inv *ActionUserCreateInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionUserCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Environment") {
+			if !inv.IsParameterNil("Environment") {
+				if inv.Input.Environment < 0 {
+					verr.Add("environment", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Language") {
+			if !inv.IsParameterNil("Language") {
+				if inv.Input.Language < 0 {
+					verr.Add("language", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Node") {
+			if !inv.IsParameterNil("Node") {
+				if inv.Input.Node < 0 {
+					verr.Add("node", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("OsTemplate") {
+			if !inv.IsParameterNil("OsTemplate") {
+				if inv.Input.OsTemplate < 0 {
+					verr.Add("os_template", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserCreateInvocation) Call() (*ActionUserCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -792,11 +749,7 @@ func (inv *ActionUserCreateInvocation) makeInputParams() map[string]interface{} 
 			ret["enable_token_auth"] = inv.Input.EnableTokenAuth
 		}
 		if inv.IsParameterSelected("Environment") {
-			if inv.IsParameterNil("Environment") {
-				ret["environment"] = nil
-			} else {
-				ret["environment"] = inv.Input.Environment
-			}
+			ret["environment"] = inv.Input.Environment
 		}
 		if inv.IsParameterSelected("FullName") {
 			ret["full_name"] = inv.Input.FullName
@@ -805,21 +758,13 @@ func (inv *ActionUserCreateInvocation) makeInputParams() map[string]interface{} 
 			ret["info"] = inv.Input.Info
 		}
 		if inv.IsParameterSelected("Language") {
-			if inv.IsParameterNil("Language") {
-				ret["language"] = nil
-			} else {
-				ret["language"] = inv.Input.Language
-			}
+			ret["language"] = inv.Input.Language
 		}
 		if inv.IsParameterSelected("Level") {
 			ret["level"] = inv.Input.Level
 		}
 		if inv.IsParameterSelected("Location") {
-			if inv.IsParameterNil("Location") {
-				ret["location"] = nil
-			} else {
-				ret["location"] = inv.Input.Location
-			}
+			ret["location"] = inv.Input.Location
 		}
 		if inv.IsParameterSelected("Lockout") {
 			ret["lockout"] = inv.Input.Lockout
@@ -831,18 +776,10 @@ func (inv *ActionUserCreateInvocation) makeInputParams() map[string]interface{} 
 			ret["mailer_enabled"] = inv.Input.MailerEnabled
 		}
 		if inv.IsParameterSelected("Node") {
-			if inv.IsParameterNil("Node") {
-				ret["node"] = nil
-			} else {
-				ret["node"] = inv.Input.Node
-			}
+			ret["node"] = inv.Input.Node
 		}
 		if inv.IsParameterSelected("OsTemplate") {
-			if inv.IsParameterNil("OsTemplate") {
-				ret["os_template"] = nil
-			} else {
-				ret["os_template"] = inv.Input.OsTemplate
-			}
+			ret["os_template"] = inv.Input.OsTemplate
 		}
 		if inv.IsParameterSelected("Password") {
 			ret["password"] = inv.Input.Password

@@ -164,8 +164,23 @@ func (inv *ActionSystemConfigUpdateInvocation) IsMetaParameterNil(param string) 
 	return exists
 }
 
+func (inv *ActionSystemConfigUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionSystemConfigUpdateInvocation) Call() (*ActionSystemConfigUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

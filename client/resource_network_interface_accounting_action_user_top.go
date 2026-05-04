@@ -109,26 +109,7 @@ func (in *ActionNetworkInterfaceAccountingUserTopInput) SetEnvironment(value int
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
-	return in
-}
-
-// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
-func (in *ActionNetworkInterfaceAccountingUserTopInput) SetEnvironmentNil(set bool) *ActionNetworkInterfaceAccountingUserTopInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Environment"] = nil
-		in.SelectParameters("Environment")
-	} else {
-		delete(in._nilParameters, "Environment")
-	}
 	return in
 }
 
@@ -176,26 +157,7 @@ func (in *ActionNetworkInterfaceAccountingUserTopInput) SetLocation(value int64)
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
-	return in
-}
-
-// SetLocationNil sets parameter Location to nil and selects it for sending
-func (in *ActionNetworkInterfaceAccountingUserTopInput) SetLocationNil(set bool) *ActionNetworkInterfaceAccountingUserTopInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Location"] = nil
-		in.SelectParameters("Location")
-	} else {
-		delete(in._nilParameters, "Location")
-	}
 	return in
 }
 
@@ -219,26 +181,7 @@ func (in *ActionNetworkInterfaceAccountingUserTopInput) SetNode(value int64) *Ac
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
-	return in
-}
-
-// SetNodeNil sets parameter Node to nil and selects it for sending
-func (in *ActionNetworkInterfaceAccountingUserTopInput) SetNodeNil(set bool) *ActionNetworkInterfaceAccountingUserTopInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Node"] = nil
-		in.SelectParameters("Node")
-	} else {
-		delete(in._nilParameters, "Node")
-	}
 	return in
 }
 
@@ -416,8 +359,66 @@ func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) IsMetaParameterNil
 	return exists
 }
 
+func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Environment") {
+			if !inv.IsParameterNil("Environment") {
+				if inv.Input.Environment < 0 {
+					verr.Add("environment", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("From") {
+			if !inv.IsParameterNil("From") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.From)
+				if !ok {
+					verr.Add("from", "not a valid datetime")
+				} else {
+					inv.Input.From = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Node") {
+			if !inv.IsParameterNil("Node") {
+				if inv.Input.Node < 0 {
+					verr.Add("node", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("To") {
+			if !inv.IsParameterNil("To") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.To)
+				if !ok {
+					verr.Add("to", "not a valid datetime")
+				} else {
+					inv.Input.To = normalized
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) Call() (*ActionNetworkInterfaceAccountingUserTopResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

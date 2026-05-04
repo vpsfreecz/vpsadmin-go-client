@@ -169,8 +169,23 @@ func (inv *ActionMailLogShowInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionMailLogShowInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionMailLogShowInvocation) Call() (*ActionMailLogShowResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

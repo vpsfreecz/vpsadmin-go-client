@@ -147,8 +147,23 @@ func (inv *ActionClusterResourcePackageDeleteInvocation) IsMetaParameterNil(para
 	return exists
 }
 
+func (inv *ActionClusterResourcePackageDeleteInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionClusterResourcePackageDeleteInvocation) Call() (*ActionClusterResourcePackageDeleteResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

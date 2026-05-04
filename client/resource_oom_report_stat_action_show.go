@@ -86,11 +86,11 @@ type ActionOomReportStatShowResponse struct {
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Stats []*ActionOomReportStatShowOutput `json:"stats"`
+		Stat *ActionOomReportStatShowOutput `json:"stat"`
 	}
 
 	// Action output without the namespace
-	Output []*ActionOomReportStatShowOutput
+	Output *ActionOomReportStatShowOutput
 }
 
 // Prepare the action for invocation
@@ -156,8 +156,23 @@ func (inv *ActionOomReportStatShowInvocation) IsMetaParameterNil(param string) b
 	return exists
 }
 
+func (inv *ActionOomReportStatShowInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionOomReportStatShowInvocation) Call() (*ActionOomReportStatShowResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 
@@ -167,7 +182,7 @@ func (inv *ActionOomReportStatShowInvocation) callAsQuery() (*ActionOomReportSta
 	resp := &ActionOomReportStatShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
-		resp.Output = resp.Response.Stats
+		resp.Output = resp.Response.Stat
 	}
 	return resp, err
 }

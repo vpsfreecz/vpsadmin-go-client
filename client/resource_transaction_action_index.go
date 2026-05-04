@@ -143,26 +143,7 @@ func (in *ActionTransactionIndexInput) SetNode(value int64) *ActionTransactionIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
-	return in
-}
-
-// SetNodeNil sets parameter Node to nil and selects it for sending
-func (in *ActionTransactionIndexInput) SetNodeNil(set bool) *ActionTransactionIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Node"] = nil
-		in.SelectParameters("Node")
-	} else {
-		delete(in._nilParameters, "Node")
-	}
 	return in
 }
 
@@ -186,26 +167,7 @@ func (in *ActionTransactionIndexInput) SetTransactionChain(value int64) *ActionT
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetTransactionChainNil(false)
 	in._selectedParameters["TransactionChain"] = nil
-	return in
-}
-
-// SetTransactionChainNil sets parameter TransactionChain to nil and selects it for sending
-func (in *ActionTransactionIndexInput) SetTransactionChainNil(set bool) *ActionTransactionIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["TransactionChain"] = nil
-		in.SelectParameters("TransactionChain")
-	} else {
-		delete(in._nilParameters, "TransactionChain")
-	}
 	return in
 }
 
@@ -379,8 +341,39 @@ func (inv *ActionTransactionIndexInvocation) IsMetaParameterNil(param string) bo
 	return exists
 }
 
+func (inv *ActionTransactionIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Node") {
+			if !inv.IsParameterNil("Node") {
+				if inv.Input.Node < 0 {
+					verr.Add("node", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("TransactionChain") {
+			if !inv.IsParameterNil("TransactionChain") {
+				if inv.Input.TransactionChain < 0 {
+					verr.Add("transaction_chain", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionTransactionIndexInvocation) Call() (*ActionTransactionIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

@@ -91,26 +91,7 @@ func (in *ActionClusterResourcePackageItemCreateInput) SetClusterResource(value 
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetClusterResourceNil(false)
 	in._selectedParameters["ClusterResource"] = nil
-	return in
-}
-
-// SetClusterResourceNil sets parameter ClusterResource to nil and selects it for sending
-func (in *ActionClusterResourcePackageItemCreateInput) SetClusterResourceNil(set bool) *ActionClusterResourcePackageItemCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["ClusterResource"] = nil
-		in.SelectParameters("ClusterResource")
-	} else {
-		delete(in._nilParameters, "ClusterResource")
-	}
 	return in
 }
 
@@ -287,8 +268,32 @@ func (inv *ActionClusterResourcePackageItemCreateInvocation) IsMetaParameterNil(
 	return exists
 }
 
+func (inv *ActionClusterResourcePackageItemCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("ClusterResource") {
+			if !inv.IsParameterNil("ClusterResource") {
+				if inv.Input.ClusterResource < 0 {
+					verr.Add("cluster_resource", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionClusterResourcePackageItemCreateInvocation) Call() (*ActionClusterResourcePackageItemCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -314,11 +319,7 @@ func (inv *ActionClusterResourcePackageItemCreateInvocation) makeInputParams() m
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("ClusterResource") {
-			if inv.IsParameterNil("ClusterResource") {
-				ret["cluster_resource"] = nil
-			} else {
-				ret["cluster_resource"] = inv.Input.ClusterResource
-			}
+			ret["cluster_resource"] = inv.Input.ClusterResource
 		}
 		if inv.IsParameterSelected("Value") {
 			ret["value"] = inv.Input.Value

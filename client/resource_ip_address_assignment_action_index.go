@@ -182,26 +182,7 @@ func (in *ActionIpAddressAssignmentIndexInput) SetIpAddress(value int64) *Action
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetIpAddressNil(false)
 	in._selectedParameters["IpAddress"] = nil
-	return in
-}
-
-// SetIpAddressNil sets parameter IpAddress to nil and selects it for sending
-func (in *ActionIpAddressAssignmentIndexInput) SetIpAddressNil(set bool) *ActionIpAddressAssignmentIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["IpAddress"] = nil
-		in.SelectParameters("IpAddress")
-	} else {
-		delete(in._nilParameters, "IpAddress")
-	}
 	return in
 }
 
@@ -249,26 +230,7 @@ func (in *ActionIpAddressAssignmentIndexInput) SetLocation(value int64) *ActionI
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
-	return in
-}
-
-// SetLocationNil sets parameter Location to nil and selects it for sending
-func (in *ActionIpAddressAssignmentIndexInput) SetLocationNil(set bool) *ActionIpAddressAssignmentIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Location"] = nil
-		in.SelectParameters("Location")
-	} else {
-		delete(in._nilParameters, "Location")
-	}
 	return in
 }
 
@@ -280,26 +242,7 @@ func (in *ActionIpAddressAssignmentIndexInput) SetNetwork(value int64) *ActionIp
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNetworkNil(false)
 	in._selectedParameters["Network"] = nil
-	return in
-}
-
-// SetNetworkNil sets parameter Network to nil and selects it for sending
-func (in *ActionIpAddressAssignmentIndexInput) SetNetworkNil(set bool) *ActionIpAddressAssignmentIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Network"] = nil
-		in.SelectParameters("Network")
-	} else {
-		delete(in._nilParameters, "Network")
-	}
 	return in
 }
 
@@ -366,26 +309,7 @@ func (in *ActionIpAddressAssignmentIndexInput) SetUser(value int64) *ActionIpAdd
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
-	return in
-}
-
-// SetUserNil sets parameter User to nil and selects it for sending
-func (in *ActionIpAddressAssignmentIndexInput) SetUserNil(set bool) *ActionIpAddressAssignmentIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["User"] = nil
-		in.SelectParameters("User")
-	} else {
-		delete(in._nilParameters, "User")
-	}
 	return in
 }
 
@@ -397,26 +321,7 @@ func (in *ActionIpAddressAssignmentIndexInput) SetVps(value int64) *ActionIpAddr
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetVpsNil(false)
 	in._selectedParameters["Vps"] = nil
-	return in
-}
-
-// SetVpsNil sets parameter Vps to nil and selects it for sending
-func (in *ActionIpAddressAssignmentIndexInput) SetVpsNil(set bool) *ActionIpAddressAssignmentIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Vps"] = nil
-		in.SelectParameters("Vps")
-	} else {
-		delete(in._nilParameters, "Vps")
-	}
 	return in
 }
 
@@ -576,8 +481,74 @@ func (inv *ActionIpAddressAssignmentIndexInvocation) IsMetaParameterNil(param st
 	return exists
 }
 
+func (inv *ActionIpAddressAssignmentIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("AssignedByChain") {
+			if !inv.IsParameterNil("AssignedByChain") {
+				if inv.Input.AssignedByChain < 0 {
+					verr.Add("assigned_by_chain", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("IpAddress") {
+			if !inv.IsParameterNil("IpAddress") {
+				if inv.Input.IpAddress < 0 {
+					verr.Add("ip_address", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Network") {
+			if !inv.IsParameterNil("Network") {
+				if inv.Input.Network < 0 {
+					verr.Add("network", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("UnassignedByChain") {
+			if !inv.IsParameterNil("UnassignedByChain") {
+				if inv.Input.UnassignedByChain < 0 {
+					verr.Add("unassigned_by_chain", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Vps") {
+			if !inv.IsParameterNil("Vps") {
+				if inv.Input.Vps < 0 {
+					verr.Add("vps", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionIpAddressAssignmentIndexInvocation) Call() (*ActionIpAddressAssignmentIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 
@@ -599,7 +570,11 @@ func (inv *ActionIpAddressAssignmentIndexInvocation) convertInputToQueryParams(r
 			ret["ip_address_assignment[active]"] = convertBoolToString(inv.Input.Active)
 		}
 		if inv.IsParameterSelected("AssignedByChain") {
-			ret["ip_address_assignment[assigned_by_chain]"] = convertInt64ToString(inv.Input.AssignedByChain)
+			if inv.IsParameterNil("AssignedByChain") {
+				ret["ip_address_assignment[assigned_by_chain]"] = ""
+			} else {
+				ret["ip_address_assignment[assigned_by_chain]"] = convertInt64ToString(inv.Input.AssignedByChain)
+			}
 		}
 		if inv.IsParameterSelected("FromId") {
 			ret["ip_address_assignment[from_id]"] = convertInt64ToString(inv.Input.FromId)
@@ -632,7 +607,11 @@ func (inv *ActionIpAddressAssignmentIndexInvocation) convertInputToQueryParams(r
 			ret["ip_address_assignment[reconstructed]"] = convertBoolToString(inv.Input.Reconstructed)
 		}
 		if inv.IsParameterSelected("UnassignedByChain") {
-			ret["ip_address_assignment[unassigned_by_chain]"] = convertInt64ToString(inv.Input.UnassignedByChain)
+			if inv.IsParameterNil("UnassignedByChain") {
+				ret["ip_address_assignment[unassigned_by_chain]"] = ""
+			} else {
+				ret["ip_address_assignment[unassigned_by_chain]"] = convertInt64ToString(inv.Input.UnassignedByChain)
+			}
 		}
 		if inv.IsParameterSelected("User") {
 			ret["ip_address_assignment[user]"] = convertInt64ToString(inv.Input.User)

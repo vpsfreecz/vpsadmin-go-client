@@ -121,26 +121,7 @@ func (in *ActionDnsRecordCreateInput) SetDnsZone(value int64) *ActionDnsRecordCr
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetDnsZoneNil(false)
 	in._selectedParameters["DnsZone"] = nil
-	return in
-}
-
-// SetDnsZoneNil sets parameter DnsZone to nil and selects it for sending
-func (in *ActionDnsRecordCreateInput) SetDnsZoneNil(set bool) *ActionDnsRecordCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["DnsZone"] = nil
-		in.SelectParameters("DnsZone")
-	} else {
-		delete(in._nilParameters, "DnsZone")
-	}
 	return in
 }
 
@@ -188,7 +169,26 @@ func (in *ActionDnsRecordCreateInput) SetPriority(value int64) *ActionDnsRecordC
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetPriorityNil(false)
 	in._selectedParameters["Priority"] = nil
+	return in
+}
+
+// SetPriorityNil sets parameter Priority to nil and selects it for sending
+func (in *ActionDnsRecordCreateInput) SetPriorityNil(set bool) *ActionDnsRecordCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Priority"] = nil
+		in.SelectParameters("Priority")
+	} else {
+		delete(in._nilParameters, "Priority")
+	}
 	return in
 }
 
@@ -200,7 +200,26 @@ func (in *ActionDnsRecordCreateInput) SetTtl(value int64) *ActionDnsRecordCreate
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetTtlNil(false)
 	in._selectedParameters["Ttl"] = nil
+	return in
+}
+
+// SetTtlNil sets parameter Ttl to nil and selects it for sending
+func (in *ActionDnsRecordCreateInput) SetTtlNil(set bool) *ActionDnsRecordCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Ttl"] = nil
+		in.SelectParameters("Ttl")
+	} else {
+		delete(in._nilParameters, "Ttl")
+	}
 	return in
 }
 
@@ -416,8 +435,39 @@ func (inv *ActionDnsRecordCreateInvocation) IsMetaParameterNil(param string) boo
 	return exists
 }
 
+func (inv *ActionDnsRecordCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("DnsZone") {
+			if !inv.IsParameterNil("DnsZone") {
+				if inv.Input.DnsZone < 0 {
+					verr.Add("dns_zone", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionDnsRecordCreateInvocation) Call() (*ActionDnsRecordCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -525,11 +575,7 @@ func (inv *ActionDnsRecordCreateInvocation) makeInputParams() map[string]interfa
 			ret["content"] = inv.Input.Content
 		}
 		if inv.IsParameterSelected("DnsZone") {
-			if inv.IsParameterNil("DnsZone") {
-				ret["dns_zone"] = nil
-			} else {
-				ret["dns_zone"] = inv.Input.DnsZone
-			}
+			ret["dns_zone"] = inv.Input.DnsZone
 		}
 		if inv.IsParameterSelected("DynamicUpdateEnabled") {
 			ret["dynamic_update_enabled"] = inv.Input.DynamicUpdateEnabled
@@ -541,10 +587,18 @@ func (inv *ActionDnsRecordCreateInvocation) makeInputParams() map[string]interfa
 			ret["name"] = inv.Input.Name
 		}
 		if inv.IsParameterSelected("Priority") {
-			ret["priority"] = inv.Input.Priority
+			if inv.IsParameterNil("Priority") {
+				ret["priority"] = nil
+			} else {
+				ret["priority"] = inv.Input.Priority
+			}
 		}
 		if inv.IsParameterSelected("Ttl") {
-			ret["ttl"] = inv.Input.Ttl
+			if inv.IsParameterNil("Ttl") {
+				ret["ttl"] = nil
+			} else {
+				ret["ttl"] = inv.Input.Ttl
+			}
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["type"] = inv.Input.Type

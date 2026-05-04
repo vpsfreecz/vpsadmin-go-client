@@ -77,6 +77,7 @@ func (in *ActionPoolShowMetaGlobalInput) AnySelected() bool {
 type ActionPoolShowOutput struct {
 	Atime                 bool                  `json:"atime"`
 	Avail                 int64                 `json:"avail"`
+	AvailableSpace        int64                 `json:"available_space"`
 	CheckedAt             string                `json:"checked_at"`
 	Compression           bool                  `json:"compression"`
 	Compressratio         float64               `json:"compressratio"`
@@ -102,7 +103,9 @@ type ActionPoolShowOutput struct {
 	Sharenfs              string                `json:"sharenfs"`
 	State                 string                `json:"state"`
 	Sync                  string                `json:"sync"`
+	TotalSpace            int64                 `json:"total_space"`
 	Used                  int64                 `json:"used"`
+	UsedSpace             int64                 `json:"used_space"`
 }
 
 // Type for action response, including envelope
@@ -181,8 +184,23 @@ func (inv *ActionPoolShowInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionPoolShowInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionPoolShowInvocation) Call() (*ActionPoolShowResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

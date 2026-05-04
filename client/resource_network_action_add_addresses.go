@@ -91,26 +91,7 @@ func (in *ActionNetworkAddAddressesInput) SetEnvironment(value int64) *ActionNet
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
-	return in
-}
-
-// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
-func (in *ActionNetworkAddAddressesInput) SetEnvironmentNil(set bool) *ActionNetworkAddAddressesInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Environment"] = nil
-		in.SelectParameters("Environment")
-	} else {
-		delete(in._nilParameters, "Environment")
-	}
 	return in
 }
 
@@ -122,26 +103,7 @@ func (in *ActionNetworkAddAddressesInput) SetUser(value int64) *ActionNetworkAdd
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
-	return in
-}
-
-// SetUserNil sets parameter User to nil and selects it for sending
-func (in *ActionNetworkAddAddressesInput) SetUserNil(set bool) *ActionNetworkAddAddressesInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["User"] = nil
-		in.SelectParameters("User")
-	} else {
-		delete(in._nilParameters, "User")
-	}
 	return in
 }
 
@@ -304,8 +266,39 @@ func (inv *ActionNetworkAddAddressesInvocation) IsMetaParameterNil(param string)
 	return exists
 }
 
+func (inv *ActionNetworkAddAddressesInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Environment") {
+			if !inv.IsParameterNil("Environment") {
+				if inv.Input.Environment < 0 {
+					verr.Add("environment", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionNetworkAddAddressesInvocation) Call() (*ActionNetworkAddAddressesResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -334,18 +327,10 @@ func (inv *ActionNetworkAddAddressesInvocation) makeInputParams() map[string]int
 			ret["count"] = inv.Input.Count
 		}
 		if inv.IsParameterSelected("Environment") {
-			if inv.IsParameterNil("Environment") {
-				ret["environment"] = nil
-			} else {
-				ret["environment"] = inv.Input.Environment
-			}
+			ret["environment"] = inv.Input.Environment
 		}
 		if inv.IsParameterSelected("User") {
-			if inv.IsParameterNil("User") {
-				ret["user"] = nil
-			} else {
-				ret["user"] = inv.Input.User
-			}
+			ret["user"] = inv.Input.User
 		}
 	}
 

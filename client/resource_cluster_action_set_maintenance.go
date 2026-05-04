@@ -228,8 +228,25 @@ func (inv *ActionClusterSetMaintenanceInvocation) IsMetaParameterNil(param strin
 	return exists
 }
 
+func (inv *ActionClusterSetMaintenanceInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionClusterSetMaintenanceInvocation) Call() (*ActionClusterSetMaintenanceResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

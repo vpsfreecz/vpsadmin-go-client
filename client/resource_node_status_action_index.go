@@ -324,8 +324,45 @@ func (inv *ActionNodeStatusIndexInvocation) IsMetaParameterNil(param string) boo
 	return exists
 }
 
+func (inv *ActionNodeStatusIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("From") {
+			if !inv.IsParameterNil("From") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.From)
+				if !ok {
+					verr.Add("from", "not a valid datetime")
+				} else {
+					inv.Input.From = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("To") {
+			if !inv.IsParameterNil("To") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.To)
+				if !ok {
+					verr.Add("to", "not a valid datetime")
+				} else {
+					inv.Input.To = normalized
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionNodeStatusIndexInvocation) Call() (*ActionNodeStatusIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

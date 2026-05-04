@@ -161,26 +161,7 @@ func (in *ActionVpsMigrateInput) SetNode(value int64) *ActionVpsMigrateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
-	return in
-}
-
-// SetNodeNil sets parameter Node to nil and selects it for sending
-func (in *ActionVpsMigrateInput) SetNodeNil(set bool) *ActionVpsMigrateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Node"] = nil
-		in.SelectParameters("Node")
-	} else {
-		delete(in._nilParameters, "Node")
-	}
 	return in
 }
 
@@ -413,8 +394,32 @@ func (inv *ActionVpsMigrateInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionVpsMigrateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Node") {
+			if !inv.IsParameterNil("Node") {
+				if inv.Input.Node < 0 {
+					verr.Add("node", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionVpsMigrateInvocation) Call() (*ActionVpsMigrateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -528,11 +533,7 @@ func (inv *ActionVpsMigrateInvocation) makeInputParams() map[string]interface{} 
 			ret["no_start"] = inv.Input.NoStart
 		}
 		if inv.IsParameterSelected("Node") {
-			if inv.IsParameterNil("Node") {
-				ret["node"] = nil
-			} else {
-				ret["node"] = inv.Input.Node
-			}
+			ret["node"] = inv.Input.Node
 		}
 		if inv.IsParameterSelected("Reason") {
 			ret["reason"] = inv.Input.Reason

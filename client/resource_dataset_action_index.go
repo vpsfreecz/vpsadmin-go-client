@@ -86,13 +86,14 @@ func (in *ActionDatasetIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetIndexInput is a type for action input parameters
 type ActionDatasetIndexInput struct {
-	Dataset int64  `json:"dataset"`
-	FromId  int64  `json:"from_id"`
-	Limit   int64  `json:"limit"`
-	Role    string `json:"role"`
-	ToDepth int64  `json:"to_depth"`
-	User    int64  `json:"user"`
-	Vps     int64  `json:"vps"`
+	Dataset     int64  `json:"dataset"`
+	FromId      int64  `json:"from_id"`
+	Limit       int64  `json:"limit"`
+	PrimaryPool int64  `json:"primary_pool"`
+	Role        string `json:"role"`
+	ToDepth     int64  `json:"to_depth"`
+	User        int64  `json:"user"`
+	Vps         int64  `json:"vps"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -107,26 +108,7 @@ func (in *ActionDatasetIndexInput) SetDataset(value int64) *ActionDatasetIndexIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetDatasetNil(false)
 	in._selectedParameters["Dataset"] = nil
-	return in
-}
-
-// SetDatasetNil sets parameter Dataset to nil and selects it for sending
-func (in *ActionDatasetIndexInput) SetDatasetNil(set bool) *ActionDatasetIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Dataset"] = nil
-		in.SelectParameters("Dataset")
-	} else {
-		delete(in._nilParameters, "Dataset")
-	}
 	return in
 }
 
@@ -151,6 +133,18 @@ func (in *ActionDatasetIndexInput) SetLimit(value int64) *ActionDatasetIndexInpu
 	}
 
 	in._selectedParameters["Limit"] = nil
+	return in
+}
+
+// SetPrimaryPool sets parameter PrimaryPool to value and selects it for sending
+func (in *ActionDatasetIndexInput) SetPrimaryPool(value int64) *ActionDatasetIndexInput {
+	in.PrimaryPool = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PrimaryPool"] = nil
 	return in
 }
 
@@ -186,26 +180,7 @@ func (in *ActionDatasetIndexInput) SetUser(value int64) *ActionDatasetIndexInput
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
-	return in
-}
-
-// SetUserNil sets parameter User to nil and selects it for sending
-func (in *ActionDatasetIndexInput) SetUserNil(set bool) *ActionDatasetIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["User"] = nil
-		in.SelectParameters("User")
-	} else {
-		delete(in._nilParameters, "User")
-	}
 	return in
 }
 
@@ -403,8 +378,53 @@ func (inv *ActionDatasetIndexInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionDatasetIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Dataset") {
+			if !inv.IsParameterNil("Dataset") {
+				if inv.Input.Dataset < 0 {
+					verr.Add("dataset", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("PrimaryPool") {
+			if !inv.IsParameterNil("PrimaryPool") {
+				if inv.Input.PrimaryPool < 0 {
+					verr.Add("primary_pool", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Vps") {
+			if !inv.IsParameterNil("Vps") {
+				if inv.Input.Vps < 0 {
+					verr.Add("vps", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionDatasetIndexInvocation) Call() (*ActionDatasetIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 
@@ -431,6 +451,9 @@ func (inv *ActionDatasetIndexInvocation) convertInputToQueryParams(ret map[strin
 		if inv.IsParameterSelected("Limit") {
 			ret["dataset[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
+		if inv.IsParameterSelected("PrimaryPool") {
+			ret["dataset[primary_pool]"] = convertInt64ToString(inv.Input.PrimaryPool)
+		}
 		if inv.IsParameterSelected("Role") {
 			ret["dataset[role]"] = inv.Input.Role
 		}
@@ -441,7 +464,11 @@ func (inv *ActionDatasetIndexInvocation) convertInputToQueryParams(ret map[strin
 			ret["dataset[user]"] = convertInt64ToString(inv.Input.User)
 		}
 		if inv.IsParameterSelected("Vps") {
-			ret["dataset[vps]"] = convertInt64ToString(inv.Input.Vps)
+			if inv.IsParameterNil("Vps") {
+				ret["dataset[vps]"] = ""
+			} else {
+				ret["dataset[vps]"] = convertInt64ToString(inv.Input.Vps)
+			}
 		}
 	}
 }

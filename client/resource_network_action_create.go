@@ -379,8 +379,25 @@ func (inv *ActionNetworkCreateInvocation) IsMetaParameterNil(param string) bool 
 	return exists
 }
 
+func (inv *ActionNetworkCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionNetworkCreateInvocation) Call() (*ActionNetworkCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

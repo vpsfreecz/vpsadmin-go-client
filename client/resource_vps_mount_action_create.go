@@ -95,26 +95,7 @@ func (in *ActionVpsMountCreateInput) SetDataset(value int64) *ActionVpsMountCrea
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetDatasetNil(false)
 	in._selectedParameters["Dataset"] = nil
-	return in
-}
-
-// SetDatasetNil sets parameter Dataset to nil and selects it for sending
-func (in *ActionVpsMountCreateInput) SetDatasetNil(set bool) *ActionVpsMountCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Dataset"] = nil
-		in.SelectParameters("Dataset")
-	} else {
-		delete(in._nilParameters, "Dataset")
-	}
 	return in
 }
 
@@ -174,26 +155,7 @@ func (in *ActionVpsMountCreateInput) SetUserNamespaceMap(value int64) *ActionVps
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNamespaceMapNil(false)
 	in._selectedParameters["UserNamespaceMap"] = nil
-	return in
-}
-
-// SetUserNamespaceMapNil sets parameter UserNamespaceMap to nil and selects it for sending
-func (in *ActionVpsMountCreateInput) SetUserNamespaceMapNil(set bool) *ActionVpsMountCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["UserNamespaceMap"] = nil
-		in.SelectParameters("UserNamespaceMap")
-	} else {
-		delete(in._nilParameters, "UserNamespaceMap")
-	}
 	return in
 }
 
@@ -373,8 +335,39 @@ func (inv *ActionVpsMountCreateInvocation) IsMetaParameterNil(param string) bool
 	return exists
 }
 
+func (inv *ActionVpsMountCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Dataset") {
+			if !inv.IsParameterNil("Dataset") {
+				if inv.Input.Dataset < 0 {
+					verr.Add("dataset", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("UserNamespaceMap") {
+			if !inv.IsParameterNil("UserNamespaceMap") {
+				if inv.Input.UserNamespaceMap < 0 {
+					verr.Add("user_namespace_map", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionVpsMountCreateInvocation) Call() (*ActionVpsMountCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -476,11 +469,7 @@ func (inv *ActionVpsMountCreateInvocation) makeInputParams() map[string]interfac
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Dataset") {
-			if inv.IsParameterNil("Dataset") {
-				ret["dataset"] = nil
-			} else {
-				ret["dataset"] = inv.Input.Dataset
-			}
+			ret["dataset"] = inv.Input.Dataset
 		}
 		if inv.IsParameterSelected("Enabled") {
 			ret["enabled"] = inv.Input.Enabled
@@ -495,11 +484,7 @@ func (inv *ActionVpsMountCreateInvocation) makeInputParams() map[string]interfac
 			ret["on_start_fail"] = inv.Input.OnStartFail
 		}
 		if inv.IsParameterSelected("UserNamespaceMap") {
-			if inv.IsParameterNil("UserNamespaceMap") {
-				ret["user_namespace_map"] = nil
-			} else {
-				ret["user_namespace_map"] = inv.Input.UserNamespaceMap
-			}
+			ret["user_namespace_map"] = inv.Input.UserNamespaceMap
 		}
 	}
 

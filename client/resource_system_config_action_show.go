@@ -159,8 +159,23 @@ func (inv *ActionSystemConfigShowInvocation) IsMetaParameterNil(param string) bo
 	return exists
 }
 
+func (inv *ActionSystemConfigShowInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionSystemConfigShowInvocation) Call() (*ActionSystemConfigShowResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

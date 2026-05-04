@@ -127,26 +127,7 @@ func (in *ActionDnsResolverIndexInput) SetVps(value int64) *ActionDnsResolverInd
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetVpsNil(false)
 	in._selectedParameters["Vps"] = nil
-	return in
-}
-
-// SetVpsNil sets parameter Vps to nil and selects it for sending
-func (in *ActionDnsResolverIndexInput) SetVpsNil(set bool) *ActionDnsResolverIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Vps"] = nil
-		in.SelectParameters("Vps")
-	} else {
-		delete(in._nilParameters, "Vps")
-	}
 	return in
 }
 
@@ -296,8 +277,32 @@ func (inv *ActionDnsResolverIndexInvocation) IsMetaParameterNil(param string) bo
 	return exists
 }
 
+func (inv *ActionDnsResolverIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Vps") {
+			if !inv.IsParameterNil("Vps") {
+				if inv.Input.Vps < 0 {
+					verr.Add("vps", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionDnsResolverIndexInvocation) Call() (*ActionDnsResolverIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

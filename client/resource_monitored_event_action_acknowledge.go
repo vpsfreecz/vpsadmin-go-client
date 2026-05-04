@@ -241,8 +241,35 @@ func (inv *ActionMonitoredEventAcknowledgeInvocation) IsMetaParameterNil(param s
 	return exists
 }
 
+func (inv *ActionMonitoredEventAcknowledgeInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Until") {
+			if !inv.IsParameterNil("Until") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Until)
+				if !ok {
+					verr.Add("until", "not a valid datetime")
+				} else {
+					inv.Input.Until = normalized
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionMonitoredEventAcknowledgeInvocation) Call() (*ActionMonitoredEventAcknowledgeResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

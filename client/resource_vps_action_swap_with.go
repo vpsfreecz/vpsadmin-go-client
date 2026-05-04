@@ -129,26 +129,7 @@ func (in *ActionVpsSwapWithInput) SetVps(value int64) *ActionVpsSwapWithInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetVpsNil(false)
 	in._selectedParameters["Vps"] = nil
-	return in
-}
-
-// SetVpsNil sets parameter Vps to nil and selects it for sending
-func (in *ActionVpsSwapWithInput) SetVpsNil(set bool) *ActionVpsSwapWithInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Vps"] = nil
-		in.SelectParameters("Vps")
-	} else {
-		delete(in._nilParameters, "Vps")
-	}
 	return in
 }
 
@@ -309,8 +290,32 @@ func (inv *ActionVpsSwapWithInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionVpsSwapWithInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Vps") {
+			if !inv.IsParameterNil("Vps") {
+				if inv.Input.Vps < 0 {
+					verr.Add("vps", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionVpsSwapWithInvocation) Call() (*ActionVpsSwapWithResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -418,11 +423,7 @@ func (inv *ActionVpsSwapWithInvocation) makeInputParams() map[string]interface{}
 			ret["resources"] = inv.Input.Resources
 		}
 		if inv.IsParameterSelected("Vps") {
-			if inv.IsParameterNil("Vps") {
-				ret["vps"] = nil
-			} else {
-				ret["vps"] = inv.Input.Vps
-			}
+			ret["vps"] = inv.Input.Vps
 		}
 	}
 

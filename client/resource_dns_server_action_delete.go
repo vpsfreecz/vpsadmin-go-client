@@ -147,8 +147,23 @@ func (inv *ActionDnsServerDeleteInvocation) IsMetaParameterNil(param string) boo
 	return exists
 }
 
+func (inv *ActionDnsServerDeleteInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionDnsServerDeleteInvocation) Call() (*ActionDnsServerDeleteResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

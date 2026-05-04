@@ -108,26 +108,7 @@ func (in *ActionExportCreateInput) SetDataset(value int64) *ActionExportCreateIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetDatasetNil(false)
 	in._selectedParameters["Dataset"] = nil
-	return in
-}
-
-// SetDatasetNil sets parameter Dataset to nil and selects it for sending
-func (in *ActionExportCreateInput) SetDatasetNil(set bool) *ActionExportCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Dataset"] = nil
-		in.SelectParameters("Dataset")
-	} else {
-		delete(in._nilParameters, "Dataset")
-	}
 	return in
 }
 
@@ -175,26 +156,7 @@ func (in *ActionExportCreateInput) SetSnapshot(value int64) *ActionExportCreateI
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetSnapshotNil(false)
 	in._selectedParameters["Snapshot"] = nil
-	return in
-}
-
-// SetSnapshotNil sets parameter Snapshot to nil and selects it for sending
-func (in *ActionExportCreateInput) SetSnapshotNil(set bool) *ActionExportCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Snapshot"] = nil
-		in.SelectParameters("Snapshot")
-	} else {
-		delete(in._nilParameters, "Snapshot")
-	}
 	return in
 }
 
@@ -405,8 +367,39 @@ func (inv *ActionExportCreateInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionExportCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Dataset") {
+			if !inv.IsParameterNil("Dataset") {
+				if inv.Input.Dataset < 0 {
+					verr.Add("dataset", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Snapshot") {
+			if !inv.IsParameterNil("Snapshot") {
+				if inv.Input.Snapshot < 0 {
+					verr.Add("snapshot", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionExportCreateInvocation) Call() (*ActionExportCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -511,11 +504,7 @@ func (inv *ActionExportCreateInvocation) makeInputParams() map[string]interface{
 			ret["all_vps"] = inv.Input.AllVps
 		}
 		if inv.IsParameterSelected("Dataset") {
-			if inv.IsParameterNil("Dataset") {
-				ret["dataset"] = nil
-			} else {
-				ret["dataset"] = inv.Input.Dataset
-			}
+			ret["dataset"] = inv.Input.Dataset
 		}
 		if inv.IsParameterSelected("Enabled") {
 			ret["enabled"] = inv.Input.Enabled
@@ -527,11 +516,7 @@ func (inv *ActionExportCreateInvocation) makeInputParams() map[string]interface{
 			ret["rw"] = inv.Input.Rw
 		}
 		if inv.IsParameterSelected("Snapshot") {
-			if inv.IsParameterNil("Snapshot") {
-				ret["snapshot"] = nil
-			} else {
-				ret["snapshot"] = inv.Input.Snapshot
-			}
+			ret["snapshot"] = inv.Input.Snapshot
 		}
 		if inv.IsParameterSelected("SubtreeCheck") {
 			ret["subtree_check"] = inv.Input.SubtreeCheck

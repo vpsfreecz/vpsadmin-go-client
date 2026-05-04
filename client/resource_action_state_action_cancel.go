@@ -144,8 +144,23 @@ func (inv *ActionActionStateCancelInvocation) IsMetaParameterNil(param string) b
 	return exists
 }
 
+func (inv *ActionActionStateCancelInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionActionStateCancelInvocation) Call() (*ActionActionStateCancelResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

@@ -270,8 +270,25 @@ func (inv *ActionUserMailTemplateRecipientUpdateInvocation) IsMetaParameterNil(p
 	return exists
 }
 
+func (inv *ActionUserMailTemplateRecipientUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserMailTemplateRecipientUpdateInvocation) Call() (*ActionUserMailTemplateRecipientUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

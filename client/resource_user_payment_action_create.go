@@ -102,26 +102,7 @@ func (in *ActionUserPaymentCreateInput) SetIncomingPayment(value int64) *ActionU
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetIncomingPaymentNil(false)
 	in._selectedParameters["IncomingPayment"] = nil
-	return in
-}
-
-// SetIncomingPaymentNil sets parameter IncomingPayment to nil and selects it for sending
-func (in *ActionUserPaymentCreateInput) SetIncomingPaymentNil(set bool) *ActionUserPaymentCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["IncomingPayment"] = nil
-		in.SelectParameters("IncomingPayment")
-	} else {
-		delete(in._nilParameters, "IncomingPayment")
-	}
 	return in
 }
 
@@ -133,26 +114,7 @@ func (in *ActionUserPaymentCreateInput) SetUser(value int64) *ActionUserPaymentC
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
-	return in
-}
-
-// SetUserNil sets parameter User to nil and selects it for sending
-func (in *ActionUserPaymentCreateInput) SetUserNil(set bool) *ActionUserPaymentCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["User"] = nil
-		in.SelectParameters("User")
-	} else {
-		delete(in._nilParameters, "User")
-	}
 	return in
 }
 
@@ -318,8 +280,39 @@ func (inv *ActionUserPaymentCreateInvocation) IsMetaParameterNil(param string) b
 	return exists
 }
 
+func (inv *ActionUserPaymentCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("IncomingPayment") {
+			if !inv.IsParameterNil("IncomingPayment") {
+				if inv.Input.IncomingPayment < 0 {
+					verr.Add("incoming_payment", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserPaymentCreateInvocation) Call() (*ActionUserPaymentCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -424,18 +417,10 @@ func (inv *ActionUserPaymentCreateInvocation) makeInputParams() map[string]inter
 			ret["amount"] = inv.Input.Amount
 		}
 		if inv.IsParameterSelected("IncomingPayment") {
-			if inv.IsParameterNil("IncomingPayment") {
-				ret["incoming_payment"] = nil
-			} else {
-				ret["incoming_payment"] = inv.Input.IncomingPayment
-			}
+			ret["incoming_payment"] = inv.Input.IncomingPayment
 		}
 		if inv.IsParameterSelected("User") {
-			if inv.IsParameterNil("User") {
-				ret["user"] = nil
-			} else {
-				ret["user"] = inv.Input.User
-			}
+			ret["user"] = inv.Input.User
 		}
 	}
 

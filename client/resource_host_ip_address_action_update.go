@@ -117,26 +117,7 @@ func (in *ActionHostIpAddressUpdateInput) SetIpAddress(value int64) *ActionHostI
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetIpAddressNil(false)
 	in._selectedParameters["IpAddress"] = nil
-	return in
-}
-
-// SetIpAddressNil sets parameter IpAddress to nil and selects it for sending
-func (in *ActionHostIpAddressUpdateInput) SetIpAddressNil(set bool) *ActionHostIpAddressUpdateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["IpAddress"] = nil
-		in.SelectParameters("IpAddress")
-	} else {
-		delete(in._nilParameters, "IpAddress")
-	}
 	return in
 }
 
@@ -323,8 +304,32 @@ func (inv *ActionHostIpAddressUpdateInvocation) IsMetaParameterNil(param string)
 	return exists
 }
 
+func (inv *ActionHostIpAddressUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("IpAddress") {
+			if !inv.IsParameterNil("IpAddress") {
+				if inv.Input.IpAddress < 0 {
+					verr.Add("ip_address", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionHostIpAddressUpdateInvocation) Call() (*ActionHostIpAddressUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -432,11 +437,7 @@ func (inv *ActionHostIpAddressUpdateInvocation) makeInputParams() map[string]int
 			ret["assigned"] = inv.Input.Assigned
 		}
 		if inv.IsParameterSelected("IpAddress") {
-			if inv.IsParameterNil("IpAddress") {
-				ret["ip_address"] = nil
-			} else {
-				ret["ip_address"] = inv.Input.IpAddress
-			}
+			ret["ip_address"] = inv.Input.IpAddress
 		}
 		if inv.IsParameterSelected("ReverseRecordValue") {
 			ret["reverse_record_value"] = inv.Input.ReverseRecordValue

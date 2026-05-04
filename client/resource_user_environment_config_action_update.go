@@ -190,10 +190,28 @@ type ActionUserEnvironmentConfigUpdateRequest struct {
 	Meta              map[string]interface{} `json:"_meta"`
 }
 
+// ActionUserEnvironmentConfigUpdateOutput is a type for action output parameters
+type ActionUserEnvironmentConfigUpdateOutput struct {
+	CanCreateVps  bool                         `json:"can_create_vps"`
+	CanDestroyVps bool                         `json:"can_destroy_vps"`
+	Default       bool                         `json:"default"`
+	Environment   *ActionEnvironmentShowOutput `json:"environment"`
+	Id            int64                        `json:"id"`
+	MaxVpsCount   int64                        `json:"max_vps_count"`
+	VpsLifetime   int64                        `json:"vps_lifetime"`
+}
+
 // Type for action response, including envelope
 type ActionUserEnvironmentConfigUpdateResponse struct {
 	Action *ActionUserEnvironmentConfigUpdate `json:"-"`
 	*Envelope
+	// Action output encapsulated within a namespace
+	Response *struct {
+		EnvironmentConfig *ActionUserEnvironmentConfigUpdateOutput `json:"environment_config"`
+	}
+
+	// Action output without the namespace
+	Output *ActionUserEnvironmentConfigUpdateOutput
 }
 
 // Prepare the action for invocation
@@ -293,8 +311,25 @@ func (inv *ActionUserEnvironmentConfigUpdateInvocation) IsMetaParameterNil(param
 	return exists
 }
 
+func (inv *ActionUserEnvironmentConfigUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserEnvironmentConfigUpdateInvocation) Call() (*ActionUserEnvironmentConfigUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -302,6 +337,9 @@ func (inv *ActionUserEnvironmentConfigUpdateInvocation) callAsBody() (*ActionUse
 	input := inv.makeAllInputParams()
 	resp := &ActionUserEnvironmentConfigUpdateResponse{Action: inv.Action}
 	err := inv.Action.Client.DoBodyRequest("PUT", inv.Path, input, resp)
+	if err == nil && resp.Status {
+		resp.Output = resp.Response.EnvironmentConfig
+	}
 	return resp, err
 }
 

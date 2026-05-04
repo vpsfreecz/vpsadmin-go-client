@@ -266,26 +266,7 @@ func (in *ActionUserIndexInput) SetLanguage(value int64) *ActionUserIndexInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLanguageNil(false)
 	in._selectedParameters["Language"] = nil
-	return in
-}
-
-// SetLanguageNil sets parameter Language to nil and selects it for sending
-func (in *ActionUserIndexInput) SetLanguageNil(set bool) *ActionUserIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Language"] = nil
-		in.SelectParameters("Language")
-	} else {
-		delete(in._nilParameters, "Language")
-	}
 	return in
 }
 
@@ -565,8 +546,32 @@ func (inv *ActionUserIndexInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionUserIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Language") {
+			if !inv.IsParameterNil("Language") {
+				if inv.Input.Language < 0 {
+					verr.Add("language", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserIndexInvocation) Call() (*ActionUserIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

@@ -119,26 +119,7 @@ func (in *ActionVpsCreateInput) SetAddressLocation(value int64) *ActionVpsCreate
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetAddressLocationNil(false)
 	in._selectedParameters["AddressLocation"] = nil
-	return in
-}
-
-// SetAddressLocationNil sets parameter AddressLocation to nil and selects it for sending
-func (in *ActionVpsCreateInput) SetAddressLocationNil(set bool) *ActionVpsCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["AddressLocation"] = nil
-		in.SelectParameters("AddressLocation")
-	} else {
-		delete(in._nilParameters, "AddressLocation")
-	}
 	return in
 }
 
@@ -222,7 +203,26 @@ func (in *ActionVpsCreateInput) SetCpuLimit(value int64) *ActionVpsCreateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetCpuLimitNil(false)
 	in._selectedParameters["CpuLimit"] = nil
+	return in
+}
+
+// SetCpuLimitNil sets parameter CpuLimit to nil and selects it for sending
+func (in *ActionVpsCreateInput) SetCpuLimitNil(set bool) *ActionVpsCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["CpuLimit"] = nil
+		in.SelectParameters("CpuLimit")
+	} else {
+		delete(in._nilParameters, "CpuLimit")
+	}
 	return in
 }
 
@@ -301,26 +301,7 @@ func (in *ActionVpsCreateInput) SetEnvironment(value int64) *ActionVpsCreateInpu
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
-	return in
-}
-
-// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
-func (in *ActionVpsCreateInput) SetEnvironmentNil(set bool) *ActionVpsCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Environment"] = nil
-		in.SelectParameters("Environment")
-	} else {
-		delete(in._nilParameters, "Environment")
-	}
 	return in
 }
 
@@ -392,26 +373,7 @@ func (in *ActionVpsCreateInput) SetLocation(value int64) *ActionVpsCreateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
-	return in
-}
-
-// SetLocationNil sets parameter Location to nil and selects it for sending
-func (in *ActionVpsCreateInput) SetLocationNil(set bool) *ActionVpsCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Location"] = nil
-		in.SelectParameters("Location")
-	} else {
-		delete(in._nilParameters, "Location")
-	}
 	return in
 }
 
@@ -447,26 +409,7 @@ func (in *ActionVpsCreateInput) SetNode(value int64) *ActionVpsCreateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
-	return in
-}
-
-// SetNodeNil sets parameter Node to nil and selects it for sending
-func (in *ActionVpsCreateInput) SetNodeNil(set bool) *ActionVpsCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Node"] = nil
-		in.SelectParameters("Node")
-	} else {
-		delete(in._nilParameters, "Node")
-	}
 	return in
 }
 
@@ -490,26 +433,7 @@ func (in *ActionVpsCreateInput) SetOsTemplate(value int64) *ActionVpsCreateInput
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetOsTemplateNil(false)
 	in._selectedParameters["OsTemplate"] = nil
-	return in
-}
-
-// SetOsTemplateNil sets parameter OsTemplate to nil and selects it for sending
-func (in *ActionVpsCreateInput) SetOsTemplateNil(set bool) *ActionVpsCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["OsTemplate"] = nil
-		in.SelectParameters("OsTemplate")
-	} else {
-		delete(in._nilParameters, "OsTemplate")
-	}
 	return in
 }
 
@@ -557,26 +481,7 @@ func (in *ActionVpsCreateInput) SetUser(value int64) *ActionVpsCreateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
-	return in
-}
-
-// SetUserNil sets parameter User to nil and selects it for sending
-func (in *ActionVpsCreateInput) SetUserNil(set bool) *ActionVpsCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["User"] = nil
-		in.SelectParameters("User")
-	} else {
-		delete(in._nilParameters, "User")
-	}
 	return in
 }
 
@@ -612,26 +517,7 @@ func (in *ActionVpsCreateInput) SetUserNamespaceMap(value int64) *ActionVpsCreat
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNamespaceMapNil(false)
 	in._selectedParameters["UserNamespaceMap"] = nil
-	return in
-}
-
-// SetUserNamespaceMapNil sets parameter UserNamespaceMap to nil and selects it for sending
-func (in *ActionVpsCreateInput) SetUserNamespaceMapNil(set bool) *ActionVpsCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["UserNamespaceMap"] = nil
-		in.SelectParameters("UserNamespaceMap")
-	} else {
-		delete(in._nilParameters, "UserNamespaceMap")
-	}
 	return in
 }
 
@@ -643,26 +529,7 @@ func (in *ActionVpsCreateInput) SetVpsUserData(value int64) *ActionVpsCreateInpu
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetVpsUserDataNil(false)
 	in._selectedParameters["VpsUserData"] = nil
-	return in
-}
-
-// SetVpsUserDataNil sets parameter VpsUserData to nil and selects it for sending
-func (in *ActionVpsCreateInput) SetVpsUserDataNil(set bool) *ActionVpsCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["VpsUserData"] = nil
-		in.SelectParameters("VpsUserData")
-	} else {
-		delete(in._nilParameters, "VpsUserData")
-	}
 	return in
 }
 
@@ -868,8 +735,88 @@ func (inv *ActionVpsCreateInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionVpsCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("AddressLocation") {
+			if !inv.IsParameterNil("AddressLocation") {
+				if inv.Input.AddressLocation < 0 {
+					verr.Add("address_location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("DnsResolver") {
+			if !inv.IsParameterNil("DnsResolver") {
+				if inv.Input.DnsResolver < 0 {
+					verr.Add("dns_resolver", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Environment") {
+			if !inv.IsParameterNil("Environment") {
+				if inv.Input.Environment < 0 {
+					verr.Add("environment", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Node") {
+			if !inv.IsParameterNil("Node") {
+				if inv.Input.Node < 0 {
+					verr.Add("node", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("OsTemplate") {
+			if !inv.IsParameterNil("OsTemplate") {
+				if inv.Input.OsTemplate < 0 {
+					verr.Add("os_template", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("UserNamespaceMap") {
+			if !inv.IsParameterNil("UserNamespaceMap") {
+				if inv.Input.UserNamespaceMap < 0 {
+					verr.Add("user_namespace_map", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("VpsUserData") {
+			if !inv.IsParameterNil("VpsUserData") {
+				if inv.Input.VpsUserData < 0 {
+					verr.Add("vps_user_data", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionVpsCreateInvocation) Call() (*ActionVpsCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -971,11 +918,7 @@ func (inv *ActionVpsCreateInvocation) makeInputParams() map[string]interface{} {
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("AddressLocation") {
-			if inv.IsParameterNil("AddressLocation") {
-				ret["address_location"] = nil
-			} else {
-				ret["address_location"] = inv.Input.AddressLocation
-			}
+			ret["address_location"] = inv.Input.AddressLocation
 		}
 		if inv.IsParameterSelected("AllowAdminModifications") {
 			ret["allow_admin_modifications"] = inv.Input.AllowAdminModifications
@@ -996,7 +939,11 @@ func (inv *ActionVpsCreateInvocation) makeInputParams() map[string]interface{} {
 			ret["cpu"] = inv.Input.Cpu
 		}
 		if inv.IsParameterSelected("CpuLimit") {
-			ret["cpu_limit"] = inv.Input.CpuLimit
+			if inv.IsParameterNil("CpuLimit") {
+				ret["cpu_limit"] = nil
+			} else {
+				ret["cpu_limit"] = inv.Input.CpuLimit
+			}
 		}
 		if inv.IsParameterSelected("Diskspace") {
 			ret["diskspace"] = inv.Input.Diskspace
@@ -1015,11 +962,7 @@ func (inv *ActionVpsCreateInvocation) makeInputParams() map[string]interface{} {
 			ret["enable_os_template_auto_update"] = inv.Input.EnableOsTemplateAutoUpdate
 		}
 		if inv.IsParameterSelected("Environment") {
-			if inv.IsParameterNil("Environment") {
-				ret["environment"] = nil
-			} else {
-				ret["environment"] = inv.Input.Environment
-			}
+			ret["environment"] = inv.Input.Environment
 		}
 		if inv.IsParameterSelected("Hostname") {
 			ret["hostname"] = inv.Input.Hostname
@@ -1037,11 +980,7 @@ func (inv *ActionVpsCreateInvocation) makeInputParams() map[string]interface{} {
 			ret["ipv6"] = inv.Input.Ipv6
 		}
 		if inv.IsParameterSelected("Location") {
-			if inv.IsParameterNil("Location") {
-				ret["location"] = nil
-			} else {
-				ret["location"] = inv.Input.Location
-			}
+			ret["location"] = inv.Input.Location
 		}
 		if inv.IsParameterSelected("MapMode") {
 			ret["map_mode"] = inv.Input.MapMode
@@ -1050,21 +989,13 @@ func (inv *ActionVpsCreateInvocation) makeInputParams() map[string]interface{} {
 			ret["memory"] = inv.Input.Memory
 		}
 		if inv.IsParameterSelected("Node") {
-			if inv.IsParameterNil("Node") {
-				ret["node"] = nil
-			} else {
-				ret["node"] = inv.Input.Node
-			}
+			ret["node"] = inv.Input.Node
 		}
 		if inv.IsParameterSelected("Onstartall") {
 			ret["onstartall"] = inv.Input.Onstartall
 		}
 		if inv.IsParameterSelected("OsTemplate") {
-			if inv.IsParameterNil("OsTemplate") {
-				ret["os_template"] = nil
-			} else {
-				ret["os_template"] = inv.Input.OsTemplate
-			}
+			ret["os_template"] = inv.Input.OsTemplate
 		}
 		if inv.IsParameterSelected("Start") {
 			ret["start"] = inv.Input.Start
@@ -1076,11 +1007,7 @@ func (inv *ActionVpsCreateInvocation) makeInputParams() map[string]interface{} {
 			ret["swap"] = inv.Input.Swap
 		}
 		if inv.IsParameterSelected("User") {
-			if inv.IsParameterNil("User") {
-				ret["user"] = nil
-			} else {
-				ret["user"] = inv.Input.User
-			}
+			ret["user"] = inv.Input.User
 		}
 		if inv.IsParameterSelected("UserDataContent") {
 			ret["user_data_content"] = inv.Input.UserDataContent
@@ -1089,18 +1016,10 @@ func (inv *ActionVpsCreateInvocation) makeInputParams() map[string]interface{} {
 			ret["user_data_format"] = inv.Input.UserDataFormat
 		}
 		if inv.IsParameterSelected("UserNamespaceMap") {
-			if inv.IsParameterNil("UserNamespaceMap") {
-				ret["user_namespace_map"] = nil
-			} else {
-				ret["user_namespace_map"] = inv.Input.UserNamespaceMap
-			}
+			ret["user_namespace_map"] = inv.Input.UserNamespaceMap
 		}
 		if inv.IsParameterSelected("VpsUserData") {
-			if inv.IsParameterNil("VpsUserData") {
-				ret["vps_user_data"] = nil
-			} else {
-				ret["vps_user_data"] = inv.Input.VpsUserData
-			}
+			ret["vps_user_data"] = inv.Input.VpsUserData
 		}
 	}
 

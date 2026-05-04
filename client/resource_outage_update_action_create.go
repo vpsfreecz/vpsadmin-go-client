@@ -98,7 +98,26 @@ func (in *ActionOutageUpdateCreateInput) SetBeginsAt(value string) *ActionOutage
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetBeginsAtNil(false)
 	in._selectedParameters["BeginsAt"] = nil
+	return in
+}
+
+// SetBeginsAtNil sets parameter BeginsAt to nil and selects it for sending
+func (in *ActionOutageUpdateCreateInput) SetBeginsAtNil(set bool) *ActionOutageUpdateCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["BeginsAt"] = nil
+		in.SelectParameters("BeginsAt")
+	} else {
+		delete(in._nilParameters, "BeginsAt")
+	}
 	return in
 }
 
@@ -170,7 +189,26 @@ func (in *ActionOutageUpdateCreateInput) SetFinishedAt(value string) *ActionOuta
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetFinishedAtNil(false)
 	in._selectedParameters["FinishedAt"] = nil
+	return in
+}
+
+// SetFinishedAtNil sets parameter FinishedAt to nil and selects it for sending
+func (in *ActionOutageUpdateCreateInput) SetFinishedAtNil(set bool) *ActionOutageUpdateCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["FinishedAt"] = nil
+		in.SelectParameters("FinishedAt")
+	} else {
+		delete(in._nilParameters, "FinishedAt")
+	}
 	return in
 }
 
@@ -194,26 +232,7 @@ func (in *ActionOutageUpdateCreateInput) SetOutage(value int64) *ActionOutageUpd
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetOutageNil(false)
 	in._selectedParameters["Outage"] = nil
-	return in
-}
-
-// SetOutageNil sets parameter Outage to nil and selects it for sending
-func (in *ActionOutageUpdateCreateInput) SetOutageNil(set bool) *ActionOutageUpdateCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Outage"] = nil
-		in.SelectParameters("Outage")
-	} else {
-		delete(in._nilParameters, "Outage")
-	}
 	return in
 }
 
@@ -410,8 +429,52 @@ func (inv *ActionOutageUpdateCreateInvocation) IsMetaParameterNil(param string) 
 	return exists
 }
 
+func (inv *ActionOutageUpdateCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("BeginsAt") {
+			if !inv.IsParameterNil("BeginsAt") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.BeginsAt)
+				if !ok {
+					verr.Add("begins_at", "not a valid datetime")
+				} else {
+					inv.Input.BeginsAt = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("FinishedAt") {
+			if !inv.IsParameterNil("FinishedAt") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.FinishedAt)
+				if !ok {
+					verr.Add("finished_at", "not a valid datetime")
+				} else {
+					inv.Input.FinishedAt = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("Outage") {
+			if !inv.IsParameterNil("Outage") {
+				if inv.Input.Outage < 0 {
+					verr.Add("outage", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionOutageUpdateCreateInvocation) Call() (*ActionOutageUpdateCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -513,7 +576,11 @@ func (inv *ActionOutageUpdateCreateInvocation) makeInputParams() map[string]inte
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("BeginsAt") {
-			ret["begins_at"] = inv.Input.BeginsAt
+			if inv.IsParameterNil("BeginsAt") {
+				ret["begins_at"] = nil
+			} else {
+				ret["begins_at"] = inv.Input.BeginsAt
+			}
 		}
 		if inv.IsParameterSelected("CsDescription") {
 			ret["cs_description"] = inv.Input.CsDescription
@@ -531,17 +598,17 @@ func (inv *ActionOutageUpdateCreateInvocation) makeInputParams() map[string]inte
 			ret["en_summary"] = inv.Input.EnSummary
 		}
 		if inv.IsParameterSelected("FinishedAt") {
-			ret["finished_at"] = inv.Input.FinishedAt
+			if inv.IsParameterNil("FinishedAt") {
+				ret["finished_at"] = nil
+			} else {
+				ret["finished_at"] = inv.Input.FinishedAt
+			}
 		}
 		if inv.IsParameterSelected("Impact") {
 			ret["impact"] = inv.Input.Impact
 		}
 		if inv.IsParameterSelected("Outage") {
-			if inv.IsParameterNil("Outage") {
-				ret["outage"] = nil
-			} else {
-				ret["outage"] = inv.Input.Outage
-			}
+			ret["outage"] = inv.Input.Outage
 		}
 		if inv.IsParameterSelected("SendMail") {
 			ret["send_mail"] = inv.Input.SendMail

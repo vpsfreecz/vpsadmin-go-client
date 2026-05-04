@@ -129,26 +129,7 @@ func (in *ActionOomReportRuleUpdateInput) SetVps(value int64) *ActionOomReportRu
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetVpsNil(false)
 	in._selectedParameters["Vps"] = nil
-	return in
-}
-
-// SetVpsNil sets parameter Vps to nil and selects it for sending
-func (in *ActionOomReportRuleUpdateInput) SetVpsNil(set bool) *ActionOomReportRuleUpdateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Vps"] = nil
-		in.SelectParameters("Vps")
-	} else {
-		delete(in._nilParameters, "Vps")
-	}
 	return in
 }
 
@@ -318,8 +299,32 @@ func (inv *ActionOomReportRuleUpdateInvocation) IsMetaParameterNil(param string)
 	return exists
 }
 
+func (inv *ActionOomReportRuleUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Vps") {
+			if !inv.IsParameterNil("Vps") {
+				if inv.Input.Vps < 0 {
+					verr.Add("vps", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionOomReportRuleUpdateInvocation) Call() (*ActionOomReportRuleUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -354,11 +359,7 @@ func (inv *ActionOomReportRuleUpdateInvocation) makeInputParams() map[string]int
 			ret["hit_count"] = inv.Input.HitCount
 		}
 		if inv.IsParameterSelected("Vps") {
-			if inv.IsParameterNil("Vps") {
-				ret["vps"] = nil
-			} else {
-				ret["vps"] = inv.Input.Vps
-			}
+			ret["vps"] = inv.Input.Vps
 		}
 	}
 

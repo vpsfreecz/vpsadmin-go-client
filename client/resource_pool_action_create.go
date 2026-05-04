@@ -73,25 +73,28 @@ func (in *ActionPoolCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionPoolCreateInput is a type for action input parameters
 type ActionPoolCreateInput struct {
-	Atime         bool    `json:"atime"`
-	CheckedAt     string  `json:"checked_at"`
-	Compression   bool    `json:"compression"`
-	Filesystem    string  `json:"filesystem"`
-	IsOpen        bool    `json:"is_open"`
-	Label         string  `json:"label"`
-	MaxDatasets   int64   `json:"max_datasets"`
-	Node          int64   `json:"node"`
-	Quota         int64   `json:"quota"`
-	Recordsize    int64   `json:"recordsize"`
-	Refquota      int64   `json:"refquota"`
-	RefquotaCheck bool    `json:"refquota_check"`
-	Relatime      bool    `json:"relatime"`
-	Role          string  `json:"role"`
-	Scan          string  `json:"scan"`
-	ScanPercent   float64 `json:"scan_percent"`
-	Sharenfs      string  `json:"sharenfs"`
-	State         string  `json:"state"`
-	Sync          string  `json:"sync"`
+	Atime          bool    `json:"atime"`
+	AvailableSpace int64   `json:"available_space"`
+	CheckedAt      string  `json:"checked_at"`
+	Compression    bool    `json:"compression"`
+	Filesystem     string  `json:"filesystem"`
+	IsOpen         bool    `json:"is_open"`
+	Label          string  `json:"label"`
+	MaxDatasets    int64   `json:"max_datasets"`
+	Node           int64   `json:"node"`
+	Quota          int64   `json:"quota"`
+	Recordsize     int64   `json:"recordsize"`
+	Refquota       int64   `json:"refquota"`
+	RefquotaCheck  bool    `json:"refquota_check"`
+	Relatime       bool    `json:"relatime"`
+	Role           string  `json:"role"`
+	Scan           string  `json:"scan"`
+	ScanPercent    float64 `json:"scan_percent"`
+	Sharenfs       string  `json:"sharenfs"`
+	State          string  `json:"state"`
+	Sync           string  `json:"sync"`
+	TotalSpace     int64   `json:"total_space"`
+	UsedSpace      int64   `json:"used_space"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -107,6 +110,18 @@ func (in *ActionPoolCreateInput) SetAtime(value bool) *ActionPoolCreateInput {
 	}
 
 	in._selectedParameters["Atime"] = nil
+	return in
+}
+
+// SetAvailableSpace sets parameter AvailableSpace to value and selects it for sending
+func (in *ActionPoolCreateInput) SetAvailableSpace(value int64) *ActionPoolCreateInput {
+	in.AvailableSpace = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AvailableSpace"] = nil
 	return in
 }
 
@@ -190,26 +205,7 @@ func (in *ActionPoolCreateInput) SetNode(value int64) *ActionPoolCreateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
-	return in
-}
-
-// SetNodeNil sets parameter Node to nil and selects it for sending
-func (in *ActionPoolCreateInput) SetNodeNil(set bool) *ActionPoolCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Node"] = nil
-		in.SelectParameters("Node")
-	} else {
-		delete(in._nilParameters, "Node")
-	}
 	return in
 }
 
@@ -345,6 +341,30 @@ func (in *ActionPoolCreateInput) SetSync(value string) *ActionPoolCreateInput {
 	return in
 }
 
+// SetTotalSpace sets parameter TotalSpace to value and selects it for sending
+func (in *ActionPoolCreateInput) SetTotalSpace(value int64) *ActionPoolCreateInput {
+	in.TotalSpace = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["TotalSpace"] = nil
+	return in
+}
+
+// SetUsedSpace sets parameter UsedSpace to value and selects it for sending
+func (in *ActionPoolCreateInput) SetUsedSpace(value int64) *ActionPoolCreateInput {
+	in.UsedSpace = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["UsedSpace"] = nil
+	return in
+}
+
 // SelectParameters sets parameters from ActionPoolCreateInput
 // that will be sent to the API.
 // SelectParameters can be called multiple times.
@@ -393,6 +413,7 @@ type ActionPoolCreateRequest struct {
 type ActionPoolCreateOutput struct {
 	Atime            bool                  `json:"atime"`
 	Avail            int64                 `json:"avail"`
+	AvailableSpace   int64                 `json:"available_space"`
 	CheckedAt        string                `json:"checked_at"`
 	Compression      bool                  `json:"compression"`
 	Compressratio    float64               `json:"compressratio"`
@@ -416,7 +437,9 @@ type ActionPoolCreateOutput struct {
 	Sharenfs         string                `json:"sharenfs"`
 	State            string                `json:"state"`
 	Sync             string                `json:"sync"`
+	TotalSpace       int64                 `json:"total_space"`
 	Used             int64                 `json:"used"`
+	UsedSpace        int64                 `json:"used_space"`
 }
 
 // ActionPoolCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -525,8 +548,49 @@ func (inv *ActionPoolCreateInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionPoolCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("CheckedAt") {
+			if !inv.IsParameterNil("CheckedAt") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.CheckedAt)
+				if !ok {
+					verr.Add("checked_at", "not a valid datetime")
+				} else {
+					inv.Input.CheckedAt = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("Node") {
+			if !inv.IsParameterNil("Node") {
+				if inv.Input.Node < 0 {
+					verr.Add("node", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("ScanPercent") {
+			if !inv.IsParameterNil("ScanPercent") {
+				if !isFiniteFloat64(inv.Input.ScanPercent) {
+					verr.Add("scan_percent", "not a valid float")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionPoolCreateInvocation) Call() (*ActionPoolCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -630,6 +694,9 @@ func (inv *ActionPoolCreateInvocation) makeInputParams() map[string]interface{} 
 		if inv.IsParameterSelected("Atime") {
 			ret["atime"] = inv.Input.Atime
 		}
+		if inv.IsParameterSelected("AvailableSpace") {
+			ret["available_space"] = inv.Input.AvailableSpace
+		}
 		if inv.IsParameterSelected("CheckedAt") {
 			ret["checked_at"] = inv.Input.CheckedAt
 		}
@@ -649,11 +716,7 @@ func (inv *ActionPoolCreateInvocation) makeInputParams() map[string]interface{} 
 			ret["max_datasets"] = inv.Input.MaxDatasets
 		}
 		if inv.IsParameterSelected("Node") {
-			if inv.IsParameterNil("Node") {
-				ret["node"] = nil
-			} else {
-				ret["node"] = inv.Input.Node
-			}
+			ret["node"] = inv.Input.Node
 		}
 		if inv.IsParameterSelected("Quota") {
 			ret["quota"] = inv.Input.Quota
@@ -687,6 +750,12 @@ func (inv *ActionPoolCreateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("Sync") {
 			ret["sync"] = inv.Input.Sync
+		}
+		if inv.IsParameterSelected("TotalSpace") {
+			ret["total_space"] = inv.Input.TotalSpace
+		}
+		if inv.IsParameterSelected("UsedSpace") {
+			ret["used_space"] = inv.Input.UsedSpace
 		}
 	}
 

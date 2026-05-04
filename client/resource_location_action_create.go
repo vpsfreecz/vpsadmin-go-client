@@ -117,26 +117,7 @@ func (in *ActionLocationCreateInput) SetEnvironment(value int64) *ActionLocation
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
-	return in
-}
-
-// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
-func (in *ActionLocationCreateInput) SetEnvironmentNil(set bool) *ActionLocationCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Environment"] = nil
-		in.SelectParameters("Environment")
-	} else {
-		delete(in._nilParameters, "Environment")
-	}
 	return in
 }
 
@@ -330,8 +311,32 @@ func (inv *ActionLocationCreateInvocation) IsMetaParameterNil(param string) bool
 	return exists
 }
 
+func (inv *ActionLocationCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Environment") {
+			if !inv.IsParameterNil("Environment") {
+				if inv.Input.Environment < 0 {
+					verr.Add("environment", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionLocationCreateInvocation) Call() (*ActionLocationCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -363,11 +368,7 @@ func (inv *ActionLocationCreateInvocation) makeInputParams() map[string]interfac
 			ret["domain"] = inv.Input.Domain
 		}
 		if inv.IsParameterSelected("Environment") {
-			if inv.IsParameterNil("Environment") {
-				ret["environment"] = nil
-			} else {
-				ret["environment"] = inv.Input.Environment
-			}
+			ret["environment"] = inv.Input.Environment
 		}
 		if inv.IsParameterSelected("HasIpv6") {
 			ret["has_ipv6"] = inv.Input.HasIpv6

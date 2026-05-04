@@ -241,8 +241,25 @@ func (inv *ActionNodeSetMaintenanceInvocation) IsMetaParameterNil(param string) 
 	return exists
 }
 
+func (inv *ActionNodeSetMaintenanceInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionNodeSetMaintenanceInvocation) Call() (*ActionNodeSetMaintenanceResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

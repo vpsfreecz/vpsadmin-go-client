@@ -81,7 +81,26 @@ func (in *ActionActionStatePollInput) SetCurrent(value int64) *ActionActionState
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetCurrentNil(false)
 	in._selectedParameters["Current"] = nil
+	return in
+}
+
+// SetCurrentNil sets parameter Current to nil and selects it for sending
+func (in *ActionActionStatePollInput) SetCurrentNil(set bool) *ActionActionStatePollInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Current"] = nil
+		in.SelectParameters("Current")
+	} else {
+		delete(in._nilParameters, "Current")
+	}
 	return in
 }
 
@@ -93,7 +112,26 @@ func (in *ActionActionStatePollInput) SetStatus(value bool) *ActionActionStatePo
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetStatusNil(false)
 	in._selectedParameters["Status"] = nil
+	return in
+}
+
+// SetStatusNil sets parameter Status to nil and selects it for sending
+func (in *ActionActionStatePollInput) SetStatusNil(set bool) *ActionActionStatePollInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Status"] = nil
+		in.SelectParameters("Status")
+	} else {
+		delete(in._nilParameters, "Status")
+	}
 	return in
 }
 
@@ -117,7 +155,26 @@ func (in *ActionActionStatePollInput) SetTotal(value int64) *ActionActionStatePo
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetTotalNil(false)
 	in._selectedParameters["Total"] = nil
+	return in
+}
+
+// SetTotalNil sets parameter Total to nil and selects it for sending
+func (in *ActionActionStatePollInput) SetTotalNil(set bool) *ActionActionStatePollInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Total"] = nil
+		in.SelectParameters("Total")
+	} else {
+		delete(in._nilParameters, "Total")
+	}
 	return in
 }
 
@@ -129,7 +186,26 @@ func (in *ActionActionStatePollInput) SetUpdateIn(value float64) *ActionActionSt
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetUpdateInNil(false)
 	in._selectedParameters["UpdateIn"] = nil
+	return in
+}
+
+// SetUpdateInNil sets parameter UpdateIn to nil and selects it for sending
+func (in *ActionActionStatePollInput) SetUpdateInNil(set bool) *ActionActionStatePollInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["UpdateIn"] = nil
+		in.SelectParameters("UpdateIn")
+	} else {
+		delete(in._nilParameters, "UpdateIn")
+	}
 	return in
 }
 
@@ -295,8 +371,39 @@ func (inv *ActionActionStatePollInvocation) IsMetaParameterNil(param string) boo
 	return exists
 }
 
+func (inv *ActionActionStatePollInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Timeout") {
+			if !inv.IsParameterNil("Timeout") {
+				if !isFiniteFloat64(inv.Input.Timeout) {
+					verr.Add("timeout", "not a valid float")
+				}
+			}
+		}
+		if inv.IsParameterSelected("UpdateIn") {
+			if !inv.IsParameterNil("UpdateIn") {
+				if !isFiniteFloat64(inv.Input.UpdateIn) {
+					verr.Add("update_in", "not a valid float")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionActionStatePollInvocation) Call() (*ActionActionStatePollResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 
@@ -315,19 +422,35 @@ func (inv *ActionActionStatePollInvocation) callAsQuery() (*ActionActionStatePol
 func (inv *ActionActionStatePollInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Current") {
-			ret["action_state[current]"] = convertInt64ToString(inv.Input.Current)
+			if inv.IsParameterNil("Current") {
+				ret["action_state[current]"] = ""
+			} else {
+				ret["action_state[current]"] = convertInt64ToString(inv.Input.Current)
+			}
 		}
 		if inv.IsParameterSelected("Status") {
-			ret["action_state[status]"] = convertBoolToString(inv.Input.Status)
+			if inv.IsParameterNil("Status") {
+				ret["action_state[status]"] = ""
+			} else {
+				ret["action_state[status]"] = convertBoolToString(inv.Input.Status)
+			}
 		}
 		if inv.IsParameterSelected("Timeout") {
 			ret["action_state[timeout]"] = convertFloat64ToString(inv.Input.Timeout)
 		}
 		if inv.IsParameterSelected("Total") {
-			ret["action_state[total]"] = convertInt64ToString(inv.Input.Total)
+			if inv.IsParameterNil("Total") {
+				ret["action_state[total]"] = ""
+			} else {
+				ret["action_state[total]"] = convertInt64ToString(inv.Input.Total)
+			}
 		}
 		if inv.IsParameterSelected("UpdateIn") {
-			ret["action_state[update_in]"] = convertFloat64ToString(inv.Input.UpdateIn)
+			if inv.IsParameterNil("UpdateIn") {
+				ret["action_state[update_in]"] = ""
+			} else {
+				ret["action_state[update_in]"] = convertFloat64ToString(inv.Input.UpdateIn)
+			}
 		}
 	}
 }

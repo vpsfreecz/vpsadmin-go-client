@@ -157,8 +157,23 @@ func (inv *ActionOutageHandlerShowInvocation) IsMetaParameterNil(param string) b
 	return exists
 }
 
+func (inv *ActionOutageHandlerShowInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionOutageHandlerShowInvocation) Call() (*ActionOutageHandlerShowResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

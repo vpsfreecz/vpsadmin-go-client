@@ -121,26 +121,7 @@ func (in *ActionIncidentReportIndexInput) SetFiledBy(value int64) *ActionInciden
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetFiledByNil(false)
 	in._selectedParameters["FiledBy"] = nil
-	return in
-}
-
-// SetFiledByNil sets parameter FiledBy to nil and selects it for sending
-func (in *ActionIncidentReportIndexInput) SetFiledByNil(set bool) *ActionIncidentReportIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["FiledBy"] = nil
-		in.SelectParameters("FiledBy")
-	} else {
-		delete(in._nilParameters, "FiledBy")
-	}
 	return in
 }
 
@@ -176,26 +157,7 @@ func (in *ActionIncidentReportIndexInput) SetIpAddressAssignment(value int64) *A
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetIpAddressAssignmentNil(false)
 	in._selectedParameters["IpAddressAssignment"] = nil
-	return in
-}
-
-// SetIpAddressAssignmentNil sets parameter IpAddressAssignment to nil and selects it for sending
-func (in *ActionIncidentReportIndexInput) SetIpAddressAssignmentNil(set bool) *ActionIncidentReportIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["IpAddressAssignment"] = nil
-		in.SelectParameters("IpAddressAssignment")
-	} else {
-		delete(in._nilParameters, "IpAddressAssignment")
-	}
 	return in
 }
 
@@ -250,26 +212,7 @@ func (in *ActionIncidentReportIndexInput) SetUser(value int64) *ActionIncidentRe
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
-	return in
-}
-
-// SetUserNil sets parameter User to nil and selects it for sending
-func (in *ActionIncidentReportIndexInput) SetUserNil(set bool) *ActionIncidentReportIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["User"] = nil
-		in.SelectParameters("User")
-	} else {
-		delete(in._nilParameters, "User")
-	}
 	return in
 }
 
@@ -281,26 +224,7 @@ func (in *ActionIncidentReportIndexInput) SetVps(value int64) *ActionIncidentRep
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetVpsNil(false)
 	in._selectedParameters["Vps"] = nil
-	return in
-}
-
-// SetVpsNil sets parameter Vps to nil and selects it for sending
-func (in *ActionIncidentReportIndexInput) SetVpsNil(set bool) *ActionIncidentReportIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Vps"] = nil
-		in.SelectParameters("Vps")
-	} else {
-		delete(in._nilParameters, "Vps")
-	}
 	return in
 }
 
@@ -461,8 +385,60 @@ func (inv *ActionIncidentReportIndexInvocation) IsMetaParameterNil(param string)
 	return exists
 }
 
+func (inv *ActionIncidentReportIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("FiledBy") {
+			if !inv.IsParameterNil("FiledBy") {
+				if inv.Input.FiledBy < 0 {
+					verr.Add("filed_by", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("IpAddressAssignment") {
+			if !inv.IsParameterNil("IpAddressAssignment") {
+				if inv.Input.IpAddressAssignment < 0 {
+					verr.Add("ip_address_assignment", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Mailbox") {
+			if !inv.IsParameterNil("Mailbox") {
+				if inv.Input.Mailbox < 0 {
+					verr.Add("mailbox", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Vps") {
+			if !inv.IsParameterNil("Vps") {
+				if inv.Input.Vps < 0 {
+					verr.Add("vps", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionIncidentReportIndexInvocation) Call() (*ActionIncidentReportIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 
@@ -499,7 +475,11 @@ func (inv *ActionIncidentReportIndexInvocation) convertInputToQueryParams(ret ma
 			ret["incident_report[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 		if inv.IsParameterSelected("Mailbox") {
-			ret["incident_report[mailbox]"] = convertInt64ToString(inv.Input.Mailbox)
+			if inv.IsParameterNil("Mailbox") {
+				ret["incident_report[mailbox]"] = ""
+			} else {
+				ret["incident_report[mailbox]"] = convertInt64ToString(inv.Input.Mailbox)
+			}
 		}
 		if inv.IsParameterSelected("User") {
 			ret["incident_report[user]"] = convertInt64ToString(inv.Input.User)

@@ -86,28 +86,31 @@ func (in *ActionPoolIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionPoolIndexInput is a type for action input parameters
 type ActionPoolIndexInput struct {
-	Atime         bool    `json:"atime"`
-	CheckedAt     string  `json:"checked_at"`
-	Compression   bool    `json:"compression"`
-	Filesystem    string  `json:"filesystem"`
-	FromId        int64   `json:"from_id"`
-	IsOpen        bool    `json:"is_open"`
-	Label         string  `json:"label"`
-	Limit         int64   `json:"limit"`
-	MaxDatasets   int64   `json:"max_datasets"`
-	Name          string  `json:"name"`
-	Node          int64   `json:"node"`
-	Quota         int64   `json:"quota"`
-	Recordsize    int64   `json:"recordsize"`
-	Refquota      int64   `json:"refquota"`
-	RefquotaCheck bool    `json:"refquota_check"`
-	Relatime      bool    `json:"relatime"`
-	Role          string  `json:"role"`
-	Scan          string  `json:"scan"`
-	ScanPercent   float64 `json:"scan_percent"`
-	Sharenfs      string  `json:"sharenfs"`
-	State         string  `json:"state"`
-	Sync          string  `json:"sync"`
+	Atime          bool    `json:"atime"`
+	AvailableSpace int64   `json:"available_space"`
+	CheckedAt      string  `json:"checked_at"`
+	Compression    bool    `json:"compression"`
+	Filesystem     string  `json:"filesystem"`
+	FromId         int64   `json:"from_id"`
+	IsOpen         bool    `json:"is_open"`
+	Label          string  `json:"label"`
+	Limit          int64   `json:"limit"`
+	MaxDatasets    int64   `json:"max_datasets"`
+	Name           string  `json:"name"`
+	Node           int64   `json:"node"`
+	Quota          int64   `json:"quota"`
+	Recordsize     int64   `json:"recordsize"`
+	Refquota       int64   `json:"refquota"`
+	RefquotaCheck  bool    `json:"refquota_check"`
+	Relatime       bool    `json:"relatime"`
+	Role           string  `json:"role"`
+	Scan           string  `json:"scan"`
+	ScanPercent    float64 `json:"scan_percent"`
+	Sharenfs       string  `json:"sharenfs"`
+	State          string  `json:"state"`
+	Sync           string  `json:"sync"`
+	TotalSpace     int64   `json:"total_space"`
+	UsedSpace      int64   `json:"used_space"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -123,6 +126,18 @@ func (in *ActionPoolIndexInput) SetAtime(value bool) *ActionPoolIndexInput {
 	}
 
 	in._selectedParameters["Atime"] = nil
+	return in
+}
+
+// SetAvailableSpace sets parameter AvailableSpace to value and selects it for sending
+func (in *ActionPoolIndexInput) SetAvailableSpace(value int64) *ActionPoolIndexInput {
+	in.AvailableSpace = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AvailableSpace"] = nil
 	return in
 }
 
@@ -242,26 +257,7 @@ func (in *ActionPoolIndexInput) SetNode(value int64) *ActionPoolIndexInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
-	return in
-}
-
-// SetNodeNil sets parameter Node to nil and selects it for sending
-func (in *ActionPoolIndexInput) SetNodeNil(set bool) *ActionPoolIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Node"] = nil
-		in.SelectParameters("Node")
-	} else {
-		delete(in._nilParameters, "Node")
-	}
 	return in
 }
 
@@ -397,6 +393,30 @@ func (in *ActionPoolIndexInput) SetSync(value string) *ActionPoolIndexInput {
 	return in
 }
 
+// SetTotalSpace sets parameter TotalSpace to value and selects it for sending
+func (in *ActionPoolIndexInput) SetTotalSpace(value int64) *ActionPoolIndexInput {
+	in.TotalSpace = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["TotalSpace"] = nil
+	return in
+}
+
+// SetUsedSpace sets parameter UsedSpace to value and selects it for sending
+func (in *ActionPoolIndexInput) SetUsedSpace(value int64) *ActionPoolIndexInput {
+	in.UsedSpace = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["UsedSpace"] = nil
+	return in
+}
+
 // SelectParameters sets parameters from ActionPoolIndexInput
 // that will be sent to the API.
 // SelectParameters can be called multiple times.
@@ -439,6 +459,7 @@ func (in *ActionPoolIndexInput) AnySelected() bool {
 type ActionPoolIndexOutput struct {
 	Atime                 bool                  `json:"atime"`
 	Avail                 int64                 `json:"avail"`
+	AvailableSpace        int64                 `json:"available_space"`
 	CheckedAt             string                `json:"checked_at"`
 	Compression           bool                  `json:"compression"`
 	Compressratio         float64               `json:"compressratio"`
@@ -464,7 +485,9 @@ type ActionPoolIndexOutput struct {
 	Sharenfs              string                `json:"sharenfs"`
 	State                 string                `json:"state"`
 	Sync                  string                `json:"sync"`
+	TotalSpace            int64                 `json:"total_space"`
 	Used                  int64                 `json:"used"`
+	UsedSpace             int64                 `json:"used_space"`
 }
 
 // Type for action response, including envelope
@@ -566,8 +589,49 @@ func (inv *ActionPoolIndexInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionPoolIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("CheckedAt") {
+			if !inv.IsParameterNil("CheckedAt") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.CheckedAt)
+				if !ok {
+					verr.Add("checked_at", "not a valid datetime")
+				} else {
+					inv.Input.CheckedAt = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("Node") {
+			if !inv.IsParameterNil("Node") {
+				if inv.Input.Node < 0 {
+					verr.Add("node", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("ScanPercent") {
+			if !inv.IsParameterNil("ScanPercent") {
+				if !isFiniteFloat64(inv.Input.ScanPercent) {
+					verr.Add("scan_percent", "not a valid float")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionPoolIndexInvocation) Call() (*ActionPoolIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 
@@ -587,6 +651,9 @@ func (inv *ActionPoolIndexInvocation) convertInputToQueryParams(ret map[string]s
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Atime") {
 			ret["pool[atime]"] = convertBoolToString(inv.Input.Atime)
+		}
+		if inv.IsParameterSelected("AvailableSpace") {
+			ret["pool[available_space]"] = convertInt64ToString(inv.Input.AvailableSpace)
 		}
 		if inv.IsParameterSelected("CheckedAt") {
 			ret["pool[checked_at]"] = inv.Input.CheckedAt
@@ -650,6 +717,12 @@ func (inv *ActionPoolIndexInvocation) convertInputToQueryParams(ret map[string]s
 		}
 		if inv.IsParameterSelected("Sync") {
 			ret["pool[sync]"] = inv.Input.Sync
+		}
+		if inv.IsParameterSelected("TotalSpace") {
+			ret["pool[total_space]"] = convertInt64ToString(inv.Input.TotalSpace)
+		}
+		if inv.IsParameterSelected("UsedSpace") {
+			ret["pool[used_space]"] = convertInt64ToString(inv.Input.UsedSpace)
 		}
 	}
 }

@@ -90,26 +90,7 @@ func (in *ActionDnsServerZoneCreateInput) SetDnsServer(value int64) *ActionDnsSe
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetDnsServerNil(false)
 	in._selectedParameters["DnsServer"] = nil
-	return in
-}
-
-// SetDnsServerNil sets parameter DnsServer to nil and selects it for sending
-func (in *ActionDnsServerZoneCreateInput) SetDnsServerNil(set bool) *ActionDnsServerZoneCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["DnsServer"] = nil
-		in.SelectParameters("DnsServer")
-	} else {
-		delete(in._nilParameters, "DnsServer")
-	}
 	return in
 }
 
@@ -121,26 +102,7 @@ func (in *ActionDnsServerZoneCreateInput) SetDnsZone(value int64) *ActionDnsServ
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetDnsZoneNil(false)
 	in._selectedParameters["DnsZone"] = nil
-	return in
-}
-
-// SetDnsZoneNil sets parameter DnsZone to nil and selects it for sending
-func (in *ActionDnsServerZoneCreateInput) SetDnsZoneNil(set bool) *ActionDnsServerZoneCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["DnsZone"] = nil
-		in.SelectParameters("DnsZone")
-	} else {
-		delete(in._nilParameters, "DnsZone")
-	}
 	return in
 }
 
@@ -321,8 +283,39 @@ func (inv *ActionDnsServerZoneCreateInvocation) IsMetaParameterNil(param string)
 	return exists
 }
 
+func (inv *ActionDnsServerZoneCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("DnsServer") {
+			if !inv.IsParameterNil("DnsServer") {
+				if inv.Input.DnsServer < 0 {
+					verr.Add("dns_server", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("DnsZone") {
+			if !inv.IsParameterNil("DnsZone") {
+				if inv.Input.DnsZone < 0 {
+					verr.Add("dns_zone", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionDnsServerZoneCreateInvocation) Call() (*ActionDnsServerZoneCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -424,18 +417,10 @@ func (inv *ActionDnsServerZoneCreateInvocation) makeInputParams() map[string]int
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("DnsServer") {
-			if inv.IsParameterNil("DnsServer") {
-				ret["dns_server"] = nil
-			} else {
-				ret["dns_server"] = inv.Input.DnsServer
-			}
+			ret["dns_server"] = inv.Input.DnsServer
 		}
 		if inv.IsParameterSelected("DnsZone") {
-			if inv.IsParameterNil("DnsZone") {
-				ret["dns_zone"] = nil
-			} else {
-				ret["dns_zone"] = inv.Input.DnsZone
-			}
+			ret["dns_zone"] = inv.Input.DnsZone
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["type"] = inv.Input.Type

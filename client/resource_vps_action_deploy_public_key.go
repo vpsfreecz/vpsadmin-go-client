@@ -90,26 +90,7 @@ func (in *ActionVpsDeployPublicKeyInput) SetPublicKey(value int64) *ActionVpsDep
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetPublicKeyNil(false)
 	in._selectedParameters["PublicKey"] = nil
-	return in
-}
-
-// SetPublicKeyNil sets parameter PublicKey to nil and selects it for sending
-func (in *ActionVpsDeployPublicKeyInput) SetPublicKeyNil(set bool) *ActionVpsDeployPublicKeyInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["PublicKey"] = nil
-		in.SelectParameters("PublicKey")
-	} else {
-		delete(in._nilParameters, "PublicKey")
-	}
 	return in
 }
 
@@ -270,8 +251,32 @@ func (inv *ActionVpsDeployPublicKeyInvocation) IsMetaParameterNil(param string) 
 	return exists
 }
 
+func (inv *ActionVpsDeployPublicKeyInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("PublicKey") {
+			if !inv.IsParameterNil("PublicKey") {
+				if inv.Input.PublicKey < 0 {
+					verr.Add("public_key", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionVpsDeployPublicKeyInvocation) Call() (*ActionVpsDeployPublicKeyResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -370,11 +375,7 @@ func (inv *ActionVpsDeployPublicKeyInvocation) makeInputParams() map[string]inte
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("PublicKey") {
-			if inv.IsParameterNil("PublicKey") {
-				ret["public_key"] = nil
-			} else {
-				ret["public_key"] = inv.Input.PublicKey
-			}
+			ret["public_key"] = inv.Input.PublicKey
 		}
 	}
 

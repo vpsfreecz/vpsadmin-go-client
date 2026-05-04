@@ -105,7 +105,26 @@ func (in *ActionUserDeleteInput) SetExpirationDate(value string) *ActionUserDele
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetExpirationDateNil(false)
 	in._selectedParameters["ExpirationDate"] = nil
+	return in
+}
+
+// SetExpirationDateNil sets parameter ExpirationDate to nil and selects it for sending
+func (in *ActionUserDeleteInput) SetExpirationDateNil(set bool) *ActionUserDeleteInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["ExpirationDate"] = nil
+		in.SelectParameters("ExpirationDate")
+	} else {
+		delete(in._nilParameters, "ExpirationDate")
+	}
 	return in
 }
 
@@ -290,8 +309,45 @@ func (inv *ActionUserDeleteInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionUserDeleteInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("ExpirationDate") {
+			if !inv.IsParameterNil("ExpirationDate") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.ExpirationDate)
+				if !ok {
+					verr.Add("expiration_date", "not a valid datetime")
+				} else {
+					inv.Input.ExpirationDate = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("RemindAfterDate") {
+			if !inv.IsParameterNil("RemindAfterDate") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.RemindAfterDate)
+				if !ok {
+					verr.Add("remind_after_date", "not a valid datetime")
+				} else {
+					inv.Input.RemindAfterDate = normalized
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserDeleteInvocation) Call() (*ActionUserDeleteResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -393,7 +449,11 @@ func (inv *ActionUserDeleteInvocation) makeInputParams() map[string]interface{} 
 			ret["change_reason"] = inv.Input.ChangeReason
 		}
 		if inv.IsParameterSelected("ExpirationDate") {
-			ret["expiration_date"] = inv.Input.ExpirationDate
+			if inv.IsParameterNil("ExpirationDate") {
+				ret["expiration_date"] = nil
+			} else {
+				ret["expiration_date"] = inv.Input.ExpirationDate
+			}
 		}
 		if inv.IsParameterSelected("ObjectState") {
 			ret["object_state"] = inv.Input.ObjectState

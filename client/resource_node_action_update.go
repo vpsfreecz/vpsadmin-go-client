@@ -162,26 +162,7 @@ func (in *ActionNodeUpdateInput) SetLocation(value int64) *ActionNodeUpdateInput
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
-	return in
-}
-
-// SetLocationNil sets parameter Location to nil and selects it for sending
-func (in *ActionNodeUpdateInput) SetLocationNil(set bool) *ActionNodeUpdateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Location"] = nil
-		in.SelectParameters("Location")
-	} else {
-		delete(in._nilParameters, "Location")
-	}
 	return in
 }
 
@@ -416,8 +397,32 @@ func (inv *ActionNodeUpdateInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionNodeUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionNodeUpdateInvocation) Call() (*ActionNodeUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -455,11 +460,7 @@ func (inv *ActionNodeUpdateInvocation) makeInputParams() map[string]interface{} 
 			ret["ip_addr"] = inv.Input.IpAddr
 		}
 		if inv.IsParameterSelected("Location") {
-			if inv.IsParameterNil("Location") {
-				ret["location"] = nil
-			} else {
-				ret["location"] = inv.Input.Location
-			}
+			ret["location"] = inv.Input.Location
 		}
 		if inv.IsParameterSelected("MaxRx") {
 			ret["max_rx"] = inv.Input.MaxRx

@@ -282,8 +282,25 @@ func (inv *ActionVpsMaintenanceWindowUpdateAllInvocation) IsMetaParameterNil(par
 	return exists
 }
 
+func (inv *ActionVpsMaintenanceWindowUpdateAllInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionVpsMaintenanceWindowUpdateAllInvocation) Call() (*ActionVpsMaintenanceWindowUpdateAllResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

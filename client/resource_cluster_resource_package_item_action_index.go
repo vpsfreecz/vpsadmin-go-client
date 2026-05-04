@@ -275,8 +275,25 @@ func (inv *ActionClusterResourcePackageItemIndexInvocation) IsMetaParameterNil(p
 	return exists
 }
 
+func (inv *ActionClusterResourcePackageItemIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionClusterResourcePackageItemIndexInvocation) Call() (*ActionClusterResourcePackageItemIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

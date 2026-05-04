@@ -168,8 +168,23 @@ func (inv *ActionIpAddressAssignmentShowInvocation) IsMetaParameterNil(param str
 	return exists
 }
 
+func (inv *ActionIpAddressAssignmentShowInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionIpAddressAssignmentShowInvocation) Call() (*ActionIpAddressAssignmentShowResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

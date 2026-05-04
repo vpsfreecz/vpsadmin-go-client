@@ -107,26 +107,7 @@ func (in *ActionMigrationPlanVpsMigrationIndexInput) SetDstNode(value int64) *Ac
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetDstNodeNil(false)
 	in._selectedParameters["DstNode"] = nil
-	return in
-}
-
-// SetDstNodeNil sets parameter DstNode to nil and selects it for sending
-func (in *ActionMigrationPlanVpsMigrationIndexInput) SetDstNodeNil(set bool) *ActionMigrationPlanVpsMigrationIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["DstNode"] = nil
-		in.SelectParameters("DstNode")
-	} else {
-		delete(in._nilParameters, "DstNode")
-	}
 	return in
 }
 
@@ -162,26 +143,7 @@ func (in *ActionMigrationPlanVpsMigrationIndexInput) SetSrcNode(value int64) *Ac
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetSrcNodeNil(false)
 	in._selectedParameters["SrcNode"] = nil
-	return in
-}
-
-// SetSrcNodeNil sets parameter SrcNode to nil and selects it for sending
-func (in *ActionMigrationPlanVpsMigrationIndexInput) SetSrcNodeNil(set bool) *ActionMigrationPlanVpsMigrationIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["SrcNode"] = nil
-		in.SelectParameters("SrcNode")
-	} else {
-		delete(in._nilParameters, "SrcNode")
-	}
 	return in
 }
 
@@ -360,8 +322,39 @@ func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) IsMetaParameterNil(pa
 	return exists
 }
 
+func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("DstNode") {
+			if !inv.IsParameterNil("DstNode") {
+				if inv.Input.DstNode < 0 {
+					verr.Add("dst_node", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("SrcNode") {
+			if !inv.IsParameterNil("SrcNode") {
+				if inv.Input.SrcNode < 0 {
+					verr.Add("src_node", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) Call() (*ActionMigrationPlanVpsMigrationIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

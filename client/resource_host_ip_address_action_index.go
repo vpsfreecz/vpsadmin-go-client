@@ -153,26 +153,7 @@ func (in *ActionHostIpAddressIndexInput) SetIpAddress(value int64) *ActionHostIp
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetIpAddressNil(false)
 	in._selectedParameters["IpAddress"] = nil
-	return in
-}
-
-// SetIpAddressNil sets parameter IpAddress to nil and selects it for sending
-func (in *ActionHostIpAddressIndexInput) SetIpAddressNil(set bool) *ActionHostIpAddressIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["IpAddress"] = nil
-		in.SelectParameters("IpAddress")
-	} else {
-		delete(in._nilParameters, "IpAddress")
-	}
 	return in
 }
 
@@ -196,26 +177,7 @@ func (in *ActionHostIpAddressIndexInput) SetLocation(value int64) *ActionHostIpA
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
-	return in
-}
-
-// SetLocationNil sets parameter Location to nil and selects it for sending
-func (in *ActionHostIpAddressIndexInput) SetLocationNil(set bool) *ActionHostIpAddressIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Location"] = nil
-		in.SelectParameters("Location")
-	} else {
-		delete(in._nilParameters, "Location")
-	}
 	return in
 }
 
@@ -227,26 +189,7 @@ func (in *ActionHostIpAddressIndexInput) SetNetwork(value int64) *ActionHostIpAd
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNetworkNil(false)
 	in._selectedParameters["Network"] = nil
-	return in
-}
-
-// SetNetworkNil sets parameter Network to nil and selects it for sending
-func (in *ActionHostIpAddressIndexInput) SetNetworkNil(set bool) *ActionHostIpAddressIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Network"] = nil
-		in.SelectParameters("Network")
-	} else {
-		delete(in._nilParameters, "Network")
-	}
 	return in
 }
 
@@ -258,26 +201,7 @@ func (in *ActionHostIpAddressIndexInput) SetNetworkInterface(value int64) *Actio
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNetworkInterfaceNil(false)
 	in._selectedParameters["NetworkInterface"] = nil
-	return in
-}
-
-// SetNetworkInterfaceNil sets parameter NetworkInterface to nil and selects it for sending
-func (in *ActionHostIpAddressIndexInput) SetNetworkInterfaceNil(set bool) *ActionHostIpAddressIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["NetworkInterface"] = nil
-		in.SelectParameters("NetworkInterface")
-	} else {
-		delete(in._nilParameters, "NetworkInterface")
-	}
 	return in
 }
 
@@ -574,8 +498,67 @@ func (inv *ActionHostIpAddressIndexInvocation) IsMetaParameterNil(param string) 
 	return exists
 }
 
+func (inv *ActionHostIpAddressIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("IpAddress") {
+			if !inv.IsParameterNil("IpAddress") {
+				if inv.Input.IpAddress < 0 {
+					verr.Add("ip_address", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Network") {
+			if !inv.IsParameterNil("Network") {
+				if inv.Input.Network < 0 {
+					verr.Add("network", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("NetworkInterface") {
+			if !inv.IsParameterNil("NetworkInterface") {
+				if inv.Input.NetworkInterface < 0 {
+					verr.Add("network_interface", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Vps") {
+			if !inv.IsParameterNil("Vps") {
+				if inv.Input.Vps < 0 {
+					verr.Add("vps", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionHostIpAddressIndexInvocation) Call() (*ActionHostIpAddressIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 
@@ -636,13 +619,21 @@ func (inv *ActionHostIpAddressIndexInvocation) convertInputToQueryParams(ret map
 			ret["host_ip_address[size]"] = convertInt64ToString(inv.Input.Size)
 		}
 		if inv.IsParameterSelected("User") {
-			ret["host_ip_address[user]"] = convertInt64ToString(inv.Input.User)
+			if inv.IsParameterNil("User") {
+				ret["host_ip_address[user]"] = ""
+			} else {
+				ret["host_ip_address[user]"] = convertInt64ToString(inv.Input.User)
+			}
 		}
 		if inv.IsParameterSelected("Version") {
 			ret["host_ip_address[version]"] = convertInt64ToString(inv.Input.Version)
 		}
 		if inv.IsParameterSelected("Vps") {
-			ret["host_ip_address[vps]"] = convertInt64ToString(inv.Input.Vps)
+			if inv.IsParameterNil("Vps") {
+				ret["host_ip_address[vps]"] = ""
+			} else {
+				ret["host_ip_address[vps]"] = convertInt64ToString(inv.Input.Vps)
+			}
 		}
 	}
 }

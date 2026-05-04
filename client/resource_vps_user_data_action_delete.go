@@ -147,8 +147,23 @@ func (inv *ActionVpsUserDataDeleteInvocation) IsMetaParameterNil(param string) b
 	return exists
 }
 
+func (inv *ActionVpsUserDataDeleteInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionVpsUserDataDeleteInvocation) Call() (*ActionVpsUserDataDeleteResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

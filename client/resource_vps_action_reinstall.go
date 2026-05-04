@@ -93,26 +93,7 @@ func (in *ActionVpsReinstallInput) SetOsTemplate(value int64) *ActionVpsReinstal
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetOsTemplateNil(false)
 	in._selectedParameters["OsTemplate"] = nil
-	return in
-}
-
-// SetOsTemplateNil sets parameter OsTemplate to nil and selects it for sending
-func (in *ActionVpsReinstallInput) SetOsTemplateNil(set bool) *ActionVpsReinstallInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["OsTemplate"] = nil
-		in.SelectParameters("OsTemplate")
-	} else {
-		delete(in._nilParameters, "OsTemplate")
-	}
 	return in
 }
 
@@ -148,26 +129,7 @@ func (in *ActionVpsReinstallInput) SetVpsUserData(value int64) *ActionVpsReinsta
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetVpsUserDataNil(false)
 	in._selectedParameters["VpsUserData"] = nil
-	return in
-}
-
-// SetVpsUserDataNil sets parameter VpsUserData to nil and selects it for sending
-func (in *ActionVpsReinstallInput) SetVpsUserDataNil(set bool) *ActionVpsReinstallInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["VpsUserData"] = nil
-		in.SelectParameters("VpsUserData")
-	} else {
-		delete(in._nilParameters, "VpsUserData")
-	}
 	return in
 }
 
@@ -328,8 +290,39 @@ func (inv *ActionVpsReinstallInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionVpsReinstallInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("OsTemplate") {
+			if !inv.IsParameterNil("OsTemplate") {
+				if inv.Input.OsTemplate < 0 {
+					verr.Add("os_template", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("VpsUserData") {
+			if !inv.IsParameterNil("VpsUserData") {
+				if inv.Input.VpsUserData < 0 {
+					verr.Add("vps_user_data", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionVpsReinstallInvocation) Call() (*ActionVpsReinstallResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -428,11 +421,7 @@ func (inv *ActionVpsReinstallInvocation) makeInputParams() map[string]interface{
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("OsTemplate") {
-			if inv.IsParameterNil("OsTemplate") {
-				ret["os_template"] = nil
-			} else {
-				ret["os_template"] = inv.Input.OsTemplate
-			}
+			ret["os_template"] = inv.Input.OsTemplate
 		}
 		if inv.IsParameterSelected("UserDataContent") {
 			ret["user_data_content"] = inv.Input.UserDataContent
@@ -441,11 +430,7 @@ func (inv *ActionVpsReinstallInvocation) makeInputParams() map[string]interface{
 			ret["user_data_format"] = inv.Input.UserDataFormat
 		}
 		if inv.IsParameterSelected("VpsUserData") {
-			if inv.IsParameterNil("VpsUserData") {
-				ret["vps_user_data"] = nil
-			} else {
-				ret["vps_user_data"] = inv.Input.VpsUserData
-			}
+			ret["vps_user_data"] = inv.Input.VpsUserData
 		}
 	}
 

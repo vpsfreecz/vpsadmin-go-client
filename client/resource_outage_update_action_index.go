@@ -129,26 +129,7 @@ func (in *ActionOutageUpdateIndexInput) SetOutage(value int64) *ActionOutageUpda
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetOutageNil(false)
 	in._selectedParameters["Outage"] = nil
-	return in
-}
-
-// SetOutageNil sets parameter Outage to nil and selects it for sending
-func (in *ActionOutageUpdateIndexInput) SetOutageNil(set bool) *ActionOutageUpdateIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Outage"] = nil
-		in.SelectParameters("Outage")
-	} else {
-		delete(in._nilParameters, "Outage")
-	}
 	return in
 }
 
@@ -160,26 +141,7 @@ func (in *ActionOutageUpdateIndexInput) SetReportedBy(value int64) *ActionOutage
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetReportedByNil(false)
 	in._selectedParameters["ReportedBy"] = nil
-	return in
-}
-
-// SetReportedByNil sets parameter ReportedBy to nil and selects it for sending
-func (in *ActionOutageUpdateIndexInput) SetReportedByNil(set bool) *ActionOutageUpdateIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["ReportedBy"] = nil
-		in.SelectParameters("ReportedBy")
-	} else {
-		delete(in._nilParameters, "ReportedBy")
-	}
 	return in
 }
 
@@ -351,8 +313,49 @@ func (inv *ActionOutageUpdateIndexInvocation) IsMetaParameterNil(param string) b
 	return exists
 }
 
+func (inv *ActionOutageUpdateIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Outage") {
+			if !inv.IsParameterNil("Outage") {
+				if inv.Input.Outage < 0 {
+					verr.Add("outage", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("ReportedBy") {
+			if !inv.IsParameterNil("ReportedBy") {
+				if inv.Input.ReportedBy < 0 {
+					verr.Add("reported_by", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Since") {
+			if !inv.IsParameterNil("Since") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Since)
+				if !ok {
+					verr.Add("since", "not a valid datetime")
+				} else {
+					inv.Input.Since = normalized
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionOutageUpdateIndexInvocation) Call() (*ActionOutageUpdateIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

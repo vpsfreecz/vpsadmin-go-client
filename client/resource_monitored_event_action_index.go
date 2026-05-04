@@ -205,26 +205,7 @@ func (in *ActionMonitoredEventIndexInput) SetUser(value int64) *ActionMonitoredE
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
-	return in
-}
-
-// SetUserNil sets parameter User to nil and selects it for sending
-func (in *ActionMonitoredEventIndexInput) SetUserNil(set bool) *ActionMonitoredEventIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["User"] = nil
-		in.SelectParameters("User")
-	} else {
-		delete(in._nilParameters, "User")
-	}
 	return in
 }
 
@@ -381,8 +362,39 @@ func (inv *ActionMonitoredEventIndexInvocation) IsMetaParameterNil(param string)
 	return exists
 }
 
+func (inv *ActionMonitoredEventIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("FromDuration") {
+			if !inv.IsParameterNil("FromDuration") {
+				if !isFiniteFloat64(inv.Input.FromDuration) {
+					verr.Add("from_duration", "not a valid float")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionMonitoredEventIndexInvocation) Call() (*ActionMonitoredEventIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

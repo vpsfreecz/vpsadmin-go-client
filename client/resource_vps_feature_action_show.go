@@ -157,8 +157,23 @@ func (inv *ActionVpsFeatureShowInvocation) IsMetaParameterNil(param string) bool
 	return exists
 }
 
+func (inv *ActionVpsFeatureShowInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionVpsFeatureShowInvocation) Call() (*ActionVpsFeatureShowResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

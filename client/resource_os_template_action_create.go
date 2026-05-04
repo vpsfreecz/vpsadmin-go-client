@@ -261,26 +261,7 @@ func (in *ActionOsTemplateCreateInput) SetOsFamily(value int64) *ActionOsTemplat
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetOsFamilyNil(false)
 	in._selectedParameters["OsFamily"] = nil
-	return in
-}
-
-// SetOsFamilyNil sets parameter OsFamily to nil and selects it for sending
-func (in *ActionOsTemplateCreateInput) SetOsFamilyNil(set bool) *ActionOsTemplateCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["OsFamily"] = nil
-		in.SelectParameters("OsFamily")
-	} else {
-		delete(in._nilParameters, "OsFamily")
-	}
 	return in
 }
 
@@ -499,8 +480,32 @@ func (inv *ActionOsTemplateCreateInvocation) IsMetaParameterNil(param string) bo
 	return exists
 }
 
+func (inv *ActionOsTemplateCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("OsFamily") {
+			if !inv.IsParameterNil("OsFamily") {
+				if inv.Input.OsFamily < 0 {
+					verr.Add("os_family", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionOsTemplateCreateInvocation) Call() (*ActionOsTemplateCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -565,11 +570,7 @@ func (inv *ActionOsTemplateCreateInvocation) makeInputParams() map[string]interf
 			ret["order"] = inv.Input.Order
 		}
 		if inv.IsParameterSelected("OsFamily") {
-			if inv.IsParameterNil("OsFamily") {
-				ret["os_family"] = nil
-			} else {
-				ret["os_family"] = inv.Input.OsFamily
-			}
+			ret["os_family"] = inv.Input.OsFamily
 		}
 		if inv.IsParameterSelected("Supported") {
 			ret["supported"] = inv.Input.Supported

@@ -128,26 +128,7 @@ func (in *ActionLocationNetworkIndexInput) SetLocation(value int64) *ActionLocat
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
-	return in
-}
-
-// SetLocationNil sets parameter Location to nil and selects it for sending
-func (in *ActionLocationNetworkIndexInput) SetLocationNil(set bool) *ActionLocationNetworkIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Location"] = nil
-		in.SelectParameters("Location")
-	} else {
-		delete(in._nilParameters, "Location")
-	}
 	return in
 }
 
@@ -159,26 +140,7 @@ func (in *ActionLocationNetworkIndexInput) SetNetwork(value int64) *ActionLocati
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNetworkNil(false)
 	in._selectedParameters["Network"] = nil
-	return in
-}
-
-// SetNetworkNil sets parameter Network to nil and selects it for sending
-func (in *ActionLocationNetworkIndexInput) SetNetworkNil(set bool) *ActionLocationNetworkIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Network"] = nil
-		in.SelectParameters("Network")
-	} else {
-		delete(in._nilParameters, "Network")
-	}
 	return in
 }
 
@@ -330,8 +292,39 @@ func (inv *ActionLocationNetworkIndexInvocation) IsMetaParameterNil(param string
 	return exists
 }
 
+func (inv *ActionLocationNetworkIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Network") {
+			if !inv.IsParameterNil("Network") {
+				if inv.Input.Network < 0 {
+					verr.Add("network", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionLocationNetworkIndexInvocation) Call() (*ActionLocationNetworkIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

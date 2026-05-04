@@ -131,26 +131,7 @@ func (in *ActionIncidentReportCreateInput) SetIpAddressAssignment(value int64) *
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetIpAddressAssignmentNil(false)
 	in._selectedParameters["IpAddressAssignment"] = nil
-	return in
-}
-
-// SetIpAddressAssignmentNil sets parameter IpAddressAssignment to nil and selects it for sending
-func (in *ActionIncidentReportCreateInput) SetIpAddressAssignmentNil(set bool) *ActionIncidentReportCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["IpAddressAssignment"] = nil
-		in.SelectParameters("IpAddressAssignment")
-	} else {
-		delete(in._nilParameters, "IpAddressAssignment")
-	}
 	return in
 }
 
@@ -186,26 +167,7 @@ func (in *ActionIncidentReportCreateInput) SetVps(value int64) *ActionIncidentRe
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetVpsNil(false)
 	in._selectedParameters["Vps"] = nil
-	return in
-}
-
-// SetVpsNil sets parameter Vps to nil and selects it for sending
-func (in *ActionIncidentReportCreateInput) SetVpsNil(set bool) *ActionIncidentReportCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Vps"] = nil
-		in.SelectParameters("Vps")
-	} else {
-		delete(in._nilParameters, "Vps")
-	}
 	return in
 }
 
@@ -391,8 +353,49 @@ func (inv *ActionIncidentReportCreateInvocation) IsMetaParameterNil(param string
 	return exists
 }
 
+func (inv *ActionIncidentReportCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("DetectedAt") {
+			if !inv.IsParameterNil("DetectedAt") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.DetectedAt)
+				if !ok {
+					verr.Add("detected_at", "not a valid datetime")
+				} else {
+					inv.Input.DetectedAt = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("IpAddressAssignment") {
+			if !inv.IsParameterNil("IpAddressAssignment") {
+				if inv.Input.IpAddressAssignment < 0 {
+					verr.Add("ip_address_assignment", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Vps") {
+			if !inv.IsParameterNil("Vps") {
+				if inv.Input.Vps < 0 {
+					verr.Add("vps", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionIncidentReportCreateInvocation) Call() (*ActionIncidentReportCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -503,11 +506,7 @@ func (inv *ActionIncidentReportCreateInvocation) makeInputParams() map[string]in
 			ret["detected_at"] = inv.Input.DetectedAt
 		}
 		if inv.IsParameterSelected("IpAddressAssignment") {
-			if inv.IsParameterNil("IpAddressAssignment") {
-				ret["ip_address_assignment"] = nil
-			} else {
-				ret["ip_address_assignment"] = inv.Input.IpAddressAssignment
-			}
+			ret["ip_address_assignment"] = inv.Input.IpAddressAssignment
 		}
 		if inv.IsParameterSelected("Subject") {
 			ret["subject"] = inv.Input.Subject
@@ -516,11 +515,7 @@ func (inv *ActionIncidentReportCreateInvocation) makeInputParams() map[string]in
 			ret["text"] = inv.Input.Text
 		}
 		if inv.IsParameterSelected("Vps") {
-			if inv.IsParameterNil("Vps") {
-				ret["vps"] = nil
-			} else {
-				ret["vps"] = inv.Input.Vps
-			}
+			ret["vps"] = inv.Input.Vps
 		}
 		if inv.IsParameterSelected("VpsAction") {
 			ret["vps_action"] = inv.Input.VpsAction

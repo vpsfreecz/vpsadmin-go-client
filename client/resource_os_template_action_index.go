@@ -93,6 +93,7 @@ type ActionOsTemplateIndexInput struct {
 	HypervisorType  string `json:"hypervisor_type"`
 	Limit           int64  `json:"limit"`
 	Location        int64  `json:"location"`
+	OsFamily        int64  `json:"os_family"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -179,26 +180,19 @@ func (in *ActionOsTemplateIndexInput) SetLocation(value int64) *ActionOsTemplate
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
 	return in
 }
 
-// SetLocationNil sets parameter Location to nil and selects it for sending
-func (in *ActionOsTemplateIndexInput) SetLocationNil(set bool) *ActionOsTemplateIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
+// SetOsFamily sets parameter OsFamily to value and selects it for sending
+func (in *ActionOsTemplateIndexInput) SetOsFamily(value int64) *ActionOsTemplateIndexInput {
+	in.OsFamily = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
 	}
 
-	if set {
-		in._nilParameters["Location"] = nil
-		in.SelectParameters("Location")
-	} else {
-		delete(in._nilParameters, "Location")
-	}
+	in._selectedParameters["OsFamily"] = nil
 	return in
 }
 
@@ -363,8 +357,39 @@ func (inv *ActionOsTemplateIndexInvocation) IsMetaParameterNil(param string) boo
 	return exists
 }
 
+func (inv *ActionOsTemplateIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("OsFamily") {
+			if !inv.IsParameterNil("OsFamily") {
+				if inv.Input.OsFamily < 0 {
+					verr.Add("os_family", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionOsTemplateIndexInvocation) Call() (*ActionOsTemplateIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 
@@ -402,6 +427,9 @@ func (inv *ActionOsTemplateIndexInvocation) convertInputToQueryParams(ret map[st
 		}
 		if inv.IsParameterSelected("Location") {
 			ret["os_template[location]"] = convertInt64ToString(inv.Input.Location)
+		}
+		if inv.IsParameterSelected("OsFamily") {
+			ret["os_template[os_family]"] = convertInt64ToString(inv.Input.OsFamily)
 		}
 	}
 }

@@ -103,26 +103,7 @@ func (in *ActionDefaultObjectClusterResourceCreateInput) SetClusterResource(valu
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetClusterResourceNil(false)
 	in._selectedParameters["ClusterResource"] = nil
-	return in
-}
-
-// SetClusterResourceNil sets parameter ClusterResource to nil and selects it for sending
-func (in *ActionDefaultObjectClusterResourceCreateInput) SetClusterResourceNil(set bool) *ActionDefaultObjectClusterResourceCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["ClusterResource"] = nil
-		in.SelectParameters("ClusterResource")
-	} else {
-		delete(in._nilParameters, "ClusterResource")
-	}
 	return in
 }
 
@@ -134,26 +115,7 @@ func (in *ActionDefaultObjectClusterResourceCreateInput) SetEnvironment(value in
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
-	return in
-}
-
-// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
-func (in *ActionDefaultObjectClusterResourceCreateInput) SetEnvironmentNil(set bool) *ActionDefaultObjectClusterResourceCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Environment"] = nil
-		in.SelectParameters("Environment")
-	} else {
-		delete(in._nilParameters, "Environment")
-	}
 	return in
 }
 
@@ -321,8 +283,39 @@ func (inv *ActionDefaultObjectClusterResourceCreateInvocation) IsMetaParameterNi
 	return exists
 }
 
+func (inv *ActionDefaultObjectClusterResourceCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("ClusterResource") {
+			if !inv.IsParameterNil("ClusterResource") {
+				if inv.Input.ClusterResource < 0 {
+					verr.Add("cluster_resource", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Environment") {
+			if !inv.IsParameterNil("Environment") {
+				if inv.Input.Environment < 0 {
+					verr.Add("environment", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionDefaultObjectClusterResourceCreateInvocation) Call() (*ActionDefaultObjectClusterResourceCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -351,18 +344,10 @@ func (inv *ActionDefaultObjectClusterResourceCreateInvocation) makeInputParams()
 			ret["class_name"] = inv.Input.ClassName
 		}
 		if inv.IsParameterSelected("ClusterResource") {
-			if inv.IsParameterNil("ClusterResource") {
-				ret["cluster_resource"] = nil
-			} else {
-				ret["cluster_resource"] = inv.Input.ClusterResource
-			}
+			ret["cluster_resource"] = inv.Input.ClusterResource
 		}
 		if inv.IsParameterSelected("Environment") {
-			if inv.IsParameterNil("Environment") {
-				ret["environment"] = nil
-			} else {
-				ret["environment"] = inv.Input.Environment
-			}
+			ret["environment"] = inv.Input.Environment
 		}
 		if inv.IsParameterSelected("Value") {
 			ret["value"] = inv.Input.Value

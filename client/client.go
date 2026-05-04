@@ -98,6 +98,8 @@ type Client struct {
 	NewsLog *ResourceNewsLog
 	// Resource Node
 	Node *ResourceNode
+	// Resource Node_transfer_connection
+	NodeTransferConnection *ResourceNodeTransferConnection
 	// Resource Oauth2_client
 	Oauth2Client *ResourceOauth2Client
 	// Resource Object_history
@@ -203,6 +205,7 @@ func New(url string) *Client {
 	c.NetworkInterfaceMonitor = NewResourceNetworkInterfaceMonitor(c)
 	c.NewsLog = NewResourceNewsLog(c)
 	c.Node = NewResourceNode(c)
+	c.NodeTransferConnection = NewResourceNodeTransferConnection(c)
 	c.Oauth2Client = NewResourceOauth2Client(c)
 	c.ObjectHistory = NewResourceObjectHistory(c)
 	c.OomReport = NewResourceOomReport(c)

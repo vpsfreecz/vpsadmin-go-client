@@ -23,6 +23,8 @@ type ResourceUser struct {
 	TotpDevice *ResourceUserTotpDevice
 	// Resource User.Webauthn_credential
 	WebauthnCredential *ResourceUserWebauthnCredential
+	// Action User#Available_ips
+	AvailableIps *ActionUserAvailableIps
 	// Action User#Create
 	Create *ActionUserCreate
 	// Action User#Create
@@ -50,6 +52,7 @@ type ResourceUser struct {
 }
 
 func NewResourceUser(client *Client) *ResourceUser {
+	actionAvailableIps := NewActionUserAvailableIps(client)
 	actionCreate := NewActionUserCreate(client)
 	actionCurrent := NewActionUserCurrent(client)
 	actionDelete := NewActionUserDelete(client)
@@ -70,6 +73,7 @@ func NewResourceUser(client *Client) *ResourceUser {
 		StateLog:               NewResourceUserStateLog(client),
 		TotpDevice:             NewResourceUserTotpDevice(client),
 		WebauthnCredential:     NewResourceUserWebauthnCredential(client),
+		AvailableIps:           actionAvailableIps,
 		Create:                 actionCreate,
 		New:                    actionCreate,
 		Current:                actionCurrent,

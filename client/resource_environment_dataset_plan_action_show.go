@@ -158,8 +158,23 @@ func (inv *ActionEnvironmentDatasetPlanShowInvocation) IsMetaParameterNil(param 
 	return exists
 }
 
+func (inv *ActionEnvironmentDatasetPlanShowInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionEnvironmentDatasetPlanShowInvocation) Call() (*ActionEnvironmentDatasetPlanShowResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

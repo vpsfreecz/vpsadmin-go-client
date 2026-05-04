@@ -105,26 +105,7 @@ func (in *ActionLocationNetworkCreateInput) SetLocation(value int64) *ActionLoca
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
-	return in
-}
-
-// SetLocationNil sets parameter Location to nil and selects it for sending
-func (in *ActionLocationNetworkCreateInput) SetLocationNil(set bool) *ActionLocationNetworkCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Location"] = nil
-		in.SelectParameters("Location")
-	} else {
-		delete(in._nilParameters, "Location")
-	}
 	return in
 }
 
@@ -136,26 +117,7 @@ func (in *ActionLocationNetworkCreateInput) SetNetwork(value int64) *ActionLocat
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNetworkNil(false)
 	in._selectedParameters["Network"] = nil
-	return in
-}
-
-// SetNetworkNil sets parameter Network to nil and selects it for sending
-func (in *ActionLocationNetworkCreateInput) SetNetworkNil(set bool) *ActionLocationNetworkCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Network"] = nil
-		in.SelectParameters("Network")
-	} else {
-		delete(in._nilParameters, "Network")
-	}
 	return in
 }
 
@@ -349,8 +311,39 @@ func (inv *ActionLocationNetworkCreateInvocation) IsMetaParameterNil(param strin
 	return exists
 }
 
+func (inv *ActionLocationNetworkCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Network") {
+			if !inv.IsParameterNil("Network") {
+				if inv.Input.Network < 0 {
+					verr.Add("network", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionLocationNetworkCreateInvocation) Call() (*ActionLocationNetworkCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -379,18 +372,10 @@ func (inv *ActionLocationNetworkCreateInvocation) makeInputParams() map[string]i
 			ret["autopick"] = inv.Input.Autopick
 		}
 		if inv.IsParameterSelected("Location") {
-			if inv.IsParameterNil("Location") {
-				ret["location"] = nil
-			} else {
-				ret["location"] = inv.Input.Location
-			}
+			ret["location"] = inv.Input.Location
 		}
 		if inv.IsParameterSelected("Network") {
-			if inv.IsParameterNil("Network") {
-				ret["network"] = nil
-			} else {
-				ret["network"] = inv.Input.Network
-			}
+			ret["network"] = inv.Input.Network
 		}
 		if inv.IsParameterSelected("Primary") {
 			ret["primary"] = inv.Input.Primary

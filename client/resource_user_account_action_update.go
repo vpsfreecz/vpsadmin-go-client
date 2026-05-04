@@ -268,8 +268,35 @@ func (inv *ActionUserAccountUpdateInvocation) IsMetaParameterNil(param string) b
 	return exists
 }
 
+func (inv *ActionUserAccountUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("PaidUntil") {
+			if !inv.IsParameterNil("PaidUntil") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.PaidUntil)
+				if !ok {
+					verr.Add("paid_until", "not a valid datetime")
+				} else {
+					inv.Input.PaidUntil = normalized
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserAccountUpdateInvocation) Call() (*ActionUserAccountUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

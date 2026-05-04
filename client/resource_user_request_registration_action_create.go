@@ -160,26 +160,7 @@ func (in *ActionUserRequestRegistrationCreateInput) SetLanguage(value int64) *Ac
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLanguageNil(false)
 	in._selectedParameters["Language"] = nil
-	return in
-}
-
-// SetLanguageNil sets parameter Language to nil and selects it for sending
-func (in *ActionUserRequestRegistrationCreateInput) SetLanguageNil(set bool) *ActionUserRequestRegistrationCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Language"] = nil
-		in.SelectParameters("Language")
-	} else {
-		delete(in._nilParameters, "Language")
-	}
 	return in
 }
 
@@ -191,26 +172,7 @@ func (in *ActionUserRequestRegistrationCreateInput) SetLocation(value int64) *Ac
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
-	return in
-}
-
-// SetLocationNil sets parameter Location to nil and selects it for sending
-func (in *ActionUserRequestRegistrationCreateInput) SetLocationNil(set bool) *ActionUserRequestRegistrationCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Location"] = nil
-		in.SelectParameters("Location")
-	} else {
-		delete(in._nilParameters, "Location")
-	}
 	return in
 }
 
@@ -270,26 +232,7 @@ func (in *ActionUserRequestRegistrationCreateInput) SetOsTemplate(value int64) *
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetOsTemplateNil(false)
 	in._selectedParameters["OsTemplate"] = nil
-	return in
-}
-
-// SetOsTemplateNil sets parameter OsTemplate to nil and selects it for sending
-func (in *ActionUserRequestRegistrationCreateInput) SetOsTemplateNil(set bool) *ActionUserRequestRegistrationCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["OsTemplate"] = nil
-		in.SelectParameters("OsTemplate")
-	} else {
-		delete(in._nilParameters, "OsTemplate")
-	}
 	return in
 }
 
@@ -508,8 +451,46 @@ func (inv *ActionUserRequestRegistrationCreateInvocation) IsMetaParameterNil(par
 	return exists
 }
 
+func (inv *ActionUserRequestRegistrationCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Language") {
+			if !inv.IsParameterNil("Language") {
+				if inv.Input.Language < 0 {
+					verr.Add("language", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("OsTemplate") {
+			if !inv.IsParameterNil("OsTemplate") {
+				if inv.Input.OsTemplate < 0 {
+					verr.Add("os_template", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserRequestRegistrationCreateInvocation) Call() (*ActionUserRequestRegistrationCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -550,18 +531,10 @@ func (inv *ActionUserRequestRegistrationCreateInvocation) makeInputParams() map[
 			ret["how"] = inv.Input.How
 		}
 		if inv.IsParameterSelected("Language") {
-			if inv.IsParameterNil("Language") {
-				ret["language"] = nil
-			} else {
-				ret["language"] = inv.Input.Language
-			}
+			ret["language"] = inv.Input.Language
 		}
 		if inv.IsParameterSelected("Location") {
-			if inv.IsParameterNil("Location") {
-				ret["location"] = nil
-			} else {
-				ret["location"] = inv.Input.Location
-			}
+			ret["location"] = inv.Input.Location
 		}
 		if inv.IsParameterSelected("Login") {
 			ret["login"] = inv.Input.Login
@@ -576,11 +549,7 @@ func (inv *ActionUserRequestRegistrationCreateInvocation) makeInputParams() map[
 			ret["org_name"] = inv.Input.OrgName
 		}
 		if inv.IsParameterSelected("OsTemplate") {
-			if inv.IsParameterNil("OsTemplate") {
-				ret["os_template"] = nil
-			} else {
-				ret["os_template"] = inv.Input.OsTemplate
-			}
+			ret["os_template"] = inv.Input.OsTemplate
 		}
 		if inv.IsParameterSelected("YearOfBirth") {
 			ret["year_of_birth"] = inv.Input.YearOfBirth

@@ -103,26 +103,7 @@ func (in *ActionVpsBootInput) SetOsTemplate(value int64) *ActionVpsBootInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetOsTemplateNil(false)
 	in._selectedParameters["OsTemplate"] = nil
-	return in
-}
-
-// SetOsTemplateNil sets parameter OsTemplate to nil and selects it for sending
-func (in *ActionVpsBootInput) SetOsTemplateNil(set bool) *ActionVpsBootInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["OsTemplate"] = nil
-		in.SelectParameters("OsTemplate")
-	} else {
-		delete(in._nilParameters, "OsTemplate")
-	}
 	return in
 }
 
@@ -283,8 +264,32 @@ func (inv *ActionVpsBootInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionVpsBootInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("OsTemplate") {
+			if !inv.IsParameterNil("OsTemplate") {
+				if inv.Input.OsTemplate < 0 {
+					verr.Add("os_template", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionVpsBootInvocation) Call() (*ActionVpsBootResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -386,11 +391,7 @@ func (inv *ActionVpsBootInvocation) makeInputParams() map[string]interface{} {
 			ret["mount_root_dataset"] = inv.Input.MountRootDataset
 		}
 		if inv.IsParameterSelected("OsTemplate") {
-			if inv.IsParameterNil("OsTemplate") {
-				ret["os_template"] = nil
-			} else {
-				ret["os_template"] = inv.Input.OsTemplate
-			}
+			ret["os_template"] = inv.Input.OsTemplate
 		}
 	}
 

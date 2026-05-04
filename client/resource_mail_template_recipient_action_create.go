@@ -90,26 +90,7 @@ func (in *ActionMailTemplateRecipientCreateInput) SetMailRecipient(value int64) 
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetMailRecipientNil(false)
 	in._selectedParameters["MailRecipient"] = nil
-	return in
-}
-
-// SetMailRecipientNil sets parameter MailRecipient to nil and selects it for sending
-func (in *ActionMailTemplateRecipientCreateInput) SetMailRecipientNil(set bool) *ActionMailTemplateRecipientCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["MailRecipient"] = nil
-		in.SelectParameters("MailRecipient")
-	} else {
-		delete(in._nilParameters, "MailRecipient")
-	}
 	return in
 }
 
@@ -273,8 +254,32 @@ func (inv *ActionMailTemplateRecipientCreateInvocation) IsMetaParameterNil(param
 	return exists
 }
 
+func (inv *ActionMailTemplateRecipientCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("MailRecipient") {
+			if !inv.IsParameterNil("MailRecipient") {
+				if inv.Input.MailRecipient < 0 {
+					verr.Add("mail_recipient", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionMailTemplateRecipientCreateInvocation) Call() (*ActionMailTemplateRecipientCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -300,11 +305,7 @@ func (inv *ActionMailTemplateRecipientCreateInvocation) makeInputParams() map[st
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("MailRecipient") {
-			if inv.IsParameterNil("MailRecipient") {
-				ret["mail_recipient"] = nil
-			} else {
-				ret["mail_recipient"] = inv.Input.MailRecipient
-			}
+			ret["mail_recipient"] = inv.Input.MailRecipient
 		}
 	}
 

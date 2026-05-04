@@ -227,8 +227,25 @@ func (inv *ActionWebauthnAuthenticationBeginInvocation) IsMetaParameterNil(param
 	return exists
 }
 
+func (inv *ActionWebauthnAuthenticationBeginInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionWebauthnAuthenticationBeginInvocation) Call() (*ActionWebauthnAuthenticationBeginResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

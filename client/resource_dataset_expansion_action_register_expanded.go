@@ -93,26 +93,7 @@ func (in *ActionDatasetExpansionRegisterExpandedInput) SetDataset(value int64) *
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetDatasetNil(false)
 	in._selectedParameters["Dataset"] = nil
-	return in
-}
-
-// SetDatasetNil sets parameter Dataset to nil and selects it for sending
-func (in *ActionDatasetExpansionRegisterExpandedInput) SetDatasetNil(set bool) *ActionDatasetExpansionRegisterExpandedInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Dataset"] = nil
-		in.SelectParameters("Dataset")
-	} else {
-		delete(in._nilParameters, "Dataset")
-	}
 	return in
 }
 
@@ -335,8 +316,32 @@ func (inv *ActionDatasetExpansionRegisterExpandedInvocation) IsMetaParameterNil(
 	return exists
 }
 
+func (inv *ActionDatasetExpansionRegisterExpandedInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Dataset") {
+			if !inv.IsParameterNil("Dataset") {
+				if inv.Input.Dataset < 0 {
+					verr.Add("dataset", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionDatasetExpansionRegisterExpandedInvocation) Call() (*ActionDatasetExpansionRegisterExpandedResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -362,11 +367,7 @@ func (inv *ActionDatasetExpansionRegisterExpandedInvocation) makeInputParams() m
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Dataset") {
-			if inv.IsParameterNil("Dataset") {
-				ret["dataset"] = nil
-			} else {
-				ret["dataset"] = inv.Input.Dataset
-			}
+			ret["dataset"] = inv.Input.Dataset
 		}
 		if inv.IsParameterSelected("EnableNotifications") {
 			ret["enable_notifications"] = inv.Input.EnableNotifications

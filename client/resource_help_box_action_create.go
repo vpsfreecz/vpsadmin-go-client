@@ -116,26 +116,7 @@ func (in *ActionHelpBoxCreateInput) SetLanguage(value int64) *ActionHelpBoxCreat
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLanguageNil(false)
 	in._selectedParameters["Language"] = nil
-	return in
-}
-
-// SetLanguageNil sets parameter Language to nil and selects it for sending
-func (in *ActionHelpBoxCreateInput) SetLanguageNil(set bool) *ActionHelpBoxCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Language"] = nil
-		in.SelectParameters("Language")
-	} else {
-		delete(in._nilParameters, "Language")
-	}
 	return in
 }
 
@@ -316,8 +297,32 @@ func (inv *ActionHelpBoxCreateInvocation) IsMetaParameterNil(param string) bool 
 	return exists
 }
 
+func (inv *ActionHelpBoxCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Language") {
+			if !inv.IsParameterNil("Language") {
+				if inv.Input.Language < 0 {
+					verr.Add("language", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionHelpBoxCreateInvocation) Call() (*ActionHelpBoxCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -349,11 +354,7 @@ func (inv *ActionHelpBoxCreateInvocation) makeInputParams() map[string]interface
 			ret["content"] = inv.Input.Content
 		}
 		if inv.IsParameterSelected("Language") {
-			if inv.IsParameterNil("Language") {
-				ret["language"] = nil
-			} else {
-				ret["language"] = inv.Input.Language
-			}
+			ret["language"] = inv.Input.Language
 		}
 		if inv.IsParameterSelected("Order") {
 			ret["order"] = inv.Input.Order

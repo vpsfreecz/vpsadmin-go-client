@@ -102,26 +102,7 @@ func (in *ActionVpsCloneInput) SetAddressLocation(value int64) *ActionVpsCloneIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetAddressLocationNil(false)
 	in._selectedParameters["AddressLocation"] = nil
-	return in
-}
-
-// SetAddressLocationNil sets parameter AddressLocation to nil and selects it for sending
-func (in *ActionVpsCloneInput) SetAddressLocationNil(set bool) *ActionVpsCloneInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["AddressLocation"] = nil
-		in.SelectParameters("AddressLocation")
-	} else {
-		delete(in._nilParameters, "AddressLocation")
-	}
 	return in
 }
 
@@ -145,26 +126,7 @@ func (in *ActionVpsCloneInput) SetEnvironment(value int64) *ActionVpsCloneInput 
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
-	return in
-}
-
-// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
-func (in *ActionVpsCloneInput) SetEnvironmentNil(set bool) *ActionVpsCloneInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Environment"] = nil
-		in.SelectParameters("Environment")
-	} else {
-		delete(in._nilParameters, "Environment")
-	}
 	return in
 }
 
@@ -212,26 +174,7 @@ func (in *ActionVpsCloneInput) SetLocation(value int64) *ActionVpsCloneInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
-	return in
-}
-
-// SetLocationNil sets parameter Location to nil and selects it for sending
-func (in *ActionVpsCloneInput) SetLocationNil(set bool) *ActionVpsCloneInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Location"] = nil
-		in.SelectParameters("Location")
-	} else {
-		delete(in._nilParameters, "Location")
-	}
 	return in
 }
 
@@ -243,26 +186,7 @@ func (in *ActionVpsCloneInput) SetNode(value int64) *ActionVpsCloneInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
-	return in
-}
-
-// SetNodeNil sets parameter Node to nil and selects it for sending
-func (in *ActionVpsCloneInput) SetNodeNil(set bool) *ActionVpsCloneInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Node"] = nil
-		in.SelectParameters("Node")
-	} else {
-		delete(in._nilParameters, "Node")
-	}
 	return in
 }
 
@@ -322,26 +246,7 @@ func (in *ActionVpsCloneInput) SetUser(value int64) *ActionVpsCloneInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
-	return in
-}
-
-// SetUserNil sets parameter User to nil and selects it for sending
-func (in *ActionVpsCloneInput) SetUserNil(set bool) *ActionVpsCloneInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["User"] = nil
-		in.SelectParameters("User")
-	} else {
-		delete(in._nilParameters, "User")
-	}
 	return in
 }
 
@@ -555,8 +460,60 @@ func (inv *ActionVpsCloneInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionVpsCloneInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("AddressLocation") {
+			if !inv.IsParameterNil("AddressLocation") {
+				if inv.Input.AddressLocation < 0 {
+					verr.Add("address_location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Environment") {
+			if !inv.IsParameterNil("Environment") {
+				if inv.Input.Environment < 0 {
+					verr.Add("environment", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Node") {
+			if !inv.IsParameterNil("Node") {
+				if inv.Input.Node < 0 {
+					verr.Add("node", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionVpsCloneInvocation) Call() (*ActionVpsCloneResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -658,21 +615,13 @@ func (inv *ActionVpsCloneInvocation) makeInputParams() map[string]interface{} {
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("AddressLocation") {
-			if inv.IsParameterNil("AddressLocation") {
-				ret["address_location"] = nil
-			} else {
-				ret["address_location"] = inv.Input.AddressLocation
-			}
+			ret["address_location"] = inv.Input.AddressLocation
 		}
 		if inv.IsParameterSelected("DatasetPlans") {
 			ret["dataset_plans"] = inv.Input.DatasetPlans
 		}
 		if inv.IsParameterSelected("Environment") {
-			if inv.IsParameterNil("Environment") {
-				ret["environment"] = nil
-			} else {
-				ret["environment"] = inv.Input.Environment
-			}
+			ret["environment"] = inv.Input.Environment
 		}
 		if inv.IsParameterSelected("Features") {
 			ret["features"] = inv.Input.Features
@@ -684,18 +633,10 @@ func (inv *ActionVpsCloneInvocation) makeInputParams() map[string]interface{} {
 			ret["keep_snapshots"] = inv.Input.KeepSnapshots
 		}
 		if inv.IsParameterSelected("Location") {
-			if inv.IsParameterNil("Location") {
-				ret["location"] = nil
-			} else {
-				ret["location"] = inv.Input.Location
-			}
+			ret["location"] = inv.Input.Location
 		}
 		if inv.IsParameterSelected("Node") {
-			if inv.IsParameterNil("Node") {
-				ret["node"] = nil
-			} else {
-				ret["node"] = inv.Input.Node
-			}
+			ret["node"] = inv.Input.Node
 		}
 		if inv.IsParameterSelected("Platform") {
 			ret["platform"] = inv.Input.Platform
@@ -710,11 +651,7 @@ func (inv *ActionVpsCloneInvocation) makeInputParams() map[string]interface{} {
 			ret["subdatasets"] = inv.Input.Subdatasets
 		}
 		if inv.IsParameterSelected("User") {
-			if inv.IsParameterNil("User") {
-				ret["user"] = nil
-			} else {
-				ret["user"] = inv.Input.User
-			}
+			ret["user"] = inv.Input.User
 		}
 	}
 

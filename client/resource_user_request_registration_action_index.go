@@ -108,26 +108,7 @@ func (in *ActionUserRequestRegistrationIndexInput) SetAdmin(value int64) *Action
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetAdminNil(false)
 	in._selectedParameters["Admin"] = nil
-	return in
-}
-
-// SetAdminNil sets parameter Admin to nil and selects it for sending
-func (in *ActionUserRequestRegistrationIndexInput) SetAdminNil(set bool) *ActionUserRequestRegistrationIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Admin"] = nil
-		in.SelectParameters("Admin")
-	} else {
-		delete(in._nilParameters, "Admin")
-	}
 	return in
 }
 
@@ -211,26 +192,7 @@ func (in *ActionUserRequestRegistrationIndexInput) SetUser(value int64) *ActionU
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
-	return in
-}
-
-// SetUserNil sets parameter User to nil and selects it for sending
-func (in *ActionUserRequestRegistrationIndexInput) SetUserNil(set bool) *ActionUserRequestRegistrationIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["User"] = nil
-		in.SelectParameters("User")
-	} else {
-		delete(in._nilParameters, "User")
-	}
 	return in
 }
 
@@ -431,8 +393,39 @@ func (inv *ActionUserRequestRegistrationIndexInvocation) IsMetaParameterNil(para
 	return exists
 }
 
+func (inv *ActionUserRequestRegistrationIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Admin") {
+			if !inv.IsParameterNil("Admin") {
+				if inv.Input.Admin < 0 {
+					verr.Add("admin", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserRequestRegistrationIndexInvocation) Call() (*ActionUserRequestRegistrationIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

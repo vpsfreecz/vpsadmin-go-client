@@ -103,26 +103,7 @@ func (in *ActionSnapshotDownloadCreateInput) SetFromSnapshot(value int64) *Actio
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetFromSnapshotNil(false)
 	in._selectedParameters["FromSnapshot"] = nil
-	return in
-}
-
-// SetFromSnapshotNil sets parameter FromSnapshot to nil and selects it for sending
-func (in *ActionSnapshotDownloadCreateInput) SetFromSnapshotNil(set bool) *ActionSnapshotDownloadCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["FromSnapshot"] = nil
-		in.SelectParameters("FromSnapshot")
-	} else {
-		delete(in._nilParameters, "FromSnapshot")
-	}
 	return in
 }
 
@@ -146,26 +127,7 @@ func (in *ActionSnapshotDownloadCreateInput) SetSnapshot(value int64) *ActionSna
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetSnapshotNil(false)
 	in._selectedParameters["Snapshot"] = nil
-	return in
-}
-
-// SetSnapshotNil sets parameter Snapshot to nil and selects it for sending
-func (in *ActionSnapshotDownloadCreateInput) SetSnapshotNil(set bool) *ActionSnapshotDownloadCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Snapshot"] = nil
-		in.SelectParameters("Snapshot")
-	} else {
-		delete(in._nilParameters, "Snapshot")
-	}
 	return in
 }
 
@@ -334,8 +296,39 @@ func (inv *ActionSnapshotDownloadCreateInvocation) IsMetaParameterNil(param stri
 	return exists
 }
 
+func (inv *ActionSnapshotDownloadCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("FromSnapshot") {
+			if !inv.IsParameterNil("FromSnapshot") {
+				if inv.Input.FromSnapshot < 0 {
+					verr.Add("from_snapshot", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Snapshot") {
+			if !inv.IsParameterNil("Snapshot") {
+				if inv.Input.Snapshot < 0 {
+					verr.Add("snapshot", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionSnapshotDownloadCreateInvocation) Call() (*ActionSnapshotDownloadCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -440,21 +433,13 @@ func (inv *ActionSnapshotDownloadCreateInvocation) makeInputParams() map[string]
 			ret["format"] = inv.Input.Format
 		}
 		if inv.IsParameterSelected("FromSnapshot") {
-			if inv.IsParameterNil("FromSnapshot") {
-				ret["from_snapshot"] = nil
-			} else {
-				ret["from_snapshot"] = inv.Input.FromSnapshot
-			}
+			ret["from_snapshot"] = inv.Input.FromSnapshot
 		}
 		if inv.IsParameterSelected("SendMail") {
 			ret["send_mail"] = inv.Input.SendMail
 		}
 		if inv.IsParameterSelected("Snapshot") {
-			if inv.IsParameterNil("Snapshot") {
-				ret["snapshot"] = nil
-			} else {
-				ret["snapshot"] = inv.Input.Snapshot
-			}
+			ret["snapshot"] = inv.Input.Snapshot
 		}
 	}
 

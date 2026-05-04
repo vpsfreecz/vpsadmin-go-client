@@ -111,7 +111,26 @@ func (in *ActionOutageUpdateInput) SetBeginsAt(value string) *ActionOutageUpdate
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetBeginsAtNil(false)
 	in._selectedParameters["BeginsAt"] = nil
+	return in
+}
+
+// SetBeginsAtNil sets parameter BeginsAt to nil and selects it for sending
+func (in *ActionOutageUpdateInput) SetBeginsAtNil(set bool) *ActionOutageUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["BeginsAt"] = nil
+		in.SelectParameters("BeginsAt")
+	} else {
+		delete(in._nilParameters, "BeginsAt")
+	}
 	return in
 }
 
@@ -183,7 +202,26 @@ func (in *ActionOutageUpdateInput) SetFinishedAt(value string) *ActionOutageUpda
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetFinishedAtNil(false)
 	in._selectedParameters["FinishedAt"] = nil
+	return in
+}
+
+// SetFinishedAtNil sets parameter FinishedAt to nil and selects it for sending
+func (in *ActionOutageUpdateInput) SetFinishedAtNil(set bool) *ActionOutageUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["FinishedAt"] = nil
+		in.SelectParameters("FinishedAt")
+	} else {
+		delete(in._nilParameters, "FinishedAt")
+	}
 	return in
 }
 
@@ -386,8 +424,45 @@ func (inv *ActionOutageUpdateInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionOutageUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("BeginsAt") {
+			if !inv.IsParameterNil("BeginsAt") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.BeginsAt)
+				if !ok {
+					verr.Add("begins_at", "not a valid datetime")
+				} else {
+					inv.Input.BeginsAt = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("FinishedAt") {
+			if !inv.IsParameterNil("FinishedAt") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.FinishedAt)
+				if !ok {
+					verr.Add("finished_at", "not a valid datetime")
+				} else {
+					inv.Input.FinishedAt = normalized
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionOutageUpdateInvocation) Call() (*ActionOutageUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -416,7 +491,11 @@ func (inv *ActionOutageUpdateInvocation) makeInputParams() map[string]interface{
 			ret["auto_resolve"] = inv.Input.AutoResolve
 		}
 		if inv.IsParameterSelected("BeginsAt") {
-			ret["begins_at"] = inv.Input.BeginsAt
+			if inv.IsParameterNil("BeginsAt") {
+				ret["begins_at"] = nil
+			} else {
+				ret["begins_at"] = inv.Input.BeginsAt
+			}
 		}
 		if inv.IsParameterSelected("CsDescription") {
 			ret["cs_description"] = inv.Input.CsDescription
@@ -434,7 +513,11 @@ func (inv *ActionOutageUpdateInvocation) makeInputParams() map[string]interface{
 			ret["en_summary"] = inv.Input.EnSummary
 		}
 		if inv.IsParameterSelected("FinishedAt") {
-			ret["finished_at"] = inv.Input.FinishedAt
+			if inv.IsParameterNil("FinishedAt") {
+				ret["finished_at"] = nil
+			} else {
+				ret["finished_at"] = inv.Input.FinishedAt
+			}
 		}
 		if inv.IsParameterSelected("Impact") {
 			ret["impact"] = inv.Input.Impact

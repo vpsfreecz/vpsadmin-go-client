@@ -168,7 +168,7 @@ type ActionPaymentStatsEstimateIncomeResponse struct {
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		PaymentStats *ActionPaymentStatsEstimateIncomeOutput `json:"payment_stats"`
+		PaymentStat *ActionPaymentStatsEstimateIncomeOutput `json:"payment_stat"`
 	}
 
 	// Action output without the namespace
@@ -261,8 +261,25 @@ func (inv *ActionPaymentStatsEstimateIncomeInvocation) IsMetaParameterNil(param 
 	return exists
 }
 
+func (inv *ActionPaymentStatsEstimateIncomeInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionPaymentStatsEstimateIncomeInvocation) Call() (*ActionPaymentStatsEstimateIncomeResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 
@@ -273,7 +290,7 @@ func (inv *ActionPaymentStatsEstimateIncomeInvocation) callAsQuery() (*ActionPay
 	resp := &ActionPaymentStatsEstimateIncomeResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
-		resp.Output = resp.Response.PaymentStats
+		resp.Output = resp.Response.PaymentStat
 	}
 	return resp, err
 }
@@ -281,16 +298,16 @@ func (inv *ActionPaymentStatsEstimateIncomeInvocation) callAsQuery() (*ActionPay
 func (inv *ActionPaymentStatsEstimateIncomeInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Duration") {
-			ret["payment_stats[duration]"] = convertInt64ToString(inv.Input.Duration)
+			ret["payment_stat[duration]"] = convertInt64ToString(inv.Input.Duration)
 		}
 		if inv.IsParameterSelected("Month") {
-			ret["payment_stats[month]"] = convertInt64ToString(inv.Input.Month)
+			ret["payment_stat[month]"] = convertInt64ToString(inv.Input.Month)
 		}
 		if inv.IsParameterSelected("Select") {
-			ret["payment_stats[select]"] = inv.Input.Select
+			ret["payment_stat[select]"] = inv.Input.Select
 		}
 		if inv.IsParameterSelected("Year") {
-			ret["payment_stats[year]"] = convertInt64ToString(inv.Input.Year)
+			ret["payment_stat[year]"] = convertInt64ToString(inv.Input.Year)
 		}
 	}
 }

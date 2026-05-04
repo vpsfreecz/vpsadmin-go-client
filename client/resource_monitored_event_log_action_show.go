@@ -156,8 +156,23 @@ func (inv *ActionMonitoredEventLogShowInvocation) IsMetaParameterNil(param strin
 	return exists
 }
 
+func (inv *ActionMonitoredEventLogShowInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionMonitoredEventLogShowInvocation) Call() (*ActionMonitoredEventLogShowResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

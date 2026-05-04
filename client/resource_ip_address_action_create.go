@@ -74,6 +74,7 @@ func (in *ActionIpAddressCreateMetaGlobalInput) AnySelected() bool {
 // ActionIpAddressCreateInput is a type for action input parameters
 type ActionIpAddressCreateInput struct {
 	Addr             string `json:"addr"`
+	Location         int64  `json:"location"`
 	Network          int64  `json:"network"`
 	NetworkInterface int64  `json:"network_interface"`
 	Prefix           int64  `json:"prefix"`
@@ -98,6 +99,18 @@ func (in *ActionIpAddressCreateInput) SetAddr(value string) *ActionIpAddressCrea
 	return in
 }
 
+// SetLocation sets parameter Location to value and selects it for sending
+func (in *ActionIpAddressCreateInput) SetLocation(value int64) *ActionIpAddressCreateInput {
+	in.Location = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Location"] = nil
+	return in
+}
+
 // SetNetwork sets parameter Network to value and selects it for sending
 func (in *ActionIpAddressCreateInput) SetNetwork(value int64) *ActionIpAddressCreateInput {
 	in.Network = value
@@ -106,26 +119,7 @@ func (in *ActionIpAddressCreateInput) SetNetwork(value int64) *ActionIpAddressCr
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNetworkNil(false)
 	in._selectedParameters["Network"] = nil
-	return in
-}
-
-// SetNetworkNil sets parameter Network to nil and selects it for sending
-func (in *ActionIpAddressCreateInput) SetNetworkNil(set bool) *ActionIpAddressCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Network"] = nil
-		in.SelectParameters("Network")
-	} else {
-		delete(in._nilParameters, "Network")
-	}
 	return in
 }
 
@@ -137,26 +131,7 @@ func (in *ActionIpAddressCreateInput) SetNetworkInterface(value int64) *ActionIp
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNetworkInterfaceNil(false)
 	in._selectedParameters["NetworkInterface"] = nil
-	return in
-}
-
-// SetNetworkInterfaceNil sets parameter NetworkInterface to nil and selects it for sending
-func (in *ActionIpAddressCreateInput) SetNetworkInterfaceNil(set bool) *ActionIpAddressCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["NetworkInterface"] = nil
-		in.SelectParameters("NetworkInterface")
-	} else {
-		delete(in._nilParameters, "NetworkInterface")
-	}
 	return in
 }
 
@@ -180,26 +155,7 @@ func (in *ActionIpAddressCreateInput) SetRouteVia(value int64) *ActionIpAddressC
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetRouteViaNil(false)
 	in._selectedParameters["RouteVia"] = nil
-	return in
-}
-
-// SetRouteViaNil sets parameter RouteVia to nil and selects it for sending
-func (in *ActionIpAddressCreateInput) SetRouteViaNil(set bool) *ActionIpAddressCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["RouteVia"] = nil
-		in.SelectParameters("RouteVia")
-	} else {
-		delete(in._nilParameters, "RouteVia")
-	}
 	return in
 }
 
@@ -402,8 +358,60 @@ func (inv *ActionIpAddressCreateInvocation) IsMetaParameterNil(param string) boo
 	return exists
 }
 
+func (inv *ActionIpAddressCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Network") {
+			if !inv.IsParameterNil("Network") {
+				if inv.Input.Network < 0 {
+					verr.Add("network", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("NetworkInterface") {
+			if !inv.IsParameterNil("NetworkInterface") {
+				if inv.Input.NetworkInterface < 0 {
+					verr.Add("network_interface", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("RouteVia") {
+			if !inv.IsParameterNil("RouteVia") {
+				if inv.Input.RouteVia < 0 {
+					verr.Add("route_via", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionIpAddressCreateInvocation) Call() (*ActionIpAddressCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -431,29 +439,20 @@ func (inv *ActionIpAddressCreateInvocation) makeInputParams() map[string]interfa
 		if inv.IsParameterSelected("Addr") {
 			ret["addr"] = inv.Input.Addr
 		}
+		if inv.IsParameterSelected("Location") {
+			ret["location"] = inv.Input.Location
+		}
 		if inv.IsParameterSelected("Network") {
-			if inv.IsParameterNil("Network") {
-				ret["network"] = nil
-			} else {
-				ret["network"] = inv.Input.Network
-			}
+			ret["network"] = inv.Input.Network
 		}
 		if inv.IsParameterSelected("NetworkInterface") {
-			if inv.IsParameterNil("NetworkInterface") {
-				ret["network_interface"] = nil
-			} else {
-				ret["network_interface"] = inv.Input.NetworkInterface
-			}
+			ret["network_interface"] = inv.Input.NetworkInterface
 		}
 		if inv.IsParameterSelected("Prefix") {
 			ret["prefix"] = inv.Input.Prefix
 		}
 		if inv.IsParameterSelected("RouteVia") {
-			if inv.IsParameterNil("RouteVia") {
-				ret["route_via"] = nil
-			} else {
-				ret["route_via"] = inv.Input.RouteVia
-			}
+			ret["route_via"] = inv.Input.RouteVia
 		}
 		if inv.IsParameterSelected("Size") {
 			ret["size"] = inv.Input.Size

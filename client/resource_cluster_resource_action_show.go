@@ -75,12 +75,15 @@ func (in *ActionClusterResourceShowMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterResourceShowOutput is a type for action output parameters
 type ActionClusterResourceShowOutput struct {
-	Id       int64  `json:"id"`
-	Label    string `json:"label"`
-	Max      int64  `json:"max"`
-	Min      int64  `json:"min"`
-	Name     string `json:"name"`
-	Stepsize int64  `json:"stepsize"`
+	AllocateChain string `json:"allocate_chain"`
+	FreeChain     string `json:"free_chain"`
+	Id            int64  `json:"id"`
+	Label         string `json:"label"`
+	Max           int64  `json:"max"`
+	Min           int64  `json:"min"`
+	Name          string `json:"name"`
+	ResourceType  string `json:"resource_type"`
+	Stepsize      int64  `json:"stepsize"`
 }
 
 // Type for action response, including envelope
@@ -159,8 +162,23 @@ func (inv *ActionClusterResourceShowInvocation) IsMetaParameterNil(param string)
 	return exists
 }
 
+func (inv *ActionClusterResourceShowInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionClusterResourceShowInvocation) Call() (*ActionClusterResourceShowResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

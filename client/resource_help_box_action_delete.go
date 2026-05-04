@@ -147,8 +147,23 @@ func (inv *ActionHelpBoxDeleteInvocation) IsMetaParameterNil(param string) bool 
 	return exists
 }
 
+func (inv *ActionHelpBoxDeleteInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionHelpBoxDeleteInvocation) Call() (*ActionHelpBoxDeleteResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

@@ -161,8 +161,23 @@ func (inv *ActionUserPublicKeyShowInvocation) IsMetaParameterNil(param string) b
 	return exists
 }
 
+func (inv *ActionUserPublicKeyShowInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserPublicKeyShowInvocation) Call() (*ActionUserPublicKeyShowResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

@@ -163,26 +163,7 @@ func (in *ActionIpAddressIndexInput) SetLocation(value int64) *ActionIpAddressIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
-	return in
-}
-
-// SetLocationNil sets parameter Location to nil and selects it for sending
-func (in *ActionIpAddressIndexInput) SetLocationNil(set bool) *ActionIpAddressIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Location"] = nil
-		in.SelectParameters("Location")
-	} else {
-		delete(in._nilParameters, "Location")
-	}
 	return in
 }
 
@@ -194,26 +175,7 @@ func (in *ActionIpAddressIndexInput) SetNetwork(value int64) *ActionIpAddressInd
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNetworkNil(false)
 	in._selectedParameters["Network"] = nil
-	return in
-}
-
-// SetNetworkNil sets parameter Network to nil and selects it for sending
-func (in *ActionIpAddressIndexInput) SetNetworkNil(set bool) *ActionIpAddressIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Network"] = nil
-		in.SelectParameters("Network")
-	} else {
-		delete(in._nilParameters, "Network")
-	}
 	return in
 }
 
@@ -225,26 +187,7 @@ func (in *ActionIpAddressIndexInput) SetNetworkInterface(value int64) *ActionIpA
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNetworkInterfaceNil(false)
 	in._selectedParameters["NetworkInterface"] = nil
-	return in
-}
-
-// SetNetworkInterfaceNil sets parameter NetworkInterface to nil and selects it for sending
-func (in *ActionIpAddressIndexInput) SetNetworkInterfaceNil(set bool) *ActionIpAddressIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["NetworkInterface"] = nil
-		in.SelectParameters("NetworkInterface")
-	} else {
-		delete(in._nilParameters, "NetworkInterface")
-	}
 	return in
 }
 
@@ -532,8 +475,60 @@ func (inv *ActionIpAddressIndexInvocation) IsMetaParameterNil(param string) bool
 	return exists
 }
 
+func (inv *ActionIpAddressIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Network") {
+			if !inv.IsParameterNil("Network") {
+				if inv.Input.Network < 0 {
+					verr.Add("network", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("NetworkInterface") {
+			if !inv.IsParameterNil("NetworkInterface") {
+				if inv.Input.NetworkInterface < 0 {
+					verr.Add("network_interface", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Vps") {
+			if !inv.IsParameterNil("Vps") {
+				if inv.Input.Vps < 0 {
+					verr.Add("vps", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionIpAddressIndexInvocation) Call() (*ActionIpAddressIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 
@@ -588,13 +583,21 @@ func (inv *ActionIpAddressIndexInvocation) convertInputToQueryParams(ret map[str
 			ret["ip_address[size]"] = convertInt64ToString(inv.Input.Size)
 		}
 		if inv.IsParameterSelected("User") {
-			ret["ip_address[user]"] = convertInt64ToString(inv.Input.User)
+			if inv.IsParameterNil("User") {
+				ret["ip_address[user]"] = ""
+			} else {
+				ret["ip_address[user]"] = convertInt64ToString(inv.Input.User)
+			}
 		}
 		if inv.IsParameterSelected("Version") {
 			ret["ip_address[version]"] = convertInt64ToString(inv.Input.Version)
 		}
 		if inv.IsParameterSelected("Vps") {
-			ret["ip_address[vps]"] = convertInt64ToString(inv.Input.Vps)
+			if inv.IsParameterNil("Vps") {
+				ret["ip_address[vps]"] = ""
+			} else {
+				ret["ip_address[vps]"] = convertInt64ToString(inv.Input.Vps)
+			}
 		}
 	}
 }

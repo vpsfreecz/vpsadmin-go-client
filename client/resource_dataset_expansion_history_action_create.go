@@ -265,8 +265,25 @@ func (inv *ActionDatasetExpansionHistoryCreateInvocation) IsMetaParameterNil(par
 	return exists
 }
 
+func (inv *ActionDatasetExpansionHistoryCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionDatasetExpansionHistoryCreateInvocation) Call() (*ActionDatasetExpansionHistoryCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

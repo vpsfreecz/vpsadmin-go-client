@@ -225,7 +225,26 @@ func (in *ActionVpsUpdateInput) SetCpuLimit(value int64) *ActionVpsUpdateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetCpuLimitNil(false)
 	in._selectedParameters["CpuLimit"] = nil
+	return in
+}
+
+// SetCpuLimitNil sets parameter CpuLimit to nil and selects it for sending
+func (in *ActionVpsUpdateInput) SetCpuLimitNil(set bool) *ActionVpsUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["CpuLimit"] = nil
+		in.SelectParameters("CpuLimit")
+	} else {
+		delete(in._nilParameters, "CpuLimit")
+	}
 	return in
 }
 
@@ -292,7 +311,26 @@ func (in *ActionVpsUpdateInput) SetExpirationDate(value string) *ActionVpsUpdate
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetExpirationDateNil(false)
 	in._selectedParameters["ExpirationDate"] = nil
+	return in
+}
+
+// SetExpirationDateNil sets parameter ExpirationDate to nil and selects it for sending
+func (in *ActionVpsUpdateInput) SetExpirationDateNil(set bool) *ActionVpsUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["ExpirationDate"] = nil
+		in.SelectParameters("ExpirationDate")
+	} else {
+		delete(in._nilParameters, "ExpirationDate")
+	}
 	return in
 }
 
@@ -364,26 +402,7 @@ func (in *ActionVpsUpdateInput) SetNode(value int64) *ActionVpsUpdateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
-	return in
-}
-
-// SetNodeNil sets parameter Node to nil and selects it for sending
-func (in *ActionVpsUpdateInput) SetNodeNil(set bool) *ActionVpsUpdateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Node"] = nil
-		in.SelectParameters("Node")
-	} else {
-		delete(in._nilParameters, "Node")
-	}
 	return in
 }
 
@@ -419,26 +438,7 @@ func (in *ActionVpsUpdateInput) SetOsTemplate(value int64) *ActionVpsUpdateInput
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetOsTemplateNil(false)
 	in._selectedParameters["OsTemplate"] = nil
-	return in
-}
-
-// SetOsTemplateNil sets parameter OsTemplate to nil and selects it for sending
-func (in *ActionVpsUpdateInput) SetOsTemplateNil(set bool) *ActionVpsUpdateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["OsTemplate"] = nil
-		in.SelectParameters("OsTemplate")
-	} else {
-		delete(in._nilParameters, "OsTemplate")
-	}
 	return in
 }
 
@@ -486,26 +486,7 @@ func (in *ActionVpsUpdateInput) SetUser(value int64) *ActionVpsUpdateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
-	return in
-}
-
-// SetUserNil sets parameter User to nil and selects it for sending
-func (in *ActionVpsUpdateInput) SetUserNil(set bool) *ActionVpsUpdateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["User"] = nil
-		in.SelectParameters("User")
-	} else {
-		delete(in._nilParameters, "User")
-	}
 	return in
 }
 
@@ -517,26 +498,7 @@ func (in *ActionVpsUpdateInput) SetUserNamespaceMap(value int64) *ActionVpsUpdat
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNamespaceMapNil(false)
 	in._selectedParameters["UserNamespaceMap"] = nil
-	return in
-}
-
-// SetUserNamespaceMapNil sets parameter UserNamespaceMap to nil and selects it for sending
-func (in *ActionVpsUpdateInput) SetUserNamespaceMapNil(set bool) *ActionVpsUpdateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["UserNamespaceMap"] = nil
-		in.SelectParameters("UserNamespaceMap")
-	} else {
-		delete(in._nilParameters, "UserNamespaceMap")
-	}
 	return in
 }
 
@@ -697,8 +659,80 @@ func (inv *ActionVpsUpdateInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionVpsUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("DnsResolver") {
+			if !inv.IsParameterNil("DnsResolver") {
+				if inv.Input.DnsResolver < 0 {
+					verr.Add("dns_resolver", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("ExpirationDate") {
+			if !inv.IsParameterNil("ExpirationDate") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.ExpirationDate)
+				if !ok {
+					verr.Add("expiration_date", "not a valid datetime")
+				} else {
+					inv.Input.ExpirationDate = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("Node") {
+			if !inv.IsParameterNil("Node") {
+				if inv.Input.Node < 0 {
+					verr.Add("node", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("OsTemplate") {
+			if !inv.IsParameterNil("OsTemplate") {
+				if inv.Input.OsTemplate < 0 {
+					verr.Add("os_template", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("RemindAfterDate") {
+			if !inv.IsParameterNil("RemindAfterDate") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.RemindAfterDate)
+				if !ok {
+					verr.Add("remind_after_date", "not a valid datetime")
+				} else {
+					inv.Input.RemindAfterDate = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("UserNamespaceMap") {
+			if !inv.IsParameterNil("UserNamespaceMap") {
+				if inv.Input.UserNamespaceMap < 0 {
+					verr.Add("user_namespace_map", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionVpsUpdateInvocation) Call() (*ActionVpsUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -824,7 +858,11 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 			ret["cpu"] = inv.Input.Cpu
 		}
 		if inv.IsParameterSelected("CpuLimit") {
-			ret["cpu_limit"] = inv.Input.CpuLimit
+			if inv.IsParameterNil("CpuLimit") {
+				ret["cpu_limit"] = nil
+			} else {
+				ret["cpu_limit"] = inv.Input.CpuLimit
+			}
 		}
 		if inv.IsParameterSelected("DnsResolver") {
 			if inv.IsParameterNil("DnsResolver") {
@@ -840,7 +878,11 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 			ret["enable_os_template_auto_update"] = inv.Input.EnableOsTemplateAutoUpdate
 		}
 		if inv.IsParameterSelected("ExpirationDate") {
-			ret["expiration_date"] = inv.Input.ExpirationDate
+			if inv.IsParameterNil("ExpirationDate") {
+				ret["expiration_date"] = nil
+			} else {
+				ret["expiration_date"] = inv.Input.ExpirationDate
+			}
 		}
 		if inv.IsParameterSelected("Hostname") {
 			ret["hostname"] = inv.Input.Hostname
@@ -858,11 +900,7 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 			ret["memory"] = inv.Input.Memory
 		}
 		if inv.IsParameterSelected("Node") {
-			if inv.IsParameterNil("Node") {
-				ret["node"] = nil
-			} else {
-				ret["node"] = inv.Input.Node
-			}
+			ret["node"] = inv.Input.Node
 		}
 		if inv.IsParameterSelected("ObjectState") {
 			ret["object_state"] = inv.Input.ObjectState
@@ -871,11 +909,7 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 			ret["onstartall"] = inv.Input.Onstartall
 		}
 		if inv.IsParameterSelected("OsTemplate") {
-			if inv.IsParameterNil("OsTemplate") {
-				ret["os_template"] = nil
-			} else {
-				ret["os_template"] = inv.Input.OsTemplate
-			}
+			ret["os_template"] = inv.Input.OsTemplate
 		}
 		if inv.IsParameterSelected("RemindAfterDate") {
 			ret["remind_after_date"] = inv.Input.RemindAfterDate
@@ -887,18 +921,10 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 			ret["swap"] = inv.Input.Swap
 		}
 		if inv.IsParameterSelected("User") {
-			if inv.IsParameterNil("User") {
-				ret["user"] = nil
-			} else {
-				ret["user"] = inv.Input.User
-			}
+			ret["user"] = inv.Input.User
 		}
 		if inv.IsParameterSelected("UserNamespaceMap") {
-			if inv.IsParameterNil("UserNamespaceMap") {
-				ret["user_namespace_map"] = nil
-			} else {
-				ret["user_namespace_map"] = inv.Input.UserNamespaceMap
-			}
+			ret["user_namespace_map"] = inv.Input.UserNamespaceMap
 		}
 	}
 

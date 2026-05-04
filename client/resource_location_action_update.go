@@ -119,26 +119,7 @@ func (in *ActionLocationUpdateInput) SetEnvironment(value int64) *ActionLocation
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
-	return in
-}
-
-// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
-func (in *ActionLocationUpdateInput) SetEnvironmentNil(set bool) *ActionLocationUpdateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Environment"] = nil
-		in.SelectParameters("Environment")
-	} else {
-		delete(in._nilParameters, "Environment")
-	}
 	return in
 }
 
@@ -222,10 +203,28 @@ type ActionLocationUpdateRequest struct {
 	Meta     map[string]interface{} `json:"_meta"`
 }
 
+// ActionLocationUpdateOutput is a type for action output parameters
+type ActionLocationUpdateOutput struct {
+	Description         string                       `json:"description"`
+	Domain              string                       `json:"domain"`
+	Environment         *ActionEnvironmentShowOutput `json:"environment"`
+	HasIpv6             bool                         `json:"has_ipv6"`
+	Id                  int64                        `json:"id"`
+	Label               string                       `json:"label"`
+	RemoteConsoleServer string                       `json:"remote_console_server"`
+}
+
 // Type for action response, including envelope
 type ActionLocationUpdateResponse struct {
 	Action *ActionLocationUpdate `json:"-"`
 	*Envelope
+	// Action output encapsulated within a namespace
+	Response *struct {
+		Location *ActionLocationUpdateOutput `json:"location"`
+	}
+
+	// Action output without the namespace
+	Output *ActionLocationUpdateOutput
 }
 
 // Prepare the action for invocation
@@ -325,8 +324,32 @@ func (inv *ActionLocationUpdateInvocation) IsMetaParameterNil(param string) bool
 	return exists
 }
 
+func (inv *ActionLocationUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Environment") {
+			if !inv.IsParameterNil("Environment") {
+				if inv.Input.Environment < 0 {
+					verr.Add("environment", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionLocationUpdateInvocation) Call() (*ActionLocationUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -334,6 +357,9 @@ func (inv *ActionLocationUpdateInvocation) callAsBody() (*ActionLocationUpdateRe
 	input := inv.makeAllInputParams()
 	resp := &ActionLocationUpdateResponse{Action: inv.Action}
 	err := inv.Action.Client.DoBodyRequest("PUT", inv.Path, input, resp)
+	if err == nil && resp.Status {
+		resp.Output = resp.Response.Location
+	}
 	return resp, err
 }
 
@@ -355,11 +381,7 @@ func (inv *ActionLocationUpdateInvocation) makeInputParams() map[string]interfac
 			ret["domain"] = inv.Input.Domain
 		}
 		if inv.IsParameterSelected("Environment") {
-			if inv.IsParameterNil("Environment") {
-				ret["environment"] = nil
-			} else {
-				ret["environment"] = inv.Input.Environment
-			}
+			ret["environment"] = inv.Input.Environment
 		}
 		if inv.IsParameterSelected("HasIpv6") {
 			ret["has_ipv6"] = inv.Input.HasIpv6

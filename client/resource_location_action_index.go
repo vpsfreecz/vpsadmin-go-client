@@ -110,26 +110,7 @@ func (in *ActionLocationIndexInput) SetEnvironment(value int64) *ActionLocationI
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
-	return in
-}
-
-// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
-func (in *ActionLocationIndexInput) SetEnvironmentNil(set bool) *ActionLocationIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Environment"] = nil
-		in.SelectParameters("Environment")
-	} else {
-		delete(in._nilParameters, "Environment")
-	}
 	return in
 }
 
@@ -201,26 +182,7 @@ func (in *ActionLocationIndexInput) SetSharesAnyNetworksWith(value int64) *Actio
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetSharesAnyNetworksWithNil(false)
 	in._selectedParameters["SharesAnyNetworksWith"] = nil
-	return in
-}
-
-// SetSharesAnyNetworksWithNil sets parameter SharesAnyNetworksWith to nil and selects it for sending
-func (in *ActionLocationIndexInput) SetSharesAnyNetworksWithNil(set bool) *ActionLocationIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["SharesAnyNetworksWith"] = nil
-		in.SelectParameters("SharesAnyNetworksWith")
-	} else {
-		delete(in._nilParameters, "SharesAnyNetworksWith")
-	}
 	return in
 }
 
@@ -244,26 +206,7 @@ func (in *ActionLocationIndexInput) SetSharesV4NetworksWith(value int64) *Action
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetSharesV4NetworksWithNil(false)
 	in._selectedParameters["SharesV4NetworksWith"] = nil
-	return in
-}
-
-// SetSharesV4NetworksWithNil sets parameter SharesV4NetworksWith to nil and selects it for sending
-func (in *ActionLocationIndexInput) SetSharesV4NetworksWithNil(set bool) *ActionLocationIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["SharesV4NetworksWith"] = nil
-		in.SelectParameters("SharesV4NetworksWith")
-	} else {
-		delete(in._nilParameters, "SharesV4NetworksWith")
-	}
 	return in
 }
 
@@ -275,26 +218,7 @@ func (in *ActionLocationIndexInput) SetSharesV6NetworksWith(value int64) *Action
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetSharesV6NetworksWithNil(false)
 	in._selectedParameters["SharesV6NetworksWith"] = nil
-	return in
-}
-
-// SetSharesV6NetworksWithNil sets parameter SharesV6NetworksWith to nil and selects it for sending
-func (in *ActionLocationIndexInput) SetSharesV6NetworksWithNil(set bool) *ActionLocationIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["SharesV6NetworksWith"] = nil
-		in.SelectParameters("SharesV6NetworksWith")
-	} else {
-		delete(in._nilParameters, "SharesV6NetworksWith")
-	}
 	return in
 }
 
@@ -448,8 +372,53 @@ func (inv *ActionLocationIndexInvocation) IsMetaParameterNil(param string) bool 
 	return exists
 }
 
+func (inv *ActionLocationIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Environment") {
+			if !inv.IsParameterNil("Environment") {
+				if inv.Input.Environment < 0 {
+					verr.Add("environment", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("SharesAnyNetworksWith") {
+			if !inv.IsParameterNil("SharesAnyNetworksWith") {
+				if inv.Input.SharesAnyNetworksWith < 0 {
+					verr.Add("shares_any_networks_with", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("SharesV4NetworksWith") {
+			if !inv.IsParameterNil("SharesV4NetworksWith") {
+				if inv.Input.SharesV4NetworksWith < 0 {
+					verr.Add("shares_v4_networks_with", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("SharesV6NetworksWith") {
+			if !inv.IsParameterNil("SharesV6NetworksWith") {
+				if inv.Input.SharesV6NetworksWith < 0 {
+					verr.Add("shares_v6_networks_with", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionLocationIndexInvocation) Call() (*ActionLocationIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

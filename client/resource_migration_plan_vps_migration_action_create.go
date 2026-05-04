@@ -105,26 +105,7 @@ func (in *ActionMigrationPlanVpsMigrationCreateInput) SetDstNode(value int64) *A
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetDstNodeNil(false)
 	in._selectedParameters["DstNode"] = nil
-	return in
-}
-
-// SetDstNodeNil sets parameter DstNode to nil and selects it for sending
-func (in *ActionMigrationPlanVpsMigrationCreateInput) SetDstNodeNil(set bool) *ActionMigrationPlanVpsMigrationCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["DstNode"] = nil
-		in.SelectParameters("DstNode")
-	} else {
-		delete(in._nilParameters, "DstNode")
-	}
 	return in
 }
 
@@ -148,26 +129,7 @@ func (in *ActionMigrationPlanVpsMigrationCreateInput) SetVps(value int64) *Actio
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetVpsNil(false)
 	in._selectedParameters["Vps"] = nil
-	return in
-}
-
-// SetVpsNil sets parameter Vps to nil and selects it for sending
-func (in *ActionMigrationPlanVpsMigrationCreateInput) SetVpsNil(set bool) *ActionMigrationPlanVpsMigrationCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Vps"] = nil
-		in.SelectParameters("Vps")
-	} else {
-		delete(in._nilParameters, "Vps")
-	}
 	return in
 }
 
@@ -340,8 +302,39 @@ func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) IsMetaParameterNil(p
 	return exists
 }
 
+func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("DstNode") {
+			if !inv.IsParameterNil("DstNode") {
+				if inv.Input.DstNode < 0 {
+					verr.Add("dst_node", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Vps") {
+			if !inv.IsParameterNil("Vps") {
+				if inv.Input.Vps < 0 {
+					verr.Add("vps", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) Call() (*ActionMigrationPlanVpsMigrationCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -370,21 +363,13 @@ func (inv *ActionMigrationPlanVpsMigrationCreateInvocation) makeInputParams() ma
 			ret["cleanup_data"] = inv.Input.CleanupData
 		}
 		if inv.IsParameterSelected("DstNode") {
-			if inv.IsParameterNil("DstNode") {
-				ret["dst_node"] = nil
-			} else {
-				ret["dst_node"] = inv.Input.DstNode
-			}
+			ret["dst_node"] = inv.Input.DstNode
 		}
 		if inv.IsParameterSelected("MaintenanceWindow") {
 			ret["maintenance_window"] = inv.Input.MaintenanceWindow
 		}
 		if inv.IsParameterSelected("Vps") {
-			if inv.IsParameterNil("Vps") {
-				ret["vps"] = nil
-			} else {
-				ret["vps"] = inv.Input.Vps
-			}
+			ret["vps"] = inv.Input.Vps
 		}
 	}
 

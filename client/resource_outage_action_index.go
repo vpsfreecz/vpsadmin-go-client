@@ -131,26 +131,7 @@ func (in *ActionOutageIndexInput) SetComponent(value int64) *ActionOutageIndexIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetComponentNil(false)
 	in._selectedParameters["Component"] = nil
-	return in
-}
-
-// SetComponentNil sets parameter Component to nil and selects it for sending
-func (in *ActionOutageIndexInput) SetComponentNil(set bool) *ActionOutageIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Component"] = nil
-		in.SelectParameters("Component")
-	} else {
-		delete(in._nilParameters, "Component")
-	}
 	return in
 }
 
@@ -186,26 +167,7 @@ func (in *ActionOutageIndexInput) SetEnvironment(value int64) *ActionOutageIndex
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
-	return in
-}
-
-// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
-func (in *ActionOutageIndexInput) SetEnvironmentNil(set bool) *ActionOutageIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Environment"] = nil
-		in.SelectParameters("Environment")
-	} else {
-		delete(in._nilParameters, "Environment")
-	}
 	return in
 }
 
@@ -217,26 +179,7 @@ func (in *ActionOutageIndexInput) SetExport(value int64) *ActionOutageIndexInput
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetExportNil(false)
 	in._selectedParameters["Export"] = nil
-	return in
-}
-
-// SetExportNil sets parameter Export to nil and selects it for sending
-func (in *ActionOutageIndexInput) SetExportNil(set bool) *ActionOutageIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Export"] = nil
-		in.SelectParameters("Export")
-	} else {
-		delete(in._nilParameters, "Export")
-	}
 	return in
 }
 
@@ -260,26 +203,7 @@ func (in *ActionOutageIndexInput) SetHandledBy(value int64) *ActionOutageIndexIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetHandledByNil(false)
 	in._selectedParameters["HandledBy"] = nil
-	return in
-}
-
-// SetHandledByNil sets parameter HandledBy to nil and selects it for sending
-func (in *ActionOutageIndexInput) SetHandledByNil(set bool) *ActionOutageIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["HandledBy"] = nil
-		in.SelectParameters("HandledBy")
-	} else {
-		delete(in._nilParameters, "HandledBy")
-	}
 	return in
 }
 
@@ -315,26 +239,7 @@ func (in *ActionOutageIndexInput) SetLocation(value int64) *ActionOutageIndexInp
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetLocationNil(false)
 	in._selectedParameters["Location"] = nil
-	return in
-}
-
-// SetLocationNil sets parameter Location to nil and selects it for sending
-func (in *ActionOutageIndexInput) SetLocationNil(set bool) *ActionOutageIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Location"] = nil
-		in.SelectParameters("Location")
-	} else {
-		delete(in._nilParameters, "Location")
-	}
 	return in
 }
 
@@ -346,26 +251,7 @@ func (in *ActionOutageIndexInput) SetNode(value int64) *ActionOutageIndexInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNodeNil(false)
 	in._selectedParameters["Node"] = nil
-	return in
-}
-
-// SetNodeNil sets parameter Node to nil and selects it for sending
-func (in *ActionOutageIndexInput) SetNodeNil(set bool) *ActionOutageIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Node"] = nil
-		in.SelectParameters("Node")
-	} else {
-		delete(in._nilParameters, "Node")
-	}
 	return in
 }
 
@@ -437,26 +323,7 @@ func (in *ActionOutageIndexInput) SetUser(value int64) *ActionOutageIndexInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
-	return in
-}
-
-// SetUserNil sets parameter User to nil and selects it for sending
-func (in *ActionOutageIndexInput) SetUserNil(set bool) *ActionOutageIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["User"] = nil
-		in.SelectParameters("User")
-	} else {
-		delete(in._nilParameters, "User")
-	}
 	return in
 }
 
@@ -468,26 +335,7 @@ func (in *ActionOutageIndexInput) SetVps(value int64) *ActionOutageIndexInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetVpsNil(false)
 	in._selectedParameters["Vps"] = nil
-	return in
-}
-
-// SetVpsNil sets parameter Vps to nil and selects it for sending
-func (in *ActionOutageIndexInput) SetVpsNil(set bool) *ActionOutageIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Vps"] = nil
-		in.SelectParameters("Vps")
-	} else {
-		delete(in._nilParameters, "Vps")
-	}
 	return in
 }
 
@@ -649,8 +497,101 @@ func (inv *ActionOutageIndexInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionOutageIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Component") {
+			if !inv.IsParameterNil("Component") {
+				if inv.Input.Component < 0 {
+					verr.Add("component", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Environment") {
+			if !inv.IsParameterNil("Environment") {
+				if inv.Input.Environment < 0 {
+					verr.Add("environment", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Export") {
+			if !inv.IsParameterNil("Export") {
+				if inv.Input.Export < 0 {
+					verr.Add("export", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("HandledBy") {
+			if !inv.IsParameterNil("HandledBy") {
+				if inv.Input.HandledBy < 0 {
+					verr.Add("handled_by", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Location") {
+			if !inv.IsParameterNil("Location") {
+				if inv.Input.Location < 0 {
+					verr.Add("location", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Node") {
+			if !inv.IsParameterNil("Node") {
+				if inv.Input.Node < 0 {
+					verr.Add("node", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("RecentSince") {
+			if !inv.IsParameterNil("RecentSince") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.RecentSince)
+				if !ok {
+					verr.Add("recent_since", "not a valid datetime")
+				} else {
+					inv.Input.RecentSince = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("Since") {
+			if !inv.IsParameterNil("Since") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Since)
+				if !ok {
+					verr.Add("since", "not a valid datetime")
+				} else {
+					inv.Input.Since = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Vps") {
+			if !inv.IsParameterNil("Vps") {
+				if inv.Input.Vps < 0 {
+					verr.Add("vps", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionOutageIndexInvocation) Call() (*ActionOutageIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

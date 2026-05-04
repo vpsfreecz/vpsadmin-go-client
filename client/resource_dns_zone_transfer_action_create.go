@@ -122,26 +122,7 @@ func (in *ActionDnsZoneTransferCreateInput) SetDnsZone(value int64) *ActionDnsZo
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetDnsZoneNil(false)
 	in._selectedParameters["DnsZone"] = nil
-	return in
-}
-
-// SetDnsZoneNil sets parameter DnsZone to nil and selects it for sending
-func (in *ActionDnsZoneTransferCreateInput) SetDnsZoneNil(set bool) *ActionDnsZoneTransferCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["DnsZone"] = nil
-		in.SelectParameters("DnsZone")
-	} else {
-		delete(in._nilParameters, "DnsZone")
-	}
 	return in
 }
 
@@ -153,26 +134,7 @@ func (in *ActionDnsZoneTransferCreateInput) SetHostIpAddress(value int64) *Actio
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetHostIpAddressNil(false)
 	in._selectedParameters["HostIpAddress"] = nil
-	return in
-}
-
-// SetHostIpAddressNil sets parameter HostIpAddress to nil and selects it for sending
-func (in *ActionDnsZoneTransferCreateInput) SetHostIpAddressNil(set bool) *ActionDnsZoneTransferCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["HostIpAddress"] = nil
-		in.SelectParameters("HostIpAddress")
-	} else {
-		delete(in._nilParameters, "HostIpAddress")
-	}
 	return in
 }
 
@@ -349,8 +311,46 @@ func (inv *ActionDnsZoneTransferCreateInvocation) IsMetaParameterNil(param strin
 	return exists
 }
 
+func (inv *ActionDnsZoneTransferCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("DnsTsigKey") {
+			if !inv.IsParameterNil("DnsTsigKey") {
+				if inv.Input.DnsTsigKey < 0 {
+					verr.Add("dns_tsig_key", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("DnsZone") {
+			if !inv.IsParameterNil("DnsZone") {
+				if inv.Input.DnsZone < 0 {
+					verr.Add("dns_zone", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("HostIpAddress") {
+			if !inv.IsParameterNil("HostIpAddress") {
+				if inv.Input.HostIpAddress < 0 {
+					verr.Add("host_ip_address", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionDnsZoneTransferCreateInvocation) Call() (*ActionDnsZoneTransferCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -459,18 +459,10 @@ func (inv *ActionDnsZoneTransferCreateInvocation) makeInputParams() map[string]i
 			}
 		}
 		if inv.IsParameterSelected("DnsZone") {
-			if inv.IsParameterNil("DnsZone") {
-				ret["dns_zone"] = nil
-			} else {
-				ret["dns_zone"] = inv.Input.DnsZone
-			}
+			ret["dns_zone"] = inv.Input.DnsZone
 		}
 		if inv.IsParameterSelected("HostIpAddress") {
-			if inv.IsParameterNil("HostIpAddress") {
-				ret["host_ip_address"] = nil
-			} else {
-				ret["host_ip_address"] = inv.Input.HostIpAddress
-			}
+			ret["host_ip_address"] = inv.Input.HostIpAddress
 		}
 		if inv.IsParameterSelected("PeerType") {
 			ret["peer_type"] = inv.Input.PeerType

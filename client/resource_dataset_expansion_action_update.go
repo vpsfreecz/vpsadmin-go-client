@@ -303,8 +303,25 @@ func (inv *ActionDatasetExpansionUpdateInvocation) IsMetaParameterNil(param stri
 	return exists
 }
 
+func (inv *ActionDatasetExpansionUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionDatasetExpansionUpdateInvocation) Call() (*ActionDatasetExpansionUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

@@ -147,8 +147,23 @@ func (inv *ActionMailTemplateTranslationDeleteInvocation) IsMetaParameterNil(par
 	return exists
 }
 
+func (inv *ActionMailTemplateTranslationDeleteInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionMailTemplateTranslationDeleteInvocation) Call() (*ActionMailTemplateTranslationDeleteResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

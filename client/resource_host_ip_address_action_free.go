@@ -171,8 +171,23 @@ func (inv *ActionHostIpAddressFreeInvocation) IsMetaParameterNil(param string) b
 	return exists
 }
 
+func (inv *ActionHostIpAddressFreeInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionHostIpAddressFreeInvocation) Call() (*ActionHostIpAddressFreeResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

@@ -75,15 +75,42 @@ func (in *ActionClusterResourceUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterResourceUpdateInput is a type for action input parameters
 type ActionClusterResourceUpdateInput struct {
-	Label    string `json:"label"`
-	Max      int64  `json:"max"`
-	Min      int64  `json:"min"`
-	Name     string `json:"name"`
-	Stepsize int64  `json:"stepsize"`
+	AllocateChain string `json:"allocate_chain"`
+	FreeChain     string `json:"free_chain"`
+	Label         string `json:"label"`
+	Max           int64  `json:"max"`
+	Min           int64  `json:"min"`
+	Name          string `json:"name"`
+	ResourceType  string `json:"resource_type"`
+	Stepsize      int64  `json:"stepsize"`
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetAllocateChain sets parameter AllocateChain to value and selects it for sending
+func (in *ActionClusterResourceUpdateInput) SetAllocateChain(value string) *ActionClusterResourceUpdateInput {
+	in.AllocateChain = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AllocateChain"] = nil
+	return in
+}
+
+// SetFreeChain sets parameter FreeChain to value and selects it for sending
+func (in *ActionClusterResourceUpdateInput) SetFreeChain(value string) *ActionClusterResourceUpdateInput {
+	in.FreeChain = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["FreeChain"] = nil
+	return in
 }
 
 // SetLabel sets parameter Label to value and selects it for sending
@@ -131,6 +158,18 @@ func (in *ActionClusterResourceUpdateInput) SetName(value string) *ActionCluster
 	}
 
 	in._selectedParameters["Name"] = nil
+	return in
+}
+
+// SetResourceType sets parameter ResourceType to value and selects it for sending
+func (in *ActionClusterResourceUpdateInput) SetResourceType(value string) *ActionClusterResourceUpdateInput {
+	in.ResourceType = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ResourceType"] = nil
 	return in
 }
 
@@ -192,12 +231,15 @@ type ActionClusterResourceUpdateRequest struct {
 
 // ActionClusterResourceUpdateOutput is a type for action output parameters
 type ActionClusterResourceUpdateOutput struct {
-	Id       int64  `json:"id"`
-	Label    string `json:"label"`
-	Max      int64  `json:"max"`
-	Min      int64  `json:"min"`
-	Name     string `json:"name"`
-	Stepsize int64  `json:"stepsize"`
+	AllocateChain string `json:"allocate_chain"`
+	FreeChain     string `json:"free_chain"`
+	Id            int64  `json:"id"`
+	Label         string `json:"label"`
+	Max           int64  `json:"max"`
+	Min           int64  `json:"min"`
+	Name          string `json:"name"`
+	ResourceType  string `json:"resource_type"`
+	Stepsize      int64  `json:"stepsize"`
 }
 
 // Type for action response, including envelope
@@ -310,8 +352,25 @@ func (inv *ActionClusterResourceUpdateInvocation) IsMetaParameterNil(param strin
 	return exists
 }
 
+func (inv *ActionClusterResourceUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionClusterResourceUpdateInvocation) Call() (*ActionClusterResourceUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -336,6 +395,12 @@ func (inv *ActionClusterResourceUpdateInvocation) makeInputParams() map[string]i
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("AllocateChain") {
+			ret["allocate_chain"] = inv.Input.AllocateChain
+		}
+		if inv.IsParameterSelected("FreeChain") {
+			ret["free_chain"] = inv.Input.FreeChain
+		}
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
 		}
@@ -347,6 +412,9 @@ func (inv *ActionClusterResourceUpdateInvocation) makeInputParams() map[string]i
 		}
 		if inv.IsParameterSelected("Name") {
 			ret["name"] = inv.Input.Name
+		}
+		if inv.IsParameterSelected("ResourceType") {
+			ret["resource_type"] = inv.Input.ResourceType
 		}
 		if inv.IsParameterSelected("Stepsize") {
 			ret["stepsize"] = inv.Input.Stepsize

@@ -91,26 +91,7 @@ func (in *ActionIpAddressAssignInput) SetNetworkInterface(value int64) *ActionIp
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNetworkInterfaceNil(false)
 	in._selectedParameters["NetworkInterface"] = nil
-	return in
-}
-
-// SetNetworkInterfaceNil sets parameter NetworkInterface to nil and selects it for sending
-func (in *ActionIpAddressAssignInput) SetNetworkInterfaceNil(set bool) *ActionIpAddressAssignInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["NetworkInterface"] = nil
-		in.SelectParameters("NetworkInterface")
-	} else {
-		delete(in._nilParameters, "NetworkInterface")
-	}
 	return in
 }
 
@@ -122,26 +103,7 @@ func (in *ActionIpAddressAssignInput) SetRouteVia(value int64) *ActionIpAddressA
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetRouteViaNil(false)
 	in._selectedParameters["RouteVia"] = nil
-	return in
-}
-
-// SetRouteViaNil sets parameter RouteVia to nil and selects it for sending
-func (in *ActionIpAddressAssignInput) SetRouteViaNil(set bool) *ActionIpAddressAssignInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["RouteVia"] = nil
-		in.SelectParameters("RouteVia")
-	} else {
-		delete(in._nilParameters, "RouteVia")
-	}
 	return in
 }
 
@@ -319,8 +281,39 @@ func (inv *ActionIpAddressAssignInvocation) IsMetaParameterNil(param string) boo
 	return exists
 }
 
+func (inv *ActionIpAddressAssignInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("NetworkInterface") {
+			if !inv.IsParameterNil("NetworkInterface") {
+				if inv.Input.NetworkInterface < 0 {
+					verr.Add("network_interface", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("RouteVia") {
+			if !inv.IsParameterNil("RouteVia") {
+				if inv.Input.RouteVia < 0 {
+					verr.Add("route_via", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionIpAddressAssignInvocation) Call() (*ActionIpAddressAssignResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -422,18 +415,10 @@ func (inv *ActionIpAddressAssignInvocation) makeInputParams() map[string]interfa
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("NetworkInterface") {
-			if inv.IsParameterNil("NetworkInterface") {
-				ret["network_interface"] = nil
-			} else {
-				ret["network_interface"] = inv.Input.NetworkInterface
-			}
+			ret["network_interface"] = inv.Input.NetworkInterface
 		}
 		if inv.IsParameterSelected("RouteVia") {
-			if inv.IsParameterNil("RouteVia") {
-				ret["route_via"] = nil
-			} else {
-				ret["route_via"] = inv.Input.RouteVia
-			}
+			ret["route_via"] = inv.Input.RouteVia
 		}
 	}
 

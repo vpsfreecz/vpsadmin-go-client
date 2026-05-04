@@ -311,8 +311,32 @@ func (inv *ActionDnsTsigKeyIndexInvocation) IsMetaParameterNil(param string) boo
 	return exists
 }
 
+func (inv *ActionDnsTsigKeyIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionDnsTsigKeyIndexInvocation) Call() (*ActionDnsTsigKeyIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 
@@ -340,7 +364,11 @@ func (inv *ActionDnsTsigKeyIndexInvocation) convertInputToQueryParams(ret map[st
 			ret["dns_tsig_key[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 		if inv.IsParameterSelected("User") {
-			ret["dns_tsig_key[user]"] = convertInt64ToString(inv.Input.User)
+			if inv.IsParameterNil("User") {
+				ret["dns_tsig_key[user]"] = ""
+			} else {
+				ret["dns_tsig_key[user]"] = convertInt64ToString(inv.Input.User)
+			}
 		}
 	}
 }

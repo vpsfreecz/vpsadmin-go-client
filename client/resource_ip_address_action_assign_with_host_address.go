@@ -91,26 +91,7 @@ func (in *ActionIpAddressAssignWithHostAddressInput) SetHostIpAddress(value int6
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetHostIpAddressNil(false)
 	in._selectedParameters["HostIpAddress"] = nil
-	return in
-}
-
-// SetHostIpAddressNil sets parameter HostIpAddress to nil and selects it for sending
-func (in *ActionIpAddressAssignWithHostAddressInput) SetHostIpAddressNil(set bool) *ActionIpAddressAssignWithHostAddressInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["HostIpAddress"] = nil
-		in.SelectParameters("HostIpAddress")
-	} else {
-		delete(in._nilParameters, "HostIpAddress")
-	}
 	return in
 }
 
@@ -122,26 +103,7 @@ func (in *ActionIpAddressAssignWithHostAddressInput) SetNetworkInterface(value i
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetNetworkInterfaceNil(false)
 	in._selectedParameters["NetworkInterface"] = nil
-	return in
-}
-
-// SetNetworkInterfaceNil sets parameter NetworkInterface to nil and selects it for sending
-func (in *ActionIpAddressAssignWithHostAddressInput) SetNetworkInterfaceNil(set bool) *ActionIpAddressAssignWithHostAddressInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["NetworkInterface"] = nil
-		in.SelectParameters("NetworkInterface")
-	} else {
-		delete(in._nilParameters, "NetworkInterface")
-	}
 	return in
 }
 
@@ -319,8 +281,39 @@ func (inv *ActionIpAddressAssignWithHostAddressInvocation) IsMetaParameterNil(pa
 	return exists
 }
 
+func (inv *ActionIpAddressAssignWithHostAddressInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("HostIpAddress") {
+			if !inv.IsParameterNil("HostIpAddress") {
+				if inv.Input.HostIpAddress < 0 {
+					verr.Add("host_ip_address", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("NetworkInterface") {
+			if !inv.IsParameterNil("NetworkInterface") {
+				if inv.Input.NetworkInterface < 0 {
+					verr.Add("network_interface", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionIpAddressAssignWithHostAddressInvocation) Call() (*ActionIpAddressAssignWithHostAddressResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -422,18 +415,10 @@ func (inv *ActionIpAddressAssignWithHostAddressInvocation) makeInputParams() map
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("HostIpAddress") {
-			if inv.IsParameterNil("HostIpAddress") {
-				ret["host_ip_address"] = nil
-			} else {
-				ret["host_ip_address"] = inv.Input.HostIpAddress
-			}
+			ret["host_ip_address"] = inv.Input.HostIpAddress
 		}
 		if inv.IsParameterSelected("NetworkInterface") {
-			if inv.IsParameterNil("NetworkInterface") {
-				ret["network_interface"] = nil
-			} else {
-				ret["network_interface"] = inv.Input.NetworkInterface
-			}
+			ret["network_interface"] = inv.Input.NetworkInterface
 		}
 	}
 

@@ -292,8 +292,25 @@ func (inv *ActionUserWebauthnCredentialIndexInvocation) IsMetaParameterNil(param
 	return exists
 }
 
+func (inv *ActionUserWebauthnCredentialIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserWebauthnCredentialIndexInvocation) Call() (*ActionUserWebauthnCredentialIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

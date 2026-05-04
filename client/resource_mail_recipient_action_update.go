@@ -93,7 +93,26 @@ func (in *ActionMailRecipientUpdateInput) SetBcc(value string) *ActionMailRecipi
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetBccNil(false)
 	in._selectedParameters["Bcc"] = nil
+	return in
+}
+
+// SetBccNil sets parameter Bcc to nil and selects it for sending
+func (in *ActionMailRecipientUpdateInput) SetBccNil(set bool) *ActionMailRecipientUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Bcc"] = nil
+		in.SelectParameters("Bcc")
+	} else {
+		delete(in._nilParameters, "Bcc")
+	}
 	return in
 }
 
@@ -105,7 +124,26 @@ func (in *ActionMailRecipientUpdateInput) SetCc(value string) *ActionMailRecipie
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetCcNil(false)
 	in._selectedParameters["Cc"] = nil
+	return in
+}
+
+// SetCcNil sets parameter Cc to nil and selects it for sending
+func (in *ActionMailRecipientUpdateInput) SetCcNil(set bool) *ActionMailRecipientUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Cc"] = nil
+		in.SelectParameters("Cc")
+	} else {
+		delete(in._nilParameters, "Cc")
+	}
 	return in
 }
 
@@ -129,7 +167,26 @@ func (in *ActionMailRecipientUpdateInput) SetTo(value string) *ActionMailRecipie
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetToNil(false)
 	in._selectedParameters["To"] = nil
+	return in
+}
+
+// SetToNil sets parameter To to nil and selects it for sending
+func (in *ActionMailRecipientUpdateInput) SetToNil(set bool) *ActionMailRecipientUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["To"] = nil
+		in.SelectParameters("To")
+	} else {
+		delete(in._nilParameters, "To")
+	}
 	return in
 }
 
@@ -296,8 +353,25 @@ func (inv *ActionMailRecipientUpdateInvocation) IsMetaParameterNil(param string)
 	return exists
 }
 
+func (inv *ActionMailRecipientUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionMailRecipientUpdateInvocation) Call() (*ActionMailRecipientUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -323,16 +397,28 @@ func (inv *ActionMailRecipientUpdateInvocation) makeInputParams() map[string]int
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Bcc") {
-			ret["bcc"] = inv.Input.Bcc
+			if inv.IsParameterNil("Bcc") {
+				ret["bcc"] = nil
+			} else {
+				ret["bcc"] = inv.Input.Bcc
+			}
 		}
 		if inv.IsParameterSelected("Cc") {
-			ret["cc"] = inv.Input.Cc
+			if inv.IsParameterNil("Cc") {
+				ret["cc"] = nil
+			} else {
+				ret["cc"] = inv.Input.Cc
+			}
 		}
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
 		}
 		if inv.IsParameterSelected("To") {
-			ret["to"] = inv.Input.To
+			if inv.IsParameterNil("To") {
+				ret["to"] = nil
+			} else {
+				ret["to"] = inv.Input.To
+			}
 		}
 	}
 

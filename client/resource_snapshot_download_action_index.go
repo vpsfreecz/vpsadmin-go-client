@@ -104,26 +104,7 @@ func (in *ActionSnapshotDownloadIndexInput) SetDataset(value int64) *ActionSnaps
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetDatasetNil(false)
 	in._selectedParameters["Dataset"] = nil
-	return in
-}
-
-// SetDatasetNil sets parameter Dataset to nil and selects it for sending
-func (in *ActionSnapshotDownloadIndexInput) SetDatasetNil(set bool) *ActionSnapshotDownloadIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Dataset"] = nil
-		in.SelectParameters("Dataset")
-	} else {
-		delete(in._nilParameters, "Dataset")
-	}
 	return in
 }
 
@@ -159,26 +140,7 @@ func (in *ActionSnapshotDownloadIndexInput) SetSnapshot(value int64) *ActionSnap
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetSnapshotNil(false)
 	in._selectedParameters["Snapshot"] = nil
-	return in
-}
-
-// SetSnapshotNil sets parameter Snapshot to nil and selects it for sending
-func (in *ActionSnapshotDownloadIndexInput) SetSnapshotNil(set bool) *ActionSnapshotDownloadIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Snapshot"] = nil
-		in.SelectParameters("Snapshot")
-	} else {
-		delete(in._nilParameters, "Snapshot")
-	}
 	return in
 }
 
@@ -334,8 +296,39 @@ func (inv *ActionSnapshotDownloadIndexInvocation) IsMetaParameterNil(param strin
 	return exists
 }
 
+func (inv *ActionSnapshotDownloadIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Dataset") {
+			if !inv.IsParameterNil("Dataset") {
+				if inv.Input.Dataset < 0 {
+					verr.Add("dataset", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Snapshot") {
+			if !inv.IsParameterNil("Snapshot") {
+				if inv.Input.Snapshot < 0 {
+					verr.Add("snapshot", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionSnapshotDownloadIndexInvocation) Call() (*ActionSnapshotDownloadIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

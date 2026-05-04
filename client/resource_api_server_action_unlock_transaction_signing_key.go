@@ -117,6 +117,12 @@ func (in *ActionApiServerUnlockTransactionSigningKeyInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
+// ActionApiServerUnlockTransactionSigningKeyRequest is a type for the entire action request
+type ActionApiServerUnlockTransactionSigningKeyRequest struct {
+	ApiServer map[string]interface{} `json:"api_server"`
+	Meta      map[string]interface{} `json:"_meta"`
+}
+
 // Type for action response, including envelope
 type ActionApiServerUnlockTransactionSigningKeyResponse struct {
 	Action *ActionApiServerUnlockTransactionSigningKey `json:"-"`
@@ -209,32 +215,62 @@ func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) IsMetaParameter
 	return exists
 }
 
-// Call() invokes the action and returns a response from the API server
-func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) Call() (*ActionApiServerUnlockTransactionSigningKeyResponse, error) {
-	return inv.callAsQuery()
+func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
 }
 
-func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) callAsQuery() (*ActionApiServerUnlockTransactionSigningKeyResponse, error) {
-	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+// Call() invokes the action and returns a response from the API server
+func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) Call() (*ActionApiServerUnlockTransactionSigningKeyResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
+	return inv.callAsBody()
+}
+
+func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) callAsBody() (*ActionApiServerUnlockTransactionSigningKeyResponse, error) {
+	input := inv.makeAllInputParams()
 	resp := &ActionApiServerUnlockTransactionSigningKeyResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
+	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
 	return resp, err
 }
 
-func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) convertInputToQueryParams(ret map[string]string) {
-	if inv.Input != nil {
-		if inv.IsParameterSelected("Passphrase") {
-			ret["api_server[passphrase]"] = inv.Input.Passphrase
-		}
+func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) makeAllInputParams() *ActionApiServerUnlockTransactionSigningKeyRequest {
+	return &ActionApiServerUnlockTransactionSigningKeyRequest{
+		ApiServer: inv.makeInputParams(),
+		Meta:      inv.makeMetaInputParams(),
 	}
 }
 
-func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) convertMetaInputToQueryParams(ret map[string]string) {
-	if inv.MetaInput != nil {
-		if inv.IsMetaParameterSelected("No") {
-			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
+func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) makeInputParams() map[string]interface{} {
+	ret := make(map[string]interface{})
+
+	if inv.Input != nil {
+		if inv.IsParameterSelected("Passphrase") {
+			ret["passphrase"] = inv.Input.Passphrase
 		}
 	}
+
+	return ret
+}
+
+func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) makeMetaInputParams() map[string]interface{} {
+	ret := make(map[string]interface{})
+
+	if inv.MetaInput != nil {
+		if inv.IsMetaParameterSelected("No") {
+			ret["no"] = inv.MetaInput.No
+		}
+	}
+
+	return ret
 }

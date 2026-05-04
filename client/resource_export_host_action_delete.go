@@ -157,8 +157,23 @@ func (inv *ActionExportHostDeleteInvocation) IsMetaParameterNil(param string) bo
 	return exists
 }
 
+func (inv *ActionExportHostDeleteInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionExportHostDeleteInvocation) Call() (*ActionExportHostDeleteResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 

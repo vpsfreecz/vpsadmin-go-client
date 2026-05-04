@@ -104,26 +104,7 @@ func (in *ActionUserPaymentIndexInput) SetAccountedBy(value int64) *ActionUserPa
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetAccountedByNil(false)
 	in._selectedParameters["AccountedBy"] = nil
-	return in
-}
-
-// SetAccountedByNil sets parameter AccountedBy to nil and selects it for sending
-func (in *ActionUserPaymentIndexInput) SetAccountedByNil(set bool) *ActionUserPaymentIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["AccountedBy"] = nil
-		in.SelectParameters("AccountedBy")
-	} else {
-		delete(in._nilParameters, "AccountedBy")
-	}
 	return in
 }
 
@@ -159,26 +140,7 @@ func (in *ActionUserPaymentIndexInput) SetUser(value int64) *ActionUserPaymentIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
-	return in
-}
-
-// SetUserNil sets parameter User to nil and selects it for sending
-func (in *ActionUserPaymentIndexInput) SetUserNil(set bool) *ActionUserPaymentIndexInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["User"] = nil
-		in.SelectParameters("User")
-	} else {
-		delete(in._nilParameters, "User")
-	}
 	return in
 }
 
@@ -331,8 +293,39 @@ func (inv *ActionUserPaymentIndexInvocation) IsMetaParameterNil(param string) bo
 	return exists
 }
 
+func (inv *ActionUserPaymentIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("AccountedBy") {
+			if !inv.IsParameterNil("AccountedBy") {
+				if inv.Input.AccountedBy < 0 {
+					verr.Add("accounted_by", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserPaymentIndexInvocation) Call() (*ActionUserPaymentIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

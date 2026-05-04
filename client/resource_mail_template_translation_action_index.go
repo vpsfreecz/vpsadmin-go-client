@@ -282,8 +282,25 @@ func (inv *ActionMailTemplateTranslationIndexInvocation) IsMetaParameterNil(para
 	return exists
 }
 
+func (inv *ActionMailTemplateTranslationIndexInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionMailTemplateTranslationIndexInvocation) Call() (*ActionMailTemplateTranslationIndexResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

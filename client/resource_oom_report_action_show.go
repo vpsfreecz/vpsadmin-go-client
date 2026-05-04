@@ -164,8 +164,23 @@ func (inv *ActionOomReportShowInvocation) IsMetaParameterNil(param string) bool 
 	return exists
 }
 
+func (inv *ActionOomReportShowInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionOomReportShowInvocation) Call() (*ActionOomReportShowResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

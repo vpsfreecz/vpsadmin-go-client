@@ -92,26 +92,7 @@ func (in *ActionUserClusterResourcePackageCreateInput) SetClusterResourcePackage
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetClusterResourcePackageNil(false)
 	in._selectedParameters["ClusterResourcePackage"] = nil
-	return in
-}
-
-// SetClusterResourcePackageNil sets parameter ClusterResourcePackage to nil and selects it for sending
-func (in *ActionUserClusterResourcePackageCreateInput) SetClusterResourcePackageNil(set bool) *ActionUserClusterResourcePackageCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["ClusterResourcePackage"] = nil
-		in.SelectParameters("ClusterResourcePackage")
-	} else {
-		delete(in._nilParameters, "ClusterResourcePackage")
-	}
 	return in
 }
 
@@ -135,26 +116,7 @@ func (in *ActionUserClusterResourcePackageCreateInput) SetEnvironment(value int6
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetEnvironmentNil(false)
 	in._selectedParameters["Environment"] = nil
-	return in
-}
-
-// SetEnvironmentNil sets parameter Environment to nil and selects it for sending
-func (in *ActionUserClusterResourcePackageCreateInput) SetEnvironmentNil(set bool) *ActionUserClusterResourcePackageCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Environment"] = nil
-		in.SelectParameters("Environment")
-	} else {
-		delete(in._nilParameters, "Environment")
-	}
 	return in
 }
 
@@ -178,26 +140,7 @@ func (in *ActionUserClusterResourcePackageCreateInput) SetUser(value int64) *Act
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNil(false)
 	in._selectedParameters["User"] = nil
-	return in
-}
-
-// SetUserNil sets parameter User to nil and selects it for sending
-func (in *ActionUserClusterResourcePackageCreateInput) SetUserNil(set bool) *ActionUserClusterResourcePackageCreateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["User"] = nil
-		in.SelectParameters("User")
-	} else {
-		delete(in._nilParameters, "User")
-	}
 	return in
 }
 
@@ -358,8 +301,46 @@ func (inv *ActionUserClusterResourcePackageCreateInvocation) IsMetaParameterNil(
 	return exists
 }
 
+func (inv *ActionUserClusterResourcePackageCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("ClusterResourcePackage") {
+			if !inv.IsParameterNil("ClusterResourcePackage") {
+				if inv.Input.ClusterResourcePackage < 0 {
+					verr.Add("cluster_resource_package", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("Environment") {
+			if !inv.IsParameterNil("Environment") {
+				if inv.Input.Environment < 0 {
+					verr.Add("environment", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("User") {
+			if !inv.IsParameterNil("User") {
+				if inv.Input.User < 0 {
+					verr.Add("user", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserClusterResourcePackageCreateInvocation) Call() (*ActionUserClusterResourcePackageCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -385,31 +366,19 @@ func (inv *ActionUserClusterResourcePackageCreateInvocation) makeInputParams() m
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("ClusterResourcePackage") {
-			if inv.IsParameterNil("ClusterResourcePackage") {
-				ret["cluster_resource_package"] = nil
-			} else {
-				ret["cluster_resource_package"] = inv.Input.ClusterResourcePackage
-			}
+			ret["cluster_resource_package"] = inv.Input.ClusterResourcePackage
 		}
 		if inv.IsParameterSelected("Comment") {
 			ret["comment"] = inv.Input.Comment
 		}
 		if inv.IsParameterSelected("Environment") {
-			if inv.IsParameterNil("Environment") {
-				ret["environment"] = nil
-			} else {
-				ret["environment"] = inv.Input.Environment
-			}
+			ret["environment"] = inv.Input.Environment
 		}
 		if inv.IsParameterSelected("FromPersonal") {
 			ret["from_personal"] = inv.Input.FromPersonal
 		}
 		if inv.IsParameterSelected("User") {
-			if inv.IsParameterNil("User") {
-				ret["user"] = nil
-			} else {
-				ret["user"] = inv.Input.User
-			}
+			ret["user"] = inv.Input.User
 		}
 	}
 

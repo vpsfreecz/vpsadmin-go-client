@@ -27,6 +27,8 @@ type ResourceDataset struct {
 	List *ActionDatasetIndex
 	// Action Dataset#Inherit
 	Inherit *ActionDatasetInherit
+	// Action Dataset#Migrate
+	Migrate *ActionDatasetMigrate
 	// Action Dataset#Show
 	Show *ActionDatasetShow
 	// Action Dataset#Show
@@ -41,6 +43,7 @@ func NewResourceDataset(client *Client) *ResourceDataset {
 	actionFindByName := NewActionDatasetFindByName(client)
 	actionIndex := NewActionDatasetIndex(client)
 	actionInherit := NewActionDatasetInherit(client)
+	actionMigrate := NewActionDatasetMigrate(client)
 	actionShow := NewActionDatasetShow(client)
 	actionUpdate := NewActionDatasetUpdate(client)
 
@@ -57,6 +60,7 @@ func NewResourceDataset(client *Client) *ResourceDataset {
 		Index:           actionIndex,
 		List:            actionIndex,
 		Inherit:         actionInherit,
+		Migrate:         actionMigrate,
 		Show:            actionShow,
 		Find:            actionShow,
 		Update:          actionUpdate,

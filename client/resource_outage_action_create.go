@@ -181,7 +181,26 @@ func (in *ActionOutageCreateInput) SetFinishedAt(value string) *ActionOutageCrea
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetFinishedAtNil(false)
 	in._selectedParameters["FinishedAt"] = nil
+	return in
+}
+
+// SetFinishedAtNil sets parameter FinishedAt to nil and selects it for sending
+func (in *ActionOutageCreateInput) SetFinishedAtNil(set bool) *ActionOutageCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["FinishedAt"] = nil
+		in.SelectParameters("FinishedAt")
+	} else {
+		delete(in._nilParameters, "FinishedAt")
+	}
 	return in
 }
 
@@ -373,8 +392,45 @@ func (inv *ActionOutageCreateInvocation) IsMetaParameterNil(param string) bool {
 	return exists
 }
 
+func (inv *ActionOutageCreateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("BeginsAt") {
+			if !inv.IsParameterNil("BeginsAt") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.BeginsAt)
+				if !ok {
+					verr.Add("begins_at", "not a valid datetime")
+				} else {
+					inv.Input.BeginsAt = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("FinishedAt") {
+			if !inv.IsParameterNil("FinishedAt") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.FinishedAt)
+				if !ok {
+					verr.Add("finished_at", "not a valid datetime")
+				} else {
+					inv.Input.FinishedAt = normalized
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionOutageCreateInvocation) Call() (*ActionOutageCreateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -421,7 +477,11 @@ func (inv *ActionOutageCreateInvocation) makeInputParams() map[string]interface{
 			ret["en_summary"] = inv.Input.EnSummary
 		}
 		if inv.IsParameterSelected("FinishedAt") {
-			ret["finished_at"] = inv.Input.FinishedAt
+			if inv.IsParameterNil("FinishedAt") {
+				ret["finished_at"] = nil
+			} else {
+				ret["finished_at"] = inv.Input.FinishedAt
+			}
 		}
 		if inv.IsParameterSelected("Impact") {
 			ret["impact"] = inv.Input.Impact

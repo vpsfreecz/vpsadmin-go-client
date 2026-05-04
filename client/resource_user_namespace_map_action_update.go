@@ -103,26 +103,7 @@ func (in *ActionUserNamespaceMapUpdateInput) SetUserNamespace(value int64) *Acti
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in.SetUserNamespaceNil(false)
 	in._selectedParameters["UserNamespace"] = nil
-	return in
-}
-
-// SetUserNamespaceNil sets parameter UserNamespace to nil and selects it for sending
-func (in *ActionUserNamespaceMapUpdateInput) SetUserNamespaceNil(set bool) *ActionUserNamespaceMapUpdateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["UserNamespace"] = nil
-		in.SelectParameters("UserNamespace")
-	} else {
-		delete(in._nilParameters, "UserNamespace")
-	}
 	return in
 }
 
@@ -287,8 +268,32 @@ func (inv *ActionUserNamespaceMapUpdateInvocation) IsMetaParameterNil(param stri
 	return exists
 }
 
+func (inv *ActionUserNamespaceMapUpdateInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.Input != nil {
+		if inv.IsParameterSelected("UserNamespace") {
+			if !inv.IsParameterNil("UserNamespace") {
+				if inv.Input.UserNamespace < 0 {
+					verr.Add("user_namespace", "not a valid resource id")
+				}
+			}
+		}
+	}
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionUserNamespaceMapUpdateInvocation) Call() (*ActionUserNamespaceMapUpdateResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
@@ -317,11 +322,7 @@ func (inv *ActionUserNamespaceMapUpdateInvocation) makeInputParams() map[string]
 			ret["label"] = inv.Input.Label
 		}
 		if inv.IsParameterSelected("UserNamespace") {
-			if inv.IsParameterNil("UserNamespace") {
-				ret["user_namespace"] = nil
-			} else {
-				ret["user_namespace"] = inv.Input.UserNamespace
-			}
+			ret["user_namespace"] = inv.Input.UserNamespace
 		}
 	}
 

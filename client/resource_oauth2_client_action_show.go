@@ -164,8 +164,23 @@ func (inv *ActionOauth2ClientShowInvocation) IsMetaParameterNil(param string) bo
 	return exists
 }
 
+func (inv *ActionOauth2ClientShowInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionOauth2ClientShowInvocation) Call() (*ActionOauth2ClientShowResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsQuery()
 }
 

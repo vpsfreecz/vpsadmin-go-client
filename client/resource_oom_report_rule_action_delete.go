@@ -147,8 +147,23 @@ func (inv *ActionOomReportRuleDeleteInvocation) IsMetaParameterNil(param string)
 	return exists
 }
 
+func (inv *ActionOomReportRuleDeleteInvocation) validate() error {
+	verr := NewValidationError()
+	if inv.MetaInput != nil {
+	}
+
+	if verr.Empty() {
+		return nil
+	}
+
+	return verr
+}
+
 // Call() invokes the action and returns a response from the API server
 func (inv *ActionOomReportRuleDeleteInvocation) Call() (*ActionOomReportRuleDeleteResponse, error) {
+	if err := inv.validate(); err != nil {
+		return nil, err
+	}
 	return inv.callAsBody()
 }
 
