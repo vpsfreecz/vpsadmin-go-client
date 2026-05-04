@@ -97,8 +97,8 @@ func (auth *TokenAuth) setDefaultOptions(options *TokenAuthOptions) {
 // the authentication is completed
 func (auth *TokenAuth) nextAuthenticationStep(options *TokenAuthOptions, action string, token string) error {
 	if action == "totp" {
-		action := auth.Resource.Totp.Prepare()
-		input := action.NewInput()
+		request := auth.Resource.Totp.Prepare()
+		input := request.NewInput()
 		input.SetToken(token)
 
 		if options.TotpCallback == nil {
@@ -109,7 +109,7 @@ func (auth *TokenAuth) nextAuthenticationStep(options *TokenAuthOptions, action 
 			return fmt.Errorf("TotpCallback failed: %v", err)
 		}
 
-		resp, err := action.Call()
+		resp, err := request.Call()
 
 		if err != nil {
 			return err

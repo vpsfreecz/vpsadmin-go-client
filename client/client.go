@@ -1,5 +1,10 @@
 package client
 
+import (
+	"net/http"
+	"time"
+)
+
 // Client represents a connection to an API server
 type Client struct {
 	// API URL
@@ -7,6 +12,8 @@ type Client struct {
 
 	// Options for authentication method
 	Authentication Authenticator
+
+	httpClient *http.Client
 
 	// Resource Action_state
 	ActionState *ResourceActionState
@@ -158,7 +165,10 @@ type Client struct {
 
 // Create a new client for API at url
 func New(url string) *Client {
-	c := &Client{Url: url}
+	c := &Client{
+		Url:        url,
+		httpClient: http.DefaultClient,
+	}
 
 	c.ActionState = NewResourceActionState(c)
 	c.ApiServer = NewResourceApiServer(c)
@@ -235,4 +245,33 @@ func New(url string) *Client {
 	c.Webauthn = NewResourceWebauthn(c)
 
 	return c
+}
+
+// SetHTTPClient configures the HTTP client used for all requests.
+func (client *Client) SetHTTPClient(httpClient *http.Client) {
+	if httpClient == nil {
+		client.httpClient = http.DefaultClient
+		return
+	}
+
+	client.httpClient = httpClient
+}
+
+// SetTimeout configures an overall timeout for all HTTP requests.
+func (client *Client) SetTimeout(timeout time.Duration) {
+	if client.httpClient == nil || client.httpClient == http.DefaultClient {
+		client.httpClient = &http.Client{Timeout: timeout}
+		return
+	}
+
+	client.httpClient.Timeout = timeout
+}
+
+func (client *Client) do(req *http.Request) (*http.Response, error) {
+	httpClient := client.httpClient
+	if httpClient == nil {
+		httpClient = http.DefaultClient
+	}
+
+	return httpClient.Do(req)
 }

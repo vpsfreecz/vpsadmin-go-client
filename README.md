@@ -57,6 +57,16 @@ if err != nil {
 api.SetExistingTokenAuth("mytoken")
 ```
 
+### HTTP timeouts
+The client uses `http.DefaultClient` by default. Configure an overall request
+timeout with `SetTimeout`, or provide a custom HTTP client with
+`SetHTTPClient`.
+
+```go
+api.SetTimeout(60 * time.Second)
+api.SetHTTPClient(&http.Client{Timeout: 60 * time.Second})
+```
+
 ### Two-factor authentication
 Two-factor authentication is supported only by token authentication. The API
 server decides when the two-factor authentication is required, so the client
