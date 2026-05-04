@@ -33,9 +33,20 @@ The repository currently has no `*_test.go` files, so `go test ./...` is primari
 
 ## Commit & Pull Request Guidelines
 
-Recent commits use short, imperative summaries, for example `Add generated HTTP timeout support` and `Update client for current API version`. Keep commits focused: separate regeneration-only changes from handwritten fixes when practical.
+Recent commits use short, imperative summaries, for example
+`Add generated HTTP timeout support` and `Update client for current API
+version`. Keep commits focused: separate regeneration-only changes from
+handwritten fixes when practical.
 
-Pull requests should include a concise description, the reason for the update, regeneration details if applicable, and the test command run. Link related issues when available. Screenshots are not relevant for this library.
+Commit messages must say what is changing and why. Describe the problem in the
+body and summarize the solution. Wrap subject and body lines at 80 characters.
+Write commit messages through a temporary file and commit with `git commit -F`.
+Git hooks must run for every commit; do not use `--no-verify`, `SKIP=...`,
+`LEFTHOOK=0`, or similar to bypass them.
+
+Pull requests should include a concise description, the reason for the update,
+regeneration details if applicable, and the test command run. Link related
+issues when available. Screenshots are not relevant for this library.
 
 ## Agent-Specific Instructions
 
