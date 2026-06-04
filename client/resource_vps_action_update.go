@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsUpdate(client *Client) *ActionVpsUpdate {
 
 // ActionVpsUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,34 +76,34 @@ func (in *ActionVpsUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsUpdateInput is a type for action input parameters
 type ActionVpsUpdateInput struct {
-	AdminLockType              string `json:"admin_lock_type"`
-	AdminOverride              bool   `json:"admin_override"`
-	AllowAdminModifications    bool   `json:"allow_admin_modifications"`
-	AutostartEnable            bool   `json:"autostart_enable"`
-	AutostartPriority          int64  `json:"autostart_priority"`
-	CgroupVersion              string `json:"cgroup_version"`
-	ChangeReason               string `json:"change_reason"`
-	Config                     string `json:"config"`
-	Cpu                        int64  `json:"cpu"`
-	CpuLimit                   int64  `json:"cpu_limit"`
-	DnsResolver                int64  `json:"dns_resolver"`
-	EnableNetwork              bool   `json:"enable_network"`
-	EnableOsTemplateAutoUpdate bool   `json:"enable_os_template_auto_update"`
-	ExpirationDate             string `json:"expiration_date"`
-	Hostname                   string `json:"hostname"`
-	Info                       string `json:"info"`
-	ManageHostname             bool   `json:"manage_hostname"`
-	MapMode                    string `json:"map_mode"`
-	Memory                     int64  `json:"memory"`
-	Node                       int64  `json:"node"`
-	ObjectState                string `json:"object_state"`
-	Onstartall                 bool   `json:"onstartall"`
-	OsTemplate                 int64  `json:"os_template"`
-	RemindAfterDate            string `json:"remind_after_date"`
-	StartMenuTimeout           int64  `json:"start_menu_timeout"`
-	Swap                       int64  `json:"swap"`
-	User                       int64  `json:"user"`
-	UserNamespaceMap           int64  `json:"user_namespace_map"`
+	AdminLockType              string "json:\"admin_lock_type\""
+	AdminOverride              bool   "json:\"admin_override\""
+	AllowAdminModifications    bool   "json:\"allow_admin_modifications\""
+	AutostartEnable            bool   "json:\"autostart_enable\""
+	AutostartPriority          int64  "json:\"autostart_priority\""
+	CgroupVersion              string "json:\"cgroup_version\""
+	ChangeReason               string "json:\"change_reason\""
+	Config                     string "json:\"config\""
+	Cpu                        int64  "json:\"cpu\""
+	CpuLimit                   int64  "json:\"cpu_limit\""
+	DnsResolver                int64  "json:\"dns_resolver\""
+	EnableNetwork              bool   "json:\"enable_network\""
+	EnableOsTemplateAutoUpdate bool   "json:\"enable_os_template_auto_update\""
+	ExpirationDate             string "json:\"expiration_date\""
+	Hostname                   string "json:\"hostname\""
+	Info                       string "json:\"info\""
+	ManageHostname             bool   "json:\"manage_hostname\""
+	MapMode                    string "json:\"map_mode\""
+	Memory                     int64  "json:\"memory\""
+	Node                       int64  "json:\"node\""
+	ObjectState                string "json:\"object_state\""
+	Onstartall                 bool   "json:\"onstartall\""
+	OsTemplate                 int64  "json:\"os_template\""
+	RemindAfterDate            string "json:\"remind_after_date\""
+	StartMenuTimeout           int64  "json:\"start_menu_timeout\""
+	Swap                       int64  "json:\"swap\""
+	User                       int64  "json:\"user\""
+	UserNamespaceMap           int64  "json:\"user_namespace_map\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -542,23 +543,23 @@ func (in *ActionVpsUpdateInput) AnySelected() bool {
 
 // ActionVpsUpdateRequest is a type for the entire action request
 type ActionVpsUpdateRequest struct {
-	Vps  map[string]interface{} `json:"vps"`
-	Meta map[string]interface{} `json:"_meta"`
+	Vps  map[string]interface{} "json:\"vps\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsUpdateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionVpsUpdateResponse struct {
-	Action *ActionVpsUpdate `json:"-"`
+	Action *ActionVpsUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionVpsUpdateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionVpsUpdateMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -590,7 +591,7 @@ func (inv *ActionVpsUpdateInvocation) SetPathParamInt(param string, value int64)
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsUpdateInvocation) SetPathParamString(param string, value string) *ActionVpsUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

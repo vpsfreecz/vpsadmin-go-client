@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,7 +19,7 @@ func NewActionVpsRestart(client *Client) *ActionVpsRestart {
 
 // ActionVpsRestartMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsRestartMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -62,7 +63,7 @@ func (in *ActionVpsRestartMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsRestartInput is a type for action input parameters
 type ActionVpsRestartInput struct {
-	Force bool `json:"force"`
+	Force bool "json:\"force\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -121,23 +122,23 @@ func (in *ActionVpsRestartInput) AnySelected() bool {
 
 // ActionVpsRestartRequest is a type for the entire action request
 type ActionVpsRestartRequest struct {
-	Vps  map[string]interface{} `json:"vps"`
-	Meta map[string]interface{} `json:"_meta"`
+	Vps  map[string]interface{} "json:\"vps\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsRestartMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsRestartMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionVpsRestartResponse struct {
-	Action *ActionVpsRestart `json:"-"`
+	Action *ActionVpsRestart "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionVpsRestartMetaGlobalOutput `json:"_meta"`
+		Meta *ActionVpsRestartMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -169,7 +170,7 @@ func (inv *ActionVpsRestartInvocation) SetPathParamInt(param string, value int64
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsRestartInvocation) SetPathParamString(param string, value string) *ActionVpsRestartInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

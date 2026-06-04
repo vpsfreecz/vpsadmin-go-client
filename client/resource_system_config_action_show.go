@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionSystemConfigShow(client *Client) *ActionSystemConfigShow {
 
 // ActionSystemConfigShowMetaGlobalInput is a type for action global meta input parameters
 type ActionSystemConfigShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,21 +76,21 @@ func (in *ActionSystemConfigShowMetaGlobalInput) AnySelected() bool {
 
 // ActionSystemConfigShowOutput is a type for action output parameters
 type ActionSystemConfigShowOutput struct {
-	Category     string `json:"category"`
-	Description  string `json:"description"`
-	Label        string `json:"label"`
-	MinUserLevel int64  `json:"min_user_level"`
-	Name         string `json:"name"`
-	Type         string `json:"type"`
+	Category     string "json:\"category\""
+	Description  string "json:\"description\""
+	Label        string "json:\"label\""
+	MinUserLevel int64  "json:\"min_user_level\""
+	Name         string "json:\"name\""
+	Type         string "json:\"type\""
 }
 
 // Type for action response, including envelope
 type ActionSystemConfigShowResponse struct {
-	Action *ActionSystemConfigShow `json:"-"`
+	Action *ActionSystemConfigShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		SystemConfig *ActionSystemConfigShowOutput `json:"system_config"`
+		SystemConfig *ActionSystemConfigShowOutput "json:\"system_config\""
 	}
 
 	// Action output without the namespace
@@ -122,7 +123,7 @@ func (inv *ActionSystemConfigShowInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionSystemConfigShowInvocation) SetPathParamString(param string, value string) *ActionSystemConfigShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

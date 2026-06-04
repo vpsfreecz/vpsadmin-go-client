@@ -16,9 +16,9 @@ func NewActionVpsOutageIndex(client *Client) *ActionVpsOutageIndex {
 
 // ActionVpsOutageIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsOutageIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,15 +86,15 @@ func (in *ActionVpsOutageIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsOutageIndexInput is a type for action input parameters
 type ActionVpsOutageIndexInput struct {
-	Direct      bool  `json:"direct"`
-	Environment int64 `json:"environment"`
-	FromId      int64 `json:"from_id"`
-	Limit       int64 `json:"limit"`
-	Location    int64 `json:"location"`
-	Node        int64 `json:"node"`
-	Outage      int64 `json:"outage"`
-	User        int64 `json:"user"`
-	Vps         int64 `json:"vps"`
+	Direct      bool  "json:\"direct\""
+	Environment int64 "json:\"environment\""
+	FromId      int64 "json:\"from_id\""
+	Limit       int64 "json:\"limit\""
+	Location    int64 "json:\"location\""
+	Node        int64 "json:\"node\""
+	Outage      int64 "json:\"outage\""
+	User        int64 "json:\"user\""
+	Vps         int64 "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -249,23 +249,23 @@ func (in *ActionVpsOutageIndexInput) AnySelected() bool {
 
 // ActionVpsOutageIndexOutput is a type for action output parameters
 type ActionVpsOutageIndexOutput struct {
-	Direct      bool                         `json:"direct"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	Id          int64                        `json:"id"`
-	Location    *ActionLocationShowOutput    `json:"location"`
-	Node        *ActionNodeShowOutput        `json:"node"`
-	Outage      *ActionOutageShowOutput      `json:"outage"`
-	User        *ActionUserShowOutput        `json:"user"`
-	Vps         *ActionVpsShowOutput         `json:"vps"`
+	Direct      bool                         "json:\"direct\""
+	Environment *ActionEnvironmentShowOutput "json:\"environment\""
+	Id          int64                        "json:\"id\""
+	Location    *ActionLocationShowOutput    "json:\"location\""
+	Node        *ActionNodeShowOutput        "json:\"node\""
+	Outage      *ActionOutageShowOutput      "json:\"outage\""
+	User        *ActionUserShowOutput        "json:\"user\""
+	Vps         *ActionVpsShowOutput         "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionVpsOutageIndexResponse struct {
-	Action *ActionVpsOutageIndex `json:"-"`
+	Action *ActionVpsOutageIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		VpsOutages []*ActionVpsOutageIndexOutput `json:"vps_outages"`
+		VpsOutages []*ActionVpsOutageIndexOutput "json:\"vps_outages\""
 	}
 
 	// Action output without the namespace

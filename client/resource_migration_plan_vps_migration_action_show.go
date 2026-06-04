@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMigrationPlanVpsMigrationShow(client *Client) *ActionMigrationPlan
 
 // ActionMigrationPlanVpsMigrationShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanVpsMigrationShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,26 +76,26 @@ func (in *ActionMigrationPlanVpsMigrationShowMetaGlobalInput) AnySelected() bool
 
 // ActionMigrationPlanVpsMigrationShowOutput is a type for action output parameters
 type ActionMigrationPlanVpsMigrationShowOutput struct {
-	CleanupData       bool                              `json:"cleanup_data"`
-	CreatedAt         string                            `json:"created_at"`
-	DstNode           *ActionNodeShowOutput             `json:"dst_node"`
-	FinishedAt        string                            `json:"finished_at"`
-	Id                int64                             `json:"id"`
-	MaintenanceWindow bool                              `json:"maintenance_window"`
-	SrcNode           *ActionNodeShowOutput             `json:"src_node"`
-	StartedAt         string                            `json:"started_at"`
-	State             string                            `json:"state"`
-	TransactionChain  *ActionTransactionChainShowOutput `json:"transaction_chain"`
-	Vps               *ActionVpsShowOutput              `json:"vps"`
+	CleanupData       bool                              "json:\"cleanup_data\""
+	CreatedAt         string                            "json:\"created_at\""
+	DstNode           *ActionNodeShowOutput             "json:\"dst_node\""
+	FinishedAt        string                            "json:\"finished_at\""
+	Id                int64                             "json:\"id\""
+	MaintenanceWindow bool                              "json:\"maintenance_window\""
+	SrcNode           *ActionNodeShowOutput             "json:\"src_node\""
+	StartedAt         string                            "json:\"started_at\""
+	State             string                            "json:\"state\""
+	TransactionChain  *ActionTransactionChainShowOutput "json:\"transaction_chain\""
+	Vps               *ActionVpsShowOutput              "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionMigrationPlanVpsMigrationShowResponse struct {
-	Action *ActionMigrationPlanVpsMigrationShow `json:"-"`
+	Action *ActionMigrationPlanVpsMigrationShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		VpsMigration *ActionMigrationPlanVpsMigrationShowOutput `json:"vps_migration"`
+		VpsMigration *ActionMigrationPlanVpsMigrationShowOutput "json:\"vps_migration\""
 	}
 
 	// Action output without the namespace
@@ -127,7 +128,7 @@ func (inv *ActionMigrationPlanVpsMigrationShowInvocation) SetPathParamInt(param 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMigrationPlanVpsMigrationShowInvocation) SetPathParamString(param string, value string) *ActionMigrationPlanVpsMigrationShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

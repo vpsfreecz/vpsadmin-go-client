@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsConsoleTokenCreate(client *Client) *ActionVpsConsoleTokenCreate
 
 // ActionVpsConsoleTokenCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsConsoleTokenCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,22 +76,22 @@ func (in *ActionVpsConsoleTokenCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsConsoleTokenCreateRequest is a type for the entire action request
 type ActionVpsConsoleTokenCreateRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsConsoleTokenCreateOutput is a type for action output parameters
 type ActionVpsConsoleTokenCreateOutput struct {
-	Expiration string `json:"expiration"`
-	Token      string `json:"token"`
+	Expiration string "json:\"expiration\""
+	Token      string "json:\"token\""
 }
 
 // Type for action response, including envelope
 type ActionVpsConsoleTokenCreateResponse struct {
-	Action *ActionVpsConsoleTokenCreate `json:"-"`
+	Action *ActionVpsConsoleTokenCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		ConsoleToken *ActionVpsConsoleTokenCreateOutput `json:"console_token"`
+		ConsoleToken *ActionVpsConsoleTokenCreateOutput "json:\"console_token\""
 	}
 
 	// Action output without the namespace
@@ -123,7 +124,7 @@ func (inv *ActionVpsConsoleTokenCreateInvocation) SetPathParamInt(param string, 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsConsoleTokenCreateInvocation) SetPathParamString(param string, value string) *ActionVpsConsoleTokenCreateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionVpsSshHostKeyIndex(client *Client) *ActionVpsSshHostKeyIndex {
 
 // ActionVpsSshHostKeyIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsSshHostKeyIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,9 +89,9 @@ func (in *ActionVpsSshHostKeyIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsSshHostKeyIndexInput is a type for action input parameters
 type ActionVpsSshHostKeyIndexInput struct {
-	Algorithm string `json:"algorithm"`
-	FromId    int64  `json:"from_id"`
-	Limit     int64  `json:"limit"`
+	Algorithm string "json:\"algorithm\""
+	FromId    int64  "json:\"from_id\""
+	Limit     int64  "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -173,21 +174,21 @@ func (in *ActionVpsSshHostKeyIndexInput) AnySelected() bool {
 
 // ActionVpsSshHostKeyIndexOutput is a type for action output parameters
 type ActionVpsSshHostKeyIndexOutput struct {
-	Algorithm   string `json:"algorithm"`
-	Bits        int64  `json:"bits"`
-	CreatedAt   string `json:"created_at"`
-	Fingerprint string `json:"fingerprint"`
-	Id          int64  `json:"id"`
-	UpdatedAt   string `json:"updated_at"`
+	Algorithm   string "json:\"algorithm\""
+	Bits        int64  "json:\"bits\""
+	CreatedAt   string "json:\"created_at\""
+	Fingerprint string "json:\"fingerprint\""
+	Id          int64  "json:\"id\""
+	UpdatedAt   string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionVpsSshHostKeyIndexResponse struct {
-	Action *ActionVpsSshHostKeyIndex `json:"-"`
+	Action *ActionVpsSshHostKeyIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		SshHostKeys []*ActionVpsSshHostKeyIndexOutput `json:"ssh_host_keys"`
+		SshHostKeys []*ActionVpsSshHostKeyIndexOutput "json:\"ssh_host_keys\""
 	}
 
 	// Action output without the namespace
@@ -222,7 +223,7 @@ func (inv *ActionVpsSshHostKeyIndexInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsSshHostKeyIndexInvocation) SetPathParamString(param string, value string) *ActionVpsSshHostKeyIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

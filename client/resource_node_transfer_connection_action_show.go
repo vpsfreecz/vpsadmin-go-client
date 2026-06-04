@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionNodeTransferConnectionShow(client *Client) *ActionNodeTransferConn
 
 // ActionNodeTransferConnectionShowMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeTransferConnectionShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,23 +76,23 @@ func (in *ActionNodeTransferConnectionShowMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeTransferConnectionShowOutput is a type for action output parameters
 type ActionNodeTransferConnectionShowOutput struct {
-	CreatedAt   string                `json:"created_at"`
-	Enabled     bool                  `json:"enabled"`
-	Id          int64                 `json:"id"`
-	NodeA       *ActionNodeShowOutput `json:"node_a"`
-	NodeAIpAddr string                `json:"node_a_ip_addr"`
-	NodeB       *ActionNodeShowOutput `json:"node_b"`
-	NodeBIpAddr string                `json:"node_b_ip_addr"`
-	UpdatedAt   string                `json:"updated_at"`
+	CreatedAt   string                "json:\"created_at\""
+	Enabled     bool                  "json:\"enabled\""
+	Id          int64                 "json:\"id\""
+	NodeA       *ActionNodeShowOutput "json:\"node_a\""
+	NodeAIpAddr string                "json:\"node_a_ip_addr\""
+	NodeB       *ActionNodeShowOutput "json:\"node_b\""
+	NodeBIpAddr string                "json:\"node_b_ip_addr\""
+	UpdatedAt   string                "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionNodeTransferConnectionShowResponse struct {
-	Action *ActionNodeTransferConnectionShow `json:"-"`
+	Action *ActionNodeTransferConnectionShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		NodeTransferConnection *ActionNodeTransferConnectionShowOutput `json:"node_transfer_connection"`
+		NodeTransferConnection *ActionNodeTransferConnectionShowOutput "json:\"node_transfer_connection\""
 	}
 
 	// Action output without the namespace
@@ -124,7 +125,7 @@ func (inv *ActionNodeTransferConnectionShowInvocation) SetPathParamInt(param str
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNodeTransferConnectionShowInvocation) SetPathParamString(param string, value string) *ActionNodeTransferConnectionShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

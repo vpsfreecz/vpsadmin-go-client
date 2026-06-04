@@ -16,9 +16,9 @@ func NewActionHelpBoxIndex(client *Client) *ActionHelpBoxIndex {
 
 // ActionHelpBoxIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionHelpBoxIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,12 +86,12 @@ func (in *ActionHelpBoxIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionHelpBoxIndexInput is a type for action input parameters
 type ActionHelpBoxIndexInput struct {
-	Action   string `json:"action"`
-	FromId   int64  `json:"from_id"`
-	Language int64  `json:"language"`
-	Limit    int64  `json:"limit"`
-	Page     string `json:"page"`
-	View     bool   `json:"view"`
+	Action   string "json:\"action\""
+	FromId   int64  "json:\"from_id\""
+	Language int64  "json:\"language\""
+	Limit    int64  "json:\"limit\""
+	Page     string "json:\"page\""
+	View     bool   "json:\"view\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -210,21 +210,21 @@ func (in *ActionHelpBoxIndexInput) AnySelected() bool {
 
 // ActionHelpBoxIndexOutput is a type for action output parameters
 type ActionHelpBoxIndexOutput struct {
-	Action   string                    `json:"action"`
-	Content  string                    `json:"content"`
-	Id       int64                     `json:"id"`
-	Language *ActionLanguageShowOutput `json:"language"`
-	Order    int64                     `json:"order"`
-	Page     string                    `json:"page"`
+	Action   string                    "json:\"action\""
+	Content  string                    "json:\"content\""
+	Id       int64                     "json:\"id\""
+	Language *ActionLanguageShowOutput "json:\"language\""
+	Order    int64                     "json:\"order\""
+	Page     string                    "json:\"page\""
 }
 
 // Type for action response, including envelope
 type ActionHelpBoxIndexResponse struct {
-	Action *ActionHelpBoxIndex `json:"-"`
+	Action *ActionHelpBoxIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		HelpBoxes []*ActionHelpBoxIndexOutput `json:"help_boxes"`
+		HelpBoxes []*ActionHelpBoxIndexOutput "json:\"help_boxes\""
 	}
 
 	// Action output without the namespace

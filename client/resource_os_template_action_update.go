@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOsTemplateUpdate(client *Client) *ActionOsTemplateUpdate {
 
 // ActionOsTemplateUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionOsTemplateUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,24 +76,24 @@ func (in *ActionOsTemplateUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionOsTemplateUpdateInput is a type for action input parameters
 type ActionOsTemplateUpdateInput struct {
-	Arch              string `json:"arch"`
-	CgroupVersion     string `json:"cgroup_version"`
-	Config            string `json:"config"`
-	Distribution      string `json:"distribution"`
-	EnableCloudInit   bool   `json:"enable_cloud_init"`
-	EnableScript      bool   `json:"enable_script"`
-	Enabled           bool   `json:"enabled"`
-	HypervisorType    string `json:"hypervisor_type"`
-	Info              string `json:"info"`
-	Label             string `json:"label"`
-	ManageDnsResolver bool   `json:"manage_dns_resolver"`
-	ManageHostname    bool   `json:"manage_hostname"`
-	Order             int64  `json:"order"`
-	OsFamily          int64  `json:"os_family"`
-	Supported         bool   `json:"supported"`
-	Variant           string `json:"variant"`
-	Vendor            string `json:"vendor"`
-	Version           string `json:"version"`
+	Arch              string "json:\"arch\""
+	CgroupVersion     string "json:\"cgroup_version\""
+	Config            string "json:\"config\""
+	Distribution      string "json:\"distribution\""
+	EnableCloudInit   bool   "json:\"enable_cloud_init\""
+	EnableScript      bool   "json:\"enable_script\""
+	Enabled           bool   "json:\"enabled\""
+	HypervisorType    string "json:\"hypervisor_type\""
+	Info              string "json:\"info\""
+	Label             string "json:\"label\""
+	ManageDnsResolver bool   "json:\"manage_dns_resolver\""
+	ManageHostname    bool   "json:\"manage_hostname\""
+	Order             int64  "json:\"order\""
+	OsFamily          int64  "json:\"os_family\""
+	Supported         bool   "json:\"supported\""
+	Variant           string "json:\"variant\""
+	Vendor            string "json:\"vendor\""
+	Version           string "json:\"version\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -355,41 +356,41 @@ func (in *ActionOsTemplateUpdateInput) AnySelected() bool {
 
 // ActionOsTemplateUpdateRequest is a type for the entire action request
 type ActionOsTemplateUpdateRequest struct {
-	OsTemplate map[string]interface{} `json:"os_template"`
-	Meta       map[string]interface{} `json:"_meta"`
+	OsTemplate map[string]interface{} "json:\"os_template\""
+	Meta       map[string]interface{} "json:\"_meta\""
 }
 
 // ActionOsTemplateUpdateOutput is a type for action output parameters
 type ActionOsTemplateUpdateOutput struct {
-	Arch              string                    `json:"arch"`
-	CgroupVersion     string                    `json:"cgroup_version"`
-	Config            string                    `json:"config"`
-	Distribution      string                    `json:"distribution"`
-	EnableCloudInit   bool                      `json:"enable_cloud_init"`
-	EnableScript      bool                      `json:"enable_script"`
-	Enabled           bool                      `json:"enabled"`
-	HypervisorType    string                    `json:"hypervisor_type"`
-	Id                int64                     `json:"id"`
-	Info              string                    `json:"info"`
-	Label             string                    `json:"label"`
-	ManageDnsResolver bool                      `json:"manage_dns_resolver"`
-	ManageHostname    bool                      `json:"manage_hostname"`
-	Name              string                    `json:"name"`
-	Order             int64                     `json:"order"`
-	OsFamily          *ActionOsFamilyShowOutput `json:"os_family"`
-	Supported         bool                      `json:"supported"`
-	Variant           string                    `json:"variant"`
-	Vendor            string                    `json:"vendor"`
-	Version           string                    `json:"version"`
+	Arch              string                    "json:\"arch\""
+	CgroupVersion     string                    "json:\"cgroup_version\""
+	Config            string                    "json:\"config\""
+	Distribution      string                    "json:\"distribution\""
+	EnableCloudInit   bool                      "json:\"enable_cloud_init\""
+	EnableScript      bool                      "json:\"enable_script\""
+	Enabled           bool                      "json:\"enabled\""
+	HypervisorType    string                    "json:\"hypervisor_type\""
+	Id                int64                     "json:\"id\""
+	Info              string                    "json:\"info\""
+	Label             string                    "json:\"label\""
+	ManageDnsResolver bool                      "json:\"manage_dns_resolver\""
+	ManageHostname    bool                      "json:\"manage_hostname\""
+	Name              string                    "json:\"name\""
+	Order             int64                     "json:\"order\""
+	OsFamily          *ActionOsFamilyShowOutput "json:\"os_family\""
+	Supported         bool                      "json:\"supported\""
+	Variant           string                    "json:\"variant\""
+	Vendor            string                    "json:\"vendor\""
+	Version           string                    "json:\"version\""
 }
 
 // Type for action response, including envelope
 type ActionOsTemplateUpdateResponse struct {
-	Action *ActionOsTemplateUpdate `json:"-"`
+	Action *ActionOsTemplateUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		OsTemplate *ActionOsTemplateUpdateOutput `json:"os_template"`
+		OsTemplate *ActionOsTemplateUpdateOutput "json:\"os_template\""
 	}
 
 	// Action output without the namespace
@@ -424,7 +425,7 @@ func (inv *ActionOsTemplateUpdateInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOsTemplateUpdateInvocation) SetPathParamString(param string, value string) *ActionOsTemplateUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

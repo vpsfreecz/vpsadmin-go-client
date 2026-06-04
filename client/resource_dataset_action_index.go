@@ -16,9 +16,9 @@ func NewActionDatasetIndex(client *Client) *ActionDatasetIndex {
 
 // ActionDatasetIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,14 +86,14 @@ func (in *ActionDatasetIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetIndexInput is a type for action input parameters
 type ActionDatasetIndexInput struct {
-	Dataset     int64  `json:"dataset"`
-	FromId      int64  `json:"from_id"`
-	Limit       int64  `json:"limit"`
-	PrimaryPool int64  `json:"primary_pool"`
-	Role        string `json:"role"`
-	ToDepth     int64  `json:"to_depth"`
-	User        int64  `json:"user"`
-	Vps         int64  `json:"vps"`
+	Dataset     int64  "json:\"dataset\""
+	FromId      int64  "json:\"from_id\""
+	Limit       int64  "json:\"limit\""
+	PrimaryPool int64  "json:\"primary_pool\""
+	Role        string "json:\"role\""
+	ToDepth     int64  "json:\"to_depth\""
+	User        int64  "json:\"user\""
+	Vps         int64  "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -255,37 +255,37 @@ func (in *ActionDatasetIndexInput) AnySelected() bool {
 
 // ActionDatasetIndexOutput is a type for action output parameters
 type ActionDatasetIndexOutput struct {
-	Atime            bool                              `json:"atime"`
-	Avail            int64                             `json:"avail"`
-	Compression      bool                              `json:"compression"`
-	Compressratio    float64                           `json:"compressratio"`
-	CurrentHistoryId int64                             `json:"current_history_id"`
-	DatasetExpansion *ActionDatasetExpansionShowOutput `json:"dataset_expansion"`
-	Environment      *ActionEnvironmentShowOutput      `json:"environment"`
-	Export           *ActionExportShowOutput           `json:"export"`
-	Id               int64                             `json:"id"`
-	Name             string                            `json:"name"`
-	Parent           *ActionDatasetShowOutput          `json:"parent"`
-	Quota            int64                             `json:"quota"`
-	Recordsize       int64                             `json:"recordsize"`
-	Refcompressratio float64                           `json:"refcompressratio"`
-	Referenced       int64                             `json:"referenced"`
-	Refquota         int64                             `json:"refquota"`
-	Relatime         bool                              `json:"relatime"`
-	Sharenfs         string                            `json:"sharenfs"`
-	Sync             string                            `json:"sync"`
-	Used             int64                             `json:"used"`
-	User             *ActionUserShowOutput             `json:"user"`
-	Vps              *ActionVpsShowOutput              `json:"vps"`
+	Atime            bool                              "json:\"atime\""
+	Avail            int64                             "json:\"avail\""
+	Compression      bool                              "json:\"compression\""
+	Compressratio    float64                           "json:\"compressratio\""
+	CurrentHistoryId int64                             "json:\"current_history_id\""
+	DatasetExpansion *ActionDatasetExpansionShowOutput "json:\"dataset_expansion\""
+	Environment      *ActionEnvironmentShowOutput      "json:\"environment\""
+	Export           *ActionExportShowOutput           "json:\"export\""
+	Id               int64                             "json:\"id\""
+	Name             string                            "json:\"name\""
+	Parent           *ActionDatasetShowOutput          "json:\"parent\""
+	Quota            int64                             "json:\"quota\""
+	Recordsize       int64                             "json:\"recordsize\""
+	Refcompressratio float64                           "json:\"refcompressratio\""
+	Referenced       int64                             "json:\"referenced\""
+	Refquota         int64                             "json:\"refquota\""
+	Relatime         bool                              "json:\"relatime\""
+	Sharenfs         string                            "json:\"sharenfs\""
+	Sync             string                            "json:\"sync\""
+	Used             int64                             "json:\"used\""
+	User             *ActionUserShowOutput             "json:\"user\""
+	Vps              *ActionVpsShowOutput              "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetIndexResponse struct {
-	Action *ActionDatasetIndex `json:"-"`
+	Action *ActionDatasetIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Datasets []*ActionDatasetIndexOutput `json:"datasets"`
+		Datasets []*ActionDatasetIndexOutput "json:\"datasets\""
 	}
 
 	// Action output without the namespace

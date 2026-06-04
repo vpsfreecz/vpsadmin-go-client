@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionUserEnvironmentConfigIndex(client *Client) *ActionUserEnvironmentC
 
 // ActionUserEnvironmentConfigIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserEnvironmentConfigIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,9 +89,9 @@ func (in *ActionUserEnvironmentConfigIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserEnvironmentConfigIndexInput is a type for action input parameters
 type ActionUserEnvironmentConfigIndexInput struct {
-	Environment int64 `json:"environment"`
-	FromId      int64 `json:"from_id"`
-	Limit       int64 `json:"limit"`
+	Environment int64 "json:\"environment\""
+	FromId      int64 "json:\"from_id\""
+	Limit       int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -173,22 +174,22 @@ func (in *ActionUserEnvironmentConfigIndexInput) AnySelected() bool {
 
 // ActionUserEnvironmentConfigIndexOutput is a type for action output parameters
 type ActionUserEnvironmentConfigIndexOutput struct {
-	CanCreateVps  bool                         `json:"can_create_vps"`
-	CanDestroyVps bool                         `json:"can_destroy_vps"`
-	Default       bool                         `json:"default"`
-	Environment   *ActionEnvironmentShowOutput `json:"environment"`
-	Id            int64                        `json:"id"`
-	MaxVpsCount   int64                        `json:"max_vps_count"`
-	VpsLifetime   int64                        `json:"vps_lifetime"`
+	CanCreateVps  bool                         "json:\"can_create_vps\""
+	CanDestroyVps bool                         "json:\"can_destroy_vps\""
+	Default       bool                         "json:\"default\""
+	Environment   *ActionEnvironmentShowOutput "json:\"environment\""
+	Id            int64                        "json:\"id\""
+	MaxVpsCount   int64                        "json:\"max_vps_count\""
+	VpsLifetime   int64                        "json:\"vps_lifetime\""
 }
 
 // Type for action response, including envelope
 type ActionUserEnvironmentConfigIndexResponse struct {
-	Action *ActionUserEnvironmentConfigIndex `json:"-"`
+	Action *ActionUserEnvironmentConfigIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		EnvironmentConfigs []*ActionUserEnvironmentConfigIndexOutput `json:"environment_configs"`
+		EnvironmentConfigs []*ActionUserEnvironmentConfigIndexOutput "json:\"environment_configs\""
 	}
 
 	// Action output without the namespace
@@ -223,7 +224,7 @@ func (inv *ActionUserEnvironmentConfigIndexInvocation) SetPathParamInt(param str
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserEnvironmentConfigIndexInvocation) SetPathParamString(param string, value string) *ActionUserEnvironmentConfigIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

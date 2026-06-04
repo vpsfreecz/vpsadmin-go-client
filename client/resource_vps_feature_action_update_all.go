@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsFeatureUpdateAll(client *Client) *ActionVpsFeatureUpdateAll {
 
 // ActionVpsFeatureUpdateAllMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsFeatureUpdateAllMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,12 +76,12 @@ func (in *ActionVpsFeatureUpdateAllMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsFeatureUpdateAllInput is a type for action input parameters
 type ActionVpsFeatureUpdateAllInput struct {
-	Fuse         bool `json:"fuse"`
-	Impermanence bool `json:"impermanence"`
-	Kvm          bool `json:"kvm"`
-	Lxc          bool `json:"lxc"`
-	Ppp          bool `json:"ppp"`
-	Tun          bool `json:"tun"`
+	Fuse         bool "json:\"fuse\""
+	Impermanence bool "json:\"impermanence\""
+	Kvm          bool "json:\"kvm\""
+	Lxc          bool "json:\"lxc\""
+	Ppp          bool "json:\"ppp\""
+	Tun          bool "json:\"tun\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -199,23 +200,23 @@ func (in *ActionVpsFeatureUpdateAllInput) AnySelected() bool {
 
 // ActionVpsFeatureUpdateAllRequest is a type for the entire action request
 type ActionVpsFeatureUpdateAllRequest struct {
-	Feature map[string]interface{} `json:"feature"`
-	Meta    map[string]interface{} `json:"_meta"`
+	Feature map[string]interface{} "json:\"feature\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsFeatureUpdateAllMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsFeatureUpdateAllMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionVpsFeatureUpdateAllResponse struct {
-	Action *ActionVpsFeatureUpdateAll `json:"-"`
+	Action *ActionVpsFeatureUpdateAll "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionVpsFeatureUpdateAllMetaGlobalOutput `json:"_meta"`
+		Meta *ActionVpsFeatureUpdateAllMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -247,7 +248,7 @@ func (inv *ActionVpsFeatureUpdateAllInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsFeatureUpdateAllInvocation) SetPathParamString(param string, value string) *ActionVpsFeatureUpdateAllInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

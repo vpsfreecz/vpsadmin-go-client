@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMigrationPlanCancel(client *Client) *ActionMigrationPlanCancel {
 
 // ActionMigrationPlanCancelMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanCancelMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,29 +76,29 @@ func (in *ActionMigrationPlanCancelMetaGlobalInput) AnySelected() bool {
 
 // ActionMigrationPlanCancelRequest is a type for the entire action request
 type ActionMigrationPlanCancelRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionMigrationPlanCancelOutput is a type for action output parameters
 type ActionMigrationPlanCancelOutput struct {
-	Concurrency int64                 `json:"concurrency"`
-	CreatedAt   string                `json:"created_at"`
-	FinishedAt  string                `json:"finished_at"`
-	Id          int64                 `json:"id"`
-	Reason      string                `json:"reason"`
-	SendMail    bool                  `json:"send_mail"`
-	State       string                `json:"state"`
-	StopOnError bool                  `json:"stop_on_error"`
-	User        *ActionUserShowOutput `json:"user"`
+	Concurrency int64                 "json:\"concurrency\""
+	CreatedAt   string                "json:\"created_at\""
+	FinishedAt  string                "json:\"finished_at\""
+	Id          int64                 "json:\"id\""
+	Reason      string                "json:\"reason\""
+	SendMail    bool                  "json:\"send_mail\""
+	State       string                "json:\"state\""
+	StopOnError bool                  "json:\"stop_on_error\""
+	User        *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionMigrationPlanCancelResponse struct {
-	Action *ActionMigrationPlanCancel `json:"-"`
+	Action *ActionMigrationPlanCancel "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MigrationPlan *ActionMigrationPlanCancelOutput `json:"migration_plan"`
+		MigrationPlan *ActionMigrationPlanCancelOutput "json:\"migration_plan\""
 	}
 
 	// Action output without the namespace
@@ -130,7 +131,7 @@ func (inv *ActionMigrationPlanCancelInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMigrationPlanCancelInvocation) SetPathParamString(param string, value string) *ActionMigrationPlanCancelInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

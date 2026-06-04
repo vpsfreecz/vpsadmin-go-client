@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnssecRecordShow(client *Client) *ActionDnssecRecordShow {
 
 // ActionDnssecRecordShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDnssecRecordShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,25 +76,25 @@ func (in *ActionDnssecRecordShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDnssecRecordShowOutput is a type for action output parameters
 type ActionDnssecRecordShowOutput struct {
-	CreatedAt       string                   `json:"created_at"`
-	DnsZone         *ActionDnsZoneShowOutput `json:"dns_zone"`
-	DnskeyAlgorithm int64                    `json:"dnskey_algorithm"`
-	DnskeyPubkey    string                   `json:"dnskey_pubkey"`
-	DsAlgorithm     int64                    `json:"ds_algorithm"`
-	DsDigest        string                   `json:"ds_digest"`
-	DsDigestType    int64                    `json:"ds_digest_type"`
-	Id              int64                    `json:"id"`
-	Keyid           int64                    `json:"keyid"`
-	UpdatedAt       string                   `json:"updated_at"`
+	CreatedAt       string                   "json:\"created_at\""
+	DnsZone         *ActionDnsZoneShowOutput "json:\"dns_zone\""
+	DnskeyAlgorithm int64                    "json:\"dnskey_algorithm\""
+	DnskeyPubkey    string                   "json:\"dnskey_pubkey\""
+	DsAlgorithm     int64                    "json:\"ds_algorithm\""
+	DsDigest        string                   "json:\"ds_digest\""
+	DsDigestType    int64                    "json:\"ds_digest_type\""
+	Id              int64                    "json:\"id\""
+	Keyid           int64                    "json:\"keyid\""
+	UpdatedAt       string                   "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionDnssecRecordShowResponse struct {
-	Action *ActionDnssecRecordShow `json:"-"`
+	Action *ActionDnssecRecordShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnssecRecord *ActionDnssecRecordShowOutput `json:"dnssec_record"`
+		DnssecRecord *ActionDnssecRecordShowOutput "json:\"dnssec_record\""
 	}
 
 	// Action output without the namespace
@@ -126,7 +127,7 @@ func (inv *ActionDnssecRecordShowInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnssecRecordShowInvocation) SetPathParamString(param string, value string) *ActionDnssecRecordShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

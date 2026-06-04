@@ -16,8 +16,8 @@ func NewActionDnsServerZoneCreate(client *Client) *ActionDnsServerZoneCreate {
 
 // ActionDnsServerZoneCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsServerZoneCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,9 +73,9 @@ func (in *ActionDnsServerZoneCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsServerZoneCreateInput is a type for action input parameters
 type ActionDnsServerZoneCreateInput struct {
-	DnsServer int64  `json:"dns_server"`
-	DnsZone   int64  `json:"dns_zone"`
-	Type      string `json:"type"`
+	DnsServer int64  "json:\"dns_server\""
+	DnsZone   int64  "json:\"dns_zone\""
+	Type      string "json:\"type\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,39 +158,46 @@ func (in *ActionDnsServerZoneCreateInput) AnySelected() bool {
 
 // ActionDnsServerZoneCreateRequest is a type for the entire action request
 type ActionDnsServerZoneCreateRequest struct {
-	DnsServerZone map[string]interface{} `json:"dns_server_zone"`
-	Meta          map[string]interface{} `json:"_meta"`
+	DnsServerZone map[string]interface{} "json:\"dns_server_zone\""
+	Meta          map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDnsServerZoneCreateOutput is a type for action output parameters
 type ActionDnsServerZoneCreateOutput struct {
-	CreatedAt   string                     `json:"created_at"`
-	DnsServer   *ActionDnsServerShowOutput `json:"dns_server"`
-	DnsZone     *ActionDnsZoneShowOutput   `json:"dns_zone"`
-	ExpiresAt   string                     `json:"expires_at"`
-	Id          int64                      `json:"id"`
-	LastCheckAt string                     `json:"last_check_at"`
-	LoadedAt    string                     `json:"loaded_at"`
-	RefreshAt   string                     `json:"refresh_at"`
-	Serial      int64                      `json:"serial"`
-	Type        string                     `json:"type"`
-	UpdatedAt   string                     `json:"updated_at"`
+	CreatedAt               string                     "json:\"created_at\""
+	DnsServer               *ActionDnsServerShowOutput "json:\"dns_server\""
+	DnsZone                 *ActionDnsZoneShowOutput   "json:\"dns_zone\""
+	ExpiresAt               string                     "json:\"expires_at\""
+	Id                      int64                      "json:\"id\""
+	LastCheckAt             string                     "json:\"last_check_at\""
+	LastTransferAt          string                     "json:\"last_transfer_at\""
+	LastTransferLogId       int64                      "json:\"last_transfer_log_id\""
+	LastTransferPrimaryAddr string                     "json:\"last_transfer_primary_addr\""
+	LastTransferReason      string                     "json:\"last_transfer_reason\""
+	LastTransferReasonCode  string                     "json:\"last_transfer_reason_code\""
+	LastTransferSerial      int64                      "json:\"last_transfer_serial\""
+	LastTransferStatus      string                     "json:\"last_transfer_status\""
+	LoadedAt                string                     "json:\"loaded_at\""
+	RefreshAt               string                     "json:\"refresh_at\""
+	Serial                  int64                      "json:\"serial\""
+	Type                    string                     "json:\"type\""
+	UpdatedAt               string                     "json:\"updated_at\""
 }
 
 // ActionDnsServerZoneCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionDnsServerZoneCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDnsServerZoneCreateResponse struct {
-	Action *ActionDnsServerZoneCreate `json:"-"`
+	Action *ActionDnsServerZoneCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsServerZone *ActionDnsServerZoneCreateOutput `json:"dns_server_zone"`
+		DnsServerZone *ActionDnsServerZoneCreateOutput "json:\"dns_server_zone\""
 		// Global output metadata
-		Meta *ActionDnsServerZoneCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDnsServerZoneCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

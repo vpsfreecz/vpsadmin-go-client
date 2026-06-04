@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionExportHostShow(client *Client) *ActionExportHostShow {
 
 // ActionExportHostShowMetaGlobalInput is a type for action global meta input parameters
 type ActionExportHostShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,21 +76,21 @@ func (in *ActionExportHostShowMetaGlobalInput) AnySelected() bool {
 
 // ActionExportHostShowOutput is a type for action output parameters
 type ActionExportHostShowOutput struct {
-	Id           int64                      `json:"id"`
-	IpAddress    *ActionIpAddressShowOutput `json:"ip_address"`
-	RootSquash   bool                       `json:"root_squash"`
-	Rw           bool                       `json:"rw"`
-	SubtreeCheck bool                       `json:"subtree_check"`
-	Sync         bool                       `json:"sync"`
+	Id           int64                      "json:\"id\""
+	IpAddress    *ActionIpAddressShowOutput "json:\"ip_address\""
+	RootSquash   bool                       "json:\"root_squash\""
+	Rw           bool                       "json:\"rw\""
+	SubtreeCheck bool                       "json:\"subtree_check\""
+	Sync         bool                       "json:\"sync\""
 }
 
 // Type for action response, including envelope
 type ActionExportHostShowResponse struct {
-	Action *ActionExportHostShow `json:"-"`
+	Action *ActionExportHostShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Host *ActionExportHostShowOutput `json:"host"`
+		Host *ActionExportHostShowOutput "json:\"host\""
 	}
 
 	// Action output without the namespace
@@ -122,7 +123,7 @@ func (inv *ActionExportHostShowInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionExportHostShowInvocation) SetPathParamString(param string, value string) *ActionExportHostShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

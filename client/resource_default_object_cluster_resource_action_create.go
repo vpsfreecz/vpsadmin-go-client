@@ -16,8 +16,8 @@ func NewActionDefaultObjectClusterResourceCreate(client *Client) *ActionDefaultO
 
 // ActionDefaultObjectClusterResourceCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDefaultObjectClusterResourceCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,10 +73,10 @@ func (in *ActionDefaultObjectClusterResourceCreateMetaGlobalInput) AnySelected()
 
 // ActionDefaultObjectClusterResourceCreateInput is a type for action input parameters
 type ActionDefaultObjectClusterResourceCreateInput struct {
-	ClassName       string `json:"class_name"`
-	ClusterResource int64  `json:"cluster_resource"`
-	Environment     int64  `json:"environment"`
-	Value           int64  `json:"value"`
+	ClassName       string "json:\"class_name\""
+	ClusterResource int64  "json:\"cluster_resource\""
+	Environment     int64  "json:\"environment\""
+	Value           int64  "json:\"value\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -171,26 +171,26 @@ func (in *ActionDefaultObjectClusterResourceCreateInput) AnySelected() bool {
 
 // ActionDefaultObjectClusterResourceCreateRequest is a type for the entire action request
 type ActionDefaultObjectClusterResourceCreateRequest struct {
-	DefaultObjectClusterResource map[string]interface{} `json:"default_object_cluster_resource"`
-	Meta                         map[string]interface{} `json:"_meta"`
+	DefaultObjectClusterResource map[string]interface{} "json:\"default_object_cluster_resource\""
+	Meta                         map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDefaultObjectClusterResourceCreateOutput is a type for action output parameters
 type ActionDefaultObjectClusterResourceCreateOutput struct {
-	ClassName       string                           `json:"class_name"`
-	ClusterResource *ActionClusterResourceShowOutput `json:"cluster_resource"`
-	Environment     *ActionEnvironmentShowOutput     `json:"environment"`
-	Id              int64                            `json:"id"`
-	Value           int64                            `json:"value"`
+	ClassName       string                           "json:\"class_name\""
+	ClusterResource *ActionClusterResourceShowOutput "json:\"cluster_resource\""
+	Environment     *ActionEnvironmentShowOutput     "json:\"environment\""
+	Id              int64                            "json:\"id\""
+	Value           int64                            "json:\"value\""
 }
 
 // Type for action response, including envelope
 type ActionDefaultObjectClusterResourceCreateResponse struct {
-	Action *ActionDefaultObjectClusterResourceCreate `json:"-"`
+	Action *ActionDefaultObjectClusterResourceCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DefaultObjectClusterResource *ActionDefaultObjectClusterResourceCreateOutput `json:"default_object_cluster_resource"`
+		DefaultObjectClusterResource *ActionDefaultObjectClusterResourceCreateOutput "json:\"default_object_cluster_resource\""
 	}
 
 	// Action output without the namespace

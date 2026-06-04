@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOutageHandlerCreate(client *Client) *ActionOutageHandlerCreate {
 
 // ActionOutageHandlerCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageHandlerCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,9 +76,9 @@ func (in *ActionOutageHandlerCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageHandlerCreateInput is a type for action input parameters
 type ActionOutageHandlerCreateInput struct {
-	FullName string `json:"full_name"`
-	Note     string `json:"note"`
-	User     int64  `json:"user"`
+	FullName string "json:\"full_name\""
+	Note     string "json:\"note\""
+	User     int64  "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,25 +161,25 @@ func (in *ActionOutageHandlerCreateInput) AnySelected() bool {
 
 // ActionOutageHandlerCreateRequest is a type for the entire action request
 type ActionOutageHandlerCreateRequest struct {
-	Handler map[string]interface{} `json:"handler"`
-	Meta    map[string]interface{} `json:"_meta"`
+	Handler map[string]interface{} "json:\"handler\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionOutageHandlerCreateOutput is a type for action output parameters
 type ActionOutageHandlerCreateOutput struct {
-	FullName string                `json:"full_name"`
-	Id       int64                 `json:"id"`
-	Note     string                `json:"note"`
-	User     *ActionUserShowOutput `json:"user"`
+	FullName string                "json:\"full_name\""
+	Id       int64                 "json:\"id\""
+	Note     string                "json:\"note\""
+	User     *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionOutageHandlerCreateResponse struct {
-	Action *ActionOutageHandlerCreate `json:"-"`
+	Action *ActionOutageHandlerCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Handler *ActionOutageHandlerCreateOutput `json:"handler"`
+		Handler *ActionOutageHandlerCreateOutput "json:\"handler\""
 	}
 
 	// Action output without the namespace
@@ -213,7 +214,7 @@ func (inv *ActionOutageHandlerCreateInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOutageHandlerCreateInvocation) SetPathParamString(param string, value string) *ActionOutageHandlerCreateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

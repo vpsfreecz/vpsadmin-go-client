@@ -16,9 +16,9 @@ func NewActionOomReportIndex(client *Client) *ActionOomReportIndex {
 
 // ActionOomReportIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,17 +86,17 @@ func (in *ActionOomReportIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportIndexInput is a type for action input parameters
 type ActionOomReportIndexInput struct {
-	Cgroup        string `json:"cgroup"`
-	Environment   int64  `json:"environment"`
-	FromId        int64  `json:"from_id"`
-	Limit         int64  `json:"limit"`
-	Location      int64  `json:"location"`
-	Node          int64  `json:"node"`
-	OomReportRule int64  `json:"oom_report_rule"`
-	Since         string `json:"since"`
-	Until         string `json:"until"`
-	User          int64  `json:"user"`
-	Vps           int64  `json:"vps"`
+	Cgroup        string "json:\"cgroup\""
+	Environment   int64  "json:\"environment\""
+	FromId        int64  "json:\"from_id\""
+	Limit         int64  "json:\"limit\""
+	Location      int64  "json:\"location\""
+	Node          int64  "json:\"node\""
+	OomReportRule int64  "json:\"oom_report_rule\""
+	Since         string "json:\"since\""
+	Until         string "json:\"until\""
+	User          int64  "json:\"user\""
+	Vps           int64  "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -275,26 +275,26 @@ func (in *ActionOomReportIndexInput) AnySelected() bool {
 
 // ActionOomReportIndexOutput is a type for action output parameters
 type ActionOomReportIndexOutput struct {
-	Cgroup        string                         `json:"cgroup"`
-	Count         int64                          `json:"count"`
-	CreatedAt     string                         `json:"created_at"`
-	Id            int64                          `json:"id"`
-	InvokedByName string                         `json:"invoked_by_name"`
-	InvokedByPid  int64                          `json:"invoked_by_pid"`
-	KilledName    string                         `json:"killed_name"`
-	KilledPid     int64                          `json:"killed_pid"`
-	OomReportRule *ActionOomReportRuleShowOutput `json:"oom_report_rule"`
-	ReportedAt    string                         `json:"reported_at"`
-	Vps           *ActionVpsShowOutput           `json:"vps"`
+	Cgroup        string                         "json:\"cgroup\""
+	Count         int64                          "json:\"count\""
+	CreatedAt     string                         "json:\"created_at\""
+	Id            int64                          "json:\"id\""
+	InvokedByName string                         "json:\"invoked_by_name\""
+	InvokedByPid  int64                          "json:\"invoked_by_pid\""
+	KilledName    string                         "json:\"killed_name\""
+	KilledPid     int64                          "json:\"killed_pid\""
+	OomReportRule *ActionOomReportRuleShowOutput "json:\"oom_report_rule\""
+	ReportedAt    string                         "json:\"reported_at\""
+	Vps           *ActionVpsShowOutput           "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionOomReportIndexResponse struct {
-	Action *ActionOomReportIndex `json:"-"`
+	Action *ActionOomReportIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		OomReports []*ActionOomReportIndexOutput `json:"oom_reports"`
+		OomReports []*ActionOomReportIndexOutput "json:\"oom_reports\""
 	}
 
 	// Action output without the namespace

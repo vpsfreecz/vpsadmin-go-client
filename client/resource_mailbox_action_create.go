@@ -16,8 +16,8 @@ func NewActionMailboxCreate(client *Client) *ActionMailboxCreate {
 
 // ActionMailboxCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionMailboxCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,12 +73,12 @@ func (in *ActionMailboxCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionMailboxCreateInput is a type for action input parameters
 type ActionMailboxCreateInput struct {
-	EnableSsl bool   `json:"enable_ssl"`
-	Label     string `json:"label"`
-	Password  string `json:"password"`
-	Port      int64  `json:"port"`
-	Server    string `json:"server"`
-	User      string `json:"user"`
+	EnableSsl bool   "json:\"enable_ssl\""
+	Label     string "json:\"label\""
+	Password  string "json:\"password\""
+	Port      int64  "json:\"port\""
+	Server    string "json:\"server\""
+	User      string "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -197,29 +197,29 @@ func (in *ActionMailboxCreateInput) AnySelected() bool {
 
 // ActionMailboxCreateRequest is a type for the entire action request
 type ActionMailboxCreateRequest struct {
-	Mailbox map[string]interface{} `json:"mailbox"`
-	Meta    map[string]interface{} `json:"_meta"`
+	Mailbox map[string]interface{} "json:\"mailbox\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionMailboxCreateOutput is a type for action output parameters
 type ActionMailboxCreateOutput struct {
-	CreatedAt string `json:"created_at"`
-	EnableSsl bool   `json:"enable_ssl"`
-	Id        int64  `json:"id"`
-	Label     string `json:"label"`
-	Port      int64  `json:"port"`
-	Server    string `json:"server"`
-	UpdatedAt string `json:"updated_at"`
-	User      string `json:"user"`
+	CreatedAt string "json:\"created_at\""
+	EnableSsl bool   "json:\"enable_ssl\""
+	Id        int64  "json:\"id\""
+	Label     string "json:\"label\""
+	Port      int64  "json:\"port\""
+	Server    string "json:\"server\""
+	UpdatedAt string "json:\"updated_at\""
+	User      string "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionMailboxCreateResponse struct {
-	Action *ActionMailboxCreate `json:"-"`
+	Action *ActionMailboxCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Mailbox *ActionMailboxCreateOutput `json:"mailbox"`
+		Mailbox *ActionMailboxCreateOutput "json:\"mailbox\""
 	}
 
 	// Action output without the namespace

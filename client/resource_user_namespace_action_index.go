@@ -16,9 +16,9 @@ func NewActionUserNamespaceIndex(client *Client) *ActionUserNamespaceIndex {
 
 // ActionUserNamespaceIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,11 +86,11 @@ func (in *ActionUserNamespaceIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserNamespaceIndexInput is a type for action input parameters
 type ActionUserNamespaceIndexInput struct {
-	BlockCount int64 `json:"block_count"`
-	FromId     int64 `json:"from_id"`
-	Limit      int64 `json:"limit"`
-	Size       int64 `json:"size"`
-	User       int64 `json:"user"`
+	BlockCount int64 "json:\"block_count\""
+	FromId     int64 "json:\"from_id\""
+	Limit      int64 "json:\"limit\""
+	Size       int64 "json:\"size\""
+	User       int64 "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -197,20 +197,20 @@ func (in *ActionUserNamespaceIndexInput) AnySelected() bool {
 
 // ActionUserNamespaceIndexOutput is a type for action output parameters
 type ActionUserNamespaceIndexOutput struct {
-	BlockCount int64                 `json:"block_count"`
-	Id         int64                 `json:"id"`
-	Offset     int64                 `json:"offset"`
-	Size       int64                 `json:"size"`
-	User       *ActionUserShowOutput `json:"user"`
+	BlockCount int64                 "json:\"block_count\""
+	Id         int64                 "json:\"id\""
+	Offset     int64                 "json:\"offset\""
+	Size       int64                 "json:\"size\""
+	User       *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionUserNamespaceIndexResponse struct {
-	Action *ActionUserNamespaceIndex `json:"-"`
+	Action *ActionUserNamespaceIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		UserNamespaces []*ActionUserNamespaceIndexOutput `json:"user_namespaces"`
+		UserNamespaces []*ActionUserNamespaceIndexOutput "json:\"user_namespaces\""
 	}
 
 	// Action output without the namespace

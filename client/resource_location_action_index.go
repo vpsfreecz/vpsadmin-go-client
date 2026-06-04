@@ -16,9 +16,9 @@ func NewActionLocationIndex(client *Client) *ActionLocationIndex {
 
 // ActionLocationIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,16 +86,16 @@ func (in *ActionLocationIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationIndexInput is a type for action input parameters
 type ActionLocationIndexInput struct {
-	Environment           int64  `json:"environment"`
-	FromId                int64  `json:"from_id"`
-	HasHypervisor         bool   `json:"has_hypervisor"`
-	HasStorage            bool   `json:"has_storage"`
-	HypervisorType        string `json:"hypervisor_type"`
-	Limit                 int64  `json:"limit"`
-	SharesAnyNetworksWith int64  `json:"shares_any_networks_with"`
-	SharesNetworksPrimary bool   `json:"shares_networks_primary"`
-	SharesV4NetworksWith  int64  `json:"shares_v4_networks_with"`
-	SharesV6NetworksWith  int64  `json:"shares_v6_networks_with"`
+	Environment           int64  "json:\"environment\""
+	FromId                int64  "json:\"from_id\""
+	HasHypervisor         bool   "json:\"has_hypervisor\""
+	HasStorage            bool   "json:\"has_storage\""
+	HypervisorType        string "json:\"hypervisor_type\""
+	Limit                 int64  "json:\"limit\""
+	SharesAnyNetworksWith int64  "json:\"shares_any_networks_with\""
+	SharesNetworksPrimary bool   "json:\"shares_networks_primary\""
+	SharesV4NetworksWith  int64  "json:\"shares_v4_networks_with\""
+	SharesV6NetworksWith  int64  "json:\"shares_v6_networks_with\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -262,24 +262,24 @@ func (in *ActionLocationIndexInput) AnySelected() bool {
 
 // ActionLocationIndexOutput is a type for action output parameters
 type ActionLocationIndexOutput struct {
-	Description           string                       `json:"description"`
-	Domain                string                       `json:"domain"`
-	Environment           *ActionEnvironmentShowOutput `json:"environment"`
-	HasIpv6               bool                         `json:"has_ipv6"`
-	Id                    int64                        `json:"id"`
-	Label                 string                       `json:"label"`
-	MaintenanceLock       string                       `json:"maintenance_lock"`
-	MaintenanceLockReason string                       `json:"maintenance_lock_reason"`
-	RemoteConsoleServer   string                       `json:"remote_console_server"`
+	Description           string                       "json:\"description\""
+	Domain                string                       "json:\"domain\""
+	Environment           *ActionEnvironmentShowOutput "json:\"environment\""
+	HasIpv6               bool                         "json:\"has_ipv6\""
+	Id                    int64                        "json:\"id\""
+	Label                 string                       "json:\"label\""
+	MaintenanceLock       string                       "json:\"maintenance_lock\""
+	MaintenanceLockReason string                       "json:\"maintenance_lock_reason\""
+	RemoteConsoleServer   string                       "json:\"remote_console_server\""
 }
 
 // Type for action response, including envelope
 type ActionLocationIndexResponse struct {
-	Action *ActionLocationIndex `json:"-"`
+	Action *ActionLocationIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Locations []*ActionLocationIndexOutput `json:"locations"`
+		Locations []*ActionLocationIndexOutput "json:\"locations\""
 	}
 
 	// Action output without the namespace

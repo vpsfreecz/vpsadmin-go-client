@@ -16,7 +16,7 @@ func NewActionClusterSearch(client *Client) *ActionClusterSearch {
 
 // ActionClusterSearchMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterSearchMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,7 +60,7 @@ func (in *ActionClusterSearchMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterSearchInput is a type for action input parameters
 type ActionClusterSearchInput struct {
-	Value string `json:"value"`
+	Value string "json:\"value\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -119,25 +119,25 @@ func (in *ActionClusterSearchInput) AnySelected() bool {
 
 // ActionClusterSearchRequest is a type for the entire action request
 type ActionClusterSearchRequest struct {
-	Cluster map[string]interface{} `json:"cluster"`
-	Meta    map[string]interface{} `json:"_meta"`
+	Cluster map[string]interface{} "json:\"cluster\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionClusterSearchOutput is a type for action output parameters
 type ActionClusterSearchOutput struct {
-	Attribute string `json:"attribute"`
-	Id        int64  `json:"id"`
-	Resource  string `json:"resource"`
-	Value     string `json:"value"`
+	Attribute string "json:\"attribute\""
+	Id        int64  "json:\"id\""
+	Resource  string "json:\"resource\""
+	Value     string "json:\"value\""
 }
 
 // Type for action response, including envelope
 type ActionClusterSearchResponse struct {
-	Action *ActionClusterSearch `json:"-"`
+	Action *ActionClusterSearch "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Clusters []*ActionClusterSearchOutput `json:"clusters"`
+		Clusters []*ActionClusterSearchOutput "json:\"clusters\""
 	}
 
 	// Action output without the namespace

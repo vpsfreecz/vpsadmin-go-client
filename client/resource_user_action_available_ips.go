@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,7 +19,7 @@ func NewActionUserAvailableIps(client *Client) *ActionUserAvailableIps {
 
 // ActionUserAvailableIpsMetaGlobalInput is a type for action global meta input parameters
 type ActionUserAvailableIpsMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -62,8 +63,8 @@ func (in *ActionUserAvailableIpsMetaGlobalInput) AnySelected() bool {
 
 // ActionUserAvailableIpsInput is a type for action input parameters
 type ActionUserAvailableIpsInput struct {
-	AddressLocation int64 `json:"address_location"`
-	Location        int64 `json:"location"`
+	AddressLocation int64 "json:\"address_location\""
+	Location        int64 "json:\"location\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,18 +135,18 @@ func (in *ActionUserAvailableIpsInput) AnySelected() bool {
 
 // ActionUserAvailableIpsOutput is a type for action output parameters
 type ActionUserAvailableIpsOutput struct {
-	Ipv4        int64 `json:"ipv4"`
-	Ipv4Private int64 `json:"ipv4_private"`
-	Ipv6        int64 `json:"ipv6"`
+	Ipv4        int64 "json:\"ipv4\""
+	Ipv4Private int64 "json:\"ipv4_private\""
+	Ipv6        int64 "json:\"ipv6\""
 }
 
 // Type for action response, including envelope
 type ActionUserAvailableIpsResponse struct {
-	Action *ActionUserAvailableIps `json:"-"`
+	Action *ActionUserAvailableIps "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		User *ActionUserAvailableIpsOutput `json:"user"`
+		User *ActionUserAvailableIpsOutput "json:\"user\""
 	}
 
 	// Action output without the namespace
@@ -180,7 +181,7 @@ func (inv *ActionUserAvailableIpsInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserAvailableIpsInvocation) SetPathParamString(param string, value string) *ActionUserAvailableIpsInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

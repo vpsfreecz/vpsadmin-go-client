@@ -16,9 +16,9 @@ func NewActionNodeTransferConnectionIndex(client *Client) *ActionNodeTransferCon
 
 // ActionNodeTransferConnectionIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeTransferConnectionIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,10 +86,10 @@ func (in *ActionNodeTransferConnectionIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeTransferConnectionIndexInput is a type for action input parameters
 type ActionNodeTransferConnectionIndexInput struct {
-	Enabled bool  `json:"enabled"`
-	FromId  int64 `json:"from_id"`
-	Limit   int64 `json:"limit"`
-	Node    int64 `json:"node"`
+	Enabled bool  "json:\"enabled\""
+	FromId  int64 "json:\"from_id\""
+	Limit   int64 "json:\"limit\""
+	Node    int64 "json:\"node\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -184,23 +184,23 @@ func (in *ActionNodeTransferConnectionIndexInput) AnySelected() bool {
 
 // ActionNodeTransferConnectionIndexOutput is a type for action output parameters
 type ActionNodeTransferConnectionIndexOutput struct {
-	CreatedAt   string                `json:"created_at"`
-	Enabled     bool                  `json:"enabled"`
-	Id          int64                 `json:"id"`
-	NodeA       *ActionNodeShowOutput `json:"node_a"`
-	NodeAIpAddr string                `json:"node_a_ip_addr"`
-	NodeB       *ActionNodeShowOutput `json:"node_b"`
-	NodeBIpAddr string                `json:"node_b_ip_addr"`
-	UpdatedAt   string                `json:"updated_at"`
+	CreatedAt   string                "json:\"created_at\""
+	Enabled     bool                  "json:\"enabled\""
+	Id          int64                 "json:\"id\""
+	NodeA       *ActionNodeShowOutput "json:\"node_a\""
+	NodeAIpAddr string                "json:\"node_a_ip_addr\""
+	NodeB       *ActionNodeShowOutput "json:\"node_b\""
+	NodeBIpAddr string                "json:\"node_b_ip_addr\""
+	UpdatedAt   string                "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionNodeTransferConnectionIndexResponse struct {
-	Action *ActionNodeTransferConnectionIndex `json:"-"`
+	Action *ActionNodeTransferConnectionIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		NodeTransferConnections []*ActionNodeTransferConnectionIndexOutput `json:"node_transfer_connections"`
+		NodeTransferConnections []*ActionNodeTransferConnectionIndexOutput "json:\"node_transfer_connections\""
 	}
 
 	// Action output without the namespace

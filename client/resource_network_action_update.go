@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionNetworkUpdate(client *Client) *ActionNetworkUpdate {
 
 // ActionNetworkUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,15 +76,15 @@ func (in *ActionNetworkUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkUpdateInput is a type for action input parameters
 type ActionNetworkUpdateInput struct {
-	Address     string `json:"address"`
-	IpVersion   int64  `json:"ip_version"`
-	Label       string `json:"label"`
-	Managed     bool   `json:"managed"`
-	Prefix      int64  `json:"prefix"`
-	Purpose     string `json:"purpose"`
-	Role        string `json:"role"`
-	SplitAccess string `json:"split_access"`
-	SplitPrefix int64  `json:"split_prefix"`
+	Address     string "json:\"address\""
+	IpVersion   int64  "json:\"ip_version\""
+	Label       string "json:\"label\""
+	Managed     bool   "json:\"managed\""
+	Prefix      int64  "json:\"prefix\""
+	Purpose     string "json:\"purpose\""
+	Role        string "json:\"role\""
+	SplitAccess string "json:\"split_access\""
+	SplitPrefix int64  "json:\"split_prefix\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -238,37 +239,37 @@ func (in *ActionNetworkUpdateInput) AnySelected() bool {
 
 // ActionNetworkUpdateRequest is a type for the entire action request
 type ActionNetworkUpdateRequest struct {
-	Network map[string]interface{} `json:"network"`
-	Meta    map[string]interface{} `json:"_meta"`
+	Network map[string]interface{} "json:\"network\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionNetworkUpdateOutput is a type for action output parameters
 type ActionNetworkUpdateOutput struct {
-	Address         string                    `json:"address"`
-	Assigned        int64                     `json:"assigned"`
-	Id              int64                     `json:"id"`
-	IpVersion       int64                     `json:"ip_version"`
-	Label           string                    `json:"label"`
-	Managed         bool                      `json:"managed"`
-	Owned           int64                     `json:"owned"`
-	Prefix          int64                     `json:"prefix"`
-	PrimaryLocation *ActionLocationShowOutput `json:"primary_location"`
-	Purpose         string                    `json:"purpose"`
-	Role            string                    `json:"role"`
-	Size            int64                     `json:"size"`
-	SplitAccess     string                    `json:"split_access"`
-	SplitPrefix     int64                     `json:"split_prefix"`
-	Taken           int64                     `json:"taken"`
-	Used            int64                     `json:"used"`
+	Address         string                    "json:\"address\""
+	Assigned        int64                     "json:\"assigned\""
+	Id              int64                     "json:\"id\""
+	IpVersion       int64                     "json:\"ip_version\""
+	Label           string                    "json:\"label\""
+	Managed         bool                      "json:\"managed\""
+	Owned           int64                     "json:\"owned\""
+	Prefix          int64                     "json:\"prefix\""
+	PrimaryLocation *ActionLocationShowOutput "json:\"primary_location\""
+	Purpose         string                    "json:\"purpose\""
+	Role            string                    "json:\"role\""
+	Size            int64                     "json:\"size\""
+	SplitAccess     string                    "json:\"split_access\""
+	SplitPrefix     int64                     "json:\"split_prefix\""
+	Taken           int64                     "json:\"taken\""
+	Used            int64                     "json:\"used\""
 }
 
 // Type for action response, including envelope
 type ActionNetworkUpdateResponse struct {
-	Action *ActionNetworkUpdate `json:"-"`
+	Action *ActionNetworkUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Network *ActionNetworkUpdateOutput `json:"network"`
+		Network *ActionNetworkUpdateOutput "json:\"network\""
 	}
 
 	// Action output without the namespace
@@ -303,7 +304,7 @@ func (inv *ActionNetworkUpdateInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNetworkUpdateInvocation) SetPathParamString(param string, value string) *ActionNetworkUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

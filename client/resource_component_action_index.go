@@ -16,9 +16,9 @@ func NewActionComponentIndex(client *Client) *ActionComponentIndex {
 
 // ActionComponentIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionComponentIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,8 +86,8 @@ func (in *ActionComponentIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionComponentIndexInput is a type for action input parameters
 type ActionComponentIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,19 +158,19 @@ func (in *ActionComponentIndexInput) AnySelected() bool {
 
 // ActionComponentIndexOutput is a type for action output parameters
 type ActionComponentIndexOutput struct {
-	Description string `json:"description"`
-	Id          int64  `json:"id"`
-	Label       string `json:"label"`
-	Name        string `json:"name"`
+	Description string "json:\"description\""
+	Id          int64  "json:\"id\""
+	Label       string "json:\"label\""
+	Name        string "json:\"name\""
 }
 
 // Type for action response, including envelope
 type ActionComponentIndexResponse struct {
-	Action *ActionComponentIndex `json:"-"`
+	Action *ActionComponentIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Components []*ActionComponentIndexOutput `json:"components"`
+		Components []*ActionComponentIndexOutput "json:\"components\""
 	}
 
 	// Action output without the namespace

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserClusterResourcePackageUpdate(client *Client) *ActionUserCluste
 
 // ActionUserClusterResourcePackageUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserClusterResourcePackageUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,7 +76,7 @@ func (in *ActionUserClusterResourcePackageUpdateMetaGlobalInput) AnySelected() b
 
 // ActionUserClusterResourcePackageUpdateInput is a type for action input parameters
 type ActionUserClusterResourcePackageUpdateInput struct {
-	Comment string `json:"comment"`
+	Comment string "json:\"comment\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,31 +135,31 @@ func (in *ActionUserClusterResourcePackageUpdateInput) AnySelected() bool {
 
 // ActionUserClusterResourcePackageUpdateRequest is a type for the entire action request
 type ActionUserClusterResourcePackageUpdateRequest struct {
-	UserClusterResourcePackage map[string]interface{} `json:"user_cluster_resource_package"`
-	Meta                       map[string]interface{} `json:"_meta"`
+	UserClusterResourcePackage map[string]interface{} "json:\"user_cluster_resource_package\""
+	Meta                       map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserClusterResourcePackageUpdateOutput is a type for action output parameters
 type ActionUserClusterResourcePackageUpdateOutput struct {
-	AddedBy                *ActionUserShowOutput                   `json:"added_by"`
-	ClusterResourcePackage *ActionClusterResourcePackageShowOutput `json:"cluster_resource_package"`
-	Comment                string                                  `json:"comment"`
-	CreatedAt              string                                  `json:"created_at"`
-	Environment            *ActionEnvironmentShowOutput            `json:"environment"`
-	Id                     int64                                   `json:"id"`
-	IsPersonal             bool                                    `json:"is_personal"`
-	Label                  string                                  `json:"label"`
-	UpdatedAt              string                                  `json:"updated_at"`
-	User                   *ActionUserShowOutput                   `json:"user"`
+	AddedBy                *ActionUserShowOutput                   "json:\"added_by\""
+	ClusterResourcePackage *ActionClusterResourcePackageShowOutput "json:\"cluster_resource_package\""
+	Comment                string                                  "json:\"comment\""
+	CreatedAt              string                                  "json:\"created_at\""
+	Environment            *ActionEnvironmentShowOutput            "json:\"environment\""
+	Id                     int64                                   "json:\"id\""
+	IsPersonal             bool                                    "json:\"is_personal\""
+	Label                  string                                  "json:\"label\""
+	UpdatedAt              string                                  "json:\"updated_at\""
+	User                   *ActionUserShowOutput                   "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionUserClusterResourcePackageUpdateResponse struct {
-	Action *ActionUserClusterResourcePackageUpdate `json:"-"`
+	Action *ActionUserClusterResourcePackageUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		UserClusterResourcePackage *ActionUserClusterResourcePackageUpdateOutput `json:"user_cluster_resource_package"`
+		UserClusterResourcePackage *ActionUserClusterResourcePackageUpdateOutput "json:\"user_cluster_resource_package\""
 	}
 
 	// Action output without the namespace
@@ -193,7 +194,7 @@ func (inv *ActionUserClusterResourcePackageUpdateInvocation) SetPathParamInt(par
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserClusterResourcePackageUpdateInvocation) SetPathParamString(param string, value string) *ActionUserClusterResourcePackageUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

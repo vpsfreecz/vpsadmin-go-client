@@ -16,9 +16,9 @@ func NewActionExportIndex(client *Client) *ActionExportIndex {
 
 // ActionExportIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionExportIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,9 +86,9 @@ func (in *ActionExportIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionExportIndexInput is a type for action input parameters
 type ActionExportIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
-	User   int64 `json:"user"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
+	User   int64 "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -171,32 +171,32 @@ func (in *ActionExportIndexInput) AnySelected() bool {
 
 // ActionExportIndexOutput is a type for action output parameters
 type ActionExportIndexOutput struct {
-	AllVps         bool                             `json:"all_vps"`
-	CreatedAt      string                           `json:"created_at"`
-	Dataset        *ActionDatasetShowOutput         `json:"dataset"`
-	Enabled        bool                             `json:"enabled"`
-	ExpirationDate string                           `json:"expiration_date"`
-	HostIpAddress  *ActionHostIpAddressShowOutput   `json:"host_ip_address"`
-	Id             int64                            `json:"id"`
-	IpAddress      *ActionIpAddressShowOutput       `json:"ip_address"`
-	Path           string                           `json:"path"`
-	RootSquash     bool                             `json:"root_squash"`
-	Rw             bool                             `json:"rw"`
-	Snapshot       *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	SubtreeCheck   bool                             `json:"subtree_check"`
-	Sync           bool                             `json:"sync"`
-	Threads        int64                            `json:"threads"`
-	UpdatedAt      string                           `json:"updated_at"`
-	User           *ActionUserShowOutput            `json:"user"`
+	AllVps         bool                             "json:\"all_vps\""
+	CreatedAt      string                           "json:\"created_at\""
+	Dataset        *ActionDatasetShowOutput         "json:\"dataset\""
+	Enabled        bool                             "json:\"enabled\""
+	ExpirationDate string                           "json:\"expiration_date\""
+	HostIpAddress  *ActionHostIpAddressShowOutput   "json:\"host_ip_address\""
+	Id             int64                            "json:\"id\""
+	IpAddress      *ActionIpAddressShowOutput       "json:\"ip_address\""
+	Path           string                           "json:\"path\""
+	RootSquash     bool                             "json:\"root_squash\""
+	Rw             bool                             "json:\"rw\""
+	Snapshot       *ActionDatasetSnapshotShowOutput "json:\"snapshot\""
+	SubtreeCheck   bool                             "json:\"subtree_check\""
+	Sync           bool                             "json:\"sync\""
+	Threads        int64                            "json:\"threads\""
+	UpdatedAt      string                           "json:\"updated_at\""
+	User           *ActionUserShowOutput            "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionExportIndexResponse struct {
-	Action *ActionExportIndex `json:"-"`
+	Action *ActionExportIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Exports []*ActionExportIndexOutput `json:"exports"`
+		Exports []*ActionExportIndexOutput "json:\"exports\""
 	}
 
 	// Action output without the namespace

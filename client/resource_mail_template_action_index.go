@@ -16,9 +16,9 @@ func NewActionMailTemplateIndex(client *Client) *ActionMailTemplateIndex {
 
 // ActionMailTemplateIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,8 +86,8 @@ func (in *ActionMailTemplateIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMailTemplateIndexInput is a type for action input parameters
 type ActionMailTemplateIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,22 +158,22 @@ func (in *ActionMailTemplateIndexInput) AnySelected() bool {
 
 // ActionMailTemplateIndexOutput is a type for action output parameters
 type ActionMailTemplateIndexOutput struct {
-	CreatedAt      string `json:"created_at"`
-	Id             int64  `json:"id"`
-	Label          string `json:"label"`
-	Name           string `json:"name"`
-	TemplateId     string `json:"template_id"`
-	UpdatedAt      string `json:"updated_at"`
-	UserVisibility string `json:"user_visibility"`
+	CreatedAt      string "json:\"created_at\""
+	Id             int64  "json:\"id\""
+	Label          string "json:\"label\""
+	Name           string "json:\"name\""
+	TemplateId     string "json:\"template_id\""
+	UpdatedAt      string "json:\"updated_at\""
+	UserVisibility string "json:\"user_visibility\""
 }
 
 // Type for action response, including envelope
 type ActionMailTemplateIndexResponse struct {
-	Action *ActionMailTemplateIndex `json:"-"`
+	Action *ActionMailTemplateIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MailTemplates []*ActionMailTemplateIndexOutput `json:"mail_templates"`
+		MailTemplates []*ActionMailTemplateIndexOutput "json:\"mail_templates\""
 	}
 
 	// Action output without the namespace

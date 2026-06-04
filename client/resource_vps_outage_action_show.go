@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsOutageShow(client *Client) *ActionVpsOutageShow {
 
 // ActionVpsOutageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsOutageShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,23 +76,23 @@ func (in *ActionVpsOutageShowMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsOutageShowOutput is a type for action output parameters
 type ActionVpsOutageShowOutput struct {
-	Direct      bool                         `json:"direct"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	Id          int64                        `json:"id"`
-	Location    *ActionLocationShowOutput    `json:"location"`
-	Node        *ActionNodeShowOutput        `json:"node"`
-	Outage      *ActionOutageShowOutput      `json:"outage"`
-	User        *ActionUserShowOutput        `json:"user"`
-	Vps         *ActionVpsShowOutput         `json:"vps"`
+	Direct      bool                         "json:\"direct\""
+	Environment *ActionEnvironmentShowOutput "json:\"environment\""
+	Id          int64                        "json:\"id\""
+	Location    *ActionLocationShowOutput    "json:\"location\""
+	Node        *ActionNodeShowOutput        "json:\"node\""
+	Outage      *ActionOutageShowOutput      "json:\"outage\""
+	User        *ActionUserShowOutput        "json:\"user\""
+	Vps         *ActionVpsShowOutput         "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionVpsOutageShowResponse struct {
-	Action *ActionVpsOutageShow `json:"-"`
+	Action *ActionVpsOutageShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		VpsOutage *ActionVpsOutageShowOutput `json:"vps_outage"`
+		VpsOutage *ActionVpsOutageShowOutput "json:\"vps_outage\""
 	}
 
 	// Action output without the namespace
@@ -124,7 +125,7 @@ func (inv *ActionVpsOutageShowInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsOutageShowInvocation) SetPathParamString(param string, value string) *ActionVpsOutageShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

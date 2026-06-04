@@ -16,9 +16,9 @@ func NewActionHostIpAddressIndex(client *Client) *ActionHostIpAddressIndex {
 
 // ActionHostIpAddressIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionHostIpAddressIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,23 +86,23 @@ func (in *ActionHostIpAddressIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionHostIpAddressIndexInput is a type for action input parameters
 type ActionHostIpAddressIndexInput struct {
-	Addr             string `json:"addr"`
-	Assigned         bool   `json:"assigned"`
-	FromId           int64  `json:"from_id"`
-	IpAddress        int64  `json:"ip_address"`
-	Limit            int64  `json:"limit"`
-	Location         int64  `json:"location"`
-	Network          int64  `json:"network"`
-	NetworkInterface int64  `json:"network_interface"`
-	Order            string `json:"order"`
-	Prefix           int64  `json:"prefix"`
-	Purpose          string `json:"purpose"`
-	Role             string `json:"role"`
-	Routed           bool   `json:"routed"`
-	Size             int64  `json:"size"`
-	User             int64  `json:"user"`
-	Version          int64  `json:"version"`
-	Vps              int64  `json:"vps"`
+	Addr             string "json:\"addr\""
+	Assigned         bool   "json:\"assigned\""
+	FromId           int64  "json:\"from_id\""
+	IpAddress        int64  "json:\"ip_address\""
+	Limit            int64  "json:\"limit\""
+	Location         int64  "json:\"location\""
+	Network          int64  "json:\"network\""
+	NetworkInterface int64  "json:\"network_interface\""
+	Order            string "json:\"order\""
+	Prefix           int64  "json:\"prefix\""
+	Purpose          string "json:\"purpose\""
+	Role             string "json:\"role\""
+	Routed           bool   "json:\"routed\""
+	Size             int64  "json:\"size\""
+	User             int64  "json:\"user\""
+	Version          int64  "json:\"version\""
+	Vps              int64  "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -391,21 +391,21 @@ func (in *ActionHostIpAddressIndexInput) AnySelected() bool {
 
 // ActionHostIpAddressIndexOutput is a type for action output parameters
 type ActionHostIpAddressIndexOutput struct {
-	Addr               string                     `json:"addr"`
-	Assigned           bool                       `json:"assigned"`
-	Id                 int64                      `json:"id"`
-	IpAddress          *ActionIpAddressShowOutput `json:"ip_address"`
-	ReverseRecordValue string                     `json:"reverse_record_value"`
-	UserCreated        bool                       `json:"user_created"`
+	Addr               string                     "json:\"addr\""
+	Assigned           bool                       "json:\"assigned\""
+	Id                 int64                      "json:\"id\""
+	IpAddress          *ActionIpAddressShowOutput "json:\"ip_address\""
+	ReverseRecordValue string                     "json:\"reverse_record_value\""
+	UserCreated        bool                       "json:\"user_created\""
 }
 
 // Type for action response, including envelope
 type ActionHostIpAddressIndexResponse struct {
-	Action *ActionHostIpAddressIndex `json:"-"`
+	Action *ActionHostIpAddressIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		HostIpAddresses []*ActionHostIpAddressIndexOutput `json:"host_ip_addresses"`
+		HostIpAddresses []*ActionHostIpAddressIndexOutput "json:\"host_ip_addresses\""
 	}
 
 	// Action output without the namespace

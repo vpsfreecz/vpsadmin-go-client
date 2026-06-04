@@ -16,9 +16,9 @@ func NewActionUserAccountIndex(client *Client) *ActionUserAccountIndex {
 
 // ActionUserAccountIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserAccountIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,8 +86,8 @@ func (in *ActionUserAccountIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserAccountIndexInput is a type for action input parameters
 type ActionUserAccountIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,18 +158,18 @@ func (in *ActionUserAccountIndexInput) AnySelected() bool {
 
 // ActionUserAccountIndexOutput is a type for action output parameters
 type ActionUserAccountIndexOutput struct {
-	Id             int64  `json:"id"`
-	MonthlyPayment int64  `json:"monthly_payment"`
-	PaidUntil      string `json:"paid_until"`
+	Id             int64  "json:\"id\""
+	MonthlyPayment int64  "json:\"monthly_payment\""
+	PaidUntil      string "json:\"paid_until\""
 }
 
 // Type for action response, including envelope
 type ActionUserAccountIndexResponse struct {
-	Action *ActionUserAccountIndex `json:"-"`
+	Action *ActionUserAccountIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		UserAccounts []*ActionUserAccountIndexOutput `json:"user_accounts"`
+		UserAccounts []*ActionUserAccountIndexOutput "json:\"user_accounts\""
 	}
 
 	// Action output without the namespace

@@ -16,9 +16,9 @@ func NewActionNewsLogIndex(client *Client) *ActionNewsLogIndex {
 
 // ActionNewsLogIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionNewsLogIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,9 +86,9 @@ func (in *ActionNewsLogIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionNewsLogIndexInput is a type for action input parameters
 type ActionNewsLogIndexInput struct {
-	FromId int64  `json:"from_id"`
-	Limit  int64  `json:"limit"`
-	Since  string `json:"since"`
+	FromId int64  "json:\"from_id\""
+	Limit  int64  "json:\"limit\""
+	Since  string "json:\"since\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -171,20 +171,20 @@ func (in *ActionNewsLogIndexInput) AnySelected() bool {
 
 // ActionNewsLogIndexOutput is a type for action output parameters
 type ActionNewsLogIndexOutput struct {
-	CreatedAt   string `json:"created_at"`
-	Id          int64  `json:"id"`
-	Message     string `json:"message"`
-	PublishedAt string `json:"published_at"`
-	UpdatedAt   string `json:"updated_at"`
+	CreatedAt   string "json:\"created_at\""
+	Id          int64  "json:\"id\""
+	Message     string "json:\"message\""
+	PublishedAt string "json:\"published_at\""
+	UpdatedAt   string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionNewsLogIndexResponse struct {
-	Action *ActionNewsLogIndex `json:"-"`
+	Action *ActionNewsLogIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		NewsLogs []*ActionNewsLogIndexOutput `json:"news_logs"`
+		NewsLogs []*ActionNewsLogIndexOutput "json:\"news_logs\""
 	}
 
 	// Action output without the namespace

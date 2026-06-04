@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionDatasetPropertyHistoryIndex(client *Client) *ActionDatasetProperty
 
 // ActionDatasetPropertyHistoryIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetPropertyHistoryIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,11 +89,11 @@ func (in *ActionDatasetPropertyHistoryIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetPropertyHistoryIndexInput is a type for action input parameters
 type ActionDatasetPropertyHistoryIndexInput struct {
-	From   string `json:"from"`
-	FromId int64  `json:"from_id"`
-	Limit  int64  `json:"limit"`
-	Name   string `json:"name"`
-	To     string `json:"to"`
+	From   string "json:\"from\""
+	FromId int64  "json:\"from_id\""
+	Limit  int64  "json:\"limit\""
+	Name   string "json:\"name\""
+	To     string "json:\"to\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -199,19 +200,19 @@ func (in *ActionDatasetPropertyHistoryIndexInput) AnySelected() bool {
 
 // ActionDatasetPropertyHistoryIndexOutput is a type for action output parameters
 type ActionDatasetPropertyHistoryIndexOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id        int64  `json:"id"`
-	Name      string `json:"name"`
-	Value     int64  `json:"value"`
+	CreatedAt string "json:\"created_at\""
+	Id        int64  "json:\"id\""
+	Name      string "json:\"name\""
+	Value     int64  "json:\"value\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetPropertyHistoryIndexResponse struct {
-	Action *ActionDatasetPropertyHistoryIndex `json:"-"`
+	Action *ActionDatasetPropertyHistoryIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		PropertyHistories []*ActionDatasetPropertyHistoryIndexOutput `json:"property_histories"`
+		PropertyHistories []*ActionDatasetPropertyHistoryIndexOutput "json:\"property_histories\""
 	}
 
 	// Action output without the namespace
@@ -246,7 +247,7 @@ func (inv *ActionDatasetPropertyHistoryIndexInvocation) SetPathParamInt(param st
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetPropertyHistoryIndexInvocation) SetPathParamString(param string, value string) *ActionDatasetPropertyHistoryIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

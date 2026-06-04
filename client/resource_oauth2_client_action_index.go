@@ -16,9 +16,9 @@ func NewActionOauth2ClientIndex(client *Client) *ActionOauth2ClientIndex {
 
 // ActionOauth2ClientIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOauth2ClientIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,8 +86,8 @@ func (in *ActionOauth2ClientIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOauth2ClientIndexInput is a type for action input parameters
 type ActionOauth2ClientIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,26 +158,26 @@ func (in *ActionOauth2ClientIndexInput) AnySelected() bool {
 
 // ActionOauth2ClientIndexOutput is a type for action output parameters
 type ActionOauth2ClientIndexOutput struct {
-	AccessTokenLifetime string `json:"access_token_lifetime"`
-	AccessTokenSeconds  int64  `json:"access_token_seconds"`
-	AllowSingleSignOn   bool   `json:"allow_single_sign_on"`
-	ClientId            string `json:"client_id"`
-	CreatedAt           string `json:"created_at"`
-	Id                  int64  `json:"id"`
-	IssueRefreshToken   bool   `json:"issue_refresh_token"`
-	Name                string `json:"name"`
-	RedirectUri         string `json:"redirect_uri"`
-	RefreshTokenSeconds int64  `json:"refresh_token_seconds"`
-	UpdatedAt           string `json:"updated_at"`
+	AccessTokenLifetime string "json:\"access_token_lifetime\""
+	AccessTokenSeconds  int64  "json:\"access_token_seconds\""
+	AllowSingleSignOn   bool   "json:\"allow_single_sign_on\""
+	ClientId            string "json:\"client_id\""
+	CreatedAt           string "json:\"created_at\""
+	Id                  int64  "json:\"id\""
+	IssueRefreshToken   bool   "json:\"issue_refresh_token\""
+	Name                string "json:\"name\""
+	RedirectUri         string "json:\"redirect_uri\""
+	RefreshTokenSeconds int64  "json:\"refresh_token_seconds\""
+	UpdatedAt           string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionOauth2ClientIndexResponse struct {
-	Action *ActionOauth2ClientIndex `json:"-"`
+	Action *ActionOauth2ClientIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Oauth2Clients []*ActionOauth2ClientIndexOutput `json:"oauth2_clients"`
+		Oauth2Clients []*ActionOauth2ClientIndexOutput "json:\"oauth2_clients\""
 	}
 
 	// Action output without the namespace

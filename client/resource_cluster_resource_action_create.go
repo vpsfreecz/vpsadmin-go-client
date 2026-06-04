@@ -16,8 +16,8 @@ func NewActionClusterResourceCreate(client *Client) *ActionClusterResourceCreate
 
 // ActionClusterResourceCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourceCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,14 +73,14 @@ func (in *ActionClusterResourceCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterResourceCreateInput is a type for action input parameters
 type ActionClusterResourceCreateInput struct {
-	AllocateChain string `json:"allocate_chain"`
-	FreeChain     string `json:"free_chain"`
-	Label         string `json:"label"`
-	Max           int64  `json:"max"`
-	Min           int64  `json:"min"`
-	Name          string `json:"name"`
-	ResourceType  string `json:"resource_type"`
-	Stepsize      int64  `json:"stepsize"`
+	AllocateChain string "json:\"allocate_chain\""
+	FreeChain     string "json:\"free_chain\""
+	Label         string "json:\"label\""
+	Max           int64  "json:\"max\""
+	Min           int64  "json:\"min\""
+	Name          string "json:\"name\""
+	ResourceType  string "json:\"resource_type\""
+	Stepsize      int64  "json:\"stepsize\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -223,30 +223,30 @@ func (in *ActionClusterResourceCreateInput) AnySelected() bool {
 
 // ActionClusterResourceCreateRequest is a type for the entire action request
 type ActionClusterResourceCreateRequest struct {
-	ClusterResource map[string]interface{} `json:"cluster_resource"`
-	Meta            map[string]interface{} `json:"_meta"`
+	ClusterResource map[string]interface{} "json:\"cluster_resource\""
+	Meta            map[string]interface{} "json:\"_meta\""
 }
 
 // ActionClusterResourceCreateOutput is a type for action output parameters
 type ActionClusterResourceCreateOutput struct {
-	AllocateChain string `json:"allocate_chain"`
-	FreeChain     string `json:"free_chain"`
-	Id            int64  `json:"id"`
-	Label         string `json:"label"`
-	Max           int64  `json:"max"`
-	Min           int64  `json:"min"`
-	Name          string `json:"name"`
-	ResourceType  string `json:"resource_type"`
-	Stepsize      int64  `json:"stepsize"`
+	AllocateChain string "json:\"allocate_chain\""
+	FreeChain     string "json:\"free_chain\""
+	Id            int64  "json:\"id\""
+	Label         string "json:\"label\""
+	Max           int64  "json:\"max\""
+	Min           int64  "json:\"min\""
+	Name          string "json:\"name\""
+	ResourceType  string "json:\"resource_type\""
+	Stepsize      int64  "json:\"stepsize\""
 }
 
 // Type for action response, including envelope
 type ActionClusterResourceCreateResponse struct {
-	Action *ActionClusterResourceCreate `json:"-"`
+	Action *ActionClusterResourceCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		ClusterResource *ActionClusterResourceCreateOutput `json:"cluster_resource"`
+		ClusterResource *ActionClusterResourceCreateOutput "json:\"cluster_resource\""
 	}
 
 	// Action output without the namespace

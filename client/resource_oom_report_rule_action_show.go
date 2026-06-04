@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOomReportRuleShow(client *Client) *ActionOomReportRuleShow {
 
 // ActionOomReportRuleShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportRuleShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,23 +76,23 @@ func (in *ActionOomReportRuleShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportRuleShowOutput is a type for action output parameters
 type ActionOomReportRuleShowOutput struct {
-	Action        string               `json:"action"`
-	CgroupPattern string               `json:"cgroup_pattern"`
-	CreatedAt     string               `json:"created_at"`
-	HitCount      int64                `json:"hit_count"`
-	Id            int64                `json:"id"`
-	Label         string               `json:"label"`
-	UpdatedAt     string               `json:"updated_at"`
-	Vps           *ActionVpsShowOutput `json:"vps"`
+	Action        string               "json:\"action\""
+	CgroupPattern string               "json:\"cgroup_pattern\""
+	CreatedAt     string               "json:\"created_at\""
+	HitCount      int64                "json:\"hit_count\""
+	Id            int64                "json:\"id\""
+	Label         string               "json:\"label\""
+	UpdatedAt     string               "json:\"updated_at\""
+	Vps           *ActionVpsShowOutput "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionOomReportRuleShowResponse struct {
-	Action *ActionOomReportRuleShow `json:"-"`
+	Action *ActionOomReportRuleShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		OomReportRule *ActionOomReportRuleShowOutput `json:"oom_report_rule"`
+		OomReportRule *ActionOomReportRuleShowOutput "json:\"oom_report_rule\""
 	}
 
 	// Action output without the namespace
@@ -124,7 +125,7 @@ func (inv *ActionOomReportRuleShowInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOomReportRuleShowInvocation) SetPathParamString(param string, value string) *ActionOomReportRuleShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

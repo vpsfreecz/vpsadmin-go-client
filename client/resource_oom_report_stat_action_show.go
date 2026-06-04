@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOomReportStatShow(client *Client) *ActionOomReportStatShow {
 
 // ActionOomReportStatShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportStatShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,18 +76,18 @@ func (in *ActionOomReportStatShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportStatShowOutput is a type for action output parameters
 type ActionOomReportStatShowOutput struct {
-	Id        int64  `json:"id"`
-	Parameter string `json:"parameter"`
-	Value     int64  `json:"value"`
+	Id        int64  "json:\"id\""
+	Parameter string "json:\"parameter\""
+	Value     int64  "json:\"value\""
 }
 
 // Type for action response, including envelope
 type ActionOomReportStatShowResponse struct {
-	Action *ActionOomReportStatShow `json:"-"`
+	Action *ActionOomReportStatShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Stat *ActionOomReportStatShowOutput `json:"stat"`
+		Stat *ActionOomReportStatShowOutput "json:\"stat\""
 	}
 
 	// Action output without the namespace
@@ -119,7 +120,7 @@ func (inv *ActionOomReportStatShowInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOomReportStatShowInvocation) SetPathParamString(param string, value string) *ActionOomReportStatShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

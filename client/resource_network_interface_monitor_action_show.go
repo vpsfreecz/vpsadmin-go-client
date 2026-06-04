@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionNetworkInterfaceMonitorShow(client *Client) *ActionNetworkInterfac
 
 // ActionNetworkInterfaceMonitorShowMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkInterfaceMonitorShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,25 +76,25 @@ func (in *ActionNetworkInterfaceMonitorShowMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkInterfaceMonitorShowOutput is a type for action output parameters
 type ActionNetworkInterfaceMonitorShowOutput struct {
-	Bytes            int64                             `json:"bytes"`
-	BytesIn          int64                             `json:"bytes_in"`
-	BytesOut         int64                             `json:"bytes_out"`
-	Delta            int64                             `json:"delta"`
-	Id               int64                             `json:"id"`
-	NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Packets          int64                             `json:"packets"`
-	PacketsIn        int64                             `json:"packets_in"`
-	PacketsOut       int64                             `json:"packets_out"`
-	UpdatedAt        string                            `json:"updated_at"`
+	Bytes            int64                             "json:\"bytes\""
+	BytesIn          int64                             "json:\"bytes_in\""
+	BytesOut         int64                             "json:\"bytes_out\""
+	Delta            int64                             "json:\"delta\""
+	Id               int64                             "json:\"id\""
+	NetworkInterface *ActionNetworkInterfaceShowOutput "json:\"network_interface\""
+	Packets          int64                             "json:\"packets\""
+	PacketsIn        int64                             "json:\"packets_in\""
+	PacketsOut       int64                             "json:\"packets_out\""
+	UpdatedAt        string                            "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionNetworkInterfaceMonitorShowResponse struct {
-	Action *ActionNetworkInterfaceMonitorShow `json:"-"`
+	Action *ActionNetworkInterfaceMonitorShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		NetworkInterfaceMonitor *ActionNetworkInterfaceMonitorShowOutput `json:"network_interface_monitor"`
+		NetworkInterfaceMonitor *ActionNetworkInterfaceMonitorShowOutput "json:\"network_interface_monitor\""
 	}
 
 	// Action output without the namespace
@@ -126,7 +127,7 @@ func (inv *ActionNetworkInterfaceMonitorShowInvocation) SetPathParamInt(param st
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNetworkInterfaceMonitorShowInvocation) SetPathParamString(param string, value string) *ActionNetworkInterfaceMonitorShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMonitoredEventIgnore(client *Client) *ActionMonitoredEventIgnore {
 
 // ActionMonitoredEventIgnoreMetaGlobalInput is a type for action global meta input parameters
 type ActionMonitoredEventIgnoreMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,7 +76,7 @@ func (in *ActionMonitoredEventIgnoreMetaGlobalInput) AnySelected() bool {
 
 // ActionMonitoredEventIgnoreInput is a type for action input parameters
 type ActionMonitoredEventIgnoreInput struct {
-	Until string `json:"until"`
+	Until string "json:\"until\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,13 +135,13 @@ func (in *ActionMonitoredEventIgnoreInput) AnySelected() bool {
 
 // ActionMonitoredEventIgnoreRequest is a type for the entire action request
 type ActionMonitoredEventIgnoreRequest struct {
-	MonitoredEvent map[string]interface{} `json:"monitored_event"`
-	Meta           map[string]interface{} `json:"_meta"`
+	MonitoredEvent map[string]interface{} "json:\"monitored_event\""
+	Meta           map[string]interface{} "json:\"_meta\""
 }
 
 // Type for action response, including envelope
 type ActionMonitoredEventIgnoreResponse struct {
-	Action *ActionMonitoredEventIgnore `json:"-"`
+	Action *ActionMonitoredEventIgnore "json:\"-\""
 	*Envelope
 }
 
@@ -172,7 +173,7 @@ func (inv *ActionMonitoredEventIgnoreInvocation) SetPathParamInt(param string, v
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMonitoredEventIgnoreInvocation) SetPathParamString(param string, value string) *ActionMonitoredEventIgnoreInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

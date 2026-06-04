@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnsServerZoneShow(client *Client) *ActionDnsServerZoneShow {
 
 // ActionDnsServerZoneShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsServerZoneShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,26 +76,33 @@ func (in *ActionDnsServerZoneShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsServerZoneShowOutput is a type for action output parameters
 type ActionDnsServerZoneShowOutput struct {
-	CreatedAt   string                     `json:"created_at"`
-	DnsServer   *ActionDnsServerShowOutput `json:"dns_server"`
-	DnsZone     *ActionDnsZoneShowOutput   `json:"dns_zone"`
-	ExpiresAt   string                     `json:"expires_at"`
-	Id          int64                      `json:"id"`
-	LastCheckAt string                     `json:"last_check_at"`
-	LoadedAt    string                     `json:"loaded_at"`
-	RefreshAt   string                     `json:"refresh_at"`
-	Serial      int64                      `json:"serial"`
-	Type        string                     `json:"type"`
-	UpdatedAt   string                     `json:"updated_at"`
+	CreatedAt               string                     "json:\"created_at\""
+	DnsServer               *ActionDnsServerShowOutput "json:\"dns_server\""
+	DnsZone                 *ActionDnsZoneShowOutput   "json:\"dns_zone\""
+	ExpiresAt               string                     "json:\"expires_at\""
+	Id                      int64                      "json:\"id\""
+	LastCheckAt             string                     "json:\"last_check_at\""
+	LastTransferAt          string                     "json:\"last_transfer_at\""
+	LastTransferLogId       int64                      "json:\"last_transfer_log_id\""
+	LastTransferPrimaryAddr string                     "json:\"last_transfer_primary_addr\""
+	LastTransferReason      string                     "json:\"last_transfer_reason\""
+	LastTransferReasonCode  string                     "json:\"last_transfer_reason_code\""
+	LastTransferSerial      int64                      "json:\"last_transfer_serial\""
+	LastTransferStatus      string                     "json:\"last_transfer_status\""
+	LoadedAt                string                     "json:\"loaded_at\""
+	RefreshAt               string                     "json:\"refresh_at\""
+	Serial                  int64                      "json:\"serial\""
+	Type                    string                     "json:\"type\""
+	UpdatedAt               string                     "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionDnsServerZoneShowResponse struct {
-	Action *ActionDnsServerZoneShow `json:"-"`
+	Action *ActionDnsServerZoneShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsServerZone *ActionDnsServerZoneShowOutput `json:"dns_server_zone"`
+		DnsServerZone *ActionDnsServerZoneShowOutput "json:\"dns_server_zone\""
 	}
 
 	// Action output without the namespace
@@ -127,7 +135,7 @@ func (inv *ActionDnsServerZoneShowInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsServerZoneShowInvocation) SetPathParamString(param string, value string) *ActionDnsServerZoneShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

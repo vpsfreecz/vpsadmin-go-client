@@ -16,8 +16,8 @@ func NewActionMailTemplateCreate(client *Client) *ActionMailTemplateCreate {
 
 // ActionMailTemplateCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,10 +73,10 @@ func (in *ActionMailTemplateCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionMailTemplateCreateInput is a type for action input parameters
 type ActionMailTemplateCreateInput struct {
-	Label          string `json:"label"`
-	Name           string `json:"name"`
-	TemplateId     string `json:"template_id"`
-	UserVisibility string `json:"user_visibility"`
+	Label          string "json:\"label\""
+	Name           string "json:\"name\""
+	TemplateId     string "json:\"template_id\""
+	UserVisibility string "json:\"user_visibility\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -171,28 +171,28 @@ func (in *ActionMailTemplateCreateInput) AnySelected() bool {
 
 // ActionMailTemplateCreateRequest is a type for the entire action request
 type ActionMailTemplateCreateRequest struct {
-	MailTemplate map[string]interface{} `json:"mail_template"`
-	Meta         map[string]interface{} `json:"_meta"`
+	MailTemplate map[string]interface{} "json:\"mail_template\""
+	Meta         map[string]interface{} "json:\"_meta\""
 }
 
 // ActionMailTemplateCreateOutput is a type for action output parameters
 type ActionMailTemplateCreateOutput struct {
-	CreatedAt      string `json:"created_at"`
-	Id             int64  `json:"id"`
-	Label          string `json:"label"`
-	Name           string `json:"name"`
-	TemplateId     string `json:"template_id"`
-	UpdatedAt      string `json:"updated_at"`
-	UserVisibility string `json:"user_visibility"`
+	CreatedAt      string "json:\"created_at\""
+	Id             int64  "json:\"id\""
+	Label          string "json:\"label\""
+	Name           string "json:\"name\""
+	TemplateId     string "json:\"template_id\""
+	UpdatedAt      string "json:\"updated_at\""
+	UserVisibility string "json:\"user_visibility\""
 }
 
 // Type for action response, including envelope
 type ActionMailTemplateCreateResponse struct {
-	Action *ActionMailTemplateCreate `json:"-"`
+	Action *ActionMailTemplateCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MailTemplate *ActionMailTemplateCreateOutput `json:"mail_template"`
+		MailTemplate *ActionMailTemplateCreateOutput "json:\"mail_template\""
 	}
 
 	// Action output without the namespace

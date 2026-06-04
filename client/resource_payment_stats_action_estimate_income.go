@@ -16,7 +16,7 @@ func NewActionPaymentStatsEstimateIncome(client *Client) *ActionPaymentStatsEsti
 
 // ActionPaymentStatsEstimateIncomeMetaGlobalInput is a type for action global meta input parameters
 type ActionPaymentStatsEstimateIncomeMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,10 +60,10 @@ func (in *ActionPaymentStatsEstimateIncomeMetaGlobalInput) AnySelected() bool {
 
 // ActionPaymentStatsEstimateIncomeInput is a type for action input parameters
 type ActionPaymentStatsEstimateIncomeInput struct {
-	Duration int64  `json:"duration"`
-	Month    int64  `json:"month"`
-	Select   string `json:"select"`
-	Year     int64  `json:"year"`
+	Duration int64  "json:\"duration\""
+	Month    int64  "json:\"month\""
+	Select   string "json:\"select\""
+	Year     int64  "json:\"year\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,17 +158,17 @@ func (in *ActionPaymentStatsEstimateIncomeInput) AnySelected() bool {
 
 // ActionPaymentStatsEstimateIncomeOutput is a type for action output parameters
 type ActionPaymentStatsEstimateIncomeOutput struct {
-	EstimatedIncome int64 `json:"estimated_income"`
-	UserCount       int64 `json:"user_count"`
+	EstimatedIncome int64 "json:\"estimated_income\""
+	UserCount       int64 "json:\"user_count\""
 }
 
 // Type for action response, including envelope
 type ActionPaymentStatsEstimateIncomeResponse struct {
-	Action *ActionPaymentStatsEstimateIncome `json:"-"`
+	Action *ActionPaymentStatsEstimateIncome "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		PaymentStat *ActionPaymentStatsEstimateIncomeOutput `json:"payment_stat"`
+		PaymentStat *ActionPaymentStatsEstimateIncomeOutput "json:\"payment_stat\""
 	}
 
 	// Action output without the namespace

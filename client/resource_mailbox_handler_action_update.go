@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMailboxHandlerUpdate(client *Client) *ActionMailboxHandlerUpdate {
 
 // ActionMailboxHandlerUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionMailboxHandlerUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,9 +76,9 @@ func (in *ActionMailboxHandlerUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionMailboxHandlerUpdateInput is a type for action input parameters
 type ActionMailboxHandlerUpdateInput struct {
-	ClassName string `json:"class_name"`
-	Continue  bool   `json:"continue"`
-	Order     int64  `json:"order"`
+	ClassName string "json:\"class_name\""
+	Continue  bool   "json:\"continue\""
+	Order     int64  "json:\"order\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,27 +161,27 @@ func (in *ActionMailboxHandlerUpdateInput) AnySelected() bool {
 
 // ActionMailboxHandlerUpdateRequest is a type for the entire action request
 type ActionMailboxHandlerUpdateRequest struct {
-	Handler map[string]interface{} `json:"handler"`
-	Meta    map[string]interface{} `json:"_meta"`
+	Handler map[string]interface{} "json:\"handler\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionMailboxHandlerUpdateOutput is a type for action output parameters
 type ActionMailboxHandlerUpdateOutput struct {
-	ClassName string `json:"class_name"`
-	Continue  bool   `json:"continue"`
-	CreatedAt string `json:"created_at"`
-	Id        int64  `json:"id"`
-	Order     int64  `json:"order"`
-	UpdatedAt string `json:"updated_at"`
+	ClassName string "json:\"class_name\""
+	Continue  bool   "json:\"continue\""
+	CreatedAt string "json:\"created_at\""
+	Id        int64  "json:\"id\""
+	Order     int64  "json:\"order\""
+	UpdatedAt string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionMailboxHandlerUpdateResponse struct {
-	Action *ActionMailboxHandlerUpdate `json:"-"`
+	Action *ActionMailboxHandlerUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Handler *ActionMailboxHandlerUpdateOutput `json:"handler"`
+		Handler *ActionMailboxHandlerUpdateOutput "json:\"handler\""
 	}
 
 	// Action output without the namespace
@@ -215,7 +216,7 @@ func (inv *ActionMailboxHandlerUpdateInvocation) SetPathParamInt(param string, v
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMailboxHandlerUpdateInvocation) SetPathParamString(param string, value string) *ActionMailboxHandlerUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

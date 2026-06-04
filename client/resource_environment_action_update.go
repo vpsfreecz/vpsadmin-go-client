@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionEnvironmentUpdate(client *Client) *ActionEnvironmentUpdate {
 
 // ActionEnvironmentUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionEnvironmentUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,14 +76,14 @@ func (in *ActionEnvironmentUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionEnvironmentUpdateInput is a type for action input parameters
 type ActionEnvironmentUpdateInput struct {
-	CanCreateVps    bool   `json:"can_create_vps"`
-	CanDestroyVps   bool   `json:"can_destroy_vps"`
-	Description     string `json:"description"`
-	Domain          string `json:"domain"`
-	Label           string `json:"label"`
-	MaxVpsCount     int64  `json:"max_vps_count"`
-	UserIpOwnership bool   `json:"user_ip_ownership"`
-	VpsLifetime     int64  `json:"vps_lifetime"`
+	CanCreateVps    bool   "json:\"can_create_vps\""
+	CanDestroyVps   bool   "json:\"can_destroy_vps\""
+	Description     string "json:\"description\""
+	Domain          string "json:\"domain\""
+	Label           string "json:\"label\""
+	MaxVpsCount     int64  "json:\"max_vps_count\""
+	UserIpOwnership bool   "json:\"user_ip_ownership\""
+	VpsLifetime     int64  "json:\"vps_lifetime\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -225,30 +226,30 @@ func (in *ActionEnvironmentUpdateInput) AnySelected() bool {
 
 // ActionEnvironmentUpdateRequest is a type for the entire action request
 type ActionEnvironmentUpdateRequest struct {
-	Environment map[string]interface{} `json:"environment"`
-	Meta        map[string]interface{} `json:"_meta"`
+	Environment map[string]interface{} "json:\"environment\""
+	Meta        map[string]interface{} "json:\"_meta\""
 }
 
 // ActionEnvironmentUpdateOutput is a type for action output parameters
 type ActionEnvironmentUpdateOutput struct {
-	CanCreateVps    bool   `json:"can_create_vps"`
-	CanDestroyVps   bool   `json:"can_destroy_vps"`
-	Description     string `json:"description"`
-	Domain          string `json:"domain"`
-	Id              int64  `json:"id"`
-	Label           string `json:"label"`
-	MaxVpsCount     int64  `json:"max_vps_count"`
-	UserIpOwnership bool   `json:"user_ip_ownership"`
-	VpsLifetime     int64  `json:"vps_lifetime"`
+	CanCreateVps    bool   "json:\"can_create_vps\""
+	CanDestroyVps   bool   "json:\"can_destroy_vps\""
+	Description     string "json:\"description\""
+	Domain          string "json:\"domain\""
+	Id              int64  "json:\"id\""
+	Label           string "json:\"label\""
+	MaxVpsCount     int64  "json:\"max_vps_count\""
+	UserIpOwnership bool   "json:\"user_ip_ownership\""
+	VpsLifetime     int64  "json:\"vps_lifetime\""
 }
 
 // Type for action response, including envelope
 type ActionEnvironmentUpdateResponse struct {
-	Action *ActionEnvironmentUpdate `json:"-"`
+	Action *ActionEnvironmentUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Environment *ActionEnvironmentUpdateOutput `json:"environment"`
+		Environment *ActionEnvironmentUpdateOutput "json:\"environment\""
 	}
 
 	// Action output without the namespace
@@ -283,7 +284,7 @@ func (inv *ActionEnvironmentUpdateInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionEnvironmentUpdateInvocation) SetPathParamString(param string, value string) *ActionEnvironmentUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

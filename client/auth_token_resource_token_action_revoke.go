@@ -16,7 +16,7 @@ func NewAuthTokenActionTokenRevoke(client *Client) *AuthTokenActionTokenRevoke {
 
 // AuthTokenActionTokenRevokeMetaGlobalInput is a type for action global meta input parameters
 type AuthTokenActionTokenRevokeMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,12 +60,12 @@ func (in *AuthTokenActionTokenRevokeMetaGlobalInput) AnySelected() bool {
 
 // AuthTokenActionTokenRevokeRequest is a type for the entire action request
 type AuthTokenActionTokenRevokeRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // Type for action response, including envelope
 type AuthTokenActionTokenRevokeResponse struct {
-	Action *AuthTokenActionTokenRevoke `json:"-"`
+	Action *AuthTokenActionTokenRevoke "json:\"-\""
 	*Envelope
 }
 

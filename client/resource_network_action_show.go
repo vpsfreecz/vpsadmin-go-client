@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionNetworkShow(client *Client) *ActionNetworkShow {
 
 // ActionNetworkShowMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,31 +76,31 @@ func (in *ActionNetworkShowMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkShowOutput is a type for action output parameters
 type ActionNetworkShowOutput struct {
-	Address         string                    `json:"address"`
-	Assigned        int64                     `json:"assigned"`
-	Id              int64                     `json:"id"`
-	IpVersion       int64                     `json:"ip_version"`
-	Label           string                    `json:"label"`
-	Managed         bool                      `json:"managed"`
-	Owned           int64                     `json:"owned"`
-	Prefix          int64                     `json:"prefix"`
-	PrimaryLocation *ActionLocationShowOutput `json:"primary_location"`
-	Purpose         string                    `json:"purpose"`
-	Role            string                    `json:"role"`
-	Size            int64                     `json:"size"`
-	SplitAccess     string                    `json:"split_access"`
-	SplitPrefix     int64                     `json:"split_prefix"`
-	Taken           int64                     `json:"taken"`
-	Used            int64                     `json:"used"`
+	Address         string                    "json:\"address\""
+	Assigned        int64                     "json:\"assigned\""
+	Id              int64                     "json:\"id\""
+	IpVersion       int64                     "json:\"ip_version\""
+	Label           string                    "json:\"label\""
+	Managed         bool                      "json:\"managed\""
+	Owned           int64                     "json:\"owned\""
+	Prefix          int64                     "json:\"prefix\""
+	PrimaryLocation *ActionLocationShowOutput "json:\"primary_location\""
+	Purpose         string                    "json:\"purpose\""
+	Role            string                    "json:\"role\""
+	Size            int64                     "json:\"size\""
+	SplitAccess     string                    "json:\"split_access\""
+	SplitPrefix     int64                     "json:\"split_prefix\""
+	Taken           int64                     "json:\"taken\""
+	Used            int64                     "json:\"used\""
 }
 
 // Type for action response, including envelope
 type ActionNetworkShowResponse struct {
-	Action *ActionNetworkShow `json:"-"`
+	Action *ActionNetworkShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Network *ActionNetworkShowOutput `json:"network"`
+		Network *ActionNetworkShowOutput "json:\"network\""
 	}
 
 	// Action output without the namespace
@@ -132,7 +133,7 @@ func (inv *ActionNetworkShowInvocation) SetPathParamInt(param string, value int6
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNetworkShowInvocation) SetPathParamString(param string, value string) *ActionNetworkShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

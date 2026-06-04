@@ -39,12 +39,13 @@ func (auth *TokenAuth) Authenticate(request *http.Request) {
 }
 
 type TokenAuthOptions struct {
-	Interval     int64
-	Lifetime     string
-	Password     string
-	Scope        string
-	User         string
-	TotpCallback func(input *AuthTokenActionTokenTotpInput) error
+	Interval              int64
+	Lifetime              string
+	Password              string
+	Scope                 string
+	User                  string
+	ResetPasswordCallback func(input *AuthTokenActionTokenResetPasswordInput) error
+	TotpCallback          func(input *AuthTokenActionTokenTotpInput) error
 }
 
 // SetNewTokenAuth obtains a new authentication token with login credentials
@@ -96,6 +97,39 @@ func (auth *TokenAuth) setDefaultOptions(options *TokenAuthOptions) {
 // nextAuthenticationStep performs authentication steps recursively, until
 // the authentication is completed
 func (auth *TokenAuth) nextAuthenticationStep(options *TokenAuthOptions, action string, token string) error {
+	if action == "reset_password" {
+		request := auth.Resource.ResetPassword.Prepare()
+		input := request.NewInput()
+		input.SetToken(token)
+
+		if options.ResetPasswordCallback == nil {
+			return fmt.Errorf("Implement callback ResetPasswordCallback")
+		}
+
+		if err := options.ResetPasswordCallback(input); err != nil {
+			return fmt.Errorf("ResetPasswordCallback failed: %v", err)
+		}
+
+		resp, err := request.Call()
+
+		if err != nil {
+			return err
+		} else if !resp.Status {
+			return fmt.Errorf("Failed at authentication step '%s': %v", action, resp.Message)
+		}
+
+		if resp.Output.Complete {
+			auth.Token = resp.Output.Token
+			auth.Resource.Client.Authentication = auth
+			return nil
+		}
+
+		return auth.nextAuthenticationStep(
+			options,
+			resp.Output.NextAction,
+			resp.Output.Token,
+		)
+	}
 	if action == "totp" {
 		request := auth.Resource.Totp.Prepare()
 		input := request.NewInput()

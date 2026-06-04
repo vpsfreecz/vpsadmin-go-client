@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,7 +19,7 @@ func NewActionUserGetPaymentInstructions(client *Client) *ActionUserGetPaymentIn
 
 // ActionUserGetPaymentInstructionsMetaGlobalInput is a type for action global meta input parameters
 type ActionUserGetPaymentInstructionsMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -62,16 +63,16 @@ func (in *ActionUserGetPaymentInstructionsMetaGlobalInput) AnySelected() bool {
 
 // ActionUserGetPaymentInstructionsOutput is a type for action output parameters
 type ActionUserGetPaymentInstructionsOutput struct {
-	Instructions string `json:"instructions"`
+	Instructions string "json:\"instructions\""
 }
 
 // Type for action response, including envelope
 type ActionUserGetPaymentInstructionsResponse struct {
-	Action *ActionUserGetPaymentInstructions `json:"-"`
+	Action *ActionUserGetPaymentInstructions "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		User *ActionUserGetPaymentInstructionsOutput `json:"user"`
+		User *ActionUserGetPaymentInstructionsOutput "json:\"user\""
 	}
 
 	// Action output without the namespace
@@ -104,7 +105,7 @@ func (inv *ActionUserGetPaymentInstructionsInvocation) SetPathParamInt(param str
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserGetPaymentInstructionsInvocation) SetPathParamString(param string, value string) *ActionUserGetPaymentInstructionsInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

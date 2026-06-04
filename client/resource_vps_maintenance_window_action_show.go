@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsMaintenanceWindowShow(client *Client) *ActionVpsMaintenanceWind
 
 // ActionVpsMaintenanceWindowShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMaintenanceWindowShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,19 +76,19 @@ func (in *ActionVpsMaintenanceWindowShowMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMaintenanceWindowShowOutput is a type for action output parameters
 type ActionVpsMaintenanceWindowShowOutput struct {
-	ClosesAt int64 `json:"closes_at"`
-	IsOpen   bool  `json:"is_open"`
-	OpensAt  int64 `json:"opens_at"`
-	Weekday  int64 `json:"weekday"`
+	ClosesAt int64 "json:\"closes_at\""
+	IsOpen   bool  "json:\"is_open\""
+	OpensAt  int64 "json:\"opens_at\""
+	Weekday  int64 "json:\"weekday\""
 }
 
 // Type for action response, including envelope
 type ActionVpsMaintenanceWindowShowResponse struct {
-	Action *ActionVpsMaintenanceWindowShow `json:"-"`
+	Action *ActionVpsMaintenanceWindowShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MaintenanceWindow *ActionVpsMaintenanceWindowShowOutput `json:"maintenance_window"`
+		MaintenanceWindow *ActionVpsMaintenanceWindowShowOutput "json:\"maintenance_window\""
 	}
 
 	// Action output without the namespace
@@ -120,7 +121,7 @@ func (inv *ActionVpsMaintenanceWindowShowInvocation) SetPathParamInt(param strin
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsMaintenanceWindowShowInvocation) SetPathParamString(param string, value string) *ActionVpsMaintenanceWindowShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

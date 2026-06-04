@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionTransactionShow(client *Client) *ActionTransactionShow {
 
 // ActionTransactionShowMetaGlobalInput is a type for action global meta input parameters
 type ActionTransactionShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,32 +76,32 @@ func (in *ActionTransactionShowMetaGlobalInput) AnySelected() bool {
 
 // ActionTransactionShowOutput is a type for action output parameters
 type ActionTransactionShowOutput struct {
-	CreatedAt        string                            `json:"created_at"`
-	DependsOn        *ActionTransactionShowOutput      `json:"depends_on"`
-	Done             string                            `json:"done"`
-	FinishedAt       string                            `json:"finished_at"`
-	Id               int64                             `json:"id"`
-	Input            string                            `json:"input"`
-	Name             string                            `json:"name"`
-	Node             *ActionNodeShowOutput             `json:"node"`
-	Output           string                            `json:"output"`
-	Priority         int64                             `json:"priority"`
-	StartedAt        string                            `json:"started_at"`
-	Success          int64                             `json:"success"`
-	TransactionChain *ActionTransactionChainShowOutput `json:"transaction_chain"`
-	Type             int64                             `json:"type"`
-	Urgent           bool                              `json:"urgent"`
-	User             *ActionUserShowOutput             `json:"user"`
-	Vps              *ActionVpsShowOutput              `json:"vps"`
+	CreatedAt        string                            "json:\"created_at\""
+	DependsOn        *ActionTransactionShowOutput      "json:\"depends_on\""
+	Done             string                            "json:\"done\""
+	FinishedAt       string                            "json:\"finished_at\""
+	Id               int64                             "json:\"id\""
+	Input            string                            "json:\"input\""
+	Name             string                            "json:\"name\""
+	Node             *ActionNodeShowOutput             "json:\"node\""
+	Output           string                            "json:\"output\""
+	Priority         int64                             "json:\"priority\""
+	StartedAt        string                            "json:\"started_at\""
+	Success          int64                             "json:\"success\""
+	TransactionChain *ActionTransactionChainShowOutput "json:\"transaction_chain\""
+	Type             int64                             "json:\"type\""
+	Urgent           bool                              "json:\"urgent\""
+	User             *ActionUserShowOutput             "json:\"user\""
+	Vps              *ActionVpsShowOutput              "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionTransactionShowResponse struct {
-	Action *ActionTransactionShow `json:"-"`
+	Action *ActionTransactionShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Transaction *ActionTransactionShowOutput `json:"transaction"`
+		Transaction *ActionTransactionShowOutput "json:\"transaction\""
 	}
 
 	// Action output without the namespace
@@ -133,7 +134,7 @@ func (inv *ActionTransactionShowInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionTransactionShowInvocation) SetPathParamString(param string, value string) *ActionTransactionShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

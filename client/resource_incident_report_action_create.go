@@ -16,8 +16,8 @@ func NewActionIncidentReportCreate(client *Client) *ActionIncidentReportCreate {
 
 // ActionIncidentReportCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionIncidentReportCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,14 +73,14 @@ func (in *ActionIncidentReportCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionIncidentReportCreateInput is a type for action input parameters
 type ActionIncidentReportCreateInput struct {
-	Codename            string `json:"codename"`
-	CpuLimit            int64  `json:"cpu_limit"`
-	DetectedAt          string `json:"detected_at"`
-	IpAddressAssignment int64  `json:"ip_address_assignment"`
-	Subject             string `json:"subject"`
-	Text                string `json:"text"`
-	Vps                 int64  `json:"vps"`
-	VpsAction           string `json:"vps_action"`
+	Codename            string "json:\"codename\""
+	CpuLimit            int64  "json:\"cpu_limit\""
+	DetectedAt          string "json:\"detected_at\""
+	IpAddressAssignment int64  "json:\"ip_address_assignment\""
+	Subject             string "json:\"subject\""
+	Text                string "json:\"text\""
+	Vps                 int64  "json:\"vps\""
+	VpsAction           string "json:\"vps_action\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -223,44 +223,44 @@ func (in *ActionIncidentReportCreateInput) AnySelected() bool {
 
 // ActionIncidentReportCreateRequest is a type for the entire action request
 type ActionIncidentReportCreateRequest struct {
-	IncidentReport map[string]interface{} `json:"incident_report"`
-	Meta           map[string]interface{} `json:"_meta"`
+	IncidentReport map[string]interface{} "json:\"incident_report\""
+	Meta           map[string]interface{} "json:\"_meta\""
 }
 
 // ActionIncidentReportCreateOutput is a type for action output parameters
 type ActionIncidentReportCreateOutput struct {
-	Codename            string                               `json:"codename"`
-	CpuLimit            int64                                `json:"cpu_limit"`
-	CreatedAt           string                               `json:"created_at"`
-	DetectedAt          string                               `json:"detected_at"`
-	FiledBy             *ActionUserShowOutput                `json:"filed_by"`
-	Id                  int64                                `json:"id"`
-	IpAddressAssignment *ActionIpAddressAssignmentShowOutput `json:"ip_address_assignment"`
-	Mailbox             *ActionMailboxShowOutput             `json:"mailbox"`
-	RawUserId           int64                                `json:"raw_user_id"`
-	RawVpsId            int64                                `json:"raw_vps_id"`
-	ReportedAt          string                               `json:"reported_at"`
-	Subject             string                               `json:"subject"`
-	Text                string                               `json:"text"`
-	User                *ActionUserShowOutput                `json:"user"`
-	Vps                 *ActionVpsShowOutput                 `json:"vps"`
-	VpsAction           string                               `json:"vps_action"`
+	Codename            string                               "json:\"codename\""
+	CpuLimit            int64                                "json:\"cpu_limit\""
+	CreatedAt           string                               "json:\"created_at\""
+	DetectedAt          string                               "json:\"detected_at\""
+	FiledBy             *ActionUserShowOutput                "json:\"filed_by\""
+	Id                  int64                                "json:\"id\""
+	IpAddressAssignment *ActionIpAddressAssignmentShowOutput "json:\"ip_address_assignment\""
+	Mailbox             *ActionMailboxShowOutput             "json:\"mailbox\""
+	RawUserId           int64                                "json:\"raw_user_id\""
+	RawVpsId            int64                                "json:\"raw_vps_id\""
+	ReportedAt          string                               "json:\"reported_at\""
+	Subject             string                               "json:\"subject\""
+	Text                string                               "json:\"text\""
+	User                *ActionUserShowOutput                "json:\"user\""
+	Vps                 *ActionVpsShowOutput                 "json:\"vps\""
+	VpsAction           string                               "json:\"vps_action\""
 }
 
 // ActionIncidentReportCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionIncidentReportCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionIncidentReportCreateResponse struct {
-	Action *ActionIncidentReportCreate `json:"-"`
+	Action *ActionIncidentReportCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		IncidentReport *ActionIncidentReportCreateOutput `json:"incident_report"`
+		IncidentReport *ActionIncidentReportCreateOutput "json:\"incident_report\""
 		// Global output metadata
-		Meta *ActionIncidentReportCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionIncidentReportCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

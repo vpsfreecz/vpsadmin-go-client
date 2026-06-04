@@ -16,8 +16,8 @@ func NewActionUserRequestRegistrationCreate(client *Client) *ActionUserRequestRe
 
 // ActionUserRequestRegistrationCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestRegistrationCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,19 +73,19 @@ func (in *ActionUserRequestRegistrationCreateMetaGlobalInput) AnySelected() bool
 
 // ActionUserRequestRegistrationCreateInput is a type for action input parameters
 type ActionUserRequestRegistrationCreateInput struct {
-	Address     string `json:"address"`
-	Currency    string `json:"currency"`
-	Email       string `json:"email"`
-	FullName    string `json:"full_name"`
-	How         string `json:"how"`
-	Language    int64  `json:"language"`
-	Location    int64  `json:"location"`
-	Login       string `json:"login"`
-	Note        string `json:"note"`
-	OrgId       string `json:"org_id"`
-	OrgName     string `json:"org_name"`
-	OsTemplate  int64  `json:"os_template"`
-	YearOfBirth int64  `json:"year_of_birth"`
+	Address     string "json:\"address\""
+	Currency    string "json:\"currency\""
+	Email       string "json:\"email\""
+	FullName    string "json:\"full_name\""
+	How         string "json:\"how\""
+	Language    int64  "json:\"language\""
+	Location    int64  "json:\"location\""
+	Login       string "json:\"login\""
+	Note        string "json:\"note\""
+	OrgId       string "json:\"org_id\""
+	OrgName     string "json:\"org_name\""
+	OsTemplate  int64  "json:\"os_template\""
+	YearOfBirth int64  "json:\"year_of_birth\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -288,77 +288,77 @@ func (in *ActionUserRequestRegistrationCreateInput) AnySelected() bool {
 
 // ActionUserRequestRegistrationCreateRequest is a type for the entire action request
 type ActionUserRequestRegistrationCreateRequest struct {
-	Registration map[string]interface{} `json:"registration"`
-	Meta         map[string]interface{} `json:"_meta"`
+	Registration map[string]interface{} "json:\"registration\""
+	Meta         map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserRequestRegistrationCreateOutput is a type for action output parameters
 type ActionUserRequestRegistrationCreateOutput struct {
-	Address                string                      `json:"address"`
-	Admin                  *ActionUserShowOutput       `json:"admin"`
-	AdminResponse          string                      `json:"admin_response"`
-	ApiIpAddr              string                      `json:"api_ip_addr"`
-	ApiIpPtr               string                      `json:"api_ip_ptr"`
-	ClientIpAddr           string                      `json:"client_ip_addr"`
-	ClientIpPtr            string                      `json:"client_ip_ptr"`
-	CreatedAt              string                      `json:"created_at"`
-	Currency               string                      `json:"currency"`
-	Email                  string                      `json:"email"`
-	FullName               string                      `json:"full_name"`
-	How                    string                      `json:"how"`
-	Id                     int64                       `json:"id"`
-	IpChecked              bool                        `json:"ip_checked"`
-	IpCrawler              bool                        `json:"ip_crawler"`
-	IpErrors               string                      `json:"ip_errors"`
-	IpFraudScore           int64                       `json:"ip_fraud_score"`
-	IpMessage              string                      `json:"ip_message"`
-	IpProxy                bool                        `json:"ip_proxy"`
-	IpRecentAbuse          bool                        `json:"ip_recent_abuse"`
-	IpRequestId            string                      `json:"ip_request_id"`
-	IpSuccess              bool                        `json:"ip_success"`
-	IpTor                  bool                        `json:"ip_tor"`
-	IpVpn                  bool                        `json:"ip_vpn"`
-	Label                  string                      `json:"label"`
-	Language               *ActionLanguageShowOutput   `json:"language"`
-	Location               *ActionLocationShowOutput   `json:"location"`
-	Login                  string                      `json:"login"`
-	MailCatchAll           bool                        `json:"mail_catch_all"`
-	MailChecked            bool                        `json:"mail_checked"`
-	MailDeliverability     string                      `json:"mail_deliverability"`
-	MailDisposable         bool                        `json:"mail_disposable"`
-	MailDnsValid           bool                        `json:"mail_dns_valid"`
-	MailErrors             string                      `json:"mail_errors"`
-	MailFraudScore         int64                       `json:"mail_fraud_score"`
-	MailFrequentComplainer bool                        `json:"mail_frequent_complainer"`
-	MailHoneypot           bool                        `json:"mail_honeypot"`
-	MailLeaked             bool                        `json:"mail_leaked"`
-	MailMessage            string                      `json:"mail_message"`
-	MailOverallScore       int64                       `json:"mail_overall_score"`
-	MailRecentAbuse        bool                        `json:"mail_recent_abuse"`
-	MailRequestId          string                      `json:"mail_request_id"`
-	MailSmtpScore          int64                       `json:"mail_smtp_score"`
-	MailSpamTrapScore      string                      `json:"mail_spam_trap_score"`
-	MailSuccess            bool                        `json:"mail_success"`
-	MailSuspect            bool                        `json:"mail_suspect"`
-	MailTimedOut           bool                        `json:"mail_timed_out"`
-	MailValid              bool                        `json:"mail_valid"`
-	Note                   string                      `json:"note"`
-	OrgId                  string                      `json:"org_id"`
-	OrgName                string                      `json:"org_name"`
-	OsTemplate             *ActionOsTemplateShowOutput `json:"os_template"`
-	State                  string                      `json:"state"`
-	UpdatedAt              string                      `json:"updated_at"`
-	User                   *ActionUserShowOutput       `json:"user"`
-	YearOfBirth            int64                       `json:"year_of_birth"`
+	Address                string                      "json:\"address\""
+	Admin                  *ActionUserShowOutput       "json:\"admin\""
+	AdminResponse          string                      "json:\"admin_response\""
+	ApiIpAddr              string                      "json:\"api_ip_addr\""
+	ApiIpPtr               string                      "json:\"api_ip_ptr\""
+	ClientIpAddr           string                      "json:\"client_ip_addr\""
+	ClientIpPtr            string                      "json:\"client_ip_ptr\""
+	CreatedAt              string                      "json:\"created_at\""
+	Currency               string                      "json:\"currency\""
+	Email                  string                      "json:\"email\""
+	FullName               string                      "json:\"full_name\""
+	How                    string                      "json:\"how\""
+	Id                     int64                       "json:\"id\""
+	IpChecked              bool                        "json:\"ip_checked\""
+	IpCrawler              bool                        "json:\"ip_crawler\""
+	IpErrors               string                      "json:\"ip_errors\""
+	IpFraudScore           int64                       "json:\"ip_fraud_score\""
+	IpMessage              string                      "json:\"ip_message\""
+	IpProxy                bool                        "json:\"ip_proxy\""
+	IpRecentAbuse          bool                        "json:\"ip_recent_abuse\""
+	IpRequestId            string                      "json:\"ip_request_id\""
+	IpSuccess              bool                        "json:\"ip_success\""
+	IpTor                  bool                        "json:\"ip_tor\""
+	IpVpn                  bool                        "json:\"ip_vpn\""
+	Label                  string                      "json:\"label\""
+	Language               *ActionLanguageShowOutput   "json:\"language\""
+	Location               *ActionLocationShowOutput   "json:\"location\""
+	Login                  string                      "json:\"login\""
+	MailCatchAll           bool                        "json:\"mail_catch_all\""
+	MailChecked            bool                        "json:\"mail_checked\""
+	MailDeliverability     string                      "json:\"mail_deliverability\""
+	MailDisposable         bool                        "json:\"mail_disposable\""
+	MailDnsValid           bool                        "json:\"mail_dns_valid\""
+	MailErrors             string                      "json:\"mail_errors\""
+	MailFraudScore         int64                       "json:\"mail_fraud_score\""
+	MailFrequentComplainer bool                        "json:\"mail_frequent_complainer\""
+	MailHoneypot           bool                        "json:\"mail_honeypot\""
+	MailLeaked             bool                        "json:\"mail_leaked\""
+	MailMessage            string                      "json:\"mail_message\""
+	MailOverallScore       int64                       "json:\"mail_overall_score\""
+	MailRecentAbuse        bool                        "json:\"mail_recent_abuse\""
+	MailRequestId          string                      "json:\"mail_request_id\""
+	MailSmtpScore          int64                       "json:\"mail_smtp_score\""
+	MailSpamTrapScore      string                      "json:\"mail_spam_trap_score\""
+	MailSuccess            bool                        "json:\"mail_success\""
+	MailSuspect            bool                        "json:\"mail_suspect\""
+	MailTimedOut           bool                        "json:\"mail_timed_out\""
+	MailValid              bool                        "json:\"mail_valid\""
+	Note                   string                      "json:\"note\""
+	OrgId                  string                      "json:\"org_id\""
+	OrgName                string                      "json:\"org_name\""
+	OsTemplate             *ActionOsTemplateShowOutput "json:\"os_template\""
+	State                  string                      "json:\"state\""
+	UpdatedAt              string                      "json:\"updated_at\""
+	User                   *ActionUserShowOutput       "json:\"user\""
+	YearOfBirth            int64                       "json:\"year_of_birth\""
 }
 
 // Type for action response, including envelope
 type ActionUserRequestRegistrationCreateResponse struct {
-	Action *ActionUserRequestRegistrationCreate `json:"-"`
+	Action *ActionUserRequestRegistrationCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Registration *ActionUserRequestRegistrationCreateOutput `json:"registration"`
+		Registration *ActionUserRequestRegistrationCreateOutput "json:\"registration\""
 	}
 
 	// Action output without the namespace

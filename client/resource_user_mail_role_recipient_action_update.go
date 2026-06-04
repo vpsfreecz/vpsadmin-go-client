@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserMailRoleRecipientUpdate(client *Client) *ActionUserMailRoleRec
 
 // ActionUserMailRoleRecipientUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserMailRoleRecipientUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,7 +76,7 @@ func (in *ActionUserMailRoleRecipientUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserMailRoleRecipientUpdateInput is a type for action input parameters
 type ActionUserMailRoleRecipientUpdateInput struct {
-	To string `json:"to"`
+	To string "json:\"to\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,25 +135,25 @@ func (in *ActionUserMailRoleRecipientUpdateInput) AnySelected() bool {
 
 // ActionUserMailRoleRecipientUpdateRequest is a type for the entire action request
 type ActionUserMailRoleRecipientUpdateRequest struct {
-	MailRoleRecipient map[string]interface{} `json:"mail_role_recipient"`
-	Meta              map[string]interface{} `json:"_meta"`
+	MailRoleRecipient map[string]interface{} "json:\"mail_role_recipient\""
+	Meta              map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserMailRoleRecipientUpdateOutput is a type for action output parameters
 type ActionUserMailRoleRecipientUpdateOutput struct {
-	Description string `json:"description"`
-	Id          string `json:"id"`
-	Label       string `json:"label"`
-	To          string `json:"to"`
+	Description string "json:\"description\""
+	Id          string "json:\"id\""
+	Label       string "json:\"label\""
+	To          string "json:\"to\""
 }
 
 // Type for action response, including envelope
 type ActionUserMailRoleRecipientUpdateResponse struct {
-	Action *ActionUserMailRoleRecipientUpdate `json:"-"`
+	Action *ActionUserMailRoleRecipientUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MailRoleRecipient *ActionUserMailRoleRecipientUpdateOutput `json:"mail_role_recipient"`
+		MailRoleRecipient *ActionUserMailRoleRecipientUpdateOutput "json:\"mail_role_recipient\""
 	}
 
 	// Action output without the namespace
@@ -187,7 +188,7 @@ func (inv *ActionUserMailRoleRecipientUpdateInvocation) SetPathParamInt(param st
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserMailRoleRecipientUpdateInvocation) SetPathParamString(param string, value string) *ActionUserMailRoleRecipientUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

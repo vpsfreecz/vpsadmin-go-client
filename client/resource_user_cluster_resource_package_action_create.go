@@ -16,8 +16,8 @@ func NewActionUserClusterResourcePackageCreate(client *Client) *ActionUserCluste
 
 // ActionUserClusterResourcePackageCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserClusterResourcePackageCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,11 +73,11 @@ func (in *ActionUserClusterResourcePackageCreateMetaGlobalInput) AnySelected() b
 
 // ActionUserClusterResourcePackageCreateInput is a type for action input parameters
 type ActionUserClusterResourcePackageCreateInput struct {
-	ClusterResourcePackage int64  `json:"cluster_resource_package"`
-	Comment                string `json:"comment"`
-	Environment            int64  `json:"environment"`
-	FromPersonal           bool   `json:"from_personal"`
-	User                   int64  `json:"user"`
+	ClusterResourcePackage int64  "json:\"cluster_resource_package\""
+	Comment                string "json:\"comment\""
+	Environment            int64  "json:\"environment\""
+	FromPersonal           bool   "json:\"from_personal\""
+	User                   int64  "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -184,31 +184,31 @@ func (in *ActionUserClusterResourcePackageCreateInput) AnySelected() bool {
 
 // ActionUserClusterResourcePackageCreateRequest is a type for the entire action request
 type ActionUserClusterResourcePackageCreateRequest struct {
-	UserClusterResourcePackage map[string]interface{} `json:"user_cluster_resource_package"`
-	Meta                       map[string]interface{} `json:"_meta"`
+	UserClusterResourcePackage map[string]interface{} "json:\"user_cluster_resource_package\""
+	Meta                       map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserClusterResourcePackageCreateOutput is a type for action output parameters
 type ActionUserClusterResourcePackageCreateOutput struct {
-	AddedBy                *ActionUserShowOutput                   `json:"added_by"`
-	ClusterResourcePackage *ActionClusterResourcePackageShowOutput `json:"cluster_resource_package"`
-	Comment                string                                  `json:"comment"`
-	CreatedAt              string                                  `json:"created_at"`
-	Environment            *ActionEnvironmentShowOutput            `json:"environment"`
-	Id                     int64                                   `json:"id"`
-	IsPersonal             bool                                    `json:"is_personal"`
-	Label                  string                                  `json:"label"`
-	UpdatedAt              string                                  `json:"updated_at"`
-	User                   *ActionUserShowOutput                   `json:"user"`
+	AddedBy                *ActionUserShowOutput                   "json:\"added_by\""
+	ClusterResourcePackage *ActionClusterResourcePackageShowOutput "json:\"cluster_resource_package\""
+	Comment                string                                  "json:\"comment\""
+	CreatedAt              string                                  "json:\"created_at\""
+	Environment            *ActionEnvironmentShowOutput            "json:\"environment\""
+	Id                     int64                                   "json:\"id\""
+	IsPersonal             bool                                    "json:\"is_personal\""
+	Label                  string                                  "json:\"label\""
+	UpdatedAt              string                                  "json:\"updated_at\""
+	User                   *ActionUserShowOutput                   "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionUserClusterResourcePackageCreateResponse struct {
-	Action *ActionUserClusterResourcePackageCreate `json:"-"`
+	Action *ActionUserClusterResourcePackageCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		UserClusterResourcePackage *ActionUserClusterResourcePackageCreateOutput `json:"user_cluster_resource_package"`
+		UserClusterResourcePackage *ActionUserClusterResourcePackageCreateOutput "json:\"user_cluster_resource_package\""
 	}
 
 	// Action output without the namespace

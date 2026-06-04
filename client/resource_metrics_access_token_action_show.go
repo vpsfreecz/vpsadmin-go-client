@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMetricsAccessTokenShow(client *Client) *ActionMetricsAccessTokenSh
 
 // ActionMetricsAccessTokenShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMetricsAccessTokenShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,23 +76,23 @@ func (in *ActionMetricsAccessTokenShowMetaGlobalInput) AnySelected() bool {
 
 // ActionMetricsAccessTokenShowOutput is a type for action output parameters
 type ActionMetricsAccessTokenShowOutput struct {
-	AccessToken  string                `json:"access_token"`
-	CreatedAt    string                `json:"created_at"`
-	Id           int64                 `json:"id"`
-	LastUse      string                `json:"last_use"`
-	MetricPrefix string                `json:"metric_prefix"`
-	UpdatedAt    string                `json:"updated_at"`
-	UseCount     int64                 `json:"use_count"`
-	User         *ActionUserShowOutput `json:"user"`
+	AccessToken  string                "json:\"access_token\""
+	CreatedAt    string                "json:\"created_at\""
+	Id           int64                 "json:\"id\""
+	LastUse      string                "json:\"last_use\""
+	MetricPrefix string                "json:\"metric_prefix\""
+	UpdatedAt    string                "json:\"updated_at\""
+	UseCount     int64                 "json:\"use_count\""
+	User         *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionMetricsAccessTokenShowResponse struct {
-	Action *ActionMetricsAccessTokenShow `json:"-"`
+	Action *ActionMetricsAccessTokenShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MetricsAccessToken *ActionMetricsAccessTokenShowOutput `json:"metrics_access_token"`
+		MetricsAccessToken *ActionMetricsAccessTokenShowOutput "json:\"metrics_access_token\""
 	}
 
 	// Action output without the namespace
@@ -124,7 +125,7 @@ func (inv *ActionMetricsAccessTokenShowInvocation) SetPathParamInt(param string,
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMetricsAccessTokenShowInvocation) SetPathParamString(param string, value string) *ActionMetricsAccessTokenShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

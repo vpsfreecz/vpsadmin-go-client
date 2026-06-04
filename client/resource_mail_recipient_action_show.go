@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMailRecipientShow(client *Client) *ActionMailRecipientShow {
 
 // ActionMailRecipientShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMailRecipientShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,20 +76,20 @@ func (in *ActionMailRecipientShowMetaGlobalInput) AnySelected() bool {
 
 // ActionMailRecipientShowOutput is a type for action output parameters
 type ActionMailRecipientShowOutput struct {
-	Bcc   string `json:"bcc"`
-	Cc    string `json:"cc"`
-	Id    int64  `json:"id"`
-	Label string `json:"label"`
-	To    string `json:"to"`
+	Bcc   string "json:\"bcc\""
+	Cc    string "json:\"cc\""
+	Id    int64  "json:\"id\""
+	Label string "json:\"label\""
+	To    string "json:\"to\""
 }
 
 // Type for action response, including envelope
 type ActionMailRecipientShowResponse struct {
-	Action *ActionMailRecipientShow `json:"-"`
+	Action *ActionMailRecipientShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MailRecipient *ActionMailRecipientShowOutput `json:"mail_recipient"`
+		MailRecipient *ActionMailRecipientShowOutput "json:\"mail_recipient\""
 	}
 
 	// Action output without the namespace
@@ -121,7 +122,7 @@ func (inv *ActionMailRecipientShowInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMailRecipientShowInvocation) SetPathParamString(param string, value string) *ActionMailRecipientShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

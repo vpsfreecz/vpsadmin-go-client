@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionLocationNetworkShow(client *Client) *ActionLocationNetworkShow {
 
 // ActionLocationNetworkShowMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationNetworkShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,22 +76,22 @@ func (in *ActionLocationNetworkShowMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationNetworkShowOutput is a type for action output parameters
 type ActionLocationNetworkShowOutput struct {
-	Autopick bool                      `json:"autopick"`
-	Id       int64                     `json:"id"`
-	Location *ActionLocationShowOutput `json:"location"`
-	Network  *ActionNetworkShowOutput  `json:"network"`
-	Primary  bool                      `json:"primary"`
-	Priority int64                     `json:"priority"`
-	Userpick bool                      `json:"userpick"`
+	Autopick bool                      "json:\"autopick\""
+	Id       int64                     "json:\"id\""
+	Location *ActionLocationShowOutput "json:\"location\""
+	Network  *ActionNetworkShowOutput  "json:\"network\""
+	Primary  bool                      "json:\"primary\""
+	Priority int64                     "json:\"priority\""
+	Userpick bool                      "json:\"userpick\""
 }
 
 // Type for action response, including envelope
 type ActionLocationNetworkShowResponse struct {
-	Action *ActionLocationNetworkShow `json:"-"`
+	Action *ActionLocationNetworkShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		LocationNetwork *ActionLocationNetworkShowOutput `json:"location_network"`
+		LocationNetwork *ActionLocationNetworkShowOutput "json:\"location_network\""
 	}
 
 	// Action output without the namespace
@@ -123,7 +124,7 @@ func (inv *ActionLocationNetworkShowInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionLocationNetworkShowInvocation) SetPathParamString(param string, value string) *ActionLocationNetworkShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

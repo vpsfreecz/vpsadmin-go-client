@@ -16,8 +16,8 @@ func NewActionOomReportRuleCreate(client *Client) *ActionOomReportRuleCreate {
 
 // ActionOomReportRuleCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportRuleCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,10 +73,10 @@ func (in *ActionOomReportRuleCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportRuleCreateInput is a type for action input parameters
 type ActionOomReportRuleCreateInput struct {
-	Action        string `json:"action"`
-	CgroupPattern string `json:"cgroup_pattern"`
-	HitCount      int64  `json:"hit_count"`
-	Vps           int64  `json:"vps"`
+	Action        string "json:\"action\""
+	CgroupPattern string "json:\"cgroup_pattern\""
+	HitCount      int64  "json:\"hit_count\""
+	Vps           int64  "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -171,29 +171,29 @@ func (in *ActionOomReportRuleCreateInput) AnySelected() bool {
 
 // ActionOomReportRuleCreateRequest is a type for the entire action request
 type ActionOomReportRuleCreateRequest struct {
-	OomReportRule map[string]interface{} `json:"oom_report_rule"`
-	Meta          map[string]interface{} `json:"_meta"`
+	OomReportRule map[string]interface{} "json:\"oom_report_rule\""
+	Meta          map[string]interface{} "json:\"_meta\""
 }
 
 // ActionOomReportRuleCreateOutput is a type for action output parameters
 type ActionOomReportRuleCreateOutput struct {
-	Action        string               `json:"action"`
-	CgroupPattern string               `json:"cgroup_pattern"`
-	CreatedAt     string               `json:"created_at"`
-	HitCount      int64                `json:"hit_count"`
-	Id            int64                `json:"id"`
-	Label         string               `json:"label"`
-	UpdatedAt     string               `json:"updated_at"`
-	Vps           *ActionVpsShowOutput `json:"vps"`
+	Action        string               "json:\"action\""
+	CgroupPattern string               "json:\"cgroup_pattern\""
+	CreatedAt     string               "json:\"created_at\""
+	HitCount      int64                "json:\"hit_count\""
+	Id            int64                "json:\"id\""
+	Label         string               "json:\"label\""
+	UpdatedAt     string               "json:\"updated_at\""
+	Vps           *ActionVpsShowOutput "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionOomReportRuleCreateResponse struct {
-	Action *ActionOomReportRuleCreate `json:"-"`
+	Action *ActionOomReportRuleCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		OomReportRule *ActionOomReportRuleCreateOutput `json:"oom_report_rule"`
+		OomReportRule *ActionOomReportRuleCreateOutput "json:\"oom_report_rule\""
 	}
 
 	// Action output without the namespace

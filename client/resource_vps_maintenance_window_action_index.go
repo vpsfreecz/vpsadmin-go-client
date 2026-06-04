@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionVpsMaintenanceWindowIndex(client *Client) *ActionVpsMaintenanceWin
 
 // ActionVpsMaintenanceWindowIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMaintenanceWindowIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,8 +89,8 @@ func (in *ActionVpsMaintenanceWindowIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMaintenanceWindowIndexInput is a type for action input parameters
 type ActionVpsMaintenanceWindowIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,19 +161,19 @@ func (in *ActionVpsMaintenanceWindowIndexInput) AnySelected() bool {
 
 // ActionVpsMaintenanceWindowIndexOutput is a type for action output parameters
 type ActionVpsMaintenanceWindowIndexOutput struct {
-	ClosesAt int64 `json:"closes_at"`
-	IsOpen   bool  `json:"is_open"`
-	OpensAt  int64 `json:"opens_at"`
-	Weekday  int64 `json:"weekday"`
+	ClosesAt int64 "json:\"closes_at\""
+	IsOpen   bool  "json:\"is_open\""
+	OpensAt  int64 "json:\"opens_at\""
+	Weekday  int64 "json:\"weekday\""
 }
 
 // Type for action response, including envelope
 type ActionVpsMaintenanceWindowIndexResponse struct {
-	Action *ActionVpsMaintenanceWindowIndex `json:"-"`
+	Action *ActionVpsMaintenanceWindowIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MaintenanceWindows []*ActionVpsMaintenanceWindowIndexOutput `json:"maintenance_windows"`
+		MaintenanceWindows []*ActionVpsMaintenanceWindowIndexOutput "json:\"maintenance_windows\""
 	}
 
 	// Action output without the namespace
@@ -207,7 +208,7 @@ func (inv *ActionVpsMaintenanceWindowIndexInvocation) SetPathParamInt(param stri
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsMaintenanceWindowIndexInvocation) SetPathParamString(param string, value string) *ActionVpsMaintenanceWindowIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDefaultObjectClusterResourceShow(client *Client) *ActionDefaultObj
 
 // ActionDefaultObjectClusterResourceShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDefaultObjectClusterResourceShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,20 +76,20 @@ func (in *ActionDefaultObjectClusterResourceShowMetaGlobalInput) AnySelected() b
 
 // ActionDefaultObjectClusterResourceShowOutput is a type for action output parameters
 type ActionDefaultObjectClusterResourceShowOutput struct {
-	ClassName       string                           `json:"class_name"`
-	ClusterResource *ActionClusterResourceShowOutput `json:"cluster_resource"`
-	Environment     *ActionEnvironmentShowOutput     `json:"environment"`
-	Id              int64                            `json:"id"`
-	Value           int64                            `json:"value"`
+	ClassName       string                           "json:\"class_name\""
+	ClusterResource *ActionClusterResourceShowOutput "json:\"cluster_resource\""
+	Environment     *ActionEnvironmentShowOutput     "json:\"environment\""
+	Id              int64                            "json:\"id\""
+	Value           int64                            "json:\"value\""
 }
 
 // Type for action response, including envelope
 type ActionDefaultObjectClusterResourceShowResponse struct {
-	Action *ActionDefaultObjectClusterResourceShow `json:"-"`
+	Action *ActionDefaultObjectClusterResourceShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DefaultObjectClusterResource *ActionDefaultObjectClusterResourceShowOutput `json:"default_object_cluster_resource"`
+		DefaultObjectClusterResource *ActionDefaultObjectClusterResourceShowOutput "json:\"default_object_cluster_resource\""
 	}
 
 	// Action output without the namespace
@@ -121,7 +122,7 @@ func (inv *ActionDefaultObjectClusterResourceShowInvocation) SetPathParamInt(par
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDefaultObjectClusterResourceShowInvocation) SetPathParamString(param string, value string) *ActionDefaultObjectClusterResourceShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

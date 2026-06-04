@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionNewsLogUpdate(client *Client) *ActionNewsLogUpdate {
 
 // ActionNewsLogUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionNewsLogUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,8 +76,8 @@ func (in *ActionNewsLogUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionNewsLogUpdateInput is a type for action input parameters
 type ActionNewsLogUpdateInput struct {
-	Message     string `json:"message"`
-	PublishedAt string `json:"published_at"`
+	Message     string "json:\"message\""
+	PublishedAt string "json:\"published_at\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -147,26 +148,26 @@ func (in *ActionNewsLogUpdateInput) AnySelected() bool {
 
 // ActionNewsLogUpdateRequest is a type for the entire action request
 type ActionNewsLogUpdateRequest struct {
-	NewsLog map[string]interface{} `json:"news_log"`
-	Meta    map[string]interface{} `json:"_meta"`
+	NewsLog map[string]interface{} "json:\"news_log\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionNewsLogUpdateOutput is a type for action output parameters
 type ActionNewsLogUpdateOutput struct {
-	CreatedAt   string `json:"created_at"`
-	Id          int64  `json:"id"`
-	Message     string `json:"message"`
-	PublishedAt string `json:"published_at"`
-	UpdatedAt   string `json:"updated_at"`
+	CreatedAt   string "json:\"created_at\""
+	Id          int64  "json:\"id\""
+	Message     string "json:\"message\""
+	PublishedAt string "json:\"published_at\""
+	UpdatedAt   string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionNewsLogUpdateResponse struct {
-	Action *ActionNewsLogUpdate `json:"-"`
+	Action *ActionNewsLogUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		NewsLog *ActionNewsLogUpdateOutput `json:"news_log"`
+		NewsLog *ActionNewsLogUpdateOutput "json:\"news_log\""
 	}
 
 	// Action output without the namespace
@@ -201,7 +202,7 @@ func (inv *ActionNewsLogUpdateInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNewsLogUpdateInvocation) SetPathParamString(param string, value string) *ActionNewsLogUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionMigrationPlanVpsMigrationIndex(client *Client) *ActionMigrationPla
 
 // ActionMigrationPlanVpsMigrationIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanVpsMigrationIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,11 +89,11 @@ func (in *ActionMigrationPlanVpsMigrationIndexMetaGlobalInput) AnySelected() boo
 
 // ActionMigrationPlanVpsMigrationIndexInput is a type for action input parameters
 type ActionMigrationPlanVpsMigrationIndexInput struct {
-	DstNode int64  `json:"dst_node"`
-	FromId  int64  `json:"from_id"`
-	Limit   int64  `json:"limit"`
-	SrcNode int64  `json:"src_node"`
-	State   string `json:"state"`
+	DstNode int64  "json:\"dst_node\""
+	FromId  int64  "json:\"from_id\""
+	Limit   int64  "json:\"limit\""
+	SrcNode int64  "json:\"src_node\""
+	State   string "json:\"state\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -199,26 +200,26 @@ func (in *ActionMigrationPlanVpsMigrationIndexInput) AnySelected() bool {
 
 // ActionMigrationPlanVpsMigrationIndexOutput is a type for action output parameters
 type ActionMigrationPlanVpsMigrationIndexOutput struct {
-	CleanupData       bool                              `json:"cleanup_data"`
-	CreatedAt         string                            `json:"created_at"`
-	DstNode           *ActionNodeShowOutput             `json:"dst_node"`
-	FinishedAt        string                            `json:"finished_at"`
-	Id                int64                             `json:"id"`
-	MaintenanceWindow bool                              `json:"maintenance_window"`
-	SrcNode           *ActionNodeShowOutput             `json:"src_node"`
-	StartedAt         string                            `json:"started_at"`
-	State             string                            `json:"state"`
-	TransactionChain  *ActionTransactionChainShowOutput `json:"transaction_chain"`
-	Vps               *ActionVpsShowOutput              `json:"vps"`
+	CleanupData       bool                              "json:\"cleanup_data\""
+	CreatedAt         string                            "json:\"created_at\""
+	DstNode           *ActionNodeShowOutput             "json:\"dst_node\""
+	FinishedAt        string                            "json:\"finished_at\""
+	Id                int64                             "json:\"id\""
+	MaintenanceWindow bool                              "json:\"maintenance_window\""
+	SrcNode           *ActionNodeShowOutput             "json:\"src_node\""
+	StartedAt         string                            "json:\"started_at\""
+	State             string                            "json:\"state\""
+	TransactionChain  *ActionTransactionChainShowOutput "json:\"transaction_chain\""
+	Vps               *ActionVpsShowOutput              "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionMigrationPlanVpsMigrationIndexResponse struct {
-	Action *ActionMigrationPlanVpsMigrationIndex `json:"-"`
+	Action *ActionMigrationPlanVpsMigrationIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		VpsMigrations []*ActionMigrationPlanVpsMigrationIndexOutput `json:"vps_migrations"`
+		VpsMigrations []*ActionMigrationPlanVpsMigrationIndexOutput "json:\"vps_migrations\""
 	}
 
 	// Action output without the namespace
@@ -253,7 +254,7 @@ func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) SetPathParamInt(param
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) SetPathParamString(param string, value string) *ActionMigrationPlanVpsMigrationIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

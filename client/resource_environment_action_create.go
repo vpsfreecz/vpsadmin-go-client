@@ -16,8 +16,8 @@ func NewActionEnvironmentCreate(client *Client) *ActionEnvironmentCreate {
 
 // ActionEnvironmentCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionEnvironmentCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,14 +73,14 @@ func (in *ActionEnvironmentCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionEnvironmentCreateInput is a type for action input parameters
 type ActionEnvironmentCreateInput struct {
-	CanCreateVps    bool   `json:"can_create_vps"`
-	CanDestroyVps   bool   `json:"can_destroy_vps"`
-	Description     string `json:"description"`
-	Domain          string `json:"domain"`
-	Label           string `json:"label"`
-	MaxVpsCount     int64  `json:"max_vps_count"`
-	UserIpOwnership bool   `json:"user_ip_ownership"`
-	VpsLifetime     int64  `json:"vps_lifetime"`
+	CanCreateVps    bool   "json:\"can_create_vps\""
+	CanDestroyVps   bool   "json:\"can_destroy_vps\""
+	Description     string "json:\"description\""
+	Domain          string "json:\"domain\""
+	Label           string "json:\"label\""
+	MaxVpsCount     int64  "json:\"max_vps_count\""
+	UserIpOwnership bool   "json:\"user_ip_ownership\""
+	VpsLifetime     int64  "json:\"vps_lifetime\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -223,30 +223,30 @@ func (in *ActionEnvironmentCreateInput) AnySelected() bool {
 
 // ActionEnvironmentCreateRequest is a type for the entire action request
 type ActionEnvironmentCreateRequest struct {
-	Environment map[string]interface{} `json:"environment"`
-	Meta        map[string]interface{} `json:"_meta"`
+	Environment map[string]interface{} "json:\"environment\""
+	Meta        map[string]interface{} "json:\"_meta\""
 }
 
 // ActionEnvironmentCreateOutput is a type for action output parameters
 type ActionEnvironmentCreateOutput struct {
-	CanCreateVps    bool   `json:"can_create_vps"`
-	CanDestroyVps   bool   `json:"can_destroy_vps"`
-	Description     string `json:"description"`
-	Domain          string `json:"domain"`
-	Id              int64  `json:"id"`
-	Label           string `json:"label"`
-	MaxVpsCount     int64  `json:"max_vps_count"`
-	UserIpOwnership bool   `json:"user_ip_ownership"`
-	VpsLifetime     int64  `json:"vps_lifetime"`
+	CanCreateVps    bool   "json:\"can_create_vps\""
+	CanDestroyVps   bool   "json:\"can_destroy_vps\""
+	Description     string "json:\"description\""
+	Domain          string "json:\"domain\""
+	Id              int64  "json:\"id\""
+	Label           string "json:\"label\""
+	MaxVpsCount     int64  "json:\"max_vps_count\""
+	UserIpOwnership bool   "json:\"user_ip_ownership\""
+	VpsLifetime     int64  "json:\"vps_lifetime\""
 }
 
 // Type for action response, including envelope
 type ActionEnvironmentCreateResponse struct {
-	Action *ActionEnvironmentCreate `json:"-"`
+	Action *ActionEnvironmentCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Environment *ActionEnvironmentCreateOutput `json:"environment"`
+		Environment *ActionEnvironmentCreateOutput "json:\"environment\""
 	}
 
 	// Action output without the namespace

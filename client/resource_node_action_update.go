@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionNodeUpdate(client *Client) *ActionNodeUpdate {
 
 // ActionNodeUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,19 +76,19 @@ func (in *ActionNodeUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeUpdateInput is a type for action input parameters
 type ActionNodeUpdateInput struct {
-	Active         bool   `json:"active"`
-	Cpus           int64  `json:"cpus"`
-	Fqdn           string `json:"fqdn"`
-	HypervisorType string `json:"hypervisor_type"`
-	IpAddr         string `json:"ip_addr"`
-	Location       int64  `json:"location"`
-	MaxRx          int64  `json:"max_rx"`
-	MaxTx          int64  `json:"max_tx"`
-	MaxVps         int64  `json:"max_vps"`
-	Name           string `json:"name"`
-	TotalMemory    int64  `json:"total_memory"`
-	TotalSwap      int64  `json:"total_swap"`
-	Type           string `json:"type"`
+	Active         bool   "json:\"active\""
+	Cpus           int64  "json:\"cpus\""
+	Fqdn           string "json:\"fqdn\""
+	HypervisorType string "json:\"hypervisor_type\""
+	IpAddr         string "json:\"ip_addr\""
+	Location       int64  "json:\"location\""
+	MaxRx          int64  "json:\"max_rx\""
+	MaxTx          int64  "json:\"max_tx\""
+	MaxVps         int64  "json:\"max_vps\""
+	Name           string "json:\"name\""
+	TotalMemory    int64  "json:\"total_memory\""
+	TotalSwap      int64  "json:\"total_swap\""
+	Type           string "json:\"type\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -290,13 +291,13 @@ func (in *ActionNodeUpdateInput) AnySelected() bool {
 
 // ActionNodeUpdateRequest is a type for the entire action request
 type ActionNodeUpdateRequest struct {
-	Node map[string]interface{} `json:"node"`
-	Meta map[string]interface{} `json:"_meta"`
+	Node map[string]interface{} "json:\"node\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // Type for action response, including envelope
 type ActionNodeUpdateResponse struct {
-	Action *ActionNodeUpdate `json:"-"`
+	Action *ActionNodeUpdate "json:\"-\""
 	*Envelope
 }
 
@@ -328,7 +329,7 @@ func (inv *ActionNodeUpdateInvocation) SetPathParamInt(param string, value int64
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNodeUpdateInvocation) SetPathParamString(param string, value string) *ActionNodeUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

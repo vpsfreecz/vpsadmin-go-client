@@ -16,9 +16,9 @@ func NewActionDnsServerIndex(client *Client) *ActionDnsServerIndex {
 
 // ActionDnsServerIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsServerIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,8 +86,8 @@ func (in *ActionDnsServerIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsServerIndexInput is a type for action input parameters
 type ActionDnsServerIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,25 +158,25 @@ func (in *ActionDnsServerIndexInput) AnySelected() bool {
 
 // ActionDnsServerIndexOutput is a type for action output parameters
 type ActionDnsServerIndexOutput struct {
-	CreatedAt          string                `json:"created_at"`
-	EnableUserDnsZones bool                  `json:"enable_user_dns_zones"`
-	Hidden             bool                  `json:"hidden"`
-	Id                 int64                 `json:"id"`
-	Ipv4Addr           string                `json:"ipv4_addr"`
-	Ipv6Addr           string                `json:"ipv6_addr"`
-	Name               string                `json:"name"`
-	Node               *ActionNodeShowOutput `json:"node"`
-	UpdatedAt          string                `json:"updated_at"`
-	UserDnsZoneType    string                `json:"user_dns_zone_type"`
+	CreatedAt          string                "json:\"created_at\""
+	EnableUserDnsZones bool                  "json:\"enable_user_dns_zones\""
+	Hidden             bool                  "json:\"hidden\""
+	Id                 int64                 "json:\"id\""
+	Ipv4Addr           string                "json:\"ipv4_addr\""
+	Ipv6Addr           string                "json:\"ipv6_addr\""
+	Name               string                "json:\"name\""
+	Node               *ActionNodeShowOutput "json:\"node\""
+	UpdatedAt          string                "json:\"updated_at\""
+	UserDnsZoneType    string                "json:\"user_dns_zone_type\""
 }
 
 // Type for action response, including envelope
 type ActionDnsServerIndexResponse struct {
-	Action *ActionDnsServerIndex `json:"-"`
+	Action *ActionDnsServerIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsServers []*ActionDnsServerIndexOutput `json:"dns_servers"`
+		DnsServers []*ActionDnsServerIndexOutput "json:\"dns_servers\""
 	}
 
 	// Action output without the namespace

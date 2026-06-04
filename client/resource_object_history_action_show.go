@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionObjectHistoryShow(client *Client) *ActionObjectHistoryShow {
 
 // ActionObjectHistoryShowMetaGlobalInput is a type for action global meta input parameters
 type ActionObjectHistoryShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,22 +76,22 @@ func (in *ActionObjectHistoryShowMetaGlobalInput) AnySelected() bool {
 
 // ActionObjectHistoryShowOutput is a type for action output parameters
 type ActionObjectHistoryShowOutput struct {
-	CreatedAt   string                       `json:"created_at"`
-	EventType   string                       `json:"event_type"`
-	Id          int64                        `json:"id"`
-	Object      string                       `json:"object"`
-	ObjectId    int64                        `json:"object_id"`
-	User        *ActionUserShowOutput        `json:"user"`
-	UserSession *ActionUserSessionShowOutput `json:"user_session"`
+	CreatedAt   string                       "json:\"created_at\""
+	EventType   string                       "json:\"event_type\""
+	Id          int64                        "json:\"id\""
+	Object      string                       "json:\"object\""
+	ObjectId    int64                        "json:\"object_id\""
+	User        *ActionUserShowOutput        "json:\"user\""
+	UserSession *ActionUserSessionShowOutput "json:\"user_session\""
 }
 
 // Type for action response, including envelope
 type ActionObjectHistoryShowResponse struct {
-	Action *ActionObjectHistoryShow `json:"-"`
+	Action *ActionObjectHistoryShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		ObjectHistory *ActionObjectHistoryShowOutput `json:"object_history"`
+		ObjectHistory *ActionObjectHistoryShowOutput "json:\"object_history\""
 	}
 
 	// Action output without the namespace
@@ -123,7 +124,7 @@ func (inv *ActionObjectHistoryShowInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionObjectHistoryShowInvocation) SetPathParamString(param string, value string) *ActionObjectHistoryShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

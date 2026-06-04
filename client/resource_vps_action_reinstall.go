@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsReinstall(client *Client) *ActionVpsReinstall {
 
 // ActionVpsReinstallMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsReinstallMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,10 +76,10 @@ func (in *ActionVpsReinstallMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsReinstallInput is a type for action input parameters
 type ActionVpsReinstallInput struct {
-	OsTemplate      int64  `json:"os_template"`
-	UserDataContent string `json:"user_data_content"`
-	UserDataFormat  string `json:"user_data_format"`
-	VpsUserData     int64  `json:"vps_user_data"`
+	OsTemplate      int64  "json:\"os_template\""
+	UserDataContent string "json:\"user_data_content\""
+	UserDataFormat  string "json:\"user_data_format\""
+	VpsUserData     int64  "json:\"vps_user_data\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -173,23 +174,23 @@ func (in *ActionVpsReinstallInput) AnySelected() bool {
 
 // ActionVpsReinstallRequest is a type for the entire action request
 type ActionVpsReinstallRequest struct {
-	Vps  map[string]interface{} `json:"vps"`
-	Meta map[string]interface{} `json:"_meta"`
+	Vps  map[string]interface{} "json:\"vps\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsReinstallMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsReinstallMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionVpsReinstallResponse struct {
-	Action *ActionVpsReinstall `json:"-"`
+	Action *ActionVpsReinstall "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionVpsReinstallMetaGlobalOutput `json:"_meta"`
+		Meta *ActionVpsReinstallMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -221,7 +222,7 @@ func (inv *ActionVpsReinstallInvocation) SetPathParamInt(param string, value int
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsReinstallInvocation) SetPathParamString(param string, value string) *ActionVpsReinstallInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

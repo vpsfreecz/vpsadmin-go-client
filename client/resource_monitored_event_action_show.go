@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMonitoredEventShow(client *Client) *ActionMonitoredEventShow {
 
 // ActionMonitoredEventShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMonitoredEventShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,27 +76,27 @@ func (in *ActionMonitoredEventShowMetaGlobalInput) AnySelected() bool {
 
 // ActionMonitoredEventShowOutput is a type for action output parameters
 type ActionMonitoredEventShowOutput struct {
-	CreatedAt  string                `json:"created_at"`
-	Duration   float64               `json:"duration"`
-	Id         int64                 `json:"id"`
-	Issue      string                `json:"issue"`
-	Label      string                `json:"label"`
-	Monitor    string                `json:"monitor"`
-	ObjectId   int64                 `json:"object_id"`
-	ObjectName string                `json:"object_name"`
-	SavedUntil string                `json:"saved_until"`
-	State      string                `json:"state"`
-	UpdatedAt  string                `json:"updated_at"`
-	User       *ActionUserShowOutput `json:"user"`
+	CreatedAt  string                "json:\"created_at\""
+	Duration   float64               "json:\"duration\""
+	Id         int64                 "json:\"id\""
+	Issue      string                "json:\"issue\""
+	Label      string                "json:\"label\""
+	Monitor    string                "json:\"monitor\""
+	ObjectId   int64                 "json:\"object_id\""
+	ObjectName string                "json:\"object_name\""
+	SavedUntil string                "json:\"saved_until\""
+	State      string                "json:\"state\""
+	UpdatedAt  string                "json:\"updated_at\""
+	User       *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionMonitoredEventShowResponse struct {
-	Action *ActionMonitoredEventShow `json:"-"`
+	Action *ActionMonitoredEventShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MonitoredEvent *ActionMonitoredEventShowOutput `json:"monitored_event"`
+		MonitoredEvent *ActionMonitoredEventShowOutput "json:\"monitored_event\""
 	}
 
 	// Action output without the namespace
@@ -128,7 +129,7 @@ func (inv *ActionMonitoredEventShowInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMonitoredEventShowInvocation) SetPathParamString(param string, value string) *ActionMonitoredEventShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

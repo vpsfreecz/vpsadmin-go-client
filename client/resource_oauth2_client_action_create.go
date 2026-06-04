@@ -16,8 +16,8 @@ func NewActionOauth2ClientCreate(client *Client) *ActionOauth2ClientCreate {
 
 // ActionOauth2ClientCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOauth2ClientCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,15 +73,15 @@ func (in *ActionOauth2ClientCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOauth2ClientCreateInput is a type for action input parameters
 type ActionOauth2ClientCreateInput struct {
-	AccessTokenLifetime string `json:"access_token_lifetime"`
-	AccessTokenSeconds  int64  `json:"access_token_seconds"`
-	AllowSingleSignOn   bool   `json:"allow_single_sign_on"`
-	ClientId            string `json:"client_id"`
-	ClientSecret        string `json:"client_secret"`
-	IssueRefreshToken   bool   `json:"issue_refresh_token"`
-	Name                string `json:"name"`
-	RedirectUri         string `json:"redirect_uri"`
-	RefreshTokenSeconds int64  `json:"refresh_token_seconds"`
+	AccessTokenLifetime string "json:\"access_token_lifetime\""
+	AccessTokenSeconds  int64  "json:\"access_token_seconds\""
+	AllowSingleSignOn   bool   "json:\"allow_single_sign_on\""
+	ClientId            string "json:\"client_id\""
+	ClientSecret        string "json:\"client_secret\""
+	IssueRefreshToken   bool   "json:\"issue_refresh_token\""
+	Name                string "json:\"name\""
+	RedirectUri         string "json:\"redirect_uri\""
+	RefreshTokenSeconds int64  "json:\"refresh_token_seconds\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -236,32 +236,32 @@ func (in *ActionOauth2ClientCreateInput) AnySelected() bool {
 
 // ActionOauth2ClientCreateRequest is a type for the entire action request
 type ActionOauth2ClientCreateRequest struct {
-	Oauth2Client map[string]interface{} `json:"oauth2_client"`
-	Meta         map[string]interface{} `json:"_meta"`
+	Oauth2Client map[string]interface{} "json:\"oauth2_client\""
+	Meta         map[string]interface{} "json:\"_meta\""
 }
 
 // ActionOauth2ClientCreateOutput is a type for action output parameters
 type ActionOauth2ClientCreateOutput struct {
-	AccessTokenLifetime string `json:"access_token_lifetime"`
-	AccessTokenSeconds  int64  `json:"access_token_seconds"`
-	AllowSingleSignOn   bool   `json:"allow_single_sign_on"`
-	ClientId            string `json:"client_id"`
-	CreatedAt           string `json:"created_at"`
-	Id                  int64  `json:"id"`
-	IssueRefreshToken   bool   `json:"issue_refresh_token"`
-	Name                string `json:"name"`
-	RedirectUri         string `json:"redirect_uri"`
-	RefreshTokenSeconds int64  `json:"refresh_token_seconds"`
-	UpdatedAt           string `json:"updated_at"`
+	AccessTokenLifetime string "json:\"access_token_lifetime\""
+	AccessTokenSeconds  int64  "json:\"access_token_seconds\""
+	AllowSingleSignOn   bool   "json:\"allow_single_sign_on\""
+	ClientId            string "json:\"client_id\""
+	CreatedAt           string "json:\"created_at\""
+	Id                  int64  "json:\"id\""
+	IssueRefreshToken   bool   "json:\"issue_refresh_token\""
+	Name                string "json:\"name\""
+	RedirectUri         string "json:\"redirect_uri\""
+	RefreshTokenSeconds int64  "json:\"refresh_token_seconds\""
+	UpdatedAt           string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionOauth2ClientCreateResponse struct {
-	Action *ActionOauth2ClientCreate `json:"-"`
+	Action *ActionOauth2ClientCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Oauth2Client *ActionOauth2ClientCreateOutput `json:"oauth2_client"`
+		Oauth2Client *ActionOauth2ClientCreateOutput "json:\"oauth2_client\""
 	}
 
 	// Action output without the namespace

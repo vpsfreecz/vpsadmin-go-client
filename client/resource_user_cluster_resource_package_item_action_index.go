@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionUserClusterResourcePackageItemIndex(client *Client) *ActionUserClu
 
 // ActionUserClusterResourcePackageItemIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserClusterResourcePackageItemIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,8 +89,8 @@ func (in *ActionUserClusterResourcePackageItemIndexMetaGlobalInput) AnySelected(
 
 // ActionUserClusterResourcePackageItemIndexInput is a type for action input parameters
 type ActionUserClusterResourcePackageItemIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,18 +161,18 @@ func (in *ActionUserClusterResourcePackageItemIndexInput) AnySelected() bool {
 
 // ActionUserClusterResourcePackageItemIndexOutput is a type for action output parameters
 type ActionUserClusterResourcePackageItemIndexOutput struct {
-	ClusterResource *ActionClusterResourceShowOutput `json:"cluster_resource"`
-	Id              int64                            `json:"id"`
-	Value           int64                            `json:"value"`
+	ClusterResource *ActionClusterResourceShowOutput "json:\"cluster_resource\""
+	Id              int64                            "json:\"id\""
+	Value           int64                            "json:\"value\""
 }
 
 // Type for action response, including envelope
 type ActionUserClusterResourcePackageItemIndexResponse struct {
-	Action *ActionUserClusterResourcePackageItemIndex `json:"-"`
+	Action *ActionUserClusterResourcePackageItemIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Items []*ActionUserClusterResourcePackageItemIndexOutput `json:"items"`
+		Items []*ActionUserClusterResourcePackageItemIndexOutput "json:\"items\""
 	}
 
 	// Action output without the namespace
@@ -206,7 +207,7 @@ func (inv *ActionUserClusterResourcePackageItemIndexInvocation) SetPathParamInt(
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserClusterResourcePackageItemIndexInvocation) SetPathParamString(param string, value string) *ActionUserClusterResourcePackageItemIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

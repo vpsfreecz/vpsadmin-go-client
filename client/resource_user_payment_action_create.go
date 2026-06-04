@@ -16,8 +16,8 @@ func NewActionUserPaymentCreate(client *Client) *ActionUserPaymentCreate {
 
 // ActionUserPaymentCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPaymentCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,9 +73,9 @@ func (in *ActionUserPaymentCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserPaymentCreateInput is a type for action input parameters
 type ActionUserPaymentCreateInput struct {
-	Amount          int64 `json:"amount"`
-	IncomingPayment int64 `json:"incoming_payment"`
-	User            int64 `json:"user"`
+	Amount          int64 "json:\"amount\""
+	IncomingPayment int64 "json:\"incoming_payment\""
+	User            int64 "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,36 +158,36 @@ func (in *ActionUserPaymentCreateInput) AnySelected() bool {
 
 // ActionUserPaymentCreateRequest is a type for the entire action request
 type ActionUserPaymentCreateRequest struct {
-	UserPayment map[string]interface{} `json:"user_payment"`
-	Meta        map[string]interface{} `json:"_meta"`
+	UserPayment map[string]interface{} "json:\"user_payment\""
+	Meta        map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserPaymentCreateOutput is a type for action output parameters
 type ActionUserPaymentCreateOutput struct {
-	AccountedBy     *ActionUserShowOutput            `json:"accounted_by"`
-	Amount          int64                            `json:"amount"`
-	CreatedAt       string                           `json:"created_at"`
-	FromDate        string                           `json:"from_date"`
-	Id              int64                            `json:"id"`
-	IncomingPayment *ActionIncomingPaymentShowOutput `json:"incoming_payment"`
-	ToDate          string                           `json:"to_date"`
-	User            *ActionUserShowOutput            `json:"user"`
+	AccountedBy     *ActionUserShowOutput            "json:\"accounted_by\""
+	Amount          int64                            "json:\"amount\""
+	CreatedAt       string                           "json:\"created_at\""
+	FromDate        string                           "json:\"from_date\""
+	Id              int64                            "json:\"id\""
+	IncomingPayment *ActionIncomingPaymentShowOutput "json:\"incoming_payment\""
+	ToDate          string                           "json:\"to_date\""
+	User            *ActionUserShowOutput            "json:\"user\""
 }
 
 // ActionUserPaymentCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionUserPaymentCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionUserPaymentCreateResponse struct {
-	Action *ActionUserPaymentCreate `json:"-"`
+	Action *ActionUserPaymentCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		UserPayment *ActionUserPaymentCreateOutput `json:"user_payment"`
+		UserPayment *ActionUserPaymentCreateOutput "json:\"user_payment\""
 		// Global output metadata
-		Meta *ActionUserPaymentCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionUserPaymentCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionIncomingPaymentShow(client *Client) *ActionIncomingPaymentShow {
 
 // ActionIncomingPaymentShowMetaGlobalInput is a type for action global meta input parameters
 type ActionIncomingPaymentShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,32 +76,32 @@ func (in *ActionIncomingPaymentShowMetaGlobalInput) AnySelected() bool {
 
 // ActionIncomingPaymentShowOutput is a type for action output parameters
 type ActionIncomingPaymentShowOutput struct {
-	AccountName     string `json:"account_name"`
-	Amount          int64  `json:"amount"`
-	Comment         string `json:"comment"`
-	CreatedAt       string `json:"created_at"`
-	Currency        string `json:"currency"`
-	Date            string `json:"date"`
-	Id              int64  `json:"id"`
-	Ks              string `json:"ks"`
-	SrcAmount       int64  `json:"src_amount"`
-	SrcCurrency     string `json:"src_currency"`
-	Ss              string `json:"ss"`
-	State           string `json:"state"`
-	TransactionId   string `json:"transaction_id"`
-	TransactionType string `json:"transaction_type"`
-	UserIdent       string `json:"user_ident"`
-	UserMessage     string `json:"user_message"`
-	Vs              string `json:"vs"`
+	AccountName     string "json:\"account_name\""
+	Amount          int64  "json:\"amount\""
+	Comment         string "json:\"comment\""
+	CreatedAt       string "json:\"created_at\""
+	Currency        string "json:\"currency\""
+	Date            string "json:\"date\""
+	Id              int64  "json:\"id\""
+	Ks              string "json:\"ks\""
+	SrcAmount       int64  "json:\"src_amount\""
+	SrcCurrency     string "json:\"src_currency\""
+	Ss              string "json:\"ss\""
+	State           string "json:\"state\""
+	TransactionId   string "json:\"transaction_id\""
+	TransactionType string "json:\"transaction_type\""
+	UserIdent       string "json:\"user_ident\""
+	UserMessage     string "json:\"user_message\""
+	Vs              string "json:\"vs\""
 }
 
 // Type for action response, including envelope
 type ActionIncomingPaymentShowResponse struct {
-	Action *ActionIncomingPaymentShow `json:"-"`
+	Action *ActionIncomingPaymentShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		IncomingPayment *ActionIncomingPaymentShowOutput `json:"incoming_payment"`
+		IncomingPayment *ActionIncomingPaymentShowOutput "json:\"incoming_payment\""
 	}
 
 	// Action output without the namespace
@@ -133,7 +134,7 @@ func (inv *ActionIncomingPaymentShowInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionIncomingPaymentShowInvocation) SetPathParamString(param string, value string) *ActionIncomingPaymentShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

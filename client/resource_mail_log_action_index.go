@@ -16,9 +16,9 @@ func NewActionMailLogIndex(client *Client) *ActionMailLogIndex {
 
 // ActionMailLogIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMailLogIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,8 +86,8 @@ func (in *ActionMailLogIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMailLogIndexInput is a type for action input parameters
 type ActionMailLogIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,31 +158,31 @@ func (in *ActionMailLogIndexInput) AnySelected() bool {
 
 // ActionMailLogIndexOutput is a type for action output parameters
 type ActionMailLogIndexOutput struct {
-	Bcc          string                        `json:"bcc"`
-	Cc           string                        `json:"cc"`
-	CreatedAt    string                        `json:"created_at"`
-	From         string                        `json:"from"`
-	Id           int64                         `json:"id"`
-	InReplyTo    string                        `json:"in_reply_to"`
-	MailTemplate *ActionMailTemplateShowOutput `json:"mail_template"`
-	MessageId    string                        `json:"message_id"`
-	References   string                        `json:"references"`
-	ReplyTo      string                        `json:"reply_to"`
-	ReturnPath   string                        `json:"return_path"`
-	Subject      string                        `json:"subject"`
-	TextHtml     string                        `json:"text_html"`
-	TextPlain    string                        `json:"text_plain"`
-	To           string                        `json:"to"`
-	User         *ActionUserShowOutput         `json:"user"`
+	Bcc          string                        "json:\"bcc\""
+	Cc           string                        "json:\"cc\""
+	CreatedAt    string                        "json:\"created_at\""
+	From         string                        "json:\"from\""
+	Id           int64                         "json:\"id\""
+	InReplyTo    string                        "json:\"in_reply_to\""
+	MailTemplate *ActionMailTemplateShowOutput "json:\"mail_template\""
+	MessageId    string                        "json:\"message_id\""
+	References   string                        "json:\"references\""
+	ReplyTo      string                        "json:\"reply_to\""
+	ReturnPath   string                        "json:\"return_path\""
+	Subject      string                        "json:\"subject\""
+	TextHtml     string                        "json:\"text_html\""
+	TextPlain    string                        "json:\"text_plain\""
+	To           string                        "json:\"to\""
+	User         *ActionUserShowOutput         "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionMailLogIndexResponse struct {
-	Action *ActionMailLogIndex `json:"-"`
+	Action *ActionMailLogIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MailLogs []*ActionMailLogIndexOutput `json:"mail_logs"`
+		MailLogs []*ActionMailLogIndexOutput "json:\"mail_logs\""
 	}
 
 	// Action output without the namespace

@@ -16,8 +16,8 @@ func NewActionOutageCreate(client *Client) *ActionOutageCreate {
 
 // ActionOutageCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,16 +73,16 @@ func (in *ActionOutageCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageCreateInput is a type for action input parameters
 type ActionOutageCreateInput struct {
-	AutoResolve   bool   `json:"auto_resolve"`
-	BeginsAt      string `json:"begins_at"`
-	CsDescription string `json:"cs_description"`
-	CsSummary     string `json:"cs_summary"`
-	Duration      int64  `json:"duration"`
-	EnDescription string `json:"en_description"`
-	EnSummary     string `json:"en_summary"`
-	FinishedAt    string `json:"finished_at"`
-	Impact        string `json:"impact"`
-	Type          string `json:"type"`
+	AutoResolve   bool   "json:\"auto_resolve\""
+	BeginsAt      string "json:\"begins_at\""
+	CsDescription string "json:\"cs_description\""
+	CsSummary     string "json:\"cs_summary\""
+	Duration      int64  "json:\"duration\""
+	EnDescription string "json:\"en_description\""
+	EnSummary     string "json:\"en_summary\""
+	FinishedAt    string "json:\"finished_at\""
+	Impact        string "json:\"impact\""
+	Type          string "json:\"type\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -268,38 +268,38 @@ func (in *ActionOutageCreateInput) AnySelected() bool {
 
 // ActionOutageCreateRequest is a type for the entire action request
 type ActionOutageCreateRequest struct {
-	Outage map[string]interface{} `json:"outage"`
-	Meta   map[string]interface{} `json:"_meta"`
+	Outage map[string]interface{} "json:\"outage\""
+	Meta   map[string]interface{} "json:\"_meta\""
 }
 
 // ActionOutageCreateOutput is a type for action output parameters
 type ActionOutageCreateOutput struct {
-	Affected                 bool   `json:"affected"`
-	AffectedDirectVpsCount   int64  `json:"affected_direct_vps_count"`
-	AffectedExportCount      int64  `json:"affected_export_count"`
-	AffectedIndirectVpsCount int64  `json:"affected_indirect_vps_count"`
-	AffectedUserCount        int64  `json:"affected_user_count"`
-	AutoResolve              bool   `json:"auto_resolve"`
-	BeginsAt                 string `json:"begins_at"`
-	CsDescription            string `json:"cs_description"`
-	CsSummary                string `json:"cs_summary"`
-	Duration                 int64  `json:"duration"`
-	EnDescription            string `json:"en_description"`
-	EnSummary                string `json:"en_summary"`
-	FinishedAt               string `json:"finished_at"`
-	Id                       int64  `json:"id"`
-	Impact                   string `json:"impact"`
-	State                    string `json:"state"`
-	Type                     string `json:"type"`
+	Affected                 bool   "json:\"affected\""
+	AffectedDirectVpsCount   int64  "json:\"affected_direct_vps_count\""
+	AffectedExportCount      int64  "json:\"affected_export_count\""
+	AffectedIndirectVpsCount int64  "json:\"affected_indirect_vps_count\""
+	AffectedUserCount        int64  "json:\"affected_user_count\""
+	AutoResolve              bool   "json:\"auto_resolve\""
+	BeginsAt                 string "json:\"begins_at\""
+	CsDescription            string "json:\"cs_description\""
+	CsSummary                string "json:\"cs_summary\""
+	Duration                 int64  "json:\"duration\""
+	EnDescription            string "json:\"en_description\""
+	EnSummary                string "json:\"en_summary\""
+	FinishedAt               string "json:\"finished_at\""
+	Id                       int64  "json:\"id\""
+	Impact                   string "json:\"impact\""
+	State                    string "json:\"state\""
+	Type                     string "json:\"type\""
 }
 
 // Type for action response, including envelope
 type ActionOutageCreateResponse struct {
-	Action *ActionOutageCreate `json:"-"`
+	Action *ActionOutageCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Outage *ActionOutageCreateOutput `json:"outage"`
+		Outage *ActionOutageCreateOutput "json:\"outage\""
 	}
 
 	// Action output without the namespace

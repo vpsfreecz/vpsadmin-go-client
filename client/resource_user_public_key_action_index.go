@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionUserPublicKeyIndex(client *Client) *ActionUserPublicKeyIndex {
 
 // ActionUserPublicKeyIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPublicKeyIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,8 +89,8 @@ func (in *ActionUserPublicKeyIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserPublicKeyIndexInput is a type for action input parameters
 type ActionUserPublicKeyIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,23 +161,23 @@ func (in *ActionUserPublicKeyIndexInput) AnySelected() bool {
 
 // ActionUserPublicKeyIndexOutput is a type for action output parameters
 type ActionUserPublicKeyIndexOutput struct {
-	AutoAdd     bool   `json:"auto_add"`
-	Comment     string `json:"comment"`
-	CreatedAt   string `json:"created_at"`
-	Fingerprint string `json:"fingerprint"`
-	Id          int64  `json:"id"`
-	Key         string `json:"key"`
-	Label       string `json:"label"`
-	UpdatedAt   string `json:"updated_at"`
+	AutoAdd     bool   "json:\"auto_add\""
+	Comment     string "json:\"comment\""
+	CreatedAt   string "json:\"created_at\""
+	Fingerprint string "json:\"fingerprint\""
+	Id          int64  "json:\"id\""
+	Key         string "json:\"key\""
+	Label       string "json:\"label\""
+	UpdatedAt   string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionUserPublicKeyIndexResponse struct {
-	Action *ActionUserPublicKeyIndex `json:"-"`
+	Action *ActionUserPublicKeyIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		PublicKeys []*ActionUserPublicKeyIndexOutput `json:"public_keys"`
+		PublicKeys []*ActionUserPublicKeyIndexOutput "json:\"public_keys\""
 	}
 
 	// Action output without the namespace
@@ -211,7 +212,7 @@ func (inv *ActionUserPublicKeyIndexInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserPublicKeyIndexInvocation) SetPathParamString(param string, value string) *ActionUserPublicKeyIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDatasetShow(client *Client) *ActionDatasetShow {
 
 // ActionDatasetShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,37 +76,37 @@ func (in *ActionDatasetShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetShowOutput is a type for action output parameters
 type ActionDatasetShowOutput struct {
-	Atime            bool                              `json:"atime"`
-	Avail            int64                             `json:"avail"`
-	Compression      bool                              `json:"compression"`
-	Compressratio    float64                           `json:"compressratio"`
-	CurrentHistoryId int64                             `json:"current_history_id"`
-	DatasetExpansion *ActionDatasetExpansionShowOutput `json:"dataset_expansion"`
-	Environment      *ActionEnvironmentShowOutput      `json:"environment"`
-	Export           *ActionExportShowOutput           `json:"export"`
-	Id               int64                             `json:"id"`
-	Name             string                            `json:"name"`
-	Parent           *ActionDatasetShowOutput          `json:"parent"`
-	Quota            int64                             `json:"quota"`
-	Recordsize       int64                             `json:"recordsize"`
-	Refcompressratio float64                           `json:"refcompressratio"`
-	Referenced       int64                             `json:"referenced"`
-	Refquota         int64                             `json:"refquota"`
-	Relatime         bool                              `json:"relatime"`
-	Sharenfs         string                            `json:"sharenfs"`
-	Sync             string                            `json:"sync"`
-	Used             int64                             `json:"used"`
-	User             *ActionUserShowOutput             `json:"user"`
-	Vps              *ActionVpsShowOutput              `json:"vps"`
+	Atime            bool                              "json:\"atime\""
+	Avail            int64                             "json:\"avail\""
+	Compression      bool                              "json:\"compression\""
+	Compressratio    float64                           "json:\"compressratio\""
+	CurrentHistoryId int64                             "json:\"current_history_id\""
+	DatasetExpansion *ActionDatasetExpansionShowOutput "json:\"dataset_expansion\""
+	Environment      *ActionEnvironmentShowOutput      "json:\"environment\""
+	Export           *ActionExportShowOutput           "json:\"export\""
+	Id               int64                             "json:\"id\""
+	Name             string                            "json:\"name\""
+	Parent           *ActionDatasetShowOutput          "json:\"parent\""
+	Quota            int64                             "json:\"quota\""
+	Recordsize       int64                             "json:\"recordsize\""
+	Refcompressratio float64                           "json:\"refcompressratio\""
+	Referenced       int64                             "json:\"referenced\""
+	Refquota         int64                             "json:\"refquota\""
+	Relatime         bool                              "json:\"relatime\""
+	Sharenfs         string                            "json:\"sharenfs\""
+	Sync             string                            "json:\"sync\""
+	Used             int64                             "json:\"used\""
+	User             *ActionUserShowOutput             "json:\"user\""
+	Vps              *ActionVpsShowOutput              "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetShowResponse struct {
-	Action *ActionDatasetShow `json:"-"`
+	Action *ActionDatasetShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Dataset *ActionDatasetShowOutput `json:"dataset"`
+		Dataset *ActionDatasetShowOutput "json:\"dataset\""
 	}
 
 	// Action output without the namespace
@@ -138,7 +139,7 @@ func (inv *ActionDatasetShowInvocation) SetPathParamInt(param string, value int6
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetShowInvocation) SetPathParamString(param string, value string) *ActionDatasetShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

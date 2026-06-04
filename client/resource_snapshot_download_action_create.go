@@ -16,8 +16,8 @@ func NewActionSnapshotDownloadCreate(client *Client) *ActionSnapshotDownloadCrea
 
 // ActionSnapshotDownloadCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionSnapshotDownloadCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,10 +73,10 @@ func (in *ActionSnapshotDownloadCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionSnapshotDownloadCreateInput is a type for action input parameters
 type ActionSnapshotDownloadCreateInput struct {
-	Format       string `json:"format"`
-	FromSnapshot int64  `json:"from_snapshot"`
-	SendMail     bool   `json:"send_mail"`
-	Snapshot     int64  `json:"snapshot"`
+	Format       string "json:\"format\""
+	FromSnapshot int64  "json:\"from_snapshot\""
+	SendMail     bool   "json:\"send_mail\""
+	Snapshot     int64  "json:\"snapshot\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -171,39 +171,39 @@ func (in *ActionSnapshotDownloadCreateInput) AnySelected() bool {
 
 // ActionSnapshotDownloadCreateRequest is a type for the entire action request
 type ActionSnapshotDownloadCreateRequest struct {
-	SnapshotDownload map[string]interface{} `json:"snapshot_download"`
-	Meta             map[string]interface{} `json:"_meta"`
+	SnapshotDownload map[string]interface{} "json:\"snapshot_download\""
+	Meta             map[string]interface{} "json:\"_meta\""
 }
 
 // ActionSnapshotDownloadCreateOutput is a type for action output parameters
 type ActionSnapshotDownloadCreateOutput struct {
-	ExpirationDate string                           `json:"expiration_date"`
-	FileName       string                           `json:"file_name"`
-	Format         string                           `json:"format"`
-	FromSnapshot   *ActionDatasetSnapshotShowOutput `json:"from_snapshot"`
-	Id             int64                            `json:"id"`
-	Ready          bool                             `json:"ready"`
-	Sha256sum      string                           `json:"sha256sum"`
-	Size           int64                            `json:"size"`
-	Snapshot       *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	Url            string                           `json:"url"`
-	User           *ActionUserShowOutput            `json:"user"`
+	ExpirationDate string                           "json:\"expiration_date\""
+	FileName       string                           "json:\"file_name\""
+	Format         string                           "json:\"format\""
+	FromSnapshot   *ActionDatasetSnapshotShowOutput "json:\"from_snapshot\""
+	Id             int64                            "json:\"id\""
+	Ready          bool                             "json:\"ready\""
+	Sha256sum      string                           "json:\"sha256sum\""
+	Size           int64                            "json:\"size\""
+	Snapshot       *ActionDatasetSnapshotShowOutput "json:\"snapshot\""
+	Url            string                           "json:\"url\""
+	User           *ActionUserShowOutput            "json:\"user\""
 }
 
 // ActionSnapshotDownloadCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionSnapshotDownloadCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionSnapshotDownloadCreateResponse struct {
-	Action *ActionSnapshotDownloadCreate `json:"-"`
+	Action *ActionSnapshotDownloadCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		SnapshotDownload *ActionSnapshotDownloadCreateOutput `json:"snapshot_download"`
+		SnapshotDownload *ActionSnapshotDownloadCreateOutput "json:\"snapshot_download\""
 		// Global output metadata
-		Meta *ActionSnapshotDownloadCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionSnapshotDownloadCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

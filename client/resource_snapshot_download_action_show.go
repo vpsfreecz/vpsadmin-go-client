@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionSnapshotDownloadShow(client *Client) *ActionSnapshotDownloadShow {
 
 // ActionSnapshotDownloadShowMetaGlobalInput is a type for action global meta input parameters
 type ActionSnapshotDownloadShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,26 +76,26 @@ func (in *ActionSnapshotDownloadShowMetaGlobalInput) AnySelected() bool {
 
 // ActionSnapshotDownloadShowOutput is a type for action output parameters
 type ActionSnapshotDownloadShowOutput struct {
-	ExpirationDate string                           `json:"expiration_date"`
-	FileName       string                           `json:"file_name"`
-	Format         string                           `json:"format"`
-	FromSnapshot   *ActionDatasetSnapshotShowOutput `json:"from_snapshot"`
-	Id             int64                            `json:"id"`
-	Ready          bool                             `json:"ready"`
-	Sha256sum      string                           `json:"sha256sum"`
-	Size           int64                            `json:"size"`
-	Snapshot       *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	Url            string                           `json:"url"`
-	User           *ActionUserShowOutput            `json:"user"`
+	ExpirationDate string                           "json:\"expiration_date\""
+	FileName       string                           "json:\"file_name\""
+	Format         string                           "json:\"format\""
+	FromSnapshot   *ActionDatasetSnapshotShowOutput "json:\"from_snapshot\""
+	Id             int64                            "json:\"id\""
+	Ready          bool                             "json:\"ready\""
+	Sha256sum      string                           "json:\"sha256sum\""
+	Size           int64                            "json:\"size\""
+	Snapshot       *ActionDatasetSnapshotShowOutput "json:\"snapshot\""
+	Url            string                           "json:\"url\""
+	User           *ActionUserShowOutput            "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionSnapshotDownloadShowResponse struct {
-	Action *ActionSnapshotDownloadShow `json:"-"`
+	Action *ActionSnapshotDownloadShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		SnapshotDownload *ActionSnapshotDownloadShowOutput `json:"snapshot_download"`
+		SnapshotDownload *ActionSnapshotDownloadShowOutput "json:\"snapshot_download\""
 	}
 
 	// Action output without the namespace
@@ -127,7 +128,7 @@ func (inv *ActionSnapshotDownloadShowInvocation) SetPathParamInt(param string, v
 
 // SetPathParamString sets string path parameter
 func (inv *ActionSnapshotDownloadShowInvocation) SetPathParamString(param string, value string) *ActionSnapshotDownloadShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

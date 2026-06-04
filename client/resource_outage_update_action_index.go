@@ -16,9 +16,9 @@ func NewActionOutageUpdateIndex(client *Client) *ActionOutageUpdateIndex {
 
 // ActionOutageUpdateIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageUpdateIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,11 +86,11 @@ func (in *ActionOutageUpdateIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageUpdateIndexInput is a type for action input parameters
 type ActionOutageUpdateIndexInput struct {
-	FromId     int64  `json:"from_id"`
-	Limit      int64  `json:"limit"`
-	Outage     int64  `json:"outage"`
-	ReportedBy int64  `json:"reported_by"`
-	Since      string `json:"since"`
+	FromId     int64  "json:\"from_id\""
+	Limit      int64  "json:\"limit\""
+	Outage     int64  "json:\"outage\""
+	ReportedBy int64  "json:\"reported_by\""
+	Since      string "json:\"since\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -197,30 +197,30 @@ func (in *ActionOutageUpdateIndexInput) AnySelected() bool {
 
 // ActionOutageUpdateIndexOutput is a type for action output parameters
 type ActionOutageUpdateIndexOutput struct {
-	BeginsAt      string                  `json:"begins_at"`
-	CreatedAt     string                  `json:"created_at"`
-	CsDescription string                  `json:"cs_description"`
-	CsSummary     string                  `json:"cs_summary"`
-	Duration      int64                   `json:"duration"`
-	EnDescription string                  `json:"en_description"`
-	EnSummary     string                  `json:"en_summary"`
-	FinishedAt    string                  `json:"finished_at"`
-	Id            int64                   `json:"id"`
-	Impact        string                  `json:"impact"`
-	Outage        *ActionOutageShowOutput `json:"outage"`
-	ReportedBy    *ActionUserShowOutput   `json:"reported_by"`
-	ReporterName  string                  `json:"reporter_name"`
-	State         string                  `json:"state"`
-	Type          string                  `json:"type"`
+	BeginsAt      string                  "json:\"begins_at\""
+	CreatedAt     string                  "json:\"created_at\""
+	CsDescription string                  "json:\"cs_description\""
+	CsSummary     string                  "json:\"cs_summary\""
+	Duration      int64                   "json:\"duration\""
+	EnDescription string                  "json:\"en_description\""
+	EnSummary     string                  "json:\"en_summary\""
+	FinishedAt    string                  "json:\"finished_at\""
+	Id            int64                   "json:\"id\""
+	Impact        string                  "json:\"impact\""
+	Outage        *ActionOutageShowOutput "json:\"outage\""
+	ReportedBy    *ActionUserShowOutput   "json:\"reported_by\""
+	ReporterName  string                  "json:\"reporter_name\""
+	State         string                  "json:\"state\""
+	Type          string                  "json:\"type\""
 }
 
 // Type for action response, including envelope
 type ActionOutageUpdateIndexResponse struct {
-	Action *ActionOutageUpdateIndex `json:"-"`
+	Action *ActionOutageUpdateIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		OutageUpdates []*ActionOutageUpdateIndexOutput `json:"outage_updates"`
+		OutageUpdates []*ActionOutageUpdateIndexOutput "json:\"outage_updates\""
 	}
 
 	// Action output without the namespace

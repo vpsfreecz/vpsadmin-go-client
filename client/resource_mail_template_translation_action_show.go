@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMailTemplateTranslationShow(client *Client) *ActionMailTemplateTra
 
 // ActionMailTemplateTranslationShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateTranslationShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,25 +76,25 @@ func (in *ActionMailTemplateTranslationShowMetaGlobalInput) AnySelected() bool {
 
 // ActionMailTemplateTranslationShowOutput is a type for action output parameters
 type ActionMailTemplateTranslationShowOutput struct {
-	CreatedAt  string                    `json:"created_at"`
-	From       string                    `json:"from"`
-	Id         int64                     `json:"id"`
-	Language   *ActionLanguageShowOutput `json:"language"`
-	ReplyTo    string                    `json:"reply_to"`
-	ReturnPath string                    `json:"return_path"`
-	Subject    string                    `json:"subject"`
-	TextHtml   string                    `json:"text_html"`
-	TextPlain  string                    `json:"text_plain"`
-	UpdatedAt  string                    `json:"updated_at"`
+	CreatedAt  string                    "json:\"created_at\""
+	From       string                    "json:\"from\""
+	Id         int64                     "json:\"id\""
+	Language   *ActionLanguageShowOutput "json:\"language\""
+	ReplyTo    string                    "json:\"reply_to\""
+	ReturnPath string                    "json:\"return_path\""
+	Subject    string                    "json:\"subject\""
+	TextHtml   string                    "json:\"text_html\""
+	TextPlain  string                    "json:\"text_plain\""
+	UpdatedAt  string                    "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionMailTemplateTranslationShowResponse struct {
-	Action *ActionMailTemplateTranslationShow `json:"-"`
+	Action *ActionMailTemplateTranslationShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Translation *ActionMailTemplateTranslationShowOutput `json:"translation"`
+		Translation *ActionMailTemplateTranslationShowOutput "json:\"translation\""
 	}
 
 	// Action output without the namespace
@@ -126,7 +127,7 @@ func (inv *ActionMailTemplateTranslationShowInvocation) SetPathParamInt(param st
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMailTemplateTranslationShowInvocation) SetPathParamString(param string, value string) *ActionMailTemplateTranslationShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

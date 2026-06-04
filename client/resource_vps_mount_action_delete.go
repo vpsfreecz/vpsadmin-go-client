@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsMountDelete(client *Client) *ActionVpsMountDelete {
 
 // ActionVpsMountDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMountDeleteMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,22 +76,22 @@ func (in *ActionVpsMountDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMountDeleteRequest is a type for the entire action request
 type ActionVpsMountDeleteRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsMountDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsMountDeleteMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionVpsMountDeleteResponse struct {
-	Action *ActionVpsMountDelete `json:"-"`
+	Action *ActionVpsMountDelete "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionVpsMountDeleteMetaGlobalOutput `json:"_meta"`
+		Meta *ActionVpsMountDeleteMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -120,7 +121,7 @@ func (inv *ActionVpsMountDeleteInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsMountDeleteInvocation) SetPathParamString(param string, value string) *ActionVpsMountDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

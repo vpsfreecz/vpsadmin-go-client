@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserAccountUpdate(client *Client) *ActionUserAccountUpdate {
 
 // ActionUserAccountUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserAccountUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,8 +76,8 @@ func (in *ActionUserAccountUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserAccountUpdateInput is a type for action input parameters
 type ActionUserAccountUpdateInput struct {
-	MonthlyPayment int64  `json:"monthly_payment"`
-	PaidUntil      string `json:"paid_until"`
+	MonthlyPayment int64  "json:\"monthly_payment\""
+	PaidUntil      string "json:\"paid_until\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -147,24 +148,24 @@ func (in *ActionUserAccountUpdateInput) AnySelected() bool {
 
 // ActionUserAccountUpdateRequest is a type for the entire action request
 type ActionUserAccountUpdateRequest struct {
-	UserAccount map[string]interface{} `json:"user_account"`
-	Meta        map[string]interface{} `json:"_meta"`
+	UserAccount map[string]interface{} "json:\"user_account\""
+	Meta        map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserAccountUpdateOutput is a type for action output parameters
 type ActionUserAccountUpdateOutput struct {
-	Id             int64  `json:"id"`
-	MonthlyPayment int64  `json:"monthly_payment"`
-	PaidUntil      string `json:"paid_until"`
+	Id             int64  "json:\"id\""
+	MonthlyPayment int64  "json:\"monthly_payment\""
+	PaidUntil      string "json:\"paid_until\""
 }
 
 // Type for action response, including envelope
 type ActionUserAccountUpdateResponse struct {
-	Action *ActionUserAccountUpdate `json:"-"`
+	Action *ActionUserAccountUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		UserAccount *ActionUserAccountUpdateOutput `json:"user_account"`
+		UserAccount *ActionUserAccountUpdateOutput "json:\"user_account\""
 	}
 
 	// Action output without the namespace
@@ -199,7 +200,7 @@ func (inv *ActionUserAccountUpdateInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserAccountUpdateInvocation) SetPathParamString(param string, value string) *ActionUserAccountUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

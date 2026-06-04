@@ -16,9 +16,9 @@ func NewActionMailboxIndex(client *Client) *ActionMailboxIndex {
 
 // ActionMailboxIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMailboxIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,8 +86,8 @@ func (in *ActionMailboxIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMailboxIndexInput is a type for action input parameters
 type ActionMailboxIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,23 +158,23 @@ func (in *ActionMailboxIndexInput) AnySelected() bool {
 
 // ActionMailboxIndexOutput is a type for action output parameters
 type ActionMailboxIndexOutput struct {
-	CreatedAt string `json:"created_at"`
-	EnableSsl bool   `json:"enable_ssl"`
-	Id        int64  `json:"id"`
-	Label     string `json:"label"`
-	Port      int64  `json:"port"`
-	Server    string `json:"server"`
-	UpdatedAt string `json:"updated_at"`
-	User      string `json:"user"`
+	CreatedAt string "json:\"created_at\""
+	EnableSsl bool   "json:\"enable_ssl\""
+	Id        int64  "json:\"id\""
+	Label     string "json:\"label\""
+	Port      int64  "json:\"port\""
+	Server    string "json:\"server\""
+	UpdatedAt string "json:\"updated_at\""
+	User      string "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionMailboxIndexResponse struct {
-	Action *ActionMailboxIndex `json:"-"`
+	Action *ActionMailboxIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Mailboxes []*ActionMailboxIndexOutput `json:"mailboxes"`
+		Mailboxes []*ActionMailboxIndexOutput "json:\"mailboxes\""
 	}
 
 	// Action output without the namespace

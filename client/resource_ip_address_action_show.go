@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionIpAddressShow(client *Client) *ActionIpAddressShow {
 
 // ActionIpAddressShowMetaGlobalInput is a type for action global meta input parameters
 type ActionIpAddressShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,24 +76,24 @@ func (in *ActionIpAddressShowMetaGlobalInput) AnySelected() bool {
 
 // ActionIpAddressShowOutput is a type for action output parameters
 type ActionIpAddressShowOutput struct {
-	Addr               string                            `json:"addr"`
-	ChargedEnvironment *ActionEnvironmentShowOutput      `json:"charged_environment"`
-	Id                 int64                             `json:"id"`
-	Network            *ActionNetworkShowOutput          `json:"network"`
-	NetworkInterface   *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Prefix             int64                             `json:"prefix"`
-	RouteVia           *ActionHostIpAddressShowOutput    `json:"route_via"`
-	Size               int64                             `json:"size"`
-	User               *ActionUserShowOutput             `json:"user"`
+	Addr               string                            "json:\"addr\""
+	ChargedEnvironment *ActionEnvironmentShowOutput      "json:\"charged_environment\""
+	Id                 int64                             "json:\"id\""
+	Network            *ActionNetworkShowOutput          "json:\"network\""
+	NetworkInterface   *ActionNetworkInterfaceShowOutput "json:\"network_interface\""
+	Prefix             int64                             "json:\"prefix\""
+	RouteVia           *ActionHostIpAddressShowOutput    "json:\"route_via\""
+	Size               int64                             "json:\"size\""
+	User               *ActionUserShowOutput             "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionIpAddressShowResponse struct {
-	Action *ActionIpAddressShow `json:"-"`
+	Action *ActionIpAddressShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		IpAddress *ActionIpAddressShowOutput `json:"ip_address"`
+		IpAddress *ActionIpAddressShowOutput "json:\"ip_address\""
 	}
 
 	// Action output without the namespace
@@ -125,7 +126,7 @@ func (inv *ActionIpAddressShowInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionIpAddressShowInvocation) SetPathParamString(param string, value string) *ActionIpAddressShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

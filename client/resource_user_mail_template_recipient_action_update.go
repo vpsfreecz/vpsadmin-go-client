@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserMailTemplateRecipientUpdate(client *Client) *ActionUserMailTem
 
 // ActionUserMailTemplateRecipientUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserMailTemplateRecipientUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,8 +76,8 @@ func (in *ActionUserMailTemplateRecipientUpdateMetaGlobalInput) AnySelected() bo
 
 // ActionUserMailTemplateRecipientUpdateInput is a type for action input parameters
 type ActionUserMailTemplateRecipientUpdateInput struct {
-	Enabled bool   `json:"enabled"`
-	To      string `json:"to"`
+	Enabled bool   "json:\"enabled\""
+	To      string "json:\"to\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -147,26 +148,26 @@ func (in *ActionUserMailTemplateRecipientUpdateInput) AnySelected() bool {
 
 // ActionUserMailTemplateRecipientUpdateRequest is a type for the entire action request
 type ActionUserMailTemplateRecipientUpdateRequest struct {
-	MailTemplateRecipient map[string]interface{} `json:"mail_template_recipient"`
-	Meta                  map[string]interface{} `json:"_meta"`
+	MailTemplateRecipient map[string]interface{} "json:\"mail_template_recipient\""
+	Meta                  map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserMailTemplateRecipientUpdateOutput is a type for action output parameters
 type ActionUserMailTemplateRecipientUpdateOutput struct {
-	Description string `json:"description"`
-	Enabled     bool   `json:"enabled"`
-	Id          string `json:"id"`
-	Label       string `json:"label"`
-	To          string `json:"to"`
+	Description string "json:\"description\""
+	Enabled     bool   "json:\"enabled\""
+	Id          string "json:\"id\""
+	Label       string "json:\"label\""
+	To          string "json:\"to\""
 }
 
 // Type for action response, including envelope
 type ActionUserMailTemplateRecipientUpdateResponse struct {
-	Action *ActionUserMailTemplateRecipientUpdate `json:"-"`
+	Action *ActionUserMailTemplateRecipientUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MailTemplateRecipient *ActionUserMailTemplateRecipientUpdateOutput `json:"mail_template_recipient"`
+		MailTemplateRecipient *ActionUserMailTemplateRecipientUpdateOutput "json:\"mail_template_recipient\""
 	}
 
 	// Action output without the namespace
@@ -201,7 +202,7 @@ func (inv *ActionUserMailTemplateRecipientUpdateInvocation) SetPathParamInt(para
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserMailTemplateRecipientUpdateInvocation) SetPathParamString(param string, value string) *ActionUserMailTemplateRecipientUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

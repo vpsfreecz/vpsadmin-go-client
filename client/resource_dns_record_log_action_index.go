@@ -16,9 +16,9 @@ func NewActionDnsRecordLogIndex(client *Client) *ActionDnsRecordLogIndex {
 
 // ActionDnsRecordLogIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsRecordLogIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,14 +86,14 @@ func (in *ActionDnsRecordLogIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsRecordLogIndexInput is a type for action input parameters
 type ActionDnsRecordLogIndexInput struct {
-	ChangeType  string `json:"change_type"`
-	DnsZone     int64  `json:"dns_zone"`
-	DnsZoneName string `json:"dns_zone_name"`
-	FromId      int64  `json:"from_id"`
-	Limit       int64  `json:"limit"`
-	Name        string `json:"name"`
-	Type        string `json:"type"`
-	User        int64  `json:"user"`
+	ChangeType  string "json:\"change_type\""
+	DnsZone     int64  "json:\"dns_zone\""
+	DnsZoneName string "json:\"dns_zone_name\""
+	FromId      int64  "json:\"from_id\""
+	Limit       int64  "json:\"limit\""
+	Name        string "json:\"name\""
+	Type        string "json:\"type\""
+	User        int64  "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -236,26 +236,26 @@ func (in *ActionDnsRecordLogIndexInput) AnySelected() bool {
 
 // ActionDnsRecordLogIndexOutput is a type for action output parameters
 type ActionDnsRecordLogIndexOutput struct {
-	ChangeType       string                            `json:"change_type"`
-	CreatedAt        string                            `json:"created_at"`
-	DnsZone          *ActionDnsZoneShowOutput          `json:"dns_zone"`
-	DnsZoneName      string                            `json:"dns_zone_name"`
-	Id               int64                             `json:"id"`
-	Name             string                            `json:"name"`
-	RawUserId        int64                             `json:"raw_user_id"`
-	TransactionChain *ActionTransactionChainShowOutput `json:"transaction_chain"`
-	Type             string                            `json:"type"`
-	UpdatedAt        string                            `json:"updated_at"`
-	User             *ActionUserShowOutput             `json:"user"`
+	ChangeType       string                            "json:\"change_type\""
+	CreatedAt        string                            "json:\"created_at\""
+	DnsZone          *ActionDnsZoneShowOutput          "json:\"dns_zone\""
+	DnsZoneName      string                            "json:\"dns_zone_name\""
+	Id               int64                             "json:\"id\""
+	Name             string                            "json:\"name\""
+	RawUserId        int64                             "json:\"raw_user_id\""
+	TransactionChain *ActionTransactionChainShowOutput "json:\"transaction_chain\""
+	Type             string                            "json:\"type\""
+	UpdatedAt        string                            "json:\"updated_at\""
+	User             *ActionUserShowOutput             "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionDnsRecordLogIndexResponse struct {
-	Action *ActionDnsRecordLogIndex `json:"-"`
+	Action *ActionDnsRecordLogIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsRecordLogs []*ActionDnsRecordLogIndexOutput `json:"dns_record_logs"`
+		DnsRecordLogs []*ActionDnsRecordLogIndexOutput "json:\"dns_record_logs\""
 	}
 
 	// Action output without the namespace

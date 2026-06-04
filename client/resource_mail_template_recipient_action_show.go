@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMailTemplateRecipientShow(client *Client) *ActionMailTemplateRecip
 
 // ActionMailTemplateRecipientShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateRecipientShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,17 +76,17 @@ func (in *ActionMailTemplateRecipientShowMetaGlobalInput) AnySelected() bool {
 
 // ActionMailTemplateRecipientShowOutput is a type for action output parameters
 type ActionMailTemplateRecipientShowOutput struct {
-	Id            int64                          `json:"id"`
-	MailRecipient *ActionMailRecipientShowOutput `json:"mail_recipient"`
+	Id            int64                          "json:\"id\""
+	MailRecipient *ActionMailRecipientShowOutput "json:\"mail_recipient\""
 }
 
 // Type for action response, including envelope
 type ActionMailTemplateRecipientShowResponse struct {
-	Action *ActionMailTemplateRecipientShow `json:"-"`
+	Action *ActionMailTemplateRecipientShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Recipient *ActionMailTemplateRecipientShowOutput `json:"recipient"`
+		Recipient *ActionMailTemplateRecipientShowOutput "json:\"recipient\""
 	}
 
 	// Action output without the namespace
@@ -118,7 +119,7 @@ func (inv *ActionMailTemplateRecipientShowInvocation) SetPathParamInt(param stri
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMailTemplateRecipientShowInvocation) SetPathParamString(param string, value string) *ActionMailTemplateRecipientShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

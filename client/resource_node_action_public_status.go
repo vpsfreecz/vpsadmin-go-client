@@ -16,8 +16,8 @@ func NewActionNodePublicStatus(client *Client) *ActionNodePublicStatus {
 
 // ActionNodePublicStatusMetaGlobalInput is a type for action global meta input parameters
 type ActionNodePublicStatusMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,35 +73,35 @@ func (in *ActionNodePublicStatusMetaGlobalInput) AnySelected() bool {
 
 // ActionNodePublicStatusOutput is a type for action output parameters
 type ActionNodePublicStatusOutput struct {
-	CgroupVersion         string                    `json:"cgroup_version"`
-	CpuIdle               float64                   `json:"cpu_idle"`
-	Fqdn                  string                    `json:"fqdn"`
-	HypervisorType        string                    `json:"hypervisor_type"`
-	Id                    int64                     `json:"id"`
-	Kernel                string                    `json:"kernel"`
-	LastReport            string                    `json:"last_report"`
-	Location              *ActionLocationShowOutput `json:"location"`
-	MaintenanceLock       string                    `json:"maintenance_lock"`
-	MaintenanceLockReason string                    `json:"maintenance_lock_reason"`
-	Name                  string                    `json:"name"`
-	PoolCheckedAt         string                    `json:"pool_checked_at"`
-	PoolScan              string                    `json:"pool_scan"`
-	PoolScanPercent       float64                   `json:"pool_scan_percent"`
-	PoolState             string                    `json:"pool_state"`
-	PoolStatus            bool                      `json:"pool_status"`
-	Status                bool                      `json:"status"`
-	Type                  string                    `json:"type"`
-	VpsCount              int64                     `json:"vps_count"`
-	VpsFree               int64                     `json:"vps_free"`
+	CgroupVersion         string                    "json:\"cgroup_version\""
+	CpuIdle               float64                   "json:\"cpu_idle\""
+	Fqdn                  string                    "json:\"fqdn\""
+	HypervisorType        string                    "json:\"hypervisor_type\""
+	Id                    int64                     "json:\"id\""
+	Kernel                string                    "json:\"kernel\""
+	LastReport            string                    "json:\"last_report\""
+	Location              *ActionLocationShowOutput "json:\"location\""
+	MaintenanceLock       string                    "json:\"maintenance_lock\""
+	MaintenanceLockReason string                    "json:\"maintenance_lock_reason\""
+	Name                  string                    "json:\"name\""
+	PoolCheckedAt         string                    "json:\"pool_checked_at\""
+	PoolScan              string                    "json:\"pool_scan\""
+	PoolScanPercent       float64                   "json:\"pool_scan_percent\""
+	PoolState             string                    "json:\"pool_state\""
+	PoolStatus            bool                      "json:\"pool_status\""
+	Status                bool                      "json:\"status\""
+	Type                  string                    "json:\"type\""
+	VpsCount              int64                     "json:\"vps_count\""
+	VpsFree               int64                     "json:\"vps_free\""
 }
 
 // Type for action response, including envelope
 type ActionNodePublicStatusResponse struct {
-	Action *ActionNodePublicStatus `json:"-"`
+	Action *ActionNodePublicStatus "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Nodes []*ActionNodePublicStatusOutput `json:"nodes"`
+		Nodes []*ActionNodePublicStatusOutput "json:\"nodes\""
 	}
 
 	// Action output without the namespace

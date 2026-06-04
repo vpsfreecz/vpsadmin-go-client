@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionExportShow(client *Client) *ActionExportShow {
 
 // ActionExportShowMetaGlobalInput is a type for action global meta input parameters
 type ActionExportShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,32 +76,32 @@ func (in *ActionExportShowMetaGlobalInput) AnySelected() bool {
 
 // ActionExportShowOutput is a type for action output parameters
 type ActionExportShowOutput struct {
-	AllVps         bool                             `json:"all_vps"`
-	CreatedAt      string                           `json:"created_at"`
-	Dataset        *ActionDatasetShowOutput         `json:"dataset"`
-	Enabled        bool                             `json:"enabled"`
-	ExpirationDate string                           `json:"expiration_date"`
-	HostIpAddress  *ActionHostIpAddressShowOutput   `json:"host_ip_address"`
-	Id             int64                            `json:"id"`
-	IpAddress      *ActionIpAddressShowOutput       `json:"ip_address"`
-	Path           string                           `json:"path"`
-	RootSquash     bool                             `json:"root_squash"`
-	Rw             bool                             `json:"rw"`
-	Snapshot       *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	SubtreeCheck   bool                             `json:"subtree_check"`
-	Sync           bool                             `json:"sync"`
-	Threads        int64                            `json:"threads"`
-	UpdatedAt      string                           `json:"updated_at"`
-	User           *ActionUserShowOutput            `json:"user"`
+	AllVps         bool                             "json:\"all_vps\""
+	CreatedAt      string                           "json:\"created_at\""
+	Dataset        *ActionDatasetShowOutput         "json:\"dataset\""
+	Enabled        bool                             "json:\"enabled\""
+	ExpirationDate string                           "json:\"expiration_date\""
+	HostIpAddress  *ActionHostIpAddressShowOutput   "json:\"host_ip_address\""
+	Id             int64                            "json:\"id\""
+	IpAddress      *ActionIpAddressShowOutput       "json:\"ip_address\""
+	Path           string                           "json:\"path\""
+	RootSquash     bool                             "json:\"root_squash\""
+	Rw             bool                             "json:\"rw\""
+	Snapshot       *ActionDatasetSnapshotShowOutput "json:\"snapshot\""
+	SubtreeCheck   bool                             "json:\"subtree_check\""
+	Sync           bool                             "json:\"sync\""
+	Threads        int64                            "json:\"threads\""
+	UpdatedAt      string                           "json:\"updated_at\""
+	User           *ActionUserShowOutput            "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionExportShowResponse struct {
-	Action *ActionExportShow `json:"-"`
+	Action *ActionExportShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Export *ActionExportShowOutput `json:"export"`
+		Export *ActionExportShowOutput "json:\"export\""
 	}
 
 	// Action output without the namespace
@@ -133,7 +134,7 @@ func (inv *ActionExportShowInvocation) SetPathParamInt(param string, value int64
 
 // SetPathParamString sets string path parameter
 func (inv *ActionExportShowInvocation) SetPathParamString(param string, value string) *ActionExportShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

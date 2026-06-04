@@ -16,8 +16,8 @@ func NewActionLocationCreate(client *Client) *ActionLocationCreate {
 
 // ActionLocationCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,12 +73,12 @@ func (in *ActionLocationCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationCreateInput is a type for action input parameters
 type ActionLocationCreateInput struct {
-	Description         string `json:"description"`
-	Domain              string `json:"domain"`
-	Environment         int64  `json:"environment"`
-	HasIpv6             bool   `json:"has_ipv6"`
-	Label               string `json:"label"`
-	RemoteConsoleServer string `json:"remote_console_server"`
+	Description         string "json:\"description\""
+	Domain              string "json:\"domain\""
+	Environment         int64  "json:\"environment\""
+	HasIpv6             bool   "json:\"has_ipv6\""
+	Label               string "json:\"label\""
+	RemoteConsoleServer string "json:\"remote_console_server\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -197,28 +197,28 @@ func (in *ActionLocationCreateInput) AnySelected() bool {
 
 // ActionLocationCreateRequest is a type for the entire action request
 type ActionLocationCreateRequest struct {
-	Location map[string]interface{} `json:"location"`
-	Meta     map[string]interface{} `json:"_meta"`
+	Location map[string]interface{} "json:\"location\""
+	Meta     map[string]interface{} "json:\"_meta\""
 }
 
 // ActionLocationCreateOutput is a type for action output parameters
 type ActionLocationCreateOutput struct {
-	Description         string                       `json:"description"`
-	Domain              string                       `json:"domain"`
-	Environment         *ActionEnvironmentShowOutput `json:"environment"`
-	HasIpv6             bool                         `json:"has_ipv6"`
-	Id                  int64                        `json:"id"`
-	Label               string                       `json:"label"`
-	RemoteConsoleServer string                       `json:"remote_console_server"`
+	Description         string                       "json:\"description\""
+	Domain              string                       "json:\"domain\""
+	Environment         *ActionEnvironmentShowOutput "json:\"environment\""
+	HasIpv6             bool                         "json:\"has_ipv6\""
+	Id                  int64                        "json:\"id\""
+	Label               string                       "json:\"label\""
+	RemoteConsoleServer string                       "json:\"remote_console_server\""
 }
 
 // Type for action response, including envelope
 type ActionLocationCreateResponse struct {
-	Action *ActionLocationCreate `json:"-"`
+	Action *ActionLocationCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Location *ActionLocationCreateOutput `json:"location"`
+		Location *ActionLocationCreateOutput "json:\"location\""
 	}
 
 	// Action output without the namespace

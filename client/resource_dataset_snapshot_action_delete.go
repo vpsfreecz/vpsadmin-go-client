@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDatasetSnapshotDelete(client *Client) *ActionDatasetSnapshotDelete
 
 // ActionDatasetSnapshotDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetSnapshotDeleteMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,22 +76,22 @@ func (in *ActionDatasetSnapshotDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetSnapshotDeleteRequest is a type for the entire action request
 type ActionDatasetSnapshotDeleteRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDatasetSnapshotDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionDatasetSnapshotDeleteMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetSnapshotDeleteResponse struct {
-	Action *ActionDatasetSnapshotDelete `json:"-"`
+	Action *ActionDatasetSnapshotDelete "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionDatasetSnapshotDeleteMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDatasetSnapshotDeleteMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -120,7 +121,7 @@ func (inv *ActionDatasetSnapshotDeleteInvocation) SetPathParamInt(param string, 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetSnapshotDeleteInvocation) SetPathParamString(param string, value string) *ActionDatasetSnapshotDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

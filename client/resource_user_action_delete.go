@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserDelete(client *Client) *ActionUserDelete {
 
 // ActionUserDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionUserDeleteMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,10 +76,10 @@ func (in *ActionUserDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionUserDeleteInput is a type for action input parameters
 type ActionUserDeleteInput struct {
-	ChangeReason    string `json:"change_reason"`
-	ExpirationDate  string `json:"expiration_date"`
-	ObjectState     string `json:"object_state"`
-	RemindAfterDate string `json:"remind_after_date"`
+	ChangeReason    string "json:\"change_reason\""
+	ExpirationDate  string "json:\"expiration_date\""
+	ObjectState     string "json:\"object_state\""
+	RemindAfterDate string "json:\"remind_after_date\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -192,23 +193,23 @@ func (in *ActionUserDeleteInput) AnySelected() bool {
 
 // ActionUserDeleteRequest is a type for the entire action request
 type ActionUserDeleteRequest struct {
-	User map[string]interface{} `json:"user"`
-	Meta map[string]interface{} `json:"_meta"`
+	User map[string]interface{} "json:\"user\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionUserDeleteMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionUserDeleteResponse struct {
-	Action *ActionUserDelete `json:"-"`
+	Action *ActionUserDelete "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionUserDeleteMetaGlobalOutput `json:"_meta"`
+		Meta *ActionUserDeleteMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -240,7 +241,7 @@ func (inv *ActionUserDeleteInvocation) SetPathParamInt(param string, value int64
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserDeleteInvocation) SetPathParamString(param string, value string) *ActionUserDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

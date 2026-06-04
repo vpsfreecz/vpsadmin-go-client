@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOutageEntityCreate(client *Client) *ActionOutageEntityCreate {
 
 // ActionOutageEntityCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageEntityCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,8 +76,8 @@ func (in *ActionOutageEntityCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageEntityCreateInput is a type for action input parameters
 type ActionOutageEntityCreateInput struct {
-	EntityId int64  `json:"entity_id"`
-	Name     string `json:"name"`
+	EntityId int64  "json:\"entity_id\""
+	Name     string "json:\"name\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -147,25 +148,25 @@ func (in *ActionOutageEntityCreateInput) AnySelected() bool {
 
 // ActionOutageEntityCreateRequest is a type for the entire action request
 type ActionOutageEntityCreateRequest struct {
-	Entity map[string]interface{} `json:"entity"`
-	Meta   map[string]interface{} `json:"_meta"`
+	Entity map[string]interface{} "json:\"entity\""
+	Meta   map[string]interface{} "json:\"_meta\""
 }
 
 // ActionOutageEntityCreateOutput is a type for action output parameters
 type ActionOutageEntityCreateOutput struct {
-	EntityId int64  `json:"entity_id"`
-	Id       int64  `json:"id"`
-	Label    string `json:"label"`
-	Name     string `json:"name"`
+	EntityId int64  "json:\"entity_id\""
+	Id       int64  "json:\"id\""
+	Label    string "json:\"label\""
+	Name     string "json:\"name\""
 }
 
 // Type for action response, including envelope
 type ActionOutageEntityCreateResponse struct {
-	Action *ActionOutageEntityCreate `json:"-"`
+	Action *ActionOutageEntityCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Entity *ActionOutageEntityCreateOutput `json:"entity"`
+		Entity *ActionOutageEntityCreateOutput "json:\"entity\""
 	}
 
 	// Action output without the namespace
@@ -200,7 +201,7 @@ func (inv *ActionOutageEntityCreateInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOutageEntityCreateInvocation) SetPathParamString(param string, value string) *ActionOutageEntityCreateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

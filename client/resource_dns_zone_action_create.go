@@ -16,8 +16,8 @@ func NewActionDnsZoneCreate(client *Client) *ActionDnsZoneCreate {
 
 // ActionDnsZoneCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsZoneCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,18 +73,18 @@ func (in *ActionDnsZoneCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsZoneCreateInput is a type for action input parameters
 type ActionDnsZoneCreateInput struct {
-	DefaultTtl            int64  `json:"default_ttl"`
-	DnssecEnabled         bool   `json:"dnssec_enabled"`
-	Email                 string `json:"email"`
-	Enabled               bool   `json:"enabled"`
-	Label                 string `json:"label"`
-	Name                  string `json:"name"`
-	ReverseNetworkAddress string `json:"reverse_network_address"`
-	ReverseNetworkPrefix  string `json:"reverse_network_prefix"`
-	Role                  string `json:"role"`
-	SeedVps               int64  `json:"seed_vps"`
-	Source                string `json:"source"`
-	User                  int64  `json:"user"`
+	DefaultTtl            int64  "json:\"default_ttl\""
+	DnssecEnabled         bool   "json:\"dnssec_enabled\""
+	Email                 string "json:\"email\""
+	Enabled               bool   "json:\"enabled\""
+	Label                 string "json:\"label\""
+	Name                  string "json:\"name\""
+	ReverseNetworkAddress string "json:\"reverse_network_address\""
+	ReverseNetworkPrefix  string "json:\"reverse_network_prefix\""
+	Role                  string "json:\"role\""
+	SeedVps               int64  "json:\"seed_vps\""
+	Source                string "json:\"source\""
+	User                  int64  "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -294,43 +294,43 @@ func (in *ActionDnsZoneCreateInput) AnySelected() bool {
 
 // ActionDnsZoneCreateRequest is a type for the entire action request
 type ActionDnsZoneCreateRequest struct {
-	DnsZone map[string]interface{} `json:"dns_zone"`
-	Meta    map[string]interface{} `json:"_meta"`
+	DnsZone map[string]interface{} "json:\"dns_zone\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDnsZoneCreateOutput is a type for action output parameters
 type ActionDnsZoneCreateOutput struct {
-	CreatedAt             string                `json:"created_at"`
-	DefaultTtl            int64                 `json:"default_ttl"`
-	DnssecEnabled         bool                  `json:"dnssec_enabled"`
-	Email                 string                `json:"email"`
-	Enabled               bool                  `json:"enabled"`
-	Id                    int64                 `json:"id"`
-	Label                 string                `json:"label"`
-	Name                  string                `json:"name"`
-	ReverseNetworkAddress string                `json:"reverse_network_address"`
-	ReverseNetworkPrefix  string                `json:"reverse_network_prefix"`
-	Role                  string                `json:"role"`
-	Serial                int64                 `json:"serial"`
-	Source                string                `json:"source"`
-	UpdatedAt             string                `json:"updated_at"`
-	User                  *ActionUserShowOutput `json:"user"`
+	CreatedAt             string                "json:\"created_at\""
+	DefaultTtl            int64                 "json:\"default_ttl\""
+	DnssecEnabled         bool                  "json:\"dnssec_enabled\""
+	Email                 string                "json:\"email\""
+	Enabled               bool                  "json:\"enabled\""
+	Id                    int64                 "json:\"id\""
+	Label                 string                "json:\"label\""
+	Name                  string                "json:\"name\""
+	ReverseNetworkAddress string                "json:\"reverse_network_address\""
+	ReverseNetworkPrefix  string                "json:\"reverse_network_prefix\""
+	Role                  string                "json:\"role\""
+	Serial                int64                 "json:\"serial\""
+	Source                string                "json:\"source\""
+	UpdatedAt             string                "json:\"updated_at\""
+	User                  *ActionUserShowOutput "json:\"user\""
 }
 
 // ActionDnsZoneCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionDnsZoneCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDnsZoneCreateResponse struct {
-	Action *ActionDnsZoneCreate `json:"-"`
+	Action *ActionDnsZoneCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsZone *ActionDnsZoneCreateOutput `json:"dns_zone"`
+		DnsZone *ActionDnsZoneCreateOutput "json:\"dns_zone\""
 		// Global output metadata
-		Meta *ActionDnsZoneCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDnsZoneCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

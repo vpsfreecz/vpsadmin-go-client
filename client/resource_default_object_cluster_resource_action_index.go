@@ -16,9 +16,9 @@ func NewActionDefaultObjectClusterResourceIndex(client *Client) *ActionDefaultOb
 
 // ActionDefaultObjectClusterResourceIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDefaultObjectClusterResourceIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,11 +86,11 @@ func (in *ActionDefaultObjectClusterResourceIndexMetaGlobalInput) AnySelected() 
 
 // ActionDefaultObjectClusterResourceIndexInput is a type for action input parameters
 type ActionDefaultObjectClusterResourceIndexInput struct {
-	ClassName       string `json:"class_name"`
-	ClusterResource int64  `json:"cluster_resource"`
-	Environment     int64  `json:"environment"`
-	FromId          int64  `json:"from_id"`
-	Limit           int64  `json:"limit"`
+	ClassName       string "json:\"class_name\""
+	ClusterResource int64  "json:\"cluster_resource\""
+	Environment     int64  "json:\"environment\""
+	FromId          int64  "json:\"from_id\""
+	Limit           int64  "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -197,20 +197,20 @@ func (in *ActionDefaultObjectClusterResourceIndexInput) AnySelected() bool {
 
 // ActionDefaultObjectClusterResourceIndexOutput is a type for action output parameters
 type ActionDefaultObjectClusterResourceIndexOutput struct {
-	ClassName       string                           `json:"class_name"`
-	ClusterResource *ActionClusterResourceShowOutput `json:"cluster_resource"`
-	Environment     *ActionEnvironmentShowOutput     `json:"environment"`
-	Id              int64                            `json:"id"`
-	Value           int64                            `json:"value"`
+	ClassName       string                           "json:\"class_name\""
+	ClusterResource *ActionClusterResourceShowOutput "json:\"cluster_resource\""
+	Environment     *ActionEnvironmentShowOutput     "json:\"environment\""
+	Id              int64                            "json:\"id\""
+	Value           int64                            "json:\"value\""
 }
 
 // Type for action response, including envelope
 type ActionDefaultObjectClusterResourceIndexResponse struct {
-	Action *ActionDefaultObjectClusterResourceIndex `json:"-"`
+	Action *ActionDefaultObjectClusterResourceIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DefaultObjectClusterResources []*ActionDefaultObjectClusterResourceIndexOutput `json:"default_object_cluster_resources"`
+		DefaultObjectClusterResources []*ActionDefaultObjectClusterResourceIndexOutput "json:\"default_object_cluster_resources\""
 	}
 
 	// Action output without the namespace

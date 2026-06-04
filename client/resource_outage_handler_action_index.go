@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionOutageHandlerIndex(client *Client) *ActionOutageHandlerIndex {
 
 // ActionOutageHandlerIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageHandlerIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,8 +89,8 @@ func (in *ActionOutageHandlerIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageHandlerIndexInput is a type for action input parameters
 type ActionOutageHandlerIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,19 +161,19 @@ func (in *ActionOutageHandlerIndexInput) AnySelected() bool {
 
 // ActionOutageHandlerIndexOutput is a type for action output parameters
 type ActionOutageHandlerIndexOutput struct {
-	FullName string                `json:"full_name"`
-	Id       int64                 `json:"id"`
-	Note     string                `json:"note"`
-	User     *ActionUserShowOutput `json:"user"`
+	FullName string                "json:\"full_name\""
+	Id       int64                 "json:\"id\""
+	Note     string                "json:\"note\""
+	User     *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionOutageHandlerIndexResponse struct {
-	Action *ActionOutageHandlerIndex `json:"-"`
+	Action *ActionOutageHandlerIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Handlers []*ActionOutageHandlerIndexOutput `json:"handlers"`
+		Handlers []*ActionOutageHandlerIndexOutput "json:\"handlers\""
 	}
 
 	// Action output without the namespace
@@ -207,7 +208,7 @@ func (inv *ActionOutageHandlerIndexInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOutageHandlerIndexInvocation) SetPathParamString(param string, value string) *ActionOutageHandlerIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

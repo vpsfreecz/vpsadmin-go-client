@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsUserDataUpdate(client *Client) *ActionVpsUserDataUpdate {
 
 // ActionVpsUserDataUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsUserDataUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,9 +76,9 @@ func (in *ActionVpsUserDataUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsUserDataUpdateInput is a type for action input parameters
 type ActionVpsUserDataUpdateInput struct {
-	Content string `json:"content"`
-	Format  string `json:"format"`
-	Label   string `json:"label"`
+	Content string "json:\"content\""
+	Format  string "json:\"format\""
+	Label   string "json:\"label\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,28 +161,28 @@ func (in *ActionVpsUserDataUpdateInput) AnySelected() bool {
 
 // ActionVpsUserDataUpdateRequest is a type for the entire action request
 type ActionVpsUserDataUpdateRequest struct {
-	VpsUserData map[string]interface{} `json:"vps_user_data"`
-	Meta        map[string]interface{} `json:"_meta"`
+	VpsUserData map[string]interface{} "json:\"vps_user_data\""
+	Meta        map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsUserDataUpdateOutput is a type for action output parameters
 type ActionVpsUserDataUpdateOutput struct {
-	Content   string                `json:"content"`
-	CreatedAt string                `json:"created_at"`
-	Format    string                `json:"format"`
-	Id        int64                 `json:"id"`
-	Label     string                `json:"label"`
-	UpdatedAt string                `json:"updated_at"`
-	User      *ActionUserShowOutput `json:"user"`
+	Content   string                "json:\"content\""
+	CreatedAt string                "json:\"created_at\""
+	Format    string                "json:\"format\""
+	Id        int64                 "json:\"id\""
+	Label     string                "json:\"label\""
+	UpdatedAt string                "json:\"updated_at\""
+	User      *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionVpsUserDataUpdateResponse struct {
-	Action *ActionVpsUserDataUpdate `json:"-"`
+	Action *ActionVpsUserDataUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		VpsUserData *ActionVpsUserDataUpdateOutput `json:"vps_user_data"`
+		VpsUserData *ActionVpsUserDataUpdateOutput "json:\"vps_user_data\""
 	}
 
 	// Action output without the namespace
@@ -216,7 +217,7 @@ func (inv *ActionVpsUserDataUpdateInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsUserDataUpdateInvocation) SetPathParamString(param string, value string) *ActionVpsUserDataUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

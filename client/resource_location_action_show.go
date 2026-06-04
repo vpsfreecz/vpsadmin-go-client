@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionLocationShow(client *Client) *ActionLocationShow {
 
 // ActionLocationShowMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,24 +76,24 @@ func (in *ActionLocationShowMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationShowOutput is a type for action output parameters
 type ActionLocationShowOutput struct {
-	Description           string                       `json:"description"`
-	Domain                string                       `json:"domain"`
-	Environment           *ActionEnvironmentShowOutput `json:"environment"`
-	HasIpv6               bool                         `json:"has_ipv6"`
-	Id                    int64                        `json:"id"`
-	Label                 string                       `json:"label"`
-	MaintenanceLock       string                       `json:"maintenance_lock"`
-	MaintenanceLockReason string                       `json:"maintenance_lock_reason"`
-	RemoteConsoleServer   string                       `json:"remote_console_server"`
+	Description           string                       "json:\"description\""
+	Domain                string                       "json:\"domain\""
+	Environment           *ActionEnvironmentShowOutput "json:\"environment\""
+	HasIpv6               bool                         "json:\"has_ipv6\""
+	Id                    int64                        "json:\"id\""
+	Label                 string                       "json:\"label\""
+	MaintenanceLock       string                       "json:\"maintenance_lock\""
+	MaintenanceLockReason string                       "json:\"maintenance_lock_reason\""
+	RemoteConsoleServer   string                       "json:\"remote_console_server\""
 }
 
 // Type for action response, including envelope
 type ActionLocationShowResponse struct {
-	Action *ActionLocationShow `json:"-"`
+	Action *ActionLocationShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Location *ActionLocationShowOutput `json:"location"`
+		Location *ActionLocationShowOutput "json:\"location\""
 	}
 
 	// Action output without the namespace
@@ -125,7 +126,7 @@ func (inv *ActionLocationShowInvocation) SetPathParamInt(param string, value int
 
 // SetPathParamString sets string path parameter
 func (inv *ActionLocationShowInvocation) SetPathParamString(param string, value string) *ActionLocationShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

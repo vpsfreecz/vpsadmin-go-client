@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionUserNamespaceMapEntryIndex(client *Client) *ActionUserNamespaceMap
 
 // ActionUserNamespaceMapEntryIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceMapEntryIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,8 +89,8 @@ func (in *ActionUserNamespaceMapEntryIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserNamespaceMapEntryIndexInput is a type for action input parameters
 type ActionUserNamespaceMapEntryIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,20 +161,20 @@ func (in *ActionUserNamespaceMapEntryIndexInput) AnySelected() bool {
 
 // ActionUserNamespaceMapEntryIndexOutput is a type for action output parameters
 type ActionUserNamespaceMapEntryIndexOutput struct {
-	Count int64  `json:"count"`
-	Id    int64  `json:"id"`
-	Kind  string `json:"kind"`
-	NsId  int64  `json:"ns_id"`
-	VpsId int64  `json:"vps_id"`
+	Count int64  "json:\"count\""
+	Id    int64  "json:\"id\""
+	Kind  string "json:\"kind\""
+	NsId  int64  "json:\"ns_id\""
+	VpsId int64  "json:\"vps_id\""
 }
 
 // Type for action response, including envelope
 type ActionUserNamespaceMapEntryIndexResponse struct {
-	Action *ActionUserNamespaceMapEntryIndex `json:"-"`
+	Action *ActionUserNamespaceMapEntryIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Entries []*ActionUserNamespaceMapEntryIndexOutput `json:"entries"`
+		Entries []*ActionUserNamespaceMapEntryIndexOutput "json:\"entries\""
 	}
 
 	// Action output without the namespace
@@ -208,7 +209,7 @@ func (inv *ActionUserNamespaceMapEntryIndexInvocation) SetPathParamInt(param str
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserNamespaceMapEntryIndexInvocation) SetPathParamString(param string, value string) *ActionUserNamespaceMapEntryIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -16,7 +16,7 @@ func NewAuthTokenActionTokenRequest(client *Client) *AuthTokenActionTokenRequest
 
 // AuthTokenActionTokenRequestMetaGlobalInput is a type for action global meta input parameters
 type AuthTokenActionTokenRequestMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,11 +60,11 @@ func (in *AuthTokenActionTokenRequestMetaGlobalInput) AnySelected() bool {
 
 // AuthTokenActionTokenRequestInput is a type for action input parameters
 type AuthTokenActionTokenRequestInput struct {
-	Interval int64  `json:"interval"`
-	Lifetime string `json:"lifetime"`
-	Password string `json:"password"`
-	Scope    string `json:"scope"`
-	User     string `json:"user"`
+	Interval int64  "json:\"interval\""
+	Lifetime string "json:\"lifetime\""
+	Password string "json:\"password\""
+	Scope    string "json:\"scope\""
+	User     string "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -171,25 +171,25 @@ func (in *AuthTokenActionTokenRequestInput) AnySelected() bool {
 
 // AuthTokenActionTokenRequestRequest is a type for the entire action request
 type AuthTokenActionTokenRequestRequest struct {
-	Token map[string]interface{} `json:"token"`
-	Meta  map[string]interface{} `json:"_meta"`
+	Token map[string]interface{} "json:\"token\""
+	Meta  map[string]interface{} "json:\"_meta\""
 }
 
 // AuthTokenActionTokenRequestOutput is a type for action output parameters
 type AuthTokenActionTokenRequestOutput struct {
-	Complete   bool   `json:"complete"`
-	NextAction string `json:"next_action"`
-	Token      string `json:"token"`
-	ValidTo    string `json:"valid_to"`
+	Complete   bool   "json:\"complete\""
+	NextAction string "json:\"next_action\""
+	Token      string "json:\"token\""
+	ValidTo    string "json:\"valid_to\""
 }
 
 // Type for action response, including envelope
 type AuthTokenActionTokenRequestResponse struct {
-	Action *AuthTokenActionTokenRequest `json:"-"`
+	Action *AuthTokenActionTokenRequest "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Token *AuthTokenActionTokenRequestOutput `json:"token"`
+		Token *AuthTokenActionTokenRequestOutput "json:\"token\""
 	}
 
 	// Action output without the namespace

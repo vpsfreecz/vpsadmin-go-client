@@ -16,9 +16,9 @@ func NewActionNetworkIndex(client *Client) *ActionNetworkIndex {
 
 // ActionNetworkIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,10 +86,10 @@ func (in *ActionNetworkIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkIndexInput is a type for action input parameters
 type ActionNetworkIndexInput struct {
-	FromId   int64  `json:"from_id"`
-	Limit    int64  `json:"limit"`
-	Location int64  `json:"location"`
-	Purpose  string `json:"purpose"`
+	FromId   int64  "json:\"from_id\""
+	Limit    int64  "json:\"limit\""
+	Location int64  "json:\"location\""
+	Purpose  string "json:\"purpose\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -184,31 +184,31 @@ func (in *ActionNetworkIndexInput) AnySelected() bool {
 
 // ActionNetworkIndexOutput is a type for action output parameters
 type ActionNetworkIndexOutput struct {
-	Address         string                    `json:"address"`
-	Assigned        int64                     `json:"assigned"`
-	Id              int64                     `json:"id"`
-	IpVersion       int64                     `json:"ip_version"`
-	Label           string                    `json:"label"`
-	Managed         bool                      `json:"managed"`
-	Owned           int64                     `json:"owned"`
-	Prefix          int64                     `json:"prefix"`
-	PrimaryLocation *ActionLocationShowOutput `json:"primary_location"`
-	Purpose         string                    `json:"purpose"`
-	Role            string                    `json:"role"`
-	Size            int64                     `json:"size"`
-	SplitAccess     string                    `json:"split_access"`
-	SplitPrefix     int64                     `json:"split_prefix"`
-	Taken           int64                     `json:"taken"`
-	Used            int64                     `json:"used"`
+	Address         string                    "json:\"address\""
+	Assigned        int64                     "json:\"assigned\""
+	Id              int64                     "json:\"id\""
+	IpVersion       int64                     "json:\"ip_version\""
+	Label           string                    "json:\"label\""
+	Managed         bool                      "json:\"managed\""
+	Owned           int64                     "json:\"owned\""
+	Prefix          int64                     "json:\"prefix\""
+	PrimaryLocation *ActionLocationShowOutput "json:\"primary_location\""
+	Purpose         string                    "json:\"purpose\""
+	Role            string                    "json:\"role\""
+	Size            int64                     "json:\"size\""
+	SplitAccess     string                    "json:\"split_access\""
+	SplitPrefix     int64                     "json:\"split_prefix\""
+	Taken           int64                     "json:\"taken\""
+	Used            int64                     "json:\"used\""
 }
 
 // Type for action response, including envelope
 type ActionNetworkIndexResponse struct {
-	Action *ActionNetworkIndex `json:"-"`
+	Action *ActionNetworkIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Networks []*ActionNetworkIndexOutput `json:"networks"`
+		Networks []*ActionNetworkIndexOutput "json:\"networks\""
 	}
 
 	// Action output without the namespace

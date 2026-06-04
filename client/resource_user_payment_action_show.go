@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserPaymentShow(client *Client) *ActionUserPaymentShow {
 
 // ActionUserPaymentShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPaymentShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,23 +76,23 @@ func (in *ActionUserPaymentShowMetaGlobalInput) AnySelected() bool {
 
 // ActionUserPaymentShowOutput is a type for action output parameters
 type ActionUserPaymentShowOutput struct {
-	AccountedBy     *ActionUserShowOutput            `json:"accounted_by"`
-	Amount          int64                            `json:"amount"`
-	CreatedAt       string                           `json:"created_at"`
-	FromDate        string                           `json:"from_date"`
-	Id              int64                            `json:"id"`
-	IncomingPayment *ActionIncomingPaymentShowOutput `json:"incoming_payment"`
-	ToDate          string                           `json:"to_date"`
-	User            *ActionUserShowOutput            `json:"user"`
+	AccountedBy     *ActionUserShowOutput            "json:\"accounted_by\""
+	Amount          int64                            "json:\"amount\""
+	CreatedAt       string                           "json:\"created_at\""
+	FromDate        string                           "json:\"from_date\""
+	Id              int64                            "json:\"id\""
+	IncomingPayment *ActionIncomingPaymentShowOutput "json:\"incoming_payment\""
+	ToDate          string                           "json:\"to_date\""
+	User            *ActionUserShowOutput            "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionUserPaymentShowResponse struct {
-	Action *ActionUserPaymentShow `json:"-"`
+	Action *ActionUserPaymentShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		UserPayment *ActionUserPaymentShowOutput `json:"user_payment"`
+		UserPayment *ActionUserPaymentShowOutput "json:\"user_payment\""
 	}
 
 	// Action output without the namespace
@@ -124,7 +125,7 @@ func (inv *ActionUserPaymentShowInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserPaymentShowInvocation) SetPathParamString(param string, value string) *ActionUserPaymentShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

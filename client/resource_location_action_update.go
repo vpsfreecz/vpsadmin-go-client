@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionLocationUpdate(client *Client) *ActionLocationUpdate {
 
 // ActionLocationUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,12 +76,12 @@ func (in *ActionLocationUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationUpdateInput is a type for action input parameters
 type ActionLocationUpdateInput struct {
-	Description         string `json:"description"`
-	Domain              string `json:"domain"`
-	Environment         int64  `json:"environment"`
-	HasIpv6             bool   `json:"has_ipv6"`
-	Label               string `json:"label"`
-	RemoteConsoleServer string `json:"remote_console_server"`
+	Description         string "json:\"description\""
+	Domain              string "json:\"domain\""
+	Environment         int64  "json:\"environment\""
+	HasIpv6             bool   "json:\"has_ipv6\""
+	Label               string "json:\"label\""
+	RemoteConsoleServer string "json:\"remote_console_server\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -199,28 +200,28 @@ func (in *ActionLocationUpdateInput) AnySelected() bool {
 
 // ActionLocationUpdateRequest is a type for the entire action request
 type ActionLocationUpdateRequest struct {
-	Location map[string]interface{} `json:"location"`
-	Meta     map[string]interface{} `json:"_meta"`
+	Location map[string]interface{} "json:\"location\""
+	Meta     map[string]interface{} "json:\"_meta\""
 }
 
 // ActionLocationUpdateOutput is a type for action output parameters
 type ActionLocationUpdateOutput struct {
-	Description         string                       `json:"description"`
-	Domain              string                       `json:"domain"`
-	Environment         *ActionEnvironmentShowOutput `json:"environment"`
-	HasIpv6             bool                         `json:"has_ipv6"`
-	Id                  int64                        `json:"id"`
-	Label               string                       `json:"label"`
-	RemoteConsoleServer string                       `json:"remote_console_server"`
+	Description         string                       "json:\"description\""
+	Domain              string                       "json:\"domain\""
+	Environment         *ActionEnvironmentShowOutput "json:\"environment\""
+	HasIpv6             bool                         "json:\"has_ipv6\""
+	Id                  int64                        "json:\"id\""
+	Label               string                       "json:\"label\""
+	RemoteConsoleServer string                       "json:\"remote_console_server\""
 }
 
 // Type for action response, including envelope
 type ActionLocationUpdateResponse struct {
-	Action *ActionLocationUpdate `json:"-"`
+	Action *ActionLocationUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Location *ActionLocationUpdateOutput `json:"location"`
+		Location *ActionLocationUpdateOutput "json:\"location\""
 	}
 
 	// Action output without the namespace
@@ -255,7 +256,7 @@ func (inv *ActionLocationUpdateInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionLocationUpdateInvocation) SetPathParamString(param string, value string) *ActionLocationUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

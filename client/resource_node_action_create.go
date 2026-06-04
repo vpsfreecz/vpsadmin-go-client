@@ -16,8 +16,8 @@ func NewActionNodeCreate(client *Client) *ActionNodeCreate {
 
 // ActionNodeCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,19 +73,19 @@ func (in *ActionNodeCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeCreateInput is a type for action input parameters
 type ActionNodeCreateInput struct {
-	Cpus           int64  `json:"cpus"`
-	HypervisorType string `json:"hypervisor_type"`
-	Id             int64  `json:"id"`
-	IpAddr         string `json:"ip_addr"`
-	Location       int64  `json:"location"`
-	Maintenance    bool   `json:"maintenance"`
-	MaxRx          int64  `json:"max_rx"`
-	MaxTx          int64  `json:"max_tx"`
-	MaxVps         int64  `json:"max_vps"`
-	Name           string `json:"name"`
-	TotalMemory    int64  `json:"total_memory"`
-	TotalSwap      int64  `json:"total_swap"`
-	Type           string `json:"type"`
+	Cpus           int64  "json:\"cpus\""
+	HypervisorType string "json:\"hypervisor_type\""
+	Id             int64  "json:\"id\""
+	IpAddr         string "json:\"ip_addr\""
+	Location       int64  "json:\"location\""
+	Maintenance    bool   "json:\"maintenance\""
+	MaxRx          int64  "json:\"max_rx\""
+	MaxTx          int64  "json:\"max_tx\""
+	MaxVps         int64  "json:\"max_vps\""
+	Name           string "json:\"name\""
+	TotalMemory    int64  "json:\"total_memory\""
+	TotalSwap      int64  "json:\"total_swap\""
+	Type           string "json:\"type\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -288,71 +288,71 @@ func (in *ActionNodeCreateInput) AnySelected() bool {
 
 // ActionNodeCreateRequest is a type for the entire action request
 type ActionNodeCreateRequest struct {
-	Node map[string]interface{} `json:"node"`
-	Meta map[string]interface{} `json:"_meta"`
+	Node map[string]interface{} "json:\"node\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionNodeCreateOutput is a type for action output parameters
 type ActionNodeCreateOutput struct {
-	Active          bool                      `json:"active"`
-	ArcC            int64                     `json:"arc_c"`
-	ArcCMax         int64                     `json:"arc_c_max"`
-	ArcHitpercent   int64                     `json:"arc_hitpercent"`
-	ArcSize         int64                     `json:"arc_size"`
-	CgroupVersion   string                    `json:"cgroup_version"`
-	CpuGuest        float64                   `json:"cpu_guest"`
-	CpuIdle         float64                   `json:"cpu_idle"`
-	CpuIowait       float64                   `json:"cpu_iowait"`
-	CpuIrq          float64                   `json:"cpu_irq"`
-	CpuNice         float64                   `json:"cpu_nice"`
-	CpuSoftirq      float64                   `json:"cpu_softirq"`
-	CpuSystem       float64                   `json:"cpu_system"`
-	CpuUser         float64                   `json:"cpu_user"`
-	Cpus            int64                     `json:"cpus"`
-	DomainName      string                    `json:"domain_name"`
-	Fqdn            string                    `json:"fqdn"`
-	HypervisorType  string                    `json:"hypervisor_type"`
-	Id              int64                     `json:"id"`
-	IpAddr          string                    `json:"ip_addr"`
-	Kernel          string                    `json:"kernel"`
-	Loadavg1        float64                   `json:"loadavg1"`
-	Loadavg15       float64                   `json:"loadavg15"`
-	Loadavg5        float64                   `json:"loadavg5"`
-	Location        *ActionLocationShowOutput `json:"location"`
-	MaxRx           int64                     `json:"max_rx"`
-	MaxTx           int64                     `json:"max_tx"`
-	MaxVps          int64                     `json:"max_vps"`
-	Name            string                    `json:"name"`
-	PoolCheckedAt   string                    `json:"pool_checked_at"`
-	PoolScan        string                    `json:"pool_scan"`
-	PoolScanPercent float64                   `json:"pool_scan_percent"`
-	PoolState       string                    `json:"pool_state"`
-	PoolStatus      bool                      `json:"pool_status"`
-	ProcessCount    int64                     `json:"process_count"`
-	Status          bool                      `json:"status"`
-	TotalMemory     int64                     `json:"total_memory"`
-	TotalSwap       int64                     `json:"total_swap"`
-	Type            string                    `json:"type"`
-	Uptime          int64                     `json:"uptime"`
-	UsedMemory      int64                     `json:"used_memory"`
-	UsedSwap        int64                     `json:"used_swap"`
-	Version         string                    `json:"version"`
+	Active          bool                      "json:\"active\""
+	ArcC            int64                     "json:\"arc_c\""
+	ArcCMax         int64                     "json:\"arc_c_max\""
+	ArcHitpercent   int64                     "json:\"arc_hitpercent\""
+	ArcSize         int64                     "json:\"arc_size\""
+	CgroupVersion   string                    "json:\"cgroup_version\""
+	CpuGuest        float64                   "json:\"cpu_guest\""
+	CpuIdle         float64                   "json:\"cpu_idle\""
+	CpuIowait       float64                   "json:\"cpu_iowait\""
+	CpuIrq          float64                   "json:\"cpu_irq\""
+	CpuNice         float64                   "json:\"cpu_nice\""
+	CpuSoftirq      float64                   "json:\"cpu_softirq\""
+	CpuSystem       float64                   "json:\"cpu_system\""
+	CpuUser         float64                   "json:\"cpu_user\""
+	Cpus            int64                     "json:\"cpus\""
+	DomainName      string                    "json:\"domain_name\""
+	Fqdn            string                    "json:\"fqdn\""
+	HypervisorType  string                    "json:\"hypervisor_type\""
+	Id              int64                     "json:\"id\""
+	IpAddr          string                    "json:\"ip_addr\""
+	Kernel          string                    "json:\"kernel\""
+	Loadavg1        float64                   "json:\"loadavg1\""
+	Loadavg15       float64                   "json:\"loadavg15\""
+	Loadavg5        float64                   "json:\"loadavg5\""
+	Location        *ActionLocationShowOutput "json:\"location\""
+	MaxRx           int64                     "json:\"max_rx\""
+	MaxTx           int64                     "json:\"max_tx\""
+	MaxVps          int64                     "json:\"max_vps\""
+	Name            string                    "json:\"name\""
+	PoolCheckedAt   string                    "json:\"pool_checked_at\""
+	PoolScan        string                    "json:\"pool_scan\""
+	PoolScanPercent float64                   "json:\"pool_scan_percent\""
+	PoolState       string                    "json:\"pool_state\""
+	PoolStatus      bool                      "json:\"pool_status\""
+	ProcessCount    int64                     "json:\"process_count\""
+	Status          bool                      "json:\"status\""
+	TotalMemory     int64                     "json:\"total_memory\""
+	TotalSwap       int64                     "json:\"total_swap\""
+	Type            string                    "json:\"type\""
+	Uptime          int64                     "json:\"uptime\""
+	UsedMemory      int64                     "json:\"used_memory\""
+	UsedSwap        int64                     "json:\"used_swap\""
+	Version         string                    "json:\"version\""
 }
 
 // ActionNodeCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionNodeCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionNodeCreateResponse struct {
-	Action *ActionNodeCreate `json:"-"`
+	Action *ActionNodeCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Node *ActionNodeCreateOutput `json:"node"`
+		Node *ActionNodeCreateOutput "json:\"node\""
 		// Global output metadata
-		Meta *ActionNodeCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionNodeCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

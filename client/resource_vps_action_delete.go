@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsDelete(client *Client) *ActionVpsDelete {
 
 // ActionVpsDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsDeleteMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,11 +76,11 @@ func (in *ActionVpsDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsDeleteInput is a type for action input parameters
 type ActionVpsDeleteInput struct {
-	ChangeReason    string `json:"change_reason"`
-	ExpirationDate  string `json:"expiration_date"`
-	Lazy            bool   `json:"lazy"`
-	ObjectState     string `json:"object_state"`
-	RemindAfterDate string `json:"remind_after_date"`
+	ChangeReason    string "json:\"change_reason\""
+	ExpirationDate  string "json:\"expiration_date\""
+	Lazy            bool   "json:\"lazy\""
+	ObjectState     string "json:\"object_state\""
+	RemindAfterDate string "json:\"remind_after_date\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -205,23 +206,23 @@ func (in *ActionVpsDeleteInput) AnySelected() bool {
 
 // ActionVpsDeleteRequest is a type for the entire action request
 type ActionVpsDeleteRequest struct {
-	Vps  map[string]interface{} `json:"vps"`
-	Meta map[string]interface{} `json:"_meta"`
+	Vps  map[string]interface{} "json:\"vps\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsDeleteMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionVpsDeleteResponse struct {
-	Action *ActionVpsDelete `json:"-"`
+	Action *ActionVpsDelete "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionVpsDeleteMetaGlobalOutput `json:"_meta"`
+		Meta *ActionVpsDeleteMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -253,7 +254,7 @@ func (inv *ActionVpsDeleteInvocation) SetPathParamInt(param string, value int64)
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsDeleteInvocation) SetPathParamString(param string, value string) *ActionVpsDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

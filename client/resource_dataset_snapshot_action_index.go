@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionDatasetSnapshotIndex(client *Client) *ActionDatasetSnapshotIndex {
 
 // ActionDatasetSnapshotIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetSnapshotIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,8 +89,8 @@ func (in *ActionDatasetSnapshotIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetSnapshotIndexInput is a type for action input parameters
 type ActionDatasetSnapshotIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,23 +161,23 @@ func (in *ActionDatasetSnapshotIndexInput) AnySelected() bool {
 
 // ActionDatasetSnapshotIndexOutput is a type for action output parameters
 type ActionDatasetSnapshotIndexOutput struct {
-	CreatedAt string                    `json:"created_at"`
-	Dataset   *ActionDatasetShowOutput  `json:"dataset"`
-	Export    *ActionExportShowOutput   `json:"export"`
-	HistoryId int64                     `json:"history_id"`
-	Id        int64                     `json:"id"`
-	Label     string                    `json:"label"`
-	Mount     *ActionVpsMountShowOutput `json:"mount"`
-	Name      string                    `json:"name"`
+	CreatedAt string                    "json:\"created_at\""
+	Dataset   *ActionDatasetShowOutput  "json:\"dataset\""
+	Export    *ActionExportShowOutput   "json:\"export\""
+	HistoryId int64                     "json:\"history_id\""
+	Id        int64                     "json:\"id\""
+	Label     string                    "json:\"label\""
+	Mount     *ActionVpsMountShowOutput "json:\"mount\""
+	Name      string                    "json:\"name\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetSnapshotIndexResponse struct {
-	Action *ActionDatasetSnapshotIndex `json:"-"`
+	Action *ActionDatasetSnapshotIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Snapshots []*ActionDatasetSnapshotIndexOutput `json:"snapshots"`
+		Snapshots []*ActionDatasetSnapshotIndexOutput "json:\"snapshots\""
 	}
 
 	// Action output without the namespace
@@ -211,7 +212,7 @@ func (inv *ActionDatasetSnapshotIndexInvocation) SetPathParamInt(param string, v
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetSnapshotIndexInvocation) SetPathParamString(param string, value string) *ActionDatasetSnapshotIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

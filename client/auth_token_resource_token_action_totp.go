@@ -16,7 +16,7 @@ func NewAuthTokenActionTokenTotp(client *Client) *AuthTokenActionTokenTotp {
 
 // AuthTokenActionTokenTotpMetaGlobalInput is a type for action global meta input parameters
 type AuthTokenActionTokenTotpMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,8 +60,8 @@ func (in *AuthTokenActionTokenTotpMetaGlobalInput) AnySelected() bool {
 
 // AuthTokenActionTokenTotpInput is a type for action input parameters
 type AuthTokenActionTokenTotpInput struct {
-	Code  string `json:"code"`
-	Token string `json:"token"`
+	Code  string "json:\"code\""
+	Token string "json:\"token\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -132,25 +132,25 @@ func (in *AuthTokenActionTokenTotpInput) AnySelected() bool {
 
 // AuthTokenActionTokenTotpRequest is a type for the entire action request
 type AuthTokenActionTokenTotpRequest struct {
-	Token map[string]interface{} `json:"token"`
-	Meta  map[string]interface{} `json:"_meta"`
+	Token map[string]interface{} "json:\"token\""
+	Meta  map[string]interface{} "json:\"_meta\""
 }
 
 // AuthTokenActionTokenTotpOutput is a type for action output parameters
 type AuthTokenActionTokenTotpOutput struct {
-	Complete   bool   `json:"complete"`
-	NextAction string `json:"next_action"`
-	Token      string `json:"token"`
-	ValidTo    string `json:"valid_to"`
+	Complete   bool   "json:\"complete\""
+	NextAction string "json:\"next_action\""
+	Token      string "json:\"token\""
+	ValidTo    string "json:\"valid_to\""
 }
 
 // Type for action response, including envelope
 type AuthTokenActionTokenTotpResponse struct {
-	Action *AuthTokenActionTokenTotp `json:"-"`
+	Action *AuthTokenActionTokenTotp "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Token *AuthTokenActionTokenTotpOutput `json:"token"`
+		Token *AuthTokenActionTokenTotpOutput "json:\"token\""
 	}
 
 	// Action output without the namespace

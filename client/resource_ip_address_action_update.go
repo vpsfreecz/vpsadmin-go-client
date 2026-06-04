@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionIpAddressUpdate(client *Client) *ActionIpAddressUpdate {
 
 // ActionIpAddressUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionIpAddressUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,8 +76,8 @@ func (in *ActionIpAddressUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionIpAddressUpdateInput is a type for action input parameters
 type ActionIpAddressUpdateInput struct {
-	Environment int64 `json:"environment"`
-	User        int64 `json:"user"`
+	Environment int64 "json:\"environment\""
+	User        int64 "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -166,37 +167,37 @@ func (in *ActionIpAddressUpdateInput) AnySelected() bool {
 
 // ActionIpAddressUpdateRequest is a type for the entire action request
 type ActionIpAddressUpdateRequest struct {
-	IpAddress map[string]interface{} `json:"ip_address"`
-	Meta      map[string]interface{} `json:"_meta"`
+	IpAddress map[string]interface{} "json:\"ip_address\""
+	Meta      map[string]interface{} "json:\"_meta\""
 }
 
 // ActionIpAddressUpdateOutput is a type for action output parameters
 type ActionIpAddressUpdateOutput struct {
-	Addr               string                            `json:"addr"`
-	ChargedEnvironment *ActionEnvironmentShowOutput      `json:"charged_environment"`
-	Id                 int64                             `json:"id"`
-	Network            *ActionNetworkShowOutput          `json:"network"`
-	NetworkInterface   *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Prefix             int64                             `json:"prefix"`
-	RouteVia           *ActionHostIpAddressShowOutput    `json:"route_via"`
-	Size               int64                             `json:"size"`
-	User               *ActionUserShowOutput             `json:"user"`
+	Addr               string                            "json:\"addr\""
+	ChargedEnvironment *ActionEnvironmentShowOutput      "json:\"charged_environment\""
+	Id                 int64                             "json:\"id\""
+	Network            *ActionNetworkShowOutput          "json:\"network\""
+	NetworkInterface   *ActionNetworkInterfaceShowOutput "json:\"network_interface\""
+	Prefix             int64                             "json:\"prefix\""
+	RouteVia           *ActionHostIpAddressShowOutput    "json:\"route_via\""
+	Size               int64                             "json:\"size\""
+	User               *ActionUserShowOutput             "json:\"user\""
 }
 
 // ActionIpAddressUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionIpAddressUpdateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionIpAddressUpdateResponse struct {
-	Action *ActionIpAddressUpdate `json:"-"`
+	Action *ActionIpAddressUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		IpAddress *ActionIpAddressUpdateOutput `json:"ip_address"`
+		IpAddress *ActionIpAddressUpdateOutput "json:\"ip_address\""
 		// Global output metadata
-		Meta *ActionIpAddressUpdateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionIpAddressUpdateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -231,7 +232,7 @@ func (inv *ActionIpAddressUpdateInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionIpAddressUpdateInvocation) SetPathParamString(param string, value string) *ActionIpAddressUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

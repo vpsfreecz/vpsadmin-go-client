@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserMailRoleRecipientShow(client *Client) *ActionUserMailRoleRecip
 
 // ActionUserMailRoleRecipientShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserMailRoleRecipientShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,19 +76,19 @@ func (in *ActionUserMailRoleRecipientShowMetaGlobalInput) AnySelected() bool {
 
 // ActionUserMailRoleRecipientShowOutput is a type for action output parameters
 type ActionUserMailRoleRecipientShowOutput struct {
-	Description string `json:"description"`
-	Id          string `json:"id"`
-	Label       string `json:"label"`
-	To          string `json:"to"`
+	Description string "json:\"description\""
+	Id          string "json:\"id\""
+	Label       string "json:\"label\""
+	To          string "json:\"to\""
 }
 
 // Type for action response, including envelope
 type ActionUserMailRoleRecipientShowResponse struct {
-	Action *ActionUserMailRoleRecipientShow `json:"-"`
+	Action *ActionUserMailRoleRecipientShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MailRoleRecipient *ActionUserMailRoleRecipientShowOutput `json:"mail_role_recipient"`
+		MailRoleRecipient *ActionUserMailRoleRecipientShowOutput "json:\"mail_role_recipient\""
 	}
 
 	// Action output without the namespace
@@ -120,7 +121,7 @@ func (inv *ActionUserMailRoleRecipientShowInvocation) SetPathParamInt(param stri
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserMailRoleRecipientShowInvocation) SetPathParamString(param string, value string) *ActionUserMailRoleRecipientShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

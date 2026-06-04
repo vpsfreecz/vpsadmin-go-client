@@ -16,8 +16,8 @@ func NewActionDnsResolverCreate(client *Client) *ActionDnsResolverCreate {
 
 // ActionDnsResolverCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsResolverCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,10 +73,10 @@ func (in *ActionDnsResolverCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsResolverCreateInput is a type for action input parameters
 type ActionDnsResolverCreateInput struct {
-	IpAddr      string `json:"ip_addr"`
-	IsUniversal bool   `json:"is_universal"`
-	Label       string `json:"label"`
-	Location    int64  `json:"location"`
+	IpAddr      string "json:\"ip_addr\""
+	IsUniversal bool   "json:\"is_universal\""
+	Label       string "json:\"label\""
+	Location    int64  "json:\"location\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -190,26 +190,26 @@ func (in *ActionDnsResolverCreateInput) AnySelected() bool {
 
 // ActionDnsResolverCreateRequest is a type for the entire action request
 type ActionDnsResolverCreateRequest struct {
-	DnsResolver map[string]interface{} `json:"dns_resolver"`
-	Meta        map[string]interface{} `json:"_meta"`
+	DnsResolver map[string]interface{} "json:\"dns_resolver\""
+	Meta        map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDnsResolverCreateOutput is a type for action output parameters
 type ActionDnsResolverCreateOutput struct {
-	Id          int64                     `json:"id"`
-	IpAddr      string                    `json:"ip_addr"`
-	IsUniversal bool                      `json:"is_universal"`
-	Label       string                    `json:"label"`
-	Location    *ActionLocationShowOutput `json:"location"`
+	Id          int64                     "json:\"id\""
+	IpAddr      string                    "json:\"ip_addr\""
+	IsUniversal bool                      "json:\"is_universal\""
+	Label       string                    "json:\"label\""
+	Location    *ActionLocationShowOutput "json:\"location\""
 }
 
 // Type for action response, including envelope
 type ActionDnsResolverCreateResponse struct {
-	Action *ActionDnsResolverCreate `json:"-"`
+	Action *ActionDnsResolverCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsResolver *ActionDnsResolverCreateOutput `json:"dns_resolver"`
+		DnsResolver *ActionDnsResolverCreateOutput "json:\"dns_resolver\""
 	}
 
 	// Action output without the namespace

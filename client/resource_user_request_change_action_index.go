@@ -16,9 +16,9 @@ func NewActionUserRequestChangeIndex(client *Client) *ActionUserRequestChangeInd
 
 // ActionUserRequestChangeIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestChangeIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,14 +86,14 @@ func (in *ActionUserRequestChangeIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserRequestChangeIndexInput is a type for action input parameters
 type ActionUserRequestChangeIndexInput struct {
-	Admin        int64  `json:"admin"`
-	ApiIpAddr    string `json:"api_ip_addr"`
-	ClientIpAddr string `json:"client_ip_addr"`
-	ClientIpPtr  string `json:"client_ip_ptr"`
-	FromId       int64  `json:"from_id"`
-	Limit        int64  `json:"limit"`
-	State        string `json:"state"`
-	User         int64  `json:"user"`
+	Admin        int64  "json:\"admin\""
+	ApiIpAddr    string "json:\"api_ip_addr\""
+	ClientIpAddr string "json:\"client_ip_addr\""
+	ClientIpPtr  string "json:\"client_ip_ptr\""
+	FromId       int64  "json:\"from_id\""
+	Limit        int64  "json:\"limit\""
+	State        string "json:\"state\""
+	User         int64  "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -236,31 +236,31 @@ func (in *ActionUserRequestChangeIndexInput) AnySelected() bool {
 
 // ActionUserRequestChangeIndexOutput is a type for action output parameters
 type ActionUserRequestChangeIndexOutput struct {
-	Address       string                `json:"address"`
-	Admin         *ActionUserShowOutput `json:"admin"`
-	AdminResponse string                `json:"admin_response"`
-	ApiIpAddr     string                `json:"api_ip_addr"`
-	ApiIpPtr      string                `json:"api_ip_ptr"`
-	ChangeReason  string                `json:"change_reason"`
-	ClientIpAddr  string                `json:"client_ip_addr"`
-	ClientIpPtr   string                `json:"client_ip_ptr"`
-	CreatedAt     string                `json:"created_at"`
-	Email         string                `json:"email"`
-	FullName      string                `json:"full_name"`
-	Id            int64                 `json:"id"`
-	Label         string                `json:"label"`
-	State         string                `json:"state"`
-	UpdatedAt     string                `json:"updated_at"`
-	User          *ActionUserShowOutput `json:"user"`
+	Address       string                "json:\"address\""
+	Admin         *ActionUserShowOutput "json:\"admin\""
+	AdminResponse string                "json:\"admin_response\""
+	ApiIpAddr     string                "json:\"api_ip_addr\""
+	ApiIpPtr      string                "json:\"api_ip_ptr\""
+	ChangeReason  string                "json:\"change_reason\""
+	ClientIpAddr  string                "json:\"client_ip_addr\""
+	ClientIpPtr   string                "json:\"client_ip_ptr\""
+	CreatedAt     string                "json:\"created_at\""
+	Email         string                "json:\"email\""
+	FullName      string                "json:\"full_name\""
+	Id            int64                 "json:\"id\""
+	Label         string                "json:\"label\""
+	State         string                "json:\"state\""
+	UpdatedAt     string                "json:\"updated_at\""
+	User          *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionUserRequestChangeIndexResponse struct {
-	Action *ActionUserRequestChangeIndex `json:"-"`
+	Action *ActionUserRequestChangeIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Changes []*ActionUserRequestChangeIndexOutput `json:"changes"`
+		Changes []*ActionUserRequestChangeIndexOutput "json:\"changes\""
 	}
 
 	// Action output without the namespace

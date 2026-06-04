@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionIpAddressAssignmentShow(client *Client) *ActionIpAddressAssignment
 
 // ActionIpAddressAssignmentShowMetaGlobalInput is a type for action global meta input parameters
 type ActionIpAddressAssignmentShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,30 +76,30 @@ func (in *ActionIpAddressAssignmentShowMetaGlobalInput) AnySelected() bool {
 
 // ActionIpAddressAssignmentShowOutput is a type for action output parameters
 type ActionIpAddressAssignmentShowOutput struct {
-	AssignedByChain   *ActionTransactionChainShowOutput `json:"assigned_by_chain"`
-	CreatedAt         string                            `json:"created_at"`
-	FromDate          string                            `json:"from_date"`
-	Id                int64                             `json:"id"`
-	IpAddr            string                            `json:"ip_addr"`
-	IpAddress         *ActionIpAddressShowOutput        `json:"ip_address"`
-	IpPrefix          int64                             `json:"ip_prefix"`
-	RawUserId         int64                             `json:"raw_user_id"`
-	RawVpsId          int64                             `json:"raw_vps_id"`
-	Reconstructed     bool                              `json:"reconstructed"`
-	ToDate            string                            `json:"to_date"`
-	UnassignedByChain *ActionTransactionChainShowOutput `json:"unassigned_by_chain"`
-	UpdatedAt         string                            `json:"updated_at"`
-	User              *ActionUserShowOutput             `json:"user"`
-	Vps               *ActionVpsShowOutput              `json:"vps"`
+	AssignedByChain   *ActionTransactionChainShowOutput "json:\"assigned_by_chain\""
+	CreatedAt         string                            "json:\"created_at\""
+	FromDate          string                            "json:\"from_date\""
+	Id                int64                             "json:\"id\""
+	IpAddr            string                            "json:\"ip_addr\""
+	IpAddress         *ActionIpAddressShowOutput        "json:\"ip_address\""
+	IpPrefix          int64                             "json:\"ip_prefix\""
+	RawUserId         int64                             "json:\"raw_user_id\""
+	RawVpsId          int64                             "json:\"raw_vps_id\""
+	Reconstructed     bool                              "json:\"reconstructed\""
+	ToDate            string                            "json:\"to_date\""
+	UnassignedByChain *ActionTransactionChainShowOutput "json:\"unassigned_by_chain\""
+	UpdatedAt         string                            "json:\"updated_at\""
+	User              *ActionUserShowOutput             "json:\"user\""
+	Vps               *ActionVpsShowOutput              "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionIpAddressAssignmentShowResponse struct {
-	Action *ActionIpAddressAssignmentShow `json:"-"`
+	Action *ActionIpAddressAssignmentShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		IpAddressAssignment *ActionIpAddressAssignmentShowOutput `json:"ip_address_assignment"`
+		IpAddressAssignment *ActionIpAddressAssignmentShowOutput "json:\"ip_address_assignment\""
 	}
 
 	// Action output without the namespace
@@ -131,7 +132,7 @@ func (inv *ActionIpAddressAssignmentShowInvocation) SetPathParamInt(param string
 
 // SetPathParamString sets string path parameter
 func (inv *ActionIpAddressAssignmentShowInvocation) SetPathParamString(param string, value string) *ActionIpAddressAssignmentShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserPublicKeyCreate(client *Client) *ActionUserPublicKeyCreate {
 
 // ActionUserPublicKeyCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPublicKeyCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,9 +76,9 @@ func (in *ActionUserPublicKeyCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserPublicKeyCreateInput is a type for action input parameters
 type ActionUserPublicKeyCreateInput struct {
-	AutoAdd bool   `json:"auto_add"`
-	Key     string `json:"key"`
-	Label   string `json:"label"`
+	AutoAdd bool   "json:\"auto_add\""
+	Key     string "json:\"key\""
+	Label   string "json:\"label\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,29 +161,29 @@ func (in *ActionUserPublicKeyCreateInput) AnySelected() bool {
 
 // ActionUserPublicKeyCreateRequest is a type for the entire action request
 type ActionUserPublicKeyCreateRequest struct {
-	PublicKey map[string]interface{} `json:"public_key"`
-	Meta      map[string]interface{} `json:"_meta"`
+	PublicKey map[string]interface{} "json:\"public_key\""
+	Meta      map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserPublicKeyCreateOutput is a type for action output parameters
 type ActionUserPublicKeyCreateOutput struct {
-	AutoAdd     bool   `json:"auto_add"`
-	Comment     string `json:"comment"`
-	CreatedAt   string `json:"created_at"`
-	Fingerprint string `json:"fingerprint"`
-	Id          int64  `json:"id"`
-	Key         string `json:"key"`
-	Label       string `json:"label"`
-	UpdatedAt   string `json:"updated_at"`
+	AutoAdd     bool   "json:\"auto_add\""
+	Comment     string "json:\"comment\""
+	CreatedAt   string "json:\"created_at\""
+	Fingerprint string "json:\"fingerprint\""
+	Id          int64  "json:\"id\""
+	Key         string "json:\"key\""
+	Label       string "json:\"label\""
+	UpdatedAt   string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionUserPublicKeyCreateResponse struct {
-	Action *ActionUserPublicKeyCreate `json:"-"`
+	Action *ActionUserPublicKeyCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		PublicKey *ActionUserPublicKeyCreateOutput `json:"public_key"`
+		PublicKey *ActionUserPublicKeyCreateOutput "json:\"public_key\""
 	}
 
 	// Action output without the namespace
@@ -217,7 +218,7 @@ func (inv *ActionUserPublicKeyCreateInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserPublicKeyCreateInvocation) SetPathParamString(param string, value string) *ActionUserPublicKeyCreateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

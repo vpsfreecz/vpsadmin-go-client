@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserOutageShow(client *Client) *ActionUserOutageShow {
 
 // ActionUserOutageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserOutageShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,20 +76,20 @@ func (in *ActionUserOutageShowMetaGlobalInput) AnySelected() bool {
 
 // ActionUserOutageShowOutput is a type for action output parameters
 type ActionUserOutageShowOutput struct {
-	ExportCount int64                   `json:"export_count"`
-	Id          int64                   `json:"id"`
-	Outage      *ActionOutageShowOutput `json:"outage"`
-	User        *ActionUserShowOutput   `json:"user"`
-	VpsCount    int64                   `json:"vps_count"`
+	ExportCount int64                   "json:\"export_count\""
+	Id          int64                   "json:\"id\""
+	Outage      *ActionOutageShowOutput "json:\"outage\""
+	User        *ActionUserShowOutput   "json:\"user\""
+	VpsCount    int64                   "json:\"vps_count\""
 }
 
 // Type for action response, including envelope
 type ActionUserOutageShowResponse struct {
-	Action *ActionUserOutageShow `json:"-"`
+	Action *ActionUserOutageShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		UserOutage *ActionUserOutageShowOutput `json:"user_outage"`
+		UserOutage *ActionUserOutageShowOutput "json:\"user_outage\""
 	}
 
 	// Action output without the namespace
@@ -121,7 +122,7 @@ func (inv *ActionUserOutageShowInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserOutageShowInvocation) SetPathParamString(param string, value string) *ActionUserOutageShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

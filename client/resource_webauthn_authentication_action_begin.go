@@ -16,7 +16,7 @@ func NewActionWebauthnAuthenticationBegin(client *Client) *ActionWebauthnAuthent
 
 // ActionWebauthnAuthenticationBeginMetaGlobalInput is a type for action global meta input parameters
 type ActionWebauthnAuthenticationBeginMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,7 +60,7 @@ func (in *ActionWebauthnAuthenticationBeginMetaGlobalInput) AnySelected() bool {
 
 // ActionWebauthnAuthenticationBeginInput is a type for action input parameters
 type ActionWebauthnAuthenticationBeginInput struct {
-	AuthToken string `json:"auth_token"`
+	AuthToken string "json:\"auth_token\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -119,22 +119,22 @@ func (in *ActionWebauthnAuthenticationBeginInput) AnySelected() bool {
 
 // ActionWebauthnAuthenticationBeginRequest is a type for the entire action request
 type ActionWebauthnAuthenticationBeginRequest struct {
-	Authentication map[string]interface{} `json:"authentication"`
-	Meta           map[string]interface{} `json:"_meta"`
+	Authentication map[string]interface{} "json:\"authentication\""
+	Meta           map[string]interface{} "json:\"_meta\""
 }
 
 // ActionWebauthnAuthenticationBeginOutput is a type for action output parameters
 type ActionWebauthnAuthenticationBeginOutput struct {
-	ChallengeToken string `json:"challenge_token"`
+	ChallengeToken string "json:\"challenge_token\""
 }
 
 // Type for action response, including envelope
 type ActionWebauthnAuthenticationBeginResponse struct {
-	Action *ActionWebauthnAuthenticationBegin `json:"-"`
+	Action *ActionWebauthnAuthenticationBegin "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Authentication *ActionWebauthnAuthenticationBeginOutput `json:"authentication"`
+		Authentication *ActionWebauthnAuthenticationBeginOutput "json:\"authentication\""
 	}
 
 	// Action output without the namespace

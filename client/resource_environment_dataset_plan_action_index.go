@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionEnvironmentDatasetPlanIndex(client *Client) *ActionEnvironmentData
 
 // ActionEnvironmentDatasetPlanIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionEnvironmentDatasetPlanIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,8 +89,8 @@ func (in *ActionEnvironmentDatasetPlanIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionEnvironmentDatasetPlanIndexInput is a type for action input parameters
 type ActionEnvironmentDatasetPlanIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,20 +161,20 @@ func (in *ActionEnvironmentDatasetPlanIndexInput) AnySelected() bool {
 
 // ActionEnvironmentDatasetPlanIndexOutput is a type for action output parameters
 type ActionEnvironmentDatasetPlanIndexOutput struct {
-	DatasetPlan *ActionDatasetPlanShowOutput `json:"dataset_plan"`
-	Id          int64                        `json:"id"`
-	Label       string                       `json:"label"`
-	UserAdd     bool                         `json:"user_add"`
-	UserRemove  bool                         `json:"user_remove"`
+	DatasetPlan *ActionDatasetPlanShowOutput "json:\"dataset_plan\""
+	Id          int64                        "json:\"id\""
+	Label       string                       "json:\"label\""
+	UserAdd     bool                         "json:\"user_add\""
+	UserRemove  bool                         "json:\"user_remove\""
 }
 
 // Type for action response, including envelope
 type ActionEnvironmentDatasetPlanIndexResponse struct {
-	Action *ActionEnvironmentDatasetPlanIndex `json:"-"`
+	Action *ActionEnvironmentDatasetPlanIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DatasetPlans []*ActionEnvironmentDatasetPlanIndexOutput `json:"dataset_plans"`
+		DatasetPlans []*ActionEnvironmentDatasetPlanIndexOutput "json:\"dataset_plans\""
 	}
 
 	// Action output without the namespace
@@ -208,7 +209,7 @@ func (inv *ActionEnvironmentDatasetPlanIndexInvocation) SetPathParamInt(param st
 
 // SetPathParamString sets string path parameter
 func (inv *ActionEnvironmentDatasetPlanIndexInvocation) SetPathParamString(param string, value string) *ActionEnvironmentDatasetPlanIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

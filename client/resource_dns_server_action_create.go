@@ -16,8 +16,8 @@ func NewActionDnsServerCreate(client *Client) *ActionDnsServerCreate {
 
 // ActionDnsServerCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsServerCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,13 +73,13 @@ func (in *ActionDnsServerCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsServerCreateInput is a type for action input parameters
 type ActionDnsServerCreateInput struct {
-	EnableUserDnsZones bool   `json:"enable_user_dns_zones"`
-	Hidden             bool   `json:"hidden"`
-	Ipv4Addr           string `json:"ipv4_addr"`
-	Ipv6Addr           string `json:"ipv6_addr"`
-	Name               string `json:"name"`
-	Node               int64  `json:"node"`
-	UserDnsZoneType    string `json:"user_dns_zone_type"`
+	EnableUserDnsZones bool   "json:\"enable_user_dns_zones\""
+	Hidden             bool   "json:\"hidden\""
+	Ipv4Addr           string "json:\"ipv4_addr\""
+	Ipv6Addr           string "json:\"ipv6_addr\""
+	Name               string "json:\"name\""
+	Node               int64  "json:\"node\""
+	UserDnsZoneType    string "json:\"user_dns_zone_type\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -210,31 +210,31 @@ func (in *ActionDnsServerCreateInput) AnySelected() bool {
 
 // ActionDnsServerCreateRequest is a type for the entire action request
 type ActionDnsServerCreateRequest struct {
-	DnsServer map[string]interface{} `json:"dns_server"`
-	Meta      map[string]interface{} `json:"_meta"`
+	DnsServer map[string]interface{} "json:\"dns_server\""
+	Meta      map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDnsServerCreateOutput is a type for action output parameters
 type ActionDnsServerCreateOutput struct {
-	CreatedAt          string                `json:"created_at"`
-	EnableUserDnsZones bool                  `json:"enable_user_dns_zones"`
-	Hidden             bool                  `json:"hidden"`
-	Id                 int64                 `json:"id"`
-	Ipv4Addr           string                `json:"ipv4_addr"`
-	Ipv6Addr           string                `json:"ipv6_addr"`
-	Name               string                `json:"name"`
-	Node               *ActionNodeShowOutput `json:"node"`
-	UpdatedAt          string                `json:"updated_at"`
-	UserDnsZoneType    string                `json:"user_dns_zone_type"`
+	CreatedAt          string                "json:\"created_at\""
+	EnableUserDnsZones bool                  "json:\"enable_user_dns_zones\""
+	Hidden             bool                  "json:\"hidden\""
+	Id                 int64                 "json:\"id\""
+	Ipv4Addr           string                "json:\"ipv4_addr\""
+	Ipv6Addr           string                "json:\"ipv6_addr\""
+	Name               string                "json:\"name\""
+	Node               *ActionNodeShowOutput "json:\"node\""
+	UpdatedAt          string                "json:\"updated_at\""
+	UserDnsZoneType    string                "json:\"user_dns_zone_type\""
 }
 
 // Type for action response, including envelope
 type ActionDnsServerCreateResponse struct {
-	Action *ActionDnsServerCreate `json:"-"`
+	Action *ActionDnsServerCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsServer *ActionDnsServerCreateOutput `json:"dns_server"`
+		DnsServer *ActionDnsServerCreateOutput "json:\"dns_server\""
 	}
 
 	// Action output without the namespace

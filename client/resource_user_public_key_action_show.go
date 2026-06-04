@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserPublicKeyShow(client *Client) *ActionUserPublicKeyShow {
 
 // ActionUserPublicKeyShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPublicKeyShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,23 +76,23 @@ func (in *ActionUserPublicKeyShowMetaGlobalInput) AnySelected() bool {
 
 // ActionUserPublicKeyShowOutput is a type for action output parameters
 type ActionUserPublicKeyShowOutput struct {
-	AutoAdd     bool   `json:"auto_add"`
-	Comment     string `json:"comment"`
-	CreatedAt   string `json:"created_at"`
-	Fingerprint string `json:"fingerprint"`
-	Id          int64  `json:"id"`
-	Key         string `json:"key"`
-	Label       string `json:"label"`
-	UpdatedAt   string `json:"updated_at"`
+	AutoAdd     bool   "json:\"auto_add\""
+	Comment     string "json:\"comment\""
+	CreatedAt   string "json:\"created_at\""
+	Fingerprint string "json:\"fingerprint\""
+	Id          int64  "json:\"id\""
+	Key         string "json:\"key\""
+	Label       string "json:\"label\""
+	UpdatedAt   string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionUserPublicKeyShowResponse struct {
-	Action *ActionUserPublicKeyShow `json:"-"`
+	Action *ActionUserPublicKeyShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		PublicKey *ActionUserPublicKeyShowOutput `json:"public_key"`
+		PublicKey *ActionUserPublicKeyShowOutput "json:\"public_key\""
 	}
 
 	// Action output without the namespace
@@ -124,7 +125,7 @@ func (inv *ActionUserPublicKeyShowInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserPublicKeyShowInvocation) SetPathParamString(param string, value string) *ActionUserPublicKeyShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -16,7 +16,7 @@ func NewActionClusterShow(client *Client) *ActionClusterShow {
 
 // ActionClusterShowMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterShowMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,17 +60,17 @@ func (in *ActionClusterShowMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterShowOutput is a type for action output parameters
 type ActionClusterShowOutput struct {
-	MaintenanceLock       bool   `json:"maintenance_lock"`
-	MaintenanceLockReason string `json:"maintenance_lock_reason"`
+	MaintenanceLock       bool   "json:\"maintenance_lock\""
+	MaintenanceLockReason string "json:\"maintenance_lock_reason\""
 }
 
 // Type for action response, including envelope
 type ActionClusterShowResponse struct {
-	Action *ActionClusterShow `json:"-"`
+	Action *ActionClusterShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Cluster *ActionClusterShowOutput `json:"cluster"`
+		Cluster *ActionClusterShowOutput "json:\"cluster\""
 	}
 
 	// Action output without the namespace

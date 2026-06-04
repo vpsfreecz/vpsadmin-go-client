@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnsZoneUpdate(client *Client) *ActionDnsZoneUpdate {
 
 // ActionDnsZoneUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsZoneUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,11 +76,11 @@ func (in *ActionDnsZoneUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsZoneUpdateInput is a type for action input parameters
 type ActionDnsZoneUpdateInput struct {
-	DefaultTtl    int64  `json:"default_ttl"`
-	DnssecEnabled bool   `json:"dnssec_enabled"`
-	Email         string `json:"email"`
-	Enabled       bool   `json:"enabled"`
-	Label         string `json:"label"`
+	DefaultTtl    int64  "json:\"default_ttl\""
+	DnssecEnabled bool   "json:\"dnssec_enabled\""
+	Email         string "json:\"email\""
+	Enabled       bool   "json:\"enabled\""
+	Label         string "json:\"label\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -186,43 +187,43 @@ func (in *ActionDnsZoneUpdateInput) AnySelected() bool {
 
 // ActionDnsZoneUpdateRequest is a type for the entire action request
 type ActionDnsZoneUpdateRequest struct {
-	DnsZone map[string]interface{} `json:"dns_zone"`
-	Meta    map[string]interface{} `json:"_meta"`
+	DnsZone map[string]interface{} "json:\"dns_zone\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDnsZoneUpdateOutput is a type for action output parameters
 type ActionDnsZoneUpdateOutput struct {
-	CreatedAt             string                `json:"created_at"`
-	DefaultTtl            int64                 `json:"default_ttl"`
-	DnssecEnabled         bool                  `json:"dnssec_enabled"`
-	Email                 string                `json:"email"`
-	Enabled               bool                  `json:"enabled"`
-	Id                    int64                 `json:"id"`
-	Label                 string                `json:"label"`
-	Name                  string                `json:"name"`
-	ReverseNetworkAddress string                `json:"reverse_network_address"`
-	ReverseNetworkPrefix  string                `json:"reverse_network_prefix"`
-	Role                  string                `json:"role"`
-	Serial                int64                 `json:"serial"`
-	Source                string                `json:"source"`
-	UpdatedAt             string                `json:"updated_at"`
-	User                  *ActionUserShowOutput `json:"user"`
+	CreatedAt             string                "json:\"created_at\""
+	DefaultTtl            int64                 "json:\"default_ttl\""
+	DnssecEnabled         bool                  "json:\"dnssec_enabled\""
+	Email                 string                "json:\"email\""
+	Enabled               bool                  "json:\"enabled\""
+	Id                    int64                 "json:\"id\""
+	Label                 string                "json:\"label\""
+	Name                  string                "json:\"name\""
+	ReverseNetworkAddress string                "json:\"reverse_network_address\""
+	ReverseNetworkPrefix  string                "json:\"reverse_network_prefix\""
+	Role                  string                "json:\"role\""
+	Serial                int64                 "json:\"serial\""
+	Source                string                "json:\"source\""
+	UpdatedAt             string                "json:\"updated_at\""
+	User                  *ActionUserShowOutput "json:\"user\""
 }
 
 // ActionDnsZoneUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionDnsZoneUpdateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDnsZoneUpdateResponse struct {
-	Action *ActionDnsZoneUpdate `json:"-"`
+	Action *ActionDnsZoneUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsZone *ActionDnsZoneUpdateOutput `json:"dns_zone"`
+		DnsZone *ActionDnsZoneUpdateOutput "json:\"dns_zone\""
 		// Global output metadata
-		Meta *ActionDnsZoneUpdateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDnsZoneUpdateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -257,7 +258,7 @@ func (inv *ActionDnsZoneUpdateInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsZoneUpdateInvocation) SetPathParamString(param string, value string) *ActionDnsZoneUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

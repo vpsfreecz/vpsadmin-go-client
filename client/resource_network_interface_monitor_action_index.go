@@ -16,9 +16,9 @@ func NewActionNetworkInterfaceMonitorIndex(client *Client) *ActionNetworkInterfa
 
 // ActionNetworkInterfaceMonitorIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkInterfaceMonitorIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,15 +86,15 @@ func (in *ActionNetworkInterfaceMonitorIndexMetaGlobalInput) AnySelected() bool 
 
 // ActionNetworkInterfaceMonitorIndexInput is a type for action input parameters
 type ActionNetworkInterfaceMonitorIndexInput struct {
-	Environment      int64  `json:"environment"`
-	FromId           int64  `json:"from_id"`
-	Limit            int64  `json:"limit"`
-	Location         int64  `json:"location"`
-	NetworkInterface int64  `json:"network_interface"`
-	Node             int64  `json:"node"`
-	Order            string `json:"order"`
-	User             int64  `json:"user"`
-	Vps              int64  `json:"vps"`
+	Environment      int64  "json:\"environment\""
+	FromId           int64  "json:\"from_id\""
+	Limit            int64  "json:\"limit\""
+	Location         int64  "json:\"location\""
+	NetworkInterface int64  "json:\"network_interface\""
+	Node             int64  "json:\"node\""
+	Order            string "json:\"order\""
+	User             int64  "json:\"user\""
+	Vps              int64  "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -249,25 +249,25 @@ func (in *ActionNetworkInterfaceMonitorIndexInput) AnySelected() bool {
 
 // ActionNetworkInterfaceMonitorIndexOutput is a type for action output parameters
 type ActionNetworkInterfaceMonitorIndexOutput struct {
-	Bytes            int64                             `json:"bytes"`
-	BytesIn          int64                             `json:"bytes_in"`
-	BytesOut         int64                             `json:"bytes_out"`
-	Delta            int64                             `json:"delta"`
-	Id               int64                             `json:"id"`
-	NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Packets          int64                             `json:"packets"`
-	PacketsIn        int64                             `json:"packets_in"`
-	PacketsOut       int64                             `json:"packets_out"`
-	UpdatedAt        string                            `json:"updated_at"`
+	Bytes            int64                             "json:\"bytes\""
+	BytesIn          int64                             "json:\"bytes_in\""
+	BytesOut         int64                             "json:\"bytes_out\""
+	Delta            int64                             "json:\"delta\""
+	Id               int64                             "json:\"id\""
+	NetworkInterface *ActionNetworkInterfaceShowOutput "json:\"network_interface\""
+	Packets          int64                             "json:\"packets\""
+	PacketsIn        int64                             "json:\"packets_in\""
+	PacketsOut       int64                             "json:\"packets_out\""
+	UpdatedAt        string                            "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionNetworkInterfaceMonitorIndexResponse struct {
-	Action *ActionNetworkInterfaceMonitorIndex `json:"-"`
+	Action *ActionNetworkInterfaceMonitorIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		NetworkInterfaceMonitors []*ActionNetworkInterfaceMonitorIndexOutput `json:"network_interface_monitors"`
+		NetworkInterfaceMonitors []*ActionNetworkInterfaceMonitorIndexOutput "json:\"network_interface_monitors\""
 	}
 
 	// Action output without the namespace

@@ -16,8 +16,8 @@ func NewActionActionStateIndex(client *Client) *ActionActionStateIndex {
 
 // ActionActionStateIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionActionStateIndexMetaGlobalInput struct {
-	Count bool `json:"count"`
-	No    bool `json:"no"`
+	Count bool "json:\"count\""
+	No    bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,9 +73,9 @@ func (in *ActionActionStateIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionActionStateIndexInput is a type for action input parameters
 type ActionActionStateIndexInput struct {
-	FromId int64  `json:"from_id"`
-	Limit  int64  `json:"limit"`
-	Order  string `json:"order"`
+	FromId int64  "json:\"from_id\""
+	Limit  int64  "json:\"limit\""
+	Order  string "json:\"order\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,25 +158,25 @@ func (in *ActionActionStateIndexInput) AnySelected() bool {
 
 // ActionActionStateIndexOutput is a type for action output parameters
 type ActionActionStateIndexOutput struct {
-	CanCancel bool   `json:"can_cancel"`
-	CreatedAt string `json:"created_at"`
-	Current   int64  `json:"current"`
-	Finished  bool   `json:"finished"`
-	Id        int64  `json:"id"`
-	Label     string `json:"label"`
-	Status    bool   `json:"status"`
-	Total     int64  `json:"total"`
-	Unit      string `json:"unit"`
-	UpdatedAt string `json:"updated_at"`
+	CanCancel bool   "json:\"can_cancel\""
+	CreatedAt string "json:\"created_at\""
+	Current   int64  "json:\"current\""
+	Finished  bool   "json:\"finished\""
+	Id        int64  "json:\"id\""
+	Label     string "json:\"label\""
+	Status    bool   "json:\"status\""
+	Total     int64  "json:\"total\""
+	Unit      string "json:\"unit\""
+	UpdatedAt string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionActionStateIndexResponse struct {
-	Action *ActionActionStateIndex `json:"-"`
+	Action *ActionActionStateIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		ActionStates []*ActionActionStateIndexOutput `json:"action_states"`
+		ActionStates []*ActionActionStateIndexOutput "json:\"action_states\""
 	}
 
 	// Action output without the namespace

@@ -16,7 +16,7 @@ func NewActionWebauthnRegistrationBegin(client *Client) *ActionWebauthnRegistrat
 
 // ActionWebauthnRegistrationBeginMetaGlobalInput is a type for action global meta input parameters
 type ActionWebauthnRegistrationBeginMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,21 +60,21 @@ func (in *ActionWebauthnRegistrationBeginMetaGlobalInput) AnySelected() bool {
 
 // ActionWebauthnRegistrationBeginRequest is a type for the entire action request
 type ActionWebauthnRegistrationBeginRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionWebauthnRegistrationBeginOutput is a type for action output parameters
 type ActionWebauthnRegistrationBeginOutput struct {
-	ChallengeToken string `json:"challenge_token"`
+	ChallengeToken string "json:\"challenge_token\""
 }
 
 // Type for action response, including envelope
 type ActionWebauthnRegistrationBeginResponse struct {
-	Action *ActionWebauthnRegistrationBegin `json:"-"`
+	Action *ActionWebauthnRegistrationBegin "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Registration *ActionWebauthnRegistrationBeginOutput `json:"registration"`
+		Registration *ActionWebauthnRegistrationBeginOutput "json:\"registration\""
 	}
 
 	// Action output without the namespace

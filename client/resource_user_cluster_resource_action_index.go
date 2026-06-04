@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionUserClusterResourceIndex(client *Client) *ActionUserClusterResourc
 
 // ActionUserClusterResourceIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserClusterResourceIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,9 +89,9 @@ func (in *ActionUserClusterResourceIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserClusterResourceIndexInput is a type for action input parameters
 type ActionUserClusterResourceIndexInput struct {
-	Environment int64 `json:"environment"`
-	FromId      int64 `json:"from_id"`
-	Limit       int64 `json:"limit"`
+	Environment int64 "json:\"environment\""
+	FromId      int64 "json:\"from_id\""
+	Limit       int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -173,21 +174,21 @@ func (in *ActionUserClusterResourceIndexInput) AnySelected() bool {
 
 // ActionUserClusterResourceIndexOutput is a type for action output parameters
 type ActionUserClusterResourceIndexOutput struct {
-	ClusterResource *ActionClusterResourceShowOutput `json:"cluster_resource"`
-	Environment     *ActionEnvironmentShowOutput     `json:"environment"`
-	Free            int64                            `json:"free"`
-	Id              int64                            `json:"id"`
-	Used            int64                            `json:"used"`
-	Value           int64                            `json:"value"`
+	ClusterResource *ActionClusterResourceShowOutput "json:\"cluster_resource\""
+	Environment     *ActionEnvironmentShowOutput     "json:\"environment\""
+	Free            int64                            "json:\"free\""
+	Id              int64                            "json:\"id\""
+	Used            int64                            "json:\"used\""
+	Value           int64                            "json:\"value\""
 }
 
 // Type for action response, including envelope
 type ActionUserClusterResourceIndexResponse struct {
-	Action *ActionUserClusterResourceIndex `json:"-"`
+	Action *ActionUserClusterResourceIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		ClusterResources []*ActionUserClusterResourceIndexOutput `json:"cluster_resources"`
+		ClusterResources []*ActionUserClusterResourceIndexOutput "json:\"cluster_resources\""
 	}
 
 	// Action output without the namespace
@@ -222,7 +223,7 @@ func (inv *ActionUserClusterResourceIndexInvocation) SetPathParamInt(param strin
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserClusterResourceIndexInvocation) SetPathParamString(param string, value string) *ActionUserClusterResourceIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

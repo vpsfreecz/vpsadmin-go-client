@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionLanguageShow(client *Client) *ActionLanguageShow {
 
 // ActionLanguageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionLanguageShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,18 +76,18 @@ func (in *ActionLanguageShowMetaGlobalInput) AnySelected() bool {
 
 // ActionLanguageShowOutput is a type for action output parameters
 type ActionLanguageShowOutput struct {
-	Code  string `json:"code"`
-	Id    int64  `json:"id"`
-	Label string `json:"label"`
+	Code  string "json:\"code\""
+	Id    int64  "json:\"id\""
+	Label string "json:\"label\""
 }
 
 // Type for action response, including envelope
 type ActionLanguageShowResponse struct {
-	Action *ActionLanguageShow `json:"-"`
+	Action *ActionLanguageShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Language *ActionLanguageShowOutput `json:"language"`
+		Language *ActionLanguageShowOutput "json:\"language\""
 	}
 
 	// Action output without the namespace
@@ -119,7 +120,7 @@ func (inv *ActionLanguageShowInvocation) SetPathParamInt(param string, value int
 
 // SetPathParamString sets string path parameter
 func (inv *ActionLanguageShowInvocation) SetPathParamString(param string, value string) *ActionLanguageShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionOomReportTaskIndex(client *Client) *ActionOomReportTaskIndex {
 
 // ActionOomReportTaskIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportTaskIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,8 +89,8 @@ func (in *ActionOomReportTaskIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportTaskIndexInput is a type for action input parameters
 type ActionOomReportTaskIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,29 +161,29 @@ func (in *ActionOomReportTaskIndexInput) AnySelected() bool {
 
 // ActionOomReportTaskIndexOutput is a type for action output parameters
 type ActionOomReportTaskIndexOutput struct {
-	HostPid       int64  `json:"host_pid"`
-	Id            int64  `json:"id"`
-	Name          string `json:"name"`
-	OomScoreAdj   int64  `json:"oom_score_adj"`
-	PgtablesBytes int64  `json:"pgtables_bytes"`
-	Rss           int64  `json:"rss"`
-	RssAnon       int64  `json:"rss_anon"`
-	RssFile       int64  `json:"rss_file"`
-	RssShmem      int64  `json:"rss_shmem"`
-	Swapents      int64  `json:"swapents"`
-	Tgid          int64  `json:"tgid"`
-	TotalVm       int64  `json:"total_vm"`
-	VpsPid        int64  `json:"vps_pid"`
-	VpsUid        int64  `json:"vps_uid"`
+	HostPid       int64  "json:\"host_pid\""
+	Id            int64  "json:\"id\""
+	Name          string "json:\"name\""
+	OomScoreAdj   int64  "json:\"oom_score_adj\""
+	PgtablesBytes int64  "json:\"pgtables_bytes\""
+	Rss           int64  "json:\"rss\""
+	RssAnon       int64  "json:\"rss_anon\""
+	RssFile       int64  "json:\"rss_file\""
+	RssShmem      int64  "json:\"rss_shmem\""
+	Swapents      int64  "json:\"swapents\""
+	Tgid          int64  "json:\"tgid\""
+	TotalVm       int64  "json:\"total_vm\""
+	VpsPid        int64  "json:\"vps_pid\""
+	VpsUid        int64  "json:\"vps_uid\""
 }
 
 // Type for action response, including envelope
 type ActionOomReportTaskIndexResponse struct {
-	Action *ActionOomReportTaskIndex `json:"-"`
+	Action *ActionOomReportTaskIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Tasks []*ActionOomReportTaskIndexOutput `json:"tasks"`
+		Tasks []*ActionOomReportTaskIndexOutput "json:\"tasks\""
 	}
 
 	// Action output without the namespace
@@ -217,7 +218,7 @@ func (inv *ActionOomReportTaskIndexInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOomReportTaskIndexInvocation) SetPathParamString(param string, value string) *ActionOomReportTaskIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

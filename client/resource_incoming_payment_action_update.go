@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionIncomingPaymentUpdate(client *Client) *ActionIncomingPaymentUpdate
 
 // ActionIncomingPaymentUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionIncomingPaymentUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,7 +76,7 @@ func (in *ActionIncomingPaymentUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionIncomingPaymentUpdateInput is a type for action input parameters
 type ActionIncomingPaymentUpdateInput struct {
-	State string `json:"state"`
+	State string "json:\"state\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,38 +135,38 @@ func (in *ActionIncomingPaymentUpdateInput) AnySelected() bool {
 
 // ActionIncomingPaymentUpdateRequest is a type for the entire action request
 type ActionIncomingPaymentUpdateRequest struct {
-	IncomingPayment map[string]interface{} `json:"incoming_payment"`
-	Meta            map[string]interface{} `json:"_meta"`
+	IncomingPayment map[string]interface{} "json:\"incoming_payment\""
+	Meta            map[string]interface{} "json:\"_meta\""
 }
 
 // ActionIncomingPaymentUpdateOutput is a type for action output parameters
 type ActionIncomingPaymentUpdateOutput struct {
-	AccountName     string `json:"account_name"`
-	Amount          int64  `json:"amount"`
-	Comment         string `json:"comment"`
-	CreatedAt       string `json:"created_at"`
-	Currency        string `json:"currency"`
-	Date            string `json:"date"`
-	Id              int64  `json:"id"`
-	Ks              string `json:"ks"`
-	SrcAmount       int64  `json:"src_amount"`
-	SrcCurrency     string `json:"src_currency"`
-	Ss              string `json:"ss"`
-	State           string `json:"state"`
-	TransactionId   string `json:"transaction_id"`
-	TransactionType string `json:"transaction_type"`
-	UserIdent       string `json:"user_ident"`
-	UserMessage     string `json:"user_message"`
-	Vs              string `json:"vs"`
+	AccountName     string "json:\"account_name\""
+	Amount          int64  "json:\"amount\""
+	Comment         string "json:\"comment\""
+	CreatedAt       string "json:\"created_at\""
+	Currency        string "json:\"currency\""
+	Date            string "json:\"date\""
+	Id              int64  "json:\"id\""
+	Ks              string "json:\"ks\""
+	SrcAmount       int64  "json:\"src_amount\""
+	SrcCurrency     string "json:\"src_currency\""
+	Ss              string "json:\"ss\""
+	State           string "json:\"state\""
+	TransactionId   string "json:\"transaction_id\""
+	TransactionType string "json:\"transaction_type\""
+	UserIdent       string "json:\"user_ident\""
+	UserMessage     string "json:\"user_message\""
+	Vs              string "json:\"vs\""
 }
 
 // Type for action response, including envelope
 type ActionIncomingPaymentUpdateResponse struct {
-	Action *ActionIncomingPaymentUpdate `json:"-"`
+	Action *ActionIncomingPaymentUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		IncomingPayment *ActionIncomingPaymentUpdateOutput `json:"incoming_payment"`
+		IncomingPayment *ActionIncomingPaymentUpdateOutput "json:\"incoming_payment\""
 	}
 
 	// Action output without the namespace
@@ -200,7 +201,7 @@ func (inv *ActionIncomingPaymentUpdateInvocation) SetPathParamInt(param string, 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionIncomingPaymentUpdateInvocation) SetPathParamString(param string, value string) *ActionIncomingPaymentUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

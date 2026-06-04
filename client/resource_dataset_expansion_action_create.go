@@ -16,8 +16,8 @@ func NewActionDatasetExpansionCreate(client *Client) *ActionDatasetExpansionCrea
 
 // ActionDatasetExpansionCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetExpansionCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,12 +73,12 @@ func (in *ActionDatasetExpansionCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetExpansionCreateInput is a type for action input parameters
 type ActionDatasetExpansionCreateInput struct {
-	AddedSpace             int64 `json:"added_space"`
-	Dataset                int64 `json:"dataset"`
-	EnableNotifications    bool  `json:"enable_notifications"`
-	EnableShrink           bool  `json:"enable_shrink"`
-	MaxOverRefquotaSeconds int64 `json:"max_over_refquota_seconds"`
-	StopVps                bool  `json:"stop_vps"`
+	AddedSpace             int64 "json:\"added_space\""
+	Dataset                int64 "json:\"dataset\""
+	EnableNotifications    bool  "json:\"enable_notifications\""
+	EnableShrink           bool  "json:\"enable_shrink\""
+	MaxOverRefquotaSeconds int64 "json:\"max_over_refquota_seconds\""
+	StopVps                bool  "json:\"stop_vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -197,40 +197,40 @@ func (in *ActionDatasetExpansionCreateInput) AnySelected() bool {
 
 // ActionDatasetExpansionCreateRequest is a type for the entire action request
 type ActionDatasetExpansionCreateRequest struct {
-	DatasetExpansion map[string]interface{} `json:"dataset_expansion"`
-	Meta             map[string]interface{} `json:"_meta"`
+	DatasetExpansion map[string]interface{} "json:\"dataset_expansion\""
+	Meta             map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDatasetExpansionCreateOutput is a type for action output parameters
 type ActionDatasetExpansionCreateOutput struct {
-	AddedSpace             int64                    `json:"added_space"`
-	CreatedAt              string                   `json:"created_at"`
-	Dataset                *ActionDatasetShowOutput `json:"dataset"`
-	EnableNotifications    bool                     `json:"enable_notifications"`
-	EnableShrink           bool                     `json:"enable_shrink"`
-	Id                     int64                    `json:"id"`
-	MaxOverRefquotaSeconds int64                    `json:"max_over_refquota_seconds"`
-	OriginalRefquota       int64                    `json:"original_refquota"`
-	OverRefquotaSeconds    int64                    `json:"over_refquota_seconds"`
-	State                  string                   `json:"state"`
-	StopVps                bool                     `json:"stop_vps"`
-	Vps                    *ActionVpsShowOutput     `json:"vps"`
+	AddedSpace             int64                    "json:\"added_space\""
+	CreatedAt              string                   "json:\"created_at\""
+	Dataset                *ActionDatasetShowOutput "json:\"dataset\""
+	EnableNotifications    bool                     "json:\"enable_notifications\""
+	EnableShrink           bool                     "json:\"enable_shrink\""
+	Id                     int64                    "json:\"id\""
+	MaxOverRefquotaSeconds int64                    "json:\"max_over_refquota_seconds\""
+	OriginalRefquota       int64                    "json:\"original_refquota\""
+	OverRefquotaSeconds    int64                    "json:\"over_refquota_seconds\""
+	State                  string                   "json:\"state\""
+	StopVps                bool                     "json:\"stop_vps\""
+	Vps                    *ActionVpsShowOutput     "json:\"vps\""
 }
 
 // ActionDatasetExpansionCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionDatasetExpansionCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetExpansionCreateResponse struct {
-	Action *ActionDatasetExpansionCreate `json:"-"`
+	Action *ActionDatasetExpansionCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DatasetExpansion *ActionDatasetExpansionCreateOutput `json:"dataset_expansion"`
+		DatasetExpansion *ActionDatasetExpansionCreateOutput "json:\"dataset_expansion\""
 		// Global output metadata
-		Meta *ActionDatasetExpansionCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDatasetExpansionCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

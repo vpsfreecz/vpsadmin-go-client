@@ -16,8 +16,8 @@ func NewActionMigrationPlanCreate(client *Client) *ActionMigrationPlanCreate {
 
 // ActionMigrationPlanCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,10 +73,10 @@ func (in *ActionMigrationPlanCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionMigrationPlanCreateInput is a type for action input parameters
 type ActionMigrationPlanCreateInput struct {
-	Concurrency int64  `json:"concurrency"`
-	Reason      string `json:"reason"`
-	SendMail    bool   `json:"send_mail"`
-	StopOnError bool   `json:"stop_on_error"`
+	Concurrency int64  "json:\"concurrency\""
+	Reason      string "json:\"reason\""
+	SendMail    bool   "json:\"send_mail\""
+	StopOnError bool   "json:\"stop_on_error\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -171,30 +171,30 @@ func (in *ActionMigrationPlanCreateInput) AnySelected() bool {
 
 // ActionMigrationPlanCreateRequest is a type for the entire action request
 type ActionMigrationPlanCreateRequest struct {
-	MigrationPlan map[string]interface{} `json:"migration_plan"`
-	Meta          map[string]interface{} `json:"_meta"`
+	MigrationPlan map[string]interface{} "json:\"migration_plan\""
+	Meta          map[string]interface{} "json:\"_meta\""
 }
 
 // ActionMigrationPlanCreateOutput is a type for action output parameters
 type ActionMigrationPlanCreateOutput struct {
-	Concurrency int64                 `json:"concurrency"`
-	CreatedAt   string                `json:"created_at"`
-	FinishedAt  string                `json:"finished_at"`
-	Id          int64                 `json:"id"`
-	Reason      string                `json:"reason"`
-	SendMail    bool                  `json:"send_mail"`
-	State       string                `json:"state"`
-	StopOnError bool                  `json:"stop_on_error"`
-	User        *ActionUserShowOutput `json:"user"`
+	Concurrency int64                 "json:\"concurrency\""
+	CreatedAt   string                "json:\"created_at\""
+	FinishedAt  string                "json:\"finished_at\""
+	Id          int64                 "json:\"id\""
+	Reason      string                "json:\"reason\""
+	SendMail    bool                  "json:\"send_mail\""
+	State       string                "json:\"state\""
+	StopOnError bool                  "json:\"stop_on_error\""
+	User        *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionMigrationPlanCreateResponse struct {
-	Action *ActionMigrationPlanCreate `json:"-"`
+	Action *ActionMigrationPlanCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MigrationPlan *ActionMigrationPlanCreateOutput `json:"migration_plan"`
+		MigrationPlan *ActionMigrationPlanCreateOutput "json:\"migration_plan\""
 	}
 
 	// Action output without the namespace

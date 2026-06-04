@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionIpAddressFree(client *Client) *ActionIpAddressFree {
 
 // ActionIpAddressFreeMetaGlobalInput is a type for action global meta input parameters
 type ActionIpAddressFreeMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,36 +76,36 @@ func (in *ActionIpAddressFreeMetaGlobalInput) AnySelected() bool {
 
 // ActionIpAddressFreeRequest is a type for the entire action request
 type ActionIpAddressFreeRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionIpAddressFreeOutput is a type for action output parameters
 type ActionIpAddressFreeOutput struct {
-	Addr               string                            `json:"addr"`
-	ChargedEnvironment *ActionEnvironmentShowOutput      `json:"charged_environment"`
-	Id                 int64                             `json:"id"`
-	Network            *ActionNetworkShowOutput          `json:"network"`
-	NetworkInterface   *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Prefix             int64                             `json:"prefix"`
-	RouteVia           *ActionHostIpAddressShowOutput    `json:"route_via"`
-	Size               int64                             `json:"size"`
-	User               *ActionUserShowOutput             `json:"user"`
+	Addr               string                            "json:\"addr\""
+	ChargedEnvironment *ActionEnvironmentShowOutput      "json:\"charged_environment\""
+	Id                 int64                             "json:\"id\""
+	Network            *ActionNetworkShowOutput          "json:\"network\""
+	NetworkInterface   *ActionNetworkInterfaceShowOutput "json:\"network_interface\""
+	Prefix             int64                             "json:\"prefix\""
+	RouteVia           *ActionHostIpAddressShowOutput    "json:\"route_via\""
+	Size               int64                             "json:\"size\""
+	User               *ActionUserShowOutput             "json:\"user\""
 }
 
 // ActionIpAddressFreeMetaGlobalOutput is a type for global output metadata parameters
 type ActionIpAddressFreeMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionIpAddressFreeResponse struct {
-	Action *ActionIpAddressFree `json:"-"`
+	Action *ActionIpAddressFree "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		IpAddress *ActionIpAddressFreeOutput `json:"ip_address"`
+		IpAddress *ActionIpAddressFreeOutput "json:\"ip_address\""
 		// Global output metadata
-		Meta *ActionIpAddressFreeMetaGlobalOutput `json:"_meta"`
+		Meta *ActionIpAddressFreeMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -137,7 +138,7 @@ func (inv *ActionIpAddressFreeInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionIpAddressFreeInvocation) SetPathParamString(param string, value string) *ActionIpAddressFreeInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,7 +19,7 @@ func NewActionPoolSetMaintenance(client *Client) *ActionPoolSetMaintenance {
 
 // ActionPoolSetMaintenanceMetaGlobalInput is a type for action global meta input parameters
 type ActionPoolSetMaintenanceMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -62,8 +63,8 @@ func (in *ActionPoolSetMaintenanceMetaGlobalInput) AnySelected() bool {
 
 // ActionPoolSetMaintenanceInput is a type for action input parameters
 type ActionPoolSetMaintenanceInput struct {
-	Lock   bool   `json:"lock"`
-	Reason string `json:"reason"`
+	Lock   bool   "json:\"lock\""
+	Reason string "json:\"reason\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,13 +135,13 @@ func (in *ActionPoolSetMaintenanceInput) AnySelected() bool {
 
 // ActionPoolSetMaintenanceRequest is a type for the entire action request
 type ActionPoolSetMaintenanceRequest struct {
-	Pool map[string]interface{} `json:"pool"`
-	Meta map[string]interface{} `json:"_meta"`
+	Pool map[string]interface{} "json:\"pool\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // Type for action response, including envelope
 type ActionPoolSetMaintenanceResponse struct {
-	Action *ActionPoolSetMaintenance `json:"-"`
+	Action *ActionPoolSetMaintenance "json:\"-\""
 	*Envelope
 }
 
@@ -172,7 +173,7 @@ func (inv *ActionPoolSetMaintenanceInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionPoolSetMaintenanceInvocation) SetPathParamString(param string, value string) *ActionPoolSetMaintenanceInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

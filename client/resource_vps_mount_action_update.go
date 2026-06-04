@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsMountUpdate(client *Client) *ActionVpsMountUpdate {
 
 // ActionVpsMountUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMountUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,9 +76,9 @@ func (in *ActionVpsMountUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMountUpdateInput is a type for action input parameters
 type ActionVpsMountUpdateInput struct {
-	Enabled       bool   `json:"enabled"`
-	MasterEnabled bool   `json:"master_enabled"`
-	OnStartFail   string `json:"on_start_fail"`
+	Enabled       bool   "json:\"enabled\""
+	MasterEnabled bool   "json:\"master_enabled\""
+	OnStartFail   string "json:\"on_start_fail\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,39 +161,39 @@ func (in *ActionVpsMountUpdateInput) AnySelected() bool {
 
 // ActionVpsMountUpdateRequest is a type for the entire action request
 type ActionVpsMountUpdateRequest struct {
-	Mount map[string]interface{} `json:"mount"`
-	Meta  map[string]interface{} `json:"_meta"`
+	Mount map[string]interface{} "json:\"mount\""
+	Meta  map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsMountUpdateOutput is a type for action output parameters
 type ActionVpsMountUpdateOutput struct {
-	CurrentState     string                            `json:"current_state"`
-	Dataset          *ActionDatasetShowOutput          `json:"dataset"`
-	Enabled          bool                              `json:"enabled"`
-	ExpirationDate   string                            `json:"expiration_date"`
-	Id               int64                             `json:"id"`
-	MasterEnabled    bool                              `json:"master_enabled"`
-	Mode             string                            `json:"mode"`
-	Mountpoint       string                            `json:"mountpoint"`
-	OnStartFail      string                            `json:"on_start_fail"`
-	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
-	Vps              *ActionVpsShowOutput              `json:"vps"`
+	CurrentState     string                            "json:\"current_state\""
+	Dataset          *ActionDatasetShowOutput          "json:\"dataset\""
+	Enabled          bool                              "json:\"enabled\""
+	ExpirationDate   string                            "json:\"expiration_date\""
+	Id               int64                             "json:\"id\""
+	MasterEnabled    bool                              "json:\"master_enabled\""
+	Mode             string                            "json:\"mode\""
+	Mountpoint       string                            "json:\"mountpoint\""
+	OnStartFail      string                            "json:\"on_start_fail\""
+	UserNamespaceMap *ActionUserNamespaceMapShowOutput "json:\"user_namespace_map\""
+	Vps              *ActionVpsShowOutput              "json:\"vps\""
 }
 
 // ActionVpsMountUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsMountUpdateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionVpsMountUpdateResponse struct {
-	Action *ActionVpsMountUpdate `json:"-"`
+	Action *ActionVpsMountUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Mount *ActionVpsMountUpdateOutput `json:"mount"`
+		Mount *ActionVpsMountUpdateOutput "json:\"mount\""
 		// Global output metadata
-		Meta *ActionVpsMountUpdateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionVpsMountUpdateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -227,7 +228,7 @@ func (inv *ActionVpsMountUpdateInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsMountUpdateInvocation) SetPathParamString(param string, value string) *ActionVpsMountUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

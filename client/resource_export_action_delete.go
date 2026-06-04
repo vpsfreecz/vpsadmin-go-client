@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionExportDelete(client *Client) *ActionExportDelete {
 
 // ActionExportDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionExportDeleteMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,22 +76,22 @@ func (in *ActionExportDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionExportDeleteRequest is a type for the entire action request
 type ActionExportDeleteRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionExportDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionExportDeleteMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionExportDeleteResponse struct {
-	Action *ActionExportDelete `json:"-"`
+	Action *ActionExportDelete "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionExportDeleteMetaGlobalOutput `json:"_meta"`
+		Meta *ActionExportDeleteMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -120,7 +121,7 @@ func (inv *ActionExportDeleteInvocation) SetPathParamInt(param string, value int
 
 // SetPathParamString sets string path parameter
 func (inv *ActionExportDeleteInvocation) SetPathParamString(param string, value string) *ActionExportDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

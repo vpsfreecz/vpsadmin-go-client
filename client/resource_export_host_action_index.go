@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionExportHostIndex(client *Client) *ActionExportHostIndex {
 
 // ActionExportHostIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionExportHostIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,8 +89,8 @@ func (in *ActionExportHostIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionExportHostIndexInput is a type for action input parameters
 type ActionExportHostIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,21 +161,21 @@ func (in *ActionExportHostIndexInput) AnySelected() bool {
 
 // ActionExportHostIndexOutput is a type for action output parameters
 type ActionExportHostIndexOutput struct {
-	Id           int64                      `json:"id"`
-	IpAddress    *ActionIpAddressShowOutput `json:"ip_address"`
-	RootSquash   bool                       `json:"root_squash"`
-	Rw           bool                       `json:"rw"`
-	SubtreeCheck bool                       `json:"subtree_check"`
-	Sync         bool                       `json:"sync"`
+	Id           int64                      "json:\"id\""
+	IpAddress    *ActionIpAddressShowOutput "json:\"ip_address\""
+	RootSquash   bool                       "json:\"root_squash\""
+	Rw           bool                       "json:\"rw\""
+	SubtreeCheck bool                       "json:\"subtree_check\""
+	Sync         bool                       "json:\"sync\""
 }
 
 // Type for action response, including envelope
 type ActionExportHostIndexResponse struct {
-	Action *ActionExportHostIndex `json:"-"`
+	Action *ActionExportHostIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Hosts []*ActionExportHostIndexOutput `json:"hosts"`
+		Hosts []*ActionExportHostIndexOutput "json:\"hosts\""
 	}
 
 	// Action output without the namespace
@@ -209,7 +210,7 @@ func (inv *ActionExportHostIndexInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionExportHostIndexInvocation) SetPathParamString(param string, value string) *ActionExportHostIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -16,8 +16,8 @@ func NewActionHelpBoxCreate(client *Client) *ActionHelpBoxCreate {
 
 // ActionHelpBoxCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionHelpBoxCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,11 +73,11 @@ func (in *ActionHelpBoxCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionHelpBoxCreateInput is a type for action input parameters
 type ActionHelpBoxCreateInput struct {
-	Action   string `json:"action"`
-	Content  string `json:"content"`
-	Language int64  `json:"language"`
-	Order    int64  `json:"order"`
-	Page     string `json:"page"`
+	Action   string "json:\"action\""
+	Content  string "json:\"content\""
+	Language int64  "json:\"language\""
+	Order    int64  "json:\"order\""
+	Page     string "json:\"page\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -184,27 +184,27 @@ func (in *ActionHelpBoxCreateInput) AnySelected() bool {
 
 // ActionHelpBoxCreateRequest is a type for the entire action request
 type ActionHelpBoxCreateRequest struct {
-	HelpBox map[string]interface{} `json:"help_box"`
-	Meta    map[string]interface{} `json:"_meta"`
+	HelpBox map[string]interface{} "json:\"help_box\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionHelpBoxCreateOutput is a type for action output parameters
 type ActionHelpBoxCreateOutput struct {
-	Action   string                    `json:"action"`
-	Content  string                    `json:"content"`
-	Id       int64                     `json:"id"`
-	Language *ActionLanguageShowOutput `json:"language"`
-	Order    int64                     `json:"order"`
-	Page     string                    `json:"page"`
+	Action   string                    "json:\"action\""
+	Content  string                    "json:\"content\""
+	Id       int64                     "json:\"id\""
+	Language *ActionLanguageShowOutput "json:\"language\""
+	Order    int64                     "json:\"order\""
+	Page     string                    "json:\"page\""
 }
 
 // Type for action response, including envelope
 type ActionHelpBoxCreateResponse struct {
-	Action *ActionHelpBoxCreate `json:"-"`
+	Action *ActionHelpBoxCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		HelpBox *ActionHelpBoxCreateOutput `json:"help_box"`
+		HelpBox *ActionHelpBoxCreateOutput "json:\"help_box\""
 	}
 
 	// Action output without the namespace

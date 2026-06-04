@@ -16,9 +16,9 @@ func NewActionMailRecipientIndex(client *Client) *ActionMailRecipientIndex {
 
 // ActionMailRecipientIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMailRecipientIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,8 +86,8 @@ func (in *ActionMailRecipientIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMailRecipientIndexInput is a type for action input parameters
 type ActionMailRecipientIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,20 +158,20 @@ func (in *ActionMailRecipientIndexInput) AnySelected() bool {
 
 // ActionMailRecipientIndexOutput is a type for action output parameters
 type ActionMailRecipientIndexOutput struct {
-	Bcc   string `json:"bcc"`
-	Cc    string `json:"cc"`
-	Id    int64  `json:"id"`
-	Label string `json:"label"`
-	To    string `json:"to"`
+	Bcc   string "json:\"bcc\""
+	Cc    string "json:\"cc\""
+	Id    int64  "json:\"id\""
+	Label string "json:\"label\""
+	To    string "json:\"to\""
 }
 
 // Type for action response, including envelope
 type ActionMailRecipientIndexResponse struct {
-	Action *ActionMailRecipientIndex `json:"-"`
+	Action *ActionMailRecipientIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MailRecipients []*ActionMailRecipientIndexOutput `json:"mail_recipients"`
+		MailRecipients []*ActionMailRecipientIndexOutput "json:\"mail_recipients\""
 	}
 
 	// Action output without the namespace

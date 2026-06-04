@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnsResolverShow(client *Client) *ActionDnsResolverShow {
 
 // ActionDnsResolverShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsResolverShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,20 +76,20 @@ func (in *ActionDnsResolverShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsResolverShowOutput is a type for action output parameters
 type ActionDnsResolverShowOutput struct {
-	Id          int64                     `json:"id"`
-	IpAddr      string                    `json:"ip_addr"`
-	IsUniversal bool                      `json:"is_universal"`
-	Label       string                    `json:"label"`
-	Location    *ActionLocationShowOutput `json:"location"`
+	Id          int64                     "json:\"id\""
+	IpAddr      string                    "json:\"ip_addr\""
+	IsUniversal bool                      "json:\"is_universal\""
+	Label       string                    "json:\"label\""
+	Location    *ActionLocationShowOutput "json:\"location\""
 }
 
 // Type for action response, including envelope
 type ActionDnsResolverShowResponse struct {
-	Action *ActionDnsResolverShow `json:"-"`
+	Action *ActionDnsResolverShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsResolver *ActionDnsResolverShowOutput `json:"dns_resolver"`
+		DnsResolver *ActionDnsResolverShowOutput "json:\"dns_resolver\""
 	}
 
 	// Action output without the namespace
@@ -121,7 +122,7 @@ func (inv *ActionDnsResolverShowInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsResolverShowInvocation) SetPathParamString(param string, value string) *ActionDnsResolverShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

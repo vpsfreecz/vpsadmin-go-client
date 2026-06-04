@@ -16,9 +16,9 @@ func NewActionNetworkInterfaceAccountingUserTop(client *Client) *ActionNetworkIn
 
 // ActionNetworkInterfaceAccountingUserTopMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkInterfaceAccountingUserTopMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,15 +86,15 @@ func (in *ActionNetworkInterfaceAccountingUserTopMetaGlobalInput) AnySelected() 
 
 // ActionNetworkInterfaceAccountingUserTopInput is a type for action input parameters
 type ActionNetworkInterfaceAccountingUserTopInput struct {
-	Environment int64  `json:"environment"`
-	From        string `json:"from"`
-	FromBytes   int64  `json:"from_bytes"`
-	Limit       int64  `json:"limit"`
-	Location    int64  `json:"location"`
-	Month       int64  `json:"month"`
-	Node        int64  `json:"node"`
-	To          string `json:"to"`
-	Year        int64  `json:"year"`
+	Environment int64  "json:\"environment\""
+	From        string "json:\"from\""
+	FromBytes   int64  "json:\"from_bytes\""
+	Limit       int64  "json:\"limit\""
+	Location    int64  "json:\"location\""
+	Month       int64  "json:\"month\""
+	Node        int64  "json:\"node\""
+	To          string "json:\"to\""
+	Year        int64  "json:\"year\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -249,24 +249,24 @@ func (in *ActionNetworkInterfaceAccountingUserTopInput) AnySelected() bool {
 
 // ActionNetworkInterfaceAccountingUserTopOutput is a type for action output parameters
 type ActionNetworkInterfaceAccountingUserTopOutput struct {
-	Bytes      int64                 `json:"bytes"`
-	BytesIn    int64                 `json:"bytes_in"`
-	BytesOut   int64                 `json:"bytes_out"`
-	Month      int64                 `json:"month"`
-	Packets    int64                 `json:"packets"`
-	PacketsIn  int64                 `json:"packets_in"`
-	PacketsOut int64                 `json:"packets_out"`
-	User       *ActionUserShowOutput `json:"user"`
-	Year       int64                 `json:"year"`
+	Bytes      int64                 "json:\"bytes\""
+	BytesIn    int64                 "json:\"bytes_in\""
+	BytesOut   int64                 "json:\"bytes_out\""
+	Month      int64                 "json:\"month\""
+	Packets    int64                 "json:\"packets\""
+	PacketsIn  int64                 "json:\"packets_in\""
+	PacketsOut int64                 "json:\"packets_out\""
+	User       *ActionUserShowOutput "json:\"user\""
+	Year       int64                 "json:\"year\""
 }
 
 // Type for action response, including envelope
 type ActionNetworkInterfaceAccountingUserTopResponse struct {
-	Action *ActionNetworkInterfaceAccountingUserTop `json:"-"`
+	Action *ActionNetworkInterfaceAccountingUserTop "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		NetworkInterfaceAccountings []*ActionNetworkInterfaceAccountingUserTopOutput `json:"network_interface_accountings"`
+		NetworkInterfaceAccountings []*ActionNetworkInterfaceAccountingUserTopOutput "json:\"network_interface_accountings\""
 	}
 
 	// Action output without the namespace

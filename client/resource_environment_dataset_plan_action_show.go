@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionEnvironmentDatasetPlanShow(client *Client) *ActionEnvironmentDatas
 
 // ActionEnvironmentDatasetPlanShowMetaGlobalInput is a type for action global meta input parameters
 type ActionEnvironmentDatasetPlanShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,20 +76,20 @@ func (in *ActionEnvironmentDatasetPlanShowMetaGlobalInput) AnySelected() bool {
 
 // ActionEnvironmentDatasetPlanShowOutput is a type for action output parameters
 type ActionEnvironmentDatasetPlanShowOutput struct {
-	DatasetPlan *ActionDatasetPlanShowOutput `json:"dataset_plan"`
-	Id          int64                        `json:"id"`
-	Label       string                       `json:"label"`
-	UserAdd     bool                         `json:"user_add"`
-	UserRemove  bool                         `json:"user_remove"`
+	DatasetPlan *ActionDatasetPlanShowOutput "json:\"dataset_plan\""
+	Id          int64                        "json:\"id\""
+	Label       string                       "json:\"label\""
+	UserAdd     bool                         "json:\"user_add\""
+	UserRemove  bool                         "json:\"user_remove\""
 }
 
 // Type for action response, including envelope
 type ActionEnvironmentDatasetPlanShowResponse struct {
-	Action *ActionEnvironmentDatasetPlanShow `json:"-"`
+	Action *ActionEnvironmentDatasetPlanShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DatasetPlan *ActionEnvironmentDatasetPlanShowOutput `json:"dataset_plan"`
+		DatasetPlan *ActionEnvironmentDatasetPlanShowOutput "json:\"dataset_plan\""
 	}
 
 	// Action output without the namespace
@@ -121,7 +122,7 @@ func (inv *ActionEnvironmentDatasetPlanShowInvocation) SetPathParamInt(param str
 
 // SetPathParamString sets string path parameter
 func (inv *ActionEnvironmentDatasetPlanShowInvocation) SetPathParamString(param string, value string) *ActionEnvironmentDatasetPlanShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

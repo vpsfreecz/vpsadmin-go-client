@@ -16,9 +16,9 @@ func NewActionSnapshotDownloadIndex(client *Client) *ActionSnapshotDownloadIndex
 
 // ActionSnapshotDownloadIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionSnapshotDownloadIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,10 +86,10 @@ func (in *ActionSnapshotDownloadIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionSnapshotDownloadIndexInput is a type for action input parameters
 type ActionSnapshotDownloadIndexInput struct {
-	Dataset  int64 `json:"dataset"`
-	FromId   int64 `json:"from_id"`
-	Limit    int64 `json:"limit"`
-	Snapshot int64 `json:"snapshot"`
+	Dataset  int64 "json:\"dataset\""
+	FromId   int64 "json:\"from_id\""
+	Limit    int64 "json:\"limit\""
+	Snapshot int64 "json:\"snapshot\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -184,26 +184,26 @@ func (in *ActionSnapshotDownloadIndexInput) AnySelected() bool {
 
 // ActionSnapshotDownloadIndexOutput is a type for action output parameters
 type ActionSnapshotDownloadIndexOutput struct {
-	ExpirationDate string                           `json:"expiration_date"`
-	FileName       string                           `json:"file_name"`
-	Format         string                           `json:"format"`
-	FromSnapshot   *ActionDatasetSnapshotShowOutput `json:"from_snapshot"`
-	Id             int64                            `json:"id"`
-	Ready          bool                             `json:"ready"`
-	Sha256sum      string                           `json:"sha256sum"`
-	Size           int64                            `json:"size"`
-	Snapshot       *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	Url            string                           `json:"url"`
-	User           *ActionUserShowOutput            `json:"user"`
+	ExpirationDate string                           "json:\"expiration_date\""
+	FileName       string                           "json:\"file_name\""
+	Format         string                           "json:\"format\""
+	FromSnapshot   *ActionDatasetSnapshotShowOutput "json:\"from_snapshot\""
+	Id             int64                            "json:\"id\""
+	Ready          bool                             "json:\"ready\""
+	Sha256sum      string                           "json:\"sha256sum\""
+	Size           int64                            "json:\"size\""
+	Snapshot       *ActionDatasetSnapshotShowOutput "json:\"snapshot\""
+	Url            string                           "json:\"url\""
+	User           *ActionUserShowOutput            "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionSnapshotDownloadIndexResponse struct {
-	Action *ActionSnapshotDownloadIndex `json:"-"`
+	Action *ActionSnapshotDownloadIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		SnapshotDownloads []*ActionSnapshotDownloadIndexOutput `json:"snapshot_downloads"`
+		SnapshotDownloads []*ActionSnapshotDownloadIndexOutput "json:\"snapshot_downloads\""
 	}
 
 	// Action output without the namespace

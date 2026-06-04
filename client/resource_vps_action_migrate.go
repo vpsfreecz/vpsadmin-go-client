@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsMigrate(client *Client) *ActionVpsMigrate {
 
 // ActionVpsMigrateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMigrateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,18 +76,18 @@ func (in *ActionVpsMigrateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMigrateInput is a type for action input parameters
 type ActionVpsMigrateInput struct {
-	CleanupData         bool   `json:"cleanup_data"`
-	FinishMinutes       int64  `json:"finish_minutes"`
-	FinishWeekday       int64  `json:"finish_weekday"`
-	MaintenanceWindow   bool   `json:"maintenance_window"`
-	NoStart             bool   `json:"no_start"`
-	Node                int64  `json:"node"`
-	Reason              string `json:"reason"`
-	ReplaceIpAddresses  bool   `json:"replace_ip_addresses"`
-	SendMail            bool   `json:"send_mail"`
-	SkipStart           bool   `json:"skip_start"`
-	Swap                string `json:"swap"`
-	TransferIpAddresses bool   `json:"transfer_ip_addresses"`
+	CleanupData         bool   "json:\"cleanup_data\""
+	FinishMinutes       int64  "json:\"finish_minutes\""
+	FinishWeekday       int64  "json:\"finish_weekday\""
+	MaintenanceWindow   bool   "json:\"maintenance_window\""
+	NoStart             bool   "json:\"no_start\""
+	Node                int64  "json:\"node\""
+	Reason              string "json:\"reason\""
+	ReplaceIpAddresses  bool   "json:\"replace_ip_addresses\""
+	SendMail            bool   "json:\"send_mail\""
+	SkipStart           bool   "json:\"skip_start\""
+	Swap                string "json:\"swap\""
+	TransferIpAddresses bool   "json:\"transfer_ip_addresses\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -277,23 +278,23 @@ func (in *ActionVpsMigrateInput) AnySelected() bool {
 
 // ActionVpsMigrateRequest is a type for the entire action request
 type ActionVpsMigrateRequest struct {
-	Vps  map[string]interface{} `json:"vps"`
-	Meta map[string]interface{} `json:"_meta"`
+	Vps  map[string]interface{} "json:\"vps\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsMigrateMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsMigrateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionVpsMigrateResponse struct {
-	Action *ActionVpsMigrate `json:"-"`
+	Action *ActionVpsMigrate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionVpsMigrateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionVpsMigrateMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -325,7 +326,7 @@ func (inv *ActionVpsMigrateInvocation) SetPathParamInt(param string, value int64
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsMigrateInvocation) SetPathParamString(param string, value string) *ActionVpsMigrateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -16,7 +16,7 @@ func NewActionClusterFullStats(client *Client) *ActionClusterFullStats {
 
 // ActionClusterFullStatsMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterFullStatsMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,28 +60,28 @@ func (in *ActionClusterFullStatsMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterFullStatsOutput is a type for action output parameters
 type ActionClusterFullStatsOutput struct {
-	Ipv4Count     int64 `json:"ipv4_count"`
-	Ipv4Used      int64 `json:"ipv4_used"`
-	NodeCount     int64 `json:"node_count"`
-	NodesOnline   int64 `json:"nodes_online"`
-	UserActive    int64 `json:"user_active"`
-	UserCount     int64 `json:"user_count"`
-	UserDeleted   int64 `json:"user_deleted"`
-	UserSuspended int64 `json:"user_suspended"`
-	VpsCount      int64 `json:"vps_count"`
-	VpsDeleted    int64 `json:"vps_deleted"`
-	VpsRunning    int64 `json:"vps_running"`
-	VpsStopped    int64 `json:"vps_stopped"`
-	VpsSuspended  int64 `json:"vps_suspended"`
+	Ipv4Count     int64 "json:\"ipv4_count\""
+	Ipv4Used      int64 "json:\"ipv4_used\""
+	NodeCount     int64 "json:\"node_count\""
+	NodesOnline   int64 "json:\"nodes_online\""
+	UserActive    int64 "json:\"user_active\""
+	UserCount     int64 "json:\"user_count\""
+	UserDeleted   int64 "json:\"user_deleted\""
+	UserSuspended int64 "json:\"user_suspended\""
+	VpsCount      int64 "json:\"vps_count\""
+	VpsDeleted    int64 "json:\"vps_deleted\""
+	VpsRunning    int64 "json:\"vps_running\""
+	VpsStopped    int64 "json:\"vps_stopped\""
+	VpsSuspended  int64 "json:\"vps_suspended\""
 }
 
 // Type for action response, including envelope
 type ActionClusterFullStatsResponse struct {
-	Action *ActionClusterFullStats `json:"-"`
+	Action *ActionClusterFullStats "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Cluster *ActionClusterFullStatsOutput `json:"cluster"`
+		Cluster *ActionClusterFullStatsOutput "json:\"cluster\""
 	}
 
 	// Action output without the namespace

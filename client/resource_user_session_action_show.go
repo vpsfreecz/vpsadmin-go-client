@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserSessionShow(client *Client) *ActionUserSessionShow {
 
 // ActionUserSessionShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserSessionShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,34 +76,34 @@ func (in *ActionUserSessionShowMetaGlobalInput) AnySelected() bool {
 
 // ActionUserSessionShowOutput is a type for action output parameters
 type ActionUserSessionShowOutput struct {
-	Admin         *ActionUserShowOutput `json:"admin"`
-	ApiIpAddr     string                `json:"api_ip_addr"`
-	ApiIpPtr      string                `json:"api_ip_ptr"`
-	AuthType      string                `json:"auth_type"`
-	ClientIpAddr  string                `json:"client_ip_addr"`
-	ClientIpPtr   string                `json:"client_ip_ptr"`
-	ClientVersion string                `json:"client_version"`
-	ClosedAt      string                `json:"closed_at"`
-	CreatedAt     string                `json:"created_at"`
-	Id            int64                 `json:"id"`
-	Label         string                `json:"label"`
-	LastRequestAt string                `json:"last_request_at"`
-	RequestCount  int64                 `json:"request_count"`
-	Scope         string                `json:"scope"`
-	TokenFragment string                `json:"token_fragment"`
-	TokenInterval int64                 `json:"token_interval"`
-	TokenLifetime string                `json:"token_lifetime"`
-	User          *ActionUserShowOutput `json:"user"`
-	UserAgent     string                `json:"user_agent"`
+	Admin         *ActionUserShowOutput "json:\"admin\""
+	ApiIpAddr     string                "json:\"api_ip_addr\""
+	ApiIpPtr      string                "json:\"api_ip_ptr\""
+	AuthType      string                "json:\"auth_type\""
+	ClientIpAddr  string                "json:\"client_ip_addr\""
+	ClientIpPtr   string                "json:\"client_ip_ptr\""
+	ClientVersion string                "json:\"client_version\""
+	ClosedAt      string                "json:\"closed_at\""
+	CreatedAt     string                "json:\"created_at\""
+	Id            int64                 "json:\"id\""
+	Label         string                "json:\"label\""
+	LastRequestAt string                "json:\"last_request_at\""
+	RequestCount  int64                 "json:\"request_count\""
+	Scope         string                "json:\"scope\""
+	TokenFragment string                "json:\"token_fragment\""
+	TokenInterval int64                 "json:\"token_interval\""
+	TokenLifetime string                "json:\"token_lifetime\""
+	User          *ActionUserShowOutput "json:\"user\""
+	UserAgent     string                "json:\"user_agent\""
 }
 
 // Type for action response, including envelope
 type ActionUserSessionShowResponse struct {
-	Action *ActionUserSessionShow `json:"-"`
+	Action *ActionUserSessionShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		UserSession *ActionUserSessionShowOutput `json:"user_session"`
+		UserSession *ActionUserSessionShowOutput "json:\"user_session\""
 	}
 
 	// Action output without the namespace
@@ -135,7 +136,7 @@ func (inv *ActionUserSessionShowInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserSessionShowInvocation) SetPathParamString(param string, value string) *ActionUserSessionShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

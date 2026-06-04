@@ -16,9 +16,9 @@ func NewActionClusterResourceIndex(client *Client) *ActionClusterResourceIndex {
 
 // ActionClusterResourceIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourceIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,8 +86,8 @@ func (in *ActionClusterResourceIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterResourceIndexInput is a type for action input parameters
 type ActionClusterResourceIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,24 +158,24 @@ func (in *ActionClusterResourceIndexInput) AnySelected() bool {
 
 // ActionClusterResourceIndexOutput is a type for action output parameters
 type ActionClusterResourceIndexOutput struct {
-	AllocateChain string `json:"allocate_chain"`
-	FreeChain     string `json:"free_chain"`
-	Id            int64  `json:"id"`
-	Label         string `json:"label"`
-	Max           int64  `json:"max"`
-	Min           int64  `json:"min"`
-	Name          string `json:"name"`
-	ResourceType  string `json:"resource_type"`
-	Stepsize      int64  `json:"stepsize"`
+	AllocateChain string "json:\"allocate_chain\""
+	FreeChain     string "json:\"free_chain\""
+	Id            int64  "json:\"id\""
+	Label         string "json:\"label\""
+	Max           int64  "json:\"max\""
+	Min           int64  "json:\"min\""
+	Name          string "json:\"name\""
+	ResourceType  string "json:\"resource_type\""
+	Stepsize      int64  "json:\"stepsize\""
 }
 
 // Type for action response, including envelope
 type ActionClusterResourceIndexResponse struct {
-	Action *ActionClusterResourceIndex `json:"-"`
+	Action *ActionClusterResourceIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		ClusterResources []*ActionClusterResourceIndexOutput `json:"cluster_resources"`
+		ClusterResources []*ActionClusterResourceIndexOutput "json:\"cluster_resources\""
 	}
 
 	// Action output without the namespace

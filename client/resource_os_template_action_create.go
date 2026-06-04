@@ -16,8 +16,8 @@ func NewActionOsTemplateCreate(client *Client) *ActionOsTemplateCreate {
 
 // ActionOsTemplateCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOsTemplateCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,24 +73,24 @@ func (in *ActionOsTemplateCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOsTemplateCreateInput is a type for action input parameters
 type ActionOsTemplateCreateInput struct {
-	Arch              string `json:"arch"`
-	CgroupVersion     string `json:"cgroup_version"`
-	Config            string `json:"config"`
-	Distribution      string `json:"distribution"`
-	EnableCloudInit   bool   `json:"enable_cloud_init"`
-	EnableScript      bool   `json:"enable_script"`
-	Enabled           bool   `json:"enabled"`
-	HypervisorType    string `json:"hypervisor_type"`
-	Info              string `json:"info"`
-	Label             string `json:"label"`
-	ManageDnsResolver bool   `json:"manage_dns_resolver"`
-	ManageHostname    bool   `json:"manage_hostname"`
-	Order             int64  `json:"order"`
-	OsFamily          int64  `json:"os_family"`
-	Supported         bool   `json:"supported"`
-	Variant           string `json:"variant"`
-	Vendor            string `json:"vendor"`
-	Version           string `json:"version"`
+	Arch              string "json:\"arch\""
+	CgroupVersion     string "json:\"cgroup_version\""
+	Config            string "json:\"config\""
+	Distribution      string "json:\"distribution\""
+	EnableCloudInit   bool   "json:\"enable_cloud_init\""
+	EnableScript      bool   "json:\"enable_script\""
+	Enabled           bool   "json:\"enabled\""
+	HypervisorType    string "json:\"hypervisor_type\""
+	Info              string "json:\"info\""
+	Label             string "json:\"label\""
+	ManageDnsResolver bool   "json:\"manage_dns_resolver\""
+	ManageHostname    bool   "json:\"manage_hostname\""
+	Order             int64  "json:\"order\""
+	OsFamily          int64  "json:\"os_family\""
+	Supported         bool   "json:\"supported\""
+	Variant           string "json:\"variant\""
+	Vendor            string "json:\"vendor\""
+	Version           string "json:\"version\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -353,41 +353,41 @@ func (in *ActionOsTemplateCreateInput) AnySelected() bool {
 
 // ActionOsTemplateCreateRequest is a type for the entire action request
 type ActionOsTemplateCreateRequest struct {
-	OsTemplate map[string]interface{} `json:"os_template"`
-	Meta       map[string]interface{} `json:"_meta"`
+	OsTemplate map[string]interface{} "json:\"os_template\""
+	Meta       map[string]interface{} "json:\"_meta\""
 }
 
 // ActionOsTemplateCreateOutput is a type for action output parameters
 type ActionOsTemplateCreateOutput struct {
-	Arch              string                    `json:"arch"`
-	CgroupVersion     string                    `json:"cgroup_version"`
-	Config            string                    `json:"config"`
-	Distribution      string                    `json:"distribution"`
-	EnableCloudInit   bool                      `json:"enable_cloud_init"`
-	EnableScript      bool                      `json:"enable_script"`
-	Enabled           bool                      `json:"enabled"`
-	HypervisorType    string                    `json:"hypervisor_type"`
-	Id                int64                     `json:"id"`
-	Info              string                    `json:"info"`
-	Label             string                    `json:"label"`
-	ManageDnsResolver bool                      `json:"manage_dns_resolver"`
-	ManageHostname    bool                      `json:"manage_hostname"`
-	Name              string                    `json:"name"`
-	Order             int64                     `json:"order"`
-	OsFamily          *ActionOsFamilyShowOutput `json:"os_family"`
-	Supported         bool                      `json:"supported"`
-	Variant           string                    `json:"variant"`
-	Vendor            string                    `json:"vendor"`
-	Version           string                    `json:"version"`
+	Arch              string                    "json:\"arch\""
+	CgroupVersion     string                    "json:\"cgroup_version\""
+	Config            string                    "json:\"config\""
+	Distribution      string                    "json:\"distribution\""
+	EnableCloudInit   bool                      "json:\"enable_cloud_init\""
+	EnableScript      bool                      "json:\"enable_script\""
+	Enabled           bool                      "json:\"enabled\""
+	HypervisorType    string                    "json:\"hypervisor_type\""
+	Id                int64                     "json:\"id\""
+	Info              string                    "json:\"info\""
+	Label             string                    "json:\"label\""
+	ManageDnsResolver bool                      "json:\"manage_dns_resolver\""
+	ManageHostname    bool                      "json:\"manage_hostname\""
+	Name              string                    "json:\"name\""
+	Order             int64                     "json:\"order\""
+	OsFamily          *ActionOsFamilyShowOutput "json:\"os_family\""
+	Supported         bool                      "json:\"supported\""
+	Variant           string                    "json:\"variant\""
+	Vendor            string                    "json:\"vendor\""
+	Version           string                    "json:\"version\""
 }
 
 // Type for action response, including envelope
 type ActionOsTemplateCreateResponse struct {
-	Action *ActionOsTemplateCreate `json:"-"`
+	Action *ActionOsTemplateCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		OsTemplate *ActionOsTemplateCreateOutput `json:"os_template"`
+		OsTemplate *ActionOsTemplateCreateOutput "json:\"os_template\""
 	}
 
 	// Action output without the namespace

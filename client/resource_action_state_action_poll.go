@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,7 +19,7 @@ func NewActionActionStatePoll(client *Client) *ActionActionStatePoll {
 
 // ActionActionStatePollMetaGlobalInput is a type for action global meta input parameters
 type ActionActionStatePollMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -62,11 +63,11 @@ func (in *ActionActionStatePollMetaGlobalInput) AnySelected() bool {
 
 // ActionActionStatePollInput is a type for action input parameters
 type ActionActionStatePollInput struct {
-	Current  int64   `json:"current"`
-	Status   bool    `json:"status"`
-	Timeout  float64 `json:"timeout"`
-	Total    int64   `json:"total"`
-	UpdateIn float64 `json:"update_in"`
+	Current  int64   "json:\"current\""
+	Status   bool    "json:\"status\""
+	Timeout  float64 "json:\"timeout\""
+	Total    int64   "json:\"total\""
+	UpdateIn float64 "json:\"update_in\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -249,25 +250,25 @@ func (in *ActionActionStatePollInput) AnySelected() bool {
 
 // ActionActionStatePollOutput is a type for action output parameters
 type ActionActionStatePollOutput struct {
-	CanCancel bool   `json:"can_cancel"`
-	CreatedAt string `json:"created_at"`
-	Current   int64  `json:"current"`
-	Finished  bool   `json:"finished"`
-	Id        int64  `json:"id"`
-	Label     string `json:"label"`
-	Status    bool   `json:"status"`
-	Total     int64  `json:"total"`
-	Unit      string `json:"unit"`
-	UpdatedAt string `json:"updated_at"`
+	CanCancel bool   "json:\"can_cancel\""
+	CreatedAt string "json:\"created_at\""
+	Current   int64  "json:\"current\""
+	Finished  bool   "json:\"finished\""
+	Id        int64  "json:\"id\""
+	Label     string "json:\"label\""
+	Status    bool   "json:\"status\""
+	Total     int64  "json:\"total\""
+	Unit      string "json:\"unit\""
+	UpdatedAt string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionActionStatePollResponse struct {
-	Action *ActionActionStatePoll `json:"-"`
+	Action *ActionActionStatePoll "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		ActionState *ActionActionStatePollOutput `json:"action_state"`
+		ActionState *ActionActionStatePollOutput "json:\"action_state\""
 	}
 
 	// Action output without the namespace
@@ -302,7 +303,7 @@ func (inv *ActionActionStatePollInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionActionStatePollInvocation) SetPathParamString(param string, value string) *ActionActionStatePollInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

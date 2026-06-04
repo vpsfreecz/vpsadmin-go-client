@@ -16,9 +16,9 @@ func NewActionTransactionIndex(client *Client) *ActionTransactionIndex {
 
 // ActionTransactionIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionTransactionIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,13 +86,13 @@ func (in *ActionTransactionIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionTransactionIndexInput is a type for action input parameters
 type ActionTransactionIndexInput struct {
-	Done             string `json:"done"`
-	FromId           int64  `json:"from_id"`
-	Limit            int64  `json:"limit"`
-	Node             int64  `json:"node"`
-	Success          int64  `json:"success"`
-	TransactionChain int64  `json:"transaction_chain"`
-	Type             int64  `json:"type"`
+	Done             string "json:\"done\""
+	FromId           int64  "json:\"from_id\""
+	Limit            int64  "json:\"limit\""
+	Node             int64  "json:\"node\""
+	Success          int64  "json:\"success\""
+	TransactionChain int64  "json:\"transaction_chain\""
+	Type             int64  "json:\"type\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -223,32 +223,32 @@ func (in *ActionTransactionIndexInput) AnySelected() bool {
 
 // ActionTransactionIndexOutput is a type for action output parameters
 type ActionTransactionIndexOutput struct {
-	CreatedAt        string                            `json:"created_at"`
-	DependsOn        *ActionTransactionShowOutput      `json:"depends_on"`
-	Done             string                            `json:"done"`
-	FinishedAt       string                            `json:"finished_at"`
-	Id               int64                             `json:"id"`
-	Input            string                            `json:"input"`
-	Name             string                            `json:"name"`
-	Node             *ActionNodeShowOutput             `json:"node"`
-	Output           string                            `json:"output"`
-	Priority         int64                             `json:"priority"`
-	StartedAt        string                            `json:"started_at"`
-	Success          int64                             `json:"success"`
-	TransactionChain *ActionTransactionChainShowOutput `json:"transaction_chain"`
-	Type             int64                             `json:"type"`
-	Urgent           bool                              `json:"urgent"`
-	User             *ActionUserShowOutput             `json:"user"`
-	Vps              *ActionVpsShowOutput              `json:"vps"`
+	CreatedAt        string                            "json:\"created_at\""
+	DependsOn        *ActionTransactionShowOutput      "json:\"depends_on\""
+	Done             string                            "json:\"done\""
+	FinishedAt       string                            "json:\"finished_at\""
+	Id               int64                             "json:\"id\""
+	Input            string                            "json:\"input\""
+	Name             string                            "json:\"name\""
+	Node             *ActionNodeShowOutput             "json:\"node\""
+	Output           string                            "json:\"output\""
+	Priority         int64                             "json:\"priority\""
+	StartedAt        string                            "json:\"started_at\""
+	Success          int64                             "json:\"success\""
+	TransactionChain *ActionTransactionChainShowOutput "json:\"transaction_chain\""
+	Type             int64                             "json:\"type\""
+	Urgent           bool                              "json:\"urgent\""
+	User             *ActionUserShowOutput             "json:\"user\""
+	Vps              *ActionVpsShowOutput              "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionTransactionIndexResponse struct {
-	Action *ActionTransactionIndex `json:"-"`
+	Action *ActionTransactionIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Transactions []*ActionTransactionIndexOutput `json:"transactions"`
+		Transactions []*ActionTransactionIndexOutput "json:\"transactions\""
 	}
 
 	// Action output without the namespace

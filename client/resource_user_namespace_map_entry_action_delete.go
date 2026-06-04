@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserNamespaceMapEntryDelete(client *Client) *ActionUserNamespaceMa
 
 // ActionUserNamespaceMapEntryDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceMapEntryDeleteMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,12 +76,12 @@ func (in *ActionUserNamespaceMapEntryDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionUserNamespaceMapEntryDeleteRequest is a type for the entire action request
 type ActionUserNamespaceMapEntryDeleteRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // Type for action response, including envelope
 type ActionUserNamespaceMapEntryDeleteResponse struct {
-	Action *ActionUserNamespaceMapEntryDelete `json:"-"`
+	Action *ActionUserNamespaceMapEntryDelete "json:\"-\""
 	*Envelope
 }
 
@@ -110,7 +111,7 @@ func (inv *ActionUserNamespaceMapEntryDeleteInvocation) SetPathParamInt(param st
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserNamespaceMapEntryDeleteInvocation) SetPathParamString(param string, value string) *ActionUserNamespaceMapEntryDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionNodeStatusIndex(client *Client) *ActionNodeStatusIndex {
 
 // ActionNodeStatusIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeStatusIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,10 +89,10 @@ func (in *ActionNodeStatusIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeStatusIndexInput is a type for action input parameters
 type ActionNodeStatusIndexInput struct {
-	From   string `json:"from"`
-	FromId int64  `json:"from_id"`
-	Limit  int64  `json:"limit"`
-	To     string `json:"to"`
+	From   string "json:\"from\""
+	FromId int64  "json:\"from_id\""
+	Limit  int64  "json:\"limit\""
+	To     string "json:\"to\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -186,41 +187,41 @@ func (in *ActionNodeStatusIndexInput) AnySelected() bool {
 
 // ActionNodeStatusIndexOutput is a type for action output parameters
 type ActionNodeStatusIndexOutput struct {
-	ArcC          int64   `json:"arc_c"`
-	ArcCMax       int64   `json:"arc_c_max"`
-	ArcHitpercent float64 `json:"arc_hitpercent"`
-	ArcSize       int64   `json:"arc_size"`
-	CpuGuest      float64 `json:"cpu_guest"`
-	CpuIdle       float64 `json:"cpu_idle"`
-	CpuIowait     float64 `json:"cpu_iowait"`
-	CpuIrq        float64 `json:"cpu_irq"`
-	CpuNice       float64 `json:"cpu_nice"`
-	CpuSoftirq    float64 `json:"cpu_softirq"`
-	CpuSystem     float64 `json:"cpu_system"`
-	CpuUser       float64 `json:"cpu_user"`
-	Cpus          int64   `json:"cpus"`
-	CreatedAt     string  `json:"created_at"`
-	Id            int64   `json:"id"`
-	Kernel        string  `json:"kernel"`
-	Loadavg1      float64 `json:"loadavg1"`
-	Loadavg15     float64 `json:"loadavg15"`
-	Loadavg5      float64 `json:"loadavg5"`
-	ProcessCount  int64   `json:"process_count"`
-	TotalMemory   int64   `json:"total_memory"`
-	TotalSwap     int64   `json:"total_swap"`
-	Uptime        int64   `json:"uptime"`
-	UsedMemory    int64   `json:"used_memory"`
-	UsedSwap      int64   `json:"used_swap"`
-	Version       string  `json:"version"`
+	ArcC          int64   "json:\"arc_c\""
+	ArcCMax       int64   "json:\"arc_c_max\""
+	ArcHitpercent float64 "json:\"arc_hitpercent\""
+	ArcSize       int64   "json:\"arc_size\""
+	CpuGuest      float64 "json:\"cpu_guest\""
+	CpuIdle       float64 "json:\"cpu_idle\""
+	CpuIowait     float64 "json:\"cpu_iowait\""
+	CpuIrq        float64 "json:\"cpu_irq\""
+	CpuNice       float64 "json:\"cpu_nice\""
+	CpuSoftirq    float64 "json:\"cpu_softirq\""
+	CpuSystem     float64 "json:\"cpu_system\""
+	CpuUser       float64 "json:\"cpu_user\""
+	Cpus          int64   "json:\"cpus\""
+	CreatedAt     string  "json:\"created_at\""
+	Id            int64   "json:\"id\""
+	Kernel        string  "json:\"kernel\""
+	Loadavg1      float64 "json:\"loadavg1\""
+	Loadavg15     float64 "json:\"loadavg15\""
+	Loadavg5      float64 "json:\"loadavg5\""
+	ProcessCount  int64   "json:\"process_count\""
+	TotalMemory   int64   "json:\"total_memory\""
+	TotalSwap     int64   "json:\"total_swap\""
+	Uptime        int64   "json:\"uptime\""
+	UsedMemory    int64   "json:\"used_memory\""
+	UsedSwap      int64   "json:\"used_swap\""
+	Version       string  "json:\"version\""
 }
 
 // Type for action response, including envelope
 type ActionNodeStatusIndexResponse struct {
-	Action *ActionNodeStatusIndex `json:"-"`
+	Action *ActionNodeStatusIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Statuses []*ActionNodeStatusIndexOutput `json:"statuses"`
+		Statuses []*ActionNodeStatusIndexOutput "json:\"statuses\""
 	}
 
 	// Action output without the namespace
@@ -255,7 +256,7 @@ func (inv *ActionNodeStatusIndexInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNodeStatusIndexInvocation) SetPathParamString(param string, value string) *ActionNodeStatusIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

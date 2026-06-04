@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionOomReportUsageIndex(client *Client) *ActionOomReportUsageIndex {
 
 // ActionOomReportUsageIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportUsageIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,8 +89,8 @@ func (in *ActionOomReportUsageIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportUsageIndexInput is a type for action input parameters
 type ActionOomReportUsageIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,20 +161,20 @@ func (in *ActionOomReportUsageIndexInput) AnySelected() bool {
 
 // ActionOomReportUsageIndexOutput is a type for action output parameters
 type ActionOomReportUsageIndexOutput struct {
-	Failcnt int64  `json:"failcnt"`
-	Id      int64  `json:"id"`
-	Limit   int64  `json:"limit"`
-	Memtype string `json:"memtype"`
-	Usage   int64  `json:"usage"`
+	Failcnt int64  "json:\"failcnt\""
+	Id      int64  "json:\"id\""
+	Limit   int64  "json:\"limit\""
+	Memtype string "json:\"memtype\""
+	Usage   int64  "json:\"usage\""
 }
 
 // Type for action response, including envelope
 type ActionOomReportUsageIndexResponse struct {
-	Action *ActionOomReportUsageIndex `json:"-"`
+	Action *ActionOomReportUsageIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Usages []*ActionOomReportUsageIndexOutput `json:"usages"`
+		Usages []*ActionOomReportUsageIndexOutput "json:\"usages\""
 	}
 
 	// Action output without the namespace
@@ -208,7 +209,7 @@ func (inv *ActionOomReportUsageIndexInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOomReportUsageIndexInvocation) SetPathParamString(param string, value string) *ActionOomReportUsageIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

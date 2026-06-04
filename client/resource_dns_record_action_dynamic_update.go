@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnsRecordDynamicUpdate(client *Client) *ActionDnsRecordDynamicUpda
 
 // ActionDnsRecordDynamicUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsRecordDynamicUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,23 +76,23 @@ func (in *ActionDnsRecordDynamicUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsRecordDynamicUpdateOutput is a type for action output parameters
 type ActionDnsRecordDynamicUpdateOutput struct {
-	Content string `json:"content"`
+	Content string "json:\"content\""
 }
 
 // ActionDnsRecordDynamicUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionDnsRecordDynamicUpdateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDnsRecordDynamicUpdateResponse struct {
-	Action *ActionDnsRecordDynamicUpdate `json:"-"`
+	Action *ActionDnsRecordDynamicUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsRecord *ActionDnsRecordDynamicUpdateOutput `json:"dns_record"`
+		DnsRecord *ActionDnsRecordDynamicUpdateOutput "json:\"dns_record\""
 		// Global output metadata
-		Meta *ActionDnsRecordDynamicUpdateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDnsRecordDynamicUpdateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -124,7 +125,7 @@ func (inv *ActionDnsRecordDynamicUpdateInvocation) SetPathParamInt(param string,
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsRecordDynamicUpdateInvocation) SetPathParamString(param string, value string) *ActionDnsRecordDynamicUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

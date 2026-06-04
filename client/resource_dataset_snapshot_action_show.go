@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDatasetSnapshotShow(client *Client) *ActionDatasetSnapshotShow {
 
 // ActionDatasetSnapshotShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetSnapshotShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,23 +76,23 @@ func (in *ActionDatasetSnapshotShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetSnapshotShowOutput is a type for action output parameters
 type ActionDatasetSnapshotShowOutput struct {
-	CreatedAt string                    `json:"created_at"`
-	Dataset   *ActionDatasetShowOutput  `json:"dataset"`
-	Export    *ActionExportShowOutput   `json:"export"`
-	HistoryId int64                     `json:"history_id"`
-	Id        int64                     `json:"id"`
-	Label     string                    `json:"label"`
-	Mount     *ActionVpsMountShowOutput `json:"mount"`
-	Name      string                    `json:"name"`
+	CreatedAt string                    "json:\"created_at\""
+	Dataset   *ActionDatasetShowOutput  "json:\"dataset\""
+	Export    *ActionExportShowOutput   "json:\"export\""
+	HistoryId int64                     "json:\"history_id\""
+	Id        int64                     "json:\"id\""
+	Label     string                    "json:\"label\""
+	Mount     *ActionVpsMountShowOutput "json:\"mount\""
+	Name      string                    "json:\"name\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetSnapshotShowResponse struct {
-	Action *ActionDatasetSnapshotShow `json:"-"`
+	Action *ActionDatasetSnapshotShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Snapshot *ActionDatasetSnapshotShowOutput `json:"snapshot"`
+		Snapshot *ActionDatasetSnapshotShowOutput "json:\"snapshot\""
 	}
 
 	// Action output without the namespace
@@ -124,7 +125,7 @@ func (inv *ActionDatasetSnapshotShowInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetSnapshotShowInvocation) SetPathParamString(param string, value string) *ActionDatasetSnapshotShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

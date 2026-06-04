@@ -16,8 +16,8 @@ func NewActionHostIpAddressCreate(client *Client) *ActionHostIpAddressCreate {
 
 // ActionHostIpAddressCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionHostIpAddressCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,9 +73,9 @@ func (in *ActionHostIpAddressCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionHostIpAddressCreateInput is a type for action input parameters
 type ActionHostIpAddressCreateInput struct {
-	Addr      string `json:"addr"`
-	Assigned  bool   `json:"assigned"`
-	IpAddress int64  `json:"ip_address"`
+	Addr      string "json:\"addr\""
+	Assigned  bool   "json:\"assigned\""
+	IpAddress int64  "json:\"ip_address\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,27 +158,27 @@ func (in *ActionHostIpAddressCreateInput) AnySelected() bool {
 
 // ActionHostIpAddressCreateRequest is a type for the entire action request
 type ActionHostIpAddressCreateRequest struct {
-	HostIpAddress map[string]interface{} `json:"host_ip_address"`
-	Meta          map[string]interface{} `json:"_meta"`
+	HostIpAddress map[string]interface{} "json:\"host_ip_address\""
+	Meta          map[string]interface{} "json:\"_meta\""
 }
 
 // ActionHostIpAddressCreateOutput is a type for action output parameters
 type ActionHostIpAddressCreateOutput struct {
-	Addr               string                     `json:"addr"`
-	Assigned           bool                       `json:"assigned"`
-	Id                 int64                      `json:"id"`
-	IpAddress          *ActionIpAddressShowOutput `json:"ip_address"`
-	ReverseRecordValue string                     `json:"reverse_record_value"`
-	UserCreated        bool                       `json:"user_created"`
+	Addr               string                     "json:\"addr\""
+	Assigned           bool                       "json:\"assigned\""
+	Id                 int64                      "json:\"id\""
+	IpAddress          *ActionIpAddressShowOutput "json:\"ip_address\""
+	ReverseRecordValue string                     "json:\"reverse_record_value\""
+	UserCreated        bool                       "json:\"user_created\""
 }
 
 // Type for action response, including envelope
 type ActionHostIpAddressCreateResponse struct {
-	Action *ActionHostIpAddressCreate `json:"-"`
+	Action *ActionHostIpAddressCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		HostIpAddress *ActionHostIpAddressCreateOutput `json:"host_ip_address"`
+		HostIpAddress *ActionHostIpAddressCreateOutput "json:\"host_ip_address\""
 	}
 
 	// Action output without the namespace

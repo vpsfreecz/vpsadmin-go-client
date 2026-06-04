@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionUserTotpDeviceIndex(client *Client) *ActionUserTotpDeviceIndex {
 
 // ActionUserTotpDeviceIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserTotpDeviceIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,10 +89,10 @@ func (in *ActionUserTotpDeviceIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserTotpDeviceIndexInput is a type for action input parameters
 type ActionUserTotpDeviceIndexInput struct {
-	Confirmed bool  `json:"confirmed"`
-	Enabled   bool  `json:"enabled"`
-	FromId    int64 `json:"from_id"`
-	Limit     int64 `json:"limit"`
+	Confirmed bool  "json:\"confirmed\""
+	Enabled   bool  "json:\"enabled\""
+	FromId    int64 "json:\"from_id\""
+	Limit     int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -186,23 +187,23 @@ func (in *ActionUserTotpDeviceIndexInput) AnySelected() bool {
 
 // ActionUserTotpDeviceIndexOutput is a type for action output parameters
 type ActionUserTotpDeviceIndexOutput struct {
-	Confirmed bool   `json:"confirmed"`
-	CreatedAt string `json:"created_at"`
-	Enabled   bool   `json:"enabled"`
-	Id        int64  `json:"id"`
-	Label     string `json:"label"`
-	LastUseAt string `json:"last_use_at"`
-	UpdatedAt string `json:"updated_at"`
-	UseCount  int64  `json:"use_count"`
+	Confirmed bool   "json:\"confirmed\""
+	CreatedAt string "json:\"created_at\""
+	Enabled   bool   "json:\"enabled\""
+	Id        int64  "json:\"id\""
+	Label     string "json:\"label\""
+	LastUseAt string "json:\"last_use_at\""
+	UpdatedAt string "json:\"updated_at\""
+	UseCount  int64  "json:\"use_count\""
 }
 
 // Type for action response, including envelope
 type ActionUserTotpDeviceIndexResponse struct {
-	Action *ActionUserTotpDeviceIndex `json:"-"`
+	Action *ActionUserTotpDeviceIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		TotpDevices []*ActionUserTotpDeviceIndexOutput `json:"totp_devices"`
+		TotpDevices []*ActionUserTotpDeviceIndexOutput "json:\"totp_devices\""
 	}
 
 	// Action output without the namespace
@@ -237,7 +238,7 @@ func (inv *ActionUserTotpDeviceIndexInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserTotpDeviceIndexInvocation) SetPathParamString(param string, value string) *ActionUserTotpDeviceIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

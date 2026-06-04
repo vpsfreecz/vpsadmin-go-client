@@ -16,9 +16,9 @@ func NewActionIpAddressAssignmentIndex(client *Client) *ActionIpAddressAssignmen
 
 // ActionIpAddressAssignmentIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionIpAddressAssignmentIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,21 +86,21 @@ func (in *ActionIpAddressAssignmentIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionIpAddressAssignmentIndexInput is a type for action input parameters
 type ActionIpAddressAssignmentIndexInput struct {
-	Active            bool   `json:"active"`
-	AssignedByChain   int64  `json:"assigned_by_chain"`
-	FromId            int64  `json:"from_id"`
-	IpAddr            string `json:"ip_addr"`
-	IpAddress         int64  `json:"ip_address"`
-	IpPrefix          int64  `json:"ip_prefix"`
-	IpVersion         int64  `json:"ip_version"`
-	Limit             int64  `json:"limit"`
-	Location          int64  `json:"location"`
-	Network           int64  `json:"network"`
-	Order             string `json:"order"`
-	Reconstructed     bool   `json:"reconstructed"`
-	UnassignedByChain int64  `json:"unassigned_by_chain"`
-	User              int64  `json:"user"`
-	Vps               int64  `json:"vps"`
+	Active            bool   "json:\"active\""
+	AssignedByChain   int64  "json:\"assigned_by_chain\""
+	FromId            int64  "json:\"from_id\""
+	IpAddr            string "json:\"ip_addr\""
+	IpAddress         int64  "json:\"ip_address\""
+	IpPrefix          int64  "json:\"ip_prefix\""
+	IpVersion         int64  "json:\"ip_version\""
+	Limit             int64  "json:\"limit\""
+	Location          int64  "json:\"location\""
+	Network           int64  "json:\"network\""
+	Order             string "json:\"order\""
+	Reconstructed     bool   "json:\"reconstructed\""
+	UnassignedByChain int64  "json:\"unassigned_by_chain\""
+	User              int64  "json:\"user\""
+	Vps               int64  "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -365,30 +365,30 @@ func (in *ActionIpAddressAssignmentIndexInput) AnySelected() bool {
 
 // ActionIpAddressAssignmentIndexOutput is a type for action output parameters
 type ActionIpAddressAssignmentIndexOutput struct {
-	AssignedByChain   *ActionTransactionChainShowOutput `json:"assigned_by_chain"`
-	CreatedAt         string                            `json:"created_at"`
-	FromDate          string                            `json:"from_date"`
-	Id                int64                             `json:"id"`
-	IpAddr            string                            `json:"ip_addr"`
-	IpAddress         *ActionIpAddressShowOutput        `json:"ip_address"`
-	IpPrefix          int64                             `json:"ip_prefix"`
-	RawUserId         int64                             `json:"raw_user_id"`
-	RawVpsId          int64                             `json:"raw_vps_id"`
-	Reconstructed     bool                              `json:"reconstructed"`
-	ToDate            string                            `json:"to_date"`
-	UnassignedByChain *ActionTransactionChainShowOutput `json:"unassigned_by_chain"`
-	UpdatedAt         string                            `json:"updated_at"`
-	User              *ActionUserShowOutput             `json:"user"`
-	Vps               *ActionVpsShowOutput              `json:"vps"`
+	AssignedByChain   *ActionTransactionChainShowOutput "json:\"assigned_by_chain\""
+	CreatedAt         string                            "json:\"created_at\""
+	FromDate          string                            "json:\"from_date\""
+	Id                int64                             "json:\"id\""
+	IpAddr            string                            "json:\"ip_addr\""
+	IpAddress         *ActionIpAddressShowOutput        "json:\"ip_address\""
+	IpPrefix          int64                             "json:\"ip_prefix\""
+	RawUserId         int64                             "json:\"raw_user_id\""
+	RawVpsId          int64                             "json:\"raw_vps_id\""
+	Reconstructed     bool                              "json:\"reconstructed\""
+	ToDate            string                            "json:\"to_date\""
+	UnassignedByChain *ActionTransactionChainShowOutput "json:\"unassigned_by_chain\""
+	UpdatedAt         string                            "json:\"updated_at\""
+	User              *ActionUserShowOutput             "json:\"user\""
+	Vps               *ActionVpsShowOutput              "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionIpAddressAssignmentIndexResponse struct {
-	Action *ActionIpAddressAssignmentIndex `json:"-"`
+	Action *ActionIpAddressAssignmentIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		IpAddressAssignments []*ActionIpAddressAssignmentIndexOutput `json:"ip_address_assignments"`
+		IpAddressAssignments []*ActionIpAddressAssignmentIndexOutput "json:\"ip_address_assignments\""
 	}
 
 	// Action output without the namespace

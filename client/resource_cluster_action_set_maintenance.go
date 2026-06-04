@@ -16,7 +16,7 @@ func NewActionClusterSetMaintenance(client *Client) *ActionClusterSetMaintenance
 
 // ActionClusterSetMaintenanceMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterSetMaintenanceMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,8 +60,8 @@ func (in *ActionClusterSetMaintenanceMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterSetMaintenanceInput is a type for action input parameters
 type ActionClusterSetMaintenanceInput struct {
-	Lock   bool   `json:"lock"`
-	Reason string `json:"reason"`
+	Lock   bool   "json:\"lock\""
+	Reason string "json:\"reason\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -132,13 +132,13 @@ func (in *ActionClusterSetMaintenanceInput) AnySelected() bool {
 
 // ActionClusterSetMaintenanceRequest is a type for the entire action request
 type ActionClusterSetMaintenanceRequest struct {
-	Cluster map[string]interface{} `json:"cluster"`
-	Meta    map[string]interface{} `json:"_meta"`
+	Cluster map[string]interface{} "json:\"cluster\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // Type for action response, including envelope
 type ActionClusterSetMaintenanceResponse struct {
-	Action *ActionClusterSetMaintenance `json:"-"`
+	Action *ActionClusterSetMaintenance "json:\"-\""
 	*Envelope
 }
 

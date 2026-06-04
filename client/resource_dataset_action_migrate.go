@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDatasetMigrate(client *Client) *ActionDatasetMigrate {
 
 // ActionDatasetMigrateMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetMigrateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,16 +76,16 @@ func (in *ActionDatasetMigrateMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetMigrateInput is a type for action input parameters
 type ActionDatasetMigrateInput struct {
-	CleanupData               bool   `json:"cleanup_data"`
-	FinishMinutes             int64  `json:"finish_minutes"`
-	FinishWeekday             int64  `json:"finish_weekday"`
-	MaintenanceWindowVps      int64  `json:"maintenance_window_vps"`
-	OptionalMaintenanceWindow bool   `json:"optional_maintenance_window"`
-	Pool                      int64  `json:"pool"`
-	Reason                    string `json:"reason"`
-	RestartVps                bool   `json:"restart_vps"`
-	Rsync                     bool   `json:"rsync"`
-	SendMail                  bool   `json:"send_mail"`
+	CleanupData               bool   "json:\"cleanup_data\""
+	FinishMinutes             int64  "json:\"finish_minutes\""
+	FinishWeekday             int64  "json:\"finish_weekday\""
+	MaintenanceWindowVps      int64  "json:\"maintenance_window_vps\""
+	OptionalMaintenanceWindow bool   "json:\"optional_maintenance_window\""
+	Pool                      int64  "json:\"pool\""
+	Reason                    string "json:\"reason\""
+	RestartVps                bool   "json:\"restart_vps\""
+	Rsync                     bool   "json:\"rsync\""
+	SendMail                  bool   "json:\"send_mail\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -251,23 +252,23 @@ func (in *ActionDatasetMigrateInput) AnySelected() bool {
 
 // ActionDatasetMigrateRequest is a type for the entire action request
 type ActionDatasetMigrateRequest struct {
-	Dataset map[string]interface{} `json:"dataset"`
-	Meta    map[string]interface{} `json:"_meta"`
+	Dataset map[string]interface{} "json:\"dataset\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDatasetMigrateMetaGlobalOutput is a type for global output metadata parameters
 type ActionDatasetMigrateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetMigrateResponse struct {
-	Action *ActionDatasetMigrate `json:"-"`
+	Action *ActionDatasetMigrate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionDatasetMigrateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDatasetMigrateMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -299,7 +300,7 @@ func (inv *ActionDatasetMigrateInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetMigrateInvocation) SetPathParamString(param string, value string) *ActionDatasetMigrateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnsTsigKeyShow(client *Client) *ActionDnsTsigKeyShow {
 
 // ActionDnsTsigKeyShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsTsigKeyShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,22 +76,22 @@ func (in *ActionDnsTsigKeyShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsTsigKeyShowOutput is a type for action output parameters
 type ActionDnsTsigKeyShowOutput struct {
-	Algorithm string                `json:"algorithm"`
-	CreatedAt string                `json:"created_at"`
-	Id        int64                 `json:"id"`
-	Name      string                `json:"name"`
-	Secret    string                `json:"secret"`
-	UpdatedAt string                `json:"updated_at"`
-	User      *ActionUserShowOutput `json:"user"`
+	Algorithm string                "json:\"algorithm\""
+	CreatedAt string                "json:\"created_at\""
+	Id        int64                 "json:\"id\""
+	Name      string                "json:\"name\""
+	Secret    string                "json:\"secret\""
+	UpdatedAt string                "json:\"updated_at\""
+	User      *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionDnsTsigKeyShowResponse struct {
-	Action *ActionDnsTsigKeyShow `json:"-"`
+	Action *ActionDnsTsigKeyShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsTsigKey *ActionDnsTsigKeyShowOutput `json:"dns_tsig_key"`
+		DnsTsigKey *ActionDnsTsigKeyShowOutput "json:\"dns_tsig_key\""
 	}
 
 	// Action output without the namespace
@@ -123,7 +124,7 @@ func (inv *ActionDnsTsigKeyShowInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsTsigKeyShowInvocation) SetPathParamString(param string, value string) *ActionDnsTsigKeyShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

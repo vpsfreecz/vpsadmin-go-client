@@ -16,7 +16,7 @@ func NewActionDebugListObjectCounts(client *Client) *ActionDebugListObjectCounts
 
 // ActionDebugListObjectCountsMetaGlobalInput is a type for action global meta input parameters
 type ActionDebugListObjectCountsMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,17 +60,17 @@ func (in *ActionDebugListObjectCountsMetaGlobalInput) AnySelected() bool {
 
 // ActionDebugListObjectCountsOutput is a type for action output parameters
 type ActionDebugListObjectCountsOutput struct {
-	Count  int64  `json:"count"`
-	Object string `json:"object"`
+	Count  int64  "json:\"count\""
+	Object string "json:\"object\""
 }
 
 // Type for action response, including envelope
 type ActionDebugListObjectCountsResponse struct {
-	Action *ActionDebugListObjectCounts `json:"-"`
+	Action *ActionDebugListObjectCounts "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Debugs []*ActionDebugListObjectCountsOutput `json:"debugs"`
+		Debugs []*ActionDebugListObjectCountsOutput "json:\"debugs\""
 	}
 
 	// Action output without the namespace

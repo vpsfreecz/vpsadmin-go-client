@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionNodeTransferConnectionUpdate(client *Client) *ActionNodeTransferCo
 
 // ActionNodeTransferConnectionUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeTransferConnectionUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,9 +76,9 @@ func (in *ActionNodeTransferConnectionUpdateMetaGlobalInput) AnySelected() bool 
 
 // ActionNodeTransferConnectionUpdateInput is a type for action input parameters
 type ActionNodeTransferConnectionUpdateInput struct {
-	Enabled     bool   `json:"enabled"`
-	NodeAIpAddr string `json:"node_a_ip_addr"`
-	NodeBIpAddr string `json:"node_b_ip_addr"`
+	Enabled     bool   "json:\"enabled\""
+	NodeAIpAddr string "json:\"node_a_ip_addr\""
+	NodeBIpAddr string "json:\"node_b_ip_addr\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,29 +161,29 @@ func (in *ActionNodeTransferConnectionUpdateInput) AnySelected() bool {
 
 // ActionNodeTransferConnectionUpdateRequest is a type for the entire action request
 type ActionNodeTransferConnectionUpdateRequest struct {
-	NodeTransferConnection map[string]interface{} `json:"node_transfer_connection"`
-	Meta                   map[string]interface{} `json:"_meta"`
+	NodeTransferConnection map[string]interface{} "json:\"node_transfer_connection\""
+	Meta                   map[string]interface{} "json:\"_meta\""
 }
 
 // ActionNodeTransferConnectionUpdateOutput is a type for action output parameters
 type ActionNodeTransferConnectionUpdateOutput struct {
-	CreatedAt   string                `json:"created_at"`
-	Enabled     bool                  `json:"enabled"`
-	Id          int64                 `json:"id"`
-	NodeA       *ActionNodeShowOutput `json:"node_a"`
-	NodeAIpAddr string                `json:"node_a_ip_addr"`
-	NodeB       *ActionNodeShowOutput `json:"node_b"`
-	NodeBIpAddr string                `json:"node_b_ip_addr"`
-	UpdatedAt   string                `json:"updated_at"`
+	CreatedAt   string                "json:\"created_at\""
+	Enabled     bool                  "json:\"enabled\""
+	Id          int64                 "json:\"id\""
+	NodeA       *ActionNodeShowOutput "json:\"node_a\""
+	NodeAIpAddr string                "json:\"node_a_ip_addr\""
+	NodeB       *ActionNodeShowOutput "json:\"node_b\""
+	NodeBIpAddr string                "json:\"node_b_ip_addr\""
+	UpdatedAt   string                "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionNodeTransferConnectionUpdateResponse struct {
-	Action *ActionNodeTransferConnectionUpdate `json:"-"`
+	Action *ActionNodeTransferConnectionUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		NodeTransferConnection *ActionNodeTransferConnectionUpdateOutput `json:"node_transfer_connection"`
+		NodeTransferConnection *ActionNodeTransferConnectionUpdateOutput "json:\"node_transfer_connection\""
 	}
 
 	// Action output without the namespace
@@ -217,7 +218,7 @@ func (inv *ActionNodeTransferConnectionUpdateInvocation) SetPathParamInt(param s
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNodeTransferConnectionUpdateInvocation) SetPathParamString(param string, value string) *ActionNodeTransferConnectionUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

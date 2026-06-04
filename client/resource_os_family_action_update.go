@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOsFamilyUpdate(client *Client) *ActionOsFamilyUpdate {
 
 // ActionOsFamilyUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionOsFamilyUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,8 +76,8 @@ func (in *ActionOsFamilyUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionOsFamilyUpdateInput is a type for action input parameters
 type ActionOsFamilyUpdateInput struct {
-	Description string `json:"description"`
-	Label       string `json:"label"`
+	Description string "json:\"description\""
+	Label       string "json:\"label\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -147,24 +148,24 @@ func (in *ActionOsFamilyUpdateInput) AnySelected() bool {
 
 // ActionOsFamilyUpdateRequest is a type for the entire action request
 type ActionOsFamilyUpdateRequest struct {
-	OsFamily map[string]interface{} `json:"os_family"`
-	Meta     map[string]interface{} `json:"_meta"`
+	OsFamily map[string]interface{} "json:\"os_family\""
+	Meta     map[string]interface{} "json:\"_meta\""
 }
 
 // ActionOsFamilyUpdateOutput is a type for action output parameters
 type ActionOsFamilyUpdateOutput struct {
-	Description string `json:"description"`
-	Id          int64  `json:"id"`
-	Label       string `json:"label"`
+	Description string "json:\"description\""
+	Id          int64  "json:\"id\""
+	Label       string "json:\"label\""
 }
 
 // Type for action response, including envelope
 type ActionOsFamilyUpdateResponse struct {
-	Action *ActionOsFamilyUpdate `json:"-"`
+	Action *ActionOsFamilyUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		OsFamily *ActionOsFamilyUpdateOutput `json:"os_family"`
+		OsFamily *ActionOsFamilyUpdateOutput "json:\"os_family\""
 	}
 
 	// Action output without the namespace
@@ -199,7 +200,7 @@ func (inv *ActionOsFamilyUpdateInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOsFamilyUpdateInvocation) SetPathParamString(param string, value string) *ActionOsFamilyUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

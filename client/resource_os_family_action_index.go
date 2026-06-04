@@ -16,9 +16,9 @@ func NewActionOsFamilyIndex(client *Client) *ActionOsFamilyIndex {
 
 // ActionOsFamilyIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOsFamilyIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,8 +86,8 @@ func (in *ActionOsFamilyIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOsFamilyIndexInput is a type for action input parameters
 type ActionOsFamilyIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,18 +158,18 @@ func (in *ActionOsFamilyIndexInput) AnySelected() bool {
 
 // ActionOsFamilyIndexOutput is a type for action output parameters
 type ActionOsFamilyIndexOutput struct {
-	Description string `json:"description"`
-	Id          int64  `json:"id"`
-	Label       string `json:"label"`
+	Description string "json:\"description\""
+	Id          int64  "json:\"id\""
+	Label       string "json:\"label\""
 }
 
 // Type for action response, including envelope
 type ActionOsFamilyIndexResponse struct {
-	Action *ActionOsFamilyIndex `json:"-"`
+	Action *ActionOsFamilyIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		OsFamilies []*ActionOsFamilyIndexOutput `json:"os_families"`
+		OsFamilies []*ActionOsFamilyIndexOutput "json:\"os_families\""
 	}
 
 	// Action output without the namespace

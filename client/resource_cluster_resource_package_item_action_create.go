@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionClusterResourcePackageItemCreate(client *Client) *ActionClusterRes
 
 // ActionClusterResourcePackageItemCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourcePackageItemCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,8 +76,8 @@ func (in *ActionClusterResourcePackageItemCreateMetaGlobalInput) AnySelected() b
 
 // ActionClusterResourcePackageItemCreateInput is a type for action input parameters
 type ActionClusterResourcePackageItemCreateInput struct {
-	ClusterResource int64 `json:"cluster_resource"`
-	Value           int64 `json:"value"`
+	ClusterResource int64 "json:\"cluster_resource\""
+	Value           int64 "json:\"value\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -147,24 +148,24 @@ func (in *ActionClusterResourcePackageItemCreateInput) AnySelected() bool {
 
 // ActionClusterResourcePackageItemCreateRequest is a type for the entire action request
 type ActionClusterResourcePackageItemCreateRequest struct {
-	Item map[string]interface{} `json:"item"`
-	Meta map[string]interface{} `json:"_meta"`
+	Item map[string]interface{} "json:\"item\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionClusterResourcePackageItemCreateOutput is a type for action output parameters
 type ActionClusterResourcePackageItemCreateOutput struct {
-	ClusterResource *ActionClusterResourceShowOutput `json:"cluster_resource"`
-	Id              int64                            `json:"id"`
-	Value           int64                            `json:"value"`
+	ClusterResource *ActionClusterResourceShowOutput "json:\"cluster_resource\""
+	Id              int64                            "json:\"id\""
+	Value           int64                            "json:\"value\""
 }
 
 // Type for action response, including envelope
 type ActionClusterResourcePackageItemCreateResponse struct {
-	Action *ActionClusterResourcePackageItemCreate `json:"-"`
+	Action *ActionClusterResourcePackageItemCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Item *ActionClusterResourcePackageItemCreateOutput `json:"item"`
+		Item *ActionClusterResourcePackageItemCreateOutput "json:\"item\""
 	}
 
 	// Action output without the namespace
@@ -199,7 +200,7 @@ func (inv *ActionClusterResourcePackageItemCreateInvocation) SetPathParamInt(par
 
 // SetPathParamString sets string path parameter
 func (inv *ActionClusterResourcePackageItemCreateInvocation) SetPathParamString(param string, value string) *ActionClusterResourcePackageItemCreateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

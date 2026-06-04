@@ -16,7 +16,7 @@ func NewActionClusterGenerateMigrationKeys(client *Client) *ActionClusterGenerat
 
 // ActionClusterGenerateMigrationKeysMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterGenerateMigrationKeysMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,22 +60,22 @@ func (in *ActionClusterGenerateMigrationKeysMetaGlobalInput) AnySelected() bool 
 
 // ActionClusterGenerateMigrationKeysRequest is a type for the entire action request
 type ActionClusterGenerateMigrationKeysRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionClusterGenerateMigrationKeysMetaGlobalOutput is a type for global output metadata parameters
 type ActionClusterGenerateMigrationKeysMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionClusterGenerateMigrationKeysResponse struct {
-	Action *ActionClusterGenerateMigrationKeys `json:"-"`
+	Action *ActionClusterGenerateMigrationKeys "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionClusterGenerateMigrationKeysMetaGlobalOutput `json:"_meta"`
+		Meta *ActionClusterGenerateMigrationKeysMetaGlobalOutput "json:\"_meta\""
 	}
 }
 

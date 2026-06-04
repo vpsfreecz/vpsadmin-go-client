@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserRequestRegistrationResolve(client *Client) *ActionUserRequestR
 
 // ActionUserRequestRegistrationResolveMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestRegistrationResolveMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,24 +76,24 @@ func (in *ActionUserRequestRegistrationResolveMetaGlobalInput) AnySelected() boo
 
 // ActionUserRequestRegistrationResolveInput is a type for action input parameters
 type ActionUserRequestRegistrationResolveInput struct {
-	Action      string `json:"action"`
-	Activate    bool   `json:"activate"`
-	Address     string `json:"address"`
-	CreateVps   bool   `json:"create_vps"`
-	Currency    string `json:"currency"`
-	Email       string `json:"email"`
-	FullName    string `json:"full_name"`
-	How         string `json:"how"`
-	Language    int64  `json:"language"`
-	Location    int64  `json:"location"`
-	Login       string `json:"login"`
-	Node        int64  `json:"node"`
-	Note        string `json:"note"`
-	OrgId       string `json:"org_id"`
-	OrgName     string `json:"org_name"`
-	OsTemplate  int64  `json:"os_template"`
-	Reason      string `json:"reason"`
-	YearOfBirth int64  `json:"year_of_birth"`
+	Action      string "json:\"action\""
+	Activate    bool   "json:\"activate\""
+	Address     string "json:\"address\""
+	CreateVps   bool   "json:\"create_vps\""
+	Currency    string "json:\"currency\""
+	Email       string "json:\"email\""
+	FullName    string "json:\"full_name\""
+	How         string "json:\"how\""
+	Language    int64  "json:\"language\""
+	Location    int64  "json:\"location\""
+	Login       string "json:\"login\""
+	Node        int64  "json:\"node\""
+	Note        string "json:\"note\""
+	OrgId       string "json:\"org_id\""
+	OrgName     string "json:\"org_name\""
+	OsTemplate  int64  "json:\"os_template\""
+	Reason      string "json:\"reason\""
+	YearOfBirth int64  "json:\"year_of_birth\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -355,13 +356,13 @@ func (in *ActionUserRequestRegistrationResolveInput) AnySelected() bool {
 
 // ActionUserRequestRegistrationResolveRequest is a type for the entire action request
 type ActionUserRequestRegistrationResolveRequest struct {
-	Registration map[string]interface{} `json:"registration"`
-	Meta         map[string]interface{} `json:"_meta"`
+	Registration map[string]interface{} "json:\"registration\""
+	Meta         map[string]interface{} "json:\"_meta\""
 }
 
 // Type for action response, including envelope
 type ActionUserRequestRegistrationResolveResponse struct {
-	Action *ActionUserRequestRegistrationResolve `json:"-"`
+	Action *ActionUserRequestRegistrationResolve "json:\"-\""
 	*Envelope
 }
 
@@ -393,7 +394,7 @@ func (inv *ActionUserRequestRegistrationResolveInvocation) SetPathParamInt(param
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserRequestRegistrationResolveInvocation) SetPathParamString(param string, value string) *ActionUserRequestRegistrationResolveInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

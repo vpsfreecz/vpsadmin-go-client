@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserWebauthnCredentialShow(client *Client) *ActionUserWebauthnCred
 
 // ActionUserWebauthnCredentialShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserWebauthnCredentialShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,22 +76,22 @@ func (in *ActionUserWebauthnCredentialShowMetaGlobalInput) AnySelected() bool {
 
 // ActionUserWebauthnCredentialShowOutput is a type for action output parameters
 type ActionUserWebauthnCredentialShowOutput struct {
-	CreatedAt string `json:"created_at"`
-	Enabled   bool   `json:"enabled"`
-	Id        int64  `json:"id"`
-	Label     string `json:"label"`
-	LastUseAt string `json:"last_use_at"`
-	UpdatedAt string `json:"updated_at"`
-	UseCount  int64  `json:"use_count"`
+	CreatedAt string "json:\"created_at\""
+	Enabled   bool   "json:\"enabled\""
+	Id        int64  "json:\"id\""
+	Label     string "json:\"label\""
+	LastUseAt string "json:\"last_use_at\""
+	UpdatedAt string "json:\"updated_at\""
+	UseCount  int64  "json:\"use_count\""
 }
 
 // Type for action response, including envelope
 type ActionUserWebauthnCredentialShowResponse struct {
-	Action *ActionUserWebauthnCredentialShow `json:"-"`
+	Action *ActionUserWebauthnCredentialShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		WebauthnCredential *ActionUserWebauthnCredentialShowOutput `json:"webauthn_credential"`
+		WebauthnCredential *ActionUserWebauthnCredentialShowOutput "json:\"webauthn_credential\""
 	}
 
 	// Action output without the namespace
@@ -123,7 +124,7 @@ func (inv *ActionUserWebauthnCredentialShowInvocation) SetPathParamInt(param str
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserWebauthnCredentialShowInvocation) SetPathParamString(param string, value string) *ActionUserWebauthnCredentialShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

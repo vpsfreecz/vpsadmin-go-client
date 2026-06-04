@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,7 +19,7 @@ func NewActionNodeEvacuate(client *Client) *ActionNodeEvacuate {
 
 // ActionNodeEvacuateMetaGlobalInput is a type for action global meta input parameters
 type ActionNodeEvacuateMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -62,13 +63,13 @@ func (in *ActionNodeEvacuateMetaGlobalInput) AnySelected() bool {
 
 // ActionNodeEvacuateInput is a type for action input parameters
 type ActionNodeEvacuateInput struct {
-	CleanupData       bool   `json:"cleanup_data"`
-	Concurrency       int64  `json:"concurrency"`
-	DstNode           int64  `json:"dst_node"`
-	MaintenanceWindow bool   `json:"maintenance_window"`
-	Reason            string `json:"reason"`
-	SendMail          bool   `json:"send_mail"`
-	StopOnError       bool   `json:"stop_on_error"`
+	CleanupData       bool   "json:\"cleanup_data\""
+	Concurrency       int64  "json:\"concurrency\""
+	DstNode           int64  "json:\"dst_node\""
+	MaintenanceWindow bool   "json:\"maintenance_window\""
+	Reason            string "json:\"reason\""
+	SendMail          bool   "json:\"send_mail\""
+	StopOnError       bool   "json:\"stop_on_error\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -199,22 +200,22 @@ func (in *ActionNodeEvacuateInput) AnySelected() bool {
 
 // ActionNodeEvacuateRequest is a type for the entire action request
 type ActionNodeEvacuateRequest struct {
-	Node map[string]interface{} `json:"node"`
-	Meta map[string]interface{} `json:"_meta"`
+	Node map[string]interface{} "json:\"node\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionNodeEvacuateOutput is a type for action output parameters
 type ActionNodeEvacuateOutput struct {
-	MigrationPlanId int64 `json:"migration_plan_id"`
+	MigrationPlanId int64 "json:\"migration_plan_id\""
 }
 
 // Type for action response, including envelope
 type ActionNodeEvacuateResponse struct {
-	Action *ActionNodeEvacuate `json:"-"`
+	Action *ActionNodeEvacuate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Node *ActionNodeEvacuateOutput `json:"node"`
+		Node *ActionNodeEvacuateOutput "json:\"node\""
 	}
 
 	// Action output without the namespace
@@ -249,7 +250,7 @@ func (inv *ActionNodeEvacuateInvocation) SetPathParamInt(param string, value int
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNodeEvacuateInvocation) SetPathParamString(param string, value string) *ActionNodeEvacuateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

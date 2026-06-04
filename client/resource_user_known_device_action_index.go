@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionUserKnownDeviceIndex(client *Client) *ActionUserKnownDeviceIndex {
 
 // ActionUserKnownDeviceIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserKnownDeviceIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,8 +89,8 @@ func (in *ActionUserKnownDeviceIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserKnownDeviceIndexInput is a type for action input parameters
 type ActionUserKnownDeviceIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,25 +161,25 @@ func (in *ActionUserKnownDeviceIndexInput) AnySelected() bool {
 
 // ActionUserKnownDeviceIndexOutput is a type for action output parameters
 type ActionUserKnownDeviceIndexOutput struct {
-	ApiIpAddr                string `json:"api_ip_addr"`
-	ApiIpPtr                 string `json:"api_ip_ptr"`
-	ClientIpAddr             string `json:"client_ip_addr"`
-	ClientIpPtr              string `json:"client_ip_ptr"`
-	CreatedAt                string `json:"created_at"`
-	Id                       int64  `json:"id"`
-	LastSeenAt               string `json:"last_seen_at"`
-	SkipMultiFactorAuthUntil string `json:"skip_multi_factor_auth_until"`
-	UpdatedAt                string `json:"updated_at"`
-	UserAgent                string `json:"user_agent"`
+	ApiIpAddr                string "json:\"api_ip_addr\""
+	ApiIpPtr                 string "json:\"api_ip_ptr\""
+	ClientIpAddr             string "json:\"client_ip_addr\""
+	ClientIpPtr              string "json:\"client_ip_ptr\""
+	CreatedAt                string "json:\"created_at\""
+	Id                       int64  "json:\"id\""
+	LastSeenAt               string "json:\"last_seen_at\""
+	SkipMultiFactorAuthUntil string "json:\"skip_multi_factor_auth_until\""
+	UpdatedAt                string "json:\"updated_at\""
+	UserAgent                string "json:\"user_agent\""
 }
 
 // Type for action response, including envelope
 type ActionUserKnownDeviceIndexResponse struct {
-	Action *ActionUserKnownDeviceIndex `json:"-"`
+	Action *ActionUserKnownDeviceIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		KnownDevices []*ActionUserKnownDeviceIndexOutput `json:"known_devices"`
+		KnownDevices []*ActionUserKnownDeviceIndexOutput "json:\"known_devices\""
 	}
 
 	// Action output without the namespace
@@ -213,7 +214,7 @@ func (inv *ActionUserKnownDeviceIndexInvocation) SetPathParamInt(param string, v
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserKnownDeviceIndexInvocation) SetPathParamString(param string, value string) *ActionUserKnownDeviceIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

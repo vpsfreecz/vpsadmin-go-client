@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionHostIpAddressShow(client *Client) *ActionHostIpAddressShow {
 
 // ActionHostIpAddressShowMetaGlobalInput is a type for action global meta input parameters
 type ActionHostIpAddressShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,21 +76,21 @@ func (in *ActionHostIpAddressShowMetaGlobalInput) AnySelected() bool {
 
 // ActionHostIpAddressShowOutput is a type for action output parameters
 type ActionHostIpAddressShowOutput struct {
-	Addr               string                     `json:"addr"`
-	Assigned           bool                       `json:"assigned"`
-	Id                 int64                      `json:"id"`
-	IpAddress          *ActionIpAddressShowOutput `json:"ip_address"`
-	ReverseRecordValue string                     `json:"reverse_record_value"`
-	UserCreated        bool                       `json:"user_created"`
+	Addr               string                     "json:\"addr\""
+	Assigned           bool                       "json:\"assigned\""
+	Id                 int64                      "json:\"id\""
+	IpAddress          *ActionIpAddressShowOutput "json:\"ip_address\""
+	ReverseRecordValue string                     "json:\"reverse_record_value\""
+	UserCreated        bool                       "json:\"user_created\""
 }
 
 // Type for action response, including envelope
 type ActionHostIpAddressShowResponse struct {
-	Action *ActionHostIpAddressShow `json:"-"`
+	Action *ActionHostIpAddressShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		HostIpAddress *ActionHostIpAddressShowOutput `json:"host_ip_address"`
+		HostIpAddress *ActionHostIpAddressShowOutput "json:\"host_ip_address\""
 	}
 
 	// Action output without the namespace
@@ -122,7 +123,7 @@ func (inv *ActionHostIpAddressShowInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionHostIpAddressShowInvocation) SetPathParamString(param string, value string) *ActionHostIpAddressShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

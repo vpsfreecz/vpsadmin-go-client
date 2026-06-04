@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsMaintenanceWindowUpdateAll(client *Client) *ActionVpsMaintenanc
 
 // ActionVpsMaintenanceWindowUpdateAllMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMaintenanceWindowUpdateAllMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,9 +76,9 @@ func (in *ActionVpsMaintenanceWindowUpdateAllMetaGlobalInput) AnySelected() bool
 
 // ActionVpsMaintenanceWindowUpdateAllInput is a type for action input parameters
 type ActionVpsMaintenanceWindowUpdateAllInput struct {
-	ClosesAt int64 `json:"closes_at"`
-	IsOpen   bool  `json:"is_open"`
-	OpensAt  int64 `json:"opens_at"`
+	ClosesAt int64 "json:\"closes_at\""
+	IsOpen   bool  "json:\"is_open\""
+	OpensAt  int64 "json:\"opens_at\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,25 +161,25 @@ func (in *ActionVpsMaintenanceWindowUpdateAllInput) AnySelected() bool {
 
 // ActionVpsMaintenanceWindowUpdateAllRequest is a type for the entire action request
 type ActionVpsMaintenanceWindowUpdateAllRequest struct {
-	MaintenanceWindow map[string]interface{} `json:"maintenance_window"`
-	Meta              map[string]interface{} `json:"_meta"`
+	MaintenanceWindow map[string]interface{} "json:\"maintenance_window\""
+	Meta              map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsMaintenanceWindowUpdateAllOutput is a type for action output parameters
 type ActionVpsMaintenanceWindowUpdateAllOutput struct {
-	ClosesAt int64 `json:"closes_at"`
-	IsOpen   bool  `json:"is_open"`
-	OpensAt  int64 `json:"opens_at"`
-	Weekday  int64 `json:"weekday"`
+	ClosesAt int64 "json:\"closes_at\""
+	IsOpen   bool  "json:\"is_open\""
+	OpensAt  int64 "json:\"opens_at\""
+	Weekday  int64 "json:\"weekday\""
 }
 
 // Type for action response, including envelope
 type ActionVpsMaintenanceWindowUpdateAllResponse struct {
-	Action *ActionVpsMaintenanceWindowUpdateAll `json:"-"`
+	Action *ActionVpsMaintenanceWindowUpdateAll "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MaintenanceWindows []*ActionVpsMaintenanceWindowUpdateAllOutput `json:"maintenance_windows"`
+		MaintenanceWindows []*ActionVpsMaintenanceWindowUpdateAllOutput "json:\"maintenance_windows\""
 	}
 
 	// Action output without the namespace
@@ -213,7 +214,7 @@ func (inv *ActionVpsMaintenanceWindowUpdateAllInvocation) SetPathParamInt(param 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsMaintenanceWindowUpdateAllInvocation) SetPathParamString(param string, value string) *ActionVpsMaintenanceWindowUpdateAllInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

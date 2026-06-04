@@ -16,8 +16,8 @@ func NewActionUserCreate(client *Client) *ActionUserCreate {
 
 // ActionUserCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,30 +73,30 @@ func (in *ActionUserCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserCreateInput is a type for action input parameters
 type ActionUserCreateInput struct {
-	Address                    string `json:"address"`
-	Email                      string `json:"email"`
-	EnableBasicAuth            bool   `json:"enable_basic_auth"`
-	EnableMultiFactorAuth      bool   `json:"enable_multi_factor_auth"`
-	EnableNewLoginNotification bool   `json:"enable_new_login_notification"`
-	EnableOauth2Auth           bool   `json:"enable_oauth2_auth"`
-	EnableSingleSignOn         bool   `json:"enable_single_sign_on"`
-	EnableTokenAuth            bool   `json:"enable_token_auth"`
-	Environment                int64  `json:"environment"`
-	FullName                   string `json:"full_name"`
-	Info                       string `json:"info"`
-	Language                   int64  `json:"language"`
-	Level                      int64  `json:"level"`
-	Location                   int64  `json:"location"`
-	Lockout                    bool   `json:"lockout"`
-	Login                      string `json:"login"`
-	MailerEnabled              bool   `json:"mailer_enabled"`
-	Node                       int64  `json:"node"`
-	OsTemplate                 int64  `json:"os_template"`
-	Password                   string `json:"password"`
-	PasswordReset              bool   `json:"password_reset"`
-	PreferredLogoutAll         bool   `json:"preferred_logout_all"`
-	PreferredSessionLength     int64  `json:"preferred_session_length"`
-	Vps                        bool   `json:"vps"`
+	Address                    string "json:\"address\""
+	Email                      string "json:\"email\""
+	EnableBasicAuth            bool   "json:\"enable_basic_auth\""
+	EnableMultiFactorAuth      bool   "json:\"enable_multi_factor_auth\""
+	EnableNewLoginNotification bool   "json:\"enable_new_login_notification\""
+	EnableOauth2Auth           bool   "json:\"enable_oauth2_auth\""
+	EnableSingleSignOn         bool   "json:\"enable_single_sign_on\""
+	EnableTokenAuth            bool   "json:\"enable_token_auth\""
+	Environment                int64  "json:\"environment\""
+	FullName                   string "json:\"full_name\""
+	Info                       string "json:\"info\""
+	Language                   int64  "json:\"language\""
+	Level                      int64  "json:\"level\""
+	Location                   int64  "json:\"location\""
+	Lockout                    bool   "json:\"lockout\""
+	Login                      string "json:\"login\""
+	MailerEnabled              bool   "json:\"mailer_enabled\""
+	Node                       int64  "json:\"node\""
+	OsTemplate                 int64  "json:\"os_template\""
+	Password                   string "json:\"password\""
+	PasswordReset              bool   "json:\"password_reset\""
+	PreferredLogoutAll         bool   "json:\"preferred_logout_all\""
+	PreferredSessionLength     int64  "json:\"preferred_session_length\""
+	Vps                        bool   "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -431,53 +431,53 @@ func (in *ActionUserCreateInput) AnySelected() bool {
 
 // ActionUserCreateRequest is a type for the entire action request
 type ActionUserCreateRequest struct {
-	User map[string]interface{} `json:"user"`
-	Meta map[string]interface{} `json:"_meta"`
+	User map[string]interface{} "json:\"user\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserCreateOutput is a type for action output parameters
 type ActionUserCreateOutput struct {
-	Address                    string                    `json:"address"`
-	CreatedAt                  string                    `json:"created_at"`
-	DokuwikiGroups             string                    `json:"dokuwiki_groups"`
-	Email                      string                    `json:"email"`
-	EnableBasicAuth            bool                      `json:"enable_basic_auth"`
-	EnableMultiFactorAuth      bool                      `json:"enable_multi_factor_auth"`
-	EnableNewLoginNotification bool                      `json:"enable_new_login_notification"`
-	EnableOauth2Auth           bool                      `json:"enable_oauth2_auth"`
-	EnableSingleSignOn         bool                      `json:"enable_single_sign_on"`
-	EnableTokenAuth            bool                      `json:"enable_token_auth"`
-	ExpirationDate             string                    `json:"expiration_date"`
-	FullName                   string                    `json:"full_name"`
-	Id                         int64                     `json:"id"`
-	Info                       string                    `json:"info"`
-	Language                   *ActionLanguageShowOutput `json:"language"`
-	LastActivityAt             string                    `json:"last_activity_at"`
-	Level                      int64                     `json:"level"`
-	Lockout                    bool                      `json:"lockout"`
-	Login                      string                    `json:"login"`
-	MailerEnabled              bool                      `json:"mailer_enabled"`
-	ObjectState                string                    `json:"object_state"`
-	PasswordReset              bool                      `json:"password_reset"`
-	PreferredLogoutAll         bool                      `json:"preferred_logout_all"`
-	PreferredSessionLength     int64                     `json:"preferred_session_length"`
-	RemindAfterDate            string                    `json:"remind_after_date"`
+	Address                    string                    "json:\"address\""
+	CreatedAt                  string                    "json:\"created_at\""
+	DokuwikiGroups             string                    "json:\"dokuwiki_groups\""
+	Email                      string                    "json:\"email\""
+	EnableBasicAuth            bool                      "json:\"enable_basic_auth\""
+	EnableMultiFactorAuth      bool                      "json:\"enable_multi_factor_auth\""
+	EnableNewLoginNotification bool                      "json:\"enable_new_login_notification\""
+	EnableOauth2Auth           bool                      "json:\"enable_oauth2_auth\""
+	EnableSingleSignOn         bool                      "json:\"enable_single_sign_on\""
+	EnableTokenAuth            bool                      "json:\"enable_token_auth\""
+	ExpirationDate             string                    "json:\"expiration_date\""
+	FullName                   string                    "json:\"full_name\""
+	Id                         int64                     "json:\"id\""
+	Info                       string                    "json:\"info\""
+	Language                   *ActionLanguageShowOutput "json:\"language\""
+	LastActivityAt             string                    "json:\"last_activity_at\""
+	Level                      int64                     "json:\"level\""
+	Lockout                    bool                      "json:\"lockout\""
+	Login                      string                    "json:\"login\""
+	MailerEnabled              bool                      "json:\"mailer_enabled\""
+	ObjectState                string                    "json:\"object_state\""
+	PasswordReset              bool                      "json:\"password_reset\""
+	PreferredLogoutAll         bool                      "json:\"preferred_logout_all\""
+	PreferredSessionLength     int64                     "json:\"preferred_session_length\""
+	RemindAfterDate            string                    "json:\"remind_after_date\""
 }
 
 // ActionUserCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionUserCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionUserCreateResponse struct {
-	Action *ActionUserCreate `json:"-"`
+	Action *ActionUserCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		User *ActionUserCreateOutput `json:"user"`
+		User *ActionUserCreateOutput "json:\"user\""
 		// Global output metadata
-		Meta *ActionUserCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionUserCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

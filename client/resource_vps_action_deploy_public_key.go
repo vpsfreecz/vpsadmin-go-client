@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsDeployPublicKey(client *Client) *ActionVpsDeployPublicKey {
 
 // ActionVpsDeployPublicKeyMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsDeployPublicKeyMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,7 +76,7 @@ func (in *ActionVpsDeployPublicKeyMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsDeployPublicKeyInput is a type for action input parameters
 type ActionVpsDeployPublicKeyInput struct {
-	PublicKey int64 `json:"public_key"`
+	PublicKey int64 "json:\"public_key\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,23 +135,23 @@ func (in *ActionVpsDeployPublicKeyInput) AnySelected() bool {
 
 // ActionVpsDeployPublicKeyRequest is a type for the entire action request
 type ActionVpsDeployPublicKeyRequest struct {
-	Vps  map[string]interface{} `json:"vps"`
-	Meta map[string]interface{} `json:"_meta"`
+	Vps  map[string]interface{} "json:\"vps\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsDeployPublicKeyMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsDeployPublicKeyMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionVpsDeployPublicKeyResponse struct {
-	Action *ActionVpsDeployPublicKey `json:"-"`
+	Action *ActionVpsDeployPublicKey "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionVpsDeployPublicKeyMetaGlobalOutput `json:"_meta"`
+		Meta *ActionVpsDeployPublicKeyMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -182,7 +183,7 @@ func (inv *ActionVpsDeployPublicKeyInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsDeployPublicKeyInvocation) SetPathParamString(param string, value string) *ActionVpsDeployPublicKeyInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnsResolverDelete(client *Client) *ActionDnsResolverDelete {
 
 // ActionDnsResolverDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsResolverDeleteMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,7 +76,7 @@ func (in *ActionDnsResolverDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsResolverDeleteInput is a type for action input parameters
 type ActionDnsResolverDeleteInput struct {
-	Force bool `json:"force"`
+	Force bool "json:\"force\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,23 +135,23 @@ func (in *ActionDnsResolverDeleteInput) AnySelected() bool {
 
 // ActionDnsResolverDeleteRequest is a type for the entire action request
 type ActionDnsResolverDeleteRequest struct {
-	DnsResolver map[string]interface{} `json:"dns_resolver"`
-	Meta        map[string]interface{} `json:"_meta"`
+	DnsResolver map[string]interface{} "json:\"dns_resolver\""
+	Meta        map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDnsResolverDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionDnsResolverDeleteMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDnsResolverDeleteResponse struct {
-	Action *ActionDnsResolverDelete `json:"-"`
+	Action *ActionDnsResolverDelete "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionDnsResolverDeleteMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDnsResolverDeleteMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -182,7 +183,7 @@ func (inv *ActionDnsResolverDeleteInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsResolverDeleteInvocation) SetPathParamString(param string, value string) *ActionDnsResolverDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

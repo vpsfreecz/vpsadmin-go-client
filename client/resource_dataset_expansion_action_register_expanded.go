@@ -16,8 +16,8 @@ func NewActionDatasetExpansionRegisterExpanded(client *Client) *ActionDatasetExp
 
 // ActionDatasetExpansionRegisterExpandedMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetExpansionRegisterExpandedMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,12 +73,12 @@ func (in *ActionDatasetExpansionRegisterExpandedMetaGlobalInput) AnySelected() b
 
 // ActionDatasetExpansionRegisterExpandedInput is a type for action input parameters
 type ActionDatasetExpansionRegisterExpandedInput struct {
-	Dataset                int64 `json:"dataset"`
-	EnableNotifications    bool  `json:"enable_notifications"`
-	EnableShrink           bool  `json:"enable_shrink"`
-	MaxOverRefquotaSeconds int64 `json:"max_over_refquota_seconds"`
-	OriginalRefquota       int64 `json:"original_refquota"`
-	StopVps                bool  `json:"stop_vps"`
+	Dataset                int64 "json:\"dataset\""
+	EnableNotifications    bool  "json:\"enable_notifications\""
+	EnableShrink           bool  "json:\"enable_shrink\""
+	MaxOverRefquotaSeconds int64 "json:\"max_over_refquota_seconds\""
+	OriginalRefquota       int64 "json:\"original_refquota\""
+	StopVps                bool  "json:\"stop_vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -197,33 +197,33 @@ func (in *ActionDatasetExpansionRegisterExpandedInput) AnySelected() bool {
 
 // ActionDatasetExpansionRegisterExpandedRequest is a type for the entire action request
 type ActionDatasetExpansionRegisterExpandedRequest struct {
-	DatasetExpansion map[string]interface{} `json:"dataset_expansion"`
-	Meta             map[string]interface{} `json:"_meta"`
+	DatasetExpansion map[string]interface{} "json:\"dataset_expansion\""
+	Meta             map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDatasetExpansionRegisterExpandedOutput is a type for action output parameters
 type ActionDatasetExpansionRegisterExpandedOutput struct {
-	AddedSpace             int64                    `json:"added_space"`
-	CreatedAt              string                   `json:"created_at"`
-	Dataset                *ActionDatasetShowOutput `json:"dataset"`
-	EnableNotifications    bool                     `json:"enable_notifications"`
-	EnableShrink           bool                     `json:"enable_shrink"`
-	Id                     int64                    `json:"id"`
-	MaxOverRefquotaSeconds int64                    `json:"max_over_refquota_seconds"`
-	OriginalRefquota       int64                    `json:"original_refquota"`
-	OverRefquotaSeconds    int64                    `json:"over_refquota_seconds"`
-	State                  string                   `json:"state"`
-	StopVps                bool                     `json:"stop_vps"`
-	Vps                    *ActionVpsShowOutput     `json:"vps"`
+	AddedSpace             int64                    "json:\"added_space\""
+	CreatedAt              string                   "json:\"created_at\""
+	Dataset                *ActionDatasetShowOutput "json:\"dataset\""
+	EnableNotifications    bool                     "json:\"enable_notifications\""
+	EnableShrink           bool                     "json:\"enable_shrink\""
+	Id                     int64                    "json:\"id\""
+	MaxOverRefquotaSeconds int64                    "json:\"max_over_refquota_seconds\""
+	OriginalRefquota       int64                    "json:\"original_refquota\""
+	OverRefquotaSeconds    int64                    "json:\"over_refquota_seconds\""
+	State                  string                   "json:\"state\""
+	StopVps                bool                     "json:\"stop_vps\""
+	Vps                    *ActionVpsShowOutput     "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetExpansionRegisterExpandedResponse struct {
-	Action *ActionDatasetExpansionRegisterExpanded `json:"-"`
+	Action *ActionDatasetExpansionRegisterExpanded "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DatasetExpansion *ActionDatasetExpansionRegisterExpandedOutput `json:"dataset_expansion"`
+		DatasetExpansion *ActionDatasetExpansionRegisterExpandedOutput "json:\"dataset_expansion\""
 	}
 
 	// Action output without the namespace

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsBoot(client *Client) *ActionVpsBoot {
 
 // ActionVpsBootMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsBootMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,8 +76,8 @@ func (in *ActionVpsBootMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsBootInput is a type for action input parameters
 type ActionVpsBootInput struct {
-	MountRootDataset string `json:"mount_root_dataset"`
-	OsTemplate       int64  `json:"os_template"`
+	MountRootDataset string "json:\"mount_root_dataset\""
+	OsTemplate       int64  "json:\"os_template\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -147,23 +148,23 @@ func (in *ActionVpsBootInput) AnySelected() bool {
 
 // ActionVpsBootRequest is a type for the entire action request
 type ActionVpsBootRequest struct {
-	Vps  map[string]interface{} `json:"vps"`
-	Meta map[string]interface{} `json:"_meta"`
+	Vps  map[string]interface{} "json:\"vps\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsBootMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsBootMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionVpsBootResponse struct {
-	Action *ActionVpsBoot `json:"-"`
+	Action *ActionVpsBoot "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionVpsBootMetaGlobalOutput `json:"_meta"`
+		Meta *ActionVpsBootMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -195,7 +196,7 @@ func (inv *ActionVpsBootInvocation) SetPathParamInt(param string, value int64) *
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsBootInvocation) SetPathParamString(param string, value string) *ActionVpsBootInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionClusterResourcePackageShow(client *Client) *ActionClusterResourceP
 
 // ActionClusterResourcePackageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourcePackageShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,21 +76,21 @@ func (in *ActionClusterResourcePackageShowMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterResourcePackageShowOutput is a type for action output parameters
 type ActionClusterResourcePackageShowOutput struct {
-	CreatedAt   string                       `json:"created_at"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	Id          int64                        `json:"id"`
-	Label       string                       `json:"label"`
-	UpdatedAt   string                       `json:"updated_at"`
-	User        *ActionUserShowOutput        `json:"user"`
+	CreatedAt   string                       "json:\"created_at\""
+	Environment *ActionEnvironmentShowOutput "json:\"environment\""
+	Id          int64                        "json:\"id\""
+	Label       string                       "json:\"label\""
+	UpdatedAt   string                       "json:\"updated_at\""
+	User        *ActionUserShowOutput        "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionClusterResourcePackageShowResponse struct {
-	Action *ActionClusterResourcePackageShow `json:"-"`
+	Action *ActionClusterResourcePackageShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		ClusterResourcePackage *ActionClusterResourcePackageShowOutput `json:"cluster_resource_package"`
+		ClusterResourcePackage *ActionClusterResourcePackageShowOutput "json:\"cluster_resource_package\""
 	}
 
 	// Action output without the namespace
@@ -122,7 +123,7 @@ func (inv *ActionClusterResourcePackageShowInvocation) SetPathParamInt(param str
 
 // SetPathParamString sets string path parameter
 func (inv *ActionClusterResourcePackageShowInvocation) SetPathParamString(param string, value string) *ActionClusterResourcePackageShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

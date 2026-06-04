@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsUserDataShow(client *Client) *ActionVpsUserDataShow {
 
 // ActionVpsUserDataShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsUserDataShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,22 +76,22 @@ func (in *ActionVpsUserDataShowMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsUserDataShowOutput is a type for action output parameters
 type ActionVpsUserDataShowOutput struct {
-	Content   string                `json:"content"`
-	CreatedAt string                `json:"created_at"`
-	Format    string                `json:"format"`
-	Id        int64                 `json:"id"`
-	Label     string                `json:"label"`
-	UpdatedAt string                `json:"updated_at"`
-	User      *ActionUserShowOutput `json:"user"`
+	Content   string                "json:\"content\""
+	CreatedAt string                "json:\"created_at\""
+	Format    string                "json:\"format\""
+	Id        int64                 "json:\"id\""
+	Label     string                "json:\"label\""
+	UpdatedAt string                "json:\"updated_at\""
+	User      *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionVpsUserDataShowResponse struct {
-	Action *ActionVpsUserDataShow `json:"-"`
+	Action *ActionVpsUserDataShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		VpsUserData *ActionVpsUserDataShowOutput `json:"vps_user_data"`
+		VpsUserData *ActionVpsUserDataShowOutput "json:\"vps_user_data\""
 	}
 
 	// Action output without the namespace
@@ -123,7 +124,7 @@ func (inv *ActionVpsUserDataShowInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsUserDataShowInvocation) SetPathParamString(param string, value string) *ActionVpsUserDataShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

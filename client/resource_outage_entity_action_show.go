@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOutageEntityShow(client *Client) *ActionOutageEntityShow {
 
 // ActionOutageEntityShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageEntityShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,19 +76,19 @@ func (in *ActionOutageEntityShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageEntityShowOutput is a type for action output parameters
 type ActionOutageEntityShowOutput struct {
-	EntityId int64  `json:"entity_id"`
-	Id       int64  `json:"id"`
-	Label    string `json:"label"`
-	Name     string `json:"name"`
+	EntityId int64  "json:\"entity_id\""
+	Id       int64  "json:\"id\""
+	Label    string "json:\"label\""
+	Name     string "json:\"name\""
 }
 
 // Type for action response, including envelope
 type ActionOutageEntityShowResponse struct {
-	Action *ActionOutageEntityShow `json:"-"`
+	Action *ActionOutageEntityShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Entity *ActionOutageEntityShowOutput `json:"entity"`
+		Entity *ActionOutageEntityShowOutput "json:\"entity\""
 	}
 
 	// Action output without the namespace
@@ -120,7 +121,7 @@ func (inv *ActionOutageEntityShowInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOutageEntityShowInvocation) SetPathParamString(param string, value string) *ActionOutageEntityShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

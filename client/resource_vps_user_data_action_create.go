@@ -16,8 +16,8 @@ func NewActionVpsUserDataCreate(client *Client) *ActionVpsUserDataCreate {
 
 // ActionVpsUserDataCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsUserDataCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,10 +73,10 @@ func (in *ActionVpsUserDataCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsUserDataCreateInput is a type for action input parameters
 type ActionVpsUserDataCreateInput struct {
-	Content string `json:"content"`
-	Format  string `json:"format"`
-	Label   string `json:"label"`
-	User    int64  `json:"user"`
+	Content string "json:\"content\""
+	Format  string "json:\"format\""
+	Label   string "json:\"label\""
+	User    int64  "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -171,28 +171,28 @@ func (in *ActionVpsUserDataCreateInput) AnySelected() bool {
 
 // ActionVpsUserDataCreateRequest is a type for the entire action request
 type ActionVpsUserDataCreateRequest struct {
-	VpsUserData map[string]interface{} `json:"vps_user_data"`
-	Meta        map[string]interface{} `json:"_meta"`
+	VpsUserData map[string]interface{} "json:\"vps_user_data\""
+	Meta        map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsUserDataCreateOutput is a type for action output parameters
 type ActionVpsUserDataCreateOutput struct {
-	Content   string                `json:"content"`
-	CreatedAt string                `json:"created_at"`
-	Format    string                `json:"format"`
-	Id        int64                 `json:"id"`
-	Label     string                `json:"label"`
-	UpdatedAt string                `json:"updated_at"`
-	User      *ActionUserShowOutput `json:"user"`
+	Content   string                "json:\"content\""
+	CreatedAt string                "json:\"created_at\""
+	Format    string                "json:\"format\""
+	Id        int64                 "json:\"id\""
+	Label     string                "json:\"label\""
+	UpdatedAt string                "json:\"updated_at\""
+	User      *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionVpsUserDataCreateResponse struct {
-	Action *ActionVpsUserDataCreate `json:"-"`
+	Action *ActionVpsUserDataCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		VpsUserData *ActionVpsUserDataCreateOutput `json:"vps_user_data"`
+		VpsUserData *ActionVpsUserDataCreateOutput "json:\"vps_user_data\""
 	}
 
 	// Action output without the namespace

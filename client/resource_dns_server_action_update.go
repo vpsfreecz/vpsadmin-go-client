@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnsServerUpdate(client *Client) *ActionDnsServerUpdate {
 
 // ActionDnsServerUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsServerUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,13 +76,13 @@ func (in *ActionDnsServerUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsServerUpdateInput is a type for action input parameters
 type ActionDnsServerUpdateInput struct {
-	EnableUserDnsZones bool   `json:"enable_user_dns_zones"`
-	Hidden             bool   `json:"hidden"`
-	Ipv4Addr           string `json:"ipv4_addr"`
-	Ipv6Addr           string `json:"ipv6_addr"`
-	Name               string `json:"name"`
-	Node               int64  `json:"node"`
-	UserDnsZoneType    string `json:"user_dns_zone_type"`
+	EnableUserDnsZones bool   "json:\"enable_user_dns_zones\""
+	Hidden             bool   "json:\"hidden\""
+	Ipv4Addr           string "json:\"ipv4_addr\""
+	Ipv6Addr           string "json:\"ipv6_addr\""
+	Name               string "json:\"name\""
+	Node               int64  "json:\"node\""
+	UserDnsZoneType    string "json:\"user_dns_zone_type\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -212,31 +213,31 @@ func (in *ActionDnsServerUpdateInput) AnySelected() bool {
 
 // ActionDnsServerUpdateRequest is a type for the entire action request
 type ActionDnsServerUpdateRequest struct {
-	DnsServer map[string]interface{} `json:"dns_server"`
-	Meta      map[string]interface{} `json:"_meta"`
+	DnsServer map[string]interface{} "json:\"dns_server\""
+	Meta      map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDnsServerUpdateOutput is a type for action output parameters
 type ActionDnsServerUpdateOutput struct {
-	CreatedAt          string                `json:"created_at"`
-	EnableUserDnsZones bool                  `json:"enable_user_dns_zones"`
-	Hidden             bool                  `json:"hidden"`
-	Id                 int64                 `json:"id"`
-	Ipv4Addr           string                `json:"ipv4_addr"`
-	Ipv6Addr           string                `json:"ipv6_addr"`
-	Name               string                `json:"name"`
-	Node               *ActionNodeShowOutput `json:"node"`
-	UpdatedAt          string                `json:"updated_at"`
-	UserDnsZoneType    string                `json:"user_dns_zone_type"`
+	CreatedAt          string                "json:\"created_at\""
+	EnableUserDnsZones bool                  "json:\"enable_user_dns_zones\""
+	Hidden             bool                  "json:\"hidden\""
+	Id                 int64                 "json:\"id\""
+	Ipv4Addr           string                "json:\"ipv4_addr\""
+	Ipv6Addr           string                "json:\"ipv6_addr\""
+	Name               string                "json:\"name\""
+	Node               *ActionNodeShowOutput "json:\"node\""
+	UpdatedAt          string                "json:\"updated_at\""
+	UserDnsZoneType    string                "json:\"user_dns_zone_type\""
 }
 
 // Type for action response, including envelope
 type ActionDnsServerUpdateResponse struct {
-	Action *ActionDnsServerUpdate `json:"-"`
+	Action *ActionDnsServerUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsServer *ActionDnsServerUpdateOutput `json:"dns_server"`
+		DnsServer *ActionDnsServerUpdateOutput "json:\"dns_server\""
 	}
 
 	// Action output without the namespace
@@ -271,7 +272,7 @@ func (inv *ActionDnsServerUpdateInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsServerUpdateInvocation) SetPathParamString(param string, value string) *ActionDnsServerUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

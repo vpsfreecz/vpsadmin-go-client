@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDatasetExpansionHistoryCreate(client *Client) *ActionDatasetExpans
 
 // ActionDatasetExpansionHistoryCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetExpansionHistoryCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,7 +76,7 @@ func (in *ActionDatasetExpansionHistoryCreateMetaGlobalInput) AnySelected() bool
 
 // ActionDatasetExpansionHistoryCreateInput is a type for action input parameters
 type ActionDatasetExpansionHistoryCreateInput struct {
-	AddedSpace int64 `json:"added_space"`
+	AddedSpace int64 "json:\"added_space\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,34 +135,34 @@ func (in *ActionDatasetExpansionHistoryCreateInput) AnySelected() bool {
 
 // ActionDatasetExpansionHistoryCreateRequest is a type for the entire action request
 type ActionDatasetExpansionHistoryCreateRequest struct {
-	History map[string]interface{} `json:"history"`
-	Meta    map[string]interface{} `json:"_meta"`
+	History map[string]interface{} "json:\"history\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDatasetExpansionHistoryCreateOutput is a type for action output parameters
 type ActionDatasetExpansionHistoryCreateOutput struct {
-	AddedSpace       int64                 `json:"added_space"`
-	Admin            *ActionUserShowOutput `json:"admin"`
-	CreatedAt        string                `json:"created_at"`
-	Id               int64                 `json:"id"`
-	NewRefquota      int64                 `json:"new_refquota"`
-	OriginalRefquota int64                 `json:"original_refquota"`
+	AddedSpace       int64                 "json:\"added_space\""
+	Admin            *ActionUserShowOutput "json:\"admin\""
+	CreatedAt        string                "json:\"created_at\""
+	Id               int64                 "json:\"id\""
+	NewRefquota      int64                 "json:\"new_refquota\""
+	OriginalRefquota int64                 "json:\"original_refquota\""
 }
 
 // ActionDatasetExpansionHistoryCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionDatasetExpansionHistoryCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetExpansionHistoryCreateResponse struct {
-	Action *ActionDatasetExpansionHistoryCreate `json:"-"`
+	Action *ActionDatasetExpansionHistoryCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		History *ActionDatasetExpansionHistoryCreateOutput `json:"history"`
+		History *ActionDatasetExpansionHistoryCreateOutput "json:\"history\""
 		// Global output metadata
-		Meta *ActionDatasetExpansionHistoryCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDatasetExpansionHistoryCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -196,7 +197,7 @@ func (inv *ActionDatasetExpansionHistoryCreateInvocation) SetPathParamInt(param 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetExpansionHistoryCreateInvocation) SetPathParamString(param string, value string) *ActionDatasetExpansionHistoryCreateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

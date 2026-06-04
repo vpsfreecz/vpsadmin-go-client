@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOsTemplateShow(client *Client) *ActionOsTemplateShow {
 
 // ActionOsTemplateShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOsTemplateShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,35 +76,35 @@ func (in *ActionOsTemplateShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOsTemplateShowOutput is a type for action output parameters
 type ActionOsTemplateShowOutput struct {
-	Arch              string                    `json:"arch"`
-	CgroupVersion     string                    `json:"cgroup_version"`
-	Config            string                    `json:"config"`
-	Distribution      string                    `json:"distribution"`
-	EnableCloudInit   bool                      `json:"enable_cloud_init"`
-	EnableScript      bool                      `json:"enable_script"`
-	Enabled           bool                      `json:"enabled"`
-	HypervisorType    string                    `json:"hypervisor_type"`
-	Id                int64                     `json:"id"`
-	Info              string                    `json:"info"`
-	Label             string                    `json:"label"`
-	ManageDnsResolver bool                      `json:"manage_dns_resolver"`
-	ManageHostname    bool                      `json:"manage_hostname"`
-	Name              string                    `json:"name"`
-	Order             int64                     `json:"order"`
-	OsFamily          *ActionOsFamilyShowOutput `json:"os_family"`
-	Supported         bool                      `json:"supported"`
-	Variant           string                    `json:"variant"`
-	Vendor            string                    `json:"vendor"`
-	Version           string                    `json:"version"`
+	Arch              string                    "json:\"arch\""
+	CgroupVersion     string                    "json:\"cgroup_version\""
+	Config            string                    "json:\"config\""
+	Distribution      string                    "json:\"distribution\""
+	EnableCloudInit   bool                      "json:\"enable_cloud_init\""
+	EnableScript      bool                      "json:\"enable_script\""
+	Enabled           bool                      "json:\"enabled\""
+	HypervisorType    string                    "json:\"hypervisor_type\""
+	Id                int64                     "json:\"id\""
+	Info              string                    "json:\"info\""
+	Label             string                    "json:\"label\""
+	ManageDnsResolver bool                      "json:\"manage_dns_resolver\""
+	ManageHostname    bool                      "json:\"manage_hostname\""
+	Name              string                    "json:\"name\""
+	Order             int64                     "json:\"order\""
+	OsFamily          *ActionOsFamilyShowOutput "json:\"os_family\""
+	Supported         bool                      "json:\"supported\""
+	Variant           string                    "json:\"variant\""
+	Vendor            string                    "json:\"vendor\""
+	Version           string                    "json:\"version\""
 }
 
 // Type for action response, including envelope
 type ActionOsTemplateShowResponse struct {
-	Action *ActionOsTemplateShow `json:"-"`
+	Action *ActionOsTemplateShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		OsTemplate *ActionOsTemplateShowOutput `json:"os_template"`
+		OsTemplate *ActionOsTemplateShowOutput "json:\"os_template\""
 	}
 
 	// Action output without the namespace
@@ -136,7 +137,7 @@ func (inv *ActionOsTemplateShowInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOsTemplateShowInvocation) SetPathParamString(param string, value string) *ActionOsTemplateShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

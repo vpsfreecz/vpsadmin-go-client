@@ -16,9 +16,9 @@ func NewActionDnsRecordIndex(client *Client) *ActionDnsRecordIndex {
 
 // ActionDnsRecordIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsRecordIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,10 +86,10 @@ func (in *ActionDnsRecordIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsRecordIndexInput is a type for action input parameters
 type ActionDnsRecordIndexInput struct {
-	DnsZone int64 `json:"dns_zone"`
-	FromId  int64 `json:"from_id"`
-	Limit   int64 `json:"limit"`
-	User    int64 `json:"user"`
+	DnsZone int64 "json:\"dns_zone\""
+	FromId  int64 "json:\"from_id\""
+	Limit   int64 "json:\"limit\""
+	User    int64 "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -203,30 +203,30 @@ func (in *ActionDnsRecordIndexInput) AnySelected() bool {
 
 // ActionDnsRecordIndexOutput is a type for action output parameters
 type ActionDnsRecordIndexOutput struct {
-	Comment              string                   `json:"comment"`
-	Content              string                   `json:"content"`
-	CreatedAt            string                   `json:"created_at"`
-	DnsZone              *ActionDnsZoneShowOutput `json:"dns_zone"`
-	DynamicUpdateEnabled bool                     `json:"dynamic_update_enabled"`
-	DynamicUpdateUrl     string                   `json:"dynamic_update_url"`
-	Enabled              bool                     `json:"enabled"`
-	Id                   int64                    `json:"id"`
-	Managed              bool                     `json:"managed"`
-	Name                 string                   `json:"name"`
-	Priority             int64                    `json:"priority"`
-	Ttl                  int64                    `json:"ttl"`
-	Type                 string                   `json:"type"`
-	UpdatedAt            string                   `json:"updated_at"`
-	User                 *ActionUserShowOutput    `json:"user"`
+	Comment              string                   "json:\"comment\""
+	Content              string                   "json:\"content\""
+	CreatedAt            string                   "json:\"created_at\""
+	DnsZone              *ActionDnsZoneShowOutput "json:\"dns_zone\""
+	DynamicUpdateEnabled bool                     "json:\"dynamic_update_enabled\""
+	DynamicUpdateUrl     string                   "json:\"dynamic_update_url\""
+	Enabled              bool                     "json:\"enabled\""
+	Id                   int64                    "json:\"id\""
+	Managed              bool                     "json:\"managed\""
+	Name                 string                   "json:\"name\""
+	Priority             int64                    "json:\"priority\""
+	Ttl                  int64                    "json:\"ttl\""
+	Type                 string                   "json:\"type\""
+	UpdatedAt            string                   "json:\"updated_at\""
+	User                 *ActionUserShowOutput    "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionDnsRecordIndexResponse struct {
-	Action *ActionDnsRecordIndex `json:"-"`
+	Action *ActionDnsRecordIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsRecords []*ActionDnsRecordIndexOutput `json:"dns_records"`
+		DnsRecords []*ActionDnsRecordIndexOutput "json:\"dns_records\""
 	}
 
 	// Action output without the namespace

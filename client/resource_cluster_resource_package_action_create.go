@@ -16,8 +16,8 @@ func NewActionClusterResourcePackageCreate(client *Client) *ActionClusterResourc
 
 // ActionClusterResourcePackageCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourcePackageCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,7 +73,7 @@ func (in *ActionClusterResourcePackageCreateMetaGlobalInput) AnySelected() bool 
 
 // ActionClusterResourcePackageCreateInput is a type for action input parameters
 type ActionClusterResourcePackageCreateInput struct {
-	Label string `json:"label"`
+	Label string "json:\"label\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -132,27 +132,27 @@ func (in *ActionClusterResourcePackageCreateInput) AnySelected() bool {
 
 // ActionClusterResourcePackageCreateRequest is a type for the entire action request
 type ActionClusterResourcePackageCreateRequest struct {
-	ClusterResourcePackage map[string]interface{} `json:"cluster_resource_package"`
-	Meta                   map[string]interface{} `json:"_meta"`
+	ClusterResourcePackage map[string]interface{} "json:\"cluster_resource_package\""
+	Meta                   map[string]interface{} "json:\"_meta\""
 }
 
 // ActionClusterResourcePackageCreateOutput is a type for action output parameters
 type ActionClusterResourcePackageCreateOutput struct {
-	CreatedAt   string                       `json:"created_at"`
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	Id          int64                        `json:"id"`
-	Label       string                       `json:"label"`
-	UpdatedAt   string                       `json:"updated_at"`
-	User        *ActionUserShowOutput        `json:"user"`
+	CreatedAt   string                       "json:\"created_at\""
+	Environment *ActionEnvironmentShowOutput "json:\"environment\""
+	Id          int64                        "json:\"id\""
+	Label       string                       "json:\"label\""
+	UpdatedAt   string                       "json:\"updated_at\""
+	User        *ActionUserShowOutput        "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionClusterResourcePackageCreateResponse struct {
-	Action *ActionClusterResourcePackageCreate `json:"-"`
+	Action *ActionClusterResourcePackageCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		ClusterResourcePackage *ActionClusterResourcePackageCreateOutput `json:"cluster_resource_package"`
+		ClusterResourcePackage *ActionClusterResourcePackageCreateOutput "json:\"cluster_resource_package\""
 	}
 
 	// Action output without the namespace

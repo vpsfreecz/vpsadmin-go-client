@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnsRecordLogShow(client *Client) *ActionDnsRecordLogShow {
 
 // ActionDnsRecordLogShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsRecordLogShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,26 +76,26 @@ func (in *ActionDnsRecordLogShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsRecordLogShowOutput is a type for action output parameters
 type ActionDnsRecordLogShowOutput struct {
-	ChangeType       string                            `json:"change_type"`
-	CreatedAt        string                            `json:"created_at"`
-	DnsZone          *ActionDnsZoneShowOutput          `json:"dns_zone"`
-	DnsZoneName      string                            `json:"dns_zone_name"`
-	Id               int64                             `json:"id"`
-	Name             string                            `json:"name"`
-	RawUserId        int64                             `json:"raw_user_id"`
-	TransactionChain *ActionTransactionChainShowOutput `json:"transaction_chain"`
-	Type             string                            `json:"type"`
-	UpdatedAt        string                            `json:"updated_at"`
-	User             *ActionUserShowOutput             `json:"user"`
+	ChangeType       string                            "json:\"change_type\""
+	CreatedAt        string                            "json:\"created_at\""
+	DnsZone          *ActionDnsZoneShowOutput          "json:\"dns_zone\""
+	DnsZoneName      string                            "json:\"dns_zone_name\""
+	Id               int64                             "json:\"id\""
+	Name             string                            "json:\"name\""
+	RawUserId        int64                             "json:\"raw_user_id\""
+	TransactionChain *ActionTransactionChainShowOutput "json:\"transaction_chain\""
+	Type             string                            "json:\"type\""
+	UpdatedAt        string                            "json:\"updated_at\""
+	User             *ActionUserShowOutput             "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionDnsRecordLogShowResponse struct {
-	Action *ActionDnsRecordLogShow `json:"-"`
+	Action *ActionDnsRecordLogShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsRecordLog *ActionDnsRecordLogShowOutput `json:"dns_record_log"`
+		DnsRecordLog *ActionDnsRecordLogShowOutput "json:\"dns_record_log\""
 	}
 
 	// Action output without the namespace
@@ -127,7 +128,7 @@ func (inv *ActionDnsRecordLogShowInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsRecordLogShowInvocation) SetPathParamString(param string, value string) *ActionDnsRecordLogShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnsRecordShow(client *Client) *ActionDnsRecordShow {
 
 // ActionDnsRecordShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsRecordShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,30 +76,30 @@ func (in *ActionDnsRecordShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsRecordShowOutput is a type for action output parameters
 type ActionDnsRecordShowOutput struct {
-	Comment              string                   `json:"comment"`
-	Content              string                   `json:"content"`
-	CreatedAt            string                   `json:"created_at"`
-	DnsZone              *ActionDnsZoneShowOutput `json:"dns_zone"`
-	DynamicUpdateEnabled bool                     `json:"dynamic_update_enabled"`
-	DynamicUpdateUrl     string                   `json:"dynamic_update_url"`
-	Enabled              bool                     `json:"enabled"`
-	Id                   int64                    `json:"id"`
-	Managed              bool                     `json:"managed"`
-	Name                 string                   `json:"name"`
-	Priority             int64                    `json:"priority"`
-	Ttl                  int64                    `json:"ttl"`
-	Type                 string                   `json:"type"`
-	UpdatedAt            string                   `json:"updated_at"`
-	User                 *ActionUserShowOutput    `json:"user"`
+	Comment              string                   "json:\"comment\""
+	Content              string                   "json:\"content\""
+	CreatedAt            string                   "json:\"created_at\""
+	DnsZone              *ActionDnsZoneShowOutput "json:\"dns_zone\""
+	DynamicUpdateEnabled bool                     "json:\"dynamic_update_enabled\""
+	DynamicUpdateUrl     string                   "json:\"dynamic_update_url\""
+	Enabled              bool                     "json:\"enabled\""
+	Id                   int64                    "json:\"id\""
+	Managed              bool                     "json:\"managed\""
+	Name                 string                   "json:\"name\""
+	Priority             int64                    "json:\"priority\""
+	Ttl                  int64                    "json:\"ttl\""
+	Type                 string                   "json:\"type\""
+	UpdatedAt            string                   "json:\"updated_at\""
+	User                 *ActionUserShowOutput    "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionDnsRecordShowResponse struct {
-	Action *ActionDnsRecordShow `json:"-"`
+	Action *ActionDnsRecordShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsRecord *ActionDnsRecordShowOutput `json:"dns_record"`
+		DnsRecord *ActionDnsRecordShowOutput "json:\"dns_record\""
 	}
 
 	// Action output without the namespace
@@ -131,7 +132,7 @@ func (inv *ActionDnsRecordShowInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsRecordShowInvocation) SetPathParamString(param string, value string) *ActionDnsRecordShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

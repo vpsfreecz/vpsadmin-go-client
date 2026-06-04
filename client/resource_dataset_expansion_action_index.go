@@ -16,9 +16,9 @@ func NewActionDatasetExpansionIndex(client *Client) *ActionDatasetExpansionIndex
 
 // ActionDatasetExpansionIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetExpansionIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,8 +86,8 @@ func (in *ActionDatasetExpansionIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetExpansionIndexInput is a type for action input parameters
 type ActionDatasetExpansionIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -158,27 +158,27 @@ func (in *ActionDatasetExpansionIndexInput) AnySelected() bool {
 
 // ActionDatasetExpansionIndexOutput is a type for action output parameters
 type ActionDatasetExpansionIndexOutput struct {
-	AddedSpace             int64                    `json:"added_space"`
-	CreatedAt              string                   `json:"created_at"`
-	Dataset                *ActionDatasetShowOutput `json:"dataset"`
-	EnableNotifications    bool                     `json:"enable_notifications"`
-	EnableShrink           bool                     `json:"enable_shrink"`
-	Id                     int64                    `json:"id"`
-	MaxOverRefquotaSeconds int64                    `json:"max_over_refquota_seconds"`
-	OriginalRefquota       int64                    `json:"original_refquota"`
-	OverRefquotaSeconds    int64                    `json:"over_refquota_seconds"`
-	State                  string                   `json:"state"`
-	StopVps                bool                     `json:"stop_vps"`
-	Vps                    *ActionVpsShowOutput     `json:"vps"`
+	AddedSpace             int64                    "json:\"added_space\""
+	CreatedAt              string                   "json:\"created_at\""
+	Dataset                *ActionDatasetShowOutput "json:\"dataset\""
+	EnableNotifications    bool                     "json:\"enable_notifications\""
+	EnableShrink           bool                     "json:\"enable_shrink\""
+	Id                     int64                    "json:\"id\""
+	MaxOverRefquotaSeconds int64                    "json:\"max_over_refquota_seconds\""
+	OriginalRefquota       int64                    "json:\"original_refquota\""
+	OverRefquotaSeconds    int64                    "json:\"over_refquota_seconds\""
+	State                  string                   "json:\"state\""
+	StopVps                bool                     "json:\"stop_vps\""
+	Vps                    *ActionVpsShowOutput     "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetExpansionIndexResponse struct {
-	Action *ActionDatasetExpansionIndex `json:"-"`
+	Action *ActionDatasetExpansionIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DatasetExpansions []*ActionDatasetExpansionIndexOutput `json:"dataset_expansions"`
+		DatasetExpansions []*ActionDatasetExpansionIndexOutput "json:\"dataset_expansions\""
 	}
 
 	// Action output without the namespace

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDatasetUpdate(client *Client) *ActionDatasetUpdate {
 
 // ActionDatasetUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,16 +76,16 @@ func (in *ActionDatasetUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetUpdateInput is a type for action input parameters
 type ActionDatasetUpdateInput struct {
-	AdminLockType string `json:"admin_lock_type"`
-	AdminOverride bool   `json:"admin_override"`
-	Atime         bool   `json:"atime"`
-	Compression   bool   `json:"compression"`
-	Quota         int64  `json:"quota"`
-	Recordsize    int64  `json:"recordsize"`
-	Refquota      int64  `json:"refquota"`
-	Relatime      bool   `json:"relatime"`
-	Sharenfs      string `json:"sharenfs"`
-	Sync          string `json:"sync"`
+	AdminLockType string "json:\"admin_lock_type\""
+	AdminOverride bool   "json:\"admin_override\""
+	Atime         bool   "json:\"atime\""
+	Compression   bool   "json:\"compression\""
+	Quota         int64  "json:\"quota\""
+	Recordsize    int64  "json:\"recordsize\""
+	Refquota      int64  "json:\"refquota\""
+	Relatime      bool   "json:\"relatime\""
+	Sharenfs      string "json:\"sharenfs\""
+	Sync          string "json:\"sync\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -251,23 +252,23 @@ func (in *ActionDatasetUpdateInput) AnySelected() bool {
 
 // ActionDatasetUpdateRequest is a type for the entire action request
 type ActionDatasetUpdateRequest struct {
-	Dataset map[string]interface{} `json:"dataset"`
-	Meta    map[string]interface{} `json:"_meta"`
+	Dataset map[string]interface{} "json:\"dataset\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDatasetUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionDatasetUpdateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetUpdateResponse struct {
-	Action *ActionDatasetUpdate `json:"-"`
+	Action *ActionDatasetUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionDatasetUpdateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDatasetUpdateMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -299,7 +300,7 @@ func (inv *ActionDatasetUpdateInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetUpdateInvocation) SetPathParamString(param string, value string) *ActionDatasetUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

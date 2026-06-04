@@ -16,9 +16,9 @@ func NewActionDnsZoneIndex(client *Client) *ActionDnsZoneIndex {
 
 // ActionDnsZoneIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsZoneIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,13 +86,13 @@ func (in *ActionDnsZoneIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsZoneIndexInput is a type for action input parameters
 type ActionDnsZoneIndexInput struct {
-	DnssecEnabled bool   `json:"dnssec_enabled"`
-	Enabled       bool   `json:"enabled"`
-	FromId        int64  `json:"from_id"`
-	Limit         int64  `json:"limit"`
-	Role          string `json:"role"`
-	Source        string `json:"source"`
-	User          int64  `json:"user"`
+	DnssecEnabled bool   "json:\"dnssec_enabled\""
+	Enabled       bool   "json:\"enabled\""
+	FromId        int64  "json:\"from_id\""
+	Limit         int64  "json:\"limit\""
+	Role          string "json:\"role\""
+	Source        string "json:\"source\""
+	User          int64  "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -242,30 +242,30 @@ func (in *ActionDnsZoneIndexInput) AnySelected() bool {
 
 // ActionDnsZoneIndexOutput is a type for action output parameters
 type ActionDnsZoneIndexOutput struct {
-	CreatedAt             string                `json:"created_at"`
-	DefaultTtl            int64                 `json:"default_ttl"`
-	DnssecEnabled         bool                  `json:"dnssec_enabled"`
-	Email                 string                `json:"email"`
-	Enabled               bool                  `json:"enabled"`
-	Id                    int64                 `json:"id"`
-	Label                 string                `json:"label"`
-	Name                  string                `json:"name"`
-	ReverseNetworkAddress string                `json:"reverse_network_address"`
-	ReverseNetworkPrefix  string                `json:"reverse_network_prefix"`
-	Role                  string                `json:"role"`
-	Serial                int64                 `json:"serial"`
-	Source                string                `json:"source"`
-	UpdatedAt             string                `json:"updated_at"`
-	User                  *ActionUserShowOutput `json:"user"`
+	CreatedAt             string                "json:\"created_at\""
+	DefaultTtl            int64                 "json:\"default_ttl\""
+	DnssecEnabled         bool                  "json:\"dnssec_enabled\""
+	Email                 string                "json:\"email\""
+	Enabled               bool                  "json:\"enabled\""
+	Id                    int64                 "json:\"id\""
+	Label                 string                "json:\"label\""
+	Name                  string                "json:\"name\""
+	ReverseNetworkAddress string                "json:\"reverse_network_address\""
+	ReverseNetworkPrefix  string                "json:\"reverse_network_prefix\""
+	Role                  string                "json:\"role\""
+	Serial                int64                 "json:\"serial\""
+	Source                string                "json:\"source\""
+	UpdatedAt             string                "json:\"updated_at\""
+	User                  *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionDnsZoneIndexResponse struct {
-	Action *ActionDnsZoneIndex `json:"-"`
+	Action *ActionDnsZoneIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsZones []*ActionDnsZoneIndexOutput `json:"dns_zones"`
+		DnsZones []*ActionDnsZoneIndexOutput "json:\"dns_zones\""
 	}
 
 	// Action output without the namespace

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOsFamilyShow(client *Client) *ActionOsFamilyShow {
 
 // ActionOsFamilyShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOsFamilyShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,18 +76,18 @@ func (in *ActionOsFamilyShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOsFamilyShowOutput is a type for action output parameters
 type ActionOsFamilyShowOutput struct {
-	Description string `json:"description"`
-	Id          int64  `json:"id"`
-	Label       string `json:"label"`
+	Description string "json:\"description\""
+	Id          int64  "json:\"id\""
+	Label       string "json:\"label\""
 }
 
 // Type for action response, including envelope
 type ActionOsFamilyShowResponse struct {
-	Action *ActionOsFamilyShow `json:"-"`
+	Action *ActionOsFamilyShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		OsFamily *ActionOsFamilyShowOutput `json:"os_family"`
+		OsFamily *ActionOsFamilyShowOutput "json:\"os_family\""
 	}
 
 	// Action output without the namespace
@@ -119,7 +120,7 @@ func (inv *ActionOsFamilyShowInvocation) SetPathParamInt(param string, value int
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOsFamilyShowInvocation) SetPathParamString(param string, value string) *ActionOsFamilyShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

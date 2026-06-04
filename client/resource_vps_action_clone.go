@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsClone(client *Client) *ActionVpsClone {
 
 // ActionVpsCloneMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsCloneMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,19 +76,18 @@ func (in *ActionVpsCloneMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsCloneInput is a type for action input parameters
 type ActionVpsCloneInput struct {
-	AddressLocation int64  `json:"address_location"`
-	DatasetPlans    bool   `json:"dataset_plans"`
-	Environment     int64  `json:"environment"`
-	Features        bool   `json:"features"`
-	Hostname        string `json:"hostname"`
-	KeepSnapshots   bool   `json:"keep_snapshots"`
-	Location        int64  `json:"location"`
-	Node            int64  `json:"node"`
-	Platform        string `json:"platform"`
-	Resources       bool   `json:"resources"`
-	Stop            bool   `json:"stop"`
-	Subdatasets     bool   `json:"subdatasets"`
-	User            int64  `json:"user"`
+	AddressLocation int64  "json:\"address_location\""
+	DatasetPlans    bool   "json:\"dataset_plans\""
+	Environment     int64  "json:\"environment\""
+	Features        bool   "json:\"features\""
+	Hostname        string "json:\"hostname\""
+	KeepSnapshots   bool   "json:\"keep_snapshots\""
+	Location        int64  "json:\"location\""
+	Node            int64  "json:\"node\""
+	Platform        string "json:\"platform\""
+	Resources       bool   "json:\"resources\""
+	Stop            bool   "json:\"stop\""
+	User            int64  "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -226,18 +226,6 @@ func (in *ActionVpsCloneInput) SetStop(value bool) *ActionVpsCloneInput {
 	return in
 }
 
-// SetSubdatasets sets parameter Subdatasets to value and selects it for sending
-func (in *ActionVpsCloneInput) SetSubdatasets(value bool) *ActionVpsCloneInput {
-	in.Subdatasets = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Subdatasets"] = nil
-	return in
-}
-
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionVpsCloneInput) SetUser(value int64) *ActionVpsCloneInput {
 	in.User = value
@@ -290,73 +278,73 @@ func (in *ActionVpsCloneInput) AnySelected() bool {
 
 // ActionVpsCloneRequest is a type for the entire action request
 type ActionVpsCloneRequest struct {
-	Vps  map[string]interface{} `json:"vps"`
-	Meta map[string]interface{} `json:"_meta"`
+	Vps  map[string]interface{} "json:\"vps\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsCloneOutput is a type for action output parameters
 type ActionVpsCloneOutput struct {
-	AllowAdminModifications       bool                              `json:"allow_admin_modifications"`
-	AutostartEnable               bool                              `json:"autostart_enable"`
-	AutostartPriority             int64                             `json:"autostart_priority"`
-	CgroupVersion                 string                            `json:"cgroup_version"`
-	Config                        string                            `json:"config"`
-	Cpu                           int64                             `json:"cpu"`
-	CpuIdle                       float64                           `json:"cpu_idle"`
-	CpuIowait                     float64                           `json:"cpu_iowait"`
-	CpuIrq                        float64                           `json:"cpu_irq"`
-	CpuLimit                      int64                             `json:"cpu_limit"`
-	CpuNice                       float64                           `json:"cpu_nice"`
-	CpuSoftirq                    float64                           `json:"cpu_softirq"`
-	CpuSystem                     float64                           `json:"cpu_system"`
-	CpuUser                       float64                           `json:"cpu_user"`
-	CreatedAt                     string                            `json:"created_at"`
-	Dataset                       *ActionDatasetShowOutput          `json:"dataset"`
-	Diskspace                     int64                             `json:"diskspace"`
-	DnsResolver                   *ActionDnsResolverShowOutput      `json:"dns_resolver"`
-	EnableNetwork                 bool                              `json:"enable_network"`
-	EnableOsTemplateAutoUpdate    bool                              `json:"enable_os_template_auto_update"`
-	Hostname                      string                            `json:"hostname"`
-	Id                            int64                             `json:"id"`
-	ImplicitOomReportRuleHitCount int64                             `json:"implicit_oom_report_rule_hit_count"`
-	InRescueMode                  bool                              `json:"in_rescue_mode"`
-	Info                          string                            `json:"info"`
-	IsRunning                     bool                              `json:"is_running"`
-	Loadavg1                      float64                           `json:"loadavg1"`
-	Loadavg15                     float64                           `json:"loadavg15"`
-	Loadavg5                      float64                           `json:"loadavg5"`
-	ManageHostname                bool                              `json:"manage_hostname"`
-	MapMode                       string                            `json:"map_mode"`
-	Memory                        int64                             `json:"memory"`
-	Node                          *ActionNodeShowOutput             `json:"node"`
-	Onstartall                    bool                              `json:"onstartall"`
-	OsTemplate                    *ActionOsTemplateShowOutput       `json:"os_template"`
-	Pool                          *ActionPoolShowOutput             `json:"pool"`
-	ProcessCount                  int64                             `json:"process_count"`
-	StartMenuTimeout              int64                             `json:"start_menu_timeout"`
-	Swap                          int64                             `json:"swap"`
-	Uptime                        int64                             `json:"uptime"`
-	UsedDiskspace                 int64                             `json:"used_diskspace"`
-	UsedMemory                    int64                             `json:"used_memory"`
-	UsedSwap                      int64                             `json:"used_swap"`
-	User                          *ActionUserShowOutput             `json:"user"`
-	UserNamespaceMap              *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
+	AllowAdminModifications       bool                              "json:\"allow_admin_modifications\""
+	AutostartEnable               bool                              "json:\"autostart_enable\""
+	AutostartPriority             int64                             "json:\"autostart_priority\""
+	CgroupVersion                 string                            "json:\"cgroup_version\""
+	Config                        string                            "json:\"config\""
+	Cpu                           int64                             "json:\"cpu\""
+	CpuIdle                       float64                           "json:\"cpu_idle\""
+	CpuIowait                     float64                           "json:\"cpu_iowait\""
+	CpuIrq                        float64                           "json:\"cpu_irq\""
+	CpuLimit                      int64                             "json:\"cpu_limit\""
+	CpuNice                       float64                           "json:\"cpu_nice\""
+	CpuSoftirq                    float64                           "json:\"cpu_softirq\""
+	CpuSystem                     float64                           "json:\"cpu_system\""
+	CpuUser                       float64                           "json:\"cpu_user\""
+	CreatedAt                     string                            "json:\"created_at\""
+	Dataset                       *ActionDatasetShowOutput          "json:\"dataset\""
+	Diskspace                     int64                             "json:\"diskspace\""
+	DnsResolver                   *ActionDnsResolverShowOutput      "json:\"dns_resolver\""
+	EnableNetwork                 bool                              "json:\"enable_network\""
+	EnableOsTemplateAutoUpdate    bool                              "json:\"enable_os_template_auto_update\""
+	Hostname                      string                            "json:\"hostname\""
+	Id                            int64                             "json:\"id\""
+	ImplicitOomReportRuleHitCount int64                             "json:\"implicit_oom_report_rule_hit_count\""
+	InRescueMode                  bool                              "json:\"in_rescue_mode\""
+	Info                          string                            "json:\"info\""
+	IsRunning                     bool                              "json:\"is_running\""
+	Loadavg1                      float64                           "json:\"loadavg1\""
+	Loadavg15                     float64                           "json:\"loadavg15\""
+	Loadavg5                      float64                           "json:\"loadavg5\""
+	ManageHostname                bool                              "json:\"manage_hostname\""
+	MapMode                       string                            "json:\"map_mode\""
+	Memory                        int64                             "json:\"memory\""
+	Node                          *ActionNodeShowOutput             "json:\"node\""
+	Onstartall                    bool                              "json:\"onstartall\""
+	OsTemplate                    *ActionOsTemplateShowOutput       "json:\"os_template\""
+	Pool                          *ActionPoolShowOutput             "json:\"pool\""
+	ProcessCount                  int64                             "json:\"process_count\""
+	StartMenuTimeout              int64                             "json:\"start_menu_timeout\""
+	Swap                          int64                             "json:\"swap\""
+	Uptime                        int64                             "json:\"uptime\""
+	UsedDiskspace                 int64                             "json:\"used_diskspace\""
+	UsedMemory                    int64                             "json:\"used_memory\""
+	UsedSwap                      int64                             "json:\"used_swap\""
+	User                          *ActionUserShowOutput             "json:\"user\""
+	UserNamespaceMap              *ActionUserNamespaceMapShowOutput "json:\"user_namespace_map\""
 }
 
 // ActionVpsCloneMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsCloneMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionVpsCloneResponse struct {
-	Action *ActionVpsClone `json:"-"`
+	Action *ActionVpsClone "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Vps *ActionVpsCloneOutput `json:"vps"`
+		Vps *ActionVpsCloneOutput "json:\"vps\""
 		// Global output metadata
-		Meta *ActionVpsCloneMetaGlobalOutput `json:"_meta"`
+		Meta *ActionVpsCloneMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -391,7 +379,7 @@ func (inv *ActionVpsCloneInvocation) SetPathParamInt(param string, value int64) 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsCloneInvocation) SetPathParamString(param string, value string) *ActionVpsCloneInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 
@@ -646,9 +634,6 @@ func (inv *ActionVpsCloneInvocation) makeInputParams() map[string]interface{} {
 		}
 		if inv.IsParameterSelected("Stop") {
 			ret["stop"] = inv.Input.Stop
-		}
-		if inv.IsParameterSelected("Subdatasets") {
-			ret["subdatasets"] = inv.Input.Subdatasets
 		}
 		if inv.IsParameterSelected("User") {
 			ret["user"] = inv.Input.User

@@ -16,8 +16,8 @@ func NewActionUserSessionCreate(client *Client) *ActionUserSessionCreate {
 
 // ActionUserSessionCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserSessionCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,11 +73,11 @@ func (in *ActionUserSessionCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserSessionCreateInput is a type for action input parameters
 type ActionUserSessionCreateInput struct {
-	Label         string `json:"label"`
-	Scope         string `json:"scope"`
-	TokenInterval int64  `json:"token_interval"`
-	TokenLifetime string `json:"token_lifetime"`
-	User          int64  `json:"user"`
+	Label         string "json:\"label\""
+	Scope         string "json:\"scope\""
+	TokenInterval int64  "json:\"token_interval\""
+	TokenLifetime string "json:\"token_lifetime\""
+	User          int64  "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -184,41 +184,41 @@ func (in *ActionUserSessionCreateInput) AnySelected() bool {
 
 // ActionUserSessionCreateRequest is a type for the entire action request
 type ActionUserSessionCreateRequest struct {
-	UserSession map[string]interface{} `json:"user_session"`
-	Meta        map[string]interface{} `json:"_meta"`
+	UserSession map[string]interface{} "json:\"user_session\""
+	Meta        map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserSessionCreateOutput is a type for action output parameters
 type ActionUserSessionCreateOutput struct {
-	Admin         *ActionUserShowOutput `json:"admin"`
-	ApiIpAddr     string                `json:"api_ip_addr"`
-	ApiIpPtr      string                `json:"api_ip_ptr"`
-	AuthType      string                `json:"auth_type"`
-	ClientIpAddr  string                `json:"client_ip_addr"`
-	ClientIpPtr   string                `json:"client_ip_ptr"`
-	ClientVersion string                `json:"client_version"`
-	ClosedAt      string                `json:"closed_at"`
-	CreatedAt     string                `json:"created_at"`
-	Id            int64                 `json:"id"`
-	Label         string                `json:"label"`
-	LastRequestAt string                `json:"last_request_at"`
-	RequestCount  int64                 `json:"request_count"`
-	Scope         string                `json:"scope"`
-	TokenFragment string                `json:"token_fragment"`
-	TokenFull     string                `json:"token_full"`
-	TokenInterval int64                 `json:"token_interval"`
-	TokenLifetime string                `json:"token_lifetime"`
-	User          *ActionUserShowOutput `json:"user"`
-	UserAgent     string                `json:"user_agent"`
+	Admin         *ActionUserShowOutput "json:\"admin\""
+	ApiIpAddr     string                "json:\"api_ip_addr\""
+	ApiIpPtr      string                "json:\"api_ip_ptr\""
+	AuthType      string                "json:\"auth_type\""
+	ClientIpAddr  string                "json:\"client_ip_addr\""
+	ClientIpPtr   string                "json:\"client_ip_ptr\""
+	ClientVersion string                "json:\"client_version\""
+	ClosedAt      string                "json:\"closed_at\""
+	CreatedAt     string                "json:\"created_at\""
+	Id            int64                 "json:\"id\""
+	Label         string                "json:\"label\""
+	LastRequestAt string                "json:\"last_request_at\""
+	RequestCount  int64                 "json:\"request_count\""
+	Scope         string                "json:\"scope\""
+	TokenFragment string                "json:\"token_fragment\""
+	TokenFull     string                "json:\"token_full\""
+	TokenInterval int64                 "json:\"token_interval\""
+	TokenLifetime string                "json:\"token_lifetime\""
+	User          *ActionUserShowOutput "json:\"user\""
+	UserAgent     string                "json:\"user_agent\""
 }
 
 // Type for action response, including envelope
 type ActionUserSessionCreateResponse struct {
-	Action *ActionUserSessionCreate `json:"-"`
+	Action *ActionUserSessionCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		UserSession *ActionUserSessionCreateOutput `json:"user_session"`
+		UserSession *ActionUserSessionCreateOutput "json:\"user_session\""
 	}
 
 	// Action output without the namespace

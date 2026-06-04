@@ -16,8 +16,8 @@ func NewActionUserRequestChangeCreate(client *Client) *ActionUserRequestChangeCr
 
 // ActionUserRequestChangeCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestChangeCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,10 +73,10 @@ func (in *ActionUserRequestChangeCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserRequestChangeCreateInput is a type for action input parameters
 type ActionUserRequestChangeCreateInput struct {
-	Address      string `json:"address"`
-	ChangeReason string `json:"change_reason"`
-	Email        string `json:"email"`
-	FullName     string `json:"full_name"`
+	Address      string "json:\"address\""
+	ChangeReason string "json:\"change_reason\""
+	Email        string "json:\"email\""
+	FullName     string "json:\"full_name\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -171,37 +171,37 @@ func (in *ActionUserRequestChangeCreateInput) AnySelected() bool {
 
 // ActionUserRequestChangeCreateRequest is a type for the entire action request
 type ActionUserRequestChangeCreateRequest struct {
-	Change map[string]interface{} `json:"change"`
-	Meta   map[string]interface{} `json:"_meta"`
+	Change map[string]interface{} "json:\"change\""
+	Meta   map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserRequestChangeCreateOutput is a type for action output parameters
 type ActionUserRequestChangeCreateOutput struct {
-	Address       string                `json:"address"`
-	Admin         *ActionUserShowOutput `json:"admin"`
-	AdminResponse string                `json:"admin_response"`
-	ApiIpAddr     string                `json:"api_ip_addr"`
-	ApiIpPtr      string                `json:"api_ip_ptr"`
-	ChangeReason  string                `json:"change_reason"`
-	ClientIpAddr  string                `json:"client_ip_addr"`
-	ClientIpPtr   string                `json:"client_ip_ptr"`
-	CreatedAt     string                `json:"created_at"`
-	Email         string                `json:"email"`
-	FullName      string                `json:"full_name"`
-	Id            int64                 `json:"id"`
-	Label         string                `json:"label"`
-	State         string                `json:"state"`
-	UpdatedAt     string                `json:"updated_at"`
-	User          *ActionUserShowOutput `json:"user"`
+	Address       string                "json:\"address\""
+	Admin         *ActionUserShowOutput "json:\"admin\""
+	AdminResponse string                "json:\"admin_response\""
+	ApiIpAddr     string                "json:\"api_ip_addr\""
+	ApiIpPtr      string                "json:\"api_ip_ptr\""
+	ChangeReason  string                "json:\"change_reason\""
+	ClientIpAddr  string                "json:\"client_ip_addr\""
+	ClientIpPtr   string                "json:\"client_ip_ptr\""
+	CreatedAt     string                "json:\"created_at\""
+	Email         string                "json:\"email\""
+	FullName      string                "json:\"full_name\""
+	Id            int64                 "json:\"id\""
+	Label         string                "json:\"label\""
+	State         string                "json:\"state\""
+	UpdatedAt     string                "json:\"updated_at\""
+	User          *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionUserRequestChangeCreateResponse struct {
-	Action *ActionUserRequestChangeCreate `json:"-"`
+	Action *ActionUserRequestChangeCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Change *ActionUserRequestChangeCreateOutput `json:"change"`
+		Change *ActionUserRequestChangeCreateOutput "json:\"change\""
 	}
 
 	// Action output without the namespace

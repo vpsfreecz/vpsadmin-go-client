@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnsServerShow(client *Client) *ActionDnsServerShow {
 
 // ActionDnsServerShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsServerShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,25 +76,25 @@ func (in *ActionDnsServerShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsServerShowOutput is a type for action output parameters
 type ActionDnsServerShowOutput struct {
-	CreatedAt          string                `json:"created_at"`
-	EnableUserDnsZones bool                  `json:"enable_user_dns_zones"`
-	Hidden             bool                  `json:"hidden"`
-	Id                 int64                 `json:"id"`
-	Ipv4Addr           string                `json:"ipv4_addr"`
-	Ipv6Addr           string                `json:"ipv6_addr"`
-	Name               string                `json:"name"`
-	Node               *ActionNodeShowOutput `json:"node"`
-	UpdatedAt          string                `json:"updated_at"`
-	UserDnsZoneType    string                `json:"user_dns_zone_type"`
+	CreatedAt          string                "json:\"created_at\""
+	EnableUserDnsZones bool                  "json:\"enable_user_dns_zones\""
+	Hidden             bool                  "json:\"hidden\""
+	Id                 int64                 "json:\"id\""
+	Ipv4Addr           string                "json:\"ipv4_addr\""
+	Ipv6Addr           string                "json:\"ipv6_addr\""
+	Name               string                "json:\"name\""
+	Node               *ActionNodeShowOutput "json:\"node\""
+	UpdatedAt          string                "json:\"updated_at\""
+	UserDnsZoneType    string                "json:\"user_dns_zone_type\""
 }
 
 // Type for action response, including envelope
 type ActionDnsServerShowResponse struct {
-	Action *ActionDnsServerShow `json:"-"`
+	Action *ActionDnsServerShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsServer *ActionDnsServerShowOutput `json:"dns_server"`
+		DnsServer *ActionDnsServerShowOutput "json:\"dns_server\""
 	}
 
 	// Action output without the namespace
@@ -126,7 +127,7 @@ func (inv *ActionDnsServerShowInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsServerShowInvocation) SetPathParamString(param string, value string) *ActionDnsServerShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionHostIpAddressDelete(client *Client) *ActionHostIpAddressDelete {
 
 // ActionHostIpAddressDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionHostIpAddressDeleteMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,22 +76,22 @@ func (in *ActionHostIpAddressDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionHostIpAddressDeleteRequest is a type for the entire action request
 type ActionHostIpAddressDeleteRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionHostIpAddressDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionHostIpAddressDeleteMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionHostIpAddressDeleteResponse struct {
-	Action *ActionHostIpAddressDelete `json:"-"`
+	Action *ActionHostIpAddressDelete "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionHostIpAddressDeleteMetaGlobalOutput `json:"_meta"`
+		Meta *ActionHostIpAddressDeleteMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -120,7 +121,7 @@ func (inv *ActionHostIpAddressDeleteInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionHostIpAddressDeleteInvocation) SetPathParamString(param string, value string) *ActionHostIpAddressDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

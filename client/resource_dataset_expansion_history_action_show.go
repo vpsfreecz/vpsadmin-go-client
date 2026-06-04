@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDatasetExpansionHistoryShow(client *Client) *ActionDatasetExpansio
 
 // ActionDatasetExpansionHistoryShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetExpansionHistoryShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,21 +76,21 @@ func (in *ActionDatasetExpansionHistoryShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetExpansionHistoryShowOutput is a type for action output parameters
 type ActionDatasetExpansionHistoryShowOutput struct {
-	AddedSpace       int64                 `json:"added_space"`
-	Admin            *ActionUserShowOutput `json:"admin"`
-	CreatedAt        string                `json:"created_at"`
-	Id               int64                 `json:"id"`
-	NewRefquota      int64                 `json:"new_refquota"`
-	OriginalRefquota int64                 `json:"original_refquota"`
+	AddedSpace       int64                 "json:\"added_space\""
+	Admin            *ActionUserShowOutput "json:\"admin\""
+	CreatedAt        string                "json:\"created_at\""
+	Id               int64                 "json:\"id\""
+	NewRefquota      int64                 "json:\"new_refquota\""
+	OriginalRefquota int64                 "json:\"original_refquota\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetExpansionHistoryShowResponse struct {
-	Action *ActionDatasetExpansionHistoryShow `json:"-"`
+	Action *ActionDatasetExpansionHistoryShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		History *ActionDatasetExpansionHistoryShowOutput `json:"history"`
+		History *ActionDatasetExpansionHistoryShowOutput "json:\"history\""
 	}
 
 	// Action output without the namespace
@@ -122,7 +123,7 @@ func (inv *ActionDatasetExpansionHistoryShowInvocation) SetPathParamInt(param st
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetExpansionHistoryShowInvocation) SetPathParamString(param string, value string) *ActionDatasetExpansionHistoryShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

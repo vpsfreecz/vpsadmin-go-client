@@ -16,8 +16,8 @@ func NewActionOutageUpdateCreate(client *Client) *ActionOutageUpdateCreate {
 
 // ActionOutageUpdateCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageUpdateCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,17 +73,17 @@ func (in *ActionOutageUpdateCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageUpdateCreateInput is a type for action input parameters
 type ActionOutageUpdateCreateInput struct {
-	BeginsAt      string `json:"begins_at"`
-	CsDescription string `json:"cs_description"`
-	CsSummary     string `json:"cs_summary"`
-	Duration      int64  `json:"duration"`
-	EnDescription string `json:"en_description"`
-	EnSummary     string `json:"en_summary"`
-	FinishedAt    string `json:"finished_at"`
-	Impact        string `json:"impact"`
-	Outage        int64  `json:"outage"`
-	SendMail      bool   `json:"send_mail"`
-	State         string `json:"state"`
+	BeginsAt      string "json:\"begins_at\""
+	CsDescription string "json:\"cs_description\""
+	CsSummary     string "json:\"cs_summary\""
+	Duration      int64  "json:\"duration\""
+	EnDescription string "json:\"en_description\""
+	EnSummary     string "json:\"en_summary\""
+	FinishedAt    string "json:\"finished_at\""
+	Impact        string "json:\"impact\""
+	Outage        int64  "json:\"outage\""
+	SendMail      bool   "json:\"send_mail\""
+	State         string "json:\"state\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -300,43 +300,43 @@ func (in *ActionOutageUpdateCreateInput) AnySelected() bool {
 
 // ActionOutageUpdateCreateRequest is a type for the entire action request
 type ActionOutageUpdateCreateRequest struct {
-	OutageUpdate map[string]interface{} `json:"outage_update"`
-	Meta         map[string]interface{} `json:"_meta"`
+	OutageUpdate map[string]interface{} "json:\"outage_update\""
+	Meta         map[string]interface{} "json:\"_meta\""
 }
 
 // ActionOutageUpdateCreateOutput is a type for action output parameters
 type ActionOutageUpdateCreateOutput struct {
-	BeginsAt      string                  `json:"begins_at"`
-	CreatedAt     string                  `json:"created_at"`
-	CsDescription string                  `json:"cs_description"`
-	CsSummary     string                  `json:"cs_summary"`
-	Duration      int64                   `json:"duration"`
-	EnDescription string                  `json:"en_description"`
-	EnSummary     string                  `json:"en_summary"`
-	FinishedAt    string                  `json:"finished_at"`
-	Id            int64                   `json:"id"`
-	Impact        string                  `json:"impact"`
-	Outage        *ActionOutageShowOutput `json:"outage"`
-	ReportedBy    *ActionUserShowOutput   `json:"reported_by"`
-	ReporterName  string                  `json:"reporter_name"`
-	State         string                  `json:"state"`
-	Type          string                  `json:"type"`
+	BeginsAt      string                  "json:\"begins_at\""
+	CreatedAt     string                  "json:\"created_at\""
+	CsDescription string                  "json:\"cs_description\""
+	CsSummary     string                  "json:\"cs_summary\""
+	Duration      int64                   "json:\"duration\""
+	EnDescription string                  "json:\"en_description\""
+	EnSummary     string                  "json:\"en_summary\""
+	FinishedAt    string                  "json:\"finished_at\""
+	Id            int64                   "json:\"id\""
+	Impact        string                  "json:\"impact\""
+	Outage        *ActionOutageShowOutput "json:\"outage\""
+	ReportedBy    *ActionUserShowOutput   "json:\"reported_by\""
+	ReporterName  string                  "json:\"reporter_name\""
+	State         string                  "json:\"state\""
+	Type          string                  "json:\"type\""
 }
 
 // ActionOutageUpdateCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionOutageUpdateCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionOutageUpdateCreateResponse struct {
-	Action *ActionOutageUpdateCreate `json:"-"`
+	Action *ActionOutageUpdateCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		OutageUpdate *ActionOutageUpdateCreateOutput `json:"outage_update"`
+		OutageUpdate *ActionOutageUpdateCreateOutput "json:\"outage_update\""
 		// Global output metadata
-		Meta *ActionOutageUpdateCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionOutageUpdateCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

@@ -16,8 +16,8 @@ func NewActionDatasetCreate(client *Client) *ActionDatasetCreate {
 
 // ActionDatasetCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,17 +73,17 @@ func (in *ActionDatasetCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetCreateInput is a type for action input parameters
 type ActionDatasetCreateInput struct {
-	Atime       bool   `json:"atime"`
-	Automount   bool   `json:"automount"`
-	Compression bool   `json:"compression"`
-	Dataset     int64  `json:"dataset"`
-	Name        string `json:"name"`
-	Quota       int64  `json:"quota"`
-	Recordsize  int64  `json:"recordsize"`
-	Refquota    int64  `json:"refquota"`
-	Relatime    bool   `json:"relatime"`
-	Sharenfs    string `json:"sharenfs"`
-	Sync        string `json:"sync"`
+	Atime       bool   "json:\"atime\""
+	Automount   bool   "json:\"automount\""
+	Compression bool   "json:\"compression\""
+	Dataset     int64  "json:\"dataset\""
+	Name        string "json:\"name\""
+	Quota       int64  "json:\"quota\""
+	Recordsize  int64  "json:\"recordsize\""
+	Refquota    int64  "json:\"refquota\""
+	Relatime    bool   "json:\"relatime\""
+	Sharenfs    string "json:\"sharenfs\""
+	Sync        string "json:\"sync\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -262,50 +262,50 @@ func (in *ActionDatasetCreateInput) AnySelected() bool {
 
 // ActionDatasetCreateRequest is a type for the entire action request
 type ActionDatasetCreateRequest struct {
-	Dataset map[string]interface{} `json:"dataset"`
-	Meta    map[string]interface{} `json:"_meta"`
+	Dataset map[string]interface{} "json:\"dataset\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDatasetCreateOutput is a type for action output parameters
 type ActionDatasetCreateOutput struct {
-	Atime            bool                              `json:"atime"`
-	Avail            int64                             `json:"avail"`
-	Compression      bool                              `json:"compression"`
-	Compressratio    float64                           `json:"compressratio"`
-	CurrentHistoryId int64                             `json:"current_history_id"`
-	DatasetExpansion *ActionDatasetExpansionShowOutput `json:"dataset_expansion"`
-	Environment      *ActionEnvironmentShowOutput      `json:"environment"`
-	Export           *ActionExportShowOutput           `json:"export"`
-	Id               int64                             `json:"id"`
-	Name             string                            `json:"name"`
-	Parent           *ActionDatasetShowOutput          `json:"parent"`
-	Quota            int64                             `json:"quota"`
-	Recordsize       int64                             `json:"recordsize"`
-	Refcompressratio float64                           `json:"refcompressratio"`
-	Referenced       int64                             `json:"referenced"`
-	Refquota         int64                             `json:"refquota"`
-	Relatime         bool                              `json:"relatime"`
-	Sharenfs         string                            `json:"sharenfs"`
-	Sync             string                            `json:"sync"`
-	Used             int64                             `json:"used"`
-	User             *ActionUserShowOutput             `json:"user"`
-	Vps              *ActionVpsShowOutput              `json:"vps"`
+	Atime            bool                              "json:\"atime\""
+	Avail            int64                             "json:\"avail\""
+	Compression      bool                              "json:\"compression\""
+	Compressratio    float64                           "json:\"compressratio\""
+	CurrentHistoryId int64                             "json:\"current_history_id\""
+	DatasetExpansion *ActionDatasetExpansionShowOutput "json:\"dataset_expansion\""
+	Environment      *ActionEnvironmentShowOutput      "json:\"environment\""
+	Export           *ActionExportShowOutput           "json:\"export\""
+	Id               int64                             "json:\"id\""
+	Name             string                            "json:\"name\""
+	Parent           *ActionDatasetShowOutput          "json:\"parent\""
+	Quota            int64                             "json:\"quota\""
+	Recordsize       int64                             "json:\"recordsize\""
+	Refcompressratio float64                           "json:\"refcompressratio\""
+	Referenced       int64                             "json:\"referenced\""
+	Refquota         int64                             "json:\"refquota\""
+	Relatime         bool                              "json:\"relatime\""
+	Sharenfs         string                            "json:\"sharenfs\""
+	Sync             string                            "json:\"sync\""
+	Used             int64                             "json:\"used\""
+	User             *ActionUserShowOutput             "json:\"user\""
+	Vps              *ActionVpsShowOutput              "json:\"vps\""
 }
 
 // ActionDatasetCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionDatasetCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetCreateResponse struct {
-	Action *ActionDatasetCreate `json:"-"`
+	Action *ActionDatasetCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Dataset *ActionDatasetCreateOutput `json:"dataset"`
+		Dataset *ActionDatasetCreateOutput "json:\"dataset\""
 		// Global output metadata
-		Meta *ActionDatasetCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDatasetCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

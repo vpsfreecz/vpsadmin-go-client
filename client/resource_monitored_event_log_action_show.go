@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMonitoredEventLogShow(client *Client) *ActionMonitoredEventLogShow
 
 // ActionMonitoredEventLogShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMonitoredEventLogShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,18 +76,18 @@ func (in *ActionMonitoredEventLogShowMetaGlobalInput) AnySelected() bool {
 
 // ActionMonitoredEventLogShowOutput is a type for action output parameters
 type ActionMonitoredEventLogShowOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id        int64  `json:"id"`
-	Passed    bool   `json:"passed"`
+	CreatedAt string "json:\"created_at\""
+	Id        int64  "json:\"id\""
+	Passed    bool   "json:\"passed\""
 }
 
 // Type for action response, including envelope
 type ActionMonitoredEventLogShowResponse struct {
-	Action *ActionMonitoredEventLogShow `json:"-"`
+	Action *ActionMonitoredEventLogShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Log *ActionMonitoredEventLogShowOutput `json:"log"`
+		Log *ActionMonitoredEventLogShowOutput "json:\"log\""
 	}
 
 	// Action output without the namespace
@@ -119,7 +120,7 @@ func (inv *ActionMonitoredEventLogShowInvocation) SetPathParamInt(param string, 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMonitoredEventLogShowInvocation) SetPathParamString(param string, value string) *ActionMonitoredEventLogShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

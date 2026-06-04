@@ -16,9 +16,9 @@ func NewActionEnvironmentIndex(client *Client) *ActionEnvironmentIndex {
 
 // ActionEnvironmentIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionEnvironmentIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,10 +86,10 @@ func (in *ActionEnvironmentIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionEnvironmentIndexInput is a type for action input parameters
 type ActionEnvironmentIndexInput struct {
-	FromId        int64 `json:"from_id"`
-	HasHypervisor bool  `json:"has_hypervisor"`
-	HasStorage    bool  `json:"has_storage"`
-	Limit         int64 `json:"limit"`
+	FromId        int64 "json:\"from_id\""
+	HasHypervisor bool  "json:\"has_hypervisor\""
+	HasStorage    bool  "json:\"has_storage\""
+	Limit         int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -184,26 +184,26 @@ func (in *ActionEnvironmentIndexInput) AnySelected() bool {
 
 // ActionEnvironmentIndexOutput is a type for action output parameters
 type ActionEnvironmentIndexOutput struct {
-	CanCreateVps          bool   `json:"can_create_vps"`
-	CanDestroyVps         bool   `json:"can_destroy_vps"`
-	Description           string `json:"description"`
-	Domain                string `json:"domain"`
-	Id                    int64  `json:"id"`
-	Label                 string `json:"label"`
-	MaintenanceLock       string `json:"maintenance_lock"`
-	MaintenanceLockReason string `json:"maintenance_lock_reason"`
-	MaxVpsCount           int64  `json:"max_vps_count"`
-	UserIpOwnership       bool   `json:"user_ip_ownership"`
-	VpsLifetime           int64  `json:"vps_lifetime"`
+	CanCreateVps          bool   "json:\"can_create_vps\""
+	CanDestroyVps         bool   "json:\"can_destroy_vps\""
+	Description           string "json:\"description\""
+	Domain                string "json:\"domain\""
+	Id                    int64  "json:\"id\""
+	Label                 string "json:\"label\""
+	MaintenanceLock       string "json:\"maintenance_lock\""
+	MaintenanceLockReason string "json:\"maintenance_lock_reason\""
+	MaxVpsCount           int64  "json:\"max_vps_count\""
+	UserIpOwnership       bool   "json:\"user_ip_ownership\""
+	VpsLifetime           int64  "json:\"vps_lifetime\""
 }
 
 // Type for action response, including envelope
 type ActionEnvironmentIndexResponse struct {
-	Action *ActionEnvironmentIndex `json:"-"`
+	Action *ActionEnvironmentIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Environments []*ActionEnvironmentIndexOutput `json:"environments"`
+		Environments []*ActionEnvironmentIndexOutput "json:\"environments\""
 	}
 
 	// Action output without the namespace

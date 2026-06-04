@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionHostIpAddressFree(client *Client) *ActionHostIpAddressFree {
 
 // ActionHostIpAddressFreeMetaGlobalInput is a type for action global meta input parameters
 type ActionHostIpAddressFreeMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,33 +76,33 @@ func (in *ActionHostIpAddressFreeMetaGlobalInput) AnySelected() bool {
 
 // ActionHostIpAddressFreeRequest is a type for the entire action request
 type ActionHostIpAddressFreeRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionHostIpAddressFreeOutput is a type for action output parameters
 type ActionHostIpAddressFreeOutput struct {
-	Addr               string                     `json:"addr"`
-	Assigned           bool                       `json:"assigned"`
-	Id                 int64                      `json:"id"`
-	IpAddress          *ActionIpAddressShowOutput `json:"ip_address"`
-	ReverseRecordValue string                     `json:"reverse_record_value"`
-	UserCreated        bool                       `json:"user_created"`
+	Addr               string                     "json:\"addr\""
+	Assigned           bool                       "json:\"assigned\""
+	Id                 int64                      "json:\"id\""
+	IpAddress          *ActionIpAddressShowOutput "json:\"ip_address\""
+	ReverseRecordValue string                     "json:\"reverse_record_value\""
+	UserCreated        bool                       "json:\"user_created\""
 }
 
 // ActionHostIpAddressFreeMetaGlobalOutput is a type for global output metadata parameters
 type ActionHostIpAddressFreeMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionHostIpAddressFreeResponse struct {
-	Action *ActionHostIpAddressFree `json:"-"`
+	Action *ActionHostIpAddressFree "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		HostIpAddress *ActionHostIpAddressFreeOutput `json:"host_ip_address"`
+		HostIpAddress *ActionHostIpAddressFreeOutput "json:\"host_ip_address\""
 		// Global output metadata
-		Meta *ActionHostIpAddressFreeMetaGlobalOutput `json:"_meta"`
+		Meta *ActionHostIpAddressFreeMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -134,7 +135,7 @@ func (inv *ActionHostIpAddressFreeInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionHostIpAddressFreeInvocation) SetPathParamString(param string, value string) *ActionHostIpAddressFreeInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

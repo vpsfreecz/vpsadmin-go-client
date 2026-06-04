@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserStateLogShow(client *Client) *ActionUserStateLogShow {
 
 // ActionUserStateLogShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserStateLogShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,22 +76,22 @@ func (in *ActionUserStateLogShowMetaGlobalInput) AnySelected() bool {
 
 // ActionUserStateLogShowOutput is a type for action output parameters
 type ActionUserStateLogShowOutput struct {
-	ChangedAt   string                `json:"changed_at"`
-	Expiration  string                `json:"expiration"`
-	Id          int64                 `json:"id"`
-	Reason      string                `json:"reason"`
-	RemindAfter string                `json:"remind_after"`
-	State       string                `json:"state"`
-	User        *ActionUserShowOutput `json:"user"`
+	ChangedAt   string                "json:\"changed_at\""
+	Expiration  string                "json:\"expiration\""
+	Id          int64                 "json:\"id\""
+	Reason      string                "json:\"reason\""
+	RemindAfter string                "json:\"remind_after\""
+	State       string                "json:\"state\""
+	User        *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionUserStateLogShowResponse struct {
-	Action *ActionUserStateLogShow `json:"-"`
+	Action *ActionUserStateLogShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		StateLog *ActionUserStateLogShowOutput `json:"state_log"`
+		StateLog *ActionUserStateLogShowOutput "json:\"state_log\""
 	}
 
 	// Action output without the namespace
@@ -123,7 +124,7 @@ func (inv *ActionUserStateLogShowInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserStateLogShowInvocation) SetPathParamString(param string, value string) *ActionUserStateLogShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

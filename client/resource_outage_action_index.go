@@ -16,9 +16,9 @@ func NewActionOutageIndex(client *Client) *ActionOutageIndex {
 
 // ActionOutageIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,25 +86,26 @@ func (in *ActionOutageIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageIndexInput is a type for action input parameters
 type ActionOutageIndexInput struct {
-	Affected    bool   `json:"affected"`
-	Component   int64  `json:"component"`
-	EntityId    int64  `json:"entity_id"`
-	EntityName  string `json:"entity_name"`
-	Environment int64  `json:"environment"`
-	Export      int64  `json:"export"`
-	FromId      int64  `json:"from_id"`
-	HandledBy   int64  `json:"handled_by"`
-	Impact      string `json:"impact"`
-	Limit       int64  `json:"limit"`
-	Location    int64  `json:"location"`
-	Node        int64  `json:"node"`
-	Order       string `json:"order"`
-	RecentSince string `json:"recent_since"`
-	Since       string `json:"since"`
-	State       string `json:"state"`
-	Type        string `json:"type"`
-	User        int64  `json:"user"`
-	Vps         int64  `json:"vps"`
+	Affected         bool   "json:\"affected\""
+	Component        int64  "json:\"component\""
+	EntityId         int64  "json:\"entity_id\""
+	EntityName       string "json:\"entity_name\""
+	Environment      int64  "json:\"environment\""
+	Export           int64  "json:\"export\""
+	FromId           int64  "json:\"from_id\""
+	HandledBy        int64  "json:\"handled_by\""
+	Impact           string "json:\"impact\""
+	Limit            int64  "json:\"limit\""
+	Location         int64  "json:\"location\""
+	Node             int64  "json:\"node\""
+	Order            string "json:\"order\""
+	RecentSince      string "json:\"recent_since\""
+	SecurityAdvisory int64  "json:\"security_advisory\""
+	Since            string "json:\"since\""
+	State            string "json:\"state\""
+	Type             string "json:\"type\""
+	User             int64  "json:\"user\""
+	Vps              int64  "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -279,6 +280,18 @@ func (in *ActionOutageIndexInput) SetRecentSince(value string) *ActionOutageInde
 	return in
 }
 
+// SetSecurityAdvisory sets parameter SecurityAdvisory to value and selects it for sending
+func (in *ActionOutageIndexInput) SetSecurityAdvisory(value int64) *ActionOutageIndexInput {
+	in.SecurityAdvisory = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["SecurityAdvisory"] = nil
+	return in
+}
+
 // SetSince sets parameter Since to value and selects it for sending
 func (in *ActionOutageIndexInput) SetSince(value string) *ActionOutageIndexInput {
 	in.Since = value
@@ -379,32 +392,32 @@ func (in *ActionOutageIndexInput) AnySelected() bool {
 
 // ActionOutageIndexOutput is a type for action output parameters
 type ActionOutageIndexOutput struct {
-	Affected                 bool   `json:"affected"`
-	AffectedDirectVpsCount   int64  `json:"affected_direct_vps_count"`
-	AffectedExportCount      int64  `json:"affected_export_count"`
-	AffectedIndirectVpsCount int64  `json:"affected_indirect_vps_count"`
-	AffectedUserCount        int64  `json:"affected_user_count"`
-	AutoResolve              bool   `json:"auto_resolve"`
-	BeginsAt                 string `json:"begins_at"`
-	CsDescription            string `json:"cs_description"`
-	CsSummary                string `json:"cs_summary"`
-	Duration                 int64  `json:"duration"`
-	EnDescription            string `json:"en_description"`
-	EnSummary                string `json:"en_summary"`
-	FinishedAt               string `json:"finished_at"`
-	Id                       int64  `json:"id"`
-	Impact                   string `json:"impact"`
-	State                    string `json:"state"`
-	Type                     string `json:"type"`
+	Affected                 bool   "json:\"affected\""
+	AffectedDirectVpsCount   int64  "json:\"affected_direct_vps_count\""
+	AffectedExportCount      int64  "json:\"affected_export_count\""
+	AffectedIndirectVpsCount int64  "json:\"affected_indirect_vps_count\""
+	AffectedUserCount        int64  "json:\"affected_user_count\""
+	AutoResolve              bool   "json:\"auto_resolve\""
+	BeginsAt                 string "json:\"begins_at\""
+	CsDescription            string "json:\"cs_description\""
+	CsSummary                string "json:\"cs_summary\""
+	Duration                 int64  "json:\"duration\""
+	EnDescription            string "json:\"en_description\""
+	EnSummary                string "json:\"en_summary\""
+	FinishedAt               string "json:\"finished_at\""
+	Id                       int64  "json:\"id\""
+	Impact                   string "json:\"impact\""
+	State                    string "json:\"state\""
+	Type                     string "json:\"type\""
 }
 
 // Type for action response, including envelope
 type ActionOutageIndexResponse struct {
-	Action *ActionOutageIndex `json:"-"`
+	Action *ActionOutageIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Outages []*ActionOutageIndexOutput `json:"outages"`
+		Outages []*ActionOutageIndexOutput "json:\"outages\""
 	}
 
 	// Action output without the namespace
@@ -552,6 +565,13 @@ func (inv *ActionOutageIndexInvocation) validate() error {
 				}
 			}
 		}
+		if inv.IsParameterSelected("SecurityAdvisory") {
+			if !inv.IsParameterNil("SecurityAdvisory") {
+				if inv.Input.SecurityAdvisory < 0 {
+					verr.Add("security_advisory", "not a valid resource id")
+				}
+			}
+		}
 		if inv.IsParameterSelected("Since") {
 			if !inv.IsParameterNil("Since") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Since)
@@ -650,6 +670,9 @@ func (inv *ActionOutageIndexInvocation) convertInputToQueryParams(ret map[string
 		}
 		if inv.IsParameterSelected("RecentSince") {
 			ret["outage[recent_since]"] = inv.Input.RecentSince
+		}
+		if inv.IsParameterSelected("SecurityAdvisory") {
+			ret["outage[security_advisory]"] = convertInt64ToString(inv.Input.SecurityAdvisory)
 		}
 		if inv.IsParameterSelected("Since") {
 			ret["outage[since]"] = inv.Input.Since

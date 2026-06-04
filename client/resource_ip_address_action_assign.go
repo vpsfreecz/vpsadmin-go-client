@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionIpAddressAssign(client *Client) *ActionIpAddressAssign {
 
 // ActionIpAddressAssignMetaGlobalInput is a type for action global meta input parameters
 type ActionIpAddressAssignMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,8 +76,8 @@ func (in *ActionIpAddressAssignMetaGlobalInput) AnySelected() bool {
 
 // ActionIpAddressAssignInput is a type for action input parameters
 type ActionIpAddressAssignInput struct {
-	NetworkInterface int64 `json:"network_interface"`
-	RouteVia         int64 `json:"route_via"`
+	NetworkInterface int64 "json:\"network_interface\""
+	RouteVia         int64 "json:\"route_via\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -147,37 +148,37 @@ func (in *ActionIpAddressAssignInput) AnySelected() bool {
 
 // ActionIpAddressAssignRequest is a type for the entire action request
 type ActionIpAddressAssignRequest struct {
-	IpAddress map[string]interface{} `json:"ip_address"`
-	Meta      map[string]interface{} `json:"_meta"`
+	IpAddress map[string]interface{} "json:\"ip_address\""
+	Meta      map[string]interface{} "json:\"_meta\""
 }
 
 // ActionIpAddressAssignOutput is a type for action output parameters
 type ActionIpAddressAssignOutput struct {
-	Addr               string                            `json:"addr"`
-	ChargedEnvironment *ActionEnvironmentShowOutput      `json:"charged_environment"`
-	Id                 int64                             `json:"id"`
-	Network            *ActionNetworkShowOutput          `json:"network"`
-	NetworkInterface   *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Prefix             int64                             `json:"prefix"`
-	RouteVia           *ActionHostIpAddressShowOutput    `json:"route_via"`
-	Size               int64                             `json:"size"`
-	User               *ActionUserShowOutput             `json:"user"`
+	Addr               string                            "json:\"addr\""
+	ChargedEnvironment *ActionEnvironmentShowOutput      "json:\"charged_environment\""
+	Id                 int64                             "json:\"id\""
+	Network            *ActionNetworkShowOutput          "json:\"network\""
+	NetworkInterface   *ActionNetworkInterfaceShowOutput "json:\"network_interface\""
+	Prefix             int64                             "json:\"prefix\""
+	RouteVia           *ActionHostIpAddressShowOutput    "json:\"route_via\""
+	Size               int64                             "json:\"size\""
+	User               *ActionUserShowOutput             "json:\"user\""
 }
 
 // ActionIpAddressAssignMetaGlobalOutput is a type for global output metadata parameters
 type ActionIpAddressAssignMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionIpAddressAssignResponse struct {
-	Action *ActionIpAddressAssign `json:"-"`
+	Action *ActionIpAddressAssign "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		IpAddress *ActionIpAddressAssignOutput `json:"ip_address"`
+		IpAddress *ActionIpAddressAssignOutput "json:\"ip_address\""
 		// Global output metadata
-		Meta *ActionIpAddressAssignMetaGlobalOutput `json:"_meta"`
+		Meta *ActionIpAddressAssignMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -212,7 +213,7 @@ func (inv *ActionIpAddressAssignInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionIpAddressAssignInvocation) SetPathParamString(param string, value string) *ActionIpAddressAssignInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

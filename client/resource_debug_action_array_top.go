@@ -16,7 +16,7 @@ func NewActionDebugArrayTop(client *Client) *ActionDebugArrayTop {
 
 // ActionDebugArrayTopMetaGlobalInput is a type for action global meta input parameters
 type ActionDebugArrayTopMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,7 +60,7 @@ func (in *ActionDebugArrayTopMetaGlobalInput) AnySelected() bool {
 
 // ActionDebugArrayTopInput is a type for action input parameters
 type ActionDebugArrayTopInput struct {
-	Limit int64 `json:"limit"`
+	Limit int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -119,16 +119,16 @@ func (in *ActionDebugArrayTopInput) AnySelected() bool {
 
 // ActionDebugArrayTopOutput is a type for action output parameters
 type ActionDebugArrayTopOutput struct {
-	Size int64 `json:"size"`
+	Size int64 "json:\"size\""
 }
 
 // Type for action response, including envelope
 type ActionDebugArrayTopResponse struct {
-	Action *ActionDebugArrayTop `json:"-"`
+	Action *ActionDebugArrayTop "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Debugs []*ActionDebugArrayTopOutput `json:"debugs"`
+		Debugs []*ActionDebugArrayTopOutput "json:\"debugs\""
 	}
 
 	// Action output without the namespace

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserKnownDeviceShow(client *Client) *ActionUserKnownDeviceShow {
 
 // ActionUserKnownDeviceShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserKnownDeviceShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,25 +76,25 @@ func (in *ActionUserKnownDeviceShowMetaGlobalInput) AnySelected() bool {
 
 // ActionUserKnownDeviceShowOutput is a type for action output parameters
 type ActionUserKnownDeviceShowOutput struct {
-	ApiIpAddr                string `json:"api_ip_addr"`
-	ApiIpPtr                 string `json:"api_ip_ptr"`
-	ClientIpAddr             string `json:"client_ip_addr"`
-	ClientIpPtr              string `json:"client_ip_ptr"`
-	CreatedAt                string `json:"created_at"`
-	Id                       int64  `json:"id"`
-	LastSeenAt               string `json:"last_seen_at"`
-	SkipMultiFactorAuthUntil string `json:"skip_multi_factor_auth_until"`
-	UpdatedAt                string `json:"updated_at"`
-	UserAgent                string `json:"user_agent"`
+	ApiIpAddr                string "json:\"api_ip_addr\""
+	ApiIpPtr                 string "json:\"api_ip_ptr\""
+	ClientIpAddr             string "json:\"client_ip_addr\""
+	ClientIpPtr              string "json:\"client_ip_ptr\""
+	CreatedAt                string "json:\"created_at\""
+	Id                       int64  "json:\"id\""
+	LastSeenAt               string "json:\"last_seen_at\""
+	SkipMultiFactorAuthUntil string "json:\"skip_multi_factor_auth_until\""
+	UpdatedAt                string "json:\"updated_at\""
+	UserAgent                string "json:\"user_agent\""
 }
 
 // Type for action response, including envelope
 type ActionUserKnownDeviceShowResponse struct {
-	Action *ActionUserKnownDeviceShow `json:"-"`
+	Action *ActionUserKnownDeviceShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		KnownDevice *ActionUserKnownDeviceShowOutput `json:"known_device"`
+		KnownDevice *ActionUserKnownDeviceShowOutput "json:\"known_device\""
 	}
 
 	// Action output without the namespace
@@ -126,7 +127,7 @@ func (inv *ActionUserKnownDeviceShowInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserKnownDeviceShowInvocation) SetPathParamString(param string, value string) *ActionUserKnownDeviceShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

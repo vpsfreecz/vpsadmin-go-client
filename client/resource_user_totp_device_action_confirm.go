@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,7 +19,7 @@ func NewActionUserTotpDeviceConfirm(client *Client) *ActionUserTotpDeviceConfirm
 
 // ActionUserTotpDeviceConfirmMetaGlobalInput is a type for action global meta input parameters
 type ActionUserTotpDeviceConfirmMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -62,7 +63,7 @@ func (in *ActionUserTotpDeviceConfirmMetaGlobalInput) AnySelected() bool {
 
 // ActionUserTotpDeviceConfirmInput is a type for action input parameters
 type ActionUserTotpDeviceConfirmInput struct {
-	Code string `json:"code"`
+	Code string "json:\"code\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -121,22 +122,22 @@ func (in *ActionUserTotpDeviceConfirmInput) AnySelected() bool {
 
 // ActionUserTotpDeviceConfirmRequest is a type for the entire action request
 type ActionUserTotpDeviceConfirmRequest struct {
-	TotpDevice map[string]interface{} `json:"totp_device"`
-	Meta       map[string]interface{} `json:"_meta"`
+	TotpDevice map[string]interface{} "json:\"totp_device\""
+	Meta       map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserTotpDeviceConfirmOutput is a type for action output parameters
 type ActionUserTotpDeviceConfirmOutput struct {
-	RecoveryCode string `json:"recovery_code"`
+	RecoveryCode string "json:\"recovery_code\""
 }
 
 // Type for action response, including envelope
 type ActionUserTotpDeviceConfirmResponse struct {
-	Action *ActionUserTotpDeviceConfirm `json:"-"`
+	Action *ActionUserTotpDeviceConfirm "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		TotpDevice *ActionUserTotpDeviceConfirmOutput `json:"totp_device"`
+		TotpDevice *ActionUserTotpDeviceConfirmOutput "json:\"totp_device\""
 	}
 
 	// Action output without the namespace
@@ -171,7 +172,7 @@ func (inv *ActionUserTotpDeviceConfirmInvocation) SetPathParamInt(param string, 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserTotpDeviceConfirmInvocation) SetPathParamString(param string, value string) *ActionUserTotpDeviceConfirmInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

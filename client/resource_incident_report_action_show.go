@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionIncidentReportShow(client *Client) *ActionIncidentReportShow {
 
 // ActionIncidentReportShowMetaGlobalInput is a type for action global meta input parameters
 type ActionIncidentReportShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,31 +76,31 @@ func (in *ActionIncidentReportShowMetaGlobalInput) AnySelected() bool {
 
 // ActionIncidentReportShowOutput is a type for action output parameters
 type ActionIncidentReportShowOutput struct {
-	Codename            string                               `json:"codename"`
-	CpuLimit            int64                                `json:"cpu_limit"`
-	CreatedAt           string                               `json:"created_at"`
-	DetectedAt          string                               `json:"detected_at"`
-	FiledBy             *ActionUserShowOutput                `json:"filed_by"`
-	Id                  int64                                `json:"id"`
-	IpAddressAssignment *ActionIpAddressAssignmentShowOutput `json:"ip_address_assignment"`
-	Mailbox             *ActionMailboxShowOutput             `json:"mailbox"`
-	RawUserId           int64                                `json:"raw_user_id"`
-	RawVpsId            int64                                `json:"raw_vps_id"`
-	ReportedAt          string                               `json:"reported_at"`
-	Subject             string                               `json:"subject"`
-	Text                string                               `json:"text"`
-	User                *ActionUserShowOutput                `json:"user"`
-	Vps                 *ActionVpsShowOutput                 `json:"vps"`
-	VpsAction           string                               `json:"vps_action"`
+	Codename            string                               "json:\"codename\""
+	CpuLimit            int64                                "json:\"cpu_limit\""
+	CreatedAt           string                               "json:\"created_at\""
+	DetectedAt          string                               "json:\"detected_at\""
+	FiledBy             *ActionUserShowOutput                "json:\"filed_by\""
+	Id                  int64                                "json:\"id\""
+	IpAddressAssignment *ActionIpAddressAssignmentShowOutput "json:\"ip_address_assignment\""
+	Mailbox             *ActionMailboxShowOutput             "json:\"mailbox\""
+	RawUserId           int64                                "json:\"raw_user_id\""
+	RawVpsId            int64                                "json:\"raw_vps_id\""
+	ReportedAt          string                               "json:\"reported_at\""
+	Subject             string                               "json:\"subject\""
+	Text                string                               "json:\"text\""
+	User                *ActionUserShowOutput                "json:\"user\""
+	Vps                 *ActionVpsShowOutput                 "json:\"vps\""
+	VpsAction           string                               "json:\"vps_action\""
 }
 
 // Type for action response, including envelope
 type ActionIncidentReportShowResponse struct {
-	Action *ActionIncidentReportShow `json:"-"`
+	Action *ActionIncidentReportShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		IncidentReport *ActionIncidentReportShowOutput `json:"incident_report"`
+		IncidentReport *ActionIncidentReportShowOutput "json:\"incident_report\""
 	}
 
 	// Action output without the namespace
@@ -132,7 +133,7 @@ func (inv *ActionIncidentReportShowInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionIncidentReportShowInvocation) SetPathParamString(param string, value string) *ActionIncidentReportShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

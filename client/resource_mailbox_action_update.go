@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMailboxUpdate(client *Client) *ActionMailboxUpdate {
 
 // ActionMailboxUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionMailboxUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,12 +76,12 @@ func (in *ActionMailboxUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionMailboxUpdateInput is a type for action input parameters
 type ActionMailboxUpdateInput struct {
-	EnableSsl bool   `json:"enable_ssl"`
-	Label     string `json:"label"`
-	Password  string `json:"password"`
-	Port      int64  `json:"port"`
-	Server    string `json:"server"`
-	User      string `json:"user"`
+	EnableSsl bool   "json:\"enable_ssl\""
+	Label     string "json:\"label\""
+	Password  string "json:\"password\""
+	Port      int64  "json:\"port\""
+	Server    string "json:\"server\""
+	User      string "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -199,29 +200,29 @@ func (in *ActionMailboxUpdateInput) AnySelected() bool {
 
 // ActionMailboxUpdateRequest is a type for the entire action request
 type ActionMailboxUpdateRequest struct {
-	Mailbox map[string]interface{} `json:"mailbox"`
-	Meta    map[string]interface{} `json:"_meta"`
+	Mailbox map[string]interface{} "json:\"mailbox\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionMailboxUpdateOutput is a type for action output parameters
 type ActionMailboxUpdateOutput struct {
-	CreatedAt string `json:"created_at"`
-	EnableSsl bool   `json:"enable_ssl"`
-	Id        int64  `json:"id"`
-	Label     string `json:"label"`
-	Port      int64  `json:"port"`
-	Server    string `json:"server"`
-	UpdatedAt string `json:"updated_at"`
-	User      string `json:"user"`
+	CreatedAt string "json:\"created_at\""
+	EnableSsl bool   "json:\"enable_ssl\""
+	Id        int64  "json:\"id\""
+	Label     string "json:\"label\""
+	Port      int64  "json:\"port\""
+	Server    string "json:\"server\""
+	UpdatedAt string "json:\"updated_at\""
+	User      string "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionMailboxUpdateResponse struct {
-	Action *ActionMailboxUpdate `json:"-"`
+	Action *ActionMailboxUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Mailbox *ActionMailboxUpdateOutput `json:"mailbox"`
+		Mailbox *ActionMailboxUpdateOutput "json:\"mailbox\""
 	}
 
 	// Action output without the namespace
@@ -256,7 +257,7 @@ func (inv *ActionMailboxUpdateInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMailboxUpdateInvocation) SetPathParamString(param string, value string) *ActionMailboxUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

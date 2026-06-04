@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOomReportRuleUpdate(client *Client) *ActionOomReportRuleUpdate {
 
 // ActionOomReportRuleUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportRuleUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,10 +76,8 @@ func (in *ActionOomReportRuleUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportRuleUpdateInput is a type for action input parameters
 type ActionOomReportRuleUpdateInput struct {
-	Action        string `json:"action"`
-	CgroupPattern string `json:"cgroup_pattern"`
-	HitCount      int64  `json:"hit_count"`
-	Vps           int64  `json:"vps"`
+	Action        string "json:\"action\""
+	CgroupPattern string "json:\"cgroup_pattern\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -106,30 +105,6 @@ func (in *ActionOomReportRuleUpdateInput) SetCgroupPattern(value string) *Action
 	}
 
 	in._selectedParameters["CgroupPattern"] = nil
-	return in
-}
-
-// SetHitCount sets parameter HitCount to value and selects it for sending
-func (in *ActionOomReportRuleUpdateInput) SetHitCount(value int64) *ActionOomReportRuleUpdateInput {
-	in.HitCount = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["HitCount"] = nil
-	return in
-}
-
-// SetVps sets parameter Vps to value and selects it for sending
-func (in *ActionOomReportRuleUpdateInput) SetVps(value int64) *ActionOomReportRuleUpdateInput {
-	in.Vps = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Vps"] = nil
 	return in
 }
 
@@ -173,29 +148,29 @@ func (in *ActionOomReportRuleUpdateInput) AnySelected() bool {
 
 // ActionOomReportRuleUpdateRequest is a type for the entire action request
 type ActionOomReportRuleUpdateRequest struct {
-	OomReportRule map[string]interface{} `json:"oom_report_rule"`
-	Meta          map[string]interface{} `json:"_meta"`
+	OomReportRule map[string]interface{} "json:\"oom_report_rule\""
+	Meta          map[string]interface{} "json:\"_meta\""
 }
 
 // ActionOomReportRuleUpdateOutput is a type for action output parameters
 type ActionOomReportRuleUpdateOutput struct {
-	Action        string               `json:"action"`
-	CgroupPattern string               `json:"cgroup_pattern"`
-	CreatedAt     string               `json:"created_at"`
-	HitCount      int64                `json:"hit_count"`
-	Id            int64                `json:"id"`
-	Label         string               `json:"label"`
-	UpdatedAt     string               `json:"updated_at"`
-	Vps           *ActionVpsShowOutput `json:"vps"`
+	Action        string               "json:\"action\""
+	CgroupPattern string               "json:\"cgroup_pattern\""
+	CreatedAt     string               "json:\"created_at\""
+	HitCount      int64                "json:\"hit_count\""
+	Id            int64                "json:\"id\""
+	Label         string               "json:\"label\""
+	UpdatedAt     string               "json:\"updated_at\""
+	Vps           *ActionVpsShowOutput "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionOomReportRuleUpdateResponse struct {
-	Action *ActionOomReportRuleUpdate `json:"-"`
+	Action *ActionOomReportRuleUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		OomReportRule *ActionOomReportRuleUpdateOutput `json:"oom_report_rule"`
+		OomReportRule *ActionOomReportRuleUpdateOutput "json:\"oom_report_rule\""
 	}
 
 	// Action output without the namespace
@@ -230,7 +205,7 @@ func (inv *ActionOomReportRuleUpdateInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOomReportRuleUpdateInvocation) SetPathParamString(param string, value string) *ActionOomReportRuleUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 
@@ -302,13 +277,6 @@ func (inv *ActionOomReportRuleUpdateInvocation) IsMetaParameterNil(param string)
 func (inv *ActionOomReportRuleUpdateInvocation) validate() error {
 	verr := NewValidationError()
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Vps") {
-			if !inv.IsParameterNil("Vps") {
-				if inv.Input.Vps < 0 {
-					verr.Add("vps", "not a valid resource id")
-				}
-			}
-		}
 	}
 	if inv.MetaInput != nil {
 	}
@@ -354,12 +322,6 @@ func (inv *ActionOomReportRuleUpdateInvocation) makeInputParams() map[string]int
 		}
 		if inv.IsParameterSelected("CgroupPattern") {
 			ret["cgroup_pattern"] = inv.Input.CgroupPattern
-		}
-		if inv.IsParameterSelected("HitCount") {
-			ret["hit_count"] = inv.Input.HitCount
-		}
-		if inv.IsParameterSelected("Vps") {
-			ret["vps"] = inv.Input.Vps
 		}
 	}
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOutageUpdateShow(client *Client) *ActionOutageUpdateShow {
 
 // ActionOutageUpdateShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageUpdateShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,30 +76,30 @@ func (in *ActionOutageUpdateShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageUpdateShowOutput is a type for action output parameters
 type ActionOutageUpdateShowOutput struct {
-	BeginsAt      string                  `json:"begins_at"`
-	CreatedAt     string                  `json:"created_at"`
-	CsDescription string                  `json:"cs_description"`
-	CsSummary     string                  `json:"cs_summary"`
-	Duration      int64                   `json:"duration"`
-	EnDescription string                  `json:"en_description"`
-	EnSummary     string                  `json:"en_summary"`
-	FinishedAt    string                  `json:"finished_at"`
-	Id            int64                   `json:"id"`
-	Impact        string                  `json:"impact"`
-	Outage        *ActionOutageShowOutput `json:"outage"`
-	ReportedBy    *ActionUserShowOutput   `json:"reported_by"`
-	ReporterName  string                  `json:"reporter_name"`
-	State         string                  `json:"state"`
-	Type          string                  `json:"type"`
+	BeginsAt      string                  "json:\"begins_at\""
+	CreatedAt     string                  "json:\"created_at\""
+	CsDescription string                  "json:\"cs_description\""
+	CsSummary     string                  "json:\"cs_summary\""
+	Duration      int64                   "json:\"duration\""
+	EnDescription string                  "json:\"en_description\""
+	EnSummary     string                  "json:\"en_summary\""
+	FinishedAt    string                  "json:\"finished_at\""
+	Id            int64                   "json:\"id\""
+	Impact        string                  "json:\"impact\""
+	Outage        *ActionOutageShowOutput "json:\"outage\""
+	ReportedBy    *ActionUserShowOutput   "json:\"reported_by\""
+	ReporterName  string                  "json:\"reporter_name\""
+	State         string                  "json:\"state\""
+	Type          string                  "json:\"type\""
 }
 
 // Type for action response, including envelope
 type ActionOutageUpdateShowResponse struct {
-	Action *ActionOutageUpdateShow `json:"-"`
+	Action *ActionOutageUpdateShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		OutageUpdate *ActionOutageUpdateShowOutput `json:"outage_update"`
+		OutageUpdate *ActionOutageUpdateShowOutput "json:\"outage_update\""
 	}
 
 	// Action output without the namespace
@@ -131,7 +132,7 @@ func (inv *ActionOutageUpdateShowInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOutageUpdateShowInvocation) SetPathParamString(param string, value string) *ActionOutageUpdateShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsSshHostKeyShow(client *Client) *ActionVpsSshHostKeyShow {
 
 // ActionVpsSshHostKeyShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsSshHostKeyShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,21 +76,21 @@ func (in *ActionVpsSshHostKeyShowMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsSshHostKeyShowOutput is a type for action output parameters
 type ActionVpsSshHostKeyShowOutput struct {
-	Algorithm   string `json:"algorithm"`
-	Bits        int64  `json:"bits"`
-	CreatedAt   string `json:"created_at"`
-	Fingerprint string `json:"fingerprint"`
-	Id          int64  `json:"id"`
-	UpdatedAt   string `json:"updated_at"`
+	Algorithm   string "json:\"algorithm\""
+	Bits        int64  "json:\"bits\""
+	CreatedAt   string "json:\"created_at\""
+	Fingerprint string "json:\"fingerprint\""
+	Id          int64  "json:\"id\""
+	UpdatedAt   string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionVpsSshHostKeyShowResponse struct {
-	Action *ActionVpsSshHostKeyShow `json:"-"`
+	Action *ActionVpsSshHostKeyShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		SshHostKey *ActionVpsSshHostKeyShowOutput `json:"ssh_host_key"`
+		SshHostKey *ActionVpsSshHostKeyShowOutput "json:\"ssh_host_key\""
 	}
 
 	// Action output without the namespace
@@ -122,7 +123,7 @@ func (inv *ActionVpsSshHostKeyShowInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsSshHostKeyShowInvocation) SetPathParamString(param string, value string) *ActionVpsSshHostKeyShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

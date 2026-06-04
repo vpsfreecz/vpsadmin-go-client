@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsFeatureUpdate(client *Client) *ActionVpsFeatureUpdate {
 
 // ActionVpsFeatureUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsFeatureUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,7 +76,7 @@ func (in *ActionVpsFeatureUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsFeatureUpdateInput is a type for action input parameters
 type ActionVpsFeatureUpdateInput struct {
-	Enabled bool `json:"enabled"`
+	Enabled bool "json:\"enabled\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,23 +135,23 @@ func (in *ActionVpsFeatureUpdateInput) AnySelected() bool {
 
 // ActionVpsFeatureUpdateRequest is a type for the entire action request
 type ActionVpsFeatureUpdateRequest struct {
-	Feature map[string]interface{} `json:"feature"`
-	Meta    map[string]interface{} `json:"_meta"`
+	Feature map[string]interface{} "json:\"feature\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsFeatureUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsFeatureUpdateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionVpsFeatureUpdateResponse struct {
-	Action *ActionVpsFeatureUpdate `json:"-"`
+	Action *ActionVpsFeatureUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionVpsFeatureUpdateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionVpsFeatureUpdateMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -182,7 +183,7 @@ func (inv *ActionVpsFeatureUpdateInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsFeatureUpdateInvocation) SetPathParamString(param string, value string) *ActionVpsFeatureUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -16,9 +16,9 @@ func NewActionExportOutageIndex(client *Client) *ActionExportOutageIndex {
 
 // ActionExportOutageIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionExportOutageIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,14 +86,14 @@ func (in *ActionExportOutageIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionExportOutageIndexInput is a type for action input parameters
 type ActionExportOutageIndexInput struct {
-	Environment int64 `json:"environment"`
-	Export      int64 `json:"export"`
-	FromId      int64 `json:"from_id"`
-	Limit       int64 `json:"limit"`
-	Location    int64 `json:"location"`
-	Node        int64 `json:"node"`
-	Outage      int64 `json:"outage"`
-	User        int64 `json:"user"`
+	Environment int64 "json:\"environment\""
+	Export      int64 "json:\"export\""
+	FromId      int64 "json:\"from_id\""
+	Limit       int64 "json:\"limit\""
+	Location    int64 "json:\"location\""
+	Node        int64 "json:\"node\""
+	Outage      int64 "json:\"outage\""
+	User        int64 "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -236,22 +236,22 @@ func (in *ActionExportOutageIndexInput) AnySelected() bool {
 
 // ActionExportOutageIndexOutput is a type for action output parameters
 type ActionExportOutageIndexOutput struct {
-	Environment *ActionEnvironmentShowOutput `json:"environment"`
-	Export      *ActionExportShowOutput      `json:"export"`
-	Id          int64                        `json:"id"`
-	Location    *ActionLocationShowOutput    `json:"location"`
-	Node        *ActionNodeShowOutput        `json:"node"`
-	Outage      *ActionOutageShowOutput      `json:"outage"`
-	User        *ActionUserShowOutput        `json:"user"`
+	Environment *ActionEnvironmentShowOutput "json:\"environment\""
+	Export      *ActionExportShowOutput      "json:\"export\""
+	Id          int64                        "json:\"id\""
+	Location    *ActionLocationShowOutput    "json:\"location\""
+	Node        *ActionNodeShowOutput        "json:\"node\""
+	Outage      *ActionOutageShowOutput      "json:\"outage\""
+	User        *ActionUserShowOutput        "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionExportOutageIndexResponse struct {
-	Action *ActionExportOutageIndex `json:"-"`
+	Action *ActionExportOutageIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		ExportOutages []*ActionExportOutageIndexOutput `json:"export_outages"`
+		ExportOutages []*ActionExportOutageIndexOutput "json:\"export_outages\""
 	}
 
 	// Action output without the namespace

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserUpdate(client *Client) *ActionUserUpdate {
 
 // ActionUserUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,31 +76,31 @@ func (in *ActionUserUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserUpdateInput is a type for action input parameters
 type ActionUserUpdateInput struct {
-	Address                    string `json:"address"`
-	ChangeReason               string `json:"change_reason"`
-	Email                      string `json:"email"`
-	EnableBasicAuth            bool   `json:"enable_basic_auth"`
-	EnableMultiFactorAuth      bool   `json:"enable_multi_factor_auth"`
-	EnableNewLoginNotification bool   `json:"enable_new_login_notification"`
-	EnableOauth2Auth           bool   `json:"enable_oauth2_auth"`
-	EnableSingleSignOn         bool   `json:"enable_single_sign_on"`
-	EnableTokenAuth            bool   `json:"enable_token_auth"`
-	ExpirationDate             string `json:"expiration_date"`
-	FullName                   string `json:"full_name"`
-	Info                       string `json:"info"`
-	Language                   int64  `json:"language"`
-	Level                      int64  `json:"level"`
-	Lockout                    bool   `json:"lockout"`
-	Login                      string `json:"login"`
-	LogoutSessions             bool   `json:"logout_sessions"`
-	MailerEnabled              bool   `json:"mailer_enabled"`
-	NewPassword                string `json:"new_password"`
-	ObjectState                string `json:"object_state"`
-	Password                   string `json:"password"`
-	PasswordReset              bool   `json:"password_reset"`
-	PreferredLogoutAll         bool   `json:"preferred_logout_all"`
-	PreferredSessionLength     int64  `json:"preferred_session_length"`
-	RemindAfterDate            string `json:"remind_after_date"`
+	Address                    string "json:\"address\""
+	ChangeReason               string "json:\"change_reason\""
+	Email                      string "json:\"email\""
+	EnableBasicAuth            bool   "json:\"enable_basic_auth\""
+	EnableMultiFactorAuth      bool   "json:\"enable_multi_factor_auth\""
+	EnableNewLoginNotification bool   "json:\"enable_new_login_notification\""
+	EnableOauth2Auth           bool   "json:\"enable_oauth2_auth\""
+	EnableSingleSignOn         bool   "json:\"enable_single_sign_on\""
+	EnableTokenAuth            bool   "json:\"enable_token_auth\""
+	ExpirationDate             string "json:\"expiration_date\""
+	FullName                   string "json:\"full_name\""
+	Info                       string "json:\"info\""
+	Language                   int64  "json:\"language\""
+	Level                      int64  "json:\"level\""
+	Lockout                    bool   "json:\"lockout\""
+	Login                      string "json:\"login\""
+	LogoutSessions             bool   "json:\"logout_sessions\""
+	MailerEnabled              bool   "json:\"mailer_enabled\""
+	NewPassword                string "json:\"new_password\""
+	ObjectState                string "json:\"object_state\""
+	Password                   string "json:\"password\""
+	PasswordReset              bool   "json:\"password_reset\""
+	PreferredLogoutAll         bool   "json:\"preferred_logout_all\""
+	PreferredSessionLength     int64  "json:\"preferred_session_length\""
+	RemindAfterDate            string "json:\"remind_after_date\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -465,50 +466,50 @@ func (in *ActionUserUpdateInput) AnySelected() bool {
 
 // ActionUserUpdateRequest is a type for the entire action request
 type ActionUserUpdateRequest struct {
-	User map[string]interface{} `json:"user"`
-	Meta map[string]interface{} `json:"_meta"`
+	User map[string]interface{} "json:\"user\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserUpdateOutput is a type for action output parameters
 type ActionUserUpdateOutput struct {
-	Address                    string                    `json:"address"`
-	CreatedAt                  string                    `json:"created_at"`
-	DokuwikiGroups             string                    `json:"dokuwiki_groups"`
-	Email                      string                    `json:"email"`
-	EnableBasicAuth            bool                      `json:"enable_basic_auth"`
-	EnableMultiFactorAuth      bool                      `json:"enable_multi_factor_auth"`
-	EnableNewLoginNotification bool                      `json:"enable_new_login_notification"`
-	EnableOauth2Auth           bool                      `json:"enable_oauth2_auth"`
-	EnableSingleSignOn         bool                      `json:"enable_single_sign_on"`
-	EnableTokenAuth            bool                      `json:"enable_token_auth"`
-	FullName                   string                    `json:"full_name"`
-	Id                         int64                     `json:"id"`
-	Info                       string                    `json:"info"`
-	Language                   *ActionLanguageShowOutput `json:"language"`
-	LastActivityAt             string                    `json:"last_activity_at"`
-	Level                      int64                     `json:"level"`
-	Lockout                    bool                      `json:"lockout"`
-	Login                      string                    `json:"login"`
-	MailerEnabled              bool                      `json:"mailer_enabled"`
-	PasswordReset              bool                      `json:"password_reset"`
-	PreferredLogoutAll         bool                      `json:"preferred_logout_all"`
-	PreferredSessionLength     int64                     `json:"preferred_session_length"`
+	Address                    string                    "json:\"address\""
+	CreatedAt                  string                    "json:\"created_at\""
+	DokuwikiGroups             string                    "json:\"dokuwiki_groups\""
+	Email                      string                    "json:\"email\""
+	EnableBasicAuth            bool                      "json:\"enable_basic_auth\""
+	EnableMultiFactorAuth      bool                      "json:\"enable_multi_factor_auth\""
+	EnableNewLoginNotification bool                      "json:\"enable_new_login_notification\""
+	EnableOauth2Auth           bool                      "json:\"enable_oauth2_auth\""
+	EnableSingleSignOn         bool                      "json:\"enable_single_sign_on\""
+	EnableTokenAuth            bool                      "json:\"enable_token_auth\""
+	FullName                   string                    "json:\"full_name\""
+	Id                         int64                     "json:\"id\""
+	Info                       string                    "json:\"info\""
+	Language                   *ActionLanguageShowOutput "json:\"language\""
+	LastActivityAt             string                    "json:\"last_activity_at\""
+	Level                      int64                     "json:\"level\""
+	Lockout                    bool                      "json:\"lockout\""
+	Login                      string                    "json:\"login\""
+	MailerEnabled              bool                      "json:\"mailer_enabled\""
+	PasswordReset              bool                      "json:\"password_reset\""
+	PreferredLogoutAll         bool                      "json:\"preferred_logout_all\""
+	PreferredSessionLength     int64                     "json:\"preferred_session_length\""
 }
 
 // ActionUserUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionUserUpdateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionUserUpdateResponse struct {
-	Action *ActionUserUpdate `json:"-"`
+	Action *ActionUserUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		User *ActionUserUpdateOutput `json:"user"`
+		User *ActionUserUpdateOutput "json:\"user\""
 		// Global output metadata
-		Meta *ActionUserUpdateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionUserUpdateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -543,7 +544,7 @@ func (inv *ActionUserUpdateInvocation) SetPathParamInt(param string, value int64
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserUpdateInvocation) SetPathParamString(param string, value string) *ActionUserUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

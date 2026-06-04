@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOutageShow(client *Client) *ActionOutageShow {
 
 // ActionOutageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,32 +76,32 @@ func (in *ActionOutageShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageShowOutput is a type for action output parameters
 type ActionOutageShowOutput struct {
-	Affected                 bool   `json:"affected"`
-	AffectedDirectVpsCount   int64  `json:"affected_direct_vps_count"`
-	AffectedExportCount      int64  `json:"affected_export_count"`
-	AffectedIndirectVpsCount int64  `json:"affected_indirect_vps_count"`
-	AffectedUserCount        int64  `json:"affected_user_count"`
-	AutoResolve              bool   `json:"auto_resolve"`
-	BeginsAt                 string `json:"begins_at"`
-	CsDescription            string `json:"cs_description"`
-	CsSummary                string `json:"cs_summary"`
-	Duration                 int64  `json:"duration"`
-	EnDescription            string `json:"en_description"`
-	EnSummary                string `json:"en_summary"`
-	FinishedAt               string `json:"finished_at"`
-	Id                       int64  `json:"id"`
-	Impact                   string `json:"impact"`
-	State                    string `json:"state"`
-	Type                     string `json:"type"`
+	Affected                 bool   "json:\"affected\""
+	AffectedDirectVpsCount   int64  "json:\"affected_direct_vps_count\""
+	AffectedExportCount      int64  "json:\"affected_export_count\""
+	AffectedIndirectVpsCount int64  "json:\"affected_indirect_vps_count\""
+	AffectedUserCount        int64  "json:\"affected_user_count\""
+	AutoResolve              bool   "json:\"auto_resolve\""
+	BeginsAt                 string "json:\"begins_at\""
+	CsDescription            string "json:\"cs_description\""
+	CsSummary                string "json:\"cs_summary\""
+	Duration                 int64  "json:\"duration\""
+	EnDescription            string "json:\"en_description\""
+	EnSummary                string "json:\"en_summary\""
+	FinishedAt               string "json:\"finished_at\""
+	Id                       int64  "json:\"id\""
+	Impact                   string "json:\"impact\""
+	State                    string "json:\"state\""
+	Type                     string "json:\"type\""
 }
 
 // Type for action response, including envelope
 type ActionOutageShowResponse struct {
-	Action *ActionOutageShow `json:"-"`
+	Action *ActionOutageShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Outage *ActionOutageShowOutput `json:"outage"`
+		Outage *ActionOutageShowOutput "json:\"outage\""
 	}
 
 	// Action output without the namespace
@@ -133,7 +134,7 @@ func (inv *ActionOutageShowInvocation) SetPathParamInt(param string, value int64
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOutageShowInvocation) SetPathParamString(param string, value string) *ActionOutageShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

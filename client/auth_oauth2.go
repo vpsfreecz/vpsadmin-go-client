@@ -3,6 +3,8 @@ package client
 import (
 	"fmt"
 	"net/http"
+	"net/url"
+	"strings"
 )
 
 type OAuth2Auth struct {
@@ -14,25 +16,37 @@ func (auth *OAuth2Auth) Authenticate(request *http.Request) {
 	request.Header.Set("X-HaveAPI-OAuth2-Token", auth.AccessToken)
 }
 
-// SetExistingTokenAuth will use a previously acquired access token
+// SetExistingOAuth2Auth will use a previously acquired access token
 func (client *Client) SetExistingOAuth2Auth(accessToken string) {
 	client.Authentication = &OAuth2Auth{
 		AccessToken: accessToken,
 	}
 }
 
-// RevokeAuthToken will revoke the access token and remove authentication
+// RevokeAccessToken will revoke the access token and remove authentication
 // from the client
 func (client *Client) RevokeAccessToken() error {
-	req, err := http.NewRequest("POST", "https://auth.vpsfree.cz/_auth/oauth2/revoke", nil)
+	auth, ok := client.Authentication.(*OAuth2Auth)
+	if !ok {
+		return fmt.Errorf("OAuth2 authentication is not configured")
+	}
+
+	form := url.Values{}
+	form.Set("token", auth.AccessToken)
+
+	revokeURL, err := client.oauth2DescriptionURL("http://api.test/_auth/oauth2/revoke")
+	if err != nil {
+		return err
+	}
+
+	req, err := http.NewRequest("POST", revokeURL, strings.NewReader(form.Encode()))
 
 	if err != nil {
 		return err
 	}
 
-	if client.Authentication != nil {
-		client.Authentication.Authenticate(req)
-	}
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	auth.Authenticate(req)
 
 	resp, err := client.do(req)
 

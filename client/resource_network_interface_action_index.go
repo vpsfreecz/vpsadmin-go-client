@@ -16,9 +16,9 @@ func NewActionNetworkInterfaceIndex(client *Client) *ActionNetworkInterfaceIndex
 
 // ActionNetworkInterfaceIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkInterfaceIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,11 +86,11 @@ func (in *ActionNetworkInterfaceIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkInterfaceIndexInput is a type for action input parameters
 type ActionNetworkInterfaceIndexInput struct {
-	FromId   int64 `json:"from_id"`
-	Limit    int64 `json:"limit"`
-	Location int64 `json:"location"`
-	User     int64 `json:"user"`
-	Vps      int64 `json:"vps"`
+	FromId   int64 "json:\"from_id\""
+	Limit    int64 "json:\"limit\""
+	Location int64 "json:\"location\""
+	User     int64 "json:\"user\""
+	Vps      int64 "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -197,23 +197,23 @@ func (in *ActionNetworkInterfaceIndexInput) AnySelected() bool {
 
 // ActionNetworkInterfaceIndexOutput is a type for action output parameters
 type ActionNetworkInterfaceIndexOutput struct {
-	Enable bool                 `json:"enable"`
-	Id     int64                `json:"id"`
-	Mac    string               `json:"mac"`
-	MaxRx  int64                `json:"max_rx"`
-	MaxTx  int64                `json:"max_tx"`
-	Name   string               `json:"name"`
-	Type   string               `json:"type"`
-	Vps    *ActionVpsShowOutput `json:"vps"`
+	Enable bool                 "json:\"enable\""
+	Id     int64                "json:\"id\""
+	Mac    string               "json:\"mac\""
+	MaxRx  int64                "json:\"max_rx\""
+	MaxTx  int64                "json:\"max_tx\""
+	Name   string               "json:\"name\""
+	Type   string               "json:\"type\""
+	Vps    *ActionVpsShowOutput "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionNetworkInterfaceIndexResponse struct {
-	Action *ActionNetworkInterfaceIndex `json:"-"`
+	Action *ActionNetworkInterfaceIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		NetworkInterfaces []*ActionNetworkInterfaceIndexOutput `json:"network_interfaces"`
+		NetworkInterfaces []*ActionNetworkInterfaceIndexOutput "json:\"network_interfaces\""
 	}
 
 	// Action output without the namespace

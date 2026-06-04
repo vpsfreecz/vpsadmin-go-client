@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionHelpBoxUpdate(client *Client) *ActionHelpBoxUpdate {
 
 // ActionHelpBoxUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionHelpBoxUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,11 +76,11 @@ func (in *ActionHelpBoxUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionHelpBoxUpdateInput is a type for action input parameters
 type ActionHelpBoxUpdateInput struct {
-	Action   string `json:"action"`
-	Content  string `json:"content"`
-	Language int64  `json:"language"`
-	Order    int64  `json:"order"`
-	Page     string `json:"page"`
+	Action   string "json:\"action\""
+	Content  string "json:\"content\""
+	Language int64  "json:\"language\""
+	Order    int64  "json:\"order\""
+	Page     string "json:\"page\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -186,27 +187,27 @@ func (in *ActionHelpBoxUpdateInput) AnySelected() bool {
 
 // ActionHelpBoxUpdateRequest is a type for the entire action request
 type ActionHelpBoxUpdateRequest struct {
-	HelpBox map[string]interface{} `json:"help_box"`
-	Meta    map[string]interface{} `json:"_meta"`
+	HelpBox map[string]interface{} "json:\"help_box\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionHelpBoxUpdateOutput is a type for action output parameters
 type ActionHelpBoxUpdateOutput struct {
-	Action   string                    `json:"action"`
-	Content  string                    `json:"content"`
-	Id       int64                     `json:"id"`
-	Language *ActionLanguageShowOutput `json:"language"`
-	Order    int64                     `json:"order"`
-	Page     string                    `json:"page"`
+	Action   string                    "json:\"action\""
+	Content  string                    "json:\"content\""
+	Id       int64                     "json:\"id\""
+	Language *ActionLanguageShowOutput "json:\"language\""
+	Order    int64                     "json:\"order\""
+	Page     string                    "json:\"page\""
 }
 
 // Type for action response, including envelope
 type ActionHelpBoxUpdateResponse struct {
-	Action *ActionHelpBoxUpdate `json:"-"`
+	Action *ActionHelpBoxUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		HelpBox *ActionHelpBoxUpdateOutput `json:"help_box"`
+		HelpBox *ActionHelpBoxUpdateOutput "json:\"help_box\""
 	}
 
 	// Action output without the namespace
@@ -241,7 +242,7 @@ func (inv *ActionHelpBoxUpdateInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionHelpBoxUpdateInvocation) SetPathParamString(param string, value string) *ActionHelpBoxUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

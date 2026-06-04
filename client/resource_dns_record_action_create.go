@@ -16,8 +16,8 @@ func NewActionDnsRecordCreate(client *Client) *ActionDnsRecordCreate {
 
 // ActionDnsRecordCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsRecordCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,16 +73,16 @@ func (in *ActionDnsRecordCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsRecordCreateInput is a type for action input parameters
 type ActionDnsRecordCreateInput struct {
-	Comment              string `json:"comment"`
-	Content              string `json:"content"`
-	DnsZone              int64  `json:"dns_zone"`
-	DynamicUpdateEnabled bool   `json:"dynamic_update_enabled"`
-	Enabled              bool   `json:"enabled"`
-	Name                 string `json:"name"`
-	Priority             int64  `json:"priority"`
-	Ttl                  int64  `json:"ttl"`
-	Type                 string `json:"type"`
-	User                 int64  `json:"user"`
+	Comment              string "json:\"comment\""
+	Content              string "json:\"content\""
+	DnsZone              int64  "json:\"dns_zone\""
+	DynamicUpdateEnabled bool   "json:\"dynamic_update_enabled\""
+	Enabled              bool   "json:\"enabled\""
+	Name                 string "json:\"name\""
+	Priority             int64  "json:\"priority\""
+	Ttl                  int64  "json:\"ttl\""
+	Type                 string "json:\"type\""
+	User                 int64  "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -306,43 +306,43 @@ func (in *ActionDnsRecordCreateInput) AnySelected() bool {
 
 // ActionDnsRecordCreateRequest is a type for the entire action request
 type ActionDnsRecordCreateRequest struct {
-	DnsRecord map[string]interface{} `json:"dns_record"`
-	Meta      map[string]interface{} `json:"_meta"`
+	DnsRecord map[string]interface{} "json:\"dns_record\""
+	Meta      map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDnsRecordCreateOutput is a type for action output parameters
 type ActionDnsRecordCreateOutput struct {
-	Comment              string                   `json:"comment"`
-	Content              string                   `json:"content"`
-	CreatedAt            string                   `json:"created_at"`
-	DnsZone              *ActionDnsZoneShowOutput `json:"dns_zone"`
-	DynamicUpdateEnabled bool                     `json:"dynamic_update_enabled"`
-	DynamicUpdateUrl     string                   `json:"dynamic_update_url"`
-	Enabled              bool                     `json:"enabled"`
-	Id                   int64                    `json:"id"`
-	Managed              bool                     `json:"managed"`
-	Name                 string                   `json:"name"`
-	Priority             int64                    `json:"priority"`
-	Ttl                  int64                    `json:"ttl"`
-	Type                 string                   `json:"type"`
-	UpdatedAt            string                   `json:"updated_at"`
-	User                 *ActionUserShowOutput    `json:"user"`
+	Comment              string                   "json:\"comment\""
+	Content              string                   "json:\"content\""
+	CreatedAt            string                   "json:\"created_at\""
+	DnsZone              *ActionDnsZoneShowOutput "json:\"dns_zone\""
+	DynamicUpdateEnabled bool                     "json:\"dynamic_update_enabled\""
+	DynamicUpdateUrl     string                   "json:\"dynamic_update_url\""
+	Enabled              bool                     "json:\"enabled\""
+	Id                   int64                    "json:\"id\""
+	Managed              bool                     "json:\"managed\""
+	Name                 string                   "json:\"name\""
+	Priority             int64                    "json:\"priority\""
+	Ttl                  int64                    "json:\"ttl\""
+	Type                 string                   "json:\"type\""
+	UpdatedAt            string                   "json:\"updated_at\""
+	User                 *ActionUserShowOutput    "json:\"user\""
 }
 
 // ActionDnsRecordCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionDnsRecordCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDnsRecordCreateResponse struct {
-	Action *ActionDnsRecordCreate `json:"-"`
+	Action *ActionDnsRecordCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsRecord *ActionDnsRecordCreateOutput `json:"dns_record"`
+		DnsRecord *ActionDnsRecordCreateOutput "json:\"dns_record\""
 		// Global output metadata
-		Meta *ActionDnsRecordCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDnsRecordCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

@@ -16,9 +16,9 @@ func NewActionDnsZoneTransferIndex(client *Client) *ActionDnsZoneTransferIndex {
 
 // ActionDnsZoneTransferIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsZoneTransferIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,12 +86,12 @@ func (in *ActionDnsZoneTransferIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsZoneTransferIndexInput is a type for action input parameters
 type ActionDnsZoneTransferIndexInput struct {
-	DnsTsigKey    int64  `json:"dns_tsig_key"`
-	DnsZone       int64  `json:"dns_zone"`
-	FromId        int64  `json:"from_id"`
-	HostIpAddress int64  `json:"host_ip_address"`
-	Limit         int64  `json:"limit"`
-	PeerType      string `json:"peer_type"`
+	DnsTsigKey    int64  "json:\"dns_tsig_key\""
+	DnsZone       int64  "json:\"dns_zone\""
+	FromId        int64  "json:\"from_id\""
+	HostIpAddress int64  "json:\"host_ip_address\""
+	Limit         int64  "json:\"limit\""
+	PeerType      string "json:\"peer_type\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -229,22 +229,22 @@ func (in *ActionDnsZoneTransferIndexInput) AnySelected() bool {
 
 // ActionDnsZoneTransferIndexOutput is a type for action output parameters
 type ActionDnsZoneTransferIndexOutput struct {
-	CreatedAt     string                         `json:"created_at"`
-	DnsTsigKey    *ActionDnsTsigKeyShowOutput    `json:"dns_tsig_key"`
-	DnsZone       *ActionDnsZoneShowOutput       `json:"dns_zone"`
-	HostIpAddress *ActionHostIpAddressShowOutput `json:"host_ip_address"`
-	Id            int64                          `json:"id"`
-	PeerType      string                         `json:"peer_type"`
-	UpdatedAt     string                         `json:"updated_at"`
+	CreatedAt     string                         "json:\"created_at\""
+	DnsTsigKey    *ActionDnsTsigKeyShowOutput    "json:\"dns_tsig_key\""
+	DnsZone       *ActionDnsZoneShowOutput       "json:\"dns_zone\""
+	HostIpAddress *ActionHostIpAddressShowOutput "json:\"host_ip_address\""
+	Id            int64                          "json:\"id\""
+	PeerType      string                         "json:\"peer_type\""
+	UpdatedAt     string                         "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionDnsZoneTransferIndexResponse struct {
-	Action *ActionDnsZoneTransferIndex `json:"-"`
+	Action *ActionDnsZoneTransferIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsZoneTransfers []*ActionDnsZoneTransferIndexOutput `json:"dns_zone_transfers"`
+		DnsZoneTransfers []*ActionDnsZoneTransferIndexOutput "json:\"dns_zone_transfers\""
 	}
 
 	// Action output without the namespace

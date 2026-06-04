@@ -16,8 +16,8 @@ func NewActionOsFamilyCreate(client *Client) *ActionOsFamilyCreate {
 
 // ActionOsFamilyCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionOsFamilyCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,8 +73,8 @@ func (in *ActionOsFamilyCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionOsFamilyCreateInput is a type for action input parameters
 type ActionOsFamilyCreateInput struct {
-	Description string `json:"description"`
-	Label       string `json:"label"`
+	Description string "json:\"description\""
+	Label       string "json:\"label\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -145,24 +145,24 @@ func (in *ActionOsFamilyCreateInput) AnySelected() bool {
 
 // ActionOsFamilyCreateRequest is a type for the entire action request
 type ActionOsFamilyCreateRequest struct {
-	OsFamily map[string]interface{} `json:"os_family"`
-	Meta     map[string]interface{} `json:"_meta"`
+	OsFamily map[string]interface{} "json:\"os_family\""
+	Meta     map[string]interface{} "json:\"_meta\""
 }
 
 // ActionOsFamilyCreateOutput is a type for action output parameters
 type ActionOsFamilyCreateOutput struct {
-	Description string `json:"description"`
-	Id          int64  `json:"id"`
-	Label       string `json:"label"`
+	Description string "json:\"description\""
+	Id          int64  "json:\"id\""
+	Label       string "json:\"label\""
 }
 
 // Type for action response, including envelope
 type ActionOsFamilyCreateResponse struct {
-	Action *ActionOsFamilyCreate `json:"-"`
+	Action *ActionOsFamilyCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		OsFamily *ActionOsFamilyCreateOutput `json:"os_family"`
+		OsFamily *ActionOsFamilyCreateOutput "json:\"os_family\""
 	}
 
 	// Action output without the namespace

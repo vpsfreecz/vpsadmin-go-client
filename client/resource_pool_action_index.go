@@ -16,9 +16,9 @@ func NewActionPoolIndex(client *Client) *ActionPoolIndex {
 
 // ActionPoolIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionPoolIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,31 +86,31 @@ func (in *ActionPoolIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionPoolIndexInput is a type for action input parameters
 type ActionPoolIndexInput struct {
-	Atime          bool    `json:"atime"`
-	AvailableSpace int64   `json:"available_space"`
-	CheckedAt      string  `json:"checked_at"`
-	Compression    bool    `json:"compression"`
-	Filesystem     string  `json:"filesystem"`
-	FromId         int64   `json:"from_id"`
-	IsOpen         bool    `json:"is_open"`
-	Label          string  `json:"label"`
-	Limit          int64   `json:"limit"`
-	MaxDatasets    int64   `json:"max_datasets"`
-	Name           string  `json:"name"`
-	Node           int64   `json:"node"`
-	Quota          int64   `json:"quota"`
-	Recordsize     int64   `json:"recordsize"`
-	Refquota       int64   `json:"refquota"`
-	RefquotaCheck  bool    `json:"refquota_check"`
-	Relatime       bool    `json:"relatime"`
-	Role           string  `json:"role"`
-	Scan           string  `json:"scan"`
-	ScanPercent    float64 `json:"scan_percent"`
-	Sharenfs       string  `json:"sharenfs"`
-	State          string  `json:"state"`
-	Sync           string  `json:"sync"`
-	TotalSpace     int64   `json:"total_space"`
-	UsedSpace      int64   `json:"used_space"`
+	Atime          bool    "json:\"atime\""
+	AvailableSpace int64   "json:\"available_space\""
+	CheckedAt      string  "json:\"checked_at\""
+	Compression    bool    "json:\"compression\""
+	Filesystem     string  "json:\"filesystem\""
+	FromId         int64   "json:\"from_id\""
+	IsOpen         bool    "json:\"is_open\""
+	Label          string  "json:\"label\""
+	Limit          int64   "json:\"limit\""
+	MaxDatasets    int64   "json:\"max_datasets\""
+	Name           string  "json:\"name\""
+	Node           int64   "json:\"node\""
+	Quota          int64   "json:\"quota\""
+	Recordsize     int64   "json:\"recordsize\""
+	Refquota       int64   "json:\"refquota\""
+	RefquotaCheck  bool    "json:\"refquota_check\""
+	Relatime       bool    "json:\"relatime\""
+	Role           string  "json:\"role\""
+	Scan           string  "json:\"scan\""
+	ScanPercent    float64 "json:\"scan_percent\""
+	Sharenfs       string  "json:\"sharenfs\""
+	State          string  "json:\"state\""
+	Sync           string  "json:\"sync\""
+	TotalSpace     int64   "json:\"total_space\""
+	UsedSpace      int64   "json:\"used_space\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -457,46 +457,46 @@ func (in *ActionPoolIndexInput) AnySelected() bool {
 
 // ActionPoolIndexOutput is a type for action output parameters
 type ActionPoolIndexOutput struct {
-	Atime                 bool                  `json:"atime"`
-	Avail                 int64                 `json:"avail"`
-	AvailableSpace        int64                 `json:"available_space"`
-	CheckedAt             string                `json:"checked_at"`
-	Compression           bool                  `json:"compression"`
-	Compressratio         float64               `json:"compressratio"`
-	Filesystem            string                `json:"filesystem"`
-	Id                    int64                 `json:"id"`
-	IsOpen                bool                  `json:"is_open"`
-	Label                 string                `json:"label"`
-	MaintenanceLock       string                `json:"maintenance_lock"`
-	MaintenanceLockReason string                `json:"maintenance_lock_reason"`
-	MaxDatasets           int64                 `json:"max_datasets"`
-	Name                  string                `json:"name"`
-	Node                  *ActionNodeShowOutput `json:"node"`
-	Quota                 int64                 `json:"quota"`
-	Recordsize            int64                 `json:"recordsize"`
-	Refcompressratio      float64               `json:"refcompressratio"`
-	Referenced            int64                 `json:"referenced"`
-	Refquota              int64                 `json:"refquota"`
-	RefquotaCheck         bool                  `json:"refquota_check"`
-	Relatime              bool                  `json:"relatime"`
-	Role                  string                `json:"role"`
-	Scan                  string                `json:"scan"`
-	ScanPercent           float64               `json:"scan_percent"`
-	Sharenfs              string                `json:"sharenfs"`
-	State                 string                `json:"state"`
-	Sync                  string                `json:"sync"`
-	TotalSpace            int64                 `json:"total_space"`
-	Used                  int64                 `json:"used"`
-	UsedSpace             int64                 `json:"used_space"`
+	Atime                 bool                  "json:\"atime\""
+	Avail                 int64                 "json:\"avail\""
+	AvailableSpace        int64                 "json:\"available_space\""
+	CheckedAt             string                "json:\"checked_at\""
+	Compression           bool                  "json:\"compression\""
+	Compressratio         float64               "json:\"compressratio\""
+	Filesystem            string                "json:\"filesystem\""
+	Id                    int64                 "json:\"id\""
+	IsOpen                bool                  "json:\"is_open\""
+	Label                 string                "json:\"label\""
+	MaintenanceLock       string                "json:\"maintenance_lock\""
+	MaintenanceLockReason string                "json:\"maintenance_lock_reason\""
+	MaxDatasets           int64                 "json:\"max_datasets\""
+	Name                  string                "json:\"name\""
+	Node                  *ActionNodeShowOutput "json:\"node\""
+	Quota                 int64                 "json:\"quota\""
+	Recordsize            int64                 "json:\"recordsize\""
+	Refcompressratio      float64               "json:\"refcompressratio\""
+	Referenced            int64                 "json:\"referenced\""
+	Refquota              int64                 "json:\"refquota\""
+	RefquotaCheck         bool                  "json:\"refquota_check\""
+	Relatime              bool                  "json:\"relatime\""
+	Role                  string                "json:\"role\""
+	Scan                  string                "json:\"scan\""
+	ScanPercent           float64               "json:\"scan_percent\""
+	Sharenfs              string                "json:\"sharenfs\""
+	State                 string                "json:\"state\""
+	Sync                  string                "json:\"sync\""
+	TotalSpace            int64                 "json:\"total_space\""
+	Used                  int64                 "json:\"used\""
+	UsedSpace             int64                 "json:\"used_space\""
 }
 
 // Type for action response, including envelope
 type ActionPoolIndexResponse struct {
-	Action *ActionPoolIndex `json:"-"`
+	Action *ActionPoolIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Pools []*ActionPoolIndexOutput `json:"pools"`
+		Pools []*ActionPoolIndexOutput "json:\"pools\""
 	}
 
 	// Action output without the namespace

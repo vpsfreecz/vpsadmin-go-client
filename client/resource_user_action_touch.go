@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserTouch(client *Client) *ActionUserTouch {
 
 // ActionUserTouchMetaGlobalInput is a type for action global meta input parameters
 type ActionUserTouchMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,7 +76,7 @@ func (in *ActionUserTouchMetaGlobalInput) AnySelected() bool {
 
 // Type for action response, including envelope
 type ActionUserTouchResponse struct {
-	Action *ActionUserTouch `json:"-"`
+	Action *ActionUserTouch "json:\"-\""
 	*Envelope
 }
 
@@ -105,7 +106,7 @@ func (inv *ActionUserTouchInvocation) SetPathParamInt(param string, value int64)
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserTouchInvocation) SetPathParamString(param string, value string) *ActionUserTouchInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

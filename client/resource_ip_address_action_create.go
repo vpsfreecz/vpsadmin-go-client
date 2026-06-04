@@ -16,8 +16,8 @@ func NewActionIpAddressCreate(client *Client) *ActionIpAddressCreate {
 
 // ActionIpAddressCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionIpAddressCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,14 +73,14 @@ func (in *ActionIpAddressCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionIpAddressCreateInput is a type for action input parameters
 type ActionIpAddressCreateInput struct {
-	Addr             string `json:"addr"`
-	Location         int64  `json:"location"`
-	Network          int64  `json:"network"`
-	NetworkInterface int64  `json:"network_interface"`
-	Prefix           int64  `json:"prefix"`
-	RouteVia         int64  `json:"route_via"`
-	Size             int64  `json:"size"`
-	User             int64  `json:"user"`
+	Addr             string "json:\"addr\""
+	Location         int64  "json:\"location\""
+	Network          int64  "json:\"network\""
+	NetworkInterface int64  "json:\"network_interface\""
+	Prefix           int64  "json:\"prefix\""
+	RouteVia         int64  "json:\"route_via\""
+	Size             int64  "json:\"size\""
+	User             int64  "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -242,30 +242,30 @@ func (in *ActionIpAddressCreateInput) AnySelected() bool {
 
 // ActionIpAddressCreateRequest is a type for the entire action request
 type ActionIpAddressCreateRequest struct {
-	IpAddress map[string]interface{} `json:"ip_address"`
-	Meta      map[string]interface{} `json:"_meta"`
+	IpAddress map[string]interface{} "json:\"ip_address\""
+	Meta      map[string]interface{} "json:\"_meta\""
 }
 
 // ActionIpAddressCreateOutput is a type for action output parameters
 type ActionIpAddressCreateOutput struct {
-	Addr               string                            `json:"addr"`
-	ChargedEnvironment *ActionEnvironmentShowOutput      `json:"charged_environment"`
-	Id                 int64                             `json:"id"`
-	Network            *ActionNetworkShowOutput          `json:"network"`
-	NetworkInterface   *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Prefix             int64                             `json:"prefix"`
-	RouteVia           *ActionHostIpAddressShowOutput    `json:"route_via"`
-	Size               int64                             `json:"size"`
-	User               *ActionUserShowOutput             `json:"user"`
+	Addr               string                            "json:\"addr\""
+	ChargedEnvironment *ActionEnvironmentShowOutput      "json:\"charged_environment\""
+	Id                 int64                             "json:\"id\""
+	Network            *ActionNetworkShowOutput          "json:\"network\""
+	NetworkInterface   *ActionNetworkInterfaceShowOutput "json:\"network_interface\""
+	Prefix             int64                             "json:\"prefix\""
+	RouteVia           *ActionHostIpAddressShowOutput    "json:\"route_via\""
+	Size               int64                             "json:\"size\""
+	User               *ActionUserShowOutput             "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionIpAddressCreateResponse struct {
-	Action *ActionIpAddressCreate `json:"-"`
+	Action *ActionIpAddressCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		IpAddress *ActionIpAddressCreateOutput `json:"ip_address"`
+		IpAddress *ActionIpAddressCreateOutput "json:\"ip_address\""
 	}
 
 	// Action output without the namespace

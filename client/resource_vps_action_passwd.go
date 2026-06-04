@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,7 +19,7 @@ func NewActionVpsPasswd(client *Client) *ActionVpsPasswd {
 
 // ActionVpsPasswdMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsPasswdMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -62,7 +63,7 @@ func (in *ActionVpsPasswdMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsPasswdInput is a type for action input parameters
 type ActionVpsPasswdInput struct {
-	Type string `json:"type"`
+	Type string "json:\"type\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -121,29 +122,29 @@ func (in *ActionVpsPasswdInput) AnySelected() bool {
 
 // ActionVpsPasswdRequest is a type for the entire action request
 type ActionVpsPasswdRequest struct {
-	Vps  map[string]interface{} `json:"vps"`
-	Meta map[string]interface{} `json:"_meta"`
+	Vps  map[string]interface{} "json:\"vps\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsPasswdOutput is a type for action output parameters
 type ActionVpsPasswdOutput struct {
-	Password string `json:"password"`
+	Password string "json:\"password\""
 }
 
 // ActionVpsPasswdMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsPasswdMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionVpsPasswdResponse struct {
-	Action *ActionVpsPasswd `json:"-"`
+	Action *ActionVpsPasswd "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Vps *ActionVpsPasswdOutput `json:"vps"`
+		Vps *ActionVpsPasswdOutput "json:\"vps\""
 		// Global output metadata
-		Meta *ActionVpsPasswdMetaGlobalOutput `json:"_meta"`
+		Meta *ActionVpsPasswdMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -178,7 +179,7 @@ func (inv *ActionVpsPasswdInvocation) SetPathParamInt(param string, value int64)
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsPasswdInvocation) SetPathParamString(param string, value string) *ActionVpsPasswdInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

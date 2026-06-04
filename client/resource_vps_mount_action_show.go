@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsMountShow(client *Client) *ActionVpsMountShow {
 
 // ActionVpsMountShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMountShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,26 +76,26 @@ func (in *ActionVpsMountShowMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMountShowOutput is a type for action output parameters
 type ActionVpsMountShowOutput struct {
-	CurrentState     string                            `json:"current_state"`
-	Dataset          *ActionDatasetShowOutput          `json:"dataset"`
-	Enabled          bool                              `json:"enabled"`
-	ExpirationDate   string                            `json:"expiration_date"`
-	Id               int64                             `json:"id"`
-	MasterEnabled    bool                              `json:"master_enabled"`
-	Mode             string                            `json:"mode"`
-	Mountpoint       string                            `json:"mountpoint"`
-	OnStartFail      string                            `json:"on_start_fail"`
-	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
-	Vps              *ActionVpsShowOutput              `json:"vps"`
+	CurrentState     string                            "json:\"current_state\""
+	Dataset          *ActionDatasetShowOutput          "json:\"dataset\""
+	Enabled          bool                              "json:\"enabled\""
+	ExpirationDate   string                            "json:\"expiration_date\""
+	Id               int64                             "json:\"id\""
+	MasterEnabled    bool                              "json:\"master_enabled\""
+	Mode             string                            "json:\"mode\""
+	Mountpoint       string                            "json:\"mountpoint\""
+	OnStartFail      string                            "json:\"on_start_fail\""
+	UserNamespaceMap *ActionUserNamespaceMapShowOutput "json:\"user_namespace_map\""
+	Vps              *ActionVpsShowOutput              "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionVpsMountShowResponse struct {
-	Action *ActionVpsMountShow `json:"-"`
+	Action *ActionVpsMountShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Mount *ActionVpsMountShowOutput `json:"mount"`
+		Mount *ActionVpsMountShowOutput "json:\"mount\""
 	}
 
 	// Action output without the namespace
@@ -127,7 +128,7 @@ func (inv *ActionVpsMountShowInvocation) SetPathParamInt(param string, value int
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsMountShowInvocation) SetPathParamString(param string, value string) *ActionVpsMountShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

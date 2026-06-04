@@ -16,8 +16,8 @@ func NewActionDnsTsigKeyCreate(client *Client) *ActionDnsTsigKeyCreate {
 
 // ActionDnsTsigKeyCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsTsigKeyCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,9 +73,9 @@ func (in *ActionDnsTsigKeyCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsTsigKeyCreateInput is a type for action input parameters
 type ActionDnsTsigKeyCreateInput struct {
-	Algorithm string `json:"algorithm"`
-	Name      string `json:"name"`
-	User      int64  `json:"user"`
+	Algorithm string "json:\"algorithm\""
+	Name      string "json:\"name\""
+	User      int64  "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -177,28 +177,28 @@ func (in *ActionDnsTsigKeyCreateInput) AnySelected() bool {
 
 // ActionDnsTsigKeyCreateRequest is a type for the entire action request
 type ActionDnsTsigKeyCreateRequest struct {
-	DnsTsigKey map[string]interface{} `json:"dns_tsig_key"`
-	Meta       map[string]interface{} `json:"_meta"`
+	DnsTsigKey map[string]interface{} "json:\"dns_tsig_key\""
+	Meta       map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDnsTsigKeyCreateOutput is a type for action output parameters
 type ActionDnsTsigKeyCreateOutput struct {
-	Algorithm string                `json:"algorithm"`
-	CreatedAt string                `json:"created_at"`
-	Id        int64                 `json:"id"`
-	Name      string                `json:"name"`
-	Secret    string                `json:"secret"`
-	UpdatedAt string                `json:"updated_at"`
-	User      *ActionUserShowOutput `json:"user"`
+	Algorithm string                "json:\"algorithm\""
+	CreatedAt string                "json:\"created_at\""
+	Id        int64                 "json:\"id\""
+	Name      string                "json:\"name\""
+	Secret    string                "json:\"secret\""
+	UpdatedAt string                "json:\"updated_at\""
+	User      *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionDnsTsigKeyCreateResponse struct {
-	Action *ActionDnsTsigKeyCreate `json:"-"`
+	Action *ActionDnsTsigKeyCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsTsigKey *ActionDnsTsigKeyCreateOutput `json:"dns_tsig_key"`
+		DnsTsigKey *ActionDnsTsigKeyCreateOutput "json:\"dns_tsig_key\""
 	}
 
 	// Action output without the namespace

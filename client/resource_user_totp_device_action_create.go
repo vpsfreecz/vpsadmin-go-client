@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserTotpDeviceCreate(client *Client) *ActionUserTotpDeviceCreate {
 
 // ActionUserTotpDeviceCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserTotpDeviceCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,7 +76,7 @@ func (in *ActionUserTotpDeviceCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserTotpDeviceCreateInput is a type for action input parameters
 type ActionUserTotpDeviceCreateInput struct {
-	Label string `json:"label"`
+	Label string "json:\"label\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,31 +135,31 @@ func (in *ActionUserTotpDeviceCreateInput) AnySelected() bool {
 
 // ActionUserTotpDeviceCreateRequest is a type for the entire action request
 type ActionUserTotpDeviceCreateRequest struct {
-	TotpDevice map[string]interface{} `json:"totp_device"`
-	Meta       map[string]interface{} `json:"_meta"`
+	TotpDevice map[string]interface{} "json:\"totp_device\""
+	Meta       map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserTotpDeviceCreateOutput is a type for action output parameters
 type ActionUserTotpDeviceCreateOutput struct {
-	Confirmed       bool   `json:"confirmed"`
-	CreatedAt       string `json:"created_at"`
-	Enabled         bool   `json:"enabled"`
-	Id              int64  `json:"id"`
-	Label           string `json:"label"`
-	LastUseAt       string `json:"last_use_at"`
-	ProvisioningUri string `json:"provisioning_uri"`
-	Secret          string `json:"secret"`
-	UpdatedAt       string `json:"updated_at"`
-	UseCount        int64  `json:"use_count"`
+	Confirmed       bool   "json:\"confirmed\""
+	CreatedAt       string "json:\"created_at\""
+	Enabled         bool   "json:\"enabled\""
+	Id              int64  "json:\"id\""
+	Label           string "json:\"label\""
+	LastUseAt       string "json:\"last_use_at\""
+	ProvisioningUri string "json:\"provisioning_uri\""
+	Secret          string "json:\"secret\""
+	UpdatedAt       string "json:\"updated_at\""
+	UseCount        int64  "json:\"use_count\""
 }
 
 // Type for action response, including envelope
 type ActionUserTotpDeviceCreateResponse struct {
-	Action *ActionUserTotpDeviceCreate `json:"-"`
+	Action *ActionUserTotpDeviceCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		TotpDevice *ActionUserTotpDeviceCreateOutput `json:"totp_device"`
+		TotpDevice *ActionUserTotpDeviceCreateOutput "json:\"totp_device\""
 	}
 
 	// Action output without the namespace
@@ -193,7 +194,7 @@ func (inv *ActionUserTotpDeviceCreateInvocation) SetPathParamInt(param string, v
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserTotpDeviceCreateInvocation) SetPathParamString(param string, value string) *ActionUserTotpDeviceCreateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

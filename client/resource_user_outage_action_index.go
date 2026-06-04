@@ -16,9 +16,9 @@ func NewActionUserOutageIndex(client *Client) *ActionUserOutageIndex {
 
 // ActionUserOutageIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserOutageIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,10 +86,10 @@ func (in *ActionUserOutageIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserOutageIndexInput is a type for action input parameters
 type ActionUserOutageIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
-	Outage int64 `json:"outage"`
-	User   int64 `json:"user"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
+	Outage int64 "json:\"outage\""
+	User   int64 "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -184,20 +184,20 @@ func (in *ActionUserOutageIndexInput) AnySelected() bool {
 
 // ActionUserOutageIndexOutput is a type for action output parameters
 type ActionUserOutageIndexOutput struct {
-	ExportCount int64                   `json:"export_count"`
-	Id          int64                   `json:"id"`
-	Outage      *ActionOutageShowOutput `json:"outage"`
-	User        *ActionUserShowOutput   `json:"user"`
-	VpsCount    int64                   `json:"vps_count"`
+	ExportCount int64                   "json:\"export_count\""
+	Id          int64                   "json:\"id\""
+	Outage      *ActionOutageShowOutput "json:\"outage\""
+	User        *ActionUserShowOutput   "json:\"user\""
+	VpsCount    int64                   "json:\"vps_count\""
 }
 
 // Type for action response, including envelope
 type ActionUserOutageIndexResponse struct {
-	Action *ActionUserOutageIndex `json:"-"`
+	Action *ActionUserOutageIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		UserOutages []*ActionUserOutageIndexOutput `json:"user_outages"`
+		UserOutages []*ActionUserOutageIndexOutput "json:\"user_outages\""
 	}
 
 	// Action output without the namespace

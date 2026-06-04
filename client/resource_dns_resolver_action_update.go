@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnsResolverUpdate(client *Client) *ActionDnsResolverUpdate {
 
 // ActionDnsResolverUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsResolverUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,10 +76,10 @@ func (in *ActionDnsResolverUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsResolverUpdateInput is a type for action input parameters
 type ActionDnsResolverUpdateInput struct {
-	IpAddr      string `json:"ip_addr"`
-	IsUniversal bool   `json:"is_universal"`
-	Label       string `json:"label"`
-	Location    int64  `json:"location"`
+	IpAddr      string "json:\"ip_addr\""
+	IsUniversal bool   "json:\"is_universal\""
+	Label       string "json:\"label\""
+	Location    int64  "json:\"location\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -192,33 +193,33 @@ func (in *ActionDnsResolverUpdateInput) AnySelected() bool {
 
 // ActionDnsResolverUpdateRequest is a type for the entire action request
 type ActionDnsResolverUpdateRequest struct {
-	DnsResolver map[string]interface{} `json:"dns_resolver"`
-	Meta        map[string]interface{} `json:"_meta"`
+	DnsResolver map[string]interface{} "json:\"dns_resolver\""
+	Meta        map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDnsResolverUpdateOutput is a type for action output parameters
 type ActionDnsResolverUpdateOutput struct {
-	Id          int64                     `json:"id"`
-	IpAddr      string                    `json:"ip_addr"`
-	IsUniversal bool                      `json:"is_universal"`
-	Label       string                    `json:"label"`
-	Location    *ActionLocationShowOutput `json:"location"`
+	Id          int64                     "json:\"id\""
+	IpAddr      string                    "json:\"ip_addr\""
+	IsUniversal bool                      "json:\"is_universal\""
+	Label       string                    "json:\"label\""
+	Location    *ActionLocationShowOutput "json:\"location\""
 }
 
 // ActionDnsResolverUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionDnsResolverUpdateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDnsResolverUpdateResponse struct {
-	Action *ActionDnsResolverUpdate `json:"-"`
+	Action *ActionDnsResolverUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsResolver *ActionDnsResolverUpdateOutput `json:"dns_resolver"`
+		DnsResolver *ActionDnsResolverUpdateOutput "json:\"dns_resolver\""
 		// Global output metadata
-		Meta *ActionDnsResolverUpdateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDnsResolverUpdateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -253,7 +254,7 @@ func (inv *ActionDnsResolverUpdateInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsResolverUpdateInvocation) SetPathParamString(param string, value string) *ActionDnsResolverUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

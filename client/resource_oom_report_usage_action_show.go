@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOomReportUsageShow(client *Client) *ActionOomReportUsageShow {
 
 // ActionOomReportUsageShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOomReportUsageShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,20 +76,20 @@ func (in *ActionOomReportUsageShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportUsageShowOutput is a type for action output parameters
 type ActionOomReportUsageShowOutput struct {
-	Failcnt int64  `json:"failcnt"`
-	Id      int64  `json:"id"`
-	Limit   int64  `json:"limit"`
-	Memtype string `json:"memtype"`
-	Usage   int64  `json:"usage"`
+	Failcnt int64  "json:\"failcnt\""
+	Id      int64  "json:\"id\""
+	Limit   int64  "json:\"limit\""
+	Memtype string "json:\"memtype\""
+	Usage   int64  "json:\"usage\""
 }
 
 // Type for action response, including envelope
 type ActionOomReportUsageShowResponse struct {
-	Action *ActionOomReportUsageShow `json:"-"`
+	Action *ActionOomReportUsageShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Usage *ActionOomReportUsageShowOutput `json:"usage"`
+		Usage *ActionOomReportUsageShowOutput "json:\"usage\""
 	}
 
 	// Action output without the namespace
@@ -121,7 +122,7 @@ func (inv *ActionOomReportUsageShowInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOomReportUsageShowInvocation) SetPathParamString(param string, value string) *ActionOomReportUsageShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

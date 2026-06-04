@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsMountCreate(client *Client) *ActionVpsMountCreate {
 
 // ActionVpsMountCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsMountCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,12 +76,12 @@ func (in *ActionVpsMountCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsMountCreateInput is a type for action input parameters
 type ActionVpsMountCreateInput struct {
-	Dataset          int64  `json:"dataset"`
-	Enabled          bool   `json:"enabled"`
-	Mode             string `json:"mode"`
-	Mountpoint       string `json:"mountpoint"`
-	OnStartFail      string `json:"on_start_fail"`
-	UserNamespaceMap int64  `json:"user_namespace_map"`
+	Dataset          int64  "json:\"dataset\""
+	Enabled          bool   "json:\"enabled\""
+	Mode             string "json:\"mode\""
+	Mountpoint       string "json:\"mountpoint\""
+	OnStartFail      string "json:\"on_start_fail\""
+	UserNamespaceMap int64  "json:\"user_namespace_map\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -199,39 +200,39 @@ func (in *ActionVpsMountCreateInput) AnySelected() bool {
 
 // ActionVpsMountCreateRequest is a type for the entire action request
 type ActionVpsMountCreateRequest struct {
-	Mount map[string]interface{} `json:"mount"`
-	Meta  map[string]interface{} `json:"_meta"`
+	Mount map[string]interface{} "json:\"mount\""
+	Meta  map[string]interface{} "json:\"_meta\""
 }
 
 // ActionVpsMountCreateOutput is a type for action output parameters
 type ActionVpsMountCreateOutput struct {
-	CurrentState     string                            `json:"current_state"`
-	Dataset          *ActionDatasetShowOutput          `json:"dataset"`
-	Enabled          bool                              `json:"enabled"`
-	ExpirationDate   string                            `json:"expiration_date"`
-	Id               int64                             `json:"id"`
-	MasterEnabled    bool                              `json:"master_enabled"`
-	Mode             string                            `json:"mode"`
-	Mountpoint       string                            `json:"mountpoint"`
-	OnStartFail      string                            `json:"on_start_fail"`
-	UserNamespaceMap *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
-	Vps              *ActionVpsShowOutput              `json:"vps"`
+	CurrentState     string                            "json:\"current_state\""
+	Dataset          *ActionDatasetShowOutput          "json:\"dataset\""
+	Enabled          bool                              "json:\"enabled\""
+	ExpirationDate   string                            "json:\"expiration_date\""
+	Id               int64                             "json:\"id\""
+	MasterEnabled    bool                              "json:\"master_enabled\""
+	Mode             string                            "json:\"mode\""
+	Mountpoint       string                            "json:\"mountpoint\""
+	OnStartFail      string                            "json:\"on_start_fail\""
+	UserNamespaceMap *ActionUserNamespaceMapShowOutput "json:\"user_namespace_map\""
+	Vps              *ActionVpsShowOutput              "json:\"vps\""
 }
 
 // ActionVpsMountCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionVpsMountCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionVpsMountCreateResponse struct {
-	Action *ActionVpsMountCreate `json:"-"`
+	Action *ActionVpsMountCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Mount *ActionVpsMountCreateOutput `json:"mount"`
+		Mount *ActionVpsMountCreateOutput "json:\"mount\""
 		// Global output metadata
-		Meta *ActionVpsMountCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionVpsMountCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -266,7 +267,7 @@ func (inv *ActionVpsMountCreateInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsMountCreateInvocation) SetPathParamString(param string, value string) *ActionVpsMountCreateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

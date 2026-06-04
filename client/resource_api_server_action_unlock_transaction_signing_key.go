@@ -16,7 +16,7 @@ func NewActionApiServerUnlockTransactionSigningKey(client *Client) *ActionApiSer
 
 // ActionApiServerUnlockTransactionSigningKeyMetaGlobalInput is a type for action global meta input parameters
 type ActionApiServerUnlockTransactionSigningKeyMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,7 +60,7 @@ func (in *ActionApiServerUnlockTransactionSigningKeyMetaGlobalInput) AnySelected
 
 // ActionApiServerUnlockTransactionSigningKeyInput is a type for action input parameters
 type ActionApiServerUnlockTransactionSigningKeyInput struct {
-	Passphrase string `json:"passphrase"`
+	Passphrase string "json:\"passphrase\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -119,13 +119,13 @@ func (in *ActionApiServerUnlockTransactionSigningKeyInput) AnySelected() bool {
 
 // ActionApiServerUnlockTransactionSigningKeyRequest is a type for the entire action request
 type ActionApiServerUnlockTransactionSigningKeyRequest struct {
-	ApiServer map[string]interface{} `json:"api_server"`
-	Meta      map[string]interface{} `json:"_meta"`
+	ApiServer map[string]interface{} "json:\"api_server\""
+	Meta      map[string]interface{} "json:\"_meta\""
 }
 
 // Type for action response, including envelope
 type ActionApiServerUnlockTransactionSigningKeyResponse struct {
-	Action *ActionApiServerUnlockTransactionSigningKey `json:"-"`
+	Action *ActionApiServerUnlockTransactionSigningKey "json:\"-\""
 	*Envelope
 }
 

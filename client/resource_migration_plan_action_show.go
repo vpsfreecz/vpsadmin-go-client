@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMigrationPlanShow(client *Client) *ActionMigrationPlanShow {
 
 // ActionMigrationPlanShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMigrationPlanShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,24 +76,24 @@ func (in *ActionMigrationPlanShowMetaGlobalInput) AnySelected() bool {
 
 // ActionMigrationPlanShowOutput is a type for action output parameters
 type ActionMigrationPlanShowOutput struct {
-	Concurrency int64                 `json:"concurrency"`
-	CreatedAt   string                `json:"created_at"`
-	FinishedAt  string                `json:"finished_at"`
-	Id          int64                 `json:"id"`
-	Reason      string                `json:"reason"`
-	SendMail    bool                  `json:"send_mail"`
-	State       string                `json:"state"`
-	StopOnError bool                  `json:"stop_on_error"`
-	User        *ActionUserShowOutput `json:"user"`
+	Concurrency int64                 "json:\"concurrency\""
+	CreatedAt   string                "json:\"created_at\""
+	FinishedAt  string                "json:\"finished_at\""
+	Id          int64                 "json:\"id\""
+	Reason      string                "json:\"reason\""
+	SendMail    bool                  "json:\"send_mail\""
+	State       string                "json:\"state\""
+	StopOnError bool                  "json:\"stop_on_error\""
+	User        *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionMigrationPlanShowResponse struct {
-	Action *ActionMigrationPlanShow `json:"-"`
+	Action *ActionMigrationPlanShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MigrationPlan *ActionMigrationPlanShowOutput `json:"migration_plan"`
+		MigrationPlan *ActionMigrationPlanShowOutput "json:\"migration_plan\""
 	}
 
 	// Action output without the namespace
@@ -125,7 +126,7 @@ func (inv *ActionMigrationPlanShowInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMigrationPlanShowInvocation) SetPathParamString(param string, value string) *ActionMigrationPlanShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

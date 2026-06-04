@@ -16,9 +16,9 @@ func NewActionNetworkInterfaceAccountingIndex(client *Client) *ActionNetworkInte
 
 // ActionNetworkInterfaceAccountingIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkInterfaceAccountingIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,19 +86,19 @@ func (in *ActionNetworkInterfaceAccountingIndexMetaGlobalInput) AnySelected() bo
 
 // ActionNetworkInterfaceAccountingIndexInput is a type for action input parameters
 type ActionNetworkInterfaceAccountingIndexInput struct {
-	Environment int64  `json:"environment"`
-	From        string `json:"from"`
-	FromBytes   int64  `json:"from_bytes"`
-	FromDate    string `json:"from_date"`
-	Limit       int64  `json:"limit"`
-	Location    int64  `json:"location"`
-	Month       int64  `json:"month"`
-	Node        int64  `json:"node"`
-	Order       string `json:"order"`
-	To          string `json:"to"`
-	User        int64  `json:"user"`
-	Vps         int64  `json:"vps"`
-	Year        int64  `json:"year"`
+	Environment int64  "json:\"environment\""
+	From        string "json:\"from\""
+	FromBytes   int64  "json:\"from_bytes\""
+	FromDate    string "json:\"from_date\""
+	Limit       int64  "json:\"limit\""
+	Location    int64  "json:\"location\""
+	Month       int64  "json:\"month\""
+	Node        int64  "json:\"node\""
+	Order       string "json:\"order\""
+	To          string "json:\"to\""
+	User        int64  "json:\"user\""
+	Vps         int64  "json:\"vps\""
+	Year        int64  "json:\"year\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -301,26 +301,26 @@ func (in *ActionNetworkInterfaceAccountingIndexInput) AnySelected() bool {
 
 // ActionNetworkInterfaceAccountingIndexOutput is a type for action output parameters
 type ActionNetworkInterfaceAccountingIndexOutput struct {
-	Bytes            int64                             `json:"bytes"`
-	BytesIn          int64                             `json:"bytes_in"`
-	BytesOut         int64                             `json:"bytes_out"`
-	CreatedAt        string                            `json:"created_at"`
-	Month            int64                             `json:"month"`
-	NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
-	Packets          int64                             `json:"packets"`
-	PacketsIn        int64                             `json:"packets_in"`
-	PacketsOut       int64                             `json:"packets_out"`
-	UpdatedAt        string                            `json:"updated_at"`
-	Year             int64                             `json:"year"`
+	Bytes            int64                             "json:\"bytes\""
+	BytesIn          int64                             "json:\"bytes_in\""
+	BytesOut         int64                             "json:\"bytes_out\""
+	CreatedAt        string                            "json:\"created_at\""
+	Month            int64                             "json:\"month\""
+	NetworkInterface *ActionNetworkInterfaceShowOutput "json:\"network_interface\""
+	Packets          int64                             "json:\"packets\""
+	PacketsIn        int64                             "json:\"packets_in\""
+	PacketsOut       int64                             "json:\"packets_out\""
+	UpdatedAt        string                            "json:\"updated_at\""
+	Year             int64                             "json:\"year\""
 }
 
 // Type for action response, including envelope
 type ActionNetworkInterfaceAccountingIndexResponse struct {
-	Action *ActionNetworkInterfaceAccountingIndex `json:"-"`
+	Action *ActionNetworkInterfaceAccountingIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		NetworkInterfaceAccountings []*ActionNetworkInterfaceAccountingIndexOutput `json:"network_interface_accountings"`
+		NetworkInterfaceAccountings []*ActionNetworkInterfaceAccountingIndexOutput "json:\"network_interface_accountings\""
 	}
 
 	// Action output without the namespace

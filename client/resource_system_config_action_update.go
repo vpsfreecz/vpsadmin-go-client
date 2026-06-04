@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionSystemConfigUpdate(client *Client) *ActionSystemConfigUpdate {
 
 // ActionSystemConfigUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionSystemConfigUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,26 +76,26 @@ func (in *ActionSystemConfigUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionSystemConfigUpdateRequest is a type for the entire action request
 type ActionSystemConfigUpdateRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionSystemConfigUpdateOutput is a type for action output parameters
 type ActionSystemConfigUpdateOutput struct {
-	Category     string `json:"category"`
-	Description  string `json:"description"`
-	Label        string `json:"label"`
-	MinUserLevel int64  `json:"min_user_level"`
-	Name         string `json:"name"`
-	Type         string `json:"type"`
+	Category     string "json:\"category\""
+	Description  string "json:\"description\""
+	Label        string "json:\"label\""
+	MinUserLevel int64  "json:\"min_user_level\""
+	Name         string "json:\"name\""
+	Type         string "json:\"type\""
 }
 
 // Type for action response, including envelope
 type ActionSystemConfigUpdateResponse struct {
-	Action *ActionSystemConfigUpdate `json:"-"`
+	Action *ActionSystemConfigUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		SystemConfig *ActionSystemConfigUpdateOutput `json:"system_config"`
+		SystemConfig *ActionSystemConfigUpdateOutput "json:\"system_config\""
 	}
 
 	// Action output without the namespace
@@ -127,7 +128,7 @@ func (inv *ActionSystemConfigUpdateInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionSystemConfigUpdateInvocation) SetPathParamString(param string, value string) *ActionSystemConfigUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

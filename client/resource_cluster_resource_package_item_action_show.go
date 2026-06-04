@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionClusterResourcePackageItemShow(client *Client) *ActionClusterResou
 
 // ActionClusterResourcePackageItemShowMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourcePackageItemShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,18 +76,18 @@ func (in *ActionClusterResourcePackageItemShowMetaGlobalInput) AnySelected() boo
 
 // ActionClusterResourcePackageItemShowOutput is a type for action output parameters
 type ActionClusterResourcePackageItemShowOutput struct {
-	ClusterResource *ActionClusterResourceShowOutput `json:"cluster_resource"`
-	Id              int64                            `json:"id"`
-	Value           int64                            `json:"value"`
+	ClusterResource *ActionClusterResourceShowOutput "json:\"cluster_resource\""
+	Id              int64                            "json:\"id\""
+	Value           int64                            "json:\"value\""
 }
 
 // Type for action response, including envelope
 type ActionClusterResourcePackageItemShowResponse struct {
-	Action *ActionClusterResourcePackageItemShow `json:"-"`
+	Action *ActionClusterResourcePackageItemShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Item *ActionClusterResourcePackageItemShowOutput `json:"item"`
+		Item *ActionClusterResourcePackageItemShowOutput "json:\"item\""
 	}
 
 	// Action output without the namespace
@@ -119,7 +120,7 @@ func (inv *ActionClusterResourcePackageItemShowInvocation) SetPathParamInt(param
 
 // SetPathParamString sets string path parameter
 func (inv *ActionClusterResourcePackageItemShowInvocation) SetPathParamString(param string, value string) *ActionClusterResourcePackageItemShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

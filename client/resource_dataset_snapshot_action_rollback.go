@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDatasetSnapshotRollback(client *Client) *ActionDatasetSnapshotRoll
 
 // ActionDatasetSnapshotRollbackMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetSnapshotRollbackMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,22 +76,22 @@ func (in *ActionDatasetSnapshotRollbackMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetSnapshotRollbackRequest is a type for the entire action request
 type ActionDatasetSnapshotRollbackRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDatasetSnapshotRollbackMetaGlobalOutput is a type for global output metadata parameters
 type ActionDatasetSnapshotRollbackMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetSnapshotRollbackResponse struct {
-	Action *ActionDatasetSnapshotRollback `json:"-"`
+	Action *ActionDatasetSnapshotRollback "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionDatasetSnapshotRollbackMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDatasetSnapshotRollbackMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -120,7 +121,7 @@ func (inv *ActionDatasetSnapshotRollbackInvocation) SetPathParamInt(param string
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetSnapshotRollbackInvocation) SetPathParamString(param string, value string) *ActionDatasetSnapshotRollbackInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

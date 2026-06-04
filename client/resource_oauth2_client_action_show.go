@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOauth2ClientShow(client *Client) *ActionOauth2ClientShow {
 
 // ActionOauth2ClientShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOauth2ClientShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,26 +76,26 @@ func (in *ActionOauth2ClientShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOauth2ClientShowOutput is a type for action output parameters
 type ActionOauth2ClientShowOutput struct {
-	AccessTokenLifetime string `json:"access_token_lifetime"`
-	AccessTokenSeconds  int64  `json:"access_token_seconds"`
-	AllowSingleSignOn   bool   `json:"allow_single_sign_on"`
-	ClientId            string `json:"client_id"`
-	CreatedAt           string `json:"created_at"`
-	Id                  int64  `json:"id"`
-	IssueRefreshToken   bool   `json:"issue_refresh_token"`
-	Name                string `json:"name"`
-	RedirectUri         string `json:"redirect_uri"`
-	RefreshTokenSeconds int64  `json:"refresh_token_seconds"`
-	UpdatedAt           string `json:"updated_at"`
+	AccessTokenLifetime string "json:\"access_token_lifetime\""
+	AccessTokenSeconds  int64  "json:\"access_token_seconds\""
+	AllowSingleSignOn   bool   "json:\"allow_single_sign_on\""
+	ClientId            string "json:\"client_id\""
+	CreatedAt           string "json:\"created_at\""
+	Id                  int64  "json:\"id\""
+	IssueRefreshToken   bool   "json:\"issue_refresh_token\""
+	Name                string "json:\"name\""
+	RedirectUri         string "json:\"redirect_uri\""
+	RefreshTokenSeconds int64  "json:\"refresh_token_seconds\""
+	UpdatedAt           string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionOauth2ClientShowResponse struct {
-	Action *ActionOauth2ClientShow `json:"-"`
+	Action *ActionOauth2ClientShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Oauth2Client *ActionOauth2ClientShowOutput `json:"oauth2_client"`
+		Oauth2Client *ActionOauth2ClientShowOutput "json:\"oauth2_client\""
 	}
 
 	// Action output without the namespace
@@ -127,7 +128,7 @@ func (inv *ActionOauth2ClientShowInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOauth2ClientShowInvocation) SetPathParamString(param string, value string) *ActionOauth2ClientShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

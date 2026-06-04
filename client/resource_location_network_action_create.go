@@ -16,8 +16,8 @@ func NewActionLocationNetworkCreate(client *Client) *ActionLocationNetworkCreate
 
 // ActionLocationNetworkCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationNetworkCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,12 +73,12 @@ func (in *ActionLocationNetworkCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationNetworkCreateInput is a type for action input parameters
 type ActionLocationNetworkCreateInput struct {
-	Autopick bool  `json:"autopick"`
-	Location int64 `json:"location"`
-	Network  int64 `json:"network"`
-	Primary  bool  `json:"primary"`
-	Priority int64 `json:"priority"`
-	Userpick bool  `json:"userpick"`
+	Autopick bool  "json:\"autopick\""
+	Location int64 "json:\"location\""
+	Network  int64 "json:\"network\""
+	Primary  bool  "json:\"primary\""
+	Priority int64 "json:\"priority\""
+	Userpick bool  "json:\"userpick\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -197,28 +197,28 @@ func (in *ActionLocationNetworkCreateInput) AnySelected() bool {
 
 // ActionLocationNetworkCreateRequest is a type for the entire action request
 type ActionLocationNetworkCreateRequest struct {
-	LocationNetwork map[string]interface{} `json:"location_network"`
-	Meta            map[string]interface{} `json:"_meta"`
+	LocationNetwork map[string]interface{} "json:\"location_network\""
+	Meta            map[string]interface{} "json:\"_meta\""
 }
 
 // ActionLocationNetworkCreateOutput is a type for action output parameters
 type ActionLocationNetworkCreateOutput struct {
-	Autopick bool                      `json:"autopick"`
-	Id       int64                     `json:"id"`
-	Location *ActionLocationShowOutput `json:"location"`
-	Network  *ActionNetworkShowOutput  `json:"network"`
-	Primary  bool                      `json:"primary"`
-	Priority int64                     `json:"priority"`
-	Userpick bool                      `json:"userpick"`
+	Autopick bool                      "json:\"autopick\""
+	Id       int64                     "json:\"id\""
+	Location *ActionLocationShowOutput "json:\"location\""
+	Network  *ActionNetworkShowOutput  "json:\"network\""
+	Primary  bool                      "json:\"primary\""
+	Priority int64                     "json:\"priority\""
+	Userpick bool                      "json:\"userpick\""
 }
 
 // Type for action response, including envelope
 type ActionLocationNetworkCreateResponse struct {
-	Action *ActionLocationNetworkCreate `json:"-"`
+	Action *ActionLocationNetworkCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		LocationNetwork *ActionLocationNetworkCreateOutput `json:"location_network"`
+		LocationNetwork *ActionLocationNetworkCreateOutput "json:\"location_network\""
 	}
 
 	// Action output without the namespace

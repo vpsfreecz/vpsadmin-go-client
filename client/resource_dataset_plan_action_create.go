@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDatasetPlanCreate(client *Client) *ActionDatasetPlanCreate {
 
 // ActionDatasetPlanCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetPlanCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,7 +76,7 @@ func (in *ActionDatasetPlanCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetPlanCreateInput is a type for action input parameters
 type ActionDatasetPlanCreateInput struct {
-	EnvironmentDatasetPlan int64 `json:"environment_dataset_plan"`
+	EnvironmentDatasetPlan int64 "json:\"environment_dataset_plan\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,23 +135,23 @@ func (in *ActionDatasetPlanCreateInput) AnySelected() bool {
 
 // ActionDatasetPlanCreateRequest is a type for the entire action request
 type ActionDatasetPlanCreateRequest struct {
-	Plan map[string]interface{} `json:"plan"`
-	Meta map[string]interface{} `json:"_meta"`
+	Plan map[string]interface{} "json:\"plan\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDatasetPlanCreateOutput is a type for action output parameters
 type ActionDatasetPlanCreateOutput struct {
-	EnvironmentDatasetPlan *ActionEnvironmentDatasetPlanShowOutput `json:"environment_dataset_plan"`
-	Id                     int64                                   `json:"id"`
+	EnvironmentDatasetPlan *ActionEnvironmentDatasetPlanShowOutput "json:\"environment_dataset_plan\""
+	Id                     int64                                   "json:\"id\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetPlanCreateResponse struct {
-	Action *ActionDatasetPlanCreate `json:"-"`
+	Action *ActionDatasetPlanCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Plan *ActionDatasetPlanCreateOutput `json:"plan"`
+		Plan *ActionDatasetPlanCreateOutput "json:\"plan\""
 	}
 
 	// Action output without the namespace
@@ -185,7 +186,7 @@ func (inv *ActionDatasetPlanCreateInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetPlanCreateInvocation) SetPathParamString(param string, value string) *ActionDatasetPlanCreateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

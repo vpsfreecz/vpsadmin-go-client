@@ -16,9 +16,9 @@ func NewActionUserClusterResourcePackageIndex(client *Client) *ActionUserCluster
 
 // ActionUserClusterResourcePackageIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserClusterResourcePackageIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,12 +86,12 @@ func (in *ActionUserClusterResourcePackageIndexMetaGlobalInput) AnySelected() bo
 
 // ActionUserClusterResourcePackageIndexInput is a type for action input parameters
 type ActionUserClusterResourcePackageIndexInput struct {
-	AddedBy                int64 `json:"added_by"`
-	ClusterResourcePackage int64 `json:"cluster_resource_package"`
-	Environment            int64 `json:"environment"`
-	FromId                 int64 `json:"from_id"`
-	Limit                  int64 `json:"limit"`
-	User                   int64 `json:"user"`
+	AddedBy                int64 "json:\"added_by\""
+	ClusterResourcePackage int64 "json:\"cluster_resource_package\""
+	Environment            int64 "json:\"environment\""
+	FromId                 int64 "json:\"from_id\""
+	Limit                  int64 "json:\"limit\""
+	User                   int64 "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -229,25 +229,25 @@ func (in *ActionUserClusterResourcePackageIndexInput) AnySelected() bool {
 
 // ActionUserClusterResourcePackageIndexOutput is a type for action output parameters
 type ActionUserClusterResourcePackageIndexOutput struct {
-	AddedBy                *ActionUserShowOutput                   `json:"added_by"`
-	ClusterResourcePackage *ActionClusterResourcePackageShowOutput `json:"cluster_resource_package"`
-	Comment                string                                  `json:"comment"`
-	CreatedAt              string                                  `json:"created_at"`
-	Environment            *ActionEnvironmentShowOutput            `json:"environment"`
-	Id                     int64                                   `json:"id"`
-	IsPersonal             bool                                    `json:"is_personal"`
-	Label                  string                                  `json:"label"`
-	UpdatedAt              string                                  `json:"updated_at"`
-	User                   *ActionUserShowOutput                   `json:"user"`
+	AddedBy                *ActionUserShowOutput                   "json:\"added_by\""
+	ClusterResourcePackage *ActionClusterResourcePackageShowOutput "json:\"cluster_resource_package\""
+	Comment                string                                  "json:\"comment\""
+	CreatedAt              string                                  "json:\"created_at\""
+	Environment            *ActionEnvironmentShowOutput            "json:\"environment\""
+	Id                     int64                                   "json:\"id\""
+	IsPersonal             bool                                    "json:\"is_personal\""
+	Label                  string                                  "json:\"label\""
+	UpdatedAt              string                                  "json:\"updated_at\""
+	User                   *ActionUserShowOutput                   "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionUserClusterResourcePackageIndexResponse struct {
-	Action *ActionUserClusterResourcePackageIndex `json:"-"`
+	Action *ActionUserClusterResourcePackageIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		UserClusterResourcePackages []*ActionUserClusterResourcePackageIndexOutput `json:"user_cluster_resource_packages"`
+		UserClusterResourcePackages []*ActionUserClusterResourcePackageIndexOutput "json:\"user_cluster_resource_packages\""
 	}
 
 	// Action output without the namespace

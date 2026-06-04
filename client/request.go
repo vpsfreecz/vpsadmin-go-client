@@ -3,16 +3,180 @@ package client
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
+	"strings"
 )
+
+func (client *Client) actionURL(path string) (string, error) {
+	if !strings.HasPrefix(path, "/") || strings.HasPrefix(path, "//") {
+		return "", fmt.Errorf("unsafe API action path %q", path)
+	}
+
+	ref, err := url.Parse(path)
+	if err != nil {
+		return "", err
+	}
+
+	if ref.IsAbs() || ref.Host != "" || ref.User != nil {
+		return "", fmt.Errorf("unsafe API action path %q", path)
+	}
+
+	return client.sameOriginURL(client.Url + path)
+}
+
+func (client *Client) descriptionURL(rawURL string) (string, error) {
+	return client.descriptionURLWithTrustedOrigins(rawURL, nil)
+}
+
+func (client *Client) oauth2DescriptionURL(rawURL string) (string, error) {
+	return client.descriptionURLWithTrustedOrigins(rawURL, client.oauth2TrustedOrigins)
+}
+
+// AllowOAuth2Origin permits OAuth2 endpoints from an additional trusted origin.
+func (client *Client) AllowOAuth2Origin(rawOrigin string) error {
+	origin, err := parseTrustedOrigin(rawOrigin)
+	if err != nil {
+		return err
+	}
+
+	if client.oauth2TrustedOrigins == nil {
+		client.oauth2TrustedOrigins = make(map[string]struct{})
+	}
+
+	client.oauth2TrustedOrigins[origin] = struct{}{}
+	return nil
+}
+
+func (client *Client) descriptionURLWithTrustedOrigins(rawURL string, trustedOrigins map[string]struct{}) (string, error) {
+	base, err := client.parsedBaseURL()
+	if err != nil {
+		return "", err
+	}
+
+	ref, err := url.Parse(rawURL)
+	if err != nil {
+		return "", err
+	}
+
+	if ref.User != nil {
+		return "", fmt.Errorf("unsafe API description URL %q", rawURL)
+	}
+
+	if ref.Host != "" && ref.Scheme == "" {
+		return "", fmt.Errorf("unsafe API description URL %q", rawURL)
+	}
+
+	resolved := base.ResolveReference(ref)
+	if !sameOrigin(base, resolved) && !originAllowed(resolved, trustedOrigins) {
+		return "", fmt.Errorf("API description URL %q is outside client origin", rawURL)
+	}
+
+	return resolved.String(), nil
+}
+
+func (client *Client) sameOriginURL(rawURL string) (string, error) {
+	base, err := client.parsedBaseURL()
+	if err != nil {
+		return "", err
+	}
+
+	resolved, err := url.Parse(rawURL)
+	if err != nil {
+		return "", err
+	}
+
+	if !sameOrigin(base, resolved) {
+		return "", fmt.Errorf("request URL %q is outside client origin", rawURL)
+	}
+
+	return resolved.String(), nil
+}
+
+func (client *Client) parsedBaseURL() (*url.URL, error) {
+	base, err := url.Parse(client.Url)
+	if err != nil {
+		return nil, err
+	}
+
+	if base.Scheme == "" || base.Host == "" {
+		return nil, fmt.Errorf("invalid client URL %q", client.Url)
+	}
+
+	return base, nil
+}
+
+func sameOrigin(a *url.URL, b *url.URL) bool {
+	return strings.EqualFold(a.Scheme, b.Scheme) &&
+		strings.EqualFold(a.Hostname(), b.Hostname()) &&
+		originPort(a) == originPort(b)
+}
+
+func originAllowed(u *url.URL, trustedOrigins map[string]struct{}) bool {
+	if len(trustedOrigins) == 0 {
+		return false
+	}
+
+	_, ok := trustedOrigins[originKey(u)]
+	return ok
+}
+
+func parseTrustedOrigin(rawOrigin string) (string, error) {
+	if rawOrigin == "" || strings.ContainsAny(rawOrigin, "\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\v\f\r\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f \x7f\\") {
+		return "", fmt.Errorf("invalid trusted OAuth2 origin %q", rawOrigin)
+	}
+
+	parsed, err := url.Parse(rawOrigin)
+	if err != nil {
+		return "", err
+	}
+
+	if parsed.Scheme == "" || parsed.Host == "" || parsed.User != nil ||
+		(parsed.Path != "" && parsed.Path != "/") ||
+		parsed.RawQuery != "" || parsed.Fragment != "" {
+		return "", fmt.Errorf("invalid trusted OAuth2 origin %q", rawOrigin)
+	}
+
+	return originKey(parsed), nil
+}
+
+func originKey(u *url.URL) string {
+	host := strings.ToLower(u.Hostname())
+	if strings.Contains(host, ":") {
+		host = "[" + host + "]"
+	}
+
+	return strings.ToLower(u.Scheme) + "://" + host + ":" + originPort(u)
+}
+
+func originPort(u *url.URL) string {
+	port := u.Port()
+	if port != "" {
+		return port
+	}
+
+	switch strings.ToLower(u.Scheme) {
+	case "http":
+		return "80"
+	case "https":
+		return "443"
+	default:
+		return ""
+	}
+}
 
 // DoQueryStringRequests makes a HTTP requests in which input parameters are
 // sent as query parameters.
 func (client *Client) DoQueryStringRequest(path string, queryParams map[string]string, output interface{}) error {
-	url := client.Url + path
+	requestURL, err := client.actionURL(path)
 
-	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return err
+	}
+
+	req, err := http.NewRequest("GET", requestURL, nil)
 
 	if err != nil {
 		return err
@@ -53,7 +217,7 @@ func (client *Client) DoQueryStringRequest(path string, queryParams map[string]s
 // DoBodyRequest makes a HTTP requests in which the input parameters are sent
 // within the request body, encoded in JSON.
 func (client *Client) DoBodyRequest(method string, path string, params interface{}, output interface{}) error {
-	url := client.Url + path
+	requestURL, err := client.actionURL(path)
 
 	jsonData, err := json.Marshal(params)
 
@@ -61,7 +225,7 @@ func (client *Client) DoBodyRequest(method string, path string, params interface
 		return err
 	}
 
-	req, err := http.NewRequest(method, url, bytes.NewBuffer(jsonData))
+	req, err := http.NewRequest(method, requestURL, bytes.NewBuffer(jsonData))
 
 	if err != nil {
 		return err

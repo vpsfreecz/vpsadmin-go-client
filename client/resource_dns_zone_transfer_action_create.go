@@ -16,8 +16,8 @@ func NewActionDnsZoneTransferCreate(client *Client) *ActionDnsZoneTransferCreate
 
 // ActionDnsZoneTransferCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsZoneTransferCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,10 +73,10 @@ func (in *ActionDnsZoneTransferCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsZoneTransferCreateInput is a type for action input parameters
 type ActionDnsZoneTransferCreateInput struct {
-	DnsTsigKey    int64  `json:"dns_tsig_key"`
-	DnsZone       int64  `json:"dns_zone"`
-	HostIpAddress int64  `json:"host_ip_address"`
-	PeerType      string `json:"peer_type"`
+	DnsTsigKey    int64  "json:\"dns_tsig_key\""
+	DnsZone       int64  "json:\"dns_zone\""
+	HostIpAddress int64  "json:\"host_ip_address\""
+	PeerType      string "json:\"peer_type\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -190,35 +190,35 @@ func (in *ActionDnsZoneTransferCreateInput) AnySelected() bool {
 
 // ActionDnsZoneTransferCreateRequest is a type for the entire action request
 type ActionDnsZoneTransferCreateRequest struct {
-	DnsZoneTransfer map[string]interface{} `json:"dns_zone_transfer"`
-	Meta            map[string]interface{} `json:"_meta"`
+	DnsZoneTransfer map[string]interface{} "json:\"dns_zone_transfer\""
+	Meta            map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDnsZoneTransferCreateOutput is a type for action output parameters
 type ActionDnsZoneTransferCreateOutput struct {
-	CreatedAt     string                         `json:"created_at"`
-	DnsTsigKey    *ActionDnsTsigKeyShowOutput    `json:"dns_tsig_key"`
-	DnsZone       *ActionDnsZoneShowOutput       `json:"dns_zone"`
-	HostIpAddress *ActionHostIpAddressShowOutput `json:"host_ip_address"`
-	Id            int64                          `json:"id"`
-	PeerType      string                         `json:"peer_type"`
-	UpdatedAt     string                         `json:"updated_at"`
+	CreatedAt     string                         "json:\"created_at\""
+	DnsTsigKey    *ActionDnsTsigKeyShowOutput    "json:\"dns_tsig_key\""
+	DnsZone       *ActionDnsZoneShowOutput       "json:\"dns_zone\""
+	HostIpAddress *ActionHostIpAddressShowOutput "json:\"host_ip_address\""
+	Id            int64                          "json:\"id\""
+	PeerType      string                         "json:\"peer_type\""
+	UpdatedAt     string                         "json:\"updated_at\""
 }
 
 // ActionDnsZoneTransferCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionDnsZoneTransferCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDnsZoneTransferCreateResponse struct {
-	Action *ActionDnsZoneTransferCreate `json:"-"`
+	Action *ActionDnsZoneTransferCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsZoneTransfer *ActionDnsZoneTransferCreateOutput `json:"dns_zone_transfer"`
+		DnsZoneTransfer *ActionDnsZoneTransferCreateOutput "json:\"dns_zone_transfer\""
 		// Global output metadata
-		Meta *ActionDnsZoneTransferCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDnsZoneTransferCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

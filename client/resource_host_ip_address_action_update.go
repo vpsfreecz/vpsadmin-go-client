@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionHostIpAddressUpdate(client *Client) *ActionHostIpAddressUpdate {
 
 // ActionHostIpAddressUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionHostIpAddressUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,10 +76,10 @@ func (in *ActionHostIpAddressUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionHostIpAddressUpdateInput is a type for action input parameters
 type ActionHostIpAddressUpdateInput struct {
-	Addr               string `json:"addr"`
-	Assigned           bool   `json:"assigned"`
-	IpAddress          int64  `json:"ip_address"`
-	ReverseRecordValue string `json:"reverse_record_value"`
+	Addr               string "json:\"addr\""
+	Assigned           bool   "json:\"assigned\""
+	IpAddress          int64  "json:\"ip_address\""
+	ReverseRecordValue string "json:\"reverse_record_value\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -173,34 +174,34 @@ func (in *ActionHostIpAddressUpdateInput) AnySelected() bool {
 
 // ActionHostIpAddressUpdateRequest is a type for the entire action request
 type ActionHostIpAddressUpdateRequest struct {
-	HostIpAddress map[string]interface{} `json:"host_ip_address"`
-	Meta          map[string]interface{} `json:"_meta"`
+	HostIpAddress map[string]interface{} "json:\"host_ip_address\""
+	Meta          map[string]interface{} "json:\"_meta\""
 }
 
 // ActionHostIpAddressUpdateOutput is a type for action output parameters
 type ActionHostIpAddressUpdateOutput struct {
-	Addr               string                     `json:"addr"`
-	Assigned           bool                       `json:"assigned"`
-	Id                 int64                      `json:"id"`
-	IpAddress          *ActionIpAddressShowOutput `json:"ip_address"`
-	ReverseRecordValue string                     `json:"reverse_record_value"`
-	UserCreated        bool                       `json:"user_created"`
+	Addr               string                     "json:\"addr\""
+	Assigned           bool                       "json:\"assigned\""
+	Id                 int64                      "json:\"id\""
+	IpAddress          *ActionIpAddressShowOutput "json:\"ip_address\""
+	ReverseRecordValue string                     "json:\"reverse_record_value\""
+	UserCreated        bool                       "json:\"user_created\""
 }
 
 // ActionHostIpAddressUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionHostIpAddressUpdateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionHostIpAddressUpdateResponse struct {
-	Action *ActionHostIpAddressUpdate `json:"-"`
+	Action *ActionHostIpAddressUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		HostIpAddress *ActionHostIpAddressUpdateOutput `json:"host_ip_address"`
+		HostIpAddress *ActionHostIpAddressUpdateOutput "json:\"host_ip_address\""
 		// Global output metadata
-		Meta *ActionHostIpAddressUpdateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionHostIpAddressUpdateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -235,7 +236,7 @@ func (inv *ActionHostIpAddressUpdateInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionHostIpAddressUpdateInvocation) SetPathParamString(param string, value string) *ActionHostIpAddressUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

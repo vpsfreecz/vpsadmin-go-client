@@ -16,9 +16,9 @@ func NewActionMetricsAccessTokenIndex(client *Client) *ActionMetricsAccessTokenI
 
 // ActionMetricsAccessTokenIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMetricsAccessTokenIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,9 +86,9 @@ func (in *ActionMetricsAccessTokenIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMetricsAccessTokenIndexInput is a type for action input parameters
 type ActionMetricsAccessTokenIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
-	User   int64 `json:"user"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
+	User   int64 "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -171,23 +171,23 @@ func (in *ActionMetricsAccessTokenIndexInput) AnySelected() bool {
 
 // ActionMetricsAccessTokenIndexOutput is a type for action output parameters
 type ActionMetricsAccessTokenIndexOutput struct {
-	AccessToken  string                `json:"access_token"`
-	CreatedAt    string                `json:"created_at"`
-	Id           int64                 `json:"id"`
-	LastUse      string                `json:"last_use"`
-	MetricPrefix string                `json:"metric_prefix"`
-	UpdatedAt    string                `json:"updated_at"`
-	UseCount     int64                 `json:"use_count"`
-	User         *ActionUserShowOutput `json:"user"`
+	AccessToken  string                "json:\"access_token\""
+	CreatedAt    string                "json:\"created_at\""
+	Id           int64                 "json:\"id\""
+	LastUse      string                "json:\"last_use\""
+	MetricPrefix string                "json:\"metric_prefix\""
+	UpdatedAt    string                "json:\"updated_at\""
+	UseCount     int64                 "json:\"use_count\""
+	User         *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionMetricsAccessTokenIndexResponse struct {
-	Action *ActionMetricsAccessTokenIndex `json:"-"`
+	Action *ActionMetricsAccessTokenIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MetricsAccessTokens []*ActionMetricsAccessTokenIndexOutput `json:"metrics_access_tokens"`
+		MetricsAccessTokens []*ActionMetricsAccessTokenIndexOutput "json:\"metrics_access_tokens\""
 	}
 
 	// Action output without the namespace

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserRequestRegistrationUpdate(client *Client) *ActionUserRequestRe
 
 // ActionUserRequestRegistrationUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestRegistrationUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,19 +76,19 @@ func (in *ActionUserRequestRegistrationUpdateMetaGlobalInput) AnySelected() bool
 
 // ActionUserRequestRegistrationUpdateInput is a type for action input parameters
 type ActionUserRequestRegistrationUpdateInput struct {
-	Address     string `json:"address"`
-	Currency    string `json:"currency"`
-	Email       string `json:"email"`
-	FullName    string `json:"full_name"`
-	How         string `json:"how"`
-	Language    int64  `json:"language"`
-	Location    int64  `json:"location"`
-	Login       string `json:"login"`
-	Note        string `json:"note"`
-	OrgId       string `json:"org_id"`
-	OrgName     string `json:"org_name"`
-	OsTemplate  int64  `json:"os_template"`
-	YearOfBirth int64  `json:"year_of_birth"`
+	Address     string "json:\"address\""
+	Currency    string "json:\"currency\""
+	Email       string "json:\"email\""
+	FullName    string "json:\"full_name\""
+	How         string "json:\"how\""
+	Language    int64  "json:\"language\""
+	Location    int64  "json:\"location\""
+	Login       string "json:\"login\""
+	Note        string "json:\"note\""
+	OrgId       string "json:\"org_id\""
+	OrgName     string "json:\"org_name\""
+	OsTemplate  int64  "json:\"os_template\""
+	YearOfBirth int64  "json:\"year_of_birth\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -290,35 +291,35 @@ func (in *ActionUserRequestRegistrationUpdateInput) AnySelected() bool {
 
 // ActionUserRequestRegistrationUpdateRequest is a type for the entire action request
 type ActionUserRequestRegistrationUpdateRequest struct {
-	Registration map[string]interface{} `json:"registration"`
-	Meta         map[string]interface{} `json:"_meta"`
+	Registration map[string]interface{} "json:\"registration\""
+	Meta         map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserRequestRegistrationUpdateOutput is a type for action output parameters
 type ActionUserRequestRegistrationUpdateOutput struct {
-	Address     string                      `json:"address"`
-	Currency    string                      `json:"currency"`
-	Email       string                      `json:"email"`
-	FullName    string                      `json:"full_name"`
-	How         string                      `json:"how"`
-	Id          int64                       `json:"id"`
-	Language    *ActionLanguageShowOutput   `json:"language"`
-	Location    *ActionLocationShowOutput   `json:"location"`
-	Login       string                      `json:"login"`
-	Note        string                      `json:"note"`
-	OrgId       string                      `json:"org_id"`
-	OrgName     string                      `json:"org_name"`
-	OsTemplate  *ActionOsTemplateShowOutput `json:"os_template"`
-	YearOfBirth int64                       `json:"year_of_birth"`
+	Address     string                      "json:\"address\""
+	Currency    string                      "json:\"currency\""
+	Email       string                      "json:\"email\""
+	FullName    string                      "json:\"full_name\""
+	How         string                      "json:\"how\""
+	Id          int64                       "json:\"id\""
+	Language    *ActionLanguageShowOutput   "json:\"language\""
+	Location    *ActionLocationShowOutput   "json:\"location\""
+	Login       string                      "json:\"login\""
+	Note        string                      "json:\"note\""
+	OrgId       string                      "json:\"org_id\""
+	OrgName     string                      "json:\"org_name\""
+	OsTemplate  *ActionOsTemplateShowOutput "json:\"os_template\""
+	YearOfBirth int64                       "json:\"year_of_birth\""
 }
 
 // Type for action response, including envelope
 type ActionUserRequestRegistrationUpdateResponse struct {
-	Action *ActionUserRequestRegistrationUpdate `json:"-"`
+	Action *ActionUserRequestRegistrationUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Registration *ActionUserRequestRegistrationUpdateOutput `json:"registration"`
+		Registration *ActionUserRequestRegistrationUpdateOutput "json:\"registration\""
 	}
 
 	// Action output without the namespace
@@ -353,7 +354,7 @@ func (inv *ActionUserRequestRegistrationUpdateInvocation) SetPathParamInt(param 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserRequestRegistrationUpdateInvocation) SetPathParamString(param string, value string) *ActionUserRequestRegistrationUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

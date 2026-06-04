@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,7 +19,7 @@ func NewActionNetworkAddAddresses(client *Client) *ActionNetworkAddAddresses {
 
 // ActionNetworkAddAddressesMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkAddAddressesMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -62,9 +63,9 @@ func (in *ActionNetworkAddAddressesMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkAddAddressesInput is a type for action input parameters
 type ActionNetworkAddAddressesInput struct {
-	Count       int64 `json:"count"`
-	Environment int64 `json:"environment"`
-	User        int64 `json:"user"`
+	Count       int64 "json:\"count\""
+	Environment int64 "json:\"environment\""
+	User        int64 "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -147,22 +148,22 @@ func (in *ActionNetworkAddAddressesInput) AnySelected() bool {
 
 // ActionNetworkAddAddressesRequest is a type for the entire action request
 type ActionNetworkAddAddressesRequest struct {
-	Network map[string]interface{} `json:"network"`
-	Meta    map[string]interface{} `json:"_meta"`
+	Network map[string]interface{} "json:\"network\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionNetworkAddAddressesOutput is a type for action output parameters
 type ActionNetworkAddAddressesOutput struct {
-	Count int64 `json:"count"`
+	Count int64 "json:\"count\""
 }
 
 // Type for action response, including envelope
 type ActionNetworkAddAddressesResponse struct {
-	Action *ActionNetworkAddAddresses `json:"-"`
+	Action *ActionNetworkAddAddresses "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Network *ActionNetworkAddAddressesOutput `json:"network"`
+		Network *ActionNetworkAddAddressesOutput "json:\"network\""
 	}
 
 	// Action output without the namespace
@@ -197,7 +198,7 @@ func (inv *ActionNetworkAddAddressesInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNetworkAddAddressesInvocation) SetPathParamString(param string, value string) *ActionNetworkAddAddressesInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -16,8 +16,8 @@ func NewActionPoolCreate(client *Client) *ActionPoolCreate {
 
 // ActionPoolCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionPoolCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,28 +73,28 @@ func (in *ActionPoolCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionPoolCreateInput is a type for action input parameters
 type ActionPoolCreateInput struct {
-	Atime          bool    `json:"atime"`
-	AvailableSpace int64   `json:"available_space"`
-	CheckedAt      string  `json:"checked_at"`
-	Compression    bool    `json:"compression"`
-	Filesystem     string  `json:"filesystem"`
-	IsOpen         bool    `json:"is_open"`
-	Label          string  `json:"label"`
-	MaxDatasets    int64   `json:"max_datasets"`
-	Node           int64   `json:"node"`
-	Quota          int64   `json:"quota"`
-	Recordsize     int64   `json:"recordsize"`
-	Refquota       int64   `json:"refquota"`
-	RefquotaCheck  bool    `json:"refquota_check"`
-	Relatime       bool    `json:"relatime"`
-	Role           string  `json:"role"`
-	Scan           string  `json:"scan"`
-	ScanPercent    float64 `json:"scan_percent"`
-	Sharenfs       string  `json:"sharenfs"`
-	State          string  `json:"state"`
-	Sync           string  `json:"sync"`
-	TotalSpace     int64   `json:"total_space"`
-	UsedSpace      int64   `json:"used_space"`
+	Atime          bool    "json:\"atime\""
+	AvailableSpace int64   "json:\"available_space\""
+	CheckedAt      string  "json:\"checked_at\""
+	Compression    bool    "json:\"compression\""
+	Filesystem     string  "json:\"filesystem\""
+	IsOpen         bool    "json:\"is_open\""
+	Label          string  "json:\"label\""
+	MaxDatasets    int64   "json:\"max_datasets\""
+	Node           int64   "json:\"node\""
+	Quota          int64   "json:\"quota\""
+	Recordsize     int64   "json:\"recordsize\""
+	Refquota       int64   "json:\"refquota\""
+	RefquotaCheck  bool    "json:\"refquota_check\""
+	Relatime       bool    "json:\"relatime\""
+	Role           string  "json:\"role\""
+	Scan           string  "json:\"scan\""
+	ScanPercent    float64 "json:\"scan_percent\""
+	Sharenfs       string  "json:\"sharenfs\""
+	State          string  "json:\"state\""
+	Sync           string  "json:\"sync\""
+	TotalSpace     int64   "json:\"total_space\""
+	UsedSpace      int64   "json:\"used_space\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -405,57 +405,57 @@ func (in *ActionPoolCreateInput) AnySelected() bool {
 
 // ActionPoolCreateRequest is a type for the entire action request
 type ActionPoolCreateRequest struct {
-	Pool map[string]interface{} `json:"pool"`
-	Meta map[string]interface{} `json:"_meta"`
+	Pool map[string]interface{} "json:\"pool\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionPoolCreateOutput is a type for action output parameters
 type ActionPoolCreateOutput struct {
-	Atime            bool                  `json:"atime"`
-	Avail            int64                 `json:"avail"`
-	AvailableSpace   int64                 `json:"available_space"`
-	CheckedAt        string                `json:"checked_at"`
-	Compression      bool                  `json:"compression"`
-	Compressratio    float64               `json:"compressratio"`
-	Filesystem       string                `json:"filesystem"`
-	Id               int64                 `json:"id"`
-	IsOpen           bool                  `json:"is_open"`
-	Label            string                `json:"label"`
-	MaxDatasets      int64                 `json:"max_datasets"`
-	Name             string                `json:"name"`
-	Node             *ActionNodeShowOutput `json:"node"`
-	Quota            int64                 `json:"quota"`
-	Recordsize       int64                 `json:"recordsize"`
-	Refcompressratio float64               `json:"refcompressratio"`
-	Referenced       int64                 `json:"referenced"`
-	Refquota         int64                 `json:"refquota"`
-	RefquotaCheck    bool                  `json:"refquota_check"`
-	Relatime         bool                  `json:"relatime"`
-	Role             string                `json:"role"`
-	Scan             string                `json:"scan"`
-	ScanPercent      float64               `json:"scan_percent"`
-	Sharenfs         string                `json:"sharenfs"`
-	State            string                `json:"state"`
-	Sync             string                `json:"sync"`
-	TotalSpace       int64                 `json:"total_space"`
-	Used             int64                 `json:"used"`
-	UsedSpace        int64                 `json:"used_space"`
+	Atime            bool                  "json:\"atime\""
+	Avail            int64                 "json:\"avail\""
+	AvailableSpace   int64                 "json:\"available_space\""
+	CheckedAt        string                "json:\"checked_at\""
+	Compression      bool                  "json:\"compression\""
+	Compressratio    float64               "json:\"compressratio\""
+	Filesystem       string                "json:\"filesystem\""
+	Id               int64                 "json:\"id\""
+	IsOpen           bool                  "json:\"is_open\""
+	Label            string                "json:\"label\""
+	MaxDatasets      int64                 "json:\"max_datasets\""
+	Name             string                "json:\"name\""
+	Node             *ActionNodeShowOutput "json:\"node\""
+	Quota            int64                 "json:\"quota\""
+	Recordsize       int64                 "json:\"recordsize\""
+	Refcompressratio float64               "json:\"refcompressratio\""
+	Referenced       int64                 "json:\"referenced\""
+	Refquota         int64                 "json:\"refquota\""
+	RefquotaCheck    bool                  "json:\"refquota_check\""
+	Relatime         bool                  "json:\"relatime\""
+	Role             string                "json:\"role\""
+	Scan             string                "json:\"scan\""
+	ScanPercent      float64               "json:\"scan_percent\""
+	Sharenfs         string                "json:\"sharenfs\""
+	State            string                "json:\"state\""
+	Sync             string                "json:\"sync\""
+	TotalSpace       int64                 "json:\"total_space\""
+	Used             int64                 "json:\"used\""
+	UsedSpace        int64                 "json:\"used_space\""
 }
 
 // ActionPoolCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionPoolCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionPoolCreateResponse struct {
-	Action *ActionPoolCreate `json:"-"`
+	Action *ActionPoolCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Pool *ActionPoolCreateOutput `json:"pool"`
+		Pool *ActionPoolCreateOutput "json:\"pool\""
 		// Global output metadata
-		Meta *ActionPoolCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionPoolCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

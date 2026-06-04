@@ -16,9 +16,9 @@ func NewActionSystemConfigIndex(client *Client) *ActionSystemConfigIndex {
 
 // ActionSystemConfigIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionSystemConfigIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,9 +86,9 @@ func (in *ActionSystemConfigIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionSystemConfigIndexInput is a type for action input parameters
 type ActionSystemConfigIndexInput struct {
-	Category string `json:"category"`
-	FromId   int64  `json:"from_id"`
-	Limit    int64  `json:"limit"`
+	Category string "json:\"category\""
+	FromId   int64  "json:\"from_id\""
+	Limit    int64  "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -171,21 +171,21 @@ func (in *ActionSystemConfigIndexInput) AnySelected() bool {
 
 // ActionSystemConfigIndexOutput is a type for action output parameters
 type ActionSystemConfigIndexOutput struct {
-	Category     string `json:"category"`
-	Description  string `json:"description"`
-	Label        string `json:"label"`
-	MinUserLevel int64  `json:"min_user_level"`
-	Name         string `json:"name"`
-	Type         string `json:"type"`
+	Category     string "json:\"category\""
+	Description  string "json:\"description\""
+	Label        string "json:\"label\""
+	MinUserLevel int64  "json:\"min_user_level\""
+	Name         string "json:\"name\""
+	Type         string "json:\"type\""
 }
 
 // Type for action response, including envelope
 type ActionSystemConfigIndexResponse struct {
-	Action *ActionSystemConfigIndex `json:"-"`
+	Action *ActionSystemConfigIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		SystemConfigs []*ActionSystemConfigIndexOutput `json:"system_configs"`
+		SystemConfigs []*ActionSystemConfigIndexOutput "json:\"system_configs\""
 	}
 
 	// Action output without the namespace

@@ -16,9 +16,9 @@ func NewActionUserIndex(client *Client) *ActionUserIndex {
 
 // ActionUserIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,28 +86,28 @@ func (in *ActionUserIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserIndexInput is a type for action input parameters
 type ActionUserIndexInput struct {
-	Address                    string `json:"address"`
-	Admin                      bool   `json:"admin"`
-	Email                      string `json:"email"`
-	EnableBasicAuth            bool   `json:"enable_basic_auth"`
-	EnableMultiFactorAuth      bool   `json:"enable_multi_factor_auth"`
-	EnableNewLoginNotification bool   `json:"enable_new_login_notification"`
-	EnableOauth2Auth           bool   `json:"enable_oauth2_auth"`
-	EnableSingleSignOn         bool   `json:"enable_single_sign_on"`
-	EnableTokenAuth            bool   `json:"enable_token_auth"`
-	FromId                     int64  `json:"from_id"`
-	FullName                   string `json:"full_name"`
-	Info                       string `json:"info"`
-	Language                   int64  `json:"language"`
-	Level                      int64  `json:"level"`
-	Limit                      int64  `json:"limit"`
-	Lockout                    bool   `json:"lockout"`
-	Login                      string `json:"login"`
-	MailerEnabled              bool   `json:"mailer_enabled"`
-	ObjectState                string `json:"object_state"`
-	PasswordReset              bool   `json:"password_reset"`
-	PreferredLogoutAll         bool   `json:"preferred_logout_all"`
-	PreferredSessionLength     int64  `json:"preferred_session_length"`
+	Address                    string "json:\"address\""
+	Admin                      bool   "json:\"admin\""
+	Email                      string "json:\"email\""
+	EnableBasicAuth            bool   "json:\"enable_basic_auth\""
+	EnableMultiFactorAuth      bool   "json:\"enable_multi_factor_auth\""
+	EnableNewLoginNotification bool   "json:\"enable_new_login_notification\""
+	EnableOauth2Auth           bool   "json:\"enable_oauth2_auth\""
+	EnableSingleSignOn         bool   "json:\"enable_single_sign_on\""
+	EnableTokenAuth            bool   "json:\"enable_token_auth\""
+	FromId                     int64  "json:\"from_id\""
+	FullName                   string "json:\"full_name\""
+	Info                       string "json:\"info\""
+	Language                   int64  "json:\"language\""
+	Level                      int64  "json:\"level\""
+	Limit                      int64  "json:\"limit\""
+	Lockout                    bool   "json:\"lockout\""
+	Login                      string "json:\"login\""
+	MailerEnabled              bool   "json:\"mailer_enabled\""
+	ObjectState                string "json:\"object_state\""
+	PasswordReset              bool   "json:\"password_reset\""
+	PreferredLogoutAll         bool   "json:\"preferred_logout_all\""
+	PreferredSessionLength     int64  "json:\"preferred_session_length\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -418,42 +418,42 @@ func (in *ActionUserIndexInput) AnySelected() bool {
 
 // ActionUserIndexOutput is a type for action output parameters
 type ActionUserIndexOutput struct {
-	Address                    string                    `json:"address"`
-	CreatedAt                  string                    `json:"created_at"`
-	DokuwikiGroups             string                    `json:"dokuwiki_groups"`
-	Email                      string                    `json:"email"`
-	EnableBasicAuth            bool                      `json:"enable_basic_auth"`
-	EnableMultiFactorAuth      bool                      `json:"enable_multi_factor_auth"`
-	EnableNewLoginNotification bool                      `json:"enable_new_login_notification"`
-	EnableOauth2Auth           bool                      `json:"enable_oauth2_auth"`
-	EnableSingleSignOn         bool                      `json:"enable_single_sign_on"`
-	EnableTokenAuth            bool                      `json:"enable_token_auth"`
-	ExpirationDate             string                    `json:"expiration_date"`
-	FullName                   string                    `json:"full_name"`
-	Id                         int64                     `json:"id"`
-	Info                       string                    `json:"info"`
-	Language                   *ActionLanguageShowOutput `json:"language"`
-	LastActivityAt             string                    `json:"last_activity_at"`
-	Level                      int64                     `json:"level"`
-	Lockout                    bool                      `json:"lockout"`
-	Login                      string                    `json:"login"`
-	MailerEnabled              bool                      `json:"mailer_enabled"`
-	MonthlyPayment             int64                     `json:"monthly_payment"`
-	ObjectState                string                    `json:"object_state"`
-	PaidUntil                  string                    `json:"paid_until"`
-	PasswordReset              bool                      `json:"password_reset"`
-	PreferredLogoutAll         bool                      `json:"preferred_logout_all"`
-	PreferredSessionLength     int64                     `json:"preferred_session_length"`
-	RemindAfterDate            string                    `json:"remind_after_date"`
+	Address                    string                    "json:\"address\""
+	CreatedAt                  string                    "json:\"created_at\""
+	DokuwikiGroups             string                    "json:\"dokuwiki_groups\""
+	Email                      string                    "json:\"email\""
+	EnableBasicAuth            bool                      "json:\"enable_basic_auth\""
+	EnableMultiFactorAuth      bool                      "json:\"enable_multi_factor_auth\""
+	EnableNewLoginNotification bool                      "json:\"enable_new_login_notification\""
+	EnableOauth2Auth           bool                      "json:\"enable_oauth2_auth\""
+	EnableSingleSignOn         bool                      "json:\"enable_single_sign_on\""
+	EnableTokenAuth            bool                      "json:\"enable_token_auth\""
+	ExpirationDate             string                    "json:\"expiration_date\""
+	FullName                   string                    "json:\"full_name\""
+	Id                         int64                     "json:\"id\""
+	Info                       string                    "json:\"info\""
+	Language                   *ActionLanguageShowOutput "json:\"language\""
+	LastActivityAt             string                    "json:\"last_activity_at\""
+	Level                      int64                     "json:\"level\""
+	Lockout                    bool                      "json:\"lockout\""
+	Login                      string                    "json:\"login\""
+	MailerEnabled              bool                      "json:\"mailer_enabled\""
+	MonthlyPayment             int64                     "json:\"monthly_payment\""
+	ObjectState                string                    "json:\"object_state\""
+	PaidUntil                  string                    "json:\"paid_until\""
+	PasswordReset              bool                      "json:\"password_reset\""
+	PreferredLogoutAll         bool                      "json:\"preferred_logout_all\""
+	PreferredSessionLength     int64                     "json:\"preferred_session_length\""
+	RemindAfterDate            string                    "json:\"remind_after_date\""
 }
 
 // Type for action response, including envelope
 type ActionUserIndexResponse struct {
-	Action *ActionUserIndex `json:"-"`
+	Action *ActionUserIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Users []*ActionUserIndexOutput `json:"users"`
+		Users []*ActionUserIndexOutput "json:\"users\""
 	}
 
 	// Action output without the namespace

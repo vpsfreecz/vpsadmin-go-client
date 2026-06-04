@@ -16,8 +16,8 @@ func NewActionExportCreate(client *Client) *ActionExportCreate {
 
 // ActionExportCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionExportCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,15 +73,15 @@ func (in *ActionExportCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionExportCreateInput is a type for action input parameters
 type ActionExportCreateInput struct {
-	AllVps       bool  `json:"all_vps"`
-	Dataset      int64 `json:"dataset"`
-	Enabled      bool  `json:"enabled"`
-	RootSquash   bool  `json:"root_squash"`
-	Rw           bool  `json:"rw"`
-	Snapshot     int64 `json:"snapshot"`
-	SubtreeCheck bool  `json:"subtree_check"`
-	Sync         bool  `json:"sync"`
-	Threads      int64 `json:"threads"`
+	AllVps       bool  "json:\"all_vps\""
+	Dataset      int64 "json:\"dataset\""
+	Enabled      bool  "json:\"enabled\""
+	RootSquash   bool  "json:\"root_squash\""
+	Rw           bool  "json:\"rw\""
+	Snapshot     int64 "json:\"snapshot\""
+	SubtreeCheck bool  "json:\"subtree_check\""
+	Sync         bool  "json:\"sync\""
+	Threads      int64 "json:\"threads\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -236,45 +236,45 @@ func (in *ActionExportCreateInput) AnySelected() bool {
 
 // ActionExportCreateRequest is a type for the entire action request
 type ActionExportCreateRequest struct {
-	Export map[string]interface{} `json:"export"`
-	Meta   map[string]interface{} `json:"_meta"`
+	Export map[string]interface{} "json:\"export\""
+	Meta   map[string]interface{} "json:\"_meta\""
 }
 
 // ActionExportCreateOutput is a type for action output parameters
 type ActionExportCreateOutput struct {
-	AllVps         bool                             `json:"all_vps"`
-	CreatedAt      string                           `json:"created_at"`
-	Dataset        *ActionDatasetShowOutput         `json:"dataset"`
-	Enabled        bool                             `json:"enabled"`
-	ExpirationDate string                           `json:"expiration_date"`
-	HostIpAddress  *ActionHostIpAddressShowOutput   `json:"host_ip_address"`
-	Id             int64                            `json:"id"`
-	IpAddress      *ActionIpAddressShowOutput       `json:"ip_address"`
-	Path           string                           `json:"path"`
-	RootSquash     bool                             `json:"root_squash"`
-	Rw             bool                             `json:"rw"`
-	Snapshot       *ActionDatasetSnapshotShowOutput `json:"snapshot"`
-	SubtreeCheck   bool                             `json:"subtree_check"`
-	Sync           bool                             `json:"sync"`
-	Threads        int64                            `json:"threads"`
-	UpdatedAt      string                           `json:"updated_at"`
-	User           *ActionUserShowOutput            `json:"user"`
+	AllVps         bool                             "json:\"all_vps\""
+	CreatedAt      string                           "json:\"created_at\""
+	Dataset        *ActionDatasetShowOutput         "json:\"dataset\""
+	Enabled        bool                             "json:\"enabled\""
+	ExpirationDate string                           "json:\"expiration_date\""
+	HostIpAddress  *ActionHostIpAddressShowOutput   "json:\"host_ip_address\""
+	Id             int64                            "json:\"id\""
+	IpAddress      *ActionIpAddressShowOutput       "json:\"ip_address\""
+	Path           string                           "json:\"path\""
+	RootSquash     bool                             "json:\"root_squash\""
+	Rw             bool                             "json:\"rw\""
+	Snapshot       *ActionDatasetSnapshotShowOutput "json:\"snapshot\""
+	SubtreeCheck   bool                             "json:\"subtree_check\""
+	Sync           bool                             "json:\"sync\""
+	Threads        int64                            "json:\"threads\""
+	UpdatedAt      string                           "json:\"updated_at\""
+	User           *ActionUserShowOutput            "json:\"user\""
 }
 
 // ActionExportCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionExportCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionExportCreateResponse struct {
-	Action *ActionExportCreate `json:"-"`
+	Action *ActionExportCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Export *ActionExportCreateOutput `json:"export"`
+		Export *ActionExportCreateOutput "json:\"export\""
 		// Global output metadata
-		Meta *ActionExportCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionExportCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

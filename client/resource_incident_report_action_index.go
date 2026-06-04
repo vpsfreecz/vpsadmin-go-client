@@ -16,9 +16,9 @@ func NewActionIncidentReportIndex(client *Client) *ActionIncidentReportIndex {
 
 // ActionIncidentReportIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionIncidentReportIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,15 +86,15 @@ func (in *ActionIncidentReportIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionIncidentReportIndexInput is a type for action input parameters
 type ActionIncidentReportIndexInput struct {
-	Codename            string `json:"codename"`
-	FiledBy             int64  `json:"filed_by"`
-	FromId              int64  `json:"from_id"`
-	IpAddr              string `json:"ip_addr"`
-	IpAddressAssignment int64  `json:"ip_address_assignment"`
-	Limit               int64  `json:"limit"`
-	Mailbox             int64  `json:"mailbox"`
-	User                int64  `json:"user"`
-	Vps                 int64  `json:"vps"`
+	Codename            string "json:\"codename\""
+	FiledBy             int64  "json:\"filed_by\""
+	FromId              int64  "json:\"from_id\""
+	IpAddr              string "json:\"ip_addr\""
+	IpAddressAssignment int64  "json:\"ip_address_assignment\""
+	Limit               int64  "json:\"limit\""
+	Mailbox             int64  "json:\"mailbox\""
+	User                int64  "json:\"user\""
+	Vps                 int64  "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -268,31 +268,31 @@ func (in *ActionIncidentReportIndexInput) AnySelected() bool {
 
 // ActionIncidentReportIndexOutput is a type for action output parameters
 type ActionIncidentReportIndexOutput struct {
-	Codename            string                               `json:"codename"`
-	CpuLimit            int64                                `json:"cpu_limit"`
-	CreatedAt           string                               `json:"created_at"`
-	DetectedAt          string                               `json:"detected_at"`
-	FiledBy             *ActionUserShowOutput                `json:"filed_by"`
-	Id                  int64                                `json:"id"`
-	IpAddressAssignment *ActionIpAddressAssignmentShowOutput `json:"ip_address_assignment"`
-	Mailbox             *ActionMailboxShowOutput             `json:"mailbox"`
-	RawUserId           int64                                `json:"raw_user_id"`
-	RawVpsId            int64                                `json:"raw_vps_id"`
-	ReportedAt          string                               `json:"reported_at"`
-	Subject             string                               `json:"subject"`
-	Text                string                               `json:"text"`
-	User                *ActionUserShowOutput                `json:"user"`
-	Vps                 *ActionVpsShowOutput                 `json:"vps"`
-	VpsAction           string                               `json:"vps_action"`
+	Codename            string                               "json:\"codename\""
+	CpuLimit            int64                                "json:\"cpu_limit\""
+	CreatedAt           string                               "json:\"created_at\""
+	DetectedAt          string                               "json:\"detected_at\""
+	FiledBy             *ActionUserShowOutput                "json:\"filed_by\""
+	Id                  int64                                "json:\"id\""
+	IpAddressAssignment *ActionIpAddressAssignmentShowOutput "json:\"ip_address_assignment\""
+	Mailbox             *ActionMailboxShowOutput             "json:\"mailbox\""
+	RawUserId           int64                                "json:\"raw_user_id\""
+	RawVpsId            int64                                "json:\"raw_vps_id\""
+	ReportedAt          string                               "json:\"reported_at\""
+	Subject             string                               "json:\"subject\""
+	Text                string                               "json:\"text\""
+	User                *ActionUserShowOutput                "json:\"user\""
+	Vps                 *ActionVpsShowOutput                 "json:\"vps\""
+	VpsAction           string                               "json:\"vps_action\""
 }
 
 // Type for action response, including envelope
 type ActionIncidentReportIndexResponse struct {
-	Action *ActionIncidentReportIndex `json:"-"`
+	Action *ActionIncidentReportIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		IncidentReports []*ActionIncidentReportIndexOutput `json:"incident_reports"`
+		IncidentReports []*ActionIncidentReportIndexOutput "json:\"incident_reports\""
 	}
 
 	// Action output without the namespace

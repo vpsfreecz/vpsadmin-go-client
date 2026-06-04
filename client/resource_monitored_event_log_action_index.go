@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionMonitoredEventLogIndex(client *Client) *ActionMonitoredEventLogInd
 
 // ActionMonitoredEventLogIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMonitoredEventLogIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,10 +89,10 @@ func (in *ActionMonitoredEventLogIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMonitoredEventLogIndexInput is a type for action input parameters
 type ActionMonitoredEventLogIndexInput struct {
-	FromId int64  `json:"from_id"`
-	Limit  int64  `json:"limit"`
-	Order  string `json:"order"`
-	Passed bool   `json:"passed"`
+	FromId int64  "json:\"from_id\""
+	Limit  int64  "json:\"limit\""
+	Order  string "json:\"order\""
+	Passed bool   "json:\"passed\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -186,18 +187,18 @@ func (in *ActionMonitoredEventLogIndexInput) AnySelected() bool {
 
 // ActionMonitoredEventLogIndexOutput is a type for action output parameters
 type ActionMonitoredEventLogIndexOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id        int64  `json:"id"`
-	Passed    bool   `json:"passed"`
+	CreatedAt string "json:\"created_at\""
+	Id        int64  "json:\"id\""
+	Passed    bool   "json:\"passed\""
 }
 
 // Type for action response, including envelope
 type ActionMonitoredEventLogIndexResponse struct {
-	Action *ActionMonitoredEventLogIndex `json:"-"`
+	Action *ActionMonitoredEventLogIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Logs []*ActionMonitoredEventLogIndexOutput `json:"logs"`
+		Logs []*ActionMonitoredEventLogIndexOutput "json:\"logs\""
 	}
 
 	// Action output without the namespace
@@ -232,7 +233,7 @@ func (inv *ActionMonitoredEventLogIndexInvocation) SetPathParamInt(param string,
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMonitoredEventLogIndexInvocation) SetPathParamString(param string, value string) *ActionMonitoredEventLogIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

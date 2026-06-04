@@ -16,8 +16,8 @@ func NewActionNetworkCreate(client *Client) *ActionNetworkCreate {
 
 // ActionNetworkCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,16 +73,16 @@ func (in *ActionNetworkCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkCreateInput is a type for action input parameters
 type ActionNetworkCreateInput struct {
-	AddIpAddresses bool   `json:"add_ip_addresses"`
-	Address        string `json:"address"`
-	IpVersion      int64  `json:"ip_version"`
-	Label          string `json:"label"`
-	Managed        bool   `json:"managed"`
-	Prefix         int64  `json:"prefix"`
-	Purpose        string `json:"purpose"`
-	Role           string `json:"role"`
-	SplitAccess    string `json:"split_access"`
-	SplitPrefix    int64  `json:"split_prefix"`
+	AddIpAddresses bool   "json:\"add_ip_addresses\""
+	Address        string "json:\"address\""
+	IpVersion      int64  "json:\"ip_version\""
+	Label          string "json:\"label\""
+	Managed        bool   "json:\"managed\""
+	Prefix         int64  "json:\"prefix\""
+	Purpose        string "json:\"purpose\""
+	Role           string "json:\"role\""
+	SplitAccess    string "json:\"split_access\""
+	SplitPrefix    int64  "json:\"split_prefix\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -249,44 +249,44 @@ func (in *ActionNetworkCreateInput) AnySelected() bool {
 
 // ActionNetworkCreateRequest is a type for the entire action request
 type ActionNetworkCreateRequest struct {
-	Network map[string]interface{} `json:"network"`
-	Meta    map[string]interface{} `json:"_meta"`
+	Network map[string]interface{} "json:\"network\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionNetworkCreateOutput is a type for action output parameters
 type ActionNetworkCreateOutput struct {
-	Address         string                    `json:"address"`
-	Assigned        int64                     `json:"assigned"`
-	Id              int64                     `json:"id"`
-	IpVersion       int64                     `json:"ip_version"`
-	Label           string                    `json:"label"`
-	Managed         bool                      `json:"managed"`
-	Owned           int64                     `json:"owned"`
-	Prefix          int64                     `json:"prefix"`
-	PrimaryLocation *ActionLocationShowOutput `json:"primary_location"`
-	Purpose         string                    `json:"purpose"`
-	Role            string                    `json:"role"`
-	Size            int64                     `json:"size"`
-	SplitAccess     string                    `json:"split_access"`
-	SplitPrefix     int64                     `json:"split_prefix"`
-	Taken           int64                     `json:"taken"`
-	Used            int64                     `json:"used"`
+	Address         string                    "json:\"address\""
+	Assigned        int64                     "json:\"assigned\""
+	Id              int64                     "json:\"id\""
+	IpVersion       int64                     "json:\"ip_version\""
+	Label           string                    "json:\"label\""
+	Managed         bool                      "json:\"managed\""
+	Owned           int64                     "json:\"owned\""
+	Prefix          int64                     "json:\"prefix\""
+	PrimaryLocation *ActionLocationShowOutput "json:\"primary_location\""
+	Purpose         string                    "json:\"purpose\""
+	Role            string                    "json:\"role\""
+	Size            int64                     "json:\"size\""
+	SplitAccess     string                    "json:\"split_access\""
+	SplitPrefix     int64                     "json:\"split_prefix\""
+	Taken           int64                     "json:\"taken\""
+	Used            int64                     "json:\"used\""
 }
 
 // ActionNetworkCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionNetworkCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionNetworkCreateResponse struct {
-	Action *ActionNetworkCreate `json:"-"`
+	Action *ActionNetworkCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Network *ActionNetworkCreateOutput `json:"network"`
+		Network *ActionNetworkCreateOutput "json:\"network\""
 		// Global output metadata
-		Meta *ActionNetworkCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionNetworkCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace

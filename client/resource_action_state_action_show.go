@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,7 +19,7 @@ func NewActionActionStateShow(client *Client) *ActionActionStateShow {
 
 // ActionActionStateShowMetaGlobalInput is a type for action global meta input parameters
 type ActionActionStateShowMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -62,25 +63,25 @@ func (in *ActionActionStateShowMetaGlobalInput) AnySelected() bool {
 
 // ActionActionStateShowOutput is a type for action output parameters
 type ActionActionStateShowOutput struct {
-	CanCancel bool   `json:"can_cancel"`
-	CreatedAt string `json:"created_at"`
-	Current   int64  `json:"current"`
-	Finished  bool   `json:"finished"`
-	Id        int64  `json:"id"`
-	Label     string `json:"label"`
-	Status    bool   `json:"status"`
-	Total     int64  `json:"total"`
-	Unit      string `json:"unit"`
-	UpdatedAt string `json:"updated_at"`
+	CanCancel bool   "json:\"can_cancel\""
+	CreatedAt string "json:\"created_at\""
+	Current   int64  "json:\"current\""
+	Finished  bool   "json:\"finished\""
+	Id        int64  "json:\"id\""
+	Label     string "json:\"label\""
+	Status    bool   "json:\"status\""
+	Total     int64  "json:\"total\""
+	Unit      string "json:\"unit\""
+	UpdatedAt string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionActionStateShowResponse struct {
-	Action *ActionActionStateShow `json:"-"`
+	Action *ActionActionStateShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		ActionState *ActionActionStateShowOutput `json:"action_state"`
+		ActionState *ActionActionStateShowOutput "json:\"action_state\""
 	}
 
 	// Action output without the namespace
@@ -113,7 +114,7 @@ func (inv *ActionActionStateShowInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionActionStateShowInvocation) SetPathParamString(param string, value string) *ActionActionStateShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

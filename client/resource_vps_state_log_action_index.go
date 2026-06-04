@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionVpsStateLogIndex(client *Client) *ActionVpsStateLogIndex {
 
 // ActionVpsStateLogIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsStateLogIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,8 +89,8 @@ func (in *ActionVpsStateLogIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsStateLogIndexInput is a type for action input parameters
 type ActionVpsStateLogIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,22 +161,22 @@ func (in *ActionVpsStateLogIndexInput) AnySelected() bool {
 
 // ActionVpsStateLogIndexOutput is a type for action output parameters
 type ActionVpsStateLogIndexOutput struct {
-	ChangedAt   string                `json:"changed_at"`
-	Expiration  string                `json:"expiration"`
-	Id          int64                 `json:"id"`
-	Reason      string                `json:"reason"`
-	RemindAfter string                `json:"remind_after"`
-	State       string                `json:"state"`
-	User        *ActionUserShowOutput `json:"user"`
+	ChangedAt   string                "json:\"changed_at\""
+	Expiration  string                "json:\"expiration\""
+	Id          int64                 "json:\"id\""
+	Reason      string                "json:\"reason\""
+	RemindAfter string                "json:\"remind_after\""
+	State       string                "json:\"state\""
+	User        *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionVpsStateLogIndexResponse struct {
-	Action *ActionVpsStateLogIndex `json:"-"`
+	Action *ActionVpsStateLogIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		StateLogs []*ActionVpsStateLogIndexOutput `json:"state_logs"`
+		StateLogs []*ActionVpsStateLogIndexOutput "json:\"state_logs\""
 	}
 
 	// Action output without the namespace
@@ -210,7 +211,7 @@ func (inv *ActionVpsStateLogIndexInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsStateLogIndexInvocation) SetPathParamString(param string, value string) *ActionVpsStateLogIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

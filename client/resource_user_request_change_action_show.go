@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserRequestChangeShow(client *Client) *ActionUserRequestChangeShow
 
 // ActionUserRequestChangeShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestChangeShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,31 +76,31 @@ func (in *ActionUserRequestChangeShowMetaGlobalInput) AnySelected() bool {
 
 // ActionUserRequestChangeShowOutput is a type for action output parameters
 type ActionUserRequestChangeShowOutput struct {
-	Address       string                `json:"address"`
-	Admin         *ActionUserShowOutput `json:"admin"`
-	AdminResponse string                `json:"admin_response"`
-	ApiIpAddr     string                `json:"api_ip_addr"`
-	ApiIpPtr      string                `json:"api_ip_ptr"`
-	ChangeReason  string                `json:"change_reason"`
-	ClientIpAddr  string                `json:"client_ip_addr"`
-	ClientIpPtr   string                `json:"client_ip_ptr"`
-	CreatedAt     string                `json:"created_at"`
-	Email         string                `json:"email"`
-	FullName      string                `json:"full_name"`
-	Id            int64                 `json:"id"`
-	Label         string                `json:"label"`
-	State         string                `json:"state"`
-	UpdatedAt     string                `json:"updated_at"`
-	User          *ActionUserShowOutput `json:"user"`
+	Address       string                "json:\"address\""
+	Admin         *ActionUserShowOutput "json:\"admin\""
+	AdminResponse string                "json:\"admin_response\""
+	ApiIpAddr     string                "json:\"api_ip_addr\""
+	ApiIpPtr      string                "json:\"api_ip_ptr\""
+	ChangeReason  string                "json:\"change_reason\""
+	ClientIpAddr  string                "json:\"client_ip_addr\""
+	ClientIpPtr   string                "json:\"client_ip_ptr\""
+	CreatedAt     string                "json:\"created_at\""
+	Email         string                "json:\"email\""
+	FullName      string                "json:\"full_name\""
+	Id            int64                 "json:\"id\""
+	Label         string                "json:\"label\""
+	State         string                "json:\"state\""
+	UpdatedAt     string                "json:\"updated_at\""
+	User          *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionUserRequestChangeShowResponse struct {
-	Action *ActionUserRequestChangeShow `json:"-"`
+	Action *ActionUserRequestChangeShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Change *ActionUserRequestChangeShowOutput `json:"change"`
+		Change *ActionUserRequestChangeShowOutput "json:\"change\""
 	}
 
 	// Action output without the namespace
@@ -132,7 +133,7 @@ func (inv *ActionUserRequestChangeShowInvocation) SetPathParamInt(param string, 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserRequestChangeShowInvocation) SetPathParamString(param string, value string) *ActionUserRequestChangeShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMailTemplateTranslationCreate(client *Client) *ActionMailTemplateT
 
 // ActionMailTemplateTranslationCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionMailTemplateTranslationCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,13 +76,13 @@ func (in *ActionMailTemplateTranslationCreateMetaGlobalInput) AnySelected() bool
 
 // ActionMailTemplateTranslationCreateInput is a type for action input parameters
 type ActionMailTemplateTranslationCreateInput struct {
-	From       string `json:"from"`
-	Language   int64  `json:"language"`
-	ReplyTo    string `json:"reply_to"`
-	ReturnPath string `json:"return_path"`
-	Subject    string `json:"subject"`
-	TextHtml   string `json:"text_html"`
-	TextPlain  string `json:"text_plain"`
+	From       string "json:\"from\""
+	Language   int64  "json:\"language\""
+	ReplyTo    string "json:\"reply_to\""
+	ReturnPath string "json:\"return_path\""
+	Subject    string "json:\"subject\""
+	TextHtml   string "json:\"text_html\""
+	TextPlain  string "json:\"text_plain\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -120,7 +121,26 @@ func (in *ActionMailTemplateTranslationCreateInput) SetReplyTo(value string) *Ac
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetReplyToNil(false)
 	in._selectedParameters["ReplyTo"] = nil
+	return in
+}
+
+// SetReplyToNil sets parameter ReplyTo to nil and selects it for sending
+func (in *ActionMailTemplateTranslationCreateInput) SetReplyToNil(set bool) *ActionMailTemplateTranslationCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["ReplyTo"] = nil
+		in.SelectParameters("ReplyTo")
+	} else {
+		delete(in._nilParameters, "ReplyTo")
+	}
 	return in
 }
 
@@ -132,7 +152,26 @@ func (in *ActionMailTemplateTranslationCreateInput) SetReturnPath(value string) 
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetReturnPathNil(false)
 	in._selectedParameters["ReturnPath"] = nil
+	return in
+}
+
+// SetReturnPathNil sets parameter ReturnPath to nil and selects it for sending
+func (in *ActionMailTemplateTranslationCreateInput) SetReturnPathNil(set bool) *ActionMailTemplateTranslationCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["ReturnPath"] = nil
+		in.SelectParameters("ReturnPath")
+	} else {
+		delete(in._nilParameters, "ReturnPath")
+	}
 	return in
 }
 
@@ -156,7 +195,26 @@ func (in *ActionMailTemplateTranslationCreateInput) SetTextHtml(value string) *A
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetTextHtmlNil(false)
 	in._selectedParameters["TextHtml"] = nil
+	return in
+}
+
+// SetTextHtmlNil sets parameter TextHtml to nil and selects it for sending
+func (in *ActionMailTemplateTranslationCreateInput) SetTextHtmlNil(set bool) *ActionMailTemplateTranslationCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TextHtml"] = nil
+		in.SelectParameters("TextHtml")
+	} else {
+		delete(in._nilParameters, "TextHtml")
+	}
 	return in
 }
 
@@ -168,7 +226,26 @@ func (in *ActionMailTemplateTranslationCreateInput) SetTextPlain(value string) *
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetTextPlainNil(false)
 	in._selectedParameters["TextPlain"] = nil
+	return in
+}
+
+// SetTextPlainNil sets parameter TextPlain to nil and selects it for sending
+func (in *ActionMailTemplateTranslationCreateInput) SetTextPlainNil(set bool) *ActionMailTemplateTranslationCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TextPlain"] = nil
+		in.SelectParameters("TextPlain")
+	} else {
+		delete(in._nilParameters, "TextPlain")
+	}
 	return in
 }
 
@@ -212,31 +289,31 @@ func (in *ActionMailTemplateTranslationCreateInput) AnySelected() bool {
 
 // ActionMailTemplateTranslationCreateRequest is a type for the entire action request
 type ActionMailTemplateTranslationCreateRequest struct {
-	Translation map[string]interface{} `json:"translation"`
-	Meta        map[string]interface{} `json:"_meta"`
+	Translation map[string]interface{} "json:\"translation\""
+	Meta        map[string]interface{} "json:\"_meta\""
 }
 
 // ActionMailTemplateTranslationCreateOutput is a type for action output parameters
 type ActionMailTemplateTranslationCreateOutput struct {
-	CreatedAt  string                    `json:"created_at"`
-	From       string                    `json:"from"`
-	Id         int64                     `json:"id"`
-	Language   *ActionLanguageShowOutput `json:"language"`
-	ReplyTo    string                    `json:"reply_to"`
-	ReturnPath string                    `json:"return_path"`
-	Subject    string                    `json:"subject"`
-	TextHtml   string                    `json:"text_html"`
-	TextPlain  string                    `json:"text_plain"`
-	UpdatedAt  string                    `json:"updated_at"`
+	CreatedAt  string                    "json:\"created_at\""
+	From       string                    "json:\"from\""
+	Id         int64                     "json:\"id\""
+	Language   *ActionLanguageShowOutput "json:\"language\""
+	ReplyTo    string                    "json:\"reply_to\""
+	ReturnPath string                    "json:\"return_path\""
+	Subject    string                    "json:\"subject\""
+	TextHtml   string                    "json:\"text_html\""
+	TextPlain  string                    "json:\"text_plain\""
+	UpdatedAt  string                    "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionMailTemplateTranslationCreateResponse struct {
-	Action *ActionMailTemplateTranslationCreate `json:"-"`
+	Action *ActionMailTemplateTranslationCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Translation *ActionMailTemplateTranslationCreateOutput `json:"translation"`
+		Translation *ActionMailTemplateTranslationCreateOutput "json:\"translation\""
 	}
 
 	// Action output without the namespace
@@ -271,7 +348,7 @@ func (inv *ActionMailTemplateTranslationCreateInvocation) SetPathParamInt(param 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMailTemplateTranslationCreateInvocation) SetPathParamString(param string, value string) *ActionMailTemplateTranslationCreateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 
@@ -397,19 +474,35 @@ func (inv *ActionMailTemplateTranslationCreateInvocation) makeInputParams() map[
 			ret["language"] = inv.Input.Language
 		}
 		if inv.IsParameterSelected("ReplyTo") {
-			ret["reply_to"] = inv.Input.ReplyTo
+			if inv.IsParameterNil("ReplyTo") {
+				ret["reply_to"] = nil
+			} else {
+				ret["reply_to"] = inv.Input.ReplyTo
+			}
 		}
 		if inv.IsParameterSelected("ReturnPath") {
-			ret["return_path"] = inv.Input.ReturnPath
+			if inv.IsParameterNil("ReturnPath") {
+				ret["return_path"] = nil
+			} else {
+				ret["return_path"] = inv.Input.ReturnPath
+			}
 		}
 		if inv.IsParameterSelected("Subject") {
 			ret["subject"] = inv.Input.Subject
 		}
 		if inv.IsParameterSelected("TextHtml") {
-			ret["text_html"] = inv.Input.TextHtml
+			if inv.IsParameterNil("TextHtml") {
+				ret["text_html"] = nil
+			} else {
+				ret["text_html"] = inv.Input.TextHtml
+			}
 		}
 		if inv.IsParameterSelected("TextPlain") {
-			ret["text_plain"] = inv.Input.TextPlain
+			if inv.IsParameterNil("TextPlain") {
+				ret["text_plain"] = nil
+			} else {
+				ret["text_plain"] = inv.Input.TextPlain
+			}
 		}
 	}
 

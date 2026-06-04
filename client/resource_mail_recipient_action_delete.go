@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMailRecipientDelete(client *Client) *ActionMailRecipientDelete {
 
 // ActionMailRecipientDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionMailRecipientDeleteMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,12 +76,12 @@ func (in *ActionMailRecipientDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionMailRecipientDeleteRequest is a type for the entire action request
 type ActionMailRecipientDeleteRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // Type for action response, including envelope
 type ActionMailRecipientDeleteResponse struct {
-	Action *ActionMailRecipientDelete `json:"-"`
+	Action *ActionMailRecipientDelete "json:\"-\""
 	*Envelope
 }
 
@@ -110,7 +111,7 @@ func (inv *ActionMailRecipientDeleteInvocation) SetPathParamInt(param string, va
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMailRecipientDeleteInvocation) SetPathParamString(param string, value string) *ActionMailRecipientDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

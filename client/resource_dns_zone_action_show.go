@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnsZoneShow(client *Client) *ActionDnsZoneShow {
 
 // ActionDnsZoneShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsZoneShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,30 +76,30 @@ func (in *ActionDnsZoneShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsZoneShowOutput is a type for action output parameters
 type ActionDnsZoneShowOutput struct {
-	CreatedAt             string                `json:"created_at"`
-	DefaultTtl            int64                 `json:"default_ttl"`
-	DnssecEnabled         bool                  `json:"dnssec_enabled"`
-	Email                 string                `json:"email"`
-	Enabled               bool                  `json:"enabled"`
-	Id                    int64                 `json:"id"`
-	Label                 string                `json:"label"`
-	Name                  string                `json:"name"`
-	ReverseNetworkAddress string                `json:"reverse_network_address"`
-	ReverseNetworkPrefix  string                `json:"reverse_network_prefix"`
-	Role                  string                `json:"role"`
-	Serial                int64                 `json:"serial"`
-	Source                string                `json:"source"`
-	UpdatedAt             string                `json:"updated_at"`
-	User                  *ActionUserShowOutput `json:"user"`
+	CreatedAt             string                "json:\"created_at\""
+	DefaultTtl            int64                 "json:\"default_ttl\""
+	DnssecEnabled         bool                  "json:\"dnssec_enabled\""
+	Email                 string                "json:\"email\""
+	Enabled               bool                  "json:\"enabled\""
+	Id                    int64                 "json:\"id\""
+	Label                 string                "json:\"label\""
+	Name                  string                "json:\"name\""
+	ReverseNetworkAddress string                "json:\"reverse_network_address\""
+	ReverseNetworkPrefix  string                "json:\"reverse_network_prefix\""
+	Role                  string                "json:\"role\""
+	Serial                int64                 "json:\"serial\""
+	Source                string                "json:\"source\""
+	UpdatedAt             string                "json:\"updated_at\""
+	User                  *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionDnsZoneShowResponse struct {
-	Action *ActionDnsZoneShow `json:"-"`
+	Action *ActionDnsZoneShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsZone *ActionDnsZoneShowOutput `json:"dns_zone"`
+		DnsZone *ActionDnsZoneShowOutput "json:\"dns_zone\""
 	}
 
 	// Action output without the namespace
@@ -131,7 +132,7 @@ func (inv *ActionDnsZoneShowInvocation) SetPathParamInt(param string, value int6
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsZoneShowInvocation) SetPathParamString(param string, value string) *ActionDnsZoneShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

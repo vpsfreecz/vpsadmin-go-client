@@ -16,9 +16,9 @@ func NewActionUserPaymentIndex(client *Client) *ActionUserPaymentIndex {
 
 // ActionUserPaymentIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserPaymentIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,10 +86,10 @@ func (in *ActionUserPaymentIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserPaymentIndexInput is a type for action input parameters
 type ActionUserPaymentIndexInput struct {
-	AccountedBy int64 `json:"accounted_by"`
-	FromId      int64 `json:"from_id"`
-	Limit       int64 `json:"limit"`
-	User        int64 `json:"user"`
+	AccountedBy int64 "json:\"accounted_by\""
+	FromId      int64 "json:\"from_id\""
+	Limit       int64 "json:\"limit\""
+	User        int64 "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -184,23 +184,23 @@ func (in *ActionUserPaymentIndexInput) AnySelected() bool {
 
 // ActionUserPaymentIndexOutput is a type for action output parameters
 type ActionUserPaymentIndexOutput struct {
-	AccountedBy     *ActionUserShowOutput            `json:"accounted_by"`
-	Amount          int64                            `json:"amount"`
-	CreatedAt       string                           `json:"created_at"`
-	FromDate        string                           `json:"from_date"`
-	Id              int64                            `json:"id"`
-	IncomingPayment *ActionIncomingPaymentShowOutput `json:"incoming_payment"`
-	ToDate          string                           `json:"to_date"`
-	User            *ActionUserShowOutput            `json:"user"`
+	AccountedBy     *ActionUserShowOutput            "json:\"accounted_by\""
+	Amount          int64                            "json:\"amount\""
+	CreatedAt       string                           "json:\"created_at\""
+	FromDate        string                           "json:\"from_date\""
+	Id              int64                            "json:\"id\""
+	IncomingPayment *ActionIncomingPaymentShowOutput "json:\"incoming_payment\""
+	ToDate          string                           "json:\"to_date\""
+	User            *ActionUserShowOutput            "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionUserPaymentIndexResponse struct {
-	Action *ActionUserPaymentIndex `json:"-"`
+	Action *ActionUserPaymentIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		UserPayments []*ActionUserPaymentIndexOutput `json:"user_payments"`
+		UserPayments []*ActionUserPaymentIndexOutput "json:\"user_payments\""
 	}
 
 	// Action output without the namespace

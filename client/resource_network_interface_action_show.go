@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionNetworkInterfaceShow(client *Client) *ActionNetworkInterfaceShow {
 
 // ActionNetworkInterfaceShowMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkInterfaceShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,23 +76,23 @@ func (in *ActionNetworkInterfaceShowMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkInterfaceShowOutput is a type for action output parameters
 type ActionNetworkInterfaceShowOutput struct {
-	Enable bool                 `json:"enable"`
-	Id     int64                `json:"id"`
-	Mac    string               `json:"mac"`
-	MaxRx  int64                `json:"max_rx"`
-	MaxTx  int64                `json:"max_tx"`
-	Name   string               `json:"name"`
-	Type   string               `json:"type"`
-	Vps    *ActionVpsShowOutput `json:"vps"`
+	Enable bool                 "json:\"enable\""
+	Id     int64                "json:\"id\""
+	Mac    string               "json:\"mac\""
+	MaxRx  int64                "json:\"max_rx\""
+	MaxTx  int64                "json:\"max_tx\""
+	Name   string               "json:\"name\""
+	Type   string               "json:\"type\""
+	Vps    *ActionVpsShowOutput "json:\"vps\""
 }
 
 // Type for action response, including envelope
 type ActionNetworkInterfaceShowResponse struct {
-	Action *ActionNetworkInterfaceShow `json:"-"`
+	Action *ActionNetworkInterfaceShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		NetworkInterface *ActionNetworkInterfaceShowOutput `json:"network_interface"`
+		NetworkInterface *ActionNetworkInterfaceShowOutput "json:\"network_interface\""
 	}
 
 	// Action output without the namespace
@@ -124,7 +125,7 @@ func (inv *ActionNetworkInterfaceShowInvocation) SetPathParamInt(param string, v
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNetworkInterfaceShowInvocation) SetPathParamString(param string, value string) *ActionNetworkInterfaceShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

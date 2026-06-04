@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMailboxShow(client *Client) *ActionMailboxShow {
 
 // ActionMailboxShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMailboxShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,23 +76,23 @@ func (in *ActionMailboxShowMetaGlobalInput) AnySelected() bool {
 
 // ActionMailboxShowOutput is a type for action output parameters
 type ActionMailboxShowOutput struct {
-	CreatedAt string `json:"created_at"`
-	EnableSsl bool   `json:"enable_ssl"`
-	Id        int64  `json:"id"`
-	Label     string `json:"label"`
-	Port      int64  `json:"port"`
-	Server    string `json:"server"`
-	UpdatedAt string `json:"updated_at"`
-	User      string `json:"user"`
+	CreatedAt string "json:\"created_at\""
+	EnableSsl bool   "json:\"enable_ssl\""
+	Id        int64  "json:\"id\""
+	Label     string "json:\"label\""
+	Port      int64  "json:\"port\""
+	Server    string "json:\"server\""
+	UpdatedAt string "json:\"updated_at\""
+	User      string "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionMailboxShowResponse struct {
-	Action *ActionMailboxShow `json:"-"`
+	Action *ActionMailboxShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Mailbox *ActionMailboxShowOutput `json:"mailbox"`
+		Mailbox *ActionMailboxShowOutput "json:\"mailbox\""
 	}
 
 	// Action output without the namespace
@@ -124,7 +125,7 @@ func (inv *ActionMailboxShowInvocation) SetPathParamInt(param string, value int6
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMailboxShowInvocation) SetPathParamString(param string, value string) *ActionMailboxShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

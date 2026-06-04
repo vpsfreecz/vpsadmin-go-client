@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDatasetPropertyHistoryShow(client *Client) *ActionDatasetPropertyH
 
 // ActionDatasetPropertyHistoryShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetPropertyHistoryShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,19 +76,19 @@ func (in *ActionDatasetPropertyHistoryShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetPropertyHistoryShowOutput is a type for action output parameters
 type ActionDatasetPropertyHistoryShowOutput struct {
-	CreatedAt string `json:"created_at"`
-	Id        int64  `json:"id"`
-	Name      string `json:"name"`
-	Value     int64  `json:"value"`
+	CreatedAt string "json:\"created_at\""
+	Id        int64  "json:\"id\""
+	Name      string "json:\"name\""
+	Value     int64  "json:\"value\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetPropertyHistoryShowResponse struct {
-	Action *ActionDatasetPropertyHistoryShow `json:"-"`
+	Action *ActionDatasetPropertyHistoryShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		PropertyHistory *ActionDatasetPropertyHistoryShowOutput `json:"property_history"`
+		PropertyHistory *ActionDatasetPropertyHistoryShowOutput "json:\"property_history\""
 	}
 
 	// Action output without the namespace
@@ -120,7 +121,7 @@ func (inv *ActionDatasetPropertyHistoryShowInvocation) SetPathParamInt(param str
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetPropertyHistoryShowInvocation) SetPathParamString(param string, value string) *ActionDatasetPropertyHistoryShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

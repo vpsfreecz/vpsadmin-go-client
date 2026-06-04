@@ -16,7 +16,7 @@ func NewActionDebugHashTop(client *Client) *ActionDebugHashTop {
 
 // ActionDebugHashTopMetaGlobalInput is a type for action global meta input parameters
 type ActionDebugHashTopMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,7 +60,7 @@ func (in *ActionDebugHashTopMetaGlobalInput) AnySelected() bool {
 
 // ActionDebugHashTopInput is a type for action input parameters
 type ActionDebugHashTopInput struct {
-	Limit int64 `json:"limit"`
+	Limit int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -119,16 +119,16 @@ func (in *ActionDebugHashTopInput) AnySelected() bool {
 
 // ActionDebugHashTopOutput is a type for action output parameters
 type ActionDebugHashTopOutput struct {
-	Size int64 `json:"size"`
+	Size int64 "json:\"size\""
 }
 
 // Type for action response, including envelope
 type ActionDebugHashTopResponse struct {
-	Action *ActionDebugHashTop `json:"-"`
+	Action *ActionDebugHashTop "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Debugs []*ActionDebugHashTopOutput `json:"debugs"`
+		Debugs []*ActionDebugHashTopOutput "json:\"debugs\""
 	}
 
 	// Action output without the namespace

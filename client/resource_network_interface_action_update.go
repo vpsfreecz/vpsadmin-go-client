@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionNetworkInterfaceUpdate(client *Client) *ActionNetworkInterfaceUpda
 
 // ActionNetworkInterfaceUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionNetworkInterfaceUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,10 +76,10 @@ func (in *ActionNetworkInterfaceUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkInterfaceUpdateInput is a type for action input parameters
 type ActionNetworkInterfaceUpdateInput struct {
-	Enable bool   `json:"enable"`
-	MaxRx  int64  `json:"max_rx"`
-	MaxTx  int64  `json:"max_tx"`
-	Name   string `json:"name"`
+	Enable bool   "json:\"enable\""
+	MaxRx  int64  "json:\"max_rx\""
+	MaxTx  int64  "json:\"max_tx\""
+	Name   string "json:\"name\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -173,36 +174,36 @@ func (in *ActionNetworkInterfaceUpdateInput) AnySelected() bool {
 
 // ActionNetworkInterfaceUpdateRequest is a type for the entire action request
 type ActionNetworkInterfaceUpdateRequest struct {
-	NetworkInterface map[string]interface{} `json:"network_interface"`
-	Meta             map[string]interface{} `json:"_meta"`
+	NetworkInterface map[string]interface{} "json:\"network_interface\""
+	Meta             map[string]interface{} "json:\"_meta\""
 }
 
 // ActionNetworkInterfaceUpdateOutput is a type for action output parameters
 type ActionNetworkInterfaceUpdateOutput struct {
-	Enable bool                 `json:"enable"`
-	Id     int64                `json:"id"`
-	Mac    string               `json:"mac"`
-	MaxRx  int64                `json:"max_rx"`
-	MaxTx  int64                `json:"max_tx"`
-	Name   string               `json:"name"`
-	Type   string               `json:"type"`
-	Vps    *ActionVpsShowOutput `json:"vps"`
+	Enable bool                 "json:\"enable\""
+	Id     int64                "json:\"id\""
+	Mac    string               "json:\"mac\""
+	MaxRx  int64                "json:\"max_rx\""
+	MaxTx  int64                "json:\"max_tx\""
+	Name   string               "json:\"name\""
+	Type   string               "json:\"type\""
+	Vps    *ActionVpsShowOutput "json:\"vps\""
 }
 
 // ActionNetworkInterfaceUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionNetworkInterfaceUpdateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionNetworkInterfaceUpdateResponse struct {
-	Action *ActionNetworkInterfaceUpdate `json:"-"`
+	Action *ActionNetworkInterfaceUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		NetworkInterface *ActionNetworkInterfaceUpdateOutput `json:"network_interface"`
+		NetworkInterface *ActionNetworkInterfaceUpdateOutput "json:\"network_interface\""
 		// Global output metadata
-		Meta *ActionNetworkInterfaceUpdateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionNetworkInterfaceUpdateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -237,7 +238,7 @@ func (inv *ActionNetworkInterfaceUpdateInvocation) SetPathParamInt(param string,
 
 // SetPathParamString sets string path parameter
 func (inv *ActionNetworkInterfaceUpdateInvocation) SetPathParamString(param string, value string) *ActionNetworkInterfaceUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

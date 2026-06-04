@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsFeatureShow(client *Client) *ActionVpsFeatureShow {
 
 // ActionVpsFeatureShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsFeatureShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,19 +76,19 @@ func (in *ActionVpsFeatureShowMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsFeatureShowOutput is a type for action output parameters
 type ActionVpsFeatureShowOutput struct {
-	Enabled bool   `json:"enabled"`
-	Id      int64  `json:"id"`
-	Label   string `json:"label"`
-	Name    string `json:"name"`
+	Enabled bool   "json:\"enabled\""
+	Id      int64  "json:\"id\""
+	Label   string "json:\"label\""
+	Name    string "json:\"name\""
 }
 
 // Type for action response, including envelope
 type ActionVpsFeatureShowResponse struct {
-	Action *ActionVpsFeatureShow `json:"-"`
+	Action *ActionVpsFeatureShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Feature *ActionVpsFeatureShowOutput `json:"feature"`
+		Feature *ActionVpsFeatureShowOutput "json:\"feature\""
 	}
 
 	// Action output without the namespace
@@ -120,7 +121,7 @@ func (inv *ActionVpsFeatureShowInvocation) SetPathParamInt(param string, value i
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsFeatureShowInvocation) SetPathParamString(param string, value string) *ActionVpsFeatureShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

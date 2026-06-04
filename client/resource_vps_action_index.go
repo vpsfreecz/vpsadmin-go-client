@@ -16,9 +16,9 @@ func NewActionVpsIndex(client *Client) *ActionVpsIndex {
 
 // ActionVpsIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,17 +86,17 @@ func (in *ActionVpsIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsIndexInput is a type for action input parameters
 type ActionVpsIndexInput struct {
-	Environment      int64  `json:"environment"`
-	FromId           int64  `json:"from_id"`
-	HostnameAny      string `json:"hostname_any"`
-	HostnameExact    string `json:"hostname_exact"`
-	Limit            int64  `json:"limit"`
-	Location         int64  `json:"location"`
-	Node             int64  `json:"node"`
-	ObjectState      string `json:"object_state"`
-	OsTemplate       int64  `json:"os_template"`
-	User             int64  `json:"user"`
-	UserNamespaceMap int64  `json:"user_namespace_map"`
+	Environment      int64  "json:\"environment\""
+	FromId           int64  "json:\"from_id\""
+	HostnameAny      string "json:\"hostname_any\""
+	HostnameExact    string "json:\"hostname_exact\""
+	Limit            int64  "json:\"limit\""
+	Location         int64  "json:\"location\""
+	Node             int64  "json:\"node\""
+	ObjectState      string "json:\"object_state\""
+	OsTemplate       int64  "json:\"os_template\""
+	User             int64  "json:\"user\""
+	UserNamespaceMap int64  "json:\"user_namespace_map\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -294,65 +294,65 @@ func (in *ActionVpsIndexInput) AnySelected() bool {
 
 // ActionVpsIndexOutput is a type for action output parameters
 type ActionVpsIndexOutput struct {
-	AllowAdminModifications       bool                              `json:"allow_admin_modifications"`
-	AutostartEnable               bool                              `json:"autostart_enable"`
-	AutostartPriority             int64                             `json:"autostart_priority"`
-	CgroupVersion                 string                            `json:"cgroup_version"`
-	Config                        string                            `json:"config"`
-	Cpu                           int64                             `json:"cpu"`
-	CpuIdle                       float64                           `json:"cpu_idle"`
-	CpuIowait                     float64                           `json:"cpu_iowait"`
-	CpuIrq                        float64                           `json:"cpu_irq"`
-	CpuLimit                      int64                             `json:"cpu_limit"`
-	CpuNice                       float64                           `json:"cpu_nice"`
-	CpuSoftirq                    float64                           `json:"cpu_softirq"`
-	CpuSystem                     float64                           `json:"cpu_system"`
-	CpuUser                       float64                           `json:"cpu_user"`
-	CreatedAt                     string                            `json:"created_at"`
-	Dataset                       *ActionDatasetShowOutput          `json:"dataset"`
-	Diskspace                     int64                             `json:"diskspace"`
-	DnsResolver                   *ActionDnsResolverShowOutput      `json:"dns_resolver"`
-	EnableNetwork                 bool                              `json:"enable_network"`
-	EnableOsTemplateAutoUpdate    bool                              `json:"enable_os_template_auto_update"`
-	ExpirationDate                string                            `json:"expiration_date"`
-	Hostname                      string                            `json:"hostname"`
-	Id                            int64                             `json:"id"`
-	ImplicitOomReportRuleHitCount int64                             `json:"implicit_oom_report_rule_hit_count"`
-	InRescueMode                  bool                              `json:"in_rescue_mode"`
-	Info                          string                            `json:"info"`
-	IsRunning                     bool                              `json:"is_running"`
-	Loadavg1                      float64                           `json:"loadavg1"`
-	Loadavg15                     float64                           `json:"loadavg15"`
-	Loadavg5                      float64                           `json:"loadavg5"`
-	MaintenanceLock               string                            `json:"maintenance_lock"`
-	MaintenanceLockReason         string                            `json:"maintenance_lock_reason"`
-	ManageHostname                bool                              `json:"manage_hostname"`
-	MapMode                       string                            `json:"map_mode"`
-	Memory                        int64                             `json:"memory"`
-	Node                          *ActionNodeShowOutput             `json:"node"`
-	ObjectState                   string                            `json:"object_state"`
-	Onstartall                    bool                              `json:"onstartall"`
-	OsTemplate                    *ActionOsTemplateShowOutput       `json:"os_template"`
-	Pool                          *ActionPoolShowOutput             `json:"pool"`
-	ProcessCount                  int64                             `json:"process_count"`
-	RemindAfterDate               string                            `json:"remind_after_date"`
-	StartMenuTimeout              int64                             `json:"start_menu_timeout"`
-	Swap                          int64                             `json:"swap"`
-	Uptime                        int64                             `json:"uptime"`
-	UsedDiskspace                 int64                             `json:"used_diskspace"`
-	UsedMemory                    int64                             `json:"used_memory"`
-	UsedSwap                      int64                             `json:"used_swap"`
-	User                          *ActionUserShowOutput             `json:"user"`
-	UserNamespaceMap              *ActionUserNamespaceMapShowOutput `json:"user_namespace_map"`
+	AllowAdminModifications       bool                              "json:\"allow_admin_modifications\""
+	AutostartEnable               bool                              "json:\"autostart_enable\""
+	AutostartPriority             int64                             "json:\"autostart_priority\""
+	CgroupVersion                 string                            "json:\"cgroup_version\""
+	Config                        string                            "json:\"config\""
+	Cpu                           int64                             "json:\"cpu\""
+	CpuIdle                       float64                           "json:\"cpu_idle\""
+	CpuIowait                     float64                           "json:\"cpu_iowait\""
+	CpuIrq                        float64                           "json:\"cpu_irq\""
+	CpuLimit                      int64                             "json:\"cpu_limit\""
+	CpuNice                       float64                           "json:\"cpu_nice\""
+	CpuSoftirq                    float64                           "json:\"cpu_softirq\""
+	CpuSystem                     float64                           "json:\"cpu_system\""
+	CpuUser                       float64                           "json:\"cpu_user\""
+	CreatedAt                     string                            "json:\"created_at\""
+	Dataset                       *ActionDatasetShowOutput          "json:\"dataset\""
+	Diskspace                     int64                             "json:\"diskspace\""
+	DnsResolver                   *ActionDnsResolverShowOutput      "json:\"dns_resolver\""
+	EnableNetwork                 bool                              "json:\"enable_network\""
+	EnableOsTemplateAutoUpdate    bool                              "json:\"enable_os_template_auto_update\""
+	ExpirationDate                string                            "json:\"expiration_date\""
+	Hostname                      string                            "json:\"hostname\""
+	Id                            int64                             "json:\"id\""
+	ImplicitOomReportRuleHitCount int64                             "json:\"implicit_oom_report_rule_hit_count\""
+	InRescueMode                  bool                              "json:\"in_rescue_mode\""
+	Info                          string                            "json:\"info\""
+	IsRunning                     bool                              "json:\"is_running\""
+	Loadavg1                      float64                           "json:\"loadavg1\""
+	Loadavg15                     float64                           "json:\"loadavg15\""
+	Loadavg5                      float64                           "json:\"loadavg5\""
+	MaintenanceLock               string                            "json:\"maintenance_lock\""
+	MaintenanceLockReason         string                            "json:\"maintenance_lock_reason\""
+	ManageHostname                bool                              "json:\"manage_hostname\""
+	MapMode                       string                            "json:\"map_mode\""
+	Memory                        int64                             "json:\"memory\""
+	Node                          *ActionNodeShowOutput             "json:\"node\""
+	ObjectState                   string                            "json:\"object_state\""
+	Onstartall                    bool                              "json:\"onstartall\""
+	OsTemplate                    *ActionOsTemplateShowOutput       "json:\"os_template\""
+	Pool                          *ActionPoolShowOutput             "json:\"pool\""
+	ProcessCount                  int64                             "json:\"process_count\""
+	RemindAfterDate               string                            "json:\"remind_after_date\""
+	StartMenuTimeout              int64                             "json:\"start_menu_timeout\""
+	Swap                          int64                             "json:\"swap\""
+	Uptime                        int64                             "json:\"uptime\""
+	UsedDiskspace                 int64                             "json:\"used_diskspace\""
+	UsedMemory                    int64                             "json:\"used_memory\""
+	UsedSwap                      int64                             "json:\"used_swap\""
+	User                          *ActionUserShowOutput             "json:\"user\""
+	UserNamespaceMap              *ActionUserNamespaceMapShowOutput "json:\"user_namespace_map\""
 }
 
 // Type for action response, including envelope
 type ActionVpsIndexResponse struct {
-	Action *ActionVpsIndex `json:"-"`
+	Action *ActionVpsIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Vpses []*ActionVpsIndexOutput `json:"vpses"`
+		Vpses []*ActionVpsIndexOutput "json:\"vpses\""
 	}
 
 	// Action output without the namespace

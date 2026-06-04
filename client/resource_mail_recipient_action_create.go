@@ -16,8 +16,8 @@ func NewActionMailRecipientCreate(client *Client) *ActionMailRecipientCreate {
 
 // ActionMailRecipientCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionMailRecipientCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,10 +73,10 @@ func (in *ActionMailRecipientCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionMailRecipientCreateInput is a type for action input parameters
 type ActionMailRecipientCreateInput struct {
-	Bcc   string `json:"bcc"`
-	Cc    string `json:"cc"`
-	Label string `json:"label"`
-	To    string `json:"to"`
+	Bcc   string "json:\"bcc\""
+	Cc    string "json:\"cc\""
+	Label string "json:\"label\""
+	To    string "json:\"to\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -228,26 +228,26 @@ func (in *ActionMailRecipientCreateInput) AnySelected() bool {
 
 // ActionMailRecipientCreateRequest is a type for the entire action request
 type ActionMailRecipientCreateRequest struct {
-	MailRecipient map[string]interface{} `json:"mail_recipient"`
-	Meta          map[string]interface{} `json:"_meta"`
+	MailRecipient map[string]interface{} "json:\"mail_recipient\""
+	Meta          map[string]interface{} "json:\"_meta\""
 }
 
 // ActionMailRecipientCreateOutput is a type for action output parameters
 type ActionMailRecipientCreateOutput struct {
-	Bcc   string `json:"bcc"`
-	Cc    string `json:"cc"`
-	Id    int64  `json:"id"`
-	Label string `json:"label"`
-	To    string `json:"to"`
+	Bcc   string "json:\"bcc\""
+	Cc    string "json:\"cc\""
+	Id    int64  "json:\"id\""
+	Label string "json:\"label\""
+	To    string "json:\"to\""
 }
 
 // Type for action response, including envelope
 type ActionMailRecipientCreateResponse struct {
-	Action *ActionMailRecipientCreate `json:"-"`
+	Action *ActionMailRecipientCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MailRecipient *ActionMailRecipientCreateOutput `json:"mail_recipient"`
+		MailRecipient *ActionMailRecipientCreateOutput "json:\"mail_recipient\""
 	}
 
 	// Action output without the namespace

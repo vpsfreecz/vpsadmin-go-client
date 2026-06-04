@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserNamespaceMapEntryUpdate(client *Client) *ActionUserNamespaceMa
 
 // ActionUserNamespaceMapEntryUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceMapEntryUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,9 +76,9 @@ func (in *ActionUserNamespaceMapEntryUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionUserNamespaceMapEntryUpdateInput is a type for action input parameters
 type ActionUserNamespaceMapEntryUpdateInput struct {
-	Count int64 `json:"count"`
-	NsId  int64 `json:"ns_id"`
-	VpsId int64 `json:"vps_id"`
+	Count int64 "json:\"count\""
+	NsId  int64 "json:\"ns_id\""
+	VpsId int64 "json:\"vps_id\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,26 +161,26 @@ func (in *ActionUserNamespaceMapEntryUpdateInput) AnySelected() bool {
 
 // ActionUserNamespaceMapEntryUpdateRequest is a type for the entire action request
 type ActionUserNamespaceMapEntryUpdateRequest struct {
-	Entry map[string]interface{} `json:"entry"`
-	Meta  map[string]interface{} `json:"_meta"`
+	Entry map[string]interface{} "json:\"entry\""
+	Meta  map[string]interface{} "json:\"_meta\""
 }
 
 // ActionUserNamespaceMapEntryUpdateOutput is a type for action output parameters
 type ActionUserNamespaceMapEntryUpdateOutput struct {
-	Count int64  `json:"count"`
-	Id    int64  `json:"id"`
-	Kind  string `json:"kind"`
-	NsId  int64  `json:"ns_id"`
-	VpsId int64  `json:"vps_id"`
+	Count int64  "json:\"count\""
+	Id    int64  "json:\"id\""
+	Kind  string "json:\"kind\""
+	NsId  int64  "json:\"ns_id\""
+	VpsId int64  "json:\"vps_id\""
 }
 
 // Type for action response, including envelope
 type ActionUserNamespaceMapEntryUpdateResponse struct {
-	Action *ActionUserNamespaceMapEntryUpdate `json:"-"`
+	Action *ActionUserNamespaceMapEntryUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Entry *ActionUserNamespaceMapEntryUpdateOutput `json:"entry"`
+		Entry *ActionUserNamespaceMapEntryUpdateOutput "json:\"entry\""
 	}
 
 	// Action output without the namespace
@@ -214,7 +215,7 @@ func (inv *ActionUserNamespaceMapEntryUpdateInvocation) SetPathParamInt(param st
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserNamespaceMapEntryUpdateInvocation) SetPathParamString(param string, value string) *ActionUserNamespaceMapEntryUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

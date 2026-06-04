@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,7 +19,7 @@ func NewActionLocationSetMaintenance(client *Client) *ActionLocationSetMaintenan
 
 // ActionLocationSetMaintenanceMetaGlobalInput is a type for action global meta input parameters
 type ActionLocationSetMaintenanceMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -62,8 +63,8 @@ func (in *ActionLocationSetMaintenanceMetaGlobalInput) AnySelected() bool {
 
 // ActionLocationSetMaintenanceInput is a type for action input parameters
 type ActionLocationSetMaintenanceInput struct {
-	Lock   bool   `json:"lock"`
-	Reason string `json:"reason"`
+	Lock   bool   "json:\"lock\""
+	Reason string "json:\"reason\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,13 +135,13 @@ func (in *ActionLocationSetMaintenanceInput) AnySelected() bool {
 
 // ActionLocationSetMaintenanceRequest is a type for the entire action request
 type ActionLocationSetMaintenanceRequest struct {
-	Location map[string]interface{} `json:"location"`
-	Meta     map[string]interface{} `json:"_meta"`
+	Location map[string]interface{} "json:\"location\""
+	Meta     map[string]interface{} "json:\"_meta\""
 }
 
 // Type for action response, including envelope
 type ActionLocationSetMaintenanceResponse struct {
-	Action *ActionLocationSetMaintenance `json:"-"`
+	Action *ActionLocationSetMaintenance "json:\"-\""
 	*Envelope
 }
 
@@ -172,7 +173,7 @@ func (inv *ActionLocationSetMaintenanceInvocation) SetPathParamInt(param string,
 
 // SetPathParamString sets string path parameter
 func (inv *ActionLocationSetMaintenanceInvocation) SetPathParamString(param string, value string) *ActionLocationSetMaintenanceInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

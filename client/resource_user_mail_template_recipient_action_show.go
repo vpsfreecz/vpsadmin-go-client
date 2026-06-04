@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserMailTemplateRecipientShow(client *Client) *ActionUserMailTempl
 
 // ActionUserMailTemplateRecipientShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserMailTemplateRecipientShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,20 +76,20 @@ func (in *ActionUserMailTemplateRecipientShowMetaGlobalInput) AnySelected() bool
 
 // ActionUserMailTemplateRecipientShowOutput is a type for action output parameters
 type ActionUserMailTemplateRecipientShowOutput struct {
-	Description string `json:"description"`
-	Enabled     bool   `json:"enabled"`
-	Id          string `json:"id"`
-	Label       string `json:"label"`
-	To          string `json:"to"`
+	Description string "json:\"description\""
+	Enabled     bool   "json:\"enabled\""
+	Id          string "json:\"id\""
+	Label       string "json:\"label\""
+	To          string "json:\"to\""
 }
 
 // Type for action response, including envelope
 type ActionUserMailTemplateRecipientShowResponse struct {
-	Action *ActionUserMailTemplateRecipientShow `json:"-"`
+	Action *ActionUserMailTemplateRecipientShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MailTemplateRecipient *ActionUserMailTemplateRecipientShowOutput `json:"mail_template_recipient"`
+		MailTemplateRecipient *ActionUserMailTemplateRecipientShowOutput "json:\"mail_template_recipient\""
 	}
 
 	// Action output without the namespace
@@ -121,7 +122,7 @@ func (inv *ActionUserMailTemplateRecipientShowInvocation) SetPathParamInt(param 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserMailTemplateRecipientShowInvocation) SetPathParamString(param string, value string) *ActionUserMailTemplateRecipientShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

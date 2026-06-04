@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionDatasetExpansionHistoryIndex(client *Client) *ActionDatasetExpansi
 
 // ActionDatasetExpansionHistoryIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetExpansionHistoryIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,8 +89,8 @@ func (in *ActionDatasetExpansionHistoryIndexMetaGlobalInput) AnySelected() bool 
 
 // ActionDatasetExpansionHistoryIndexInput is a type for action input parameters
 type ActionDatasetExpansionHistoryIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,21 +161,21 @@ func (in *ActionDatasetExpansionHistoryIndexInput) AnySelected() bool {
 
 // ActionDatasetExpansionHistoryIndexOutput is a type for action output parameters
 type ActionDatasetExpansionHistoryIndexOutput struct {
-	AddedSpace       int64                 `json:"added_space"`
-	Admin            *ActionUserShowOutput `json:"admin"`
-	CreatedAt        string                `json:"created_at"`
-	Id               int64                 `json:"id"`
-	NewRefquota      int64                 `json:"new_refquota"`
-	OriginalRefquota int64                 `json:"original_refquota"`
+	AddedSpace       int64                 "json:\"added_space\""
+	Admin            *ActionUserShowOutput "json:\"admin\""
+	CreatedAt        string                "json:\"created_at\""
+	Id               int64                 "json:\"id\""
+	NewRefquota      int64                 "json:\"new_refquota\""
+	OriginalRefquota int64                 "json:\"original_refquota\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetExpansionHistoryIndexResponse struct {
-	Action *ActionDatasetExpansionHistoryIndex `json:"-"`
+	Action *ActionDatasetExpansionHistoryIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Histories []*ActionDatasetExpansionHistoryIndexOutput `json:"histories"`
+		Histories []*ActionDatasetExpansionHistoryIndexOutput "json:\"histories\""
 	}
 
 	// Action output without the namespace
@@ -209,7 +210,7 @@ func (inv *ActionDatasetExpansionHistoryIndexInvocation) SetPathParamInt(param s
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetExpansionHistoryIndexInvocation) SetPathParamString(param string, value string) *ActionDatasetExpansionHistoryIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

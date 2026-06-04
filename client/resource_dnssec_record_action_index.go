@@ -16,9 +16,9 @@ func NewActionDnssecRecordIndex(client *Client) *ActionDnssecRecordIndex {
 
 // ActionDnssecRecordIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDnssecRecordIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,9 +86,9 @@ func (in *ActionDnssecRecordIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDnssecRecordIndexInput is a type for action input parameters
 type ActionDnssecRecordIndexInput struct {
-	DnsZone int64 `json:"dns_zone"`
-	FromId  int64 `json:"from_id"`
-	Limit   int64 `json:"limit"`
+	DnsZone int64 "json:\"dns_zone\""
+	FromId  int64 "json:\"from_id\""
+	Limit   int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -171,25 +171,25 @@ func (in *ActionDnssecRecordIndexInput) AnySelected() bool {
 
 // ActionDnssecRecordIndexOutput is a type for action output parameters
 type ActionDnssecRecordIndexOutput struct {
-	CreatedAt       string                   `json:"created_at"`
-	DnsZone         *ActionDnsZoneShowOutput `json:"dns_zone"`
-	DnskeyAlgorithm int64                    `json:"dnskey_algorithm"`
-	DnskeyPubkey    string                   `json:"dnskey_pubkey"`
-	DsAlgorithm     int64                    `json:"ds_algorithm"`
-	DsDigest        string                   `json:"ds_digest"`
-	DsDigestType    int64                    `json:"ds_digest_type"`
-	Id              int64                    `json:"id"`
-	Keyid           int64                    `json:"keyid"`
-	UpdatedAt       string                   `json:"updated_at"`
+	CreatedAt       string                   "json:\"created_at\""
+	DnsZone         *ActionDnsZoneShowOutput "json:\"dns_zone\""
+	DnskeyAlgorithm int64                    "json:\"dnskey_algorithm\""
+	DnskeyPubkey    string                   "json:\"dnskey_pubkey\""
+	DsAlgorithm     int64                    "json:\"ds_algorithm\""
+	DsDigest        string                   "json:\"ds_digest\""
+	DsDigestType    int64                    "json:\"ds_digest_type\""
+	Id              int64                    "json:\"id\""
+	Keyid           int64                    "json:\"keyid\""
+	UpdatedAt       string                   "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionDnssecRecordIndexResponse struct {
-	Action *ActionDnssecRecordIndex `json:"-"`
+	Action *ActionDnssecRecordIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnssecRecords []*ActionDnssecRecordIndexOutput `json:"dnssec_records"`
+		DnssecRecords []*ActionDnssecRecordIndexOutput "json:\"dnssec_records\""
 	}
 
 	// Action output without the namespace

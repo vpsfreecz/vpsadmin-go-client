@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserEnvironmentConfigShow(client *Client) *ActionUserEnvironmentCo
 
 // ActionUserEnvironmentConfigShowMetaGlobalInput is a type for action global meta input parameters
 type ActionUserEnvironmentConfigShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,22 +76,22 @@ func (in *ActionUserEnvironmentConfigShowMetaGlobalInput) AnySelected() bool {
 
 // ActionUserEnvironmentConfigShowOutput is a type for action output parameters
 type ActionUserEnvironmentConfigShowOutput struct {
-	CanCreateVps  bool                         `json:"can_create_vps"`
-	CanDestroyVps bool                         `json:"can_destroy_vps"`
-	Default       bool                         `json:"default"`
-	Environment   *ActionEnvironmentShowOutput `json:"environment"`
-	Id            int64                        `json:"id"`
-	MaxVpsCount   int64                        `json:"max_vps_count"`
-	VpsLifetime   int64                        `json:"vps_lifetime"`
+	CanCreateVps  bool                         "json:\"can_create_vps\""
+	CanDestroyVps bool                         "json:\"can_destroy_vps\""
+	Default       bool                         "json:\"default\""
+	Environment   *ActionEnvironmentShowOutput "json:\"environment\""
+	Id            int64                        "json:\"id\""
+	MaxVpsCount   int64                        "json:\"max_vps_count\""
+	VpsLifetime   int64                        "json:\"vps_lifetime\""
 }
 
 // Type for action response, including envelope
 type ActionUserEnvironmentConfigShowResponse struct {
-	Action *ActionUserEnvironmentConfigShow `json:"-"`
+	Action *ActionUserEnvironmentConfigShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		EnvironmentConfig *ActionUserEnvironmentConfigShowOutput `json:"environment_config"`
+		EnvironmentConfig *ActionUserEnvironmentConfigShowOutput "json:\"environment_config\""
 	}
 
 	// Action output without the namespace
@@ -123,7 +124,7 @@ func (inv *ActionUserEnvironmentConfigShowInvocation) SetPathParamInt(param stri
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserEnvironmentConfigShowInvocation) SetPathParamString(param string, value string) *ActionUserEnvironmentConfigShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

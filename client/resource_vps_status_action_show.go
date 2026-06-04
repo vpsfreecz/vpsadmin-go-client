@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionVpsStatusShow(client *Client) *ActionVpsStatusShow {
 
 // ActionVpsStatusShowMetaGlobalInput is a type for action global meta input parameters
 type ActionVpsStatusShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,37 +76,37 @@ func (in *ActionVpsStatusShowMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsStatusShowOutput is a type for action output parameters
 type ActionVpsStatusShowOutput struct {
-	CpuIdle      float64 `json:"cpu_idle"`
-	CpuIowait    float64 `json:"cpu_iowait"`
-	CpuIrq       float64 `json:"cpu_irq"`
-	CpuNice      float64 `json:"cpu_nice"`
-	CpuSoftirq   float64 `json:"cpu_softirq"`
-	CpuSystem    float64 `json:"cpu_system"`
-	CpuUser      float64 `json:"cpu_user"`
-	Cpus         int64   `json:"cpus"`
-	CreatedAt    string  `json:"created_at"`
-	Id           int64   `json:"id"`
-	InRescueMode bool    `json:"in_rescue_mode"`
-	IsRunning    bool    `json:"is_running"`
-	Loadavg1     float64 `json:"loadavg1"`
-	Loadavg15    float64 `json:"loadavg15"`
-	Loadavg5     float64 `json:"loadavg5"`
-	ProcessCount int64   `json:"process_count"`
-	Status       bool    `json:"status"`
-	TotalMemory  int64   `json:"total_memory"`
-	TotalSwap    int64   `json:"total_swap"`
-	Uptime       int64   `json:"uptime"`
-	UsedMemory   int64   `json:"used_memory"`
-	UsedSwap     int64   `json:"used_swap"`
+	CpuIdle      float64 "json:\"cpu_idle\""
+	CpuIowait    float64 "json:\"cpu_iowait\""
+	CpuIrq       float64 "json:\"cpu_irq\""
+	CpuNice      float64 "json:\"cpu_nice\""
+	CpuSoftirq   float64 "json:\"cpu_softirq\""
+	CpuSystem    float64 "json:\"cpu_system\""
+	CpuUser      float64 "json:\"cpu_user\""
+	Cpus         int64   "json:\"cpus\""
+	CreatedAt    string  "json:\"created_at\""
+	Id           int64   "json:\"id\""
+	InRescueMode bool    "json:\"in_rescue_mode\""
+	IsRunning    bool    "json:\"is_running\""
+	Loadavg1     float64 "json:\"loadavg1\""
+	Loadavg15    float64 "json:\"loadavg15\""
+	Loadavg5     float64 "json:\"loadavg5\""
+	ProcessCount int64   "json:\"process_count\""
+	Status       bool    "json:\"status\""
+	TotalMemory  int64   "json:\"total_memory\""
+	TotalSwap    int64   "json:\"total_swap\""
+	Uptime       int64   "json:\"uptime\""
+	UsedMemory   int64   "json:\"used_memory\""
+	UsedSwap     int64   "json:\"used_swap\""
 }
 
 // Type for action response, including envelope
 type ActionVpsStatusShowResponse struct {
-	Action *ActionVpsStatusShow `json:"-"`
+	Action *ActionVpsStatusShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Status *ActionVpsStatusShowOutput `json:"status"`
+		Status *ActionVpsStatusShowOutput "json:\"status\""
 	}
 
 	// Action output without the namespace
@@ -138,7 +139,7 @@ func (inv *ActionVpsStatusShowInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionVpsStatusShowInvocation) SetPathParamString(param string, value string) *ActionVpsStatusShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

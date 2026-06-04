@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionExportHostCreate(client *Client) *ActionExportHostCreate {
 
 // ActionExportHostCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionExportHostCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,11 +76,11 @@ func (in *ActionExportHostCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionExportHostCreateInput is a type for action input parameters
 type ActionExportHostCreateInput struct {
-	IpAddress    int64 `json:"ip_address"`
-	RootSquash   bool  `json:"root_squash"`
-	Rw           bool  `json:"rw"`
-	SubtreeCheck bool  `json:"subtree_check"`
-	Sync         bool  `json:"sync"`
+	IpAddress    int64 "json:\"ip_address\""
+	RootSquash   bool  "json:\"root_squash\""
+	Rw           bool  "json:\"rw\""
+	SubtreeCheck bool  "json:\"subtree_check\""
+	Sync         bool  "json:\"sync\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -186,34 +187,34 @@ func (in *ActionExportHostCreateInput) AnySelected() bool {
 
 // ActionExportHostCreateRequest is a type for the entire action request
 type ActionExportHostCreateRequest struct {
-	Host map[string]interface{} `json:"host"`
-	Meta map[string]interface{} `json:"_meta"`
+	Host map[string]interface{} "json:\"host\""
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionExportHostCreateOutput is a type for action output parameters
 type ActionExportHostCreateOutput struct {
-	Id           int64                      `json:"id"`
-	IpAddress    *ActionIpAddressShowOutput `json:"ip_address"`
-	RootSquash   bool                       `json:"root_squash"`
-	Rw           bool                       `json:"rw"`
-	SubtreeCheck bool                       `json:"subtree_check"`
-	Sync         bool                       `json:"sync"`
+	Id           int64                      "json:\"id\""
+	IpAddress    *ActionIpAddressShowOutput "json:\"ip_address\""
+	RootSquash   bool                       "json:\"root_squash\""
+	Rw           bool                       "json:\"rw\""
+	SubtreeCheck bool                       "json:\"subtree_check\""
+	Sync         bool                       "json:\"sync\""
 }
 
 // ActionExportHostCreateMetaGlobalOutput is a type for global output metadata parameters
 type ActionExportHostCreateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionExportHostCreateResponse struct {
-	Action *ActionExportHostCreate `json:"-"`
+	Action *ActionExportHostCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Host *ActionExportHostCreateOutput `json:"host"`
+		Host *ActionExportHostCreateOutput "json:\"host\""
 		// Global output metadata
-		Meta *ActionExportHostCreateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionExportHostCreateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -248,7 +249,7 @@ func (inv *ActionExportHostCreateInvocation) SetPathParamInt(param string, value
 
 // SetPathParamString sets string path parameter
 func (inv *ActionExportHostCreateInvocation) SetPathParamString(param string, value string) *ActionExportHostCreateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

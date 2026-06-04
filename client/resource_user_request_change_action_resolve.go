@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionUserRequestChangeResolve(client *Client) *ActionUserRequestChangeR
 
 // ActionUserRequestChangeResolveMetaGlobalInput is a type for action global meta input parameters
 type ActionUserRequestChangeResolveMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,12 +76,12 @@ func (in *ActionUserRequestChangeResolveMetaGlobalInput) AnySelected() bool {
 
 // ActionUserRequestChangeResolveInput is a type for action input parameters
 type ActionUserRequestChangeResolveInput struct {
-	Action       string `json:"action"`
-	Address      string `json:"address"`
-	ChangeReason string `json:"change_reason"`
-	Email        string `json:"email"`
-	FullName     string `json:"full_name"`
-	Reason       string `json:"reason"`
+	Action       string "json:\"action\""
+	Address      string "json:\"address\""
+	ChangeReason string "json:\"change_reason\""
+	Email        string "json:\"email\""
+	FullName     string "json:\"full_name\""
+	Reason       string "json:\"reason\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -199,13 +200,13 @@ func (in *ActionUserRequestChangeResolveInput) AnySelected() bool {
 
 // ActionUserRequestChangeResolveRequest is a type for the entire action request
 type ActionUserRequestChangeResolveRequest struct {
-	Change map[string]interface{} `json:"change"`
-	Meta   map[string]interface{} `json:"_meta"`
+	Change map[string]interface{} "json:\"change\""
+	Meta   map[string]interface{} "json:\"_meta\""
 }
 
 // Type for action response, including envelope
 type ActionUserRequestChangeResolveResponse struct {
-	Action *ActionUserRequestChangeResolve `json:"-"`
+	Action *ActionUserRequestChangeResolve "json:\"-\""
 	*Envelope
 }
 
@@ -237,7 +238,7 @@ func (inv *ActionUserRequestChangeResolveInvocation) SetPathParamInt(param strin
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserRequestChangeResolveInvocation) SetPathParamString(param string, value string) *ActionUserRequestChangeResolveInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

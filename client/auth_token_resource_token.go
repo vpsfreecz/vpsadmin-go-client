@@ -9,6 +9,8 @@ type AuthTokenResourceToken struct {
 	Renew *AuthTokenActionTokenRenew
 	// Action Token#Request
 	Request *AuthTokenActionTokenRequest
+	// Action Token#Reset_password
+	ResetPassword *AuthTokenActionTokenResetPassword
 	// Action Token#Revoke
 	Revoke *AuthTokenActionTokenRevoke
 	// Action Token#Totp
@@ -18,14 +20,16 @@ type AuthTokenResourceToken struct {
 func NewAuthTokenResourceToken(client *Client) *AuthTokenResourceToken {
 	actionRenew := NewAuthTokenActionTokenRenew(client)
 	actionRequest := NewAuthTokenActionTokenRequest(client)
+	actionResetPassword := NewAuthTokenActionTokenResetPassword(client)
 	actionRevoke := NewAuthTokenActionTokenRevoke(client)
 	actionTotp := NewAuthTokenActionTokenTotp(client)
 
 	return &AuthTokenResourceToken{
-		Client:  client,
-		Renew:   actionRenew,
-		Request: actionRequest,
-		Revoke:  actionRevoke,
-		Totp:    actionTotp,
+		Client:        client,
+		Renew:         actionRenew,
+		Request:       actionRequest,
+		ResetPassword: actionResetPassword,
+		Revoke:        actionRevoke,
+		Totp:          actionTotp,
 	}
 }

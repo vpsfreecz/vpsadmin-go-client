@@ -16,7 +16,7 @@ func NewActionClusterPublicStats(client *Client) *ActionClusterPublicStats {
 
 // ActionClusterPublicStatsMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterPublicStatsMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,18 +60,18 @@ func (in *ActionClusterPublicStatsMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterPublicStatsOutput is a type for action output parameters
 type ActionClusterPublicStatsOutput struct {
-	Ipv4Left  int64 `json:"ipv4_left"`
-	UserCount int64 `json:"user_count"`
-	VpsCount  int64 `json:"vps_count"`
+	Ipv4Left  int64 "json:\"ipv4_left\""
+	UserCount int64 "json:\"user_count\""
+	VpsCount  int64 "json:\"vps_count\""
 }
 
 // Type for action response, including envelope
 type ActionClusterPublicStatsResponse struct {
-	Action *ActionClusterPublicStats `json:"-"`
+	Action *ActionClusterPublicStats "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Cluster *ActionClusterPublicStatsOutput `json:"cluster"`
+		Cluster *ActionClusterPublicStatsOutput "json:\"cluster\""
 	}
 
 	// Action output without the namespace

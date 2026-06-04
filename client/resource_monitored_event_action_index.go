@@ -16,9 +16,9 @@ func NewActionMonitoredEventIndex(client *Client) *ActionMonitoredEventIndex {
 
 // ActionMonitoredEventIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionMonitoredEventIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,15 +86,15 @@ func (in *ActionMonitoredEventIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionMonitoredEventIndexInput is a type for action input parameters
 type ActionMonitoredEventIndexInput struct {
-	FromDuration float64 `json:"from_duration"`
-	FromId       int64   `json:"from_id"`
-	Limit        int64   `json:"limit"`
-	Monitor      string  `json:"monitor"`
-	ObjectId     int64   `json:"object_id"`
-	ObjectName   string  `json:"object_name"`
-	Order        string  `json:"order"`
-	State        string  `json:"state"`
-	User         int64   `json:"user"`
+	FromDuration float64 "json:\"from_duration\""
+	FromId       int64   "json:\"from_id\""
+	Limit        int64   "json:\"limit\""
+	Monitor      string  "json:\"monitor\""
+	ObjectId     int64   "json:\"object_id\""
+	ObjectName   string  "json:\"object_name\""
+	Order        string  "json:\"order\""
+	State        string  "json:\"state\""
+	User         int64   "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -249,27 +249,27 @@ func (in *ActionMonitoredEventIndexInput) AnySelected() bool {
 
 // ActionMonitoredEventIndexOutput is a type for action output parameters
 type ActionMonitoredEventIndexOutput struct {
-	CreatedAt  string                `json:"created_at"`
-	Duration   float64               `json:"duration"`
-	Id         int64                 `json:"id"`
-	Issue      string                `json:"issue"`
-	Label      string                `json:"label"`
-	Monitor    string                `json:"monitor"`
-	ObjectId   int64                 `json:"object_id"`
-	ObjectName string                `json:"object_name"`
-	SavedUntil string                `json:"saved_until"`
-	State      string                `json:"state"`
-	UpdatedAt  string                `json:"updated_at"`
-	User       *ActionUserShowOutput `json:"user"`
+	CreatedAt  string                "json:\"created_at\""
+	Duration   float64               "json:\"duration\""
+	Id         int64                 "json:\"id\""
+	Issue      string                "json:\"issue\""
+	Label      string                "json:\"label\""
+	Monitor    string                "json:\"monitor\""
+	ObjectId   int64                 "json:\"object_id\""
+	ObjectName string                "json:\"object_name\""
+	SavedUntil string                "json:\"saved_until\""
+	State      string                "json:\"state\""
+	UpdatedAt  string                "json:\"updated_at\""
+	User       *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionMonitoredEventIndexResponse struct {
-	Action *ActionMonitoredEventIndex `json:"-"`
+	Action *ActionMonitoredEventIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MonitoredEvents []*ActionMonitoredEventIndexOutput `json:"monitored_events"`
+		MonitoredEvents []*ActionMonitoredEventIndexOutput "json:\"monitored_events\""
 	}
 
 	// Action output without the namespace

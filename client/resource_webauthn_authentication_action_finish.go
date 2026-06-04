@@ -16,7 +16,7 @@ func NewActionWebauthnAuthenticationFinish(client *Client) *ActionWebauthnAuthen
 
 // ActionWebauthnAuthenticationFinishMetaGlobalInput is a type for action global meta input parameters
 type ActionWebauthnAuthenticationFinishMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,8 +60,8 @@ func (in *ActionWebauthnAuthenticationFinishMetaGlobalInput) AnySelected() bool 
 
 // ActionWebauthnAuthenticationFinishInput is a type for action input parameters
 type ActionWebauthnAuthenticationFinishInput struct {
-	AuthToken      string `json:"auth_token"`
-	ChallengeToken string `json:"challenge_token"`
+	AuthToken      string "json:\"auth_token\""
+	ChallengeToken string "json:\"challenge_token\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -132,13 +132,13 @@ func (in *ActionWebauthnAuthenticationFinishInput) AnySelected() bool {
 
 // ActionWebauthnAuthenticationFinishRequest is a type for the entire action request
 type ActionWebauthnAuthenticationFinishRequest struct {
-	Authentication map[string]interface{} `json:"authentication"`
-	Meta           map[string]interface{} `json:"_meta"`
+	Authentication map[string]interface{} "json:\"authentication\""
+	Meta           map[string]interface{} "json:\"_meta\""
 }
 
 // Type for action response, including envelope
 type ActionWebauthnAuthenticationFinishResponse struct {
-	Action *ActionWebauthnAuthenticationFinish `json:"-"`
+	Action *ActionWebauthnAuthenticationFinish "json:\"-\""
 	*Envelope
 }
 

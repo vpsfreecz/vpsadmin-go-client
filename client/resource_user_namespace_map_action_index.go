@@ -16,9 +16,9 @@ func NewActionUserNamespaceMapIndex(client *Client) *ActionUserNamespaceMapIndex
 
 // ActionUserNamespaceMapIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserNamespaceMapIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,10 +86,10 @@ func (in *ActionUserNamespaceMapIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserNamespaceMapIndexInput is a type for action input parameters
 type ActionUserNamespaceMapIndexInput struct {
-	FromId        int64 `json:"from_id"`
-	Limit         int64 `json:"limit"`
-	User          int64 `json:"user"`
-	UserNamespace int64 `json:"user_namespace"`
+	FromId        int64 "json:\"from_id\""
+	Limit         int64 "json:\"limit\""
+	User          int64 "json:\"user\""
+	UserNamespace int64 "json:\"user_namespace\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -184,18 +184,18 @@ func (in *ActionUserNamespaceMapIndexInput) AnySelected() bool {
 
 // ActionUserNamespaceMapIndexOutput is a type for action output parameters
 type ActionUserNamespaceMapIndexOutput struct {
-	Id            int64                          `json:"id"`
-	Label         string                         `json:"label"`
-	UserNamespace *ActionUserNamespaceShowOutput `json:"user_namespace"`
+	Id            int64                          "json:\"id\""
+	Label         string                         "json:\"label\""
+	UserNamespace *ActionUserNamespaceShowOutput "json:\"user_namespace\""
 }
 
 // Type for action response, including envelope
 type ActionUserNamespaceMapIndexResponse struct {
-	Action *ActionUserNamespaceMapIndex `json:"-"`
+	Action *ActionUserNamespaceMapIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		UserNamespaceMaps []*ActionUserNamespaceMapIndexOutput `json:"user_namespace_maps"`
+		UserNamespaceMaps []*ActionUserNamespaceMapIndexOutput "json:\"user_namespace_maps\""
 	}
 
 	// Action output without the namespace

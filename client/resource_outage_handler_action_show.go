@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionOutageHandlerShow(client *Client) *ActionOutageHandlerShow {
 
 // ActionOutageHandlerShowMetaGlobalInput is a type for action global meta input parameters
 type ActionOutageHandlerShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,19 +76,19 @@ func (in *ActionOutageHandlerShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageHandlerShowOutput is a type for action output parameters
 type ActionOutageHandlerShowOutput struct {
-	FullName string                `json:"full_name"`
-	Id       int64                 `json:"id"`
-	Note     string                `json:"note"`
-	User     *ActionUserShowOutput `json:"user"`
+	FullName string                "json:\"full_name\""
+	Id       int64                 "json:\"id\""
+	Note     string                "json:\"note\""
+	User     *ActionUserShowOutput "json:\"user\""
 }
 
 // Type for action response, including envelope
 type ActionOutageHandlerShowResponse struct {
-	Action *ActionOutageHandlerShow `json:"-"`
+	Action *ActionOutageHandlerShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Handler *ActionOutageHandlerShowOutput `json:"handler"`
+		Handler *ActionOutageHandlerShowOutput "json:\"handler\""
 	}
 
 	// Action output without the namespace
@@ -120,7 +121,7 @@ func (inv *ActionOutageHandlerShowInvocation) SetPathParamInt(param string, valu
 
 // SetPathParamString sets string path parameter
 func (inv *ActionOutageHandlerShowInvocation) SetPathParamString(param string, value string) *ActionOutageHandlerShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

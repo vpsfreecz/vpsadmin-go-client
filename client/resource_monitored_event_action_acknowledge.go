@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMonitoredEventAcknowledge(client *Client) *ActionMonitoredEventAck
 
 // ActionMonitoredEventAcknowledgeMetaGlobalInput is a type for action global meta input parameters
 type ActionMonitoredEventAcknowledgeMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,7 +76,7 @@ func (in *ActionMonitoredEventAcknowledgeMetaGlobalInput) AnySelected() bool {
 
 // ActionMonitoredEventAcknowledgeInput is a type for action input parameters
 type ActionMonitoredEventAcknowledgeInput struct {
-	Until string `json:"until"`
+	Until string "json:\"until\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -134,13 +135,13 @@ func (in *ActionMonitoredEventAcknowledgeInput) AnySelected() bool {
 
 // ActionMonitoredEventAcknowledgeRequest is a type for the entire action request
 type ActionMonitoredEventAcknowledgeRequest struct {
-	MonitoredEvent map[string]interface{} `json:"monitored_event"`
-	Meta           map[string]interface{} `json:"_meta"`
+	MonitoredEvent map[string]interface{} "json:\"monitored_event\""
+	Meta           map[string]interface{} "json:\"_meta\""
 }
 
 // Type for action response, including envelope
 type ActionMonitoredEventAcknowledgeResponse struct {
-	Action *ActionMonitoredEventAcknowledge `json:"-"`
+	Action *ActionMonitoredEventAcknowledge "json:\"-\""
 	*Envelope
 }
 
@@ -172,7 +173,7 @@ func (inv *ActionMonitoredEventAcknowledgeInvocation) SetPathParamInt(param stri
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMonitoredEventAcknowledgeInvocation) SetPathParamString(param string, value string) *ActionMonitoredEventAcknowledgeInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

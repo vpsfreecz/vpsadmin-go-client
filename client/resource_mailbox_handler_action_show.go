@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionMailboxHandlerShow(client *Client) *ActionMailboxHandlerShow {
 
 // ActionMailboxHandlerShowMetaGlobalInput is a type for action global meta input parameters
 type ActionMailboxHandlerShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,21 +76,21 @@ func (in *ActionMailboxHandlerShowMetaGlobalInput) AnySelected() bool {
 
 // ActionMailboxHandlerShowOutput is a type for action output parameters
 type ActionMailboxHandlerShowOutput struct {
-	ClassName string `json:"class_name"`
-	Continue  bool   `json:"continue"`
-	CreatedAt string `json:"created_at"`
-	Id        int64  `json:"id"`
-	Order     int64  `json:"order"`
-	UpdatedAt string `json:"updated_at"`
+	ClassName string "json:\"class_name\""
+	Continue  bool   "json:\"continue\""
+	CreatedAt string "json:\"created_at\""
+	Id        int64  "json:\"id\""
+	Order     int64  "json:\"order\""
+	UpdatedAt string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionMailboxHandlerShowResponse struct {
-	Action *ActionMailboxHandlerShow `json:"-"`
+	Action *ActionMailboxHandlerShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Handler *ActionMailboxHandlerShowOutput `json:"handler"`
+		Handler *ActionMailboxHandlerShowOutput "json:\"handler\""
 	}
 
 	// Action output without the namespace
@@ -122,7 +123,7 @@ func (inv *ActionMailboxHandlerShowInvocation) SetPathParamInt(param string, val
 
 // SetPathParamString sets string path parameter
 func (inv *ActionMailboxHandlerShowInvocation) SetPathParamString(param string, value string) *ActionMailboxHandlerShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

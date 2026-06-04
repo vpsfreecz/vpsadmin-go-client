@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionUserMailTemplateRecipientIndex(client *Client) *ActionUserMailTemp
 
 // ActionUserMailTemplateRecipientIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserMailTemplateRecipientIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,8 +89,8 @@ func (in *ActionUserMailTemplateRecipientIndexMetaGlobalInput) AnySelected() boo
 
 // ActionUserMailTemplateRecipientIndexInput is a type for action input parameters
 type ActionUserMailTemplateRecipientIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -160,20 +161,20 @@ func (in *ActionUserMailTemplateRecipientIndexInput) AnySelected() bool {
 
 // ActionUserMailTemplateRecipientIndexOutput is a type for action output parameters
 type ActionUserMailTemplateRecipientIndexOutput struct {
-	Description string `json:"description"`
-	Enabled     bool   `json:"enabled"`
-	Id          string `json:"id"`
-	Label       string `json:"label"`
-	To          string `json:"to"`
+	Description string "json:\"description\""
+	Enabled     bool   "json:\"enabled\""
+	Id          string "json:\"id\""
+	Label       string "json:\"label\""
+	To          string "json:\"to\""
 }
 
 // Type for action response, including envelope
 type ActionUserMailTemplateRecipientIndexResponse struct {
-	Action *ActionUserMailTemplateRecipientIndex `json:"-"`
+	Action *ActionUserMailTemplateRecipientIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		MailTemplateRecipients []*ActionUserMailTemplateRecipientIndexOutput `json:"mail_template_recipients"`
+		MailTemplateRecipients []*ActionUserMailTemplateRecipientIndexOutput "json:\"mail_template_recipients\""
 	}
 
 	// Action output without the namespace
@@ -208,7 +209,7 @@ func (inv *ActionUserMailTemplateRecipientIndexInvocation) SetPathParamInt(param
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserMailTemplateRecipientIndexInvocation) SetPathParamString(param string, value string) *ActionUserMailTemplateRecipientIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionClusterResourceUpdate(client *Client) *ActionClusterResourceUpdate
 
 // ActionClusterResourceUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionClusterResourceUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,14 +76,14 @@ func (in *ActionClusterResourceUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionClusterResourceUpdateInput is a type for action input parameters
 type ActionClusterResourceUpdateInput struct {
-	AllocateChain string `json:"allocate_chain"`
-	FreeChain     string `json:"free_chain"`
-	Label         string `json:"label"`
-	Max           int64  `json:"max"`
-	Min           int64  `json:"min"`
-	Name          string `json:"name"`
-	ResourceType  string `json:"resource_type"`
-	Stepsize      int64  `json:"stepsize"`
+	AllocateChain string "json:\"allocate_chain\""
+	FreeChain     string "json:\"free_chain\""
+	Label         string "json:\"label\""
+	Max           int64  "json:\"max\""
+	Min           int64  "json:\"min\""
+	Name          string "json:\"name\""
+	ResourceType  string "json:\"resource_type\""
+	Stepsize      int64  "json:\"stepsize\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -225,30 +226,30 @@ func (in *ActionClusterResourceUpdateInput) AnySelected() bool {
 
 // ActionClusterResourceUpdateRequest is a type for the entire action request
 type ActionClusterResourceUpdateRequest struct {
-	ClusterResource map[string]interface{} `json:"cluster_resource"`
-	Meta            map[string]interface{} `json:"_meta"`
+	ClusterResource map[string]interface{} "json:\"cluster_resource\""
+	Meta            map[string]interface{} "json:\"_meta\""
 }
 
 // ActionClusterResourceUpdateOutput is a type for action output parameters
 type ActionClusterResourceUpdateOutput struct {
-	AllocateChain string `json:"allocate_chain"`
-	FreeChain     string `json:"free_chain"`
-	Id            int64  `json:"id"`
-	Label         string `json:"label"`
-	Max           int64  `json:"max"`
-	Min           int64  `json:"min"`
-	Name          string `json:"name"`
-	ResourceType  string `json:"resource_type"`
-	Stepsize      int64  `json:"stepsize"`
+	AllocateChain string "json:\"allocate_chain\""
+	FreeChain     string "json:\"free_chain\""
+	Id            int64  "json:\"id\""
+	Label         string "json:\"label\""
+	Max           int64  "json:\"max\""
+	Min           int64  "json:\"min\""
+	Name          string "json:\"name\""
+	ResourceType  string "json:\"resource_type\""
+	Stepsize      int64  "json:\"stepsize\""
 }
 
 // Type for action response, including envelope
 type ActionClusterResourceUpdateResponse struct {
-	Action *ActionClusterResourceUpdate `json:"-"`
+	Action *ActionClusterResourceUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		ClusterResource *ActionClusterResourceUpdateOutput `json:"cluster_resource"`
+		ClusterResource *ActionClusterResourceUpdateOutput "json:\"cluster_resource\""
 	}
 
 	// Action output without the namespace
@@ -283,7 +284,7 @@ func (inv *ActionClusterResourceUpdateInvocation) SetPathParamInt(param string, 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionClusterResourceUpdateInvocation) SetPathParamString(param string, value string) *ActionClusterResourceUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

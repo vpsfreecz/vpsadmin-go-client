@@ -16,9 +16,9 @@ func NewActionDnsResolverIndex(client *Client) *ActionDnsResolverIndex {
 
 // ActionDnsResolverIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsResolverIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,9 +86,9 @@ func (in *ActionDnsResolverIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsResolverIndexInput is a type for action input parameters
 type ActionDnsResolverIndexInput struct {
-	FromId int64 `json:"from_id"`
-	Limit  int64 `json:"limit"`
-	Vps    int64 `json:"vps"`
+	FromId int64 "json:\"from_id\""
+	Limit  int64 "json:\"limit\""
+	Vps    int64 "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -171,20 +171,20 @@ func (in *ActionDnsResolverIndexInput) AnySelected() bool {
 
 // ActionDnsResolverIndexOutput is a type for action output parameters
 type ActionDnsResolverIndexOutput struct {
-	Id          int64                     `json:"id"`
-	IpAddr      string                    `json:"ip_addr"`
-	IsUniversal bool                      `json:"is_universal"`
-	Label       string                    `json:"label"`
-	Location    *ActionLocationShowOutput `json:"location"`
+	Id          int64                     "json:\"id\""
+	IpAddr      string                    "json:\"ip_addr\""
+	IsUniversal bool                      "json:\"is_universal\""
+	Label       string                    "json:\"label\""
+	Location    *ActionLocationShowOutput "json:\"location\""
 }
 
 // Type for action response, including envelope
 type ActionDnsResolverIndexResponse struct {
-	Action *ActionDnsResolverIndex `json:"-"`
+	Action *ActionDnsResolverIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsResolvers []*ActionDnsResolverIndexOutput `json:"dns_resolvers"`
+		DnsResolvers []*ActionDnsResolverIndexOutput "json:\"dns_resolvers\""
 	}
 
 	// Action output without the namespace

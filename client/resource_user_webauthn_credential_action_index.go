@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,9 +19,9 @@ func NewActionUserWebauthnCredentialIndex(client *Client) *ActionUserWebauthnCre
 
 // ActionUserWebauthnCredentialIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionUserWebauthnCredentialIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -88,9 +89,9 @@ func (in *ActionUserWebauthnCredentialIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserWebauthnCredentialIndexInput is a type for action input parameters
 type ActionUserWebauthnCredentialIndexInput struct {
-	Enabled bool  `json:"enabled"`
-	FromId  int64 `json:"from_id"`
-	Limit   int64 `json:"limit"`
+	Enabled bool  "json:\"enabled\""
+	FromId  int64 "json:\"from_id\""
+	Limit   int64 "json:\"limit\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -173,22 +174,22 @@ func (in *ActionUserWebauthnCredentialIndexInput) AnySelected() bool {
 
 // ActionUserWebauthnCredentialIndexOutput is a type for action output parameters
 type ActionUserWebauthnCredentialIndexOutput struct {
-	CreatedAt string `json:"created_at"`
-	Enabled   bool   `json:"enabled"`
-	Id        int64  `json:"id"`
-	Label     string `json:"label"`
-	LastUseAt string `json:"last_use_at"`
-	UpdatedAt string `json:"updated_at"`
-	UseCount  int64  `json:"use_count"`
+	CreatedAt string "json:\"created_at\""
+	Enabled   bool   "json:\"enabled\""
+	Id        int64  "json:\"id\""
+	Label     string "json:\"label\""
+	LastUseAt string "json:\"last_use_at\""
+	UpdatedAt string "json:\"updated_at\""
+	UseCount  int64  "json:\"use_count\""
 }
 
 // Type for action response, including envelope
 type ActionUserWebauthnCredentialIndexResponse struct {
-	Action *ActionUserWebauthnCredentialIndex `json:"-"`
+	Action *ActionUserWebauthnCredentialIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		WebauthnCredentials []*ActionUserWebauthnCredentialIndexOutput `json:"webauthn_credentials"`
+		WebauthnCredentials []*ActionUserWebauthnCredentialIndexOutput "json:\"webauthn_credentials\""
 	}
 
 	// Action output without the namespace
@@ -223,7 +224,7 @@ func (inv *ActionUserWebauthnCredentialIndexInvocation) SetPathParamInt(param st
 
 // SetPathParamString sets string path parameter
 func (inv *ActionUserWebauthnCredentialIndexInvocation) SetPathParamString(param string, value string) *ActionUserWebauthnCredentialIndexInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

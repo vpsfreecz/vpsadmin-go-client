@@ -16,9 +16,9 @@ func NewActionObjectHistoryIndex(client *Client) *ActionObjectHistoryIndex {
 
 // ActionObjectHistoryIndexMetaGlobalInput is a type for action global meta input parameters
 type ActionObjectHistoryIndexMetaGlobalInput struct {
-	Count    bool   `json:"count"`
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Count    bool   "json:\"count\""
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -86,13 +86,13 @@ func (in *ActionObjectHistoryIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionObjectHistoryIndexInput is a type for action input parameters
 type ActionObjectHistoryIndexInput struct {
-	EventType   string `json:"event_type"`
-	FromId      int64  `json:"from_id"`
-	Limit       int64  `json:"limit"`
-	Object      string `json:"object"`
-	ObjectId    int64  `json:"object_id"`
-	User        int64  `json:"user"`
-	UserSession int64  `json:"user_session"`
+	EventType   string "json:\"event_type\""
+	FromId      int64  "json:\"from_id\""
+	Limit       int64  "json:\"limit\""
+	Object      string "json:\"object\""
+	ObjectId    int64  "json:\"object_id\""
+	User        int64  "json:\"user\""
+	UserSession int64  "json:\"user_session\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -223,22 +223,22 @@ func (in *ActionObjectHistoryIndexInput) AnySelected() bool {
 
 // ActionObjectHistoryIndexOutput is a type for action output parameters
 type ActionObjectHistoryIndexOutput struct {
-	CreatedAt   string                       `json:"created_at"`
-	EventType   string                       `json:"event_type"`
-	Id          int64                        `json:"id"`
-	Object      string                       `json:"object"`
-	ObjectId    int64                        `json:"object_id"`
-	User        *ActionUserShowOutput        `json:"user"`
-	UserSession *ActionUserSessionShowOutput `json:"user_session"`
+	CreatedAt   string                       "json:\"created_at\""
+	EventType   string                       "json:\"event_type\""
+	Id          int64                        "json:\"id\""
+	Object      string                       "json:\"object\""
+	ObjectId    int64                        "json:\"object_id\""
+	User        *ActionUserShowOutput        "json:\"user\""
+	UserSession *ActionUserSessionShowOutput "json:\"user_session\""
 }
 
 // Type for action response, including envelope
 type ActionObjectHistoryIndexResponse struct {
-	Action *ActionObjectHistoryIndex `json:"-"`
+	Action *ActionObjectHistoryIndex "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		ObjectHistories []*ActionObjectHistoryIndexOutput `json:"object_histories"`
+		ObjectHistories []*ActionObjectHistoryIndexOutput "json:\"object_histories\""
 	}
 
 	// Action output without the namespace

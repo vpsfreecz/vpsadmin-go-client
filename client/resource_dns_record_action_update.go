@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnsRecordUpdate(client *Client) *ActionDnsRecordUpdate {
 
 // ActionDnsRecordUpdateMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsRecordUpdateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,13 +76,13 @@ func (in *ActionDnsRecordUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsRecordUpdateInput is a type for action input parameters
 type ActionDnsRecordUpdateInput struct {
-	Comment              string `json:"comment"`
-	Content              string `json:"content"`
-	DynamicUpdateEnabled bool   `json:"dynamic_update_enabled"`
-	Enabled              bool   `json:"enabled"`
-	Priority             int64  `json:"priority"`
-	Ttl                  int64  `json:"ttl"`
-	User                 int64  `json:"user"`
+	Comment              string "json:\"comment\""
+	Content              string "json:\"content\""
+	DynamicUpdateEnabled bool   "json:\"dynamic_update_enabled\""
+	Enabled              bool   "json:\"enabled\""
+	Priority             int64  "json:\"priority\""
+	Ttl                  int64  "json:\"ttl\""
+	User                 int64  "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -269,43 +270,43 @@ func (in *ActionDnsRecordUpdateInput) AnySelected() bool {
 
 // ActionDnsRecordUpdateRequest is a type for the entire action request
 type ActionDnsRecordUpdateRequest struct {
-	DnsRecord map[string]interface{} `json:"dns_record"`
-	Meta      map[string]interface{} `json:"_meta"`
+	DnsRecord map[string]interface{} "json:\"dns_record\""
+	Meta      map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDnsRecordUpdateOutput is a type for action output parameters
 type ActionDnsRecordUpdateOutput struct {
-	Comment              string                   `json:"comment"`
-	Content              string                   `json:"content"`
-	CreatedAt            string                   `json:"created_at"`
-	DnsZone              *ActionDnsZoneShowOutput `json:"dns_zone"`
-	DynamicUpdateEnabled bool                     `json:"dynamic_update_enabled"`
-	DynamicUpdateUrl     string                   `json:"dynamic_update_url"`
-	Enabled              bool                     `json:"enabled"`
-	Id                   int64                    `json:"id"`
-	Managed              bool                     `json:"managed"`
-	Name                 string                   `json:"name"`
-	Priority             int64                    `json:"priority"`
-	Ttl                  int64                    `json:"ttl"`
-	Type                 string                   `json:"type"`
-	UpdatedAt            string                   `json:"updated_at"`
-	User                 *ActionUserShowOutput    `json:"user"`
+	Comment              string                   "json:\"comment\""
+	Content              string                   "json:\"content\""
+	CreatedAt            string                   "json:\"created_at\""
+	DnsZone              *ActionDnsZoneShowOutput "json:\"dns_zone\""
+	DynamicUpdateEnabled bool                     "json:\"dynamic_update_enabled\""
+	DynamicUpdateUrl     string                   "json:\"dynamic_update_url\""
+	Enabled              bool                     "json:\"enabled\""
+	Id                   int64                    "json:\"id\""
+	Managed              bool                     "json:\"managed\""
+	Name                 string                   "json:\"name\""
+	Priority             int64                    "json:\"priority\""
+	Ttl                  int64                    "json:\"ttl\""
+	Type                 string                   "json:\"type\""
+	UpdatedAt            string                   "json:\"updated_at\""
+	User                 *ActionUserShowOutput    "json:\"user\""
 }
 
 // ActionDnsRecordUpdateMetaGlobalOutput is a type for global output metadata parameters
 type ActionDnsRecordUpdateMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDnsRecordUpdateResponse struct {
-	Action *ActionDnsRecordUpdate `json:"-"`
+	Action *ActionDnsRecordUpdate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DnsRecord *ActionDnsRecordUpdateOutput `json:"dns_record"`
+		DnsRecord *ActionDnsRecordUpdateOutput "json:\"dns_record\""
 		// Global output metadata
-		Meta *ActionDnsRecordUpdateMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDnsRecordUpdateMetaGlobalOutput "json:\"_meta\""
 	}
 
 	// Action output without the namespace
@@ -340,7 +341,7 @@ func (inv *ActionDnsRecordUpdateInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsRecordUpdateInvocation) SetPathParamString(param string, value string) *ActionDnsRecordUpdateInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

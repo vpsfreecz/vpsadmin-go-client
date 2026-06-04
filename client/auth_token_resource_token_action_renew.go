@@ -16,7 +16,7 @@ func NewAuthTokenActionTokenRenew(client *Client) *AuthTokenActionTokenRenew {
 
 // AuthTokenActionTokenRenewMetaGlobalInput is a type for action global meta input parameters
 type AuthTokenActionTokenRenewMetaGlobalInput struct {
-	No bool `json:"no"`
+	No bool "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -60,21 +60,21 @@ func (in *AuthTokenActionTokenRenewMetaGlobalInput) AnySelected() bool {
 
 // AuthTokenActionTokenRenewRequest is a type for the entire action request
 type AuthTokenActionTokenRenewRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // AuthTokenActionTokenRenewOutput is a type for action output parameters
 type AuthTokenActionTokenRenewOutput struct {
-	ValidTo string `json:"valid_to"`
+	ValidTo string "json:\"valid_to\""
 }
 
 // Type for action response, including envelope
 type AuthTokenActionTokenRenewResponse struct {
-	Action *AuthTokenActionTokenRenew `json:"-"`
+	Action *AuthTokenActionTokenRenew "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		Token *AuthTokenActionTokenRenewOutput `json:"token"`
+		Token *AuthTokenActionTokenRenewOutput "json:\"token\""
 	}
 
 	// Action output without the namespace

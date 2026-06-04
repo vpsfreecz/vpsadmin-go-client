@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDatasetPlanShow(client *Client) *ActionDatasetPlanShow {
 
 // ActionDatasetPlanShowMetaGlobalInput is a type for action global meta input parameters
 type ActionDatasetPlanShowMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,18 +76,18 @@ func (in *ActionDatasetPlanShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDatasetPlanShowOutput is a type for action output parameters
 type ActionDatasetPlanShowOutput struct {
-	Description string `json:"description"`
-	Id          int64  `json:"id"`
-	Label       string `json:"label"`
+	Description string "json:\"description\""
+	Id          int64  "json:\"id\""
+	Label       string "json:\"label\""
 }
 
 // Type for action response, including envelope
 type ActionDatasetPlanShowResponse struct {
-	Action *ActionDatasetPlanShow `json:"-"`
+	Action *ActionDatasetPlanShow "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		DatasetPlan *ActionDatasetPlanShowOutput `json:"dataset_plan"`
+		DatasetPlan *ActionDatasetPlanShowOutput "json:\"dataset_plan\""
 	}
 
 	// Action output without the namespace
@@ -119,7 +120,7 @@ func (inv *ActionDatasetPlanShowInvocation) SetPathParamInt(param string, value 
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDatasetPlanShowInvocation) SetPathParamString(param string, value string) *ActionDatasetPlanShowInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 

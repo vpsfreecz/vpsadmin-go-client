@@ -16,8 +16,8 @@ func NewActionNewsLogCreate(client *Client) *ActionNewsLogCreate {
 
 // ActionNewsLogCreateMetaGlobalInput is a type for action global meta input parameters
 type ActionNewsLogCreateMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -73,8 +73,8 @@ func (in *ActionNewsLogCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionNewsLogCreateInput is a type for action input parameters
 type ActionNewsLogCreateInput struct {
-	Message     string `json:"message"`
-	PublishedAt string `json:"published_at"`
+	Message     string "json:\"message\""
+	PublishedAt string "json:\"published_at\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -145,26 +145,26 @@ func (in *ActionNewsLogCreateInput) AnySelected() bool {
 
 // ActionNewsLogCreateRequest is a type for the entire action request
 type ActionNewsLogCreateRequest struct {
-	NewsLog map[string]interface{} `json:"news_log"`
-	Meta    map[string]interface{} `json:"_meta"`
+	NewsLog map[string]interface{} "json:\"news_log\""
+	Meta    map[string]interface{} "json:\"_meta\""
 }
 
 // ActionNewsLogCreateOutput is a type for action output parameters
 type ActionNewsLogCreateOutput struct {
-	CreatedAt   string `json:"created_at"`
-	Id          int64  `json:"id"`
-	Message     string `json:"message"`
-	PublishedAt string `json:"published_at"`
-	UpdatedAt   string `json:"updated_at"`
+	CreatedAt   string "json:\"created_at\""
+	Id          int64  "json:\"id\""
+	Message     string "json:\"message\""
+	PublishedAt string "json:\"published_at\""
+	UpdatedAt   string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
 type ActionNewsLogCreateResponse struct {
-	Action *ActionNewsLogCreate `json:"-"`
+	Action *ActionNewsLogCreate "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
-		NewsLog *ActionNewsLogCreateOutput `json:"news_log"`
+		NewsLog *ActionNewsLogCreateOutput "json:\"news_log\""
 	}
 
 	// Action output without the namespace

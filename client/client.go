@@ -13,7 +13,8 @@ type Client struct {
 	// Options for authentication method
 	Authentication Authenticator
 
-	httpClient *http.Client
+	httpClient           *http.Client
+	oauth2TrustedOrigins map[string]struct{}
 
 	// Resource Action_state
 	ActionState *ResourceActionState
@@ -47,6 +48,8 @@ type Client struct {
 	DnsServer *ResourceDnsServer
 	// Resource Dns_server_zone
 	DnsServerZone *ResourceDnsServerZone
+	// Resource Dns_server_zone_transfer_log
+	DnsServerZoneTransferLog *ResourceDnsServerZoneTransferLog
 	// Resource Dns_tsig_key
 	DnsTsigKey *ResourceDnsTsigKey
 	// Resource Dns_zone
@@ -121,12 +124,20 @@ type Client struct {
 	OsTemplate *ResourceOsTemplate
 	// Resource Outage
 	Outage *ResourceOutage
+	// Resource Outage_security_advisory
+	OutageSecurityAdvisory *ResourceOutageSecurityAdvisory
 	// Resource Outage_update
 	OutageUpdate *ResourceOutageUpdate
 	// Resource Payment_stats
 	PaymentStats *ResourcePaymentStats
 	// Resource Pool
 	Pool *ResourcePool
+	// Resource Security_advisory
+	SecurityAdvisory *ResourceSecurityAdvisory
+	// Resource Security_advisory_cve
+	SecurityAdvisoryCve *ResourceSecurityAdvisoryCve
+	// Resource Security_advisory_update
+	SecurityAdvisoryUpdate *ResourceSecurityAdvisoryUpdate
 	// Resource Snapshot_download
 	SnapshotDownload *ResourceSnapshotDownload
 	// Resource System_config
@@ -151,12 +162,16 @@ type Client struct {
 	UserPayment *ResourceUserPayment
 	// Resource User_request
 	UserRequest *ResourceUserRequest
+	// Resource User_security_advisory
+	UserSecurityAdvisory *ResourceUserSecurityAdvisory
 	// Resource User_session
 	UserSession *ResourceUserSession
 	// Resource Vps
 	Vps *ResourceVps
 	// Resource Vps_outage
 	VpsOutage *ResourceVpsOutage
+	// Resource Vps_security_advisory
+	VpsSecurityAdvisory *ResourceVpsSecurityAdvisory
 	// Resource Vps_user_data
 	VpsUserData *ResourceVpsUserData
 	// Resource Webauthn
@@ -186,6 +201,7 @@ func New(url string) *Client {
 	c.DnsResolver = NewResourceDnsResolver(c)
 	c.DnsServer = NewResourceDnsServer(c)
 	c.DnsServerZone = NewResourceDnsServerZone(c)
+	c.DnsServerZoneTransferLog = NewResourceDnsServerZoneTransferLog(c)
 	c.DnsTsigKey = NewResourceDnsTsigKey(c)
 	c.DnsZone = NewResourceDnsZone(c)
 	c.DnsZoneTransfer = NewResourceDnsZoneTransfer(c)
@@ -223,9 +239,13 @@ func New(url string) *Client {
 	c.OsFamily = NewResourceOsFamily(c)
 	c.OsTemplate = NewResourceOsTemplate(c)
 	c.Outage = NewResourceOutage(c)
+	c.OutageSecurityAdvisory = NewResourceOutageSecurityAdvisory(c)
 	c.OutageUpdate = NewResourceOutageUpdate(c)
 	c.PaymentStats = NewResourcePaymentStats(c)
 	c.Pool = NewResourcePool(c)
+	c.SecurityAdvisory = NewResourceSecurityAdvisory(c)
+	c.SecurityAdvisoryCve = NewResourceSecurityAdvisoryCve(c)
+	c.SecurityAdvisoryUpdate = NewResourceSecurityAdvisoryUpdate(c)
 	c.SnapshotDownload = NewResourceSnapshotDownload(c)
 	c.SystemConfig = NewResourceSystemConfig(c)
 	c.Transaction = NewResourceTransaction(c)
@@ -238,9 +258,11 @@ func New(url string) *Client {
 	c.UserOutage = NewResourceUserOutage(c)
 	c.UserPayment = NewResourceUserPayment(c)
 	c.UserRequest = NewResourceUserRequest(c)
+	c.UserSecurityAdvisory = NewResourceUserSecurityAdvisory(c)
 	c.UserSession = NewResourceUserSession(c)
 	c.Vps = NewResourceVps(c)
 	c.VpsOutage = NewResourceVpsOutage(c)
+	c.VpsSecurityAdvisory = NewResourceVpsSecurityAdvisory(c)
 	c.VpsUserData = NewResourceVpsUserData(c)
 	c.Webauthn = NewResourceWebauthn(c)
 

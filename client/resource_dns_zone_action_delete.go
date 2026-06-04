@@ -1,6 +1,7 @@
 package client
 
 import (
+	"net/url"
 	"strings"
 )
 
@@ -18,8 +19,8 @@ func NewActionDnsZoneDelete(client *Client) *ActionDnsZoneDelete {
 
 // ActionDnsZoneDeleteMetaGlobalInput is a type for action global meta input parameters
 type ActionDnsZoneDeleteMetaGlobalInput struct {
-	Includes string `json:"includes"`
-	No       bool   `json:"no"`
+	Includes string "json:\"includes\""
+	No       bool   "json:\"no\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -75,22 +76,22 @@ func (in *ActionDnsZoneDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsZoneDeleteRequest is a type for the entire action request
 type ActionDnsZoneDeleteRequest struct {
-	Meta map[string]interface{} `json:"_meta"`
+	Meta map[string]interface{} "json:\"_meta\""
 }
 
 // ActionDnsZoneDeleteMetaGlobalOutput is a type for global output metadata parameters
 type ActionDnsZoneDeleteMetaGlobalOutput struct {
-	ActionStateId int64 `json:"action_state_id"`
+	ActionStateId int64 "json:\"action_state_id\""
 }
 
 // Type for action response, including envelope
 type ActionDnsZoneDeleteResponse struct {
-	Action *ActionDnsZoneDelete `json:"-"`
+	Action *ActionDnsZoneDelete "json:\"-\""
 	*Envelope
 	// Action output encapsulated within a namespace
 	Response *struct {
 		// Global output metadata
-		Meta *ActionDnsZoneDeleteMetaGlobalOutput `json:"_meta"`
+		Meta *ActionDnsZoneDeleteMetaGlobalOutput "json:\"_meta\""
 	}
 }
 
@@ -120,7 +121,7 @@ func (inv *ActionDnsZoneDeleteInvocation) SetPathParamInt(param string, value in
 
 // SetPathParamString sets string path parameter
 func (inv *ActionDnsZoneDeleteInvocation) SetPathParamString(param string, value string) *ActionDnsZoneDeleteInvocation {
-	inv.Path = strings.Replace(inv.Path, "{"+param+"}", value, 1)
+	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
 }
 
