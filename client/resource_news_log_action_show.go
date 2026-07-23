@@ -77,6 +77,8 @@ func (in *ActionNewsLogShowMetaGlobalInput) AnySelected() bool {
 // ActionNewsLogShowOutput is a type for action output parameters
 type ActionNewsLogShowOutput struct {
 	CreatedAt   string "json:\"created_at\""
+	CsMessage   string "json:\"cs_message\""
+	EnMessage   string "json:\"en_message\""
 	Id          int64  "json:\"id\""
 	Message     string "json:\"message\""
 	PublishedAt string "json:\"published_at\""

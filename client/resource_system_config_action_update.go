@@ -84,6 +84,7 @@ type ActionSystemConfigUpdateOutput struct {
 	Category     string "json:\"category\""
 	Description  string "json:\"description\""
 	Label        string "json:\"label\""
+	Localized    bool   "json:\"localized\""
 	MinUserLevel int64  "json:\"min_user_level\""
 	Name         string "json:\"name\""
 	Type         string "json:\"type\""

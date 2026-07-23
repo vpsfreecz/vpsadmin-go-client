@@ -95,7 +95,6 @@ type ActionUserShowOutput struct {
 	Level                      int64                     "json:\"level\""
 	Lockout                    bool                      "json:\"lockout\""
 	Login                      string                    "json:\"login\""
-	MailerEnabled              bool                      "json:\"mailer_enabled\""
 	MonthlyPayment             int64                     "json:\"monthly_payment\""
 	ObjectState                string                    "json:\"object_state\""
 	PaidUntil                  string                    "json:\"paid_until\""
@@ -103,6 +102,7 @@ type ActionUserShowOutput struct {
 	PreferredLogoutAll         bool                      "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64                     "json:\"preferred_session_length\""
 	RemindAfterDate            string                    "json:\"remind_after_date\""
+	TimeZone                   string                    "json:\"time_zone\""
 }
 
 // Type for action response, including envelope

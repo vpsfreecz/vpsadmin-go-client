@@ -172,6 +172,8 @@ func (in *ActionNewsLogIndexInput) AnySelected() bool {
 // ActionNewsLogIndexOutput is a type for action output parameters
 type ActionNewsLogIndexOutput struct {
 	CreatedAt   string "json:\"created_at\""
+	CsMessage   string "json:\"cs_message\""
+	EnMessage   string "json:\"en_message\""
 	Id          int64  "json:\"id\""
 	Message     string "json:\"message\""
 	PublishedAt string "json:\"published_at\""

@@ -88,6 +88,7 @@ type ActionUserRequestRegistrationUpdateInput struct {
 	OrgId       string "json:\"org_id\""
 	OrgName     string "json:\"org_name\""
 	OsTemplate  int64  "json:\"os_template\""
+	TimeZone    string "json:\"time_zone\""
 	YearOfBirth int64  "json:\"year_of_birth\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -239,6 +240,37 @@ func (in *ActionUserRequestRegistrationUpdateInput) SetOsTemplate(value int64) *
 	return in
 }
 
+// SetTimeZone sets parameter TimeZone to value and selects it for sending
+func (in *ActionUserRequestRegistrationUpdateInput) SetTimeZone(value string) *ActionUserRequestRegistrationUpdateInput {
+	in.TimeZone = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetTimeZoneNil(false)
+	in._selectedParameters["TimeZone"] = nil
+	return in
+}
+
+// SetTimeZoneNil sets parameter TimeZone to nil and selects it for sending
+func (in *ActionUserRequestRegistrationUpdateInput) SetTimeZoneNil(set bool) *ActionUserRequestRegistrationUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TimeZone"] = nil
+		in.SelectParameters("TimeZone")
+	} else {
+		delete(in._nilParameters, "TimeZone")
+	}
+	return in
+}
+
 // SetYearOfBirth sets parameter YearOfBirth to value and selects it for sending
 func (in *ActionUserRequestRegistrationUpdateInput) SetYearOfBirth(value int64) *ActionUserRequestRegistrationUpdateInput {
 	in.YearOfBirth = value
@@ -310,6 +342,7 @@ type ActionUserRequestRegistrationUpdateOutput struct {
 	OrgId       string                      "json:\"org_id\""
 	OrgName     string                      "json:\"org_name\""
 	OsTemplate  *ActionOsTemplateShowOutput "json:\"os_template\""
+	TimeZone    string                      "json:\"time_zone\""
 	YearOfBirth int64                       "json:\"year_of_birth\""
 }
 
@@ -522,6 +555,13 @@ func (inv *ActionUserRequestRegistrationUpdateInvocation) makeInputParams() map[
 		}
 		if inv.IsParameterSelected("OsTemplate") {
 			ret["os_template"] = inv.Input.OsTemplate
+		}
+		if inv.IsParameterSelected("TimeZone") {
+			if inv.IsParameterNil("TimeZone") {
+				ret["time_zone"] = nil
+			} else {
+				ret["time_zone"] = inv.Input.TimeZone
+			}
 		}
 		if inv.IsParameterSelected("YearOfBirth") {
 			ret["year_of_birth"] = inv.Input.YearOfBirth

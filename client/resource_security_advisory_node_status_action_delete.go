@@ -74,9 +74,69 @@ func (in *ActionSecurityAdvisoryNodeStatusDeleteMetaGlobalInput) AnySelected() b
 	return len(in._selectedParameters) > 0
 }
 
+// ActionSecurityAdvisoryNodeStatusDeleteInput is a type for action input parameters
+type ActionSecurityAdvisoryNodeStatusDeleteInput struct {
+	ExpectedContentRevision int64 "json:\"expected_content_revision\""
+	// Only selected parameters are sent to the API. Ignored if empty.
+	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
+}
+
+// SetExpectedContentRevision sets parameter ExpectedContentRevision to value and selects it for sending
+func (in *ActionSecurityAdvisoryNodeStatusDeleteInput) SetExpectedContentRevision(value int64) *ActionSecurityAdvisoryNodeStatusDeleteInput {
+	in.ExpectedContentRevision = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ExpectedContentRevision"] = nil
+	return in
+}
+
+// SelectParameters sets parameters from ActionSecurityAdvisoryNodeStatusDeleteInput
+// that will be sent to the API.
+// SelectParameters can be called multiple times.
+func (in *ActionSecurityAdvisoryNodeStatusDeleteInput) SelectParameters(params ...string) *ActionSecurityAdvisoryNodeStatusDeleteInput {
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	for _, param := range params {
+		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionSecurityAdvisoryNodeStatusDeleteInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionSecurityAdvisoryNodeStatusDeleteInput) UnselectParameters(params ...string) *ActionSecurityAdvisoryNodeStatusDeleteInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
+	}
+
+	return in
+}
+
+func (in *ActionSecurityAdvisoryNodeStatusDeleteInput) AnySelected() bool {
+	if in._selectedParameters == nil {
+		return false
+	}
+
+	return len(in._selectedParameters) > 0
+}
+
 // ActionSecurityAdvisoryNodeStatusDeleteRequest is a type for the entire action request
 type ActionSecurityAdvisoryNodeStatusDeleteRequest struct {
-	Meta map[string]interface{} "json:\"_meta\""
+	NodeStatus map[string]interface{} "json:\"node_status\""
+	Meta       map[string]interface{} "json:\"_meta\""
 }
 
 // Type for action response, including envelope
@@ -100,6 +160,8 @@ type ActionSecurityAdvisoryNodeStatusDeleteInvocation struct {
 
 	// Path which may contain parameters that need to be set
 	Path string
+	// Input parameters
+	Input *ActionSecurityAdvisoryNodeStatusDeleteInput
 	// Global meta input parameters
 	MetaInput *ActionSecurityAdvisoryNodeStatusDeleteMetaGlobalInput
 }
@@ -113,6 +175,38 @@ func (inv *ActionSecurityAdvisoryNodeStatusDeleteInvocation) SetPathParamInt(par
 func (inv *ActionSecurityAdvisoryNodeStatusDeleteInvocation) SetPathParamString(param string, value string) *ActionSecurityAdvisoryNodeStatusDeleteInvocation {
 	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
+}
+
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionSecurityAdvisoryNodeStatusDeleteInvocation) NewInput() *ActionSecurityAdvisoryNodeStatusDeleteInput {
+	inv.Input = &ActionSecurityAdvisoryNodeStatusDeleteInput{}
+	return inv.Input
+}
+
+// SetInput provides input parameters to send to the API
+func (inv *ActionSecurityAdvisoryNodeStatusDeleteInvocation) SetInput(input *ActionSecurityAdvisoryNodeStatusDeleteInput) *ActionSecurityAdvisoryNodeStatusDeleteInvocation {
+	inv.Input = input
+	return inv
+}
+
+// IsParameterSelected returns true if param is to be sent to the API
+func (inv *ActionSecurityAdvisoryNodeStatusDeleteInvocation) IsParameterSelected(param string) bool {
+	if inv.Input._selectedParameters == nil {
+		return true
+	}
+
+	_, exists := inv.Input._selectedParameters[param]
+	return exists
+}
+
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionSecurityAdvisoryNodeStatusDeleteInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
 }
 
 // NewMetaInput returns a new struct for global meta input parameters and sets
@@ -150,6 +244,8 @@ func (inv *ActionSecurityAdvisoryNodeStatusDeleteInvocation) IsMetaParameterNil(
 
 func (inv *ActionSecurityAdvisoryNodeStatusDeleteInvocation) validate() error {
 	verr := NewValidationError()
+	if inv.Input != nil {
+	}
 	if inv.MetaInput != nil {
 	}
 
@@ -177,8 +273,21 @@ func (inv *ActionSecurityAdvisoryNodeStatusDeleteInvocation) callAsBody() (*Acti
 
 func (inv *ActionSecurityAdvisoryNodeStatusDeleteInvocation) makeAllInputParams() *ActionSecurityAdvisoryNodeStatusDeleteRequest {
 	return &ActionSecurityAdvisoryNodeStatusDeleteRequest{
-		Meta: inv.makeMetaInputParams(),
+		NodeStatus: inv.makeInputParams(),
+		Meta:       inv.makeMetaInputParams(),
 	}
+}
+
+func (inv *ActionSecurityAdvisoryNodeStatusDeleteInvocation) makeInputParams() map[string]interface{} {
+	ret := make(map[string]interface{})
+
+	if inv.Input != nil {
+		if inv.IsParameterSelected("ExpectedContentRevision") {
+			ret["expected_content_revision"] = inv.Input.ExpectedContentRevision
+		}
+	}
+
+	return ret
 }
 
 func (inv *ActionSecurityAdvisoryNodeStatusDeleteInvocation) makeMetaInputParams() map[string]interface{} {

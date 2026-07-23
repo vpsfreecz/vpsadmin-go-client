@@ -76,14 +76,90 @@ func (in *ActionSecurityAdvisoryNodeStatusUpdateMetaGlobalInput) AnySelected() b
 
 // ActionSecurityAdvisoryNodeStatusUpdateInput is a type for action input parameters
 type ActionSecurityAdvisoryNodeStatusUpdateInput struct {
-	MitigatedSince  string "json:\"mitigated_since\""
-	Note            string "json:\"note\""
-	State           string "json:\"state\""
-	VulnerableUntil string "json:\"vulnerable_until\""
+	CsNote                  string "json:\"cs_note\""
+	EnNote                  string "json:\"en_note\""
+	ExpectedContentRevision int64  "json:\"expected_content_revision\""
+	MitigatedSince          string "json:\"mitigated_since\""
+	State                   string "json:\"state\""
+	VulnerableUntil         string "json:\"vulnerable_until\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetCsNote sets parameter CsNote to value and selects it for sending
+func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetCsNote(value string) *ActionSecurityAdvisoryNodeStatusUpdateInput {
+	in.CsNote = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetCsNoteNil(false)
+	in._selectedParameters["CsNote"] = nil
+	return in
+}
+
+// SetCsNoteNil sets parameter CsNote to nil and selects it for sending
+func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetCsNoteNil(set bool) *ActionSecurityAdvisoryNodeStatusUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["CsNote"] = nil
+		in.SelectParameters("CsNote")
+	} else {
+		delete(in._nilParameters, "CsNote")
+	}
+	return in
+}
+
+// SetEnNote sets parameter EnNote to value and selects it for sending
+func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetEnNote(value string) *ActionSecurityAdvisoryNodeStatusUpdateInput {
+	in.EnNote = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetEnNoteNil(false)
+	in._selectedParameters["EnNote"] = nil
+	return in
+}
+
+// SetEnNoteNil sets parameter EnNote to nil and selects it for sending
+func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetEnNoteNil(set bool) *ActionSecurityAdvisoryNodeStatusUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["EnNote"] = nil
+		in.SelectParameters("EnNote")
+	} else {
+		delete(in._nilParameters, "EnNote")
+	}
+	return in
+}
+
+// SetExpectedContentRevision sets parameter ExpectedContentRevision to value and selects it for sending
+func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetExpectedContentRevision(value int64) *ActionSecurityAdvisoryNodeStatusUpdateInput {
+	in.ExpectedContentRevision = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ExpectedContentRevision"] = nil
+	return in
 }
 
 // SetMitigatedSince sets parameter MitigatedSince to value and selects it for sending
@@ -113,37 +189,6 @@ func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetMitigatedSinceNil(set 
 		in.SelectParameters("MitigatedSince")
 	} else {
 		delete(in._nilParameters, "MitigatedSince")
-	}
-	return in
-}
-
-// SetNote sets parameter Note to value and selects it for sending
-func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetNote(value string) *ActionSecurityAdvisoryNodeStatusUpdateInput {
-	in.Note = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in.SetNoteNil(false)
-	in._selectedParameters["Note"] = nil
-	return in
-}
-
-// SetNoteNil sets parameter Note to nil and selects it for sending
-func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetNoteNil(set bool) *ActionSecurityAdvisoryNodeStatusUpdateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Note"] = nil
-		in.SelectParameters("Note")
-	} else {
-		delete(in._nilParameters, "Note")
 	}
 	return in
 }
@@ -237,11 +282,11 @@ type ActionSecurityAdvisoryNodeStatusUpdateRequest struct {
 
 // ActionSecurityAdvisoryNodeStatusUpdateOutput is a type for action output parameters
 type ActionSecurityAdvisoryNodeStatusUpdateOutput struct {
+	CsNote           string                            "json:\"cs_note\""
+	EnNote           string                            "json:\"en_note\""
 	Id               int64                             "json:\"id\""
 	MitigatedSince   string                            "json:\"mitigated_since\""
-	NodeId           int64                             "json:\"node_id\""
-	NodeName         string                            "json:\"node_name\""
-	Note             string                            "json:\"note\""
+	Node             *ActionNodeShowOutput             "json:\"node\""
 	SecurityAdvisory *ActionSecurityAdvisoryShowOutput "json:\"security_advisory\""
 	State            string                            "json:\"state\""
 	VulnerableUntil  string                            "json:\"vulnerable_until\""
@@ -420,18 +465,28 @@ func (inv *ActionSecurityAdvisoryNodeStatusUpdateInvocation) makeInputParams() m
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("CsNote") {
+			if inv.IsParameterNil("CsNote") {
+				ret["cs_note"] = nil
+			} else {
+				ret["cs_note"] = inv.Input.CsNote
+			}
+		}
+		if inv.IsParameterSelected("EnNote") {
+			if inv.IsParameterNil("EnNote") {
+				ret["en_note"] = nil
+			} else {
+				ret["en_note"] = inv.Input.EnNote
+			}
+		}
+		if inv.IsParameterSelected("ExpectedContentRevision") {
+			ret["expected_content_revision"] = inv.Input.ExpectedContentRevision
+		}
 		if inv.IsParameterSelected("MitigatedSince") {
 			if inv.IsParameterNil("MitigatedSince") {
 				ret["mitigated_since"] = nil
 			} else {
 				ret["mitigated_since"] = inv.Input.MitigatedSince
-			}
-		}
-		if inv.IsParameterSelected("Note") {
-			if inv.IsParameterNil("Note") {
-				ret["note"] = nil
-			} else {
-				ret["note"] = inv.Input.Note
 			}
 		}
 		if inv.IsParameterSelected("State") {

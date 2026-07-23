@@ -229,6 +229,7 @@ type ActionTransactionIndexOutput struct {
 	FinishedAt       string                            "json:\"finished_at\""
 	Id               int64                             "json:\"id\""
 	Input            string                            "json:\"input\""
+	Label            string                            "json:\"label\""
 	Name             string                            "json:\"name\""
 	Node             *ActionNodeShowOutput             "json:\"node\""
 	Output           string                            "json:\"output\""

@@ -103,11 +103,11 @@ type ActionUserIndexInput struct {
 	Limit                      int64  "json:\"limit\""
 	Lockout                    bool   "json:\"lockout\""
 	Login                      string "json:\"login\""
-	MailerEnabled              bool   "json:\"mailer_enabled\""
 	ObjectState                string "json:\"object_state\""
 	PasswordReset              bool   "json:\"password_reset\""
 	PreferredLogoutAll         bool   "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64  "json:\"preferred_session_length\""
+	TimeZone                   string "json:\"time_zone\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -318,18 +318,6 @@ func (in *ActionUserIndexInput) SetLogin(value string) *ActionUserIndexInput {
 	return in
 }
 
-// SetMailerEnabled sets parameter MailerEnabled to value and selects it for sending
-func (in *ActionUserIndexInput) SetMailerEnabled(value bool) *ActionUserIndexInput {
-	in.MailerEnabled = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["MailerEnabled"] = nil
-	return in
-}
-
 // SetObjectState sets parameter ObjectState to value and selects it for sending
 func (in *ActionUserIndexInput) SetObjectState(value string) *ActionUserIndexInput {
 	in.ObjectState = value
@@ -375,6 +363,37 @@ func (in *ActionUserIndexInput) SetPreferredSessionLength(value int64) *ActionUs
 	}
 
 	in._selectedParameters["PreferredSessionLength"] = nil
+	return in
+}
+
+// SetTimeZone sets parameter TimeZone to value and selects it for sending
+func (in *ActionUserIndexInput) SetTimeZone(value string) *ActionUserIndexInput {
+	in.TimeZone = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetTimeZoneNil(false)
+	in._selectedParameters["TimeZone"] = nil
+	return in
+}
+
+// SetTimeZoneNil sets parameter TimeZone to nil and selects it for sending
+func (in *ActionUserIndexInput) SetTimeZoneNil(set bool) *ActionUserIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TimeZone"] = nil
+		in.SelectParameters("TimeZone")
+	} else {
+		delete(in._nilParameters, "TimeZone")
+	}
 	return in
 }
 
@@ -437,7 +456,6 @@ type ActionUserIndexOutput struct {
 	Level                      int64                     "json:\"level\""
 	Lockout                    bool                      "json:\"lockout\""
 	Login                      string                    "json:\"login\""
-	MailerEnabled              bool                      "json:\"mailer_enabled\""
 	MonthlyPayment             int64                     "json:\"monthly_payment\""
 	ObjectState                string                    "json:\"object_state\""
 	PaidUntil                  string                    "json:\"paid_until\""
@@ -445,6 +463,7 @@ type ActionUserIndexOutput struct {
 	PreferredLogoutAll         bool                      "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64                     "json:\"preferred_session_length\""
 	RemindAfterDate            string                    "json:\"remind_after_date\""
+	TimeZone                   string                    "json:\"time_zone\""
 }
 
 // Type for action response, including envelope
@@ -640,9 +659,6 @@ func (inv *ActionUserIndexInvocation) convertInputToQueryParams(ret map[string]s
 		if inv.IsParameterSelected("Login") {
 			ret["user[login]"] = inv.Input.Login
 		}
-		if inv.IsParameterSelected("MailerEnabled") {
-			ret["user[mailer_enabled]"] = convertBoolToString(inv.Input.MailerEnabled)
-		}
 		if inv.IsParameterSelected("ObjectState") {
 			ret["user[object_state]"] = inv.Input.ObjectState
 		}
@@ -654,6 +670,13 @@ func (inv *ActionUserIndexInvocation) convertInputToQueryParams(ret map[string]s
 		}
 		if inv.IsParameterSelected("PreferredSessionLength") {
 			ret["user[preferred_session_length]"] = convertInt64ToString(inv.Input.PreferredSessionLength)
+		}
+		if inv.IsParameterSelected("TimeZone") {
+			if inv.IsParameterNil("TimeZone") {
+				ret["user[time_zone]"] = ""
+			} else {
+				ret["user[time_zone]"] = inv.Input.TimeZone
+			}
 		}
 	}
 }

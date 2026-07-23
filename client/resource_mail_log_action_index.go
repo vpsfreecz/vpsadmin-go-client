@@ -158,22 +158,22 @@ func (in *ActionMailLogIndexInput) AnySelected() bool {
 
 // ActionMailLogIndexOutput is a type for action output parameters
 type ActionMailLogIndexOutput struct {
-	Bcc          string                        "json:\"bcc\""
-	Cc           string                        "json:\"cc\""
-	CreatedAt    string                        "json:\"created_at\""
-	From         string                        "json:\"from\""
-	Id           int64                         "json:\"id\""
-	InReplyTo    string                        "json:\"in_reply_to\""
-	MailTemplate *ActionMailTemplateShowOutput "json:\"mail_template\""
-	MessageId    string                        "json:\"message_id\""
-	References   string                        "json:\"references\""
-	ReplyTo      string                        "json:\"reply_to\""
-	ReturnPath   string                        "json:\"return_path\""
-	Subject      string                        "json:\"subject\""
-	TextHtml     string                        "json:\"text_html\""
-	TextPlain    string                        "json:\"text_plain\""
-	To           string                        "json:\"to\""
-	User         *ActionUserShowOutput         "json:\"user\""
+	Bcc                  string                                "json:\"bcc\""
+	Cc                   string                                "json:\"cc\""
+	CreatedAt            string                                "json:\"created_at\""
+	From                 string                                "json:\"from\""
+	Id                   int64                                 "json:\"id\""
+	InReplyTo            string                                "json:\"in_reply_to\""
+	MessageId            string                                "json:\"message_id\""
+	NotificationTemplate *ActionNotificationTemplateShowOutput "json:\"notification_template\""
+	References           string                                "json:\"references\""
+	ReplyTo              string                                "json:\"reply_to\""
+	ReturnPath           string                                "json:\"return_path\""
+	Subject              string                                "json:\"subject\""
+	TextHtml             string                                "json:\"text_html\""
+	TextPlain            string                                "json:\"text_plain\""
+	To                   string                                "json:\"to\""
+	User                 *ActionUserShowOutput                 "json:\"user\""
 }
 
 // Type for action response, including envelope

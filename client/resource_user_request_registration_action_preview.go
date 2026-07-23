@@ -90,6 +90,7 @@ type ActionUserRequestRegistrationPreviewOutput struct {
 	OrgId         string                      "json:\"org_id\""
 	OrgName       string                      "json:\"org_name\""
 	OsTemplate    *ActionOsTemplateShowOutput "json:\"os_template\""
+	TimeZone      string                      "json:\"time_zone\""
 	YearOfBirth   int64                       "json:\"year_of_birth\""
 }
 

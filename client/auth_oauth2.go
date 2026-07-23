@@ -34,7 +34,7 @@ func (client *Client) RevokeAccessToken() error {
 	form := url.Values{}
 	form.Set("token", auth.AccessToken)
 
-	revokeURL, err := client.oauth2DescriptionURL("http://api.test/_auth/oauth2/revoke")
+	revokeURL, err := client.descriptionURL("http://api.test/_auth/oauth2/revoke")
 	if err != nil {
 		return err
 	}

@@ -191,6 +191,7 @@ type ActionNodeStatusIndexOutput struct {
 	ArcCMax       int64   "json:\"arc_c_max\""
 	ArcHitpercent float64 "json:\"arc_hitpercent\""
 	ArcSize       int64   "json:\"arc_size\""
+	CgroupVersion string  "json:\"cgroup_version\""
 	CpuGuest      float64 "json:\"cpu_guest\""
 	CpuIdle       float64 "json:\"cpu_idle\""
 	CpuIowait     float64 "json:\"cpu_iowait\""

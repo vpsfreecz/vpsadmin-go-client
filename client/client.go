@@ -13,8 +13,7 @@ type Client struct {
 	// Options for authentication method
 	Authentication Authenticator
 
-	httpClient           *http.Client
-	oauth2TrustedOrigins map[string]struct{}
+	httpClient *http.Client
 
 	// Resource Action_state
 	ActionState *ResourceActionState
@@ -60,6 +59,16 @@ type Client struct {
 	DnssecRecord *ResourceDnssecRecord
 	// Resource Environment
 	Environment *ResourceEnvironment
+	// Resource Event
+	Event *ResourceEvent
+	// Resource Event_delivery
+	EventDelivery *ResourceEventDelivery
+	// Resource Event_route
+	EventRoute *ResourceEventRoute
+	// Resource Event_time_interval
+	EventTimeInterval *ResourceEventTimeInterval
+	// Resource Event_type
+	EventType *ResourceEventType
 	// Resource Export
 	Export *ResourceExport
 	// Resource Export_outage
@@ -84,10 +93,6 @@ type Client struct {
 	LocationNetwork *ResourceLocationNetwork
 	// Resource Mail_log
 	MailLog *ResourceMailLog
-	// Resource Mail_recipient
-	MailRecipient *ResourceMailRecipient
-	// Resource Mail_template
-	MailTemplate *ResourceMailTemplate
 	// Resource Mailbox
 	Mailbox *ResourceMailbox
 	// Resource Metrics_access_token
@@ -108,16 +113,60 @@ type Client struct {
 	NewsLog *ResourceNewsLog
 	// Resource Node
 	Node *ResourceNode
+	// Resource Node_cgroup_state
+	NodeCgroupState *ResourceNodeCgroupState
+	// Resource Node_ebpf_program
+	NodeEbpfProgram *ResourceNodeEbpfProgram
+	// Resource Node_ebpf_program_link
+	NodeEbpfProgramLink *ResourceNodeEbpfProgramLink
+	// Resource Node_ebpf_program_object
+	NodeEbpfProgramObject *ResourceNodeEbpfProgramObject
+	// Resource Node_kernel_configuration_option
+	NodeKernelConfigurationOption *ResourceNodeKernelConfigurationOption
+	// Resource Node_kernel_event
+	NodeKernelEvent *ResourceNodeKernelEvent
+	// Resource Node_kernel_evidence
+	NodeKernelEvidence *ResourceNodeKernelEvidence
+	// Resource Node_kernel_evidence_error
+	NodeKernelEvidenceError *ResourceNodeKernelEvidenceError
+	// Resource Node_kernel_history_gap
+	NodeKernelHistoryGap *ResourceNodeKernelHistoryGap
+	// Resource Node_kernel_history_state
+	NodeKernelHistoryState *ResourceNodeKernelHistoryState
+	// Resource Node_kernel_livepatch
+	NodeKernelLivepatch *ResourceNodeKernelLivepatch
+	// Resource Node_kernel_livepatch_patch
+	NodeKernelLivepatchPatch *ResourceNodeKernelLivepatchPatch
+	// Resource Node_kernel_module
+	NodeKernelModule *ResourceNodeKernelModule
+	// Resource Node_kernel_parameter
+	NodeKernelParameter *ResourceNodeKernelParameter
+	// Resource Node_software_change
+	NodeSoftwareChange *ResourceNodeSoftwareChange
+	// Resource Node_software_deployment
+	NodeSoftwareDeployment *ResourceNodeSoftwareDeployment
+	// Resource Node_software_version
+	NodeSoftwareVersion *ResourceNodeSoftwareVersion
+	// Resource Node_sysctl
+	NodeSysctl *ResourceNodeSysctl
+	// Resource Node_sysctl_change
+	NodeSysctlChange *ResourceNodeSysctlChange
+	// Resource Node_system_state
+	NodeSystemState *ResourceNodeSystemState
 	// Resource Node_transfer_connection
 	NodeTransferConnection *ResourceNodeTransferConnection
+	// Resource Notification_receiver
+	NotificationReceiver *ResourceNotificationReceiver
+	// Resource Notification_target
+	NotificationTarget *ResourceNotificationTarget
+	// Resource Notification_template
+	NotificationTemplate *ResourceNotificationTemplate
 	// Resource Oauth2_client
 	Oauth2Client *ResourceOauth2Client
 	// Resource Object_history
 	ObjectHistory *ResourceObjectHistory
 	// Resource Oom_report
 	OomReport *ResourceOomReport
-	// Resource Oom_report_rule
-	OomReportRule *ResourceOomReportRule
 	// Resource Os_family
 	OsFamily *ResourceOsFamily
 	// Resource Os_template
@@ -176,6 +225,8 @@ type Client struct {
 	VpsUserData *ResourceVpsUserData
 	// Resource Webauthn
 	Webauthn *ResourceWebauthn
+	// Resource Webui_user_setting
+	WebuiUserSetting *ResourceWebuiUserSetting
 }
 
 // Create a new client for API at url
@@ -207,6 +258,11 @@ func New(url string) *Client {
 	c.DnsZoneTransfer = NewResourceDnsZoneTransfer(c)
 	c.DnssecRecord = NewResourceDnssecRecord(c)
 	c.Environment = NewResourceEnvironment(c)
+	c.Event = NewResourceEvent(c)
+	c.EventDelivery = NewResourceEventDelivery(c)
+	c.EventRoute = NewResourceEventRoute(c)
+	c.EventTimeInterval = NewResourceEventTimeInterval(c)
+	c.EventType = NewResourceEventType(c)
 	c.Export = NewResourceExport(c)
 	c.ExportOutage = NewResourceExportOutage(c)
 	c.HelpBox = NewResourceHelpBox(c)
@@ -219,8 +275,6 @@ func New(url string) *Client {
 	c.Location = NewResourceLocation(c)
 	c.LocationNetwork = NewResourceLocationNetwork(c)
 	c.MailLog = NewResourceMailLog(c)
-	c.MailRecipient = NewResourceMailRecipient(c)
-	c.MailTemplate = NewResourceMailTemplate(c)
 	c.Mailbox = NewResourceMailbox(c)
 	c.MetricsAccessToken = NewResourceMetricsAccessToken(c)
 	c.MigrationPlan = NewResourceMigrationPlan(c)
@@ -231,11 +285,33 @@ func New(url string) *Client {
 	c.NetworkInterfaceMonitor = NewResourceNetworkInterfaceMonitor(c)
 	c.NewsLog = NewResourceNewsLog(c)
 	c.Node = NewResourceNode(c)
+	c.NodeCgroupState = NewResourceNodeCgroupState(c)
+	c.NodeEbpfProgram = NewResourceNodeEbpfProgram(c)
+	c.NodeEbpfProgramLink = NewResourceNodeEbpfProgramLink(c)
+	c.NodeEbpfProgramObject = NewResourceNodeEbpfProgramObject(c)
+	c.NodeKernelConfigurationOption = NewResourceNodeKernelConfigurationOption(c)
+	c.NodeKernelEvent = NewResourceNodeKernelEvent(c)
+	c.NodeKernelEvidence = NewResourceNodeKernelEvidence(c)
+	c.NodeKernelEvidenceError = NewResourceNodeKernelEvidenceError(c)
+	c.NodeKernelHistoryGap = NewResourceNodeKernelHistoryGap(c)
+	c.NodeKernelHistoryState = NewResourceNodeKernelHistoryState(c)
+	c.NodeKernelLivepatch = NewResourceNodeKernelLivepatch(c)
+	c.NodeKernelLivepatchPatch = NewResourceNodeKernelLivepatchPatch(c)
+	c.NodeKernelModule = NewResourceNodeKernelModule(c)
+	c.NodeKernelParameter = NewResourceNodeKernelParameter(c)
+	c.NodeSoftwareChange = NewResourceNodeSoftwareChange(c)
+	c.NodeSoftwareDeployment = NewResourceNodeSoftwareDeployment(c)
+	c.NodeSoftwareVersion = NewResourceNodeSoftwareVersion(c)
+	c.NodeSysctl = NewResourceNodeSysctl(c)
+	c.NodeSysctlChange = NewResourceNodeSysctlChange(c)
+	c.NodeSystemState = NewResourceNodeSystemState(c)
 	c.NodeTransferConnection = NewResourceNodeTransferConnection(c)
+	c.NotificationReceiver = NewResourceNotificationReceiver(c)
+	c.NotificationTarget = NewResourceNotificationTarget(c)
+	c.NotificationTemplate = NewResourceNotificationTemplate(c)
 	c.Oauth2Client = NewResourceOauth2Client(c)
 	c.ObjectHistory = NewResourceObjectHistory(c)
 	c.OomReport = NewResourceOomReport(c)
-	c.OomReportRule = NewResourceOomReportRule(c)
 	c.OsFamily = NewResourceOsFamily(c)
 	c.OsTemplate = NewResourceOsTemplate(c)
 	c.Outage = NewResourceOutage(c)
@@ -265,6 +341,7 @@ func New(url string) *Client {
 	c.VpsSecurityAdvisory = NewResourceVpsSecurityAdvisory(c)
 	c.VpsUserData = NewResourceVpsUserData(c)
 	c.Webauthn = NewResourceWebauthn(c)
+	c.WebuiUserSetting = NewResourceWebuiUserSetting(c)
 
 	return c
 }

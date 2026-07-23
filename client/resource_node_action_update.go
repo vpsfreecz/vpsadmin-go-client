@@ -77,7 +77,6 @@ func (in *ActionNodeUpdateMetaGlobalInput) AnySelected() bool {
 // ActionNodeUpdateInput is a type for action input parameters
 type ActionNodeUpdateInput struct {
 	Active         bool   "json:\"active\""
-	Cpus           int64  "json:\"cpus\""
 	Fqdn           string "json:\"fqdn\""
 	HypervisorType string "json:\"hypervisor_type\""
 	IpAddr         string "json:\"ip_addr\""
@@ -86,8 +85,6 @@ type ActionNodeUpdateInput struct {
 	MaxTx          int64  "json:\"max_tx\""
 	MaxVps         int64  "json:\"max_vps\""
 	Name           string "json:\"name\""
-	TotalMemory    int64  "json:\"total_memory\""
-	TotalSwap      int64  "json:\"total_swap\""
 	Type           string "json:\"type\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -104,18 +101,6 @@ func (in *ActionNodeUpdateInput) SetActive(value bool) *ActionNodeUpdateInput {
 	}
 
 	in._selectedParameters["Active"] = nil
-	return in
-}
-
-// SetCpus sets parameter Cpus to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetCpus(value int64) *ActionNodeUpdateInput {
-	in.Cpus = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Cpus"] = nil
 	return in
 }
 
@@ -212,30 +197,6 @@ func (in *ActionNodeUpdateInput) SetName(value string) *ActionNodeUpdateInput {
 	}
 
 	in._selectedParameters["Name"] = nil
-	return in
-}
-
-// SetTotalMemory sets parameter TotalMemory to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetTotalMemory(value int64) *ActionNodeUpdateInput {
-	in.TotalMemory = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["TotalMemory"] = nil
-	return in
-}
-
-// SetTotalSwap sets parameter TotalSwap to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetTotalSwap(value int64) *ActionNodeUpdateInput {
-	in.TotalSwap = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["TotalSwap"] = nil
 	return in
 }
 
@@ -448,9 +409,6 @@ func (inv *ActionNodeUpdateInvocation) makeInputParams() map[string]interface{} 
 		if inv.IsParameterSelected("Active") {
 			ret["active"] = inv.Input.Active
 		}
-		if inv.IsParameterSelected("Cpus") {
-			ret["cpus"] = inv.Input.Cpus
-		}
 		if inv.IsParameterSelected("Fqdn") {
 			ret["fqdn"] = inv.Input.Fqdn
 		}
@@ -474,12 +432,6 @@ func (inv *ActionNodeUpdateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("Name") {
 			ret["name"] = inv.Input.Name
-		}
-		if inv.IsParameterSelected("TotalMemory") {
-			ret["total_memory"] = inv.Input.TotalMemory
-		}
-		if inv.IsParameterSelected("TotalSwap") {
-			ret["total_swap"] = inv.Input.TotalSwap
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["type"] = inv.Input.Type
