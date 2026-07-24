@@ -173,7 +173,9 @@ func (inv *ActionActionStateShowInvocation) Call() (*ActionActionStateShowRespon
 
 func (inv *ActionActionStateShowInvocation) callAsQuery() (*ActionActionStateShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionActionStateShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -182,10 +184,12 @@ func (inv *ActionActionStateShowInvocation) callAsQuery() (*ActionActionStateSho
 	return resp, err
 }
 
-func (inv *ActionActionStateShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionActionStateShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

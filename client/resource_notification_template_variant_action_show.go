@@ -81,6 +81,7 @@ type ActionNotificationTemplateVariantShowOutput struct {
 	Html       string                    "json:\"html\""
 	Id         int64                     "json:\"id\""
 	Language   *ActionLanguageShowOutput "json:\"language\""
+	Options    interface{}               "json:\"options\""
 	Protocol   string                    "json:\"protocol\""
 	ReplyTo    string                    "json:\"reply_to\""
 	ReturnPath string                    "json:\"return_path\""
@@ -187,7 +188,9 @@ func (inv *ActionNotificationTemplateVariantShowInvocation) Call() (*ActionNotif
 
 func (inv *ActionNotificationTemplateVariantShowInvocation) callAsQuery() (*ActionNotificationTemplateVariantShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionNotificationTemplateVariantShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -196,13 +199,19 @@ func (inv *ActionNotificationTemplateVariantShowInvocation) callAsQuery() (*Acti
 	return resp, err
 }
 
-func (inv *ActionNotificationTemplateVariantShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionNotificationTemplateVariantShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

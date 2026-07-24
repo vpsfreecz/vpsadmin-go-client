@@ -83,6 +83,11 @@ type ActionEventRouteShowOutput struct {
 	EventType              string                "json:\"event_type\""
 	EventTypePattern       string                "json:\"event_type_pattern\""
 	ExpiresAt              string                "json:\"expires_at\""
+	GroupBy                interface{}           "json:\"group_by\""
+	GroupIntervalSeconds   int64                 "json:\"group_interval_seconds\""
+	GroupWaitSeconds       int64                 "json:\"group_wait_seconds\""
+	GroupingEnabled        bool                  "json:\"grouping_enabled\""
+	GroupingSummary        string                "json:\"grouping_summary\""
 	HitCount               int64                 "json:\"hit_count\""
 	Id                     int64                 "json:\"id\""
 	Label                  string                "json:\"label\""
@@ -195,7 +200,9 @@ func (inv *ActionEventRouteShowInvocation) Call() (*ActionEventRouteShowResponse
 
 func (inv *ActionEventRouteShowInvocation) callAsQuery() (*ActionEventRouteShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionEventRouteShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -204,13 +211,19 @@ func (inv *ActionEventRouteShowInvocation) callAsQuery() (*ActionEventRouteShowR
 	return resp, err
 }
 
-func (inv *ActionEventRouteShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionEventRouteShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

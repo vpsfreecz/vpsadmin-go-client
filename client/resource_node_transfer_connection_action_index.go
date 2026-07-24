@@ -324,8 +324,12 @@ func (inv *ActionNodeTransferConnectionIndexInvocation) Call() (*ActionNodeTrans
 
 func (inv *ActionNodeTransferConnectionIndexInvocation) callAsQuery() (*ActionNodeTransferConnectionIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionNodeTransferConnectionIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -334,7 +338,7 @@ func (inv *ActionNodeTransferConnectionIndexInvocation) callAsQuery() (*ActionNo
 	return resp, err
 }
 
-func (inv *ActionNodeTransferConnectionIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionNodeTransferConnectionIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Enabled") {
 			ret["node_transfer_connection[enabled]"] = convertBoolToString(inv.Input.Enabled)
@@ -349,18 +353,26 @@ func (inv *ActionNodeTransferConnectionIndexInvocation) convertInputToQueryParam
 			ret["node_transfer_connection[node]"] = convertInt64ToString(inv.Input.Node)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionNodeTransferConnectionIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionNodeTransferConnectionIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

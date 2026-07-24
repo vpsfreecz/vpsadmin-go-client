@@ -478,49 +478,59 @@ func (in *ActionEventDeliveryIndexInput) AnySelected() bool {
 
 // ActionEventDeliveryIndexOutput is a type for action output parameters
 type ActionEventDeliveryIndexOutput struct {
-	Action                                  string "json:\"action\""
-	AttemptCount                            int64  "json:\"attempt_count\""
-	CreatedAt                               string "json:\"created_at\""
-	DeliveryTransactionChainId              int64  "json:\"delivery_transaction_chain_id\""
-	DeliveryTransactionChainLabel           string "json:\"delivery_transaction_chain_label\""
-	ErrorSummary                            string "json:\"error_summary\""
-	EventCreatedAt                          string "json:\"event_created_at\""
-	EventId                                 int64  "json:\"event_id\""
-	EventRouteId                            int64  "json:\"event_route_id\""
-	EventRouteLabel                         string "json:\"event_route_label\""
-	EventRoutingContextId                   int64  "json:\"event_routing_context_id\""
-	EventSeverity                           string "json:\"event_severity\""
-	EventSubject                            string "json:\"event_subject\""
-	EventType                               string "json:\"event_type\""
-	EventUserId                             int64  "json:\"event_user_id\""
-	EventUserLogin                          string "json:\"event_user_login\""
-	EventVpsHostname                        string "json:\"event_vps_hostname\""
-	EventVpsId                              int64  "json:\"event_vps_id\""
-	Id                                      int64  "json:\"id\""
-	LastAttemptAt                           string "json:\"last_attempt_at\""
-	MailLogId                               int64  "json:\"mail_log_id\""
-	NextAttemptAt                           string "json:\"next_attempt_at\""
-	NotificationReceiverActionDisplayTarget string "json:\"notification_receiver_action_display_target\""
-	NotificationReceiverActionLabel         string "json:\"notification_receiver_action_label\""
-	NotificationReceiverId                  int64  "json:\"notification_receiver_id\""
-	NotificationReceiverLabel               string "json:\"notification_receiver_label\""
-	NotificationReceiverTargetId            int64  "json:\"notification_receiver_target_id\""
-	NotificationTargetDisplayTarget         string "json:\"notification_target_display_target\""
-	NotificationTargetId                    int64  "json:\"notification_target_id\""
-	NotificationTargetLabel                 string "json:\"notification_target_label\""
-	ProviderMessageId                       string "json:\"provider_message_id\""
-	RecipientUserId                         int64  "json:\"recipient_user_id\""
-	RecipientUserLogin                      string "json:\"recipient_user_login\""
-	ReleasedAt                              string "json:\"released_at\""
-	ResponseBody                            string "json:\"response_body\""
-	ResponseStatus                          int64  "json:\"response_status\""
-	State                                   string "json:\"state\""
-	TargetKind                              string "json:\"target_kind\""
-	TargetLabel                             string "json:\"target_label\""
-	TargetValue                             string "json:\"target_value\""
-	TemplateName                            string "json:\"template_name\""
-	TransactionId                           int64  "json:\"transaction_id\""
-	UpdatedAt                               string "json:\"updated_at\""
+	Action                                  string      "json:\"action\""
+	AttemptCount                            int64       "json:\"attempt_count\""
+	CreatedAt                               string      "json:\"created_at\""
+	DeliveryTransactionChainId              int64       "json:\"delivery_transaction_chain_id\""
+	DeliveryTransactionChainLabel           string      "json:\"delivery_transaction_chain_label\""
+	EffectiveEventDeliveryId                int64       "json:\"effective_event_delivery_id\""
+	EffectiveEventId                        int64       "json:\"effective_event_id\""
+	ErrorSummary                            string      "json:\"error_summary\""
+	EventCount                              int64       "json:\"event_count\""
+	EventCreatedAt                          string      "json:\"event_created_at\""
+	EventDeliveryGroupId                    int64       "json:\"event_delivery_group_id\""
+	EventId                                 int64       "json:\"event_id\""
+	EventRouteId                            int64       "json:\"event_route_id\""
+	EventRouteLabel                         string      "json:\"event_route_label\""
+	EventRoutingContextId                   int64       "json:\"event_routing_context_id\""
+	EventSeverity                           string      "json:\"event_severity\""
+	EventSubject                            string      "json:\"event_subject\""
+	EventType                               string      "json:\"event_type\""
+	EventUserId                             int64       "json:\"event_user_id\""
+	EventUserLogin                          string      "json:\"event_user_login\""
+	EventVpsHostname                        string      "json:\"event_vps_hostname\""
+	EventVpsId                              int64       "json:\"event_vps_id\""
+	GroupEventIds                           interface{} "json:\"group_event_ids\""
+	GroupKey                                string      "json:\"group_key\""
+	GroupLabels                             interface{} "json:\"group_labels\""
+	GroupNextFlushAt                        string      "json:\"group_next_flush_at\""
+	GroupTruncatedCount                     int64       "json:\"group_truncated_count\""
+	GroupedDelivery                         bool        "json:\"grouped_delivery\""
+	Id                                      int64       "json:\"id\""
+	LastAttemptAt                           string      "json:\"last_attempt_at\""
+	MailLogId                               int64       "json:\"mail_log_id\""
+	NextAttemptAt                           string      "json:\"next_attempt_at\""
+	NotificationReceiverActionDisplayTarget string      "json:\"notification_receiver_action_display_target\""
+	NotificationReceiverActionLabel         string      "json:\"notification_receiver_action_label\""
+	NotificationReceiverId                  int64       "json:\"notification_receiver_id\""
+	NotificationReceiverLabel               string      "json:\"notification_receiver_label\""
+	NotificationReceiverTargetId            int64       "json:\"notification_receiver_target_id\""
+	NotificationTargetDisplayTarget         string      "json:\"notification_target_display_target\""
+	NotificationTargetId                    int64       "json:\"notification_target_id\""
+	NotificationTargetLabel                 string      "json:\"notification_target_label\""
+	ProviderMessageId                       string      "json:\"provider_message_id\""
+	RecipientUserId                         int64       "json:\"recipient_user_id\""
+	RecipientUserLogin                      string      "json:\"recipient_user_login\""
+	ReleasedAt                              string      "json:\"released_at\""
+	ResponseBody                            string      "json:\"response_body\""
+	ResponseStatus                          int64       "json:\"response_status\""
+	State                                   string      "json:\"state\""
+	TargetKind                              string      "json:\"target_kind\""
+	TargetLabel                             string      "json:\"target_label\""
+	TargetValue                             string      "json:\"target_value\""
+	TemplateName                            string      "json:\"template_name\""
+	TransactionId                           int64       "json:\"transaction_id\""
+	UpdatedAt                               string      "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
@@ -660,8 +670,12 @@ func (inv *ActionEventDeliveryIndexInvocation) Call() (*ActionEventDeliveryIndex
 
 func (inv *ActionEventDeliveryIndexInvocation) callAsQuery() (*ActionEventDeliveryIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionEventDeliveryIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -670,7 +684,7 @@ func (inv *ActionEventDeliveryIndexInvocation) callAsQuery() (*ActionEventDelive
 	return resp, err
 }
 
-func (inv *ActionEventDeliveryIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionEventDeliveryIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Action") {
 			if inv.IsParameterNil("Action") {
@@ -749,18 +763,26 @@ func (inv *ActionEventDeliveryIndexInvocation) convertInputToQueryParams(ret map
 			}
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionEventDeliveryIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionEventDeliveryIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

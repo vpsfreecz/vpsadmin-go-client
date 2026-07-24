@@ -171,13 +171,15 @@ func (in *ActionSystemConfigIndexInput) AnySelected() bool {
 
 // ActionSystemConfigIndexOutput is a type for action output parameters
 type ActionSystemConfigIndexOutput struct {
-	Category     string "json:\"category\""
-	Description  string "json:\"description\""
-	Label        string "json:\"label\""
-	Localized    bool   "json:\"localized\""
-	MinUserLevel int64  "json:\"min_user_level\""
-	Name         string "json:\"name\""
-	Type         string "json:\"type\""
+	Category       string      "json:\"category\""
+	Description    string      "json:\"description\""
+	Label          string      "json:\"label\""
+	Localized      bool        "json:\"localized\""
+	LocalizedValue interface{} "json:\"localized_value\""
+	MinUserLevel   int64       "json:\"min_user_level\""
+	Name           string      "json:\"name\""
+	Type           string      "json:\"type\""
+	Value          interface{} "json:\"value\""
 }
 
 // Type for action response, including envelope
@@ -303,8 +305,12 @@ func (inv *ActionSystemConfigIndexInvocation) Call() (*ActionSystemConfigIndexRe
 
 func (inv *ActionSystemConfigIndexInvocation) callAsQuery() (*ActionSystemConfigIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionSystemConfigIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -313,7 +319,7 @@ func (inv *ActionSystemConfigIndexInvocation) callAsQuery() (*ActionSystemConfig
 	return resp, err
 }
 
-func (inv *ActionSystemConfigIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionSystemConfigIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Category") {
 			ret["system_config[category]"] = inv.Input.Category
@@ -325,18 +331,26 @@ func (inv *ActionSystemConfigIndexInvocation) convertInputToQueryParams(ret map[
 			ret["system_config[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionSystemConfigIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionSystemConfigIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

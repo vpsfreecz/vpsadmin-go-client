@@ -194,7 +194,9 @@ func (inv *ActionUserCurrentInvocation) Call() (*ActionUserCurrentResponse, erro
 
 func (inv *ActionUserCurrentInvocation) callAsQuery() (*ActionUserCurrentResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionUserCurrentResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -203,13 +205,19 @@ func (inv *ActionUserCurrentInvocation) callAsQuery() (*ActionUserCurrentRespons
 	return resp, err
 }
 
-func (inv *ActionUserCurrentInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionUserCurrentInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

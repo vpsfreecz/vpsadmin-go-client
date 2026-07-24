@@ -410,8 +410,12 @@ func (inv *ActionActionStatePollInvocation) Call() (*ActionActionStatePollRespon
 
 func (inv *ActionActionStatePollInvocation) callAsQuery() (*ActionActionStatePollResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionActionStatePollResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -420,7 +424,7 @@ func (inv *ActionActionStatePollInvocation) callAsQuery() (*ActionActionStatePol
 	return resp, err
 }
 
-func (inv *ActionActionStatePollInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionActionStatePollInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Current") {
 			if inv.IsParameterNil("Current") {
@@ -454,12 +458,16 @@ func (inv *ActionActionStatePollInvocation) convertInputToQueryParams(ret map[st
 			}
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionActionStatePollInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionActionStatePollInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

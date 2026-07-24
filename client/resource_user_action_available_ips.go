@@ -288,8 +288,12 @@ func (inv *ActionUserAvailableIpsInvocation) Call() (*ActionUserAvailableIpsResp
 
 func (inv *ActionUserAvailableIpsInvocation) callAsQuery() (*ActionUserAvailableIpsResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionUserAvailableIpsResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -298,7 +302,7 @@ func (inv *ActionUserAvailableIpsInvocation) callAsQuery() (*ActionUserAvailable
 	return resp, err
 }
 
-func (inv *ActionUserAvailableIpsInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionUserAvailableIpsInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("AddressLocation") {
 			ret["user[address_location]"] = convertInt64ToString(inv.Input.AddressLocation)
@@ -307,12 +311,16 @@ func (inv *ActionUserAvailableIpsInvocation) convertInputToQueryParams(ret map[s
 			ret["user[location]"] = convertInt64ToString(inv.Input.Location)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionUserAvailableIpsInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionUserAvailableIpsInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

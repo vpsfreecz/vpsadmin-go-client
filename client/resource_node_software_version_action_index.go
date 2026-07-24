@@ -499,8 +499,12 @@ func (inv *ActionNodeSoftwareVersionIndexInvocation) Call() (*ActionNodeSoftware
 
 func (inv *ActionNodeSoftwareVersionIndexInvocation) callAsQuery() (*ActionNodeSoftwareVersionIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionNodeSoftwareVersionIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -509,7 +513,7 @@ func (inv *ActionNodeSoftwareVersionIndexInvocation) callAsQuery() (*ActionNodeS
 	return resp, err
 }
 
-func (inv *ActionNodeSoftwareVersionIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionNodeSoftwareVersionIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Component") {
 			ret["node_software_version[component]"] = inv.Input.Component
@@ -557,18 +561,26 @@ func (inv *ActionNodeSoftwareVersionIndexInvocation) convertInputToQueryParams(r
 			ret["node_software_version[version_source]"] = inv.Input.VersionSource
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionNodeSoftwareVersionIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionNodeSoftwareVersionIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

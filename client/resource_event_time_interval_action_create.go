@@ -73,9 +73,10 @@ func (in *ActionEventTimeIntervalCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionEventTimeIntervalCreateInput is a type for action input parameters
 type ActionEventTimeIntervalCreateInput struct {
-	Name     string "json:\"name\""
-	TimeZone string "json:\"time_zone\""
-	User     int64  "json:\"user\""
+	Name     string      "json:\"name\""
+	Specs    interface{} "json:\"specs\""
+	TimeZone string      "json:\"time_zone\""
+	User     int64       "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -91,6 +92,18 @@ func (in *ActionEventTimeIntervalCreateInput) SetName(value string) *ActionEvent
 	}
 
 	in._selectedParameters["Name"] = nil
+	return in
+}
+
+// SetSpecs sets parameter Specs to value and selects it for sending
+func (in *ActionEventTimeIntervalCreateInput) SetSpecs(value interface{}) *ActionEventTimeIntervalCreateInput {
+	in.Specs = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Specs"] = nil
 	return in
 }
 
@@ -172,6 +185,7 @@ type ActionEventTimeIntervalCreateOutput struct {
 	MuteRouteReferenceCount   int64                 "json:\"mute_route_reference_count\""
 	Name                      string                "json:\"name\""
 	RouteReferenceCount       int64                 "json:\"route_reference_count\""
+	Specs                     interface{}           "json:\"specs\""
 	TimeZone                  string                "json:\"time_zone\""
 	UpdatedAt                 string                "json:\"updated_at\""
 	User                      *ActionUserShowOutput "json:\"user\""
@@ -328,6 +342,9 @@ func (inv *ActionEventTimeIntervalCreateInvocation) makeInputParams() map[string
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Name") {
 			ret["name"] = inv.Input.Name
+		}
+		if inv.IsParameterSelected("Specs") {
+			ret["specs"] = inv.Input.Specs
 		}
 		if inv.IsParameterSelected("TimeZone") {
 			ret["time_zone"] = inv.Input.TimeZone

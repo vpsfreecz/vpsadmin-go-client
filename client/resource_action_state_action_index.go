@@ -293,8 +293,12 @@ func (inv *ActionActionStateIndexInvocation) Call() (*ActionActionStateIndexResp
 
 func (inv *ActionActionStateIndexInvocation) callAsQuery() (*ActionActionStateIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionActionStateIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -303,7 +307,7 @@ func (inv *ActionActionStateIndexInvocation) callAsQuery() (*ActionActionStateIn
 	return resp, err
 }
 
-func (inv *ActionActionStateIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionActionStateIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("FromId") {
 			ret["action_state[from_id]"] = convertInt64ToString(inv.Input.FromId)
@@ -315,9 +319,11 @@ func (inv *ActionActionStateIndexInvocation) convertInputToQueryParams(ret map[s
 			ret["action_state[order]"] = inv.Input.Order
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionActionStateIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionActionStateIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
@@ -326,4 +332,6 @@ func (inv *ActionActionStateIndexInvocation) convertMetaInputToQueryParams(ret m
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

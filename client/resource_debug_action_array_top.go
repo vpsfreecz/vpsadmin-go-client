@@ -119,7 +119,8 @@ func (in *ActionDebugArrayTopInput) AnySelected() bool {
 
 // ActionDebugArrayTopOutput is a type for action output parameters
 type ActionDebugArrayTopOutput struct {
-	Size int64 "json:\"size\""
+	Sample interface{} "json:\"sample\""
+	Size   int64       "json:\"size\""
 }
 
 // Type for action response, including envelope
@@ -245,8 +246,12 @@ func (inv *ActionDebugArrayTopInvocation) Call() (*ActionDebugArrayTopResponse, 
 
 func (inv *ActionDebugArrayTopInvocation) callAsQuery() (*ActionDebugArrayTopResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionDebugArrayTopResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -255,18 +260,22 @@ func (inv *ActionDebugArrayTopInvocation) callAsQuery() (*ActionDebugArrayTopRes
 	return resp, err
 }
 
-func (inv *ActionDebugArrayTopInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionDebugArrayTopInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Limit") {
 			ret["debug[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionDebugArrayTopInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionDebugArrayTopInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

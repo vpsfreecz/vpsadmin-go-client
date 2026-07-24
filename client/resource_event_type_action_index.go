@@ -145,13 +145,15 @@ func (in *ActionEventTypeIndexInput) AnySelected() bool {
 
 // ActionEventTypeIndexOutput is a type for action output parameters
 type ActionEventTypeIndexOutput struct {
-	Category            string "json:\"category\""
-	DefaultRouted       bool   "json:\"default_routed\""
-	Label               string "json:\"label\""
-	Name                string "json:\"name\""
-	Severity            string "json:\"severity\""
-	SeverityDescription string "json:\"severity_description\""
-	Template            string "json:\"template\""
+	Category            string      "json:\"category\""
+	DefaultRouted       bool        "json:\"default_routed\""
+	Fields              interface{} "json:\"fields\""
+	Label               string      "json:\"label\""
+	Name                string      "json:\"name\""
+	Roles               interface{} "json:\"roles\""
+	Severity            string      "json:\"severity\""
+	SeverityDescription string      "json:\"severity_description\""
+	Template            string      "json:\"template\""
 }
 
 // Type for action response, including envelope
@@ -277,8 +279,12 @@ func (inv *ActionEventTypeIndexInvocation) Call() (*ActionEventTypeIndexResponse
 
 func (inv *ActionEventTypeIndexInvocation) callAsQuery() (*ActionEventTypeIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionEventTypeIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -287,7 +293,7 @@ func (inv *ActionEventTypeIndexInvocation) callAsQuery() (*ActionEventTypeIndexR
 	return resp, err
 }
 
-func (inv *ActionEventTypeIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionEventTypeIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("FromId") {
 			ret["event_type[from_id]"] = convertInt64ToString(inv.Input.FromId)
@@ -296,9 +302,11 @@ func (inv *ActionEventTypeIndexInvocation) convertInputToQueryParams(ret map[str
 			ret["event_type[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionEventTypeIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionEventTypeIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
@@ -307,4 +315,6 @@ func (inv *ActionEventTypeIndexInvocation) convertMetaInputToQueryParams(ret map
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

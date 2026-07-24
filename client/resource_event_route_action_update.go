@@ -76,15 +76,19 @@ func (in *ActionEventRouteUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionEventRouteUpdateInput is a type for action input parameters
 type ActionEventRouteUpdateInput struct {
-	Continue               bool   "json:\"continue\""
-	Enabled                bool   "json:\"enabled\""
-	EventType              string "json:\"event_type\""
-	EventTypePattern       string "json:\"event_type_pattern\""
-	Label                  string "json:\"label\""
-	NotificationReceiverId int64  "json:\"notification_receiver_id\""
-	ParentId               int64  "json:\"parent_id\""
-	Position               int64  "json:\"position\""
-	SubjectScope           string "json:\"subject_scope\""
+	Continue               bool        "json:\"continue\""
+	Enabled                bool        "json:\"enabled\""
+	EventType              string      "json:\"event_type\""
+	EventTypePattern       string      "json:\"event_type_pattern\""
+	GroupBy                interface{} "json:\"group_by\""
+	GroupIntervalSeconds   int64       "json:\"group_interval_seconds\""
+	GroupWaitSeconds       int64       "json:\"group_wait_seconds\""
+	GroupingEnabled        bool        "json:\"grouping_enabled\""
+	Label                  string      "json:\"label\""
+	NotificationReceiverId int64       "json:\"notification_receiver_id\""
+	ParentId               int64       "json:\"parent_id\""
+	Position               int64       "json:\"position\""
+	SubjectScope           string      "json:\"subject_scope\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -174,6 +178,92 @@ func (in *ActionEventRouteUpdateInput) SetEventTypePatternNil(set bool) *ActionE
 	} else {
 		delete(in._nilParameters, "EventTypePattern")
 	}
+	return in
+}
+
+// SetGroupBy sets parameter GroupBy to value and selects it for sending
+func (in *ActionEventRouteUpdateInput) SetGroupBy(value interface{}) *ActionEventRouteUpdateInput {
+	in.GroupBy = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["GroupBy"] = nil
+	return in
+}
+
+// SetGroupIntervalSeconds sets parameter GroupIntervalSeconds to value and selects it for sending
+func (in *ActionEventRouteUpdateInput) SetGroupIntervalSeconds(value int64) *ActionEventRouteUpdateInput {
+	in.GroupIntervalSeconds = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetGroupIntervalSecondsNil(false)
+	in._selectedParameters["GroupIntervalSeconds"] = nil
+	return in
+}
+
+// SetGroupIntervalSecondsNil sets parameter GroupIntervalSeconds to nil and selects it for sending
+func (in *ActionEventRouteUpdateInput) SetGroupIntervalSecondsNil(set bool) *ActionEventRouteUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["GroupIntervalSeconds"] = nil
+		in.SelectParameters("GroupIntervalSeconds")
+	} else {
+		delete(in._nilParameters, "GroupIntervalSeconds")
+	}
+	return in
+}
+
+// SetGroupWaitSeconds sets parameter GroupWaitSeconds to value and selects it for sending
+func (in *ActionEventRouteUpdateInput) SetGroupWaitSeconds(value int64) *ActionEventRouteUpdateInput {
+	in.GroupWaitSeconds = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetGroupWaitSecondsNil(false)
+	in._selectedParameters["GroupWaitSeconds"] = nil
+	return in
+}
+
+// SetGroupWaitSecondsNil sets parameter GroupWaitSeconds to nil and selects it for sending
+func (in *ActionEventRouteUpdateInput) SetGroupWaitSecondsNil(set bool) *ActionEventRouteUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["GroupWaitSeconds"] = nil
+		in.SelectParameters("GroupWaitSeconds")
+	} else {
+		delete(in._nilParameters, "GroupWaitSeconds")
+	}
+	return in
+}
+
+// SetGroupingEnabled sets parameter GroupingEnabled to value and selects it for sending
+func (in *ActionEventRouteUpdateInput) SetGroupingEnabled(value bool) *ActionEventRouteUpdateInput {
+	in.GroupingEnabled = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["GroupingEnabled"] = nil
 	return in
 }
 
@@ -347,6 +437,11 @@ type ActionEventRouteUpdateOutput struct {
 	EventType              string                "json:\"event_type\""
 	EventTypePattern       string                "json:\"event_type_pattern\""
 	ExpiresAt              string                "json:\"expires_at\""
+	GroupBy                interface{}           "json:\"group_by\""
+	GroupIntervalSeconds   int64                 "json:\"group_interval_seconds\""
+	GroupWaitSeconds       int64                 "json:\"group_wait_seconds\""
+	GroupingEnabled        bool                  "json:\"grouping_enabled\""
+	GroupingSummary        string                "json:\"grouping_summary\""
 	HitCount               int64                 "json:\"hit_count\""
 	Id                     int64                 "json:\"id\""
 	Label                  string                "json:\"label\""
@@ -533,6 +628,26 @@ func (inv *ActionEventRouteUpdateInvocation) makeInputParams() map[string]interf
 			} else {
 				ret["event_type_pattern"] = inv.Input.EventTypePattern
 			}
+		}
+		if inv.IsParameterSelected("GroupBy") {
+			ret["group_by"] = inv.Input.GroupBy
+		}
+		if inv.IsParameterSelected("GroupIntervalSeconds") {
+			if inv.IsParameterNil("GroupIntervalSeconds") {
+				ret["group_interval_seconds"] = nil
+			} else {
+				ret["group_interval_seconds"] = inv.Input.GroupIntervalSeconds
+			}
+		}
+		if inv.IsParameterSelected("GroupWaitSeconds") {
+			if inv.IsParameterNil("GroupWaitSeconds") {
+				ret["group_wait_seconds"] = nil
+			} else {
+				ret["group_wait_seconds"] = inv.Input.GroupWaitSeconds
+			}
+		}
+		if inv.IsParameterSelected("GroupingEnabled") {
+			ret["grouping_enabled"] = inv.Input.GroupingEnabled
 		}
 		if inv.IsParameterSelected("Label") {
 			if inv.IsParameterNil("Label") {

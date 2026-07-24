@@ -84,6 +84,7 @@ type ActionEventTimeIntervalShowOutput struct {
 	MuteRouteReferenceCount   int64                 "json:\"mute_route_reference_count\""
 	Name                      string                "json:\"name\""
 	RouteReferenceCount       int64                 "json:\"route_reference_count\""
+	Specs                     interface{}           "json:\"specs\""
 	TimeZone                  string                "json:\"time_zone\""
 	UpdatedAt                 string                "json:\"updated_at\""
 	User                      *ActionUserShowOutput "json:\"user\""
@@ -187,7 +188,9 @@ func (inv *ActionEventTimeIntervalShowInvocation) Call() (*ActionEventTimeInterv
 
 func (inv *ActionEventTimeIntervalShowInvocation) callAsQuery() (*ActionEventTimeIntervalShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionEventTimeIntervalShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -196,13 +199,19 @@ func (inv *ActionEventTimeIntervalShowInvocation) callAsQuery() (*ActionEventTim
 	return resp, err
 }
 
-func (inv *ActionEventTimeIntervalShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionEventTimeIntervalShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

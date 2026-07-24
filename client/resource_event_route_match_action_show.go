@@ -76,17 +76,18 @@ func (in *ActionEventRouteMatchShowMetaGlobalInput) AnySelected() bool {
 
 // ActionEventRouteMatchShowOutput is a type for action output parameters
 type ActionEventRouteMatchShowOutput struct {
-	CreatedAt         string "json:\"created_at\""
-	EventRouteId      int64  "json:\"event_route_id\""
-	EventRouteLabel   string "json:\"event_route_label\""
-	Id                int64  "json:\"id\""
-	MatchOrder        int64  "json:\"match_order\""
-	RouteOwnerId      int64  "json:\"route_owner_id\""
-	RouteOwnerLogin   string "json:\"route_owner_login\""
-	Source            string "json:\"source\""
-	SubjectRelation   string "json:\"subject_relation\""
-	TimeIntervalState string "json:\"time_interval_state\""
-	UpdatedAt         string "json:\"updated_at\""
+	CreatedAt            string      "json:\"created_at\""
+	EventRouteId         int64       "json:\"event_route_id\""
+	EventRouteLabel      string      "json:\"event_route_label\""
+	Id                   int64       "json:\"id\""
+	MatchOrder           int64       "json:\"match_order\""
+	RouteOwnerId         int64       "json:\"route_owner_id\""
+	RouteOwnerLogin      string      "json:\"route_owner_login\""
+	Source               string      "json:\"source\""
+	SubjectRelation      string      "json:\"subject_relation\""
+	TimeIntervalSnapshot interface{} "json:\"time_interval_snapshot\""
+	TimeIntervalState    string      "json:\"time_interval_state\""
+	UpdatedAt            string      "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
@@ -187,7 +188,9 @@ func (inv *ActionEventRouteMatchShowInvocation) Call() (*ActionEventRouteMatchSh
 
 func (inv *ActionEventRouteMatchShowInvocation) callAsQuery() (*ActionEventRouteMatchShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionEventRouteMatchShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -196,13 +199,19 @@ func (inv *ActionEventRouteMatchShowInvocation) callAsQuery() (*ActionEventRoute
 	return resp, err
 }
 
-func (inv *ActionEventRouteMatchShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionEventRouteMatchShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

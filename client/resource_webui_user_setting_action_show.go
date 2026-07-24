@@ -82,6 +82,7 @@ type ActionWebuiUserSettingShowOutput struct {
 	Namespace string                "json:\"namespace\""
 	UpdatedAt string                "json:\"updated_at\""
 	User      *ActionUserShowOutput "json:\"user\""
+	Value     interface{}           "json:\"value\""
 }
 
 // Type for action response, including envelope
@@ -182,7 +183,9 @@ func (inv *ActionWebuiUserSettingShowInvocation) Call() (*ActionWebuiUserSetting
 
 func (inv *ActionWebuiUserSettingShowInvocation) callAsQuery() (*ActionWebuiUserSettingShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionWebuiUserSettingShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -191,13 +194,19 @@ func (inv *ActionWebuiUserSettingShowInvocation) callAsQuery() (*ActionWebuiUser
 	return resp, err
 }
 
-func (inv *ActionWebuiUserSettingShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionWebuiUserSettingShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

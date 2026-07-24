@@ -161,17 +161,18 @@ func (in *ActionEventRouteMatchIndexInput) AnySelected() bool {
 
 // ActionEventRouteMatchIndexOutput is a type for action output parameters
 type ActionEventRouteMatchIndexOutput struct {
-	CreatedAt         string "json:\"created_at\""
-	EventRouteId      int64  "json:\"event_route_id\""
-	EventRouteLabel   string "json:\"event_route_label\""
-	Id                int64  "json:\"id\""
-	MatchOrder        int64  "json:\"match_order\""
-	RouteOwnerId      int64  "json:\"route_owner_id\""
-	RouteOwnerLogin   string "json:\"route_owner_login\""
-	Source            string "json:\"source\""
-	SubjectRelation   string "json:\"subject_relation\""
-	TimeIntervalState string "json:\"time_interval_state\""
-	UpdatedAt         string "json:\"updated_at\""
+	CreatedAt            string      "json:\"created_at\""
+	EventRouteId         int64       "json:\"event_route_id\""
+	EventRouteLabel      string      "json:\"event_route_label\""
+	Id                   int64       "json:\"id\""
+	MatchOrder           int64       "json:\"match_order\""
+	RouteOwnerId         int64       "json:\"route_owner_id\""
+	RouteOwnerLogin      string      "json:\"route_owner_login\""
+	Source               string      "json:\"source\""
+	SubjectRelation      string      "json:\"subject_relation\""
+	TimeIntervalSnapshot interface{} "json:\"time_interval_snapshot\""
+	TimeIntervalState    string      "json:\"time_interval_state\""
+	UpdatedAt            string      "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
@@ -308,8 +309,12 @@ func (inv *ActionEventRouteMatchIndexInvocation) Call() (*ActionEventRouteMatchI
 
 func (inv *ActionEventRouteMatchIndexInvocation) callAsQuery() (*ActionEventRouteMatchIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionEventRouteMatchIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -318,7 +323,7 @@ func (inv *ActionEventRouteMatchIndexInvocation) callAsQuery() (*ActionEventRout
 	return resp, err
 }
 
-func (inv *ActionEventRouteMatchIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionEventRouteMatchIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("FromId") {
 			ret["route_match[from_id]"] = convertInt64ToString(inv.Input.FromId)
@@ -327,18 +332,26 @@ func (inv *ActionEventRouteMatchIndexInvocation) convertInputToQueryParams(ret m
 			ret["route_match[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionEventRouteMatchIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionEventRouteMatchIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

@@ -389,8 +389,12 @@ func (inv *ActionDnsZoneIndexInvocation) Call() (*ActionDnsZoneIndexResponse, er
 
 func (inv *ActionDnsZoneIndexInvocation) callAsQuery() (*ActionDnsZoneIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionDnsZoneIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -399,7 +403,7 @@ func (inv *ActionDnsZoneIndexInvocation) callAsQuery() (*ActionDnsZoneIndexRespo
 	return resp, err
 }
 
-func (inv *ActionDnsZoneIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionDnsZoneIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("DnssecEnabled") {
 			ret["dns_zone[dnssec_enabled]"] = convertBoolToString(inv.Input.DnssecEnabled)
@@ -427,18 +431,26 @@ func (inv *ActionDnsZoneIndexInvocation) convertInputToQueryParams(ret map[strin
 			}
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionDnsZoneIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionDnsZoneIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

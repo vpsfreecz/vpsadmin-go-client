@@ -77,6 +77,7 @@ func (in *ActionObjectHistoryShowMetaGlobalInput) AnySelected() bool {
 // ActionObjectHistoryShowOutput is a type for action output parameters
 type ActionObjectHistoryShowOutput struct {
 	CreatedAt   string                       "json:\"created_at\""
+	EventData   interface{}                  "json:\"event_data\""
 	EventType   string                       "json:\"event_type\""
 	Id          int64                        "json:\"id\""
 	Object      string                       "json:\"object\""
@@ -183,7 +184,9 @@ func (inv *ActionObjectHistoryShowInvocation) Call() (*ActionObjectHistoryShowRe
 
 func (inv *ActionObjectHistoryShowInvocation) callAsQuery() (*ActionObjectHistoryShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionObjectHistoryShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -192,13 +195,19 @@ func (inv *ActionObjectHistoryShowInvocation) callAsQuery() (*ActionObjectHistor
 	return resp, err
 }
 
-func (inv *ActionObjectHistoryShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionObjectHistoryShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

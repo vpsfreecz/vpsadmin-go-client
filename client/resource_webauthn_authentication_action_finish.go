@@ -60,8 +60,9 @@ func (in *ActionWebauthnAuthenticationFinishMetaGlobalInput) AnySelected() bool 
 
 // ActionWebauthnAuthenticationFinishInput is a type for action input parameters
 type ActionWebauthnAuthenticationFinishInput struct {
-	AuthToken      string "json:\"auth_token\""
-	ChallengeToken string "json:\"challenge_token\""
+	AuthToken           string      "json:\"auth_token\""
+	ChallengeToken      string      "json:\"challenge_token\""
+	PublicKeyCredential interface{} "json:\"public_key_credential\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -89,6 +90,18 @@ func (in *ActionWebauthnAuthenticationFinishInput) SetChallengeToken(value strin
 	}
 
 	in._selectedParameters["ChallengeToken"] = nil
+	return in
+}
+
+// SetPublicKeyCredential sets parameter PublicKeyCredential to value and selects it for sending
+func (in *ActionWebauthnAuthenticationFinishInput) SetPublicKeyCredential(value interface{}) *ActionWebauthnAuthenticationFinishInput {
+	in.PublicKeyCredential = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PublicKeyCredential"] = nil
 	return in
 }
 
@@ -273,6 +286,9 @@ func (inv *ActionWebauthnAuthenticationFinishInvocation) makeInputParams() map[s
 		}
 		if inv.IsParameterSelected("ChallengeToken") {
 			ret["challenge_token"] = inv.Input.ChallengeToken
+		}
+		if inv.IsParameterSelected("PublicKeyCredential") {
+			ret["public_key_credential"] = inv.Input.PublicKeyCredential
 		}
 	}
 

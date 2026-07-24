@@ -193,7 +193,9 @@ func (inv *ActionNodeKernelEvidenceShowInvocation) Call() (*ActionNodeKernelEvid
 
 func (inv *ActionNodeKernelEvidenceShowInvocation) callAsQuery() (*ActionNodeKernelEvidenceShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionNodeKernelEvidenceShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -202,13 +204,19 @@ func (inv *ActionNodeKernelEvidenceShowInvocation) callAsQuery() (*ActionNodeKer
 	return resp, err
 }
 
-func (inv *ActionNodeKernelEvidenceShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionNodeKernelEvidenceShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

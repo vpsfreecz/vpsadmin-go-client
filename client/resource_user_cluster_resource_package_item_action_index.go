@@ -300,8 +300,12 @@ func (inv *ActionUserClusterResourcePackageItemIndexInvocation) Call() (*ActionU
 
 func (inv *ActionUserClusterResourcePackageItemIndexInvocation) callAsQuery() (*ActionUserClusterResourcePackageItemIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionUserClusterResourcePackageItemIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -310,7 +314,7 @@ func (inv *ActionUserClusterResourcePackageItemIndexInvocation) callAsQuery() (*
 	return resp, err
 }
 
-func (inv *ActionUserClusterResourcePackageItemIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionUserClusterResourcePackageItemIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("FromId") {
 			ret["item[from_id]"] = convertInt64ToString(inv.Input.FromId)
@@ -319,18 +323,26 @@ func (inv *ActionUserClusterResourcePackageItemIndexInvocation) convertInputToQu
 			ret["item[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionUserClusterResourcePackageItemIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionUserClusterResourcePackageItemIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

@@ -304,8 +304,12 @@ func (inv *ActionVpsStateLogIndexInvocation) Call() (*ActionVpsStateLogIndexResp
 
 func (inv *ActionVpsStateLogIndexInvocation) callAsQuery() (*ActionVpsStateLogIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionVpsStateLogIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -314,7 +318,7 @@ func (inv *ActionVpsStateLogIndexInvocation) callAsQuery() (*ActionVpsStateLogIn
 	return resp, err
 }
 
-func (inv *ActionVpsStateLogIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionVpsStateLogIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("FromId") {
 			ret["state_log[from_id]"] = convertInt64ToString(inv.Input.FromId)
@@ -323,18 +327,26 @@ func (inv *ActionVpsStateLogIndexInvocation) convertInputToQueryParams(ret map[s
 			ret["state_log[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionVpsStateLogIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionVpsStateLogIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

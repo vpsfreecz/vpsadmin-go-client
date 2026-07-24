@@ -285,8 +285,12 @@ func (inv *ActionPaymentStatsEstimateIncomeInvocation) Call() (*ActionPaymentSta
 
 func (inv *ActionPaymentStatsEstimateIncomeInvocation) callAsQuery() (*ActionPaymentStatsEstimateIncomeResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionPaymentStatsEstimateIncomeResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -295,7 +299,7 @@ func (inv *ActionPaymentStatsEstimateIncomeInvocation) callAsQuery() (*ActionPay
 	return resp, err
 }
 
-func (inv *ActionPaymentStatsEstimateIncomeInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionPaymentStatsEstimateIncomeInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Duration") {
 			ret["payment_stat[duration]"] = convertInt64ToString(inv.Input.Duration)
@@ -310,12 +314,16 @@ func (inv *ActionPaymentStatsEstimateIncomeInvocation) convertInputToQueryParams
 			ret["payment_stat[year]"] = convertInt64ToString(inv.Input.Year)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionPaymentStatsEstimateIncomeInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionPaymentStatsEstimateIncomeInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

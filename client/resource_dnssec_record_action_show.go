@@ -186,7 +186,9 @@ func (inv *ActionDnssecRecordShowInvocation) Call() (*ActionDnssecRecordShowResp
 
 func (inv *ActionDnssecRecordShowInvocation) callAsQuery() (*ActionDnssecRecordShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionDnssecRecordShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -195,13 +197,19 @@ func (inv *ActionDnssecRecordShowInvocation) callAsQuery() (*ActionDnssecRecordS
 	return resp, err
 }
 
-func (inv *ActionDnssecRecordShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionDnssecRecordShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

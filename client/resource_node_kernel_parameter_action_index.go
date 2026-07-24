@@ -430,8 +430,12 @@ func (inv *ActionNodeKernelParameterIndexInvocation) Call() (*ActionNodeKernelPa
 
 func (inv *ActionNodeKernelParameterIndexInvocation) callAsQuery() (*ActionNodeKernelParameterIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionNodeKernelParameterIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -440,7 +444,7 @@ func (inv *ActionNodeKernelParameterIndexInvocation) callAsQuery() (*ActionNodeK
 	return resp, err
 }
 
-func (inv *ActionNodeKernelParameterIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionNodeKernelParameterIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("From") {
 			ret["node_kernel_parameter[from]"] = inv.Input.From
@@ -473,18 +477,26 @@ func (inv *ActionNodeKernelParameterIndexInvocation) convertInputToQueryParams(r
 			ret["node_kernel_parameter[value]"] = inv.Input.Value
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionNodeKernelParameterIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionNodeKernelParameterIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

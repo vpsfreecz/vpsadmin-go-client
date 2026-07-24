@@ -76,14 +76,15 @@ func (in *ActionNotificationTemplateVariantUpdateMetaGlobalInput) AnySelected() 
 
 // ActionNotificationTemplateVariantUpdateInput is a type for action input parameters
 type ActionNotificationTemplateVariantUpdateInput struct {
-	From       string "json:\"from\""
-	Html       string "json:\"html\""
-	Language   int64  "json:\"language\""
-	Protocol   string "json:\"protocol\""
-	ReplyTo    string "json:\"reply_to\""
-	ReturnPath string "json:\"return_path\""
-	Subject    string "json:\"subject\""
-	Text       string "json:\"text\""
+	From       string      "json:\"from\""
+	Html       string      "json:\"html\""
+	Language   int64       "json:\"language\""
+	Options    interface{} "json:\"options\""
+	Protocol   string      "json:\"protocol\""
+	ReplyTo    string      "json:\"reply_to\""
+	ReturnPath string      "json:\"return_path\""
+	Subject    string      "json:\"subject\""
+	Text       string      "json:\"text\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -161,6 +162,37 @@ func (in *ActionNotificationTemplateVariantUpdateInput) SetLanguage(value int64)
 	}
 
 	in._selectedParameters["Language"] = nil
+	return in
+}
+
+// SetOptions sets parameter Options to value and selects it for sending
+func (in *ActionNotificationTemplateVariantUpdateInput) SetOptions(value interface{}) *ActionNotificationTemplateVariantUpdateInput {
+	in.Options = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetOptionsNil(false)
+	in._selectedParameters["Options"] = nil
+	return in
+}
+
+// SetOptionsNil sets parameter Options to nil and selects it for sending
+func (in *ActionNotificationTemplateVariantUpdateInput) SetOptionsNil(set bool) *ActionNotificationTemplateVariantUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Options"] = nil
+		in.SelectParameters("Options")
+	} else {
+		delete(in._nilParameters, "Options")
+	}
 	return in
 }
 
@@ -351,6 +383,7 @@ type ActionNotificationTemplateVariantUpdateOutput struct {
 	Html       string                    "json:\"html\""
 	Id         int64                     "json:\"id\""
 	Language   *ActionLanguageShowOutput "json:\"language\""
+	Options    interface{}               "json:\"options\""
 	Protocol   string                    "json:\"protocol\""
 	ReplyTo    string                    "json:\"reply_to\""
 	ReturnPath string                    "json:\"return_path\""
@@ -535,6 +568,13 @@ func (inv *ActionNotificationTemplateVariantUpdateInvocation) makeInputParams() 
 		}
 		if inv.IsParameterSelected("Language") {
 			ret["language"] = inv.Input.Language
+		}
+		if inv.IsParameterSelected("Options") {
+			if inv.IsParameterNil("Options") {
+				ret["options"] = nil
+			} else {
+				ret["options"] = inv.Input.Options
+			}
 		}
 		if inv.IsParameterSelected("Protocol") {
 			ret["protocol"] = inv.Input.Protocol

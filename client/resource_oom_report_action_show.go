@@ -84,7 +84,6 @@ type ActionOomReportShowOutput struct {
 	InvokedByPid  int64                "json:\"invoked_by_pid\""
 	KilledName    string               "json:\"killed_name\""
 	KilledPid     int64                "json:\"killed_pid\""
-	ReportedAt    string               "json:\"reported_at\""
 	Vps           *ActionVpsShowOutput "json:\"vps\""
 }
 
@@ -186,7 +185,9 @@ func (inv *ActionOomReportShowInvocation) Call() (*ActionOomReportShowResponse, 
 
 func (inv *ActionOomReportShowInvocation) callAsQuery() (*ActionOomReportShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionOomReportShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -195,13 +196,19 @@ func (inv *ActionOomReportShowInvocation) callAsQuery() (*ActionOomReportShowRes
 	return resp, err
 }
 
-func (inv *ActionOomReportShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionOomReportShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

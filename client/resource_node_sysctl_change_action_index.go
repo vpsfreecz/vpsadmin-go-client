@@ -409,8 +409,12 @@ func (inv *ActionNodeSysctlChangeIndexInvocation) Call() (*ActionNodeSysctlChang
 
 func (inv *ActionNodeSysctlChangeIndexInvocation) callAsQuery() (*ActionNodeSysctlChangeIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionNodeSysctlChangeIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -419,7 +423,7 @@ func (inv *ActionNodeSysctlChangeIndexInvocation) callAsQuery() (*ActionNodeSysc
 	return resp, err
 }
 
-func (inv *ActionNodeSysctlChangeIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionNodeSysctlChangeIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("From") {
 			ret["node_sysctl_change[from]"] = inv.Input.From
@@ -446,18 +450,26 @@ func (inv *ActionNodeSysctlChangeIndexInvocation) convertInputToQueryParams(ret 
 			ret["node_sysctl_change[to]"] = inv.Input.To
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionNodeSysctlChangeIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionNodeSysctlChangeIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

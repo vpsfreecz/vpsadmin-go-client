@@ -361,8 +361,12 @@ func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) Call() (*ActionMigrat
 
 func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) callAsQuery() (*ActionMigrationPlanVpsMigrationIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionMigrationPlanVpsMigrationIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -371,7 +375,7 @@ func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) callAsQuery() (*Actio
 	return resp, err
 }
 
-func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("DstNode") {
 			ret["vps_migration[dst_node]"] = convertInt64ToString(inv.Input.DstNode)
@@ -389,18 +393,26 @@ func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) convertInputToQueryPa
 			ret["vps_migration[state]"] = inv.Input.State
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionMigrationPlanVpsMigrationIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

@@ -313,6 +313,11 @@ type ActionEventRouteIndexOutput struct {
 	EventType              string                "json:\"event_type\""
 	EventTypePattern       string                "json:\"event_type_pattern\""
 	ExpiresAt              string                "json:\"expires_at\""
+	GroupBy                interface{}           "json:\"group_by\""
+	GroupIntervalSeconds   int64                 "json:\"group_interval_seconds\""
+	GroupWaitSeconds       int64                 "json:\"group_wait_seconds\""
+	GroupingEnabled        bool                  "json:\"grouping_enabled\""
+	GroupingSummary        string                "json:\"grouping_summary\""
 	HitCount               int64                 "json:\"hit_count\""
 	Id                     int64                 "json:\"id\""
 	Label                  string                "json:\"label\""
@@ -457,8 +462,12 @@ func (inv *ActionEventRouteIndexInvocation) Call() (*ActionEventRouteIndexRespon
 
 func (inv *ActionEventRouteIndexInvocation) callAsQuery() (*ActionEventRouteIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionEventRouteIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -467,7 +476,7 @@ func (inv *ActionEventRouteIndexInvocation) callAsQuery() (*ActionEventRouteInde
 	return resp, err
 }
 
-func (inv *ActionEventRouteIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionEventRouteIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Enabled") {
 			ret["event_route[enabled]"] = convertBoolToString(inv.Input.Enabled)
@@ -509,18 +518,26 @@ func (inv *ActionEventRouteIndexInvocation) convertInputToQueryParams(ret map[st
 			ret["event_route[user]"] = convertInt64ToString(inv.Input.User)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionEventRouteIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionEventRouteIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }
