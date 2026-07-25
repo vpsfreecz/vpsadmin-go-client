@@ -63,6 +63,8 @@ type Client struct {
 	Event *ResourceEvent
 	// Resource Event_delivery
 	EventDelivery *ResourceEventDelivery
+	// Resource Event_delivery_group
+	EventDeliveryGroup *ResourceEventDeliveryGroup
 	// Resource Event_route
 	EventRoute *ResourceEventRoute
 	// Resource Event_time_interval
@@ -260,6 +262,7 @@ func New(url string) *Client {
 	c.Environment = NewResourceEnvironment(c)
 	c.Event = NewResourceEvent(c)
 	c.EventDelivery = NewResourceEventDelivery(c)
+	c.EventDeliveryGroup = NewResourceEventDeliveryGroup(c)
 	c.EventRoute = NewResourceEventRoute(c)
 	c.EventTimeInterval = NewResourceEventTimeInterval(c)
 	c.EventType = NewResourceEventType(c)

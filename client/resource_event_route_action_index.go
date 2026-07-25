@@ -321,6 +321,7 @@ type ActionEventRouteIndexOutput struct {
 	HitCount               int64                 "json:\"hit_count\""
 	Id                     int64                 "json:\"id\""
 	Label                  string                "json:\"label\""
+	MatcherCount           int64                 "json:\"matcher_count\""
 	MatcherSummary         string                "json:\"matcher_summary\""
 	NotificationReceiverId int64                 "json:\"notification_receiver_id\""
 	ParentId               int64                 "json:\"parent_id\""

@@ -87,6 +87,7 @@ func (in *ActionEventDeliveryIndexMetaGlobalInput) AnySelected() bool {
 // ActionEventDeliveryIndexInput is a type for action input parameters
 type ActionEventDeliveryIndexInput struct {
 	Action                       string "json:\"action\""
+	EventDeliveryGroup           int64  "json:\"event_delivery_group\""
 	EventRouteId                 int64  "json:\"event_route_id\""
 	EventType                    string "json:\"event_type\""
 	FromId                       int64  "json:\"from_id\""
@@ -131,6 +132,37 @@ func (in *ActionEventDeliveryIndexInput) SetActionNil(set bool) *ActionEventDeli
 		in.SelectParameters("Action")
 	} else {
 		delete(in._nilParameters, "Action")
+	}
+	return in
+}
+
+// SetEventDeliveryGroup sets parameter EventDeliveryGroup to value and selects it for sending
+func (in *ActionEventDeliveryIndexInput) SetEventDeliveryGroup(value int64) *ActionEventDeliveryIndexInput {
+	in.EventDeliveryGroup = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetEventDeliveryGroupNil(false)
+	in._selectedParameters["EventDeliveryGroup"] = nil
+	return in
+}
+
+// SetEventDeliveryGroupNil sets parameter EventDeliveryGroup to nil and selects it for sending
+func (in *ActionEventDeliveryIndexInput) SetEventDeliveryGroupNil(set bool) *ActionEventDeliveryIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["EventDeliveryGroup"] = nil
+		in.SelectParameters("EventDeliveryGroup")
+	} else {
+		delete(in._nilParameters, "EventDeliveryGroup")
 	}
 	return in
 }
@@ -635,6 +667,13 @@ func (inv *ActionEventDeliveryIndexInvocation) IsMetaParameterNil(param string) 
 func (inv *ActionEventDeliveryIndexInvocation) validate() error {
 	verr := NewValidationError()
 	if inv.Input != nil {
+		if inv.IsParameterSelected("EventDeliveryGroup") {
+			if !inv.IsParameterNil("EventDeliveryGroup") {
+				if inv.Input.EventDeliveryGroup < 0 {
+					verr.Add("event_delivery_group", "not a valid resource id")
+				}
+			}
+		}
 		if inv.IsParameterSelected("RecipientUser") {
 			if !inv.IsParameterNil("RecipientUser") {
 				if inv.Input.RecipientUser < 0 {
@@ -691,6 +730,13 @@ func (inv *ActionEventDeliveryIndexInvocation) convertInputToQueryParams(ret map
 				ret["event_delivery[action]"] = ""
 			} else {
 				ret["event_delivery[action]"] = inv.Input.Action
+			}
+		}
+		if inv.IsParameterSelected("EventDeliveryGroup") {
+			if inv.IsParameterNil("EventDeliveryGroup") {
+				ret["event_delivery[event_delivery_group]"] = ""
+			} else {
+				ret["event_delivery[event_delivery_group]"] = convertInt64ToString(inv.Input.EventDeliveryGroup)
 			}
 		}
 		if inv.IsParameterSelected("EventRouteId") {

@@ -88,9 +88,11 @@ func (in *ActionEventIndexMetaGlobalInput) AnySelected() bool {
 type ActionEventIndexInput struct {
 	Action                       string "json:\"action\""
 	Category                     string "json:\"category\""
+	EventDeliveryGroup           int64  "json:\"event_delivery_group\""
 	EventRouteId                 int64  "json:\"event_route_id\""
 	EventType                    string "json:\"event_type\""
 	FromId                       int64  "json:\"from_id\""
+	GroupMembership              string "json:\"group_membership\""
 	Limit                        int64  "json:\"limit\""
 	NotificationReceiverId       int64  "json:\"notification_receiver_id\""
 	NotificationReceiverTargetId int64  "json:\"notification_receiver_target_id\""
@@ -126,6 +128,37 @@ func (in *ActionEventIndexInput) SetCategory(value string) *ActionEventIndexInpu
 	}
 
 	in._selectedParameters["Category"] = nil
+	return in
+}
+
+// SetEventDeliveryGroup sets parameter EventDeliveryGroup to value and selects it for sending
+func (in *ActionEventIndexInput) SetEventDeliveryGroup(value int64) *ActionEventIndexInput {
+	in.EventDeliveryGroup = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetEventDeliveryGroupNil(false)
+	in._selectedParameters["EventDeliveryGroup"] = nil
+	return in
+}
+
+// SetEventDeliveryGroupNil sets parameter EventDeliveryGroup to nil and selects it for sending
+func (in *ActionEventIndexInput) SetEventDeliveryGroupNil(set bool) *ActionEventIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["EventDeliveryGroup"] = nil
+		in.SelectParameters("EventDeliveryGroup")
+	} else {
+		delete(in._nilParameters, "EventDeliveryGroup")
+	}
 	return in
 }
 
@@ -181,6 +214,37 @@ func (in *ActionEventIndexInput) SetFromId(value int64) *ActionEventIndexInput {
 	}
 
 	in._selectedParameters["FromId"] = nil
+	return in
+}
+
+// SetGroupMembership sets parameter GroupMembership to value and selects it for sending
+func (in *ActionEventIndexInput) SetGroupMembership(value string) *ActionEventIndexInput {
+	in.GroupMembership = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetGroupMembershipNil(false)
+	in._selectedParameters["GroupMembership"] = nil
+	return in
+}
+
+// SetGroupMembershipNil sets parameter GroupMembership to nil and selects it for sending
+func (in *ActionEventIndexInput) SetGroupMembershipNil(set bool) *ActionEventIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["GroupMembership"] = nil
+		in.SelectParameters("GroupMembership")
+	} else {
+		delete(in._nilParameters, "GroupMembership")
+	}
 	return in
 }
 
@@ -535,6 +599,13 @@ func (inv *ActionEventIndexInvocation) IsMetaParameterNil(param string) bool {
 func (inv *ActionEventIndexInvocation) validate() error {
 	verr := NewValidationError()
 	if inv.Input != nil {
+		if inv.IsParameterSelected("EventDeliveryGroup") {
+			if !inv.IsParameterNil("EventDeliveryGroup") {
+				if inv.Input.EventDeliveryGroup < 0 {
+					verr.Add("event_delivery_group", "not a valid resource id")
+				}
+			}
+		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
@@ -585,6 +656,13 @@ func (inv *ActionEventIndexInvocation) convertInputToQueryParams(ret map[string]
 		if inv.IsParameterSelected("Category") {
 			ret["event[category]"] = inv.Input.Category
 		}
+		if inv.IsParameterSelected("EventDeliveryGroup") {
+			if inv.IsParameterNil("EventDeliveryGroup") {
+				ret["event[event_delivery_group]"] = ""
+			} else {
+				ret["event[event_delivery_group]"] = convertInt64ToString(inv.Input.EventDeliveryGroup)
+			}
+		}
 		if inv.IsParameterSelected("EventRouteId") {
 			if inv.IsParameterNil("EventRouteId") {
 				ret["event[event_route_id]"] = ""
@@ -597,6 +675,13 @@ func (inv *ActionEventIndexInvocation) convertInputToQueryParams(ret map[string]
 		}
 		if inv.IsParameterSelected("FromId") {
 			ret["event[from_id]"] = convertInt64ToString(inv.Input.FromId)
+		}
+		if inv.IsParameterSelected("GroupMembership") {
+			if inv.IsParameterNil("GroupMembership") {
+				ret["event[group_membership]"] = ""
+			} else {
+				ret["event[group_membership]"] = inv.Input.GroupMembership
+			}
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["event[limit]"] = convertInt64ToString(inv.Input.Limit)
