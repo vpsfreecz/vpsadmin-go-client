@@ -76,9 +76,11 @@ type ActionSecurityAdvisoryCreateInput struct {
 	CsDescription string "json:\"cs_description\""
 	CsResponse    string "json:\"cs_response\""
 	CsSummary     string "json:\"cs_summary\""
+	Cve           string "json:\"cve\""
 	EnDescription string "json:\"en_description\""
 	EnResponse    string "json:\"en_response\""
 	EnSummary     string "json:\"en_summary\""
+	ExternalId    string "json:\"external_id\""
 	Name          string "json:\"name\""
 	PublishedAt   string "json:\"published_at\""
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -123,6 +125,37 @@ func (in *ActionSecurityAdvisoryCreateInput) SetCsSummary(value string) *ActionS
 	return in
 }
 
+// SetCve sets parameter Cve to value and selects it for sending
+func (in *ActionSecurityAdvisoryCreateInput) SetCve(value string) *ActionSecurityAdvisoryCreateInput {
+	in.Cve = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetCveNil(false)
+	in._selectedParameters["Cve"] = nil
+	return in
+}
+
+// SetCveNil sets parameter Cve to nil and selects it for sending
+func (in *ActionSecurityAdvisoryCreateInput) SetCveNil(set bool) *ActionSecurityAdvisoryCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Cve"] = nil
+		in.SelectParameters("Cve")
+	} else {
+		delete(in._nilParameters, "Cve")
+	}
+	return in
+}
+
 // SetEnDescription sets parameter EnDescription to value and selects it for sending
 func (in *ActionSecurityAdvisoryCreateInput) SetEnDescription(value string) *ActionSecurityAdvisoryCreateInput {
 	in.EnDescription = value
@@ -156,6 +189,37 @@ func (in *ActionSecurityAdvisoryCreateInput) SetEnSummary(value string) *ActionS
 	}
 
 	in._selectedParameters["EnSummary"] = nil
+	return in
+}
+
+// SetExternalId sets parameter ExternalId to value and selects it for sending
+func (in *ActionSecurityAdvisoryCreateInput) SetExternalId(value string) *ActionSecurityAdvisoryCreateInput {
+	in.ExternalId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetExternalIdNil(false)
+	in._selectedParameters["ExternalId"] = nil
+	return in
+}
+
+// SetExternalIdNil sets parameter ExternalId to nil and selects it for sending
+func (in *ActionSecurityAdvisoryCreateInput) SetExternalIdNil(set bool) *ActionSecurityAdvisoryCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["ExternalId"] = nil
+		in.SelectParameters("ExternalId")
+	} else {
+		delete(in._nilParameters, "ExternalId")
+	}
 	return in
 }
 
@@ -271,6 +335,7 @@ type ActionSecurityAdvisoryCreateOutput struct {
 	AffectedNodeCount int64                 "json:\"affected_node_count\""
 	AffectedUserCount int64                 "json:\"affected_user_count\""
 	AffectedVpsCount  int64                 "json:\"affected_vps_count\""
+	ContentRevision   int64                 "json:\"content_revision\""
 	CreatedAt         string                "json:\"created_at\""
 	CreatedBy         *ActionUserShowOutput "json:\"created_by\""
 	CsDescription     string                "json:\"cs_description\""
@@ -279,6 +344,7 @@ type ActionSecurityAdvisoryCreateOutput struct {
 	EnDescription     string                "json:\"en_description\""
 	EnResponse        string                "json:\"en_response\""
 	EnSummary         string                "json:\"en_summary\""
+	ExternalId        string                "json:\"external_id\""
 	Id                int64                 "json:\"id\""
 	Name              string                "json:\"name\""
 	PublishedAt       string                "json:\"published_at\""
@@ -449,6 +515,13 @@ func (inv *ActionSecurityAdvisoryCreateInvocation) makeInputParams() map[string]
 		if inv.IsParameterSelected("CsSummary") {
 			ret["cs_summary"] = inv.Input.CsSummary
 		}
+		if inv.IsParameterSelected("Cve") {
+			if inv.IsParameterNil("Cve") {
+				ret["cve"] = nil
+			} else {
+				ret["cve"] = inv.Input.Cve
+			}
+		}
 		if inv.IsParameterSelected("EnDescription") {
 			ret["en_description"] = inv.Input.EnDescription
 		}
@@ -457,6 +530,13 @@ func (inv *ActionSecurityAdvisoryCreateInvocation) makeInputParams() map[string]
 		}
 		if inv.IsParameterSelected("EnSummary") {
 			ret["en_summary"] = inv.Input.EnSummary
+		}
+		if inv.IsParameterSelected("ExternalId") {
+			if inv.IsParameterNil("ExternalId") {
+				ret["external_id"] = nil
+			} else {
+				ret["external_id"] = inv.Input.ExternalId
+			}
 		}
 		if inv.IsParameterSelected("Name") {
 			if inv.IsParameterNil("Name") {

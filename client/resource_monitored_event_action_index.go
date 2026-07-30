@@ -400,8 +400,12 @@ func (inv *ActionMonitoredEventIndexInvocation) Call() (*ActionMonitoredEventInd
 
 func (inv *ActionMonitoredEventIndexInvocation) callAsQuery() (*ActionMonitoredEventIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionMonitoredEventIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -410,7 +414,7 @@ func (inv *ActionMonitoredEventIndexInvocation) callAsQuery() (*ActionMonitoredE
 	return resp, err
 }
 
-func (inv *ActionMonitoredEventIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionMonitoredEventIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("FromDuration") {
 			ret["monitored_event[from_duration]"] = convertFloat64ToString(inv.Input.FromDuration)
@@ -440,18 +444,26 @@ func (inv *ActionMonitoredEventIndexInvocation) convertInputToQueryParams(ret ma
 			ret["monitored_event[user]"] = convertInt64ToString(inv.Input.User)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionMonitoredEventIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionMonitoredEventIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

@@ -89,13 +89,13 @@ type ActionUserCreateInput struct {
 	Location                   int64  "json:\"location\""
 	Lockout                    bool   "json:\"lockout\""
 	Login                      string "json:\"login\""
-	MailerEnabled              bool   "json:\"mailer_enabled\""
 	Node                       int64  "json:\"node\""
 	OsTemplate                 int64  "json:\"os_template\""
 	Password                   string "json:\"password\""
 	PasswordReset              bool   "json:\"password_reset\""
 	PreferredLogoutAll         bool   "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64  "json:\"preferred_session_length\""
+	TimeZone                   string "json:\"time_zone\""
 	Vps                        bool   "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -295,18 +295,6 @@ func (in *ActionUserCreateInput) SetLogin(value string) *ActionUserCreateInput {
 	return in
 }
 
-// SetMailerEnabled sets parameter MailerEnabled to value and selects it for sending
-func (in *ActionUserCreateInput) SetMailerEnabled(value bool) *ActionUserCreateInput {
-	in.MailerEnabled = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["MailerEnabled"] = nil
-	return in
-}
-
 // SetNode sets parameter Node to value and selects it for sending
 func (in *ActionUserCreateInput) SetNode(value int64) *ActionUserCreateInput {
 	in.Node = value
@@ -376,6 +364,37 @@ func (in *ActionUserCreateInput) SetPreferredSessionLength(value int64) *ActionU
 	}
 
 	in._selectedParameters["PreferredSessionLength"] = nil
+	return in
+}
+
+// SetTimeZone sets parameter TimeZone to value and selects it for sending
+func (in *ActionUserCreateInput) SetTimeZone(value string) *ActionUserCreateInput {
+	in.TimeZone = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetTimeZoneNil(false)
+	in._selectedParameters["TimeZone"] = nil
+	return in
+}
+
+// SetTimeZoneNil sets parameter TimeZone to nil and selects it for sending
+func (in *ActionUserCreateInput) SetTimeZoneNil(set bool) *ActionUserCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TimeZone"] = nil
+		in.SelectParameters("TimeZone")
+	} else {
+		delete(in._nilParameters, "TimeZone")
+	}
 	return in
 }
 
@@ -456,12 +475,12 @@ type ActionUserCreateOutput struct {
 	Level                      int64                     "json:\"level\""
 	Lockout                    bool                      "json:\"lockout\""
 	Login                      string                    "json:\"login\""
-	MailerEnabled              bool                      "json:\"mailer_enabled\""
 	ObjectState                string                    "json:\"object_state\""
 	PasswordReset              bool                      "json:\"password_reset\""
 	PreferredLogoutAll         bool                      "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64                     "json:\"preferred_session_length\""
 	RemindAfterDate            string                    "json:\"remind_after_date\""
+	TimeZone                   string                    "json:\"time_zone\""
 }
 
 // ActionUserCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -772,9 +791,6 @@ func (inv *ActionUserCreateInvocation) makeInputParams() map[string]interface{} 
 		if inv.IsParameterSelected("Login") {
 			ret["login"] = inv.Input.Login
 		}
-		if inv.IsParameterSelected("MailerEnabled") {
-			ret["mailer_enabled"] = inv.Input.MailerEnabled
-		}
 		if inv.IsParameterSelected("Node") {
 			ret["node"] = inv.Input.Node
 		}
@@ -792,6 +808,13 @@ func (inv *ActionUserCreateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("PreferredSessionLength") {
 			ret["preferred_session_length"] = inv.Input.PreferredSessionLength
+		}
+		if inv.IsParameterSelected("TimeZone") {
+			if inv.IsParameterNil("TimeZone") {
+				ret["time_zone"] = nil
+			} else {
+				ret["time_zone"] = inv.Input.TimeZone
+			}
 		}
 		if inv.IsParameterSelected("Vps") {
 			ret["vps"] = inv.Input.Vps

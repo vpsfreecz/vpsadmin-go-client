@@ -93,7 +93,6 @@ type ActionUserUpdateInput struct {
 	Lockout                    bool   "json:\"lockout\""
 	Login                      string "json:\"login\""
 	LogoutSessions             bool   "json:\"logout_sessions\""
-	MailerEnabled              bool   "json:\"mailer_enabled\""
 	NewPassword                string "json:\"new_password\""
 	ObjectState                string "json:\"object_state\""
 	Password                   string "json:\"password\""
@@ -101,6 +100,7 @@ type ActionUserUpdateInput struct {
 	PreferredLogoutAll         bool   "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64  "json:\"preferred_session_length\""
 	RemindAfterDate            string "json:\"remind_after_date\""
+	TimeZone                   string "json:\"time_zone\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -330,18 +330,6 @@ func (in *ActionUserUpdateInput) SetLogoutSessions(value bool) *ActionUserUpdate
 	return in
 }
 
-// SetMailerEnabled sets parameter MailerEnabled to value and selects it for sending
-func (in *ActionUserUpdateInput) SetMailerEnabled(value bool) *ActionUserUpdateInput {
-	in.MailerEnabled = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["MailerEnabled"] = nil
-	return in
-}
-
 // SetNewPassword sets parameter NewPassword to value and selects it for sending
 func (in *ActionUserUpdateInput) SetNewPassword(value string) *ActionUserUpdateInput {
 	in.NewPassword = value
@@ -426,6 +414,37 @@ func (in *ActionUserUpdateInput) SetRemindAfterDate(value string) *ActionUserUpd
 	return in
 }
 
+// SetTimeZone sets parameter TimeZone to value and selects it for sending
+func (in *ActionUserUpdateInput) SetTimeZone(value string) *ActionUserUpdateInput {
+	in.TimeZone = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetTimeZoneNil(false)
+	in._selectedParameters["TimeZone"] = nil
+	return in
+}
+
+// SetTimeZoneNil sets parameter TimeZone to nil and selects it for sending
+func (in *ActionUserUpdateInput) SetTimeZoneNil(set bool) *ActionUserUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TimeZone"] = nil
+		in.SelectParameters("TimeZone")
+	} else {
+		delete(in._nilParameters, "TimeZone")
+	}
+	return in
+}
+
 // SelectParameters sets parameters from ActionUserUpdateInput
 // that will be sent to the API.
 // SelectParameters can be called multiple times.
@@ -490,10 +509,10 @@ type ActionUserUpdateOutput struct {
 	Level                      int64                     "json:\"level\""
 	Lockout                    bool                      "json:\"lockout\""
 	Login                      string                    "json:\"login\""
-	MailerEnabled              bool                      "json:\"mailer_enabled\""
 	PasswordReset              bool                      "json:\"password_reset\""
 	PreferredLogoutAll         bool                      "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64                     "json:\"preferred_session_length\""
+	TimeZone                   string                    "json:\"time_zone\""
 }
 
 // ActionUserUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -814,9 +833,6 @@ func (inv *ActionUserUpdateInvocation) makeInputParams() map[string]interface{} 
 		if inv.IsParameterSelected("LogoutSessions") {
 			ret["logout_sessions"] = inv.Input.LogoutSessions
 		}
-		if inv.IsParameterSelected("MailerEnabled") {
-			ret["mailer_enabled"] = inv.Input.MailerEnabled
-		}
 		if inv.IsParameterSelected("NewPassword") {
 			ret["new_password"] = inv.Input.NewPassword
 		}
@@ -837,6 +853,13 @@ func (inv *ActionUserUpdateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("RemindAfterDate") {
 			ret["remind_after_date"] = inv.Input.RemindAfterDate
+		}
+		if inv.IsParameterSelected("TimeZone") {
+			if inv.IsParameterNil("TimeZone") {
+				ret["time_zone"] = nil
+			} else {
+				ret["time_zone"] = inv.Input.TimeZone
+			}
 		}
 	}
 

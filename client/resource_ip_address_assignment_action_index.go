@@ -554,8 +554,12 @@ func (inv *ActionIpAddressAssignmentIndexInvocation) Call() (*ActionIpAddressAss
 
 func (inv *ActionIpAddressAssignmentIndexInvocation) callAsQuery() (*ActionIpAddressAssignmentIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionIpAddressAssignmentIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -564,7 +568,7 @@ func (inv *ActionIpAddressAssignmentIndexInvocation) callAsQuery() (*ActionIpAdd
 	return resp, err
 }
 
-func (inv *ActionIpAddressAssignmentIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionIpAddressAssignmentIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Active") {
 			ret["ip_address_assignment[active]"] = convertBoolToString(inv.Input.Active)
@@ -620,18 +624,26 @@ func (inv *ActionIpAddressAssignmentIndexInvocation) convertInputToQueryParams(r
 			ret["ip_address_assignment[vps]"] = convertInt64ToString(inv.Input.Vps)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionIpAddressAssignmentIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionIpAddressAssignmentIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

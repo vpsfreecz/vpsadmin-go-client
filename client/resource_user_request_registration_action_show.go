@@ -128,7 +128,9 @@ type ActionUserRequestRegistrationShowOutput struct {
 	OrgId                  string                      "json:\"org_id\""
 	OrgName                string                      "json:\"org_name\""
 	OsTemplate             *ActionOsTemplateShowOutput "json:\"os_template\""
+	RawUserId              int64                       "json:\"raw_user_id\""
 	State                  string                      "json:\"state\""
+	TimeZone               string                      "json:\"time_zone\""
 	UpdatedAt              string                      "json:\"updated_at\""
 	User                   *ActionUserShowOutput       "json:\"user\""
 	YearOfBirth            int64                       "json:\"year_of_birth\""
@@ -232,7 +234,9 @@ func (inv *ActionUserRequestRegistrationShowInvocation) Call() (*ActionUserReque
 
 func (inv *ActionUserRequestRegistrationShowInvocation) callAsQuery() (*ActionUserRequestRegistrationShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionUserRequestRegistrationShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -241,13 +245,19 @@ func (inv *ActionUserRequestRegistrationShowInvocation) callAsQuery() (*ActionUs
 	return resp, err
 }
 
-func (inv *ActionUserRequestRegistrationShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionUserRequestRegistrationShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

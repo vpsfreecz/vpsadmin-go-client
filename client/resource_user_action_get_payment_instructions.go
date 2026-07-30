@@ -164,7 +164,9 @@ func (inv *ActionUserGetPaymentInstructionsInvocation) Call() (*ActionUserGetPay
 
 func (inv *ActionUserGetPaymentInstructionsInvocation) callAsQuery() (*ActionUserGetPaymentInstructionsResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionUserGetPaymentInstructionsResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -173,10 +175,12 @@ func (inv *ActionUserGetPaymentInstructionsInvocation) callAsQuery() (*ActionUse
 	return resp, err
 }
 
-func (inv *ActionUserGetPaymentInstructionsInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionUserGetPaymentInstructionsInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

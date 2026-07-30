@@ -100,7 +100,26 @@ func (in *ActionNodeCreateInput) SetCpus(value int64) *ActionNodeCreateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetCpusNil(false)
 	in._selectedParameters["Cpus"] = nil
+	return in
+}
+
+// SetCpusNil sets parameter Cpus to nil and selects it for sending
+func (in *ActionNodeCreateInput) SetCpusNil(set bool) *ActionNodeCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Cpus"] = nil
+		in.SelectParameters("Cpus")
+	} else {
+		delete(in._nilParameters, "Cpus")
+	}
 	return in
 }
 
@@ -220,7 +239,26 @@ func (in *ActionNodeCreateInput) SetTotalMemory(value int64) *ActionNodeCreateIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetTotalMemoryNil(false)
 	in._selectedParameters["TotalMemory"] = nil
+	return in
+}
+
+// SetTotalMemoryNil sets parameter TotalMemory to nil and selects it for sending
+func (in *ActionNodeCreateInput) SetTotalMemoryNil(set bool) *ActionNodeCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TotalMemory"] = nil
+		in.SelectParameters("TotalMemory")
+	} else {
+		delete(in._nilParameters, "TotalMemory")
+	}
 	return in
 }
 
@@ -232,7 +270,26 @@ func (in *ActionNodeCreateInput) SetTotalSwap(value int64) *ActionNodeCreateInpu
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetTotalSwapNil(false)
 	in._selectedParameters["TotalSwap"] = nil
+	return in
+}
+
+// SetTotalSwapNil sets parameter TotalSwap to nil and selects it for sending
+func (in *ActionNodeCreateInput) SetTotalSwapNil(set bool) *ActionNodeCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TotalSwap"] = nil
+		in.SelectParameters("TotalSwap")
+	} else {
+		delete(in._nilParameters, "TotalSwap")
+	}
 	return in
 }
 
@@ -572,7 +629,11 @@ func (inv *ActionNodeCreateInvocation) makeInputParams() map[string]interface{} 
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Cpus") {
-			ret["cpus"] = inv.Input.Cpus
+			if inv.IsParameterNil("Cpus") {
+				ret["cpus"] = nil
+			} else {
+				ret["cpus"] = inv.Input.Cpus
+			}
 		}
 		if inv.IsParameterSelected("HypervisorType") {
 			ret["hypervisor_type"] = inv.Input.HypervisorType
@@ -602,10 +663,18 @@ func (inv *ActionNodeCreateInvocation) makeInputParams() map[string]interface{} 
 			ret["name"] = inv.Input.Name
 		}
 		if inv.IsParameterSelected("TotalMemory") {
-			ret["total_memory"] = inv.Input.TotalMemory
+			if inv.IsParameterNil("TotalMemory") {
+				ret["total_memory"] = nil
+			} else {
+				ret["total_memory"] = inv.Input.TotalMemory
+			}
 		}
 		if inv.IsParameterSelected("TotalSwap") {
-			ret["total_swap"] = inv.Input.TotalSwap
+			if inv.IsParameterNil("TotalSwap") {
+				ret["total_swap"] = nil
+			} else {
+				ret["total_swap"] = inv.Input.TotalSwap
+			}
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["type"] = inv.Input.Type

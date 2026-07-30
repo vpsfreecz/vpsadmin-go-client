@@ -324,8 +324,12 @@ func (inv *ActionUserEnvironmentConfigIndexInvocation) Call() (*ActionUserEnviro
 
 func (inv *ActionUserEnvironmentConfigIndexInvocation) callAsQuery() (*ActionUserEnvironmentConfigIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionUserEnvironmentConfigIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -334,7 +338,7 @@ func (inv *ActionUserEnvironmentConfigIndexInvocation) callAsQuery() (*ActionUse
 	return resp, err
 }
 
-func (inv *ActionUserEnvironmentConfigIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionUserEnvironmentConfigIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Environment") {
 			ret["environment_config[environment]"] = convertInt64ToString(inv.Input.Environment)
@@ -346,18 +350,26 @@ func (inv *ActionUserEnvironmentConfigIndexInvocation) convertInputToQueryParams
 			ret["environment_config[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionUserEnvironmentConfigIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionUserEnvironmentConfigIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

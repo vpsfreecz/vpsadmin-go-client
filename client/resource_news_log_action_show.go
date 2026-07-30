@@ -77,6 +77,8 @@ func (in *ActionNewsLogShowMetaGlobalInput) AnySelected() bool {
 // ActionNewsLogShowOutput is a type for action output parameters
 type ActionNewsLogShowOutput struct {
 	CreatedAt   string "json:\"created_at\""
+	CsMessage   string "json:\"cs_message\""
+	EnMessage   string "json:\"en_message\""
 	Id          int64  "json:\"id\""
 	Message     string "json:\"message\""
 	PublishedAt string "json:\"published_at\""
@@ -181,7 +183,9 @@ func (inv *ActionNewsLogShowInvocation) Call() (*ActionNewsLogShowResponse, erro
 
 func (inv *ActionNewsLogShowInvocation) callAsQuery() (*ActionNewsLogShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionNewsLogShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -190,13 +194,19 @@ func (inv *ActionNewsLogShowInvocation) callAsQuery() (*ActionNewsLogShowRespons
 	return resp, err
 }
 
-func (inv *ActionNewsLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionNewsLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

@@ -89,6 +89,7 @@ type ActionUserRequestChangeShowOutput struct {
 	FullName      string                "json:\"full_name\""
 	Id            int64                 "json:\"id\""
 	Label         string                "json:\"label\""
+	RawUserId     int64                 "json:\"raw_user_id\""
 	State         string                "json:\"state\""
 	UpdatedAt     string                "json:\"updated_at\""
 	User          *ActionUserShowOutput "json:\"user\""
@@ -192,7 +193,9 @@ func (inv *ActionUserRequestChangeShowInvocation) Call() (*ActionUserRequestChan
 
 func (inv *ActionUserRequestChangeShowInvocation) callAsQuery() (*ActionUserRequestChangeShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionUserRequestChangeShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -201,13 +204,19 @@ func (inv *ActionUserRequestChangeShowInvocation) callAsQuery() (*ActionUserRequ
 	return resp, err
 }
 
-func (inv *ActionUserRequestChangeShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionUserRequestChangeShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

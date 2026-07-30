@@ -76,7 +76,8 @@ func (in *ActionNewsLogUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionNewsLogUpdateInput is a type for action input parameters
 type ActionNewsLogUpdateInput struct {
-	Message     string "json:\"message\""
+	CsMessage   string "json:\"cs_message\""
+	EnMessage   string "json:\"en_message\""
 	PublishedAt string "json:\"published_at\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -84,15 +85,27 @@ type ActionNewsLogUpdateInput struct {
 	_nilParameters map[string]interface{}
 }
 
-// SetMessage sets parameter Message to value and selects it for sending
-func (in *ActionNewsLogUpdateInput) SetMessage(value string) *ActionNewsLogUpdateInput {
-	in.Message = value
+// SetCsMessage sets parameter CsMessage to value and selects it for sending
+func (in *ActionNewsLogUpdateInput) SetCsMessage(value string) *ActionNewsLogUpdateInput {
+	in.CsMessage = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Message"] = nil
+	in._selectedParameters["CsMessage"] = nil
+	return in
+}
+
+// SetEnMessage sets parameter EnMessage to value and selects it for sending
+func (in *ActionNewsLogUpdateInput) SetEnMessage(value string) *ActionNewsLogUpdateInput {
+	in.EnMessage = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnMessage"] = nil
 	return in
 }
 
@@ -155,6 +168,8 @@ type ActionNewsLogUpdateRequest struct {
 // ActionNewsLogUpdateOutput is a type for action output parameters
 type ActionNewsLogUpdateOutput struct {
 	CreatedAt   string "json:\"created_at\""
+	CsMessage   string "json:\"cs_message\""
+	EnMessage   string "json:\"en_message\""
 	Id          int64  "json:\"id\""
 	Message     string "json:\"message\""
 	PublishedAt string "json:\"published_at\""
@@ -324,8 +339,11 @@ func (inv *ActionNewsLogUpdateInvocation) makeInputParams() map[string]interface
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Message") {
-			ret["message"] = inv.Input.Message
+		if inv.IsParameterSelected("CsMessage") {
+			ret["cs_message"] = inv.Input.CsMessage
+		}
+		if inv.IsParameterSelected("EnMessage") {
+			ret["en_message"] = inv.Input.EnMessage
 		}
 		if inv.IsParameterSelected("PublishedAt") {
 			ret["published_at"] = inv.Input.PublishedAt

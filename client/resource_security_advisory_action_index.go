@@ -88,6 +88,7 @@ func (in *ActionSecurityAdvisoryIndexMetaGlobalInput) AnySelected() bool {
 type ActionSecurityAdvisoryIndexInput struct {
 	Affected    bool   "json:\"affected\""
 	Cve         string "json:\"cve\""
+	ExternalId  string "json:\"external_id\""
 	FromId      int64  "json:\"from_id\""
 	Limit       int64  "json:\"limit\""
 	Node        int64  "json:\"node\""
@@ -124,6 +125,18 @@ func (in *ActionSecurityAdvisoryIndexInput) SetCve(value string) *ActionSecurity
 	}
 
 	in._selectedParameters["Cve"] = nil
+	return in
+}
+
+// SetExternalId sets parameter ExternalId to value and selects it for sending
+func (in *ActionSecurityAdvisoryIndexInput) SetExternalId(value string) *ActionSecurityAdvisoryIndexInput {
+	in.ExternalId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ExternalId"] = nil
 	return in
 }
 
@@ -279,6 +292,7 @@ type ActionSecurityAdvisoryIndexOutput struct {
 	AffectedNodeCount int64                 "json:\"affected_node_count\""
 	AffectedUserCount int64                 "json:\"affected_user_count\""
 	AffectedVpsCount  int64                 "json:\"affected_vps_count\""
+	ContentRevision   int64                 "json:\"content_revision\""
 	CreatedAt         string                "json:\"created_at\""
 	CreatedBy         *ActionUserShowOutput "json:\"created_by\""
 	CsDescription     string                "json:\"cs_description\""
@@ -287,6 +301,7 @@ type ActionSecurityAdvisoryIndexOutput struct {
 	EnDescription     string                "json:\"en_description\""
 	EnResponse        string                "json:\"en_response\""
 	EnSummary         string                "json:\"en_summary\""
+	ExternalId        string                "json:\"external_id\""
 	Id                int64                 "json:\"id\""
 	Name              string                "json:\"name\""
 	PublishedAt       string                "json:\"published_at\""
@@ -460,8 +475,12 @@ func (inv *ActionSecurityAdvisoryIndexInvocation) Call() (*ActionSecurityAdvisor
 
 func (inv *ActionSecurityAdvisoryIndexInvocation) callAsQuery() (*ActionSecurityAdvisoryIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionSecurityAdvisoryIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -470,13 +489,16 @@ func (inv *ActionSecurityAdvisoryIndexInvocation) callAsQuery() (*ActionSecurity
 	return resp, err
 }
 
-func (inv *ActionSecurityAdvisoryIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionSecurityAdvisoryIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Affected") {
 			ret["security_advisory[affected]"] = convertBoolToString(inv.Input.Affected)
 		}
 		if inv.IsParameterSelected("Cve") {
 			ret["security_advisory[cve]"] = inv.Input.Cve
+		}
+		if inv.IsParameterSelected("ExternalId") {
+			ret["security_advisory[external_id]"] = inv.Input.ExternalId
 		}
 		if inv.IsParameterSelected("FromId") {
 			ret["security_advisory[from_id]"] = convertInt64ToString(inv.Input.FromId)
@@ -506,18 +528,26 @@ func (inv *ActionSecurityAdvisoryIndexInvocation) convertInputToQueryParams(ret 
 			ret["security_advisory[vps]"] = convertInt64ToString(inv.Input.Vps)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionSecurityAdvisoryIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionSecurityAdvisoryIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

@@ -229,6 +229,7 @@ type ActionTransactionIndexOutput struct {
 	FinishedAt       string                            "json:\"finished_at\""
 	Id               int64                             "json:\"id\""
 	Input            string                            "json:\"input\""
+	Label            string                            "json:\"label\""
 	Name             string                            "json:\"name\""
 	Node             *ActionNodeShowOutput             "json:\"node\""
 	Output           string                            "json:\"output\""
@@ -379,8 +380,12 @@ func (inv *ActionTransactionIndexInvocation) Call() (*ActionTransactionIndexResp
 
 func (inv *ActionTransactionIndexInvocation) callAsQuery() (*ActionTransactionIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionTransactionIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -389,7 +394,7 @@ func (inv *ActionTransactionIndexInvocation) callAsQuery() (*ActionTransactionIn
 	return resp, err
 }
 
-func (inv *ActionTransactionIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionTransactionIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Done") {
 			ret["transaction[done]"] = inv.Input.Done
@@ -413,18 +418,26 @@ func (inv *ActionTransactionIndexInvocation) convertInputToQueryParams(ret map[s
 			ret["transaction[type]"] = convertInt64ToString(inv.Input.Type)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionTransactionIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionTransactionIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

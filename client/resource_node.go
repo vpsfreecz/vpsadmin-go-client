@@ -5,6 +5,8 @@ type ResourceNode struct {
 	// Pointer to client
 	Client *Client
 
+	// Resource Node.Kernel_history
+	KernelHistory *ResourceNodeKernelHistory
 	// Resource Node.Status
 	Status *ResourceNodeStatus
 	// Action Node#Create
@@ -43,6 +45,7 @@ func NewResourceNode(client *Client) *ResourceNode {
 
 	return &ResourceNode{
 		Client:         client,
+		KernelHistory:  NewResourceNodeKernelHistory(client),
 		Status:         NewResourceNodeStatus(client),
 		Create:         actionCreate,
 		New:            actionCreate,

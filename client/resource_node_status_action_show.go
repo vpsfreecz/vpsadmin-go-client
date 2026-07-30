@@ -80,6 +80,7 @@ type ActionNodeStatusShowOutput struct {
 	ArcCMax       int64   "json:\"arc_c_max\""
 	ArcHitpercent float64 "json:\"arc_hitpercent\""
 	ArcSize       int64   "json:\"arc_size\""
+	CgroupVersion string  "json:\"cgroup_version\""
 	CpuGuest      float64 "json:\"cpu_guest\""
 	CpuIdle       float64 "json:\"cpu_idle\""
 	CpuIowait     float64 "json:\"cpu_iowait\""
@@ -202,7 +203,9 @@ func (inv *ActionNodeStatusShowInvocation) Call() (*ActionNodeStatusShowResponse
 
 func (inv *ActionNodeStatusShowInvocation) callAsQuery() (*ActionNodeStatusShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionNodeStatusShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -211,13 +214,19 @@ func (inv *ActionNodeStatusShowInvocation) callAsQuery() (*ActionNodeStatusShowR
 	return resp, err
 }
 
-func (inv *ActionNodeStatusShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionNodeStatusShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

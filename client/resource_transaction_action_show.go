@@ -82,6 +82,7 @@ type ActionTransactionShowOutput struct {
 	FinishedAt       string                            "json:\"finished_at\""
 	Id               int64                             "json:\"id\""
 	Input            string                            "json:\"input\""
+	Label            string                            "json:\"label\""
 	Name             string                            "json:\"name\""
 	Node             *ActionNodeShowOutput             "json:\"node\""
 	Output           string                            "json:\"output\""
@@ -193,7 +194,9 @@ func (inv *ActionTransactionShowInvocation) Call() (*ActionTransactionShowRespon
 
 func (inv *ActionTransactionShowInvocation) callAsQuery() (*ActionTransactionShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionTransactionShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -202,13 +205,19 @@ func (inv *ActionTransactionShowInvocation) callAsQuery() (*ActionTransactionSho
 	return resp, err
 }
 
-func (inv *ActionTransactionShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionTransactionShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

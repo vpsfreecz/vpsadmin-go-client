@@ -1,6 +1,8 @@
 package client
 
 import (
+	"encoding/json"
+	"fmt"
 	"math"
 	"sort"
 	"strconv"
@@ -114,6 +116,19 @@ func convertBoolToString(v bool) string {
 	} else {
 		return "0"
 	}
+}
+
+func convertCustomToString(v interface{}) (string, error) {
+	if str, ok := v.(string); ok {
+		return str, nil
+	}
+
+	encoded, err := json.Marshal(v)
+	if err != nil {
+		return "", fmt.Errorf("encode custom query parameter: %w", err)
+	}
+
+	return string(encoded), nil
 }
 
 func convertResourceToString(v int64) string {

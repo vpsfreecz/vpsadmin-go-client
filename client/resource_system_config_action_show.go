@@ -76,12 +76,15 @@ func (in *ActionSystemConfigShowMetaGlobalInput) AnySelected() bool {
 
 // ActionSystemConfigShowOutput is a type for action output parameters
 type ActionSystemConfigShowOutput struct {
-	Category     string "json:\"category\""
-	Description  string "json:\"description\""
-	Label        string "json:\"label\""
-	MinUserLevel int64  "json:\"min_user_level\""
-	Name         string "json:\"name\""
-	Type         string "json:\"type\""
+	Category       string      "json:\"category\""
+	Description    string      "json:\"description\""
+	Label          string      "json:\"label\""
+	Localized      bool        "json:\"localized\""
+	LocalizedValue interface{} "json:\"localized_value\""
+	MinUserLevel   int64       "json:\"min_user_level\""
+	Name           string      "json:\"name\""
+	Type           string      "json:\"type\""
+	Value          interface{} "json:\"value\""
 }
 
 // Type for action response, including envelope
@@ -182,7 +185,9 @@ func (inv *ActionSystemConfigShowInvocation) Call() (*ActionSystemConfigShowResp
 
 func (inv *ActionSystemConfigShowInvocation) callAsQuery() (*ActionSystemConfigShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionSystemConfigShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -191,13 +196,19 @@ func (inv *ActionSystemConfigShowInvocation) callAsQuery() (*ActionSystemConfigS
 	return resp, err
 }
 
-func (inv *ActionSystemConfigShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionSystemConfigShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

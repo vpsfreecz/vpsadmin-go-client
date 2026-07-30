@@ -76,14 +76,15 @@ func (in *ActionSecurityAdvisoryUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionSecurityAdvisoryUpdateInput is a type for action input parameters
 type ActionSecurityAdvisoryUpdateInput struct {
-	CsDescription string "json:\"cs_description\""
-	CsResponse    string "json:\"cs_response\""
-	CsSummary     string "json:\"cs_summary\""
-	EnDescription string "json:\"en_description\""
-	EnResponse    string "json:\"en_response\""
-	EnSummary     string "json:\"en_summary\""
-	Name          string "json:\"name\""
-	PublishedAt   string "json:\"published_at\""
+	CsDescription           string "json:\"cs_description\""
+	CsResponse              string "json:\"cs_response\""
+	CsSummary               string "json:\"cs_summary\""
+	EnDescription           string "json:\"en_description\""
+	EnResponse              string "json:\"en_response\""
+	EnSummary               string "json:\"en_summary\""
+	ExpectedContentRevision int64  "json:\"expected_content_revision\""
+	Name                    string "json:\"name\""
+	PublishedAt             string "json:\"published_at\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -159,6 +160,18 @@ func (in *ActionSecurityAdvisoryUpdateInput) SetEnSummary(value string) *ActionS
 	}
 
 	in._selectedParameters["EnSummary"] = nil
+	return in
+}
+
+// SetExpectedContentRevision sets parameter ExpectedContentRevision to value and selects it for sending
+func (in *ActionSecurityAdvisoryUpdateInput) SetExpectedContentRevision(value int64) *ActionSecurityAdvisoryUpdateInput {
+	in.ExpectedContentRevision = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ExpectedContentRevision"] = nil
 	return in
 }
 
@@ -274,6 +287,7 @@ type ActionSecurityAdvisoryUpdateOutput struct {
 	AffectedNodeCount int64                 "json:\"affected_node_count\""
 	AffectedUserCount int64                 "json:\"affected_user_count\""
 	AffectedVpsCount  int64                 "json:\"affected_vps_count\""
+	ContentRevision   int64                 "json:\"content_revision\""
 	CreatedAt         string                "json:\"created_at\""
 	CreatedBy         *ActionUserShowOutput "json:\"created_by\""
 	CsDescription     string                "json:\"cs_description\""
@@ -282,6 +296,7 @@ type ActionSecurityAdvisoryUpdateOutput struct {
 	EnDescription     string                "json:\"en_description\""
 	EnResponse        string                "json:\"en_response\""
 	EnSummary         string                "json:\"en_summary\""
+	ExternalId        string                "json:\"external_id\""
 	Id                int64                 "json:\"id\""
 	Name              string                "json:\"name\""
 	PublishedAt       string                "json:\"published_at\""
@@ -471,6 +486,9 @@ func (inv *ActionSecurityAdvisoryUpdateInvocation) makeInputParams() map[string]
 		}
 		if inv.IsParameterSelected("EnSummary") {
 			ret["en_summary"] = inv.Input.EnSummary
+		}
+		if inv.IsParameterSelected("ExpectedContentRevision") {
+			ret["expected_content_revision"] = inv.Input.ExpectedContentRevision
 		}
 		if inv.IsParameterSelected("Name") {
 			if inv.IsParameterNil("Name") {

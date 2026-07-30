@@ -154,10 +154,11 @@ type ActionOutageEntityCreateRequest struct {
 
 // ActionOutageEntityCreateOutput is a type for action output parameters
 type ActionOutageEntityCreateOutput struct {
-	EntityId int64  "json:\"entity_id\""
-	Id       int64  "json:\"id\""
-	Label    string "json:\"label\""
-	Name     string "json:\"name\""
+	EntityId   int64  "json:\"entity_id\""
+	EntityType string "json:\"entity_type\""
+	Id         int64  "json:\"id\""
+	Label      string "json:\"label\""
+	Name       string "json:\"name\""
 }
 
 // Type for action response, including envelope

@@ -76,10 +76,11 @@ func (in *ActionOutageEntityShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageEntityShowOutput is a type for action output parameters
 type ActionOutageEntityShowOutput struct {
-	EntityId int64  "json:\"entity_id\""
-	Id       int64  "json:\"id\""
-	Label    string "json:\"label\""
-	Name     string "json:\"name\""
+	EntityId   int64  "json:\"entity_id\""
+	EntityType string "json:\"entity_type\""
+	Id         int64  "json:\"id\""
+	Label      string "json:\"label\""
+	Name       string "json:\"name\""
 }
 
 // Type for action response, including envelope
@@ -180,7 +181,9 @@ func (inv *ActionOutageEntityShowInvocation) Call() (*ActionOutageEntityShowResp
 
 func (inv *ActionOutageEntityShowInvocation) callAsQuery() (*ActionOutageEntityShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionOutageEntityShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -189,13 +192,19 @@ func (inv *ActionOutageEntityShowInvocation) callAsQuery() (*ActionOutageEntityS
 	return resp, err
 }
 
-func (inv *ActionOutageEntityShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionOutageEntityShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

@@ -158,22 +158,22 @@ func (in *ActionMailLogIndexInput) AnySelected() bool {
 
 // ActionMailLogIndexOutput is a type for action output parameters
 type ActionMailLogIndexOutput struct {
-	Bcc          string                        "json:\"bcc\""
-	Cc           string                        "json:\"cc\""
-	CreatedAt    string                        "json:\"created_at\""
-	From         string                        "json:\"from\""
-	Id           int64                         "json:\"id\""
-	InReplyTo    string                        "json:\"in_reply_to\""
-	MailTemplate *ActionMailTemplateShowOutput "json:\"mail_template\""
-	MessageId    string                        "json:\"message_id\""
-	References   string                        "json:\"references\""
-	ReplyTo      string                        "json:\"reply_to\""
-	ReturnPath   string                        "json:\"return_path\""
-	Subject      string                        "json:\"subject\""
-	TextHtml     string                        "json:\"text_html\""
-	TextPlain    string                        "json:\"text_plain\""
-	To           string                        "json:\"to\""
-	User         *ActionUserShowOutput         "json:\"user\""
+	Bcc                  string                                "json:\"bcc\""
+	Cc                   string                                "json:\"cc\""
+	CreatedAt            string                                "json:\"created_at\""
+	From                 string                                "json:\"from\""
+	Id                   int64                                 "json:\"id\""
+	InReplyTo            string                                "json:\"in_reply_to\""
+	MessageId            string                                "json:\"message_id\""
+	NotificationTemplate *ActionNotificationTemplateShowOutput "json:\"notification_template\""
+	References           string                                "json:\"references\""
+	ReplyTo              string                                "json:\"reply_to\""
+	ReturnPath           string                                "json:\"return_path\""
+	Subject              string                                "json:\"subject\""
+	TextHtml             string                                "json:\"text_html\""
+	TextPlain            string                                "json:\"text_plain\""
+	To                   string                                "json:\"to\""
+	User                 *ActionUserShowOutput                 "json:\"user\""
 }
 
 // Type for action response, including envelope
@@ -299,8 +299,12 @@ func (inv *ActionMailLogIndexInvocation) Call() (*ActionMailLogIndexResponse, er
 
 func (inv *ActionMailLogIndexInvocation) callAsQuery() (*ActionMailLogIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionMailLogIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -309,7 +313,7 @@ func (inv *ActionMailLogIndexInvocation) callAsQuery() (*ActionMailLogIndexRespo
 	return resp, err
 }
 
-func (inv *ActionMailLogIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionMailLogIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("FromId") {
 			ret["mail_log[from_id]"] = convertInt64ToString(inv.Input.FromId)
@@ -318,18 +322,26 @@ func (inv *ActionMailLogIndexInvocation) convertInputToQueryParams(ret map[strin
 			ret["mail_log[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionMailLogIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionMailLogIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

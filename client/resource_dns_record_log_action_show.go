@@ -76,6 +76,7 @@ func (in *ActionDnsRecordLogShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsRecordLogShowOutput is a type for action output parameters
 type ActionDnsRecordLogShowOutput struct {
+	AttrChanges      interface{}                       "json:\"attr_changes\""
 	ChangeType       string                            "json:\"change_type\""
 	CreatedAt        string                            "json:\"created_at\""
 	DnsZone          *ActionDnsZoneShowOutput          "json:\"dns_zone\""
@@ -187,7 +188,9 @@ func (inv *ActionDnsRecordLogShowInvocation) Call() (*ActionDnsRecordLogShowResp
 
 func (inv *ActionDnsRecordLogShowInvocation) callAsQuery() (*ActionDnsRecordLogShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionDnsRecordLogShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -196,13 +199,19 @@ func (inv *ActionDnsRecordLogShowInvocation) callAsQuery() (*ActionDnsRecordLogS
 	return resp, err
 }
 
-func (inv *ActionDnsRecordLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionDnsRecordLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

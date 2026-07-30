@@ -348,8 +348,12 @@ func (inv *ActionHelpBoxIndexInvocation) Call() (*ActionHelpBoxIndexResponse, er
 
 func (inv *ActionHelpBoxIndexInvocation) callAsQuery() (*ActionHelpBoxIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionHelpBoxIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -358,7 +362,7 @@ func (inv *ActionHelpBoxIndexInvocation) callAsQuery() (*ActionHelpBoxIndexRespo
 	return resp, err
 }
 
-func (inv *ActionHelpBoxIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionHelpBoxIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Action") {
 			ret["help_box[action]"] = inv.Input.Action
@@ -379,18 +383,26 @@ func (inv *ActionHelpBoxIndexInvocation) convertInputToQueryParams(ret map[strin
 			ret["help_box[view]"] = convertBoolToString(inv.Input.View)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionHelpBoxIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionHelpBoxIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

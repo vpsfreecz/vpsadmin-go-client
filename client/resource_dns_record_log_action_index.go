@@ -236,6 +236,7 @@ func (in *ActionDnsRecordLogIndexInput) AnySelected() bool {
 
 // ActionDnsRecordLogIndexOutput is a type for action output parameters
 type ActionDnsRecordLogIndexOutput struct {
+	AttrChanges      interface{}                       "json:\"attr_changes\""
 	ChangeType       string                            "json:\"change_type\""
 	CreatedAt        string                            "json:\"created_at\""
 	DnsZone          *ActionDnsZoneShowOutput          "json:\"dns_zone\""
@@ -386,8 +387,12 @@ func (inv *ActionDnsRecordLogIndexInvocation) Call() (*ActionDnsRecordLogIndexRe
 
 func (inv *ActionDnsRecordLogIndexInvocation) callAsQuery() (*ActionDnsRecordLogIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionDnsRecordLogIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -396,7 +401,7 @@ func (inv *ActionDnsRecordLogIndexInvocation) callAsQuery() (*ActionDnsRecordLog
 	return resp, err
 }
 
-func (inv *ActionDnsRecordLogIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionDnsRecordLogIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("ChangeType") {
 			ret["dns_record_log[change_type]"] = inv.Input.ChangeType
@@ -423,18 +428,26 @@ func (inv *ActionDnsRecordLogIndexInvocation) convertInputToQueryParams(ret map[
 			ret["dns_record_log[user]"] = convertInt64ToString(inv.Input.User)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionDnsRecordLogIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionDnsRecordLogIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

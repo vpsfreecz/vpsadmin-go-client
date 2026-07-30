@@ -86,17 +86,16 @@ func (in *ActionOomReportIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportIndexInput is a type for action input parameters
 type ActionOomReportIndexInput struct {
-	Cgroup        string "json:\"cgroup\""
-	Environment   int64  "json:\"environment\""
-	FromId        int64  "json:\"from_id\""
-	Limit         int64  "json:\"limit\""
-	Location      int64  "json:\"location\""
-	Node          int64  "json:\"node\""
-	OomReportRule int64  "json:\"oom_report_rule\""
-	Since         string "json:\"since\""
-	Until         string "json:\"until\""
-	User          int64  "json:\"user\""
-	Vps           int64  "json:\"vps\""
+	Cgroup      string "json:\"cgroup\""
+	Environment int64  "json:\"environment\""
+	FromId      int64  "json:\"from_id\""
+	Limit       int64  "json:\"limit\""
+	Location    int64  "json:\"location\""
+	Node        int64  "json:\"node\""
+	Since       string "json:\"since\""
+	Until       string "json:\"until\""
+	User        int64  "json:\"user\""
+	Vps         int64  "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -172,18 +171,6 @@ func (in *ActionOomReportIndexInput) SetNode(value int64) *ActionOomReportIndexI
 	}
 
 	in._selectedParameters["Node"] = nil
-	return in
-}
-
-// SetOomReportRule sets parameter OomReportRule to value and selects it for sending
-func (in *ActionOomReportIndexInput) SetOomReportRule(value int64) *ActionOomReportIndexInput {
-	in.OomReportRule = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["OomReportRule"] = nil
 	return in
 }
 
@@ -275,17 +262,15 @@ func (in *ActionOomReportIndexInput) AnySelected() bool {
 
 // ActionOomReportIndexOutput is a type for action output parameters
 type ActionOomReportIndexOutput struct {
-	Cgroup        string                         "json:\"cgroup\""
-	Count         int64                          "json:\"count\""
-	CreatedAt     string                         "json:\"created_at\""
-	Id            int64                          "json:\"id\""
-	InvokedByName string                         "json:\"invoked_by_name\""
-	InvokedByPid  int64                          "json:\"invoked_by_pid\""
-	KilledName    string                         "json:\"killed_name\""
-	KilledPid     int64                          "json:\"killed_pid\""
-	OomReportRule *ActionOomReportRuleShowOutput "json:\"oom_report_rule\""
-	ReportedAt    string                         "json:\"reported_at\""
-	Vps           *ActionVpsShowOutput           "json:\"vps\""
+	Cgroup        string               "json:\"cgroup\""
+	Count         int64                "json:\"count\""
+	CreatedAt     string               "json:\"created_at\""
+	Id            int64                "json:\"id\""
+	InvokedByName string               "json:\"invoked_by_name\""
+	InvokedByPid  int64                "json:\"invoked_by_pid\""
+	KilledName    string               "json:\"killed_name\""
+	KilledPid     int64                "json:\"killed_pid\""
+	Vps           *ActionVpsShowOutput "json:\"vps\""
 }
 
 // Type for action response, including envelope
@@ -411,13 +396,6 @@ func (inv *ActionOomReportIndexInvocation) validate() error {
 				}
 			}
 		}
-		if inv.IsParameterSelected("OomReportRule") {
-			if !inv.IsParameterNil("OomReportRule") {
-				if inv.Input.OomReportRule < 0 {
-					verr.Add("oom_report_rule", "not a valid resource id")
-				}
-			}
-		}
 		if inv.IsParameterSelected("Since") {
 			if !inv.IsParameterNil("Since") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Since)
@@ -473,8 +451,12 @@ func (inv *ActionOomReportIndexInvocation) Call() (*ActionOomReportIndexResponse
 
 func (inv *ActionOomReportIndexInvocation) callAsQuery() (*ActionOomReportIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionOomReportIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -483,7 +465,7 @@ func (inv *ActionOomReportIndexInvocation) callAsQuery() (*ActionOomReportIndexR
 	return resp, err
 }
 
-func (inv *ActionOomReportIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionOomReportIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Cgroup") {
 			ret["oom_report[cgroup]"] = inv.Input.Cgroup
@@ -503,9 +485,6 @@ func (inv *ActionOomReportIndexInvocation) convertInputToQueryParams(ret map[str
 		if inv.IsParameterSelected("Node") {
 			ret["oom_report[node]"] = convertInt64ToString(inv.Input.Node)
 		}
-		if inv.IsParameterSelected("OomReportRule") {
-			ret["oom_report[oom_report_rule]"] = convertInt64ToString(inv.Input.OomReportRule)
-		}
 		if inv.IsParameterSelected("Since") {
 			ret["oom_report[since]"] = inv.Input.Since
 		}
@@ -519,18 +498,26 @@ func (inv *ActionOomReportIndexInvocation) convertInputToQueryParams(ret map[str
 			ret["oom_report[vps]"] = convertInt64ToString(inv.Input.Vps)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionOomReportIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionOomReportIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

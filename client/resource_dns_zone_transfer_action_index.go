@@ -382,8 +382,12 @@ func (inv *ActionDnsZoneTransferIndexInvocation) Call() (*ActionDnsZoneTransferI
 
 func (inv *ActionDnsZoneTransferIndexInvocation) callAsQuery() (*ActionDnsZoneTransferIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionDnsZoneTransferIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -392,7 +396,7 @@ func (inv *ActionDnsZoneTransferIndexInvocation) callAsQuery() (*ActionDnsZoneTr
 	return resp, err
 }
 
-func (inv *ActionDnsZoneTransferIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionDnsZoneTransferIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("DnsTsigKey") {
 			if inv.IsParameterNil("DnsTsigKey") {
@@ -417,18 +421,26 @@ func (inv *ActionDnsZoneTransferIndexInvocation) convertInputToQueryParams(ret m
 			ret["dns_zone_transfer[peer_type]"] = inv.Input.PeerType
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionDnsZoneTransferIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionDnsZoneTransferIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

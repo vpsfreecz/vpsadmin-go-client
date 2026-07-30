@@ -65,7 +65,8 @@ type ActionWebauthnRegistrationBeginRequest struct {
 
 // ActionWebauthnRegistrationBeginOutput is a type for action output parameters
 type ActionWebauthnRegistrationBeginOutput struct {
-	ChallengeToken string "json:\"challenge_token\""
+	ChallengeToken string      "json:\"challenge_token\""
+	Options        interface{} "json:\"options\""
 }
 
 // Type for action response, including envelope

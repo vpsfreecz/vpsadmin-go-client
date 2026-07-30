@@ -395,8 +395,12 @@ func (inv *ActionOsTemplateIndexInvocation) Call() (*ActionOsTemplateIndexRespon
 
 func (inv *ActionOsTemplateIndexInvocation) callAsQuery() (*ActionOsTemplateIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionOsTemplateIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -405,7 +409,7 @@ func (inv *ActionOsTemplateIndexInvocation) callAsQuery() (*ActionOsTemplateInde
 	return resp, err
 }
 
-func (inv *ActionOsTemplateIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionOsTemplateIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("CgroupVersion") {
 			ret["os_template[cgroup_version]"] = inv.Input.CgroupVersion
@@ -432,18 +436,26 @@ func (inv *ActionOsTemplateIndexInvocation) convertInputToQueryParams(ret map[st
 			ret["os_template[os_family]"] = convertInt64ToString(inv.Input.OsFamily)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionOsTemplateIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionOsTemplateIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

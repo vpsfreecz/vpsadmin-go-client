@@ -303,8 +303,12 @@ func (inv *ActionMailboxHandlerIndexInvocation) Call() (*ActionMailboxHandlerInd
 
 func (inv *ActionMailboxHandlerIndexInvocation) callAsQuery() (*ActionMailboxHandlerIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionMailboxHandlerIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -313,7 +317,7 @@ func (inv *ActionMailboxHandlerIndexInvocation) callAsQuery() (*ActionMailboxHan
 	return resp, err
 }
 
-func (inv *ActionMailboxHandlerIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionMailboxHandlerIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("FromId") {
 			ret["handler[from_id]"] = convertInt64ToString(inv.Input.FromId)
@@ -322,18 +326,26 @@ func (inv *ActionMailboxHandlerIndexInvocation) convertInputToQueryParams(ret ma
 			ret["handler[limit]"] = convertInt64ToString(inv.Input.Limit)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionMailboxHandlerIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionMailboxHandlerIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

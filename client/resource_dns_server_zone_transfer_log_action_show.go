@@ -190,7 +190,9 @@ func (inv *ActionDnsServerZoneTransferLogShowInvocation) Call() (*ActionDnsServe
 
 func (inv *ActionDnsServerZoneTransferLogShowInvocation) callAsQuery() (*ActionDnsServerZoneTransferLogShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionDnsServerZoneTransferLogShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -199,13 +201,19 @@ func (inv *ActionDnsServerZoneTransferLogShowInvocation) callAsQuery() (*ActionD
 	return resp, err
 }
 
-func (inv *ActionDnsServerZoneTransferLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionDnsServerZoneTransferLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

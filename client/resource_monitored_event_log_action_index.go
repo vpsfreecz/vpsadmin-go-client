@@ -187,9 +187,10 @@ func (in *ActionMonitoredEventLogIndexInput) AnySelected() bool {
 
 // ActionMonitoredEventLogIndexOutput is a type for action output parameters
 type ActionMonitoredEventLogIndexOutput struct {
-	CreatedAt string "json:\"created_at\""
-	Id        int64  "json:\"id\""
-	Passed    bool   "json:\"passed\""
+	CreatedAt string      "json:\"created_at\""
+	Id        int64       "json:\"id\""
+	Passed    bool        "json:\"passed\""
+	Value     interface{} "json:\"value\""
 }
 
 // Type for action response, including envelope
@@ -326,8 +327,12 @@ func (inv *ActionMonitoredEventLogIndexInvocation) Call() (*ActionMonitoredEvent
 
 func (inv *ActionMonitoredEventLogIndexInvocation) callAsQuery() (*ActionMonitoredEventLogIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionMonitoredEventLogIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -336,7 +341,7 @@ func (inv *ActionMonitoredEventLogIndexInvocation) callAsQuery() (*ActionMonitor
 	return resp, err
 }
 
-func (inv *ActionMonitoredEventLogIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionMonitoredEventLogIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("FromId") {
 			ret["log[from_id]"] = convertInt64ToString(inv.Input.FromId)
@@ -351,18 +356,26 @@ func (inv *ActionMonitoredEventLogIndexInvocation) convertInputToQueryParams(ret
 			ret["log[passed]"] = convertBoolToString(inv.Input.Passed)
 		}
 	}
+
+	return nil
 }
 
-func (inv *ActionMonitoredEventLogIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionMonitoredEventLogIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

@@ -156,7 +156,9 @@ func (inv *ActionClusterShowInvocation) Call() (*ActionClusterShowResponse, erro
 
 func (inv *ActionClusterShowInvocation) callAsQuery() (*ActionClusterShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionClusterShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -165,10 +167,12 @@ func (inv *ActionClusterShowInvocation) callAsQuery() (*ActionClusterShowRespons
 	return resp, err
 }
 
-func (inv *ActionClusterShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionClusterShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

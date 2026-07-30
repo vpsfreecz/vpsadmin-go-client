@@ -187,7 +187,9 @@ func (inv *ActionOauth2ClientShowInvocation) Call() (*ActionOauth2ClientShowResp
 
 func (inv *ActionOauth2ClientShowInvocation) callAsQuery() (*ActionOauth2ClientShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionOauth2ClientShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -196,13 +198,19 @@ func (inv *ActionOauth2ClientShowInvocation) callAsQuery() (*ActionOauth2ClientS
 	return resp, err
 }
 
-func (inv *ActionOauth2ClientShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionOauth2ClientShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

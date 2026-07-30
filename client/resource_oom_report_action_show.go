@@ -76,17 +76,15 @@ func (in *ActionOomReportShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOomReportShowOutput is a type for action output parameters
 type ActionOomReportShowOutput struct {
-	Cgroup        string                         "json:\"cgroup\""
-	Count         int64                          "json:\"count\""
-	CreatedAt     string                         "json:\"created_at\""
-	Id            int64                          "json:\"id\""
-	InvokedByName string                         "json:\"invoked_by_name\""
-	InvokedByPid  int64                          "json:\"invoked_by_pid\""
-	KilledName    string                         "json:\"killed_name\""
-	KilledPid     int64                          "json:\"killed_pid\""
-	OomReportRule *ActionOomReportRuleShowOutput "json:\"oom_report_rule\""
-	ReportedAt    string                         "json:\"reported_at\""
-	Vps           *ActionVpsShowOutput           "json:\"vps\""
+	Cgroup        string               "json:\"cgroup\""
+	Count         int64                "json:\"count\""
+	CreatedAt     string               "json:\"created_at\""
+	Id            int64                "json:\"id\""
+	InvokedByName string               "json:\"invoked_by_name\""
+	InvokedByPid  int64                "json:\"invoked_by_pid\""
+	KilledName    string               "json:\"killed_name\""
+	KilledPid     int64                "json:\"killed_pid\""
+	Vps           *ActionVpsShowOutput "json:\"vps\""
 }
 
 // Type for action response, including envelope
@@ -187,7 +185,9 @@ func (inv *ActionOomReportShowInvocation) Call() (*ActionOomReportShowResponse, 
 
 func (inv *ActionOomReportShowInvocation) callAsQuery() (*ActionOomReportShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionOomReportShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -196,13 +196,19 @@ func (inv *ActionOomReportShowInvocation) callAsQuery() (*ActionOomReportShowRes
 	return resp, err
 }
 
-func (inv *ActionOomReportShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionOomReportShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

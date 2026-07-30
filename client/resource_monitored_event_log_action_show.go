@@ -76,9 +76,10 @@ func (in *ActionMonitoredEventLogShowMetaGlobalInput) AnySelected() bool {
 
 // ActionMonitoredEventLogShowOutput is a type for action output parameters
 type ActionMonitoredEventLogShowOutput struct {
-	CreatedAt string "json:\"created_at\""
-	Id        int64  "json:\"id\""
-	Passed    bool   "json:\"passed\""
+	CreatedAt string      "json:\"created_at\""
+	Id        int64       "json:\"id\""
+	Passed    bool        "json:\"passed\""
+	Value     interface{} "json:\"value\""
 }
 
 // Type for action response, including envelope
@@ -179,7 +180,9 @@ func (inv *ActionMonitoredEventLogShowInvocation) Call() (*ActionMonitoredEventL
 
 func (inv *ActionMonitoredEventLogShowInvocation) callAsQuery() (*ActionMonitoredEventLogShowResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionMonitoredEventLogShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -188,13 +191,19 @@ func (inv *ActionMonitoredEventLogShowInvocation) callAsQuery() (*ActionMonitore
 	return resp, err
 }
 
-func (inv *ActionMonitoredEventLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionMonitoredEventLogShowInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

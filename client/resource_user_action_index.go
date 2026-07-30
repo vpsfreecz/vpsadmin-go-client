@@ -103,11 +103,11 @@ type ActionUserIndexInput struct {
 	Limit                      int64  "json:\"limit\""
 	Lockout                    bool   "json:\"lockout\""
 	Login                      string "json:\"login\""
-	MailerEnabled              bool   "json:\"mailer_enabled\""
 	ObjectState                string "json:\"object_state\""
 	PasswordReset              bool   "json:\"password_reset\""
 	PreferredLogoutAll         bool   "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64  "json:\"preferred_session_length\""
+	TimeZone                   string "json:\"time_zone\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -318,18 +318,6 @@ func (in *ActionUserIndexInput) SetLogin(value string) *ActionUserIndexInput {
 	return in
 }
 
-// SetMailerEnabled sets parameter MailerEnabled to value and selects it for sending
-func (in *ActionUserIndexInput) SetMailerEnabled(value bool) *ActionUserIndexInput {
-	in.MailerEnabled = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["MailerEnabled"] = nil
-	return in
-}
-
 // SetObjectState sets parameter ObjectState to value and selects it for sending
 func (in *ActionUserIndexInput) SetObjectState(value string) *ActionUserIndexInput {
 	in.ObjectState = value
@@ -375,6 +363,37 @@ func (in *ActionUserIndexInput) SetPreferredSessionLength(value int64) *ActionUs
 	}
 
 	in._selectedParameters["PreferredSessionLength"] = nil
+	return in
+}
+
+// SetTimeZone sets parameter TimeZone to value and selects it for sending
+func (in *ActionUserIndexInput) SetTimeZone(value string) *ActionUserIndexInput {
+	in.TimeZone = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetTimeZoneNil(false)
+	in._selectedParameters["TimeZone"] = nil
+	return in
+}
+
+// SetTimeZoneNil sets parameter TimeZone to nil and selects it for sending
+func (in *ActionUserIndexInput) SetTimeZoneNil(set bool) *ActionUserIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TimeZone"] = nil
+		in.SelectParameters("TimeZone")
+	} else {
+		delete(in._nilParameters, "TimeZone")
+	}
 	return in
 }
 
@@ -437,7 +456,6 @@ type ActionUserIndexOutput struct {
 	Level                      int64                     "json:\"level\""
 	Lockout                    bool                      "json:\"lockout\""
 	Login                      string                    "json:\"login\""
-	MailerEnabled              bool                      "json:\"mailer_enabled\""
 	MonthlyPayment             int64                     "json:\"monthly_payment\""
 	ObjectState                string                    "json:\"object_state\""
 	PaidUntil                  string                    "json:\"paid_until\""
@@ -445,6 +463,7 @@ type ActionUserIndexOutput struct {
 	PreferredLogoutAll         bool                      "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64                     "json:\"preferred_session_length\""
 	RemindAfterDate            string                    "json:\"remind_after_date\""
+	TimeZone                   string                    "json:\"time_zone\""
 }
 
 // Type for action response, including envelope
@@ -577,8 +596,12 @@ func (inv *ActionUserIndexInvocation) Call() (*ActionUserIndexResponse, error) {
 
 func (inv *ActionUserIndexInvocation) callAsQuery() (*ActionUserIndexResponse, error) {
 	queryParams := make(map[string]string)
-	inv.convertInputToQueryParams(queryParams)
-	inv.convertMetaInputToQueryParams(queryParams)
+	if err := inv.convertInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
+	if err := inv.convertMetaInputToQueryParams(queryParams); err != nil {
+		return nil, err
+	}
 	resp := &ActionUserIndexResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
 	if err == nil && resp.Status {
@@ -587,7 +610,7 @@ func (inv *ActionUserIndexInvocation) callAsQuery() (*ActionUserIndexResponse, e
 	return resp, err
 }
 
-func (inv *ActionUserIndexInvocation) convertInputToQueryParams(ret map[string]string) {
+func (inv *ActionUserIndexInvocation) convertInputToQueryParams(ret map[string]string) error {
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Address") {
 			ret["user[address]"] = inv.Input.Address
@@ -640,9 +663,6 @@ func (inv *ActionUserIndexInvocation) convertInputToQueryParams(ret map[string]s
 		if inv.IsParameterSelected("Login") {
 			ret["user[login]"] = inv.Input.Login
 		}
-		if inv.IsParameterSelected("MailerEnabled") {
-			ret["user[mailer_enabled]"] = convertBoolToString(inv.Input.MailerEnabled)
-		}
 		if inv.IsParameterSelected("ObjectState") {
 			ret["user[object_state]"] = inv.Input.ObjectState
 		}
@@ -655,19 +675,34 @@ func (inv *ActionUserIndexInvocation) convertInputToQueryParams(ret map[string]s
 		if inv.IsParameterSelected("PreferredSessionLength") {
 			ret["user[preferred_session_length]"] = convertInt64ToString(inv.Input.PreferredSessionLength)
 		}
+		if inv.IsParameterSelected("TimeZone") {
+			if inv.IsParameterNil("TimeZone") {
+				ret["user[time_zone]"] = ""
+			} else {
+				ret["user[time_zone]"] = inv.Input.TimeZone
+			}
+		}
 	}
+
+	return nil
 }
 
-func (inv *ActionUserIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) {
+func (inv *ActionUserIndexInvocation) convertMetaInputToQueryParams(ret map[string]string) error {
 	if inv.MetaInput != nil {
 		if inv.IsMetaParameterSelected("Count") {
 			ret["_meta[count]"] = convertBoolToString(inv.MetaInput.Count)
 		}
 		if inv.IsMetaParameterSelected("Includes") {
-			ret["_meta[includes]"] = inv.MetaInput.Includes
+			queryValue, err := convertCustomToString(inv.MetaInput.Includes)
+			if err != nil {
+				return err
+			}
+			ret["_meta[includes]"] = queryValue
 		}
 		if inv.IsMetaParameterSelected("No") {
 			ret["_meta[no]"] = convertBoolToString(inv.MetaInput.No)
 		}
 	}
+
+	return nil
 }

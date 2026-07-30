@@ -11,10 +11,10 @@ type ResourceUser struct {
 	EnvironmentConfig *ResourceUserEnvironmentConfig
 	// Resource User.Known_device
 	KnownDevice *ResourceUserKnownDevice
-	// Resource User.Mail_role_recipient
-	MailRoleRecipient *ResourceUserMailRoleRecipient
-	// Resource User.Mail_template_recipient
-	MailTemplateRecipient *ResourceUserMailTemplateRecipient
+	// Resource User.Notification_delivery_method
+	NotificationDeliveryMethod *ResourceUserNotificationDeliveryMethod
+	// Resource User.Notification_rate_limit
+	NotificationRateLimit *ResourceUserNotificationRateLimit
 	// Resource User.Public_key
 	PublicKey *ResourceUserPublicKey
 	// Resource User.State_log
@@ -63,28 +63,28 @@ func NewResourceUser(client *Client) *ResourceUser {
 	actionUpdate := NewActionUserUpdate(client)
 
 	return &ResourceUser{
-		Client:                 client,
-		ClusterResource:        NewResourceUserClusterResource(client),
-		EnvironmentConfig:      NewResourceUserEnvironmentConfig(client),
-		KnownDevice:            NewResourceUserKnownDevice(client),
-		MailRoleRecipient:      NewResourceUserMailRoleRecipient(client),
-		MailTemplateRecipient:  NewResourceUserMailTemplateRecipient(client),
-		PublicKey:              NewResourceUserPublicKey(client),
-		StateLog:               NewResourceUserStateLog(client),
-		TotpDevice:             NewResourceUserTotpDevice(client),
-		WebauthnCredential:     NewResourceUserWebauthnCredential(client),
-		AvailableIps:           actionAvailableIps,
-		Create:                 actionCreate,
-		New:                    actionCreate,
-		Current:                actionCurrent,
-		Delete:                 actionDelete,
-		Destroy:                actionDelete,
-		GetPaymentInstructions: actionGetPaymentInstructions,
-		Index:                  actionIndex,
-		List:                   actionIndex,
-		Show:                   actionShow,
-		Find:                   actionShow,
-		Touch:                  actionTouch,
-		Update:                 actionUpdate,
+		Client:                     client,
+		ClusterResource:            NewResourceUserClusterResource(client),
+		EnvironmentConfig:          NewResourceUserEnvironmentConfig(client),
+		KnownDevice:                NewResourceUserKnownDevice(client),
+		NotificationDeliveryMethod: NewResourceUserNotificationDeliveryMethod(client),
+		NotificationRateLimit:      NewResourceUserNotificationRateLimit(client),
+		PublicKey:                  NewResourceUserPublicKey(client),
+		StateLog:                   NewResourceUserStateLog(client),
+		TotpDevice:                 NewResourceUserTotpDevice(client),
+		WebauthnCredential:         NewResourceUserWebauthnCredential(client),
+		AvailableIps:               actionAvailableIps,
+		Create:                     actionCreate,
+		New:                        actionCreate,
+		Current:                    actionCurrent,
+		Delete:                     actionDelete,
+		Destroy:                    actionDelete,
+		GetPaymentInstructions:     actionGetPaymentInstructions,
+		Index:                      actionIndex,
+		List:                       actionIndex,
+		Show:                       actionShow,
+		Find:                       actionShow,
+		Touch:                      actionTouch,
+		Update:                     actionUpdate,
 	}
 }
