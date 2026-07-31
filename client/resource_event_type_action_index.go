@@ -146,10 +146,12 @@ func (in *ActionEventTypeIndexInput) AnySelected() bool {
 // ActionEventTypeIndexOutput is a type for action output parameters
 type ActionEventTypeIndexOutput struct {
 	Category            string      "json:\"category\""
+	CategoryLabel       string      "json:\"category_label\""
 	DefaultRouted       bool        "json:\"default_routed\""
 	Fields              interface{} "json:\"fields\""
 	Label               string      "json:\"label\""
 	Name                string      "json:\"name\""
+	Resource            interface{} "json:\"resource\""
 	Roles               interface{} "json:\"roles\""
 	Severity            string      "json:\"severity\""
 	SeverityDescription string      "json:\"severity_description\""

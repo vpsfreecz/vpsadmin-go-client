@@ -435,6 +435,20 @@ func (inv *ActionEventRouteIndexInvocation) IsMetaParameterNil(param string) boo
 func (inv *ActionEventRouteIndexInvocation) validate() error {
 	verr := NewValidationError()
 	if inv.Input != nil {
+		if inv.IsParameterSelected("NotificationReceiverId") {
+			if !inv.IsParameterNil("NotificationReceiverId") {
+				if inv.Input.NotificationReceiverId < 0 {
+					verr.Add("notification_receiver_id", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("ParentId") {
+			if !inv.IsParameterNil("ParentId") {
+				if inv.Input.ParentId < 0 {
+					verr.Add("parent_id", "not a valid resource id")
+				}
+			}
+		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {

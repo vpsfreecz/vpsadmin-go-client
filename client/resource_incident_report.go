@@ -13,6 +13,8 @@ type ResourceIncidentReport struct {
 	Index *ActionIncidentReportIndex
 	// Action Incident_report#Index
 	List *ActionIncidentReportIndex
+	// Action Incident_report#Mute_similar
+	MuteSimilar *ActionIncidentReportMuteSimilar
 	// Action Incident_report#Show
 	Show *ActionIncidentReportShow
 	// Action Incident_report#Show
@@ -22,15 +24,17 @@ type ResourceIncidentReport struct {
 func NewResourceIncidentReport(client *Client) *ResourceIncidentReport {
 	actionCreate := NewActionIncidentReportCreate(client)
 	actionIndex := NewActionIncidentReportIndex(client)
+	actionMuteSimilar := NewActionIncidentReportMuteSimilar(client)
 	actionShow := NewActionIncidentReportShow(client)
 
 	return &ResourceIncidentReport{
-		Client: client,
-		Create: actionCreate,
-		New:    actionCreate,
-		Index:  actionIndex,
-		List:   actionIndex,
-		Show:   actionShow,
-		Find:   actionShow,
+		Client:      client,
+		Create:      actionCreate,
+		New:         actionCreate,
+		Index:       actionIndex,
+		List:        actionIndex,
+		MuteSimilar: actionMuteSimilar,
+		Show:        actionShow,
+		Find:        actionShow,
 	}
 }

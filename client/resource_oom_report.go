@@ -15,6 +15,8 @@ type ResourceOomReport struct {
 	Index *ActionOomReportIndex
 	// Action Oom_report#Index
 	List *ActionOomReportIndex
+	// Action Oom_report#Mute_similar
+	MuteSimilar *ActionOomReportMuteSimilar
 	// Action Oom_report#Show
 	Show *ActionOomReportShow
 	// Action Oom_report#Show
@@ -23,16 +25,18 @@ type ResourceOomReport struct {
 
 func NewResourceOomReport(client *Client) *ResourceOomReport {
 	actionIndex := NewActionOomReportIndex(client)
+	actionMuteSimilar := NewActionOomReportMuteSimilar(client)
 	actionShow := NewActionOomReportShow(client)
 
 	return &ResourceOomReport{
-		Client: client,
-		Stat:   NewResourceOomReportStat(client),
-		Task:   NewResourceOomReportTask(client),
-		Usage:  NewResourceOomReportUsage(client),
-		Index:  actionIndex,
-		List:   actionIndex,
-		Show:   actionShow,
-		Find:   actionShow,
+		Client:      client,
+		Stat:        NewResourceOomReportStat(client),
+		Task:        NewResourceOomReportTask(client),
+		Usage:       NewResourceOomReportUsage(client),
+		Index:       actionIndex,
+		List:        actionIndex,
+		MuteSimilar: actionMuteSimilar,
+		Show:        actionShow,
+		Find:        actionShow,
 	}
 }

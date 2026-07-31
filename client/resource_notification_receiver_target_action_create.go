@@ -308,6 +308,13 @@ func (inv *ActionNotificationReceiverTargetCreateInvocation) IsMetaParameterNil(
 func (inv *ActionNotificationReceiverTargetCreateInvocation) validate() error {
 	verr := NewValidationError()
 	if inv.Input != nil {
+		if inv.IsParameterSelected("NotificationTargetId") {
+			if !inv.IsParameterNil("NotificationTargetId") {
+				if inv.Input.NotificationTargetId < 0 {
+					verr.Add("notification_target_id", "not a valid resource id")
+				}
+			}
+		}
 	}
 	if inv.MetaInput != nil {
 	}

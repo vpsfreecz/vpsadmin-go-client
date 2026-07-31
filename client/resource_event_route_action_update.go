@@ -80,6 +80,7 @@ type ActionEventRouteUpdateInput struct {
 	Enabled                bool        "json:\"enabled\""
 	EventType              string      "json:\"event_type\""
 	EventTypePattern       string      "json:\"event_type_pattern\""
+	ExpiresAt              string      "json:\"expires_at\""
 	GroupBy                interface{} "json:\"group_by\""
 	GroupIntervalSeconds   int64       "json:\"group_interval_seconds\""
 	GroupWaitSeconds       int64       "json:\"group_wait_seconds\""
@@ -177,6 +178,37 @@ func (in *ActionEventRouteUpdateInput) SetEventTypePatternNil(set bool) *ActionE
 		in.SelectParameters("EventTypePattern")
 	} else {
 		delete(in._nilParameters, "EventTypePattern")
+	}
+	return in
+}
+
+// SetExpiresAt sets parameter ExpiresAt to value and selects it for sending
+func (in *ActionEventRouteUpdateInput) SetExpiresAt(value string) *ActionEventRouteUpdateInput {
+	in.ExpiresAt = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetExpiresAtNil(false)
+	in._selectedParameters["ExpiresAt"] = nil
+	return in
+}
+
+// SetExpiresAtNil sets parameter ExpiresAt to nil and selects it for sending
+func (in *ActionEventRouteUpdateInput) SetExpiresAtNil(set bool) *ActionEventRouteUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["ExpiresAt"] = nil
+		in.SelectParameters("ExpiresAt")
+	} else {
+		delete(in._nilParameters, "ExpiresAt")
 	}
 	return in
 }
@@ -570,6 +602,30 @@ func (inv *ActionEventRouteUpdateInvocation) IsMetaParameterNil(param string) bo
 func (inv *ActionEventRouteUpdateInvocation) validate() error {
 	verr := NewValidationError()
 	if inv.Input != nil {
+		if inv.IsParameterSelected("ExpiresAt") {
+			if !inv.IsParameterNil("ExpiresAt") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.ExpiresAt)
+				if !ok {
+					verr.Add("expires_at", "not a valid datetime")
+				} else {
+					inv.Input.ExpiresAt = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("NotificationReceiverId") {
+			if !inv.IsParameterNil("NotificationReceiverId") {
+				if inv.Input.NotificationReceiverId < 0 {
+					verr.Add("notification_receiver_id", "not a valid resource id")
+				}
+			}
+		}
+		if inv.IsParameterSelected("ParentId") {
+			if !inv.IsParameterNil("ParentId") {
+				if inv.Input.ParentId < 0 {
+					verr.Add("parent_id", "not a valid resource id")
+				}
+			}
+		}
 	}
 	if inv.MetaInput != nil {
 	}
@@ -628,6 +684,13 @@ func (inv *ActionEventRouteUpdateInvocation) makeInputParams() map[string]interf
 				ret["event_type_pattern"] = nil
 			} else {
 				ret["event_type_pattern"] = inv.Input.EventTypePattern
+			}
+		}
+		if inv.IsParameterSelected("ExpiresAt") {
+			if inv.IsParameterNil("ExpiresAt") {
+				ret["expires_at"] = nil
+			} else {
+				ret["expires_at"] = inv.Input.ExpiresAt
 			}
 		}
 		if inv.IsParameterSelected("GroupBy") {

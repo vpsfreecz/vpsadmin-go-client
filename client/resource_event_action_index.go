@@ -97,6 +97,8 @@ type ActionEventIndexInput struct {
 	NotificationReceiverId       int64  "json:\"notification_receiver_id\""
 	NotificationReceiverTargetId int64  "json:\"notification_receiver_target_id\""
 	NotificationTargetId         int64  "json:\"notification_target_id\""
+	ResourceAction               string "json:\"resource_action\""
+	ResourceName                 string "json:\"resource_name\""
 	RoutingState                 string "json:\"routing_state\""
 	Severity                     string "json:\"severity\""
 	SubjectRelation              string "json:\"subject_relation\""
@@ -349,6 +351,68 @@ func (in *ActionEventIndexInput) SetNotificationTargetIdNil(set bool) *ActionEve
 		in.SelectParameters("NotificationTargetId")
 	} else {
 		delete(in._nilParameters, "NotificationTargetId")
+	}
+	return in
+}
+
+// SetResourceAction sets parameter ResourceAction to value and selects it for sending
+func (in *ActionEventIndexInput) SetResourceAction(value string) *ActionEventIndexInput {
+	in.ResourceAction = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetResourceActionNil(false)
+	in._selectedParameters["ResourceAction"] = nil
+	return in
+}
+
+// SetResourceActionNil sets parameter ResourceAction to nil and selects it for sending
+func (in *ActionEventIndexInput) SetResourceActionNil(set bool) *ActionEventIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["ResourceAction"] = nil
+		in.SelectParameters("ResourceAction")
+	} else {
+		delete(in._nilParameters, "ResourceAction")
+	}
+	return in
+}
+
+// SetResourceName sets parameter ResourceName to value and selects it for sending
+func (in *ActionEventIndexInput) SetResourceName(value string) *ActionEventIndexInput {
+	in.ResourceName = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetResourceNameNil(false)
+	in._selectedParameters["ResourceName"] = nil
+	return in
+}
+
+// SetResourceNameNil sets parameter ResourceName to nil and selects it for sending
+func (in *ActionEventIndexInput) SetResourceNameNil(set bool) *ActionEventIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["ResourceName"] = nil
+		in.SelectParameters("ResourceName")
+	} else {
+		delete(in._nilParameters, "ResourceName")
 	}
 	return in
 }
@@ -705,6 +769,20 @@ func (inv *ActionEventIndexInvocation) convertInputToQueryParams(ret map[string]
 				ret["event[notification_target_id]"] = ""
 			} else {
 				ret["event[notification_target_id]"] = convertInt64ToString(inv.Input.NotificationTargetId)
+			}
+		}
+		if inv.IsParameterSelected("ResourceAction") {
+			if inv.IsParameterNil("ResourceAction") {
+				ret["event[resource_action]"] = ""
+			} else {
+				ret["event[resource_action]"] = inv.Input.ResourceAction
+			}
+		}
+		if inv.IsParameterSelected("ResourceName") {
+			if inv.IsParameterNil("ResourceName") {
+				ret["event[resource_name]"] = ""
+			} else {
+				ret["event[resource_name]"] = inv.Input.ResourceName
 			}
 		}
 		if inv.IsParameterSelected("RoutingState") {
