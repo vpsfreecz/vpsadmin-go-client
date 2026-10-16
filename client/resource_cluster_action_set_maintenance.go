@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionClusterSetMaintenance is a type for action Cluster#Set_maintenance
 type ActionClusterSetMaintenance struct {
@@ -229,7 +232,7 @@ func (inv *ActionClusterSetMaintenanceInvocation) IsMetaParameterNil(param strin
 }
 
 func (inv *ActionClusterSetMaintenanceInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {
@@ -242,19 +245,44 @@ func (inv *ActionClusterSetMaintenanceInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionClusterSetMaintenanceInvocation) Call() (*ActionClusterSetMaintenanceResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionClusterSetMaintenanceInvocation) CallContext(ctx context.Context) (*ActionClusterSetMaintenanceResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionClusterSetMaintenanceResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionClusterSetMaintenanceInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionClusterSetMaintenanceInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionClusterSetMaintenanceInvocation) callAsBody() (*ActionClusterSetMaintenanceResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionClusterSetMaintenanceResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *ActionClusterSetMaintenanceInvocation) makeAllInputParams() *ActionClusterSetMaintenanceRequest {

@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionPoolCreate is a type for action Pool#Create
 type ActionPoolCreate struct {
@@ -549,13 +552,13 @@ func (inv *ActionPoolCreateInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionPoolCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("CheckedAt") {
 			if !inv.IsParameterNil("CheckedAt") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.CheckedAt)
 				if !ok {
-					verr.Add("checked_at", "not a valid datetime")
+					verr.Add("checked_at", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.CheckedAt = normalized
 				}
@@ -564,14 +567,14 @@ func (inv *ActionPoolCreateInvocation) validate() error {
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("ScanPercent") {
 			if !inv.IsParameterNil("ScanPercent") {
 				if !isFiniteFloat64(inv.Input.ScanPercent) {
-					verr.Add("scan_percent", "not a valid float")
+					verr.Add("scan_percent", t(inv.Action.Client, "validation.invalid_float", nil))
 				}
 			}
 		}
@@ -586,22 +589,53 @@ func (inv *ActionPoolCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionPoolCreateInvocation) Call() (*ActionPoolCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionPoolCreateInvocation) CallContext(ctx context.Context) (*ActionPoolCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionPoolCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Pool == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Pool
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionPoolCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionPoolCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionPoolCreateInvocation) callAsBody() (*ActionPoolCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionPoolCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Pool
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 // IsBlocking checks whether the current invocation resulted in a blocking operation

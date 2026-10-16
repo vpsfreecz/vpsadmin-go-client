@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionOsFamilyCreate is a type for action Os_family#Create
 type ActionOsFamilyCreate struct {
@@ -256,7 +259,7 @@ func (inv *ActionOsFamilyCreateInvocation) IsMetaParameterNil(param string) bool
 }
 
 func (inv *ActionOsFamilyCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {
@@ -269,22 +272,53 @@ func (inv *ActionOsFamilyCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionOsFamilyCreateInvocation) Call() (*ActionOsFamilyCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionOsFamilyCreateInvocation) CallContext(ctx context.Context) (*ActionOsFamilyCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionOsFamilyCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.OsFamily == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.OsFamily
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionOsFamilyCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionOsFamilyCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionOsFamilyCreateInvocation) callAsBody() (*ActionOsFamilyCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionOsFamilyCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.OsFamily
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *ActionOsFamilyCreateInvocation) makeAllInputParams() *ActionOsFamilyCreateRequest {

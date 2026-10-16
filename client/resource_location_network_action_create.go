@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionLocationNetworkCreate is a type for action Location_network#Create
 type ActionLocationNetworkCreate struct {
@@ -312,19 +315,19 @@ func (inv *ActionLocationNetworkCreateInvocation) IsMetaParameterNil(param strin
 }
 
 func (inv *ActionLocationNetworkCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Network") {
 			if !inv.IsParameterNil("Network") {
 				if inv.Input.Network < 0 {
-					verr.Add("network", "not a valid resource id")
+					verr.Add("network", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -339,22 +342,53 @@ func (inv *ActionLocationNetworkCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionLocationNetworkCreateInvocation) Call() (*ActionLocationNetworkCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionLocationNetworkCreateInvocation) CallContext(ctx context.Context) (*ActionLocationNetworkCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionLocationNetworkCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.LocationNetwork == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.LocationNetwork
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionLocationNetworkCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionLocationNetworkCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionLocationNetworkCreateInvocation) callAsBody() (*ActionLocationNetworkCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionLocationNetworkCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.LocationNetwork
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *ActionLocationNetworkCreateInvocation) makeAllInputParams() *ActionLocationNetworkCreateRequest {

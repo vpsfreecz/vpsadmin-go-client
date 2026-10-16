@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionOomReportRuleIndex is a type for action Oom_report_rule#Index
 type ActionOomReportRuleIndex struct {
@@ -281,12 +284,12 @@ func (inv *ActionOomReportRuleIndexInvocation) IsMetaParameterNil(param string) 
 }
 
 func (inv *ActionOomReportRuleIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Vps") {
 			if !inv.IsParameterNil("Vps") {
 				if inv.Input.Vps < 0 {
-					verr.Add("vps", "not a valid resource id")
+					verr.Add("vps", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -301,24 +304,55 @@ func (inv *ActionOomReportRuleIndexInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionOomReportRuleIndexInvocation) Call() (*ActionOomReportRuleIndexResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionOomReportRuleIndexInvocation) CallContext(ctx context.Context) (*ActionOomReportRuleIndexResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionOomReportRuleIndexResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.OomReportRules == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.OomReportRules
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionOomReportRuleIndexInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionOomReportRuleIndexInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionOomReportRuleIndexInvocation) callAsQuery() (*ActionOomReportRuleIndexResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertInputToQueryParams(queryParams)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionOomReportRuleIndexResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.OomReportRules
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionOomReportRuleIndexInvocation) convertInputToQueryParams(ret map[string]string) {

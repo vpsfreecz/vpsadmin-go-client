@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionSecurityAdvisoryIndex is a type for action Security_advisory#Index
 type ActionSecurityAdvisoryIndex struct {
@@ -88,6 +91,7 @@ func (in *ActionSecurityAdvisoryIndexMetaGlobalInput) AnySelected() bool {
 type ActionSecurityAdvisoryIndexInput struct {
 	Affected    bool   "json:\"affected\""
 	Cve         string "json:\"cve\""
+	ExternalId  string "json:\"external_id\""
 	FromId      int64  "json:\"from_id\""
 	Limit       int64  "json:\"limit\""
 	Node        int64  "json:\"node\""
@@ -124,6 +128,18 @@ func (in *ActionSecurityAdvisoryIndexInput) SetCve(value string) *ActionSecurity
 	}
 
 	in._selectedParameters["Cve"] = nil
+	return in
+}
+
+// SetExternalId sets parameter ExternalId to value and selects it for sending
+func (in *ActionSecurityAdvisoryIndexInput) SetExternalId(value string) *ActionSecurityAdvisoryIndexInput {
+	in.ExternalId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ExternalId"] = nil
 	return in
 }
 
@@ -279,6 +295,7 @@ type ActionSecurityAdvisoryIndexOutput struct {
 	AffectedNodeCount int64                 "json:\"affected_node_count\""
 	AffectedUserCount int64                 "json:\"affected_user_count\""
 	AffectedVpsCount  int64                 "json:\"affected_vps_count\""
+	ContentRevision   int64                 "json:\"content_revision\""
 	CreatedAt         string                "json:\"created_at\""
 	CreatedBy         *ActionUserShowOutput "json:\"created_by\""
 	CsDescription     string                "json:\"cs_description\""
@@ -287,6 +304,7 @@ type ActionSecurityAdvisoryIndexOutput struct {
 	EnDescription     string                "json:\"en_description\""
 	EnResponse        string                "json:\"en_response\""
 	EnSummary         string                "json:\"en_summary\""
+	ExternalId        string                "json:\"external_id\""
 	Id                int64                 "json:\"id\""
 	Name              string                "json:\"name\""
 	PublishedAt       string                "json:\"published_at\""
@@ -396,12 +414,12 @@ func (inv *ActionSecurityAdvisoryIndexInvocation) IsMetaParameterNil(param strin
 }
 
 func (inv *ActionSecurityAdvisoryIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -409,7 +427,7 @@ func (inv *ActionSecurityAdvisoryIndexInvocation) validate() error {
 			if !inv.IsParameterNil("RecentSince") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.RecentSince)
 				if !ok {
-					verr.Add("recent_since", "not a valid datetime")
+					verr.Add("recent_since", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.RecentSince = normalized
 				}
@@ -419,7 +437,7 @@ func (inv *ActionSecurityAdvisoryIndexInvocation) validate() error {
 			if !inv.IsParameterNil("Since") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Since)
 				if !ok {
-					verr.Add("since", "not a valid datetime")
+					verr.Add("since", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.Since = normalized
 				}
@@ -428,14 +446,14 @@ func (inv *ActionSecurityAdvisoryIndexInvocation) validate() error {
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Vps") {
 			if !inv.IsParameterNil("Vps") {
 				if inv.Input.Vps < 0 {
-					verr.Add("vps", "not a valid resource id")
+					verr.Add("vps", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -450,24 +468,55 @@ func (inv *ActionSecurityAdvisoryIndexInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionSecurityAdvisoryIndexInvocation) Call() (*ActionSecurityAdvisoryIndexResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionSecurityAdvisoryIndexInvocation) CallContext(ctx context.Context) (*ActionSecurityAdvisoryIndexResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionSecurityAdvisoryIndexResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.SecurityAdvisories == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.SecurityAdvisories
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionSecurityAdvisoryIndexInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionSecurityAdvisoryIndexInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionSecurityAdvisoryIndexInvocation) callAsQuery() (*ActionSecurityAdvisoryIndexResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertInputToQueryParams(queryParams)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionSecurityAdvisoryIndexResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.SecurityAdvisories
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionSecurityAdvisoryIndexInvocation) convertInputToQueryParams(ret map[string]string) {
@@ -477,6 +526,9 @@ func (inv *ActionSecurityAdvisoryIndexInvocation) convertInputToQueryParams(ret 
 		}
 		if inv.IsParameterSelected("Cve") {
 			ret["security_advisory[cve]"] = inv.Input.Cve
+		}
+		if inv.IsParameterSelected("ExternalId") {
+			ret["security_advisory[external_id]"] = inv.Input.ExternalId
 		}
 		if inv.IsParameterSelected("FromId") {
 			ret["security_advisory[from_id]"] = convertInt64ToString(inv.Input.FromId)

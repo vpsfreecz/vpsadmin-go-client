@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionOutageUpdateCreate is a type for action Outage_update#Create
 type ActionOutageUpdateCreate struct {
@@ -430,13 +433,13 @@ func (inv *ActionOutageUpdateCreateInvocation) IsMetaParameterNil(param string) 
 }
 
 func (inv *ActionOutageUpdateCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("BeginsAt") {
 			if !inv.IsParameterNil("BeginsAt") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.BeginsAt)
 				if !ok {
-					verr.Add("begins_at", "not a valid datetime")
+					verr.Add("begins_at", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.BeginsAt = normalized
 				}
@@ -446,7 +449,7 @@ func (inv *ActionOutageUpdateCreateInvocation) validate() error {
 			if !inv.IsParameterNil("FinishedAt") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.FinishedAt)
 				if !ok {
-					verr.Add("finished_at", "not a valid datetime")
+					verr.Add("finished_at", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.FinishedAt = normalized
 				}
@@ -455,7 +458,7 @@ func (inv *ActionOutageUpdateCreateInvocation) validate() error {
 		if inv.IsParameterSelected("Outage") {
 			if !inv.IsParameterNil("Outage") {
 				if inv.Input.Outage < 0 {
-					verr.Add("outage", "not a valid resource id")
+					verr.Add("outage", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -470,22 +473,53 @@ func (inv *ActionOutageUpdateCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionOutageUpdateCreateInvocation) Call() (*ActionOutageUpdateCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionOutageUpdateCreateInvocation) CallContext(ctx context.Context) (*ActionOutageUpdateCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionOutageUpdateCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.OutageUpdate == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.OutageUpdate
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionOutageUpdateCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionOutageUpdateCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionOutageUpdateCreateInvocation) callAsBody() (*ActionOutageUpdateCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionOutageUpdateCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.OutageUpdate
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 // IsBlocking checks whether the current invocation resulted in a blocking operation

@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionHelpBoxCreate is a type for action Help_box#Create
 type ActionHelpBoxCreate struct {
@@ -298,12 +301,12 @@ func (inv *ActionHelpBoxCreateInvocation) IsMetaParameterNil(param string) bool 
 }
 
 func (inv *ActionHelpBoxCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Language") {
 			if !inv.IsParameterNil("Language") {
 				if inv.Input.Language < 0 {
-					verr.Add("language", "not a valid resource id")
+					verr.Add("language", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -318,22 +321,53 @@ func (inv *ActionHelpBoxCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionHelpBoxCreateInvocation) Call() (*ActionHelpBoxCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionHelpBoxCreateInvocation) CallContext(ctx context.Context) (*ActionHelpBoxCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionHelpBoxCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.HelpBox == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.HelpBox
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionHelpBoxCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionHelpBoxCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionHelpBoxCreateInvocation) callAsBody() (*ActionHelpBoxCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionHelpBoxCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.HelpBox
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *ActionHelpBoxCreateInvocation) makeAllInputParams() *ActionHelpBoxCreateRequest {

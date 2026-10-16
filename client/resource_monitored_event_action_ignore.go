@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -243,13 +245,13 @@ func (inv *ActionMonitoredEventIgnoreInvocation) IsMetaParameterNil(param string
 }
 
 func (inv *ActionMonitoredEventIgnoreInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Until") {
 			if !inv.IsParameterNil("Until") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Until)
 				if !ok {
-					verr.Add("until", "not a valid datetime")
+					verr.Add("until", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.Until = normalized
 				}
@@ -266,19 +268,44 @@ func (inv *ActionMonitoredEventIgnoreInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionMonitoredEventIgnoreInvocation) Call() (*ActionMonitoredEventIgnoreResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionMonitoredEventIgnoreInvocation) CallContext(ctx context.Context) (*ActionMonitoredEventIgnoreResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionMonitoredEventIgnoreResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionMonitoredEventIgnoreInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionMonitoredEventIgnoreInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionMonitoredEventIgnoreInvocation) callAsBody() (*ActionMonitoredEventIgnoreResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionMonitoredEventIgnoreResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *ActionMonitoredEventIgnoreInvocation) makeAllInputParams() *ActionMonitoredEventIgnoreRequest {

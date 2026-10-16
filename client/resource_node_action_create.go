@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionNodeCreate is a type for action Node#Create
 type ActionNodeCreate struct {
@@ -100,7 +103,26 @@ func (in *ActionNodeCreateInput) SetCpus(value int64) *ActionNodeCreateInput {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetCpusNil(false)
 	in._selectedParameters["Cpus"] = nil
+	return in
+}
+
+// SetCpusNil sets parameter Cpus to nil and selects it for sending
+func (in *ActionNodeCreateInput) SetCpusNil(set bool) *ActionNodeCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Cpus"] = nil
+		in.SelectParameters("Cpus")
+	} else {
+		delete(in._nilParameters, "Cpus")
+	}
 	return in
 }
 
@@ -220,7 +242,26 @@ func (in *ActionNodeCreateInput) SetTotalMemory(value int64) *ActionNodeCreateIn
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetTotalMemoryNil(false)
 	in._selectedParameters["TotalMemory"] = nil
+	return in
+}
+
+// SetTotalMemoryNil sets parameter TotalMemory to nil and selects it for sending
+func (in *ActionNodeCreateInput) SetTotalMemoryNil(set bool) *ActionNodeCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TotalMemory"] = nil
+		in.SelectParameters("TotalMemory")
+	} else {
+		delete(in._nilParameters, "TotalMemory")
+	}
 	return in
 }
 
@@ -232,7 +273,26 @@ func (in *ActionNodeCreateInput) SetTotalSwap(value int64) *ActionNodeCreateInpu
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetTotalSwapNil(false)
 	in._selectedParameters["TotalSwap"] = nil
+	return in
+}
+
+// SetTotalSwapNil sets parameter TotalSwap to nil and selects it for sending
+func (in *ActionNodeCreateInput) SetTotalSwapNil(set bool) *ActionNodeCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TotalSwap"] = nil
+		in.SelectParameters("TotalSwap")
+	} else {
+		delete(in._nilParameters, "TotalSwap")
+	}
 	return in
 }
 
@@ -446,12 +506,12 @@ func (inv *ActionNodeCreateInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionNodeCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -466,22 +526,53 @@ func (inv *ActionNodeCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionNodeCreateInvocation) Call() (*ActionNodeCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionNodeCreateInvocation) CallContext(ctx context.Context) (*ActionNodeCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionNodeCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Node == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Node
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionNodeCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionNodeCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionNodeCreateInvocation) callAsBody() (*ActionNodeCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionNodeCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Node
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 // IsBlocking checks whether the current invocation resulted in a blocking operation
@@ -572,7 +663,11 @@ func (inv *ActionNodeCreateInvocation) makeInputParams() map[string]interface{} 
 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Cpus") {
-			ret["cpus"] = inv.Input.Cpus
+			if inv.IsParameterNil("Cpus") {
+				ret["cpus"] = nil
+			} else {
+				ret["cpus"] = inv.Input.Cpus
+			}
 		}
 		if inv.IsParameterSelected("HypervisorType") {
 			ret["hypervisor_type"] = inv.Input.HypervisorType
@@ -602,10 +697,18 @@ func (inv *ActionNodeCreateInvocation) makeInputParams() map[string]interface{} 
 			ret["name"] = inv.Input.Name
 		}
 		if inv.IsParameterSelected("TotalMemory") {
-			ret["total_memory"] = inv.Input.TotalMemory
+			if inv.IsParameterNil("TotalMemory") {
+				ret["total_memory"] = nil
+			} else {
+				ret["total_memory"] = inv.Input.TotalMemory
+			}
 		}
 		if inv.IsParameterSelected("TotalSwap") {
-			ret["total_swap"] = inv.Input.TotalSwap
+			if inv.IsParameterNil("TotalSwap") {
+				ret["total_swap"] = nil
+			} else {
+				ret["total_swap"] = inv.Input.TotalSwap
+			}
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["type"] = inv.Input.Type

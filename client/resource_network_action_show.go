@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -76,22 +78,25 @@ func (in *ActionNetworkShowMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkShowOutput is a type for action output parameters
 type ActionNetworkShowOutput struct {
-	Address         string                    "json:\"address\""
-	Assigned        int64                     "json:\"assigned\""
-	Id              int64                     "json:\"id\""
-	IpVersion       int64                     "json:\"ip_version\""
-	Label           string                    "json:\"label\""
-	Managed         bool                      "json:\"managed\""
-	Owned           int64                     "json:\"owned\""
-	Prefix          int64                     "json:\"prefix\""
-	PrimaryLocation *ActionLocationShowOutput "json:\"primary_location\""
-	Purpose         string                    "json:\"purpose\""
-	Role            string                    "json:\"role\""
-	Size            int64                     "json:\"size\""
-	SplitAccess     string                    "json:\"split_access\""
-	SplitPrefix     int64                     "json:\"split_prefix\""
-	Taken           int64                     "json:\"taken\""
-	Used            int64                     "json:\"used\""
+	Address          string                    "json:\"address\""
+	Assigned         int64                     "json:\"assigned\""
+	AvailableToUsers int64                     "json:\"available_to_users\""
+	Enabled          bool                      "json:\"enabled\""
+	Id               int64                     "json:\"id\""
+	IpVersion        int64                     "json:\"ip_version\""
+	Label            string                    "json:\"label\""
+	Managed          bool                      "json:\"managed\""
+	Owned            int64                     "json:\"owned\""
+	OwnedUnassigned  int64                     "json:\"owned_unassigned\""
+	Prefix           int64                     "json:\"prefix\""
+	PrimaryLocation  *ActionLocationShowOutput "json:\"primary_location\""
+	Purpose          string                    "json:\"purpose\""
+	Role             string                    "json:\"role\""
+	Size             int64                     "json:\"size\""
+	SplitAccess      string                    "json:\"split_access\""
+	SplitPrefix      int64                     "json:\"split_prefix\""
+	Taken            int64                     "json:\"taken\""
+	Used             int64                     "json:\"used\""
 }
 
 // Type for action response, including envelope
@@ -171,7 +176,7 @@ func (inv *ActionNetworkShowInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionNetworkShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 
@@ -182,23 +187,54 @@ func (inv *ActionNetworkShowInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionNetworkShowInvocation) Call() (*ActionNetworkShowResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionNetworkShowInvocation) CallContext(ctx context.Context) (*ActionNetworkShowResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionNetworkShowResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Network == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Network
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionNetworkShowInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionNetworkShowInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionNetworkShowInvocation) callAsQuery() (*ActionNetworkShowResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionNetworkShowResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Network
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionNetworkShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {

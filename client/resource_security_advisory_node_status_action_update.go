@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -76,14 +78,90 @@ func (in *ActionSecurityAdvisoryNodeStatusUpdateMetaGlobalInput) AnySelected() b
 
 // ActionSecurityAdvisoryNodeStatusUpdateInput is a type for action input parameters
 type ActionSecurityAdvisoryNodeStatusUpdateInput struct {
-	MitigatedSince  string "json:\"mitigated_since\""
-	Note            string "json:\"note\""
-	State           string "json:\"state\""
-	VulnerableUntil string "json:\"vulnerable_until\""
+	CsNote                  string "json:\"cs_note\""
+	EnNote                  string "json:\"en_note\""
+	ExpectedContentRevision int64  "json:\"expected_content_revision\""
+	MitigatedSince          string "json:\"mitigated_since\""
+	State                   string "json:\"state\""
+	VulnerableUntil         string "json:\"vulnerable_until\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetCsNote sets parameter CsNote to value and selects it for sending
+func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetCsNote(value string) *ActionSecurityAdvisoryNodeStatusUpdateInput {
+	in.CsNote = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetCsNoteNil(false)
+	in._selectedParameters["CsNote"] = nil
+	return in
+}
+
+// SetCsNoteNil sets parameter CsNote to nil and selects it for sending
+func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetCsNoteNil(set bool) *ActionSecurityAdvisoryNodeStatusUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["CsNote"] = nil
+		in.SelectParameters("CsNote")
+	} else {
+		delete(in._nilParameters, "CsNote")
+	}
+	return in
+}
+
+// SetEnNote sets parameter EnNote to value and selects it for sending
+func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetEnNote(value string) *ActionSecurityAdvisoryNodeStatusUpdateInput {
+	in.EnNote = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetEnNoteNil(false)
+	in._selectedParameters["EnNote"] = nil
+	return in
+}
+
+// SetEnNoteNil sets parameter EnNote to nil and selects it for sending
+func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetEnNoteNil(set bool) *ActionSecurityAdvisoryNodeStatusUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["EnNote"] = nil
+		in.SelectParameters("EnNote")
+	} else {
+		delete(in._nilParameters, "EnNote")
+	}
+	return in
+}
+
+// SetExpectedContentRevision sets parameter ExpectedContentRevision to value and selects it for sending
+func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetExpectedContentRevision(value int64) *ActionSecurityAdvisoryNodeStatusUpdateInput {
+	in.ExpectedContentRevision = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ExpectedContentRevision"] = nil
+	return in
 }
 
 // SetMitigatedSince sets parameter MitigatedSince to value and selects it for sending
@@ -113,37 +191,6 @@ func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetMitigatedSinceNil(set 
 		in.SelectParameters("MitigatedSince")
 	} else {
 		delete(in._nilParameters, "MitigatedSince")
-	}
-	return in
-}
-
-// SetNote sets parameter Note to value and selects it for sending
-func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetNote(value string) *ActionSecurityAdvisoryNodeStatusUpdateInput {
-	in.Note = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in.SetNoteNil(false)
-	in._selectedParameters["Note"] = nil
-	return in
-}
-
-// SetNoteNil sets parameter Note to nil and selects it for sending
-func (in *ActionSecurityAdvisoryNodeStatusUpdateInput) SetNoteNil(set bool) *ActionSecurityAdvisoryNodeStatusUpdateInput {
-	if in._nilParameters == nil {
-		if !set {
-			return in
-		}
-		in._nilParameters = make(map[string]interface{})
-	}
-
-	if set {
-		in._nilParameters["Note"] = nil
-		in.SelectParameters("Note")
-	} else {
-		delete(in._nilParameters, "Note")
 	}
 	return in
 }
@@ -237,11 +284,11 @@ type ActionSecurityAdvisoryNodeStatusUpdateRequest struct {
 
 // ActionSecurityAdvisoryNodeStatusUpdateOutput is a type for action output parameters
 type ActionSecurityAdvisoryNodeStatusUpdateOutput struct {
+	CsNote           string                            "json:\"cs_note\""
+	EnNote           string                            "json:\"en_note\""
 	Id               int64                             "json:\"id\""
 	MitigatedSince   string                            "json:\"mitigated_since\""
-	NodeId           int64                             "json:\"node_id\""
-	NodeName         string                            "json:\"node_name\""
-	Note             string                            "json:\"note\""
+	Node             *ActionNodeShowOutput             "json:\"node\""
 	SecurityAdvisory *ActionSecurityAdvisoryShowOutput "json:\"security_advisory\""
 	State            string                            "json:\"state\""
 	VulnerableUntil  string                            "json:\"vulnerable_until\""
@@ -358,13 +405,13 @@ func (inv *ActionSecurityAdvisoryNodeStatusUpdateInvocation) IsMetaParameterNil(
 }
 
 func (inv *ActionSecurityAdvisoryNodeStatusUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("MitigatedSince") {
 			if !inv.IsParameterNil("MitigatedSince") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.MitigatedSince)
 				if !ok {
-					verr.Add("mitigated_since", "not a valid datetime")
+					verr.Add("mitigated_since", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.MitigatedSince = normalized
 				}
@@ -374,7 +421,7 @@ func (inv *ActionSecurityAdvisoryNodeStatusUpdateInvocation) validate() error {
 			if !inv.IsParameterNil("VulnerableUntil") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.VulnerableUntil)
 				if !ok {
-					verr.Add("vulnerable_until", "not a valid datetime")
+					verr.Add("vulnerable_until", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.VulnerableUntil = normalized
 				}
@@ -391,22 +438,53 @@ func (inv *ActionSecurityAdvisoryNodeStatusUpdateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionSecurityAdvisoryNodeStatusUpdateInvocation) Call() (*ActionSecurityAdvisoryNodeStatusUpdateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionSecurityAdvisoryNodeStatusUpdateInvocation) CallContext(ctx context.Context) (*ActionSecurityAdvisoryNodeStatusUpdateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionSecurityAdvisoryNodeStatusUpdateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.NodeStatus == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.NodeStatus
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionSecurityAdvisoryNodeStatusUpdateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionSecurityAdvisoryNodeStatusUpdateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionSecurityAdvisoryNodeStatusUpdateInvocation) callAsBody() (*ActionSecurityAdvisoryNodeStatusUpdateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionSecurityAdvisoryNodeStatusUpdateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("PUT", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.NodeStatus
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "PUT", inv.Path, input)
 }
 
 func (inv *ActionSecurityAdvisoryNodeStatusUpdateInvocation) makeAllInputParams() *ActionSecurityAdvisoryNodeStatusUpdateRequest {
@@ -420,18 +498,28 @@ func (inv *ActionSecurityAdvisoryNodeStatusUpdateInvocation) makeInputParams() m
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("CsNote") {
+			if inv.IsParameterNil("CsNote") {
+				ret["cs_note"] = nil
+			} else {
+				ret["cs_note"] = inv.Input.CsNote
+			}
+		}
+		if inv.IsParameterSelected("EnNote") {
+			if inv.IsParameterNil("EnNote") {
+				ret["en_note"] = nil
+			} else {
+				ret["en_note"] = inv.Input.EnNote
+			}
+		}
+		if inv.IsParameterSelected("ExpectedContentRevision") {
+			ret["expected_content_revision"] = inv.Input.ExpectedContentRevision
+		}
 		if inv.IsParameterSelected("MitigatedSince") {
 			if inv.IsParameterNil("MitigatedSince") {
 				ret["mitigated_since"] = nil
 			} else {
 				ret["mitigated_since"] = inv.Input.MitigatedSince
-			}
-		}
-		if inv.IsParameterSelected("Note") {
-			if inv.IsParameterNil("Note") {
-				ret["note"] = nil
-			} else {
-				ret["note"] = inv.Input.Note
 			}
 		}
 		if inv.IsParameterSelected("State") {

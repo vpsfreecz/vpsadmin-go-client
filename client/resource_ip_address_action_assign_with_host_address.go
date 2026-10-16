@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -283,19 +285,19 @@ func (inv *ActionIpAddressAssignWithHostAddressInvocation) IsMetaParameterNil(pa
 }
 
 func (inv *ActionIpAddressAssignWithHostAddressInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("HostIpAddress") {
 			if !inv.IsParameterNil("HostIpAddress") {
 				if inv.Input.HostIpAddress < 0 {
-					verr.Add("host_ip_address", "not a valid resource id")
+					verr.Add("host_ip_address", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("NetworkInterface") {
 			if !inv.IsParameterNil("NetworkInterface") {
 				if inv.Input.NetworkInterface < 0 {
-					verr.Add("network_interface", "not a valid resource id")
+					verr.Add("network_interface", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -310,22 +312,53 @@ func (inv *ActionIpAddressAssignWithHostAddressInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionIpAddressAssignWithHostAddressInvocation) Call() (*ActionIpAddressAssignWithHostAddressResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionIpAddressAssignWithHostAddressInvocation) CallContext(ctx context.Context) (*ActionIpAddressAssignWithHostAddressResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionIpAddressAssignWithHostAddressResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.IpAddress == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.IpAddress
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionIpAddressAssignWithHostAddressInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionIpAddressAssignWithHostAddressInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionIpAddressAssignWithHostAddressInvocation) callAsBody() (*ActionIpAddressAssignWithHostAddressResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionIpAddressAssignWithHostAddressResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.IpAddress
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 // IsBlocking checks whether the current invocation resulted in a blocking operation

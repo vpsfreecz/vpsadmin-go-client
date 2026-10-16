@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionNewsLogCreate is a type for action News_log#Create
 type ActionNewsLogCreate struct {
@@ -73,7 +76,8 @@ func (in *ActionNewsLogCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionNewsLogCreateInput is a type for action input parameters
 type ActionNewsLogCreateInput struct {
-	Message     string "json:\"message\""
+	CsMessage   string "json:\"cs_message\""
+	EnMessage   string "json:\"en_message\""
 	PublishedAt string "json:\"published_at\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -81,15 +85,27 @@ type ActionNewsLogCreateInput struct {
 	_nilParameters map[string]interface{}
 }
 
-// SetMessage sets parameter Message to value and selects it for sending
-func (in *ActionNewsLogCreateInput) SetMessage(value string) *ActionNewsLogCreateInput {
-	in.Message = value
+// SetCsMessage sets parameter CsMessage to value and selects it for sending
+func (in *ActionNewsLogCreateInput) SetCsMessage(value string) *ActionNewsLogCreateInput {
+	in.CsMessage = value
 
 	if in._selectedParameters == nil {
 		in._selectedParameters = make(map[string]interface{})
 	}
 
-	in._selectedParameters["Message"] = nil
+	in._selectedParameters["CsMessage"] = nil
+	return in
+}
+
+// SetEnMessage sets parameter EnMessage to value and selects it for sending
+func (in *ActionNewsLogCreateInput) SetEnMessage(value string) *ActionNewsLogCreateInput {
+	in.EnMessage = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["EnMessage"] = nil
 	return in
 }
 
@@ -152,6 +168,8 @@ type ActionNewsLogCreateRequest struct {
 // ActionNewsLogCreateOutput is a type for action output parameters
 type ActionNewsLogCreateOutput struct {
 	CreatedAt   string "json:\"created_at\""
+	CsMessage   string "json:\"cs_message\""
+	EnMessage   string "json:\"en_message\""
 	Id          int64  "json:\"id\""
 	Message     string "json:\"message\""
 	PublishedAt string "json:\"published_at\""
@@ -258,13 +276,13 @@ func (inv *ActionNewsLogCreateInvocation) IsMetaParameterNil(param string) bool 
 }
 
 func (inv *ActionNewsLogCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("PublishedAt") {
 			if !inv.IsParameterNil("PublishedAt") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.PublishedAt)
 				if !ok {
-					verr.Add("published_at", "not a valid datetime")
+					verr.Add("published_at", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.PublishedAt = normalized
 				}
@@ -281,22 +299,53 @@ func (inv *ActionNewsLogCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionNewsLogCreateInvocation) Call() (*ActionNewsLogCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionNewsLogCreateInvocation) CallContext(ctx context.Context) (*ActionNewsLogCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionNewsLogCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.NewsLog == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.NewsLog
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionNewsLogCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionNewsLogCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionNewsLogCreateInvocation) callAsBody() (*ActionNewsLogCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionNewsLogCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.NewsLog
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *ActionNewsLogCreateInvocation) makeAllInputParams() *ActionNewsLogCreateRequest {
@@ -310,8 +359,11 @@ func (inv *ActionNewsLogCreateInvocation) makeInputParams() map[string]interface
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
-		if inv.IsParameterSelected("Message") {
-			ret["message"] = inv.Input.Message
+		if inv.IsParameterSelected("CsMessage") {
+			ret["cs_message"] = inv.Input.CsMessage
+		}
+		if inv.IsParameterSelected("EnMessage") {
+			ret["en_message"] = inv.Input.EnMessage
 		}
 		if inv.IsParameterSelected("PublishedAt") {
 			ret["published_at"] = inv.Input.PublishedAt

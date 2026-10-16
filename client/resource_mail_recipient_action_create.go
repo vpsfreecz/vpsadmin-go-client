@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionMailRecipientCreate is a type for action Mail_recipient#Create
 type ActionMailRecipientCreate struct {
@@ -341,7 +344,7 @@ func (inv *ActionMailRecipientCreateInvocation) IsMetaParameterNil(param string)
 }
 
 func (inv *ActionMailRecipientCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {
@@ -354,22 +357,53 @@ func (inv *ActionMailRecipientCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionMailRecipientCreateInvocation) Call() (*ActionMailRecipientCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionMailRecipientCreateInvocation) CallContext(ctx context.Context) (*ActionMailRecipientCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionMailRecipientCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.MailRecipient == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.MailRecipient
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionMailRecipientCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionMailRecipientCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionMailRecipientCreateInvocation) callAsBody() (*ActionMailRecipientCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionMailRecipientCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.MailRecipient
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *ActionMailRecipientCreateInvocation) makeAllInputParams() *ActionMailRecipientCreateRequest {

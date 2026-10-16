@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionUserAccountIndex is a type for action User_account#Index
 type ActionUserAccountIndex struct {
@@ -263,7 +266,7 @@ func (inv *ActionUserAccountIndexInvocation) IsMetaParameterNil(param string) bo
 }
 
 func (inv *ActionUserAccountIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {
@@ -276,24 +279,55 @@ func (inv *ActionUserAccountIndexInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionUserAccountIndexInvocation) Call() (*ActionUserAccountIndexResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionUserAccountIndexInvocation) CallContext(ctx context.Context) (*ActionUserAccountIndexResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionUserAccountIndexResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.UserAccounts == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.UserAccounts
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionUserAccountIndexInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionUserAccountIndexInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionUserAccountIndexInvocation) callAsQuery() (*ActionUserAccountIndexResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertInputToQueryParams(queryParams)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionUserAccountIndexResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.UserAccounts
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionUserAccountIndexInvocation) convertInputToQueryParams(ret map[string]string) {

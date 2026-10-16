@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -661,12 +663,12 @@ func (inv *ActionVpsUpdateInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionVpsUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("DnsResolver") {
 			if !inv.IsParameterNil("DnsResolver") {
 				if inv.Input.DnsResolver < 0 {
-					verr.Add("dns_resolver", "not a valid resource id")
+					verr.Add("dns_resolver", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -674,7 +676,7 @@ func (inv *ActionVpsUpdateInvocation) validate() error {
 			if !inv.IsParameterNil("ExpirationDate") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.ExpirationDate)
 				if !ok {
-					verr.Add("expiration_date", "not a valid datetime")
+					verr.Add("expiration_date", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.ExpirationDate = normalized
 				}
@@ -683,14 +685,14 @@ func (inv *ActionVpsUpdateInvocation) validate() error {
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("OsTemplate") {
 			if !inv.IsParameterNil("OsTemplate") {
 				if inv.Input.OsTemplate < 0 {
-					verr.Add("os_template", "not a valid resource id")
+					verr.Add("os_template", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -698,7 +700,7 @@ func (inv *ActionVpsUpdateInvocation) validate() error {
 			if !inv.IsParameterNil("RemindAfterDate") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.RemindAfterDate)
 				if !ok {
-					verr.Add("remind_after_date", "not a valid datetime")
+					verr.Add("remind_after_date", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.RemindAfterDate = normalized
 				}
@@ -707,14 +709,14 @@ func (inv *ActionVpsUpdateInvocation) validate() error {
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("UserNamespaceMap") {
 			if !inv.IsParameterNil("UserNamespaceMap") {
 				if inv.Input.UserNamespaceMap < 0 {
-					verr.Add("user_namespace_map", "not a valid resource id")
+					verr.Add("user_namespace_map", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -729,19 +731,49 @@ func (inv *ActionVpsUpdateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionVpsUpdateInvocation) Call() (*ActionVpsUpdateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionVpsUpdateInvocation) CallContext(ctx context.Context) (*ActionVpsUpdateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionVpsUpdateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionVpsUpdateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionVpsUpdateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionVpsUpdateInvocation) callAsBody() (*ActionVpsUpdateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionVpsUpdateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("PUT", inv.Path, input, resp)
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "PUT", inv.Path, input)
 }
 
 // IsBlocking checks whether the current invocation resulted in a blocking operation

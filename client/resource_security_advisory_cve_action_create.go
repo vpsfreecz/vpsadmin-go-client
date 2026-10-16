@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionSecurityAdvisoryCveCreate is a type for action Security_advisory_cve#Create
 type ActionSecurityAdvisoryCveCreate struct {
@@ -73,8 +76,9 @@ func (in *ActionSecurityAdvisoryCveCreateMetaGlobalInput) AnySelected() bool {
 
 // ActionSecurityAdvisoryCveCreateInput is a type for action input parameters
 type ActionSecurityAdvisoryCveCreateInput struct {
-	CveId            string "json:\"cve_id\""
-	SecurityAdvisory int64  "json:\"security_advisory\""
+	CveId                   string "json:\"cve_id\""
+	ExpectedContentRevision int64  "json:\"expected_content_revision\""
+	SecurityAdvisory        int64  "json:\"security_advisory\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -90,6 +94,18 @@ func (in *ActionSecurityAdvisoryCveCreateInput) SetCveId(value string) *ActionSe
 	}
 
 	in._selectedParameters["CveId"] = nil
+	return in
+}
+
+// SetExpectedContentRevision sets parameter ExpectedContentRevision to value and selects it for sending
+func (in *ActionSecurityAdvisoryCveCreateInput) SetExpectedContentRevision(value int64) *ActionSecurityAdvisoryCveCreateInput {
+	in.ExpectedContentRevision = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ExpectedContentRevision"] = nil
 	return in
 }
 
@@ -258,12 +274,12 @@ func (inv *ActionSecurityAdvisoryCveCreateInvocation) IsMetaParameterNil(param s
 }
 
 func (inv *ActionSecurityAdvisoryCveCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("SecurityAdvisory") {
 			if !inv.IsParameterNil("SecurityAdvisory") {
 				if inv.Input.SecurityAdvisory < 0 {
-					verr.Add("security_advisory", "not a valid resource id")
+					verr.Add("security_advisory", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -278,22 +294,53 @@ func (inv *ActionSecurityAdvisoryCveCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionSecurityAdvisoryCveCreateInvocation) Call() (*ActionSecurityAdvisoryCveCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionSecurityAdvisoryCveCreateInvocation) CallContext(ctx context.Context) (*ActionSecurityAdvisoryCveCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionSecurityAdvisoryCveCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.SecurityAdvisoryCve == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.SecurityAdvisoryCve
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionSecurityAdvisoryCveCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionSecurityAdvisoryCveCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionSecurityAdvisoryCveCreateInvocation) callAsBody() (*ActionSecurityAdvisoryCveCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionSecurityAdvisoryCveCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.SecurityAdvisoryCve
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *ActionSecurityAdvisoryCveCreateInvocation) makeAllInputParams() *ActionSecurityAdvisoryCveCreateRequest {
@@ -309,6 +356,9 @@ func (inv *ActionSecurityAdvisoryCveCreateInvocation) makeInputParams() map[stri
 	if inv.Input != nil {
 		if inv.IsParameterSelected("CveId") {
 			ret["cve_id"] = inv.Input.CveId
+		}
+		if inv.IsParameterSelected("ExpectedContentRevision") {
+			ret["expected_content_revision"] = inv.Input.ExpectedContentRevision
 		}
 		if inv.IsParameterSelected("SecurityAdvisory") {
 			ret["security_advisory"] = inv.Input.SecurityAdvisory

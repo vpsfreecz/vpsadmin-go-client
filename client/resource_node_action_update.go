@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -77,7 +79,6 @@ func (in *ActionNodeUpdateMetaGlobalInput) AnySelected() bool {
 // ActionNodeUpdateInput is a type for action input parameters
 type ActionNodeUpdateInput struct {
 	Active         bool   "json:\"active\""
-	Cpus           int64  "json:\"cpus\""
 	Fqdn           string "json:\"fqdn\""
 	HypervisorType string "json:\"hypervisor_type\""
 	IpAddr         string "json:\"ip_addr\""
@@ -86,8 +87,6 @@ type ActionNodeUpdateInput struct {
 	MaxTx          int64  "json:\"max_tx\""
 	MaxVps         int64  "json:\"max_vps\""
 	Name           string "json:\"name\""
-	TotalMemory    int64  "json:\"total_memory\""
-	TotalSwap      int64  "json:\"total_swap\""
 	Type           string "json:\"type\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -104,18 +103,6 @@ func (in *ActionNodeUpdateInput) SetActive(value bool) *ActionNodeUpdateInput {
 	}
 
 	in._selectedParameters["Active"] = nil
-	return in
-}
-
-// SetCpus sets parameter Cpus to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetCpus(value int64) *ActionNodeUpdateInput {
-	in.Cpus = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["Cpus"] = nil
 	return in
 }
 
@@ -212,30 +199,6 @@ func (in *ActionNodeUpdateInput) SetName(value string) *ActionNodeUpdateInput {
 	}
 
 	in._selectedParameters["Name"] = nil
-	return in
-}
-
-// SetTotalMemory sets parameter TotalMemory to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetTotalMemory(value int64) *ActionNodeUpdateInput {
-	in.TotalMemory = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["TotalMemory"] = nil
-	return in
-}
-
-// SetTotalSwap sets parameter TotalSwap to value and selects it for sending
-func (in *ActionNodeUpdateInput) SetTotalSwap(value int64) *ActionNodeUpdateInput {
-	in.TotalSwap = value
-
-	if in._selectedParameters == nil {
-		in._selectedParameters = make(map[string]interface{})
-	}
-
-	in._selectedParameters["TotalSwap"] = nil
 	return in
 }
 
@@ -399,12 +362,12 @@ func (inv *ActionNodeUpdateInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionNodeUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -419,19 +382,44 @@ func (inv *ActionNodeUpdateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionNodeUpdateInvocation) Call() (*ActionNodeUpdateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionNodeUpdateInvocation) CallContext(ctx context.Context) (*ActionNodeUpdateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionNodeUpdateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionNodeUpdateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionNodeUpdateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionNodeUpdateInvocation) callAsBody() (*ActionNodeUpdateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionNodeUpdateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("PUT", inv.Path, input, resp)
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "PUT", inv.Path, input)
 }
 
 func (inv *ActionNodeUpdateInvocation) makeAllInputParams() *ActionNodeUpdateRequest {
@@ -447,9 +435,6 @@ func (inv *ActionNodeUpdateInvocation) makeInputParams() map[string]interface{} 
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Active") {
 			ret["active"] = inv.Input.Active
-		}
-		if inv.IsParameterSelected("Cpus") {
-			ret["cpus"] = inv.Input.Cpus
 		}
 		if inv.IsParameterSelected("Fqdn") {
 			ret["fqdn"] = inv.Input.Fqdn
@@ -474,12 +459,6 @@ func (inv *ActionNodeUpdateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("Name") {
 			ret["name"] = inv.Input.Name
-		}
-		if inv.IsParameterSelected("TotalMemory") {
-			ret["total_memory"] = inv.Input.TotalMemory
-		}
-		if inv.IsParameterSelected("TotalSwap") {
-			ret["total_swap"] = inv.Input.TotalSwap
 		}
 		if inv.IsParameterSelected("Type") {
 			ret["type"] = inv.Input.Type

@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionOutageSecurityAdvisoryCreate is a type for action Outage_security_advisory#Create
 type ActionOutageSecurityAdvisoryCreate struct {
@@ -258,19 +261,19 @@ func (inv *ActionOutageSecurityAdvisoryCreateInvocation) IsMetaParameterNil(para
 }
 
 func (inv *ActionOutageSecurityAdvisoryCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Outage") {
 			if !inv.IsParameterNil("Outage") {
 				if inv.Input.Outage < 0 {
-					verr.Add("outage", "not a valid resource id")
+					verr.Add("outage", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("SecurityAdvisory") {
 			if !inv.IsParameterNil("SecurityAdvisory") {
 				if inv.Input.SecurityAdvisory < 0 {
-					verr.Add("security_advisory", "not a valid resource id")
+					verr.Add("security_advisory", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -285,22 +288,53 @@ func (inv *ActionOutageSecurityAdvisoryCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionOutageSecurityAdvisoryCreateInvocation) Call() (*ActionOutageSecurityAdvisoryCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionOutageSecurityAdvisoryCreateInvocation) CallContext(ctx context.Context) (*ActionOutageSecurityAdvisoryCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionOutageSecurityAdvisoryCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.OutageSecurityAdvisory == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.OutageSecurityAdvisory
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionOutageSecurityAdvisoryCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionOutageSecurityAdvisoryCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionOutageSecurityAdvisoryCreateInvocation) callAsBody() (*ActionOutageSecurityAdvisoryCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionOutageSecurityAdvisoryCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.OutageSecurityAdvisory
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *ActionOutageSecurityAdvisoryCreateInvocation) makeAllInputParams() *ActionOutageSecurityAdvisoryCreateRequest {

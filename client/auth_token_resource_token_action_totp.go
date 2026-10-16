@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // AuthTokenActionTokenTotp is a type for action Token#Totp
 type AuthTokenActionTokenTotp struct {
@@ -244,7 +247,7 @@ func (inv *AuthTokenActionTokenTotpInvocation) IsMetaParameterNil(param string) 
 }
 
 func (inv *AuthTokenActionTokenTotpInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {
@@ -257,22 +260,53 @@ func (inv *AuthTokenActionTokenTotpInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *AuthTokenActionTokenTotpInvocation) Call() (*AuthTokenActionTokenTotpResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *AuthTokenActionTokenTotpInvocation) CallContext(ctx context.Context) (*AuthTokenActionTokenTotpResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &AuthTokenActionTokenTotpResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Token == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Token
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *AuthTokenActionTokenTotpInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *AuthTokenActionTokenTotpInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *AuthTokenActionTokenTotpInvocation) callAsBody() (*AuthTokenActionTokenTotpResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &AuthTokenActionTokenTotpResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Token
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *AuthTokenActionTokenTotpInvocation) makeAllInputParams() *AuthTokenActionTokenTotpRequest {

@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionDnsRecordLogIndex is a type for action Dns_record_log#Index
 type ActionDnsRecordLogIndex struct {
@@ -349,19 +352,19 @@ func (inv *ActionDnsRecordLogIndexInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionDnsRecordLogIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("DnsZone") {
 			if !inv.IsParameterNil("DnsZone") {
 				if inv.Input.DnsZone < 0 {
-					verr.Add("dns_zone", "not a valid resource id")
+					verr.Add("dns_zone", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -376,24 +379,55 @@ func (inv *ActionDnsRecordLogIndexInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionDnsRecordLogIndexInvocation) Call() (*ActionDnsRecordLogIndexResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionDnsRecordLogIndexInvocation) CallContext(ctx context.Context) (*ActionDnsRecordLogIndexResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionDnsRecordLogIndexResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.DnsRecordLogs == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.DnsRecordLogs
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionDnsRecordLogIndexInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionDnsRecordLogIndexInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionDnsRecordLogIndexInvocation) callAsQuery() (*ActionDnsRecordLogIndexResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertInputToQueryParams(queryParams)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionDnsRecordLogIndexResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.DnsRecordLogs
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionDnsRecordLogIndexInvocation) convertInputToQueryParams(ret map[string]string) {

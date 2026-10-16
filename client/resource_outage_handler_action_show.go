@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -159,7 +161,7 @@ func (inv *ActionOutageHandlerShowInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionOutageHandlerShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 
@@ -170,23 +172,54 @@ func (inv *ActionOutageHandlerShowInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionOutageHandlerShowInvocation) Call() (*ActionOutageHandlerShowResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionOutageHandlerShowInvocation) CallContext(ctx context.Context) (*ActionOutageHandlerShowResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionOutageHandlerShowResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Handler == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Handler
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionOutageHandlerShowInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionOutageHandlerShowInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionOutageHandlerShowInvocation) callAsQuery() (*ActionOutageHandlerShowResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionOutageHandlerShowResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Handler
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionOutageHandlerShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {

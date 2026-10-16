@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -76,10 +78,11 @@ func (in *ActionOutageEntityShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOutageEntityShowOutput is a type for action output parameters
 type ActionOutageEntityShowOutput struct {
-	EntityId int64  "json:\"entity_id\""
-	Id       int64  "json:\"id\""
-	Label    string "json:\"label\""
-	Name     string "json:\"name\""
+	EntityId   int64  "json:\"entity_id\""
+	EntityType string "json:\"entity_type\""
+	Id         int64  "json:\"id\""
+	Label      string "json:\"label\""
+	Name       string "json:\"name\""
 }
 
 // Type for action response, including envelope
@@ -159,7 +162,7 @@ func (inv *ActionOutageEntityShowInvocation) IsMetaParameterNil(param string) bo
 }
 
 func (inv *ActionOutageEntityShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 
@@ -170,23 +173,54 @@ func (inv *ActionOutageEntityShowInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionOutageEntityShowInvocation) Call() (*ActionOutageEntityShowResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionOutageEntityShowInvocation) CallContext(ctx context.Context) (*ActionOutageEntityShowResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionOutageEntityShowResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Entity == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Entity
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionOutageEntityShowInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionOutageEntityShowInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionOutageEntityShowInvocation) callAsQuery() (*ActionOutageEntityShowResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionOutageEntityShowResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Entity
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionOutageEntityShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {

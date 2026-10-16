@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionUserClusterResourcePackageIndex is a type for action User_cluster_resource_package#Index
 type ActionUserClusterResourcePackageIndex struct {
@@ -341,33 +344,33 @@ func (inv *ActionUserClusterResourcePackageIndexInvocation) IsMetaParameterNil(p
 }
 
 func (inv *ActionUserClusterResourcePackageIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("AddedBy") {
 			if !inv.IsParameterNil("AddedBy") {
 				if inv.Input.AddedBy < 0 {
-					verr.Add("added_by", "not a valid resource id")
+					verr.Add("added_by", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("ClusterResourcePackage") {
 			if !inv.IsParameterNil("ClusterResourcePackage") {
 				if inv.Input.ClusterResourcePackage < 0 {
-					verr.Add("cluster_resource_package", "not a valid resource id")
+					verr.Add("cluster_resource_package", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Environment") {
 			if !inv.IsParameterNil("Environment") {
 				if inv.Input.Environment < 0 {
-					verr.Add("environment", "not a valid resource id")
+					verr.Add("environment", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -382,24 +385,55 @@ func (inv *ActionUserClusterResourcePackageIndexInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionUserClusterResourcePackageIndexInvocation) Call() (*ActionUserClusterResourcePackageIndexResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionUserClusterResourcePackageIndexInvocation) CallContext(ctx context.Context) (*ActionUserClusterResourcePackageIndexResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionUserClusterResourcePackageIndexResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.UserClusterResourcePackages == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.UserClusterResourcePackages
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionUserClusterResourcePackageIndexInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionUserClusterResourcePackageIndexInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionUserClusterResourcePackageIndexInvocation) callAsQuery() (*ActionUserClusterResourcePackageIndexResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertInputToQueryParams(queryParams)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionUserClusterResourcePackageIndexResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.UserClusterResourcePackages
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionUserClusterResourcePackageIndexInvocation) convertInputToQueryParams(ret map[string]string) {

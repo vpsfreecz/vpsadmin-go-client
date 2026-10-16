@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -76,17 +78,20 @@ func (in *ActionOauth2ClientShowMetaGlobalInput) AnySelected() bool {
 
 // ActionOauth2ClientShowOutput is a type for action output parameters
 type ActionOauth2ClientShowOutput struct {
-	AccessTokenLifetime string "json:\"access_token_lifetime\""
-	AccessTokenSeconds  int64  "json:\"access_token_seconds\""
-	AllowSingleSignOn   bool   "json:\"allow_single_sign_on\""
-	ClientId            string "json:\"client_id\""
-	CreatedAt           string "json:\"created_at\""
-	Id                  int64  "json:\"id\""
-	IssueRefreshToken   bool   "json:\"issue_refresh_token\""
-	Name                string "json:\"name\""
-	RedirectUri         string "json:\"redirect_uri\""
-	RefreshTokenSeconds int64  "json:\"refresh_token_seconds\""
-	UpdatedAt           string "json:\"updated_at\""
+	AccessTokenLifetime                  string "json:\"access_token_lifetime\""
+	AccessTokenSeconds                   int64  "json:\"access_token_seconds\""
+	AllowSingleSignOn                    bool   "json:\"allow_single_sign_on\""
+	AuthorizationStartRequiresUserAction bool   "json:\"authorization_start_requires_user_action\""
+	AuthorizationStartUri                string "json:\"authorization_start_uri\""
+	ClientId                             string "json:\"client_id\""
+	CreatedAt                            string "json:\"created_at\""
+	Id                                   int64  "json:\"id\""
+	IsDefault                            bool   "json:\"is_default\""
+	IssueRefreshToken                    bool   "json:\"issue_refresh_token\""
+	Name                                 string "json:\"name\""
+	RedirectUri                          string "json:\"redirect_uri\""
+	RefreshTokenSeconds                  int64  "json:\"refresh_token_seconds\""
+	UpdatedAt                            string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
@@ -166,7 +171,7 @@ func (inv *ActionOauth2ClientShowInvocation) IsMetaParameterNil(param string) bo
 }
 
 func (inv *ActionOauth2ClientShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 
@@ -177,23 +182,54 @@ func (inv *ActionOauth2ClientShowInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionOauth2ClientShowInvocation) Call() (*ActionOauth2ClientShowResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionOauth2ClientShowInvocation) CallContext(ctx context.Context) (*ActionOauth2ClientShowResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionOauth2ClientShowResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Oauth2Client == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Oauth2Client
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionOauth2ClientShowInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionOauth2ClientShowInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionOauth2ClientShowInvocation) callAsQuery() (*ActionOauth2ClientShowResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionOauth2ClientShowResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Oauth2Client
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionOauth2ClientShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {

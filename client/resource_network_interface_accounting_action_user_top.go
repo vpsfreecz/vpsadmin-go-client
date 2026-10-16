@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionNetworkInterfaceAccountingUserTop is a type for action Network_interface_accounting#User_top
 type ActionNetworkInterfaceAccountingUserTop struct {
@@ -360,12 +363,12 @@ func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) IsMetaParameterNil
 }
 
 func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Environment") {
 			if !inv.IsParameterNil("Environment") {
 				if inv.Input.Environment < 0 {
-					verr.Add("environment", "not a valid resource id")
+					verr.Add("environment", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -373,7 +376,7 @@ func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) validate() error {
 			if !inv.IsParameterNil("From") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.From)
 				if !ok {
-					verr.Add("from", "not a valid datetime")
+					verr.Add("from", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.From = normalized
 				}
@@ -382,14 +385,14 @@ func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) validate() error {
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -397,7 +400,7 @@ func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) validate() error {
 			if !inv.IsParameterNil("To") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.To)
 				if !ok {
-					verr.Add("to", "not a valid datetime")
+					verr.Add("to", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.To = normalized
 				}
@@ -414,24 +417,55 @@ func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) Call() (*ActionNetworkInterfaceAccountingUserTopResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) CallContext(ctx context.Context) (*ActionNetworkInterfaceAccountingUserTopResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionNetworkInterfaceAccountingUserTopResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.NetworkInterfaceAccountings == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.NetworkInterfaceAccountings
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) callAsQuery() (*ActionNetworkInterfaceAccountingUserTopResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertInputToQueryParams(queryParams)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionNetworkInterfaceAccountingUserTopResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.NetworkInterfaceAccountings
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionNetworkInterfaceAccountingUserTopInvocation) convertInputToQueryParams(ret map[string]string) {

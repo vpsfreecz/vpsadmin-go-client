@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionIpAddressAssignmentIndex is a type for action Ip_address_assignment#Index
 type ActionIpAddressAssignmentIndex struct {
@@ -482,54 +485,54 @@ func (inv *ActionIpAddressAssignmentIndexInvocation) IsMetaParameterNil(param st
 }
 
 func (inv *ActionIpAddressAssignmentIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("AssignedByChain") {
 			if !inv.IsParameterNil("AssignedByChain") {
 				if inv.Input.AssignedByChain < 0 {
-					verr.Add("assigned_by_chain", "not a valid resource id")
+					verr.Add("assigned_by_chain", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("IpAddress") {
 			if !inv.IsParameterNil("IpAddress") {
 				if inv.Input.IpAddress < 0 {
-					verr.Add("ip_address", "not a valid resource id")
+					verr.Add("ip_address", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Network") {
 			if !inv.IsParameterNil("Network") {
 				if inv.Input.Network < 0 {
-					verr.Add("network", "not a valid resource id")
+					verr.Add("network", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("UnassignedByChain") {
 			if !inv.IsParameterNil("UnassignedByChain") {
 				if inv.Input.UnassignedByChain < 0 {
-					verr.Add("unassigned_by_chain", "not a valid resource id")
+					verr.Add("unassigned_by_chain", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Vps") {
 			if !inv.IsParameterNil("Vps") {
 				if inv.Input.Vps < 0 {
-					verr.Add("vps", "not a valid resource id")
+					verr.Add("vps", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -544,24 +547,55 @@ func (inv *ActionIpAddressAssignmentIndexInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionIpAddressAssignmentIndexInvocation) Call() (*ActionIpAddressAssignmentIndexResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionIpAddressAssignmentIndexInvocation) CallContext(ctx context.Context) (*ActionIpAddressAssignmentIndexResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionIpAddressAssignmentIndexResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.IpAddressAssignments == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.IpAddressAssignments
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionIpAddressAssignmentIndexInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionIpAddressAssignmentIndexInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionIpAddressAssignmentIndexInvocation) callAsQuery() (*ActionIpAddressAssignmentIndexResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertInputToQueryParams(queryParams)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionIpAddressAssignmentIndexResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.IpAddressAssignments
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionIpAddressAssignmentIndexInvocation) convertInputToQueryParams(ret map[string]string) {

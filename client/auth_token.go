@@ -68,7 +68,9 @@ func (client *Client) SetNewTokenAuth(options *TokenAuthOptions) error {
 	if err != nil {
 		return err
 	} else if !resp.Status {
-		return fmt.Errorf("Unable to request token: %v", resp.Message)
+		return fmt.Errorf("%s", t(client, "authentication.token_request_failed", map[string]string{
+			"message": resp.Message,
+		}))
 	}
 
 	if resp.Output.Complete {
@@ -103,11 +105,16 @@ func (auth *TokenAuth) nextAuthenticationStep(options *TokenAuthOptions, action 
 		input.SetToken(token)
 
 		if options.ResetPasswordCallback == nil {
-			return fmt.Errorf("Implement callback ResetPasswordCallback")
+			return fmt.Errorf("%s", t(auth.Resource.Client, "authentication.callback_required", map[string]string{
+				"callback": "ResetPasswordCallback",
+			}))
 		}
 
 		if err := options.ResetPasswordCallback(input); err != nil {
-			return fmt.Errorf("ResetPasswordCallback failed: %v", err)
+			return fmt.Errorf("%s", t(auth.Resource.Client, "authentication.callback_failed", map[string]string{
+				"callback": "ResetPasswordCallback",
+				"error":    err.Error(),
+			}))
 		}
 
 		resp, err := request.Call()
@@ -115,7 +122,10 @@ func (auth *TokenAuth) nextAuthenticationStep(options *TokenAuthOptions, action 
 		if err != nil {
 			return err
 		} else if !resp.Status {
-			return fmt.Errorf("Failed at authentication step '%s': %v", action, resp.Message)
+			return fmt.Errorf("%s", t(auth.Resource.Client, "authentication.token_step_failed", map[string]string{
+				"action":  action,
+				"message": resp.Message,
+			}))
 		}
 
 		if resp.Output.Complete {
@@ -136,11 +146,16 @@ func (auth *TokenAuth) nextAuthenticationStep(options *TokenAuthOptions, action 
 		input.SetToken(token)
 
 		if options.TotpCallback == nil {
-			return fmt.Errorf("Implement callback TotpCallback")
+			return fmt.Errorf("%s", t(auth.Resource.Client, "authentication.callback_required", map[string]string{
+				"callback": "TotpCallback",
+			}))
 		}
 
 		if err := options.TotpCallback(input); err != nil {
-			return fmt.Errorf("TotpCallback failed: %v", err)
+			return fmt.Errorf("%s", t(auth.Resource.Client, "authentication.callback_failed", map[string]string{
+				"callback": "TotpCallback",
+				"error":    err.Error(),
+			}))
 		}
 
 		resp, err := request.Call()
@@ -148,7 +163,10 @@ func (auth *TokenAuth) nextAuthenticationStep(options *TokenAuthOptions, action 
 		if err != nil {
 			return err
 		} else if !resp.Status {
-			return fmt.Errorf("Failed at authentication step '%s': %v", action, resp.Message)
+			return fmt.Errorf("%s", t(auth.Resource.Client, "authentication.token_step_failed", map[string]string{
+				"action":  action,
+				"message": resp.Message,
+			}))
 		}
 
 		if resp.Output.Complete {
@@ -164,7 +182,9 @@ func (auth *TokenAuth) nextAuthenticationStep(options *TokenAuthOptions, action 
 		)
 	}
 
-	return fmt.Errorf("Unsupported authentication action '%s'", action)
+	return fmt.Errorf("%s", t(auth.Resource.Client, "authentication.unsupported_auth_action", map[string]string{
+		"action": action,
+	}))
 }
 
 // SetExistingTokenAuth will use a previously acquired token
@@ -190,7 +210,9 @@ func (client *Client) RevokeAuthToken() error {
 	if err != nil {
 		return err
 	} else if !resp.Status {
-		return fmt.Errorf("Unable to revoke token: %v", resp.Message)
+		return fmt.Errorf("%s", t(client, "authentication.token_revoke_failed", map[string]string{
+			"message": resp.Message,
+		}))
 	}
 
 	client.Authentication = nil

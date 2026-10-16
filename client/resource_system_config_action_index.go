@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionSystemConfigIndex is a type for action System_config#Index
 type ActionSystemConfigIndex struct {
@@ -174,6 +177,7 @@ type ActionSystemConfigIndexOutput struct {
 	Category     string "json:\"category\""
 	Description  string "json:\"description\""
 	Label        string "json:\"label\""
+	Localized    bool   "json:\"localized\""
 	MinUserLevel int64  "json:\"min_user_level\""
 	Name         string "json:\"name\""
 	Type         string "json:\"type\""
@@ -279,7 +283,7 @@ func (inv *ActionSystemConfigIndexInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionSystemConfigIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {
@@ -292,24 +296,55 @@ func (inv *ActionSystemConfigIndexInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionSystemConfigIndexInvocation) Call() (*ActionSystemConfigIndexResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionSystemConfigIndexInvocation) CallContext(ctx context.Context) (*ActionSystemConfigIndexResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionSystemConfigIndexResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.SystemConfigs == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.SystemConfigs
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionSystemConfigIndexInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionSystemConfigIndexInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionSystemConfigIndexInvocation) callAsQuery() (*ActionSystemConfigIndexResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertInputToQueryParams(queryParams)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionSystemConfigIndexResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.SystemConfigs
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionSystemConfigIndexInvocation) convertInputToQueryParams(ret map[string]string) {

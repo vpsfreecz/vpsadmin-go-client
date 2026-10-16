@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionUserPaymentCreate is a type for action User_payment#Create
 type ActionUserPaymentCreate struct {
@@ -281,19 +284,19 @@ func (inv *ActionUserPaymentCreateInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionUserPaymentCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("IncomingPayment") {
 			if !inv.IsParameterNil("IncomingPayment") {
 				if inv.Input.IncomingPayment < 0 {
-					verr.Add("incoming_payment", "not a valid resource id")
+					verr.Add("incoming_payment", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -308,22 +311,53 @@ func (inv *ActionUserPaymentCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionUserPaymentCreateInvocation) Call() (*ActionUserPaymentCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionUserPaymentCreateInvocation) CallContext(ctx context.Context) (*ActionUserPaymentCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionUserPaymentCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.UserPayment == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.UserPayment
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionUserPaymentCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionUserPaymentCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionUserPaymentCreateInvocation) callAsBody() (*ActionUserPaymentCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionUserPaymentCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.UserPayment
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 // IsBlocking checks whether the current invocation resulted in a blocking operation

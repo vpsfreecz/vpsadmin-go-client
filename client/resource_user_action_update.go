@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -101,6 +103,7 @@ type ActionUserUpdateInput struct {
 	PreferredLogoutAll         bool   "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64  "json:\"preferred_session_length\""
 	RemindAfterDate            string "json:\"remind_after_date\""
+	TimeZone                   string "json:\"time_zone\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -426,6 +429,37 @@ func (in *ActionUserUpdateInput) SetRemindAfterDate(value string) *ActionUserUpd
 	return in
 }
 
+// SetTimeZone sets parameter TimeZone to value and selects it for sending
+func (in *ActionUserUpdateInput) SetTimeZone(value string) *ActionUserUpdateInput {
+	in.TimeZone = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetTimeZoneNil(false)
+	in._selectedParameters["TimeZone"] = nil
+	return in
+}
+
+// SetTimeZoneNil sets parameter TimeZone to nil and selects it for sending
+func (in *ActionUserUpdateInput) SetTimeZoneNil(set bool) *ActionUserUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TimeZone"] = nil
+		in.SelectParameters("TimeZone")
+	} else {
+		delete(in._nilParameters, "TimeZone")
+	}
+	return in
+}
+
 // SelectParameters sets parameters from ActionUserUpdateInput
 // that will be sent to the API.
 // SelectParameters can be called multiple times.
@@ -494,6 +528,7 @@ type ActionUserUpdateOutput struct {
 	PasswordReset              bool                      "json:\"password_reset\""
 	PreferredLogoutAll         bool                      "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64                     "json:\"preferred_session_length\""
+	TimeZone                   string                    "json:\"time_zone\""
 }
 
 // ActionUserUpdateMetaGlobalOutput is a type for global output metadata parameters
@@ -614,13 +649,13 @@ func (inv *ActionUserUpdateInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionUserUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("ExpirationDate") {
 			if !inv.IsParameterNil("ExpirationDate") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.ExpirationDate)
 				if !ok {
-					verr.Add("expiration_date", "not a valid datetime")
+					verr.Add("expiration_date", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.ExpirationDate = normalized
 				}
@@ -629,7 +664,7 @@ func (inv *ActionUserUpdateInvocation) validate() error {
 		if inv.IsParameterSelected("Language") {
 			if !inv.IsParameterNil("Language") {
 				if inv.Input.Language < 0 {
-					verr.Add("language", "not a valid resource id")
+					verr.Add("language", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -637,7 +672,7 @@ func (inv *ActionUserUpdateInvocation) validate() error {
 			if !inv.IsParameterNil("RemindAfterDate") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.RemindAfterDate)
 				if !ok {
-					verr.Add("remind_after_date", "not a valid datetime")
+					verr.Add("remind_after_date", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.RemindAfterDate = normalized
 				}
@@ -654,22 +689,53 @@ func (inv *ActionUserUpdateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionUserUpdateInvocation) Call() (*ActionUserUpdateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionUserUpdateInvocation) CallContext(ctx context.Context) (*ActionUserUpdateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionUserUpdateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.User == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.User
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionUserUpdateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionUserUpdateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionUserUpdateInvocation) callAsBody() (*ActionUserUpdateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionUserUpdateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("PUT", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.User
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "PUT", inv.Path, input)
 }
 
 // IsBlocking checks whether the current invocation resulted in a blocking operation
@@ -837,6 +903,13 @@ func (inv *ActionUserUpdateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("RemindAfterDate") {
 			ret["remind_after_date"] = inv.Input.RemindAfterDate
+		}
+		if inv.IsParameterSelected("TimeZone") {
+			if inv.IsParameterNil("TimeZone") {
+				ret["time_zone"] = nil
+			} else {
+				ret["time_zone"] = inv.Input.TimeZone
+			}
 		}
 	}
 

@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionMetricsAccessTokenCreate is a type for action Metrics_access_token#Create
 type ActionMetricsAccessTokenCreate struct {
@@ -261,12 +264,12 @@ func (inv *ActionMetricsAccessTokenCreateInvocation) IsMetaParameterNil(param st
 }
 
 func (inv *ActionMetricsAccessTokenCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -281,22 +284,53 @@ func (inv *ActionMetricsAccessTokenCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionMetricsAccessTokenCreateInvocation) Call() (*ActionMetricsAccessTokenCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionMetricsAccessTokenCreateInvocation) CallContext(ctx context.Context) (*ActionMetricsAccessTokenCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionMetricsAccessTokenCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.MetricsAccessToken == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.MetricsAccessToken
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionMetricsAccessTokenCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionMetricsAccessTokenCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionMetricsAccessTokenCreateInvocation) callAsBody() (*ActionMetricsAccessTokenCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionMetricsAccessTokenCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.MetricsAccessToken
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *ActionMetricsAccessTokenCreateInvocation) makeAllInputParams() *ActionMetricsAccessTokenCreateRequest {

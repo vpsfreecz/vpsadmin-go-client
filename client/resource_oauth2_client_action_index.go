@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionOauth2ClientIndex is a type for action Oauth2_client#Index
 type ActionOauth2ClientIndex struct {
@@ -158,17 +161,20 @@ func (in *ActionOauth2ClientIndexInput) AnySelected() bool {
 
 // ActionOauth2ClientIndexOutput is a type for action output parameters
 type ActionOauth2ClientIndexOutput struct {
-	AccessTokenLifetime string "json:\"access_token_lifetime\""
-	AccessTokenSeconds  int64  "json:\"access_token_seconds\""
-	AllowSingleSignOn   bool   "json:\"allow_single_sign_on\""
-	ClientId            string "json:\"client_id\""
-	CreatedAt           string "json:\"created_at\""
-	Id                  int64  "json:\"id\""
-	IssueRefreshToken   bool   "json:\"issue_refresh_token\""
-	Name                string "json:\"name\""
-	RedirectUri         string "json:\"redirect_uri\""
-	RefreshTokenSeconds int64  "json:\"refresh_token_seconds\""
-	UpdatedAt           string "json:\"updated_at\""
+	AccessTokenLifetime                  string "json:\"access_token_lifetime\""
+	AccessTokenSeconds                   int64  "json:\"access_token_seconds\""
+	AllowSingleSignOn                    bool   "json:\"allow_single_sign_on\""
+	AuthorizationStartRequiresUserAction bool   "json:\"authorization_start_requires_user_action\""
+	AuthorizationStartUri                string "json:\"authorization_start_uri\""
+	ClientId                             string "json:\"client_id\""
+	CreatedAt                            string "json:\"created_at\""
+	Id                                   int64  "json:\"id\""
+	IsDefault                            bool   "json:\"is_default\""
+	IssueRefreshToken                    bool   "json:\"issue_refresh_token\""
+	Name                                 string "json:\"name\""
+	RedirectUri                          string "json:\"redirect_uri\""
+	RefreshTokenSeconds                  int64  "json:\"refresh_token_seconds\""
+	UpdatedAt                            string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
@@ -271,7 +277,7 @@ func (inv *ActionOauth2ClientIndexInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionOauth2ClientIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {
@@ -284,24 +290,55 @@ func (inv *ActionOauth2ClientIndexInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionOauth2ClientIndexInvocation) Call() (*ActionOauth2ClientIndexResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionOauth2ClientIndexInvocation) CallContext(ctx context.Context) (*ActionOauth2ClientIndexResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionOauth2ClientIndexResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Oauth2Clients == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Oauth2Clients
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionOauth2ClientIndexInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionOauth2ClientIndexInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionOauth2ClientIndexInvocation) callAsQuery() (*ActionOauth2ClientIndexResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertInputToQueryParams(queryParams)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionOauth2ClientIndexResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Oauth2Clients
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionOauth2ClientIndexInvocation) convertInputToQueryParams(ret map[string]string) {

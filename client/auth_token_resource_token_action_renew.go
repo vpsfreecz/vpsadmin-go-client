@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // AuthTokenActionTokenRenew is a type for action Token#Renew
 type AuthTokenActionTokenRenew struct {
@@ -83,7 +86,17 @@ type AuthTokenActionTokenRenewResponse struct {
 
 // Call the action directly without any path or input parameters
 func (action *AuthTokenActionTokenRenew) Call() (*AuthTokenActionTokenRenewResponse, error) {
-	return action.Prepare().Call()
+	return action.CallContext(context.Background())
+}
+
+// CallContext calls the action with cancellation and deadline support.
+func (action *AuthTokenActionTokenRenew) CallContext(ctx context.Context) (*AuthTokenActionTokenRenewResponse, error) {
+	return action.Prepare().CallContext(ctx)
+}
+
+// CallRaw calls the action without decoding or classifying its response.
+func (action *AuthTokenActionTokenRenew) CallRaw(ctx context.Context) (*RawResponse, error) {
+	return action.Prepare().CallRaw(ctx)
 }
 
 // Prepare the action for invocation
@@ -139,7 +152,7 @@ func (inv *AuthTokenActionTokenRenewInvocation) IsMetaParameterNil(param string)
 }
 
 func (inv *AuthTokenActionTokenRenewInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 
@@ -150,22 +163,53 @@ func (inv *AuthTokenActionTokenRenewInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *AuthTokenActionTokenRenewInvocation) Call() (*AuthTokenActionTokenRenewResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *AuthTokenActionTokenRenewInvocation) CallContext(ctx context.Context) (*AuthTokenActionTokenRenewResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &AuthTokenActionTokenRenewResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Token == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Token
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *AuthTokenActionTokenRenewInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *AuthTokenActionTokenRenewInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *AuthTokenActionTokenRenewInvocation) callAsBody() (*AuthTokenActionTokenRenewResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &AuthTokenActionTokenRenewResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Token
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *AuthTokenActionTokenRenewInvocation) makeAllInputParams() *AuthTokenActionTokenRenewRequest {

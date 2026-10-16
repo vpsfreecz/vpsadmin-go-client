@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -76,12 +78,25 @@ func (in *ActionSecurityAdvisoryPublishMetaGlobalInput) AnySelected() bool {
 
 // ActionSecurityAdvisoryPublishInput is a type for action input parameters
 type ActionSecurityAdvisoryPublishInput struct {
-	PublishedAt string "json:\"published_at\""
-	SendMail    bool   "json:\"send_mail\""
+	ExpectedContentRevision int64  "json:\"expected_content_revision\""
+	PublishedAt             string "json:\"published_at\""
+	SendMail                bool   "json:\"send_mail\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetExpectedContentRevision sets parameter ExpectedContentRevision to value and selects it for sending
+func (in *ActionSecurityAdvisoryPublishInput) SetExpectedContentRevision(value int64) *ActionSecurityAdvisoryPublishInput {
+	in.ExpectedContentRevision = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ExpectedContentRevision"] = nil
+	return in
 }
 
 // SetPublishedAt sets parameter PublishedAt to value and selects it for sending
@@ -177,6 +192,7 @@ type ActionSecurityAdvisoryPublishOutput struct {
 	AffectedNodeCount int64                 "json:\"affected_node_count\""
 	AffectedUserCount int64                 "json:\"affected_user_count\""
 	AffectedVpsCount  int64                 "json:\"affected_vps_count\""
+	ContentRevision   int64                 "json:\"content_revision\""
 	CreatedAt         string                "json:\"created_at\""
 	CreatedBy         *ActionUserShowOutput "json:\"created_by\""
 	CsDescription     string                "json:\"cs_description\""
@@ -185,6 +201,7 @@ type ActionSecurityAdvisoryPublishOutput struct {
 	EnDescription     string                "json:\"en_description\""
 	EnResponse        string                "json:\"en_response\""
 	EnSummary         string                "json:\"en_summary\""
+	ExternalId        string                "json:\"external_id\""
 	Id                int64                 "json:\"id\""
 	Name              string                "json:\"name\""
 	PublishedAt       string                "json:\"published_at\""
@@ -312,13 +329,13 @@ func (inv *ActionSecurityAdvisoryPublishInvocation) IsMetaParameterNil(param str
 }
 
 func (inv *ActionSecurityAdvisoryPublishInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("PublishedAt") {
 			if !inv.IsParameterNil("PublishedAt") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.PublishedAt)
 				if !ok {
-					verr.Add("published_at", "not a valid datetime")
+					verr.Add("published_at", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.PublishedAt = normalized
 				}
@@ -335,22 +352,53 @@ func (inv *ActionSecurityAdvisoryPublishInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionSecurityAdvisoryPublishInvocation) Call() (*ActionSecurityAdvisoryPublishResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionSecurityAdvisoryPublishInvocation) CallContext(ctx context.Context) (*ActionSecurityAdvisoryPublishResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionSecurityAdvisoryPublishResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.SecurityAdvisory == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.SecurityAdvisory
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionSecurityAdvisoryPublishInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionSecurityAdvisoryPublishInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionSecurityAdvisoryPublishInvocation) callAsBody() (*ActionSecurityAdvisoryPublishResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionSecurityAdvisoryPublishResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.SecurityAdvisory
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 // IsBlocking checks whether the current invocation resulted in a blocking operation
@@ -440,6 +488,9 @@ func (inv *ActionSecurityAdvisoryPublishInvocation) makeInputParams() map[string
 	ret := make(map[string]interface{})
 
 	if inv.Input != nil {
+		if inv.IsParameterSelected("ExpectedContentRevision") {
+			ret["expected_content_revision"] = inv.Input.ExpectedContentRevision
+		}
 		if inv.IsParameterSelected("PublishedAt") {
 			if inv.IsParameterNil("PublishedAt") {
 				ret["published_at"] = nil

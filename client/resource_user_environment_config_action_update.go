@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -313,7 +315,7 @@ func (inv *ActionUserEnvironmentConfigUpdateInvocation) IsMetaParameterNil(param
 }
 
 func (inv *ActionUserEnvironmentConfigUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {
@@ -326,22 +328,53 @@ func (inv *ActionUserEnvironmentConfigUpdateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionUserEnvironmentConfigUpdateInvocation) Call() (*ActionUserEnvironmentConfigUpdateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionUserEnvironmentConfigUpdateInvocation) CallContext(ctx context.Context) (*ActionUserEnvironmentConfigUpdateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionUserEnvironmentConfigUpdateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.EnvironmentConfig == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.EnvironmentConfig
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionUserEnvironmentConfigUpdateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionUserEnvironmentConfigUpdateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionUserEnvironmentConfigUpdateInvocation) callAsBody() (*ActionUserEnvironmentConfigUpdateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionUserEnvironmentConfigUpdateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("PUT", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.EnvironmentConfig
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "PUT", inv.Path, input)
 }
 
 func (inv *ActionUserEnvironmentConfigUpdateInvocation) makeAllInputParams() *ActionUserEnvironmentConfigUpdateRequest {

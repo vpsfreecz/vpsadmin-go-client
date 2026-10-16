@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -191,6 +193,7 @@ type ActionNodeStatusIndexOutput struct {
 	ArcCMax       int64   "json:\"arc_c_max\""
 	ArcHitpercent float64 "json:\"arc_hitpercent\""
 	ArcSize       int64   "json:\"arc_size\""
+	CgroupVersion string  "json:\"cgroup_version\""
 	CpuGuest      float64 "json:\"cpu_guest\""
 	CpuIdle       float64 "json:\"cpu_idle\""
 	CpuIowait     float64 "json:\"cpu_iowait\""
@@ -326,13 +329,13 @@ func (inv *ActionNodeStatusIndexInvocation) IsMetaParameterNil(param string) boo
 }
 
 func (inv *ActionNodeStatusIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("From") {
 			if !inv.IsParameterNil("From") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.From)
 				if !ok {
-					verr.Add("from", "not a valid datetime")
+					verr.Add("from", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.From = normalized
 				}
@@ -342,7 +345,7 @@ func (inv *ActionNodeStatusIndexInvocation) validate() error {
 			if !inv.IsParameterNil("To") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.To)
 				if !ok {
-					verr.Add("to", "not a valid datetime")
+					verr.Add("to", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.To = normalized
 				}
@@ -359,24 +362,55 @@ func (inv *ActionNodeStatusIndexInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionNodeStatusIndexInvocation) Call() (*ActionNodeStatusIndexResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionNodeStatusIndexInvocation) CallContext(ctx context.Context) (*ActionNodeStatusIndexResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionNodeStatusIndexResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Statuses == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Statuses
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionNodeStatusIndexInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionNodeStatusIndexInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionNodeStatusIndexInvocation) callAsQuery() (*ActionNodeStatusIndexResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertInputToQueryParams(queryParams)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionNodeStatusIndexResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Statuses
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionNodeStatusIndexInvocation) convertInputToQueryParams(ret map[string]string) {

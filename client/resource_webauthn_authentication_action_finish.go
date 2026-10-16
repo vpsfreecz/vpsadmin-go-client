@@ -1,6 +1,10 @@
 package client
 
-import ()
+import (
+	"context"
+	"encoding/json"
+	"net/http"
+)
 
 // ActionWebauthnAuthenticationFinish is a type for action Webauthn.Authentication#Finish
 type ActionWebauthnAuthenticationFinish struct {
@@ -60,8 +64,9 @@ func (in *ActionWebauthnAuthenticationFinishMetaGlobalInput) AnySelected() bool 
 
 // ActionWebauthnAuthenticationFinishInput is a type for action input parameters
 type ActionWebauthnAuthenticationFinishInput struct {
-	AuthToken      string "json:\"auth_token\""
-	ChallengeToken string "json:\"challenge_token\""
+	AuthToken           string          "json:\"auth_token\""
+	ChallengeToken      string          "json:\"challenge_token\""
+	PublicKeyCredential json.RawMessage "json:\"public_key_credential\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -89,6 +94,18 @@ func (in *ActionWebauthnAuthenticationFinishInput) SetChallengeToken(value strin
 	}
 
 	in._selectedParameters["ChallengeToken"] = nil
+	return in
+}
+
+// SetPublicKeyCredential sets parameter PublicKeyCredential to value and selects it for sending
+func (in *ActionWebauthnAuthenticationFinishInput) SetPublicKeyCredential(value json.RawMessage) *ActionWebauthnAuthenticationFinishInput {
+	in.PublicKeyCredential = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PublicKeyCredential"] = nil
 	return in
 }
 
@@ -229,7 +246,7 @@ func (inv *ActionWebauthnAuthenticationFinishInvocation) IsMetaParameterNil(para
 }
 
 func (inv *ActionWebauthnAuthenticationFinishInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {
@@ -242,19 +259,44 @@ func (inv *ActionWebauthnAuthenticationFinishInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionWebauthnAuthenticationFinishInvocation) Call() (*ActionWebauthnAuthenticationFinishResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionWebauthnAuthenticationFinishInvocation) CallContext(ctx context.Context) (*ActionWebauthnAuthenticationFinishResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionWebauthnAuthenticationFinishResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionWebauthnAuthenticationFinishInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionWebauthnAuthenticationFinishInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionWebauthnAuthenticationFinishInvocation) callAsBody() (*ActionWebauthnAuthenticationFinishResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionWebauthnAuthenticationFinishResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *ActionWebauthnAuthenticationFinishInvocation) makeAllInputParams() *ActionWebauthnAuthenticationFinishRequest {
@@ -273,6 +315,9 @@ func (inv *ActionWebauthnAuthenticationFinishInvocation) makeInputParams() map[s
 		}
 		if inv.IsParameterSelected("ChallengeToken") {
 			ret["challenge_token"] = inv.Input.ChallengeToken
+		}
+		if inv.IsParameterSelected("PublicKeyCredential") {
+			ret["public_key_credential"] = inv.Input.PublicKeyCredential
 		}
 	}
 

@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionNetworkIndex is a type for action Network#Index
 type ActionNetworkIndex struct {
@@ -86,14 +89,28 @@ func (in *ActionNetworkIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkIndexInput is a type for action input parameters
 type ActionNetworkIndexInput struct {
-	FromId   int64  "json:\"from_id\""
-	Limit    int64  "json:\"limit\""
-	Location int64  "json:\"location\""
-	Purpose  string "json:\"purpose\""
+	Enabled   bool   "json:\"enabled\""
+	FromId    int64  "json:\"from_id\""
+	Limit     int64  "json:\"limit\""
+	Location  int64  "json:\"location\""
+	Purpose   string "json:\"purpose\""
+	UsableFor string "json:\"usable_for\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetEnabled sets parameter Enabled to value and selects it for sending
+func (in *ActionNetworkIndexInput) SetEnabled(value bool) *ActionNetworkIndexInput {
+	in.Enabled = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Enabled"] = nil
+	return in
 }
 
 // SetFromId sets parameter FromId to value and selects it for sending
@@ -144,6 +161,18 @@ func (in *ActionNetworkIndexInput) SetPurpose(value string) *ActionNetworkIndexI
 	return in
 }
 
+// SetUsableFor sets parameter UsableFor to value and selects it for sending
+func (in *ActionNetworkIndexInput) SetUsableFor(value string) *ActionNetworkIndexInput {
+	in.UsableFor = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["UsableFor"] = nil
+	return in
+}
+
 // SelectParameters sets parameters from ActionNetworkIndexInput
 // that will be sent to the API.
 // SelectParameters can be called multiple times.
@@ -184,22 +213,25 @@ func (in *ActionNetworkIndexInput) AnySelected() bool {
 
 // ActionNetworkIndexOutput is a type for action output parameters
 type ActionNetworkIndexOutput struct {
-	Address         string                    "json:\"address\""
-	Assigned        int64                     "json:\"assigned\""
-	Id              int64                     "json:\"id\""
-	IpVersion       int64                     "json:\"ip_version\""
-	Label           string                    "json:\"label\""
-	Managed         bool                      "json:\"managed\""
-	Owned           int64                     "json:\"owned\""
-	Prefix          int64                     "json:\"prefix\""
-	PrimaryLocation *ActionLocationShowOutput "json:\"primary_location\""
-	Purpose         string                    "json:\"purpose\""
-	Role            string                    "json:\"role\""
-	Size            int64                     "json:\"size\""
-	SplitAccess     string                    "json:\"split_access\""
-	SplitPrefix     int64                     "json:\"split_prefix\""
-	Taken           int64                     "json:\"taken\""
-	Used            int64                     "json:\"used\""
+	Address          string                    "json:\"address\""
+	Assigned         int64                     "json:\"assigned\""
+	AvailableToUsers int64                     "json:\"available_to_users\""
+	Enabled          bool                      "json:\"enabled\""
+	Id               int64                     "json:\"id\""
+	IpVersion        int64                     "json:\"ip_version\""
+	Label            string                    "json:\"label\""
+	Managed          bool                      "json:\"managed\""
+	Owned            int64                     "json:\"owned\""
+	OwnedUnassigned  int64                     "json:\"owned_unassigned\""
+	Prefix           int64                     "json:\"prefix\""
+	PrimaryLocation  *ActionLocationShowOutput "json:\"primary_location\""
+	Purpose          string                    "json:\"purpose\""
+	Role             string                    "json:\"role\""
+	Size             int64                     "json:\"size\""
+	SplitAccess      string                    "json:\"split_access\""
+	SplitPrefix      int64                     "json:\"split_prefix\""
+	Taken            int64                     "json:\"taken\""
+	Used             int64                     "json:\"used\""
 }
 
 // Type for action response, including envelope
@@ -302,12 +334,12 @@ func (inv *ActionNetworkIndexInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionNetworkIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -322,28 +354,62 @@ func (inv *ActionNetworkIndexInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionNetworkIndexInvocation) Call() (*ActionNetworkIndexResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionNetworkIndexInvocation) CallContext(ctx context.Context) (*ActionNetworkIndexResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionNetworkIndexResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Networks == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Networks
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionNetworkIndexInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionNetworkIndexInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionNetworkIndexInvocation) callAsQuery() (*ActionNetworkIndexResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertInputToQueryParams(queryParams)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionNetworkIndexResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Networks
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionNetworkIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("Enabled") {
+			ret["network[enabled]"] = convertBoolToString(inv.Input.Enabled)
+		}
 		if inv.IsParameterSelected("FromId") {
 			ret["network[from_id]"] = convertInt64ToString(inv.Input.FromId)
 		}
@@ -355,6 +421,9 @@ func (inv *ActionNetworkIndexInvocation) convertInputToQueryParams(ret map[strin
 		}
 		if inv.IsParameterSelected("Purpose") {
 			ret["network[purpose]"] = inv.Input.Purpose
+		}
+		if inv.IsParameterSelected("UsableFor") {
+			ret["network[usable_for]"] = inv.Input.UsableFor
 		}
 	}
 }

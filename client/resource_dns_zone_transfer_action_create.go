@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionDnsZoneTransferCreate is a type for action Dns_zone_transfer#Create
 type ActionDnsZoneTransferCreate struct {
@@ -312,26 +315,26 @@ func (inv *ActionDnsZoneTransferCreateInvocation) IsMetaParameterNil(param strin
 }
 
 func (inv *ActionDnsZoneTransferCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("DnsTsigKey") {
 			if !inv.IsParameterNil("DnsTsigKey") {
 				if inv.Input.DnsTsigKey < 0 {
-					verr.Add("dns_tsig_key", "not a valid resource id")
+					verr.Add("dns_tsig_key", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("DnsZone") {
 			if !inv.IsParameterNil("DnsZone") {
 				if inv.Input.DnsZone < 0 {
-					verr.Add("dns_zone", "not a valid resource id")
+					verr.Add("dns_zone", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("HostIpAddress") {
 			if !inv.IsParameterNil("HostIpAddress") {
 				if inv.Input.HostIpAddress < 0 {
-					verr.Add("host_ip_address", "not a valid resource id")
+					verr.Add("host_ip_address", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -346,22 +349,53 @@ func (inv *ActionDnsZoneTransferCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionDnsZoneTransferCreateInvocation) Call() (*ActionDnsZoneTransferCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionDnsZoneTransferCreateInvocation) CallContext(ctx context.Context) (*ActionDnsZoneTransferCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionDnsZoneTransferCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.DnsZoneTransfer == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.DnsZoneTransfer
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionDnsZoneTransferCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionDnsZoneTransferCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionDnsZoneTransferCreateInvocation) callAsBody() (*ActionDnsZoneTransferCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionDnsZoneTransferCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.DnsZoneTransfer
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 // IsBlocking checks whether the current invocation resulted in a blocking operation

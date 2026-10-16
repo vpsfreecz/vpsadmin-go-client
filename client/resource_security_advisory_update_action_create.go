@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionSecurityAdvisoryUpdateCreate is a type for action Security_advisory_update#Create
 type ActionSecurityAdvisoryUpdateCreate struct {
@@ -426,13 +429,13 @@ func (inv *ActionSecurityAdvisoryUpdateCreateInvocation) IsMetaParameterNil(para
 }
 
 func (inv *ActionSecurityAdvisoryUpdateCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("PublishedAt") {
 			if !inv.IsParameterNil("PublishedAt") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.PublishedAt)
 				if !ok {
-					verr.Add("published_at", "not a valid datetime")
+					verr.Add("published_at", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.PublishedAt = normalized
 				}
@@ -441,7 +444,7 @@ func (inv *ActionSecurityAdvisoryUpdateCreateInvocation) validate() error {
 		if inv.IsParameterSelected("SecurityAdvisory") {
 			if !inv.IsParameterNil("SecurityAdvisory") {
 				if inv.Input.SecurityAdvisory < 0 {
-					verr.Add("security_advisory", "not a valid resource id")
+					verr.Add("security_advisory", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -456,22 +459,53 @@ func (inv *ActionSecurityAdvisoryUpdateCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionSecurityAdvisoryUpdateCreateInvocation) Call() (*ActionSecurityAdvisoryUpdateCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionSecurityAdvisoryUpdateCreateInvocation) CallContext(ctx context.Context) (*ActionSecurityAdvisoryUpdateCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionSecurityAdvisoryUpdateCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.SecurityAdvisoryUpdate == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.SecurityAdvisoryUpdate
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionSecurityAdvisoryUpdateCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionSecurityAdvisoryUpdateCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionSecurityAdvisoryUpdateCreateInvocation) callAsBody() (*ActionSecurityAdvisoryUpdateCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionSecurityAdvisoryUpdateCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.SecurityAdvisoryUpdate
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 // IsBlocking checks whether the current invocation resulted in a blocking operation

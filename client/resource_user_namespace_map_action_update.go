@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -270,12 +272,12 @@ func (inv *ActionUserNamespaceMapUpdateInvocation) IsMetaParameterNil(param stri
 }
 
 func (inv *ActionUserNamespaceMapUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("UserNamespace") {
 			if !inv.IsParameterNil("UserNamespace") {
 				if inv.Input.UserNamespace < 0 {
-					verr.Add("user_namespace", "not a valid resource id")
+					verr.Add("user_namespace", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -290,22 +292,53 @@ func (inv *ActionUserNamespaceMapUpdateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionUserNamespaceMapUpdateInvocation) Call() (*ActionUserNamespaceMapUpdateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionUserNamespaceMapUpdateInvocation) CallContext(ctx context.Context) (*ActionUserNamespaceMapUpdateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionUserNamespaceMapUpdateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.UserNamespaceMap == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.UserNamespaceMap
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionUserNamespaceMapUpdateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionUserNamespaceMapUpdateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionUserNamespaceMapUpdateInvocation) callAsBody() (*ActionUserNamespaceMapUpdateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionUserNamespaceMapUpdateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("PUT", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.UserNamespaceMap
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "PUT", inv.Path, input)
 }
 
 func (inv *ActionUserNamespaceMapUpdateInvocation) makeAllInputParams() *ActionUserNamespaceMapUpdateRequest {

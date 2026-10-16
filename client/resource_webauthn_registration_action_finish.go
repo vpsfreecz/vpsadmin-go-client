@@ -1,6 +1,10 @@
 package client
 
-import ()
+import (
+	"context"
+	"encoding/json"
+	"net/http"
+)
 
 // ActionWebauthnRegistrationFinish is a type for action Webauthn.Registration#Finish
 type ActionWebauthnRegistrationFinish struct {
@@ -60,8 +64,9 @@ func (in *ActionWebauthnRegistrationFinishMetaGlobalInput) AnySelected() bool {
 
 // ActionWebauthnRegistrationFinishInput is a type for action input parameters
 type ActionWebauthnRegistrationFinishInput struct {
-	ChallengeToken string "json:\"challenge_token\""
-	Label          string "json:\"label\""
+	ChallengeToken      string          "json:\"challenge_token\""
+	Label               string          "json:\"label\""
+	PublicKeyCredential json.RawMessage "json:\"public_key_credential\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -89,6 +94,18 @@ func (in *ActionWebauthnRegistrationFinishInput) SetLabel(value string) *ActionW
 	}
 
 	in._selectedParameters["Label"] = nil
+	return in
+}
+
+// SetPublicKeyCredential sets parameter PublicKeyCredential to value and selects it for sending
+func (in *ActionWebauthnRegistrationFinishInput) SetPublicKeyCredential(value json.RawMessage) *ActionWebauthnRegistrationFinishInput {
+	in.PublicKeyCredential = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PublicKeyCredential"] = nil
 	return in
 }
 
@@ -229,7 +246,7 @@ func (inv *ActionWebauthnRegistrationFinishInvocation) IsMetaParameterNil(param 
 }
 
 func (inv *ActionWebauthnRegistrationFinishInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {
@@ -242,19 +259,44 @@ func (inv *ActionWebauthnRegistrationFinishInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionWebauthnRegistrationFinishInvocation) Call() (*ActionWebauthnRegistrationFinishResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionWebauthnRegistrationFinishInvocation) CallContext(ctx context.Context) (*ActionWebauthnRegistrationFinishResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionWebauthnRegistrationFinishResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionWebauthnRegistrationFinishInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionWebauthnRegistrationFinishInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionWebauthnRegistrationFinishInvocation) callAsBody() (*ActionWebauthnRegistrationFinishResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionWebauthnRegistrationFinishResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *ActionWebauthnRegistrationFinishInvocation) makeAllInputParams() *ActionWebauthnRegistrationFinishRequest {
@@ -273,6 +315,9 @@ func (inv *ActionWebauthnRegistrationFinishInvocation) makeInputParams() map[str
 		}
 		if inv.IsParameterSelected("Label") {
 			ret["label"] = inv.Input.Label
+		}
+		if inv.IsParameterSelected("PublicKeyCredential") {
+			ret["public_key_credential"] = inv.Input.PublicKeyCredential
 		}
 	}
 

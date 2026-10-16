@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionUserClusterResourcePackageCreate is a type for action User_cluster_resource_package#Create
 type ActionUserClusterResourcePackageCreate struct {
@@ -302,26 +305,26 @@ func (inv *ActionUserClusterResourcePackageCreateInvocation) IsMetaParameterNil(
 }
 
 func (inv *ActionUserClusterResourcePackageCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("ClusterResourcePackage") {
 			if !inv.IsParameterNil("ClusterResourcePackage") {
 				if inv.Input.ClusterResourcePackage < 0 {
-					verr.Add("cluster_resource_package", "not a valid resource id")
+					verr.Add("cluster_resource_package", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Environment") {
 			if !inv.IsParameterNil("Environment") {
 				if inv.Input.Environment < 0 {
-					verr.Add("environment", "not a valid resource id")
+					verr.Add("environment", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -336,22 +339,53 @@ func (inv *ActionUserClusterResourcePackageCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionUserClusterResourcePackageCreateInvocation) Call() (*ActionUserClusterResourcePackageCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionUserClusterResourcePackageCreateInvocation) CallContext(ctx context.Context) (*ActionUserClusterResourcePackageCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionUserClusterResourcePackageCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.UserClusterResourcePackage == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.UserClusterResourcePackage
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionUserClusterResourcePackageCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionUserClusterResourcePackageCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionUserClusterResourcePackageCreateInvocation) callAsBody() (*ActionUserClusterResourcePackageCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionUserClusterResourcePackageCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.UserClusterResourcePackage
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *ActionUserClusterResourcePackageCreateInvocation) makeAllInputParams() *ActionUserClusterResourcePackageCreateRequest {

@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -128,7 +130,9 @@ type ActionUserRequestRegistrationShowOutput struct {
 	OrgId                  string                      "json:\"org_id\""
 	OrgName                string                      "json:\"org_name\""
 	OsTemplate             *ActionOsTemplateShowOutput "json:\"os_template\""
+	RawUserId              int64                       "json:\"raw_user_id\""
 	State                  string                      "json:\"state\""
+	TimeZone               string                      "json:\"time_zone\""
 	UpdatedAt              string                      "json:\"updated_at\""
 	User                   *ActionUserShowOutput       "json:\"user\""
 	YearOfBirth            int64                       "json:\"year_of_birth\""
@@ -211,7 +215,7 @@ func (inv *ActionUserRequestRegistrationShowInvocation) IsMetaParameterNil(param
 }
 
 func (inv *ActionUserRequestRegistrationShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 
@@ -222,23 +226,54 @@ func (inv *ActionUserRequestRegistrationShowInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionUserRequestRegistrationShowInvocation) Call() (*ActionUserRequestRegistrationShowResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionUserRequestRegistrationShowInvocation) CallContext(ctx context.Context) (*ActionUserRequestRegistrationShowResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionUserRequestRegistrationShowResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Registration == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Registration
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionUserRequestRegistrationShowInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionUserRequestRegistrationShowInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionUserRequestRegistrationShowInvocation) callAsQuery() (*ActionUserRequestRegistrationShowResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionUserRequestRegistrationShowResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Registration
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionUserRequestRegistrationShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {

@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionIncidentReportCreate is a type for action Incident_report#Create
 type ActionIncidentReportCreate struct {
@@ -354,13 +357,13 @@ func (inv *ActionIncidentReportCreateInvocation) IsMetaParameterNil(param string
 }
 
 func (inv *ActionIncidentReportCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("DetectedAt") {
 			if !inv.IsParameterNil("DetectedAt") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.DetectedAt)
 				if !ok {
-					verr.Add("detected_at", "not a valid datetime")
+					verr.Add("detected_at", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.DetectedAt = normalized
 				}
@@ -369,14 +372,14 @@ func (inv *ActionIncidentReportCreateInvocation) validate() error {
 		if inv.IsParameterSelected("IpAddressAssignment") {
 			if !inv.IsParameterNil("IpAddressAssignment") {
 				if inv.Input.IpAddressAssignment < 0 {
-					verr.Add("ip_address_assignment", "not a valid resource id")
+					verr.Add("ip_address_assignment", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Vps") {
 			if !inv.IsParameterNil("Vps") {
 				if inv.Input.Vps < 0 {
-					verr.Add("vps", "not a valid resource id")
+					verr.Add("vps", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -391,22 +394,53 @@ func (inv *ActionIncidentReportCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionIncidentReportCreateInvocation) Call() (*ActionIncidentReportCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionIncidentReportCreateInvocation) CallContext(ctx context.Context) (*ActionIncidentReportCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionIncidentReportCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.IncidentReport == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.IncidentReport
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionIncidentReportCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionIncidentReportCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionIncidentReportCreateInvocation) callAsBody() (*ActionIncidentReportCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionIncidentReportCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.IncidentReport
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 // IsBlocking checks whether the current invocation resulted in a blocking operation

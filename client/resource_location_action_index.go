@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionLocationIndex is a type for action Location#Index
 type ActionLocationIndex struct {
@@ -373,33 +376,33 @@ func (inv *ActionLocationIndexInvocation) IsMetaParameterNil(param string) bool 
 }
 
 func (inv *ActionLocationIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Environment") {
 			if !inv.IsParameterNil("Environment") {
 				if inv.Input.Environment < 0 {
-					verr.Add("environment", "not a valid resource id")
+					verr.Add("environment", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("SharesAnyNetworksWith") {
 			if !inv.IsParameterNil("SharesAnyNetworksWith") {
 				if inv.Input.SharesAnyNetworksWith < 0 {
-					verr.Add("shares_any_networks_with", "not a valid resource id")
+					verr.Add("shares_any_networks_with", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("SharesV4NetworksWith") {
 			if !inv.IsParameterNil("SharesV4NetworksWith") {
 				if inv.Input.SharesV4NetworksWith < 0 {
-					verr.Add("shares_v4_networks_with", "not a valid resource id")
+					verr.Add("shares_v4_networks_with", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("SharesV6NetworksWith") {
 			if !inv.IsParameterNil("SharesV6NetworksWith") {
 				if inv.Input.SharesV6NetworksWith < 0 {
-					verr.Add("shares_v6_networks_with", "not a valid resource id")
+					verr.Add("shares_v6_networks_with", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -414,24 +417,55 @@ func (inv *ActionLocationIndexInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionLocationIndexInvocation) Call() (*ActionLocationIndexResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionLocationIndexInvocation) CallContext(ctx context.Context) (*ActionLocationIndexResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionLocationIndexResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Locations == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Locations
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionLocationIndexInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionLocationIndexInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionLocationIndexInvocation) callAsQuery() (*ActionLocationIndexResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertInputToQueryParams(queryParams)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionLocationIndexResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Locations
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionLocationIndexInvocation) convertInputToQueryParams(ret map[string]string) {

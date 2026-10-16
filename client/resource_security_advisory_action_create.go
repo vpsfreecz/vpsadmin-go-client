@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionSecurityAdvisoryCreate is a type for action Security_advisory#Create
 type ActionSecurityAdvisoryCreate struct {
@@ -76,9 +79,11 @@ type ActionSecurityAdvisoryCreateInput struct {
 	CsDescription string "json:\"cs_description\""
 	CsResponse    string "json:\"cs_response\""
 	CsSummary     string "json:\"cs_summary\""
+	Cve           string "json:\"cve\""
 	EnDescription string "json:\"en_description\""
 	EnResponse    string "json:\"en_response\""
 	EnSummary     string "json:\"en_summary\""
+	ExternalId    string "json:\"external_id\""
 	Name          string "json:\"name\""
 	PublishedAt   string "json:\"published_at\""
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -123,6 +128,37 @@ func (in *ActionSecurityAdvisoryCreateInput) SetCsSummary(value string) *ActionS
 	return in
 }
 
+// SetCve sets parameter Cve to value and selects it for sending
+func (in *ActionSecurityAdvisoryCreateInput) SetCve(value string) *ActionSecurityAdvisoryCreateInput {
+	in.Cve = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetCveNil(false)
+	in._selectedParameters["Cve"] = nil
+	return in
+}
+
+// SetCveNil sets parameter Cve to nil and selects it for sending
+func (in *ActionSecurityAdvisoryCreateInput) SetCveNil(set bool) *ActionSecurityAdvisoryCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Cve"] = nil
+		in.SelectParameters("Cve")
+	} else {
+		delete(in._nilParameters, "Cve")
+	}
+	return in
+}
+
 // SetEnDescription sets parameter EnDescription to value and selects it for sending
 func (in *ActionSecurityAdvisoryCreateInput) SetEnDescription(value string) *ActionSecurityAdvisoryCreateInput {
 	in.EnDescription = value
@@ -156,6 +192,37 @@ func (in *ActionSecurityAdvisoryCreateInput) SetEnSummary(value string) *ActionS
 	}
 
 	in._selectedParameters["EnSummary"] = nil
+	return in
+}
+
+// SetExternalId sets parameter ExternalId to value and selects it for sending
+func (in *ActionSecurityAdvisoryCreateInput) SetExternalId(value string) *ActionSecurityAdvisoryCreateInput {
+	in.ExternalId = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetExternalIdNil(false)
+	in._selectedParameters["ExternalId"] = nil
+	return in
+}
+
+// SetExternalIdNil sets parameter ExternalId to nil and selects it for sending
+func (in *ActionSecurityAdvisoryCreateInput) SetExternalIdNil(set bool) *ActionSecurityAdvisoryCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["ExternalId"] = nil
+		in.SelectParameters("ExternalId")
+	} else {
+		delete(in._nilParameters, "ExternalId")
+	}
 	return in
 }
 
@@ -271,6 +338,7 @@ type ActionSecurityAdvisoryCreateOutput struct {
 	AffectedNodeCount int64                 "json:\"affected_node_count\""
 	AffectedUserCount int64                 "json:\"affected_user_count\""
 	AffectedVpsCount  int64                 "json:\"affected_vps_count\""
+	ContentRevision   int64                 "json:\"content_revision\""
 	CreatedAt         string                "json:\"created_at\""
 	CreatedBy         *ActionUserShowOutput "json:\"created_by\""
 	CsDescription     string                "json:\"cs_description\""
@@ -279,6 +347,7 @@ type ActionSecurityAdvisoryCreateOutput struct {
 	EnDescription     string                "json:\"en_description\""
 	EnResponse        string                "json:\"en_response\""
 	EnSummary         string                "json:\"en_summary\""
+	ExternalId        string                "json:\"external_id\""
 	Id                int64                 "json:\"id\""
 	Name              string                "json:\"name\""
 	PublishedAt       string                "json:\"published_at\""
@@ -388,13 +457,13 @@ func (inv *ActionSecurityAdvisoryCreateInvocation) IsMetaParameterNil(param stri
 }
 
 func (inv *ActionSecurityAdvisoryCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("PublishedAt") {
 			if !inv.IsParameterNil("PublishedAt") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.PublishedAt)
 				if !ok {
-					verr.Add("published_at", "not a valid datetime")
+					verr.Add("published_at", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.PublishedAt = normalized
 				}
@@ -411,22 +480,53 @@ func (inv *ActionSecurityAdvisoryCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionSecurityAdvisoryCreateInvocation) Call() (*ActionSecurityAdvisoryCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionSecurityAdvisoryCreateInvocation) CallContext(ctx context.Context) (*ActionSecurityAdvisoryCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionSecurityAdvisoryCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.SecurityAdvisory == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.SecurityAdvisory
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionSecurityAdvisoryCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionSecurityAdvisoryCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionSecurityAdvisoryCreateInvocation) callAsBody() (*ActionSecurityAdvisoryCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionSecurityAdvisoryCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.SecurityAdvisory
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 func (inv *ActionSecurityAdvisoryCreateInvocation) makeAllInputParams() *ActionSecurityAdvisoryCreateRequest {
@@ -449,6 +549,13 @@ func (inv *ActionSecurityAdvisoryCreateInvocation) makeInputParams() map[string]
 		if inv.IsParameterSelected("CsSummary") {
 			ret["cs_summary"] = inv.Input.CsSummary
 		}
+		if inv.IsParameterSelected("Cve") {
+			if inv.IsParameterNil("Cve") {
+				ret["cve"] = nil
+			} else {
+				ret["cve"] = inv.Input.Cve
+			}
+		}
 		if inv.IsParameterSelected("EnDescription") {
 			ret["en_description"] = inv.Input.EnDescription
 		}
@@ -457,6 +564,13 @@ func (inv *ActionSecurityAdvisoryCreateInvocation) makeInputParams() map[string]
 		}
 		if inv.IsParameterSelected("EnSummary") {
 			ret["en_summary"] = inv.Input.EnSummary
+		}
+		if inv.IsParameterSelected("ExternalId") {
+			if inv.IsParameterNil("ExternalId") {
+				ret["external_id"] = nil
+			} else {
+				ret["external_id"] = inv.Input.ExternalId
+			}
 		}
 		if inv.IsParameterSelected("Name") {
 			if inv.IsParameterNil("Name") {

@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionPoolIndex is a type for action Pool#Index
 type ActionPoolIndex struct {
@@ -590,13 +593,13 @@ func (inv *ActionPoolIndexInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionPoolIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("CheckedAt") {
 			if !inv.IsParameterNil("CheckedAt") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.CheckedAt)
 				if !ok {
-					verr.Add("checked_at", "not a valid datetime")
+					verr.Add("checked_at", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.CheckedAt = normalized
 				}
@@ -605,14 +608,14 @@ func (inv *ActionPoolIndexInvocation) validate() error {
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("ScanPercent") {
 			if !inv.IsParameterNil("ScanPercent") {
 				if !isFiniteFloat64(inv.Input.ScanPercent) {
-					verr.Add("scan_percent", "not a valid float")
+					verr.Add("scan_percent", t(inv.Action.Client, "validation.invalid_float", nil))
 				}
 			}
 		}
@@ -627,24 +630,55 @@ func (inv *ActionPoolIndexInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionPoolIndexInvocation) Call() (*ActionPoolIndexResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionPoolIndexInvocation) CallContext(ctx context.Context) (*ActionPoolIndexResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionPoolIndexResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Pools == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Pools
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionPoolIndexInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionPoolIndexInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsQuery()
-}
-
-func (inv *ActionPoolIndexInvocation) callAsQuery() (*ActionPoolIndexResponse, error) {
 	queryParams := make(map[string]string)
 	inv.convertInputToQueryParams(queryParams)
 	inv.convertMetaInputToQueryParams(queryParams)
-	resp := &ActionPoolIndexResponse{Action: inv.Action}
-	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Pools
-	}
-	return resp, err
+	return inv.Action.Client.newQueryStringRequest(ctx, inv.Path, queryParams)
 }
 
 func (inv *ActionPoolIndexInvocation) convertInputToQueryParams(ret map[string]string) {

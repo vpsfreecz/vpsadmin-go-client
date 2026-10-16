@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -76,10 +78,12 @@ func (in *ActionVpsReplaceMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsReplaceInput is a type for action input parameters
 type ActionVpsReplaceInput struct {
-	ExpirationDate string "json:\"expiration_date\""
-	Node           int64  "json:\"node\""
-	Reason         string "json:\"reason\""
-	Start          bool   "json:\"start\""
+	ExpirationDate        string "json:\"expiration_date\""
+	Node                  int64  "json:\"node\""
+	PreserveBackupHistory bool   "json:\"preserve_backup_history\""
+	PreserveBackups       bool   "json:\"preserve_backups\""
+	Reason                string "json:\"reason\""
+	Start                 bool   "json:\"start\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -107,6 +111,30 @@ func (in *ActionVpsReplaceInput) SetNode(value int64) *ActionVpsReplaceInput {
 	}
 
 	in._selectedParameters["Node"] = nil
+	return in
+}
+
+// SetPreserveBackupHistory sets parameter PreserveBackupHistory to value and selects it for sending
+func (in *ActionVpsReplaceInput) SetPreserveBackupHistory(value bool) *ActionVpsReplaceInput {
+	in.PreserveBackupHistory = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PreserveBackupHistory"] = nil
+	return in
+}
+
+// SetPreserveBackups sets parameter PreserveBackups to value and selects it for sending
+func (in *ActionVpsReplaceInput) SetPreserveBackups(value bool) *ActionVpsReplaceInput {
+	in.PreserveBackups = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PreserveBackups"] = nil
 	return in
 }
 
@@ -345,13 +373,13 @@ func (inv *ActionVpsReplaceInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionVpsReplaceInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("ExpirationDate") {
 			if !inv.IsParameterNil("ExpirationDate") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.ExpirationDate)
 				if !ok {
-					verr.Add("expiration_date", "not a valid datetime")
+					verr.Add("expiration_date", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.ExpirationDate = normalized
 				}
@@ -360,7 +388,7 @@ func (inv *ActionVpsReplaceInvocation) validate() error {
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -375,22 +403,53 @@ func (inv *ActionVpsReplaceInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionVpsReplaceInvocation) Call() (*ActionVpsReplaceResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionVpsReplaceInvocation) CallContext(ctx context.Context) (*ActionVpsReplaceResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionVpsReplaceResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Vps == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Vps
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionVpsReplaceInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionVpsReplaceInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionVpsReplaceInvocation) callAsBody() (*ActionVpsReplaceResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionVpsReplaceResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Vps
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 // IsBlocking checks whether the current invocation resulted in a blocking operation
@@ -485,6 +544,12 @@ func (inv *ActionVpsReplaceInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("Node") {
 			ret["node"] = inv.Input.Node
+		}
+		if inv.IsParameterSelected("PreserveBackupHistory") {
+			ret["preserve_backup_history"] = inv.Input.PreserveBackupHistory
+		}
+		if inv.IsParameterSelected("PreserveBackups") {
+			ret["preserve_backups"] = inv.Input.PreserveBackups
 		}
 		if inv.IsParameterSelected("Reason") {
 			ret["reason"] = inv.Input.Reason

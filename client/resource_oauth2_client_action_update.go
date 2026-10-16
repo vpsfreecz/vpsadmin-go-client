@@ -1,6 +1,8 @@
 package client
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -76,15 +78,18 @@ func (in *ActionOauth2ClientUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionOauth2ClientUpdateInput is a type for action input parameters
 type ActionOauth2ClientUpdateInput struct {
-	AccessTokenLifetime string "json:\"access_token_lifetime\""
-	AccessTokenSeconds  int64  "json:\"access_token_seconds\""
-	AllowSingleSignOn   bool   "json:\"allow_single_sign_on\""
-	ClientId            string "json:\"client_id\""
-	ClientSecret        string "json:\"client_secret\""
-	IssueRefreshToken   bool   "json:\"issue_refresh_token\""
-	Name                string "json:\"name\""
-	RedirectUri         string "json:\"redirect_uri\""
-	RefreshTokenSeconds int64  "json:\"refresh_token_seconds\""
+	AccessTokenLifetime                  string "json:\"access_token_lifetime\""
+	AccessTokenSeconds                   int64  "json:\"access_token_seconds\""
+	AllowSingleSignOn                    bool   "json:\"allow_single_sign_on\""
+	AuthorizationStartRequiresUserAction bool   "json:\"authorization_start_requires_user_action\""
+	AuthorizationStartUri                string "json:\"authorization_start_uri\""
+	ClientId                             string "json:\"client_id\""
+	ClientSecret                         string "json:\"client_secret\""
+	IsDefault                            bool   "json:\"is_default\""
+	IssueRefreshToken                    bool   "json:\"issue_refresh_token\""
+	Name                                 string "json:\"name\""
+	RedirectUri                          string "json:\"redirect_uri\""
+	RefreshTokenSeconds                  int64  "json:\"refresh_token_seconds\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -127,6 +132,30 @@ func (in *ActionOauth2ClientUpdateInput) SetAllowSingleSignOn(value bool) *Actio
 	return in
 }
 
+// SetAuthorizationStartRequiresUserAction sets parameter AuthorizationStartRequiresUserAction to value and selects it for sending
+func (in *ActionOauth2ClientUpdateInput) SetAuthorizationStartRequiresUserAction(value bool) *ActionOauth2ClientUpdateInput {
+	in.AuthorizationStartRequiresUserAction = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AuthorizationStartRequiresUserAction"] = nil
+	return in
+}
+
+// SetAuthorizationStartUri sets parameter AuthorizationStartUri to value and selects it for sending
+func (in *ActionOauth2ClientUpdateInput) SetAuthorizationStartUri(value string) *ActionOauth2ClientUpdateInput {
+	in.AuthorizationStartUri = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AuthorizationStartUri"] = nil
+	return in
+}
+
 // SetClientId sets parameter ClientId to value and selects it for sending
 func (in *ActionOauth2ClientUpdateInput) SetClientId(value string) *ActionOauth2ClientUpdateInput {
 	in.ClientId = value
@@ -148,6 +177,18 @@ func (in *ActionOauth2ClientUpdateInput) SetClientSecret(value string) *ActionOa
 	}
 
 	in._selectedParameters["ClientSecret"] = nil
+	return in
+}
+
+// SetIsDefault sets parameter IsDefault to value and selects it for sending
+func (in *ActionOauth2ClientUpdateInput) SetIsDefault(value bool) *ActionOauth2ClientUpdateInput {
+	in.IsDefault = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["IsDefault"] = nil
 	return in
 }
 
@@ -245,17 +286,20 @@ type ActionOauth2ClientUpdateRequest struct {
 
 // ActionOauth2ClientUpdateOutput is a type for action output parameters
 type ActionOauth2ClientUpdateOutput struct {
-	AccessTokenLifetime string "json:\"access_token_lifetime\""
-	AccessTokenSeconds  int64  "json:\"access_token_seconds\""
-	AllowSingleSignOn   bool   "json:\"allow_single_sign_on\""
-	ClientId            string "json:\"client_id\""
-	CreatedAt           string "json:\"created_at\""
-	Id                  int64  "json:\"id\""
-	IssueRefreshToken   bool   "json:\"issue_refresh_token\""
-	Name                string "json:\"name\""
-	RedirectUri         string "json:\"redirect_uri\""
-	RefreshTokenSeconds int64  "json:\"refresh_token_seconds\""
-	UpdatedAt           string "json:\"updated_at\""
+	AccessTokenLifetime                  string "json:\"access_token_lifetime\""
+	AccessTokenSeconds                   int64  "json:\"access_token_seconds\""
+	AllowSingleSignOn                    bool   "json:\"allow_single_sign_on\""
+	AuthorizationStartRequiresUserAction bool   "json:\"authorization_start_requires_user_action\""
+	AuthorizationStartUri                string "json:\"authorization_start_uri\""
+	ClientId                             string "json:\"client_id\""
+	CreatedAt                            string "json:\"created_at\""
+	Id                                   int64  "json:\"id\""
+	IsDefault                            bool   "json:\"is_default\""
+	IssueRefreshToken                    bool   "json:\"issue_refresh_token\""
+	Name                                 string "json:\"name\""
+	RedirectUri                          string "json:\"redirect_uri\""
+	RefreshTokenSeconds                  int64  "json:\"refresh_token_seconds\""
+	UpdatedAt                            string "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
@@ -369,7 +413,7 @@ func (inv *ActionOauth2ClientUpdateInvocation) IsMetaParameterNil(param string) 
 }
 
 func (inv *ActionOauth2ClientUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {
@@ -382,22 +426,53 @@ func (inv *ActionOauth2ClientUpdateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionOauth2ClientUpdateInvocation) Call() (*ActionOauth2ClientUpdateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionOauth2ClientUpdateInvocation) CallContext(ctx context.Context) (*ActionOauth2ClientUpdateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionOauth2ClientUpdateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Oauth2Client == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Oauth2Client
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionOauth2ClientUpdateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionOauth2ClientUpdateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionOauth2ClientUpdateInvocation) callAsBody() (*ActionOauth2ClientUpdateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionOauth2ClientUpdateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("PUT", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Oauth2Client
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "PUT", inv.Path, input)
 }
 
 func (inv *ActionOauth2ClientUpdateInvocation) makeAllInputParams() *ActionOauth2ClientUpdateRequest {
@@ -420,11 +495,20 @@ func (inv *ActionOauth2ClientUpdateInvocation) makeInputParams() map[string]inte
 		if inv.IsParameterSelected("AllowSingleSignOn") {
 			ret["allow_single_sign_on"] = inv.Input.AllowSingleSignOn
 		}
+		if inv.IsParameterSelected("AuthorizationStartRequiresUserAction") {
+			ret["authorization_start_requires_user_action"] = inv.Input.AuthorizationStartRequiresUserAction
+		}
+		if inv.IsParameterSelected("AuthorizationStartUri") {
+			ret["authorization_start_uri"] = inv.Input.AuthorizationStartUri
+		}
 		if inv.IsParameterSelected("ClientId") {
 			ret["client_id"] = inv.Input.ClientId
 		}
 		if inv.IsParameterSelected("ClientSecret") {
 			ret["client_secret"] = inv.Input.ClientSecret
+		}
+		if inv.IsParameterSelected("IsDefault") {
+			ret["is_default"] = inv.Input.IsDefault
 		}
 		if inv.IsParameterSelected("IssueRefreshToken") {
 			ret["issue_refresh_token"] = inv.Input.IssueRefreshToken

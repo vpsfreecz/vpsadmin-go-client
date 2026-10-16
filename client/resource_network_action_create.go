@@ -1,6 +1,9 @@
 package client
 
-import ()
+import (
+	"context"
+	"net/http"
+)
 
 // ActionNetworkCreate is a type for action Network#Create
 type ActionNetworkCreate struct {
@@ -75,6 +78,7 @@ func (in *ActionNetworkCreateMetaGlobalInput) AnySelected() bool {
 type ActionNetworkCreateInput struct {
 	AddIpAddresses bool   "json:\"add_ip_addresses\""
 	Address        string "json:\"address\""
+	Enabled        bool   "json:\"enabled\""
 	IpVersion      int64  "json:\"ip_version\""
 	Label          string "json:\"label\""
 	Managed        bool   "json:\"managed\""
@@ -110,6 +114,18 @@ func (in *ActionNetworkCreateInput) SetAddress(value string) *ActionNetworkCreat
 	}
 
 	in._selectedParameters["Address"] = nil
+	return in
+}
+
+// SetEnabled sets parameter Enabled to value and selects it for sending
+func (in *ActionNetworkCreateInput) SetEnabled(value bool) *ActionNetworkCreateInput {
+	in.Enabled = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Enabled"] = nil
 	return in
 }
 
@@ -255,22 +271,25 @@ type ActionNetworkCreateRequest struct {
 
 // ActionNetworkCreateOutput is a type for action output parameters
 type ActionNetworkCreateOutput struct {
-	Address         string                    "json:\"address\""
-	Assigned        int64                     "json:\"assigned\""
-	Id              int64                     "json:\"id\""
-	IpVersion       int64                     "json:\"ip_version\""
-	Label           string                    "json:\"label\""
-	Managed         bool                      "json:\"managed\""
-	Owned           int64                     "json:\"owned\""
-	Prefix          int64                     "json:\"prefix\""
-	PrimaryLocation *ActionLocationShowOutput "json:\"primary_location\""
-	Purpose         string                    "json:\"purpose\""
-	Role            string                    "json:\"role\""
-	Size            int64                     "json:\"size\""
-	SplitAccess     string                    "json:\"split_access\""
-	SplitPrefix     int64                     "json:\"split_prefix\""
-	Taken           int64                     "json:\"taken\""
-	Used            int64                     "json:\"used\""
+	Address          string                    "json:\"address\""
+	Assigned         int64                     "json:\"assigned\""
+	AvailableToUsers int64                     "json:\"available_to_users\""
+	Enabled          bool                      "json:\"enabled\""
+	Id               int64                     "json:\"id\""
+	IpVersion        int64                     "json:\"ip_version\""
+	Label            string                    "json:\"label\""
+	Managed          bool                      "json:\"managed\""
+	Owned            int64                     "json:\"owned\""
+	OwnedUnassigned  int64                     "json:\"owned_unassigned\""
+	Prefix           int64                     "json:\"prefix\""
+	PrimaryLocation  *ActionLocationShowOutput "json:\"primary_location\""
+	Purpose          string                    "json:\"purpose\""
+	Role             string                    "json:\"role\""
+	Size             int64                     "json:\"size\""
+	SplitAccess      string                    "json:\"split_access\""
+	SplitPrefix      int64                     "json:\"split_prefix\""
+	Taken            int64                     "json:\"taken\""
+	Used             int64                     "json:\"used\""
 }
 
 // ActionNetworkCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -380,7 +399,7 @@ func (inv *ActionNetworkCreateInvocation) IsMetaParameterNil(param string) bool 
 }
 
 func (inv *ActionNetworkCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {
@@ -393,22 +412,53 @@ func (inv *ActionNetworkCreateInvocation) validate() error {
 	return verr
 }
 
-// Call() invokes the action and returns a response from the API server
+// Call invokes the action using a background context.
 func (inv *ActionNetworkCreateInvocation) Call() (*ActionNetworkCreateResponse, error) {
+	return inv.CallContext(context.Background())
+}
+
+// CallContext invokes the action and decodes its typed response.
+func (inv *ActionNetworkCreateInvocation) CallContext(ctx context.Context) (*ActionNetworkCreateResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	resp := &ActionNetworkCreateResponse{Action: inv.Action}
+	raw, err := inv.Action.Client.doRaw(req)
+	if err != nil {
+		return resp, err
+	}
+	if err := decodeTypedResponse(raw.Body, resp); err != nil {
+		return resp, err
+	}
+	if resp.Status {
+		if resp.Response == nil {
+			return resp, errMalformedResponse
+		}
+		if resp.Response.Network == nil {
+			return resp, errMalformedResponse
+		}
+		resp.Output = resp.Response.Network
+	}
+	return resp, nil
+}
+
+// CallRaw validates and sends the action without decoding its response body.
+// The caller owns HTTP and API status classification.
+func (inv *ActionNetworkCreateInvocation) CallRaw(ctx context.Context) (*RawResponse, error) {
+	req, err := inv.newRequest(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return inv.Action.Client.doRaw(req)
+}
+
+func (inv *ActionNetworkCreateInvocation) newRequest(ctx context.Context) (*http.Request, error) {
 	if err := inv.validate(); err != nil {
 		return nil, err
 	}
-	return inv.callAsBody()
-}
-
-func (inv *ActionNetworkCreateInvocation) callAsBody() (*ActionNetworkCreateResponse, error) {
 	input := inv.makeAllInputParams()
-	resp := &ActionNetworkCreateResponse{Action: inv.Action}
-	err := inv.Action.Client.DoBodyRequest("POST", inv.Path, input, resp)
-	if err == nil && resp.Status {
-		resp.Output = resp.Response.Network
-	}
-	return resp, err
+	return inv.Action.Client.newBodyRequest(ctx, "POST", inv.Path, input)
 }
 
 // IsBlocking checks whether the current invocation resulted in a blocking operation
@@ -503,6 +553,9 @@ func (inv *ActionNetworkCreateInvocation) makeInputParams() map[string]interface
 		}
 		if inv.IsParameterSelected("Address") {
 			ret["address"] = inv.Input.Address
+		}
+		if inv.IsParameterSelected("Enabled") {
+			ret["enabled"] = inv.Input.Enabled
 		}
 		if inv.IsParameterSelected("IpVersion") {
 			ret["ip_version"] = inv.Input.IpVersion
