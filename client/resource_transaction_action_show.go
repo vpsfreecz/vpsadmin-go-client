@@ -82,6 +82,7 @@ type ActionTransactionShowOutput struct {
 	FinishedAt       string                            "json:\"finished_at\""
 	Id               int64                             "json:\"id\""
 	Input            string                            "json:\"input\""
+	Label            string                            "json:\"label\""
 	Name             string                            "json:\"name\""
 	Node             *ActionNodeShowOutput             "json:\"node\""
 	Output           string                            "json:\"output\""
@@ -172,7 +173,7 @@ func (inv *ActionTransactionShowInvocation) IsMetaParameterNil(param string) boo
 }
 
 func (inv *ActionTransactionShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

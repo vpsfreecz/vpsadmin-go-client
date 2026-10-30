@@ -143,7 +143,7 @@ func (inv *ActionUserGetPaymentInstructionsInvocation) IsMetaParameterNil(param 
 }
 
 func (inv *ActionUserGetPaymentInstructionsInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

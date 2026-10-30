@@ -198,7 +198,7 @@ func (inv *ActionNodeOverviewListInvocation) IsMetaParameterNil(param string) bo
 }
 
 func (inv *ActionNodeOverviewListInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

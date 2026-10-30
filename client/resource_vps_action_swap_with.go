@@ -292,12 +292,12 @@ func (inv *ActionVpsSwapWithInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionVpsSwapWithInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Vps") {
 			if !inv.IsParameterNil("Vps") {
 				if inv.Input.Vps < 0 {
-					verr.Add("vps", "not a valid resource id")
+					verr.Add("vps", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

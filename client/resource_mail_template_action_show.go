@@ -162,7 +162,7 @@ func (inv *ActionMailTemplateShowInvocation) IsMetaParameterNil(param string) bo
 }
 
 func (inv *ActionMailTemplateShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

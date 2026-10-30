@@ -149,7 +149,7 @@ func (inv *ActionUserSessionCloseInvocation) IsMetaParameterNil(param string) bo
 }
 
 func (inv *ActionUserSessionCloseInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

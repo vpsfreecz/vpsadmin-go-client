@@ -164,7 +164,7 @@ func (inv *ActionTransactionChainShowInvocation) IsMetaParameterNil(param string
 }
 
 func (inv *ActionTransactionChainShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

@@ -280,7 +280,7 @@ func (inv *ActionExportHostIndexInvocation) IsMetaParameterNil(param string) boo
 }
 
 func (inv *ActionExportHostIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

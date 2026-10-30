@@ -174,6 +174,7 @@ type ActionSystemConfigIndexOutput struct {
 	Category     string "json:\"category\""
 	Description  string "json:\"description\""
 	Label        string "json:\"label\""
+	Localized    bool   "json:\"localized\""
 	MinUserLevel int64  "json:\"min_user_level\""
 	Name         string "json:\"name\""
 	Type         string "json:\"type\""
@@ -279,7 +280,7 @@ func (inv *ActionSystemConfigIndexInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionSystemConfigIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

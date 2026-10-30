@@ -288,7 +288,9 @@ type ActionUserRequestRegistrationIndexOutput struct {
 	OrgId                  string                      "json:\"org_id\""
 	OrgName                string                      "json:\"org_name\""
 	OsTemplate             *ActionOsTemplateShowOutput "json:\"os_template\""
+	RawUserId              int64                       "json:\"raw_user_id\""
 	State                  string                      "json:\"state\""
+	TimeZone               string                      "json:\"time_zone\""
 	UpdatedAt              string                      "json:\"updated_at\""
 	User                   *ActionUserShowOutput       "json:\"user\""
 	YearOfBirth            int64                       "json:\"year_of_birth\""
@@ -394,19 +396,19 @@ func (inv *ActionUserRequestRegistrationIndexInvocation) IsMetaParameterNil(para
 }
 
 func (inv *ActionUserRequestRegistrationIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Admin") {
 			if !inv.IsParameterNil("Admin") {
 				if inv.Input.Admin < 0 {
-					verr.Add("admin", "not a valid resource id")
+					verr.Add("admin", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

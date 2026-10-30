@@ -368,19 +368,19 @@ func (inv *ActionExportCreateInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionExportCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Dataset") {
 			if !inv.IsParameterNil("Dataset") {
 				if inv.Input.Dataset < 0 {
-					verr.Add("dataset", "not a valid resource id")
+					verr.Add("dataset", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Snapshot") {
 			if !inv.IsParameterNil("Snapshot") {
 				if inv.Input.Snapshot < 0 {
-					verr.Add("snapshot", "not a valid resource id")
+					verr.Add("snapshot", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

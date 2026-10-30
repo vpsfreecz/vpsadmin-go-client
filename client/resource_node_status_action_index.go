@@ -191,6 +191,7 @@ type ActionNodeStatusIndexOutput struct {
 	ArcCMax       int64   "json:\"arc_c_max\""
 	ArcHitpercent float64 "json:\"arc_hitpercent\""
 	ArcSize       int64   "json:\"arc_size\""
+	CgroupVersion string  "json:\"cgroup_version\""
 	CpuGuest      float64 "json:\"cpu_guest\""
 	CpuIdle       float64 "json:\"cpu_idle\""
 	CpuIowait     float64 "json:\"cpu_iowait\""
@@ -326,13 +327,13 @@ func (inv *ActionNodeStatusIndexInvocation) IsMetaParameterNil(param string) boo
 }
 
 func (inv *ActionNodeStatusIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("From") {
 			if !inv.IsParameterNil("From") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.From)
 				if !ok {
-					verr.Add("from", "not a valid datetime")
+					verr.Add("from", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.From = normalized
 				}
@@ -342,7 +343,7 @@ func (inv *ActionNodeStatusIndexInvocation) validate() error {
 			if !inv.IsParameterNil("To") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.To)
 				if !ok {
-					verr.Add("to", "not a valid datetime")
+					verr.Add("to", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.To = normalized
 				}

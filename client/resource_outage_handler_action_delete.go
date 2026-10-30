@@ -149,7 +149,7 @@ func (inv *ActionOutageHandlerDeleteInvocation) IsMetaParameterNil(param string)
 }
 
 func (inv *ActionOutageHandlerDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

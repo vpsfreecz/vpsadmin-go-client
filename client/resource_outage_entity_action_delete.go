@@ -149,7 +149,7 @@ func (inv *ActionOutageEntityDeleteInvocation) IsMetaParameterNil(param string) 
 }
 
 func (inv *ActionOutageEntityDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

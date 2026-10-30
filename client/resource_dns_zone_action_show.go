@@ -170,7 +170,7 @@ func (inv *ActionDnsZoneShowInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionDnsZoneShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

@@ -173,7 +173,7 @@ func (inv *ActionHostIpAddressFreeInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionHostIpAddressFreeInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

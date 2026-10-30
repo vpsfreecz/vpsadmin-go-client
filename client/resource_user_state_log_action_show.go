@@ -162,7 +162,7 @@ func (inv *ActionUserStateLogShowInvocation) IsMetaParameterNil(param string) bo
 }
 
 func (inv *ActionUserStateLogShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

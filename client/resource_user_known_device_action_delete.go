@@ -149,7 +149,7 @@ func (inv *ActionUserKnownDeviceDeleteInvocation) IsMetaParameterNil(param strin
 }
 
 func (inv *ActionUserKnownDeviceDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

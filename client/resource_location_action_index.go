@@ -373,33 +373,33 @@ func (inv *ActionLocationIndexInvocation) IsMetaParameterNil(param string) bool 
 }
 
 func (inv *ActionLocationIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Environment") {
 			if !inv.IsParameterNil("Environment") {
 				if inv.Input.Environment < 0 {
-					verr.Add("environment", "not a valid resource id")
+					verr.Add("environment", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("SharesAnyNetworksWith") {
 			if !inv.IsParameterNil("SharesAnyNetworksWith") {
 				if inv.Input.SharesAnyNetworksWith < 0 {
-					verr.Add("shares_any_networks_with", "not a valid resource id")
+					verr.Add("shares_any_networks_with", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("SharesV4NetworksWith") {
 			if !inv.IsParameterNil("SharesV4NetworksWith") {
 				if inv.Input.SharesV4NetworksWith < 0 {
-					verr.Add("shares_v4_networks_with", "not a valid resource id")
+					verr.Add("shares_v4_networks_with", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("SharesV6NetworksWith") {
 			if !inv.IsParameterNil("SharesV6NetworksWith") {
 				if inv.Input.SharesV6NetworksWith < 0 {
-					verr.Add("shares_v6_networks_with", "not a valid resource id")
+					verr.Add("shares_v6_networks_with", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

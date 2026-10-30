@@ -258,19 +258,19 @@ func (inv *ActionOutageSecurityAdvisoryCreateInvocation) IsMetaParameterNil(para
 }
 
 func (inv *ActionOutageSecurityAdvisoryCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Outage") {
 			if !inv.IsParameterNil("Outage") {
 				if inv.Input.Outage < 0 {
-					verr.Add("outage", "not a valid resource id")
+					verr.Add("outage", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("SecurityAdvisory") {
 			if !inv.IsParameterNil("SecurityAdvisory") {
 				if inv.Input.SecurityAdvisory < 0 {
-					verr.Add("security_advisory", "not a valid resource id")
+					verr.Add("security_advisory", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

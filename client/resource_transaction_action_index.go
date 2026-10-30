@@ -229,6 +229,7 @@ type ActionTransactionIndexOutput struct {
 	FinishedAt       string                            "json:\"finished_at\""
 	Id               int64                             "json:\"id\""
 	Input            string                            "json:\"input\""
+	Label            string                            "json:\"label\""
 	Name             string                            "json:\"name\""
 	Node             *ActionNodeShowOutput             "json:\"node\""
 	Output           string                            "json:\"output\""
@@ -342,19 +343,19 @@ func (inv *ActionTransactionIndexInvocation) IsMetaParameterNil(param string) bo
 }
 
 func (inv *ActionTransactionIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("TransactionChain") {
 			if !inv.IsParameterNil("TransactionChain") {
 				if inv.Input.TransactionChain < 0 {
-					verr.Add("transaction_chain", "not a valid resource id")
+					verr.Add("transaction_chain", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

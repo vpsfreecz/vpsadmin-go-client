@@ -253,12 +253,12 @@ func (inv *ActionVpsDeployPublicKeyInvocation) IsMetaParameterNil(param string) 
 }
 
 func (inv *ActionVpsDeployPublicKeyInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("PublicKey") {
 			if !inv.IsParameterNil("PublicKey") {
 				if inv.Input.PublicKey < 0 {
-					verr.Add("public_key", "not a valid resource id")
+					verr.Add("public_key", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

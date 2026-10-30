@@ -149,7 +149,7 @@ func (inv *ActionUserWebauthnCredentialDeleteInvocation) IsMetaParameterNil(para
 }
 
 func (inv *ActionUserWebauthnCredentialDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

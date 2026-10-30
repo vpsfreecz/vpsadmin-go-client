@@ -149,7 +149,7 @@ func (inv *ActionMailboxDeleteInvocation) IsMetaParameterNil(param string) bool 
 }
 
 func (inv *ActionMailboxDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

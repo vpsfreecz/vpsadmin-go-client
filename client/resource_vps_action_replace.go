@@ -76,10 +76,12 @@ func (in *ActionVpsReplaceMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsReplaceInput is a type for action input parameters
 type ActionVpsReplaceInput struct {
-	ExpirationDate string "json:\"expiration_date\""
-	Node           int64  "json:\"node\""
-	Reason         string "json:\"reason\""
-	Start          bool   "json:\"start\""
+	ExpirationDate        string "json:\"expiration_date\""
+	Node                  int64  "json:\"node\""
+	PreserveBackupHistory bool   "json:\"preserve_backup_history\""
+	PreserveBackups       bool   "json:\"preserve_backups\""
+	Reason                string "json:\"reason\""
+	Start                 bool   "json:\"start\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -107,6 +109,30 @@ func (in *ActionVpsReplaceInput) SetNode(value int64) *ActionVpsReplaceInput {
 	}
 
 	in._selectedParameters["Node"] = nil
+	return in
+}
+
+// SetPreserveBackupHistory sets parameter PreserveBackupHistory to value and selects it for sending
+func (in *ActionVpsReplaceInput) SetPreserveBackupHistory(value bool) *ActionVpsReplaceInput {
+	in.PreserveBackupHistory = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PreserveBackupHistory"] = nil
+	return in
+}
+
+// SetPreserveBackups sets parameter PreserveBackups to value and selects it for sending
+func (in *ActionVpsReplaceInput) SetPreserveBackups(value bool) *ActionVpsReplaceInput {
+	in.PreserveBackups = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PreserveBackups"] = nil
 	return in
 }
 
@@ -345,13 +371,13 @@ func (inv *ActionVpsReplaceInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionVpsReplaceInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("ExpirationDate") {
 			if !inv.IsParameterNil("ExpirationDate") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.ExpirationDate)
 				if !ok {
-					verr.Add("expiration_date", "not a valid datetime")
+					verr.Add("expiration_date", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.ExpirationDate = normalized
 				}
@@ -360,7 +386,7 @@ func (inv *ActionVpsReplaceInvocation) validate() error {
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -485,6 +511,12 @@ func (inv *ActionVpsReplaceInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("Node") {
 			ret["node"] = inv.Input.Node
+		}
+		if inv.IsParameterSelected("PreserveBackupHistory") {
+			ret["preserve_backup_history"] = inv.Input.PreserveBackupHistory
+		}
+		if inv.IsParameterSelected("PreserveBackups") {
+			ret["preserve_backups"] = inv.Input.PreserveBackups
 		}
 		if inv.IsParameterSelected("Reason") {
 			ret["reason"] = inv.Input.Reason

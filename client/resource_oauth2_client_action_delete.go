@@ -149,7 +149,7 @@ func (inv *ActionOauth2ClientDeleteInvocation) IsMetaParameterNil(param string) 
 }
 
 func (inv *ActionOauth2ClientDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

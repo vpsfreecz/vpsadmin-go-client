@@ -161,10 +161,11 @@ func (in *ActionOutageEntityIndexInput) AnySelected() bool {
 
 // ActionOutageEntityIndexOutput is a type for action output parameters
 type ActionOutageEntityIndexOutput struct {
-	EntityId int64  "json:\"entity_id\""
-	Id       int64  "json:\"id\""
-	Label    string "json:\"label\""
-	Name     string "json:\"name\""
+	EntityId   int64  "json:\"entity_id\""
+	EntityType string "json:\"entity_type\""
+	Id         int64  "json:\"id\""
+	Label      string "json:\"label\""
+	Name       string "json:\"name\""
 }
 
 // Type for action response, including envelope
@@ -278,7 +279,7 @@ func (inv *ActionOutageEntityIndexInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionOutageEntityIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

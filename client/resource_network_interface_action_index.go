@@ -307,26 +307,26 @@ func (inv *ActionNetworkInterfaceIndexInvocation) IsMetaParameterNil(param strin
 }
 
 func (inv *ActionNetworkInterfaceIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Vps") {
 			if !inv.IsParameterNil("Vps") {
 				if inv.Input.Vps < 0 {
-					verr.Add("vps", "not a valid resource id")
+					verr.Add("vps", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

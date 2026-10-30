@@ -337,19 +337,19 @@ func (inv *ActionVpsMountCreateInvocation) IsMetaParameterNil(param string) bool
 }
 
 func (inv *ActionVpsMountCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Dataset") {
 			if !inv.IsParameterNil("Dataset") {
 				if inv.Input.Dataset < 0 {
-					verr.Add("dataset", "not a valid resource id")
+					verr.Add("dataset", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("UserNamespaceMap") {
 			if !inv.IsParameterNil("UserNamespaceMap") {
 				if inv.Input.UserNamespaceMap < 0 {
-					verr.Add("user_namespace_map", "not a valid resource id")
+					verr.Add("user_namespace_map", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

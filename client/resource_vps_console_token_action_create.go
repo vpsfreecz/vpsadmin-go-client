@@ -162,7 +162,7 @@ func (inv *ActionVpsConsoleTokenCreateInvocation) IsMetaParameterNil(param strin
 }
 
 func (inv *ActionVpsConsoleTokenCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

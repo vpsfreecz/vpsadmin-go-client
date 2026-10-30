@@ -190,6 +190,7 @@ type ActionUserRequestChangeCreateOutput struct {
 	FullName      string                "json:\"full_name\""
 	Id            int64                 "json:\"id\""
 	Label         string                "json:\"label\""
+	RawUserId     int64                 "json:\"raw_user_id\""
 	State         string                "json:\"state\""
 	UpdatedAt     string                "json:\"updated_at\""
 	User          *ActionUserShowOutput "json:\"user\""
@@ -295,7 +296,7 @@ func (inv *ActionUserRequestChangeCreateInvocation) IsMetaParameterNil(param str
 }
 
 func (inv *ActionUserRequestChangeCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

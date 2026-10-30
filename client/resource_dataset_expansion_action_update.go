@@ -305,7 +305,7 @@ func (inv *ActionDatasetExpansionUpdateInvocation) IsMetaParameterNil(param stri
 }
 
 func (inv *ActionDatasetExpansionUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

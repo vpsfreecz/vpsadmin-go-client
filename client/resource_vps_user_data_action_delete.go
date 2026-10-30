@@ -149,7 +149,7 @@ func (inv *ActionVpsUserDataDeleteInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionVpsUserDataDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

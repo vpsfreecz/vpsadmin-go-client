@@ -15,6 +15,8 @@ type Client struct {
 
 	httpClient           *http.Client
 	oauth2TrustedOrigins map[string]struct{}
+	language             string
+	languageHeader       string
 
 	// Resource Action_state
 	ActionState *ResourceActionState
@@ -76,6 +78,10 @@ type Client struct {
 	IpAddress *ResourceIpAddress
 	// Resource Ip_address_assignment
 	IpAddressAssignment *ResourceIpAddressAssignment
+	// Resource Ip_release_campaign
+	IpReleaseCampaign *ResourceIpReleaseCampaign
+	// Resource Ip_release_request
+	IpReleaseRequest *ResourceIpReleaseRequest
 	// Resource Language
 	Language *ResourceLanguage
 	// Resource Location
@@ -108,6 +114,46 @@ type Client struct {
 	NewsLog *ResourceNewsLog
 	// Resource Node
 	Node *ResourceNode
+	// Resource Node_cgroup_state
+	NodeCgroupState *ResourceNodeCgroupState
+	// Resource Node_ebpf_program
+	NodeEbpfProgram *ResourceNodeEbpfProgram
+	// Resource Node_ebpf_program_link
+	NodeEbpfProgramLink *ResourceNodeEbpfProgramLink
+	// Resource Node_ebpf_program_object
+	NodeEbpfProgramObject *ResourceNodeEbpfProgramObject
+	// Resource Node_kernel_configuration_option
+	NodeKernelConfigurationOption *ResourceNodeKernelConfigurationOption
+	// Resource Node_kernel_event
+	NodeKernelEvent *ResourceNodeKernelEvent
+	// Resource Node_kernel_evidence
+	NodeKernelEvidence *ResourceNodeKernelEvidence
+	// Resource Node_kernel_evidence_error
+	NodeKernelEvidenceError *ResourceNodeKernelEvidenceError
+	// Resource Node_kernel_history_gap
+	NodeKernelHistoryGap *ResourceNodeKernelHistoryGap
+	// Resource Node_kernel_history_state
+	NodeKernelHistoryState *ResourceNodeKernelHistoryState
+	// Resource Node_kernel_livepatch
+	NodeKernelLivepatch *ResourceNodeKernelLivepatch
+	// Resource Node_kernel_livepatch_patch
+	NodeKernelLivepatchPatch *ResourceNodeKernelLivepatchPatch
+	// Resource Node_kernel_module
+	NodeKernelModule *ResourceNodeKernelModule
+	// Resource Node_kernel_parameter
+	NodeKernelParameter *ResourceNodeKernelParameter
+	// Resource Node_software_change
+	NodeSoftwareChange *ResourceNodeSoftwareChange
+	// Resource Node_software_deployment
+	NodeSoftwareDeployment *ResourceNodeSoftwareDeployment
+	// Resource Node_software_version
+	NodeSoftwareVersion *ResourceNodeSoftwareVersion
+	// Resource Node_sysctl
+	NodeSysctl *ResourceNodeSysctl
+	// Resource Node_sysctl_change
+	NodeSysctlChange *ResourceNodeSysctlChange
+	// Resource Node_system_state
+	NodeSystemState *ResourceNodeSystemState
 	// Resource Node_transfer_connection
 	NodeTransferConnection *ResourceNodeTransferConnection
 	// Resource Oauth2_client
@@ -128,6 +174,8 @@ type Client struct {
 	OutageSecurityAdvisory *ResourceOutageSecurityAdvisory
 	// Resource Outage_update
 	OutageUpdate *ResourceOutageUpdate
+	// Resource Password_change_log
+	PasswordChangeLog *ResourcePasswordChangeLog
 	// Resource Payment_stats
 	PaymentStats *ResourcePaymentStats
 	// Resource Pool
@@ -176,6 +224,8 @@ type Client struct {
 	VpsUserData *ResourceVpsUserData
 	// Resource Webauthn
 	Webauthn *ResourceWebauthn
+	// Resource Webui_user_setting
+	WebuiUserSetting *ResourceWebuiUserSetting
 }
 
 // Create a new client for API at url
@@ -215,6 +265,8 @@ func New(url string) *Client {
 	c.IncomingPayment = NewResourceIncomingPayment(c)
 	c.IpAddress = NewResourceIpAddress(c)
 	c.IpAddressAssignment = NewResourceIpAddressAssignment(c)
+	c.IpReleaseCampaign = NewResourceIpReleaseCampaign(c)
+	c.IpReleaseRequest = NewResourceIpReleaseRequest(c)
 	c.Language = NewResourceLanguage(c)
 	c.Location = NewResourceLocation(c)
 	c.LocationNetwork = NewResourceLocationNetwork(c)
@@ -231,6 +283,26 @@ func New(url string) *Client {
 	c.NetworkInterfaceMonitor = NewResourceNetworkInterfaceMonitor(c)
 	c.NewsLog = NewResourceNewsLog(c)
 	c.Node = NewResourceNode(c)
+	c.NodeCgroupState = NewResourceNodeCgroupState(c)
+	c.NodeEbpfProgram = NewResourceNodeEbpfProgram(c)
+	c.NodeEbpfProgramLink = NewResourceNodeEbpfProgramLink(c)
+	c.NodeEbpfProgramObject = NewResourceNodeEbpfProgramObject(c)
+	c.NodeKernelConfigurationOption = NewResourceNodeKernelConfigurationOption(c)
+	c.NodeKernelEvent = NewResourceNodeKernelEvent(c)
+	c.NodeKernelEvidence = NewResourceNodeKernelEvidence(c)
+	c.NodeKernelEvidenceError = NewResourceNodeKernelEvidenceError(c)
+	c.NodeKernelHistoryGap = NewResourceNodeKernelHistoryGap(c)
+	c.NodeKernelHistoryState = NewResourceNodeKernelHistoryState(c)
+	c.NodeKernelLivepatch = NewResourceNodeKernelLivepatch(c)
+	c.NodeKernelLivepatchPatch = NewResourceNodeKernelLivepatchPatch(c)
+	c.NodeKernelModule = NewResourceNodeKernelModule(c)
+	c.NodeKernelParameter = NewResourceNodeKernelParameter(c)
+	c.NodeSoftwareChange = NewResourceNodeSoftwareChange(c)
+	c.NodeSoftwareDeployment = NewResourceNodeSoftwareDeployment(c)
+	c.NodeSoftwareVersion = NewResourceNodeSoftwareVersion(c)
+	c.NodeSysctl = NewResourceNodeSysctl(c)
+	c.NodeSysctlChange = NewResourceNodeSysctlChange(c)
+	c.NodeSystemState = NewResourceNodeSystemState(c)
 	c.NodeTransferConnection = NewResourceNodeTransferConnection(c)
 	c.Oauth2Client = NewResourceOauth2Client(c)
 	c.ObjectHistory = NewResourceObjectHistory(c)
@@ -241,6 +313,7 @@ func New(url string) *Client {
 	c.Outage = NewResourceOutage(c)
 	c.OutageSecurityAdvisory = NewResourceOutageSecurityAdvisory(c)
 	c.OutageUpdate = NewResourceOutageUpdate(c)
+	c.PasswordChangeLog = NewResourcePasswordChangeLog(c)
 	c.PaymentStats = NewResourcePaymentStats(c)
 	c.Pool = NewResourcePool(c)
 	c.SecurityAdvisory = NewResourceSecurityAdvisory(c)
@@ -265,6 +338,7 @@ func New(url string) *Client {
 	c.VpsSecurityAdvisory = NewResourceVpsSecurityAdvisory(c)
 	c.VpsUserData = NewResourceVpsUserData(c)
 	c.Webauthn = NewResourceWebauthn(c)
+	c.WebuiUserSetting = NewResourceWebuiUserSetting(c)
 
 	return c
 }

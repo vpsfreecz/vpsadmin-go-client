@@ -313,7 +313,7 @@ func (inv *ActionUserEnvironmentConfigUpdateInvocation) IsMetaParameterNil(param
 }
 
 func (inv *ActionUserEnvironmentConfigUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

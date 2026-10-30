@@ -243,7 +243,7 @@ func (inv *ActionNodeSetMaintenanceInvocation) IsMetaParameterNil(param string) 
 }
 
 func (inv *ActionNodeSetMaintenanceInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

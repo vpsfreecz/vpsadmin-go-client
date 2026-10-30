@@ -149,7 +149,7 @@ func (inv *ActionUserNamespaceMapDeleteInvocation) IsMetaParameterNil(param stri
 }
 
 func (inv *ActionUserNamespaceMapDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

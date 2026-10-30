@@ -159,7 +159,7 @@ func (inv *ActionSnapshotDownloadDeleteInvocation) IsMetaParameterNil(param stri
 }
 
 func (inv *ActionSnapshotDownloadDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

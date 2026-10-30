@@ -354,13 +354,13 @@ func (inv *ActionIncidentReportCreateInvocation) IsMetaParameterNil(param string
 }
 
 func (inv *ActionIncidentReportCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("DetectedAt") {
 			if !inv.IsParameterNil("DetectedAt") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.DetectedAt)
 				if !ok {
-					verr.Add("detected_at", "not a valid datetime")
+					verr.Add("detected_at", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.DetectedAt = normalized
 				}
@@ -369,14 +369,14 @@ func (inv *ActionIncidentReportCreateInvocation) validate() error {
 		if inv.IsParameterSelected("IpAddressAssignment") {
 			if !inv.IsParameterNil("IpAddressAssignment") {
 				if inv.Input.IpAddressAssignment < 0 {
-					verr.Add("ip_address_assignment", "not a valid resource id")
+					verr.Add("ip_address_assignment", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Vps") {
 			if !inv.IsParameterNil("Vps") {
 				if inv.Input.Vps < 0 {
-					verr.Add("vps", "not a valid resource id")
+					verr.Add("vps", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

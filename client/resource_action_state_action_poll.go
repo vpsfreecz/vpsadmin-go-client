@@ -373,19 +373,19 @@ func (inv *ActionActionStatePollInvocation) IsMetaParameterNil(param string) boo
 }
 
 func (inv *ActionActionStatePollInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Timeout") {
 			if !inv.IsParameterNil("Timeout") {
 				if !isFiniteFloat64(inv.Input.Timeout) {
-					verr.Add("timeout", "not a valid float")
+					verr.Add("timeout", t(inv.Action.Client, "validation.invalid_float", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("UpdateIn") {
 			if !inv.IsParameterNil("UpdateIn") {
 				if !isFiniteFloat64(inv.Input.UpdateIn) {
-					verr.Add("update_in", "not a valid float")
+					verr.Add("update_in", t(inv.Action.Client, "validation.invalid_float", nil))
 				}
 			}
 		}

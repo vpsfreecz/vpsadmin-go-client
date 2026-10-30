@@ -388,33 +388,33 @@ func (inv *ActionOomReportIndexInvocation) IsMetaParameterNil(param string) bool
 }
 
 func (inv *ActionOomReportIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Environment") {
 			if !inv.IsParameterNil("Environment") {
 				if inv.Input.Environment < 0 {
-					verr.Add("environment", "not a valid resource id")
+					verr.Add("environment", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("OomReportRule") {
 			if !inv.IsParameterNil("OomReportRule") {
 				if inv.Input.OomReportRule < 0 {
-					verr.Add("oom_report_rule", "not a valid resource id")
+					verr.Add("oom_report_rule", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -422,7 +422,7 @@ func (inv *ActionOomReportIndexInvocation) validate() error {
 			if !inv.IsParameterNil("Since") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Since)
 				if !ok {
-					verr.Add("since", "not a valid datetime")
+					verr.Add("since", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.Since = normalized
 				}
@@ -432,7 +432,7 @@ func (inv *ActionOomReportIndexInvocation) validate() error {
 			if !inv.IsParameterNil("Until") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Until)
 				if !ok {
-					verr.Add("until", "not a valid datetime")
+					verr.Add("until", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.Until = normalized
 				}
@@ -441,14 +441,14 @@ func (inv *ActionOomReportIndexInvocation) validate() error {
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Vps") {
 			if !inv.IsParameterNil("Vps") {
 				if inv.Input.Vps < 0 {
-					verr.Add("vps", "not a valid resource id")
+					verr.Add("vps", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

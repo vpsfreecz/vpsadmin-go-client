@@ -149,7 +149,7 @@ func (inv *ActionNewsLogDeleteInvocation) IsMetaParameterNil(param string) bool 
 }
 
 func (inv *ActionNewsLogDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

@@ -426,13 +426,13 @@ func (inv *ActionOutageUpdateInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionOutageUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("BeginsAt") {
 			if !inv.IsParameterNil("BeginsAt") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.BeginsAt)
 				if !ok {
-					verr.Add("begins_at", "not a valid datetime")
+					verr.Add("begins_at", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.BeginsAt = normalized
 				}
@@ -442,7 +442,7 @@ func (inv *ActionOutageUpdateInvocation) validate() error {
 			if !inv.IsParameterNil("FinishedAt") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.FinishedAt)
 				if !ok {
-					verr.Add("finished_at", "not a valid datetime")
+					verr.Add("finished_at", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.FinishedAt = normalized
 				}

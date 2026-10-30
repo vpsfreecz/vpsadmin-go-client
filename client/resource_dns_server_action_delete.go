@@ -149,7 +149,7 @@ func (inv *ActionDnsServerDeleteInvocation) IsMetaParameterNil(param string) boo
 }
 
 func (inv *ActionDnsServerDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

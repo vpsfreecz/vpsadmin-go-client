@@ -256,12 +256,12 @@ func (inv *ActionUserNamespaceMapCreateInvocation) IsMetaParameterNil(param stri
 }
 
 func (inv *ActionUserNamespaceMapCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("UserNamespace") {
 			if !inv.IsParameterNil("UserNamespace") {
 				if inv.Input.UserNamespace < 0 {
-					verr.Add("user_namespace", "not a valid resource id")
+					verr.Add("user_namespace", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

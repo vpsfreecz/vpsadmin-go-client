@@ -291,19 +291,19 @@ func (inv *ActionUserOutageIndexInvocation) IsMetaParameterNil(param string) boo
 }
 
 func (inv *ActionUserOutageIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Outage") {
 			if !inv.IsParameterNil("Outage") {
 				if inv.Input.Outage < 0 {
-					verr.Add("outage", "not a valid resource id")
+					verr.Add("outage", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

@@ -298,12 +298,12 @@ func (inv *ActionSecurityAdvisoryUpdateIndexInvocation) IsMetaParameterNil(param
 }
 
 func (inv *ActionSecurityAdvisoryUpdateIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("SecurityAdvisory") {
 			if !inv.IsParameterNil("SecurityAdvisory") {
 				if inv.Input.SecurityAdvisory < 0 {
-					verr.Add("security_advisory", "not a valid resource id")
+					verr.Add("security_advisory", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -311,7 +311,7 @@ func (inv *ActionSecurityAdvisoryUpdateIndexInvocation) validate() error {
 			if !inv.IsParameterNil("Since") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Since)
 				if !ok {
-					verr.Add("since", "not a valid datetime")
+					verr.Add("since", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.Since = normalized
 				}

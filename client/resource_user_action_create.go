@@ -96,6 +96,7 @@ type ActionUserCreateInput struct {
 	PasswordReset              bool   "json:\"password_reset\""
 	PreferredLogoutAll         bool   "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64  "json:\"preferred_session_length\""
+	TimeZone                   string "json:\"time_zone\""
 	Vps                        bool   "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -379,6 +380,37 @@ func (in *ActionUserCreateInput) SetPreferredSessionLength(value int64) *ActionU
 	return in
 }
 
+// SetTimeZone sets parameter TimeZone to value and selects it for sending
+func (in *ActionUserCreateInput) SetTimeZone(value string) *ActionUserCreateInput {
+	in.TimeZone = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetTimeZoneNil(false)
+	in._selectedParameters["TimeZone"] = nil
+	return in
+}
+
+// SetTimeZoneNil sets parameter TimeZone to nil and selects it for sending
+func (in *ActionUserCreateInput) SetTimeZoneNil(set bool) *ActionUserCreateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TimeZone"] = nil
+		in.SelectParameters("TimeZone")
+	} else {
+		delete(in._nilParameters, "TimeZone")
+	}
+	return in
+}
+
 // SetVps sets parameter Vps to value and selects it for sending
 func (in *ActionUserCreateInput) SetVps(value bool) *ActionUserCreateInput {
 	in.Vps = value
@@ -462,6 +494,7 @@ type ActionUserCreateOutput struct {
 	PreferredLogoutAll         bool                      "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64                     "json:\"preferred_session_length\""
 	RemindAfterDate            string                    "json:\"remind_after_date\""
+	TimeZone                   string                    "json:\"time_zone\""
 }
 
 // ActionUserCreateMetaGlobalOutput is a type for global output metadata parameters
@@ -571,40 +604,40 @@ func (inv *ActionUserCreateInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionUserCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Environment") {
 			if !inv.IsParameterNil("Environment") {
 				if inv.Input.Environment < 0 {
-					verr.Add("environment", "not a valid resource id")
+					verr.Add("environment", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Language") {
 			if !inv.IsParameterNil("Language") {
 				if inv.Input.Language < 0 {
-					verr.Add("language", "not a valid resource id")
+					verr.Add("language", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("OsTemplate") {
 			if !inv.IsParameterNil("OsTemplate") {
 				if inv.Input.OsTemplate < 0 {
-					verr.Add("os_template", "not a valid resource id")
+					verr.Add("os_template", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -792,6 +825,13 @@ func (inv *ActionUserCreateInvocation) makeInputParams() map[string]interface{} 
 		}
 		if inv.IsParameterSelected("PreferredSessionLength") {
 			ret["preferred_session_length"] = inv.Input.PreferredSessionLength
+		}
+		if inv.IsParameterSelected("TimeZone") {
+			if inv.IsParameterNil("TimeZone") {
+				ret["time_zone"] = nil
+			} else {
+				ret["time_zone"] = inv.Input.TimeZone
+			}
 		}
 		if inv.IsParameterSelected("Vps") {
 			ret["vps"] = inv.Input.Vps

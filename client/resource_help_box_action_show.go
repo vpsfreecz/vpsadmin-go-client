@@ -161,7 +161,7 @@ func (inv *ActionHelpBoxShowInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionHelpBoxShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

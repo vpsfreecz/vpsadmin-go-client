@@ -158,7 +158,7 @@ func (inv *ActionUserNamespaceMapShowInvocation) IsMetaParameterNil(param string
 }
 
 func (inv *ActionUserNamespaceMapShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

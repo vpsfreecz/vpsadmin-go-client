@@ -103,6 +103,7 @@ type ActionUserShowOutput struct {
 	PreferredLogoutAll         bool                      "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64                     "json:\"preferred_session_length\""
 	RemindAfterDate            string                    "json:\"remind_after_date\""
+	TimeZone                   string                    "json:\"time_zone\""
 }
 
 // Type for action response, including envelope
@@ -182,7 +183,7 @@ func (inv *ActionUserShowInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionUserShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

@@ -312,19 +312,19 @@ func (inv *ActionLocationNetworkCreateInvocation) IsMetaParameterNil(param strin
 }
 
 func (inv *ActionLocationNetworkCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Network") {
 			if !inv.IsParameterNil("Network") {
 				if inv.Input.Network < 0 {
-					verr.Add("network", "not a valid resource id")
+					verr.Add("network", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

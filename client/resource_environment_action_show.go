@@ -166,7 +166,7 @@ func (inv *ActionEnvironmentShowInvocation) IsMetaParameterNil(param string) boo
 }
 
 func (inv *ActionEnvironmentShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

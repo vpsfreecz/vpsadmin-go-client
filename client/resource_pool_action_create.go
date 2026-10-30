@@ -549,13 +549,13 @@ func (inv *ActionPoolCreateInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionPoolCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("CheckedAt") {
 			if !inv.IsParameterNil("CheckedAt") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.CheckedAt)
 				if !ok {
-					verr.Add("checked_at", "not a valid datetime")
+					verr.Add("checked_at", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.CheckedAt = normalized
 				}
@@ -564,14 +564,14 @@ func (inv *ActionPoolCreateInvocation) validate() error {
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("ScanPercent") {
 			if !inv.IsParameterNil("ScanPercent") {
 				if !isFiniteFloat64(inv.Input.ScanPercent) {
-					verr.Add("scan_percent", "not a valid float")
+					verr.Add("scan_percent", t(inv.Action.Client, "validation.invalid_float", nil))
 				}
 			}
 		}

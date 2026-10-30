@@ -144,7 +144,7 @@ func (inv *ActionUserTouchInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionUserTouchInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

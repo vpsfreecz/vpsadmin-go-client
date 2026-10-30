@@ -379,33 +379,33 @@ func (inv *ActionDatasetIndexInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionDatasetIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Dataset") {
 			if !inv.IsParameterNil("Dataset") {
 				if inv.Input.Dataset < 0 {
-					verr.Add("dataset", "not a valid resource id")
+					verr.Add("dataset", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("PrimaryPool") {
 			if !inv.IsParameterNil("PrimaryPool") {
 				if inv.Input.PrimaryPool < 0 {
-					verr.Add("primary_pool", "not a valid resource id")
+					verr.Add("primary_pool", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Vps") {
 			if !inv.IsParameterNil("Vps") {
 				if inv.Input.Vps < 0 {
-					verr.Add("vps", "not a valid resource id")
+					verr.Add("vps", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

@@ -277,7 +277,7 @@ func (inv *ActionClusterResourcePackageItemIndexInvocation) IsMetaParameterNil(p
 }
 
 func (inv *ActionClusterResourcePackageItemIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

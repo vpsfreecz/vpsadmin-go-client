@@ -285,7 +285,7 @@ func (inv *ActionUserNamespaceMapEntryUpdateInvocation) IsMetaParameterNil(param
 }
 
 func (inv *ActionUserNamespaceMapEntryUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

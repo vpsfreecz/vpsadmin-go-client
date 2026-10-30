@@ -159,7 +159,7 @@ func (inv *ActionDatasetSnapshotRollbackInvocation) IsMetaParameterNil(param str
 }
 
 func (inv *ActionDatasetSnapshotRollbackInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

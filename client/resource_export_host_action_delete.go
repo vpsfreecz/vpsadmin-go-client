@@ -159,7 +159,7 @@ func (inv *ActionExportHostDeleteInvocation) IsMetaParameterNil(param string) bo
 }
 
 func (inv *ActionExportHostDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

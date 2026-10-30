@@ -308,7 +308,7 @@ func (inv *ActionUserRequestChangeResolveInvocation) IsMetaParameterNil(param st
 }
 
 func (inv *ActionUserRequestChangeResolveInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

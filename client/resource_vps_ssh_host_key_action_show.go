@@ -161,7 +161,7 @@ func (inv *ActionVpsSshHostKeyShowInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionVpsSshHostKeyShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

@@ -159,7 +159,7 @@ func (inv *ActionVpsMaintenanceWindowShowInvocation) IsMetaParameterNil(param st
 }
 
 func (inv *ActionVpsMaintenanceWindowShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

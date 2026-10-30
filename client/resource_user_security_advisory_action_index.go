@@ -290,19 +290,19 @@ func (inv *ActionUserSecurityAdvisoryIndexInvocation) IsMetaParameterNil(param s
 }
 
 func (inv *ActionUserSecurityAdvisoryIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("SecurityAdvisory") {
 			if !inv.IsParameterNil("SecurityAdvisory") {
 				if inv.Input.SecurityAdvisory < 0 {
-					verr.Add("security_advisory", "not a valid resource id")
+					verr.Add("security_advisory", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

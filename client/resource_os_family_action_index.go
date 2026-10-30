@@ -263,7 +263,7 @@ func (inv *ActionOsFamilyIndexInvocation) IsMetaParameterNil(param string) bool 
 }
 
 func (inv *ActionOsFamilyIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

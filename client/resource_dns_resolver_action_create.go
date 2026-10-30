@@ -303,12 +303,12 @@ func (inv *ActionDnsResolverCreateInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionDnsResolverCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

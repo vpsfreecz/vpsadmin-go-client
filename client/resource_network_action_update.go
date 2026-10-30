@@ -77,6 +77,7 @@ func (in *ActionNetworkUpdateMetaGlobalInput) AnySelected() bool {
 // ActionNetworkUpdateInput is a type for action input parameters
 type ActionNetworkUpdateInput struct {
 	Address     string "json:\"address\""
+	Enabled     bool   "json:\"enabled\""
 	IpVersion   int64  "json:\"ip_version\""
 	Label       string "json:\"label\""
 	Managed     bool   "json:\"managed\""
@@ -100,6 +101,18 @@ func (in *ActionNetworkUpdateInput) SetAddress(value string) *ActionNetworkUpdat
 	}
 
 	in._selectedParameters["Address"] = nil
+	return in
+}
+
+// SetEnabled sets parameter Enabled to value and selects it for sending
+func (in *ActionNetworkUpdateInput) SetEnabled(value bool) *ActionNetworkUpdateInput {
+	in.Enabled = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["Enabled"] = nil
 	return in
 }
 
@@ -245,22 +258,25 @@ type ActionNetworkUpdateRequest struct {
 
 // ActionNetworkUpdateOutput is a type for action output parameters
 type ActionNetworkUpdateOutput struct {
-	Address         string                    "json:\"address\""
-	Assigned        int64                     "json:\"assigned\""
-	Id              int64                     "json:\"id\""
-	IpVersion       int64                     "json:\"ip_version\""
-	Label           string                    "json:\"label\""
-	Managed         bool                      "json:\"managed\""
-	Owned           int64                     "json:\"owned\""
-	Prefix          int64                     "json:\"prefix\""
-	PrimaryLocation *ActionLocationShowOutput "json:\"primary_location\""
-	Purpose         string                    "json:\"purpose\""
-	Role            string                    "json:\"role\""
-	Size            int64                     "json:\"size\""
-	SplitAccess     string                    "json:\"split_access\""
-	SplitPrefix     int64                     "json:\"split_prefix\""
-	Taken           int64                     "json:\"taken\""
-	Used            int64                     "json:\"used\""
+	Address          string                    "json:\"address\""
+	Assigned         int64                     "json:\"assigned\""
+	AvailableToUsers int64                     "json:\"available_to_users\""
+	Enabled          bool                      "json:\"enabled\""
+	Id               int64                     "json:\"id\""
+	IpVersion        int64                     "json:\"ip_version\""
+	Label            string                    "json:\"label\""
+	Managed          bool                      "json:\"managed\""
+	Owned            int64                     "json:\"owned\""
+	OwnedUnassigned  int64                     "json:\"owned_unassigned\""
+	Prefix           int64                     "json:\"prefix\""
+	PrimaryLocation  *ActionLocationShowOutput "json:\"primary_location\""
+	Purpose          string                    "json:\"purpose\""
+	Role             string                    "json:\"role\""
+	Size             int64                     "json:\"size\""
+	SplitAccess      string                    "json:\"split_access\""
+	SplitPrefix      int64                     "json:\"split_prefix\""
+	Taken            int64                     "json:\"taken\""
+	Used             int64                     "json:\"used\""
 }
 
 // Type for action response, including envelope
@@ -374,7 +390,7 @@ func (inv *ActionNetworkUpdateInvocation) IsMetaParameterNil(param string) bool 
 }
 
 func (inv *ActionNetworkUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {
@@ -418,6 +434,9 @@ func (inv *ActionNetworkUpdateInvocation) makeInputParams() map[string]interface
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Address") {
 			ret["address"] = inv.Input.Address
+		}
+		if inv.IsParameterSelected("Enabled") {
+			ret["enabled"] = inv.Input.Enabled
 		}
 		if inv.IsParameterSelected("IpVersion") {
 			ret["ip_version"] = inv.Input.IpVersion

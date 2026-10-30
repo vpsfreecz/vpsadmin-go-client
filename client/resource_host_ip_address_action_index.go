@@ -100,6 +100,7 @@ type ActionHostIpAddressIndexInput struct {
 	Role             string "json:\"role\""
 	Routed           bool   "json:\"routed\""
 	Size             int64  "json:\"size\""
+	UsableFor        string "json:\"usable_for\""
 	User             int64  "json:\"user\""
 	Version          int64  "json:\"version\""
 	Vps              int64  "json:\"vps\""
@@ -274,6 +275,18 @@ func (in *ActionHostIpAddressIndexInput) SetSize(value int64) *ActionHostIpAddre
 	}
 
 	in._selectedParameters["Size"] = nil
+	return in
+}
+
+// SetUsableFor sets parameter UsableFor to value and selects it for sending
+func (in *ActionHostIpAddressIndexInput) SetUsableFor(value string) *ActionHostIpAddressIndexInput {
+	in.UsableFor = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["UsableFor"] = nil
 	return in
 }
 
@@ -499,47 +512,47 @@ func (inv *ActionHostIpAddressIndexInvocation) IsMetaParameterNil(param string) 
 }
 
 func (inv *ActionHostIpAddressIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("IpAddress") {
 			if !inv.IsParameterNil("IpAddress") {
 				if inv.Input.IpAddress < 0 {
-					verr.Add("ip_address", "not a valid resource id")
+					verr.Add("ip_address", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Network") {
 			if !inv.IsParameterNil("Network") {
 				if inv.Input.Network < 0 {
-					verr.Add("network", "not a valid resource id")
+					verr.Add("network", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("NetworkInterface") {
 			if !inv.IsParameterNil("NetworkInterface") {
 				if inv.Input.NetworkInterface < 0 {
-					verr.Add("network_interface", "not a valid resource id")
+					verr.Add("network_interface", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Vps") {
 			if !inv.IsParameterNil("Vps") {
 				if inv.Input.Vps < 0 {
-					verr.Add("vps", "not a valid resource id")
+					verr.Add("vps", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -617,6 +630,9 @@ func (inv *ActionHostIpAddressIndexInvocation) convertInputToQueryParams(ret map
 		}
 		if inv.IsParameterSelected("Size") {
 			ret["host_ip_address[size]"] = convertInt64ToString(inv.Input.Size)
+		}
+		if inv.IsParameterSelected("UsableFor") {
+			ret["host_ip_address[usable_for]"] = inv.Input.UsableFor
 		}
 		if inv.IsParameterSelected("User") {
 			if inv.IsParameterNil("User") {

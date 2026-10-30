@@ -162,7 +162,7 @@ func (inv *ActionObjectHistoryShowInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionObjectHistoryShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

@@ -291,12 +291,12 @@ func (inv *ActionSecurityAdvisoryCveIndexInvocation) IsMetaParameterNil(param st
 }
 
 func (inv *ActionSecurityAdvisoryCveIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("SecurityAdvisory") {
 			if !inv.IsParameterNil("SecurityAdvisory") {
 				if inv.Input.SecurityAdvisory < 0 {
-					verr.Add("security_advisory", "not a valid resource id")
+					verr.Add("security_advisory", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

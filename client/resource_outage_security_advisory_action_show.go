@@ -160,7 +160,7 @@ func (inv *ActionOutageSecurityAdvisoryShowInvocation) IsMetaParameterNil(param 
 }
 
 func (inv *ActionOutageSecurityAdvisoryShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

@@ -270,12 +270,12 @@ func (inv *ActionClusterResourcePackageItemCreateInvocation) IsMetaParameterNil(
 }
 
 func (inv *ActionClusterResourcePackageItemCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("ClusterResource") {
 			if !inv.IsParameterNil("ClusterResource") {
 				if inv.Input.ClusterResource < 0 {
-					verr.Add("cluster_resource", "not a valid resource id")
+					verr.Add("cluster_resource", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

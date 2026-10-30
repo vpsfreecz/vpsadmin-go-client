@@ -166,7 +166,7 @@ func (inv *ActionNodePublicStatusInvocation) IsMetaParameterNil(param string) bo
 }
 
 func (inv *ActionNodePublicStatusInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

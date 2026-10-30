@@ -169,7 +169,7 @@ func (inv *ActionMigrationPlanCancelInvocation) IsMetaParameterNil(param string)
 }
 
 func (inv *ActionMigrationPlanCancelInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

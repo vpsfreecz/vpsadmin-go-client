@@ -359,40 +359,40 @@ func (inv *ActionIpAddressCreateInvocation) IsMetaParameterNil(param string) boo
 }
 
 func (inv *ActionIpAddressCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Network") {
 			if !inv.IsParameterNil("Network") {
 				if inv.Input.Network < 0 {
-					verr.Add("network", "not a valid resource id")
+					verr.Add("network", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("NetworkInterface") {
 			if !inv.IsParameterNil("NetworkInterface") {
 				if inv.Input.NetworkInterface < 0 {
-					verr.Add("network_interface", "not a valid resource id")
+					verr.Add("network_interface", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("RouteVia") {
 			if !inv.IsParameterNil("RouteVia") {
 				if inv.Input.RouteVia < 0 {
-					verr.Add("route_via", "not a valid resource id")
+					verr.Add("route_via", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

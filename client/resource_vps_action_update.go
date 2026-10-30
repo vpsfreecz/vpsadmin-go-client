@@ -661,12 +661,12 @@ func (inv *ActionVpsUpdateInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionVpsUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("DnsResolver") {
 			if !inv.IsParameterNil("DnsResolver") {
 				if inv.Input.DnsResolver < 0 {
-					verr.Add("dns_resolver", "not a valid resource id")
+					verr.Add("dns_resolver", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -674,7 +674,7 @@ func (inv *ActionVpsUpdateInvocation) validate() error {
 			if !inv.IsParameterNil("ExpirationDate") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.ExpirationDate)
 				if !ok {
-					verr.Add("expiration_date", "not a valid datetime")
+					verr.Add("expiration_date", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.ExpirationDate = normalized
 				}
@@ -683,14 +683,14 @@ func (inv *ActionVpsUpdateInvocation) validate() error {
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("OsTemplate") {
 			if !inv.IsParameterNil("OsTemplate") {
 				if inv.Input.OsTemplate < 0 {
-					verr.Add("os_template", "not a valid resource id")
+					verr.Add("os_template", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -698,7 +698,7 @@ func (inv *ActionVpsUpdateInvocation) validate() error {
 			if !inv.IsParameterNil("RemindAfterDate") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.RemindAfterDate)
 				if !ok {
-					verr.Add("remind_after_date", "not a valid datetime")
+					verr.Add("remind_after_date", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.RemindAfterDate = normalized
 				}
@@ -707,14 +707,14 @@ func (inv *ActionVpsUpdateInvocation) validate() error {
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("UserNamespaceMap") {
 			if !inv.IsParameterNil("UserNamespaceMap") {
 				if inv.Input.UserNamespaceMap < 0 {
-					verr.Add("user_namespace_map", "not a valid resource id")
+					verr.Add("user_namespace_map", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

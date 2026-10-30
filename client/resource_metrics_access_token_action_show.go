@@ -163,7 +163,7 @@ func (inv *ActionMetricsAccessTokenShowInvocation) IsMetaParameterNil(param stri
 }
 
 func (inv *ActionMetricsAccessTokenShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

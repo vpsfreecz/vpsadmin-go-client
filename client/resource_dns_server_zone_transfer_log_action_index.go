@@ -352,19 +352,19 @@ func (inv *ActionDnsServerZoneTransferLogIndexInvocation) IsMetaParameterNil(par
 }
 
 func (inv *ActionDnsServerZoneTransferLogIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("DnsServerZone") {
 			if !inv.IsParameterNil("DnsServerZone") {
 				if inv.Input.DnsServerZone < 0 {
-					verr.Add("dns_server_zone", "not a valid resource id")
+					verr.Add("dns_server_zone", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("DnsZone") {
 			if !inv.IsParameterNil("DnsZone") {
 				if inv.Input.DnsZone < 0 {
-					verr.Add("dns_zone", "not a valid resource id")
+					verr.Add("dns_zone", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

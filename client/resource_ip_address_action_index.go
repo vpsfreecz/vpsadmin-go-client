@@ -92,12 +92,14 @@ type ActionIpAddressIndexInput struct {
 	Limit               int64  "json:\"limit\""
 	Location            int64  "json:\"location\""
 	Network             int64  "json:\"network\""
+	NetworkEnabled      bool   "json:\"network_enabled\""
 	NetworkInterface    int64  "json:\"network_interface\""
 	Order               string "json:\"order\""
 	Prefix              int64  "json:\"prefix\""
 	Purpose             string "json:\"purpose\""
 	Role                string "json:\"role\""
 	Size                int64  "json:\"size\""
+	UsableFor           string "json:\"usable_for\""
 	User                int64  "json:\"user\""
 	Version             int64  "json:\"version\""
 	Vps                 int64  "json:\"vps\""
@@ -179,6 +181,18 @@ func (in *ActionIpAddressIndexInput) SetNetwork(value int64) *ActionIpAddressInd
 	return in
 }
 
+// SetNetworkEnabled sets parameter NetworkEnabled to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetNetworkEnabled(value bool) *ActionIpAddressIndexInput {
+	in.NetworkEnabled = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["NetworkEnabled"] = nil
+	return in
+}
+
 // SetNetworkInterface sets parameter NetworkInterface to value and selects it for sending
 func (in *ActionIpAddressIndexInput) SetNetworkInterface(value int64) *ActionIpAddressIndexInput {
 	in.NetworkInterface = value
@@ -248,6 +262,18 @@ func (in *ActionIpAddressIndexInput) SetSize(value int64) *ActionIpAddressIndexI
 	}
 
 	in._selectedParameters["Size"] = nil
+	return in
+}
+
+// SetUsableFor sets parameter UsableFor to value and selects it for sending
+func (in *ActionIpAddressIndexInput) SetUsableFor(value string) *ActionIpAddressIndexInput {
+	in.UsableFor = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["UsableFor"] = nil
 	return in
 }
 
@@ -476,40 +502,40 @@ func (inv *ActionIpAddressIndexInvocation) IsMetaParameterNil(param string) bool
 }
 
 func (inv *ActionIpAddressIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Network") {
 			if !inv.IsParameterNil("Network") {
 				if inv.Input.Network < 0 {
-					verr.Add("network", "not a valid resource id")
+					verr.Add("network", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("NetworkInterface") {
 			if !inv.IsParameterNil("NetworkInterface") {
 				if inv.Input.NetworkInterface < 0 {
-					verr.Add("network_interface", "not a valid resource id")
+					verr.Add("network_interface", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Vps") {
 			if !inv.IsParameterNil("Vps") {
 				if inv.Input.Vps < 0 {
-					verr.Add("vps", "not a valid resource id")
+					verr.Add("vps", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -564,6 +590,9 @@ func (inv *ActionIpAddressIndexInvocation) convertInputToQueryParams(ret map[str
 		if inv.IsParameterSelected("Network") {
 			ret["ip_address[network]"] = convertInt64ToString(inv.Input.Network)
 		}
+		if inv.IsParameterSelected("NetworkEnabled") {
+			ret["ip_address[network_enabled]"] = convertBoolToString(inv.Input.NetworkEnabled)
+		}
 		if inv.IsParameterSelected("NetworkInterface") {
 			ret["ip_address[network_interface]"] = convertInt64ToString(inv.Input.NetworkInterface)
 		}
@@ -581,6 +610,9 @@ func (inv *ActionIpAddressIndexInvocation) convertInputToQueryParams(ret map[str
 		}
 		if inv.IsParameterSelected("Size") {
 			ret["ip_address[size]"] = convertInt64ToString(inv.Input.Size)
+		}
+		if inv.IsParameterSelected("UsableFor") {
+			ret["ip_address[usable_for]"] = inv.Input.UsableFor
 		}
 		if inv.IsParameterSelected("User") {
 			if inv.IsParameterNil("User") {

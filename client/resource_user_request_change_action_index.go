@@ -249,6 +249,7 @@ type ActionUserRequestChangeIndexOutput struct {
 	FullName      string                "json:\"full_name\""
 	Id            int64                 "json:\"id\""
 	Label         string                "json:\"label\""
+	RawUserId     int64                 "json:\"raw_user_id\""
 	State         string                "json:\"state\""
 	UpdatedAt     string                "json:\"updated_at\""
 	User          *ActionUserShowOutput "json:\"user\""
@@ -354,19 +355,19 @@ func (inv *ActionUserRequestChangeIndexInvocation) IsMetaParameterNil(param stri
 }
 
 func (inv *ActionUserRequestChangeIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Admin") {
 			if !inv.IsParameterNil("Admin") {
 				if inv.Input.Admin < 0 {
-					verr.Add("admin", "not a valid resource id")
+					verr.Add("admin", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

@@ -161,7 +161,7 @@ func (inv *ActionDatasetExpansionHistoryShowInvocation) IsMetaParameterNil(param
 }
 
 func (inv *ActionDatasetExpansionHistoryShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

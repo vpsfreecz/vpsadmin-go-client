@@ -283,19 +283,19 @@ func (inv *ActionIpAddressAssignWithHostAddressInvocation) IsMetaParameterNil(pa
 }
 
 func (inv *ActionIpAddressAssignWithHostAddressInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("HostIpAddress") {
 			if !inv.IsParameterNil("HostIpAddress") {
 				if inv.Input.HostIpAddress < 0 {
-					verr.Add("host_ip_address", "not a valid resource id")
+					verr.Add("host_ip_address", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("NetworkInterface") {
 			if !inv.IsParameterNil("NetworkInterface") {
 				if inv.Input.NetworkInterface < 0 {
-					verr.Add("network_interface", "not a valid resource id")
+					verr.Add("network_interface", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

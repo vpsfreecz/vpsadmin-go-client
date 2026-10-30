@@ -306,12 +306,12 @@ func (inv *ActionHostIpAddressUpdateInvocation) IsMetaParameterNil(param string)
 }
 
 func (inv *ActionHostIpAddressUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("IpAddress") {
 			if !inv.IsParameterNil("IpAddress") {
 				if inv.Input.IpAddress < 0 {
-					verr.Add("ip_address", "not a valid resource id")
+					verr.Add("ip_address", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

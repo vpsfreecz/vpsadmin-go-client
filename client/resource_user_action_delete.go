@@ -311,13 +311,13 @@ func (inv *ActionUserDeleteInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionUserDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("ExpirationDate") {
 			if !inv.IsParameterNil("ExpirationDate") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.ExpirationDate)
 				if !ok {
-					verr.Add("expiration_date", "not a valid datetime")
+					verr.Add("expiration_date", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.ExpirationDate = normalized
 				}
@@ -327,7 +327,7 @@ func (inv *ActionUserDeleteInvocation) validate() error {
 			if !inv.IsParameterNil("RemindAfterDate") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.RemindAfterDate)
 				if !ok {
-					verr.Add("remind_after_date", "not a valid datetime")
+					verr.Add("remind_after_date", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.RemindAfterDate = normalized
 				}

@@ -332,19 +332,19 @@ func (inv *ActionObjectHistoryIndexInvocation) IsMetaParameterNil(param string) 
 }
 
 func (inv *ActionObjectHistoryIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("UserSession") {
 			if !inv.IsParameterNil("UserSession") {
 				if inv.Input.UserSession < 0 {
-					verr.Add("user_session", "not a valid resource id")
+					verr.Add("user_session", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

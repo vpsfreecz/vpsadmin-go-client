@@ -283,19 +283,19 @@ func (inv *ActionIpAddressAssignInvocation) IsMetaParameterNil(param string) boo
 }
 
 func (inv *ActionIpAddressAssignInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("NetworkInterface") {
 			if !inv.IsParameterNil("NetworkInterface") {
 				if inv.Input.NetworkInterface < 0 {
-					verr.Add("network_interface", "not a valid resource id")
+					verr.Add("network_interface", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("RouteVia") {
 			if !inv.IsParameterNil("RouteVia") {
 				if inv.Input.RouteVia < 0 {
-					verr.Add("route_via", "not a valid resource id")
+					verr.Add("route_via", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

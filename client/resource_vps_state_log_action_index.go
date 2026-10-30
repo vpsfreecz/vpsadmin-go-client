@@ -281,7 +281,7 @@ func (inv *ActionVpsStateLogIndexInvocation) IsMetaParameterNil(param string) bo
 }
 
 func (inv *ActionVpsStateLogIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

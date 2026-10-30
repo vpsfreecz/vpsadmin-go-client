@@ -418,12 +418,12 @@ func (inv *ActionMailTemplateTranslationCreateInvocation) IsMetaParameterNil(par
 }
 
 func (inv *ActionMailTemplateTranslationCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Language") {
 			if !inv.IsParameterNil("Language") {
 				if inv.Input.Language < 0 {
-					verr.Add("language", "not a valid resource id")
+					verr.Add("language", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

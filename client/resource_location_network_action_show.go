@@ -162,7 +162,7 @@ func (inv *ActionLocationNetworkShowInvocation) IsMetaParameterNil(param string)
 }
 
 func (inv *ActionLocationNetworkShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

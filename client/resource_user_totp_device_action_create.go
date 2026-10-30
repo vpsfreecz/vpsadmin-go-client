@@ -264,7 +264,7 @@ func (inv *ActionUserTotpDeviceCreateInvocation) IsMetaParameterNil(param string
 }
 
 func (inv *ActionUserTotpDeviceCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

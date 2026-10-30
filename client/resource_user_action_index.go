@@ -108,6 +108,7 @@ type ActionUserIndexInput struct {
 	PasswordReset              bool   "json:\"password_reset\""
 	PreferredLogoutAll         bool   "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64  "json:\"preferred_session_length\""
+	TimeZone                   string "json:\"time_zone\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -378,6 +379,37 @@ func (in *ActionUserIndexInput) SetPreferredSessionLength(value int64) *ActionUs
 	return in
 }
 
+// SetTimeZone sets parameter TimeZone to value and selects it for sending
+func (in *ActionUserIndexInput) SetTimeZone(value string) *ActionUserIndexInput {
+	in.TimeZone = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetTimeZoneNil(false)
+	in._selectedParameters["TimeZone"] = nil
+	return in
+}
+
+// SetTimeZoneNil sets parameter TimeZone to nil and selects it for sending
+func (in *ActionUserIndexInput) SetTimeZoneNil(set bool) *ActionUserIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["TimeZone"] = nil
+		in.SelectParameters("TimeZone")
+	} else {
+		delete(in._nilParameters, "TimeZone")
+	}
+	return in
+}
+
 // SelectParameters sets parameters from ActionUserIndexInput
 // that will be sent to the API.
 // SelectParameters can be called multiple times.
@@ -445,6 +477,7 @@ type ActionUserIndexOutput struct {
 	PreferredLogoutAll         bool                      "json:\"preferred_logout_all\""
 	PreferredSessionLength     int64                     "json:\"preferred_session_length\""
 	RemindAfterDate            string                    "json:\"remind_after_date\""
+	TimeZone                   string                    "json:\"time_zone\""
 }
 
 // Type for action response, including envelope
@@ -547,12 +580,12 @@ func (inv *ActionUserIndexInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionUserIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Language") {
 			if !inv.IsParameterNil("Language") {
 				if inv.Input.Language < 0 {
-					verr.Add("language", "not a valid resource id")
+					verr.Add("language", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -654,6 +687,13 @@ func (inv *ActionUserIndexInvocation) convertInputToQueryParams(ret map[string]s
 		}
 		if inv.IsParameterSelected("PreferredSessionLength") {
 			ret["user[preferred_session_length]"] = convertInt64ToString(inv.Input.PreferredSessionLength)
+		}
+		if inv.IsParameterSelected("TimeZone") {
+			if inv.IsParameterNil("TimeZone") {
+				ret["user[time_zone]"] = ""
+			} else {
+				ret["user[time_zone]"] = inv.Input.TimeZone
+			}
 		}
 	}
 }

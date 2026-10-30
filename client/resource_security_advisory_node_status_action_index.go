@@ -187,11 +187,11 @@ func (in *ActionSecurityAdvisoryNodeStatusIndexInput) AnySelected() bool {
 
 // ActionSecurityAdvisoryNodeStatusIndexOutput is a type for action output parameters
 type ActionSecurityAdvisoryNodeStatusIndexOutput struct {
+	CsNote           string                            "json:\"cs_note\""
+	EnNote           string                            "json:\"en_note\""
 	Id               int64                             "json:\"id\""
 	MitigatedSince   string                            "json:\"mitigated_since\""
-	NodeId           int64                             "json:\"node_id\""
-	NodeName         string                            "json:\"node_name\""
-	Note             string                            "json:\"note\""
+	Node             *ActionNodeShowOutput             "json:\"node\""
 	SecurityAdvisory *ActionSecurityAdvisoryShowOutput "json:\"security_advisory\""
 	State            string                            "json:\"state\""
 	VulnerableUntil  string                            "json:\"vulnerable_until\""
@@ -308,12 +308,12 @@ func (inv *ActionSecurityAdvisoryNodeStatusIndexInvocation) IsMetaParameterNil(p
 }
 
 func (inv *ActionSecurityAdvisoryNodeStatusIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

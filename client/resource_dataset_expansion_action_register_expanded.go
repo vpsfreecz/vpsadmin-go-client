@@ -317,12 +317,12 @@ func (inv *ActionDatasetExpansionRegisterExpandedInvocation) IsMetaParameterNil(
 }
 
 func (inv *ActionDatasetExpansionRegisterExpandedInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Dataset") {
 			if !inv.IsParameterNil("Dataset") {
 				if inv.Input.Dataset < 0 {
-					verr.Add("dataset", "not a valid resource id")
+					verr.Add("dataset", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

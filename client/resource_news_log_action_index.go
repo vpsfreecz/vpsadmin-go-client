@@ -172,6 +172,8 @@ func (in *ActionNewsLogIndexInput) AnySelected() bool {
 // ActionNewsLogIndexOutput is a type for action output parameters
 type ActionNewsLogIndexOutput struct {
 	CreatedAt   string "json:\"created_at\""
+	CsMessage   string "json:\"cs_message\""
+	EnMessage   string "json:\"en_message\""
 	Id          int64  "json:\"id\""
 	Message     string "json:\"message\""
 	PublishedAt string "json:\"published_at\""
@@ -278,13 +280,13 @@ func (inv *ActionNewsLogIndexInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionNewsLogIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Since") {
 			if !inv.IsParameterNil("Since") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Since)
 				if !ok {
-					verr.Add("since", "not a valid datetime")
+					verr.Add("since", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.Since = normalized
 				}

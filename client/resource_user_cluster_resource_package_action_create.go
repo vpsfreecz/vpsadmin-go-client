@@ -302,26 +302,26 @@ func (inv *ActionUserClusterResourcePackageCreateInvocation) IsMetaParameterNil(
 }
 
 func (inv *ActionUserClusterResourcePackageCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("ClusterResourcePackage") {
 			if !inv.IsParameterNil("ClusterResourcePackage") {
 				if inv.Input.ClusterResourcePackage < 0 {
-					verr.Add("cluster_resource_package", "not a valid resource id")
+					verr.Add("cluster_resource_package", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Environment") {
 			if !inv.IsParameterNil("Environment") {
 				if inv.Input.Environment < 0 {
-					verr.Add("environment", "not a valid resource id")
+					verr.Add("environment", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

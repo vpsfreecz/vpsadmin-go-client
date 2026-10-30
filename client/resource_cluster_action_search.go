@@ -231,7 +231,7 @@ func (inv *ActionClusterSearchInvocation) IsMetaParameterNil(param string) bool 
 }
 
 func (inv *ActionClusterSearchInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

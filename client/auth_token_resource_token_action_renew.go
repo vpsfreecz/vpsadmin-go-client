@@ -139,7 +139,7 @@ func (inv *AuthTokenActionTokenRenewInvocation) IsMetaParameterNil(param string)
 }
 
 func (inv *AuthTokenActionTokenRenewInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

@@ -348,13 +348,13 @@ func (inv *ActionVpsStatusIndexInvocation) IsMetaParameterNil(param string) bool
 }
 
 func (inv *ActionVpsStatusIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("From") {
 			if !inv.IsParameterNil("From") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.From)
 				if !ok {
-					verr.Add("from", "not a valid datetime")
+					verr.Add("from", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.From = normalized
 				}
@@ -364,7 +364,7 @@ func (inv *ActionVpsStatusIndexInvocation) validate() error {
 			if !inv.IsParameterNil("To") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.To)
 				if !ok {
-					verr.Add("to", "not a valid datetime")
+					verr.Add("to", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.To = normalized
 				}

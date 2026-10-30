@@ -159,7 +159,7 @@ func (inv *ActionDatasetPropertyHistoryShowInvocation) IsMetaParameterNil(param 
 }
 
 func (inv *ActionDatasetPropertyHistoryShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

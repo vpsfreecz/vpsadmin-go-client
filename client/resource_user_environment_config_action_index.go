@@ -294,12 +294,12 @@ func (inv *ActionUserEnvironmentConfigIndexInvocation) IsMetaParameterNil(param 
 }
 
 func (inv *ActionUserEnvironmentConfigIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Environment") {
 			if !inv.IsParameterNil("Environment") {
 				if inv.Input.Environment < 0 {
-					verr.Add("environment", "not a valid resource id")
+					verr.Add("environment", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

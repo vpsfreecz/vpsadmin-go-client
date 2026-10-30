@@ -139,7 +139,7 @@ func (inv *ActionWebauthnRegistrationBeginInvocation) IsMetaParameterNil(param s
 }
 
 func (inv *ActionWebauthnRegistrationBeginInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

@@ -320,12 +320,12 @@ func (inv *ActionNodeEvacuateInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionNodeEvacuateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("DstNode") {
 			if !inv.IsParameterNil("DstNode") {
 				if inv.Input.DstNode < 0 {
-					verr.Add("dst_node", "not a valid resource id")
+					verr.Add("dst_node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

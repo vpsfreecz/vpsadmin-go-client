@@ -166,7 +166,7 @@ func (inv *ActionMigrationPlanVpsMigrationShowInvocation) IsMetaParameterNil(par
 }
 
 func (inv *ActionMigrationPlanVpsMigrationShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

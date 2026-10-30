@@ -256,12 +256,12 @@ func (inv *ActionDatasetPlanCreateInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionDatasetPlanCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("EnvironmentDatasetPlan") {
 			if !inv.IsParameterNil("EnvironmentDatasetPlan") {
 				if inv.Input.EnvironmentDatasetPlan < 0 {
-					verr.Add("environment_dataset_plan", "not a valid resource id")
+					verr.Add("environment_dataset_plan", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

@@ -128,7 +128,9 @@ type ActionUserRequestRegistrationShowOutput struct {
 	OrgId                  string                      "json:\"org_id\""
 	OrgName                string                      "json:\"org_name\""
 	OsTemplate             *ActionOsTemplateShowOutput "json:\"os_template\""
+	RawUserId              int64                       "json:\"raw_user_id\""
 	State                  string                      "json:\"state\""
+	TimeZone               string                      "json:\"time_zone\""
 	UpdatedAt              string                      "json:\"updated_at\""
 	User                   *ActionUserShowOutput       "json:\"user\""
 	YearOfBirth            int64                       "json:\"year_of_birth\""
@@ -211,7 +213,7 @@ func (inv *ActionUserRequestRegistrationShowInvocation) IsMetaParameterNil(param
 }
 
 func (inv *ActionUserRequestRegistrationShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

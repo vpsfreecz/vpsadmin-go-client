@@ -149,7 +149,7 @@ func (inv *ActionSecurityAdvisoryRebuildAffectedVpsInvocation) IsMetaParameterNi
 }
 
 func (inv *ActionSecurityAdvisoryRebuildAffectedVpsInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

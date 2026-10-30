@@ -370,19 +370,19 @@ func (inv *ActionDatasetMigrateInvocation) IsMetaParameterNil(param string) bool
 }
 
 func (inv *ActionDatasetMigrateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("MaintenanceWindowVps") {
 			if !inv.IsParameterNil("MaintenanceWindowVps") {
 				if inv.Input.MaintenanceWindowVps < 0 {
-					verr.Add("maintenance_window_vps", "not a valid resource id")
+					verr.Add("maintenance_window_vps", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Pool") {
 			if !inv.IsParameterNil("Pool") {
 				if inv.Input.Pool < 0 {
-					verr.Add("pool", "not a valid resource id")
+					verr.Add("pool", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

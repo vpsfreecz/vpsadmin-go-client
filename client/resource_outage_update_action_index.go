@@ -314,19 +314,19 @@ func (inv *ActionOutageUpdateIndexInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionOutageUpdateIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Outage") {
 			if !inv.IsParameterNil("Outage") {
 				if inv.Input.Outage < 0 {
-					verr.Add("outage", "not a valid resource id")
+					verr.Add("outage", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("ReportedBy") {
 			if !inv.IsParameterNil("ReportedBy") {
 				if inv.Input.ReportedBy < 0 {
-					verr.Add("reported_by", "not a valid resource id")
+					verr.Add("reported_by", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -334,7 +334,7 @@ func (inv *ActionOutageUpdateIndexInvocation) validate() error {
 			if !inv.IsParameterNil("Since") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.Since)
 				if !ok {
-					verr.Add("since", "not a valid datetime")
+					verr.Add("since", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.Since = normalized
 				}

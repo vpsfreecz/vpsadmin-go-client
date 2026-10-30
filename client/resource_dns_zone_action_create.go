@@ -424,19 +424,19 @@ func (inv *ActionDnsZoneCreateInvocation) IsMetaParameterNil(param string) bool 
 }
 
 func (inv *ActionDnsZoneCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("SeedVps") {
 			if !inv.IsParameterNil("SeedVps") {
 				if inv.Input.SeedVps < 0 {
-					verr.Add("seed_vps", "not a valid resource id")
+					verr.Add("seed_vps", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

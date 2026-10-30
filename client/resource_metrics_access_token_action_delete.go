@@ -149,7 +149,7 @@ func (inv *ActionMetricsAccessTokenDeleteInvocation) IsMetaParameterNil(param st
 }
 
 func (inv *ActionMetricsAccessTokenDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

@@ -170,7 +170,7 @@ func (inv *ActionIpAddressAssignmentShowInvocation) IsMetaParameterNil(param str
 }
 
 func (inv *ActionIpAddressAssignmentShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

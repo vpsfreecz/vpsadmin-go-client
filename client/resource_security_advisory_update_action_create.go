@@ -426,13 +426,13 @@ func (inv *ActionSecurityAdvisoryUpdateCreateInvocation) IsMetaParameterNil(para
 }
 
 func (inv *ActionSecurityAdvisoryUpdateCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("PublishedAt") {
 			if !inv.IsParameterNil("PublishedAt") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.PublishedAt)
 				if !ok {
-					verr.Add("published_at", "not a valid datetime")
+					verr.Add("published_at", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.PublishedAt = normalized
 				}
@@ -441,7 +441,7 @@ func (inv *ActionSecurityAdvisoryUpdateCreateInvocation) validate() error {
 		if inv.IsParameterSelected("SecurityAdvisory") {
 			if !inv.IsParameterNil("SecurityAdvisory") {
 				if inv.Input.SecurityAdvisory < 0 {
-					verr.Add("security_advisory", "not a valid resource id")
+					verr.Add("security_advisory", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

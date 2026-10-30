@@ -160,7 +160,7 @@ func (inv *ActionEnvironmentDatasetPlanShowInvocation) IsMetaParameterNil(param 
 }
 
 func (inv *ActionEnvironmentDatasetPlanShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

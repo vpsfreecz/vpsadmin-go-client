@@ -163,7 +163,7 @@ func (inv *ActionDnsRecordDynamicUpdateInvocation) IsMetaParameterNil(param stri
 }
 
 func (inv *ActionDnsRecordDynamicUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

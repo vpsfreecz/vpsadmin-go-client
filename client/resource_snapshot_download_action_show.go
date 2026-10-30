@@ -166,7 +166,7 @@ func (inv *ActionSnapshotDownloadShowInvocation) IsMetaParameterNil(param string
 }
 
 func (inv *ActionSnapshotDownloadShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

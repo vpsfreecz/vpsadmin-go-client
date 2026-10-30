@@ -355,7 +355,7 @@ func (inv *ActionMailRecipientUpdateInvocation) IsMetaParameterNil(param string)
 }
 
 func (inv *ActionMailRecipientUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

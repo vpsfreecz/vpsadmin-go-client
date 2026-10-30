@@ -276,7 +276,7 @@ func (inv *ActionMailLogIndexInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionMailLogIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

@@ -162,7 +162,7 @@ func (inv *ActionDnsTsigKeyShowInvocation) IsMetaParameterNil(param string) bool
 }
 
 func (inv *ActionDnsTsigKeyShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

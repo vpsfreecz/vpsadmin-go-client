@@ -149,7 +149,7 @@ func (inv *ActionUserClusterResourcePackageDeleteInvocation) IsMetaParameterNil(
 }
 
 func (inv *ActionUserClusterResourcePackageDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

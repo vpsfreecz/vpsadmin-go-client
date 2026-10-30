@@ -263,7 +263,7 @@ func (inv *ActionUserAccountIndexInvocation) IsMetaParameterNil(param string) bo
 }
 
 func (inv *ActionUserAccountIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

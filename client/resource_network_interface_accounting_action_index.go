@@ -414,12 +414,12 @@ func (inv *ActionNetworkInterfaceAccountingIndexInvocation) IsMetaParameterNil(p
 }
 
 func (inv *ActionNetworkInterfaceAccountingIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Environment") {
 			if !inv.IsParameterNil("Environment") {
 				if inv.Input.Environment < 0 {
-					verr.Add("environment", "not a valid resource id")
+					verr.Add("environment", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -427,7 +427,7 @@ func (inv *ActionNetworkInterfaceAccountingIndexInvocation) validate() error {
 			if !inv.IsParameterNil("From") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.From)
 				if !ok {
-					verr.Add("from", "not a valid datetime")
+					verr.Add("from", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.From = normalized
 				}
@@ -437,7 +437,7 @@ func (inv *ActionNetworkInterfaceAccountingIndexInvocation) validate() error {
 			if !inv.IsParameterNil("FromDate") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.FromDate)
 				if !ok {
-					verr.Add("from_date", "not a valid datetime")
+					verr.Add("from_date", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.FromDate = normalized
 				}
@@ -446,14 +446,14 @@ func (inv *ActionNetworkInterfaceAccountingIndexInvocation) validate() error {
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -461,7 +461,7 @@ func (inv *ActionNetworkInterfaceAccountingIndexInvocation) validate() error {
 			if !inv.IsParameterNil("To") {
 				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.To)
 				if !ok {
-					verr.Add("to", "not a valid datetime")
+					verr.Add("to", t(inv.Action.Client, "validation.invalid_datetime", nil))
 				} else {
 					inv.Input.To = normalized
 				}
@@ -470,14 +470,14 @@ func (inv *ActionNetworkInterfaceAccountingIndexInvocation) validate() error {
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Vps") {
 			if !inv.IsParameterNil("Vps") {
 				if inv.Input.Vps < 0 {
-					verr.Add("vps", "not a valid resource id")
+					verr.Add("vps", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

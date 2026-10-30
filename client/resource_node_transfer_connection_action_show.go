@@ -163,7 +163,7 @@ func (inv *ActionNodeTransferConnectionShowInvocation) IsMetaParameterNil(param 
 }
 
 func (inv *ActionNodeTransferConnectionShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

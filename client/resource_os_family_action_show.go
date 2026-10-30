@@ -158,7 +158,7 @@ func (inv *ActionOsFamilyShowInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionOsFamilyShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

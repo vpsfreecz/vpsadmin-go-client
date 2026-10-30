@@ -300,19 +300,19 @@ func (inv *ActionNodeTransferConnectionCreateInvocation) IsMetaParameterNil(para
 }
 
 func (inv *ActionNodeTransferConnectionCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("NodeA") {
 			if !inv.IsParameterNil("NodeA") {
 				if inv.Input.NodeA < 0 {
-					verr.Add("node_a", "not a valid resource id")
+					verr.Add("node_a", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("NodeB") {
 			if !inv.IsParameterNil("NodeB") {
 				if inv.Input.NodeB < 0 {
-					verr.Add("node_b", "not a valid resource id")
+					verr.Add("node_b", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

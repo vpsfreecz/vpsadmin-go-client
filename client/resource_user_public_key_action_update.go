@@ -288,7 +288,7 @@ func (inv *ActionUserPublicKeyUpdateInvocation) IsMetaParameterNil(param string)
 }
 
 func (inv *ActionUserPublicKeyUpdateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

@@ -286,7 +286,7 @@ func (inv *ActionMailboxHandlerCreateInvocation) IsMetaParameterNil(param string
 }
 
 func (inv *ActionMailboxHandlerCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

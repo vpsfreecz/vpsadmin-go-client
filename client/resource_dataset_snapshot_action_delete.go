@@ -159,7 +159,7 @@ func (inv *ActionDatasetSnapshotDeleteInvocation) IsMetaParameterNil(param strin
 }
 
 func (inv *ActionDatasetSnapshotDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

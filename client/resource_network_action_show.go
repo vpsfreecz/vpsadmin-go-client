@@ -76,22 +76,25 @@ func (in *ActionNetworkShowMetaGlobalInput) AnySelected() bool {
 
 // ActionNetworkShowOutput is a type for action output parameters
 type ActionNetworkShowOutput struct {
-	Address         string                    "json:\"address\""
-	Assigned        int64                     "json:\"assigned\""
-	Id              int64                     "json:\"id\""
-	IpVersion       int64                     "json:\"ip_version\""
-	Label           string                    "json:\"label\""
-	Managed         bool                      "json:\"managed\""
-	Owned           int64                     "json:\"owned\""
-	Prefix          int64                     "json:\"prefix\""
-	PrimaryLocation *ActionLocationShowOutput "json:\"primary_location\""
-	Purpose         string                    "json:\"purpose\""
-	Role            string                    "json:\"role\""
-	Size            int64                     "json:\"size\""
-	SplitAccess     string                    "json:\"split_access\""
-	SplitPrefix     int64                     "json:\"split_prefix\""
-	Taken           int64                     "json:\"taken\""
-	Used            int64                     "json:\"used\""
+	Address          string                    "json:\"address\""
+	Assigned         int64                     "json:\"assigned\""
+	AvailableToUsers int64                     "json:\"available_to_users\""
+	Enabled          bool                      "json:\"enabled\""
+	Id               int64                     "json:\"id\""
+	IpVersion        int64                     "json:\"ip_version\""
+	Label            string                    "json:\"label\""
+	Managed          bool                      "json:\"managed\""
+	Owned            int64                     "json:\"owned\""
+	OwnedUnassigned  int64                     "json:\"owned_unassigned\""
+	Prefix           int64                     "json:\"prefix\""
+	PrimaryLocation  *ActionLocationShowOutput "json:\"primary_location\""
+	Purpose          string                    "json:\"purpose\""
+	Role             string                    "json:\"role\""
+	Size             int64                     "json:\"size\""
+	SplitAccess      string                    "json:\"split_access\""
+	SplitPrefix      int64                     "json:\"split_prefix\""
+	Taken            int64                     "json:\"taken\""
+	Used             int64                     "json:\"used\""
 }
 
 // Type for action response, including envelope
@@ -171,7 +174,7 @@ func (inv *ActionNetworkShowInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionNetworkShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

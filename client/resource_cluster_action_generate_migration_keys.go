@@ -137,7 +137,7 @@ func (inv *ActionClusterGenerateMigrationKeysInvocation) IsMetaParameterNil(para
 }
 
 func (inv *ActionClusterGenerateMigrationKeysInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

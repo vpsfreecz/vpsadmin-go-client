@@ -736,68 +736,68 @@ func (inv *ActionVpsCreateInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionVpsCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("AddressLocation") {
 			if !inv.IsParameterNil("AddressLocation") {
 				if inv.Input.AddressLocation < 0 {
-					verr.Add("address_location", "not a valid resource id")
+					verr.Add("address_location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("DnsResolver") {
 			if !inv.IsParameterNil("DnsResolver") {
 				if inv.Input.DnsResolver < 0 {
-					verr.Add("dns_resolver", "not a valid resource id")
+					verr.Add("dns_resolver", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Environment") {
 			if !inv.IsParameterNil("Environment") {
 				if inv.Input.Environment < 0 {
-					verr.Add("environment", "not a valid resource id")
+					verr.Add("environment", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Node") {
 			if !inv.IsParameterNil("Node") {
 				if inv.Input.Node < 0 {
-					verr.Add("node", "not a valid resource id")
+					verr.Add("node", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("OsTemplate") {
 			if !inv.IsParameterNil("OsTemplate") {
 				if inv.Input.OsTemplate < 0 {
-					verr.Add("os_template", "not a valid resource id")
+					verr.Add("os_template", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("UserNamespaceMap") {
 			if !inv.IsParameterNil("UserNamespaceMap") {
 				if inv.Input.UserNamespaceMap < 0 {
-					verr.Add("user_namespace_map", "not a valid resource id")
+					verr.Add("user_namespace_map", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("VpsUserData") {
 			if !inv.IsParameterNil("VpsUserData") {
 				if inv.Input.VpsUserData < 0 {
-					verr.Add("vps_user_data", "not a valid resource id")
+					verr.Add("vps_user_data", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

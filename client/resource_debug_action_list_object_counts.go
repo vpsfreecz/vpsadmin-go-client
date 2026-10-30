@@ -135,7 +135,7 @@ func (inv *ActionDebugListObjectCountsInvocation) IsMetaParameterNil(param strin
 }
 
 func (inv *ActionDebugListObjectCountsInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

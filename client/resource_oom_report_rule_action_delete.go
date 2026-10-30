@@ -149,7 +149,7 @@ func (inv *ActionOomReportRuleDeleteInvocation) IsMetaParameterNil(param string)
 }
 
 func (inv *ActionOomReportRuleDeleteInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

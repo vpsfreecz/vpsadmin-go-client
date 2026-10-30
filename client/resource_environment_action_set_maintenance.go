@@ -243,7 +243,7 @@ func (inv *ActionEnvironmentSetMaintenanceInvocation) IsMetaParameterNil(param s
 }
 
 func (inv *ActionEnvironmentSetMaintenanceInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

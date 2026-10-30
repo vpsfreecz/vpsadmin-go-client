@@ -303,7 +303,7 @@ func (inv *ActionMonitoredEventLogIndexInvocation) IsMetaParameterNil(param stri
 }
 
 func (inv *ActionMonitoredEventLogIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

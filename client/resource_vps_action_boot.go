@@ -266,12 +266,12 @@ func (inv *ActionVpsBootInvocation) IsMetaParameterNil(param string) bool {
 }
 
 func (inv *ActionVpsBootInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("OsTemplate") {
 			if !inv.IsParameterNil("OsTemplate") {
 				if inv.Input.OsTemplate < 0 {
-					verr.Add("os_template", "not a valid resource id")
+					verr.Add("os_template", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

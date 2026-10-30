@@ -409,19 +409,19 @@ func (inv *ActionUserSessionIndexInvocation) IsMetaParameterNil(param string) bo
 }
 
 func (inv *ActionUserSessionIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Admin") {
 			if !inv.IsParameterNil("Admin") {
 				if inv.Input.Admin < 0 {
-					verr.Add("admin", "not a valid resource id")
+					verr.Add("admin", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

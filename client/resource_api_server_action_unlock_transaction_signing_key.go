@@ -216,7 +216,7 @@ func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) IsMetaParameter
 }
 
 func (inv *ActionApiServerUnlockTransactionSigningKeyInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

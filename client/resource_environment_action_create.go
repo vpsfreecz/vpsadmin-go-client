@@ -340,7 +340,7 @@ func (inv *ActionEnvironmentCreateInvocation) IsMetaParameterNil(param string) b
 }
 
 func (inv *ActionEnvironmentCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 	}
 	if inv.MetaInput != nil {

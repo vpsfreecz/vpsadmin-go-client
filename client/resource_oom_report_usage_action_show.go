@@ -160,7 +160,7 @@ func (inv *ActionOomReportUsageShowInvocation) IsMetaParameterNil(param string) 
 }
 
 func (inv *ActionOomReportUsageShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

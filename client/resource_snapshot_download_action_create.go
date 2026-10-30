@@ -297,19 +297,19 @@ func (inv *ActionSnapshotDownloadCreateInvocation) IsMetaParameterNil(param stri
 }
 
 func (inv *ActionSnapshotDownloadCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("FromSnapshot") {
 			if !inv.IsParameterNil("FromSnapshot") {
 				if inv.Input.FromSnapshot < 0 {
-					verr.Add("from_snapshot", "not a valid resource id")
+					verr.Add("from_snapshot", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("Snapshot") {
 			if !inv.IsParameterNil("Snapshot") {
 				if inv.Input.Snapshot < 0 {
-					verr.Add("snapshot", "not a valid resource id")
+					verr.Add("snapshot", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

@@ -256,12 +256,12 @@ func (inv *ActionMailTemplateRecipientCreateInvocation) IsMetaParameterNil(param
 }
 
 func (inv *ActionMailTemplateRecipientCreateInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("MailRecipient") {
 			if !inv.IsParameterNil("MailRecipient") {
 				if inv.Input.MailRecipient < 0 {
-					verr.Add("mail_recipient", "not a valid resource id")
+					verr.Add("mail_recipient", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}

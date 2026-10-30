@@ -86,10 +86,12 @@ func (in *ActionUserPaymentIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionUserPaymentIndexInput is a type for action input parameters
 type ActionUserPaymentIndexInput struct {
-	AccountedBy int64 "json:\"accounted_by\""
-	FromId      int64 "json:\"from_id\""
-	Limit       int64 "json:\"limit\""
-	User        int64 "json:\"user\""
+	AccountedBy int64  "json:\"accounted_by\""
+	CreatedFrom string "json:\"created_from\""
+	CreatedTo   string "json:\"created_to\""
+	FromId      int64  "json:\"from_id\""
+	Limit       int64  "json:\"limit\""
+	User        int64  "json:\"user\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -105,6 +107,30 @@ func (in *ActionUserPaymentIndexInput) SetAccountedBy(value int64) *ActionUserPa
 	}
 
 	in._selectedParameters["AccountedBy"] = nil
+	return in
+}
+
+// SetCreatedFrom sets parameter CreatedFrom to value and selects it for sending
+func (in *ActionUserPaymentIndexInput) SetCreatedFrom(value string) *ActionUserPaymentIndexInput {
+	in.CreatedFrom = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["CreatedFrom"] = nil
+	return in
+}
+
+// SetCreatedTo sets parameter CreatedTo to value and selects it for sending
+func (in *ActionUserPaymentIndexInput) SetCreatedTo(value string) *ActionUserPaymentIndexInput {
+	in.CreatedTo = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["CreatedTo"] = nil
 	return in
 }
 
@@ -294,19 +320,39 @@ func (inv *ActionUserPaymentIndexInvocation) IsMetaParameterNil(param string) bo
 }
 
 func (inv *ActionUserPaymentIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("AccountedBy") {
 			if !inv.IsParameterNil("AccountedBy") {
 				if inv.Input.AccountedBy < 0 {
-					verr.Add("accounted_by", "not a valid resource id")
+					verr.Add("accounted_by", t(inv.Action.Client, "validation.invalid_resource_id", nil))
+				}
+			}
+		}
+		if inv.IsParameterSelected("CreatedFrom") {
+			if !inv.IsParameterNil("CreatedFrom") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.CreatedFrom)
+				if !ok {
+					verr.Add("created_from", t(inv.Action.Client, "validation.invalid_datetime", nil))
+				} else {
+					inv.Input.CreatedFrom = normalized
+				}
+			}
+		}
+		if inv.IsParameterSelected("CreatedTo") {
+			if !inv.IsParameterNil("CreatedTo") {
+				normalized, ok := normalizeAndCheckDatetimeString(inv.Input.CreatedTo)
+				if !ok {
+					verr.Add("created_to", t(inv.Action.Client, "validation.invalid_datetime", nil))
+				} else {
+					inv.Input.CreatedTo = normalized
 				}
 			}
 		}
 		if inv.IsParameterSelected("User") {
 			if !inv.IsParameterNil("User") {
 				if inv.Input.User < 0 {
-					verr.Add("user", "not a valid resource id")
+					verr.Add("user", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
@@ -345,6 +391,12 @@ func (inv *ActionUserPaymentIndexInvocation) convertInputToQueryParams(ret map[s
 	if inv.Input != nil {
 		if inv.IsParameterSelected("AccountedBy") {
 			ret["user_payment[accounted_by]"] = convertInt64ToString(inv.Input.AccountedBy)
+		}
+		if inv.IsParameterSelected("CreatedFrom") {
+			ret["user_payment[created_from]"] = inv.Input.CreatedFrom
+		}
+		if inv.IsParameterSelected("CreatedTo") {
+			ret["user_payment[created_to]"] = inv.Input.CreatedTo
 		}
 		if inv.IsParameterSelected("FromId") {
 			ret["user_payment[from_id]"] = convertInt64ToString(inv.Input.FromId)

@@ -136,7 +136,7 @@ func (inv *ActionClusterPublicStatsInvocation) IsMetaParameterNil(param string) 
 }
 
 func (inv *ActionClusterPublicStatsInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

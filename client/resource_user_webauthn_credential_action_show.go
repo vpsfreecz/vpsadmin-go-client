@@ -162,7 +162,7 @@ func (inv *ActionUserWebauthnCredentialShowInvocation) IsMetaParameterNil(param 
 }
 
 func (inv *ActionUserWebauthnCredentialShowInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.MetaInput != nil {
 	}
 

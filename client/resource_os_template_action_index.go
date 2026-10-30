@@ -358,19 +358,19 @@ func (inv *ActionOsTemplateIndexInvocation) IsMetaParameterNil(param string) boo
 }
 
 func (inv *ActionOsTemplateIndexInvocation) validate() error {
-	verr := NewValidationError()
+	verr := NewValidationError(inv.Action.Client)
 	if inv.Input != nil {
 		if inv.IsParameterSelected("Location") {
 			if !inv.IsParameterNil("Location") {
 				if inv.Input.Location < 0 {
-					verr.Add("location", "not a valid resource id")
+					verr.Add("location", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
 		if inv.IsParameterSelected("OsFamily") {
 			if !inv.IsParameterNil("OsFamily") {
 				if inv.Input.OsFamily < 0 {
-					verr.Add("os_family", "not a valid resource id")
+					verr.Add("os_family", t(inv.Action.Client, "validation.invalid_resource_id", nil))
 				}
 			}
 		}
