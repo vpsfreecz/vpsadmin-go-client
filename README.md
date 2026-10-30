@@ -368,7 +368,42 @@ Some actions start background work. A successful response does not mean that
 work has finished. A timeout or lost connection during a write does not prove
 the write failed. Inspect the server's state before retrying an uncertain write.
 
+Use `api.SetLanguage("cs")` to select Czech messages and send `Accept-Language`;
+check its returned error. `SetLanguageHeader` changes the request header used
+for that value. Client-side validation messages support Czech and English and
+fall back to English.
+
+## Custom input parameters
+
+The Go generator omits parameters whose schema type is `Custom`. Generated
+input structs and request maps cannot send these fields. An action can have a
+typed accessor even when its required Custom input is unsupported. In the
+captured API 7.0 contract, this affects:
+
+| Typed actions | Omitted input | Effect |
+| --- | --- | --- |
+| `IpReleaseCampaign.Create`, `IpReleaseCampaign.Exempt`, `IpReleaseRequest.Keep` | `addresses` | Required; these typed calls cannot supply it |
+| `WebuiUserSetting.Set` | `value` | Required; the typed call cannot supply it |
+| `Webauthn.Authentication.Finish`, `Webauthn.Registration.Finish` | `public_key_credential` | Required; these typed calls cannot supply it |
+| `SystemConfig.Update` | `value` | Optional; the typed call cannot update it |
+
+For these inputs, use the existing low-level
+`Client.DoBodyRequest(method, path, params, output)` with a complete namespaced
+request body and a suitable response type, or use another client. This method
+JSON-encodes the supplied body and uses the client's authentication and
+language settings. It bypasses generated input validation and does not populate
+a generated response's convenience `Output` field. Check its returned error,
+then the API response's `Status`, `Message` and `Errors`; read the returned
+payload from its `Response` namespace. Encode variable URL path segments
+appropriately.
+
 ## Development and regeneration
+
+Version 0.1.0 uses an unauthenticated public API 7.0 snapshot captured on
+2026-10-30. Capture permissions and enabled plugins determine the available API
+surface. Read [CHANGELOG.md](CHANGELOG.md) before upgrading from an older
+pseudo-version: refreshed fields and removed obsolete bindings can require
+source changes.
 
 Use `nix-shell` for the repository's Go development environment. The files in
 `client/` are generated; update them through the HaveAPI generator instead of
