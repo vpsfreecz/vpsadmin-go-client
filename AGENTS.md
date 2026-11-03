@@ -60,4 +60,8 @@ issues when available. Screenshots are not relevant for this library.
 
 ## Agent-Specific Instructions
 
+For vpsAdmin API and generator changes, follow the canonical
+[generated-client synchronization procedure](https://github.com/vpsfreecz/vpsadmin/blob/master/docs/api-schema-export.md#generated-client-synchronization)
+before declaring synchronization complete.
+
 Do not patch files in `client/` by hand. Regenerate them with `haveapi-go-client`, then review the resulting diff for scope and accidental churn.

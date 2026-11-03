@@ -408,6 +408,11 @@ appropriately.
 
 ## Development and regeneration
 
+For vpsAdmin API and generator changes, follow the
+[generated-client synchronization procedure](https://github.com/vpsfreecz/vpsadmin/blob/master/docs/api-schema-export.md#generated-client-synchronization)
+for the required client checks and completion records. Synchronizing generated
+source does not by itself require a release.
+
 Version 0.2.0 uses a source-fixture API 7.0 export from vpsAdmin commit
 `942c6eaed41331f823d8e0f670ed239e2b308440`, with all six bundled plugins and
 English metadata. The source fixture does not establish which API version or
