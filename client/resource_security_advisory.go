@@ -11,6 +11,10 @@ type ResourceSecurityAdvisory struct {
 	Create *ActionSecurityAdvisoryCreate
 	// Action Security_advisory#Create
 	New *ActionSecurityAdvisoryCreate
+	// Action Security_advisory#Delete
+	Delete *ActionSecurityAdvisoryDelete
+	// Action Security_advisory#Delete
+	Destroy *ActionSecurityAdvisoryDelete
 	// Action Security_advisory#Index
 	Index *ActionSecurityAdvisoryIndex
 	// Action Security_advisory#Index
@@ -19,6 +23,8 @@ type ResourceSecurityAdvisory struct {
 	Publish *ActionSecurityAdvisoryPublish
 	// Action Security_advisory#Rebuild_affected_vps
 	RebuildAffectedVps *ActionSecurityAdvisoryRebuildAffectedVps
+	// Action Security_advisory#Retract
+	Retract *ActionSecurityAdvisoryRetract
 	// Action Security_advisory#Show
 	Show *ActionSecurityAdvisoryShow
 	// Action Security_advisory#Show
@@ -29,9 +35,11 @@ type ResourceSecurityAdvisory struct {
 
 func NewResourceSecurityAdvisory(client *Client) *ResourceSecurityAdvisory {
 	actionCreate := NewActionSecurityAdvisoryCreate(client)
+	actionDelete := NewActionSecurityAdvisoryDelete(client)
 	actionIndex := NewActionSecurityAdvisoryIndex(client)
 	actionPublish := NewActionSecurityAdvisoryPublish(client)
 	actionRebuildAffectedVps := NewActionSecurityAdvisoryRebuildAffectedVps(client)
+	actionRetract := NewActionSecurityAdvisoryRetract(client)
 	actionShow := NewActionSecurityAdvisoryShow(client)
 	actionUpdate := NewActionSecurityAdvisoryUpdate(client)
 
@@ -40,10 +48,13 @@ func NewResourceSecurityAdvisory(client *Client) *ResourceSecurityAdvisory {
 		NodeStatus:         NewResourceSecurityAdvisoryNodeStatus(client),
 		Create:             actionCreate,
 		New:                actionCreate,
+		Delete:             actionDelete,
+		Destroy:            actionDelete,
 		Index:              actionIndex,
 		List:               actionIndex,
 		Publish:            actionPublish,
 		RebuildAffectedVps: actionRebuildAffectedVps,
+		Retract:            actionRetract,
 		Show:               actionShow,
 		Find:               actionShow,
 		Update:             actionUpdate,

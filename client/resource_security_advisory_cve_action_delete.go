@@ -76,7 +76,8 @@ func (in *ActionSecurityAdvisoryCveDeleteMetaGlobalInput) AnySelected() bool {
 
 // ActionSecurityAdvisoryCveDeleteInput is a type for action input parameters
 type ActionSecurityAdvisoryCveDeleteInput struct {
-	ExpectedContentRevision int64 "json:\"expected_content_revision\""
+	ExpectedContentRevision int64  "json:\"expected_content_revision\""
+	ExpectedState           string "json:\"expected_state\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -92,6 +93,18 @@ func (in *ActionSecurityAdvisoryCveDeleteInput) SetExpectedContentRevision(value
 	}
 
 	in._selectedParameters["ExpectedContentRevision"] = nil
+	return in
+}
+
+// SetExpectedState sets parameter ExpectedState to value and selects it for sending
+func (in *ActionSecurityAdvisoryCveDeleteInput) SetExpectedState(value string) *ActionSecurityAdvisoryCveDeleteInput {
+	in.ExpectedState = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ExpectedState"] = nil
 	return in
 }
 
@@ -284,6 +297,9 @@ func (inv *ActionSecurityAdvisoryCveDeleteInvocation) makeInputParams() map[stri
 	if inv.Input != nil {
 		if inv.IsParameterSelected("ExpectedContentRevision") {
 			ret["expected_content_revision"] = inv.Input.ExpectedContentRevision
+		}
+		if inv.IsParameterSelected("ExpectedState") {
+			ret["expected_state"] = inv.Input.ExpectedState
 		}
 	}
 

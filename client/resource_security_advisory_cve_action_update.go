@@ -78,6 +78,7 @@ func (in *ActionSecurityAdvisoryCveUpdateMetaGlobalInput) AnySelected() bool {
 type ActionSecurityAdvisoryCveUpdateInput struct {
 	CveId                   string "json:\"cve_id\""
 	ExpectedContentRevision int64  "json:\"expected_content_revision\""
+	ExpectedState           string "json:\"expected_state\""
 	SecurityAdvisory        int64  "json:\"security_advisory\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
@@ -106,6 +107,18 @@ func (in *ActionSecurityAdvisoryCveUpdateInput) SetExpectedContentRevision(value
 	}
 
 	in._selectedParameters["ExpectedContentRevision"] = nil
+	return in
+}
+
+// SetExpectedState sets parameter ExpectedState to value and selects it for sending
+func (in *ActionSecurityAdvisoryCveUpdateInput) SetExpectedState(value string) *ActionSecurityAdvisoryCveUpdateInput {
+	in.ExpectedState = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["ExpectedState"] = nil
 	return in
 }
 
@@ -339,6 +352,9 @@ func (inv *ActionSecurityAdvisoryCveUpdateInvocation) makeInputParams() map[stri
 		}
 		if inv.IsParameterSelected("ExpectedContentRevision") {
 			ret["expected_content_revision"] = inv.Input.ExpectedContentRevision
+		}
+		if inv.IsParameterSelected("ExpectedState") {
+			ret["expected_state"] = inv.Input.ExpectedState
 		}
 		if inv.IsParameterSelected("SecurityAdvisory") {
 			ret["security_advisory"] = inv.Input.SecurityAdvisory
