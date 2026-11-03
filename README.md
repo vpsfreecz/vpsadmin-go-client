@@ -346,6 +346,15 @@ if err := api.SetNewTokenAuth(options); err != nil {
 The server decides which authentication steps are required. If it requires a
 password reset, provide `TokenAuthOptions.ResetPasswordCallback` as well.
 
+### OAuth token revocation
+
+`SetExistingOAuth2Auth` accepts an existing OAuth access token. Token revocation
+uses `https://auth.vpsfree.cz/_auth/oauth2/revoke`.
+For a client at `https://api.vpsfree.cz`, explicitly trust the authentication
+origin with `AllowOAuth2Origin("https://auth.vpsfree.cz")` before calling
+`RevokeAccessToken`. Untrusted cross-origin requests fail before dispatch.
+Successful revocation clears client authentication; a failed request preserves it.
+
 ## Responses, errors and timeouts
 
 Check the `error` returned by `Call()` first; it covers request and decoding
@@ -399,22 +408,54 @@ appropriately.
 
 ## Development and regeneration
 
-Version 0.1.0 uses an unauthenticated public API 7.0 snapshot captured on
-2026-10-30. Capture permissions and enabled plugins determine the available API
-surface. Read [CHANGELOG.md](CHANGELOG.md) before upgrading from an older
-pseudo-version: refreshed fields and removed obsolete bindings can require
-source changes.
+Version 0.2.0 uses a source-fixture API 7.0 export from vpsAdmin commit
+`942c6eaed41331f823d8e0f670ed239e2b308440`, with all six bundled plugins and
+English metadata. The source fixture does not establish which API version or
+permissions a deployed server provides. Read [CHANGELOG.md](CHANGELOG.md) before
+upgrading.
 
-Use `nix-shell` for the repository's Go development environment. The files in
-`client/` are generated; update them through the HaveAPI generator instead of
-editing them by hand. From this repository's root, with `haveapi-go-client`
-installed:
+The raw export is [schema/source-api-7.0.json](schema/source-api-7.0.json), with
+its unmodified [provenance](schema/provenance.json) and exporter dependency lock.
+`tools/prepare-schema` derives [schema/api-7.0.json](schema/api-7.0.json) by
+changing only the fixture's OAuth revocation URL to
+`https://auth.vpsfree.cz/_auth/oauth2/revoke`. It rejects an unexpected fixture
+profile or endpoint.
+[schema/generator.json](schema/generator.json) records both hashes, the exact
+change, generator source, configuration and toolchain. This preserves endpoint
+selection without changing the client's origin trust checks.
+
+Use `nix-shell` for Go and Python checks:
 
 ```sh
-haveapi-go-client https://api.vpsfree.cz ./client
+python3 -m unittest discover -s tools -p '*_test.py'
+go test ./...
 ```
 
-Regeneration contacts the API and replaces generated client files. Review the
-diff before committing it. The [Go generator
-README](https://github.com/vpsfreecz/haveapi/tree/master/clients/go) describes
-saved-schema generation and capture options.
+The Go tests use an HTTP transport stub and make no production requests. The
+files in `client/`, except handwritten `*_test.go` files, are generated.
+Prepare the input from this repository's root:
+
+```sh
+./tools/prepare-schema
+```
+
+Use a separate HaveAPI checkout at commit
+`1ef9b204ba45bb261d3334be5c555cc1856b713b` (generator 0.32.2). Restore
+`schema/generator.Gemfile.lock` as that checkout's `clients/go/Gemfile.lock` and
+prepare its component bundle as described in the [Go generator
+guide](https://github.com/vpsfreecz/haveapi/blob/1ef9b204ba45bb261d3334be5c555cc1856b713b/clients/go/README.md).
+From the prepared HaveAPI environment, with `GO_CLIENT` pointing to this
+repository and `FRESH_OUTPUT` to a fresh output directory, run:
+
+```sh
+BUNDLE_GEMFILE="$PWD/clients/go/Gemfile" bundle _4.0.23_ exec ruby \
+  clients/go/bin/haveapi-go-client generate \
+  --schema "$GO_CLIENT/schema/api-7.0.json" --api-version 7.0 \
+  --output "$FRESH_OUTPUT" \
+  --module github.com/vpsfreecz/vpsadmin-go-client --package client
+```
+
+Compare the fresh `client/*.go` output with this repository, including removed
+files. Preserve handwritten tests and the existing `go.mod`. The generator does
+not remove stale files when writing into an existing directory. Review the
+complete diff before committing; do not edit generated files by hand.

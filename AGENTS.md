@@ -7,7 +7,10 @@ This repository is a small Go module for the vpsAdmin API client.
 - `go.mod` declares module `github.com/vpsfreecz/vpsadmin-go-client` and Go 1.16.
 - `client/` contains the generated package used by importers as `github.com/vpsfreecz/vpsadmin-go-client/client`.
 - `README.md` documents public usage examples, authentication, timeouts, and client regeneration.
-- `shell.nix` provides a Nix development shell with Go, Git, and Go tools.
+- `shell.nix` provides a Nix development shell with Go, Git, Go tools and Python.
+- `schema/` retains raw and effective API inputs, source/generator provenance
+  and resolved dependency locks. `tools/prepare-schema` makes the bounded OAuth
+  endpoint projection documented in the README.
 
 Files in `client/` are generated resource/action types named by API resource and action, for example `resource_vps_action_start.go` and `resource_dns_record_action_show.go`.
 
@@ -17,7 +20,11 @@ Files in `client/` are generated resource/action types named by API resource and
 - `go test ./...`: compile and test all packages. In minimal environments without `gcc`, use `CGO_ENABLED=0 go test ./...`.
 - `go test ./client`: run checks for only the generated client package.
 - `go fmt ./...`: format Go files before committing.
-- `haveapi-go-client https://api.vpsfree.cz ./client`: regenerate the client from the current vpsAdmin API.
+- `python3 -m unittest discover -s tools -p '*_test.py'`: test schema preparation.
+- `tools/prepare-schema`: derive the generation input from the saved raw export.
+- Follow README's pinned saved-schema command to generate into a fresh directory;
+  compare the complete generated file set, including removals, while preserving
+  handwritten tests and `go.mod`.
 
 There is no runnable application in this repository; it is a library module.
 
@@ -29,7 +36,10 @@ Do not edit generated files manually. Changes to `client/` must be made by regen
 
 ## Testing Guidelines
 
-The repository currently has no `*_test.go` files, so `go test ./...` is primarily a compile-time smoke test. Add tests beside the package code as `*_test.go` when adding handwritten logic, bug fixes, or behavior not covered by generation. Keep tests deterministic and avoid live API calls unless explicitly gated.
+`go test ./...` compiles the generated package and checks OAuth revocation with
+an HTTP transport stub. Python tests beside the schema helper check its bounded
+projection and failure behavior. Keep tests deterministic and offline. Preserve
+handwritten `*_test.go` files when replacing generated output.
 
 ## Commit & Pull Request Guidelines
 
