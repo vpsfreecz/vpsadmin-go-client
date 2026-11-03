@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+"""Preserve the shipped Go OAuth endpoint in the source-fixture schema."""
+
+import argparse
+import json
+from pathlib import Path
+
+
+def main():
+    root = Path(__file__).resolve().parent.parent
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("source", nargs="?", type=Path,
+                        default=root / "schema/source-api-7.0.json")
+    parser.add_argument("output", nargs="?", type=Path,
+                        default=root / "schema/api-7.0.json")
+    args = parser.parse_args()
+
+    try:
+        if args.source.resolve() == args.output.resolve():
+            raise ValueError("source and output must be different files")
+        schema = json.loads(args.source.read_text(encoding="utf-8"))
+        expected = {
+            "schema_format": 1,
+            "api_version": "7.0",
+            "protocol_version": "2.0",
+            "profile": "vpsadmin-full-fixture",
+            "mount_path": "/",
+            "source_url": "https://schema.invalid/v7.0/",
+        }
+        for key, value in expected.items():
+            actual = schema[key]
+            if type(actual) is not type(value) or actual != value:
+                raise ValueError("unexpected source " + key)
+
+        oauth2 = schema["description"]["authentication"]["oauth2"]
+        if oauth2["revoke_url"] != "http://api.test/_auth/oauth2/revoke":
+            raise ValueError("unexpected source OAuth revocation URL")
+        oauth2["revoke_url"] = "https://auth.vpsfree.cz/_auth/oauth2/revoke"
+        output = json.dumps(schema, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+        args.output.write_text(output, encoding="utf-8")
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        parser.exit(1, "prepare-schema: " + str(error) + "\n")
+
+
+if __name__ == "__main__":
+    main()

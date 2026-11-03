@@ -9,5 +9,6 @@ in stdenv.mkDerivation rec {
     git
     go
     gotools
+    python3
   ];
 }
