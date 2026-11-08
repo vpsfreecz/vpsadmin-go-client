@@ -121,7 +121,26 @@ func (in *ActionDnsServerUpdateInput) SetIpv4Addr(value string) *ActionDnsServer
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetIpv4AddrNil(false)
 	in._selectedParameters["Ipv4Addr"] = nil
+	return in
+}
+
+// SetIpv4AddrNil sets parameter Ipv4Addr to nil and selects it for sending
+func (in *ActionDnsServerUpdateInput) SetIpv4AddrNil(set bool) *ActionDnsServerUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Ipv4Addr"] = nil
+		in.SelectParameters("Ipv4Addr")
+	} else {
+		delete(in._nilParameters, "Ipv4Addr")
+	}
 	return in
 }
 
@@ -133,7 +152,26 @@ func (in *ActionDnsServerUpdateInput) SetIpv6Addr(value string) *ActionDnsServer
 		in._selectedParameters = make(map[string]interface{})
 	}
 
+	in.SetIpv6AddrNil(false)
 	in._selectedParameters["Ipv6Addr"] = nil
+	return in
+}
+
+// SetIpv6AddrNil sets parameter Ipv6Addr to nil and selects it for sending
+func (in *ActionDnsServerUpdateInput) SetIpv6AddrNil(set bool) *ActionDnsServerUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["Ipv6Addr"] = nil
+		in.SelectParameters("Ipv6Addr")
+	} else {
+		delete(in._nilParameters, "Ipv6Addr")
+	}
 	return in
 }
 
@@ -398,10 +436,18 @@ func (inv *ActionDnsServerUpdateInvocation) makeInputParams() map[string]interfa
 			ret["hidden"] = inv.Input.Hidden
 		}
 		if inv.IsParameterSelected("Ipv4Addr") {
-			ret["ipv4_addr"] = inv.Input.Ipv4Addr
+			if inv.IsParameterNil("Ipv4Addr") {
+				ret["ipv4_addr"] = nil
+			} else {
+				ret["ipv4_addr"] = inv.Input.Ipv4Addr
+			}
 		}
 		if inv.IsParameterSelected("Ipv6Addr") {
-			ret["ipv6_addr"] = inv.Input.Ipv6Addr
+			if inv.IsParameterNil("Ipv6Addr") {
+				ret["ipv6_addr"] = nil
+			} else {
+				ret["ipv6_addr"] = inv.Input.Ipv6Addr
+			}
 		}
 		if inv.IsParameterSelected("Name") {
 			ret["name"] = inv.Input.Name

@@ -86,18 +86,33 @@ func (in *ActionDnsServerZoneTransferLogIndexMetaGlobalInput) AnySelected() bool
 
 // ActionDnsServerZoneTransferLogIndexInput is a type for action input parameters
 type ActionDnsServerZoneTransferLogIndexInput struct {
-	DnsServerZone int64  "json:\"dns_server_zone\""
-	DnsZone       int64  "json:\"dns_zone\""
-	FromId        int64  "json:\"from_id\""
-	Limit         int64  "json:\"limit\""
-	Order         string "json:\"order\""
-	PrimaryAddr   string "json:\"primary_addr\""
-	ReasonCode    string "json:\"reason_code\""
-	Status        string "json:\"status\""
+	AttemptKind     string "json:\"attempt_kind\""
+	DnsServerZone   int64  "json:\"dns_server_zone\""
+	DnsZone         int64  "json:\"dns_zone\""
+	DnsZoneTransfer int64  "json:\"dns_zone_transfer\""
+	FailureClass    string "json:\"failure_class\""
+	FromId          int64  "json:\"from_id\""
+	Limit           int64  "json:\"limit\""
+	Order           string "json:\"order\""
+	PrimaryAddr     string "json:\"primary_addr\""
+	ReasonCode      string "json:\"reason_code\""
+	Status          string "json:\"status\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
 	_nilParameters map[string]interface{}
+}
+
+// SetAttemptKind sets parameter AttemptKind to value and selects it for sending
+func (in *ActionDnsServerZoneTransferLogIndexInput) SetAttemptKind(value string) *ActionDnsServerZoneTransferLogIndexInput {
+	in.AttemptKind = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["AttemptKind"] = nil
+	return in
 }
 
 // SetDnsServerZone sets parameter DnsServerZone to value and selects it for sending
@@ -121,6 +136,68 @@ func (in *ActionDnsServerZoneTransferLogIndexInput) SetDnsZone(value int64) *Act
 	}
 
 	in._selectedParameters["DnsZone"] = nil
+	return in
+}
+
+// SetDnsZoneTransfer sets parameter DnsZoneTransfer to value and selects it for sending
+func (in *ActionDnsServerZoneTransferLogIndexInput) SetDnsZoneTransfer(value int64) *ActionDnsServerZoneTransferLogIndexInput {
+	in.DnsZoneTransfer = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetDnsZoneTransferNil(false)
+	in._selectedParameters["DnsZoneTransfer"] = nil
+	return in
+}
+
+// SetDnsZoneTransferNil sets parameter DnsZoneTransfer to nil and selects it for sending
+func (in *ActionDnsServerZoneTransferLogIndexInput) SetDnsZoneTransferNil(set bool) *ActionDnsServerZoneTransferLogIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["DnsZoneTransfer"] = nil
+		in.SelectParameters("DnsZoneTransfer")
+	} else {
+		delete(in._nilParameters, "DnsZoneTransfer")
+	}
+	return in
+}
+
+// SetFailureClass sets parameter FailureClass to value and selects it for sending
+func (in *ActionDnsServerZoneTransferLogIndexInput) SetFailureClass(value string) *ActionDnsServerZoneTransferLogIndexInput {
+	in.FailureClass = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetFailureClassNil(false)
+	in._selectedParameters["FailureClass"] = nil
+	return in
+}
+
+// SetFailureClassNil sets parameter FailureClass to nil and selects it for sending
+func (in *ActionDnsServerZoneTransferLogIndexInput) SetFailureClassNil(set bool) *ActionDnsServerZoneTransferLogIndexInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["FailureClass"] = nil
+		in.SelectParameters("FailureClass")
+	} else {
+		delete(in._nilParameters, "FailureClass")
+	}
 	return in
 }
 
@@ -236,20 +313,25 @@ func (in *ActionDnsServerZoneTransferLogIndexInput) AnySelected() bool {
 
 // ActionDnsServerZoneTransferLogIndexOutput is a type for action output parameters
 type ActionDnsServerZoneTransferLogIndexOutput struct {
-	CreatedAt     string                         "json:\"created_at\""
-	DnsServerZone *ActionDnsServerZoneShowOutput "json:\"dns_server_zone\""
-	EventAt       string                         "json:\"event_at\""
-	EventKey      string                         "json:\"event_key\""
-	Id            int64                          "json:\"id\""
-	Message       string                         "json:\"message\""
-	PrimaryAddr   string                         "json:\"primary_addr\""
-	RawMessage    string                         "json:\"raw_message\""
-	Reason        string                         "json:\"reason\""
-	ReasonCode    string                         "json:\"reason_code\""
-	Serial        int64                          "json:\"serial\""
-	SourceCursor  string                         "json:\"source_cursor\""
-	Status        string                         "json:\"status\""
-	UpdatedAt     string                         "json:\"updated_at\""
+	AttemptKind     string                           "json:\"attempt_kind\""
+	CreatedAt       string                           "json:\"created_at\""
+	DnsServerZone   *ActionDnsServerZoneShowOutput   "json:\"dns_server_zone\""
+	DnsZoneTransfer *ActionDnsZoneTransferShowOutput "json:\"dns_zone_transfer\""
+	EventAt         string                           "json:\"event_at\""
+	EventKey        string                           "json:\"event_key\""
+	FailureClass    string                           "json:\"failure_class\""
+	Id              int64                            "json:\"id\""
+	Message         string                           "json:\"message\""
+	PrimaryAddr     string                           "json:\"primary_addr\""
+	PrimarySerial   int64                            "json:\"primary_serial\""
+	RawMessage      string                           "json:\"raw_message\""
+	Reason          string                           "json:\"reason\""
+	ReasonCode      string                           "json:\"reason_code\""
+	SecondarySerial int64                            "json:\"secondary_serial\""
+	Serial          int64                            "json:\"serial\""
+	SourceCursor    string                           "json:\"source_cursor\""
+	Status          string                           "json:\"status\""
+	UpdatedAt       string                           "json:\"updated_at\""
 }
 
 // Type for action response, including envelope
@@ -368,6 +450,13 @@ func (inv *ActionDnsServerZoneTransferLogIndexInvocation) validate() error {
 				}
 			}
 		}
+		if inv.IsParameterSelected("DnsZoneTransfer") {
+			if !inv.IsParameterNil("DnsZoneTransfer") {
+				if inv.Input.DnsZoneTransfer < 0 {
+					verr.Add("dns_zone_transfer", t(inv.Action.Client, "validation.invalid_resource_id", nil))
+				}
+			}
+		}
 	}
 	if inv.MetaInput != nil {
 	}
@@ -401,11 +490,28 @@ func (inv *ActionDnsServerZoneTransferLogIndexInvocation) callAsQuery() (*Action
 
 func (inv *ActionDnsServerZoneTransferLogIndexInvocation) convertInputToQueryParams(ret map[string]string) {
 	if inv.Input != nil {
+		if inv.IsParameterSelected("AttemptKind") {
+			ret["dns_server_zone_transfer_log[attempt_kind]"] = inv.Input.AttemptKind
+		}
 		if inv.IsParameterSelected("DnsServerZone") {
 			ret["dns_server_zone_transfer_log[dns_server_zone]"] = convertInt64ToString(inv.Input.DnsServerZone)
 		}
 		if inv.IsParameterSelected("DnsZone") {
 			ret["dns_server_zone_transfer_log[dns_zone]"] = convertInt64ToString(inv.Input.DnsZone)
+		}
+		if inv.IsParameterSelected("DnsZoneTransfer") {
+			if inv.IsParameterNil("DnsZoneTransfer") {
+				ret["dns_server_zone_transfer_log[dns_zone_transfer]"] = ""
+			} else {
+				ret["dns_server_zone_transfer_log[dns_zone_transfer]"] = convertInt64ToString(inv.Input.DnsZoneTransfer)
+			}
+		}
+		if inv.IsParameterSelected("FailureClass") {
+			if inv.IsParameterNil("FailureClass") {
+				ret["dns_server_zone_transfer_log[failure_class]"] = ""
+			} else {
+				ret["dns_server_zone_transfer_log[failure_class]"] = inv.Input.FailureClass
+			}
 		}
 		if inv.IsParameterSelected("FromId") {
 			ret["dns_server_zone_transfer_log[from_id]"] = convertInt64ToString(inv.Input.FromId)

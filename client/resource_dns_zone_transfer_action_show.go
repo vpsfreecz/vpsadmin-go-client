@@ -76,13 +76,19 @@ func (in *ActionDnsZoneTransferShowMetaGlobalInput) AnySelected() bool {
 
 // ActionDnsZoneTransferShowOutput is a type for action output parameters
 type ActionDnsZoneTransferShowOutput struct {
-	CreatedAt     string                         "json:\"created_at\""
-	DnsTsigKey    *ActionDnsTsigKeyShowOutput    "json:\"dns_tsig_key\""
-	DnsZone       *ActionDnsZoneShowOutput       "json:\"dns_zone\""
-	HostIpAddress *ActionHostIpAddressShowOutput "json:\"host_ip_address\""
-	Id            int64                          "json:\"id\""
-	PeerType      string                         "json:\"peer_type\""
-	UpdatedAt     string                         "json:\"updated_at\""
+	CreatedAt                 string                         "json:\"created_at\""
+	DnsTsigKey                *ActionDnsTsigKeyShowOutput    "json:\"dns_tsig_key\""
+	DnsZone                   *ActionDnsZoneShowOutput       "json:\"dns_zone\""
+	HostIpAddress             *ActionHostIpAddressShowOutput "json:\"host_ip_address\""
+	Id                        int64                          "json:\"id\""
+	LastTransferCheckAt       string                         "json:\"last_transfer_check_at\""
+	PeerType                  string                         "json:\"peer_type\""
+	TransferCheckFailedCount  int64                          "json:\"transfer_check_failed_count\""
+	TransferCheckPendingCount int64                          "json:\"transfer_check_pending_count\""
+	TransferCheckServerCount  int64                          "json:\"transfer_check_server_count\""
+	TransferCheckStatus       string                         "json:\"transfer_check_status\""
+	TransferCheckSuccessCount int64                          "json:\"transfer_check_success_count\""
+	UpdatedAt                 string                         "json:\"updated_at\""
 }
 
 // Type for action response, including envelope

@@ -13033,7 +13033,7 @@
                 },
                 "ipv4_addr": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "String",
@@ -13041,7 +13041,7 @@
                 },
                 "ipv6_addr": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "String",
@@ -13183,7 +13183,7 @@
                 },
                 "ipv4_addr": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "String",
@@ -13191,7 +13191,7 @@
                 },
                 "ipv6_addr": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "String",
@@ -13472,7 +13472,7 @@
                 },
                 "ipv4_addr": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "String",
@@ -13480,7 +13480,7 @@
                 },
                 "ipv6_addr": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "String",
@@ -13641,7 +13641,7 @@
                 },
                 "ipv4_addr": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "String",
@@ -13649,7 +13649,7 @@
                 },
                 "ipv6_addr": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "String",
@@ -13734,7 +13734,7 @@
                 },
                 "ipv4_addr": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "String",
@@ -13742,7 +13742,7 @@
                 },
                 "ipv6_addr": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "String",
@@ -13880,7 +13880,7 @@
                 },
                 "ipv4_addr": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "String",
@@ -13888,7 +13888,7 @@
                 },
                 "ipv6_addr": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "String",
@@ -14254,6 +14254,23 @@
                   "required": false,
                   "type": "Datetime",
                   "validators": {}
+                },
+                "zone_status": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "serving",
+                        "expired",
+                        "not_loaded",
+                        "unknown"
+                      ]
+                    }
+                  }
                 }
               }
             },
@@ -14682,6 +14699,23 @@
                   "required": false,
                   "type": "Datetime",
                   "validators": {}
+                },
+                "zone_status": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "serving",
+                        "expired",
+                        "not_loaded",
+                        "unknown"
+                      ]
+                    }
+                  }
                 }
               }
             },
@@ -14930,6 +14964,23 @@
                   "required": false,
                   "type": "Datetime",
                   "validators": {}
+                },
+                "zone_status": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "serving",
+                        "expired",
+                        "not_loaded",
+                        "unknown"
+                      ]
+                    }
+                  }
                 }
               }
             },
@@ -14939,7 +14990,7 @@
         },
         "resources": {}
       },
-      "dns_server_zone_transfer_log": {
+      "dns_server_zone_primary_transfer_state": {
         "actions": {
           "index": {
             "aliases": [
@@ -14947,10 +14998,10 @@
             ],
             "auth": true,
             "blocking": false,
-            "help": "/v7.0/dns_server_zone_transfer_logs?method=GET",
+            "help": "/v7.0/dns_server_zone_primary_transfer_states?method=GET",
             "input": {
               "layout": "object",
-              "namespace": "dns_server_zone_transfer_log",
+              "namespace": "dns_server_zone_primary_transfer_state",
               "parameters": {
                 "dns_server_zone": {
                   "choices": {
@@ -14982,7 +15033,476 @@
                   "type": "Resource",
                   "value": null,
                   "value_id": "id",
+                  "value_label": "label"
+                },
+                "dns_zone_transfer": {
+                  "choices": {
+                    "help": "/v7.0/dns_zone_transfers?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/dns_zone_transfers"
+                  },
+                  "nullable": false,
+                  "required": null,
+                  "resource": [
+                    "dns_zone_transfer"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "id"
+                },
+                "failure_class": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "primary",
+                        "network"
+                      ]
+                    }
+                  }
+                },
+                "from_id": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {
+                    "number": {
+                      "min": 0
+                    }
+                  }
+                },
+                "limit": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {
+                    "number": {
+                      "max": 1000,
+                      "min": 0
+                    }
+                  }
+                },
+                "status": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "unknown",
+                        "success",
+                        "failed"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "meta": {
+              "global": {
+                "input": {
+                  "layout": "hash",
+                  "namespace": false,
+                  "parameters": {
+                    "count": {
+                      "default": false,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "includes": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Custom",
+                      "validators": {}
+                    },
+                    "no": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    }
+                  }
+                },
+                "output": {
+                  "layout": "hash",
+                  "namespace": false,
+                  "parameters": {
+                    "total_count": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    }
+                  }
+                }
+              },
+              "object": {
+                "input": null,
+                "output": {
+                  "layout": "hash",
+                  "namespace": false,
+                  "parameters": {
+                    "path_params": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Custom",
+                      "validators": {}
+                    },
+                    "resolved": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    }
+                  }
+                }
+              }
+            },
+            "method": "GET",
+            "output": {
+              "layout": "object_list",
+              "namespace": "dns_server_zone_primary_transfer_states",
+              "parameters": {
+                "alert_eligible_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "created_at": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "dns_server_zone": {
+                  "choices": {
+                    "help": "/v7.0/dns_server_zones?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/dns_server_zones"
+                  },
+                  "nullable": false,
+                  "required": null,
+                  "resource": [
+                    "dns_server_zone"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "id"
+                },
+                "dns_zone_transfer": {
+                  "choices": {
+                    "help": "/v7.0/dns_zone_transfers?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/dns_zone_transfers"
+                  },
+                  "nullable": false,
+                  "required": null,
+                  "resource": [
+                    "dns_zone_transfer"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "id"
+                },
+                "evidence_current": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "failed_since": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "failure_class": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "primary",
+                        "network"
+                      ]
+                    }
+                  }
+                },
+                "id": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "last_attempt_at": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "last_attempt_kind": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "transfer",
+                        "refresh",
+                        "notify",
+                        "load",
+                        "ixfr_probe",
+                        "axfr_probe"
+                      ]
+                    }
+                  }
+                },
+                "last_success_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "last_transfer_log": {
+                  "choices": {
+                    "help": "/v7.0/dns_server_zone_transfer_logs?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/dns_server_zone_transfer_logs"
+                  },
+                  "nullable": true,
+                  "required": null,
+                  "resource": [
+                    "dns_server_zone_transfer_log"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "id"
+                },
+                "primary_serial": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "reason": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "reason_code": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "reason_observed_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "secondary_serial": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "secondary_source_addr": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "status": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "unknown",
+                        "success",
+                        "failed"
+                      ]
+                    }
+                  }
+                },
+                "updated_at": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                }
+              }
+            },
+            "path": "/v7.0/dns_server_zone_primary_transfer_states",
+            "scope": "dns_server_zone_primary_transfer_state#index"
+          }
+        },
+        "resources": {}
+      },
+      "dns_server_zone_transfer_log": {
+        "actions": {
+          "index": {
+            "aliases": [
+              "list"
+            ],
+            "auth": true,
+            "blocking": false,
+            "help": "/v7.0/dns_server_zone_transfer_logs?method=GET",
+            "input": {
+              "layout": "object",
+              "namespace": "dns_server_zone_transfer_log",
+              "parameters": {
+                "attempt_kind": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "transfer",
+                        "refresh",
+                        "notify",
+                        "load",
+                        "ixfr_probe",
+                        "axfr_probe",
+                        "legacy"
+                      ]
+                    }
+                  }
+                },
+                "dns_server_zone": {
+                  "choices": {
+                    "help": "/v7.0/dns_server_zones?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/dns_server_zones"
+                  },
+                  "nullable": false,
+                  "required": null,
+                  "resource": [
+                    "dns_server_zone"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "id"
+                },
+                "dns_zone": {
+                  "choices": {
+                    "help": "/v7.0/dns_zones?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/dns_zones"
+                  },
+                  "nullable": false,
+                  "required": null,
+                  "resource": [
+                    "dns_zone"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
                   "value_label": "name"
+                },
+                "dns_zone_transfer": {
+                  "choices": {
+                    "help": "/v7.0/dns_zone_transfers?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/dns_zone_transfers"
+                  },
+                  "nullable": true,
+                  "required": null,
+                  "resource": [
+                    "dns_zone_transfer"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "id"
+                },
+                "failure_class": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "primary",
+                        "network",
+                        "local",
+                        "lifecycle",
+                        "unknown"
+                      ]
+                    }
+                  }
                 },
                 "from_id": {
                   "default": null,
@@ -15135,6 +15655,26 @@
               "layout": "object_list",
               "namespace": "dns_server_zone_transfer_logs",
               "parameters": {
+                "attempt_kind": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "transfer",
+                        "refresh",
+                        "notify",
+                        "load",
+                        "ixfr_probe",
+                        "axfr_probe",
+                        "legacy"
+                      ]
+                    }
+                  }
+                },
                 "created_at": {
                   "default": null,
                   "nullable": false,
@@ -15159,6 +15699,22 @@
                   "value_id": "id",
                   "value_label": "id"
                 },
+                "dns_zone_transfer": {
+                  "choices": {
+                    "help": "/v7.0/dns_zone_transfers?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/dns_zone_transfers"
+                  },
+                  "nullable": true,
+                  "required": null,
+                  "resource": [
+                    "dns_zone_transfer"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "id"
+                },
                 "event_at": {
                   "default": null,
                   "nullable": false,
@@ -15174,6 +15730,24 @@
                   "required": false,
                   "type": "String",
                   "validators": {}
+                },
+                "failure_class": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "primary",
+                        "network",
+                        "local",
+                        "lifecycle",
+                        "unknown"
+                      ]
+                    }
+                  }
                 },
                 "id": {
                   "default": null,
@@ -15199,6 +15773,14 @@
                   "type": "String",
                   "validators": {}
                 },
+                "primary_serial": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
                 "raw_message": {
                   "default": null,
                   "nullable": false,
@@ -15221,6 +15803,14 @@
                   "protected": false,
                   "required": false,
                   "type": "String",
+                  "validators": {}
+                },
+                "secondary_serial": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
                   "validators": {}
                 },
                 "serial": {
@@ -15336,6 +15926,26 @@
               "layout": "object",
               "namespace": "dns_server_zone_transfer_log",
               "parameters": {
+                "attempt_kind": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "transfer",
+                        "refresh",
+                        "notify",
+                        "load",
+                        "ixfr_probe",
+                        "axfr_probe",
+                        "legacy"
+                      ]
+                    }
+                  }
+                },
                 "created_at": {
                   "default": null,
                   "nullable": false,
@@ -15360,6 +15970,22 @@
                   "value_id": "id",
                   "value_label": "id"
                 },
+                "dns_zone_transfer": {
+                  "choices": {
+                    "help": "/v7.0/dns_zone_transfers?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/dns_zone_transfers"
+                  },
+                  "nullable": true,
+                  "required": null,
+                  "resource": [
+                    "dns_zone_transfer"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "id"
+                },
                 "event_at": {
                   "default": null,
                   "nullable": false,
@@ -15375,6 +16001,24 @@
                   "required": false,
                   "type": "String",
                   "validators": {}
+                },
+                "failure_class": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "primary",
+                        "network",
+                        "local",
+                        "lifecycle",
+                        "unknown"
+                      ]
+                    }
+                  }
                 },
                 "id": {
                   "default": null,
@@ -15400,6 +16044,14 @@
                   "type": "String",
                   "validators": {}
                 },
+                "primary_serial": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
                 "raw_message": {
                   "default": null,
                   "nullable": false,
@@ -15422,6 +16074,14 @@
                   "protected": false,
                   "required": false,
                   "type": "String",
+                  "validators": {}
+                },
+                "secondary_serial": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
                   "validators": {}
                 },
                 "serial": {
@@ -17584,6 +18244,14 @@
                   "type": "Integer",
                   "validators": {}
                 },
+                "last_transfer_check_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
                 "peer_type": {
                   "default": null,
                   "nullable": false,
@@ -17598,6 +18266,54 @@
                       ]
                     }
                   }
+                },
+                "transfer_check_failed_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "transfer_check_pending_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "transfer_check_server_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "transfer_check_status": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "success",
+                        "failed",
+                        "pending"
+                      ]
+                    }
+                  }
+                },
+                "transfer_check_success_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
                 },
                 "updated_at": {
                   "default": null,
@@ -17941,6 +18657,14 @@
                   "type": "Integer",
                   "validators": {}
                 },
+                "last_transfer_check_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
                 "peer_type": {
                   "default": null,
                   "nullable": false,
@@ -17955,6 +18679,54 @@
                       ]
                     }
                   }
+                },
+                "transfer_check_failed_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "transfer_check_pending_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "transfer_check_server_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "transfer_check_status": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "success",
+                        "failed",
+                        "pending"
+                      ]
+                    }
+                  }
+                },
+                "transfer_check_success_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
                 },
                 "updated_at": {
                   "default": null,
@@ -18102,6 +18874,14 @@
                   "type": "Integer",
                   "validators": {}
                 },
+                "last_transfer_check_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
                 "peer_type": {
                   "default": null,
                   "nullable": false,
@@ -18116,6 +18896,54 @@
                       ]
                     }
                   }
+                },
+                "transfer_check_failed_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "transfer_check_pending_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "transfer_check_server_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "transfer_check_status": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "success",
+                        "failed",
+                        "pending"
+                      ]
+                    }
+                  }
+                },
+                "transfer_check_success_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
                 },
                 "updated_at": {
                   "default": null,

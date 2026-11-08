@@ -1,7 +1,7 @@
 {
   "api_source": {
     "repository": "git@github.com:vpsfreecz/vpsadmin.git",
-    "revision": "942c6eaed41331f823d8e0f670ed239e2b308440"
+    "revision": "68a36237b0bad9625fb25965bd415e801ddccf4c"
   },
   "command": [
     "bundle",
@@ -32,9 +32,9 @@
   },
   "exporter": {
     "lock": "schema/tooling.Gemfile.lock",
-    "lock_sha256": "62a0e7f65e0755296ea50e3f5efa590f51e8615571a078cf45243f6ca8555f1c",
+    "lock_sha256": "1e440ef2f006d9318a1d96e0638286f94634d6698dad061b6593eec4f5e89e09",
     "provenance": "schema/provenance.json",
-    "provenance_sha256": "c85815abd315f53a5ef05f324abe377760293786a13a25b7a127ec804c50e0c1"
+    "provenance_sha256": "fd7f7c1e43550eb25451ae29c893c3ba19ffaf1f244731204fee48aff9ffa384"
   },
   "format": 1,
   "generator": {
@@ -141,10 +141,10 @@
   },
   "output": {
     "added_files": [
-      "client/resource_security_advisory_action_delete.go",
-      "client/resource_security_advisory_action_retract.go"
+      "client/resource_dns_server_zone_primary_transfer_state.go",
+      "client/resource_dns_server_zone_primary_transfer_state_action_index.go"
     ],
-    "generated_file_count": 684,
+    "generated_file_count": 686,
     "preserved_go_mod_sha256": "b6512dde7aae8cef8a81d4e3630db5194e851338c0abf2acb7b2f016b7173e2a",
     "preserved_module_metadata": "go.mod",
     "removed_files": [],
@@ -152,14 +152,14 @@
   },
   "projection": {
     "effective": "schema/api-7.0.json",
-    "effective_sha256": "8953f1d35e3015d3bbc14d8cd7c456982ac57e9a55ecace3d5ce8bc11d4ec31c",
+    "effective_sha256": "934d46f84511baed7a49838823c7a380846f6c54504010f4bcc3964ec517716c",
     "field": "description.authentication.oauth2.revoke_url",
     "helper": "tools/prepare-schema",
     "helper_sha256": "92a56fbc9056bda008b6e7c7c47c3f6b95f15e665f6158a593f1c93811f0e019",
     "new": "https://auth.vpsfree.cz/_auth/oauth2/revoke",
     "old": "http://api.test/_auth/oauth2/revoke",
     "source": "schema/source-api-7.0.json",
-    "source_sha256": "d6ec617653913c56e92398a6032aa350118597a0e3f45c599bc92b6071ea0a26"
+    "source_sha256": "46317b52cbb73ddb54973e5227a9a274bc74f76834eb8e4ead3f2266cf46a972"
   },
   "toolchain": {
     "bundler": "4.0.23",

@@ -94,6 +94,7 @@ type ActionDnsServerZoneShowOutput struct {
 	Serial                  int64                      "json:\"serial\""
 	Type                    string                     "json:\"type\""
 	UpdatedAt               string                     "json:\"updated_at\""
+	ZoneStatus              string                     "json:\"zone_status\""
 }
 
 // Type for action response, including envelope

@@ -50,6 +50,8 @@ type Client struct {
 	DnsServer *ResourceDnsServer
 	// Resource Dns_server_zone
 	DnsServerZone *ResourceDnsServerZone
+	// Resource Dns_server_zone_primary_transfer_state
+	DnsServerZonePrimaryTransferState *ResourceDnsServerZonePrimaryTransferState
 	// Resource Dns_server_zone_transfer_log
 	DnsServerZoneTransferLog *ResourceDnsServerZoneTransferLog
 	// Resource Dns_tsig_key
@@ -251,6 +253,7 @@ func New(url string) *Client {
 	c.DnsResolver = NewResourceDnsResolver(c)
 	c.DnsServer = NewResourceDnsServer(c)
 	c.DnsServerZone = NewResourceDnsServerZone(c)
+	c.DnsServerZonePrimaryTransferState = NewResourceDnsServerZonePrimaryTransferState(c)
 	c.DnsServerZoneTransferLog = NewResourceDnsServerZoneTransferLog(c)
 	c.DnsTsigKey = NewResourceDnsTsigKey(c)
 	c.DnsZone = NewResourceDnsZone(c)
