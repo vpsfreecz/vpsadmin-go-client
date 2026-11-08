@@ -413,8 +413,8 @@ For vpsAdmin API and generator changes, follow the
 for the required client checks and completion records. Synchronizing generated
 source does not by itself require a release.
 
-Version 0.2.0 uses a source-fixture API 7.0 export from vpsAdmin commit
-`942c6eaed41331f823d8e0f670ed239e2b308440`, with all six bundled plugins and
+The saved API 7.0 schema is a source-fixture export from vpsAdmin commit
+`68a36237b0bad9625fb25965bd415e801ddccf4c`, with all six bundled plugins and
 English metadata. The source fixture does not establish which API version or
 permissions a deployed server provides. Read [CHANGELOG.md](CHANGELOG.md) before
 upgrading.

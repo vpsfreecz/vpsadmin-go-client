@@ -1,3 +1,12 @@
+# Unreleased
+
+- Add DNS primary transfer checks, flags showing whether results are current,
+  secondary serving status and historical transfer kinds. The new operations
+  and fields require a compatible API. Missing evidence does not mean the
+  primary is ready.
+- Added exported fields can break unkeyed struct literals. Existing scalar
+  outputs still cannot distinguish omitted values from zero values.
+
 # 0.2.0
 
 - Regenerate API 7.0 from vpsAdmin source commit
