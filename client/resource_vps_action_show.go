@@ -74,6 +74,65 @@ func (in *ActionVpsShowMetaGlobalInput) AnySelected() bool {
 	return len(in._selectedParameters) > 0
 }
 
+// ActionVpsShowInput is a type for action input parameters
+type ActionVpsShowInput struct {
+	IncidentPolicy string "json:\"incident_policy\""
+	// Only selected parameters are sent to the API. Ignored if empty.
+	_selectedParameters map[string]interface{}
+	// Parameters that are set to nil instead of value
+	_nilParameters map[string]interface{}
+}
+
+// SetIncidentPolicy sets parameter IncidentPolicy to value and selects it for sending
+func (in *ActionVpsShowInput) SetIncidentPolicy(value string) *ActionVpsShowInput {
+	in.IncidentPolicy = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["IncidentPolicy"] = nil
+	return in
+}
+
+// SelectParameters sets parameters from ActionVpsShowInput
+// that will be sent to the API.
+// SelectParameters can be called multiple times.
+func (in *ActionVpsShowInput) SelectParameters(params ...string) *ActionVpsShowInput {
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	for _, param := range params {
+		in._selectedParameters[param] = nil
+	}
+
+	return in
+}
+
+// UnselectParameters unsets parameters from ActionVpsShowInput
+// that will be sent to the API.
+// UnsSelectParameters can be called multiple times.
+func (in *ActionVpsShowInput) UnselectParameters(params ...string) *ActionVpsShowInput {
+	if in._selectedParameters == nil {
+		return in
+	}
+
+	for _, param := range params {
+		delete(in._selectedParameters, param)
+	}
+
+	return in
+}
+
+func (in *ActionVpsShowInput) AnySelected() bool {
+	if in._selectedParameters == nil {
+		return false
+	}
+
+	return len(in._selectedParameters) > 0
+}
+
 // ActionVpsShowOutput is a type for action output parameters
 type ActionVpsShowOutput struct {
 	AllowAdminModifications       bool                              "json:\"allow_admin_modifications\""
@@ -101,6 +160,25 @@ type ActionVpsShowOutput struct {
 	Id                            int64                             "json:\"id\""
 	ImplicitOomReportRuleHitCount int64                             "json:\"implicit_oom_report_rule_hit_count\""
 	InRescueMode                  bool                              "json:\"in_rescue_mode\""
+	IncidentAccountingSince       string                            "json:\"incident_accounting_since\""
+	IncidentActionChainId         int64                             "json:\"incident_action_chain_id\""
+	IncidentActionState           string                            "json:\"incident_action_state\""
+	IncidentCount30d              int64                             "json:\"incident_count_30d\""
+	IncidentCount7d               int64                             "json:\"incident_count_7d\""
+	IncidentEnforcementEnabled    bool                              "json:\"incident_enforcement_enabled\""
+	IncidentLastIncidentAt        string                            "json:\"incident_last_incident_at\""
+	IncidentLastStopAt            string                            "json:\"incident_last_stop_at\""
+	IncidentLastWarningAt         string                            "json:\"incident_last_warning_at\""
+	IncidentMode                  string                            "json:\"incident_mode\""
+	IncidentNextStopAllowedAt     string                            "json:\"incident_next_stop_allowed_at\""
+	IncidentPolicy                string                            "json:\"incident_policy\""
+	IncidentPolicyLabel           string                            "json:\"incident_policy_label\""
+	IncidentStatus                string                            "json:\"incident_status\""
+	IncidentStopEnforced          bool                              "json:\"incident_stop_enforced\""
+	IncidentStopLimit             int64                             "json:\"incident_stop_limit\""
+	IncidentStopLimitOverride     int64                             "json:\"incident_stop_limit_override\""
+	IncidentWarningLimit          int64                             "json:\"incident_warning_limit\""
+	IncidentWarningLimitOverride  int64                             "json:\"incident_warning_limit_override\""
 	Info                          string                            "json:\"info\""
 	IsRunning                     bool                              "json:\"is_running\""
 	Loadavg1                      float64                           "json:\"loadavg1\""
@@ -156,6 +234,8 @@ type ActionVpsShowInvocation struct {
 
 	// Path which may contain parameters that need to be set
 	Path string
+	// Input parameters
+	Input *ActionVpsShowInput
 	// Global meta input parameters
 	MetaInput *ActionVpsShowMetaGlobalInput
 }
@@ -169,6 +249,38 @@ func (inv *ActionVpsShowInvocation) SetPathParamInt(param string, value int64) *
 func (inv *ActionVpsShowInvocation) SetPathParamString(param string, value string) *ActionVpsShowInvocation {
 	inv.Path = strings.Replace(inv.Path, "{"+param+"}", url.PathEscape(value), 1)
 	return inv
+}
+
+// NewInput returns a new struct for input parameters and sets it as with SetInput
+func (inv *ActionVpsShowInvocation) NewInput() *ActionVpsShowInput {
+	inv.Input = &ActionVpsShowInput{}
+	return inv.Input
+}
+
+// SetInput provides input parameters to send to the API
+func (inv *ActionVpsShowInvocation) SetInput(input *ActionVpsShowInput) *ActionVpsShowInvocation {
+	inv.Input = input
+	return inv
+}
+
+// IsParameterSelected returns true if param is to be sent to the API
+func (inv *ActionVpsShowInvocation) IsParameterSelected(param string) bool {
+	if inv.Input._selectedParameters == nil {
+		return true
+	}
+
+	_, exists := inv.Input._selectedParameters[param]
+	return exists
+}
+
+// IsParameterNil returns true if param is to be sent to the API as nil
+func (inv *ActionVpsShowInvocation) IsParameterNil(param string) bool {
+	if inv.Input._nilParameters == nil {
+		return false
+	}
+
+	_, exists := inv.Input._nilParameters[param]
+	return exists
 }
 
 // NewMetaInput returns a new struct for global meta input parameters and sets
@@ -206,6 +318,8 @@ func (inv *ActionVpsShowInvocation) IsMetaParameterNil(param string) bool {
 
 func (inv *ActionVpsShowInvocation) validate() error {
 	verr := NewValidationError(inv.Action.Client)
+	if inv.Input != nil {
+	}
 	if inv.MetaInput != nil {
 	}
 
@@ -226,6 +340,7 @@ func (inv *ActionVpsShowInvocation) Call() (*ActionVpsShowResponse, error) {
 
 func (inv *ActionVpsShowInvocation) callAsQuery() (*ActionVpsShowResponse, error) {
 	queryParams := make(map[string]string)
+	inv.convertInputToQueryParams(queryParams)
 	inv.convertMetaInputToQueryParams(queryParams)
 	resp := &ActionVpsShowResponse{Action: inv.Action}
 	err := inv.Action.Client.DoQueryStringRequest(inv.Path, queryParams, resp)
@@ -233,6 +348,14 @@ func (inv *ActionVpsShowInvocation) callAsQuery() (*ActionVpsShowResponse, error
 		resp.Output = resp.Response.Vps
 	}
 	return resp, err
+}
+
+func (inv *ActionVpsShowInvocation) convertInputToQueryParams(ret map[string]string) {
+	if inv.Input != nil {
+		if inv.IsParameterSelected("IncidentPolicy") {
+			ret["vps[incident_policy]"] = inv.Input.IncidentPolicy
+		}
+	}
 }
 
 func (inv *ActionVpsShowInvocation) convertMetaInputToQueryParams(ret map[string]string) {

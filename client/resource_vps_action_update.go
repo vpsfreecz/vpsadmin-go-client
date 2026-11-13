@@ -76,34 +76,38 @@ func (in *ActionVpsUpdateMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsUpdateInput is a type for action input parameters
 type ActionVpsUpdateInput struct {
-	AdminLockType              string "json:\"admin_lock_type\""
-	AdminOverride              bool   "json:\"admin_override\""
-	AllowAdminModifications    bool   "json:\"allow_admin_modifications\""
-	AutostartEnable            bool   "json:\"autostart_enable\""
-	AutostartPriority          int64  "json:\"autostart_priority\""
-	CgroupVersion              string "json:\"cgroup_version\""
-	ChangeReason               string "json:\"change_reason\""
-	Config                     string "json:\"config\""
-	Cpu                        int64  "json:\"cpu\""
-	CpuLimit                   int64  "json:\"cpu_limit\""
-	DnsResolver                int64  "json:\"dns_resolver\""
-	EnableNetwork              bool   "json:\"enable_network\""
-	EnableOsTemplateAutoUpdate bool   "json:\"enable_os_template_auto_update\""
-	ExpirationDate             string "json:\"expiration_date\""
-	Hostname                   string "json:\"hostname\""
-	Info                       string "json:\"info\""
-	ManageHostname             bool   "json:\"manage_hostname\""
-	MapMode                    string "json:\"map_mode\""
-	Memory                     int64  "json:\"memory\""
-	Node                       int64  "json:\"node\""
-	ObjectState                string "json:\"object_state\""
-	Onstartall                 bool   "json:\"onstartall\""
-	OsTemplate                 int64  "json:\"os_template\""
-	RemindAfterDate            string "json:\"remind_after_date\""
-	StartMenuTimeout           int64  "json:\"start_menu_timeout\""
-	Swap                       int64  "json:\"swap\""
-	User                       int64  "json:\"user\""
-	UserNamespaceMap           int64  "json:\"user_namespace_map\""
+	AdminLockType                string "json:\"admin_lock_type\""
+	AdminOverride                bool   "json:\"admin_override\""
+	AllowAdminModifications      bool   "json:\"allow_admin_modifications\""
+	AutostartEnable              bool   "json:\"autostart_enable\""
+	AutostartPriority            int64  "json:\"autostart_priority\""
+	CgroupVersion                string "json:\"cgroup_version\""
+	ChangeReason                 string "json:\"change_reason\""
+	Config                       string "json:\"config\""
+	Cpu                          int64  "json:\"cpu\""
+	CpuLimit                     int64  "json:\"cpu_limit\""
+	DnsResolver                  int64  "json:\"dns_resolver\""
+	EnableNetwork                bool   "json:\"enable_network\""
+	EnableOsTemplateAutoUpdate   bool   "json:\"enable_os_template_auto_update\""
+	ExpirationDate               string "json:\"expiration_date\""
+	Hostname                     string "json:\"hostname\""
+	IncidentEnforcementEnabled   bool   "json:\"incident_enforcement_enabled\""
+	IncidentPolicy               string "json:\"incident_policy\""
+	IncidentStopLimitOverride    int64  "json:\"incident_stop_limit_override\""
+	IncidentWarningLimitOverride int64  "json:\"incident_warning_limit_override\""
+	Info                         string "json:\"info\""
+	ManageHostname               bool   "json:\"manage_hostname\""
+	MapMode                      string "json:\"map_mode\""
+	Memory                       int64  "json:\"memory\""
+	Node                         int64  "json:\"node\""
+	ObjectState                  string "json:\"object_state\""
+	Onstartall                   bool   "json:\"onstartall\""
+	OsTemplate                   int64  "json:\"os_template\""
+	RemindAfterDate              string "json:\"remind_after_date\""
+	StartMenuTimeout             int64  "json:\"start_menu_timeout\""
+	Swap                         int64  "json:\"swap\""
+	User                         int64  "json:\"user\""
+	UserNamespaceMap             int64  "json:\"user_namespace_map\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -344,6 +348,92 @@ func (in *ActionVpsUpdateInput) SetHostname(value string) *ActionVpsUpdateInput 
 	}
 
 	in._selectedParameters["Hostname"] = nil
+	return in
+}
+
+// SetIncidentEnforcementEnabled sets parameter IncidentEnforcementEnabled to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetIncidentEnforcementEnabled(value bool) *ActionVpsUpdateInput {
+	in.IncidentEnforcementEnabled = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["IncidentEnforcementEnabled"] = nil
+	return in
+}
+
+// SetIncidentPolicy sets parameter IncidentPolicy to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetIncidentPolicy(value string) *ActionVpsUpdateInput {
+	in.IncidentPolicy = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["IncidentPolicy"] = nil
+	return in
+}
+
+// SetIncidentStopLimitOverride sets parameter IncidentStopLimitOverride to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetIncidentStopLimitOverride(value int64) *ActionVpsUpdateInput {
+	in.IncidentStopLimitOverride = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetIncidentStopLimitOverrideNil(false)
+	in._selectedParameters["IncidentStopLimitOverride"] = nil
+	return in
+}
+
+// SetIncidentStopLimitOverrideNil sets parameter IncidentStopLimitOverride to nil and selects it for sending
+func (in *ActionVpsUpdateInput) SetIncidentStopLimitOverrideNil(set bool) *ActionVpsUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["IncidentStopLimitOverride"] = nil
+		in.SelectParameters("IncidentStopLimitOverride")
+	} else {
+		delete(in._nilParameters, "IncidentStopLimitOverride")
+	}
+	return in
+}
+
+// SetIncidentWarningLimitOverride sets parameter IncidentWarningLimitOverride to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetIncidentWarningLimitOverride(value int64) *ActionVpsUpdateInput {
+	in.IncidentWarningLimitOverride = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in.SetIncidentWarningLimitOverrideNil(false)
+	in._selectedParameters["IncidentWarningLimitOverride"] = nil
+	return in
+}
+
+// SetIncidentWarningLimitOverrideNil sets parameter IncidentWarningLimitOverride to nil and selects it for sending
+func (in *ActionVpsUpdateInput) SetIncidentWarningLimitOverrideNil(set bool) *ActionVpsUpdateInput {
+	if in._nilParameters == nil {
+		if !set {
+			return in
+		}
+		in._nilParameters = make(map[string]interface{})
+	}
+
+	if set {
+		in._nilParameters["IncidentWarningLimitOverride"] = nil
+		in.SelectParameters("IncidentWarningLimitOverride")
+	} else {
+		delete(in._nilParameters, "IncidentWarningLimitOverride")
+	}
 	return in
 }
 
@@ -887,6 +977,26 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 		}
 		if inv.IsParameterSelected("Hostname") {
 			ret["hostname"] = inv.Input.Hostname
+		}
+		if inv.IsParameterSelected("IncidentEnforcementEnabled") {
+			ret["incident_enforcement_enabled"] = inv.Input.IncidentEnforcementEnabled
+		}
+		if inv.IsParameterSelected("IncidentPolicy") {
+			ret["incident_policy"] = inv.Input.IncidentPolicy
+		}
+		if inv.IsParameterSelected("IncidentStopLimitOverride") {
+			if inv.IsParameterNil("IncidentStopLimitOverride") {
+				ret["incident_stop_limit_override"] = nil
+			} else {
+				ret["incident_stop_limit_override"] = inv.Input.IncidentStopLimitOverride
+			}
+		}
+		if inv.IsParameterSelected("IncidentWarningLimitOverride") {
+			if inv.IsParameterNil("IncidentWarningLimitOverride") {
+				ret["incident_warning_limit_override"] = nil
+			} else {
+				ret["incident_warning_limit_override"] = inv.Input.IncidentWarningLimitOverride
+			}
 		}
 		if inv.IsParameterSelected("Info") {
 			ret["info"] = inv.Input.Info

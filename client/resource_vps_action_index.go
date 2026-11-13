@@ -86,17 +86,20 @@ func (in *ActionVpsIndexMetaGlobalInput) AnySelected() bool {
 
 // ActionVpsIndexInput is a type for action input parameters
 type ActionVpsIndexInput struct {
-	Environment      int64  "json:\"environment\""
-	FromId           int64  "json:\"from_id\""
-	HostnameAny      string "json:\"hostname_any\""
-	HostnameExact    string "json:\"hostname_exact\""
-	Limit            int64  "json:\"limit\""
-	Location         int64  "json:\"location\""
-	Node             int64  "json:\"node\""
-	ObjectState      string "json:\"object_state\""
-	OsTemplate       int64  "json:\"os_template\""
-	User             int64  "json:\"user\""
-	UserNamespaceMap int64  "json:\"user_namespace_map\""
+	Environment                int64  "json:\"environment\""
+	FromId                     int64  "json:\"from_id\""
+	HostnameAny                string "json:\"hostname_any\""
+	HostnameExact              string "json:\"hostname_exact\""
+	IncidentEnforcementEnabled bool   "json:\"incident_enforcement_enabled\""
+	IncidentPolicy             string "json:\"incident_policy\""
+	IncidentStatus             string "json:\"incident_status\""
+	Limit                      int64  "json:\"limit\""
+	Location                   int64  "json:\"location\""
+	Node                       int64  "json:\"node\""
+	ObjectState                string "json:\"object_state\""
+	OsTemplate                 int64  "json:\"os_template\""
+	User                       int64  "json:\"user\""
+	UserNamespaceMap           int64  "json:\"user_namespace_map\""
 	// Only selected parameters are sent to the API. Ignored if empty.
 	_selectedParameters map[string]interface{}
 	// Parameters that are set to nil instead of value
@@ -148,6 +151,42 @@ func (in *ActionVpsIndexInput) SetHostnameExact(value string) *ActionVpsIndexInp
 	}
 
 	in._selectedParameters["HostnameExact"] = nil
+	return in
+}
+
+// SetIncidentEnforcementEnabled sets parameter IncidentEnforcementEnabled to value and selects it for sending
+func (in *ActionVpsIndexInput) SetIncidentEnforcementEnabled(value bool) *ActionVpsIndexInput {
+	in.IncidentEnforcementEnabled = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["IncidentEnforcementEnabled"] = nil
+	return in
+}
+
+// SetIncidentPolicy sets parameter IncidentPolicy to value and selects it for sending
+func (in *ActionVpsIndexInput) SetIncidentPolicy(value string) *ActionVpsIndexInput {
+	in.IncidentPolicy = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["IncidentPolicy"] = nil
+	return in
+}
+
+// SetIncidentStatus sets parameter IncidentStatus to value and selects it for sending
+func (in *ActionVpsIndexInput) SetIncidentStatus(value string) *ActionVpsIndexInput {
+	in.IncidentStatus = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["IncidentStatus"] = nil
 	return in
 }
 
@@ -319,6 +358,25 @@ type ActionVpsIndexOutput struct {
 	Id                            int64                             "json:\"id\""
 	ImplicitOomReportRuleHitCount int64                             "json:\"implicit_oom_report_rule_hit_count\""
 	InRescueMode                  bool                              "json:\"in_rescue_mode\""
+	IncidentAccountingSince       string                            "json:\"incident_accounting_since\""
+	IncidentActionChainId         int64                             "json:\"incident_action_chain_id\""
+	IncidentActionState           string                            "json:\"incident_action_state\""
+	IncidentCount30d              int64                             "json:\"incident_count_30d\""
+	IncidentCount7d               int64                             "json:\"incident_count_7d\""
+	IncidentEnforcementEnabled    bool                              "json:\"incident_enforcement_enabled\""
+	IncidentLastIncidentAt        string                            "json:\"incident_last_incident_at\""
+	IncidentLastStopAt            string                            "json:\"incident_last_stop_at\""
+	IncidentLastWarningAt         string                            "json:\"incident_last_warning_at\""
+	IncidentMode                  string                            "json:\"incident_mode\""
+	IncidentNextStopAllowedAt     string                            "json:\"incident_next_stop_allowed_at\""
+	IncidentPolicy                string                            "json:\"incident_policy\""
+	IncidentPolicyLabel           string                            "json:\"incident_policy_label\""
+	IncidentStatus                string                            "json:\"incident_status\""
+	IncidentStopEnforced          bool                              "json:\"incident_stop_enforced\""
+	IncidentStopLimit             int64                             "json:\"incident_stop_limit\""
+	IncidentStopLimitOverride     int64                             "json:\"incident_stop_limit_override\""
+	IncidentWarningLimit          int64                             "json:\"incident_warning_limit\""
+	IncidentWarningLimitOverride  int64                             "json:\"incident_warning_limit_override\""
 	Info                          string                            "json:\"info\""
 	IsRunning                     bool                              "json:\"is_running\""
 	Loadavg1                      float64                           "json:\"loadavg1\""
@@ -534,6 +592,15 @@ func (inv *ActionVpsIndexInvocation) convertInputToQueryParams(ret map[string]st
 		}
 		if inv.IsParameterSelected("HostnameExact") {
 			ret["vps[hostname_exact]"] = inv.Input.HostnameExact
+		}
+		if inv.IsParameterSelected("IncidentEnforcementEnabled") {
+			ret["vps[incident_enforcement_enabled]"] = convertBoolToString(inv.Input.IncidentEnforcementEnabled)
+		}
+		if inv.IsParameterSelected("IncidentPolicy") {
+			ret["vps[incident_policy]"] = inv.Input.IncidentPolicy
+		}
+		if inv.IsParameterSelected("IncidentStatus") {
+			ret["vps[incident_status]"] = inv.Input.IncidentStatus
 		}
 		if inv.IsParameterSelected("Limit") {
 			ret["vps[limit]"] = convertInt64ToString(inv.Input.Limit)
