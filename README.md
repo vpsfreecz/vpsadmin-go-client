@@ -413,11 +413,38 @@ For vpsAdmin API and generator changes, follow the
 for the required client checks and completion records. Synchronizing generated
 source does not by itself require a release.
 
-Version 0.2.0 uses a source-fixture API 7.0 export from vpsAdmin commit
-`942c6eaed41331f823d8e0f670ed239e2b308440`, with all six bundled plugins and
+This development snapshot uses a source-fixture API 7.0 export from vpsAdmin
+commit `de4df3d63f4d4afb0c27e8b9be2785c15d24811c`, with all six bundled plugins and
 English metadata. The source fixture does not establish which API version or
 permissions a deployed server provides. Read [CHANGELOG.md](CHANGELOG.md) before
 upgrading.
+
+Use `IncidentPolicy.Index` to discover policies and `Vps.IncidentPolicy.Index`
+or `Vps.IncidentPolicy.Show` to read their current rows for a VPS. Policy keys
+come from the registry at runtime; pass the returned string key in the path.
+`Vps.IncidentPolicy.Update` preserves explicit null override resets and returns
+the authoritative policy row. Change shared VPS shutdown permission through
+`Vps.Update` separately, then use `Vps.Show` to confirm its current value.
+Index filters are sent only when selected; initial reads need no policy selector.
+Check server capabilities before enabling these calls.
+
+Current rows include counts, effective limits, overrides and `ConfigurationValid`.
+Limits reflect the declaration and current overrides. Invalid configurations
+return null effective limits and status. Go scalar fields decode missing or null
+values to zero, false or an empty string. Check `ConfigurationValid` before
+interpreting limits or status. Use a reader that preserves null when you need to
+distinguish missing values from scalar values.
+
+Evaluation IDs, timestamps, states and incident-report policy evaluations describe
+saved history. They do not supply current limits or predict whether a policy will
+match a future event. The server validates policy keys and status strings.
+
+Saved evaluations include `Matched`, `WarningPeriodDays` and `StopPeriodDays`.
+The period fields describe the saved count windows. As a scalar boolean,
+`Matched` cannot distinguish `false` from null or a missing field. A report's
+notice policy key and label identify its saved originating policy; null or
+missing values become empty strings. They do not select a current policy.
+Active policy metadata has no `source_type` field.
 
 The raw export is [schema/source-api-7.0.json](schema/source-api-7.0.json), with
 its unmodified [provenance](schema/provenance.json) and exporter dependency lock.
