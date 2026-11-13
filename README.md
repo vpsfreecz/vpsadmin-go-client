@@ -413,11 +413,19 @@ For vpsAdmin API and generator changes, follow the
 for the required client checks and completion records. Synchronizing generated
 source does not by itself require a release.
 
-Version 0.2.0 uses a source-fixture API 7.0 export from vpsAdmin commit
-`942c6eaed41331f823d8e0f670ed239e2b308440`, with all six bundled plugins and
+This development snapshot uses a source-fixture API 7.0 export from vpsAdmin
+commit `7919441ccb8e9587ad0afc84674b074ca9c5a880`, with all six bundled plugins and
 English metadata. The source fixture does not establish which API version or
 permissions a deployed server provides. Read [CHANGELOG.md](CHANGELOG.md) before
 upgrading.
+
+Incident read selectors are sent only when selected. Use an invocation without
+input for initial reads, or select existing filters with setters; the generator
+does not inject the server's policy default. Select `incident_policy` explicitly
+for incident settings writes, and use nullable override setters to reset a limit.
+As with other scalar outputs, missing or null incident fields decode to Go zero
+values. Check server capabilities before using incident settings with an older
+API. Policy names and status values remain server-validated strings.
 
 The raw export is [schema/source-api-7.0.json](schema/source-api-7.0.json), with
 its unmodified [provenance](schema/provenance.json) and exporter dependency lock.
