@@ -24375,6 +24375,187 @@
         },
         "resources": {}
       },
+      "incident_policy": {
+        "actions": {
+          "index": {
+            "aliases": [],
+            "auth": true,
+            "blocking": false,
+            "help": "/v7.0/incident_policies?method=GET",
+            "input": {
+              "layout": "object",
+              "namespace": "incident_policy",
+              "parameters": {}
+            },
+            "meta": {
+              "global": {
+                "input": {
+                  "layout": "hash",
+                  "namespace": false,
+                  "parameters": {
+                    "no": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    }
+                  }
+                },
+                "output": null
+              },
+              "object": null
+            },
+            "method": "GET",
+            "output": {
+              "layout": "object_list",
+              "namespace": "incident_policies",
+              "parameters": {
+                "description": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Text",
+                  "validators": {}
+                },
+                "key": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "label": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "settings_category": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "stop_period_days": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "warning_period_days": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                }
+              }
+            },
+            "path": "/v7.0/incident_policies",
+            "scope": "incident_policy#index"
+          },
+          "show": {
+            "aliases": [],
+            "auth": true,
+            "blocking": false,
+            "help": "/v7.0/incident_policies/{key}?method=GET",
+            "input": {
+              "layout": "object",
+              "namespace": "incident_policy",
+              "parameters": {}
+            },
+            "meta": {
+              "global": {
+                "input": {
+                  "layout": "hash",
+                  "namespace": false,
+                  "parameters": {
+                    "no": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    }
+                  }
+                },
+                "output": null
+              },
+              "object": null
+            },
+            "method": "GET",
+            "output": {
+              "layout": "object",
+              "namespace": "incident_policy",
+              "parameters": {
+                "description": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Text",
+                  "validators": {}
+                },
+                "key": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "label": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "settings_category": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "stop_period_days": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "warning_period_days": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                }
+              }
+            },
+            "path": "/v7.0/incident_policies/{key}",
+            "scope": "incident_policy#show"
+          }
+        },
+        "resources": {}
+      },
       "incident_report": {
         "actions": {
           "create": {
@@ -24839,6 +25020,14 @@
                   "value_id": "id",
                   "value_label": "label"
                 },
+                "policy_key": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
                 "user": {
                   "choices": {
                     "help": "/v7.0/users?method=GET",
@@ -25039,6 +25228,56 @@
                   "value_id": "id",
                   "value_label": "label"
                 },
+                "notice_kind": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": {
+                        "stop_completed": null,
+                        "warning": null
+                      }
+                    }
+                  }
+                },
+                "notice_mail_state": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": {
+                        "failed": null,
+                        "pending": null,
+                        "queued": null,
+                        "sent": null,
+                        "suppressed": null,
+                        "uncertain": null
+                      }
+                    }
+                  }
+                },
+                "notice_policy_key": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "notice_policy_label": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
                 "raw_user_id": {
                   "default": null,
                   "nullable": false,
@@ -25077,6 +25316,14 @@
                   "protected": false,
                   "required": false,
                   "type": "Text",
+                  "validators": {}
+                },
+                "trigger_incident_report_id": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
                   "validators": {}
                 },
                 "user": {
@@ -25290,6 +25537,56 @@
                   "value_id": "id",
                   "value_label": "label"
                 },
+                "notice_kind": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": {
+                        "stop_completed": null,
+                        "warning": null
+                      }
+                    }
+                  }
+                },
+                "notice_mail_state": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": {
+                        "failed": null,
+                        "pending": null,
+                        "queued": null,
+                        "sent": null,
+                        "suppressed": null,
+                        "uncertain": null
+                      }
+                    }
+                  }
+                },
+                "notice_policy_key": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "notice_policy_label": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
                 "raw_user_id": {
                   "default": null,
                   "nullable": false,
@@ -25328,6 +25625,14 @@
                   "protected": false,
                   "required": false,
                   "type": "Text",
+                  "validators": {}
+                },
+                "trigger_incident_report_id": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
                   "validators": {}
                 },
                 "user": {
@@ -25385,7 +25690,206 @@
             "scope": "incident_report#show"
           }
         },
-        "resources": {}
+        "resources": {
+          "policy_evaluation": {
+            "actions": {
+              "index": {
+                "aliases": [],
+                "auth": true,
+                "blocking": false,
+                "help": "/v7.0/incident_reports/{incident_report_id}/policy_evaluations?method=GET",
+                "input": {
+                  "layout": "object",
+                  "namespace": "policy_evaluation",
+                  "parameters": {}
+                },
+                "meta": {
+                  "global": {
+                    "input": {
+                      "layout": "hash",
+                      "namespace": false,
+                      "parameters": {
+                        "no": {
+                          "default": null,
+                          "nullable": false,
+                          "protected": false,
+                          "required": false,
+                          "type": "Boolean",
+                          "validators": {}
+                        }
+                      }
+                    },
+                    "output": null
+                  },
+                  "object": null
+                },
+                "method": "GET",
+                "output": {
+                  "layout": "object_list",
+                  "namespace": "policy_evaluations",
+                  "parameters": {
+                    "count_30d": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "count_7d": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "decision": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "none": null,
+                            "stop": null,
+                            "warning": null
+                          }
+                        }
+                      }
+                    },
+                    "effective_mode": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "enforce": null,
+                            "notify": null,
+                            "observe": null
+                          }
+                        }
+                      }
+                    },
+                    "error_class": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "error_stage": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "evaluated_at": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "label": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "matched": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "policy_key": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "state": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "audit_only": null,
+                            "error": null,
+                            "recorded": null,
+                            "skipped": null
+                          }
+                        }
+                      }
+                    },
+                    "stop_enforced": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "stop_limit": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "stop_period_days": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "warning_limit": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "warning_period_days": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    }
+                  }
+                },
+                "path": "/v7.0/incident_reports/{incident_report_id}/policy_evaluations",
+                "scope": "incident_report.policy_evaluation#index"
+              }
+            },
+            "resources": {}
+          }
+        }
       },
       "incoming_payment": {
         "actions": {
@@ -77670,7 +78174,7 @@
                 },
                 "value": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "Custom",
@@ -77814,7 +78318,7 @@
                 },
                 "value": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "Custom",
@@ -77836,7 +78340,7 @@
               "parameters": {
                 "value": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "Custom",
@@ -77967,7 +78471,7 @@
                 },
                 "value": {
                   "default": null,
-                  "nullable": false,
+                  "nullable": true,
                   "protected": false,
                   "required": false,
                   "type": "Custom",
@@ -97094,6 +97598,79 @@
                   "type": "Boolean",
                   "validators": {}
                 },
+                "incident_accounting_since": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_action_chain_id": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "incident_action_state": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "none",
+                        "pending",
+                        "failed",
+                        "uncertain"
+                      ]
+                    }
+                  }
+                },
+                "incident_enforcement_enabled": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "incident_last_stop_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_next_stop_allowed_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_stop_threshold_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "incident_warning_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
                 "info": {
                   "default": null,
                   "nullable": false,
@@ -97998,6 +98575,79 @@
                   "type": "Boolean",
                   "validators": {}
                 },
+                "incident_accounting_since": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_action_chain_id": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "incident_action_state": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "none",
+                        "pending",
+                        "failed",
+                        "uncertain"
+                      ]
+                    }
+                  }
+                },
+                "incident_enforcement_enabled": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "incident_last_stop_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_next_stop_allowed_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_stop_threshold_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "incident_warning_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
                 "info": {
                   "default": null,
                   "nullable": false,
@@ -98536,6 +99186,39 @@
                   "type": "String",
                   "validators": {}
                 },
+                "incident_enforcement_enabled": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "incident_policy": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "incident_status": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": {
+                        "clear": null,
+                        "near_limit": null,
+                        "stop_threshold": null,
+                        "warning": null
+                      }
+                    }
+                  }
+                },
                 "limit": {
                   "default": null,
                   "nullable": false,
@@ -98949,6 +99632,79 @@
                   "protected": false,
                   "required": false,
                   "type": "Boolean",
+                  "validators": {}
+                },
+                "incident_accounting_since": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_action_chain_id": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "incident_action_state": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "none",
+                        "pending",
+                        "failed",
+                        "uncertain"
+                      ]
+                    }
+                  }
+                },
+                "incident_enforcement_enabled": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "incident_last_stop_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_next_stop_allowed_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_stop_threshold_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "incident_warning_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
                   "validators": {}
                 },
                 "info": {
@@ -100000,6 +100756,79 @@
                   "type": "Boolean",
                   "validators": {}
                 },
+                "incident_accounting_since": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_action_chain_id": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "incident_action_state": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "none",
+                        "pending",
+                        "failed",
+                        "uncertain"
+                      ]
+                    }
+                  }
+                },
+                "incident_enforcement_enabled": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "incident_last_stop_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_next_stop_allowed_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_stop_threshold_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "incident_warning_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
                 "info": {
                   "default": null,
                   "nullable": false,
@@ -100680,6 +101509,79 @@
                   "protected": false,
                   "required": false,
                   "type": "Boolean",
+                  "validators": {}
+                },
+                "incident_accounting_since": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_action_chain_id": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "incident_action_state": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "none",
+                        "pending",
+                        "failed",
+                        "uncertain"
+                      ]
+                    }
+                  }
+                },
+                "incident_enforcement_enabled": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "incident_last_stop_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_next_stop_allowed_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "incident_stop_threshold_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "incident_warning_count": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
                   "validators": {}
                 },
                 "info": {
@@ -101414,6 +102316,14 @@
                       "rx": "\\A[a-zA-Z0-9][a-zA-Z\\-_.0-9]{0,62}[a-zA-Z0-9]\\z"
                     }
                   }
+                },
+                "incident_enforcement_enabled": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
                 },
                 "info": {
                   "default": null,
@@ -102395,6 +103305,775 @@
                 },
                 "path": "/v7.0/vpses/{vps_id}/features/update_all",
                 "scope": "vps.feature#update_all"
+              }
+            },
+            "resources": {}
+          },
+          "incident_policy": {
+            "actions": {
+              "index": {
+                "aliases": [],
+                "auth": true,
+                "blocking": false,
+                "help": "/v7.0/vpses/{vps_id}/incident_policies?method=GET",
+                "input": {
+                  "layout": "object",
+                  "namespace": "incident_policy",
+                  "parameters": {}
+                },
+                "meta": {
+                  "global": {
+                    "input": {
+                      "layout": "hash",
+                      "namespace": false,
+                      "parameters": {
+                        "no": {
+                          "default": null,
+                          "nullable": false,
+                          "protected": false,
+                          "required": false,
+                          "type": "Boolean",
+                          "validators": {}
+                        }
+                      }
+                    },
+                    "output": null
+                  },
+                  "object": null
+                },
+                "method": "GET",
+                "output": {
+                  "layout": "object_list",
+                  "namespace": "incident_policies",
+                  "parameters": {
+                    "configuration_valid": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "count_30d": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "count_7d": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "description": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Text",
+                      "validators": {}
+                    },
+                    "effective_mode": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "enforce": null,
+                            "notify": null,
+                            "observe": null
+                          }
+                        }
+                      }
+                    },
+                    "evaluated_at": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "evaluation_report_id": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "evaluation_state": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "error": null,
+                            "none": null,
+                            "recorded": null
+                          }
+                        }
+                      }
+                    },
+                    "global_mode": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "enforce": null,
+                            "notify": null,
+                            "observe": null
+                          }
+                        }
+                      }
+                    },
+                    "key": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "label": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "last_incident_at": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "last_warning_at": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "settings_category": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "status": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "clear": null,
+                            "near_limit": null,
+                            "stop_threshold": null,
+                            "warning": null
+                          }
+                        }
+                      }
+                    },
+                    "stop_enforced": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "stop_limit": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "stop_limit_override": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "stop_period_days": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "warning_limit": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "warning_limit_override": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "warning_period_days": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    }
+                  }
+                },
+                "path": "/v7.0/vpses/{vps_id}/incident_policies",
+                "scope": "vps.incident_policy#index"
+              },
+              "show": {
+                "aliases": [],
+                "auth": true,
+                "blocking": false,
+                "help": "/v7.0/vpses/{vps_id}/incident_policies/{key}?method=GET",
+                "input": {
+                  "layout": "object",
+                  "namespace": "incident_policy",
+                  "parameters": {}
+                },
+                "meta": {
+                  "global": {
+                    "input": {
+                      "layout": "hash",
+                      "namespace": false,
+                      "parameters": {
+                        "no": {
+                          "default": null,
+                          "nullable": false,
+                          "protected": false,
+                          "required": false,
+                          "type": "Boolean",
+                          "validators": {}
+                        }
+                      }
+                    },
+                    "output": null
+                  },
+                  "object": null
+                },
+                "method": "GET",
+                "output": {
+                  "layout": "object",
+                  "namespace": "incident_policy",
+                  "parameters": {
+                    "configuration_valid": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "count_30d": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "count_7d": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "description": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Text",
+                      "validators": {}
+                    },
+                    "effective_mode": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "enforce": null,
+                            "notify": null,
+                            "observe": null
+                          }
+                        }
+                      }
+                    },
+                    "evaluated_at": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "evaluation_report_id": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "evaluation_state": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "error": null,
+                            "none": null,
+                            "recorded": null
+                          }
+                        }
+                      }
+                    },
+                    "global_mode": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "enforce": null,
+                            "notify": null,
+                            "observe": null
+                          }
+                        }
+                      }
+                    },
+                    "key": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "label": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "last_incident_at": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "last_warning_at": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "settings_category": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "status": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "clear": null,
+                            "near_limit": null,
+                            "stop_threshold": null,
+                            "warning": null
+                          }
+                        }
+                      }
+                    },
+                    "stop_enforced": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "stop_limit": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "stop_limit_override": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "stop_period_days": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "warning_limit": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "warning_limit_override": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "warning_period_days": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    }
+                  }
+                },
+                "path": "/v7.0/vpses/{vps_id}/incident_policies/{key}",
+                "scope": "vps.incident_policy#show"
+              },
+              "update": {
+                "aliases": [],
+                "auth": true,
+                "blocking": false,
+                "help": "/v7.0/vpses/{vps_id}/incident_policies/{key}?method=PUT",
+                "input": {
+                  "layout": "object",
+                  "namespace": "incident_policy",
+                  "parameters": {
+                    "stop_limit_override": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "warning_limit_override": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    }
+                  }
+                },
+                "meta": {
+                  "global": {
+                    "input": {
+                      "layout": "hash",
+                      "namespace": false,
+                      "parameters": {
+                        "no": {
+                          "default": null,
+                          "nullable": false,
+                          "protected": false,
+                          "required": false,
+                          "type": "Boolean",
+                          "validators": {}
+                        }
+                      }
+                    },
+                    "output": null
+                  },
+                  "object": null
+                },
+                "method": "PUT",
+                "output": {
+                  "layout": "object",
+                  "namespace": "incident_policy",
+                  "parameters": {
+                    "configuration_valid": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "count_30d": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "count_7d": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "description": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Text",
+                      "validators": {}
+                    },
+                    "effective_mode": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "enforce": null,
+                            "notify": null,
+                            "observe": null
+                          }
+                        }
+                      }
+                    },
+                    "evaluated_at": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "evaluation_report_id": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "evaluation_state": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "error": null,
+                            "none": null,
+                            "recorded": null
+                          }
+                        }
+                      }
+                    },
+                    "global_mode": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "enforce": null,
+                            "notify": null,
+                            "observe": null
+                          }
+                        }
+                      }
+                    },
+                    "key": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "label": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "last_incident_at": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "last_warning_at": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "settings_category": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "status": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": {
+                            "clear": null,
+                            "near_limit": null,
+                            "stop_threshold": null,
+                            "warning": null
+                          }
+                        }
+                      }
+                    },
+                    "stop_enforced": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "stop_limit": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "stop_limit_override": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "stop_period_days": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "warning_limit": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "warning_limit_override": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "warning_period_days": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    }
+                  }
+                },
+                "path": "/v7.0/vpses/{vps_id}/incident_policies/{key}",
+                "scope": "vps.incident_policy#update"
               }
             },
             "resources": {}

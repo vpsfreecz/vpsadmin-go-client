@@ -91,6 +91,7 @@ type ActionVpsUpdateInput struct {
 	EnableOsTemplateAutoUpdate bool   "json:\"enable_os_template_auto_update\""
 	ExpirationDate             string "json:\"expiration_date\""
 	Hostname                   string "json:\"hostname\""
+	IncidentEnforcementEnabled bool   "json:\"incident_enforcement_enabled\""
 	Info                       string "json:\"info\""
 	ManageHostname             bool   "json:\"manage_hostname\""
 	MapMode                    string "json:\"map_mode\""
@@ -344,6 +345,18 @@ func (in *ActionVpsUpdateInput) SetHostname(value string) *ActionVpsUpdateInput 
 	}
 
 	in._selectedParameters["Hostname"] = nil
+	return in
+}
+
+// SetIncidentEnforcementEnabled sets parameter IncidentEnforcementEnabled to value and selects it for sending
+func (in *ActionVpsUpdateInput) SetIncidentEnforcementEnabled(value bool) *ActionVpsUpdateInput {
+	in.IncidentEnforcementEnabled = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["IncidentEnforcementEnabled"] = nil
 	return in
 }
 
@@ -887,6 +900,9 @@ func (inv *ActionVpsUpdateInvocation) makeInputParams() map[string]interface{} {
 		}
 		if inv.IsParameterSelected("Hostname") {
 			ret["hostname"] = inv.Input.Hostname
+		}
+		if inv.IsParameterSelected("IncidentEnforcementEnabled") {
+			ret["incident_enforcement_enabled"] = inv.Input.IncidentEnforcementEnabled
 		}
 		if inv.IsParameterSelected("Info") {
 			ret["info"] = inv.Input.Info

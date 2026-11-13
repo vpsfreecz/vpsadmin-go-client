@@ -9,6 +9,8 @@ type ResourceVps struct {
 	ConsoleToken *ResourceVpsConsoleToken
 	// Resource Vps.Feature
 	Feature *ResourceVpsFeature
+	// Resource Vps.Incident_policy
+	IncidentPolicy *ResourceVpsIncidentPolicy
 	// Resource Vps.Maintenance_window
 	MaintenanceWindow *ResourceVpsMaintenanceWindow
 	// Resource Vps.Mount
@@ -86,6 +88,7 @@ func NewResourceVps(client *Client) *ResourceVps {
 		Client:            client,
 		ConsoleToken:      NewResourceVpsConsoleToken(client),
 		Feature:           NewResourceVpsFeature(client),
+		IncidentPolicy:    NewResourceVpsIncidentPolicy(client),
 		MaintenanceWindow: NewResourceVpsMaintenanceWindow(client),
 		Mount:             NewResourceVpsMount(client),
 		SshHostKey:        NewResourceVpsSshHostKey(client),

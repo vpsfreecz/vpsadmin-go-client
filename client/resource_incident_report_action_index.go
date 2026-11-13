@@ -93,6 +93,7 @@ type ActionIncidentReportIndexInput struct {
 	IpAddressAssignment int64  "json:\"ip_address_assignment\""
 	Limit               int64  "json:\"limit\""
 	Mailbox             int64  "json:\"mailbox\""
+	PolicyKey           string "json:\"policy_key\""
 	User                int64  "json:\"user\""
 	Vps                 int64  "json:\"vps\""
 	// Only selected parameters are sent to the API. Ignored if empty.
@@ -204,6 +205,18 @@ func (in *ActionIncidentReportIndexInput) SetMailboxNil(set bool) *ActionInciden
 	return in
 }
 
+// SetPolicyKey sets parameter PolicyKey to value and selects it for sending
+func (in *ActionIncidentReportIndexInput) SetPolicyKey(value string) *ActionIncidentReportIndexInput {
+	in.PolicyKey = value
+
+	if in._selectedParameters == nil {
+		in._selectedParameters = make(map[string]interface{})
+	}
+
+	in._selectedParameters["PolicyKey"] = nil
+	return in
+}
+
 // SetUser sets parameter User to value and selects it for sending
 func (in *ActionIncidentReportIndexInput) SetUser(value int64) *ActionIncidentReportIndexInput {
 	in.User = value
@@ -268,22 +281,27 @@ func (in *ActionIncidentReportIndexInput) AnySelected() bool {
 
 // ActionIncidentReportIndexOutput is a type for action output parameters
 type ActionIncidentReportIndexOutput struct {
-	Codename            string                               "json:\"codename\""
-	CpuLimit            int64                                "json:\"cpu_limit\""
-	CreatedAt           string                               "json:\"created_at\""
-	DetectedAt          string                               "json:\"detected_at\""
-	FiledBy             *ActionUserShowOutput                "json:\"filed_by\""
-	Id                  int64                                "json:\"id\""
-	IpAddressAssignment *ActionIpAddressAssignmentShowOutput "json:\"ip_address_assignment\""
-	Mailbox             *ActionMailboxShowOutput             "json:\"mailbox\""
-	RawUserId           int64                                "json:\"raw_user_id\""
-	RawVpsId            int64                                "json:\"raw_vps_id\""
-	ReportedAt          string                               "json:\"reported_at\""
-	Subject             string                               "json:\"subject\""
-	Text                string                               "json:\"text\""
-	User                *ActionUserShowOutput                "json:\"user\""
-	Vps                 *ActionVpsShowOutput                 "json:\"vps\""
-	VpsAction           string                               "json:\"vps_action\""
+	Codename                string                               "json:\"codename\""
+	CpuLimit                int64                                "json:\"cpu_limit\""
+	CreatedAt               string                               "json:\"created_at\""
+	DetectedAt              string                               "json:\"detected_at\""
+	FiledBy                 *ActionUserShowOutput                "json:\"filed_by\""
+	Id                      int64                                "json:\"id\""
+	IpAddressAssignment     *ActionIpAddressAssignmentShowOutput "json:\"ip_address_assignment\""
+	Mailbox                 *ActionMailboxShowOutput             "json:\"mailbox\""
+	NoticeKind              string                               "json:\"notice_kind\""
+	NoticeMailState         string                               "json:\"notice_mail_state\""
+	NoticePolicyKey         string                               "json:\"notice_policy_key\""
+	NoticePolicyLabel       string                               "json:\"notice_policy_label\""
+	RawUserId               int64                                "json:\"raw_user_id\""
+	RawVpsId                int64                                "json:\"raw_vps_id\""
+	ReportedAt              string                               "json:\"reported_at\""
+	Subject                 string                               "json:\"subject\""
+	Text                    string                               "json:\"text\""
+	TriggerIncidentReportId int64                                "json:\"trigger_incident_report_id\""
+	User                    *ActionUserShowOutput                "json:\"user\""
+	Vps                     *ActionVpsShowOutput                 "json:\"vps\""
+	VpsAction               string                               "json:\"vps_action\""
 }
 
 // Type for action response, including envelope
@@ -480,6 +498,9 @@ func (inv *ActionIncidentReportIndexInvocation) convertInputToQueryParams(ret ma
 			} else {
 				ret["incident_report[mailbox]"] = convertInt64ToString(inv.Input.Mailbox)
 			}
+		}
+		if inv.IsParameterSelected("PolicyKey") {
+			ret["incident_report[policy_key]"] = inv.Input.PolicyKey
 		}
 		if inv.IsParameterSelected("User") {
 			ret["incident_report[user]"] = convertInt64ToString(inv.Input.User)
