@@ -195,6 +195,7 @@ type ActionNodeKernelHistoryIndexOutput struct {
 	EventType       string "json:\"event_type\""
 	Id              int64  "json:\"id\""
 	LivepatchAction string "json:\"livepatch_action\""
+	LivepatchId     string "json:\"livepatch_id\""
 	ObservedAfter   string "json:\"observed_after\""
 	ObservedBefore  string "json:\"observed_before\""
 	ReportedRelease string "json:\"reported_release\""

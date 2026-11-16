@@ -92,6 +92,7 @@ type ActionNodeKernelEventShowOutput struct {
 	KernelConfigDigest    string                              "json:\"kernel_config_digest\""
 	KernelSourceRevision  string                              "json:\"kernel_source_revision\""
 	LivepatchAction       string                              "json:\"livepatch_action\""
+	LivepatchId           string                              "json:\"livepatch_id\""
 	Node                  *ActionNodeShowOutput               "json:\"node\""
 	NodeKernelEvidence    *ActionNodeKernelEvidenceShowOutput "json:\"node_kernel_evidence\""
 	ObservedAfter         string                              "json:\"observed_after\""

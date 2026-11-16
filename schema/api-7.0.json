@@ -49981,6 +49981,14 @@
                         }
                       }
                     },
+                    "livepatch_id": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
                     "observed_after": {
                       "default": null,
                       "nullable": true,
@@ -52891,6 +52899,14 @@
                     }
                   }
                 },
+                "livepatch_id": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
                 "node": {
                   "choices": {
                     "help": "/v7.0/nodes?method=GET",
@@ -53215,6 +53231,14 @@
                       ]
                     }
                   }
+                },
+                "livepatch_id": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
                 },
                 "node": {
                   "choices": {
