@@ -72,6 +72,10 @@ type Client struct {
 	HostIpAddress *ResourceHostIpAddress
 	// Resource Incident_policy
 	IncidentPolicy *ResourceIncidentPolicy
+	// Resource Incident_policy_evaluation
+	IncidentPolicyEvaluation *ResourceIncidentPolicyEvaluation
+	// Resource Incident_policy_exposure
+	IncidentPolicyExposure *ResourceIncidentPolicyExposure
 	// Resource Incident_report
 	IncidentReport *ResourceIncidentReport
 	// Resource Incoming_payment
@@ -264,6 +268,8 @@ func New(url string) *Client {
 	c.HelpBox = NewResourceHelpBox(c)
 	c.HostIpAddress = NewResourceHostIpAddress(c)
 	c.IncidentPolicy = NewResourceIncidentPolicy(c)
+	c.IncidentPolicyEvaluation = NewResourceIncidentPolicyEvaluation(c)
+	c.IncidentPolicyExposure = NewResourceIncidentPolicyExposure(c)
 	c.IncidentReport = NewResourceIncidentReport(c)
 	c.IncomingPayment = NewResourceIncomingPayment(c)
 	c.IpAddress = NewResourceIpAddress(c)

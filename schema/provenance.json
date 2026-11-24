@@ -3,7 +3,7 @@
   "api_version": "7.0",
   "database": {
     "engine": "MariaDB",
-    "version": "11.4.12-MariaDB"
+    "version": "11.4.13-MariaDB"
   },
   "inputs": {
     "api/config/dataset_plans.rb": "33397be38d3ab9fd2b93ab8210156e0bec6bb303cc521f512b2255ddb6ff78b1",
@@ -15,10 +15,10 @@
     "tools/test_db.rb": "b9faee4880ac40526808eae5aa408e3160adff5f4efe92eddfdaee115eb29e5c"
   },
   "inventory": {
-    "actions": 527,
-    "parameters": 8917,
-    "resources": 154,
-    "scopes_sha256": "b485169c27500ee603a889516ad096b3a0c6c7c88d305d0518dbedf4fb6655eb"
+    "actions": 529,
+    "parameters": 9031,
+    "resources": 156,
+    "scopes_sha256": "984fe8b3ba672e6c4950ffcc1ac7b79c7ef4b0b4e67990fd091b4071bff53727"
   },
   "locale": "en",
   "plugins": {
@@ -82,10 +82,10 @@
   },
   "profile": "vpsadmin-full-fixture",
   "protocol_version": "2.0",
-  "schema_sha256": "7cb28ebd8e0957d9a8ba2c359c8658040ed1cd195f0dd14327c03b595012fc85",
+  "schema_sha256": "7e2a529787c06944f1ad0cdf3369edd8b4650d79826f3bbda9101af2dfb67628",
   "source": {
     "repository": "git@github.com:vpsfreecz/vpsadmin.git",
-    "revision": "de4df3d63f4d4afb0c27e8b9be2785c15d24811c"
+    "revision": "74c0af3aef3ec9124ca89ce7669ccd9b99633495"
   },
   "tooling": {
     "bundler": "4.0.24",

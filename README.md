@@ -414,7 +414,7 @@ for the required client checks and completion records. Synchronizing generated
 source does not by itself require a release.
 
 This development snapshot uses a source-fixture API 7.0 export from vpsAdmin
-commit `de4df3d63f4d4afb0c27e8b9be2785c15d24811c`, with all six bundled plugins and
+commit `74c0af3aef3ec9124ca89ce7669ccd9b99633495`, with all six bundled plugins and
 English metadata. The source fixture does not establish which API version or
 permissions a deployed server provides. Read [CHANGELOG.md](CHANGELOG.md) before
 upgrading.
@@ -445,6 +445,20 @@ The period fields describe the saved count windows. As a scalar boolean,
 notice policy key and label identify its saved originating policy; null or
 missing values become empty strings. They do not select a current policy.
 Active policy metadata has no `source_type` field.
+
+Administrators can use `IncidentPolicyExposure.Index` for current VPS/policy
+matches and `IncidentPolicyEvaluation.Index` for saved evaluations with current
+action and mail outcomes. Both use `SetOffset` and `SetLimit`. Their global
+response metadata includes `total_count`, `offset`, `limit`, `next_offset`,
+`as_of` and `read_at`. Keep the returned `as_of` when requesting another page;
+it fixes the counting and recording cutoff, while settings, ownership and
+outcomes reflect the time of each read. History orders by evaluation time and
+ID, with `direction` selecting ascending or descending order.
+
+The scalar limitation above also applies to these reads: null `matched` becomes
+false and null `next_offset` becomes zero. A scalar value alone does not establish
+whether the server supplied it. Use a reader that preserves null when that
+distinction is needed.
 
 The raw export is [schema/source-api-7.0.json](schema/source-api-7.0.json), with
 its unmodified [provenance](schema/provenance.json) and exporter dependency lock.
