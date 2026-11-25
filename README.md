@@ -382,6 +382,194 @@ check its returned error. `SetLanguageHeader` changes the request header used
 for that value. Client-side validation messages support Czech and English and
 fall back to English.
 
+## VPS evidence
+
+VPS evidence provides current rolling credit for one VPS, an overview of VPSes
+with positive credit, and immutable intervals saved with an incident report.
+Members can read their own VPSes; administrators can read all VPSes permitted by
+the server. Check server capabilities before using these endpoints.
+
+Use `DoQueryStringRequest` with an explicit path and a caller-owned response
+struct for evidence reads. Generated scalar fields collapse null to zero,
+false or an empty string, and generated responses omit global metadata and
+Custom fields. These omissions lose the distinction between unavailable and
+recorded credit, optional peaks and pagination facts.
+
+The generated client intentionally has no `api.Vps.Evidence` accessor. The
+pinned generator gives it the same Go name as the top-level `api.VpsEvidence`
+and would route the child accessor to the fleet endpoint. Schema preparation
+omits only that child from generation. Its API endpoint remains available through
+the explicit request below. `api.VpsEvidence` selects the fleet endpoint, but
+its generated response still has the scalar and metadata limitations above.
+
+| Read | GET path | Query namespace | Response rows |
+| --- | --- | --- | --- |
+| Current credit for VPS 12 | `/v7.0/vpses/12/evidence` | No inputs | `evidence` |
+| Positive-credit overview | `/v7.0/vps_evidence` | `vps_evidence` | `vps_evidence` |
+| Intervals saved with report 12 | `/v7.0/incident_reports/12/evidence_intervals` | `evidence_interval` | `evidence_intervals` |
+
+The following example uses the authenticated `api` from the usage example.
+Its custom row selects credit, observation and peak fields; add other fields
+from the API contract as your application needs them, preserving nullable scalars
+as pointers.
+
+```go
+var current struct {
+	client.Envelope
+	Response struct {
+		Rows []struct {
+			Signal             string  `json:"signal"`
+			CreditUs           *int64  `json:"credit_us"`
+			ConfigurationValid bool    `json:"configuration_valid"`
+			ObservationState   string  `json:"observation_state"`
+			WindowComplete     *bool   `json:"window_complete"`
+			ReportingEnabled   *bool   `json:"reporting_enabled"`
+			ReportEligible     *bool   `json:"report_eligible"`
+			ReportDue          *bool   `json:"report_due"`
+			Measurement        *string `json:"measurement"`
+			PeakUnit           *string `json:"peak_unit"`
+			PeakValue          *int64  `json:"peak_value"`
+			PeakIsLowerBound   *bool   `json:"peak_is_lower_bound"`
+		} `json:"evidence"`
+		Meta struct {
+			ReadAt             string   `json:"read_at"`
+			ConfigurationValid bool     `json:"configuration_valid"`
+			UnavailableSignals []string `json:"unavailable_signals"`
+		} `json:"_meta"`
+	} `json:"response"`
+}
+err := api.DoQueryStringRequest("/v7.0/vpses/12/evidence", nil, &current)
+if err != nil {
+	log.Fatal(err)
+}
+if !current.Status {
+	log.Fatalf("Read VPS evidence failed: %s (%v)", current.Message, current.Errors)
+}
+for _, row := range current.Response.Rows {
+	if row.CreditUs == nil {
+		fmt.Printf("%s: credit unavailable\n", row.Signal)
+		continue
+	}
+	fmt.Printf("%s: %d microseconds of recorded credit\n", row.Signal, *row.CreditUs)
+}
+```
+
+Read `Response`, not a generated convenience `Output` field. The method sends
+an authenticated GET with query parameters and no body. Check its returned
+error and then `Status`, `Message` and `Errors` before using the response.
+
+The per-VPS response includes every supported signal, including no-data rows.
+A nil `CreditUs` means unavailable, even when `ConfigurationValid` is true,
+such as during an ownership change. A pointer to zero means no recorded credit;
+it does not establish VPS health or collection coverage. Positive credit can
+remain visible while observations are stale or reporting is disabled.
+Freshness, source qualification, reporting eligibility and whether a report is
+due are separate facts. Read `Measurement` and `PeakUnit` with `PeakValue`;
+`PeakIsLowerBound` identifies an unfinished contributing observation.
+
+The overview includes only positive credit, including subsecond values. Use
+query keys such as `vps_evidence[offset]`, `vps_evidence[limit]`,
+`vps_evidence[vps]` and `vps_evidence[signal]`. Optional `vps_evidence[user]`,
+`vps_evidence[node]`, `vps_evidence[location]` and `vps_evidence[environment]`
+filter by resource ID; `user` is administrator-only. The server applies filters
+within the caller's permissions before counting and paging. Decode rows under
+`vps_evidence` into custom pointer fields, and retain `_meta.total_count`, `offset`, `limit`
+and nullable `next_offset` alongside the current metadata shown above.
+`unavailable_signals` is a sorted array of selected signals with invalid
+configuration; an empty array means none. Missing or stale observations alone
+do not make configuration invalid.
+
+For saved intervals, send `evidence_interval[offset]` and
+`evidence_interval[limit]`, then decode `evidence_intervals` into custom rows.
+Pagination starts at offset 0, defaults to 25 rows and allows at most 100 rows.
+Keep timestamps as strings to retain microsecond precision. Credit uses integer
+microseconds; optional peak measurements have explicit units and nullable values.
+Use pointers for nullable measurement, peak and lower-bound fields.
+
+Saved `_meta` includes `available`, counts and pagination, plus nullable
+`window_complete`, `evaluated_at`, `window_seconds`, `threshold_seconds`,
+`repeat_seconds` and `credit_us`. Its nullable `condition_measurement`,
+`condition_operator`, `condition_value` and `condition_unit` describe the signal
+predicate saved with the incident. Use `*string`, `*int64` and `*bool` as
+appropriate, check `available`, and follow `next_offset` for another page.
+These facts describe the incident when it was created and remain unchanged
+when current settings change. A non-nil false value differs from an unknown
+value. Access to the parent report remains subject to server authorization.
+
+The generic `evidence_interval` resource replaces the draft `rtnl_interval`
+resource without a compatibility alias. Use the matching backend API before
+calling the new endpoints.
+
+### Memory pressure history
+
+Use the root `/v7.0/vps_pressure_history` endpoint for daily recorded time.
+The generated `api.VpsPressureHistory` accessor has the same scalar and metadata
+limitations as evidence reads. Use a custom response to preserve nullable
+values and all history metadata:
+
+```go
+var history struct {
+	client.Envelope
+	Response struct {
+		Rows []struct {
+			ID         *string `json:"id"`
+			FromAt     *string `json:"from_at"`
+			ToAt       *string `json:"to_at"`
+			PartialDay *bool   `json:"partial_day"`
+			RecordedUs *int64  `json:"recorded_us"`
+		} `json:"vps_pressure_history"`
+		Meta struct {
+			ReadAt           *string `json:"read_at"`
+			Timezone         *string `json:"timezone"`
+			RangeFrom        *string `json:"range_from"`
+			RangeTo          *string `json:"range_to"`
+			TotalRecordedUs  *int64  `json:"total_recorded_us"`
+			FirstRecordedAt  *string `json:"first_recorded_at"`
+			AccountingSince  *string `json:"accounting_since"`
+			OwnershipLimited *bool   `json:"ownership_limited"`
+			Available        *bool   `json:"available"`
+		} `json:"_meta"`
+	} `json:"response"`
+}
+err := api.DoQueryStringRequest("/v7.0/vps_pressure_history", map[string]string{
+	"vps_pressure_history[vps]":  "12",
+	"vps_pressure_history[days]": "30",
+}, &history)
+if err != nil {
+	log.Fatal(err)
+}
+if !history.Status {
+	log.Fatalf("Read pressure history failed: %s (%v)", history.Message, history.Errors)
+}
+```
+
+Read `history.Response.Rows` and `history.Response.Meta`, preserving nil
+pointers. Keep timestamps as strings to retain microsecond precision.
+
+The server requires a VPS ID and accepts `days` as 7 or 30, defaulting to 7.
+The response contains that many ascending UTC calendar days, including today.
+Each row spans `from_at` to `to_at`; today's end is next UTC midnight and
+`partial_day` is true. `read_at` records when the response was read. Accepted
+contributions within the server's clock tolerance are not clipped to that time.
+
+`recorded_us` contains positive integer microseconds or null for a day without
+recorded data. `total_recorded_us` sums the returned positive values and is null
+when none are available. Preserve these unknown values instead of displaying
+zero. History uses daily totals retained for 32 UTC calendar days; it is not
+backfilled from incident reports or old observations and has no historical
+reporting threshold.
+
+History is scoped to the VPS's current owner and exact accounting epoch.
+`accounting_since` is nullable; `ownership_limited` says whether that epoch
+starts inside the requested range. `available` can be true without any recorded
+days. A pending transfer or known ownership-state mismatch makes history
+unavailable; a foreign VPS remains an authorization error. Current observation
+freshness and reporting settings do not decide history availability.
+`first_recorded_at` is the earliest retained acceptance timestamp for this owner
+and epoch across the full 32-day retention period, independent of `days`.
+It does not establish the first occurrence or the start of collection coverage.
+Check the server's capabilities and authorization before offering this read.
+
 ## Custom input parameters
 
 The Go generator omits parameters whose schema type is `Custom`. Generated
@@ -413,9 +601,10 @@ For vpsAdmin API and generator changes, follow the
 for the required client checks and completion records. Synchronizing generated
 source does not by itself require a release.
 
-This development snapshot uses a source-fixture API 7.0 export from vpsAdmin
-commit `5725a0996fb60767511bfc86482acefdec9eb9d9`, with all six bundled plugins and
-English metadata. The source fixture does not establish which API version or
+This development snapshot uses a source-fixture API 7.0 export with all six
+bundled plugins and English metadata. Its exact vpsAdmin revision is recorded
+in [schema/provenance.json](schema/provenance.json).
+The source fixture does not establish which API version or
 permissions a deployed server provides. Read [CHANGELOG.md](CHANGELOG.md) before
 upgrading.
 
@@ -448,13 +637,20 @@ Active policy metadata has no `source_type` field.
 
 The raw export is [schema/source-api-7.0.json](schema/source-api-7.0.json), with
 its unmodified [provenance](schema/provenance.json) and exporter dependency lock.
-`tools/prepare-schema` derives [schema/api-7.0.json](schema/api-7.0.json) by
-changing only the fixture's OAuth revocation URL to
-`https://auth.vpsfree.cz/_auth/oauth2/revoke`. It rejects an unexpected fixture
-profile or endpoint.
-[schema/generator.json](schema/generator.json) records both hashes, the exact
-change, generator source, configuration and toolchain. This preserves endpoint
-selection without changing the client's origin trust checks.
+`tools/prepare-schema` derives [schema/api-7.0.json](schema/api-7.0.json) with
+two bounded changes: it replaces the fixture's OAuth revocation URL with
+`https://auth.vpsfree.cz/_auth/oauth2/revoke` and omits the nested `vps.evidence`
+resource to avoid the Go name collision described above. The raw export stays
+unchanged. The effective schema contains 159 application resources and 533
+actions; the raw export contains 160 resources, 534 actions and 9,176 parameters. Authentication remains one
+resource with five actions in both inputs.
+
+Preparation rejects an unexpected fixture profile, OAuth endpoint or evidence
+resource signature before replacing the output. It retains the top-level
+`vps_evidence` resource and checks both evidence routes and namespaces.
+[schema/generator.json](schema/generator.json) records raw and effective hashes,
+both transformations, helper identity, generator source, configuration and
+toolchain. OAuth origin trust checks remain unchanged.
 
 Use `nix-shell` for Go and Python checks:
 

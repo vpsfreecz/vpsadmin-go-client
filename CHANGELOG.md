@@ -1,3 +1,20 @@
+# Unreleased
+
+- Add generic saved evidence intervals and the positive-credit overview from
+  the API 7.0 source contract. Replace the draft `RtnlInterval` resource with
+  `EvidenceInterval`; no compatibility alias is provided.
+- Omit the newly introduced `Vps.Evidence` accessor from Go generation. It
+  collides with top-level `VpsEvidence` in the pinned generator and would call
+  the fleet route. Per-VPS reads remain available through
+  `DoQueryStringRequest("/v7.0/vpses/12/evidence", nil, &response)`. Use custom
+  nullable row fields and response metadata for all evidence reads, as shown
+  in the README. Generated fleet and saved-interval responses retain their
+  scalar/null and metadata limitations.
+- Preserve the raw API export and record two independent generation-input
+  projections: the existing OAuth revocation endpoint replacement and the
+  evidence child omission. Schema preparation validates the expected resource
+  signatures and refuses changed inputs before replacing the effective schema.
+
 # 0.2.0
 
 - Regenerate API 7.0 from vpsAdmin source commit
