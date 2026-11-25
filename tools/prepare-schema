@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Preserve the shipped Go OAuth endpoint in the source-fixture schema."""
+"""Apply the bounded compatibility projections for the pinned Go generator."""
 
 import argparse
 import json
@@ -35,6 +35,28 @@ def main():
         oauth2 = schema["description"]["authentication"]["oauth2"]
         if oauth2["revoke_url"] != "http://api.test/_auth/oauth2/revoke":
             raise ValueError("unexpected source OAuth revocation URL")
+
+        resources = schema["description"]["resources"]
+        child = resources["vps"]["resources"]["evidence"]
+        fleet = resources["vps_evidence"]
+        for resource, path, scope, namespace in (
+            (child, "/v7.0/vpses/{vps_id}/evidence", "vps.evidence#index", "evidence"),
+            (fleet, "/v7.0/vps_evidence", "vps_evidence#index", "vps_evidence"),
+        ):
+            if resource["resources"] != {} or set(resource["actions"]) != {"index"}:
+                raise ValueError("unexpected evidence resource shape")
+            action = resource["actions"]["index"]
+            if (action["method"] != "GET" or action["path"] != path
+                    or action["scope"] != scope or action["auth"] is not True
+                    or action["input"]["layout"] != "object"
+                    or action["input"]["namespace"] != namespace
+                    or action["output"]["layout"] != "object_list"
+                    or action["output"]["namespace"] != namespace):
+                raise ValueError("unexpected evidence index signature")
+
+        # Child and fleet otherwise overwrite the same generated Go names.
+        # The full child contract remains in the raw source schema.
+        del resources["vps"]["resources"]["evidence"]
         oauth2["revoke_url"] = "https://auth.vpsfree.cz/_auth/oauth2/revoke"
         output = json.dumps(schema, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
         args.output.write_text(output, encoding="utf-8")

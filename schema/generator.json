@@ -1,7 +1,7 @@
 {
   "api_source": {
     "repository": "git@github.com:vpsfreecz/vpsadmin.git",
-    "revision": "5725a0996fb60767511bfc86482acefdec9eb9d9"
+    "revision": "425458447af34477754f722d0351ee6c0734f24b"
   },
   "command": [
     "bundle",
@@ -32,9 +32,9 @@
   },
   "exporter": {
     "lock": "schema/tooling.Gemfile.lock",
-    "lock_sha256": "dd5db5ca44bb69ca2ae0244515103146f17b7621f12ca34c3dec6950f4455aaf",
+    "lock_sha256": "ca7865c3a0b3c96e63791996a0cf786dba1c90b145830099073fbfd579360397",
     "provenance": "schema/provenance.json",
-    "provenance_sha256": "2dc3ebd685f416b8099cd23fe4c9f14ea6c0342a2eed117323988f34268a1e76"
+    "provenance_sha256": "221c9d234920c85b87515643c598a92fc83a879779885c21065edf1fd260afe4"
   },
   "format": 1,
   "generator": {
@@ -141,13 +141,14 @@
   },
   "output": {
     "added_files": [
-      "resource_dataset_action_disable_backups.go",
-      "resource_incident_policy_evaluation.go",
-      "resource_incident_policy_evaluation_action_index.go",
-      "resource_incident_policy_exposure.go",
-      "resource_incident_policy_exposure_action_index.go"
+      "client/resource_incident_report_evidence_interval.go",
+      "client/resource_incident_report_evidence_interval_action_index.go",
+      "client/resource_vps_evidence.go",
+      "client/resource_vps_evidence_action_index.go",
+      "client/resource_vps_pressure_history.go",
+      "client/resource_vps_pressure_history_action_index.go"
     ],
-    "generated_file_count": 698,
+    "generated_file_count": 704,
     "preserved_go_mod_sha256": "b6512dde7aae8cef8a81d4e3630db5194e851338c0abf2acb7b2f016b7173e2a",
     "preserved_module_metadata": "go.mod",
     "removed_files": [],
@@ -155,14 +156,59 @@
   },
   "projection": {
     "effective": "schema/api-7.0.json",
-    "effective_sha256": "a6565d287a33c834b8f46abc292f831eef5aa6086d47bd04d5bb1238fea4e1a2",
+    "effective_sha256": "3500808b89c304c442511c6a5756b42a70e2a5e42cea602d14f3ca939859938d",
     "field": "description.authentication.oauth2.revoke_url",
     "helper": "tools/prepare-schema",
-    "helper_sha256": "92a56fbc9056bda008b6e7c7c47c3f6b95f15e665f6158a593f1c93811f0e019",
+    "helper_sha256": "8b19603bbaee9e968bdf46787fae9871fe766289dbafb563eed3302b8bbc001c",
     "new": "https://auth.vpsfree.cz/_auth/oauth2/revoke",
     "old": "http://api.test/_auth/oauth2/revoke",
     "source": "schema/source-api-7.0.json",
-    "source_sha256": "7088ef00b82964437746ad3e46b3ca78da515b8fde18cae46f1c275ef68f9bf9"
+    "source_sha256": "a4c81b6df4e0e167ddc3c888c66be173282061fcb0f80fe19205f4a372d64326",
+    "omissions": [
+      {
+        "resource_path": [
+          "description",
+          "resources",
+          "vps",
+          "resources",
+          "evidence"
+        ],
+        "reason": "The pinned Go generator maps nested Vps::Evidence and top-level VpsEvidence to the same names; omit the child accessor to prevent dispatching the fleet action. Use the explicit child GET with a custom response.",
+        "expected_signature": {
+          "actions": [
+            "index"
+          ],
+          "children": [],
+          "method": "GET",
+          "path": "/v7.0/vpses/{vps_id}/evidence",
+          "scope": "vps.evidence#index",
+          "auth": true,
+          "input_namespace": "evidence",
+          "output_namespace": "evidence"
+        },
+        "retained_fleet": {
+          "method": "GET",
+          "path": "/v7.0/vps_evidence",
+          "scope": "vps_evidence#index",
+          "input_namespace": "vps_evidence",
+          "output_namespace": "vps_evidence"
+        }
+      }
+    ],
+    "counts": {
+      "raw": {
+        "application_resources": 160,
+        "application_actions": 534,
+        "authentication_resources": 1,
+        "authentication_actions": 5
+      },
+      "effective": {
+        "application_resources": 159,
+        "application_actions": 533,
+        "authentication_resources": 1,
+        "authentication_actions": 5
+      }
+    }
   },
   "toolchain": {
     "bundler": "4.0.23",

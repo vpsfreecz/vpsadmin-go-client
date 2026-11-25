@@ -9,8 +9,8 @@ This repository is a small Go module for the vpsAdmin API client.
 - `README.md` documents public usage examples, authentication, timeouts, and client regeneration.
 - `shell.nix` provides a Nix development shell with Go, Git, Go tools and Python.
 - `schema/` retains raw and effective API inputs, source/generator provenance
-  and resolved dependency locks. `tools/prepare-schema` makes the bounded OAuth
-  endpoint projection documented in the README.
+  and resolved dependency locks. `tools/prepare-schema` applies the bounded OAuth
+  endpoint replacement and colliding-child omission documented in the README.
 
 Files in `client/` are generated resource/action types named by API resource and action, for example `resource_vps_action_start.go` and `resource_dns_record_action_show.go`.
 

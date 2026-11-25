@@ -5,6 +5,8 @@ type ResourceIncidentReport struct {
 	// Pointer to client
 	Client *Client
 
+	// Resource Incident_report.Evidence_interval
+	EvidenceInterval *ResourceIncidentReportEvidenceInterval
 	// Resource Incident_report.Policy_evaluation
 	PolicyEvaluation *ResourceIncidentReportPolicyEvaluation
 	// Action Incident_report#Create
@@ -28,6 +30,7 @@ func NewResourceIncidentReport(client *Client) *ResourceIncidentReport {
 
 	return &ResourceIncidentReport{
 		Client:           client,
+		EvidenceInterval: NewResourceIncidentReportEvidenceInterval(client),
 		PolicyEvaluation: NewResourceIncidentReportPolicyEvaluation(client),
 		Create:           actionCreate,
 		New:              actionCreate,

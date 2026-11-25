@@ -8,17 +8,17 @@
   "inputs": {
     "api/config/dataset_plans.rb": "33397be38d3ab9fd2b93ab8210156e0bec6bb303cc521f512b2255ddb6ff78b1",
     "api/config/dataset_properties.rb": "d4e80f78ecafccd75c5adc5e87f058beb16c4a38f7e2108e5ac3ad8e1e30f7f3",
-    "api/db/schema.rb": "86bd0dbc1a6b87d90644e5d6acfef680d93ba336cfbb8f7f6fe16d3a10117fbf",
+    "api/db/schema.rb": "2f3607571368c51d494aca5562902f5a620505c4adf9717e6304b232d1e2a581",
     "api/spec/support/db_setup.rb": "3bf201e552741272f3a79b8c631e5eed0e295b4e4c8ec8a30a5d66980bcddc9c",
     "api/spec/support/spec_plugins.rb": "b930102255afc99583a37b6229c760be2afb9ed2f2537fc5ba41c091f08bfea2",
     "api/spec/support/spec_seed.rb": "d0836d875dea8ed8046ff2a925dc8176a3a0fa2a79bacb3b3369525da3700d31",
     "tools/test_db.rb": "b9faee4880ac40526808eae5aa408e3160adff5f4efe92eddfdaee115eb29e5c"
   },
   "inventory": {
-    "actions": 530,
-    "parameters": 9044,
-    "resources": 156,
-    "scopes_sha256": "77818ef2f8c3dc9e8a33161fc2a1c7a73866674ee3ce87396f3dafd54dcf9c3f"
+    "actions": 534,
+    "parameters": 9176,
+    "resources": 160,
+    "scopes_sha256": "ab6e72e1b3583c68d8d4ed10ab3af207275562b58d80f5227a6ea6298e355b35"
   },
   "locale": "en",
   "plugins": {
@@ -82,10 +82,10 @@
   },
   "profile": "vpsadmin-full-fixture",
   "protocol_version": "2.0",
-  "schema_sha256": "7088ef00b82964437746ad3e46b3ca78da515b8fde18cae46f1c275ef68f9bf9",
+  "schema_sha256": "a4c81b6df4e0e167ddc3c888c66be173282061fcb0f80fe19205f4a372d64326",
   "source": {
     "repository": "git@github.com:vpsfreecz/vpsadmin.git",
-    "revision": "5725a0996fb60767511bfc86482acefdec9eb9d9"
+    "revision": "425458447af34477754f722d0351ee6c0734f24b"
   },
   "tooling": {
     "bundler": "4.1.1",
@@ -164,8 +164,8 @@
         "version": "1.3.8"
       },
       "connection_pool": {
-        "gem_sha256": "33fff5ba71a12d2aa26cb72b1db8bba2a1a01823559fb01d29eb74c286e62e0a",
-        "version": "3.0.2"
+        "gem_sha256": "e0f8ee3ee0039396753e06e8a2dde0ef028e40f7df29e97f57da7577c489cb5e",
+        "version": "3.0.3"
       },
       "cose": {
         "gem_sha256": "2c8d66c31ab5a2d194b04edb91b38b281ad6a2e501f7850b9e5aaecc2cb82f42",
@@ -192,8 +192,8 @@
         "version": "1.74.0"
       },
       "domain_name": {
-        "gem_sha256": "6091f1c2b4781302de49eefef9ebcfbd758b84279898ea8918d0a59fdc5c0cc9",
-        "version": "0.7.20261031"
+        "gem_sha256": "13f6a6cc6190892a75041b606d90bfb358ecbd869c1099fdd57b83b11d79269e",
+        "version": "0.7.20261117"
       },
       "drb": {
         "gem_sha256": "0b00d6fdb50995fe4a45dea13663493c841112e4068656854646f418fda13373",
@@ -260,8 +260,8 @@
         "version": "1.1.6"
       },
       "httparty": {
-        "gem_sha256": "5c95cf29ca70d5bfd834e56140ddfca6e94166c3b870cde9c25d157cdb5a00d2",
-        "version": "0.24.3"
+        "gem_sha256": "354f84b766f9a3e077d64fc8b61a71c88e7c8a890eac4178d30d3269458c1dc5",
+        "version": "0.25.1"
       },
       "i18n": {
         "gem_sha256": "00f9eb62412fe593b2a65a97daa75300d37abb8f7202ec748e94b6d46a9dd1b5",
@@ -284,8 +284,8 @@
         "version": "1.17.2"
       },
       "jwt": {
-        "gem_sha256": "44cc34fbc341c148233cf66641522b4bce0dfb1ce55e8073f05c56f44f4ee546",
-        "version": "3.3.0"
+        "gem_sha256": "d3f8f74f2a4ba373e0ebf6b756858567a6ce4d2fd150c126f91b82bd1f924d03",
+        "version": "3.3.1"
       },
       "language_server-protocol": {
         "gem_sha256": "5ef2c0c138f8267e1bc631d3328347d354f96724b0af22f2c79516120443b7f0",
@@ -392,8 +392,8 @@
         "version": "2.3.0"
       },
       "parser": {
-        "gem_sha256": "e02f9b63c2fe05b0c68f692ba4df89b3cb113b663964f75d988fbebfd6c3deca",
-        "version": "3.3.13.0"
+        "gem_sha256": "62f8f76af7b919425ee2d811880e9dcb8011ab40bfd59970dfb583141697e58f",
+        "version": "3.3.14.0"
       },
       "pathname": {
         "gem_sha256": null,
@@ -412,24 +412,24 @@
         "version": "0.16.1"
       },
       "puma": {
-        "gem_sha256": "6383a60bbc3d9495b2e453d93e60cefa817f7e854a302a5013f31fd9f514a5f3",
-        "version": "8.0.3"
+        "gem_sha256": "a12de11fb2f20f8a3ef25a5b1447eabe7142846719eeb9672ee8ec0705b8c3a8",
+        "version": "8.1.3"
       },
       "racc": {
         "gem_sha256": "4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f",
         "version": "1.8.1"
       },
       "rack": {
-        "gem_sha256": "1fecc85e463ebc7a2a945fff829ffcd549babeb1556384796fad946c28dc4ec7",
-        "version": "3.2.8"
+        "gem_sha256": "8235c1d08f0c461bedcff4413bbeba888173e5b09e1332ae951c98f0ee460dcc",
+        "version": "3.2.9"
       },
       "rack-oauth2": {
         "gem_sha256": "c73aa87c508043e2258f02b4fb110cacba9b37d2ccf884e22487d014a120d1a5",
         "version": "2.2.1"
       },
       "rack-protection": {
-        "gem_sha256": "cf6e2842df8c55f5e4d1a4be015e603e19e9bc3a7178bae58949ccbb58558bac",
-        "version": "4.2.1"
+        "gem_sha256": "0e75764dae462c4041544452ce568bb1f1ced556b791cd32ac479d0781065a99",
+        "version": "4.2.2"
       },
       "rack-session": {
         "gem_sha256": "595434f8c0c3473ae7d7ac56ecda6cc6dfd9d37c0b2b5255330aa1576967ffe8",
@@ -460,8 +460,8 @@
         "version": "3.6.1"
       },
       "regexp_parser": {
-        "gem_sha256": "5aedb6b7c35688f51e86eef17a15374dfd287c83f4ca644b2c5f3ec50a33b44b",
-        "version": "2.13.1"
+        "gem_sha256": "1d0547814f57e6f00946957bd0ca201bc42f42cfb08eee89df60998aedcd8a3b",
+        "version": "2.13.4"
       },
       "reline": {
         "gem_sha256": "5b012d8e55dbf9d450f12bde2cf7d15ff546ae80b3f8f3b30e570d431815583d",
@@ -504,12 +504,12 @@
         "version": "3.13.8"
       },
       "rubocop": {
-        "gem_sha256": "14fb31eed143a0dc6f78186c550c1715e81cd38f59d05d1165050e445c1f5382",
-        "version": "1.92.2"
+        "gem_sha256": "fd77feac46e8e91c3a534f868a1702c59f5bf8173515fd00a3c6ce1198672ff6",
+        "version": "1.92.3"
       },
       "rubocop-ast": {
-        "gem_sha256": "0ec311e36b191b3872d909078a35274e962ae97dbce64be6812d145ca59acfcb",
-        "version": "1.51.0"
+        "gem_sha256": "11f7cadec54e593e905b1bb78f2b28bdd4b8e13b34cb82fe49c876e3dd5008c1",
+        "version": "1.54.0"
       },
       "rubocop-rake": {
         "gem_sha256": "3797f2b6810c3e9df7376c26d5f44f3475eda59eb1adc38e6f62ecf027cbae4d",
@@ -540,16 +540,16 @@
         "version": "0.2.3"
       },
       "sinatra": {
-        "gem_sha256": "b7aeb9b11d046b552972ade834f1f9be98b185fa8444480688e3627625377080",
-        "version": "4.2.1"
+        "gem_sha256": "3a0e63c600eb65d7ad6fa0d597a9533f2870d1862cc63ab7b0f7f0ad449ad42f",
+        "version": "4.2.2"
       },
       "sinatra-activerecord": {
         "gem_sha256": "99f352c2dfa244d02b4f877efbe00135360b758390b8bb7bc2d4d91171c93811",
         "version": "2.0.28"
       },
       "sinatra-contrib": {
-        "gem_sha256": "10d091c944d268aa910c618ea40a3c3ebe0533e6e32990d84af92235a3d26b4a",
-        "version": "4.2.1"
+        "gem_sha256": "3d629cfb3647e363cfca6609d0dcde63aa45db664645fe947f0eeddb9cca1620",
+        "version": "4.2.2"
       },
       "sorted_set": {
         "gem_sha256": "bac01eb16b6bcfcdb7d732a28e87422be8b5c9fdcfeadbe9072682407524ee83",
@@ -608,7 +608,7 @@
         "version": "0.9.45"
       }
     },
-    "lock_sha256": "dd5db5ca44bb69ca2ae0244515103146f17b7621f12ca34c3dec6950f4455aaf",
+    "lock_sha256": "ca7865c3a0b3c96e63791996a0cf786dba1c90b145830099073fbfd579360397",
     "ruby": "3.4.12"
   }
 }

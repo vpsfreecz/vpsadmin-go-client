@@ -28,9 +28,25 @@ class PrepareSchemaTest(unittest.TestCase):
                 "authentication": {
                     "oauth2": {"revoke_url": "http://api.test/_auth/oauth2/revoke"}
                 },
-                "resources": {"example": {"default": "unchanged"}},
+                "resources": {
+                    "example": {"default": "unchanged"},
+                    "vps": {"resources": {"evidence": self.evidence_resource(
+                        "/v7.0/vpses/{vps_id}/evidence", "vps.evidence#index", "evidence"
+                    )}},
+                    "vps_evidence": self.evidence_resource(
+                        "/v7.0/vps_evidence", "vps_evidence#index", "vps_evidence"
+                    ),
+                },
             },
         }
+
+    @staticmethod
+    def evidence_resource(path, scope, namespace):
+        return {"resources": {}, "actions": {"index": {
+            "method": "GET", "path": path, "scope": scope, "auth": True,
+            "input": {"layout": "object", "namespace": namespace},
+            "output": {"layout": "object_list", "namespace": namespace},
+        }}}
 
     def prepare(self, schema):
         self.source.write_text(json.dumps(schema), encoding="utf-8")
@@ -39,7 +55,7 @@ class PrepareSchemaTest(unittest.TestCase):
             capture_output=True, text=True,
         )
 
-    def test_only_endpoint_changes_and_source_bytes_are_preserved(self):
+    def test_only_two_projections_change_and_source_bytes_are_preserved(self):
         result = self.prepare(self.schema)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(self.source.read_text(), json.dumps(self.schema))
@@ -47,6 +63,7 @@ class PrepareSchemaTest(unittest.TestCase):
         expected["description"]["authentication"]["oauth2"]["revoke_url"] = (
             "https://auth.vpsfree.cz/_auth/oauth2/revoke"
         )
+        del expected["description"]["resources"]["vps"]["resources"]["evidence"]
         self.assertEqual(json.loads(self.output.read_text()), expected)
 
     def test_repeat_is_byte_identical(self):
@@ -86,6 +103,44 @@ class PrepareSchemaTest(unittest.TestCase):
         )
         self.assertNotEqual(result.returncode, 0)
         self.assertEqual(self.source.read_text(), original)
+
+    def test_changed_evidence_signatures_preserve_existing_output(self):
+        for key in ("child", "fleet"):
+            for field, value in (
+                ("method", "POST"), ("path", "/wrong"), ("scope", "wrong#index"),
+                ("auth", False), ("auth", 1),
+                ("input.layout", "hash"), ("input.namespace", "wrong"),
+                ("output.layout", "object"), ("output.namespace", "wrong"),
+            ):
+                with self.subTest(resource=key, field=field, value=value):
+                    schema = copy.deepcopy(self.schema)
+                    resources = schema["description"]["resources"]
+                    resource = (resources["vps"]["resources"]["evidence"]
+                                if key == "child" else resources["vps_evidence"])
+                    target = resource["actions"]["index"]
+                    parts = field.split(".")
+                    if len(parts) == 2:
+                        target = target[parts[0]]
+                    target[parts[-1]] = value
+                    self.output.write_text("existing output")
+                    self.assertNotEqual(self.prepare(schema).returncode, 0)
+                    self.assertEqual(self.output.read_text(), "existing output")
+
+            for change in ("missing", "extra_action", "extra_child"):
+                with self.subTest(resource=key, change=change):
+                    schema = copy.deepcopy(self.schema)
+                    resources = schema["description"]["resources"]
+                    parent = resources["vps"]["resources"] if key == "child" else resources
+                    name = "evidence" if key == "child" else "vps_evidence"
+                    if change == "missing":
+                        del parent[name]
+                    elif change == "extra_action":
+                        parent[name]["actions"]["show"] = {}
+                    else:
+                        parent[name]["resources"]["unexpected"] = {}
+                    self.output.write_text("existing output")
+                    self.assertNotEqual(self.prepare(schema).returncode, 0)
+                    self.assertEqual(self.output.read_text(), "existing output")
 
 
 if __name__ == "__main__":

@@ -27066,6 +27066,306 @@
           }
         },
         "resources": {
+          "evidence_interval": {
+            "actions": {
+              "index": {
+                "aliases": [],
+                "auth": true,
+                "blocking": false,
+                "help": "/v7.0/incident_reports/{incident_report_id}/evidence_intervals?method=GET",
+                "input": {
+                  "layout": "object",
+                  "namespace": "evidence_interval",
+                  "parameters": {
+                    "limit": {
+                      "default": 25,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {
+                        "number": {
+                          "max": 100,
+                          "min": 1
+                        }
+                      }
+                    },
+                    "offset": {
+                      "default": 0,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {
+                        "number": {
+                          "min": 0
+                        }
+                      }
+                    }
+                  }
+                },
+                "meta": {
+                  "global": {
+                    "input": {
+                      "layout": "hash",
+                      "namespace": false,
+                      "parameters": {
+                        "no": {
+                          "default": null,
+                          "nullable": false,
+                          "protected": false,
+                          "required": false,
+                          "type": "Boolean",
+                          "validators": {}
+                        }
+                      }
+                    },
+                    "output": {
+                      "layout": "hash",
+                      "namespace": false,
+                      "parameters": {
+                        "available": {
+                          "default": null,
+                          "nullable": false,
+                          "protected": false,
+                          "required": false,
+                          "type": "Boolean",
+                          "validators": {}
+                        },
+                        "condition_measurement": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "String",
+                          "validators": {}
+                        },
+                        "condition_operator": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "String",
+                          "validators": {}
+                        },
+                        "condition_unit": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "String",
+                          "validators": {}
+                        },
+                        "condition_value": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "Integer",
+                          "validators": {}
+                        },
+                        "credit_us": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "Integer",
+                          "validators": {}
+                        },
+                        "evaluated_at": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "Datetime",
+                          "validators": {}
+                        },
+                        "limit": {
+                          "default": null,
+                          "nullable": false,
+                          "protected": false,
+                          "required": false,
+                          "type": "Integer",
+                          "validators": {}
+                        },
+                        "next_offset": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "Integer",
+                          "validators": {}
+                        },
+                        "offset": {
+                          "default": null,
+                          "nullable": false,
+                          "protected": false,
+                          "required": false,
+                          "type": "Integer",
+                          "validators": {}
+                        },
+                        "qualification_interval_us": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "Integer",
+                          "validators": {}
+                        },
+                        "repeat_seconds": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "Integer",
+                          "validators": {}
+                        },
+                        "representation": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "String",
+                          "validators": {}
+                        },
+                        "signal": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "String",
+                          "validators": {}
+                        },
+                        "threshold_seconds": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "Integer",
+                          "validators": {}
+                        },
+                        "total_count": {
+                          "default": null,
+                          "nullable": false,
+                          "protected": false,
+                          "required": false,
+                          "type": "Integer",
+                          "validators": {}
+                        },
+                        "window_complete": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "Boolean",
+                          "validators": {}
+                        },
+                        "window_from": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "Datetime",
+                          "validators": {}
+                        },
+                        "window_seconds": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "Integer",
+                          "validators": {}
+                        },
+                        "window_to": {
+                          "default": null,
+                          "nullable": true,
+                          "protected": false,
+                          "required": false,
+                          "type": "Datetime",
+                          "validators": {}
+                        }
+                      }
+                    }
+                  },
+                  "object": null
+                },
+                "method": "GET",
+                "output": {
+                  "layout": "object_list",
+                  "namespace": "evidence_intervals",
+                  "parameters": {
+                    "credit_us": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "from_at": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "id": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "measurement": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "peak_is_lower_bound": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "peak_unit": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "peak_value": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "to_at": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    }
+                  }
+                },
+                "path": "/v7.0/incident_reports/{incident_report_id}/evidence_intervals",
+                "scope": "incident_report.evidence_interval#index"
+              }
+            },
+            "resources": {}
+          },
           "policy_evaluation": {
             "actions": {
               "index": {
@@ -104242,6 +104542,376 @@
             },
             "resources": {}
           },
+          "evidence": {
+            "actions": {
+              "index": {
+                "aliases": [],
+                "auth": true,
+                "blocking": false,
+                "help": "/v7.0/vpses/{vps_id}/evidence?method=GET",
+                "input": {
+                  "layout": "object",
+                  "namespace": "evidence",
+                  "parameters": {}
+                },
+                "meta": {
+                  "global": {
+                    "input": {
+                      "layout": "hash",
+                      "namespace": false,
+                      "parameters": {
+                        "no": {
+                          "default": null,
+                          "nullable": false,
+                          "protected": false,
+                          "required": false,
+                          "type": "Boolean",
+                          "validators": {}
+                        }
+                      }
+                    },
+                    "output": {
+                      "layout": "hash",
+                      "namespace": false,
+                      "parameters": {
+                        "configuration_valid": {
+                          "default": null,
+                          "nullable": false,
+                          "protected": false,
+                          "required": false,
+                          "type": "Boolean",
+                          "validators": {}
+                        },
+                        "read_at": {
+                          "default": null,
+                          "nullable": false,
+                          "protected": false,
+                          "required": false,
+                          "type": "Datetime",
+                          "validators": {}
+                        },
+                        "unavailable_signals": {
+                          "default": null,
+                          "nullable": false,
+                          "protected": false,
+                          "required": false,
+                          "type": "Custom",
+                          "validators": {}
+                        }
+                      }
+                    }
+                  },
+                  "object": null
+                },
+                "method": "GET",
+                "output": {
+                  "layout": "object_list",
+                  "namespace": "evidence",
+                  "parameters": {
+                    "condition_measurement": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "condition_operator": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "condition_unit": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "condition_value": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "configuration_valid": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "credit_us": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "hostname": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "id": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "label": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "last_incident_at": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "last_observed_at": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "measurement": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "node": {
+                      "choices": {
+                        "help": "/v7.0/nodes?method=GET",
+                        "method": "GET",
+                        "path": "/v7.0/nodes"
+                      },
+                      "nullable": true,
+                      "required": null,
+                      "resource": [
+                        "node"
+                      ],
+                      "type": "Resource",
+                      "value": null,
+                      "value_id": "id",
+                      "value_label": "domain_name"
+                    },
+                    "observation_age_seconds": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Float",
+                      "validators": {}
+                    },
+                    "observation_state": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": [
+                            "no_data",
+                            "fresh",
+                            "stale"
+                          ]
+                        }
+                      }
+                    },
+                    "peak_is_lower_bound": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "peak_unit": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "peak_value": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "qualification": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": [
+                            "qualified",
+                            "ineligible",
+                            "unknown"
+                          ]
+                        }
+                      }
+                    },
+                    "repeat_seconds": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "report_due": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "report_eligible": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "reporting_enabled": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "representation": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "signal": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {}
+                    },
+                    "threshold_seconds": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "user": {
+                      "choices": {
+                        "help": "/v7.0/users?method=GET",
+                        "method": "GET",
+                        "path": "/v7.0/users"
+                      },
+                      "nullable": false,
+                      "required": null,
+                      "resource": [
+                        "user"
+                      ],
+                      "type": "Resource",
+                      "value": null,
+                      "value_id": "id",
+                      "value_label": "login"
+                    },
+                    "vps": {
+                      "choices": {
+                        "help": "/v7.0/vpses?method=GET",
+                        "method": "GET",
+                        "path": "/v7.0/vpses"
+                      },
+                      "nullable": false,
+                      "required": null,
+                      "resource": [
+                        "vps"
+                      ],
+                      "type": "Resource",
+                      "value": null,
+                      "value_id": "id",
+                      "value_label": "hostname"
+                    },
+                    "window_complete": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "window_from": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "window_seconds": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "window_to": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    }
+                  }
+                },
+                "path": "/v7.0/vpses/{vps_id}/evidence",
+                "scope": "vps.evidence#index"
+              }
+            },
+            "resources": {}
+          },
           "feature": {
             "actions": {
               "index": {
@@ -108370,6 +109040,528 @@
           }
         }
       },
+      "vps_evidence": {
+        "actions": {
+          "index": {
+            "aliases": [],
+            "auth": true,
+            "blocking": false,
+            "help": "/v7.0/vps_evidence?method=GET",
+            "input": {
+              "layout": "object",
+              "namespace": "vps_evidence",
+              "parameters": {
+                "environment": {
+                  "choices": {
+                    "help": "/v7.0/environments?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/environments"
+                  },
+                  "nullable": false,
+                  "required": null,
+                  "resource": [
+                    "environment"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "label"
+                },
+                "limit": {
+                  "default": 25,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {
+                    "number": {
+                      "max": 100,
+                      "min": 1
+                    }
+                  }
+                },
+                "location": {
+                  "choices": {
+                    "help": "/v7.0/locations?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/locations"
+                  },
+                  "nullable": false,
+                  "required": null,
+                  "resource": [
+                    "location"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "label"
+                },
+                "node": {
+                  "choices": {
+                    "help": "/v7.0/nodes?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/nodes"
+                  },
+                  "nullable": false,
+                  "required": null,
+                  "resource": [
+                    "node"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "domain_name"
+                },
+                "offset": {
+                  "default": 0,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {
+                    "number": {
+                      "min": 0
+                    }
+                  }
+                },
+                "signal": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "rtnl_latency"
+                      ]
+                    }
+                  }
+                },
+                "user": {
+                  "choices": {
+                    "help": "/v7.0/users?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/users"
+                  },
+                  "nullable": false,
+                  "required": null,
+                  "resource": [
+                    "user"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "login"
+                },
+                "vps": {
+                  "choices": {
+                    "help": "/v7.0/vpses?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/vpses"
+                  },
+                  "nullable": false,
+                  "required": null,
+                  "resource": [
+                    "vps"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "hostname"
+                }
+              }
+            },
+            "meta": {
+              "global": {
+                "input": {
+                  "layout": "hash",
+                  "namespace": false,
+                  "parameters": {
+                    "no": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    }
+                  }
+                },
+                "output": {
+                  "layout": "hash",
+                  "namespace": false,
+                  "parameters": {
+                    "configuration_valid": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "limit": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "next_offset": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "offset": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "read_at": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "total_count": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    },
+                    "unavailable_signals": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Custom",
+                      "validators": {}
+                    }
+                  }
+                }
+              },
+              "object": null
+            },
+            "method": "GET",
+            "output": {
+              "layout": "object_list",
+              "namespace": "vps_evidence",
+              "parameters": {
+                "condition_measurement": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "condition_operator": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "condition_unit": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "condition_value": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "configuration_valid": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "credit_us": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "hostname": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "id": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "label": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "last_incident_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "last_observed_at": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "measurement": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "node": {
+                  "choices": {
+                    "help": "/v7.0/nodes?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/nodes"
+                  },
+                  "nullable": true,
+                  "required": null,
+                  "resource": [
+                    "node"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "domain_name"
+                },
+                "observation_age_seconds": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Float",
+                  "validators": {}
+                },
+                "observation_state": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "no_data",
+                        "fresh",
+                        "stale"
+                      ]
+                    }
+                  }
+                },
+                "peak_is_lower_bound": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "peak_unit": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "peak_value": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "qualification": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        "qualified",
+                        "ineligible",
+                        "unknown"
+                      ]
+                    }
+                  }
+                },
+                "repeat_seconds": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "report_due": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "report_eligible": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "reporting_enabled": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "representation": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "signal": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "threshold_seconds": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "user": {
+                  "choices": {
+                    "help": "/v7.0/users?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/users"
+                  },
+                  "nullable": false,
+                  "required": null,
+                  "resource": [
+                    "user"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "login"
+                },
+                "vps": {
+                  "choices": {
+                    "help": "/v7.0/vpses?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/vpses"
+                  },
+                  "nullable": false,
+                  "required": null,
+                  "resource": [
+                    "vps"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "hostname"
+                },
+                "window_complete": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "window_from": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "window_seconds": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "window_to": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                }
+              }
+            },
+            "path": "/v7.0/vps_evidence",
+            "scope": "vps_evidence#index"
+          }
+        },
+        "resources": {}
+      },
       "vps_outage": {
         "actions": {
           "index": {
@@ -108894,6 +110086,206 @@
             },
             "path": "/v7.0/vps_outages/{vps_outage_id}",
             "scope": "vps_outage#show"
+          }
+        },
+        "resources": {}
+      },
+      "vps_pressure_history": {
+        "actions": {
+          "index": {
+            "aliases": [],
+            "auth": true,
+            "blocking": false,
+            "help": "/v7.0/vps_pressure_history?method=GET",
+            "input": {
+              "layout": "object",
+              "namespace": "vps_pressure_history",
+              "parameters": {
+                "days": {
+                  "default": 7,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {
+                    "include": {
+                      "values": [
+                        7,
+                        30
+                      ]
+                    }
+                  }
+                },
+                "vps": {
+                  "choices": {
+                    "help": "/v7.0/vpses?method=GET",
+                    "method": "GET",
+                    "path": "/v7.0/vpses"
+                  },
+                  "nullable": false,
+                  "required": true,
+                  "resource": [
+                    "vps"
+                  ],
+                  "type": "Resource",
+                  "value": null,
+                  "value_id": "id",
+                  "value_label": "hostname"
+                }
+              }
+            },
+            "meta": {
+              "global": {
+                "input": {
+                  "layout": "hash",
+                  "namespace": false,
+                  "parameters": {
+                    "no": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    }
+                  }
+                },
+                "output": {
+                  "layout": "hash",
+                  "namespace": false,
+                  "parameters": {
+                    "accounting_since": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "available": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "first_recorded_at": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "ownership_limited": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    },
+                    "range_from": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "range_to": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "read_at": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Datetime",
+                      "validators": {}
+                    },
+                    "timezone": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "String",
+                      "validators": {
+                        "include": {
+                          "values": [
+                            "UTC"
+                          ]
+                        }
+                      }
+                    },
+                    "total_recorded_us": {
+                      "default": null,
+                      "nullable": true,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    }
+                  }
+                }
+              },
+              "object": null
+            },
+            "method": "GET",
+            "output": {
+              "layout": "object_list",
+              "namespace": "vps_pressure_history",
+              "parameters": {
+                "from_at": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                },
+                "id": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "partial_day": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "recorded_us": {
+                  "default": null,
+                  "nullable": true,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                },
+                "to_at": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Datetime",
+                  "validators": {}
+                }
+              }
+            },
+            "path": "/v7.0/vps_pressure_history",
+            "scope": "vps_pressure_history#index"
           }
         },
         "resources": {}

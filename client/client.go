@@ -222,8 +222,12 @@ type Client struct {
 	UserSession *ResourceUserSession
 	// Resource Vps
 	Vps *ResourceVps
+	// Resource Vps_evidence
+	VpsEvidence *ResourceVpsEvidence
 	// Resource Vps_outage
 	VpsOutage *ResourceVpsOutage
+	// Resource Vps_pressure_history
+	VpsPressureHistory *ResourceVpsPressureHistory
 	// Resource Vps_security_advisory
 	VpsSecurityAdvisory *ResourceVpsSecurityAdvisory
 	// Resource Vps_user_data
@@ -343,7 +347,9 @@ func New(url string) *Client {
 	c.UserSecurityAdvisory = NewResourceUserSecurityAdvisory(c)
 	c.UserSession = NewResourceUserSession(c)
 	c.Vps = NewResourceVps(c)
+	c.VpsEvidence = NewResourceVpsEvidence(c)
 	c.VpsOutage = NewResourceVpsOutage(c)
+	c.VpsPressureHistory = NewResourceVpsPressureHistory(c)
 	c.VpsSecurityAdvisory = NewResourceVpsSecurityAdvisory(c)
 	c.VpsUserData = NewResourceVpsUserData(c)
 	c.Webauthn = NewResourceWebauthn(c)
