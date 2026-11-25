@@ -1,3 +1,8 @@
+# Unreleased
+
+- Synchronize saved API inputs and generated outputs for system configuration
+  nullability and administrator incident-policy reads.
+
 # 0.2.0
 
 - Regenerate API 7.0 from vpsAdmin source commit

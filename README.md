@@ -414,7 +414,7 @@ for the required client checks and completion records. Synchronizing generated
 source does not by itself require a release.
 
 This development snapshot uses a source-fixture API 7.0 export from vpsAdmin
-commit `de4df3d63f4d4afb0c27e8b9be2785c15d24811c`, with all six bundled plugins and
+commit `33921d77d4149875a90249eefc64a7345b18f543`, with all six bundled plugins and
 English metadata. The source fixture does not establish which API version or
 permissions a deployed server provides. Read [CHANGELOG.md](CHANGELOG.md) before
 upgrading.
@@ -445,6 +445,16 @@ The period fields describe the saved count windows. As a scalar boolean,
 notice policy key and label identify its saved originating policy; null or
 missing values become empty strings. They do not select a current policy.
 Active policy metadata has no `source_type` field.
+
+### System configuration metadata
+
+SystemConfig outputs include `ValueNullable`. A missing or null value decodes to
+false, as with other scalar booleans. The Go generator omits Custom outputs,
+including `choices` and the setting `value`. Use the existing low-level
+`DoBodyRequest` response with a suitable output type when reading choice metadata;
+`ValueNullable` alone cannot establish whether a choice contract exists.
+
+### Saved schema and generation
 
 The raw export is [schema/source-api-7.0.json](schema/source-api-7.0.json), with
 its unmodified [provenance](schema/provenance.json) and exporter dependency lock.
