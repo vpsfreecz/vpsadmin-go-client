@@ -1,7 +1,7 @@
 {
   "api_source": {
     "repository": "git@github.com:vpsfreecz/vpsadmin.git",
-    "revision": "de4df3d63f4d4afb0c27e8b9be2785c15d24811c"
+    "revision": "5725a0996fb60767511bfc86482acefdec9eb9d9"
   },
   "command": [
     "bundle",
@@ -32,9 +32,9 @@
   },
   "exporter": {
     "lock": "schema/tooling.Gemfile.lock",
-    "lock_sha256": "2e9a124eff7b80d6fd57cd0f03cb2809847c67cc7f1af6364911c3622d7242a0",
+    "lock_sha256": "dd5db5ca44bb69ca2ae0244515103146f17b7621f12ca34c3dec6950f4455aaf",
     "provenance": "schema/provenance.json",
-    "provenance_sha256": "a9e536e9984183866604a7b8d14c6f1ba02f26e7986b52f10131ee82f2cd6fd8"
+    "provenance_sha256": "2dc3ebd685f416b8099cd23fe4c9f14ea6c0342a2eed117323988f34268a1e76"
   },
   "format": 1,
   "generator": {
@@ -140,8 +140,14 @@
     "version": "0.32.2"
   },
   "output": {
-    "added_files": [],
-    "generated_file_count": 693,
+    "added_files": [
+      "resource_dataset_action_disable_backups.go",
+      "resource_incident_policy_evaluation.go",
+      "resource_incident_policy_evaluation_action_index.go",
+      "resource_incident_policy_exposure.go",
+      "resource_incident_policy_exposure_action_index.go"
+    ],
+    "generated_file_count": 698,
     "preserved_go_mod_sha256": "b6512dde7aae8cef8a81d4e3630db5194e851338c0abf2acb7b2f016b7173e2a",
     "preserved_module_metadata": "go.mod",
     "removed_files": [],
@@ -149,14 +155,14 @@
   },
   "projection": {
     "effective": "schema/api-7.0.json",
-    "effective_sha256": "efdb58be9db25590e51711fc18137a512752edbb38e9ba2ffb7f1938d8644cfa",
+    "effective_sha256": "a6565d287a33c834b8f46abc292f831eef5aa6086d47bd04d5bb1238fea4e1a2",
     "field": "description.authentication.oauth2.revoke_url",
     "helper": "tools/prepare-schema",
     "helper_sha256": "92a56fbc9056bda008b6e7c7c47c3f6b95f15e665f6158a593f1c93811f0e019",
     "new": "https://auth.vpsfree.cz/_auth/oauth2/revoke",
     "old": "http://api.test/_auth/oauth2/revoke",
     "source": "schema/source-api-7.0.json",
-    "source_sha256": "7cb28ebd8e0957d9a8ba2c359c8658040ed1cd195f0dd14327c03b595012fc85"
+    "source_sha256": "7088ef00b82964437746ad3e46b3ca78da515b8fde18cae46f1c275ef68f9bf9"
   },
   "toolchain": {
     "bundler": "4.0.23",
@@ -164,8 +170,8 @@
     "go_store": "/nix/store/fkz7zn1a0yiryf9kri2yh1s12k1sv557-go-1.26.10",
     "nix_flake_lock_sha256": "187d63f65b46f5cfa3ac830a5d0c182693cd0ca7ab8e486c3876fcf4b4f6d4f4",
     "nix_shell": "haveapi#client-go",
-    "projection_python": "3.13.17",
-    "projection_python_executable": "/nix/store/kp6p38x6zb21n7gdlnp9nsm2aagq7sg2-python3-3.13.17/bin/python3",
+    "projection_python": "3.13.18",
+    "projection_python_executable": "/nix/store/9qkpw9669q6w9nl6bmh2k35nq76i52nf-python3-3.13.18/bin/python3.13",
     "ruby": "3.4.11",
     "ruby_store": "/nix/store/jnjll1yxfq02bdcw5pjf9gl86wh8gfhq-ruby-3.4.11"
   }

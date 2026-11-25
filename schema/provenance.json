@@ -3,7 +3,7 @@
   "api_version": "7.0",
   "database": {
     "engine": "MariaDB",
-    "version": "11.4.12-MariaDB"
+    "version": "11.4.13-MariaDB"
   },
   "inputs": {
     "api/config/dataset_plans.rb": "33397be38d3ab9fd2b93ab8210156e0bec6bb303cc521f512b2255ddb6ff78b1",
@@ -15,10 +15,10 @@
     "tools/test_db.rb": "b9faee4880ac40526808eae5aa408e3160adff5f4efe92eddfdaee115eb29e5c"
   },
   "inventory": {
-    "actions": 527,
-    "parameters": 8917,
-    "resources": 154,
-    "scopes_sha256": "b485169c27500ee603a889516ad096b3a0c6c7c88d305d0518dbedf4fb6655eb"
+    "actions": 530,
+    "parameters": 9044,
+    "resources": 156,
+    "scopes_sha256": "77818ef2f8c3dc9e8a33161fc2a1c7a73866674ee3ce87396f3dafd54dcf9c3f"
   },
   "locale": "en",
   "plugins": {
@@ -48,7 +48,7 @@
         20240124185400,
         20260601121000
       ],
-      "source_sha256": "23fd593c5b6c5dcf32a146a5f61635dbbfb5921257a6388de1df73964cc022f4",
+      "source_sha256": "423e8c2050b875bc4095b9a40caec766905e4a22932fe5c3ce032ac1f84b1542",
       "version": "4.2.1"
     },
     "payments": {
@@ -57,7 +57,7 @@
         20260706212000,
         20260905180000
       ],
-      "source_sha256": "a842dd5796fc05305a5e0ebac2694a145a86965ebf657e6599b1f12f0fff6a86",
+      "source_sha256": "7ab1cc35192f6fe54182980256b9bcb2bc68c7227128b06da179a78fa9a0b2cc",
       "version": "4.2.1"
     },
     "requests": {
@@ -67,7 +67,7 @@
         20201126142500,
         20260606223100
       ],
-      "source_sha256": "daca23ec4afeedd258e3a71ffba57d8c76b238b904bc0af256080f3d35df26c7",
+      "source_sha256": "930855654849a6e19b1648ed1e7272a0726a3c72aa3f508fe13e57bf83e9482f",
       "version": "4.2.1"
     },
     "webui": {
@@ -76,19 +76,19 @@
         20260607190000,
         20260706211000
       ],
-      "source_sha256": "8b3faedb05e40874cfb80f56e697e4972fc77b357cc44f401d70f5d4ea168c62",
+      "source_sha256": "3c3e3c58217c2fd709e63fad5b634fd65789df20b6581c0afe9d7a19f987a9ad",
       "version": "4.2.1"
     }
   },
   "profile": "vpsadmin-full-fixture",
   "protocol_version": "2.0",
-  "schema_sha256": "7cb28ebd8e0957d9a8ba2c359c8658040ed1cd195f0dd14327c03b595012fc85",
+  "schema_sha256": "7088ef00b82964437746ad3e46b3ca78da515b8fde18cae46f1c275ef68f9bf9",
   "source": {
     "repository": "git@github.com:vpsfreecz/vpsadmin.git",
-    "revision": "de4df3d63f4d4afb0c27e8b9be2785c15d24811c"
+    "revision": "5725a0996fb60767511bfc86482acefdec9eb9d9"
   },
   "tooling": {
-    "bundler": "4.0.24",
+    "bundler": "4.1.1",
     "gemfile_sha256": "87df3509b79a68dcf55f4f344017c619a8fcf0dbb9e70e576a2d2d39891a8ef2",
     "gems": {
       "activemodel": {
@@ -144,8 +144,8 @@
         "version": "2.5.1"
       },
       "bundler": {
-        "gem_sha256": "16ca64e20816a0cf151a948fb141d788602996d2b4d73577b74388fe84fa98bc",
-        "version": "4.0.24"
+        "gem_sha256": "7a76aebebc2e476cbc1e11314200d7fe83c7398d6930f1d048e4d3dd2d0e93e3",
+        "version": "4.1.1"
       },
       "bunny": {
         "gem_sha256": "072fe4ae98eaa9c95a17e4d166204f710bba8a9a7070b73a8c3b023f439d1682",
@@ -557,7 +557,7 @@
       },
       "syntax_suggest": {
         "gem_sha256": null,
-        "version": "2.0.2"
+        "version": "2.0.3"
       },
       "tilt": {
         "gem_sha256": "da5735d0280bba96e9a91041bb14aee435ccad5c17b0fa519249ae543d9aa3a5",
@@ -608,7 +608,7 @@
         "version": "0.9.45"
       }
     },
-    "lock_sha256": "2e9a124eff7b80d6fd57cd0f03cb2809847c67cc7f1af6364911c3622d7242a0",
-    "ruby": "3.4.9"
+    "lock_sha256": "dd5db5ca44bb69ca2ae0244515103146f17b7621f12ca34c3dec6950f4455aaf",
+    "ruby": "3.4.12"
   }
 }

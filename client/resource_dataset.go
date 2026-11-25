@@ -19,6 +19,8 @@ type ResourceDataset struct {
 	Delete *ActionDatasetDelete
 	// Action Dataset#Delete
 	Destroy *ActionDatasetDelete
+	// Action Dataset#Disable_backups
+	DisableBackups *ActionDatasetDisableBackups
 	// Action Dataset#Find_by_name
 	FindByName *ActionDatasetFindByName
 	// Action Dataset#Index
@@ -40,6 +42,7 @@ type ResourceDataset struct {
 func NewResourceDataset(client *Client) *ResourceDataset {
 	actionCreate := NewActionDatasetCreate(client)
 	actionDelete := NewActionDatasetDelete(client)
+	actionDisableBackups := NewActionDatasetDisableBackups(client)
 	actionFindByName := NewActionDatasetFindByName(client)
 	actionIndex := NewActionDatasetIndex(client)
 	actionInherit := NewActionDatasetInherit(client)
@@ -56,6 +59,7 @@ func NewResourceDataset(client *Client) *ResourceDataset {
 		New:             actionCreate,
 		Delete:          actionDelete,
 		Destroy:         actionDelete,
+		DisableBackups:  actionDisableBackups,
 		FindByName:      actionFindByName,
 		Index:           actionIndex,
 		List:            actionIndex,
