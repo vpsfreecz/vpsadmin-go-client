@@ -171,13 +171,14 @@ func (in *ActionSystemConfigIndexInput) AnySelected() bool {
 
 // ActionSystemConfigIndexOutput is a type for action output parameters
 type ActionSystemConfigIndexOutput struct {
-	Category     string "json:\"category\""
-	Description  string "json:\"description\""
-	Label        string "json:\"label\""
-	Localized    bool   "json:\"localized\""
-	MinUserLevel int64  "json:\"min_user_level\""
-	Name         string "json:\"name\""
-	Type         string "json:\"type\""
+	Category      string "json:\"category\""
+	Description   string "json:\"description\""
+	Label         string "json:\"label\""
+	Localized     bool   "json:\"localized\""
+	MinUserLevel  int64  "json:\"min_user_level\""
+	Name          string "json:\"name\""
+	Type          string "json:\"type\""
+	ValueNullable bool   "json:\"value_nullable\""
 }
 
 // Type for action response, including envelope
