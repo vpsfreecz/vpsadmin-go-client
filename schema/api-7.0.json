@@ -5579,6 +5579,200 @@
             "path": "/v7.0/datasets/{dataset_id}/migrate",
             "scope": "dataset#migrate"
           },
+          "preview_snapshot_removal": {
+            "aliases": [],
+            "auth": true,
+            "blocking": false,
+            "help": "/v7.0/datasets/{dataset_id}/preview_snapshot_removal?method=POST",
+            "input": {
+              "layout": "object",
+              "namespace": "dataset",
+              "parameters": {
+                "disable_plans": {
+                  "default": true,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "recursive": {
+                  "default": false,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                }
+              }
+            },
+            "meta": {
+              "global": {
+                "input": {
+                  "layout": "hash",
+                  "namespace": false,
+                  "parameters": {
+                    "no": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    }
+                  }
+                },
+                "output": null
+              },
+              "object": null
+            },
+            "method": "POST",
+            "output": {
+              "layout": "hash",
+              "namespace": "dataset",
+              "parameters": {
+                "manifest": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Custom",
+                  "validators": {}
+                },
+                "manifest_digest": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "String",
+                  "validators": {}
+                },
+                "manifest_version": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Integer",
+                  "validators": {}
+                }
+              }
+            },
+            "path": "/v7.0/datasets/{dataset_id}/preview_snapshot_removal",
+            "scope": "dataset#preview_snapshot_removal"
+          },
+          "remove_snapshots": {
+            "aliases": [],
+            "auth": true,
+            "blocking": true,
+            "help": "/v7.0/datasets/{dataset_id}/remove_snapshots?method=POST",
+            "input": {
+              "layout": "object",
+              "namespace": "dataset",
+              "parameters": {
+                "disable_plans": {
+                  "default": true,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                },
+                "manifest_digest": {
+                  "default": null,
+                  "nullable": false,
+                  "protected": false,
+                  "required": true,
+                  "type": "String",
+                  "validators": {
+                    "present": {
+                      "empty": false
+                    }
+                  }
+                },
+                "recursive": {
+                  "default": false,
+                  "nullable": false,
+                  "protected": false,
+                  "required": false,
+                  "type": "Boolean",
+                  "validators": {}
+                }
+              }
+            },
+            "meta": {
+              "global": {
+                "input": {
+                  "layout": "hash",
+                  "namespace": false,
+                  "parameters": {
+                    "includes": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Custom",
+                      "validators": {}
+                    },
+                    "no": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    }
+                  }
+                },
+                "output": {
+                  "layout": "hash",
+                  "namespace": false,
+                  "parameters": {
+                    "action_state_id": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Integer",
+                      "validators": {}
+                    }
+                  }
+                }
+              },
+              "object": {
+                "input": null,
+                "output": {
+                  "layout": "hash",
+                  "namespace": false,
+                  "parameters": {
+                    "path_params": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Custom",
+                      "validators": {}
+                    },
+                    "resolved": {
+                      "default": null,
+                      "nullable": false,
+                      "protected": false,
+                      "required": false,
+                      "type": "Boolean",
+                      "validators": {}
+                    }
+                  }
+                }
+              }
+            },
+            "method": "POST",
+            "output": {
+              "layout": "object",
+              "namespace": "dataset",
+              "parameters": {}
+            },
+            "path": "/v7.0/datasets/{dataset_id}/remove_snapshots",
+            "scope": "dataset#remove_snapshots"
+          },
           "show": {
             "aliases": [
               "find"

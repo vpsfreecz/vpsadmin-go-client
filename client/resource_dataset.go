@@ -31,6 +31,10 @@ type ResourceDataset struct {
 	Inherit *ActionDatasetInherit
 	// Action Dataset#Migrate
 	Migrate *ActionDatasetMigrate
+	// Action Dataset#Preview_snapshot_removal
+	PreviewSnapshotRemoval *ActionDatasetPreviewSnapshotRemoval
+	// Action Dataset#Remove_snapshots
+	RemoveSnapshots *ActionDatasetRemoveSnapshots
 	// Action Dataset#Show
 	Show *ActionDatasetShow
 	// Action Dataset#Show
@@ -47,26 +51,30 @@ func NewResourceDataset(client *Client) *ResourceDataset {
 	actionIndex := NewActionDatasetIndex(client)
 	actionInherit := NewActionDatasetInherit(client)
 	actionMigrate := NewActionDatasetMigrate(client)
+	actionPreviewSnapshotRemoval := NewActionDatasetPreviewSnapshotRemoval(client)
+	actionRemoveSnapshots := NewActionDatasetRemoveSnapshots(client)
 	actionShow := NewActionDatasetShow(client)
 	actionUpdate := NewActionDatasetUpdate(client)
 
 	return &ResourceDataset{
-		Client:          client,
-		Plan:            NewResourceDatasetPlan(client),
-		PropertyHistory: NewResourceDatasetPropertyHistory(client),
-		Snapshot:        NewResourceDatasetSnapshot(client),
-		Create:          actionCreate,
-		New:             actionCreate,
-		Delete:          actionDelete,
-		Destroy:         actionDelete,
-		DisableBackups:  actionDisableBackups,
-		FindByName:      actionFindByName,
-		Index:           actionIndex,
-		List:            actionIndex,
-		Inherit:         actionInherit,
-		Migrate:         actionMigrate,
-		Show:            actionShow,
-		Find:            actionShow,
-		Update:          actionUpdate,
+		Client:                 client,
+		Plan:                   NewResourceDatasetPlan(client),
+		PropertyHistory:        NewResourceDatasetPropertyHistory(client),
+		Snapshot:               NewResourceDatasetSnapshot(client),
+		Create:                 actionCreate,
+		New:                    actionCreate,
+		Delete:                 actionDelete,
+		Destroy:                actionDelete,
+		DisableBackups:         actionDisableBackups,
+		FindByName:             actionFindByName,
+		Index:                  actionIndex,
+		List:                   actionIndex,
+		Inherit:                actionInherit,
+		Migrate:                actionMigrate,
+		PreviewSnapshotRemoval: actionPreviewSnapshotRemoval,
+		RemoveSnapshots:        actionRemoveSnapshots,
+		Show:                   actionShow,
+		Find:                   actionShow,
+		Update:                 actionUpdate,
 	}
 }

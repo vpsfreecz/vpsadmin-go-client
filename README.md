@@ -414,7 +414,7 @@ for the required client checks and completion records. Synchronizing generated
 source does not by itself require a release.
 
 This development snapshot uses a source-fixture API 7.0 export from vpsAdmin
-commit `5725a0996fb60767511bfc86482acefdec9eb9d9`, with all six bundled plugins and
+commit `10df8f0230507d63551ec727605c61dca3c7985c`, with all six bundled plugins and
 English metadata. The source fixture does not establish which API version or
 permissions a deployed server provides. Read [CHANGELOG.md](CHANGELOG.md) before
 upgrading.

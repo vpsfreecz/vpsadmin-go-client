@@ -15,10 +15,10 @@
     "tools/test_db.rb": "b9faee4880ac40526808eae5aa408e3160adff5f4efe92eddfdaee115eb29e5c"
   },
   "inventory": {
-    "actions": 530,
-    "parameters": 9044,
+    "actions": 532,
+    "parameters": 9058,
     "resources": 156,
-    "scopes_sha256": "77818ef2f8c3dc9e8a33161fc2a1c7a73866674ee3ce87396f3dafd54dcf9c3f"
+    "scopes_sha256": "d61697d1fe03574bea1cdfc6c1db2c49891a963fbb49dbdb8f67e90ea4fb8ce8"
   },
   "locale": "en",
   "plugins": {
@@ -82,10 +82,10 @@
   },
   "profile": "vpsadmin-full-fixture",
   "protocol_version": "2.0",
-  "schema_sha256": "7088ef00b82964437746ad3e46b3ca78da515b8fde18cae46f1c275ef68f9bf9",
+  "schema_sha256": "41a951f1a5509fd9105eb2cf27dbd14f0e0d3b15842615ec66d4774f089ba11c",
   "source": {
     "repository": "git@github.com:vpsfreecz/vpsadmin.git",
-    "revision": "5725a0996fb60767511bfc86482acefdec9eb9d9"
+    "revision": "10df8f0230507d63551ec727605c61dca3c7985c"
   },
   "tooling": {
     "bundler": "4.1.1",
