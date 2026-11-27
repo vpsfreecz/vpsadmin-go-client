@@ -406,6 +406,15 @@ then the API response's `Status`, `Message` and `Errors`; read the returned
 payload from its `Response` namespace. Encode variable URL path segments
 appropriately.
 
+## Custom output fields
+
+The generator also omits Custom output fields. For example,
+`Dataset.PreviewSnapshotRemoval` exposes the manifest version and digest but not
+the complete snapshot inventory. Generated responses do not retain a raw copy of
+omitted fields. To inspect that inventory, use `Client.DoBodyRequest` with a
+suitable response type, or another client. A typed preview response alone is
+insufficient for the complete inventory review.
+
 ## Development and regeneration
 
 For vpsAdmin API and generator changes, follow the
